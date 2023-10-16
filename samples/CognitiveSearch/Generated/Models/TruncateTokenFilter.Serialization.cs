@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class TruncateTokenFilter : IUtf8JsonSerializable
+    public partial class TruncateTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<TruncateTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TruncateTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TruncateTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Length))
@@ -27,8 +31,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static TruncateTokenFilter DeserializeTruncateTokenFilter(JsonElement element)
+        TruncateTokenFilter IModelJsonSerializable<TruncateTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTruncateTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TruncateTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TruncateTokenFilter IModelSerializable<TruncateTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTruncateTokenFilter(document.RootElement, options);
+        }
+
+        internal static TruncateTokenFilter DeserializeTruncateTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

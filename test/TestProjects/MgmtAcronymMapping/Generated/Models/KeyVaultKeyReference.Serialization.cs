@@ -8,13 +8,16 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class KeyVaultKeyReference : IUtf8JsonSerializable
+    public partial class KeyVaultKeyReference : IUtf8JsonSerializable, IModelJsonSerializable<KeyVaultKeyReference>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<KeyVaultKeyReference>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<KeyVaultKeyReference>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("keyUrl"u8);
@@ -24,8 +27,32 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static KeyVaultKeyReference DeserializeKeyVaultKeyReference(JsonElement element)
+        KeyVaultKeyReference IModelJsonSerializable<KeyVaultKeyReference>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyVaultKeyReference(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<KeyVaultKeyReference>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyVaultKeyReference IModelSerializable<KeyVaultKeyReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyVaultKeyReference(document.RootElement, options);
+        }
+
+        internal static KeyVaultKeyReference DeserializeKeyVaultKeyReference(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

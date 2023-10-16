@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtConstants.Models
 {
-    public partial class OptionalMachinePatch : IUtf8JsonSerializable
+    public partial class OptionalMachinePatch : IUtf8JsonSerializable, IModelJsonSerializable<OptionalMachinePatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OptionalMachinePatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<OptionalMachinePatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -40,6 +45,89 @@ namespace MgmtConstants.Models
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
+        }
+
+        OptionalMachinePatch IModelJsonSerializable<OptionalMachinePatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeOptionalMachinePatch(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OptionalMachinePatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OptionalMachinePatch IModelSerializable<OptionalMachinePatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOptionalMachinePatch(document.RootElement, options);
+        }
+
+        internal static OptionalMachinePatch DeserializeOptionalMachinePatch(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<IDictionary<string, string>> tags = default;
+            Optional<ModelWithRequiredConstant> listener = default;
+            Optional<ModelWithOptionalConstant> content = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("properties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("listener"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            listener = ModelWithRequiredConstant.DeserializeModelWithRequiredConstant(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("content"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            content = ModelWithOptionalConstant.DeserializeModelWithOptionalConstant(property0.Value);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new OptionalMachinePatch(Optional.ToDictionary(tags), listener.Value, content.Value);
         }
     }
 }

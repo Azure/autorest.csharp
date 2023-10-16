@@ -5,15 +5,97 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceLimits
+    public partial class ServiceLimits : IUtf8JsonSerializable, IModelJsonSerializable<ServiceLimits>
     {
-        internal static ServiceLimits DeserializeServiceLimits(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ServiceLimits>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ServiceLimits>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(MaxFieldsPerIndex))
+            {
+                if (MaxFieldsPerIndex != null)
+                {
+                    writer.WritePropertyName("maxFieldsPerIndex"u8);
+                    writer.WriteNumberValue(MaxFieldsPerIndex.Value);
+                }
+                else
+                {
+                    writer.WriteNull("maxFieldsPerIndex");
+                }
+            }
+            if (Optional.IsDefined(MaxFieldNestingDepthPerIndex))
+            {
+                if (MaxFieldNestingDepthPerIndex != null)
+                {
+                    writer.WritePropertyName("maxFieldNestingDepthPerIndex"u8);
+                    writer.WriteNumberValue(MaxFieldNestingDepthPerIndex.Value);
+                }
+                else
+                {
+                    writer.WriteNull("maxFieldNestingDepthPerIndex");
+                }
+            }
+            if (Optional.IsDefined(MaxComplexCollectionFieldsPerIndex))
+            {
+                if (MaxComplexCollectionFieldsPerIndex != null)
+                {
+                    writer.WritePropertyName("maxComplexCollectionFieldsPerIndex"u8);
+                    writer.WriteNumberValue(MaxComplexCollectionFieldsPerIndex.Value);
+                }
+                else
+                {
+                    writer.WriteNull("maxComplexCollectionFieldsPerIndex");
+                }
+            }
+            if (Optional.IsDefined(MaxComplexObjectsInCollectionsPerDocument))
+            {
+                if (MaxComplexObjectsInCollectionsPerDocument != null)
+                {
+                    writer.WritePropertyName("maxComplexObjectsInCollectionsPerDocument"u8);
+                    writer.WriteNumberValue(MaxComplexObjectsInCollectionsPerDocument.Value);
+                }
+                else
+                {
+                    writer.WriteNull("maxComplexObjectsInCollectionsPerDocument");
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        ServiceLimits IModelJsonSerializable<ServiceLimits>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceLimits(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ServiceLimits>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ServiceLimits IModelSerializable<ServiceLimits>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeServiceLimits(document.RootElement, options);
+        }
+
+        internal static ServiceLimits DeserializeServiceLimits(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

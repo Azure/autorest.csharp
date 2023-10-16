@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return utf8JsonWriter.WriteObjectValue(value);
             }
 
-            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(RequestMethod) || valueType == typeof(AzureLocation))
+            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(AzureLocation))
             {
                 return utf8JsonWriter.WriteStringValue(value);
             }
@@ -375,7 +375,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     : utf8JsonWriter.WriteStringValue(value);
             }
 
-            if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress))
+            if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress) || valueType == typeof(RequestMethod))
             {
                 return utf8JsonWriter.WriteStringValue(value.InvokeToString());
             }

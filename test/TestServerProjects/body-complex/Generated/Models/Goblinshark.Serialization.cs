@@ -9,12 +9,15 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class Goblinshark : IUtf8JsonSerializable
+    public partial class Goblinshark : IUtf8JsonSerializable, IModelJsonSerializable<Goblinshark>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Goblinshark>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Goblinshark>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Jawsize))
@@ -56,8 +59,32 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        internal static Goblinshark DeserializeGoblinshark(JsonElement element)
+        Goblinshark IModelJsonSerializable<Goblinshark>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeGoblinshark(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Goblinshark>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Goblinshark IModelSerializable<Goblinshark>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGoblinshark(document.RootElement, options);
+        }
+
+        internal static Goblinshark DeserializeGoblinshark(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

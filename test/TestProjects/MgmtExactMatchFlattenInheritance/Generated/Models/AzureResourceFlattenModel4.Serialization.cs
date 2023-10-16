@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtExactMatchFlattenInheritance.Models
 {
-    public partial class AzureResourceFlattenModel4 : IUtf8JsonSerializable
+    public partial class AzureResourceFlattenModel4 : IUtf8JsonSerializable, IModelJsonSerializable<AzureResourceFlattenModel4>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AzureResourceFlattenModel4>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AzureResourceFlattenModel4>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -41,8 +45,32 @@ namespace MgmtExactMatchFlattenInheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static AzureResourceFlattenModel4 DeserializeAzureResourceFlattenModel4(JsonElement element)
+        AzureResourceFlattenModel4 IModelJsonSerializable<AzureResourceFlattenModel4>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureResourceFlattenModel4(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AzureResourceFlattenModel4>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AzureResourceFlattenModel4 IModelSerializable<AzureResourceFlattenModel4>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAzureResourceFlattenModel4(document.RootElement, options);
+        }
+
+        internal static AzureResourceFlattenModel4 DeserializeAzureResourceFlattenModel4(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

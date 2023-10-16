@@ -5,14 +5,55 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class SentimentConfidenceScorePerLabel
+    public partial class SentimentConfidenceScorePerLabel : IUtf8JsonSerializable, IModelJsonSerializable<SentimentConfidenceScorePerLabel>
     {
-        internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SentimentConfidenceScorePerLabel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SentimentConfidenceScorePerLabel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("positive"u8);
+            writer.WriteNumberValue(Positive);
+            writer.WritePropertyName("neutral"u8);
+            writer.WriteNumberValue(Neutral);
+            writer.WritePropertyName("negative"u8);
+            writer.WriteNumberValue(Negative);
+            writer.WriteEndObject();
+        }
+
+        SentimentConfidenceScorePerLabel IModelJsonSerializable<SentimentConfidenceScorePerLabel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSentimentConfidenceScorePerLabel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SentimentConfidenceScorePerLabel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SentimentConfidenceScorePerLabel IModelSerializable<SentimentConfidenceScorePerLabel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSentimentConfidenceScorePerLabel(document.RootElement, options);
+        }
+
+        internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

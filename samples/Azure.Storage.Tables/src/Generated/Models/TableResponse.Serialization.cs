@@ -5,15 +5,74 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableResponse
+    public partial class TableResponse : IUtf8JsonSerializable, IModelJsonSerializable<TableResponse>
     {
-        internal static TableResponse DeserializeTableResponse(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TableResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TableResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(OdataMetadata))
+            {
+                writer.WritePropertyName("odata.metadata"u8);
+                writer.WriteStringValue(OdataMetadata);
+            }
+            if (Optional.IsDefined(TableName))
+            {
+                writer.WritePropertyName("TableName"u8);
+                writer.WriteStringValue(TableName);
+            }
+            if (Optional.IsDefined(OdataType))
+            {
+                writer.WritePropertyName("odata.type"u8);
+                writer.WriteStringValue(OdataType);
+            }
+            if (Optional.IsDefined(OdataId))
+            {
+                writer.WritePropertyName("odata.id"u8);
+                writer.WriteStringValue(OdataId);
+            }
+            if (Optional.IsDefined(OdataEditLink))
+            {
+                writer.WritePropertyName("odata.editLink"u8);
+                writer.WriteStringValue(OdataEditLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        TableResponse IModelJsonSerializable<TableResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTableResponse(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TableResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TableResponse IModelSerializable<TableResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTableResponse(document.RootElement, options);
+        }
+
+        internal static TableResponse DeserializeTableResponse(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

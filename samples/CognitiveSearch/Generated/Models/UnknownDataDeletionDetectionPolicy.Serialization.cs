@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownDataDeletionDetectionPolicy : IUtf8JsonSerializable
+    internal partial class UnknownDataDeletionDetectionPolicy : IUtf8JsonSerializable, IModelJsonSerializable<UnknownDataDeletionDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownDataDeletionDetectionPolicy>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownDataDeletionDetectionPolicy>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
@@ -20,8 +24,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static UnknownDataDeletionDetectionPolicy DeserializeUnknownDataDeletionDetectionPolicy(JsonElement element)
+        UnknownDataDeletionDetectionPolicy IModelJsonSerializable<UnknownDataDeletionDetectionPolicy>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownDataDeletionDetectionPolicy(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownDataDeletionDetectionPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownDataDeletionDetectionPolicy IModelSerializable<UnknownDataDeletionDetectionPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownDataDeletionDetectionPolicy(document.RootElement, options);
+        }
+
+        internal static UnknownDataDeletionDetectionPolicy DeserializeUnknownDataDeletionDetectionPolicy(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

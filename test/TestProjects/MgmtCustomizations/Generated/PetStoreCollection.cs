@@ -228,7 +228,7 @@ namespace MgmtCustomizations
         public virtual AsyncPageable<PetStoreResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _petStoreRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new PetStoreResource(Client, PetStoreData.DeserializePetStoreData(e)), _petStoreClientDiagnostics, Pipeline, "PetStoreCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new PetStoreResource(Client, PetStoreData.DeserializePetStoreData(e)), _petStoreClientDiagnostics, Pipeline, "PetStoreCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace MgmtCustomizations
         public virtual Pageable<PetStoreResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _petStoreRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new PetStoreResource(Client, PetStoreData.DeserializePetStoreData(e)), _petStoreClientDiagnostics, Pipeline, "PetStoreCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new PetStoreResource(Client, PetStoreData.DeserializePetStoreData(e)), _petStoreClientDiagnostics, Pipeline, "PetStoreCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

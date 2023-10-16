@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class LeaseShareContent : IUtf8JsonSerializable
+    public partial class LeaseShareContent : IUtf8JsonSerializable, IModelJsonSerializable<LeaseShareContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LeaseShareContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LeaseShareContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("action"u8);
@@ -38,6 +42,80 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStringValue(ProposedLeaseId);
             }
             writer.WriteEndObject();
+        }
+
+        LeaseShareContent IModelJsonSerializable<LeaseShareContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLeaseShareContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LeaseShareContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LeaseShareContent IModelSerializable<LeaseShareContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLeaseShareContent(document.RootElement, options);
+        }
+
+        internal static LeaseShareContent DeserializeLeaseShareContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            LeaseShareAction action = default;
+            Optional<string> leaseId = default;
+            Optional<int> breakPeriod = default;
+            Optional<int> leaseDuration = default;
+            Optional<string> proposedLeaseId = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("action"u8))
+                {
+                    action = new LeaseShareAction(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("leaseId"u8))
+                {
+                    leaseId = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("breakPeriod"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    breakPeriod = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("leaseDuration"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    leaseDuration = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("proposedLeaseId"u8))
+                {
+                    proposedLeaseId = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new LeaseShareContent(action, leaseId.Value, Optional.ToNullable(breakPeriod), Optional.ToNullable(leaseDuration), proposedLeaseId.Value);
         }
     }
 }

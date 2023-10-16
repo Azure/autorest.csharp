@@ -226,7 +226,7 @@ namespace MgmtExactMatchFlattenInheritance
         public virtual AsyncPageable<CustomModel2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _customModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new CustomModel2Resource(Client, CustomModel2Data.DeserializeCustomModel2Data(e)), _customModel2ClientDiagnostics, Pipeline, "CustomModel2Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new CustomModel2Resource(Client, CustomModel2Data.DeserializeCustomModel2Data(e)), _customModel2ClientDiagnostics, Pipeline, "CustomModel2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtExactMatchFlattenInheritance
         public virtual Pageable<CustomModel2Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _customModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new CustomModel2Resource(Client, CustomModel2Data.DeserializeCustomModel2Data(e)), _customModel2ClientDiagnostics, Pipeline, "CustomModel2Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new CustomModel2Resource(Client, CustomModel2Data.DeserializeCustomModel2Data(e)), _customModel2ClientDiagnostics, Pipeline, "CustomModel2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

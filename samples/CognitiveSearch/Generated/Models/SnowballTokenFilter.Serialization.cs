@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SnowballTokenFilter : IUtf8JsonSerializable
+    public partial class SnowballTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<SnowballTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SnowballTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SnowballTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("language"u8);
@@ -24,8 +28,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static SnowballTokenFilter DeserializeSnowballTokenFilter(JsonElement element)
+        SnowballTokenFilter IModelJsonSerializable<SnowballTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSnowballTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SnowballTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SnowballTokenFilter IModelSerializable<SnowballTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSnowballTokenFilter(document.RootElement, options);
+        }
+
+        internal static SnowballTokenFilter DeserializeSnowballTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

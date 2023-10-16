@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownCharFilter : IUtf8JsonSerializable
+    internal partial class UnknownCharFilter : IUtf8JsonSerializable, IModelJsonSerializable<UnknownCharFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownCharFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownCharFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
@@ -22,8 +26,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static UnknownCharFilter DeserializeUnknownCharFilter(JsonElement element)
+        UnknownCharFilter IModelJsonSerializable<UnknownCharFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownCharFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownCharFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownCharFilter IModelSerializable<UnknownCharFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownCharFilter(document.RootElement, options);
+        }
+
+        internal static UnknownCharFilter DeserializeUnknownCharFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

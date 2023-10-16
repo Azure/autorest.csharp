@@ -5,17 +5,66 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtExpandResourceTypes.Models
 {
-    public partial class DnsResourceReference
+    public partial class DnsResourceReference : IUtf8JsonSerializable, IModelJsonSerializable<DnsResourceReference>
     {
-        internal static DnsResourceReference DeserializeDnsResourceReference(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DnsResourceReference>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DnsResourceReference>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(DnsResources))
+            {
+                writer.WritePropertyName("dnsResources"u8);
+                writer.WriteStartArray();
+                foreach (var item in DnsResources)
+                {
+                    JsonSerializer.Serialize(writer, item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(TargetResource))
+            {
+                writer.WritePropertyName("targetResource"u8);
+                JsonSerializer.Serialize(writer, TargetResource);
+            }
+            writer.WriteEndObject();
+        }
+
+        DnsResourceReference IModelJsonSerializable<DnsResourceReference>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDnsResourceReference(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DnsResourceReference>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DnsResourceReference IModelSerializable<DnsResourceReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDnsResourceReference(document.RootElement, options);
+        }
+
+        internal static DnsResourceReference DeserializeDnsResourceReference(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

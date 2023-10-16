@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class StemmerTokenFilter : IUtf8JsonSerializable
+    public partial class StemmerTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<StemmerTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StemmerTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<StemmerTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("language"u8);
@@ -24,8 +28,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static StemmerTokenFilter DeserializeStemmerTokenFilter(JsonElement element)
+        StemmerTokenFilter IModelJsonSerializable<StemmerTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeStemmerTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<StemmerTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StemmerTokenFilter IModelSerializable<StemmerTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStemmerTokenFilter(document.RootElement, options);
+        }
+
+        internal static StemmerTokenFilter DeserializeStemmerTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

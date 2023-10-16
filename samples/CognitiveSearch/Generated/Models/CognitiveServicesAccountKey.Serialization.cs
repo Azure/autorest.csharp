@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class CognitiveServicesAccountKey : IUtf8JsonSerializable
+    public partial class CognitiveServicesAccountKey : IUtf8JsonSerializable, IModelJsonSerializable<CognitiveServicesAccountKey>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CognitiveServicesAccountKey>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CognitiveServicesAccountKey>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("key"u8);
@@ -27,8 +31,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static CognitiveServicesAccountKey DeserializeCognitiveServicesAccountKey(JsonElement element)
+        CognitiveServicesAccountKey IModelJsonSerializable<CognitiveServicesAccountKey>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCognitiveServicesAccountKey(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CognitiveServicesAccountKey>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CognitiveServicesAccountKey IModelSerializable<CognitiveServicesAccountKey>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCognitiveServicesAccountKey(document.RootElement, options);
+        }
+
+        internal static CognitiveServicesAccountKey DeserializeCognitiveServicesAccountKey(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

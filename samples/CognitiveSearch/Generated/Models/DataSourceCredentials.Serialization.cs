@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class DataSourceCredentials : IUtf8JsonSerializable
+    public partial class DataSourceCredentials : IUtf8JsonSerializable, IModelJsonSerializable<DataSourceCredentials>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DataSourceCredentials>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DataSourceCredentials>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ConnectionString))
@@ -23,8 +27,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static DataSourceCredentials DeserializeDataSourceCredentials(JsonElement element)
+        DataSourceCredentials IModelJsonSerializable<DataSourceCredentials>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataSourceCredentials(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DataSourceCredentials>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DataSourceCredentials IModelSerializable<DataSourceCredentials>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDataSourceCredentials(document.RootElement, options);
+        }
+
+        internal static DataSourceCredentials DeserializeDataSourceCredentials(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachinePatchStatus
+    public partial class VirtualMachinePatchStatus : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachinePatchStatus>
     {
-        internal static VirtualMachinePatchStatus DeserializeVirtualMachinePatchStatus(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachinePatchStatus>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VirtualMachinePatchStatus>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(AvailablePatchSummary))
+            {
+                writer.WritePropertyName("availablePatchSummary"u8);
+                writer.WriteObjectValue(AvailablePatchSummary);
+            }
+            if (Optional.IsDefined(LastPatchInstallationSummary))
+            {
+                writer.WritePropertyName("lastPatchInstallationSummary"u8);
+                writer.WriteObjectValue(LastPatchInstallationSummary);
+            }
+            writer.WriteEndObject();
+        }
+
+        VirtualMachinePatchStatus IModelJsonSerializable<VirtualMachinePatchStatus>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachinePatchStatus(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachinePatchStatus>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachinePatchStatus IModelSerializable<VirtualMachinePatchStatus>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachinePatchStatus(document.RootElement, options);
+        }
+
+        internal static VirtualMachinePatchStatus DeserializeVirtualMachinePatchStatus(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

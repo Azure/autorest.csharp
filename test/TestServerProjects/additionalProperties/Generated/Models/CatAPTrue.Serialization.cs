@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace additionalProperties.Models
 {
-    public partial class CatAPTrue : IUtf8JsonSerializable
+    public partial class CatAPTrue : IUtf8JsonSerializable, IModelJsonSerializable<CatAPTrue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CatAPTrue>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CatAPTrue>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Friendly))
@@ -36,8 +40,32 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        internal static CatAPTrue DeserializeCatAPTrue(JsonElement element)
+        CatAPTrue IModelJsonSerializable<CatAPTrue>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCatAPTrue(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CatAPTrue>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CatAPTrue IModelSerializable<CatAPTrue>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCatAPTrue(document.RootElement, options);
+        }
+
+        internal static CatAPTrue DeserializeCatAPTrue(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -81,7 +109,7 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new CatAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties, Optional.ToNullable(friendly));
+            return new CatAPTrue(id, name.Value, Optional.ToNullable(status), Optional.ToNullable(friendly));
         }
     }
 }

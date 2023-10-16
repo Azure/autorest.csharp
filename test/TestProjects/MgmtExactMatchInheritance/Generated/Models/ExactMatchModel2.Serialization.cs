@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtExactMatchInheritance.Models
 {
-    public partial class ExactMatchModel2 : IUtf8JsonSerializable
+    public partial class ExactMatchModel2 : IUtf8JsonSerializable, IModelJsonSerializable<ExactMatchModel2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ExactMatchModel2>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ExactMatchModel2>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
@@ -38,8 +42,32 @@ namespace MgmtExactMatchInheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel2 DeserializeExactMatchModel2(JsonElement element)
+        ExactMatchModel2 IModelJsonSerializable<ExactMatchModel2>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeExactMatchModel2(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ExactMatchModel2>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExactMatchModel2 IModelSerializable<ExactMatchModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel2(document.RootElement, options);
+        }
+
+        internal static ExactMatchModel2 DeserializeExactMatchModel2(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

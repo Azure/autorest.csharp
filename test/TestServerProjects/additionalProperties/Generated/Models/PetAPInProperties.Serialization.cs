@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace additionalProperties.Models
 {
-    public partial class PetAPInProperties : IUtf8JsonSerializable
+    public partial class PetAPInProperties : IUtf8JsonSerializable, IModelJsonSerializable<PetAPInProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PetAPInProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PetAPInProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
@@ -37,8 +41,32 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element)
+        PetAPInProperties IModelJsonSerializable<PetAPInProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePetAPInProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PetAPInProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PetAPInProperties IModelSerializable<PetAPInProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePetAPInProperties(document.RootElement, options);
+        }
+
+        internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

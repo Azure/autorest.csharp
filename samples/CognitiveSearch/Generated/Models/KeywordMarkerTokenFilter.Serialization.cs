@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class KeywordMarkerTokenFilter : IUtf8JsonSerializable
+    public partial class KeywordMarkerTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<KeywordMarkerTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<KeywordMarkerTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<KeywordMarkerTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("keywords"u8);
@@ -35,8 +39,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static KeywordMarkerTokenFilter DeserializeKeywordMarkerTokenFilter(JsonElement element)
+        KeywordMarkerTokenFilter IModelJsonSerializable<KeywordMarkerTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeywordMarkerTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<KeywordMarkerTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeywordMarkerTokenFilter IModelSerializable<KeywordMarkerTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeywordMarkerTokenFilter(document.RootElement, options);
+        }
+
+        internal static KeywordMarkerTokenFilter DeserializeKeywordMarkerTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

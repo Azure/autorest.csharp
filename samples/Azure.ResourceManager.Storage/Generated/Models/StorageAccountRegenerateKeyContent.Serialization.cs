@@ -5,19 +5,65 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class StorageAccountRegenerateKeyContent : IUtf8JsonSerializable
+    public partial class StorageAccountRegenerateKeyContent : IUtf8JsonSerializable, IModelJsonSerializable<StorageAccountRegenerateKeyContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StorageAccountRegenerateKeyContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<StorageAccountRegenerateKeyContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("keyName"u8);
             writer.WriteStringValue(KeyName);
             writer.WriteEndObject();
+        }
+
+        StorageAccountRegenerateKeyContent IModelJsonSerializable<StorageAccountRegenerateKeyContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageAccountRegenerateKeyContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<StorageAccountRegenerateKeyContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StorageAccountRegenerateKeyContent IModelSerializable<StorageAccountRegenerateKeyContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStorageAccountRegenerateKeyContent(document.RootElement, options);
+        }
+
+        internal static StorageAccountRegenerateKeyContent DeserializeStorageAccountRegenerateKeyContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string keyName = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("keyName"u8))
+                {
+                    keyName = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new StorageAccountRegenerateKeyContent(keyName);
         }
     }
 }

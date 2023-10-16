@@ -8,12 +8,15 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class DatetimeWrapper : IUtf8JsonSerializable
+    public partial class DatetimeWrapper : IUtf8JsonSerializable, IModelJsonSerializable<DatetimeWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DatetimeWrapper>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DatetimeWrapper>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Field))
@@ -29,8 +32,32 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        internal static DatetimeWrapper DeserializeDatetimeWrapper(JsonElement element)
+        DatetimeWrapper IModelJsonSerializable<DatetimeWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDatetimeWrapper(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DatetimeWrapper>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DatetimeWrapper IModelSerializable<DatetimeWrapper>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDatetimeWrapper(document.RootElement, options);
+        }
+
+        internal static DatetimeWrapper DeserializeDatetimeWrapper(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

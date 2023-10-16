@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class EncryptionKey : IUtf8JsonSerializable
+    public partial class EncryptionKey : IUtf8JsonSerializable, IModelJsonSerializable<EncryptionKey>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EncryptionKey>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<EncryptionKey>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("keyVaultKeyName"u8);
@@ -29,8 +33,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static EncryptionKey DeserializeEncryptionKey(JsonElement element)
+        EncryptionKey IModelJsonSerializable<EncryptionKey>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEncryptionKey(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EncryptionKey>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EncryptionKey IModelSerializable<EncryptionKey>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEncryptionKey(document.RootElement, options);
+        }
+
+        internal static EncryptionKey DeserializeEncryptionKey(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

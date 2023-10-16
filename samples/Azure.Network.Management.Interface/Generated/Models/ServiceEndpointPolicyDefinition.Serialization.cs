@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class ServiceEndpointPolicyDefinition : IUtf8JsonSerializable
+    public partial class ServiceEndpointPolicyDefinition : IUtf8JsonSerializable, IModelJsonSerializable<ServiceEndpointPolicyDefinition>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ServiceEndpointPolicyDefinition>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ServiceEndpointPolicyDefinition>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -52,8 +56,32 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        internal static ServiceEndpointPolicyDefinition DeserializeServiceEndpointPolicyDefinition(JsonElement element)
+        ServiceEndpointPolicyDefinition IModelJsonSerializable<ServiceEndpointPolicyDefinition>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceEndpointPolicyDefinition(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ServiceEndpointPolicyDefinition>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ServiceEndpointPolicyDefinition IModelSerializable<ServiceEndpointPolicyDefinition>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeServiceEndpointPolicyDefinition(document.RootElement, options);
+        }
+
+        internal static ServiceEndpointPolicyDefinition DeserializeServiceEndpointPolicyDefinition(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

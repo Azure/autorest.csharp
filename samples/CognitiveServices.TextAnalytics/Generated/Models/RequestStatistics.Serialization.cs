@@ -5,14 +5,57 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class RequestStatistics
+    public partial class RequestStatistics : IUtf8JsonSerializable, IModelJsonSerializable<RequestStatistics>
     {
-        internal static RequestStatistics DeserializeRequestStatistics(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RequestStatistics>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RequestStatistics>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("documentsCount"u8);
+            writer.WriteNumberValue(DocumentsCount);
+            writer.WritePropertyName("validDocumentsCount"u8);
+            writer.WriteNumberValue(ValidDocumentsCount);
+            writer.WritePropertyName("erroneousDocumentsCount"u8);
+            writer.WriteNumberValue(ErroneousDocumentsCount);
+            writer.WritePropertyName("transactionsCount"u8);
+            writer.WriteNumberValue(TransactionsCount);
+            writer.WriteEndObject();
+        }
+
+        RequestStatistics IModelJsonSerializable<RequestStatistics>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRequestStatistics(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RequestStatistics>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RequestStatistics IModelSerializable<RequestStatistics>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRequestStatistics(document.RootElement, options);
+        }
+
+        internal static RequestStatistics DeserializeRequestStatistics(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

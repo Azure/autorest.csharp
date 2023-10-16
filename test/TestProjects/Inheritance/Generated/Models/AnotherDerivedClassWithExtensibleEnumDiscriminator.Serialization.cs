@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
     [JsonConverter(typeof(AnotherDerivedClassWithExtensibleEnumDiscriminatorConverter))]
-    public partial class AnotherDerivedClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable
+    public partial class AnotherDerivedClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IModelJsonSerializable<AnotherDerivedClassWithExtensibleEnumDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AnotherDerivedClassWithExtensibleEnumDiscriminator>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
@@ -23,8 +26,32 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static AnotherDerivedClassWithExtensibleEnumDiscriminator DeserializeAnotherDerivedClassWithExtensibleEnumDiscriminator(JsonElement element)
+        AnotherDerivedClassWithExtensibleEnumDiscriminator IModelJsonSerializable<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnotherDerivedClassWithExtensibleEnumDiscriminator(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AnotherDerivedClassWithExtensibleEnumDiscriminator IModelSerializable<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAnotherDerivedClassWithExtensibleEnumDiscriminator(document.RootElement, options);
+        }
+
+        internal static AnotherDerivedClassWithExtensibleEnumDiscriminator DeserializeAnotherDerivedClassWithExtensibleEnumDiscriminator(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

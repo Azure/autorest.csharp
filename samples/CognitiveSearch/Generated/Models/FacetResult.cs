@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -16,16 +15,14 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of FacetResult. </summary>
         internal FacetResult()
         {
-            AdditionalProperties = new ChangeTrackingDictionary<string, object>();
+            AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary> Initializes a new instance of FacetResult. </summary>
         /// <param name="count"> The approximate count of documents falling within the bucket described by this facet. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
-        internal FacetResult(long? count, IReadOnlyDictionary<string, object> additionalProperties)
+        internal FacetResult(long? count)
         {
             Count = count;
-            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> The approximate count of documents falling within the bucket described by this facet. </summary>

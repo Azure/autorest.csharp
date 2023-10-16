@@ -228,7 +228,7 @@ namespace MgmtExtensionCommonRestOperation
         public virtual AsyncPageable<TypeOneResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace MgmtExtensionCommonRestOperation
         public virtual Pageable<TypeOneResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

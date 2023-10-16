@@ -15,6 +15,15 @@ namespace CognitiveSearch.Models
         {
         }
 
+        /// <summary> Initializes a new instance of AccessCondition. </summary>
+        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
+        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        internal AccessCondition(string ifMatch, string ifNoneMatch)
+        {
+            IfMatch = ifMatch;
+            IfNoneMatch = ifNoneMatch;
+        }
+
         /// <summary> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </summary>
         public string IfMatch { get; set; }
         /// <summary> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </summary>

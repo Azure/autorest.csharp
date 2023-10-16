@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
-    internal partial class UnknownBaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable
+    internal partial class UnknownBaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IModelJsonSerializable<UnknownBaseClassWithExtensibleEnumDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownBaseClassWithExtensibleEnumDiscriminator>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownBaseClassWithExtensibleEnumDiscriminator>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
@@ -20,8 +24,32 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static UnknownBaseClassWithExtensibleEnumDiscriminator DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(JsonElement element)
+        UnknownBaseClassWithExtensibleEnumDiscriminator IModelJsonSerializable<UnknownBaseClassWithExtensibleEnumDiscriminator>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownBaseClassWithExtensibleEnumDiscriminator>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownBaseClassWithExtensibleEnumDiscriminator IModelSerializable<UnknownBaseClassWithExtensibleEnumDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(document.RootElement, options);
+        }
+
+        internal static UnknownBaseClassWithExtensibleEnumDiscriminator DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

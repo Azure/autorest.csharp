@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class PathHierarchyTokenizerV2 : IUtf8JsonSerializable
+    public partial class PathHierarchyTokenizerV2 : IUtf8JsonSerializable, IModelJsonSerializable<PathHierarchyTokenizerV2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PathHierarchyTokenizerV2>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PathHierarchyTokenizerV2>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Delimiter))
@@ -47,8 +51,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static PathHierarchyTokenizerV2 DeserializePathHierarchyTokenizerV2(JsonElement element)
+        PathHierarchyTokenizerV2 IModelJsonSerializable<PathHierarchyTokenizerV2>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePathHierarchyTokenizerV2(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PathHierarchyTokenizerV2>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PathHierarchyTokenizerV2 IModelSerializable<PathHierarchyTokenizerV2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePathHierarchyTokenizerV2(document.RootElement, options);
+        }
+
+        internal static PathHierarchyTokenizerV2 DeserializePathHierarchyTokenizerV2(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

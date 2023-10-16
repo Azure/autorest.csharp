@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AzureActiveDirectoryApplicationCredentials : IUtf8JsonSerializable
+    public partial class AzureActiveDirectoryApplicationCredentials : IUtf8JsonSerializable, IModelJsonSerializable<AzureActiveDirectoryApplicationCredentials>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AzureActiveDirectoryApplicationCredentials>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AzureActiveDirectoryApplicationCredentials>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("applicationId"u8);
@@ -25,8 +29,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static AzureActiveDirectoryApplicationCredentials DeserializeAzureActiveDirectoryApplicationCredentials(JsonElement element)
+        AzureActiveDirectoryApplicationCredentials IModelJsonSerializable<AzureActiveDirectoryApplicationCredentials>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureActiveDirectoryApplicationCredentials(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AzureActiveDirectoryApplicationCredentials>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AzureActiveDirectoryApplicationCredentials IModelSerializable<AzureActiveDirectoryApplicationCredentials>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAzureActiveDirectoryApplicationCredentials(document.RootElement, options);
+        }
+
+        internal static AzureActiveDirectoryApplicationCredentials DeserializeAzureActiveDirectoryApplicationCredentials(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

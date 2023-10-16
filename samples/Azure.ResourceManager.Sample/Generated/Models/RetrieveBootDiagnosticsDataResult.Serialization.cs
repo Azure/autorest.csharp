@@ -8,13 +8,46 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class RetrieveBootDiagnosticsDataResult
+    public partial class RetrieveBootDiagnosticsDataResult : IUtf8JsonSerializable, IModelJsonSerializable<RetrieveBootDiagnosticsDataResult>
     {
-        internal static RetrieveBootDiagnosticsDataResult DeserializeRetrieveBootDiagnosticsDataResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RetrieveBootDiagnosticsDataResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RetrieveBootDiagnosticsDataResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        RetrieveBootDiagnosticsDataResult IModelJsonSerializable<RetrieveBootDiagnosticsDataResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRetrieveBootDiagnosticsDataResult(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RetrieveBootDiagnosticsDataResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RetrieveBootDiagnosticsDataResult IModelSerializable<RetrieveBootDiagnosticsDataResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement, options);
+        }
+
+        internal static RetrieveBootDiagnosticsDataResult DeserializeRetrieveBootDiagnosticsDataResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
     [JsonConverter(typeof(SeparateClassConverter))]
-    public partial class SeparateClass : IUtf8JsonSerializable
+    public partial class SeparateClass : IUtf8JsonSerializable, IModelJsonSerializable<SeparateClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SeparateClass>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SeparateClass>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(StringProperty))
@@ -31,8 +34,32 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static SeparateClass DeserializeSeparateClass(JsonElement element)
+        SeparateClass IModelJsonSerializable<SeparateClass>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSeparateClass(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SeparateClass>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SeparateClass IModelSerializable<SeparateClass>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSeparateClass(document.RootElement, options);
+        }
+
+        internal static SeparateClass DeserializeSeparateClass(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class DictionaryWrapper : IUtf8JsonSerializable
+    public partial class DictionaryWrapper : IUtf8JsonSerializable, IModelJsonSerializable<DictionaryWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DictionaryWrapper>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DictionaryWrapper>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(DefaultProgram))
@@ -37,8 +41,32 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        internal static DictionaryWrapper DeserializeDictionaryWrapper(JsonElement element)
+        DictionaryWrapper IModelJsonSerializable<DictionaryWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDictionaryWrapper(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DictionaryWrapper>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DictionaryWrapper IModelSerializable<DictionaryWrapper>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDictionaryWrapper(document.RootElement, options);
+        }
+
+        internal static DictionaryWrapper DeserializeDictionaryWrapper(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

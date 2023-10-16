@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class FieldMappingFunction : IUtf8JsonSerializable
+    public partial class FieldMappingFunction : IUtf8JsonSerializable, IModelJsonSerializable<FieldMappingFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FieldMappingFunction>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FieldMappingFunction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -37,8 +41,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static FieldMappingFunction DeserializeFieldMappingFunction(JsonElement element)
+        FieldMappingFunction IModelJsonSerializable<FieldMappingFunction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFieldMappingFunction(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FieldMappingFunction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FieldMappingFunction IModelSerializable<FieldMappingFunction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFieldMappingFunction(document.RootElement, options);
+        }
+
+        internal static FieldMappingFunction DeserializeFieldMappingFunction(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

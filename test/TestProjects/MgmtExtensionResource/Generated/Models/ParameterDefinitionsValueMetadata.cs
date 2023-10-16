@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace MgmtExtensionResource.Models
 {
@@ -17,7 +16,7 @@ namespace MgmtExtensionResource.Models
         /// <summary> Initializes a new instance of ParameterDefinitionsValueMetadata. </summary>
         public ParameterDefinitionsValueMetadata()
         {
-            AdditionalProperties = new ChangeTrackingDictionary<string, BinaryData>();
+            AdditionalProperties = new Dictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of ParameterDefinitionsValueMetadata. </summary>
@@ -25,14 +24,12 @@ namespace MgmtExtensionResource.Models
         /// <param name="description"> The description of the parameter. </param>
         /// <param name="strongType"> Used when assigning the policy definition through the portal. Provides a context aware list of values for the user to choose from. </param>
         /// <param name="assignPermissions"> Set to true to have Azure portal create role assignments on the resource ID or resource scope value of this parameter during policy assignment. This property is useful in case you wish to assign permissions outside the assignment scope. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
-        internal ParameterDefinitionsValueMetadata(string displayName, string description, string strongType, bool? assignPermissions, IDictionary<string, BinaryData> additionalProperties)
+        internal ParameterDefinitionsValueMetadata(string displayName, string description, string strongType, bool? assignPermissions)
         {
             DisplayName = displayName;
             Description = description;
             StrongType = strongType;
             AssignPermissions = assignPermissions;
-            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> The display name for the parameter. </summary>

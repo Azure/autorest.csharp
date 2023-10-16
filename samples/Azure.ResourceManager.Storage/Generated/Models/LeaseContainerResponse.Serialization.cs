@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class LeaseContainerResponse
+    public partial class LeaseContainerResponse : IUtf8JsonSerializable, IModelJsonSerializable<LeaseContainerResponse>
     {
-        internal static LeaseContainerResponse DeserializeLeaseContainerResponse(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LeaseContainerResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LeaseContainerResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(LeaseId))
+            {
+                writer.WritePropertyName("leaseId"u8);
+                writer.WriteStringValue(LeaseId);
+            }
+            if (Optional.IsDefined(LeaseTimeSeconds))
+            {
+                writer.WritePropertyName("leaseTimeSeconds"u8);
+                writer.WriteStringValue(LeaseTimeSeconds);
+            }
+            writer.WriteEndObject();
+        }
+
+        LeaseContainerResponse IModelJsonSerializable<LeaseContainerResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLeaseContainerResponse(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LeaseContainerResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LeaseContainerResponse IModelSerializable<LeaseContainerResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLeaseContainerResponse(document.RootElement, options);
+        }
+
+        internal static LeaseContainerResponse DeserializeLeaseContainerResponse(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

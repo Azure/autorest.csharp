@@ -8,13 +8,70 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class LogAnalytics
+    public partial class LogAnalytics : IUtf8JsonSerializable, IModelJsonSerializable<LogAnalytics>
     {
-        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LogAnalytics>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LogAnalytics>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ContentType))
+            {
+                writer.WritePropertyName("contentType"u8);
+                writer.WriteStringValue(ContentType.Value.ToString());
+            }
+            if (Optional.IsDefined(Content))
+            {
+                writer.WritePropertyName("content"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Content);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Content.ToString()).RootElement);
+#endif
+            }
+            if (Optional.IsDefined(RequestMethod))
+            {
+                writer.WritePropertyName("method"u8);
+                writer.WriteStringValue(RequestMethod.Value.ToString());
+            }
+            if (Optional.IsDefined(BasePathUri))
+            {
+                writer.WritePropertyName("basePath"u8);
+                writer.WriteStringValue(BasePathUri.AbsoluteUri);
+            }
+            writer.WriteEndObject();
+        }
+
+        LogAnalytics IModelJsonSerializable<LogAnalytics>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLogAnalytics(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LogAnalytics>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LogAnalytics IModelSerializable<LogAnalytics>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLogAnalytics(document.RootElement, options);
+        }
+
+        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class LanguageDetectionSkill : IUtf8JsonSerializable
+    public partial class LanguageDetectionSkill : IUtf8JsonSerializable, IModelJsonSerializable<LanguageDetectionSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LanguageDetectionSkill>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LanguageDetectionSkill>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
@@ -50,8 +54,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element)
+        LanguageDetectionSkill IModelJsonSerializable<LanguageDetectionSkill>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLanguageDetectionSkill(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LanguageDetectionSkill>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LanguageDetectionSkill IModelSerializable<LanguageDetectionSkill>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLanguageDetectionSkill(document.RootElement, options);
+        }
+
+        internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

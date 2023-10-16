@@ -5,15 +5,58 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class TextAnalyticsWarning
+    public partial class TextAnalyticsWarning : IUtf8JsonSerializable, IModelJsonSerializable<TextAnalyticsWarning>
     {
-        internal static TextAnalyticsWarning DeserializeTextAnalyticsWarning(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TextAnalyticsWarning>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TextAnalyticsWarning>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("code"u8);
+            writer.WriteStringValue(Code.ToSerialString());
+            writer.WritePropertyName("message"u8);
+            writer.WriteStringValue(Message);
+            if (Optional.IsDefined(TargetRef))
+            {
+                writer.WritePropertyName("targetRef"u8);
+                writer.WriteStringValue(TargetRef);
+            }
+            writer.WriteEndObject();
+        }
+
+        TextAnalyticsWarning IModelJsonSerializable<TextAnalyticsWarning>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTextAnalyticsWarning(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TextAnalyticsWarning>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TextAnalyticsWarning IModelSerializable<TextAnalyticsWarning>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTextAnalyticsWarning(document.RootElement, options);
+        }
+
+        internal static TextAnalyticsWarning DeserializeTextAnalyticsWarning(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

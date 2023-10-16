@@ -5,15 +5,79 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineSize
+    public partial class VirtualMachineSize : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineSize>
     {
-        internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineSize>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VirtualMachineSize>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(NumberOfCores))
+            {
+                writer.WritePropertyName("numberOfCores"u8);
+                writer.WriteNumberValue(NumberOfCores.Value);
+            }
+            if (Optional.IsDefined(OSDiskSizeInMB))
+            {
+                writer.WritePropertyName("osDiskSizeInMB"u8);
+                writer.WriteNumberValue(OSDiskSizeInMB.Value);
+            }
+            if (Optional.IsDefined(ResourceDiskSizeInMB))
+            {
+                writer.WritePropertyName("resourceDiskSizeInMB"u8);
+                writer.WriteNumberValue(ResourceDiskSizeInMB.Value);
+            }
+            if (Optional.IsDefined(MemoryInMB))
+            {
+                writer.WritePropertyName("memoryInMB"u8);
+                writer.WriteNumberValue(MemoryInMB.Value);
+            }
+            if (Optional.IsDefined(MaxDataDiskCount))
+            {
+                writer.WritePropertyName("maxDataDiskCount"u8);
+                writer.WriteNumberValue(MaxDataDiskCount.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        VirtualMachineSize IModelJsonSerializable<VirtualMachineSize>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineSize(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineSize>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineSize IModelSerializable<VirtualMachineSize>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineSize(document.RootElement, options);
+        }
+
+        internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,15 +5,66 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class DotSalmon
+    public partial class DotSalmon : IUtf8JsonSerializable, IModelJsonSerializable<DotSalmon>
     {
-        internal static DotSalmon DeserializeDotSalmon(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DotSalmon>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DotSalmon>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location);
+            }
+            if (Optional.IsDefined(Iswild))
+            {
+                writer.WritePropertyName("iswild"u8);
+                writer.WriteBooleanValue(Iswild.Value);
+            }
+            writer.WritePropertyName("fish.type"u8);
+            writer.WriteStringValue(FishType);
+            if (Optional.IsDefined(Species))
+            {
+                writer.WritePropertyName("species"u8);
+                writer.WriteStringValue(Species);
+            }
+            writer.WriteEndObject();
+        }
+
+        DotSalmon IModelJsonSerializable<DotSalmon>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDotSalmon(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DotSalmon>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DotSalmon IModelSerializable<DotSalmon>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDotSalmon(document.RootElement, options);
+        }
+
+        internal static DotSalmon DeserializeDotSalmon(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

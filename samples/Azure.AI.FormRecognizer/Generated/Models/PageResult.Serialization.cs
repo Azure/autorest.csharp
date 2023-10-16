@@ -5,16 +5,77 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class PageResult
+    public partial class PageResult : IUtf8JsonSerializable, IModelJsonSerializable<PageResult>
     {
-        internal static PageResult DeserializePageResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PageResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PageResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("page"u8);
+            writer.WriteNumberValue(Page);
+            if (Optional.IsDefined(ClusterId))
+            {
+                writer.WritePropertyName("clusterId"u8);
+                writer.WriteNumberValue(ClusterId.Value);
+            }
+            if (Optional.IsCollectionDefined(KeyValuePairs))
+            {
+                writer.WritePropertyName("keyValuePairs"u8);
+                writer.WriteStartArray();
+                foreach (var item in KeyValuePairs)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(Tables))
+            {
+                writer.WritePropertyName("tables"u8);
+                writer.WriteStartArray();
+                foreach (var item in Tables)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        PageResult IModelJsonSerializable<PageResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePageResult(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PageResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PageResult IModelSerializable<PageResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePageResult(document.RootElement, options);
+        }
+
+        internal static PageResult DeserializePageResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

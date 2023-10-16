@@ -5,15 +5,56 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownDotFish
+    internal partial class UnknownDotFish : IUtf8JsonSerializable, IModelJsonSerializable<UnknownDotFish>
     {
-        internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownDotFish>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownDotFish>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("fish.type"u8);
+            writer.WriteStringValue(FishType);
+            if (Optional.IsDefined(Species))
+            {
+                writer.WritePropertyName("species"u8);
+                writer.WriteStringValue(Species);
+            }
+            writer.WriteEndObject();
+        }
+
+        UnknownDotFish IModelJsonSerializable<UnknownDotFish>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownDotFish(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownDotFish>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownDotFish IModelSerializable<UnknownDotFish>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownDotFish(document.RootElement, options);
+        }
+
+        internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

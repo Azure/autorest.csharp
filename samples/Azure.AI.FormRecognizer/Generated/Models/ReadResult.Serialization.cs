@@ -5,16 +5,75 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ReadResult
+    public partial class ReadResult : IUtf8JsonSerializable, IModelJsonSerializable<ReadResult>
     {
-        internal static ReadResult DeserializeReadResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ReadResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ReadResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("page"u8);
+            writer.WriteNumberValue(Page);
+            writer.WritePropertyName("angle"u8);
+            writer.WriteNumberValue(Angle);
+            writer.WritePropertyName("width"u8);
+            writer.WriteNumberValue(Width);
+            writer.WritePropertyName("height"u8);
+            writer.WriteNumberValue(Height);
+            writer.WritePropertyName("unit"u8);
+            writer.WriteStringValue(Unit.ToSerialString());
+            if (Optional.IsDefined(Language))
+            {
+                writer.WritePropertyName("language"u8);
+                writer.WriteStringValue(Language.Value.ToString());
+            }
+            if (Optional.IsCollectionDefined(Lines))
+            {
+                writer.WritePropertyName("lines"u8);
+                writer.WriteStartArray();
+                foreach (var item in Lines)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        ReadResult IModelJsonSerializable<ReadResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeReadResult(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ReadResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ReadResult IModelSerializable<ReadResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeReadResult(document.RootElement, options);
+        }
+
+        internal static ReadResult DeserializeReadResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

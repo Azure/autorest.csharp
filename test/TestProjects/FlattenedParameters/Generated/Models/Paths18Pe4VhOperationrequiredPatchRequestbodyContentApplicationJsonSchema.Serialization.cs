@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace FlattenedParameters.Models
 {
-    internal partial class Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable
+    internal partial class Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IModelJsonSerializable<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("flattened"u8);
@@ -26,6 +30,66 @@ namespace FlattenedParameters.Models
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
+        }
+
+        Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema IModelJsonSerializable<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePaths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema IModelSerializable<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePaths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
+        }
+
+        internal static Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema DeserializePaths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string required = default;
+            Optional<string> nonRequired = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("flattened"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("required"u8))
+                        {
+                            required = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("non_required"u8))
+                        {
+                            nonRequired = property0.Value.GetString();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(required, nonRequired.Value);
         }
     }
 }

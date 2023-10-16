@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class HighWaterMarkChangeDetectionPolicy : IUtf8JsonSerializable
+    public partial class HighWaterMarkChangeDetectionPolicy : IUtf8JsonSerializable, IModelJsonSerializable<HighWaterMarkChangeDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<HighWaterMarkChangeDetectionPolicy>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<HighWaterMarkChangeDetectionPolicy>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("highWaterMarkColumnName"u8);
@@ -22,8 +26,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static HighWaterMarkChangeDetectionPolicy DeserializeHighWaterMarkChangeDetectionPolicy(JsonElement element)
+        HighWaterMarkChangeDetectionPolicy IModelJsonSerializable<HighWaterMarkChangeDetectionPolicy>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeHighWaterMarkChangeDetectionPolicy(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<HighWaterMarkChangeDetectionPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        HighWaterMarkChangeDetectionPolicy IModelSerializable<HighWaterMarkChangeDetectionPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeHighWaterMarkChangeDetectionPolicy(document.RootElement, options);
+        }
+
+        internal static HighWaterMarkChangeDetectionPolicy DeserializeHighWaterMarkChangeDetectionPolicy(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

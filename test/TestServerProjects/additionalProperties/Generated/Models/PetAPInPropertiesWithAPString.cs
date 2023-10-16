@@ -25,7 +25,7 @@ namespace additionalProperties.Models
             Id = id;
             OdataLocation = odataLocation;
             AdditionalProperties = new ChangeTrackingDictionary<string, float>();
-            MoreAdditionalProperties = new ChangeTrackingDictionary<string, string>();
+            MoreAdditionalProperties = new Dictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
@@ -34,15 +34,13 @@ namespace additionalProperties.Models
         /// <param name="status"></param>
         /// <param name="odataLocation"></param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
-        /// <param name="moreAdditionalProperties"> Additional Properties. </param>
-        internal PetAPInPropertiesWithAPString(int id, string name, bool? status, string odataLocation, IDictionary<string, float> additionalProperties, IDictionary<string, string> moreAdditionalProperties)
+        internal PetAPInPropertiesWithAPString(int id, string name, bool? status, string odataLocation, IDictionary<string, float> additionalProperties)
         {
             Id = id;
             Name = name;
             Status = status;
             OdataLocation = odataLocation;
             AdditionalProperties = additionalProperties;
-            MoreAdditionalProperties = moreAdditionalProperties;
         }
 
         /// <summary> Gets or sets the id. </summary>

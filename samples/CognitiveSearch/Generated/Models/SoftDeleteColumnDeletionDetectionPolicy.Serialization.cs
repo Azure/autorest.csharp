@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SoftDeleteColumnDeletionDetectionPolicy : IUtf8JsonSerializable
+    public partial class SoftDeleteColumnDeletionDetectionPolicy : IUtf8JsonSerializable, IModelJsonSerializable<SoftDeleteColumnDeletionDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SoftDeleteColumnDeletionDetectionPolicy>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SoftDeleteColumnDeletionDetectionPolicy>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(SoftDeleteColumnName))
@@ -30,8 +34,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static SoftDeleteColumnDeletionDetectionPolicy DeserializeSoftDeleteColumnDeletionDetectionPolicy(JsonElement element)
+        SoftDeleteColumnDeletionDetectionPolicy IModelJsonSerializable<SoftDeleteColumnDeletionDetectionPolicy>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSoftDeleteColumnDeletionDetectionPolicy(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SoftDeleteColumnDeletionDetectionPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SoftDeleteColumnDeletionDetectionPolicy IModelSerializable<SoftDeleteColumnDeletionDetectionPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSoftDeleteColumnDeletionDetectionPolicy(document.RootElement, options);
+        }
+
+        internal static SoftDeleteColumnDeletionDetectionPolicy DeserializeSoftDeleteColumnDeletionDetectionPolicy(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

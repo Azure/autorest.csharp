@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtExactMatchFlattenInheritance
 {
-    public partial class CustomModel2Data : IUtf8JsonSerializable
+    public partial class CustomModel2Data : IUtf8JsonSerializable, IModelJsonSerializable<CustomModel2Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CustomModel2Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CustomModel2Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -24,8 +28,32 @@ namespace MgmtExactMatchFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static CustomModel2Data DeserializeCustomModel2Data(JsonElement element)
+        CustomModel2Data IModelJsonSerializable<CustomModel2Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCustomModel2Data(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CustomModel2Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CustomModel2Data IModelSerializable<CustomModel2Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCustomModel2Data(document.RootElement, options);
+        }
+
+        internal static CustomModel2Data DeserializeCustomModel2Data(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

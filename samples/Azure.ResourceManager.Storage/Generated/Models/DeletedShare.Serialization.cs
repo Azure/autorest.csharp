@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class DeletedShare : IUtf8JsonSerializable
+    public partial class DeletedShare : IUtf8JsonSerializable, IModelJsonSerializable<DeletedShare>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeletedShare>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeletedShare>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("deletedShareName"u8);
@@ -20,6 +24,54 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WritePropertyName("deletedShareVersion"u8);
             writer.WriteStringValue(DeletedShareVersion);
             writer.WriteEndObject();
+        }
+
+        DeletedShare IModelJsonSerializable<DeletedShare>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeletedShare(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeletedShare>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedShare IModelSerializable<DeletedShare>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeletedShare(document.RootElement, options);
+        }
+
+        internal static DeletedShare DeserializeDeletedShare(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string deletedShareName = default;
+            string deletedShareVersion = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("deletedShareName"u8))
+                {
+                    deletedShareName = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("deletedShareVersion"u8))
+                {
+                    deletedShareVersion = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new DeletedShare(deletedShareName, deletedShareVersion);
         }
     }
 }

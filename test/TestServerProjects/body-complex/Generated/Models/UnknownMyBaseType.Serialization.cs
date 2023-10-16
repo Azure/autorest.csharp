@@ -5,15 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownMyBaseType
+    internal partial class UnknownMyBaseType : IUtf8JsonSerializable, IModelJsonSerializable<UnknownMyBaseType>
     {
-        internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownMyBaseType>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownMyBaseType>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToString());
+            if (Optional.IsDefined(PropB1))
+            {
+                writer.WritePropertyName("propB1"u8);
+                writer.WriteStringValue(PropB1);
+            }
+            writer.WritePropertyName("helper"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PropBH1))
+            {
+                writer.WritePropertyName("propBH1"u8);
+                writer.WriteStringValue(PropBH1);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        UnknownMyBaseType IModelJsonSerializable<UnknownMyBaseType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownMyBaseType(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownMyBaseType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownMyBaseType IModelSerializable<UnknownMyBaseType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownMyBaseType(document.RootElement, options);
+        }
+
+        internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

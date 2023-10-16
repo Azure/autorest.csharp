@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
-    public partial class ClassThatInheritsFromBaseClassWithDiscriminator : IUtf8JsonSerializable
+    public partial class ClassThatInheritsFromBaseClassWithDiscriminator : IUtf8JsonSerializable, IModelJsonSerializable<ClassThatInheritsFromBaseClassWithDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ClassThatInheritsFromBaseClassWithDiscriminator>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ClassThatInheritsFromBaseClassWithDiscriminator>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
@@ -83,8 +86,32 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static ClassThatInheritsFromBaseClassWithDiscriminator DeserializeClassThatInheritsFromBaseClassWithDiscriminator(JsonElement element)
+        ClassThatInheritsFromBaseClassWithDiscriminator IModelJsonSerializable<ClassThatInheritsFromBaseClassWithDiscriminator>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeClassThatInheritsFromBaseClassWithDiscriminator(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ClassThatInheritsFromBaseClassWithDiscriminator>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ClassThatInheritsFromBaseClassWithDiscriminator IModelSerializable<ClassThatInheritsFromBaseClassWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeClassThatInheritsFromBaseClassWithDiscriminator(document.RootElement, options);
+        }
+
+        internal static ClassThatInheritsFromBaseClassWithDiscriminator DeserializeClassThatInheritsFromBaseClassWithDiscriminator(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

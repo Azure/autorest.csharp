@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtExtensionResource.Models
 {
-    public partial class ValidateSomethingContent : IUtf8JsonSerializable
+    public partial class ValidateSomethingContent : IUtf8JsonSerializable, IModelJsonSerializable<ValidateSomethingContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ValidateSomethingContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ValidateSomethingContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Something))
@@ -21,6 +25,48 @@ namespace MgmtExtensionResource.Models
                 writer.WriteStringValue(Something);
             }
             writer.WriteEndObject();
+        }
+
+        ValidateSomethingContent IModelJsonSerializable<ValidateSomethingContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeValidateSomethingContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ValidateSomethingContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ValidateSomethingContent IModelSerializable<ValidateSomethingContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeValidateSomethingContent(document.RootElement, options);
+        }
+
+        internal static ValidateSomethingContent DeserializeValidateSomethingContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> something = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("something"u8))
+                {
+                    something = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new ValidateSomethingContent(something.Value);
         }
     }
 }

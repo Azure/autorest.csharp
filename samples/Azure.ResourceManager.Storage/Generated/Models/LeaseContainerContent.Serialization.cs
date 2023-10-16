@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class LeaseContainerContent : IUtf8JsonSerializable
+    public partial class LeaseContainerContent : IUtf8JsonSerializable, IModelJsonSerializable<LeaseContainerContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LeaseContainerContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LeaseContainerContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("action"u8);
@@ -38,6 +42,80 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStringValue(ProposedLeaseId);
             }
             writer.WriteEndObject();
+        }
+
+        LeaseContainerContent IModelJsonSerializable<LeaseContainerContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLeaseContainerContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LeaseContainerContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LeaseContainerContent IModelSerializable<LeaseContainerContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLeaseContainerContent(document.RootElement, options);
+        }
+
+        internal static LeaseContainerContent DeserializeLeaseContainerContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            LeaseContainerRequestAction action = default;
+            Optional<string> leaseId = default;
+            Optional<int> breakPeriod = default;
+            Optional<int> leaseDuration = default;
+            Optional<string> proposedLeaseId = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("action"u8))
+                {
+                    action = new LeaseContainerRequestAction(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("leaseId"u8))
+                {
+                    leaseId = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("breakPeriod"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    breakPeriod = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("leaseDuration"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    leaseDuration = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("proposedLeaseId"u8))
+                {
+                    proposedLeaseId = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new LeaseContainerContent(action, leaseId.Value, Optional.ToNullable(breakPeriod), Optional.ToNullable(leaseDuration), proposedLeaseId.Value);
         }
     }
 }

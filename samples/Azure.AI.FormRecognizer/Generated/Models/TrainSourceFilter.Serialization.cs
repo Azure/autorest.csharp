@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainSourceFilter : IUtf8JsonSerializable
+    public partial class TrainSourceFilter : IUtf8JsonSerializable, IModelJsonSerializable<TrainSourceFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TrainSourceFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TrainSourceFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Prefix))
@@ -26,6 +30,58 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteBooleanValue(IncludeSubFolders.Value);
             }
             writer.WriteEndObject();
+        }
+
+        TrainSourceFilter IModelJsonSerializable<TrainSourceFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTrainSourceFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TrainSourceFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TrainSourceFilter IModelSerializable<TrainSourceFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTrainSourceFilter(document.RootElement, options);
+        }
+
+        internal static TrainSourceFilter DeserializeTrainSourceFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> prefix = default;
+            Optional<bool> includeSubFolders = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("prefix"u8))
+                {
+                    prefix = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("includeSubFolders"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    includeSubFolders = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new TrainSourceFilter(prefix.Value, Optional.ToNullable(includeSubFolders));
         }
     }
 }

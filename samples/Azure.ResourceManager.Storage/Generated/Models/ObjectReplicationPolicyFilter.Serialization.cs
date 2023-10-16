@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ObjectReplicationPolicyFilter : IUtf8JsonSerializable
+    public partial class ObjectReplicationPolicyFilter : IUtf8JsonSerializable, IModelJsonSerializable<ObjectReplicationPolicyFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ObjectReplicationPolicyFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ObjectReplicationPolicyFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(PrefixMatch))
@@ -34,8 +38,32 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        internal static ObjectReplicationPolicyFilter DeserializeObjectReplicationPolicyFilter(JsonElement element)
+        ObjectReplicationPolicyFilter IModelJsonSerializable<ObjectReplicationPolicyFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeObjectReplicationPolicyFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ObjectReplicationPolicyFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ObjectReplicationPolicyFilter IModelSerializable<ObjectReplicationPolicyFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeObjectReplicationPolicyFilter(document.RootElement, options);
+        }
+
+        internal static ObjectReplicationPolicyFilter DeserializeObjectReplicationPolicyFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

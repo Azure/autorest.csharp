@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
-    internal partial class ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride : IUtf8JsonSerializable
+    internal partial class ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride : IUtf8JsonSerializable, IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(BaseClassProperty))
@@ -91,8 +94,32 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(JsonElement element)
+        ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride IModelSerializable<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(document.RootElement, options);
+        }
+
+        internal static ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -228,7 +228,7 @@ namespace MgmtExtensionCommonRestOperation
         public virtual AsyncPageable<TypeTwoResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeTwoCommonRestClient.CreateListTypeTwosRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), _typeTwoCommonClientDiagnostics, Pipeline, "TypeTwoCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), _typeTwoCommonClientDiagnostics, Pipeline, "TypeTwoCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace MgmtExtensionCommonRestOperation
         public virtual Pageable<TypeTwoResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeTwoCommonRestClient.CreateListTypeTwosRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), _typeTwoCommonClientDiagnostics, Pipeline, "TypeTwoCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), _typeTwoCommonClientDiagnostics, Pipeline, "TypeTwoCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

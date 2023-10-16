@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineCaptureContent : IUtf8JsonSerializable
+    public partial class VirtualMachineCaptureContent : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineCaptureContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineCaptureContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VirtualMachineCaptureContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("vhdPrefix"u8);
@@ -22,6 +26,60 @@ namespace MgmtAcronymMapping.Models
             writer.WritePropertyName("overwriteVhds"u8);
             writer.WriteBooleanValue(OverwriteVhds);
             writer.WriteEndObject();
+        }
+
+        VirtualMachineCaptureContent IModelJsonSerializable<VirtualMachineCaptureContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineCaptureContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineCaptureContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineCaptureContent IModelSerializable<VirtualMachineCaptureContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineCaptureContent(document.RootElement, options);
+        }
+
+        internal static VirtualMachineCaptureContent DeserializeVirtualMachineCaptureContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string vhdPrefix = default;
+            string destinationContainerName = default;
+            bool overwriteVhds = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("vhdPrefix"u8))
+                {
+                    vhdPrefix = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("destinationContainerName"u8))
+                {
+                    destinationContainerName = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("overwriteVhds"u8))
+                {
+                    overwriteVhds = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new VirtualMachineCaptureContent(vhdPrefix, destinationContainerName, overwriteVhds);
         }
     }
 }

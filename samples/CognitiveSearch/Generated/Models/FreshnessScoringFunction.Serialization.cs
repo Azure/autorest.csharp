@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class FreshnessScoringFunction : IUtf8JsonSerializable
+    public partial class FreshnessScoringFunction : IUtf8JsonSerializable, IModelJsonSerializable<FreshnessScoringFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FreshnessScoringFunction>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FreshnessScoringFunction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("freshness"u8);
@@ -31,8 +35,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static FreshnessScoringFunction DeserializeFreshnessScoringFunction(JsonElement element)
+        FreshnessScoringFunction IModelJsonSerializable<FreshnessScoringFunction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFreshnessScoringFunction(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FreshnessScoringFunction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FreshnessScoringFunction IModelSerializable<FreshnessScoringFunction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFreshnessScoringFunction(document.RootElement, options);
+        }
+
+        internal static FreshnessScoringFunction DeserializeFreshnessScoringFunction(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

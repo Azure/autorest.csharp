@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace HlcConstants.Models
 {
-    public partial class ModelWithRequiredConstant : IUtf8JsonSerializable
+    public partial class ModelWithRequiredConstant : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithRequiredConstant>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithRequiredConstant>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelWithRequiredConstant>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredStringConstant"u8);
@@ -26,8 +30,32 @@ namespace HlcConstants.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element)
+        ModelWithRequiredConstant IModelJsonSerializable<ModelWithRequiredConstant>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithRequiredConstant(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithRequiredConstant>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithRequiredConstant IModelSerializable<ModelWithRequiredConstant>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithRequiredConstant(document.RootElement, options);
+        }
+
+        internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

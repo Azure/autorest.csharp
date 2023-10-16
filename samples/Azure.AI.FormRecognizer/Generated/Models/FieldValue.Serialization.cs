@@ -9,13 +9,134 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class FieldValue
+    public partial class FieldValue : IUtf8JsonSerializable, IModelJsonSerializable<FieldValue>
     {
-        internal static FieldValue DeserializeFieldValue(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FieldValue>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FieldValue>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("type"u8);
+            writer.WriteStringValue(Type.ToSerialString());
+            if (Optional.IsDefined(ValueString))
+            {
+                writer.WritePropertyName("valueString"u8);
+                writer.WriteStringValue(ValueString);
+            }
+            if (Optional.IsDefined(ValueDate))
+            {
+                writer.WritePropertyName("valueDate"u8);
+                writer.WriteStringValue(ValueDate.Value, "D");
+            }
+            if (Optional.IsDefined(ValueTime))
+            {
+                writer.WritePropertyName("valueTime"u8);
+                writer.WriteStringValue(ValueTime.Value, "T");
+            }
+            if (Optional.IsDefined(ValuePhoneNumber))
+            {
+                writer.WritePropertyName("valuePhoneNumber"u8);
+                writer.WriteStringValue(ValuePhoneNumber);
+            }
+            if (Optional.IsDefined(ValueNumber))
+            {
+                writer.WritePropertyName("valueNumber"u8);
+                writer.WriteNumberValue(ValueNumber.Value);
+            }
+            if (Optional.IsDefined(ValueInteger))
+            {
+                writer.WritePropertyName("valueInteger"u8);
+                writer.WriteNumberValue(ValueInteger.Value);
+            }
+            if (Optional.IsCollectionDefined(ValueArray))
+            {
+                writer.WritePropertyName("valueArray"u8);
+                writer.WriteStartArray();
+                foreach (var item in ValueArray)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ValueObject))
+            {
+                writer.WritePropertyName("valueObject"u8);
+                writer.WriteStartObject();
+                foreach (var item in ValueObject)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (Optional.IsDefined(Text))
+            {
+                writer.WritePropertyName("text"u8);
+                writer.WriteStringValue(Text);
+            }
+            if (Optional.IsCollectionDefined(BoundingBox))
+            {
+                writer.WritePropertyName("boundingBox"u8);
+                writer.WriteStartArray();
+                foreach (var item in BoundingBox)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Confidence))
+            {
+                writer.WritePropertyName("confidence"u8);
+                writer.WriteNumberValue(Confidence.Value);
+            }
+            if (Optional.IsCollectionDefined(Elements))
+            {
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in Elements)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Page))
+            {
+                writer.WritePropertyName("page"u8);
+                writer.WriteNumberValue(Page.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        FieldValue IModelJsonSerializable<FieldValue>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFieldValue(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FieldValue>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FieldValue IModelSerializable<FieldValue>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFieldValue(document.RootElement, options);
+        }
+
+        internal static FieldValue DeserializeFieldValue(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

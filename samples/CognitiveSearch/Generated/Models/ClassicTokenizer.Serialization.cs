@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ClassicTokenizer : IUtf8JsonSerializable
+    public partial class ClassicTokenizer : IUtf8JsonSerializable, IModelJsonSerializable<ClassicTokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ClassicTokenizer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ClassicTokenizer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxTokenLength))
@@ -27,8 +31,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static ClassicTokenizer DeserializeClassicTokenizer(JsonElement element)
+        ClassicTokenizer IModelJsonSerializable<ClassicTokenizer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeClassicTokenizer(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ClassicTokenizer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ClassicTokenizer IModelSerializable<ClassicTokenizer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeClassicTokenizer(document.RootElement, options);
+        }
+
+        internal static ClassicTokenizer DeserializeClassicTokenizer(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

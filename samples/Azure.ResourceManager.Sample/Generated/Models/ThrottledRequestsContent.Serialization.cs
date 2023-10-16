@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class ThrottledRequestsContent : IUtf8JsonSerializable
+    public partial class ThrottledRequestsContent : IUtf8JsonSerializable, IModelJsonSerializable<ThrottledRequestsContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ThrottledRequestsContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ThrottledRequestsContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("blobContainerSasUri"u8);
@@ -37,6 +41,90 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteBooleanValue(GroupByResourceName.Value);
             }
             writer.WriteEndObject();
+        }
+
+        ThrottledRequestsContent IModelJsonSerializable<ThrottledRequestsContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeThrottledRequestsContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ThrottledRequestsContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ThrottledRequestsContent IModelSerializable<ThrottledRequestsContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeThrottledRequestsContent(document.RootElement, options);
+        }
+
+        internal static ThrottledRequestsContent DeserializeThrottledRequestsContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Uri blobContainerSasUri = default;
+            DateTimeOffset fromTime = default;
+            DateTimeOffset toTime = default;
+            Optional<bool> groupByThrottlePolicy = default;
+            Optional<bool> groupByOperationName = default;
+            Optional<bool> groupByResourceName = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("blobContainerSasUri"u8))
+                {
+                    blobContainerSasUri = new Uri(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("fromTime"u8))
+                {
+                    fromTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("toTime"u8))
+                {
+                    toTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("groupByThrottlePolicy"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    groupByThrottlePolicy = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("groupByOperationName"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    groupByOperationName = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("groupByResourceName"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    groupByResourceName = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName));
         }
     }
 }

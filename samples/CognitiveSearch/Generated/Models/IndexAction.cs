@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -16,7 +15,14 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of IndexAction. </summary>
         public IndexAction()
         {
-            AdditionalProperties = new ChangeTrackingDictionary<string, object>();
+            AdditionalProperties = new Dictionary<string, object>();
+        }
+
+        /// <summary> Initializes a new instance of IndexAction. </summary>
+        /// <param name="actionType"> The operation to perform on a document in an indexing batch. </param>
+        internal IndexAction(IndexActionType? actionType)
+        {
+            ActionType = actionType;
         }
 
         /// <summary> The operation to perform on a document in an indexing batch. </summary>

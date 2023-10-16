@@ -11,14 +11,17 @@ using System.Net;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtExactMatchInheritance.Models;
 
 namespace MgmtExactMatchInheritance
 {
-    public partial class ExactMatchModel1Data : IUtf8JsonSerializable
+    public partial class ExactMatchModel1Data : IUtf8JsonSerializable, IModelJsonSerializable<ExactMatchModel1Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ExactMatchModel1Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ExactMatchModel1Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
@@ -139,8 +142,32 @@ namespace MgmtExactMatchInheritance
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element)
+        ExactMatchModel1Data IModelJsonSerializable<ExactMatchModel1Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeExactMatchModel1Data(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ExactMatchModel1Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExactMatchModel1Data IModelSerializable<ExactMatchModel1Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel1Data(document.RootElement, options);
+        }
+
+        internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -22,16 +22,7 @@ namespace CognitiveSearch.Models
             Argument.AssertNotNull(text, nameof(text));
 
             Text = text;
-            AdditionalProperties = new ChangeTrackingDictionary<string, object>();
-        }
-
-        /// <summary> Initializes a new instance of SuggestResult. </summary>
-        /// <param name="text"> The text of the suggestion result. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
-        internal SuggestResult(string text, IReadOnlyDictionary<string, object> additionalProperties)
-        {
-            Text = text;
-            AdditionalProperties = additionalProperties;
+            AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary> The text of the suggestion result. </summary>

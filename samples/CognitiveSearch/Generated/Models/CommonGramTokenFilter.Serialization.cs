@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class CommonGramTokenFilter : IUtf8JsonSerializable
+    public partial class CommonGramTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<CommonGramTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CommonGramTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CommonGramTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("commonWords"u8);
@@ -40,8 +44,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static CommonGramTokenFilter DeserializeCommonGramTokenFilter(JsonElement element)
+        CommonGramTokenFilter IModelJsonSerializable<CommonGramTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCommonGramTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CommonGramTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CommonGramTokenFilter IModelSerializable<CommonGramTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCommonGramTokenFilter(document.RootElement, options);
+        }
+
+        internal static CommonGramTokenFilter DeserializeCommonGramTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

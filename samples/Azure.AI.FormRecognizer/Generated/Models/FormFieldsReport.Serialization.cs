@@ -5,14 +5,53 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class FormFieldsReport
+    public partial class FormFieldsReport : IUtf8JsonSerializable, IModelJsonSerializable<FormFieldsReport>
     {
-        internal static FormFieldsReport DeserializeFormFieldsReport(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FormFieldsReport>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FormFieldsReport>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("fieldName"u8);
+            writer.WriteStringValue(FieldName);
+            writer.WritePropertyName("accuracy"u8);
+            writer.WriteNumberValue(Accuracy);
+            writer.WriteEndObject();
+        }
+
+        FormFieldsReport IModelJsonSerializable<FormFieldsReport>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFormFieldsReport(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FormFieldsReport>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FormFieldsReport IModelSerializable<FormFieldsReport>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFormFieldsReport(document.RootElement, options);
+        }
+
+        internal static FormFieldsReport DeserializeFormFieldsReport(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

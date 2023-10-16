@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class TextTranslationSkill : IUtf8JsonSerializable
+    public partial class TextTranslationSkill : IUtf8JsonSerializable, IModelJsonSerializable<TextTranslationSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TextTranslationSkill>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TextTranslationSkill>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("defaultToLanguageCode"u8);
@@ -62,8 +66,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static TextTranslationSkill DeserializeTextTranslationSkill(JsonElement element)
+        TextTranslationSkill IModelJsonSerializable<TextTranslationSkill>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTextTranslationSkill(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TextTranslationSkill>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TextTranslationSkill IModelSerializable<TextTranslationSkill>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTextTranslationSkill(document.RootElement, options);
+        }
+
+        internal static TextTranslationSkill DeserializeTextTranslationSkill(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class KeywordTokenizerV2 : IUtf8JsonSerializable
+    public partial class KeywordTokenizerV2 : IUtf8JsonSerializable, IModelJsonSerializable<KeywordTokenizerV2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<KeywordTokenizerV2>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<KeywordTokenizerV2>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxTokenLength))
@@ -27,8 +31,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static KeywordTokenizerV2 DeserializeKeywordTokenizerV2(JsonElement element)
+        KeywordTokenizerV2 IModelJsonSerializable<KeywordTokenizerV2>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeywordTokenizerV2(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<KeywordTokenizerV2>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeywordTokenizerV2 IModelSerializable<KeywordTokenizerV2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeywordTokenizerV2(document.RootElement, options);
+        }
+
+        internal static KeywordTokenizerV2 DeserializeKeywordTokenizerV2(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,14 +5,63 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceCounters
+    public partial class ServiceCounters : IUtf8JsonSerializable, IModelJsonSerializable<ServiceCounters>
     {
-        internal static ServiceCounters DeserializeServiceCounters(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ServiceCounters>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ServiceCounters>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("documentCount"u8);
+            writer.WriteObjectValue(DocumentCounter);
+            writer.WritePropertyName("indexesCount"u8);
+            writer.WriteObjectValue(IndexCounter);
+            writer.WritePropertyName("indexersCount"u8);
+            writer.WriteObjectValue(IndexerCounter);
+            writer.WritePropertyName("dataSourcesCount"u8);
+            writer.WriteObjectValue(DataSourceCounter);
+            writer.WritePropertyName("storageSize"u8);
+            writer.WriteObjectValue(StorageSizeCounter);
+            writer.WritePropertyName("synonymMaps"u8);
+            writer.WriteObjectValue(SynonymMapCounter);
+            writer.WritePropertyName("skillsetCount"u8);
+            writer.WriteObjectValue(SkillsetCounter);
+            writer.WriteEndObject();
+        }
+
+        ServiceCounters IModelJsonSerializable<ServiceCounters>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceCounters(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ServiceCounters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ServiceCounters IModelSerializable<ServiceCounters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeServiceCounters(document.RootElement, options);
+        }
+
+        internal static ServiceCounters DeserializeServiceCounters(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

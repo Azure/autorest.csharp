@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class StopAnalyzer : IUtf8JsonSerializable
+    public partial class StopAnalyzer : IUtf8JsonSerializable, IModelJsonSerializable<StopAnalyzer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StopAnalyzer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<StopAnalyzer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Stopwords))
@@ -33,8 +37,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static StopAnalyzer DeserializeStopAnalyzer(JsonElement element)
+        StopAnalyzer IModelJsonSerializable<StopAnalyzer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeStopAnalyzer(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<StopAnalyzer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StopAnalyzer IModelSerializable<StopAnalyzer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStopAnalyzer(document.RootElement, options);
+        }
+
+        internal static StopAnalyzer DeserializeStopAnalyzer(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

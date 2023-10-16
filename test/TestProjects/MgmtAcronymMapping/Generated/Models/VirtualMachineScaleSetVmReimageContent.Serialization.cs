@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetVmReimageContent : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetVmReimageContent : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmReimageContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmReimageContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VirtualMachineScaleSetVmReimageContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(TempDisk))
@@ -21,6 +25,52 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteBooleanValue(TempDisk.Value);
             }
             writer.WriteEndObject();
+        }
+
+        VirtualMachineScaleSetVmReimageContent IModelJsonSerializable<VirtualMachineScaleSetVmReimageContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetVmReimageContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetVmReimageContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetVmReimageContent IModelSerializable<VirtualMachineScaleSetVmReimageContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetVmReimageContent(document.RootElement, options);
+        }
+
+        internal static VirtualMachineScaleSetVmReimageContent DeserializeVirtualMachineScaleSetVmReimageContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<bool> tempDisk = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("tempDisk"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    tempDisk = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new VirtualMachineScaleSetVmReimageContent(Optional.ToNullable(tempDisk));
         }
     }
 }

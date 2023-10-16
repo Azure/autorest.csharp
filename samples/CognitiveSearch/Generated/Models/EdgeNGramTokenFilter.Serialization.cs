@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class EdgeNGramTokenFilter : IUtf8JsonSerializable
+    public partial class EdgeNGramTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<EdgeNGramTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EdgeNGramTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<EdgeNGramTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MinGram))
@@ -37,8 +41,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static EdgeNGramTokenFilter DeserializeEdgeNGramTokenFilter(JsonElement element)
+        EdgeNGramTokenFilter IModelJsonSerializable<EdgeNGramTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEdgeNGramTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EdgeNGramTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EdgeNGramTokenFilter IModelSerializable<EdgeNGramTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEdgeNGramTokenFilter(document.RootElement, options);
+        }
+
+        internal static EdgeNGramTokenFilter DeserializeEdgeNGramTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

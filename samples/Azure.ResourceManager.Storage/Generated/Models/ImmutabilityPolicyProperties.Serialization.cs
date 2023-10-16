@@ -5,17 +5,69 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ImmutabilityPolicyProperties
+    public partial class ImmutabilityPolicyProperties : IUtf8JsonSerializable, IModelJsonSerializable<ImmutabilityPolicyProperties>
     {
-        internal static ImmutabilityPolicyProperties DeserializeImmutabilityPolicyProperties(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ImmutabilityPolicyProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ImmutabilityPolicyProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+            {
+                writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
+                writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+            }
+            if (Optional.IsDefined(AllowProtectedAppendWrites))
+            {
+                writer.WritePropertyName("allowProtectedAppendWrites"u8);
+                writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
+            }
+            if (Optional.IsDefined(AllowProtectedAppendWritesAll))
+            {
+                writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
+                writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        ImmutabilityPolicyProperties IModelJsonSerializable<ImmutabilityPolicyProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeImmutabilityPolicyProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ImmutabilityPolicyProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ImmutabilityPolicyProperties IModelSerializable<ImmutabilityPolicyProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeImmutabilityPolicyProperties(document.RootElement, options);
+        }
+
+        internal static ImmutabilityPolicyProperties DeserializeImmutabilityPolicyProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

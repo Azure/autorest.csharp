@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class TagScoringFunction : IUtf8JsonSerializable
+    public partial class TagScoringFunction : IUtf8JsonSerializable, IModelJsonSerializable<TagScoringFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TagScoringFunction>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TagScoringFunction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("tag"u8);
@@ -31,8 +35,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static TagScoringFunction DeserializeTagScoringFunction(JsonElement element)
+        TagScoringFunction IModelJsonSerializable<TagScoringFunction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTagScoringFunction(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TagScoringFunction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TagScoringFunction IModelSerializable<TagScoringFunction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTagScoringFunction(document.RootElement, options);
+        }
+
+        internal static TagScoringFunction DeserializeTagScoringFunction(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

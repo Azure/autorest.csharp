@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ExtensionClientName.Models
 {
-    public partial class RenamedSchema : IUtf8JsonSerializable
+    public partial class RenamedSchema : IUtf8JsonSerializable, IModelJsonSerializable<RenamedSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RenamedSchema>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RenamedSchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(RenamedProperty))
@@ -35,8 +39,32 @@ namespace ExtensionClientName.Models
             writer.WriteEndObject();
         }
 
-        internal static RenamedSchema DeserializeRenamedSchema(JsonElement element)
+        RenamedSchema IModelJsonSerializable<RenamedSchema>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRenamedSchema(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RenamedSchema>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RenamedSchema IModelSerializable<RenamedSchema>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRenamedSchema(document.RootElement, options);
+        }
+
+        internal static RenamedSchema DeserializeRenamedSchema(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

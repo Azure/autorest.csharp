@@ -9,14 +9,17 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
-    public partial class PolicyDefinitionData : IUtf8JsonSerializable
+    public partial class PolicyDefinitionData : IUtf8JsonSerializable, IModelJsonSerializable<PolicyDefinitionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PolicyDefinitionData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PolicyDefinitionData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
@@ -74,8 +77,32 @@ namespace MgmtExtensionResource
             writer.WriteEndObject();
         }
 
-        internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element)
+        PolicyDefinitionData IModelJsonSerializable<PolicyDefinitionData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePolicyDefinitionData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PolicyDefinitionData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PolicyDefinitionData IModelSerializable<PolicyDefinitionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePolicyDefinitionData(document.RootElement, options);
+        }
+
+        internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

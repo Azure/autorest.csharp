@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
-    public partial class ClassThatInheritsFromBaseClassAndSomeProperties : IUtf8JsonSerializable
+    public partial class ClassThatInheritsFromBaseClassAndSomeProperties : IUtf8JsonSerializable, IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomeProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomeProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomeProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(SomeProperty))
@@ -91,8 +94,32 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static ClassThatInheritsFromBaseClassAndSomeProperties DeserializeClassThatInheritsFromBaseClassAndSomeProperties(JsonElement element)
+        ClassThatInheritsFromBaseClassAndSomeProperties IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomeProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeClassThatInheritsFromBaseClassAndSomeProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ClassThatInheritsFromBaseClassAndSomeProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ClassThatInheritsFromBaseClassAndSomeProperties IModelSerializable<ClassThatInheritsFromBaseClassAndSomeProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeClassThatInheritsFromBaseClassAndSomeProperties(document.RootElement, options);
+        }
+
+        internal static ClassThatInheritsFromBaseClassAndSomeProperties DeserializeClassThatInheritsFromBaseClassAndSomeProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

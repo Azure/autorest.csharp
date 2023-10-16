@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -17,8 +16,8 @@ namespace body_complex.Models
         /// <param name="length"></param>
         public SmartSalmon(float length) : base(length)
         {
-            AdditionalProperties = new ChangeTrackingDictionary<string, object>();
             Fishtype = "smart_salmon";
+            AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
@@ -32,11 +31,9 @@ namespace body_complex.Models
         /// <param name="location"></param>
         /// <param name="iswild"></param>
         /// <param name="collegeDegree"></param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
-        internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree, IDictionary<string, object> additionalProperties) : base(fishtype, species, length, siblings, location, iswild)
+        internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree) : base(fishtype, species, length, siblings, location, iswild)
         {
             CollegeDegree = collegeDegree;
-            AdditionalProperties = additionalProperties;
             Fishtype = fishtype ?? "smart_salmon";
         }
 

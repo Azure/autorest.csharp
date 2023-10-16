@@ -5,17 +5,21 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtConstants.Models;
 
 namespace MgmtConstants
 {
-    public partial class OptionalMachineData : IUtf8JsonSerializable
+    public partial class OptionalMachineData : IUtf8JsonSerializable, IModelJsonSerializable<OptionalMachineData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OptionalMachineData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<OptionalMachineData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -47,8 +51,32 @@ namespace MgmtConstants
             writer.WriteEndObject();
         }
 
-        internal static OptionalMachineData DeserializeOptionalMachineData(JsonElement element)
+        OptionalMachineData IModelJsonSerializable<OptionalMachineData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeOptionalMachineData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OptionalMachineData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OptionalMachineData IModelSerializable<OptionalMachineData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOptionalMachineData(document.RootElement, options);
+        }
+
+        internal static OptionalMachineData DeserializeOptionalMachineData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

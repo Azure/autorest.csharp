@@ -5,15 +5,60 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class KeyValuePair
+    public partial class KeyValuePair : IUtf8JsonSerializable, IModelJsonSerializable<KeyValuePair>
     {
-        internal static KeyValuePair DeserializeKeyValuePair(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<KeyValuePair>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<KeyValuePair>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Label))
+            {
+                writer.WritePropertyName("label"u8);
+                writer.WriteStringValue(Label);
+            }
+            writer.WritePropertyName("key"u8);
+            writer.WriteObjectValue(Key);
+            writer.WritePropertyName("value"u8);
+            writer.WriteObjectValue(Value);
+            writer.WritePropertyName("confidence"u8);
+            writer.WriteNumberValue(Confidence);
+            writer.WriteEndObject();
+        }
+
+        KeyValuePair IModelJsonSerializable<KeyValuePair>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyValuePair(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<KeyValuePair>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyValuePair IModelSerializable<KeyValuePair>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyValuePair(document.RootElement, options);
+        }
+
+        internal static KeyValuePair DeserializeKeyValuePair(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -73,7 +73,7 @@ namespace AdditionalPropertiesEx.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new InputAdditionalPropertiesModel(id, additionalProperties);
+            return new InputAdditionalPropertiesModel(id);
         }
     }
 }

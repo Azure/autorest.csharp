@@ -5,14 +5,49 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class GetIndexStatisticsResult
+    public partial class GetIndexStatisticsResult : IUtf8JsonSerializable, IModelJsonSerializable<GetIndexStatisticsResult>
     {
-        internal static GetIndexStatisticsResult DeserializeGetIndexStatisticsResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<GetIndexStatisticsResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<GetIndexStatisticsResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        GetIndexStatisticsResult IModelJsonSerializable<GetIndexStatisticsResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeGetIndexStatisticsResult(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<GetIndexStatisticsResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GetIndexStatisticsResult IModelSerializable<GetIndexStatisticsResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGetIndexStatisticsResult(document.RootElement, options);
+        }
+
+        internal static GetIndexStatisticsResult DeserializeGetIndexStatisticsResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

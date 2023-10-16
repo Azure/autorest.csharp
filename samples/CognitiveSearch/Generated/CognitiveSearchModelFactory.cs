@@ -32,26 +32,21 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of FacetResult. </summary>
         /// <param name="count"> The approximate count of documents falling within the bucket described by this facet. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.FacetResult"/> instance for mocking. </returns>
-        public static FacetResult FacetResult(long? count = null, IReadOnlyDictionary<string, object> additionalProperties = null)
+        public static FacetResult FacetResult(long? count = null)
         {
-            additionalProperties ??= new Dictionary<string, object>();
-
-            return new FacetResult(count, additionalProperties);
+            return new FacetResult(count);
         }
 
         /// <summary> Initializes a new instance of SearchResult. </summary>
         /// <param name="score"> The relevance score of the document compared to other documents returned by the query. </param>
         /// <param name="highlights"> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.SearchResult"/> instance for mocking. </returns>
-        public static SearchResult SearchResult(double score = default, IReadOnlyDictionary<string, IList<string>> highlights = null, IReadOnlyDictionary<string, object> additionalProperties = null)
+        public static SearchResult SearchResult(double score = default, IReadOnlyDictionary<string, IList<string>> highlights = null)
         {
             highlights ??= new Dictionary<string, IList<string>>();
-            additionalProperties ??= new Dictionary<string, object>();
 
-            return new SearchResult(score, highlights, additionalProperties);
+            return new SearchResult(score, highlights);
         }
 
         /// <summary> Initializes a new instance of SuggestDocumentsResult. </summary>
@@ -67,13 +62,34 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of SuggestResult. </summary>
         /// <param name="text"> The text of the suggestion result. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         /// <returns> A new <see cref="Models.SuggestResult"/> instance for mocking. </returns>
-        public static SuggestResult SuggestResult(string text = null, IReadOnlyDictionary<string, object> additionalProperties = null)
+        public static SuggestResult SuggestResult(string text = null)
         {
-            additionalProperties ??= new Dictionary<string, object>();
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
 
-            return new SuggestResult(text, additionalProperties);
+            return new SuggestResult(text);
+        }
+
+        /// <summary> Initializes a new instance of SuggestRequest. </summary>
+        /// <param name="filter"> An OData expression that filters the documents considered for suggestions. </param>
+        /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources. </param>
+        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </param>
+        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting of suggestions is disabled. </param>
+        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestion query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
+        /// <param name="orderBy"> The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </param>
+        /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
+        /// <param name="searchFields"> The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
+        /// <param name="select"> The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
+        /// <param name="top"> The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5. </param>
+        /// <returns> A new <see cref="Models.SuggestRequest"/> instance for mocking. </returns>
+        public static SuggestRequest SuggestRequest(string filter = null, bool? useFuzzyMatching = null, string highlightPostTag = null, string highlightPreTag = null, double? minimumCoverage = null, string orderBy = null, string searchText = null, string searchFields = null, string select = null, string suggesterName = null, int? top = null)
+        {
+            return new SuggestRequest(filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchText, searchFields, select, suggesterName, top);
         }
 
         /// <summary> Initializes a new instance of IndexDocumentsResult. </summary>
@@ -125,6 +141,23 @@ namespace CognitiveSearch.Models
             }
 
             return new AutocompleteItem(text, queryPlusText);
+        }
+
+        /// <summary> Initializes a new instance of AutocompleteRequest. </summary>
+        /// <param name="searchText"> The search text on which to base autocomplete results. </param>
+        /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms. </param>
+        /// <param name="filter"> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </param>
+        /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </param>
+        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled. </param>
+        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled. </param>
+        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
+        /// <param name="searchFields"> The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
+        /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
+        /// <returns> A new <see cref="Models.AutocompleteRequest"/> instance for mocking. </returns>
+        public static AutocompleteRequest AutocompleteRequest(string searchText = null, AutocompleteMode? autocompleteMode = null, string filter = null, bool? useFuzzyMatching = null, string highlightPostTag = null, string highlightPreTag = null, double? minimumCoverage = null, string searchFields = null, string suggesterName = null, int? top = null)
+        {
+            return new AutocompleteRequest(searchText, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, suggesterName, top);
         }
 
         /// <summary> Initializes a new instance of ListDataSourcesResult. </summary>
@@ -264,6 +297,21 @@ namespace CognitiveSearch.Models
         public static GetIndexStatisticsResult GetIndexStatisticsResult(long documentCount = default, long storageSize = default)
         {
             return new GetIndexStatisticsResult(documentCount, storageSize);
+        }
+
+        /// <summary> Initializes a new instance of AnalyzeRequest. </summary>
+        /// <param name="text"> The text to break into tokens. </param>
+        /// <param name="analyzer"> The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive. </param>
+        /// <param name="tokenizer"> The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive. </param>
+        /// <param name="tokenFilters"> An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </param>
+        /// <param name="charFilters"> An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </param>
+        /// <returns> A new <see cref="Models.AnalyzeRequest"/> instance for mocking. </returns>
+        public static AnalyzeRequest AnalyzeRequest(string text = null, AnalyzerName? analyzer = null, TokenizerName? tokenizer = null, IEnumerable<TokenFilterName> tokenFilters = null, IEnumerable<CharFilterName> charFilters = null)
+        {
+            tokenFilters ??= new List<TokenFilterName>();
+            charFilters ??= new List<CharFilterName>();
+
+            return new AnalyzeRequest(text, analyzer, tokenizer, tokenFilters?.ToList(), charFilters?.ToList());
         }
 
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>

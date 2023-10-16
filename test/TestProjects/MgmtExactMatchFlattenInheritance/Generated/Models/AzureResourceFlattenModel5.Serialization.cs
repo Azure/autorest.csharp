@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtExactMatchFlattenInheritance.Models
 {
-    public partial class AzureResourceFlattenModel5 : IUtf8JsonSerializable
+    public partial class AzureResourceFlattenModel5 : IUtf8JsonSerializable, IModelJsonSerializable<AzureResourceFlattenModel5>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AzureResourceFlattenModel5>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AzureResourceFlattenModel5>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -24,8 +28,32 @@ namespace MgmtExactMatchFlattenInheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static AzureResourceFlattenModel5 DeserializeAzureResourceFlattenModel5(JsonElement element)
+        AzureResourceFlattenModel5 IModelJsonSerializable<AzureResourceFlattenModel5>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureResourceFlattenModel5(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AzureResourceFlattenModel5>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AzureResourceFlattenModel5 IModelSerializable<AzureResourceFlattenModel5>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAzureResourceFlattenModel5(document.RootElement, options);
+        }
+
+        internal static AzureResourceFlattenModel5 DeserializeAzureResourceFlattenModel5(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

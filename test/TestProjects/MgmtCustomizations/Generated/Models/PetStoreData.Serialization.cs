@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtCustomizations.Models;
 
 namespace MgmtCustomizations
 {
-    public partial class PetStoreData : IUtf8JsonSerializable
+    public partial class PetStoreData : IUtf8JsonSerializable, IModelJsonSerializable<PetStoreData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PetStoreData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PetStoreData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Properties))
@@ -25,8 +29,32 @@ namespace MgmtCustomizations
             writer.WriteEndObject();
         }
 
-        internal static PetStoreData DeserializePetStoreData(JsonElement element)
+        PetStoreData IModelJsonSerializable<PetStoreData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePetStoreData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PetStoreData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PetStoreData IModelSerializable<PetStoreData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePetStoreData(document.RootElement, options);
+        }
+
+        internal static PetStoreData DeserializePetStoreData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableProperties : IUtf8JsonSerializable
+    public partial class TableProperties : IUtf8JsonSerializable, IModelJsonSerializable<TableProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TableProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TableProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(TableName))
@@ -21,6 +25,48 @@ namespace Azure.Storage.Tables.Models
                 writer.WriteStringValue(TableName);
             }
             writer.WriteEndObject();
+        }
+
+        TableProperties IModelJsonSerializable<TableProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTableProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TableProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TableProperties IModelSerializable<TableProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTableProperties(document.RootElement, options);
+        }
+
+        internal static TableProperties DeserializeTableProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> tableName = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("TableName"u8))
+                {
+                    tableName = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new TableProperties(tableName.Value);
         }
     }
 }

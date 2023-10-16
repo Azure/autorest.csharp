@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class Endpoints
+    public partial class Endpoints : IUtf8JsonSerializable, IModelJsonSerializable<Endpoints>
     {
-        internal static Endpoints DeserializeEndpoints(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Endpoints>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Endpoints>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(MicrosoftEndpoints))
+            {
+                writer.WritePropertyName("microsoftEndpoints"u8);
+                writer.WriteObjectValue(MicrosoftEndpoints);
+            }
+            if (Optional.IsDefined(InternetEndpoints))
+            {
+                writer.WritePropertyName("internetEndpoints"u8);
+                writer.WriteObjectValue(InternetEndpoints);
+            }
+            writer.WriteEndObject();
+        }
+
+        Endpoints IModelJsonSerializable<Endpoints>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEndpoints(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Endpoints>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Endpoints IModelSerializable<Endpoints>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEndpoints(document.RootElement, options);
+        }
+
+        internal static Endpoints DeserializeEndpoints(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

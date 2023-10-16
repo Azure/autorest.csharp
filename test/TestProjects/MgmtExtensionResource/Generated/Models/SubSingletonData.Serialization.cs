@@ -5,16 +5,55 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtExtensionResource
 {
-    public partial class SubSingletonData
+    public partial class SubSingletonData : IUtf8JsonSerializable, IModelJsonSerializable<SubSingletonData>
     {
-        internal static SubSingletonData DeserializeSubSingletonData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SubSingletonData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SubSingletonData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Something))
+            {
+                writer.WritePropertyName("something"u8);
+                writer.WriteStringValue(Something);
+            }
+            writer.WriteEndObject();
+        }
+
+        SubSingletonData IModelJsonSerializable<SubSingletonData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubSingletonData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SubSingletonData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SubSingletonData IModelSerializable<SubSingletonData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSubSingletonData(document.RootElement, options);
+        }
+
+        internal static SubSingletonData DeserializeSubSingletonData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

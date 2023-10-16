@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexBatch : IUtf8JsonSerializable
+    public partial class IndexBatch : IUtf8JsonSerializable, IModelJsonSerializable<IndexBatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IndexBatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<IndexBatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
@@ -23,6 +28,53 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
+        }
+
+        IndexBatch IModelJsonSerializable<IndexBatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndexBatch(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<IndexBatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IndexBatch IModelSerializable<IndexBatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIndexBatch(document.RootElement, options);
+        }
+
+        internal static IndexBatch DeserializeIndexBatch(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            IList<IndexAction> value = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("value"u8))
+                {
+                    List<IndexAction> array = new List<IndexAction>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(IndexAction.DeserializeIndexAction(item));
+                    }
+                    value = array;
+                    continue;
+                }
+            }
+            return new IndexBatch(value);
         }
     }
 }

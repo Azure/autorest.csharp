@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_string.Models
 {
-    public partial class RefColorConstant : IUtf8JsonSerializable
+    public partial class RefColorConstant : IUtf8JsonSerializable, IModelJsonSerializable<RefColorConstant>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RefColorConstant>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RefColorConstant>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("ColorConstant"u8);
@@ -25,8 +29,32 @@ namespace body_string.Models
             writer.WriteEndObject();
         }
 
-        internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
+        RefColorConstant IModelJsonSerializable<RefColorConstant>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRefColorConstant(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RefColorConstant>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RefColorConstant IModelSerializable<RefColorConstant>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRefColorConstant(document.RootElement, options);
+        }
+
+        internal static RefColorConstant DeserializeRefColorConstant(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

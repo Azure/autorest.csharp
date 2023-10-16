@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class AccountSasContent : IUtf8JsonSerializable
+    public partial class AccountSasContent : IUtf8JsonSerializable, IModelJsonSerializable<AccountSasContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AccountSasContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AccountSasContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("signedServices"u8);
@@ -44,6 +48,98 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStringValue(KeyToSign);
             }
             writer.WriteEndObject();
+        }
+
+        AccountSasContent IModelJsonSerializable<AccountSasContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAccountSasContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AccountSasContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AccountSasContent IModelSerializable<AccountSasContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAccountSasContent(document.RootElement, options);
+        }
+
+        internal static AccountSasContent DeserializeAccountSasContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Service signedServices = default;
+            SignedResourceType signedResourceTypes = default;
+            Permission signedPermission = default;
+            Optional<string> signedIp = default;
+            Optional<HttpProtocol> signedProtocol = default;
+            Optional<DateTimeOffset> signedStart = default;
+            DateTimeOffset signedExpiry = default;
+            Optional<string> keyToSign = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("signedServices"u8))
+                {
+                    signedServices = new Service(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("signedResourceTypes"u8))
+                {
+                    signedResourceTypes = new SignedResourceType(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("signedPermission"u8))
+                {
+                    signedPermission = new Permission(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("signedIp"u8))
+                {
+                    signedIp = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("signedProtocol"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedProtocol = property.Value.GetString().ToHttpProtocol();
+                    continue;
+                }
+                if (property.NameEquals("signedStart"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedStart = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("signedExpiry"u8))
+                {
+                    signedExpiry = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("keyToSign"u8))
+                {
+                    keyToSign = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new AccountSasContent(signedServices, signedResourceTypes, signedPermission, signedIp.Value, Optional.ToNullable(signedProtocol), Optional.ToNullable(signedStart), signedExpiry, keyToSign.Value);
         }
     }
 }

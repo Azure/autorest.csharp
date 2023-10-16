@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class MagnitudeScoringFunction : IUtf8JsonSerializable
+    public partial class MagnitudeScoringFunction : IUtf8JsonSerializable, IModelJsonSerializable<MagnitudeScoringFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MagnitudeScoringFunction>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MagnitudeScoringFunction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("magnitude"u8);
@@ -31,8 +35,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static MagnitudeScoringFunction DeserializeMagnitudeScoringFunction(JsonElement element)
+        MagnitudeScoringFunction IModelJsonSerializable<MagnitudeScoringFunction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMagnitudeScoringFunction(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MagnitudeScoringFunction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MagnitudeScoringFunction IModelSerializable<MagnitudeScoringFunction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMagnitudeScoringFunction(document.RootElement, options);
+        }
+
+        internal static MagnitudeScoringFunction DeserializeMagnitudeScoringFunction(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

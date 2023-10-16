@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class WordDelimiterTokenFilter : IUtf8JsonSerializable
+    public partial class WordDelimiterTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<WordDelimiterTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<WordDelimiterTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<WordDelimiterTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(GenerateWordParts))
@@ -78,8 +82,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static WordDelimiterTokenFilter DeserializeWordDelimiterTokenFilter(JsonElement element)
+        WordDelimiterTokenFilter IModelJsonSerializable<WordDelimiterTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeWordDelimiterTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<WordDelimiterTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WordDelimiterTokenFilter IModelSerializable<WordDelimiterTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWordDelimiterTokenFilter(document.RootElement, options);
+        }
+
+        internal static WordDelimiterTokenFilter DeserializeWordDelimiterTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

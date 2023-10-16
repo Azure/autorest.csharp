@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
@@ -18,16 +17,7 @@ namespace AdditionalPropertiesEx.Models
         internal OutputAdditionalPropertiesModel(int id)
         {
             Id = id;
-            AdditionalProperties = new ChangeTrackingDictionary<string, string>();
-        }
-
-        /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
-        /// <param name="id"></param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
-        internal OutputAdditionalPropertiesModel(int id, IReadOnlyDictionary<string, string> additionalProperties)
-        {
-            Id = id;
-            AdditionalProperties = additionalProperties;
+            AdditionalProperties = new Dictionary<string, string>();
         }
 
         /// <summary> Gets the id. </summary>

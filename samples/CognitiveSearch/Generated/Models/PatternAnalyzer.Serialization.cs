@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class PatternAnalyzer : IUtf8JsonSerializable
+    public partial class PatternAnalyzer : IUtf8JsonSerializable, IModelJsonSerializable<PatternAnalyzer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PatternAnalyzer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PatternAnalyzer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(LowerCaseTerms))
@@ -48,8 +52,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static PatternAnalyzer DeserializePatternAnalyzer(JsonElement element)
+        PatternAnalyzer IModelJsonSerializable<PatternAnalyzer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePatternAnalyzer(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PatternAnalyzer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PatternAnalyzer IModelSerializable<PatternAnalyzer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePatternAnalyzer(document.RootElement, options);
+        }
+
+        internal static PatternAnalyzer DeserializePatternAnalyzer(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -8,13 +8,81 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class MaintenanceRedeployStatus
+    public partial class MaintenanceRedeployStatus : IUtf8JsonSerializable, IModelJsonSerializable<MaintenanceRedeployStatus>
     {
-        internal static MaintenanceRedeployStatus DeserializeMaintenanceRedeployStatus(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MaintenanceRedeployStatus>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MaintenanceRedeployStatus>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(IsCustomerInitiatedMaintenanceAllowed))
+            {
+                writer.WritePropertyName("isCustomerInitiatedMaintenanceAllowed"u8);
+                writer.WriteBooleanValue(IsCustomerInitiatedMaintenanceAllowed.Value);
+            }
+            if (Optional.IsDefined(PreMaintenanceWindowStartOn))
+            {
+                writer.WritePropertyName("preMaintenanceWindowStartTime"u8);
+                writer.WriteStringValue(PreMaintenanceWindowStartOn.Value, "O");
+            }
+            if (Optional.IsDefined(PreMaintenanceWindowEndOn))
+            {
+                writer.WritePropertyName("preMaintenanceWindowEndTime"u8);
+                writer.WriteStringValue(PreMaintenanceWindowEndOn.Value, "O");
+            }
+            if (Optional.IsDefined(MaintenanceWindowStartOn))
+            {
+                writer.WritePropertyName("maintenanceWindowStartTime"u8);
+                writer.WriteStringValue(MaintenanceWindowStartOn.Value, "O");
+            }
+            if (Optional.IsDefined(MaintenanceWindowEndOn))
+            {
+                writer.WritePropertyName("maintenanceWindowEndTime"u8);
+                writer.WriteStringValue(MaintenanceWindowEndOn.Value, "O");
+            }
+            if (Optional.IsDefined(LastOperationResultCode))
+            {
+                writer.WritePropertyName("lastOperationResultCode"u8);
+                writer.WriteStringValue(LastOperationResultCode.Value.ToSerialString());
+            }
+            if (Optional.IsDefined(LastOperationMessage))
+            {
+                writer.WritePropertyName("lastOperationMessage"u8);
+                writer.WriteStringValue(LastOperationMessage);
+            }
+            writer.WriteEndObject();
+        }
+
+        MaintenanceRedeployStatus IModelJsonSerializable<MaintenanceRedeployStatus>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMaintenanceRedeployStatus(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MaintenanceRedeployStatus>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MaintenanceRedeployStatus IModelSerializable<MaintenanceRedeployStatus>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMaintenanceRedeployStatus(document.RootElement, options);
+        }
+
+        internal static MaintenanceRedeployStatus DeserializeMaintenanceRedeployStatus(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

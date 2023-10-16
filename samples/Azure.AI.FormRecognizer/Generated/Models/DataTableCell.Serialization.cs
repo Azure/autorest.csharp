@@ -5,16 +5,95 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class DataTableCell
+    public partial class DataTableCell : IUtf8JsonSerializable, IModelJsonSerializable<DataTableCell>
     {
-        internal static DataTableCell DeserializeDataTableCell(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DataTableCell>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DataTableCell>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("rowIndex"u8);
+            writer.WriteNumberValue(RowIndex);
+            writer.WritePropertyName("columnIndex"u8);
+            writer.WriteNumberValue(ColumnIndex);
+            if (Optional.IsDefined(RowSpan))
+            {
+                writer.WritePropertyName("rowSpan"u8);
+                writer.WriteNumberValue(RowSpan.Value);
+            }
+            if (Optional.IsDefined(ColumnSpan))
+            {
+                writer.WritePropertyName("columnSpan"u8);
+                writer.WriteNumberValue(ColumnSpan.Value);
+            }
+            writer.WritePropertyName("text"u8);
+            writer.WriteStringValue(Text);
+            writer.WritePropertyName("boundingBox"u8);
+            writer.WriteStartArray();
+            foreach (var item in BoundingBox)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("confidence"u8);
+            writer.WriteNumberValue(Confidence);
+            if (Optional.IsCollectionDefined(Elements))
+            {
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in Elements)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(IsHeader))
+            {
+                writer.WritePropertyName("isHeader"u8);
+                writer.WriteBooleanValue(IsHeader.Value);
+            }
+            if (Optional.IsDefined(IsFooter))
+            {
+                writer.WritePropertyName("isFooter"u8);
+                writer.WriteBooleanValue(IsFooter.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        DataTableCell IModelJsonSerializable<DataTableCell>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataTableCell(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DataTableCell>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DataTableCell IModelSerializable<DataTableCell>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDataTableCell(document.RootElement, options);
+        }
+
+        internal static DataTableCell DeserializeDataTableCell(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

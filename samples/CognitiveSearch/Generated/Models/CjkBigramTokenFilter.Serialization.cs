@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class CjkBigramTokenFilter : IUtf8JsonSerializable
+    public partial class CjkBigramTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<CjkBigramTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CjkBigramTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CjkBigramTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(IgnoreScripts))
@@ -38,8 +42,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static CjkBigramTokenFilter DeserializeCjkBigramTokenFilter(JsonElement element)
+        CjkBigramTokenFilter IModelJsonSerializable<CjkBigramTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCjkBigramTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CjkBigramTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CjkBigramTokenFilter IModelSerializable<CjkBigramTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCjkBigramTokenFilter(document.RootElement, options);
+        }
+
+        internal static CjkBigramTokenFilter DeserializeCjkBigramTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

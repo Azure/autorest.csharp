@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
-    public partial class ClassThatInheritsFromBaseClassAndRedefinesAProperty : IUtf8JsonSerializable
+    public partial class ClassThatInheritsFromBaseClassAndRedefinesAProperty : IUtf8JsonSerializable, IModelJsonSerializable<ClassThatInheritsFromBaseClassAndRedefinesAProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ClassThatInheritsFromBaseClassAndRedefinesAProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(BaseClassProperty))
@@ -81,8 +84,32 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static ClassThatInheritsFromBaseClassAndRedefinesAProperty DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(JsonElement element)
+        ClassThatInheritsFromBaseClassAndRedefinesAProperty IModelJsonSerializable<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ClassThatInheritsFromBaseClassAndRedefinesAProperty IModelSerializable<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(document.RootElement, options);
+        }
+
+        internal static ClassThatInheritsFromBaseClassAndRedefinesAProperty DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

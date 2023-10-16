@@ -5,16 +5,155 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class EffectiveNetworkSecurityRule
+    public partial class EffectiveNetworkSecurityRule : IUtf8JsonSerializable, IModelJsonSerializable<EffectiveNetworkSecurityRule>
     {
-        internal static EffectiveNetworkSecurityRule DeserializeEffectiveNetworkSecurityRule(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EffectiveNetworkSecurityRule>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<EffectiveNetworkSecurityRule>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Protocol))
+            {
+                writer.WritePropertyName("protocol"u8);
+                writer.WriteStringValue(Protocol.Value.ToString());
+            }
+            if (Optional.IsDefined(SourcePortRange))
+            {
+                writer.WritePropertyName("sourcePortRange"u8);
+                writer.WriteStringValue(SourcePortRange);
+            }
+            if (Optional.IsDefined(DestinationPortRange))
+            {
+                writer.WritePropertyName("destinationPortRange"u8);
+                writer.WriteStringValue(DestinationPortRange);
+            }
+            if (Optional.IsCollectionDefined(SourcePortRanges))
+            {
+                writer.WritePropertyName("sourcePortRanges"u8);
+                writer.WriteStartArray();
+                foreach (var item in SourcePortRanges)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(DestinationPortRanges))
+            {
+                writer.WritePropertyName("destinationPortRanges"u8);
+                writer.WriteStartArray();
+                foreach (var item in DestinationPortRanges)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(SourceAddressPrefix))
+            {
+                writer.WritePropertyName("sourceAddressPrefix"u8);
+                writer.WriteStringValue(SourceAddressPrefix);
+            }
+            if (Optional.IsDefined(DestinationAddressPrefix))
+            {
+                writer.WritePropertyName("destinationAddressPrefix"u8);
+                writer.WriteStringValue(DestinationAddressPrefix);
+            }
+            if (Optional.IsCollectionDefined(SourceAddressPrefixes))
+            {
+                writer.WritePropertyName("sourceAddressPrefixes"u8);
+                writer.WriteStartArray();
+                foreach (var item in SourceAddressPrefixes)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(DestinationAddressPrefixes))
+            {
+                writer.WritePropertyName("destinationAddressPrefixes"u8);
+                writer.WriteStartArray();
+                foreach (var item in DestinationAddressPrefixes)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ExpandedSourceAddressPrefix))
+            {
+                writer.WritePropertyName("expandedSourceAddressPrefix"u8);
+                writer.WriteStartArray();
+                foreach (var item in ExpandedSourceAddressPrefix)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ExpandedDestinationAddressPrefix))
+            {
+                writer.WritePropertyName("expandedDestinationAddressPrefix"u8);
+                writer.WriteStartArray();
+                foreach (var item in ExpandedDestinationAddressPrefix)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Access))
+            {
+                writer.WritePropertyName("access"u8);
+                writer.WriteStringValue(Access.Value.ToString());
+            }
+            if (Optional.IsDefined(Priority))
+            {
+                writer.WritePropertyName("priority"u8);
+                writer.WriteNumberValue(Priority.Value);
+            }
+            if (Optional.IsDefined(Direction))
+            {
+                writer.WritePropertyName("direction"u8);
+                writer.WriteStringValue(Direction.Value.ToString());
+            }
+            writer.WriteEndObject();
+        }
+
+        EffectiveNetworkSecurityRule IModelJsonSerializable<EffectiveNetworkSecurityRule>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEffectiveNetworkSecurityRule(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EffectiveNetworkSecurityRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EffectiveNetworkSecurityRule IModelSerializable<EffectiveNetworkSecurityRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEffectiveNetworkSecurityRule(document.RootElement, options);
+        }
+
+        internal static EffectiveNetworkSecurityRule DeserializeEffectiveNetworkSecurityRule(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

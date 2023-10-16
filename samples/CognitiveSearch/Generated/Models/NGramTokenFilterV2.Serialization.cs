@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class NGramTokenFilterV2 : IUtf8JsonSerializable
+    public partial class NGramTokenFilterV2 : IUtf8JsonSerializable, IModelJsonSerializable<NGramTokenFilterV2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NGramTokenFilterV2>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NGramTokenFilterV2>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MinGram))
@@ -32,8 +36,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static NGramTokenFilterV2 DeserializeNGramTokenFilterV2(JsonElement element)
+        NGramTokenFilterV2 IModelJsonSerializable<NGramTokenFilterV2>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeNGramTokenFilterV2(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NGramTokenFilterV2>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NGramTokenFilterV2 IModelSerializable<NGramTokenFilterV2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNGramTokenFilterV2(document.RootElement, options);
+        }
+
+        internal static NGramTokenFilterV2 DeserializeNGramTokenFilterV2(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

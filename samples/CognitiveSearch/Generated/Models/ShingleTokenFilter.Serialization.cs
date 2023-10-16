@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ShingleTokenFilter : IUtf8JsonSerializable
+    public partial class ShingleTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<ShingleTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ShingleTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ShingleTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxShingleSize))
@@ -52,8 +56,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static ShingleTokenFilter DeserializeShingleTokenFilter(JsonElement element)
+        ShingleTokenFilter IModelJsonSerializable<ShingleTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeShingleTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ShingleTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ShingleTokenFilter IModelSerializable<ShingleTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeShingleTokenFilter(document.RootElement, options);
+        }
+
+        internal static ShingleTokenFilter DeserializeShingleTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

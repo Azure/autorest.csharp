@@ -8,13 +8,57 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class AnalyzeOperationResult
+    public partial class AnalyzeOperationResult : IUtf8JsonSerializable, IModelJsonSerializable<AnalyzeOperationResult>
     {
-        internal static AnalyzeOperationResult DeserializeAnalyzeOperationResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AnalyzeOperationResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AnalyzeOperationResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("status"u8);
+            writer.WriteStringValue(Status.ToSerialString());
+            writer.WritePropertyName("createdDateTime"u8);
+            writer.WriteStringValue(CreatedDateTime, "O");
+            writer.WritePropertyName("lastUpdatedDateTime"u8);
+            writer.WriteStringValue(LastUpdatedDateTime, "O");
+            if (Optional.IsDefined(AnalyzeResult))
+            {
+                writer.WritePropertyName("analyzeResult"u8);
+                writer.WriteObjectValue(AnalyzeResult);
+            }
+            writer.WriteEndObject();
+        }
+
+        AnalyzeOperationResult IModelJsonSerializable<AnalyzeOperationResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnalyzeOperationResult(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AnalyzeOperationResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AnalyzeOperationResult IModelSerializable<AnalyzeOperationResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAnalyzeOperationResult(document.RootElement, options);
+        }
+
+        internal static AnalyzeOperationResult DeserializeAnalyzeOperationResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class MultiLanguageInput : IUtf8JsonSerializable
+    public partial class MultiLanguageInput : IUtf8JsonSerializable, IModelJsonSerializable<MultiLanguageInput>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MultiLanguageInput>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MultiLanguageInput>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
@@ -25,6 +29,60 @@ namespace CognitiveServices.TextAnalytics.Models
                 writer.WriteStringValue(Language);
             }
             writer.WriteEndObject();
+        }
+
+        MultiLanguageInput IModelJsonSerializable<MultiLanguageInput>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMultiLanguageInput(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MultiLanguageInput>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MultiLanguageInput IModelSerializable<MultiLanguageInput>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMultiLanguageInput(document.RootElement, options);
+        }
+
+        internal static MultiLanguageInput DeserializeMultiLanguageInput(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string id = default;
+            string text = default;
+            Optional<string> language = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("id"u8))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("text"u8))
+                {
+                    text = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("language"u8))
+                {
+                    language = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new MultiLanguageInput(id, text, language.Value);
         }
     }
 }

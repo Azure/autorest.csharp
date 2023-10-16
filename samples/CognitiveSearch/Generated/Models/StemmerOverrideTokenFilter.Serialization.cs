@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class StemmerOverrideTokenFilter : IUtf8JsonSerializable
+    public partial class StemmerOverrideTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<StemmerOverrideTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StemmerOverrideTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<StemmerOverrideTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("rules"u8);
@@ -30,8 +34,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static StemmerOverrideTokenFilter DeserializeStemmerOverrideTokenFilter(JsonElement element)
+        StemmerOverrideTokenFilter IModelJsonSerializable<StemmerOverrideTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeStemmerOverrideTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<StemmerOverrideTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StemmerOverrideTokenFilter IModelSerializable<StemmerOverrideTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStemmerOverrideTokenFilter(document.RootElement, options);
+        }
+
+        internal static StemmerOverrideTokenFilter DeserializeStemmerOverrideTokenFilter(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

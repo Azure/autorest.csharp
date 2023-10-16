@@ -5,13 +5,16 @@
 
 using System.Text.Json;
 using Azure;
+using Azure.Core.Serialization;
 
 namespace dpg_customization_LowLevel.Models
 {
     public partial class Product
     {
-        internal static Product DeserializeProduct(JsonElement element)
+        internal static Product DeserializeProduct(JsonElement element, ModelSerializerOptions options = null)
         {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             ProductReceived received = default;
             foreach (var property in element.EnumerateObject())
             {

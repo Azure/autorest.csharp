@@ -22,6 +22,26 @@ namespace Azure.ResourceManager.Sample.Models
             DataDisks = new ChangeTrackingList<VirtualMachineScaleSetDataDisk>();
         }
 
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateStorageProfile. </summary>
+        /// <param name="imageReference">
+        /// The image reference.
+        /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.imageReference
+        /// </param>
+        /// <param name="osDisk">
+        /// The OS disk.
+        /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.osDisk
+        /// </param>
+        /// <param name="dataDisks">
+        /// The data disks.
+        /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.dataDisks
+        /// </param>
+        internal VirtualMachineScaleSetUpdateStorageProfile(ImageReference imageReference, VirtualMachineScaleSetUpdateOSDisk osDisk, IList<VirtualMachineScaleSetDataDisk> dataDisks)
+        {
+            ImageReference = imageReference;
+            OSDisk = osDisk;
+            DataDisks = dataDisks;
+        }
+
         /// <summary>
         /// The image reference.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.imageReference

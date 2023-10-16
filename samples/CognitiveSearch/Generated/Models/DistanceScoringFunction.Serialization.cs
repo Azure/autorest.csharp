@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class DistanceScoringFunction : IUtf8JsonSerializable
+    public partial class DistanceScoringFunction : IUtf8JsonSerializable, IModelJsonSerializable<DistanceScoringFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DistanceScoringFunction>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DistanceScoringFunction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("distance"u8);
@@ -31,8 +35,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static DistanceScoringFunction DeserializeDistanceScoringFunction(JsonElement element)
+        DistanceScoringFunction IModelJsonSerializable<DistanceScoringFunction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDistanceScoringFunction(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DistanceScoringFunction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DistanceScoringFunction IModelSerializable<DistanceScoringFunction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDistanceScoringFunction(document.RootElement, options);
+        }
+
+        internal static DistanceScoringFunction DeserializeDistanceScoringFunction(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

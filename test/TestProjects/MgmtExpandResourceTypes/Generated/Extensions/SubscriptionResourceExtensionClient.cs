@@ -68,7 +68,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ZoneRestClient.CreateListRequest(Id.SubscriptionId, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ZoneRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, top);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ZoneResource(Client, ZoneData.DeserializeZoneData(e)), ZoneClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetZonesByDnszone", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new ZoneResource(Client, ZoneData.DeserializeZoneData(e)), ZoneClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetZonesByDnszone", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ZoneRestClient.CreateListRequest(Id.SubscriptionId, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ZoneRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, top);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ZoneResource(Client, ZoneData.DeserializeZoneData(e)), ZoneClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetZonesByDnszone", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new ZoneResource(Client, ZoneData.DeserializeZoneData(e)), ZoneClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetZonesByDnszone", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

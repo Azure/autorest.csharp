@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainRequest : IUtf8JsonSerializable
+    public partial class TrainRequest : IUtf8JsonSerializable, IModelJsonSerializable<TrainRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TrainRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TrainRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("source"u8);
@@ -28,6 +32,68 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteBooleanValue(UseLabelFile.Value);
             }
             writer.WriteEndObject();
+        }
+
+        TrainRequest IModelJsonSerializable<TrainRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTrainRequest(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TrainRequest>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TrainRequest IModelSerializable<TrainRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTrainRequest(document.RootElement, options);
+        }
+
+        internal static TrainRequest DeserializeTrainRequest(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string source = default;
+            Optional<TrainSourceFilter> sourceFilter = default;
+            Optional<bool> useLabelFile = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("source"u8))
+                {
+                    source = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("sourceFilter"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    sourceFilter = TrainSourceFilter.DeserializeTrainSourceFilter(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("useLabelFile"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    useLabelFile = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new TrainRequest(source, sourceFilter.Value, Optional.ToNullable(useLabelFile));
         }
     }
 }

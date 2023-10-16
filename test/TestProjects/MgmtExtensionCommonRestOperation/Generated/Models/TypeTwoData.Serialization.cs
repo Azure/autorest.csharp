@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtExtensionCommonRestOperation
 {
-    public partial class TypeTwoData : IUtf8JsonSerializable
+    public partial class TypeTwoData : IUtf8JsonSerializable, IModelJsonSerializable<TypeTwoData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TypeTwoData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TypeTwoData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MyType))
@@ -38,8 +42,32 @@ namespace MgmtExtensionCommonRestOperation
             writer.WriteEndObject();
         }
 
-        internal static TypeTwoData DeserializeTypeTwoData(JsonElement element)
+        TypeTwoData IModelJsonSerializable<TypeTwoData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTypeTwoData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TypeTwoData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TypeTwoData IModelSerializable<TypeTwoData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTypeTwoData(document.RootElement, options);
+        }
+
+        internal static TypeTwoData DeserializeTypeTwoData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

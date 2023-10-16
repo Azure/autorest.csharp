@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace FlattenedParameters.Models
 {
-    internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable
+    internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IModelJsonSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Items))
@@ -33,6 +38,57 @@ namespace FlattenedParameters.Models
                 }
             }
             writer.WriteEndObject();
+        }
+
+        PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema IModelJsonSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema IModelSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
+        }
+
+        internal static PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<IList<string>> items = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("items"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    items = array;
+                    continue;
+                }
+            }
+            return new PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(Optional.ToList(items));
         }
     }
 }

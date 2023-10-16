@@ -231,7 +231,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetCNameRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetCNameRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetCNameResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new RecordSetCNameResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetCNameRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetCNameRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetCNameResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new RecordSetCNameResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

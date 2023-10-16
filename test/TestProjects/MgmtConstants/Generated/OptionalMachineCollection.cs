@@ -236,7 +236,7 @@ namespace MgmtConstants
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _optionalMachineOptionalsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace MgmtConstants
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _optionalMachineOptionalsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

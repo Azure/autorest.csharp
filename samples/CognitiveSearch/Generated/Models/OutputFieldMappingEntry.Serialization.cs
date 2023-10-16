@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class OutputFieldMappingEntry : IUtf8JsonSerializable
+    public partial class OutputFieldMappingEntry : IUtf8JsonSerializable, IModelJsonSerializable<OutputFieldMappingEntry>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OutputFieldMappingEntry>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<OutputFieldMappingEntry>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -25,8 +29,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static OutputFieldMappingEntry DeserializeOutputFieldMappingEntry(JsonElement element)
+        OutputFieldMappingEntry IModelJsonSerializable<OutputFieldMappingEntry>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutputFieldMappingEntry(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OutputFieldMappingEntry>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OutputFieldMappingEntry IModelSerializable<OutputFieldMappingEntry>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOutputFieldMappingEntry(document.RootElement, options);
+        }
+
+        internal static OutputFieldMappingEntry DeserializeOutputFieldMappingEntry(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

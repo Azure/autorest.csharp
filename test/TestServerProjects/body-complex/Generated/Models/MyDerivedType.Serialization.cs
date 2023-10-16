@@ -5,15 +5,69 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class MyDerivedType
+    public partial class MyDerivedType : IUtf8JsonSerializable, IModelJsonSerializable<MyDerivedType>
     {
-        internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MyDerivedType>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MyDerivedType>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PropD1))
+            {
+                writer.WritePropertyName("propD1"u8);
+                writer.WriteStringValue(PropD1);
+            }
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToString());
+            if (Optional.IsDefined(PropB1))
+            {
+                writer.WritePropertyName("propB1"u8);
+                writer.WriteStringValue(PropB1);
+            }
+            writer.WritePropertyName("helper"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PropBH1))
+            {
+                writer.WritePropertyName("propBH1"u8);
+                writer.WriteStringValue(PropBH1);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        MyDerivedType IModelJsonSerializable<MyDerivedType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMyDerivedType(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MyDerivedType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MyDerivedType IModelSerializable<MyDerivedType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMyDerivedType(document.RootElement, options);
+        }
+
+        internal static MyDerivedType DeserializeMyDerivedType(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

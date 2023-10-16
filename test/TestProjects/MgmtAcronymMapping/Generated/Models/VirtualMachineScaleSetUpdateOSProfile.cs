@@ -22,6 +22,31 @@ namespace MgmtAcronymMapping.Models
             Secrets = new ChangeTrackingList<VaultSecretGroup>();
         }
 
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSProfile. </summary>
+        /// <param name="customData">
+        /// A base-64 encoded string of custom data.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.customData
+        /// </param>
+        /// <param name="windowsConfiguration">
+        /// The Windows Configuration of the OS profile.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.windowsConfiguration
+        /// </param>
+        /// <param name="linuxConfiguration">
+        /// The Linux Configuration of the OS profile.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.linuxConfiguration
+        /// </param>
+        /// <param name="secrets">
+        /// The List of certificates for addition to the VM.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.secrets
+        /// </param>
+        internal VirtualMachineScaleSetUpdateOSProfile(string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets)
+        {
+            CustomData = customData;
+            WindowsConfiguration = windowsConfiguration;
+            LinuxConfiguration = linuxConfiguration;
+            Secrets = secrets;
+        }
+
         /// <summary>
         /// A base-64 encoded string of custom data.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.customData

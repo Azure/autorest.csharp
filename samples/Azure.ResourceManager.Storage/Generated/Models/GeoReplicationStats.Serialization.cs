@@ -8,13 +8,46 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class GeoReplicationStats
+    public partial class GeoReplicationStats : IUtf8JsonSerializable, IModelJsonSerializable<GeoReplicationStats>
     {
-        internal static GeoReplicationStats DeserializeGeoReplicationStats(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<GeoReplicationStats>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<GeoReplicationStats>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        GeoReplicationStats IModelJsonSerializable<GeoReplicationStats>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeGeoReplicationStats(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<GeoReplicationStats>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GeoReplicationStats IModelSerializable<GeoReplicationStats>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGeoReplicationStats(document.RootElement, options);
+        }
+
+        internal static GeoReplicationStats DeserializeGeoReplicationStats(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

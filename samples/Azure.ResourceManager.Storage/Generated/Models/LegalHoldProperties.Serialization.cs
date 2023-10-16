@@ -5,16 +5,65 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class LegalHoldProperties
+    public partial class LegalHoldProperties : IUtf8JsonSerializable, IModelJsonSerializable<LegalHoldProperties>
     {
-        internal static LegalHoldProperties DeserializeLegalHoldProperties(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LegalHoldProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LegalHoldProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartArray();
+                foreach (var item in Tags)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(ProtectedAppendWritesHistory))
+            {
+                writer.WritePropertyName("protectedAppendWritesHistory"u8);
+                writer.WriteObjectValue(ProtectedAppendWritesHistory);
+            }
+            writer.WriteEndObject();
+        }
+
+        LegalHoldProperties IModelJsonSerializable<LegalHoldProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLegalHoldProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LegalHoldProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LegalHoldProperties IModelSerializable<LegalHoldProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLegalHoldProperties(document.RootElement, options);
+        }
+
+        internal static LegalHoldProperties DeserializeLegalHoldProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

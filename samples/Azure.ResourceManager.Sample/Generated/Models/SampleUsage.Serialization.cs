@@ -5,14 +5,57 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class SampleUsage
+    public partial class SampleUsage : IUtf8JsonSerializable, IModelJsonSerializable<SampleUsage>
     {
-        internal static SampleUsage DeserializeSampleUsage(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SampleUsage>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SampleUsage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("unit"u8);
+            writer.WriteStringValue(Unit.ToString());
+            writer.WritePropertyName("currentValue"u8);
+            writer.WriteNumberValue(CurrentValue);
+            writer.WritePropertyName("limit"u8);
+            writer.WriteNumberValue(Limit);
+            writer.WritePropertyName("name"u8);
+            writer.WriteObjectValue(Name);
+            writer.WriteEndObject();
+        }
+
+        SampleUsage IModelJsonSerializable<SampleUsage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSampleUsage(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SampleUsage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SampleUsage IModelSerializable<SampleUsage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSampleUsage(document.RootElement, options);
+        }
+
+        internal static SampleUsage DeserializeSampleUsage(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class CopyRequest : IUtf8JsonSerializable
+    public partial class CopyRequest : IUtf8JsonSerializable, IModelJsonSerializable<CopyRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CopyRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CopyRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("targetResourceId"u8);
@@ -22,6 +26,60 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WritePropertyName("copyAuthorization"u8);
             writer.WriteObjectValue(CopyAuthorization);
             writer.WriteEndObject();
+        }
+
+        CopyRequest IModelJsonSerializable<CopyRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCopyRequest(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CopyRequest>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CopyRequest IModelSerializable<CopyRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCopyRequest(document.RootElement, options);
+        }
+
+        internal static CopyRequest DeserializeCopyRequest(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string targetResourceId = default;
+            string targetResourceRegion = default;
+            CopyAuthorizationResult copyAuthorization = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("targetResourceId"u8))
+                {
+                    targetResourceId = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("targetResourceRegion"u8))
+                {
+                    targetResourceRegion = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("copyAuthorization"u8))
+                {
+                    copyAuthorization = CopyAuthorizationResult.DeserializeCopyAuthorizationResult(property.Value);
+                    continue;
+                }
+            }
+            return new CopyRequest(targetResourceId, targetResourceRegion, copyAuthorization);
         }
     }
 }

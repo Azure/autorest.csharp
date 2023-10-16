@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class EdgeNGramTokenizer : IUtf8JsonSerializable
+    public partial class EdgeNGramTokenizer : IUtf8JsonSerializable, IModelJsonSerializable<EdgeNGramTokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EdgeNGramTokenizer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<EdgeNGramTokenizer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MinGram))
@@ -43,8 +47,32 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static EdgeNGramTokenizer DeserializeEdgeNGramTokenizer(JsonElement element)
+        EdgeNGramTokenizer IModelJsonSerializable<EdgeNGramTokenizer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEdgeNGramTokenizer(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EdgeNGramTokenizer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EdgeNGramTokenizer IModelSerializable<EdgeNGramTokenizer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEdgeNGramTokenizer(document.RootElement, options);
+        }
+
+        internal static EdgeNGramTokenizer DeserializeEdgeNGramTokenizer(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

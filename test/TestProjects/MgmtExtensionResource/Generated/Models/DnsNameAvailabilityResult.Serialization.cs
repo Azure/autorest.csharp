@@ -5,15 +5,54 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtExtensionResource.Models
 {
-    public partial class DnsNameAvailabilityResult
+    public partial class DnsNameAvailabilityResult : IUtf8JsonSerializable, IModelJsonSerializable<DnsNameAvailabilityResult>
     {
-        internal static DnsNameAvailabilityResult DeserializeDnsNameAvailabilityResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DnsNameAvailabilityResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DnsNameAvailabilityResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Available))
+            {
+                writer.WritePropertyName("available"u8);
+                writer.WriteBooleanValue(Available.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        DnsNameAvailabilityResult IModelJsonSerializable<DnsNameAvailabilityResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDnsNameAvailabilityResult(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DnsNameAvailabilityResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DnsNameAvailabilityResult IModelSerializable<DnsNameAvailabilityResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDnsNameAvailabilityResult(document.RootElement, options);
+        }
+
+        internal static DnsNameAvailabilityResult DeserializeDnsNameAvailabilityResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
