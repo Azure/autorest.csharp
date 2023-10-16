@@ -76,7 +76,7 @@ export function loadOperation(
     enums: Map<string, InputEnumType>
 ): InputOperation {
     const program = context.program;
-    const sdkContext = createSdkContext(context);
+    const sdkContext = createSdkContext(context, "csharp");
     const {
         path: fullPath,
         operation: op,

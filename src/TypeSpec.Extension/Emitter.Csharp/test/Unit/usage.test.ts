@@ -37,7 +37,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("Foo"));
@@ -56,7 +56,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.outputs.includes("Foo"));
@@ -75,7 +75,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
@@ -95,7 +95,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
@@ -120,7 +120,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("TemplateModelFoo"));
@@ -146,7 +146,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         // verify that the baseModel will not apply the usage of derived model.
@@ -168,7 +168,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("TestRequest"));
@@ -214,7 +214,7 @@ describe("Test getUsages", () => {
             { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("BatchCreateFooListItemsRequest"));
@@ -246,7 +246,7 @@ describe("Test getUsages", () => {
         );
 
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
@@ -300,7 +300,7 @@ describe("Test getUsages", () => {
         );
 
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("BaseModelWithDiscriminator"));
@@ -364,7 +364,7 @@ describe("Test getUsages", () => {
         );
 
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createSdkContext(context, "csharp");
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.outputs.includes("BaseModelWithDiscriminator"));
