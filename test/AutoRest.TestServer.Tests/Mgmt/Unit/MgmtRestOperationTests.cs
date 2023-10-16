@@ -84,7 +84,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null,
-                branded: true);
+                branded: true,
+                generateTestProject: true);
         }
 
         private void TestPair(ResourceMatchType expected, HttpMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)

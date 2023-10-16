@@ -107,7 +107,8 @@ namespace NamedTypeSymbolExtensionsTests
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
-                branded: true);
+                branded: true,
+                generateTestProject: true);
         }
 
         [Test]

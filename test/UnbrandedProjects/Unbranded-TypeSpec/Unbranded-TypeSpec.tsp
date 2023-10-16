@@ -225,58 +225,53 @@ model ModelWithFormat {
     guid: string;
 }
 
-@doc("Hello world service")
 @route("/hello")
-namespace Hello.Demo {
-    @doc("Return hi")
-    @get
-    op sayHi(
-        @header headParameter: string,
-        @query queryParameter: string,
-        @query optionalQuery?: string
-    ): Thing;
-}
+@doc("Return hi")
+@get
+op sayHi(
+    @header headParameter: string,
+    @query queryParameter: string,
+    @query optionalQuery?: string
+): Thing;
 
-namespace Hello.Demo2 {
-    @route("/againHi")
-    @doc("Return hi again")
-    @get
-    @convenientAPI(true)
-    op helloAgain(
-        @header p1: string,
-        @body action: RoundTripModel,
-        @header contentType: "text/plain",
-        @path p2: string
-    ): RoundTripModel;
+@route("/againHi")
+@doc("Return hi again")
+@get
+@convenientAPI(true)
+op helloAgain(
+    @header p1: string,
+    @body action: RoundTripModel,
+    @header contentType: "text/plain",
+    @path p2: string
+): RoundTripModel;
 
-    @route("/noContentType")
-    @doc("Return hi again")
-    @get
-    @convenientAPI(false)
-    op noContentType(
-        @header p1: string,
-        @body action: RoundTripModel,
-        @path p2: string
-    ): RoundTripModel;
+@route("/noContentType")
+@doc("Return hi again")
+@get
+@convenientAPI(false)
+op noContentType(
+    @header p1: string,
+    @body action: RoundTripModel,
+    @path p2: string
+): RoundTripModel;
 
-    @route("/demoHi")
-    @doc("Return hi in demo2")
-    @get
-    @convenientAPI(true)
-    op helloDemo2(): Thing;
+@route("/demoHi")
+@doc("Return hi in demo2")
+@get
+@convenientAPI(true)
+op helloDemo2(): Thing;
 
-    @route("/literal")
-    @doc("Create with literal value")
-    @post
-    @convenientAPI(true)
-    op createLiteral(@body body: Thing): Thing;
+@route("/literal")
+@doc("Create with literal value")
+@post
+@convenientAPI(true)
+op createLiteral(@body body: Thing): Thing;
 
-    @route("/helloLiteral")
-    @doc("Send literal parameters")
-    @get
-    @convenientAPI(true)
-    op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
-}
+@route("/helloLiteral")
+@doc("Send literal parameters")
+@get
+@convenientAPI(true)
+op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
 
 @route("/top")
 @doc("top level method")
@@ -331,28 +326,24 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @convenientAPI(true)
 op returnsAnonymousModel(): {};
 
-namespace EnumTest {
-    @get
-    @route("/unknown-value")
-    @doc("get extensible enum")
-    op getUnknownValue(): DaysOfWeekExtensibleEnum;
-}
+@get
+@route("/unknown-value")
+@doc("get extensible enum")
+op getUnknownValue(): DaysOfWeekExtensibleEnum;
 
-namespace ProtocolAndConvenient {
-    @doc("When set protocol false and convenient true, then the protocol method should be internal")
-    @route("internalProtocol")
-    @post
-    @convenientAPI(true)
-    @protocolAPI(false)
-    op internalProtocol(@body body: Thing): Thing;
+@doc("When set protocol false and convenient true, then the protocol method should be internal")
+@route("internalProtocol")
+@post
+@convenientAPI(true)
+@protocolAPI(false)
+op internalProtocol(@body body: Thing): Thing;
 
-    @doc("When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one")
-    @route("stillConvenient")
-    @get
-    @convenientAPI(true)
-    @protocolAPI(false)
-    op stillConvenient(): void;
-}
+@doc("When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one")
+@route("stillConvenient")
+@get
+@convenientAPI(true)
+@protocolAPI(false)
+op stillConvenient(): void;
 
 @route("/headAsBoolean")
 @doc("head as boolean.")
