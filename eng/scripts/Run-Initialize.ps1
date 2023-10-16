@@ -31,8 +31,8 @@ try {
     }
 
     Write-Host "Using TypeSpec.Next"
-    Invoke-LoggedCommand "npx -y @azure-tools/typespec-bump-deps@0.3.0 --add-npm-overrides package.json"
-    Invoke-LoggedCommand "npx -y @azure-tools/typespec-bump-deps@0.3.0 --use-peer-ranges ./src/TypeSpec.Extension/Emitter.Csharp/package.json"
+    Invoke-LoggedCommand "npx -y @azure-tools/typespec-bump-deps@latest --add-npm-overrides package.json"
+    Invoke-LoggedCommand "npx -y @azure-tools/typespec-bump-deps@latest --use-peer-ranges ./src/TypeSpec.Extension/Emitter.Csharp/package.json"
     Invoke-LoggedCommand "npm install"
 
     # Write-Host "Adding package.json files to git index to avoid diff detection"
