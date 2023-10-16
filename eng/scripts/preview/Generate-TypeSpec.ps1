@@ -6,7 +6,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
-$root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
+$root = (Resolve-Path "$PSScriptRoot/../../..").Path.Replace('\', '/')
 Set-ConsoleEncoding
 
 $typespecProjectPath = "$root/src/TypeSpec.Extension/Emitter.Csharp"

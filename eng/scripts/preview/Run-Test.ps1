@@ -2,14 +2,14 @@
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
-$root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
-. "$root/eng/scripts/CommandInvocation-Helpers.ps1"
+$root = (Resolve-Path "$PSScriptRoot/../../..").Path.Replace('\', '/')
+. "$root/eng/scripts/preview/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
 Push-Location $root
 try {
     # check if shared code is up to date
-    & "$root/eng/scripts/Check-SharedCode.ps1"
+    & "$root/eng/scripts/preview/Check-SharedCode.ps1"
 
     # build CADL Ranch Mock Api project
     Push-Location "$root/test/CadlRanchMockApis"
@@ -36,7 +36,7 @@ try {
     }
 
     # run E2E Test for TypeSpec emitter
-    & "$root/eng/scripts/Test-TypeSpecGeneration.ps1"
+    & "$root/eng/scripts/preview/Test-TypeSpecGeneration.ps1"
 }
 finally {
     Pop-Location

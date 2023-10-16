@@ -6,13 +6,13 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
-$root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
+$root = (Resolve-Path "$PSScriptRoot/../../..").Path.Replace('\', '/')
 Set-ConsoleEncoding
 
-& "$root/eng/scripts/Download-SharedSource.ps1"
+& "$root/eng/scripts/preview/Download-SharedSource.ps1"
 
 Write-Host 'Checking file difference...'
-& "$root/eng/scripts/Check-GitChanges.ps1" -Exceptions ":!package*.json :!**/package.json"
+& "$root/eng/scripts/preview/Check-GitChanges.ps1" -Exceptions ":!package*.json :!**/package.json"
 
 if (!$?)
 {

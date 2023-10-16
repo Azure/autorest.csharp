@@ -3,8 +3,8 @@ Set-StrictMode -Version 3.0
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
-$root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
-. "$root/eng/scripts/CommandInvocation-Helpers.ps1"
+$root = (Resolve-Path "$PSScriptRoot/../../..").Path.Replace('\', '/')
+. "$root/eng/scripts/preview/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
 function CopyAll([string[]]$files, [string]$source, [string]$destination)

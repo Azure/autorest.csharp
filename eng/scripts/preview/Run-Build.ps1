@@ -9,8 +9,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
-$root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
-. "$root/eng/scripts/CommandInvocation-Helpers.ps1"
+$root = (Resolve-Path "$PSScriptRoot/../../..").Path.Replace('\', '/')
+. "$root/eng/scripts/preview/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
 [bool]$BuildPrereleaseVersion = $BuildPrereleaseVersion -ieq "true"
@@ -29,8 +29,8 @@ if (Test-Path "$output") {
 }
 
 # create the output folders
-New-Item -ItemType Directory -Force -Path "$artifacts" | Out-Null
-New-Item -ItemType Directory -Force -Path "$output" | Out-Null
+$artifacts = New-Item -ItemType Directory -Force -Path "$artifacts" | Select-Object -ExpandProperty FullName
+$output = New-Item -ItemType Directory -Force -Path "$output" | Select-Object -ExpandProperty FullName
 
 $generatorVersion = node -p -e "require('$root/src/AutoRest.CSharp/package.json').version"
 $emitterVersion = node -p -e "require('$root/src/TypeSpec.Extension/Emitter.Csharp/package.json').version"
