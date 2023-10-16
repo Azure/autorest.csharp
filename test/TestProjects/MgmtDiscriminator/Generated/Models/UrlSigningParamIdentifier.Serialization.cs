@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class UrlSigningParamIdentifier : IUtf8JsonSerializable
+    public partial class UrlSigningParamIdentifier : IUtf8JsonSerializable, IModelJsonSerializable<UrlSigningParamIdentifier>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UrlSigningParamIdentifier>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UrlSigningParamIdentifier>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("paramIndicator"u8);
@@ -22,8 +26,32 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        internal static UrlSigningParamIdentifier DeserializeUrlSigningParamIdentifier(JsonElement element)
+        UrlSigningParamIdentifier IModelJsonSerializable<UrlSigningParamIdentifier>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUrlSigningParamIdentifier(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UrlSigningParamIdentifier>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UrlSigningParamIdentifier IModelSerializable<UrlSigningParamIdentifier>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUrlSigningParamIdentifier(document.RootElement, options);
+        }
+
+        internal static UrlSigningParamIdentifier DeserializeUrlSigningParamIdentifier(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

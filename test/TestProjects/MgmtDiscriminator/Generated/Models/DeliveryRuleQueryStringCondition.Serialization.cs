@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DeliveryRuleQueryStringCondition : IUtf8JsonSerializable
+    public partial class DeliveryRuleQueryStringCondition : IUtf8JsonSerializable, IModelJsonSerializable<DeliveryRuleQueryStringCondition>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeliveryRuleQueryStringCondition>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeliveryRuleQueryStringCondition>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
@@ -22,8 +26,32 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        internal static DeliveryRuleQueryStringCondition DeserializeDeliveryRuleQueryStringCondition(JsonElement element)
+        DeliveryRuleQueryStringCondition IModelJsonSerializable<DeliveryRuleQueryStringCondition>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeliveryRuleQueryStringCondition(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeliveryRuleQueryStringCondition>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeliveryRuleQueryStringCondition IModelSerializable<DeliveryRuleQueryStringCondition>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeliveryRuleQueryStringCondition(document.RootElement, options);
+        }
+
+        internal static DeliveryRuleQueryStringCondition DeserializeDeliveryRuleQueryStringCondition(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

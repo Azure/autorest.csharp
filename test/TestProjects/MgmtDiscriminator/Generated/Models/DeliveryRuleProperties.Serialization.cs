@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DeliveryRuleProperties : IUtf8JsonSerializable
+    public partial class DeliveryRuleProperties : IUtf8JsonSerializable, IModelJsonSerializable<DeliveryRuleProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeliveryRuleProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeliveryRuleProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Order))
@@ -55,8 +59,32 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        internal static DeliveryRuleProperties DeserializeDeliveryRuleProperties(JsonElement element)
+        DeliveryRuleProperties IModelJsonSerializable<DeliveryRuleProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeliveryRuleProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeliveryRuleProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeliveryRuleProperties IModelSerializable<DeliveryRuleProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeliveryRuleProperties(document.RootElement, options);
+        }
+
+        internal static DeliveryRuleProperties DeserializeDeliveryRuleProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

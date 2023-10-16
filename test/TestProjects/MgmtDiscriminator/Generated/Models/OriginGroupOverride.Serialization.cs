@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class OriginGroupOverride : IUtf8JsonSerializable
+    public partial class OriginGroupOverride : IUtf8JsonSerializable, IModelJsonSerializable<OriginGroupOverride>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OriginGroupOverride>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<OriginGroupOverride>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(OriginGroup))
@@ -29,8 +33,32 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        internal static OriginGroupOverride DeserializeOriginGroupOverride(JsonElement element)
+        OriginGroupOverride IModelJsonSerializable<OriginGroupOverride>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeOriginGroupOverride(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OriginGroupOverride>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OriginGroupOverride IModelSerializable<OriginGroupOverride>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOriginGroupOverride(document.RootElement, options);
+        }
+
+        internal static OriginGroupOverride DeserializeOriginGroupOverride(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

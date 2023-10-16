@@ -41,6 +41,11 @@ namespace AutoRest.CSharp.Generation.Writers
             var hasJson = jsonSerialization != null;
             var hasXml = xmlSerialization != null;
 
+            //var typeOfT = model.IsUnknownDerivedType ? model.Inherits!.Implementation!.Type : model.Type;
+            var typeOfT = model.Type;
+            CSharpType iModelSerializableType = new CSharpType(typeof(IModelSerializable<>), typeOfT);
+            CSharpType iModelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), typeOfT);
+
             if (!hasJson && !hasXml)
             {
                 return;
@@ -58,8 +63,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer
                     .AppendIf($": ", hasJson || hasXml)
-                    .AppendIf($"{typeof(IUtf8JsonSerializable)}, {new CSharpType(typeof(IModelJsonSerializable<>), model.Type)}", hasJson)
+                    .AppendIf($"{typeof(IUtf8JsonSerializable)}, {iModelJsonSerializableType}, ", hasJson)
+                    .AppendIf($"{typeof(IModelJsonSerializable<object>)}, ", hasJson && model.IsStruct)
                     .AppendIf($"{typeof(IXmlSerializable)}, ", hasXml)
+                    //.AppendIf($"{iModelSerializableType}, ", hasXml) // TODO
                     .RemoveTrailingComma();
 
                 writer.Line();
@@ -117,23 +124,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteJsonSerialize(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization jsonSerialization)
         {
-            var modelSerializableType = new CSharpType(typeof(IModelSerializable<>), model.Type);
-            var modelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), model.Type);
-
             // the methods that implement the interface IModelJsonSerializable<T> (do not include inherited methods)
-            foreach (var method in JsonSerializationMethodsBuilder.BuildModelJsonSerializableMethods(model, jsonSerialization, modelJsonSerializableType))
+            foreach (var method in JsonSerializationMethodsBuilder.BuildModelJsonSerializableMethods(model, jsonSerialization))
             {
                 writer.WriteMethod(method);
             }
-
-            // the methods that implement the interface IModelSerializable<T>
-            foreach (var method in JsonSerializationMethodsBuilder.BuildModelSerializableMethods(jsonSerialization, modelSerializableType))
-            {
-                writer.WriteMethod(method);
-            }
-
-            // the method that implements IUtf8JsonSerializable
-            writer.WriteMethod(JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(jsonSerialization, modelJsonSerializableType));
 
             // the deserialize static method
             if (JsonSerializationMethodsBuilder.BuildDeserialize(model.Declaration, jsonSerialization, model.GetExistingType()) is { } deserialize)

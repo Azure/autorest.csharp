@@ -16,6 +16,8 @@ namespace FirstTestTypeSpec.Models
 {
     internal partial class Thing : IUtf8JsonSerializable, IModelJsonSerializable<Thing>
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Thing>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
         void IModelJsonSerializable<Thing>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
@@ -105,14 +107,14 @@ namespace FirstTestTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.Parse(data);
-            return DeserializeThing(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeThing(document.RootElement, options);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Thing>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
-
-        internal static Thing DeserializeThing(JsonElement element, ModelSerializerOptions options)
+        internal static Thing DeserializeThing(JsonElement element, ModelSerializerOptions options = null)
         {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -248,9 +250,7 @@ namespace FirstTestTypeSpec.Models
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

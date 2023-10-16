@@ -15,6 +15,8 @@ namespace FirstTestTypeSpec.Models
 {
     internal partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithRequiredNullableProperties>
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithRequiredNullableProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
         void IModelJsonSerializable<ModelWithRequiredNullableProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
@@ -66,14 +68,14 @@ namespace FirstTestTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.Parse(data);
-            return DeserializeModelWithRequiredNullableProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithRequiredNullableProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
-
-        internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelSerializerOptions options)
+        internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelSerializerOptions options = null)
         {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -128,9 +130,7 @@ namespace FirstTestTypeSpec.Models
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

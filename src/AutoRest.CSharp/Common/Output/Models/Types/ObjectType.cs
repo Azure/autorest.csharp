@@ -34,58 +34,58 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsPropertyBag { get; protected init; }
 
-        private bool? _isBaseClass;
-        public bool IsBaseClass => _isBaseClass ??= (Inherits is null && HasSubClasses()) || Discriminator is not null && IsDiscriminatorBase(Discriminator.DefaultObjectType);
-        protected virtual bool HasSubClasses() => false;
+        //private bool? _isBaseClass;
+        //public bool IsBaseClass => _isBaseClass ??= (Inherits is null && HasSubClasses()) || Discriminator is not null && IsDiscriminatorBase(Discriminator.DefaultObjectType);
+        //protected virtual bool HasSubClasses() => false;
 
-        protected bool IsDiscriminatorBase(ObjectType? defaultDerivedType)
-        {
-            if (defaultDerivedType is null || defaultDerivedType.Type.IsFrameworkType)
-                return false;
+        //protected bool IsDiscriminatorBase(ObjectType? defaultDerivedType)
+        //{
+        //    if (defaultDerivedType is null || defaultDerivedType.Type.IsFrameworkType)
+        //        return false;
 
-            if (defaultDerivedType.Type.Implementation is not ObjectType objectType)
-                return false;
+        //    if (defaultDerivedType.Type.Implementation is not ObjectType objectType)
+        //        return false;
 
-            if (objectType.Inherits is null)
-                return false;
+        //    if (objectType.Inherits is null)
+        //        return false;
 
-            if (objectType.Inherits.IsFrameworkType)
-                return false;
+        //    if (objectType.Inherits.IsFrameworkType)
+        //        return false;
 
-            if (objectType.Inherits.Implementation is not ObjectType baseObjectType)
-                return false;
+        //    if (objectType.Inherits.Implementation is not ObjectType baseObjectType)
+        //        return false;
 
-            return baseObjectType.Type.Equals(Type);
-        }
+        //    return baseObjectType.Type.Equals(Type);
+        //}
 
-        private ObjectTypeProperty? _rawDataProperty;
-        public ObjectTypeProperty? RawDataProperty => _rawDataProperty ??= EnsureRawDataProperty();
+        //private ObjectTypeProperty? _rawDataProperty;
+        //public ObjectTypeProperty? RawDataProperty => _rawDataProperty ??= EnsureRawDataProperty();
 
-        private ObjectTypeProperty? EnsureRawDataProperty()
-        {
-            if (!ShouldHaveRawData())
-                return null;
+        //private ObjectTypeProperty? EnsureRawDataProperty()
+        //{
+        //    if (!ShouldHaveRawData())
+        //        return null;
 
-            var accessor = IsBaseClass && !IsStruct ? "protected internal" : "private";
-            if (IsStruct)
-                accessor += " readonly";
+        //    var accessor = IsBaseClass && !IsStruct ? "protected internal" : "private";
+        //    if (IsStruct)
+        //        accessor += " readonly";
 
-            return ObjectTypeProperty.GetRawDataWithAccessor(accessor);
-        }
+        //    return ObjectTypeProperty.GetRawDataWithAccessor(accessor);
+        //}
 
-        private bool ShouldHaveRawData()
-        {
-            if (IsPropertyBag)
-                return false;
+        //private bool ShouldHaveRawData()
+        //{
+        //    if (IsPropertyBag)
+        //        return false;
 
-            if (!(IsBaseClass && Inherits is null) && (Inherits is not null && !Inherits.IsFrameworkType && Inherits.Implementation is not SystemObjectType))
-                return false;
+        //    if (!(IsBaseClass && Inherits is null) && (Inherits is not null && !Inherits.IsFrameworkType && Inherits.Implementation is not SystemObjectType))
+        //        return false;
 
-            if (AdditionalPropertiesProperty is not null)
-                return false;
+        //    if (AdditionalPropertiesProperty is not null)
+        //        return false;
 
-            return true;
-        }
+        //    return true;
+        //}
 
         public bool IsStruct => ExistingType?.IsValueType ?? false;
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();

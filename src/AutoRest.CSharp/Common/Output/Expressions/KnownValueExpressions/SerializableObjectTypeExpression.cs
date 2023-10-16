@@ -3,6 +3,7 @@
 
 using System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -18,8 +19,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public static SerializableObjectTypeExpression FromResponse(SerializableObjectType serializableObjectType, ResponseExpression response)
             => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, "FromResponse", new[] { response }));
 
-        public static SerializableObjectTypeExpression Deserialize(SerializableObjectType serializableObjectType, ValueExpression element, ValueExpression options)
-            => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, $"Deserialize{serializableObjectType.Declaration.Name}", new[] { element, options }));
+        public static SerializableObjectTypeExpression Deserialize(SerializableObjectType serializableObjectType, ValueExpression element, ValueExpression? options = null)
+        {
+            var arguments = options == null ? new[] { element } : new[] { element, options };
+            return new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, $"Deserialize{serializableObjectType.Declaration.Name}", arguments));
+        }
 
         public RequestContentExpression ToRequestContent() => new(Untyped.Invoke("ToRequestContent"));
 

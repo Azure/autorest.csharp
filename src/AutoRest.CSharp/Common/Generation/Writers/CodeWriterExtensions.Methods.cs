@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
-                    writer.AppendRaw(" = ");
+                    writer.AppendRaw(setValue.Operator);
                     writer.WriteValueExpression(setValue.From);
                     break;
                 case DeclareVariableStatement { Type: { } type } declareVariable:

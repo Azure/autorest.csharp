@@ -8,6 +8,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal sealed record RequestContentExpression(ValueExpression Untyped) : TypedValueExpression<RequestContent>(Untyped)
     {
+        public static RequestContentExpression Create(ValueExpression serializable, ModelSerializerOptionsExpression options)
+            => new(InvokeStatic(nameof(RequestContent.Create), serializable, options));
         public static RequestContentExpression Create(ValueExpression serializable) => new(InvokeStatic(nameof(RequestContent.Create), new[] { serializable }));
         public static RequestContentExpression FromEnumerable(ValueExpression enumerable) => new(new InvokeStaticMethodExpression(typeof(RequestContentHelper), nameof(RequestContentHelper.FromEnumerable), new[] { enumerable }));
         public static RequestContentExpression FromDictionary(ValueExpression dictionary) => new(new InvokeStaticMethodExpression(typeof(RequestContentHelper), nameof(RequestContentHelper.FromDictionary), new[] { dictionary }));
