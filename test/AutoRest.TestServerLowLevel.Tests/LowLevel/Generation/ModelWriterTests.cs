@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                     new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, null, true, false, false),
                     new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, null, true, false, false)
                 },
-                null, null, null, null, null, false);
+                null, Array.Empty<InputModelType>(), null, null, null, false);
 
             var model = new ModelTypeProvider(input, "test", null, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);

@@ -52,7 +52,8 @@ namespace AutoRest.CSharp.Generation.Writers
     <member name=""foo"">
       <example>
 
-<code></code></example>
+<code><![CDATA[
+]]></code></example>
     </member>
   </members>
 </doc>", Writer.ToString());
@@ -73,7 +74,8 @@ namespace AutoRest.CSharp.Generation.Writers
     <member name=""foo"">
       <example>
 test
-<code>Hello, world!</code></example>
+<code><![CDATA[
+Hello, world!]]></code></example>
     </member>
   </members>
 </doc>", Writer.ToString());
@@ -95,9 +97,11 @@ test
     <member name=""foo"">
       <example>
 test
-<code>Hello, world!</code>
+<code><![CDATA[
+Hello, world!]]></code>
 test2
-<code>Hello, world, again!</code></example>
+<code><![CDATA[
+Hello, world, again!]]></code></example>
     </member>
   </members>
 </doc>", Writer.ToString());
@@ -121,12 +125,14 @@ test2
     <member name=""foo"">
       <example>
 test
-<code>Hello, world!</code></example>
+<code><![CDATA[
+Hello, world!]]></code></example>
     </member>
     <member name=""fooAsync"">
       <example>
 test2
-<code>Hello, world, again!</code></example>
+<code><![CDATA[
+Hello, world, again!]]></code></example>
     </member>
   </members>
 </doc>", Writer.ToString());
