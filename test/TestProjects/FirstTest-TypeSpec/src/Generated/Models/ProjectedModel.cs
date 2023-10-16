@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
@@ -13,6 +14,7 @@ namespace FirstTestTypeSpec.Models
     /// <summary> this is a model with a projected name. </summary>
     public partial class ProjectedModel
     {
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
         /// <summary> Initializes a new instance of ProjectedModel. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>

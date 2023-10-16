@@ -86,6 +86,15 @@ namespace FirstTestTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableList");
             }
+            foreach (var item in _serializedAdditionalRawData)
+            {
+                writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+            }
             writer.WriteEndObject();
         }
 
@@ -132,6 +141,8 @@ namespace FirstTestTypeSpec.Models
             string requiredBadDescription = default;
             Optional<IList<int>> optionalNullableList = default;
             IList<int> requiredNullableList = default;
+            Dictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -235,7 +246,9 @@ namespace FirstTestTypeSpec.Models
                     requiredNullableList = array;
                     continue;
                 }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
         }
 

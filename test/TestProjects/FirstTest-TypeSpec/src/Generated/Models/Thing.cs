@@ -15,6 +15,7 @@ namespace FirstTestTypeSpec.Models
     /// <summary> A model with a few properties of literal types. </summary>
     internal partial class Thing
     {
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>

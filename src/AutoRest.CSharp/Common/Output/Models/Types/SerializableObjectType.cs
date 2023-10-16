@@ -36,5 +36,19 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract bool EnsureHasXmlSerialization();
         protected abstract JsonObjectSerialization? EnsureJsonSerialization();
         protected abstract XmlObjectSerialization? EnsureXmlSerialization();
+
+        private bool? _shouldHaveRawData;
+        protected bool ShouldHaveRawData => _shouldHaveRawData ??= EnsureShouldHaveRawData();
+
+        private bool EnsureShouldHaveRawData()
+        {
+            if (IsPropertyBag)
+                return false;
+
+            if (Inherits != null && Inherits is not { IsFrameworkType: false, Implementation: SystemObjectType })
+                return false;
+
+            return true;
+        }
     }
 }

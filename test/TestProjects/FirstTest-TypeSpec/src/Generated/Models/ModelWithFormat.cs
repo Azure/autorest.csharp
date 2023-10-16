@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
@@ -13,6 +14,7 @@ namespace FirstTestTypeSpec.Models
     /// <summary> The ModelWithFormat. </summary>
     public partial class ModelWithFormat
     {
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
         /// <summary> Initializes a new instance of ModelWithFormat. </summary>
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>

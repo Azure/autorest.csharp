@@ -15,6 +15,7 @@ namespace FirstTestTypeSpec.Models
     /// <summary> this is a roundtrip model. </summary>
     internal partial class RoundTripModel
     {
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>

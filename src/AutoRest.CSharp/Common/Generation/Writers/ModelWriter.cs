@@ -69,6 +69,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
+                    WritePrivateAdditionalPropertiesProperty(writer, schema.AdditionalPropertiesProperty);
+
                     WriteConstructor(writer, schema);
 
                     WriteProperties(writer, schema);
@@ -85,6 +87,26 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (property.FlattenedProperty != null)
                     WriteProperty(writer, property.FlattenedProperty);
             }
+
+            WriteAdditionalPropertiesProperty(writer, schema.AdditionalPropertiesProperty);
+        }
+
+        private void WritePrivateAdditionalPropertiesProperty(CodeWriter writer, ObjectTypeProperty? additionalPropertiesProperty)
+        {
+            if (additionalPropertiesProperty is null || additionalPropertiesProperty.Declaration.Accessibility == "public")
+                return;
+
+            writer.Append($"{additionalPropertiesProperty.Declaration.Accessibility} ")
+                .Append($"{additionalPropertiesProperty.Declaration.Type} {additionalPropertiesProperty.Declaration.Name};")
+                .Line();
+        }
+
+        private void WriteAdditionalPropertiesProperty(CodeWriter writer, ObjectTypeProperty? additionalPropertiesProperty)
+        {
+            if (additionalPropertiesProperty is null || additionalPropertiesProperty.Declaration.Accessibility != "public")
+                return;
+
+            WriteProperty(writer, additionalPropertiesProperty);
         }
 
         private void WriteFieldModifiers(CodeWriter writer, FieldModifiers modifiers)

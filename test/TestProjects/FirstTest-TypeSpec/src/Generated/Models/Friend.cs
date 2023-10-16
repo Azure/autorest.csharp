@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
@@ -13,6 +14,7 @@ namespace FirstTestTypeSpec.Models
     /// <summary> this is not a friendly model but with a friendly name. </summary>
     public partial class Friend
     {
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
         /// <summary> Initializes a new instance of Friend. </summary>
         /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>

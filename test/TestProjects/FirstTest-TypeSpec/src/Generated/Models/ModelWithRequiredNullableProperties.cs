@@ -5,11 +5,15 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few required nullable properties. </summary>
     internal partial class ModelWithRequiredNullableProperties
     {
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
         /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>
         /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
         /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>

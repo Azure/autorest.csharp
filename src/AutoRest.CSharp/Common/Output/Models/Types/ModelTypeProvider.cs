@@ -45,7 +45,33 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
-        public override ObjectTypeProperty? AdditionalPropertiesProperty => null; // AdditionalProperties feature is not implemented in DPG yet
+        private ObjectTypeProperty? _additionalPropertiesProperty;
+        public override ObjectTypeProperty? AdditionalPropertiesProperty
+        {
+            get
+            {
+                if (_additionalPropertiesProperty != null)
+                    return _additionalPropertiesProperty;
+
+                // TODO refactor later
+                // determines if we need a private additional properties property
+                if (!ShouldHaveRawData)
+                    return null;
+
+                _additionalPropertiesProperty = new ObjectTypeProperty(
+                    BuilderHelpers.CreateMemberDeclaration(_privateAdditionalPropertiesPropertyName,
+                        _privateAdditionalPropertiesPropertyType, "private", null, _typeFactory),
+                    "Keeps track of any properties unknown to the library.",
+                    true,
+                    null
+                    );
+
+                return _additionalPropertiesProperty;
+            }
+        }
+
+        private readonly string _privateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
+        private readonly CSharpType _privateAdditionalPropertiesPropertyType = new CSharpType(typeof(Dictionary<,>), typeof(string), typeof(BinaryData));
 
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
@@ -187,6 +213,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool ShouldSkipSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
         {
+            // TODO -- need to change
             if (inputProperty.IsDiscriminator)
             {
                 return false;
@@ -212,6 +239,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fullParameterList.AddRange(parametersToPassToBase);
             }
             fullParameterList.AddRange(parameters.Select(creator));
+
+            // we should always put the additional properties parameter to the last of the list
+            // TODO
         }
 
         private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
@@ -313,7 +343,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override CSharpType? CreateInheritedType()
         {
             if (_inputModel.BaseModel is not null)
-                return _typeFactory.CreateType(_inputModel.BaseModel!);
+                return _typeFactory.CreateType(_inputModel.BaseModel);
 
             return null;
         }
