@@ -58,6 +58,7 @@ jobs:
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     retryCountOnTaskFailure: 1
+    continueOnError: true
   - pwsh: |
       git restore NuGet.Config
     displayName: Discard versions change
