@@ -352,10 +352,10 @@ namespace AutoRest.CSharp.Output.Samples.Models
             var methodName = methodSignature.Name;
             if (IsAllParametersUsed)
             {
-                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(HasResponseBody ? " and parse the result" : "")}.";
+                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(ResponseType is not null ? " and parse the result" : "")}.";
             }
 
-            return $"This sample shows how to call {methodName}{(HasResponseBody ? " and parse the result" : string.Empty)}.";
+            return $"This sample shows how to call {methodName}{(ResponseType is not null ? " and parse the result" : string.Empty)}.";
         }
 
         // RequestContext is excluded

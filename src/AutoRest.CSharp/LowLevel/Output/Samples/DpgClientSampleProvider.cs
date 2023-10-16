@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 {
                     Declare(returnType, "response", new ResponseExpression(invocation), out var responseOfT),
                     EmptyLine,
-                    sample.HasResponseBody ? ParseResponse(responseType, sample, responseOfT.ContentStream) : InvokeConsoleWriteLine(responseOfT.GetRawResponse().Status)
+                    ParseResponse(responseType, sample, responseOfT.ContentStream)
                 };
             }
 
