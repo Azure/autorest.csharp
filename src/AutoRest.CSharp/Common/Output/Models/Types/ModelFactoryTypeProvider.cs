@@ -8,6 +8,10 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -16,7 +20,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -25,8 +29,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        private IEnumerable<MethodSignature>? _methods;
-        public IEnumerable<MethodSignature> Methods => _methods ??= Models.Select(CreateMethod);
+        private IEnumerable<Method>? _methods;
+        public IEnumerable<Method> Methods => _methods ??= Models.Select(CreateMethod);
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
@@ -84,29 +88,22 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
-        private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
+        private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
-            var from = parameter.Type;
-            var to = property.Declaration.Type;
-            FormattableString result = $"{parameter.Name:I}";
-            return (property, result);
-        }
+            ValueExpression p = parameter;
+            var propertyStack = property.BuildHierarchyStack();
 
-        private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForFlattenedProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, Stack<ObjectTypeProperty> propertyStack)
-        {
+            if (propertyStack.Count == 1)
+                return p;
+
             var assignmentProperty = propertyStack.Last();
             Debug.Assert(assignmentProperty.FlattenedProperty != null);
 
-            // determine whether this is a value type that changed to nullable because of other enclosing properties are nullable
-            var isOverriddenValueType = assignmentProperty.FlattenedProperty.IsOverriddenValueType;
-
             // iterate over the property stack to build a nested expression of variable assignment
-            ObjectTypeProperty property, immediateParentProperty;
+            ObjectTypeProperty immediateParentProperty;
             property = propertyStack.Pop();
-            FormattableString result = $"{parameter.Name:I}";
-
-            if (isOverriddenValueType)
-                result = $"{result}.Value";
+            // <parameterName> or <parameterName>.Value
+            ValueExpression result = p.NullableStructValue(parameter.Type);
 
             CSharpType from = parameter.Type;
             while (propertyStack.Count > 0)
@@ -118,13 +115,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
                         // get the type of the first parameter of its ctor
                         var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = $"new {parentPropertyType}({result}{CodeWriterExtensions.GetConversion(writer, from, to)})";
+                        result = New.Instance(parentPropertyType, GetConversion(result, from, to));
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
                         // find the method in the list
                         var method = ExistingModelFactoryMethods.First(m => m.Name == systemObjectType.Type.Name);
-                        result = $"{method.DeclaringType!}.{method.Name}({result})";
+                        result = new InvokeStaticMethodExpression(method.DeclaringType!, method.Name, new[] { result });
                         break;
                     default:
                         throw new InvalidOperationException($"The propertyType {parentPropertyType} (implementation type: {parentPropertyType.Implementation.GetType()}) is unhandled here, this should never happen");
@@ -137,42 +134,57 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (assignmentProperty.FlattenedProperty != null)
             {
-                if (isOverriddenValueType)
-                    result = $"{parameter.Name:I}.HasValue ? {result} : null";
+                if (assignmentProperty.FlattenedProperty.IsOverriddenValueType)
+                    result = new TernaryConditionalOperator(
+                        p.Property(nameof(Nullable<int>.HasValue)),
+                        result,
+                        Null);
                 else if (parameter.Type.IsNullable)
-                    result = $"{parameter.Name:I} != null ? {result} : null";
+                    result = new TernaryConditionalOperator(
+                        NotEqual(p, Null),
+                        result,
+                        Null);
             }
 
-            return (assignmentProperty, result);
+            return result;
         }
 
-        public (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignment(CodeWriter writer, SerializableObjectType model, Parameter parameter)
+        private static ValueExpression GetConversion(ValueExpression expression, CSharpType from, CSharpType to)
         {
-            var property = _parameterCache[model][parameter];
-            var propertyStack = property.BuildHierarchyStack();
-
-            if (propertyStack.Count == 1)
-                return GetPropertyAssignmentForSimpleProperty(writer, model, parameter, property);
-
-            return GetPropertyAssignmentForFlattenedProperty(writer, model, parameter, propertyStack);
-        }
-
-        private readonly Dictionary<SerializableObjectType, Dictionary<Parameter, ObjectTypeProperty>> _parameterCache = new();
-
-        private MethodSignature CreateMethod(SerializableObjectType modelType)
-        {
-            var ctor = modelType.SerializationConstructor;
-            var ctorSignature = ctor.Signature;
-            var methodParameters = new List<Parameter>(ctorSignature.Parameters.Count);
-            var cache = new Dictionary<Parameter, ObjectTypeProperty>();
-
-            var discriminator = modelType.Discriminator;
-
-            foreach (var ctorParameter in ctorSignature.Parameters)
+            if (TypeFactory.RequiresToList(from, to))
             {
-                var property = ctor.FindPropertyInitializedByParameter(ctorParameter);
+                if (from.IsNullable)
+                    expression = new NullConditionalExpression(expression);
+                return new InvokeStaticMethodExpression(typeof(Enumerable), nameof(Enumerable.ToList), new[] { expression }, CallAsExtension: true);
+            }
+
+            return expression;
+        }
+
+        private Method CreateMethod(SerializableObjectType model)
+        {
+            var ctor = model.SerializationConstructor;
+            var ctorToCall = ctor;
+            if (model.Declaration.IsAbstract)
+            {
+                // the model factory entry method `RequiresModelFactory` makes sure this:
+                // if this model is abstract, the discriminator must not be null.
+                ctorToCall = model.Discriminator!.DefaultObjectType.SerializationConstructor;
+            }
+            var methodParameters = new List<Parameter>(ctor.Signature.Parameters.Count);
+            var methodArguments = new List<ValueExpression>(ctor.Signature.Parameters.Count);
+
+            var discriminator = model.Discriminator;
+            var parameterCache = new Dictionary<Parameter, ObjectTypeProperty>();
+            foreach (var ctorParameter in ctorToCall.Signature.Parameters)
+            {
+                var property = ctorToCall.FindPropertyInitializedByParameter(ctorParameter);
                 if (property == null)
+                {
+                    // if the property is not found, in order not to introduce compilation errors, we need to add a `default` into the argument list
+                    methodArguments.Add(Default);
                     continue;
+                }
 
                 if (property.FlattenedProperty != null)
                     property = property.FlattenedProperty;
@@ -181,29 +193,28 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var inputType = property.Declaration.Type;
                 Constant? overriddenDefaultValue = null;
                 // check if the property is the discriminator, but skip the check if the configuration is on for HLC only
-                if (discriminator != null && discriminator.Property == property && !Configuration.ModelFactoryForHlc.Contains(modelType.Declaration.Name))
+                if (discriminator != null && discriminator.Property == property && !Configuration.ModelFactoryForHlc.Contains(model.Declaration.Name))
                 {
-                    var value = discriminator.Value;
-                    if (value != null)
+                    if (discriminator.Value is { } value)
                     {
-                        // this is a derived class
+                        // this is a derived class, we do not add this parameter to the method, but we need an argument for the invocation
+                        methodArguments.Add(new ConstantExpression(value));
                         continue;
                     }
-                    else
+                    // this class is the base in a discriminated set
+                    switch (inputType)
                     {
-                        // this is the base
-                        switch (inputType)
-                        {
-                            case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } extensibleEnumType }:
-                                inputType = extensibleEnumType.ValueType;
-                                overriddenDefaultValue = new Constant("Unknown", inputType);
-                                break;
-                            case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } }:
-                                continue;
-                                // we skip the parameter if the discriminator is a sealed choice because we can never pass in a "Unknown" value.
-                            default:
-                                break;
-                        }
+                        case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } extensibleEnum }:
+                            inputType = extensibleEnum.ValueType;
+                            overriddenDefaultValue = new Constant("Unknown", inputType);
+                            break;
+                        case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } }:
+                            // we skip the parameter if the discriminator is a sealed choice because we can never pass in a "Unknown" value.
+                            // but we still need to add it to the method argument list as a `default`
+                            methodArguments.Add(Default);
+                            continue;
+                        default:
+                            break;
                     }
                 }
 
@@ -213,7 +224,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     inputType = inputType.WithNullable(true);
                 }
 
-                var modelFactoryMethodParameter = ctorParameter with
+                var parameter = ctorParameter with
                 {
                     Name = parameterName,
                     Type = inputType,
@@ -221,15 +232,33 @@ namespace AutoRest.CSharp.Output.Models.Types
                     Initializer = inputType.GetParameterInitializer(ctorParameter.DefaultValue)
                 };
 
-                methodParameters.Add(modelFactoryMethodParameter);
-                cache.Add(modelFactoryMethodParameter, property);
+                methodParameters.Add(parameter);
+
+                var expression = BuildPropertyAssignmentExpression(parameter, property);
+                expression = GetConversion(expression, parameter.Type, ctorParameter.Type);
+                methodArguments.Add(expression);
+                parameterCache.Add(parameter, property);
             }
 
-            _parameterCache.Add(modelType, cache);
+            FormattableString returnDescription = $"A new <see cref=\"{model.Type}\"/> instance for mocking.";
 
-            FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
+            var signature = new MethodSignature(
+                ctor.Signature.Name,
+                ctor.Signature.Summary,
+                ctor.Signature.Description,
+                MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
+                model.Type,
+                returnDescription,
+                methodParameters);
 
-            return new MethodSignature(ctorSignature.Name, ctorSignature.Summary, ctorSignature.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
+            var methodBody = new MethodBodyStatement[]
+            {
+                // write the initializers and validations
+                new ParameterValidationBlock(methodParameters),
+                Return(New.Instance(ctorToCall.Signature, methodArguments))
+            };
+
+            return new(signature, methodBody);
         }
 
         private static bool RequiresModelFactory(SerializableObjectType model)
@@ -262,7 +291,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return model.Constructors
-                .Where(c => c.Signature.Modifiers.HasFlag(Public))
+                .Where(c => c.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                 .All(c => properties.Any(property => c.FindParameterByInitializedProperty(property) == default));
         }
     }

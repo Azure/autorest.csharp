@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private TypeFactory _typeFactory;
         private SourceInputModel? _sourceInputModel;
         private InputModelType[]? _derivedTypes;
-        private ObjectType? _defaultDerivedType;
+        private SerializableObjectType? _defaultDerivedType;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, SerializableObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory!;
