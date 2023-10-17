@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Report
             this._sections.Add(this.EnumModelSection);
             this._sections.Add(this.ResourceSection);
             this._sections.Add(this.ResourceCollectionSection);
+            this._sections.Add(this.ExtensionSection);
             this._sections.Add(this.TransformSection);
             this._sections.Add(this.HelpMessage);
         }
@@ -31,8 +32,9 @@ namespace AutoRest.CSharp.Mgmt.Report
         public DictionaryReportSection<EnumModelItem> EnumModelSection { get; } = new DictionaryReportSection<EnumModelItem>("EnumModels");
         public DictionaryReportSection<ResourceItem> ResourceSection { get; } = new DictionaryReportSection<ResourceItem>("Resources");
         public DictionaryReportSection<ResourceItem> ResourceCollectionSection { get; } = new DictionaryReportSection<ResourceItem>("ResourceCollections");
+        public DictionaryReportSection<ExtensionItem> ExtensionSection { get; } = new DictionaryReportSection<ExtensionItem>("Extensions");
         public TransformSection TransformSection { get; } = new TransformSection("Transforms");
-        private DictionaryReportSection<string> HelpMessage { get; } = new DictionaryReportSection<string>("_help_message_",
+        private DictionaryReportSection<string> HelpMessage { get; } = new DictionaryReportSection<string>("_help_message_", () =>
             new Dictionary<string, string>()
             {
                 { "1", "If the transform configuration has a '!' postfix (i.e. 'ProxyResource!'), it means the config is not from *.md config file (i.e. it's built-in through hard code)" },

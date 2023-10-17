@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         else
                         {
                             AutoRestLogger.Warning($"Ignore Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
-                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(),"<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
+                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), "<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
                         }
                     });
                     MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     if (p.SchemaProperty != null)
                     {
-                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(),model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
                     }
                     else
                     {
@@ -239,7 +239,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 foreach (var extension in extensions)
                 {
                     if (!extension.IsEmpty)
+                    {
+                        MgmtReport.Instance.ExtensionSection.Add(extension.ResourceName, new ExtensionItem(extension, MgmtReport.Instance.TransformSection));
                         WriteExtensionFile(project, MgmtExtensionWriter.GetWriter(extension));
+                    }
                 }
             }
             else
@@ -252,7 +255,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 foreach (var extensionClient in extensionClients)
                 {
                     if (!extensionClient.IsEmpty)
+                    {
+                        MgmtReport.Instance.ExtensionSection.Add(extensionClient.ResourceName, new ExtensionItem(extensionClient, MgmtReport.Instance.TransformSection));
                         WriteExtensionFile(project, new MgmtExtensionClientWriter(extensionClient));
+                    }
                 }
             }
         }

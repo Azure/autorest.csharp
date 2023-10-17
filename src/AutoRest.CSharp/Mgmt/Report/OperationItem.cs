@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Report
             this.OperationId = operation.OperationId;
             this.IsLongRunningOperation = operation.IsLongRunningOperation;
             this.IsPageableOperation = operation.IsPagingOperation;
+            this.Resource = operation.Resource?.ResourceName;
 
             var bodyParam = operation.Parameters.FirstOrDefault(p => p.RequestLocation == Common.Input.RequestLocation.Body);
             if (bodyParam != null)
@@ -55,5 +56,8 @@ namespace AutoRest.CSharp.Mgmt.Report
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitDefaults)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool IsPageableOperation { get; set; }
+        [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitNull)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Resource { get; set; }
     }
 }
