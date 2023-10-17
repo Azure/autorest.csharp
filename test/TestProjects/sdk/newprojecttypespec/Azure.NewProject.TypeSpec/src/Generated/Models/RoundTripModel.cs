@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> this is a roundtrip model. </summary>
-    internal partial class RoundTripModel
+    public partial class RoundTripModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>

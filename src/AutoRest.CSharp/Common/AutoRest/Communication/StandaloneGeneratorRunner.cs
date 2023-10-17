@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
             else
             {
                 projectPath = options.ProjectPath!;
+                if (!projectPath!.EndsWith("src", StringComparison.Ordinal))
+                    projectPath = Path.Combine(projectPath, "src");
                 outputPath = Path.Combine(projectPath, "Generated");
             }
             generatedTestOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated");

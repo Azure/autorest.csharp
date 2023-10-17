@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> This is a model without union types. </summary>
-    internal partial class UsualModel
+    public partial class UsualModel
     {
         /// <summary> Initializes a new instance of UsualModel. </summary>
         /// <param name="name"> The name. </param>

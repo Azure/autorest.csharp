@@ -8,9 +8,7 @@ using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.LowLevel.Generation;
 using AutoRest.CSharp.LowLevel.Generation.SampleGeneration;
 using AutoRest.CSharp.LowLevel.Output.Samples;
 using AutoRest.CSharp.Output.Models;
@@ -49,11 +47,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 if (sampleProvider.Methods.Any())
                 {
-                    var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
-                    var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
-                    clientSampleWriter.Write();
-                    project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
-                    project.AddGeneratedDocFile(xmlDocWriter.Filename, xmlDocWriter.ToString());
+                    if (Configuration.IsBranded)
+                    {
+                        var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                        var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
+                        clientSampleWriter.Write();
+                        project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                        project.AddGeneratedDocFile(xmlDocWriter.Filename, xmlDocWriter.ToString());
+                    }
+                    else
+                    {
+                        var smokeTestWriter = new SmokeTestWriter(client, sampleProvider);
+                        smokeTestWriter.Write();
+                        project.AddGeneratedTestFile($"../../tests/Generated/{client.Type.Name}Tests.cs", smokeTestWriter.ToString());
+                    }
                 }
             }
 
@@ -61,9 +68,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ClientOptionsWriter.WriteClientOptions(optionsWriter, library.ClientOptions);
             project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
 
-            var extensionWriter = new AspDotNetExtensionWriter(library.AspDotNetExtension);
-            extensionWriter.Write();
-            project.AddGeneratedFile($"{library.AspDotNetExtension.Type.Name}.cs", extensionWriter.ToString());
+            if (Configuration.IsBranded)
+            {
+                var extensionWriter = new AspDotNetExtensionWriter(library.AspDotNetExtension);
+                extensionWriter.Write();
+                project.AddGeneratedFile($"{library.AspDotNetExtension.Type.Name}.cs", extensionWriter.ToString());
+            }
 
             var modelFactoryProvider = library.ModelFactory;
             if (modelFactoryProvider != null)

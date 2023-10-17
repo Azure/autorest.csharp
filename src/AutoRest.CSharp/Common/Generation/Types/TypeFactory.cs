@@ -32,12 +32,12 @@ namespace AutoRest.CSharp.Generation.Types
             _library = library;
         }
 
-        private Type AzureResponseErrorType => typeof(Azure.ResponseError);
+        private Type AzureResponseErrorType => typeof(ResponseError);
 
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType       => throw new InvalidOperationException("Literal type shouldn't be used outside of the Input layer"),
-            InputUnionType unionType           => new CSharpType(typeof(object), unionType.IsNullable), //TODO -- need to support multiple union types.
+            InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable), //TODO -- need to support multiple union types.
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -130,12 +130,12 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 if (IsList(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingList<>), type.Arguments);
+                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
                 }
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingDictionary<,>), type.Arguments);
+                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
                 }
             }
 

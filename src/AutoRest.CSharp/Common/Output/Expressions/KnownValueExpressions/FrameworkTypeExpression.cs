@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
@@ -11,5 +11,5 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     /// </summary>
     /// <param name="FrameworkType">Framework type</param>
     /// <param name="Untyped"></param>
-    internal sealed record FrameworkTypeExpression(System.Type FrameworkType, ValueExpression Untyped) : TypedValueExpression(FrameworkType, Untyped);
+    internal sealed record FrameworkTypeExpression(Type FrameworkType, ValueExpression Untyped) : TypedValueExpression(FrameworkType, Untyped);
 }

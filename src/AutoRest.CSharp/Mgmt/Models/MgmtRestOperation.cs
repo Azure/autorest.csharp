@@ -19,7 +19,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Operation = AutoRest.CSharp.Input.Operation;
@@ -550,7 +549,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private CSharpType GetWrappedMgmtReturnType(CSharpType? originalType)
         {
             if (originalType is null)
-                return IsLongRunningOperation ? typeof(ArmOperation) : typeof(Response);
+                return IsLongRunningOperation ? typeof(ArmOperation) : Configuration.ApiTypes.ResponseType;
 
             if (IsPagingOperation)
                 return originalType;

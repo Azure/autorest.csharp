@@ -11,19 +11,48 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> This is another model with union types. </summary>
-    internal partial class AnotherModelWithUnionProperty
+    public partial class AnotherModelWithUnionProperty
     {
         /// <summary> Initializes a new instance of AnotherModelWithUnionProperty. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="unionProperty"/> is null. </exception>
-        internal AnotherModelWithUnionProperty(object unionProperty)
+        internal AnotherModelWithUnionProperty(BinaryData unionProperty)
         {
             Argument.AssertNotNull(unionProperty, nameof(unionProperty));
 
             UnionProperty = unionProperty;
         }
 
-        /// <summary> This is a union property. </summary>
-        public object UnionProperty { get; }
+        /// <summary>
+        /// This is a union property
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public BinaryData UnionProperty { get; }
     }
 }

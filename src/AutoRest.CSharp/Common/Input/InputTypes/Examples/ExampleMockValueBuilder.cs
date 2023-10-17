@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         public const string ShortVersionMockExampleKey = "ShortVersion";
         public const string MockExampleAllParameterKey = "AllParameters";
 
-        private const string EndpointMockValue = "<https://my-service.azure.com>";
+        private static readonly string EndpointMockValue = Configuration.ApiTypes.EndPointSampleValue;
 
         public static IReadOnlyList<InputClient> AddExamples(IReadOnlyList<InputClient> clients)
             => clients.Select(c => c with { Examples = BuildClientExamples(c.Parameters), Operations = AddExamples(c.Operations) }).ToArray();

@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class TypeSpecInputConstantConverter: JsonConverter<InputConstant>
+    internal class TypeSpecInputConstantConverter : JsonConverter<InputConstant>
     {
         private readonly TypeSpecReferenceHandler _referenceHandler;
 

@@ -14,7 +14,6 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
@@ -62,7 +61,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             }
 
             // handle RequestContent
-            if (frameworkType == typeof(RequestContent))
+            if (frameworkType == Configuration.ApiTypes.RequestContentType)
             {
                 return GetExpressionForRequestContent(exampleValue);
             }
@@ -208,9 +207,11 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             {
                 return Null;
             }
-
-            var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
-            return RequestContentExpression.Create(freeFormObjectExpression);
+            else
+            {
+                var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
+                return Configuration.ApiTypes.GetCreateFromStreamSampleExpression(freeFormObjectExpression);
+            }
         }
 
         private static ValueExpression GetExpressionForList(CSharpType listType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
@@ -259,10 +260,8 @@ namespace AutoRest.CSharp.LowLevel.Extensions
 
         private static ValueExpression GetExpressionForBinaryData(InputExampleValue exampleValue)
         {
-            // determine which method on BinaryData we want to use to serialize this BinaryData
-            return exampleValue is InputExampleRawValue { RawValue: string }
-                ? BinaryDataExpression.FromString(GetExpressionForFreeFormObject(exampleValue))
-                : BinaryDataExpression.FromObjectAsJson(GetExpressionForFreeFormObject(exampleValue));
+            //always use FromObjectAsJson for BinaryData so that the serialization works correctly.
+            return BinaryDataExpression.FromObjectAsJson(GetExpressionForFreeFormObject(exampleValue, true));
         }
 
         private static ValueExpression GetExpressionForFreeFormObject(InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch

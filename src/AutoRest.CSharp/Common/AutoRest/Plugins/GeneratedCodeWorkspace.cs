@@ -7,11 +7,12 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.ClientModel;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.PostProcessing;
-using AutoRest.CSharp.Input;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -38,6 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Response).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Result).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ArmResource).Assembly.Location),
             };
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Input
 {
