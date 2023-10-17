@@ -129,6 +129,9 @@ namespace AutoRest.CSharp.Generation.Writers
             var openBraceToken = initializer.OpenBraceToken;
             openBraceToken = initializer.Parent switch
             {
+                AssignmentExpressionSyntax => openBraceToken
+                    .WithLeadingTrivia(parentLeadingTrivia.Insert(0, SyntaxFactory.CarriageReturnLineFeed))
+                    .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed),
                 ImplicitArrayCreationExpressionSyntax => openBraceToken
                     .WithLeadingTrivia(SyntaxFactory.Space)
                     .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed),

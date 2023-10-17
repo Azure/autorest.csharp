@@ -785,14 +785,17 @@ ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-0
             ValidationLosses = { 123.45F },
             LatenciesInSeconds = { 123.45F },
         },
-        VariableStates = {new VariableState
+        VariableStates = 
         {
-            Variable = "<variable>",
-            FilledNARatio = 123.45F,
-            EffectiveCount = 1234,
-            FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-            LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-        }},
+            new VariableState
+            {
+                Variable = "<variable>",
+                FilledNARatio = 123.45F,
+                EffectiveCount = 1234,
+                FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+            }
+        },
     },
 };
 Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
@@ -836,14 +839,17 @@ ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-0
             ValidationLosses = { 123.45F },
             LatenciesInSeconds = { 123.45F },
         },
-        VariableStates = {new VariableState
+        VariableStates = 
         {
-            Variable = "<variable>",
-            FilledNARatio = 123.45F,
-            EffectiveCount = 1234,
-            FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-            LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-        }},
+            new VariableState
+            {
+                Variable = "<variable>",
+                FilledNARatio = 123.45F,
+                EffectiveCount = 1234,
+                FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+            }
+        },
     },
 };
 Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);

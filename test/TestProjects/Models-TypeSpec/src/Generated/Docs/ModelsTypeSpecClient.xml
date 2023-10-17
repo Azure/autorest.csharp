@@ -1086,13 +1086,16 @@ RoundTripOptionalModel input = new RoundTripOptionalModel
     OptionalInt = 1234,
     OptionalStringList = { "<optionalStringList>" },
     OptionalIntList = { 1234 },
-    OptionalModelList = {new CollectionItem(new Dictionary<string, RecordItem>
+    OptionalModelList = 
     {
-        ["key"] = new RecordItem(new CollectionItem[]
+        new CollectionItem(new Dictionary<string, RecordItem>
         {
-            default
+            ["key"] = new RecordItem(new CollectionItem[]
+            {
+                default
+            })
         })
-    })},
+    },
     OptionalModel = new DerivedModel(new CollectionItem[]
     {
         default
@@ -1143,13 +1146,16 @@ RoundTripOptionalModel input = new RoundTripOptionalModel
     OptionalInt = 1234,
     OptionalStringList = { "<optionalStringList>" },
     OptionalIntList = { 1234 },
-    OptionalModelList = {new CollectionItem(new Dictionary<string, RecordItem>
+    OptionalModelList = 
     {
-        ["key"] = new RecordItem(new CollectionItem[]
+        new CollectionItem(new Dictionary<string, RecordItem>
         {
-            default
+            ["key"] = new RecordItem(new CollectionItem[]
+            {
+                default
+            })
         })
-    })},
+    },
     OptionalModel = new DerivedModel(new CollectionItem[]
     {
         default
@@ -1250,7 +1256,7 @@ using RequestContent content = RequestContent.Create(new
     {
         key = "<optionalStringRecord>",
     },
-    optionalModelRecord = new { },
+    optionalModelRecord = new{},
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = "01:23:45",
     optionalCollectionWithNullableIntElement = new object[]
@@ -1346,7 +1352,7 @@ using RequestContent content = RequestContent.Create(new
     {
         key = "<optionalStringRecord>",
     },
-    optionalModelRecord = new { },
+    optionalModelRecord = new{},
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = "01:23:45",
     optionalCollectionWithNullableIntElement = new object[]
@@ -1557,7 +1563,7 @@ using RequestContent content = RequestContent.Create(new
     {
         key = "<requiredStringRecord>",
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredBytes = new object(),
     requiredUint8Array = new object[]
     {
@@ -1632,7 +1638,7 @@ using RequestContent content = RequestContent.Create(new
     {
         key = "<requiredStringRecord>",
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredBytes = new object(),
     optionalBytes = new object(),
     requiredUint8Array = new object[]
@@ -1723,7 +1729,7 @@ using RequestContent content = RequestContent.Create(new
     {
         key = "<requiredStringRecord>",
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredBytes = new object(),
     requiredUint8Array = new object[]
     {
@@ -1798,7 +1804,7 @@ using RequestContent content = RequestContent.Create(new
     {
         key = "<requiredStringRecord>",
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredBytes = new object(),
     optionalBytes = new object(),
     requiredUint8Array = new object[]

@@ -160,10 +160,13 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 
 CollectionsModelProperty body = new CollectionsModelProperty
 {
-    Property = {new StringProperty
+    Property = 
     {
-        Property = "<property>",
-    }},
+        new StringProperty
+        {
+            Property = "<property>",
+        }
+    },
 };
 Response response = await client.PutAllAsync(body);
 ]]></code></example>
@@ -183,10 +186,13 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 
 CollectionsModelProperty body = new CollectionsModelProperty
 {
-    Property = {new StringProperty
+    Property = 
     {
-        Property = "<property>",
-    }},
+        new StringProperty
+        {
+            Property = "<property>",
+        }
+    },
 };
 Response response = client.PutAll(body);
 ]]></code></example>
@@ -266,10 +272,13 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 
 CollectionsModelProperty body = new CollectionsModelProperty
 {
-    Property = {new StringProperty
+    Property = 
     {
-        Property = "<property>",
-    }},
+        new StringProperty
+        {
+            Property = "<property>",
+        }
+    },
 };
 Response response = await client.PutDefaultAsync(body);
 ]]></code></example>
@@ -289,10 +298,13 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 
 CollectionsModelProperty body = new CollectionsModelProperty
 {
-    Property = {new StringProperty
+    Property = 
     {
-        Property = "<property>",
-    }},
+        new StringProperty
+        {
+            Property = "<property>",
+        }
+    },
 };
 Response response = client.PutDefault(body);
 ]]></code></example>
