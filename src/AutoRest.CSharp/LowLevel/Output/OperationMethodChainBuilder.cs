@@ -19,7 +19,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using Configuration = AutoRest.CSharp.Input.Configuration;
+using Configuration = AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -302,15 +302,15 @@ namespace AutoRest.CSharp.Output.Models
             var headAsBoolean = Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             if (headAsBoolean)
             {
-                return new ReturnTypeChain(typeof(Response<bool>), typeof(Response<bool>), null);
+                return new ReturnTypeChain(Configuration.ApiTypes.GetResponseOfT<bool>(), Configuration.ApiTypes.GetResponseOfT<bool>(), null);
             }
 
             if (responseType != null)
             {
-                return new ReturnTypeChain(new CSharpType(typeof(Response<>), responseType), typeof(Response), responseType);
+                return new ReturnTypeChain(new CSharpType(Configuration.ApiTypes.ResponseOfTType, responseType), Configuration.ApiTypes.ResponseType, responseType);
             }
 
-            return new ReturnTypeChain(typeof(Response), typeof(Response), null);
+            return new ReturnTypeChain(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseType, null);
         }
 
         private CSharpType? GetReturnedResponseCSharpType()
@@ -402,6 +402,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var field = fields.GetFieldByParameter(parameter);
                 var inputProperty = fields.GetInputByField(field);
+                if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
+                    continue;
                 var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
                 Constant? defaultValue = null;
                 if (!inputProperty.IsRequired)

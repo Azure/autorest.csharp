@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
@@ -41,6 +42,90 @@ namespace AutoRest.CSharp.Common.Input
                 yield return model;
                 model = model.BaseModel;
             }
+        }
+
+        internal InputModelType Update(string newName, InputModelTypeUsage usage)
+        {
+            return new InputModelType(
+                newName,
+                Namespace,
+                Accessibility,
+                Deprecated,
+                Description,
+                usage,
+                Properties,
+                BaseModel,
+                DerivedModels,
+                DiscriminatorValue,
+                DiscriminatorPropertyName,
+                IsNullable);
+        }
+
+        internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
+        {
+            return new InputModelType(
+                Name,
+                Namespace,
+                Accessibility,
+                Deprecated,
+                Description,
+                Usage,
+                GetNewProperties(property, inputType),
+                BaseModel,
+                DerivedModels,
+                DiscriminatorValue,
+                DiscriminatorPropertyName,
+                IsNullable);
+        }
+
+        private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputType inputType)
+        {
+            List<InputModelProperty> properties = new List<InputModelProperty>();
+            foreach (var myProperty in Properties)
+            {
+                if (myProperty.Equals(property))
+                {
+                    properties.Add(new InputModelProperty(
+                        myProperty.Name,
+                        myProperty.SerializedName,
+                        myProperty.Description,
+                        myProperty.Type.GetCollectionEquivalent(inputType),
+                        myProperty.IsRequired,
+                        myProperty.IsReadOnly,
+                        myProperty.IsDiscriminator));
+                }
+                else
+                {
+                    properties.Add(myProperty);
+                }
+            }
+            return properties;
+        }
+
+        public bool Equals(InputType other, bool handleCollections)
+        {
+            if (!handleCollections)
+                return Equals(other);
+
+            switch (other)
+            {
+                case InputDictionaryType otherDictionary:
+                    return Equals(otherDictionary.ValueType);
+                case InputListType otherList:
+                    return Equals(otherList.ElementType);
+                default:
+                    return Equals(other);
+            }
+        }
+
+        internal InputModelProperty? GetProperty(InputModelType key)
+        {
+            foreach (var property in Properties)
+            {
+                if (key.Equals(property.Type, true))
+                    return property;
+            }
+            return null;
         }
     }
 }

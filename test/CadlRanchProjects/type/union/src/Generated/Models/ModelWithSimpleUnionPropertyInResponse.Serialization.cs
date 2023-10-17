@@ -5,13 +5,13 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace _Type.Union.Models
 {
-    internal partial class ModelWithSimpleUnionPropertyInResponse
+    public partial class ModelWithSimpleUnionPropertyInResponse
     {
         internal static ModelWithSimpleUnionPropertyInResponse DeserializeModelWithSimpleUnionPropertyInResponse(JsonElement element)
         {
@@ -19,12 +19,12 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            object simpleUnion = default;
+            BinaryData simpleUnion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("simpleUnion"u8))
                 {
-                    simpleUnion = property.Value.GetObject();
+                    simpleUnion = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
             }
