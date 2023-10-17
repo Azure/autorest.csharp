@@ -388,7 +388,9 @@ export function loadOperation(
         if (op.verb !== "delete") {
             const formattedType = getFormattedType(
                 program,
-                metadata.logicalPath
+                // TODO: we should check `logicalPath` or other ways to determine body type,
+                // after https://github.com/Azure/typespec-azure/issues/3725 is fixed
+                op.verb === "post"
                     ? metadata.envelopeResult
                     : metadata.logicalResult
             );
@@ -402,7 +404,13 @@ export function loadOperation(
                 // for now, let assume we don't allow return type
                 StatusCodes: op.verb === "delete" ? [204] : [200],
                 BodyType: bodyType,
-                ResultPath: metadata.logicalPath,
+                ResultPath:
+                    metadata.logicalPath ??
+                    // https://github.com/Azure/typespec-azure/issues/3725
+                    (metadata.envelopeResult != metadata.logicalResult &&
+                    op.verb === "post"
+                        ? "result" // actually `result` is the only allowed path for now
+                        : undefined),
                 BodyMediaType: BodyMediaType.Json
             } as OperationResponse
         } as OperationLongRunning;
