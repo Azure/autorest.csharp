@@ -30,14 +30,17 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndArray();
             writer.WritePropertyName("baseModelProp"u8);
             writer.WriteStringValue(BaseModelProp);
-            foreach (var item in _serializedAdditionalRawData)
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName(item.Key);
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -46,8 +49,8 @@ namespace ModelsTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRoundTripOnNoUse(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripOnNoUse(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RoundTripOnNoUse>.Serialize(ModelSerializerOptions options)
@@ -76,26 +79,29 @@ namespace ModelsTypeSpec.Models
             string baseModelProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("requiredList"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    List<CollectionItem> array = new List<CollectionItem>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("requiredList"u8))
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        List<CollectionItem> array = new List<CollectionItem>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        }
+                        requiredList = array;
+                        continue;
                     }
-                    requiredList = array;
-                    continue;
+                    if (property.NameEquals("baseModelProp"u8))
+                    {
+                        baseModelProp = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("baseModelProp"u8))
-                {
-                    baseModelProp = property.Value.GetString();
-                    continue;
-                }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoundTripOnNoUse(baseModelProp, serializedAdditionalRawData, requiredList);
         }
 

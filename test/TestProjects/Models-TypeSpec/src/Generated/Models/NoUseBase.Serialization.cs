@@ -23,14 +23,17 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("baseModelProp"u8);
             writer.WriteStringValue(BaseModelProp);
-            foreach (var item in _serializedAdditionalRawData)
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName(item.Key);
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -39,8 +42,8 @@ namespace ModelsTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeNoUseBase(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNoUseBase(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<NoUseBase>.Serialize(ModelSerializerOptions options)
@@ -68,16 +71,19 @@ namespace ModelsTypeSpec.Models
             string baseModelProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("baseModelProp"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    baseModelProp = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("baseModelProp"u8))
+                    {
+                        baseModelProp = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NoUseBase(baseModelProp, serializedAdditionalRawData);
         }
 

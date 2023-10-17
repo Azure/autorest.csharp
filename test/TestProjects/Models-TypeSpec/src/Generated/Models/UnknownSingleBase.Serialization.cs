@@ -25,14 +25,17 @@ namespace ModelsTypeSpec.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("size"u8);
             writer.WriteNumberValue(Size);
-            foreach (var item in _serializedAdditionalRawData)
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName(item.Key);
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -41,8 +44,8 @@ namespace ModelsTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownSingleBase(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownSingleBase(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UnknownSingleBase>.Serialize(ModelSerializerOptions options)
@@ -71,21 +74,24 @@ namespace ModelsTypeSpec.Models
             int size = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("kind"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    kind = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("kind"u8))
+                    {
+                        kind = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("size"u8))
+                    {
+                        size = property.Value.GetInt32();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("size"u8))
-                {
-                    size = property.Value.GetInt32();
-                    continue;
-                }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownSingleBase(kind, size, serializedAdditionalRawData);
         }
 

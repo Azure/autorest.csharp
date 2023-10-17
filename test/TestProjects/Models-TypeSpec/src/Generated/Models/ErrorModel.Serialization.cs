@@ -21,14 +21,27 @@ namespace ModelsTypeSpec.Models
         void IModelJsonSerializable<ErrorModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            foreach (var item in _serializedAdditionalRawData)
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName(item.Key);
+                writer.WritePropertyName("message"u8);
+                writer.WriteStringValue(Message);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InnerError))
+            {
+                writer.WritePropertyName("innerError"u8);
+                writer.WriteObjectValue(InnerError);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -37,8 +50,8 @@ namespace ModelsTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeErrorModel(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeErrorModel(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ErrorModel>.Serialize(ModelSerializerOptions options)
@@ -67,25 +80,28 @@ namespace ModelsTypeSpec.Models
             Optional<ErrorModel> innerError = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("message"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    message = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("innerError"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("message"u8))
                     {
+                        message = property.Value.GetString();
                         continue;
                     }
-                    innerError = DeserializeErrorModel(property.Value);
-                    continue;
+                    if (property.NameEquals("innerError"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        innerError = DeserializeErrorModel(property.Value);
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ErrorModel(message, innerError.Value, serializedAdditionalRawData);
         }
 

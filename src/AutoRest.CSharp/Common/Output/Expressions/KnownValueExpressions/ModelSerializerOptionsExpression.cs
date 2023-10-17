@@ -9,5 +9,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     internal record ModelSerializerOptionsExpression(ValueExpression Untyped) : TypedValueExpression<ModelSerializerOptions>(Untyped)
     {
         public static ModelSerializerOptionsExpression DefaultWireOptions => new(new TypeReference(typeof(ModelSerializerOptions)).Property(nameof(ModelSerializerOptions.DefaultWireOptions)));
+
+        public ValueExpression Format => new MemberExpression(this, nameof(ModelSerializerOptions.Format));
     }
 }

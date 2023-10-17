@@ -263,9 +263,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fullParameterList.AddRange(parametersToPassToBase);
             }
             fullParameterList.AddRange(parameters.Select(creator));
-
-            // we should always put the additional properties parameter to the last of the list
-            // TODO
         }
 
         private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)

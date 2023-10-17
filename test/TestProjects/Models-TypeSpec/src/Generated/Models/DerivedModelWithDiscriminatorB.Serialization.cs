@@ -32,14 +32,17 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredPropertyOnBase"u8);
             writer.WriteNumberValue(RequiredPropertyOnBase);
-            foreach (var item in _serializedAdditionalRawData)
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName(item.Key);
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -48,8 +51,8 @@ namespace ModelsTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDerivedModelWithDiscriminatorB(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDerivedModelWithDiscriminatorB(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DerivedModelWithDiscriminatorB>.Serialize(ModelSerializerOptions options)
@@ -80,31 +83,34 @@ namespace ModelsTypeSpec.Models
             int requiredPropertyOnBase = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("requiredInt"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    requiredInt = property.Value.GetInt32();
-                    continue;
+                    if (property.NameEquals("requiredInt"u8))
+                    {
+                        requiredInt = property.Value.GetInt32();
+                        continue;
+                    }
+                    if (property.NameEquals("discriminatorProperty"u8))
+                    {
+                        discriminatorProperty = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("optionalPropertyOnBase"u8))
+                    {
+                        optionalPropertyOnBase = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("requiredPropertyOnBase"u8))
+                    {
+                        requiredPropertyOnBase = property.Value.GetInt32();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("discriminatorProperty"u8))
-                {
-                    discriminatorProperty = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("optionalPropertyOnBase"u8))
-                {
-                    optionalPropertyOnBase = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("requiredPropertyOnBase"u8))
-                {
-                    requiredPropertyOnBase = property.Value.GetInt32();
-                    continue;
-                }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DerivedModelWithDiscriminatorB(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, serializedAdditionalRawData, requiredInt);
         }
 
