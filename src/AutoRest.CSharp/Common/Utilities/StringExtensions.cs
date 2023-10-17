@@ -57,6 +57,9 @@ namespace AutoRest.CSharp.Utilities
                 if (IsWordSeparator(c))
                 {
                     upperCase = true;
+                    // for continuous _, we just eat the first one so that people can still have a way to keep _ in the name if they want
+                    if (i > 0 && name[i - 1] == '_' && name[i] == '_')
+                        nameBuilder.Append('_');
                     continue;
                 }
 
