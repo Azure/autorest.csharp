@@ -251,7 +251,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError200Valid(RequestContext)">
@@ -274,7 +274,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = client.Get200Model201ModelDefaultError200Valid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError201ValidAsync(RequestContext)">
@@ -297,7 +297,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError201Valid(RequestContext)">
@@ -320,7 +320,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = client.Get200Model201ModelDefaultError201Valid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError400ValidAsync(RequestContext)">
@@ -343,7 +343,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError400Valid(RequestContext)">
@@ -366,7 +366,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = client.Get200Model201ModelDefaultError400Valid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext)">
@@ -389,7 +389,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext)">
@@ -412,7 +412,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext)">
@@ -435,7 +435,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext)">
@@ -458,7 +458,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext)">
@@ -481,7 +481,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext)">
@@ -504,7 +504,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext)">
@@ -527,7 +527,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext)">
@@ -550,7 +550,7 @@ MultipleResponsesClient client = new MultipleResponsesClient(credential);
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("statusCode").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultError202NoneAsync(RequestContext)">

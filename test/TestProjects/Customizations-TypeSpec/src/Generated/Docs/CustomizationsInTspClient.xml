@@ -27,7 +27,7 @@ RootModel input = new RootModel
         ["key"] = "<badDictionaryName>"
     }, new IList<string>[]
     {
-        new string[]{"<badListOfListName>"}
+        new string[] { "<badListOfListName>" }
     }, new IDictionary<string, string>[]
     {
         new Dictionary<string, string>
@@ -70,7 +70,7 @@ RootModel input = new RootModel
         ["key"] = "<badDictionaryName>"
     }, new IList<string>[]
     {
-        new string[]{"<badListOfListName>"}
+        new string[] { "<badListOfListName>" }
     }, new IDictionary<string, string>[]
     {
         new Dictionary<string, string>

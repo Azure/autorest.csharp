@@ -151,8 +151,8 @@ namespace AutoRest.CSharp.Generation.Writers
         private static bool IsSingleLine(SyntaxNode node)
         {
             var lines = node.SyntaxTree.GetText().Lines;
-            var fullSpan = node.FullSpan;
-            return lines.GetLinePosition(fullSpan.Start).Line == lines.GetLinePosition(fullSpan.End).Line;
+            var span = node.Span;
+            return lines.GetLinePosition(span.Start).Line == lines.GetLinePosition(span.End).Line;
         }
 
         private static SyntaxTriviaList GetPreviousLevelTrivia(SyntaxNode node)
