@@ -3,7 +3,7 @@
 #nullable disable
 
 using System;
-using System.ServiceModel.Rest;
+using System.Net.ClientModel;
 using NUnit.Framework;
 using OpenAI;
 

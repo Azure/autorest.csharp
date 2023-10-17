@@ -3,10 +3,10 @@
 #nullable disable
 
 using System;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Internal;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Core.Pipeline;
+using System.Net.ClientModel.Internal;
 using System.Threading;
 using System.Threading.Tasks;
 using NoTestTypeSpec.Models;
@@ -110,7 +110,7 @@ namespace NoTestTypeSpec
         /// <param name="optionalQuery"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
@@ -151,7 +151,7 @@ namespace NoTestTypeSpec
         /// <param name="optionalQuery"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {

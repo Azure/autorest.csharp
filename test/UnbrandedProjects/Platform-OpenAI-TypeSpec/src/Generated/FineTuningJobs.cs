@@ -3,10 +3,10 @@
 #nullable disable
 
 using System;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Internal;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Core.Pipeline;
+using System.Net.ClientModel.Internal;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
@@ -112,7 +112,7 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
@@ -155,7 +155,7 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
@@ -213,7 +213,7 @@ namespace OpenAI
         /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> GetPaginatedsAsync(string after, long? limit, RequestOptions context)
         {
@@ -249,7 +249,7 @@ namespace OpenAI
         /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result GetPaginateds(string after, long? limit, RequestOptions context)
         {
@@ -324,7 +324,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> RetrieveAsync(string fineTuningJobId, RequestOptions context)
         {
@@ -365,7 +365,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result Retrieve(string fineTuningJobId, RequestOptions context)
         {
@@ -438,7 +438,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> GetEventsAsync(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
@@ -479,7 +479,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result GetEvents(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
@@ -546,7 +546,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CancelAsync(string fineTuningJobId, RequestOptions context)
         {
@@ -585,7 +585,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result Cancel(string fineTuningJobId, RequestOptions context)
         {

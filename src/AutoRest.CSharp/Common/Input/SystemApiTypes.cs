@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Internal;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Core.Pipeline;
+using System.Net.ClientModel.Internal;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
@@ -16,7 +16,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure.Core.Pipeline; //needed because BearerTokenAuthenticationPolicy doesn't exist in System.ServiceModel.Rest yet
-using RequestBody = System.ServiceModel.Rest.Core.RequestBody;
+using RequestBody = System.Net.ClientModel.Core.RequestBody;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type OptionalType => typeof(OptionalProperty);
         public override Type OptionalPropertyType => typeof(OptionalProperty<>);
 
-        public override Type RequestFailedExceptionType => typeof(RequestErrorException);
+        public override Type RequestFailedExceptionType => typeof(MessageFailedException);
 
         public override Type ResponseClassifierType => typeof(ResponseErrorClassifier);
         public override Type StatusCodeClassifierType => typeof(StatusResponseClassifier);

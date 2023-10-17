@@ -28,7 +28,7 @@
     <PackageReference Include="nunit" />
     <!-- Any stable version of System.Memory should work here. -->
     <PackageReference Include="System.Memory" />
-    <PackageReference Include="System.ServiceModel.Rest" />
+    <PackageReference Include="System.Net.ClientModel" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->

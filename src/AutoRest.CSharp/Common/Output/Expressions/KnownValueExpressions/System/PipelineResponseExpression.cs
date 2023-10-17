@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Core;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;

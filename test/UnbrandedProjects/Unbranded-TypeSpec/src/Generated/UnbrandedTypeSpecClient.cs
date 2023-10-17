@@ -3,10 +3,10 @@
 #nullable disable
 
 using System;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Internal;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Core.Pipeline;
+using System.Net.ClientModel.Internal;
 using System.Threading;
 using System.Threading.Tasks;
 using UnbrandedTypeSpec.Models;
@@ -73,7 +73,7 @@ namespace UnbrandedTypeSpec
         /// <param name="optionalQuery"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
@@ -109,7 +109,7 @@ namespace UnbrandedTypeSpec
         /// <param name="optionalQuery"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
@@ -189,7 +189,7 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> HelloAgainAsync(string p2, string p1, RequestBody content, RequestOptions context = null)
         {
@@ -232,7 +232,7 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result HelloAgain(string p2, string p1, RequestBody content, RequestOptions context = null)
         {
@@ -270,7 +270,7 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> NoContentTypeAsync(string p2, string p1, RequestBody content, RequestOptions context = null)
         {
@@ -308,7 +308,7 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result NoContentType(string p2, string p1, RequestBody content, RequestOptions context = null)
         {
@@ -364,7 +364,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> HelloDemo2Async(RequestOptions context)
         {
@@ -398,7 +398,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result HelloDemo2(RequestOptions context)
         {
@@ -462,7 +462,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateLiteralAsync(RequestBody content, RequestOptions context = null)
         {
@@ -500,7 +500,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result CreateLiteral(RequestBody content, RequestOptions context = null)
         {
@@ -554,7 +554,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> HelloLiteralAsync(RequestOptions context)
         {
@@ -588,7 +588,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result HelloLiteral(RequestOptions context)
         {
@@ -643,7 +643,7 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> TopActionAsync(DateTimeOffset action, RequestOptions context)
         {
@@ -678,7 +678,7 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result TopAction(DateTimeOffset action, RequestOptions context)
         {
@@ -707,7 +707,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> TopAction2Async(RequestOptions context)
         {
@@ -736,7 +736,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result TopAction2(RequestOptions context)
         {
@@ -767,7 +767,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> PatchActionAsync(RequestBody content, RequestOptions context = null)
         {
@@ -800,7 +800,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result PatchAction(RequestBody content, RequestOptions context = null)
         {
@@ -866,7 +866,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> AnonymousBodyAsync(RequestBody content, RequestOptions context = null)
         {
@@ -904,7 +904,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result AnonymousBody(RequestBody content, RequestOptions context = null)
         {
@@ -970,7 +970,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> FriendlyModelAsync(RequestBody content, RequestOptions context = null)
         {
@@ -1008,7 +1008,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result FriendlyModel(RequestBody content, RequestOptions context = null)
         {
@@ -1039,7 +1039,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> AddTimeHeaderAsync(RequestOptions context = null)
         {
@@ -1068,7 +1068,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result AddTimeHeader(RequestOptions context = null)
         {
@@ -1135,7 +1135,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, RequestBody content, RequestOptions context = null)
         {
@@ -1174,7 +1174,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result StringFormat(Guid subscriptionId, RequestBody content, RequestOptions context = null)
         {
@@ -1240,7 +1240,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> ProjectedNameModelAsync(RequestBody content, RequestOptions context = null)
         {
@@ -1278,7 +1278,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result ProjectedNameModel(RequestBody content, RequestOptions context = null)
         {
@@ -1332,7 +1332,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> ReturnsAnonymousModelAsync(RequestOptions context)
         {
@@ -1366,7 +1366,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result ReturnsAnonymousModel(RequestOptions context)
         {
@@ -1395,7 +1395,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> GetUnknownValueAsync(RequestOptions context)
         {
@@ -1424,7 +1424,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result GetUnknownValue(RequestOptions context)
         {
@@ -1483,7 +1483,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Result> InternalProtocolAsync(RequestBody content, RequestOptions context = null)
         {
@@ -1516,7 +1516,7 @@ namespace UnbrandedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         internal virtual Result InternalProtocol(RequestBody content, RequestOptions context = null)
         {
@@ -1585,7 +1585,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Result> StillConvenientAsync(RequestOptions context = null)
         {
@@ -1614,7 +1614,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         internal virtual Result StillConvenient(RequestOptions context = null)
         {
@@ -1647,7 +1647,7 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result<bool>> HeadAsBooleanAsync(string id, RequestOptions context = null)
         {
@@ -1683,7 +1683,7 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result<bool> HeadAsBoolean(string id, RequestOptions context = null)
         {

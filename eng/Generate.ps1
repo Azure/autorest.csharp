@@ -191,6 +191,7 @@ function Add-TestProjects-Directory($directory) {
     if (Test-Path $tspConfigConfigurationPath) {
         $directoryToUse = $directory
         $launchSettingsArgs = ""
+        $options = ""
         if ($directory.FullName.Contains("\sdk\")) {
             $directoryToUse = $srcFolder
         }
@@ -202,8 +203,9 @@ function Add-TestProjects-Directory($directory) {
                 $directoryToUse = Join-Path $directoryToUse "src"
             }
             $launchSettingsArgs = "-n"
+            $options = "--option @azure-tools/typespec-csharp.new-project=true"
         }
-        Add-TypeSpec $testName $directoryToUse "" "" $launchSettingsArgs
+        Add-TypeSpec $testName $directoryToUse "" $options $launchSettingsArgs
     }
     elseif (Test-Path $readmeConfigurationPath) {
         $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true"

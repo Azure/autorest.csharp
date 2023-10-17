@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.ServiceModel.Rest;
+using System.Net.ClientModel;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.AutoRest.Plugins;

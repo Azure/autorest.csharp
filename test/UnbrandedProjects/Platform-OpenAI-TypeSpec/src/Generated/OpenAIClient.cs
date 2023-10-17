@@ -3,10 +3,10 @@
 #nullable disable
 
 using System;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Internal;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Core.Pipeline;
+using System.Net.ClientModel.Internal;
 using System.Threading;
 
 namespace OpenAI

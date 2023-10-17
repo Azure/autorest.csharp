@@ -3,10 +3,10 @@
 #nullable disable
 
 using System;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Internal;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Core.Pipeline;
+using System.Net.ClientModel.Internal;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
@@ -88,7 +88,7 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> GetModelsAsync(RequestOptions context)
         {
@@ -123,7 +123,7 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result GetModels(RequestOptions context)
         {
@@ -195,7 +195,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> RetrieveAsync(string model, RequestOptions context)
         {
@@ -235,7 +235,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result Retrieve(string model, RequestOptions context)
         {
@@ -302,7 +302,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> DeleteAsync(string model, RequestOptions context)
         {
@@ -341,7 +341,7 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual Result Delete(string model, RequestOptions context)
         {

@@ -3,7 +3,7 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.ServiceModel.Rest.Core;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 
 namespace OpenAI.Models
