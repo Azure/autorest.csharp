@@ -78,7 +78,7 @@ export function createModelForService(
     service: Service
 ): CodeModel {
     const program = context.program;
-    const sdkContext = createSdkContext(context, "csharp");
+    const sdkContext = createSdkContext(context, "@azure-tools/typespec-csharp");
     const title = service.title;
     const serviceNamespaceType = service.type;
     const apiVersions: Set<string> = new Set<string>();

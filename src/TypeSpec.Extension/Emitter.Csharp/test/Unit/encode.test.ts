@@ -139,7 +139,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context, "csharp");
+        const sdkContext = createSdkContext(context, "@azure-tools/typespec-csharp");
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -170,7 +170,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context, "csharp");
+        const sdkContext = createSdkContext(context, "@azure-tools/typespec-csharp");
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -201,7 +201,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context, "csharp");
+        const sdkContext = createSdkContext(context, "@azure-tools/typespec-csharp");
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -232,7 +232,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context, "csharp");
+        const sdkContext = createSdkContext(context, "@azure-tools/typespec-csharp");
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
