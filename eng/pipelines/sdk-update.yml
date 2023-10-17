@@ -199,6 +199,7 @@ stages:
           Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           BranchName: $(BranchName)
+          ContinueOnError: true
       - job: Create_PR
         dependsOn: Update_Code
         variables:

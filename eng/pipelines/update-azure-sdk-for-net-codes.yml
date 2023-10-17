@@ -11,6 +11,9 @@ parameters:
     type: object
   - name: Matrix
     type: object
+  - name: ContinueOnError
+    type: boolean
+    default: false
 
 jobs:
 - job: ${{ parameters.Name }}
@@ -58,7 +61,7 @@ jobs:
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     retryCountOnTaskFailure: 1
-    continueOnError: true
+    continueOnError: ${{ parameters.ContinueOnError}}
   - pwsh: |
       git restore NuGet.Config
     displayName: Discard versions change
