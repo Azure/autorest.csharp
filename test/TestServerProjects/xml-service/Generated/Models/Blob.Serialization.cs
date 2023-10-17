@@ -6,12 +6,39 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Linq;
+using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Blob
+    public partial class Blob : IXmlSerializable
     {
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        {
+            writer.WriteStartElement(nameHint ?? "Blob");
+            writer.WriteStartElement("Name");
+            writer.WriteValue(Name);
+            writer.WriteEndElement();
+            writer.WriteStartElement("Deleted");
+            writer.WriteValue(Deleted);
+            writer.WriteEndElement();
+            writer.WriteStartElement("Snapshot");
+            writer.WriteValue(Snapshot);
+            writer.WriteEndElement();
+            writer.WriteObjectValue(Properties, "Properties");
+            if (Optional.IsCollectionDefined(Metadata))
+            {
+                foreach (var pair in Metadata)
+                {
+                    writer.WriteStartElement("String");
+                    writer.WriteValue(pair.Value);
+                    writer.WriteEndElement();
+                }
+            }
+            writer.WriteEndElement();
+        }
+
         internal static Blob DeserializeBlob(XElement element)
         {
             string name = default;

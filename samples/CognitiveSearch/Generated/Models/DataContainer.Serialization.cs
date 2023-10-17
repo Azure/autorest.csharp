@@ -33,8 +33,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDataContainer(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataContainer(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DataContainer>.Serialize(ModelSerializerOptions options)

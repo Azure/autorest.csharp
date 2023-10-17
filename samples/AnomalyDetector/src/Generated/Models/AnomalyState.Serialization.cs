@@ -10,13 +10,75 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class AnomalyState
+    public partial class AnomalyState : IUtf8JsonSerializable, IModelJsonSerializable<AnomalyState>
     {
-        internal static AnomalyState DeserializeAnomalyState(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AnomalyState>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AnomalyState>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("timestamp"u8);
+            writer.WriteStringValue(Timestamp, "O");
+            if (Optional.IsDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteObjectValue(Value);
+            }
+            if (Optional.IsCollectionDefined(Errors))
+            {
+                writer.WritePropertyName("errors"u8);
+                writer.WriteStartArray();
+                foreach (var item in Errors)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        AnomalyState IModelJsonSerializable<AnomalyState>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnomalyState(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AnomalyState>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AnomalyState IModelSerializable<AnomalyState>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAnomalyState(document.RootElement, options);
+        }
+
+        internal static AnomalyState DeserializeAnomalyState(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -24,38 +86,45 @@ namespace AnomalyDetector.Models
             DateTimeOffset timestamp = default;
             Optional<AnomalyValue> value = default;
             Optional<IReadOnlyList<ErrorResponse>> errors = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("timestamp"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    timestamp = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("value"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("timestamp"u8))
                     {
+                        timestamp = property.Value.GetDateTimeOffset("O");
                         continue;
                     }
-                    value = AnomalyValue.DeserializeAnomalyValue(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("errors"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("value"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        value = AnomalyValue.DeserializeAnomalyValue(property.Value);
                         continue;
                     }
-                    List<ErrorResponse> array = new List<ErrorResponse>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("errors"u8))
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<ErrorResponse> array = new List<ErrorResponse>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        }
+                        errors = array;
+                        continue;
                     }
-                    errors = array;
-                    continue;
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new AnomalyState(timestamp, value.Value, Optional.ToList(errors));
+            return new AnomalyState(timestamp, value.Value, Optional.ToList(errors), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -63,7 +132,13 @@ namespace AnomalyDetector.Models
         internal static AnomalyState FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAnomalyState(document.RootElement);
+            return DeserializeAnomalyState(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

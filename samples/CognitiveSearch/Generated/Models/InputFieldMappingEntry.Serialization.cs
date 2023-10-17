@@ -49,8 +49,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeInputFieldMappingEntry(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeInputFieldMappingEntry(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<InputFieldMappingEntry>.Serialize(ModelSerializerOptions options)

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The derived model. </summary>
     internal partial class DerivedModel : BaseModel
     {
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public DerivedModel(string name) : base(name)
@@ -21,13 +22,19 @@ namespace ConfidentLevelsInTsp.Models
             Argument.AssertNotNull(name, nameof(name));
         }
 
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="age"> The age. </param>
-        internal DerivedModel(string name, double? size, int? age) : base(name, size)
+        internal DerivedModel(string name, double? size, IDictionary<string, BinaryData> serializedAdditionalRawData, int? age) : base(name, size, serializedAdditionalRawData)
         {
             Age = age;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/> for deserialization. </summary>
+        internal DerivedModel()
+        {
         }
 
         /// <summary> The age. </summary>

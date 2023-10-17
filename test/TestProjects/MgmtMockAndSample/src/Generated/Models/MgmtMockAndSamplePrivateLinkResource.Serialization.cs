@@ -5,36 +5,118 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class MgmtMockAndSamplePrivateLinkResource : IUtf8JsonSerializable
+    public partial class MgmtMockAndSamplePrivateLinkResource : IUtf8JsonSerializable, IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResource>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResource>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(RequiredZoneNames))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Location))
             {
-                writer.WritePropertyName("requiredZoneNames"u8);
-                writer.WriteStartArray();
-                foreach (var item in RequiredZoneNames)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(GroupId))
+                {
+                    writer.WritePropertyName("groupId"u8);
+                    writer.WriteStringValue(GroupId);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(RequiredMembers))
+                {
+                    writer.WritePropertyName("requiredMembers"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in RequiredMembers)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(RequiredZoneNames))
+                {
+                    writer.WritePropertyName("requiredZoneNames"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in RequiredZoneNames)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
-        internal static MgmtMockAndSamplePrivateLinkResource DeserializeMgmtMockAndSamplePrivateLinkResource(JsonElement element)
+        MgmtMockAndSamplePrivateLinkResource IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResource>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtMockAndSamplePrivateLinkResource(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSamplePrivateLinkResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSamplePrivateLinkResource IModelSerializable<MgmtMockAndSamplePrivateLinkResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSamplePrivateLinkResource(document.RootElement, options);
+        }
+
+        internal static MgmtMockAndSamplePrivateLinkResource DeserializeMgmtMockAndSamplePrivateLinkResource(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

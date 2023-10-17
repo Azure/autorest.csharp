@@ -15,33 +15,32 @@ namespace _Azure.Lro.RpcLegacy.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AzureLroRpcLegacyModelFactory
     {
-        /// <summary> Initializes a new instance of JobResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.JobResult"/>. </summary>
         /// <param name="jobId"> A processing job identifier. </param>
         /// <param name="comment"> Comment. </param>
         /// <param name="status"> The status of the processing job. </param>
         /// <param name="errors"> Error objects that describes the error when status is "Failed". </param>
         /// <param name="results"> The results. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.JobResult"/> instance for mocking. </returns>
-        public static JobResult JobResult(string jobId = null, string comment = null, JobStatus status = default, IEnumerable<ErrorResponse> errors = null, IEnumerable<string> results = null)
+        public static JobResult JobResult(string jobId = null, string comment = null, JobStatus status = default, IEnumerable<ErrorResponse> errors = null, IEnumerable<string> results = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
             errors ??= new List<ErrorResponse>();
             results ??= new List<string>();
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new JobResult(jobId, comment, status, errors?.ToList(), results?.ToList());
+            return new JobResult(jobId, comment, status, errors?.ToList(), results?.ToList(), serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ErrorResponse"/>. </summary>
         /// <param name="error"> The error object. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ErrorResponse"/> instance for mocking. </returns>
-        public static ErrorResponse ErrorResponse(ResponseError error = null)
+        public static ErrorResponse ErrorResponse(ResponseError error = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (error == null)
-            {
-                throw new ArgumentNullException(nameof(error));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new ErrorResponse(error);
+            return new ErrorResponse(error, serializedAdditionalRawData);
         }
     }
 }

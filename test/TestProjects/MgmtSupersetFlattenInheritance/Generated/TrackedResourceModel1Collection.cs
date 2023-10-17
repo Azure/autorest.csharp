@@ -223,7 +223,7 @@ namespace MgmtSupersetFlattenInheritance
         public virtual AsyncPageable<TrackedResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace MgmtSupersetFlattenInheritance
         public virtual Pageable<TrackedResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

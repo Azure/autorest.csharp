@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class WorkspacePatch : IUtf8JsonSerializable
+    public partial class WorkspacePatch : IUtf8JsonSerializable, IModelJsonSerializable<WorkspacePatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<WorkspacePatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<WorkspacePatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -27,6 +32,57 @@ namespace MgmtParamOrdering.Models
                 writer.WriteEndObject();
             }
             writer.WriteEndObject();
+        }
+
+        WorkspacePatch IModelJsonSerializable<WorkspacePatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeWorkspacePatch(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<WorkspacePatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WorkspacePatch IModelSerializable<WorkspacePatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWorkspacePatch(document.RootElement, options);
+        }
+
+        internal static WorkspacePatch DeserializeWorkspacePatch(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<IDictionary<string, string>> tags = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+            }
+            return new WorkspacePatch(Optional.ToDictionary(tags));
         }
     }
 }

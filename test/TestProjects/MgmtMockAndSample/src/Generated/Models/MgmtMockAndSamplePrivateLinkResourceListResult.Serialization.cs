@@ -5,16 +5,60 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class MgmtMockAndSamplePrivateLinkResourceListResult
+    internal partial class MgmtMockAndSamplePrivateLinkResourceListResult : IUtf8JsonSerializable, IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>
     {
-        internal static MgmtMockAndSamplePrivateLinkResourceListResult DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        MgmtMockAndSamplePrivateLinkResourceListResult IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSamplePrivateLinkResourceListResult IModelSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(document.RootElement, options);
+        }
+
+        internal static MgmtMockAndSamplePrivateLinkResourceListResult DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

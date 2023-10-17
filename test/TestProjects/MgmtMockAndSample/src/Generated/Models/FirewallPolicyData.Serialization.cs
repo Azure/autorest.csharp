@@ -5,20 +5,29 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class FirewallPolicyData : IUtf8JsonSerializable
+    public partial class FirewallPolicyData : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirewallPolicyData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
@@ -38,69 +47,151 @@ namespace MgmtMockAndSample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(StartupProbe))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("startupProbe"u8);
-                writer.WriteObjectValue(StartupProbe);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(ReadinessProbe))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("readinessProbe"u8);
-                writer.WriteObjectValue(ReadinessProbe);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(DesiredStatusCode))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("desiredStatusCode"u8);
-                writer.WriteNumberValue(DesiredStatusCode.Value.ToSerialInt32());
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(BasePolicy))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("basePolicy"u8);
-                JsonSerializer.Serialize(writer, BasePolicy);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(ThreatIntelWhitelist))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("threatIntelWhitelist"u8);
-                writer.WriteObjectValue(ThreatIntelWhitelist);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(StartupProbe))
+                {
+                    writer.WritePropertyName("startupProbe"u8);
+                    writer.WriteObjectValue(StartupProbe);
+                }
+                if (Optional.IsDefined(ReadinessProbe))
+                {
+                    writer.WritePropertyName("readinessProbe"u8);
+                    writer.WriteObjectValue(ReadinessProbe);
+                }
+                if (Optional.IsDefined(DesiredStatusCode))
+                {
+                    writer.WritePropertyName("desiredStatusCode"u8);
+                    writer.WriteNumberValue(DesiredStatusCode.Value.ToSerialInt32());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(RuleCollectionGroups))
+                {
+                    writer.WritePropertyName("ruleCollectionGroups"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in RuleCollectionGroups)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                if (Optional.IsDefined(BasePolicy))
+                {
+                    writer.WritePropertyName("basePolicy"u8);
+                    JsonSerializer.Serialize(writer, BasePolicy);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Firewalls))
+                {
+                    writer.WritePropertyName("firewalls"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Firewalls)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(ChildPolicies))
+                {
+                    writer.WritePropertyName("childPolicies"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in ChildPolicies)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(ThreatIntelWhitelist))
+                {
+                    writer.WritePropertyName("threatIntelWhitelist"u8);
+                    writer.WriteObjectValue(ThreatIntelWhitelist);
+                }
+                if (Optional.IsDefined(Insights))
+                {
+                    writer.WritePropertyName("insights"u8);
+                    writer.WriteObjectValue(Insights);
+                }
+                if (Optional.IsDefined(Snat))
+                {
+                    writer.WritePropertyName("snat"u8);
+                    writer.WriteObjectValue(Snat);
+                }
+                if (Optional.IsDefined(DnsSettings))
+                {
+                    writer.WritePropertyName("dnsSettings"u8);
+                    writer.WriteObjectValue(DnsSettings);
+                }
+                if (Optional.IsDefined(IntrusionDetection))
+                {
+                    writer.WritePropertyName("intrusionDetection"u8);
+                    writer.WriteObjectValue(IntrusionDetection);
+                }
+                if (Optional.IsDefined(TransportSecurity))
+                {
+                    writer.WritePropertyName("transportSecurity"u8);
+                    writer.WriteObjectValue(TransportSecurity);
+                }
+                if (Optional.IsDefined(Sku))
+                {
+                    writer.WritePropertyName("sku"u8);
+                    writer.WriteObjectValue(Sku);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Insights))
-            {
-                writer.WritePropertyName("insights"u8);
-                writer.WriteObjectValue(Insights);
-            }
-            if (Optional.IsDefined(Snat))
-            {
-                writer.WritePropertyName("snat"u8);
-                writer.WriteObjectValue(Snat);
-            }
-            if (Optional.IsDefined(DnsSettings))
-            {
-                writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
-            }
-            if (Optional.IsDefined(IntrusionDetection))
-            {
-                writer.WritePropertyName("intrusionDetection"u8);
-                writer.WriteObjectValue(IntrusionDetection);
-            }
-            if (Optional.IsDefined(TransportSecurity))
-            {
-                writer.WritePropertyName("transportSecurity"u8);
-                writer.WriteObjectValue(TransportSecurity);
-            }
-            if (Optional.IsDefined(Sku))
-            {
-                writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyData DeserializeFirewallPolicyData(JsonElement element)
+        FirewallPolicyData IModelJsonSerializable<FirewallPolicyData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyData IModelSerializable<FirewallPolicyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyData(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyData DeserializeFirewallPolicyData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

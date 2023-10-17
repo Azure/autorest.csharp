@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtSupersetInheritance
 {
-    public partial class SupersetModel6Data : IUtf8JsonSerializable
+    public partial class SupersetModel6Data : IUtf8JsonSerializable, IModelJsonSerializable<SupersetModel6Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SupersetModel6Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SupersetModel6Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
@@ -21,11 +25,55 @@ namespace MgmtSupersetInheritance
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
             writer.WriteEndObject();
         }
 
-        internal static SupersetModel6Data DeserializeSupersetModel6Data(JsonElement element)
+        SupersetModel6Data IModelJsonSerializable<SupersetModel6Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSupersetModel6Data(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SupersetModel6Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SupersetModel6Data IModelSerializable<SupersetModel6Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSupersetModel6Data(document.RootElement, options);
+        }
+
+        internal static SupersetModel6Data DeserializeSupersetModel6Data(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

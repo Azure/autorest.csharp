@@ -36,8 +36,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBootDiagnostics(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBootDiagnostics(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BootDiagnostics>.Serialize(ModelSerializerOptions options)

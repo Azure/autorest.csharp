@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class ManagedHsmSku : IUtf8JsonSerializable
+    public partial class ManagedHsmSku : IUtf8JsonSerializable, IModelJsonSerializable<ManagedHsmSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ManagedHsmSku>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ManagedHsmSku>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("family"u8);
@@ -22,8 +26,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static ManagedHsmSku DeserializeManagedHsmSku(JsonElement element)
+        ManagedHsmSku IModelJsonSerializable<ManagedHsmSku>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeManagedHsmSku(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ManagedHsmSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ManagedHsmSku IModelSerializable<ManagedHsmSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeManagedHsmSku(document.RootElement, options);
+        }
+
+        internal static ManagedHsmSku DeserializeManagedHsmSku(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

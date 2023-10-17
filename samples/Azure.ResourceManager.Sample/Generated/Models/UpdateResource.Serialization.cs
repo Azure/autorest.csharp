@@ -38,8 +38,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUpdateResource(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpdateResource(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UpdateResource>.Serialize(ModelSerializerOptions options)

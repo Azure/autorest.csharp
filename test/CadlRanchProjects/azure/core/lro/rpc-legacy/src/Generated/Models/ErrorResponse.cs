@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure;
 using Azure.Core;
 
@@ -14,7 +15,10 @@ namespace _Azure.Lro.RpcLegacy.Models
     /// <summary> A response containing error details. </summary>
     public partial class ErrorResponse
     {
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
         /// <param name="error"> The error object. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         internal ErrorResponse(ResponseError error)
@@ -22,6 +26,21 @@ namespace _Azure.Lro.RpcLegacy.Models
             Argument.AssertNotNull(error, nameof(error));
 
             Error = error;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
+        /// <param name="error"> The error object. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorResponse(ResponseError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Error = error;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/> for deserialization. </summary>
+        internal ErrorResponse()
+        {
         }
 
         /// <summary> The error object. </summary>

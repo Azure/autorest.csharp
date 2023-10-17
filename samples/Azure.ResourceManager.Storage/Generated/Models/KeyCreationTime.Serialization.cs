@@ -36,8 +36,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeKeyCreationTime(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyCreationTime(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<KeyCreationTime>.Serialize(ModelSerializerOptions options)

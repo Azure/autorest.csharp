@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class ModelWithArrayOfEnum : IUtf8JsonSerializable
+    internal partial class ModelWithArrayOfEnum : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithArrayOfEnum>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithArrayOfEnum>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelWithArrayOfEnum>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(ArrayOfEnum))
@@ -44,8 +48,32 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelWithArrayOfEnum DeserializeModelWithArrayOfEnum(JsonElement element)
+        ModelWithArrayOfEnum IModelJsonSerializable<ModelWithArrayOfEnum>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithArrayOfEnum(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithArrayOfEnum>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithArrayOfEnum IModelSerializable<ModelWithArrayOfEnum>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithArrayOfEnum(document.RootElement, options);
+        }
+
+        internal static ModelWithArrayOfEnum DeserializeModelWithArrayOfEnum(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -34,34 +34,57 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(OperatingSystem))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("operatingSystem"u8);
-                writer.WriteStringValue(OperatingSystem);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(ComputeRole))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("computeRole"u8);
-                writer.WriteStringValue(ComputeRole);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(HandlerSchema))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("handlerSchema"u8);
-                writer.WriteStringValue(HandlerSchema);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(VmScaleSetEnabled))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("vmScaleSetEnabled"u8);
-                writer.WriteBooleanValue(VmScaleSetEnabled.Value);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(SupportsMultipleExtensions))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("supportsMultipleExtensions"u8);
-                writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(OperatingSystem))
+                {
+                    writer.WritePropertyName("operatingSystem"u8);
+                    writer.WriteStringValue(OperatingSystem);
+                }
+                if (Optional.IsDefined(ComputeRole))
+                {
+                    writer.WritePropertyName("computeRole"u8);
+                    writer.WriteStringValue(ComputeRole);
+                }
+                if (Optional.IsDefined(HandlerSchema))
+                {
+                    writer.WritePropertyName("handlerSchema"u8);
+                    writer.WriteStringValue(HandlerSchema);
+                }
+                if (Optional.IsDefined(VmScaleSetEnabled))
+                {
+                    writer.WritePropertyName("vmScaleSetEnabled"u8);
+                    writer.WriteBooleanValue(VmScaleSetEnabled.Value);
+                }
+                if (Optional.IsDefined(SupportsMultipleExtensions))
+                {
+                    writer.WritePropertyName("supportsMultipleExtensions"u8);
+                    writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -69,8 +92,8 @@ namespace Azure.ResourceManager.Sample
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineExtensionImageData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineExtensionImageData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineExtensionImageData>.Serialize(ModelSerializerOptions options)

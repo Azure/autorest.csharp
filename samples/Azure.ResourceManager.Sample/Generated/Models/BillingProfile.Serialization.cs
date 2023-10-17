@@ -31,8 +31,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBillingProfile(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBillingProfile(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BillingProfile>.Serialize(ModelSerializerOptions options)

@@ -32,24 +32,57 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("platformFaultDomain"u8);
-                writer.WriteNumberValue(PlatformFaultDomain.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PlatformFaultDomain))
+                {
+                    writer.WritePropertyName("platformFaultDomain"u8);
+                    writer.WriteNumberValue(PlatformFaultDomain.Value);
+                }
+                if (Optional.IsDefined(AutoReplaceOnFailure))
+                {
+                    writer.WritePropertyName("autoReplaceOnFailure"u8);
+                    writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(HostId))
+                {
+                    writer.WritePropertyName("hostId"u8);
+                    writer.WriteStringValue(HostId);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(VirtualMachines))
+                {
+                    writer.WritePropertyName("virtualMachines"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VirtualMachines)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(LicenseType))
+                {
+                    writer.WritePropertyName("licenseType"u8);
+                    writer.WriteStringValue(LicenseType.Value.ToSerialString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningOn))
+                {
+                    writer.WritePropertyName("provisioningTime"u8);
+                    writer.WriteStringValue(ProvisioningOn.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstanceView))
+                {
+                    writer.WritePropertyName("instanceView"u8);
+                    writer.WriteObjectValue(InstanceView);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(AutoReplaceOnFailure))
-            {
-                writer.WritePropertyName("autoReplaceOnFailure"u8);
-                writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
-            }
-            if (Optional.IsDefined(LicenseType))
-            {
-                writer.WritePropertyName("licenseType"u8);
-                writer.WriteStringValue(LicenseType.Value.ToSerialString());
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -57,8 +90,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDedicatedHostPatch(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDedicatedHostPatch(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DedicatedHostPatch>.Serialize(ModelSerializerOptions options)

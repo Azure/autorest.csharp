@@ -228,7 +228,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithAncestorWithLocRestClient.CreateListTestRequest(Id.SubscriptionId, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentWithAncestorWithLocRestClient.CreateListTestNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithLocResource(Client, FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(e)), _fakeParentWithAncestorWithLocClientDiagnostics, Pipeline, "FakeParentWithAncestorWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new FakeParentWithAncestorWithLocResource(Client, FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(e)), _fakeParentWithAncestorWithLocClientDiagnostics, Pipeline, "FakeParentWithAncestorWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithAncestorWithLocRestClient.CreateListTestRequest(Id.SubscriptionId, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentWithAncestorWithLocRestClient.CreateListTestNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithLocResource(Client, FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(e)), _fakeParentWithAncestorWithLocClientDiagnostics, Pipeline, "FakeParentWithAncestorWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new FakeParentWithAncestorWithLocResource(Client, FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(e)), _fakeParentWithAncestorWithLocClientDiagnostics, Pipeline, "FakeParentWithAncestorWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -5,17 +5,76 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class DeletedVaultData
+    public partial class DeletedVaultData : IUtf8JsonSerializable, IModelJsonSerializable<DeletedVaultData>
     {
-        internal static DeletedVaultData DeserializeDeletedVaultData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeletedVaultData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeletedVaultData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Properties))
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteObjectValue(Properties);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            writer.WriteEndObject();
+        }
+
+        DeletedVaultData IModelJsonSerializable<DeletedVaultData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeletedVaultData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeletedVaultData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedVaultData IModelSerializable<DeletedVaultData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeletedVaultData(document.RootElement, options);
+        }
+
+        internal static DeletedVaultData DeserializeDeletedVaultData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

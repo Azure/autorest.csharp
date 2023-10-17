@@ -25,6 +25,26 @@ namespace MgmtExactMatchFlattenInheritance.Models
                 writer.WritePropertyName("foo"u8);
                 writer.WriteNumberValue(Foo.Value);
             }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
             writer.WriteEndObject();
         }
 
@@ -32,8 +52,8 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAzureResourceFlattenModel5(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureResourceFlattenModel5(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AzureResourceFlattenModel5>.Serialize(ModelSerializerOptions options)

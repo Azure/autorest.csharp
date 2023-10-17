@@ -6,15 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Optionality.Models
 {
-    public partial class DurationProperty : IUtf8JsonSerializable
+    public partial class DurationProperty : IUtf8JsonSerializable, IModelJsonSerializable<DurationProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DurationProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DurationProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Property))
@@ -22,29 +26,72 @@ namespace _Type.Property.Optionality.Models
                 writer.WritePropertyName("property"u8);
                 writer.WriteStringValue(Property.Value, "P");
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static DurationProperty DeserializeDurationProperty(JsonElement element)
+        DurationProperty IModelJsonSerializable<DurationProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDurationProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DurationProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DurationProperty IModelSerializable<DurationProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDurationProperty(document.RootElement, options);
+        }
+
+        internal static DurationProperty DeserializeDurationProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<TimeSpan> property = default;
-            foreach (var property0 in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property0.NameEquals("property"u8))
+                foreach (var property0 in element.EnumerateObject())
                 {
-                    if (property0.Value.ValueKind == JsonValueKind.Null)
+                    if (property0.NameEquals("property"u8))
                     {
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        property = property0.Value.GetTimeSpan("P");
                         continue;
                     }
-                    property = property0.Value.GetTimeSpan("P");
-                    continue;
+                    additionalPropertiesDictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new DurationProperty(Optional.ToNullable(property));
+            return new DurationProperty(Optional.ToNullable(property), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -52,15 +99,13 @@ namespace _Type.Property.Optionality.Models
         internal static DurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDurationProperty(document.RootElement);
+            return DeserializeDurationProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

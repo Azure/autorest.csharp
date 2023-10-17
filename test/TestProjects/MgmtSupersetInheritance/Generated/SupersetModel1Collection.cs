@@ -223,7 +223,7 @@ namespace MgmtSupersetInheritance
         public virtual AsyncPageable<SupersetModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace MgmtSupersetInheritance
         public virtual Pageable<SupersetModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

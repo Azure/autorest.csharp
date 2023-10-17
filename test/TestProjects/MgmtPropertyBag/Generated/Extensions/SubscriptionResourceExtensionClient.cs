@@ -65,7 +65,7 @@ namespace MgmtPropertyBag
         public virtual AsyncPageable<FooResource> GetFoosAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FooRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, filter, top);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFoos", "", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFoos", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace MgmtPropertyBag
         public virtual Pageable<FooResource> GetFoos(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FooRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, filter, top);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFoos", "", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFoos", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace MgmtPropertyBag
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => BarRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, ifMatch, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => BarRestClient.CreateListWithSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, ifMatch, top);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetBars", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetBars", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace MgmtPropertyBag
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => BarRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, ifMatch, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => BarRestClient.CreateListWithSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, ifMatch, top);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetBars", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetBars", "value", "nextLink", cancellationToken);
         }
     }
 }

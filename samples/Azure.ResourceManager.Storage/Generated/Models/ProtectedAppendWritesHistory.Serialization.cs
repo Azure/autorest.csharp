@@ -24,6 +24,11 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Timestamp))
+            {
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
+            }
             writer.WriteEndObject();
         }
 
@@ -31,8 +36,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeProtectedAppendWritesHistory(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeProtectedAppendWritesHistory(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ProtectedAppendWritesHistory>.Serialize(ModelSerializerOptions options)

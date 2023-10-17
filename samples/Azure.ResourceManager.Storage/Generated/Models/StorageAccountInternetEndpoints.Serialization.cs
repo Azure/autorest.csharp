@@ -19,6 +19,26 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<StorageAccountInternetEndpoints>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Blob))
+            {
+                writer.WritePropertyName("blob"u8);
+                writer.WriteStringValue(Blob);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(File))
+            {
+                writer.WritePropertyName("file"u8);
+                writer.WriteStringValue(File);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Web))
+            {
+                writer.WritePropertyName("web"u8);
+                writer.WriteStringValue(Web);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Dfs))
+            {
+                writer.WritePropertyName("dfs"u8);
+                writer.WriteStringValue(Dfs);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +46,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageAccountInternetEndpoints(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageAccountInternetEndpoints(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StorageAccountInternetEndpoints>.Serialize(ModelSerializerOptions options)

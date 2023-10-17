@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
-    public partial class TrackedResourceModel2 : IUtf8JsonSerializable
+    public partial class TrackedResourceModel2 : IUtf8JsonSerializable, IModelJsonSerializable<TrackedResourceModel2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TrackedResourceModel2>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TrackedResourceModel2>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -40,19 +44,66 @@ namespace MgmtSupersetFlattenInheritance.Models
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(FooPropertiesFoo))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("foo"u8);
-                writer.WriteStringValue(FooPropertiesFoo);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(FooPropertiesFoo))
+                {
+                    writer.WritePropertyName("foo"u8);
+                    writer.WriteStringValue(FooPropertiesFoo);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
-        internal static TrackedResourceModel2 DeserializeTrackedResourceModel2(JsonElement element)
+        TrackedResourceModel2 IModelJsonSerializable<TrackedResourceModel2>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTrackedResourceModel2(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TrackedResourceModel2>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TrackedResourceModel2 IModelSerializable<TrackedResourceModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTrackedResourceModel2(document.RootElement, options);
+        }
+
+        internal static TrackedResourceModel2 DeserializeTrackedResourceModel2(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -24,6 +24,11 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastEnabledOn))
+            {
+                writer.WritePropertyName("lastEnabledTime"u8);
+                writer.WriteStringValue(LastEnabledOn.Value, "O");
+            }
             if (Optional.IsDefined(KeyType))
             {
                 writer.WritePropertyName("keyType"u8);
@@ -36,8 +41,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeEncryptionService(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEncryptionService(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<EncryptionService>.Serialize(ModelSerializerOptions options)

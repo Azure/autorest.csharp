@@ -21,6 +21,16 @@ namespace MgmtExactMatchInheritance.Models
         void IModelJsonSerializable<ExactMatchModel11>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -28,8 +38,8 @@ namespace MgmtExactMatchInheritance.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeExactMatchModel11(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeExactMatchModel11(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ExactMatchModel11>.Serialize(ModelSerializerOptions options)

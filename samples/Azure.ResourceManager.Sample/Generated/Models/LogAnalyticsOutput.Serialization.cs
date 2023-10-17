@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<LogAnalyticsOutput>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Output))
+            {
+                writer.WritePropertyName("output"u8);
+                writer.WriteStringValue(Output);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +31,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeLogAnalyticsOutput(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLogAnalyticsOutput(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<LogAnalyticsOutput>.Serialize(ModelSerializerOptions options)

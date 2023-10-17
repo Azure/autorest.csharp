@@ -5,15 +5,54 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithInternalModel
+    public partial class ModelWithInternalModel : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithInternalModel>
     {
-        internal static ModelWithInternalModel DeserializeModelWithInternalModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithInternalModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelWithInternalModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(InternalProperty))
+            {
+                writer.WritePropertyName("InternalProperty"u8);
+                writer.WriteObjectValue(InternalProperty);
+            }
+            writer.WriteEndObject();
+        }
+
+        ModelWithInternalModel IModelJsonSerializable<ModelWithInternalModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithInternalModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithInternalModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithInternalModel IModelSerializable<ModelWithInternalModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithInternalModel(document.RootElement, options);
+        }
+
+        internal static ModelWithInternalModel DeserializeModelWithInternalModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

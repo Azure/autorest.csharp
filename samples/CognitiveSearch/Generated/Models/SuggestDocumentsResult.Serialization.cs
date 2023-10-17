@@ -20,6 +20,21 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<SuggestDocumentsResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Results)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Coverage))
+            {
+                writer.WritePropertyName("@search.coverage"u8);
+                writer.WriteNumberValue(Coverage.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +42,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSuggestDocumentsResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSuggestDocumentsResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SuggestDocumentsResult>.Serialize(ModelSerializerOptions options)

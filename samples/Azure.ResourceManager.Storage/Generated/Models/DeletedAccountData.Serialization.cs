@@ -20,9 +20,57 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<DeletedAccountData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StorageAccountResourceId))
+                {
+                    writer.WritePropertyName("storageAccountResourceId"u8);
+                    writer.WriteStringValue(StorageAccountResourceId);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Location))
+                {
+                    writer.WritePropertyName("location"u8);
+                    writer.WriteStringValue(Location.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RestoreReference))
+                {
+                    writer.WritePropertyName("restoreReference"u8);
+                    writer.WriteStringValue(RestoreReference);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CreationTime))
+                {
+                    writer.WritePropertyName("creationTime"u8);
+                    writer.WriteStringValue(CreationTime);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DeletionTime))
+                {
+                    writer.WritePropertyName("deletionTime"u8);
+                    writer.WriteStringValue(DeletionTime);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -30,8 +78,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDeletedAccountData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeletedAccountData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DeletedAccountData>.Serialize(ModelSerializerOptions options)

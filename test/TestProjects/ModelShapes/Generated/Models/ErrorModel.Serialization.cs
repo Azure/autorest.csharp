@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
-    internal partial class ErrorModel
+    internal partial class ErrorModel : IUtf8JsonSerializable, IModelJsonSerializable<ErrorModel>
     {
-        internal static ErrorModel DeserializeErrorModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ErrorModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ErrorModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Code))
+            {
+                writer.WritePropertyName("Code"u8);
+                writer.WriteStringValue(Code);
+            }
+            if (Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("Status"u8);
+                writer.WriteStringValue(Status);
+            }
+            writer.WriteEndObject();
+        }
+
+        ErrorModel IModelJsonSerializable<ErrorModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeErrorModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ErrorModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ErrorModel IModelSerializable<ErrorModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeErrorModel(document.RootElement, options);
+        }
+
+        internal static ErrorModel DeserializeErrorModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

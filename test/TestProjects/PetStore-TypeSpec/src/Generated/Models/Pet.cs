@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace PetStore.Models
@@ -13,7 +14,10 @@ namespace PetStore.Models
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -23,17 +27,25 @@ namespace PetStore.Models
 
             Name = name;
             Age = age;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
         /// <param name="tag"></param>
         /// <param name="age"></param>
-        internal Pet(string name, string tag, int age)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string name, string tag, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Tag = tag;
             Age = age;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>
+        internal Pet()
+        {
         }
 
         /// <summary> Gets or sets the name. </summary>

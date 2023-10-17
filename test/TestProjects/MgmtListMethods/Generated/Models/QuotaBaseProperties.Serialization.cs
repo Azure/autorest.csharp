@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtListMethods.Models
 {
-    public partial class QuotaBaseProperties : IUtf8JsonSerializable
+    public partial class QuotaBaseProperties : IUtf8JsonSerializable, IModelJsonSerializable<QuotaBaseProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<QuotaBaseProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<QuotaBaseProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
@@ -36,6 +40,74 @@ namespace MgmtListMethods.Models
                 writer.WriteStringValue(Unit.Value.ToString());
             }
             writer.WriteEndObject();
+        }
+
+        QuotaBaseProperties IModelJsonSerializable<QuotaBaseProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeQuotaBaseProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<QuotaBaseProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        QuotaBaseProperties IModelSerializable<QuotaBaseProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeQuotaBaseProperties(document.RootElement, options);
+        }
+
+        internal static QuotaBaseProperties DeserializeQuotaBaseProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> id = default;
+            Optional<string> type = default;
+            Optional<long> limit = default;
+            Optional<QuotaUnit> unit = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("id"u8))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"u8))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("limit"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    limit = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("unit"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    unit = new QuotaUnit(property.Value.GetString());
+                    continue;
+                }
+            }
+            return new QuotaBaseProperties(id.Value, type.Value, Optional.ToNullable(limit), Optional.ToNullable(unit));
         }
     }
 }

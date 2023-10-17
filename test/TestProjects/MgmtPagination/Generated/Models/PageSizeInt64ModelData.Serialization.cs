@@ -5,21 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtPagination
 {
-    public partial class PageSizeInt64ModelData : IUtf8JsonSerializable
+    public partial class PageSizeInt64ModelData : IUtf8JsonSerializable, IModelJsonSerializable<PageSizeInt64ModelData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PageSizeInt64ModelData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PageSizeInt64ModelData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
             writer.WriteEndObject();
         }
 
-        internal static PageSizeInt64ModelData DeserializePageSizeInt64ModelData(JsonElement element)
+        PageSizeInt64ModelData IModelJsonSerializable<PageSizeInt64ModelData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePageSizeInt64ModelData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PageSizeInt64ModelData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PageSizeInt64ModelData IModelSerializable<PageSizeInt64ModelData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePageSizeInt64ModelData(document.RootElement, options);
+        }
+
+        internal static PageSizeInt64ModelData DeserializePageSizeInt64ModelData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -20,6 +20,21 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<Restriction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RestrictionType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(RestrictionType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Values))
+            {
+                writer.WritePropertyName("values"u8);
+                writer.WriteStartArray();
+                foreach (var item in Values)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(ReasonCode))
             {
                 writer.WritePropertyName("reasonCode"u8);
@@ -32,8 +47,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRestriction(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRestriction(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Restriction>.Serialize(ModelSerializerOptions options)

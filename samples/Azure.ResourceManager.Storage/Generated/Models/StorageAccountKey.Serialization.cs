@@ -19,6 +19,26 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<StorageAccountKey>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(KeyName))
+            {
+                writer.WritePropertyName("keyName"u8);
+                writer.WriteStringValue(KeyName);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStringValue(Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Permissions))
+            {
+                writer.WritePropertyName("permissions"u8);
+                writer.WriteStringValue(Permissions.Value.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CreatedOn))
+            {
+                writer.WritePropertyName("creationTime"u8);
+                writer.WriteStringValue(CreatedOn.Value, "O");
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +46,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageAccountKey(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageAccountKey(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StorageAccountKey>.Serialize(ModelSerializerOptions options)

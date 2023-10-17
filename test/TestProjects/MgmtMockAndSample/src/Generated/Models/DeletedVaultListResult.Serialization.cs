@@ -5,17 +5,66 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class DeletedVaultListResult
+    internal partial class DeletedVaultListResult : IUtf8JsonSerializable, IModelJsonSerializable<DeletedVaultListResult>
     {
-        internal static DeletedVaultListResult DeserializeDeletedVaultListResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeletedVaultListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeletedVaultListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        DeletedVaultListResult IModelJsonSerializable<DeletedVaultListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeletedVaultListResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeletedVaultListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedVaultListResult IModelSerializable<DeletedVaultListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeletedVaultListResult(document.RootElement, options);
+        }
+
+        internal static DeletedVaultListResult DeserializeDeletedVaultListResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

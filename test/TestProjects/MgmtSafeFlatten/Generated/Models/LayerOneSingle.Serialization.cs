@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSafeFlatten.Models
 {
-    internal partial class LayerOneSingle : IUtf8JsonSerializable
+    internal partial class LayerOneSingle : IUtf8JsonSerializable, IModelJsonSerializable<LayerOneSingle>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LayerOneSingle>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LayerOneSingle>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(LayerTwo))
@@ -23,8 +27,32 @@ namespace MgmtSafeFlatten.Models
             writer.WriteEndObject();
         }
 
-        internal static LayerOneSingle DeserializeLayerOneSingle(JsonElement element)
+        LayerOneSingle IModelJsonSerializable<LayerOneSingle>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLayerOneSingle(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LayerOneSingle>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LayerOneSingle IModelSerializable<LayerOneSingle>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLayerOneSingle(document.RootElement, options);
+        }
+
+        internal static LayerOneSingle DeserializeLayerOneSingle(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

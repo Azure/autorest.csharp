@@ -14,7 +14,10 @@ namespace _Type._Dictionary.Models
     /// <summary> Dictionary inner model. </summary>
     public partial class InnerModel
     {
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
         /// <param name="property"> Required string property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
@@ -23,15 +26,23 @@ namespace _Type._Dictionary.Models
 
             Property = property;
             Children = new ChangeTrackingDictionary<string, InnerModel>();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
         /// <param name="property"> Required string property. </param>
         /// <param name="children"></param>
-        internal InnerModel(string property, IDictionary<string, InnerModel> children)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InnerModel(string property, IDictionary<string, InnerModel> children, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
             Children = children;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/> for deserialization. </summary>
+        internal InnerModel()
+        {
         }
 
         /// <summary> Required string property. </summary>

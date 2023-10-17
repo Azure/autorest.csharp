@@ -25,34 +25,47 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Description))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(Description);
-            }
-            if (Optional.IsDefined(Service))
-            {
-                writer.WritePropertyName("service"u8);
-                writer.WriteStringValue(Service);
-            }
-            if (Optional.IsCollectionDefined(ServiceResources))
-            {
-                writer.WritePropertyName("serviceResources"u8);
-                writer.WriteStartArray();
-                foreach (var item in ServiceResources)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Description))
                 {
-                    writer.WriteStringValue(item);
+                    writer.WritePropertyName("description"u8);
+                    writer.WriteStringValue(Description);
                 }
-                writer.WriteEndArray();
+                if (Optional.IsDefined(Service))
+                {
+                    writer.WritePropertyName("service"u8);
+                    writer.WriteStringValue(Service);
+                }
+                if (Optional.IsCollectionDefined(ServiceResources))
+                {
+                    writer.WritePropertyName("serviceResources"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in ServiceResources)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -60,8 +73,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeServiceEndpointPolicyDefinition(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceEndpointPolicyDefinition(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ServiceEndpointPolicyDefinition>.Serialize(ModelSerializerOptions options)

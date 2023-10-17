@@ -5,16 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace Projection.ProjectedName.Models
 {
     /// <summary> The LanguageProjectedNameModel. </summary>
     public partial class LanguageProjectedNameModel
     {
-        /// <summary> Initializes a new instance of LanguageProjectedNameModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LanguageProjectedNameModel"/>. </summary>
         /// <param name="csName"> Pass in true. </param>
         public LanguageProjectedNameModel(bool csName)
         {
             CSName = csName;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LanguageProjectedNameModel"/>. </summary>
+        /// <param name="csName"> Pass in true. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LanguageProjectedNameModel(bool csName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            CSName = csName;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LanguageProjectedNameModel"/> for deserialization. </summary>
+        internal LanguageProjectedNameModel()
+        {
         }
 
         /// <summary> Pass in true. </summary>

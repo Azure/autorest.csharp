@@ -20,6 +20,16 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<ListIndexesResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Indexes)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +37,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeListIndexesResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeListIndexesResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ListIndexesResult>.Serialize(ModelSerializerOptions options)

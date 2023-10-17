@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Encode.Duration.Models
 {
-    public partial class FloatSecondsDurationArrayProperty : IUtf8JsonSerializable
+    public partial class FloatSecondsDurationArrayProperty : IUtf8JsonSerializable, IModelJsonSerializable<FloatSecondsDurationArrayProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FloatSecondsDurationArrayProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FloatSecondsDurationArrayProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
@@ -25,30 +28,73 @@ namespace Encode.Duration.Models
                 writer.WriteNumberValue(Convert.ToDouble(item.ToString("s\\.fff")));
             }
             writer.WriteEndArray();
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static FloatSecondsDurationArrayProperty DeserializeFloatSecondsDurationArrayProperty(JsonElement element)
+        FloatSecondsDurationArrayProperty IModelJsonSerializable<FloatSecondsDurationArrayProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FloatSecondsDurationArrayProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FloatSecondsDurationArrayProperty IModelSerializable<FloatSecondsDurationArrayProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, options);
+        }
+
+        internal static FloatSecondsDurationArrayProperty DeserializeFloatSecondsDurationArrayProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IList<TimeSpan> value = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("value"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    List<TimeSpan> array = new List<TimeSpan>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("value"u8))
                     {
-                        array.Add(TimeSpan.FromSeconds(item.GetDouble()));
+                        List<TimeSpan> array = new List<TimeSpan>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(TimeSpan.FromSeconds(item.GetDouble()));
+                        }
+                        value = array;
+                        continue;
                     }
-                    value = array;
-                    continue;
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new FloatSecondsDurationArrayProperty(value);
+            return new FloatSecondsDurationArrayProperty(value, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -56,15 +102,13 @@ namespace Encode.Duration.Models
         internal static FloatSecondsDurationArrayProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement);
+            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

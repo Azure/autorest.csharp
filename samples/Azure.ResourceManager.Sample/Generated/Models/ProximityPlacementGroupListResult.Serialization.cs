@@ -40,8 +40,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeProximityPlacementGroupListResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeProximityPlacementGroupListResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ProximityPlacementGroupListResult>.Serialize(ModelSerializerOptions options)

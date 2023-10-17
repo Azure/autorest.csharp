@@ -23,14 +23,17 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            foreach (var item in _serializedAdditionalRawData)
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName(item.Key);
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -39,8 +42,8 @@ namespace FirstTestTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeProjectedModel(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeProjectedModel(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ProjectedModel>.Serialize(ModelSerializerOptions options)
@@ -68,16 +71,19 @@ namespace FirstTestTypeSpec.Models
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("name"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    name = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("name"u8))
+                    {
+                        name = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ProjectedModel(name, serializedAdditionalRawData);
         }
 

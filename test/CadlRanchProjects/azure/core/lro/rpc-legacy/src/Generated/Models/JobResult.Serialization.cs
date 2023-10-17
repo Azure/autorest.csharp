@@ -5,17 +5,98 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Azure.Lro.RpcLegacy.Models
 {
-    public partial class JobResult
+    public partial class JobResult : IUtf8JsonSerializable, IModelJsonSerializable<JobResult>
     {
-        internal static JobResult DeserializeJobResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<JobResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<JobResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("jobId"u8);
+                writer.WriteStringValue(JobId);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("comment"u8);
+                writer.WriteStringValue(Comment);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Errors))
+            {
+                writer.WritePropertyName("errors"u8);
+                writer.WriteStartArray();
+                foreach (var item in Errors)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Results))
+            {
+                writer.WritePropertyName("results"u8);
+                writer.WriteStartArray();
+                foreach (var item in Results)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        JobResult IModelJsonSerializable<JobResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeJobResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<JobResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        JobResult IModelSerializable<JobResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeJobResult(document.RootElement, options);
+        }
+
+        internal static JobResult DeserializeJobResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -25,53 +106,60 @@ namespace _Azure.Lro.RpcLegacy.Models
             JobStatus status = default;
             Optional<IReadOnlyList<ErrorResponse>> errors = default;
             Optional<IReadOnlyList<string>> results = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("jobId"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    jobId = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("comment"u8))
-                {
-                    comment = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("status"u8))
-                {
-                    status = new JobStatus(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("errors"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("jobId"u8))
                     {
+                        jobId = property.Value.GetString();
                         continue;
                     }
-                    List<ErrorResponse> array = new List<ErrorResponse>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("comment"u8))
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
-                    }
-                    errors = array;
-                    continue;
-                }
-                if (property.NameEquals("results"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        comment = property.Value.GetString();
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("status"u8))
                     {
-                        array.Add(item.GetString());
+                        status = new JobStatus(property.Value.GetString());
+                        continue;
                     }
-                    results = array;
-                    continue;
+                    if (property.NameEquals("errors"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<ErrorResponse> array = new List<ErrorResponse>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        }
+                        errors = array;
+                        continue;
+                    }
+                    if (property.NameEquals("results"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetString());
+                        }
+                        results = array;
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new JobResult(jobId, comment, status, Optional.ToList(errors), Optional.ToList(results));
+            return new JobResult(jobId, comment, status, Optional.ToList(errors), Optional.ToList(results), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -79,7 +167,13 @@ namespace _Azure.Lro.RpcLegacy.Models
         internal static JobResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeJobResult(document.RootElement);
+            return DeserializeJobResult(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

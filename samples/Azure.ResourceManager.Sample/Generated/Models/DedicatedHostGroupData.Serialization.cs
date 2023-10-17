@@ -48,6 +48,11 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TenantId))
+            {
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
+            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
@@ -61,19 +66,57 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("platformFaultDomainCount"u8);
-                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(SupportAutomaticPlacement))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("supportAutomaticPlacement"u8);
-                writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PlatformFaultDomainCount))
+                {
+                    writer.WritePropertyName("platformFaultDomainCount"u8);
+                    writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Hosts))
+                {
+                    writer.WritePropertyName("hosts"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Hosts)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstanceView))
+                {
+                    writer.WritePropertyName("instanceView"u8);
+                    writer.WriteObjectValue(InstanceView);
+                }
+                if (Optional.IsDefined(SupportAutomaticPlacement))
+                {
+                    writer.WritePropertyName("supportAutomaticPlacement"u8);
+                    writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -81,8 +124,8 @@ namespace Azure.ResourceManager.Sample
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDedicatedHostGroupData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDedicatedHostGroupData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DedicatedHostGroupData>.Serialize(ModelSerializerOptions options)

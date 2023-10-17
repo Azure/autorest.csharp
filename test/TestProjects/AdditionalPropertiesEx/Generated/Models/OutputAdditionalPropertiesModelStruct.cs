@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
@@ -14,10 +16,14 @@ namespace AdditionalPropertiesEx.Models
     {
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModelStruct. </summary>
         /// <param name="id"></param>
-        internal OutputAdditionalPropertiesModelStruct(int id)
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
+        internal OutputAdditionalPropertiesModelStruct(int id, IReadOnlyDictionary<string, string> additionalProperties)
         {
+            Argument.AssertNotNull(additionalProperties, nameof(additionalProperties));
+
             Id = id;
-            AdditionalProperties = new Dictionary<string, string>();
+            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> Gets the id. </summary>

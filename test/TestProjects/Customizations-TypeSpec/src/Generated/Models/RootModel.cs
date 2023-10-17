@@ -5,17 +5,25 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Root RoundTrip model to reference all other types to ensure generation. </summary>
     public partial class RootModel
     {
-        /// <summary> Initializes a new instance of RootModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RootModel"/>. </summary>
         public RootModel()
         {
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of RootModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RootModel"/>. </summary>
         /// <param name="propertyExtensibleEnum"> ExtensibleEnumWithOperator. </param>
         /// <param name="propertyModelToMakeInternal"> ModelToMakeInternal. </param>
         /// <param name="propertyModelToRename"> ModelToRename. </param>
@@ -26,7 +34,8 @@ namespace CustomizationsInTsp.Models
         /// <param name="propertyEnumToBeMadeExtensible"> EnumToBeMadeExtensible. </param>
         /// <param name="propertyModelToAddAdditionalSerializableProperty"> ModelToAddAdditionalSerializableProperty. </param>
         /// <param name="propertyToMoveToCustomization"> Enum type property to move to customization code. </param>
-        internal RootModel(ExtensibleEnumWithOperator? propertyExtensibleEnum, ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RootModel(ExtensibleEnumWithOperator? propertyExtensibleEnum, ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PropertyExtensibleEnum = propertyExtensibleEnum;
             PropertyModelToMakeInternal = propertyModelToMakeInternal;
@@ -38,6 +47,7 @@ namespace CustomizationsInTsp.Models
             PropertyEnumToBeMadeExtensible = propertyEnumToBeMadeExtensible;
             PropertyModelToAddAdditionalSerializableProperty = propertyModelToAddAdditionalSerializableProperty;
             PropertyToMoveToCustomization = propertyToMoveToCustomization;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> ExtensibleEnumWithOperator. </summary>

@@ -5,15 +5,54 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithAbstractModel
+    public partial class ModelWithAbstractModel : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithAbstractModel>
     {
-        internal static ModelWithAbstractModel DeserializeModelWithAbstractModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithAbstractModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelWithAbstractModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(AbstractModelProperty))
+            {
+                writer.WritePropertyName("AbstractModelProperty"u8);
+                writer.WriteObjectValue(AbstractModelProperty);
+            }
+            writer.WriteEndObject();
+        }
+
+        ModelWithAbstractModel IModelJsonSerializable<ModelWithAbstractModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithAbstractModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithAbstractModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithAbstractModel IModelSerializable<ModelWithAbstractModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithAbstractModel(document.RootElement, options);
+        }
+
+        internal static ModelWithAbstractModel DeserializeModelWithAbstractModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

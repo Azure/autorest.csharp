@@ -70,8 +70,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAutocompleteRequest(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAutocompleteRequest(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AutocompleteRequest>.Serialize(ModelSerializerOptions options)

@@ -41,34 +41,67 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformUpdateDomainCount))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("platformUpdateDomainCount"u8);
-                writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("platformFaultDomainCount"u8);
-                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsCollectionDefined(VirtualMachines))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("virtualMachines"u8);
-                writer.WriteStartArray();
-                foreach (var item in VirtualMachines)
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PlatformUpdateDomainCount))
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    writer.WritePropertyName("platformUpdateDomainCount"u8);
+                    writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
                 }
-                writer.WriteEndArray();
+                if (Optional.IsDefined(PlatformFaultDomainCount))
+                {
+                    writer.WritePropertyName("platformFaultDomainCount"u8);
+                    writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                }
+                if (Optional.IsCollectionDefined(VirtualMachines))
+                {
+                    writer.WritePropertyName("virtualMachines"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VirtualMachines)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(ProximityPlacementGroup))
+                {
+                    writer.WritePropertyName("proximityPlacementGroup"u8);
+                    JsonSerializer.Serialize(writer, ProximityPlacementGroup);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Statuses))
+                {
+                    writer.WritePropertyName("statuses"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Statuses)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ProximityPlacementGroup))
-            {
-                writer.WritePropertyName("proximityPlacementGroup"u8);
-                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -76,8 +109,8 @@ namespace Azure.ResourceManager.Sample
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAvailabilitySetData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAvailabilitySetData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AvailabilitySetData>.Serialize(ModelSerializerOptions options)

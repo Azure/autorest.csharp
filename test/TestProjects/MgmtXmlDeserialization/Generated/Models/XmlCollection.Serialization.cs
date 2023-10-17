@@ -5,16 +5,44 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtXmlDeserialization;
 
 namespace MgmtXmlDeserialization.Models
 {
-    internal partial class XmlCollection
+    internal partial class XmlCollection : IUtf8JsonSerializable, IModelJsonSerializable<XmlCollection>, IXmlSerializable
     {
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        {
+            writer.WriteStartElement(nameHint ?? "XmlCollection");
+            if (Optional.IsDefined(Count))
+            {
+                writer.WriteStartElement("count");
+                writer.WriteValue(Count.Value);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(NextLink))
+            {
+                writer.WriteStartElement("nextLink");
+                writer.WriteValue(NextLink);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsCollectionDefined(Value))
+            {
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item, "XmlInstance");
+                }
+            }
+            writer.WriteEndElement();
+        }
+
         internal static XmlCollection DeserializeXmlCollection(XElement element)
         {
             long? count = default;
@@ -37,8 +65,60 @@ namespace MgmtXmlDeserialization.Models
             return new XmlCollection(value, count, nextLink);
         }
 
-        internal static XmlCollection DeserializeXmlCollection(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<XmlCollection>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<XmlCollection>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Count))
+            {
+                writer.WritePropertyName("count"u8);
+                writer.WriteNumberValue(Count.Value);
+            }
+            if (Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        XmlCollection IModelJsonSerializable<XmlCollection>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeXmlCollection(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<XmlCollection>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        XmlCollection IModelSerializable<XmlCollection>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeXmlCollection(document.RootElement, options);
+        }
+
+        internal static XmlCollection DeserializeXmlCollection(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

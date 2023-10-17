@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class NetworkRule : IUtf8JsonSerializable
+    public partial class NetworkRule : IUtf8JsonSerializable, IModelJsonSerializable<NetworkRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NetworkRule>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NetworkRule>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(IpProtocols))
@@ -101,8 +105,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static NetworkRule DeserializeNetworkRule(JsonElement element)
+        NetworkRule IModelJsonSerializable<NetworkRule>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNetworkRule(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NetworkRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NetworkRule IModelSerializable<NetworkRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNetworkRule(document.RootElement, options);
+        }
+
+        internal static NetworkRule DeserializeNetworkRule(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

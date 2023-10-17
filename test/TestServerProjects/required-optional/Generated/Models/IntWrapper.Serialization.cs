@@ -5,19 +5,65 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace required_optional.Models
 {
-    public partial class IntWrapper : IUtf8JsonSerializable
+    public partial class IntWrapper : IUtf8JsonSerializable, IModelJsonSerializable<IntWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IntWrapper>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<IntWrapper>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteNumberValue(Value);
             writer.WriteEndObject();
+        }
+
+        IntWrapper IModelJsonSerializable<IntWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIntWrapper(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<IntWrapper>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IntWrapper IModelSerializable<IntWrapper>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIntWrapper(document.RootElement, options);
+        }
+
+        internal static IntWrapper DeserializeIntWrapper(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            int value = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("value"u8))
+                {
+                    value = property.Value.GetInt32();
+                    continue;
+                }
+            }
+            return new IntWrapper(value);
         }
     }
 }

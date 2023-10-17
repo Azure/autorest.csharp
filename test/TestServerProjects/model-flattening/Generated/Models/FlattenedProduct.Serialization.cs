@@ -5,17 +5,31 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace model_flattening.Models
 {
-    public partial class FlattenedProduct : IUtf8JsonSerializable
+    public partial class FlattenedProduct : IUtf8JsonSerializable, IModelJsonSerializable<FlattenedProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FlattenedProduct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FlattenedProduct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
+            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
@@ -32,29 +46,66 @@ namespace model_flattening.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PName))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("p.name"u8);
-                writer.WriteStringValue(PName);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(TypePropertiesType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(TypePropertiesType);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PName))
+                {
+                    writer.WritePropertyName("p.name"u8);
+                    writer.WriteStringValue(PName);
+                }
+                if (Optional.IsDefined(TypePropertiesType))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(TypePropertiesType);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningStateValues))
+                {
+                    writer.WritePropertyName("provisioningStateValues"u8);
+                    writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
+                }
+                if (Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element)
+        FlattenedProduct IModelJsonSerializable<FlattenedProduct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFlattenedProduct(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FlattenedProduct>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FlattenedProduct IModelSerializable<FlattenedProduct>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFlattenedProduct(document.RootElement, options);
+        }
+
+        internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

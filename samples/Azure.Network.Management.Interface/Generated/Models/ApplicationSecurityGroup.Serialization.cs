@@ -20,10 +20,25 @@ namespace Azure.Network.Management.Interface.Models
         void IModelJsonSerializable<ApplicationSecurityGroup>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -41,9 +56,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceGuid))
+                {
+                    writer.WritePropertyName("resourceGuid"u8);
+                    writer.WriteStringValue(ResourceGuid);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -51,8 +79,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeApplicationSecurityGroup(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeApplicationSecurityGroup(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ApplicationSecurityGroup>.Serialize(ModelSerializerOptions options)

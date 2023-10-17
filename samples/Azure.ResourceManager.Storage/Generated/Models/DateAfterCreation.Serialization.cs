@@ -28,8 +28,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDateAfterCreation(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDateAfterCreation(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DateAfterCreation>.Serialize(ModelSerializerOptions options)

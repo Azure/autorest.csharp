@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true, CreatePublicConstructorParameter);
 
-            FormattableString summary = $"Initializes a new instance of {Declaration.Name}";
+            FormattableString summary = $"Initializes a new instance of <see cref=\"{Type}\"/>";
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
                 : MethodSignatureModifiers.Internal;
@@ -200,7 +200,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ConstructorSignature(
                 Type,
-                $"Initializes a new instance of {Declaration.Name}",
+                $"Initializes a new instance of <see cref=\"{Type}\"/>",
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,
@@ -383,6 +383,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return InitializationConstructor;
             if (SerializationConstructor != InitializationConstructor)
                 yield return SerializationConstructor;
+
+            // add an extra empty ctor if we do not have a ctor with no parameters
+            if (InitializationConstructor.Signature.Parameters.Count > 0 && SerializationConstructor.Signature.Parameters.Count > 0)
+                yield return new(
+                    new ConstructorSignature(Type, null, $"Initializes a new instance of <see cref=\"{Type}\"/> for deserialization.", MethodSignatureModifiers.Internal, Array.Empty<Parameter>()),
+                    Array.Empty<ObjectPropertyInitializer>(),
+                    null);
         }
 
         protected override bool EnsureHasJsonSerialization()

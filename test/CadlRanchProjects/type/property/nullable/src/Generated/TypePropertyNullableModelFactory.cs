@@ -14,100 +14,89 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model factory for models. </summary>
     public static partial class TypePropertyNullableModelFactory
     {
-        /// <summary> Initializes a new instance of StringProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.StringProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.StringProperty"/> instance for mocking. </returns>
-        public static StringProperty StringProperty(string requiredProperty = null, string nullableProperty = null)
+        public static StringProperty StringProperty(string requiredProperty = null, string nullableProperty = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (requiredProperty == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProperty));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new StringProperty(requiredProperty, nullableProperty);
+            return new StringProperty(requiredProperty, nullableProperty, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of BytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.BytesProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.BytesProperty"/> instance for mocking. </returns>
-        public static BytesProperty BytesProperty(string requiredProperty = null, BinaryData nullableProperty = null)
+        public static BytesProperty BytesProperty(string requiredProperty = null, BinaryData nullableProperty = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (requiredProperty == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProperty));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new BytesProperty(requiredProperty, nullableProperty);
+            return new BytesProperty(requiredProperty, nullableProperty, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DatetimeProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.DatetimeProperty"/> instance for mocking. </returns>
-        public static DatetimeProperty DatetimeProperty(string requiredProperty = null, DateTimeOffset? nullableProperty = null)
+        public static DatetimeProperty DatetimeProperty(string requiredProperty = null, DateTimeOffset? nullableProperty = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (requiredProperty == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProperty));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new DatetimeProperty(requiredProperty, nullableProperty);
+            return new DatetimeProperty(requiredProperty, nullableProperty, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of DurationProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DurationProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.DurationProperty"/> instance for mocking. </returns>
-        public static DurationProperty DurationProperty(string requiredProperty = null, TimeSpan? nullableProperty = null)
+        public static DurationProperty DurationProperty(string requiredProperty = null, TimeSpan? nullableProperty = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (requiredProperty == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProperty));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new DurationProperty(requiredProperty, nullableProperty);
+            return new DurationProperty(requiredProperty, nullableProperty, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.CollectionsByteProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.CollectionsByteProperty"/> instance for mocking. </returns>
-        public static CollectionsByteProperty CollectionsByteProperty(string requiredProperty = null, IEnumerable<BinaryData> nullableProperty = null)
+        public static CollectionsByteProperty CollectionsByteProperty(string requiredProperty = null, IEnumerable<BinaryData> nullableProperty = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
             nullableProperty ??= new List<BinaryData>();
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new CollectionsByteProperty(requiredProperty, nullableProperty?.ToList());
+            return new CollectionsByteProperty(requiredProperty, nullableProperty?.ToList(), serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.CollectionsModelProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.CollectionsModelProperty"/> instance for mocking. </returns>
-        public static CollectionsModelProperty CollectionsModelProperty(string requiredProperty = null, IEnumerable<InnerModel> nullableProperty = null)
+        public static CollectionsModelProperty CollectionsModelProperty(string requiredProperty = null, IEnumerable<InnerModel> nullableProperty = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
             nullableProperty ??= new List<InnerModel>();
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new CollectionsModelProperty(requiredProperty, nullableProperty?.ToList());
+            return new CollectionsModelProperty(requiredProperty, nullableProperty?.ToList(), serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.InnerModel"/>. </summary>
         /// <param name="property"> Inner model property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.InnerModel"/> instance for mocking. </returns>
-        public static InnerModel InnerModel(string property = null)
+        public static InnerModel InnerModel(string property = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new InnerModel(property);
+            return new InnerModel(property, serializedAdditionalRawData);
         }
     }
 }

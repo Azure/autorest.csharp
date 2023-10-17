@@ -10,20 +10,57 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(PrivateEndpointConnectionListConverter))]
-    public partial class PrivateEndpointConnectionList : IUtf8JsonSerializable
+    public partial class PrivateEndpointConnectionList : IUtf8JsonSerializable, IModelJsonSerializable<PrivateEndpointConnectionList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PrivateEndpointConnectionList>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PrivateEndpointConnectionList>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
-        internal static PrivateEndpointConnectionList DeserializePrivateEndpointConnectionList(JsonElement element)
+        PrivateEndpointConnectionList IModelJsonSerializable<PrivateEndpointConnectionList>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePrivateEndpointConnectionList(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PrivateEndpointConnectionList>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateEndpointConnectionList IModelSerializable<PrivateEndpointConnectionList>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateEndpointConnectionList(document.RootElement, options);
+        }
+
+        internal static PrivateEndpointConnectionList DeserializePrivateEndpointConnectionList(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,21 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Property.Optionality.Models
 {
     /// <summary> Template type for testing models with optional property. Pass in the type of the property you are looking for. </summary>
     public partial class StringProperty
     {
-        /// <summary> Initializes a new instance of StringProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="StringProperty"/>. </summary>
         public StringProperty()
         {
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of StringProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringProperty"/>. </summary>
         /// <param name="property"> Property. </param>
-        internal StringProperty(string property)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StringProperty(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Property. </summary>

@@ -227,7 +227,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<FakeConfigurationResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace MgmtListMethods
         public virtual Pageable<FakeConfigurationResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

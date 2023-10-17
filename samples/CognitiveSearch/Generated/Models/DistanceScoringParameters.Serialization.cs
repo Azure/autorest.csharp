@@ -30,8 +30,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDistanceScoringParameters(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDistanceScoringParameters(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DistanceScoringParameters>.Serialize(ModelSerializerOptions options)

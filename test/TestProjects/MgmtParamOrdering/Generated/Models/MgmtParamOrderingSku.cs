@@ -15,6 +15,17 @@ namespace MgmtParamOrdering.Models
         {
         }
 
+        /// <summary> Initializes a new instance of MgmtParamOrderingSku. </summary>
+        /// <param name="name"> The sku name. </param>
+        /// <param name="tier"> Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**. </param>
+        /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>
+        internal MgmtParamOrderingSku(string name, string tier, long? capacity)
+        {
+            Name = name;
+            Tier = tier;
+            Capacity = capacity;
+        }
+
         /// <summary> The sku name. </summary>
         public string Name { get; set; }
         /// <summary> Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**. </summary>

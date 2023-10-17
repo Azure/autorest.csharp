@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary>
@@ -14,20 +18,31 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// </summary>
     public abstract partial class Bird
     {
-        /// <summary> Initializes a new instance of Bird. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Bird"/>. </summary>
         /// <param name="wingspan"></param>
         protected Bird(int wingspan)
         {
             Wingspan = wingspan;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Bird. </summary>
+        /// <summary> Initializes a new instance of <see cref="Bird"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
-        internal Bird(string kind, int wingspan)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Bird(string kind, int wingspan, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Wingspan = wingspan;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Bird"/> for deserialization. </summary>
+        internal Bird()
+        {
         }
 
         /// <summary> Gets or sets the kind. </summary>

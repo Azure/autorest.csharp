@@ -87,7 +87,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSourceScopeRequest(Id, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, Id, filter);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), ResourceLinkClientDiagnostics, Pipeline, "ArmResourceExtensionClient.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), ResourceLinkClientDiagnostics, Pipeline, "ArmResourceExtensionClient.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSourceScopeRequest(Id, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, Id, filter);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), ResourceLinkClientDiagnostics, Pipeline, "ArmResourceExtensionClient.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), ResourceLinkClientDiagnostics, Pipeline, "ArmResourceExtensionClient.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -5,30 +5,86 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Union.Models
 {
-    internal partial class ModelWithNamedUnionPropertyInResponse
+    internal partial class ModelWithNamedUnionPropertyInResponse : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithNamedUnionPropertyInResponse>
     {
-        internal static ModelWithNamedUnionPropertyInResponse DeserializeModelWithNamedUnionPropertyInResponse(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithNamedUnionPropertyInResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelWithNamedUnionPropertyInResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("namedUnion"u8);
+            writer.WriteObjectValue(NamedUnion);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        ModelWithNamedUnionPropertyInResponse IModelJsonSerializable<ModelWithNamedUnionPropertyInResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithNamedUnionPropertyInResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithNamedUnionPropertyInResponse IModelSerializable<ModelWithNamedUnionPropertyInResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement, options);
+        }
+
+        internal static ModelWithNamedUnionPropertyInResponse DeserializeModelWithNamedUnionPropertyInResponse(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             object namedUnion = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("namedUnion"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    namedUnion = property.Value.GetObject();
-                    continue;
+                    if (property.NameEquals("namedUnion"u8))
+                    {
+                        namedUnion = property.Value.GetObject();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new ModelWithNamedUnionPropertyInResponse(namedUnion);
+            return new ModelWithNamedUnionPropertyInResponse(namedUnion, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -36,7 +92,13 @@ namespace _Type.Union.Models
         internal static ModelWithNamedUnionPropertyInResponse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement);
+            return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

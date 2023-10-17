@@ -5,25 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Renamed model (original name: ModelToRename). </summary>
     public partial class RenamedModel
     {
-        /// <summary> Initializes a new instance of RenamedModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RenamedModel"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public RenamedModel(int requiredInt)
         {
             RequiredInt = requiredInt;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of RenamedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedModel"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="optionalInt"> Optional int. </param>
-        internal RenamedModel(int requiredInt, int? optionalInt)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedModel(int requiredInt, int? optionalInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredInt = requiredInt;
             OptionalInt = optionalInt;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RenamedModel"/> for deserialization. </summary>
+        internal RenamedModel()
+        {
         }
 
         /// <summary> Required int. </summary>

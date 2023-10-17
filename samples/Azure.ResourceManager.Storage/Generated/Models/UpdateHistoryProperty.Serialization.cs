@@ -19,6 +19,36 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<UpdateHistoryProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Update))
+            {
+                writer.WritePropertyName("update"u8);
+                writer.WriteStringValue(Update.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+            {
+                writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
+                writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Timestamp))
+            {
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ObjectIdentifier))
+            {
+                writer.WritePropertyName("objectIdentifier"u8);
+                writer.WriteStringValue(ObjectIdentifier);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TenantId))
+            {
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Upn))
+            {
+                writer.WritePropertyName("upn"u8);
+                writer.WriteStringValue(Upn);
+            }
             if (Optional.IsDefined(AllowProtectedAppendWrites))
             {
                 writer.WritePropertyName("allowProtectedAppendWrites"u8);
@@ -36,8 +66,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUpdateHistoryProperty(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpdateHistoryProperty(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UpdateHistoryProperty>.Serialize(ModelSerializerOptions options)

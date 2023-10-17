@@ -5,15 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class CheckNameAvailabilityResult
+    public partial class CheckNameAvailabilityResult : IUtf8JsonSerializable, IModelJsonSerializable<CheckNameAvailabilityResult>
     {
-        internal static CheckNameAvailabilityResult DeserializeCheckNameAvailabilityResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CheckNameAvailabilityResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CheckNameAvailabilityResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NameAvailable))
+            {
+                writer.WritePropertyName("nameAvailable"u8);
+                writer.WriteBooleanValue(NameAvailable.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Reason))
+            {
+                writer.WritePropertyName("reason"u8);
+                writer.WriteStringValue(Reason.Value.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Message))
+            {
+                writer.WritePropertyName("message"u8);
+                writer.WriteStringValue(Message);
+            }
+            writer.WriteEndObject();
+        }
+
+        CheckNameAvailabilityResult IModelJsonSerializable<CheckNameAvailabilityResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCheckNameAvailabilityResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CheckNameAvailabilityResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CheckNameAvailabilityResult IModelSerializable<CheckNameAvailabilityResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCheckNameAvailabilityResult(document.RootElement, options);
+        }
+
+        internal static CheckNameAvailabilityResult DeserializeCheckNameAvailabilityResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -17,7 +17,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of CollectionItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionItem"/>. </summary>
         /// <param name="requiredModelRecord"> Required model record. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredModelRecord"/> is null. </exception>
         public CollectionItem(IDictionary<string, RecordItem> requiredModelRecord)
@@ -28,13 +28,18 @@ namespace ModelsTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CollectionItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionItem"/>. </summary>
         /// <param name="requiredModelRecord"> Required model record. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CollectionItem(IDictionary<string, RecordItem> requiredModelRecord, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredModelRecord = requiredModelRecord;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CollectionItem"/> for deserialization. </summary>
+        internal CollectionItem()
+        {
         }
 
         /// <summary> Required model record. </summary>

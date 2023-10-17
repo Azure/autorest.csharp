@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(ModelClassConverter))]
-    public partial class ModelClass : IUtf8JsonSerializable
+    public partial class ModelClass : IUtf8JsonSerializable, IModelJsonSerializable<ModelClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelClass>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelClass>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(StringProperty))
@@ -33,8 +36,32 @@ namespace ModelWithConverterUsage.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelClass DeserializeModelClass(JsonElement element)
+        ModelClass IModelJsonSerializable<ModelClass>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelClass(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelClass>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelClass IModelSerializable<ModelClass>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelClass(document.RootElement, options);
+        }
+
+        internal static ModelClass DeserializeModelClass(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,23 +5,32 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtPartialResource.Models;
 
 namespace MgmtPartialResource
 {
-    public partial class PublicIPAddressData : IUtf8JsonSerializable
+    public partial class PublicIPAddressData : IUtf8JsonSerializable, IModelJsonSerializable<PublicIPAddressData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PublicIPAddressData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PublicIPAddressData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -33,54 +42,106 @@ namespace MgmtPartialResource
                 }
                 writer.WriteEndArray();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PublicIPAllocationMethod))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("publicIPAllocationMethod"u8);
-                writer.WriteStringValue(PublicIPAllocationMethod.Value.ToString());
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(PublicIPAddressVersion))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("publicIPAddressVersion"u8);
-                writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(IpAddress))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("ipAddress"u8);
-                writer.WriteStringValue(IpAddress);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("idleTimeoutInMinutes"u8);
-                writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(ServicePublicIPAddress))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("servicePublicIPAddress"u8);
-                writer.WriteObjectValue(ServicePublicIPAddress);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PublicIPAllocationMethod))
+                {
+                    writer.WritePropertyName("publicIPAllocationMethod"u8);
+                    writer.WriteStringValue(PublicIPAllocationMethod.Value.ToString());
+                }
+                if (Optional.IsDefined(PublicIPAddressVersion))
+                {
+                    writer.WritePropertyName("publicIPAddressVersion"u8);
+                    writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
+                }
+                if (Optional.IsDefined(IpAddress))
+                {
+                    writer.WritePropertyName("ipAddress"u8);
+                    writer.WriteStringValue(IpAddress);
+                }
+                if (Optional.IsDefined(IdleTimeoutInMinutes))
+                {
+                    writer.WritePropertyName("idleTimeoutInMinutes"u8);
+                    writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceGuid))
+                {
+                    writer.WritePropertyName("resourceGuid"u8);
+                    writer.WriteStringValue(ResourceGuid);
+                }
+                if (Optional.IsDefined(ServicePublicIPAddress))
+                {
+                    writer.WritePropertyName("servicePublicIPAddress"u8);
+                    writer.WriteObjectValue(ServicePublicIPAddress);
+                }
+                if (Optional.IsDefined(MigrationPhase))
+                {
+                    writer.WritePropertyName("migrationPhase"u8);
+                    writer.WriteStringValue(MigrationPhase.Value.ToString());
+                }
+                if (Optional.IsDefined(LinkedPublicIPAddress))
+                {
+                    writer.WritePropertyName("linkedPublicIPAddress"u8);
+                    writer.WriteObjectValue(LinkedPublicIPAddress);
+                }
+                if (Optional.IsDefined(DeleteOption))
+                {
+                    writer.WritePropertyName("deleteOption"u8);
+                    writer.WriteStringValue(DeleteOption.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(MigrationPhase))
-            {
-                writer.WritePropertyName("migrationPhase"u8);
-                writer.WriteStringValue(MigrationPhase.Value.ToString());
-            }
-            if (Optional.IsDefined(LinkedPublicIPAddress))
-            {
-                writer.WritePropertyName("linkedPublicIPAddress"u8);
-                writer.WriteObjectValue(LinkedPublicIPAddress);
-            }
-            if (Optional.IsDefined(DeleteOption))
-            {
-                writer.WritePropertyName("deleteOption"u8);
-                writer.WriteStringValue(DeleteOption.Value.ToString());
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static PublicIPAddressData DeserializePublicIPAddressData(JsonElement element)
+        PublicIPAddressData IModelJsonSerializable<PublicIPAddressData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePublicIPAddressData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PublicIPAddressData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PublicIPAddressData IModelSerializable<PublicIPAddressData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePublicIPAddressData(document.RootElement, options);
+        }
+
+        internal static PublicIPAddressData DeserializePublicIPAddressData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

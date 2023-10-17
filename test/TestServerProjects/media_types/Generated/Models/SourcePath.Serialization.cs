@@ -31,8 +31,8 @@ namespace media_types.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSourcePath(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSourcePath(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SourcePath>.Serialize(ModelSerializerOptions options)

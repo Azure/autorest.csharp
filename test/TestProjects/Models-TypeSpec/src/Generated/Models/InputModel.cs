@@ -18,7 +18,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredNullableInt"> Required nullable int. </param>
@@ -71,7 +71,7 @@ namespace ModelsTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredNullableInt"> Required nullable int. </param>
@@ -122,6 +122,11 @@ namespace ModelsTypeSpec.Models
             NonRequiredNullableStringList = nonRequiredNullableStringList;
             NonRequiredNullableIntList = nonRequiredNullableIntList;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InputModel"/> for deserialization. </summary>
+        internal InputModel()
+        {
         }
 
         /// <summary> Required string. </summary>

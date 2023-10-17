@@ -51,8 +51,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSmbSetting(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSmbSetting(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SmbSetting>.Serialize(ModelSerializerOptions options)

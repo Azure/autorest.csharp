@@ -5,14 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Model with a property never. (This property should not be included). </summary>
     public partial class NeverProperty
     {
-        /// <summary> Initializes a new instance of NeverProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="NeverProperty"/>. </summary>
         public NeverProperty()
         {
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="NeverProperty"/>. </summary>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NeverProperty(IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

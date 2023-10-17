@@ -19,6 +19,26 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<TokenInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("token"u8);
+                writer.WriteStringValue(Token);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("startOffset"u8);
+                writer.WriteNumberValue(StartOffset);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("endOffset"u8);
+                writer.WriteNumberValue(EndOffset);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("position"u8);
+                writer.WriteNumberValue(Position);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +46,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeTokenInfo(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTokenInfo(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<TokenInfo>.Serialize(ModelSerializerOptions options)

@@ -19,6 +19,21 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<IndexerLimits>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaxRunTime))
+            {
+                writer.WritePropertyName("maxRunTime"u8);
+                writer.WriteStringValue(MaxRunTime.Value, "P");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaxDocumentExtractionSize))
+            {
+                writer.WritePropertyName("maxDocumentExtractionSize"u8);
+                writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaxDocumentContentCharactersToExtract))
+            {
+                writer.WritePropertyName("maxDocumentContentCharactersToExtract"u8);
+                writer.WriteNumberValue(MaxDocumentContentCharactersToExtract.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +41,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeIndexerLimits(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndexerLimits(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<IndexerLimits>.Serialize(ModelSerializerOptions options)

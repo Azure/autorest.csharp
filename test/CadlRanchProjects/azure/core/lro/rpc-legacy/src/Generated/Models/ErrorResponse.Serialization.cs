@@ -5,29 +5,86 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Azure.Lro.RpcLegacy.Models
 {
-    public partial class ErrorResponse
+    public partial class ErrorResponse : IUtf8JsonSerializable, IModelJsonSerializable<ErrorResponse>
     {
-        internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ErrorResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ErrorResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("error"u8);
+            JsonSerializer.Serialize(writer, Error);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        ErrorResponse IModelJsonSerializable<ErrorResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeErrorResponse(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ErrorResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ErrorResponse IModelSerializable<ErrorResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeErrorResponse(document.RootElement, options);
+        }
+
+        internal static ErrorResponse DeserializeErrorResponse(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             ResponseError error = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("error"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    error = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
-                    continue;
+                    if (property.NameEquals("error"u8))
+                    {
+                        error = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new ErrorResponse(error);
+            return new ErrorResponse(error, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -35,7 +92,13 @@ namespace _Azure.Lro.RpcLegacy.Models
         internal static ErrorResponse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeErrorResponse(document.RootElement);
+            return DeserializeErrorResponse(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

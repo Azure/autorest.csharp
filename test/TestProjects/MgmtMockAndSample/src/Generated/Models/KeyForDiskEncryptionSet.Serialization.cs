@@ -8,13 +8,16 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class KeyForDiskEncryptionSet : IUtf8JsonSerializable
+    public partial class KeyForDiskEncryptionSet : IUtf8JsonSerializable, IModelJsonSerializable<KeyForDiskEncryptionSet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<KeyForDiskEncryptionSet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<KeyForDiskEncryptionSet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(SourceVault))
@@ -27,8 +30,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static KeyForDiskEncryptionSet DeserializeKeyForDiskEncryptionSet(JsonElement element)
+        KeyForDiskEncryptionSet IModelJsonSerializable<KeyForDiskEncryptionSet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyForDiskEncryptionSet(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<KeyForDiskEncryptionSet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyForDiskEncryptionSet IModelSerializable<KeyForDiskEncryptionSet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyForDiskEncryptionSet(document.RootElement, options);
+        }
+
+        internal static KeyForDiskEncryptionSet DeserializeKeyForDiskEncryptionSet(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

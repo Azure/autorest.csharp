@@ -5,14 +5,51 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class UnknownAbstractModel
+    internal partial class UnknownAbstractModel : IUtf8JsonSerializable, IModelJsonSerializable<UnknownAbstractModel>
     {
-        internal static UnknownAbstractModel DeserializeUnknownAbstractModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownAbstractModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownAbstractModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("DiscriminatorProperty"u8);
+            writer.WriteStringValue(DiscriminatorProperty);
+            writer.WriteEndObject();
+        }
+
+        UnknownAbstractModel IModelJsonSerializable<UnknownAbstractModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownAbstractModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownAbstractModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownAbstractModel IModelSerializable<UnknownAbstractModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownAbstractModel(document.RootElement, options);
+        }
+
+        internal static UnknownAbstractModel DeserializeUnknownAbstractModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

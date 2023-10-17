@@ -5,16 +5,76 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class WhatIfOperationResult
+    public partial class WhatIfOperationResult : IUtf8JsonSerializable, IModelJsonSerializable<WhatIfOperationResult>
     {
-        internal static WhatIfOperationResult DeserializeWhatIfOperationResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<WhatIfOperationResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<WhatIfOperationResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status);
+            }
+            if (Optional.IsDefined(ErrorResponse))
+            {
+                writer.WritePropertyName("errorResponse"u8);
+                writer.WriteObjectValue(ErrorResponse);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsCollectionDefined(Changes))
+                {
+                    writer.WritePropertyName("changes"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Changes)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        WhatIfOperationResult IModelJsonSerializable<WhatIfOperationResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeWhatIfOperationResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<WhatIfOperationResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WhatIfOperationResult IModelSerializable<WhatIfOperationResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWhatIfOperationResult(document.RootElement, options);
+        }
+
+        internal static WhatIfOperationResult DeserializeWhatIfOperationResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

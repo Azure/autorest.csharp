@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class TemplateHashResult
+    public partial class TemplateHashResult : IUtf8JsonSerializable, IModelJsonSerializable<TemplateHashResult>
     {
-        internal static TemplateHashResult DeserializeTemplateHashResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TemplateHashResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<TemplateHashResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(MinifiedTemplate))
+            {
+                writer.WritePropertyName("minifiedTemplate"u8);
+                writer.WriteStringValue(MinifiedTemplate);
+            }
+            if (Optional.IsDefined(TemplateHash))
+            {
+                writer.WritePropertyName("templateHash"u8);
+                writer.WriteStringValue(TemplateHash);
+            }
+            writer.WriteEndObject();
+        }
+
+        TemplateHashResult IModelJsonSerializable<TemplateHashResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTemplateHashResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TemplateHashResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TemplateHashResult IModelSerializable<TemplateHashResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTemplateHashResult(document.RootElement, options);
+        }
+
+        internal static TemplateHashResult DeserializeTemplateHashResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

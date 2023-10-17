@@ -8,13 +8,56 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class EventData
+    public partial class EventData : IUtf8JsonSerializable, IModelJsonSerializable<EventData>
     {
-        internal static EventData DeserializeEventData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EventData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<EventData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Authorization))
+            {
+                writer.WritePropertyName("authorization"u8);
+                writer.WriteObjectValue(Authorization);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TenantId))
+            {
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        EventData IModelJsonSerializable<EventData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEventData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EventData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EventData IModelSerializable<EventData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEventData(document.RootElement, options);
+        }
+
+        internal static EventData DeserializeEventData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

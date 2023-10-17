@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,10 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Indirect self reference model. </summary>
     internal partial class IndirectSelfReferenceModel
     {
-        /// <summary> Initializes a new instance of IndirectSelfReferenceModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="IndirectSelfReferenceModel"/>. </summary>
         /// <param name="something"> Something not important. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="something"/> or <paramref name="unionProperty"/> is null. </exception>
@@ -24,17 +28,25 @@ namespace ConfidentLevelsInTsp.Models
 
             Something = something;
             UnionProperty = unionProperty;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of IndirectSelfReferenceModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="IndirectSelfReferenceModel"/>. </summary>
         /// <param name="something"> Something not important. </param>
         /// <param name="reference"> Reference back. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
-        internal IndirectSelfReferenceModel(string something, NonConfidentModelWithSelfReference reference, object unionProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndirectSelfReferenceModel(string something, NonConfidentModelWithSelfReference reference, object unionProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Something = something;
             Reference = reference;
             UnionProperty = unionProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="IndirectSelfReferenceModel"/> for deserialization. </summary>
+        internal IndirectSelfReferenceModel()
+        {
         }
 
         /// <summary> Something not important. </summary>

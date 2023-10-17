@@ -5,16 +5,78 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class AnomalyInterpretation
+    public partial class AnomalyInterpretation : IUtf8JsonSerializable, IModelJsonSerializable<AnomalyInterpretation>
     {
-        internal static AnomalyInterpretation DeserializeAnomalyInterpretation(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AnomalyInterpretation>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AnomalyInterpretation>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Variable))
+            {
+                writer.WritePropertyName("variable"u8);
+                writer.WriteStringValue(Variable);
+            }
+            if (Optional.IsDefined(ContributionScore))
+            {
+                writer.WritePropertyName("contributionScore"u8);
+                writer.WriteNumberValue(ContributionScore.Value);
+            }
+            if (Optional.IsDefined(CorrelationChanges))
+            {
+                writer.WritePropertyName("correlationChanges"u8);
+                writer.WriteObjectValue(CorrelationChanges);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        AnomalyInterpretation IModelJsonSerializable<AnomalyInterpretation>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnomalyInterpretation(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AnomalyInterpretation>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AnomalyInterpretation IModelSerializable<AnomalyInterpretation>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAnomalyInterpretation(document.RootElement, options);
+        }
+
+        internal static AnomalyInterpretation DeserializeAnomalyInterpretation(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -22,33 +84,40 @@ namespace AnomalyDetector.Models
             Optional<string> variable = default;
             Optional<float> contributionScore = default;
             Optional<CorrelationChanges> correlationChanges = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("variable"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    variable = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("contributionScore"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("variable"u8))
                     {
+                        variable = property.Value.GetString();
                         continue;
                     }
-                    contributionScore = property.Value.GetSingle();
-                    continue;
-                }
-                if (property.NameEquals("correlationChanges"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("contributionScore"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        contributionScore = property.Value.GetSingle();
                         continue;
                     }
-                    correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value);
-                    continue;
+                    if (property.NameEquals("correlationChanges"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value);
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new AnomalyInterpretation(variable.Value, Optional.ToNullable(contributionScore), correlationChanges.Value);
+            return new AnomalyInterpretation(variable.Value, Optional.ToNullable(contributionScore), correlationChanges.Value, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -56,7 +125,13 @@ namespace AnomalyDetector.Models
         internal static AnomalyInterpretation FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAnomalyInterpretation(document.RootElement);
+            return DeserializeAnomalyInterpretation(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -5,15 +5,61 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    internal partial class NotFoundErrorBase
+    internal partial class NotFoundErrorBase : IUtf8JsonSerializable, IModelJsonSerializable<NotFoundErrorBase>
     {
-        internal static NotFoundErrorBase DeserializeNotFoundErrorBase(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NotFoundErrorBase>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NotFoundErrorBase>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Reason))
+            {
+                writer.WritePropertyName("reason"u8);
+                writer.WriteStringValue(Reason);
+            }
+            writer.WritePropertyName("whatNotFound"u8);
+            writer.WriteStringValue(WhatNotFound);
+            if (Optional.IsDefined(SomeBaseProp))
+            {
+                writer.WritePropertyName("someBaseProp"u8);
+                writer.WriteStringValue(SomeBaseProp);
+            }
+            writer.WriteEndObject();
+        }
+
+        NotFoundErrorBase IModelJsonSerializable<NotFoundErrorBase>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNotFoundErrorBase(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NotFoundErrorBase>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NotFoundErrorBase IModelSerializable<NotFoundErrorBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNotFoundErrorBase(document.RootElement, options);
+        }
+
+        internal static NotFoundErrorBase DeserializeNotFoundErrorBase(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

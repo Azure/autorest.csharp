@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<SuggestResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("@search.text"u8);
+                writer.WriteStringValue(Text);
+            }
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -32,8 +37,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSuggestResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSuggestResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SuggestResult>.Serialize(ModelSerializerOptions options)
@@ -71,7 +76,7 @@ namespace CognitiveSearch.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SuggestResult(searchText);
+            return new SuggestResult(searchText, additionalProperties);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> The FooCollectionGetIfExistsOptions. </summary>
     public partial class FooCollectionGetIfExistsOptions
     {
-        /// <summary> Initializes a new instance of FooCollectionGetIfExistsOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="FooCollectionGetIfExistsOptions"/>. </summary>
         /// <param name="fooName"> The foo name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
         public FooCollectionGetIfExistsOptions(string fooName)
@@ -22,6 +22,11 @@ namespace MgmtPropertyBag.Models
             Argument.AssertNotNull(fooName, nameof(fooName));
 
             FooName = fooName;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FooCollectionGetIfExistsOptions"/> for deserialization. </summary>
+        internal FooCollectionGetIfExistsOptions()
+        {
         }
 
         /// <summary> The foo name. </summary>

@@ -5,46 +5,94 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class ErrorResponse : IUtf8JsonSerializable
+    public partial class ErrorResponse : IUtf8JsonSerializable, IModelJsonSerializable<ErrorResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ErrorResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ErrorResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("code"u8);
             writer.WriteStringValue(Code);
             writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
+        ErrorResponse IModelJsonSerializable<ErrorResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeErrorResponse(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ErrorResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ErrorResponse IModelSerializable<ErrorResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeErrorResponse(document.RootElement, options);
+        }
+
+        internal static ErrorResponse DeserializeErrorResponse(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string code = default;
             string message = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("code"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    code = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("code"u8))
+                    {
+                        code = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("message"u8))
+                    {
+                        message = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("message"u8))
-                {
-                    message = property.Value.GetString();
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new ErrorResponse(code, message);
+            return new ErrorResponse(code, message, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -52,15 +100,13 @@ namespace AnomalyDetector.Models
         internal static ErrorResponse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeErrorResponse(document.RootElement);
+            return DeserializeErrorResponse(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -19,6 +19,36 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RunningStatus))
+            {
+                writer.WritePropertyName("runningStatus"u8);
+                writer.WriteObjectValue(RunningStatus);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Progress))
+            {
+                writer.WritePropertyName("progress"u8);
+                writer.WriteObjectValue(Progress);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Error))
+            {
+                writer.WritePropertyName("error"u8);
+                writer.WriteObjectValue(Error);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartedBy))
+            {
+                writer.WritePropertyName("startedBy"u8);
+                writer.WriteStringValue(StartedBy.Value.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TargetImageReference))
+            {
+                writer.WritePropertyName("targetImageReference"u8);
+                writer.WriteObjectValue(TargetImageReference);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RollbackInfo))
+            {
+                writer.WritePropertyName("rollbackInfo"u8);
+                writer.WriteObjectValue(RollbackInfo);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +56,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUpgradeOperationHistoricalStatusInfoProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpgradeOperationHistoricalStatusInfoProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Serialize(ModelSerializerOptions options)

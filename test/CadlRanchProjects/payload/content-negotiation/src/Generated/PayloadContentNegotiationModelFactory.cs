@@ -6,24 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Payload.ContentNegotiation.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class PayloadContentNegotiationModelFactory
     {
-        /// <summary> Initializes a new instance of PngImageAsJson. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.PngImageAsJson"/>. </summary>
         /// <param name="content"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.PngImageAsJson"/> instance for mocking. </returns>
-        public static PngImageAsJson PngImageAsJson(BinaryData content = null)
+        public static PngImageAsJson PngImageAsJson(BinaryData content = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new PngImageAsJson(content);
+            return new PngImageAsJson(content, serializedAdditionalRawData);
         }
     }
 }

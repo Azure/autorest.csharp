@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class MhsmNetworkRuleSet : IUtf8JsonSerializable
+    public partial class MhsmNetworkRuleSet : IUtf8JsonSerializable, IModelJsonSerializable<MhsmNetworkRuleSet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MhsmNetworkRuleSet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MhsmNetworkRuleSet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Bypass))
@@ -50,8 +54,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static MhsmNetworkRuleSet DeserializeMhsmNetworkRuleSet(JsonElement element)
+        MhsmNetworkRuleSet IModelJsonSerializable<MhsmNetworkRuleSet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMhsmNetworkRuleSet(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MhsmNetworkRuleSet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmNetworkRuleSet IModelSerializable<MhsmNetworkRuleSet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmNetworkRuleSet(document.RootElement, options);
+        }
+
+        internal static MhsmNetworkRuleSet DeserializeMhsmNetworkRuleSet(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

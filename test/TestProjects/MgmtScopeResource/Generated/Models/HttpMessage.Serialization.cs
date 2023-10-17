@@ -8,13 +8,55 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    internal partial class HttpMessage
+    internal partial class HttpMessage : IUtf8JsonSerializable, IModelJsonSerializable<HttpMessage>
     {
-        internal static HttpMessage DeserializeHttpMessage(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<HttpMessage>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<HttpMessage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Content))
+            {
+                writer.WritePropertyName("content"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Content);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Content.ToString()).RootElement);
+#endif
+            }
+            writer.WriteEndObject();
+        }
+
+        HttpMessage IModelJsonSerializable<HttpMessage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeHttpMessage(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<HttpMessage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        HttpMessage IModelSerializable<HttpMessage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeHttpMessage(document.RootElement, options);
+        }
+
+        internal static HttpMessage DeserializeHttpMessage(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

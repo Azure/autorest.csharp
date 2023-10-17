@@ -19,6 +19,21 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<GeoReplicationStats>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastSyncOn))
+            {
+                writer.WritePropertyName("lastSyncTime"u8);
+                writer.WriteStringValue(LastSyncOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CanFailover))
+            {
+                writer.WritePropertyName("canFailover"u8);
+                writer.WriteBooleanValue(CanFailover.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +41,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeGeoReplicationStats(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeGeoReplicationStats(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<GeoReplicationStats>.Serialize(ModelSerializerOptions options)

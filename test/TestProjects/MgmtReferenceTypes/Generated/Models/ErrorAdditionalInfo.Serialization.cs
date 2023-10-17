@@ -9,20 +9,61 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(ErrorAdditionalInfoConverter))]
-    public partial class ErrorAdditionalInfo : IUtf8JsonSerializable
+    public partial class ErrorAdditionalInfo : IUtf8JsonSerializable, IModelJsonSerializable<ErrorAdditionalInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ErrorAdditionalInfo>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ErrorAdditionalInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ErrorAdditionalInfoType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ErrorAdditionalInfoType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Info))
+            {
+                writer.WritePropertyName("info"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Info);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Info.ToString()).RootElement);
+#endif
+            }
             writer.WriteEndObject();
         }
 
-        internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element)
+        ErrorAdditionalInfo IModelJsonSerializable<ErrorAdditionalInfo>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeErrorAdditionalInfo(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ErrorAdditionalInfo>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ErrorAdditionalInfo IModelSerializable<ErrorAdditionalInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeErrorAdditionalInfo(document.RootElement, options);
+        }
+
+        internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

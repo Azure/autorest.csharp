@@ -36,8 +36,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetIPTag(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetIPTag(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetIPTag>.Serialize(ModelSerializerOptions options)

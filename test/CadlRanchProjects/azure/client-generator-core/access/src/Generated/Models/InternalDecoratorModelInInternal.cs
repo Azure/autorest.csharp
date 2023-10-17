@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
@@ -13,7 +14,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Used in an internal operation, should be generated but not exported. </summary>
     internal partial class InternalDecoratorModelInInternal
     {
-        /// <summary> Initializes a new instance of InternalDecoratorModelInInternal. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="InternalDecoratorModelInInternal"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal InternalDecoratorModelInInternal(string name)
@@ -21,6 +25,21 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InternalDecoratorModelInInternal"/>. </summary>
+        /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InternalDecoratorModelInInternal(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InternalDecoratorModelInInternal"/> for deserialization. </summary>
+        internal InternalDecoratorModelInInternal()
+        {
         }
 
         /// <summary> Gets the name. </summary>

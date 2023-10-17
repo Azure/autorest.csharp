@@ -25,94 +25,112 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(VirtualNetworkTaps))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("virtualNetworkTaps"u8);
-                writer.WriteStartArray();
-                foreach (var item in VirtualNetworkTaps)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsCollectionDefined(VirtualNetworkTaps))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("virtualNetworkTaps"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VirtualNetworkTaps)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
-            {
-                writer.WritePropertyName("applicationGatewayBackendAddressPools"u8);
-                writer.WriteStartArray();
-                foreach (var item in ApplicationGatewayBackendAddressPools)
+                if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("applicationGatewayBackendAddressPools"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in ApplicationGatewayBackendAddressPools)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
-            {
-                writer.WritePropertyName("loadBalancerBackendAddressPools"u8);
-                writer.WriteStartArray();
-                foreach (var item in LoadBalancerBackendAddressPools)
+                if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("loadBalancerBackendAddressPools"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in LoadBalancerBackendAddressPools)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(LoadBalancerInboundNatRules))
-            {
-                writer.WritePropertyName("loadBalancerInboundNatRules"u8);
-                writer.WriteStartArray();
-                foreach (var item in LoadBalancerInboundNatRules)
+                if (Optional.IsCollectionDefined(LoadBalancerInboundNatRules))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("loadBalancerInboundNatRules"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in LoadBalancerInboundNatRules)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(PrivateIPAddress))
-            {
-                writer.WritePropertyName("privateIPAddress"u8);
-                writer.WriteStringValue(PrivateIPAddress);
-            }
-            if (Optional.IsDefined(PrivateIPAllocationMethod))
-            {
-                writer.WritePropertyName("privateIPAllocationMethod"u8);
-                writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
-            }
-            if (Optional.IsDefined(PrivateIPAddressVersion))
-            {
-                writer.WritePropertyName("privateIPAddressVersion"u8);
-                writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
-            }
-            if (Optional.IsDefined(Subnet))
-            {
-                writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
-            }
-            if (Optional.IsDefined(Primary))
-            {
-                writer.WritePropertyName("primary"u8);
-                writer.WriteBooleanValue(Primary.Value);
-            }
-            if (Optional.IsDefined(PublicIPAddress))
-            {
-                writer.WritePropertyName("publicIPAddress"u8);
-                writer.WriteObjectValue(PublicIPAddress);
-            }
-            if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
-            {
-                writer.WritePropertyName("applicationSecurityGroups"u8);
-                writer.WriteStartArray();
-                foreach (var item in ApplicationSecurityGroups)
+                if (Optional.IsDefined(PrivateIPAddress))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("privateIPAddress"u8);
+                    writer.WriteStringValue(PrivateIPAddress);
                 }
-                writer.WriteEndArray();
+                if (Optional.IsDefined(PrivateIPAllocationMethod))
+                {
+                    writer.WritePropertyName("privateIPAllocationMethod"u8);
+                    writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
+                }
+                if (Optional.IsDefined(PrivateIPAddressVersion))
+                {
+                    writer.WritePropertyName("privateIPAddressVersion"u8);
+                    writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
+                }
+                if (Optional.IsDefined(Subnet))
+                {
+                    writer.WritePropertyName("subnet"u8);
+                    writer.WriteObjectValue(Subnet);
+                }
+                if (Optional.IsDefined(Primary))
+                {
+                    writer.WritePropertyName("primary"u8);
+                    writer.WriteBooleanValue(Primary.Value);
+                }
+                if (Optional.IsDefined(PublicIPAddress))
+                {
+                    writer.WritePropertyName("publicIPAddress"u8);
+                    writer.WriteObjectValue(PublicIPAddress);
+                }
+                if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
+                {
+                    writer.WritePropertyName("applicationSecurityGroups"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in ApplicationSecurityGroups)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PrivateLinkConnectionProperties))
+                {
+                    writer.WritePropertyName("privateLinkConnectionProperties"u8);
+                    writer.WriteObjectValue(PrivateLinkConnectionProperties);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -120,8 +138,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkInterfaceIPConfiguration(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNetworkInterfaceIPConfiguration(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<NetworkInterfaceIPConfiguration>.Serialize(ModelSerializerOptions options)

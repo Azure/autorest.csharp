@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The cat without a union type. </summary>
     internal partial class UnpollutedCat : PollutedPet
     {
-        /// <summary> Initializes a new instance of UnpollutedCat. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnpollutedCat"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="meow"> Meow. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="meow"/> is null. </exception>
@@ -26,13 +27,19 @@ namespace ConfidentLevelsInTsp.Models
             Meow = meow;
         }
 
-        /// <summary> Initializes a new instance of UnpollutedCat. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnpollutedCat"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="meow"> Meow. </param>
-        internal UnpollutedCat(string kind, string name, string meow) : base(kind, name)
+        internal UnpollutedCat(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string meow) : base(kind, name, serializedAdditionalRawData)
         {
             Meow = meow;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnpollutedCat"/> for deserialization. </summary>
+        internal UnpollutedCat()
+        {
         }
 
         /// <summary> Meow. </summary>

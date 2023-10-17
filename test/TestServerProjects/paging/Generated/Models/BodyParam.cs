@@ -15,6 +15,13 @@ namespace paging.Models
         {
         }
 
+        /// <summary> Initializes a new instance of BodyParam. </summary>
+        /// <param name="name"></param>
+        internal BodyParam(string name)
+        {
+            Name = name;
+        }
+
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
     }

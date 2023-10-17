@@ -20,6 +20,57 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<SearchDocumentsResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Count))
+            {
+                writer.WritePropertyName("@odata.count"u8);
+                writer.WriteNumberValue(Count.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Coverage))
+            {
+                writer.WritePropertyName("@search.coverage"u8);
+                writer.WriteNumberValue(Coverage.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Facets))
+            {
+                writer.WritePropertyName("@search.facets"u8);
+                writer.WriteStartObject();
+                foreach (var item in Facets)
+                {
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteStartArray();
+                    foreach (var item0 in item.Value)
+                    {
+                        writer.WriteObjectValue(item0);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NextPageParameters))
+            {
+                writer.WritePropertyName("@search.nextPageParameters"u8);
+                writer.WriteObjectValue(NextPageParameters);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Results)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("@odata.nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +78,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSearchDocumentsResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSearchDocumentsResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SearchDocumentsResult>.Serialize(ModelSerializerOptions options)

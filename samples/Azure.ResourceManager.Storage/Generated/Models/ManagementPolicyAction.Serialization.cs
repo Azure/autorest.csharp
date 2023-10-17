@@ -41,8 +41,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeManagementPolicyAction(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeManagementPolicyAction(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ManagementPolicyAction>.Serialize(ModelSerializerOptions options)

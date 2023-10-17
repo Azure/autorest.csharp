@@ -30,8 +30,8 @@ namespace Inheritance.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBaseClassWithExtensibleEnumDiscriminator(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBaseClassWithExtensibleEnumDiscriminator(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BaseClassWithExtensibleEnumDiscriminator>.Serialize(ModelSerializerOptions options)

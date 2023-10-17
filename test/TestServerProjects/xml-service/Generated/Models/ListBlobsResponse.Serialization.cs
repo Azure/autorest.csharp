@@ -5,12 +5,45 @@
 
 #nullable disable
 
+using System.Xml;
 using System.Xml.Linq;
+using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ListBlobsResponse
+    public partial class ListBlobsResponse : IXmlSerializable
     {
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        {
+            writer.WriteStartElement(nameHint ?? "EnumerationResults");
+            if (Optional.IsDefined(ServiceEndpoint))
+            {
+                writer.WriteStartAttribute("ServiceEndpoint");
+                writer.WriteValue(ServiceEndpoint);
+                writer.WriteEndAttribute();
+            }
+            writer.WriteStartAttribute("ContainerName");
+            writer.WriteValue(ContainerName);
+            writer.WriteEndAttribute();
+            writer.WriteStartElement("Prefix");
+            writer.WriteValue(Prefix);
+            writer.WriteEndElement();
+            writer.WriteStartElement("Marker");
+            writer.WriteValue(Marker);
+            writer.WriteEndElement();
+            writer.WriteStartElement("MaxResults");
+            writer.WriteValue(MaxResults);
+            writer.WriteEndElement();
+            writer.WriteStartElement("Delimiter");
+            writer.WriteValue(Delimiter);
+            writer.WriteEndElement();
+            writer.WriteObjectValue(Blobs, "Blobs");
+            writer.WriteStartElement("NextMarker");
+            writer.WriteValue(NextMarker);
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element)
         {
             string serviceEndpoint = default;

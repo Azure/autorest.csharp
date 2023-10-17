@@ -40,8 +40,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeLengthTokenFilter(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLengthTokenFilter(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<LengthTokenFilter>.Serialize(ModelSerializerOptions options)

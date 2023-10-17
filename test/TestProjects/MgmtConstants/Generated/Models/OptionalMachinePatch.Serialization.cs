@@ -31,19 +31,22 @@ namespace MgmtConstants.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Listener))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("listener"u8);
-                writer.WriteObjectValue(Listener);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Listener))
+                {
+                    writer.WritePropertyName("listener"u8);
+                    writer.WriteObjectValue(Listener);
+                }
+                if (Optional.IsDefined(Content))
+                {
+                    writer.WritePropertyName("content"u8);
+                    writer.WriteObjectValue(Content);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Content))
-            {
-                writer.WritePropertyName("content"u8);
-                writer.WriteObjectValue(Content);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -51,8 +54,8 @@ namespace MgmtConstants.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOptionalMachinePatch(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOptionalMachinePatch(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OptionalMachinePatch>.Serialize(ModelSerializerOptions options)

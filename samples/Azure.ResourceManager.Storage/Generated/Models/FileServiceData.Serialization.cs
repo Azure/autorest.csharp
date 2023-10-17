@@ -21,24 +21,52 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<FileServiceData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Cors))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Sku))
             {
-                writer.WritePropertyName("cors"u8);
-                writer.WriteObjectValue(Cors);
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsDefined(ShareDeleteRetentionPolicy))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("shareDeleteRetentionPolicy"u8);
-                writer.WriteObjectValue(ShareDeleteRetentionPolicy);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(ProtocolSettings))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("protocolSettings"u8);
-                writer.WriteObjectValue(ProtocolSettings);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Cors))
+                {
+                    writer.WritePropertyName("cors"u8);
+                    writer.WriteObjectValue(Cors);
+                }
+                if (Optional.IsDefined(ShareDeleteRetentionPolicy))
+                {
+                    writer.WritePropertyName("shareDeleteRetentionPolicy"u8);
+                    writer.WriteObjectValue(ShareDeleteRetentionPolicy);
+                }
+                if (Optional.IsDefined(ProtocolSettings))
+                {
+                    writer.WritePropertyName("protocolSettings"u8);
+                    writer.WriteObjectValue(ProtocolSettings);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -46,8 +74,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeFileServiceData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFileServiceData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<FileServiceData>.Serialize(ModelSerializerOptions options)

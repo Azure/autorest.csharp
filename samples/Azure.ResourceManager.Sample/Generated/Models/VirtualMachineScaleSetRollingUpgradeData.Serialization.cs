@@ -35,9 +35,52 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Policy))
+                {
+                    writer.WritePropertyName("policy"u8);
+                    writer.WriteObjectValue(Policy);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RunningStatus))
+                {
+                    writer.WritePropertyName("runningStatus"u8);
+                    writer.WriteObjectValue(RunningStatus);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Progress))
+                {
+                    writer.WritePropertyName("progress"u8);
+                    writer.WriteObjectValue(Progress);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Error))
+                {
+                    writer.WritePropertyName("error"u8);
+                    writer.WriteObjectValue(Error);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -45,8 +88,8 @@ namespace Azure.ResourceManager.Sample
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetRollingUpgradeData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetRollingUpgradeData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetRollingUpgradeData>.Serialize(ModelSerializerOptions options)

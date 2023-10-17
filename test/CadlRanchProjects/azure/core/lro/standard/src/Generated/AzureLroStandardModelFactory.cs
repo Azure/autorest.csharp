@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure;
 
 namespace _Azure.Lro.Standard.Models
@@ -13,32 +14,28 @@ namespace _Azure.Lro.Standard.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AzureLroStandardModelFactory
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="role"> The role of user. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
-        public static User User(string name = null, string role = null)
+        public static User User(string name = null, string role = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            return new User(name, role);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new User(name, role, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of ExportedUser. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ExportedUser"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="resourceUri"> The exported URI. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resourceUri"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ExportedUser"/> instance for mocking. </returns>
-        public static ExportedUser ExportedUser(string name = null, string resourceUri = null)
+        public static ExportedUser ExportedUser(string name = null, string resourceUri = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (resourceUri == null)
-            {
-                throw new ArgumentNullException(nameof(resourceUri));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new ExportedUser(name, resourceUri);
+            return new ExportedUser(name, resourceUri, serializedAdditionalRawData);
         }
     }
 }

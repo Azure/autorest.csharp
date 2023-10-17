@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
-    public partial class NonResourceModel1 : IUtf8JsonSerializable
+    public partial class NonResourceModel1 : IUtf8JsonSerializable, IModelJsonSerializable<NonResourceModel1>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NonResourceModel1>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NonResourceModel1>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Bar))
@@ -20,24 +24,51 @@ namespace MgmtSupersetFlattenInheritance.Models
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Id))
+                {
+                    writer.WritePropertyName("id"u8);
+                    writer.WriteStringValue(Id);
+                }
+                if (Optional.IsDefined(Foo))
+                {
+                    writer.WritePropertyName("foo"u8);
+                    writer.WriteStringValue(Foo);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Foo))
-            {
-                writer.WritePropertyName("foo"u8);
-                writer.WriteStringValue(Foo);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static NonResourceModel1 DeserializeNonResourceModel1(JsonElement element)
+        NonResourceModel1 IModelJsonSerializable<NonResourceModel1>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNonResourceModel1(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NonResourceModel1>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NonResourceModel1 IModelSerializable<NonResourceModel1>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNonResourceModel1(document.RootElement, options);
+        }
+
+        internal static NonResourceModel1 DeserializeNonResourceModel1(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

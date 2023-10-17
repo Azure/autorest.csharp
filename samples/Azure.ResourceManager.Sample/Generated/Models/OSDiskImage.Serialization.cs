@@ -28,8 +28,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOSDiskImage(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOSDiskImage(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OSDiskImage>.Serialize(ModelSerializerOptions options)

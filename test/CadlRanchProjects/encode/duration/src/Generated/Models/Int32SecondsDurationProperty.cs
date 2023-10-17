@@ -6,17 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using Azure.Core;
 
 namespace Encode.Duration.Models
 {
     /// <summary> The Int32SecondsDurationProperty. </summary>
     public partial class Int32SecondsDurationProperty
     {
-        /// <summary> Initializes a new instance of Int32SecondsDurationProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Int32SecondsDurationProperty"/>. </summary>
         /// <param name="value"></param>
         public Int32SecondsDurationProperty(TimeSpan value)
         {
             Value = value;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Int32SecondsDurationProperty"/>. </summary>
+        /// <param name="value"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Int32SecondsDurationProperty(TimeSpan value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Int32SecondsDurationProperty"/> for deserialization. </summary>
+        internal Int32SecondsDurationProperty()
+        {
         }
 
         /// <summary> Gets or sets the value. </summary>

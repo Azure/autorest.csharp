@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class VirtualMachineScaleSetVMInstanceIDs : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetVMInstanceIDs : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVMInstanceIDs>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVMInstanceIDs>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VirtualMachineScaleSetVMInstanceIDs>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(InstanceIds))
@@ -26,6 +31,57 @@ namespace MgmtParamOrdering.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
+        }
+
+        VirtualMachineScaleSetVMInstanceIDs IModelJsonSerializable<VirtualMachineScaleSetVMInstanceIDs>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetVMInstanceIDs(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetVMInstanceIDs>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetVMInstanceIDs IModelSerializable<VirtualMachineScaleSetVMInstanceIDs>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetVMInstanceIDs(document.RootElement, options);
+        }
+
+        internal static VirtualMachineScaleSetVMInstanceIDs DeserializeVirtualMachineScaleSetVMInstanceIDs(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<IList<string>> instanceIds = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("instanceIds"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    instanceIds = array;
+                    continue;
+                }
+            }
+            return new VirtualMachineScaleSetVMInstanceIDs(Optional.ToList(instanceIds));
         }
     }
 }

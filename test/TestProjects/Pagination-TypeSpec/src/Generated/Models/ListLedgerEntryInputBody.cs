@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Pagination.Models
@@ -13,7 +14,10 @@ namespace Pagination.Models
     /// <summary> Type for input model body. </summary>
     public partial class ListLedgerEntryInputBody
     {
-        /// <summary> Initializes a new instance of ListLedgerEntryInputBody. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ListLedgerEntryInputBody"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
@@ -23,6 +27,23 @@ namespace Pagination.Models
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ListLedgerEntryInputBody"/>. </summary>
+        /// <param name="requiredString"> Required string. </param>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListLedgerEntryInputBody(string requiredString, int requiredInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            RequiredString = requiredString;
+            RequiredInt = requiredInt;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ListLedgerEntryInputBody"/> for deserialization. </summary>
+        internal ListLedgerEntryInputBody()
+        {
         }
 
         /// <summary> Required string. </summary>

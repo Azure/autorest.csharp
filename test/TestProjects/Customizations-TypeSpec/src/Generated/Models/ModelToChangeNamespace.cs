@@ -5,16 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Model moved into custom namespace. </summary>
     public partial class ModelToChangeNamespace
     {
-        /// <summary> Initializes a new instance of ModelToChangeNamespace. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public ModelToChangeNamespace(int requiredInt)
         {
             RequiredInt = requiredInt;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/>. </summary>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelToChangeNamespace(int requiredInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            RequiredInt = requiredInt;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/> for deserialization. </summary>
+        internal ModelToChangeNamespace()
+        {
         }
 
         /// <summary> Required int. </summary>

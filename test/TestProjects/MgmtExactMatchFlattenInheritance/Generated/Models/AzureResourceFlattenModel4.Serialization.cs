@@ -24,24 +24,27 @@ namespace MgmtExactMatchFlattenInheritance.Models
                 writer.WritePropertyName("foo"u8);
                 writer.WriteNumberValue(Foo.Value);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Id))
+                {
+                    writer.WritePropertyName("id"u8);
+                    writer.WriteStringValue(Id);
+                }
+                if (Optional.IsDefined(Name))
+                {
+                    writer.WritePropertyName("name"u8);
+                    writer.WriteStringValue(Name);
+                }
+                if (Optional.IsDefined(ResourceType))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(ResourceType);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(ResourceType))
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -49,8 +52,8 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAzureResourceFlattenModel4(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureResourceFlattenModel4(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AzureResourceFlattenModel4>.Serialize(ModelSerializerOptions options)

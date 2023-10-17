@@ -24,29 +24,42 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(AddressPrefix))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("addressPrefix"u8);
-                writer.WriteStringValue(AddressPrefix);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(AddressPrefix))
+                {
+                    writer.WritePropertyName("addressPrefix"u8);
+                    writer.WriteStringValue(AddressPrefix);
+                }
+                if (Optional.IsDefined(NextHopType))
+                {
+                    writer.WritePropertyName("nextHopType"u8);
+                    writer.WriteStringValue(NextHopType.Value.ToString());
+                }
+                if (Optional.IsDefined(NextHopIpAddress))
+                {
+                    writer.WritePropertyName("nextHopIpAddress"u8);
+                    writer.WriteStringValue(NextHopIpAddress);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(NextHopType))
-            {
-                writer.WritePropertyName("nextHopType"u8);
-                writer.WriteStringValue(NextHopType.Value.ToString());
-            }
-            if (Optional.IsDefined(NextHopIpAddress))
-            {
-                writer.WritePropertyName("nextHopIpAddress"u8);
-                writer.WriteStringValue(NextHopIpAddress);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -54,8 +67,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRoute(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoute(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Route>.Serialize(ModelSerializerOptions options)

@@ -24,34 +24,47 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PrivateIPAddress))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("privateIPAddress"u8);
-                writer.WriteStringValue(PrivateIPAddress);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PrivateIPAddress))
+                {
+                    writer.WritePropertyName("privateIPAddress"u8);
+                    writer.WriteStringValue(PrivateIPAddress);
+                }
+                if (Optional.IsDefined(PrivateIPAllocationMethod))
+                {
+                    writer.WritePropertyName("privateIPAllocationMethod"u8);
+                    writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
+                }
+                if (Optional.IsDefined(Subnet))
+                {
+                    writer.WritePropertyName("subnet"u8);
+                    writer.WriteObjectValue(Subnet);
+                }
+                if (Optional.IsDefined(PublicIPAddress))
+                {
+                    writer.WritePropertyName("publicIPAddress"u8);
+                    writer.WriteObjectValue(PublicIPAddress);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(PrivateIPAllocationMethod))
-            {
-                writer.WritePropertyName("privateIPAllocationMethod"u8);
-                writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
-            }
-            if (Optional.IsDefined(Subnet))
-            {
-                writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
-            }
-            if (Optional.IsDefined(PublicIPAddress))
-            {
-                writer.WritePropertyName("publicIPAddress"u8);
-                writer.WriteObjectValue(PublicIPAddress);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -59,8 +72,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeIPConfiguration(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIPConfiguration(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<IPConfiguration>.Serialize(ModelSerializerOptions options)

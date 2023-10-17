@@ -19,6 +19,11 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<SubResourceReadOnly>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +31,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSubResourceReadOnly(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubResourceReadOnly(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SubResourceReadOnly>.Serialize(ModelSerializerOptions options)

@@ -9,14 +9,17 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
-    public partial class WorkspaceData : IUtf8JsonSerializable
+    public partial class WorkspaceData : IUtf8JsonSerializable, IModelJsonSerializable<WorkspaceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<WorkspaceData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<WorkspaceData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -32,76 +35,148 @@ namespace MgmtParamOrdering
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Description))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(Description);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(FriendlyName))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("friendlyName"u8);
-                writer.WriteStringValue(FriendlyName);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(KeyVault))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("keyVault"u8);
-                writer.WriteStringValue(KeyVault);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(ApplicationInsights))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("applicationInsights"u8);
-                writer.WriteStringValue(ApplicationInsights);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(ContainerRegistry))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (ContainerRegistry != null)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(WorkspaceId))
                 {
-                    writer.WritePropertyName("containerRegistry"u8);
-                    writer.WriteStringValue(ContainerRegistry);
+                    writer.WritePropertyName("workspaceId"u8);
+                    writer.WriteStringValue(WorkspaceId);
                 }
-                else
+                if (Optional.IsDefined(Description))
                 {
-                    writer.WriteNull("containerRegistry");
+                    writer.WritePropertyName("description"u8);
+                    writer.WriteStringValue(Description);
                 }
+                if (Optional.IsDefined(FriendlyName))
+                {
+                    writer.WritePropertyName("friendlyName"u8);
+                    writer.WriteStringValue(FriendlyName);
+                }
+                if (Optional.IsDefined(KeyVault))
+                {
+                    writer.WritePropertyName("keyVault"u8);
+                    writer.WriteStringValue(KeyVault);
+                }
+                if (Optional.IsDefined(ApplicationInsights))
+                {
+                    writer.WritePropertyName("applicationInsights"u8);
+                    writer.WriteStringValue(ApplicationInsights);
+                }
+                if (Optional.IsDefined(ContainerRegistry))
+                {
+                    if (ContainerRegistry != null)
+                    {
+                        writer.WritePropertyName("containerRegistry"u8);
+                        writer.WriteStringValue(ContainerRegistry);
+                    }
+                    else
+                    {
+                        writer.WriteNull("containerRegistry");
+                    }
+                }
+                if (Optional.IsDefined(StorageAccount))
+                {
+                    writer.WritePropertyName("storageAccount"u8);
+                    writer.WriteStringValue(StorageAccount);
+                }
+                if (Optional.IsDefined(DiscoveryUri))
+                {
+                    writer.WritePropertyName("discoveryUrl"u8);
+                    writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                if (Optional.IsDefined(HbiWorkspace))
+                {
+                    writer.WritePropertyName("hbiWorkspace"u8);
+                    writer.WriteBooleanValue(HbiWorkspace.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ServiceProvisionedResourceGroup))
+                {
+                    writer.WritePropertyName("serviceProvisionedResourceGroup"u8);
+                    writer.WriteStringValue(ServiceProvisionedResourceGroup);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PrivateLinkCount))
+                {
+                    writer.WritePropertyName("privateLinkCount"u8);
+                    writer.WriteNumberValue(PrivateLinkCount.Value);
+                }
+                if (Optional.IsDefined(ImageBuildCompute))
+                {
+                    writer.WritePropertyName("imageBuildCompute"u8);
+                    writer.WriteStringValue(ImageBuildCompute);
+                }
+                if (Optional.IsDefined(AllowPublicAccessWhenBehindVnet))
+                {
+                    writer.WritePropertyName("allowPublicAccessWhenBehindVnet"u8);
+                    writer.WriteBooleanValue(AllowPublicAccessWhenBehindVnet.Value);
+                }
+                if (Optional.IsDefined(PrimaryUserAssignedIdentity))
+                {
+                    writer.WritePropertyName("primaryUserAssignedIdentity"u8);
+                    writer.WriteStringValue(PrimaryUserAssignedIdentity);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TenantId))
+                {
+                    writer.WritePropertyName("tenantId"u8);
+                    writer.WriteStringValue(TenantId.Value);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(StorageAccount))
-            {
-                writer.WritePropertyName("storageAccount"u8);
-                writer.WriteStringValue(StorageAccount);
-            }
-            if (Optional.IsDefined(DiscoveryUri))
-            {
-                writer.WritePropertyName("discoveryUrl"u8);
-                writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
-            }
-            if (Optional.IsDefined(HbiWorkspace))
-            {
-                writer.WritePropertyName("hbiWorkspace"u8);
-                writer.WriteBooleanValue(HbiWorkspace.Value);
-            }
-            if (Optional.IsDefined(ImageBuildCompute))
-            {
-                writer.WritePropertyName("imageBuildCompute"u8);
-                writer.WriteStringValue(ImageBuildCompute);
-            }
-            if (Optional.IsDefined(AllowPublicAccessWhenBehindVnet))
-            {
-                writer.WritePropertyName("allowPublicAccessWhenBehindVnet"u8);
-                writer.WriteBooleanValue(AllowPublicAccessWhenBehindVnet.Value);
-            }
-            if (Optional.IsDefined(PrimaryUserAssignedIdentity))
-            {
-                writer.WritePropertyName("primaryUserAssignedIdentity"u8);
-                writer.WriteStringValue(PrimaryUserAssignedIdentity);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static WorkspaceData DeserializeWorkspaceData(JsonElement element)
+        WorkspaceData IModelJsonSerializable<WorkspaceData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeWorkspaceData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<WorkspaceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WorkspaceData IModelSerializable<WorkspaceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWorkspaceData(document.RootElement, options);
+        }
+
+        internal static WorkspaceData DeserializeWorkspaceData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -156,7 +156,7 @@ namespace MgmtHierarchicalNonResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryRestClient.CreateListRequest(Id.SubscriptionId, _location, sharedTo);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, _location, sharedTo);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SharedGalleryResource(Client, SharedGalleryData.DeserializeSharedGalleryData(e)), _sharedGalleryClientDiagnostics, Pipeline, "SharedGalleryCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new SharedGalleryResource(Client, SharedGalleryData.DeserializeSharedGalleryData(e)), _sharedGalleryClientDiagnostics, Pipeline, "SharedGalleryCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace MgmtHierarchicalNonResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryRestClient.CreateListRequest(Id.SubscriptionId, _location, sharedTo);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, _location, sharedTo);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SharedGalleryResource(Client, SharedGalleryData.DeserializeSharedGalleryData(e)), _sharedGalleryClientDiagnostics, Pipeline, "SharedGalleryCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new SharedGalleryResource(Client, SharedGalleryData.DeserializeSharedGalleryData(e)), _sharedGalleryClientDiagnostics, Pipeline, "SharedGalleryCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

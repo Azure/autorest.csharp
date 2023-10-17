@@ -5,45 +5,84 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using NamespaceForEnums;
 
 namespace CustomNamespace
 {
-    internal partial struct RenamedModelStruct : IUtf8JsonSerializable
+    internal partial struct RenamedModelStruct : IUtf8JsonSerializable, IModelJsonSerializable<RenamedModelStruct>, IModelJsonSerializable<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RenamedModelStruct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RenamedModelStruct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("ModelProperty"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(CustomizedFlattenedStringProperty))
+            if (options.Format == ModelSerializerFormat.Json)
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteStringValue(CustomizedFlattenedStringProperty);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(CustomizedFlattenedStringProperty))
+                {
+                    writer.WritePropertyName("ModelProperty"u8);
+                    writer.WriteStringValue(CustomizedFlattenedStringProperty);
+                }
+                if (Optional.IsDefined(PropertyToField))
+                {
+                    writer.WritePropertyName("PropertyToField"u8);
+                    writer.WriteStringValue(PropertyToField);
+                }
+                if (Optional.IsDefined(Fruit))
+                {
+                    writer.WritePropertyName("Fruit"u8);
+                    writer.WriteStringValue(Fruit.Value.ToSerialString());
+                }
+                if (Optional.IsDefined(DaysOfWeek))
+                {
+                    writer.WritePropertyName("DaysOfWeek"u8);
+                    writer.WriteStringValue(DaysOfWeek.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(PropertyToField))
-            {
-                writer.WritePropertyName("PropertyToField"u8);
-                writer.WriteStringValue(PropertyToField);
-            }
-            if (Optional.IsDefined(Fruit))
-            {
-                writer.WritePropertyName("Fruit"u8);
-                writer.WriteStringValue(Fruit.Value.ToSerialString());
-            }
-            if (Optional.IsDefined(DaysOfWeek))
-            {
-                writer.WritePropertyName("DaysOfWeek"u8);
-                writer.WriteStringValue(DaysOfWeek.Value.ToString());
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element)
+        RenamedModelStruct IModelJsonSerializable<RenamedModelStruct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRenamedModelStruct(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RenamedModelStruct>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RenamedModelStruct IModelSerializable<RenamedModelStruct>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRenamedModelStruct(document.RootElement, options);
+        }
+
+        void IModelJsonSerializable<object>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options) => ((IModelJsonSerializable<RenamedModelStruct>)this).Serialize(writer, options);
+
+        object IModelJsonSerializable<object>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options) => ((IModelJsonSerializable<RenamedModelStruct>)this).Deserialize(ref reader, options);
+
+        BinaryData IModelSerializable<object>.Serialize(ModelSerializerOptions options) => ((IModelJsonSerializable<RenamedModelStruct>)this).Serialize(options);
+
+        object IModelSerializable<object>.Deserialize(BinaryData data, ModelSerializerOptions options) => ((IModelJsonSerializable<RenamedModelStruct>)this).Deserialize(data, options);
+
+        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             Optional<string> modelProperty = default;
             Optional<string> propertyToField = default;
             Optional<CustomFruitEnum> fruit = default;

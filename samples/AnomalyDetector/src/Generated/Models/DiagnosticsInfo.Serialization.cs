@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class DiagnosticsInfo : IUtf8JsonSerializable
+    public partial class DiagnosticsInfo : IUtf8JsonSerializable, IModelJsonSerializable<DiagnosticsInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DiagnosticsInfo>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DiagnosticsInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelState))
@@ -32,44 +36,87 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static DiagnosticsInfo DeserializeDiagnosticsInfo(JsonElement element)
+        DiagnosticsInfo IModelJsonSerializable<DiagnosticsInfo>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDiagnosticsInfo(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DiagnosticsInfo>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DiagnosticsInfo IModelSerializable<DiagnosticsInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDiagnosticsInfo(document.RootElement, options);
+        }
+
+        internal static DiagnosticsInfo DeserializeDiagnosticsInfo(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<ModelState> modelState = default;
             Optional<IList<VariableState>> variableStates = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("modelState"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("modelState"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        modelState = ModelState.DeserializeModelState(property.Value);
                         continue;
                     }
-                    modelState = ModelState.DeserializeModelState(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("variableStates"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("variableStates"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<VariableState> array = new List<VariableState>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(VariableState.DeserializeVariableState(item));
+                        }
+                        variableStates = array;
                         continue;
                     }
-                    List<VariableState> array = new List<VariableState>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(VariableState.DeserializeVariableState(item));
-                    }
-                    variableStates = array;
-                    continue;
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new DiagnosticsInfo(modelState.Value, Optional.ToList(variableStates));
+            return new DiagnosticsInfo(modelState.Value, Optional.ToList(variableStates), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -77,15 +124,13 @@ namespace AnomalyDetector.Models
         internal static DiagnosticsInfo FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDiagnosticsInfo(document.RootElement);
+            return DeserializeDiagnosticsInfo(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     /// <summary>
@@ -14,20 +18,31 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     /// </summary>
     public abstract partial class Dog
     {
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="weight"> Weight of the dog. </param>
         protected Dog(int weight)
         {
             Weight = weight;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="weight"> Weight of the dog. </param>
-        internal Dog(DogKind kind, int weight)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dog(DogKind kind, int weight, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Weight = weight;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Dog"/> for deserialization. </summary>
+        internal Dog()
+        {
         }
 
         /// <summary> discriminator property. </summary>

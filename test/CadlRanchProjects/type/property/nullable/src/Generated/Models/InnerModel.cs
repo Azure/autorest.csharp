@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
@@ -13,7 +14,10 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Inner model used in collections model property. </summary>
     public partial class InnerModel
     {
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
         /// <param name="property"> Inner model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         internal InnerModel(string property)
@@ -21,6 +25,21 @@ namespace _Type.Property.Nullable.Models
             Argument.AssertNotNull(property, nameof(property));
 
             Property = property;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
+        /// <param name="property"> Inner model property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InnerModel(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Property = property;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/> for deserialization. </summary>
+        internal InnerModel()
+        {
         }
 
         /// <summary> Inner model property. </summary>

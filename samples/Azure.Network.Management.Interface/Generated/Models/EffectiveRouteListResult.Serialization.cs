@@ -30,6 +30,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
             writer.WriteEndObject();
         }
 
@@ -37,8 +42,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeEffectiveRouteListResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEffectiveRouteListResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<EffectiveRouteListResult>.Serialize(ModelSerializerOptions options)

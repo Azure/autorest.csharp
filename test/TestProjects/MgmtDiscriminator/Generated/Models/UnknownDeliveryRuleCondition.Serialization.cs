@@ -21,6 +21,11 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Foo))
+            {
+                writer.WritePropertyName("foo"u8);
+                writer.WriteStringValue(Foo);
+            }
             writer.WriteEndObject();
         }
 
@@ -28,8 +33,8 @@ namespace MgmtDiscriminator.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownDeliveryRuleCondition(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownDeliveryRuleCondition(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UnknownDeliveryRuleCondition>.Serialize(ModelSerializerOptions options)

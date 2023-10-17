@@ -8,13 +8,96 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class DeploymentOperationProperties
+    public partial class DeploymentOperationProperties : IUtf8JsonSerializable, IModelJsonSerializable<DeploymentOperationProperties>
     {
-        internal static DeploymentOperationProperties DeserializeDeploymentOperationProperties(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeploymentOperationProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeploymentOperationProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningOperation))
+            {
+                writer.WritePropertyName("provisioningOperation"u8);
+                writer.WriteStringValue(ProvisioningOperation.Value.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Timestamp))
+            {
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Duration))
+            {
+                writer.WritePropertyName("duration"u8);
+                writer.WriteStringValue(Duration.Value, "P");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AnotherDuration))
+            {
+                writer.WritePropertyName("anotherDuration"u8);
+                writer.WriteStringValue(AnotherDuration.Value, "c");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ServiceRequestId))
+            {
+                writer.WritePropertyName("serviceRequestId"u8);
+                writer.WriteStringValue(ServiceRequestId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StatusCode))
+            {
+                writer.WritePropertyName("statusCode"u8);
+                writer.WriteStringValue(StatusCode);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StatusMessage))
+            {
+                writer.WritePropertyName("statusMessage"u8);
+                writer.WriteObjectValue(StatusMessage);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Request))
+            {
+                writer.WritePropertyName("request"u8);
+                writer.WriteObjectValue(Request);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Response))
+            {
+                writer.WritePropertyName("response"u8);
+                writer.WriteObjectValue(Response);
+            }
+            writer.WriteEndObject();
+        }
+
+        DeploymentOperationProperties IModelJsonSerializable<DeploymentOperationProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeploymentOperationProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeploymentOperationProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeploymentOperationProperties IModelSerializable<DeploymentOperationProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeploymentOperationProperties(document.RootElement, options);
+        }
+
+        internal static DeploymentOperationProperties DeserializeDeploymentOperationProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

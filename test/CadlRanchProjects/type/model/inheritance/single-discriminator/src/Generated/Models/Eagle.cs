@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// <summary> The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances. </summary>
     public partial class Eagle : Bird
     {
-        /// <summary> Initializes a new instance of Eagle. </summary>
+        /// <summary> Initializes a new instance of <see cref="Eagle"/>. </summary>
         /// <param name="wingspan"></param>
         public Eagle(int wingspan) : base(wingspan)
         {
@@ -22,17 +23,23 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             Hate = new ChangeTrackingDictionary<string, Bird>();
         }
 
-        /// <summary> Initializes a new instance of Eagle. </summary>
+        /// <summary> Initializes a new instance of <see cref="Eagle"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="friends"></param>
         /// <param name="hate"></param>
         /// <param name="partner"></param>
-        internal Eagle(string kind, int wingspan, IList<Bird> friends, IDictionary<string, Bird> hate, Bird partner) : base(kind, wingspan)
+        internal Eagle(string kind, int wingspan, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<Bird> friends, IDictionary<string, Bird> hate, Bird partner) : base(kind, wingspan, serializedAdditionalRawData)
         {
             Friends = friends;
             Hate = hate;
             Partner = partner;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Eagle"/> for deserialization. </summary>
+        internal Eagle()
+        {
         }
 
         /// <summary>

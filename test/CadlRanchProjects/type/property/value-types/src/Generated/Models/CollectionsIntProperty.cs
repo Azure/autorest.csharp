@@ -15,7 +15,10 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with collection int properties. </summary>
     public partial class CollectionsIntProperty
     {
-        /// <summary> Initializes a new instance of CollectionsIntProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CollectionsIntProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public CollectionsIntProperty(IEnumerable<int> property)
@@ -23,13 +26,21 @@ namespace _Type.Property.ValueTypes.Models
             Argument.AssertNotNull(property, nameof(property));
 
             Property = property.ToList();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CollectionsIntProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsIntProperty"/>. </summary>
         /// <param name="property"> Property. </param>
-        internal CollectionsIntProperty(IList<int> property)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionsIntProperty(IList<int> property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CollectionsIntProperty"/> for deserialization. </summary>
+        internal CollectionsIntProperty()
+        {
         }
 
         /// <summary> Property. </summary>

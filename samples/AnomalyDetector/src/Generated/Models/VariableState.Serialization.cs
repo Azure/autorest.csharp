@@ -6,15 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class VariableState : IUtf8JsonSerializable
+    public partial class VariableState : IUtf8JsonSerializable, IModelJsonSerializable<VariableState>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VariableState>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VariableState>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Variable))
@@ -42,11 +46,47 @@ namespace AnomalyDetector.Models
                 writer.WritePropertyName("lastTimestamp"u8);
                 writer.WriteStringValue(LastTimestamp.Value, "O");
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static VariableState DeserializeVariableState(JsonElement element)
+        VariableState IModelJsonSerializable<VariableState>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVariableState(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VariableState>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VariableState IModelSerializable<VariableState>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVariableState(document.RootElement, options);
+        }
+
+        internal static VariableState DeserializeVariableState(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -56,51 +96,58 @@ namespace AnomalyDetector.Models
             Optional<int> effectiveCount = default;
             Optional<DateTimeOffset> firstTimestamp = default;
             Optional<DateTimeOffset> lastTimestamp = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("variable"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    variable = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("filledNARatio"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("variable"u8))
                     {
+                        variable = property.Value.GetString();
                         continue;
                     }
-                    filledNARatio = property.Value.GetSingle();
-                    continue;
-                }
-                if (property.NameEquals("effectiveCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("filledNARatio"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        filledNARatio = property.Value.GetSingle();
                         continue;
                     }
-                    effectiveCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("firstTimestamp"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("effectiveCount"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        effectiveCount = property.Value.GetInt32();
                         continue;
                     }
-                    firstTimestamp = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("lastTimestamp"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("firstTimestamp"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        firstTimestamp = property.Value.GetDateTimeOffset("O");
                         continue;
                     }
-                    lastTimestamp = property.Value.GetDateTimeOffset("O");
-                    continue;
+                    if (property.NameEquals("lastTimestamp"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        lastTimestamp = property.Value.GetDateTimeOffset("O");
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new VariableState(variable.Value, Optional.ToNullable(filledNARatio), Optional.ToNullable(effectiveCount), Optional.ToNullable(firstTimestamp), Optional.ToNullable(lastTimestamp));
+            return new VariableState(variable.Value, Optional.ToNullable(filledNARatio), Optional.ToNullable(effectiveCount), Optional.ToNullable(firstTimestamp), Optional.ToNullable(lastTimestamp), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -108,15 +155,13 @@ namespace AnomalyDetector.Models
         internal static VariableState FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeVariableState(document.RootElement);
+            return DeserializeVariableState(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

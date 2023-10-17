@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
-    public partial class IdentityWithNoSystemIdentity : IUtf8JsonSerializable
+    public partial class IdentityWithNoSystemIdentity : IUtf8JsonSerializable, IModelJsonSerializable<IdentityWithNoSystemIdentity>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IdentityWithNoSystemIdentity>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<IdentityWithNoSystemIdentity>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ResourceIdentityType))
@@ -36,8 +40,32 @@ namespace MgmtPropertyChooser.Models
             writer.WriteEndObject();
         }
 
-        internal static IdentityWithNoSystemIdentity DeserializeIdentityWithNoSystemIdentity(JsonElement element)
+        IdentityWithNoSystemIdentity IModelJsonSerializable<IdentityWithNoSystemIdentity>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIdentityWithNoSystemIdentity(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<IdentityWithNoSystemIdentity>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IdentityWithNoSystemIdentity IModelSerializable<IdentityWithNoSystemIdentity>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIdentityWithNoSystemIdentity(document.RootElement, options);
+        }
+
+        internal static IdentityWithNoSystemIdentity DeserializeIdentityWithNoSystemIdentity(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

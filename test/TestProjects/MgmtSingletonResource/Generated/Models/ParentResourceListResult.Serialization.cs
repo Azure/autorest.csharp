@@ -5,17 +5,63 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtSingletonResource;
 
 namespace MgmtSingletonResource.Models
 {
-    internal partial class ParentResourceListResult
+    internal partial class ParentResourceListResult : IUtf8JsonSerializable, IModelJsonSerializable<ParentResourceListResult>
     {
-        internal static ParentResourceListResult DeserializeParentResourceListResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ParentResourceListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ParentResourceListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("value"u8);
+            writer.WriteStartArray();
+            foreach (var item in Value)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        ParentResourceListResult IModelJsonSerializable<ParentResourceListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeParentResourceListResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ParentResourceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ParentResourceListResult IModelSerializable<ParentResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeParentResourceListResult(document.RootElement, options);
+        }
+
+        internal static ParentResourceListResult DeserializeParentResourceListResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

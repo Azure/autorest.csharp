@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class DeploymentValidateResult
+    public partial class DeploymentValidateResult : IUtf8JsonSerializable, IModelJsonSerializable<DeploymentValidateResult>
     {
-        internal static DeploymentValidateResult DeserializeDeploymentValidateResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeploymentValidateResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeploymentValidateResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ErrorResponse))
+            {
+                writer.WritePropertyName("errorResponse"u8);
+                writer.WriteObjectValue(ErrorResponse);
+            }
+            if (Optional.IsDefined(Properties))
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteObjectValue(Properties);
+            }
+            writer.WriteEndObject();
+        }
+
+        DeploymentValidateResult IModelJsonSerializable<DeploymentValidateResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeploymentValidateResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeploymentValidateResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeploymentValidateResult IModelSerializable<DeploymentValidateResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeploymentValidateResult(document.RootElement, options);
+        }
+
+        internal static DeploymentValidateResult DeserializeDeploymentValidateResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

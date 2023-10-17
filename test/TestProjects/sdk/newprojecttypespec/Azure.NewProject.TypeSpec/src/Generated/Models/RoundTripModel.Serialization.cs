@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    internal partial class RoundTripModel : IUtf8JsonSerializable
+    internal partial class RoundTripModel : IUtf8JsonSerializable, IModelJsonSerializable<RoundTripModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RoundTripModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RoundTripModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
@@ -156,11 +159,87 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("readOnlyRequiredRecordUnknown"u8);
+                writer.WriteStartObject();
+                foreach (var item in ReadOnlyRequiredRecordUnknown)
+                {
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
+            {
+                writer.WritePropertyName("readOnlyOptionalRecordUnknown"u8);
+                writer.WriteStartObject();
+                foreach (var item in ReadOnlyOptionalRecordUnknown)
+                {
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+                writer.WriteEndObject();
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element)
+        RoundTripModel IModelJsonSerializable<RoundTripModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RoundTripModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RoundTripModel IModelSerializable<RoundTripModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRoundTripModel(document.RootElement, options);
+        }
+
+        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -185,236 +264,243 @@ namespace Azure.NewProject.TypeSpec.Models
             Optional<IDictionary<string, BinaryData>> optionalRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
             Optional<IReadOnlyDictionary<string, BinaryData>> readOnlyOptionalRecordUnknown = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("requiredString"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    requiredString = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("requiredInt"u8))
-                {
-                    requiredInt = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("requiredCollection"u8))
-                {
-                    List<StringFixedEnum> array = new List<StringFixedEnum>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("requiredString"u8))
                     {
-                        array.Add(item.GetString().ToStringFixedEnum());
-                    }
-                    requiredCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("requiredDictionary"u8))
-                {
-                    Dictionary<string, StringExtensibleEnum> dictionary = new Dictionary<string, StringExtensibleEnum>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        dictionary.Add(property0.Name, new StringExtensibleEnum(property0.Value.GetString()));
-                    }
-                    requiredDictionary = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("requiredModel"u8))
-                {
-                    requiredModel = Thing.DeserializeThing(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("intExtensibleEnum"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        requiredString = property.Value.GetString();
                         continue;
                     }
-                    intExtensibleEnum = new IntExtensibleEnum(property.Value.GetInt32());
-                    continue;
-                }
-                if (property.NameEquals("intExtensibleEnumCollection"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("requiredInt"u8))
                     {
+                        requiredInt = property.Value.GetInt32();
                         continue;
                     }
-                    List<IntExtensibleEnum> array = new List<IntExtensibleEnum>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("requiredCollection"u8))
                     {
-                        array.Add(new IntExtensibleEnum(item.GetInt32()));
-                    }
-                    intExtensibleEnumCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("floatExtensibleEnum"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    floatExtensibleEnum = new FloatExtensibleEnum(property.Value.GetInt32());
-                    continue;
-                }
-                if (property.NameEquals("floatExtensibleEnumCollection"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<FloatExtensibleEnum> array = new List<FloatExtensibleEnum>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(new FloatExtensibleEnum(item.GetInt32()));
-                    }
-                    floatExtensibleEnumCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("floatFixedEnum"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    floatFixedEnum = property.Value.GetSingle().ToFloatFixedEnum();
-                    continue;
-                }
-                if (property.NameEquals("floatFixedEnumCollection"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<FloatFixedEnum> array = new List<FloatFixedEnum>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetSingle().ToFloatFixedEnum());
-                    }
-                    floatFixedEnumCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("intFixedEnum"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    intFixedEnum = property.Value.GetInt32().ToIntFixedEnum();
-                    continue;
-                }
-                if (property.NameEquals("intFixedEnumCollection"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<IntFixedEnum> array = new List<IntFixedEnum>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetInt32().ToIntFixedEnum());
-                    }
-                    intFixedEnumCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("stringFixedEnum"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    stringFixedEnum = property.Value.GetString().ToStringFixedEnum();
-                    continue;
-                }
-                if (property.NameEquals("requiredUnknown"u8))
-                {
-                    requiredUnknown = BinaryData.FromString(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("optionalUnknown"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalUnknown = BinaryData.FromString(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("requiredRecordUnknown"u8))
-                {
-                    Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        List<StringFixedEnum> array = new List<StringFixedEnum>();
+                        foreach (var item in property.Value.EnumerateArray())
                         {
-                            dictionary.Add(property0.Name, null);
+                            array.Add(item.GetString().ToStringFixedEnum());
                         }
-                        else
-                        {
-                            dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
-                        }
-                    }
-                    requiredRecordUnknown = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("optionalRecordUnknown"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        requiredCollection = array;
                         continue;
                     }
-                    Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.NameEquals("requiredDictionary"u8))
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        Dictionary<string, StringExtensibleEnum> dictionary = new Dictionary<string, StringExtensibleEnum>();
+                        foreach (var property0 in property.Value.EnumerateObject())
                         {
-                            dictionary.Add(property0.Name, null);
+                            dictionary.Add(property0.Name, new StringExtensibleEnum(property0.Value.GetString()));
                         }
-                        else
-                        {
-                            dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
-                        }
-                    }
-                    optionalRecordUnknown = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("readOnlyRequiredRecordUnknown"u8))
-                {
-                    Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
-                        }
-                    }
-                    readOnlyRequiredRecordUnknown = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("readOnlyOptionalRecordUnknown"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        requiredDictionary = dictionary;
                         continue;
                     }
-                    Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.NameEquals("requiredModel"u8))
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
-                        }
+                        requiredModel = Thing.DeserializeThing(property.Value);
+                        continue;
                     }
-                    readOnlyOptionalRecordUnknown = dictionary;
-                    continue;
+                    if (property.NameEquals("intExtensibleEnum"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        intExtensibleEnum = new IntExtensibleEnum(property.Value.GetInt32());
+                        continue;
+                    }
+                    if (property.NameEquals("intExtensibleEnumCollection"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<IntExtensibleEnum> array = new List<IntExtensibleEnum>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(new IntExtensibleEnum(item.GetInt32()));
+                        }
+                        intExtensibleEnumCollection = array;
+                        continue;
+                    }
+                    if (property.NameEquals("floatExtensibleEnum"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        floatExtensibleEnum = new FloatExtensibleEnum(property.Value.GetInt32());
+                        continue;
+                    }
+                    if (property.NameEquals("floatExtensibleEnumCollection"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<FloatExtensibleEnum> array = new List<FloatExtensibleEnum>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(new FloatExtensibleEnum(item.GetInt32()));
+                        }
+                        floatExtensibleEnumCollection = array;
+                        continue;
+                    }
+                    if (property.NameEquals("floatFixedEnum"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        floatFixedEnum = property.Value.GetSingle().ToFloatFixedEnum();
+                        continue;
+                    }
+                    if (property.NameEquals("floatFixedEnumCollection"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<FloatFixedEnum> array = new List<FloatFixedEnum>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetSingle().ToFloatFixedEnum());
+                        }
+                        floatFixedEnumCollection = array;
+                        continue;
+                    }
+                    if (property.NameEquals("intFixedEnum"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        intFixedEnum = property.Value.GetInt32().ToIntFixedEnum();
+                        continue;
+                    }
+                    if (property.NameEquals("intFixedEnumCollection"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<IntFixedEnum> array = new List<IntFixedEnum>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetInt32().ToIntFixedEnum());
+                        }
+                        intFixedEnumCollection = array;
+                        continue;
+                    }
+                    if (property.NameEquals("stringFixedEnum"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        stringFixedEnum = property.Value.GetString().ToStringFixedEnum();
+                        continue;
+                    }
+                    if (property.NameEquals("requiredUnknown"u8))
+                    {
+                        requiredUnknown = BinaryData.FromString(property.Value.GetRawText());
+                        continue;
+                    }
+                    if (property.NameEquals("optionalUnknown"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        optionalUnknown = BinaryData.FromString(property.Value.GetRawText());
+                        continue;
+                    }
+                    if (property.NameEquals("requiredRecordUnknown"u8))
+                    {
+                        Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                            }
+                        }
+                        requiredRecordUnknown = dictionary;
+                        continue;
+                    }
+                    if (property.NameEquals("optionalRecordUnknown"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                            }
+                        }
+                        optionalRecordUnknown = dictionary;
+                        continue;
+                    }
+                    if (property.NameEquals("readOnlyRequiredRecordUnknown"u8))
+                    {
+                        Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                            }
+                        }
+                        readOnlyRequiredRecordUnknown = dictionary;
+                        continue;
+                    }
+                    if (property.NameEquals("readOnlyOptionalRecordUnknown"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                            }
+                        }
+                        readOnlyOptionalRecordUnknown = dictionary;
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown));
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -422,15 +508,13 @@ namespace Azure.NewProject.TypeSpec.Models
         internal static RoundTripModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripModel(document.RootElement);
+            return DeserializeRoundTripModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

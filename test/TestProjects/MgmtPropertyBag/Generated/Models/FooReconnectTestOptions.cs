@@ -15,7 +15,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> The FooReconnectTestOptions. </summary>
     public partial class FooReconnectTestOptions
     {
-        /// <summary> Initializes a new instance of FooReconnectTestOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="FooReconnectTestOptions"/>. </summary>
         public FooReconnectTestOptions()
         {
             CountryOrRegions = new ChangeTrackingList<string>();

@@ -5,14 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Model.Empty.Models
 {
     /// <summary> Empty model used in operation return type. </summary>
     public partial class EmptyOutput
     {
-        /// <summary> Initializes a new instance of EmptyOutput. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="EmptyOutput"/>. </summary>
         internal EmptyOutput()
         {
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="EmptyOutput"/>. </summary>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EmptyOutput(IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

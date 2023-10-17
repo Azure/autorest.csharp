@@ -5,14 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace SpreadTypeSpec.Models
 {
-    internal partial class SpreadAliasWithCollectionsRequest : IUtf8JsonSerializable
+    internal partial class SpreadAliasWithCollectionsRequest : IUtf8JsonSerializable, IModelJsonSerializable<SpreadAliasWithCollectionsRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SpreadAliasWithCollectionsRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SpreadAliasWithCollectionsRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredStringList"u8);
@@ -32,15 +38,102 @@ namespace SpreadTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
+        }
+
+        SpreadAliasWithCollectionsRequest IModelJsonSerializable<SpreadAliasWithCollectionsRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSpreadAliasWithCollectionsRequest(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SpreadAliasWithCollectionsRequest>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SpreadAliasWithCollectionsRequest IModelSerializable<SpreadAliasWithCollectionsRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSpreadAliasWithCollectionsRequest(document.RootElement, options);
+        }
+
+        internal static SpreadAliasWithCollectionsRequest DeserializeSpreadAliasWithCollectionsRequest(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            IList<string> requiredStringList = default;
+            Optional<IList<string>> optionalStringList = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in element.EnumerateObject())
+                {
+                    if (property.NameEquals("requiredStringList"u8))
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetString());
+                        }
+                        requiredStringList = array;
+                        continue;
+                    }
+                    if (property.NameEquals("optionalStringList"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetString());
+                        }
+                        optionalStringList = array;
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
+            }
+            return new SpreadAliasWithCollectionsRequest(requiredStringList, Optional.ToList(optionalStringList), serializedAdditionalRawData);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SpreadAliasWithCollectionsRequest FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSpreadAliasWithCollectionsRequest(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

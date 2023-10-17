@@ -232,7 +232,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantTestRestClient.CreateListRequest(optionalParam);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantTestRestClient.CreateListNextPageRequest(nextLink, optionalParam);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantTestResource(Client, TenantTestData.DeserializeTenantTestData(e)), _tenantTestClientDiagnostics, Pipeline, "TenantTestCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantTestResource(Client, TenantTestData.DeserializeTenantTestData(e)), _tenantTestClientDiagnostics, Pipeline, "TenantTestCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantTestRestClient.CreateListRequest(optionalParam);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantTestRestClient.CreateListNextPageRequest(nextLink, optionalParam);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantTestResource(Client, TenantTestData.DeserializeTenantTestData(e)), _tenantTestClientDiagnostics, Pipeline, "TenantTestCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantTestResource(Client, TenantTestData.DeserializeTenantTestData(e)), _tenantTestClientDiagnostics, Pipeline, "TenantTestCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

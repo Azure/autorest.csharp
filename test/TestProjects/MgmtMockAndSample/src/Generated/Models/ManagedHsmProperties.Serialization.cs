@@ -9,12 +9,15 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class ManagedHsmProperties : IUtf8JsonSerializable
+    public partial class ManagedHsmProperties : IUtf8JsonSerializable, IModelJsonSerializable<ManagedHsmProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ManagedHsmProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ManagedHsmProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Settings))
@@ -55,6 +58,11 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(HsmUri))
+            {
+                writer.WritePropertyName("hsmUri"u8);
+                writer.WriteStringValue(HsmUri.AbsoluteUri);
+            }
             if (Optional.IsDefined(EnableSoftDelete))
             {
                 writer.WritePropertyName("enableSoftDelete"u8);
@@ -75,21 +83,70 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StatusMessage))
+            {
+                writer.WritePropertyName("statusMessage"u8);
+                writer.WriteStringValue(StatusMessage);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
+            }
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(PrivateEndpointConnections))
+            {
+                writer.WritePropertyName("privateEndpointConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpointConnections)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ScheduledPurgeOn))
+            {
+                writer.WritePropertyName("scheduledPurgeDate"u8);
+                writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
+            }
             writer.WriteEndObject();
         }
 
-        internal static ManagedHsmProperties DeserializeManagedHsmProperties(JsonElement element)
+        ManagedHsmProperties IModelJsonSerializable<ManagedHsmProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeManagedHsmProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ManagedHsmProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ManagedHsmProperties IModelSerializable<ManagedHsmProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeManagedHsmProperties(document.RootElement, options);
+        }
+
+        internal static ManagedHsmProperties DeserializeManagedHsmProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

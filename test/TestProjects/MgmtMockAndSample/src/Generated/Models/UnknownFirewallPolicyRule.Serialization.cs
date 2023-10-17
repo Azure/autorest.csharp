@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class UnknownFirewallPolicyRule : IUtf8JsonSerializable
+    internal partial class UnknownFirewallPolicyRule : IUtf8JsonSerializable, IModelJsonSerializable<UnknownFirewallPolicyRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownFirewallPolicyRule>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownFirewallPolicyRule>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -30,8 +34,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static UnknownFirewallPolicyRule DeserializeUnknownFirewallPolicyRule(JsonElement element)
+        UnknownFirewallPolicyRule IModelJsonSerializable<UnknownFirewallPolicyRule>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownFirewallPolicyRule(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownFirewallPolicyRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownFirewallPolicyRule IModelSerializable<UnknownFirewallPolicyRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownFirewallPolicyRule(document.RootElement, options);
+        }
+
+        internal static UnknownFirewallPolicyRule DeserializeUnknownFirewallPolicyRule(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

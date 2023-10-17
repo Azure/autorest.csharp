@@ -27,6 +27,11 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteBooleanValue(Status.Value);
+            }
             if (Optional.IsCollectionDefined(AdditionalProperties))
             {
                 writer.WritePropertyName("additionalProperties"u8);
@@ -45,8 +50,8 @@ namespace additionalProperties.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePetAPInProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetAPInProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PetAPInProperties>.Serialize(ModelSerializerOptions options)

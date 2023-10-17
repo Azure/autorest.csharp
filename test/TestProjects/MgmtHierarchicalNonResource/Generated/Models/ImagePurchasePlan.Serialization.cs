@@ -5,15 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class ImagePurchasePlan
+    public partial class ImagePurchasePlan : IUtf8JsonSerializable, IModelJsonSerializable<ImagePurchasePlan>
     {
-        internal static ImagePurchasePlan DeserializeImagePurchasePlan(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ImagePurchasePlan>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ImagePurchasePlan>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Publisher))
+            {
+                writer.WritePropertyName("publisher"u8);
+                writer.WriteStringValue(Publisher);
+            }
+            if (Optional.IsDefined(Product))
+            {
+                writer.WritePropertyName("product"u8);
+                writer.WriteStringValue(Product);
+            }
+            writer.WriteEndObject();
+        }
+
+        ImagePurchasePlan IModelJsonSerializable<ImagePurchasePlan>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImagePurchasePlan(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ImagePurchasePlan>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ImagePurchasePlan IModelSerializable<ImagePurchasePlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeImagePurchasePlan(document.RootElement, options);
+        }
+
+        internal static ImagePurchasePlan DeserializeImagePurchasePlan(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

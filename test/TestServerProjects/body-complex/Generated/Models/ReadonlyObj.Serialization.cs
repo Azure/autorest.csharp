@@ -19,6 +19,11 @@ namespace body_complex.Models
         void IModelJsonSerializable<ReadonlyObj>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Size))
             {
                 writer.WritePropertyName("size"u8);
@@ -31,8 +36,8 @@ namespace body_complex.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeReadonlyObj(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeReadonlyObj(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ReadonlyObj>.Serialize(ModelSerializerOptions options)

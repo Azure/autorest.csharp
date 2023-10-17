@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtPartialResource.Models
 {
-    public partial class ConfigurationProfileAssignmentProperties : IUtf8JsonSerializable
+    public partial class ConfigurationProfileAssignmentProperties : IUtf8JsonSerializable, IModelJsonSerializable<ConfigurationProfileAssignmentProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ConfigurationProfileAssignmentProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ConfigurationProfileAssignmentProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ConfigurationProfile))
@@ -25,11 +29,40 @@ namespace MgmtPartialResource.Models
                 writer.WritePropertyName("targetId"u8);
                 writer.WriteStringValue(TargetId);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status);
+            }
             writer.WriteEndObject();
         }
 
-        internal static ConfigurationProfileAssignmentProperties DeserializeConfigurationProfileAssignmentProperties(JsonElement element)
+        ConfigurationProfileAssignmentProperties IModelJsonSerializable<ConfigurationProfileAssignmentProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeConfigurationProfileAssignmentProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ConfigurationProfileAssignmentProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ConfigurationProfileAssignmentProperties IModelSerializable<ConfigurationProfileAssignmentProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeConfigurationProfileAssignmentProperties(document.RootElement, options);
+        }
+
+        internal static ConfigurationProfileAssignmentProperties DeserializeConfigurationProfileAssignmentProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

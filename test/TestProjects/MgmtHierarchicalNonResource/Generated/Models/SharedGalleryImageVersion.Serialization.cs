@@ -8,13 +8,83 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class SharedGalleryImageVersion
+    public partial class SharedGalleryImageVersion : IUtf8JsonSerializable, IModelJsonSerializable<SharedGalleryImageVersion>
     {
-        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SharedGalleryImageVersion>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SharedGalleryImageVersion>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PublishedOn))
+                {
+                    writer.WritePropertyName("publishedDate"u8);
+                    writer.WriteStringValue(PublishedOn.Value, "O");
+                }
+                if (Optional.IsDefined(EndOfLifeOn))
+                {
+                    writer.WritePropertyName("endOfLifeDate"u8);
+                    writer.WriteStringValue(EndOfLifeOn.Value, "O");
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("identifier"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(UniqueId))
+                {
+                    writer.WritePropertyName("uniqueId"u8);
+                    writer.WriteStringValue(UniqueId);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        SharedGalleryImageVersion IModelJsonSerializable<SharedGalleryImageVersion>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSharedGalleryImageVersion(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SharedGalleryImageVersion>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SharedGalleryImageVersion IModelSerializable<SharedGalleryImageVersion>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSharedGalleryImageVersion(document.RootElement, options);
+        }
+
+        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

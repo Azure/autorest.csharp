@@ -36,8 +36,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDateAfterModification(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDateAfterModification(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DateAfterModification>.Serialize(ModelSerializerOptions options)

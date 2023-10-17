@@ -5,18 +5,32 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
-    public partial class IdentityWithDifferentPropertyType : IUtf8JsonSerializable
+    public partial class IdentityWithDifferentPropertyType : IUtf8JsonSerializable, IModelJsonSerializable<IdentityWithDifferentPropertyType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IdentityWithDifferentPropertyType>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<IdentityWithDifferentPropertyType>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PrincipalId))
+            {
+                writer.WritePropertyName("principalId"u8);
+                writer.WriteStringValue(PrincipalId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TenantId))
+            {
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteNumberValue(TenantId.Value);
+            }
             if (Optional.IsDefined(ResourceIdentityType))
             {
                 writer.WritePropertyName("type"u8);
@@ -36,8 +50,32 @@ namespace MgmtPropertyChooser.Models
             writer.WriteEndObject();
         }
 
-        internal static IdentityWithDifferentPropertyType DeserializeIdentityWithDifferentPropertyType(JsonElement element)
+        IdentityWithDifferentPropertyType IModelJsonSerializable<IdentityWithDifferentPropertyType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIdentityWithDifferentPropertyType(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<IdentityWithDifferentPropertyType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IdentityWithDifferentPropertyType IModelSerializable<IdentityWithDifferentPropertyType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIdentityWithDifferentPropertyType(document.RootElement, options);
+        }
+
+        internal static IdentityWithDifferentPropertyType DeserializeIdentityWithDifferentPropertyType(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -228,7 +228,7 @@ namespace MgmtMockAndSample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(e)), _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "MgmtMockAndSamplePrivateEndpointConnectionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(e)), _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "MgmtMockAndSamplePrivateEndpointConnectionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MgmtMockAndSample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(e)), _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "MgmtMockAndSamplePrivateEndpointConnectionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(e)), _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "MgmtMockAndSamplePrivateEndpointConnectionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

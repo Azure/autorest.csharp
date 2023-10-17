@@ -20,6 +20,32 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<SearchResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("@search.score"u8);
+                writer.WriteNumberValue(Score);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Highlights))
+            {
+                writer.WritePropertyName("@search.highlights"u8);
+                writer.WriteStartObject();
+                foreach (var item in Highlights)
+                {
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteStartArray();
+                    foreach (var item0 in item.Value)
+                    {
+                        writer.WriteStringValue(item0);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
+            }
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -32,8 +58,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSearchResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSearchResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SearchResult>.Serialize(ModelSerializerOptions options)
@@ -98,7 +124,7 @@ namespace CognitiveSearch.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SearchResult(searchScore, Optional.ToDictionary(searchHighlights));
+            return new SearchResult(searchScore, Optional.ToDictionary(searchHighlights), additionalProperties);
         }
     }
 }

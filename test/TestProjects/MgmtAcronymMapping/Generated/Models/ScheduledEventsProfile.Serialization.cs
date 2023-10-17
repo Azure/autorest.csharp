@@ -31,8 +31,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeScheduledEventsProfile(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeScheduledEventsProfile(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ScheduledEventsProfile>.Serialize(ModelSerializerOptions options)

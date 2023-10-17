@@ -31,14 +31,17 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PublicKey))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("publicKey"u8);
-                writer.WriteStringValue(PublicKey);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PublicKey))
+                {
+                    writer.WritePropertyName("publicKey"u8);
+                    writer.WriteStringValue(PublicKey);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -46,8 +49,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSshPublicKeyPatch(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSshPublicKeyPatch(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SshPublicKeyPatch>.Serialize(ModelSerializerOptions options)

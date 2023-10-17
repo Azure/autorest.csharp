@@ -15,7 +15,10 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadAliasWithCollectionsRequest. </summary>
     internal partial class SpreadAliasWithCollectionsRequest
     {
-        /// <summary> Initializes a new instance of SpreadAliasWithCollectionsRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithCollectionsRequest"/>. </summary>
         /// <param name="requiredStringList"> required list. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
         public SpreadAliasWithCollectionsRequest(IEnumerable<string> requiredStringList)
@@ -24,15 +27,23 @@ namespace SpreadTypeSpec.Models
 
             RequiredStringList = requiredStringList.ToList();
             OptionalStringList = new ChangeTrackingList<string>();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of SpreadAliasWithCollectionsRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithCollectionsRequest"/>. </summary>
         /// <param name="requiredStringList"> required list. </param>
         /// <param name="optionalStringList"> optional list. </param>
-        internal SpreadAliasWithCollectionsRequest(IList<string> requiredStringList, IList<string> optionalStringList)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SpreadAliasWithCollectionsRequest(IList<string> requiredStringList, IList<string> optionalStringList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredStringList = requiredStringList;
             OptionalStringList = optionalStringList;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithCollectionsRequest"/> for deserialization. </summary>
+        internal SpreadAliasWithCollectionsRequest()
+        {
         }
 
         /// <summary> required list. </summary>

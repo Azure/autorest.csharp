@@ -231,7 +231,7 @@ namespace MgmtSubscriptionNameParameter
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sbSubscriptionSubscriptionsRestClient.CreateListByTopicRequest(Id.SubscriptionId, Id.ResourceGroupName, skip, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sbSubscriptionSubscriptionsRestClient.CreateListByTopicNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SBSubscriptionResource(Client, SBSubscriptionData.DeserializeSBSubscriptionData(e)), _sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, "SBSubscriptionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new SBSubscriptionResource(Client, SBSubscriptionData.DeserializeSBSubscriptionData(e)), _sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, "SBSubscriptionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace MgmtSubscriptionNameParameter
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sbSubscriptionSubscriptionsRestClient.CreateListByTopicRequest(Id.SubscriptionId, Id.ResourceGroupName, skip, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sbSubscriptionSubscriptionsRestClient.CreateListByTopicNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SBSubscriptionResource(Client, SBSubscriptionData.DeserializeSBSubscriptionData(e)), _sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, "SBSubscriptionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new SBSubscriptionResource(Client, SBSubscriptionData.DeserializeSBSubscriptionData(e)), _sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, "SBSubscriptionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

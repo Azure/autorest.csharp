@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
@@ -17,7 +18,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// </summary>
     internal abstract partial class AbstractModel
     {
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected AbstractModel(string name)
@@ -25,15 +29,23 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"></param>
-        internal AbstractModel(string kind, string name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AbstractModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/> for deserialization. </summary>
+        internal AbstractModel()
+        {
         }
 
         /// <summary> Discriminator. </summary>

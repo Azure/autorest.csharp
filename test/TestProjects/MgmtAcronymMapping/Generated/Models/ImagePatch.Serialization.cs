@@ -32,24 +32,32 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(SourceVirtualMachine))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("sourceVirtualMachine"u8);
-                JsonSerializer.Serialize(writer, SourceVirtualMachine);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(SourceVirtualMachine))
+                {
+                    writer.WritePropertyName("sourceVirtualMachine"u8);
+                    JsonSerializer.Serialize(writer, SourceVirtualMachine);
+                }
+                if (Optional.IsDefined(StorageProfile))
+                {
+                    writer.WritePropertyName("storageProfile"u8);
+                    writer.WriteObjectValue(StorageProfile);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                if (Optional.IsDefined(HyperVGeneration))
+                {
+                    writer.WritePropertyName("hyperVGeneration"u8);
+                    writer.WriteStringValue(HyperVGeneration.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(StorageProfile))
-            {
-                writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
-            }
-            if (Optional.IsDefined(HyperVGeneration))
-            {
-                writer.WritePropertyName("hyperVGeneration"u8);
-                writer.WriteStringValue(HyperVGeneration.Value.ToString());
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -57,8 +65,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeImagePatch(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImagePatch(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ImagePatch>.Serialize(ModelSerializerOptions options)

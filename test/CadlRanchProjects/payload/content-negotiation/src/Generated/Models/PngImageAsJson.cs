@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Payload.ContentNegotiation.Models
@@ -13,7 +14,10 @@ namespace Payload.ContentNegotiation.Models
     /// <summary> The PngImageAsJson. </summary>
     public partial class PngImageAsJson
     {
-        /// <summary> Initializes a new instance of PngImageAsJson. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PngImageAsJson"/>. </summary>
         /// <param name="content"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         internal PngImageAsJson(BinaryData content)
@@ -21,6 +25,21 @@ namespace Payload.ContentNegotiation.Models
             Argument.AssertNotNull(content, nameof(content));
 
             Content = content;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PngImageAsJson"/>. </summary>
+        /// <param name="content"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PngImageAsJson(BinaryData content, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Content = content;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PngImageAsJson"/> for deserialization. </summary>
+        internal PngImageAsJson()
+        {
         }
 
         /// <summary>

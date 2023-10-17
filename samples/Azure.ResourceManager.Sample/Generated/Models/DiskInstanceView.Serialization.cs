@@ -52,8 +52,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDiskInstanceView(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDiskInstanceView(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DiskInstanceView>.Serialize(ModelSerializerOptions options)

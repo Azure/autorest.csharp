@@ -15,7 +15,10 @@ namespace Encode.Bytes.Models
     /// <summary> The Base64urlArrayBytesProperty. </summary>
     public partial class Base64urlArrayBytesProperty
     {
-        /// <summary> Initializes a new instance of Base64urlArrayBytesProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Base64urlArrayBytesProperty"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Base64urlArrayBytesProperty(IEnumerable<BinaryData> value)
@@ -23,13 +26,21 @@ namespace Encode.Bytes.Models
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Base64urlArrayBytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Base64urlArrayBytesProperty"/>. </summary>
         /// <param name="value"></param>
-        internal Base64urlArrayBytesProperty(IList<BinaryData> value)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Base64urlArrayBytesProperty(IList<BinaryData> value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Base64urlArrayBytesProperty"/> for deserialization. </summary>
+        internal Base64urlArrayBytesProperty()
+        {
         }
 
         /// <summary>

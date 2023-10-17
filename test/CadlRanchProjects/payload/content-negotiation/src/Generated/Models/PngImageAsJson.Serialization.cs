@@ -6,30 +6,85 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Payload.ContentNegotiation.Models
 {
-    public partial class PngImageAsJson
+    public partial class PngImageAsJson : IUtf8JsonSerializable, IModelJsonSerializable<PngImageAsJson>
     {
-        internal static PngImageAsJson DeserializePngImageAsJson(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PngImageAsJson>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PngImageAsJson>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("content"u8);
+            writer.WriteBase64StringValue(Content.ToArray(), "D");
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        PngImageAsJson IModelJsonSerializable<PngImageAsJson>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePngImageAsJson(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PngImageAsJson>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PngImageAsJson IModelSerializable<PngImageAsJson>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePngImageAsJson(document.RootElement, options);
+        }
+
+        internal static PngImageAsJson DeserializePngImageAsJson(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             BinaryData content = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("content"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    content = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
-                    continue;
+                    if (property.NameEquals("content"u8))
+                    {
+                        content = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new PngImageAsJson(content);
+            return new PngImageAsJson(content, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -37,7 +92,13 @@ namespace Payload.ContentNegotiation.Models
         internal static PngImageAsJson FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePngImageAsJson(document.RootElement);
+            return DeserializePngImageAsJson(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

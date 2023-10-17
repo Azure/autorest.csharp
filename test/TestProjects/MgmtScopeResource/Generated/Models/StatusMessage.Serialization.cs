@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class StatusMessage
+    public partial class StatusMessage : IUtf8JsonSerializable, IModelJsonSerializable<StatusMessage>
     {
-        internal static StatusMessage DeserializeStatusMessage(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StatusMessage>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<StatusMessage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status);
+            }
+            if (Optional.IsDefined(ErrorResponse))
+            {
+                writer.WritePropertyName("errorResponse"u8);
+                writer.WriteObjectValue(ErrorResponse);
+            }
+            writer.WriteEndObject();
+        }
+
+        StatusMessage IModelJsonSerializable<StatusMessage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStatusMessage(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<StatusMessage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StatusMessage IModelSerializable<StatusMessage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStatusMessage(document.RootElement, options);
+        }
+
+        internal static StatusMessage DeserializeStatusMessage(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

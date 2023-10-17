@@ -8,13 +8,61 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSupersetInheritance.Models
 {
-    public partial class SupersetModel7SystemData
+    public partial class SupersetModel7SystemData : IUtf8JsonSerializable, IModelJsonSerializable<SupersetModel7SystemData>
     {
-        internal static SupersetModel7SystemData DeserializeSupersetModel7SystemData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SupersetModel7SystemData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SupersetModel7SystemData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(CreatedBy))
+            {
+                writer.WritePropertyName("createdBy"u8);
+                writer.WriteStringValue(CreatedBy);
+            }
+            if (Optional.IsDefined(CreatedOn))
+            {
+                writer.WritePropertyName("createdAt"u8);
+                writer.WriteStringValue(CreatedOn.Value, "O");
+            }
+            if (Optional.IsDefined(LastModifiedBy))
+            {
+                writer.WritePropertyName("lastModifiedBy"u8);
+                writer.WriteStringValue(LastModifiedBy);
+            }
+            writer.WriteEndObject();
+        }
+
+        SupersetModel7SystemData IModelJsonSerializable<SupersetModel7SystemData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSupersetModel7SystemData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SupersetModel7SystemData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SupersetModel7SystemData IModelSerializable<SupersetModel7SystemData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSupersetModel7SystemData(document.RootElement, options);
+        }
+
+        internal static SupersetModel7SystemData DeserializeSupersetModel7SystemData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

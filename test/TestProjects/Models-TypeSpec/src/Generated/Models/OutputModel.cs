@@ -18,7 +18,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>
@@ -44,7 +44,7 @@ namespace ModelsTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>
@@ -67,6 +67,11 @@ namespace ModelsTypeSpec.Models
             OptionalRecord = optionalRecord;
             OptionalNullableRecord = optionalNullableRecord;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/> for deserialization. </summary>
+        internal OutputModel()
+        {
         }
 
         /// <summary> Required string. </summary>

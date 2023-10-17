@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Union.Models
@@ -13,7 +14,10 @@ namespace _Type.Union.Models
     /// <summary> The ModelWithSimpleUnionProperty. </summary>
     internal partial class ModelWithSimpleUnionProperty
     {
-        /// <summary> Initializes a new instance of ModelWithSimpleUnionProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionProperty"/>. </summary>
         /// <param name="simpleUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="simpleUnion"/> is null. </exception>
         public ModelWithSimpleUnionProperty(object simpleUnion)
@@ -21,6 +25,21 @@ namespace _Type.Union.Models
             Argument.AssertNotNull(simpleUnion, nameof(simpleUnion));
 
             SimpleUnion = simpleUnion;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionProperty"/>. </summary>
+        /// <param name="simpleUnion"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithSimpleUnionProperty(object simpleUnion, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            SimpleUnion = simpleUnion;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionProperty"/> for deserialization. </summary>
+        internal ModelWithSimpleUnionProperty()
+        {
         }
 
         /// <summary> Gets the simple union. </summary>

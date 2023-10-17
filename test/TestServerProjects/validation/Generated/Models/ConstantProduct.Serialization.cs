@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace validation.Models
 {
-    public partial class ConstantProduct : IUtf8JsonSerializable
+    public partial class ConstantProduct : IUtf8JsonSerializable, IModelJsonSerializable<ConstantProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ConstantProduct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ConstantProduct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty"u8);
@@ -22,8 +26,32 @@ namespace validation.Models
             writer.WriteEndObject();
         }
 
-        internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
+        ConstantProduct IModelJsonSerializable<ConstantProduct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeConstantProduct(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ConstantProduct>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ConstantProduct IModelSerializable<ConstantProduct>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeConstantProduct(document.RootElement, options);
+        }
+
+        internal static ConstantProduct DeserializeConstantProduct(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

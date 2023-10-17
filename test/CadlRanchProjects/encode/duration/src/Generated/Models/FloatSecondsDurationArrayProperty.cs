@@ -15,7 +15,10 @@ namespace Encode.Duration.Models
     /// <summary> The FloatSecondsDurationArrayProperty. </summary>
     public partial class FloatSecondsDurationArrayProperty
     {
-        /// <summary> Initializes a new instance of FloatSecondsDurationArrayProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FloatSecondsDurationArrayProperty"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public FloatSecondsDurationArrayProperty(IEnumerable<TimeSpan> value)
@@ -23,13 +26,21 @@ namespace Encode.Duration.Models
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of FloatSecondsDurationArrayProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatSecondsDurationArrayProperty"/>. </summary>
         /// <param name="value"></param>
-        internal FloatSecondsDurationArrayProperty(IList<TimeSpan> value)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FloatSecondsDurationArrayProperty(IList<TimeSpan> value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FloatSecondsDurationArrayProperty"/> for deserialization. </summary>
+        internal FloatSecondsDurationArrayProperty()
+        {
         }
 
         /// <summary> Gets the value. </summary>

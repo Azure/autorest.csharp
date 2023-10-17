@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models
@@ -13,7 +14,10 @@ namespace Azure.NewProject.TypeSpec.Models
     /// <summary> A model with a few properties of literal types. </summary>
     internal partial class Thing
     {
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
@@ -27,9 +31,10 @@ namespace Azure.NewProject.TypeSpec.Models
             Name = name;
             RequiredUnion = requiredUnion;
             RequiredBadDescription = requiredBadDescription;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredLiteralString"> required literal string. </param>
@@ -41,7 +46,8 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        internal Thing(string name, object requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Thing(string name, object requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -54,6 +60,12 @@ namespace Azure.NewProject.TypeSpec.Models
             OptionalLiteralFloat = optionalLiteralFloat;
             OptionalLiteralBool = optionalLiteralBool;
             RequiredBadDescription = requiredBadDescription;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Thing"/> for deserialization. </summary>
+        internal Thing()
+        {
         }
 
         /// <summary> name of the Thing. </summary>

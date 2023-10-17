@@ -34,8 +34,8 @@ namespace AdditionalPropertiesEx.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOutputAdditionalPropertiesModel(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutputAdditionalPropertiesModel(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OutputAdditionalPropertiesModel>.Serialize(ModelSerializerOptions options)
@@ -73,7 +73,7 @@ namespace AdditionalPropertiesEx.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new OutputAdditionalPropertiesModel(id);
+            return new OutputAdditionalPropertiesModel(id, additionalProperties);
         }
     }
 }

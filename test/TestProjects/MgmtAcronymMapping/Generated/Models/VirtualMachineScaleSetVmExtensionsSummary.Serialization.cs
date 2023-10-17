@@ -20,6 +20,21 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<VirtualMachineScaleSetVmExtensionsSummary>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(StatusesSummary))
+            {
+                writer.WritePropertyName("statusesSummary"u8);
+                writer.WriteStartArray();
+                foreach (var item in StatusesSummary)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +42,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetVmExtensionsSummary(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetVmExtensionsSummary(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetVmExtensionsSummary>.Serialize(ModelSerializerOptions options)

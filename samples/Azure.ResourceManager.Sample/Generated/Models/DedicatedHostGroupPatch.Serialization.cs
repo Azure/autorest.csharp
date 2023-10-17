@@ -42,19 +42,37 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("platformFaultDomainCount"u8);
-                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PlatformFaultDomainCount))
+                {
+                    writer.WritePropertyName("platformFaultDomainCount"u8);
+                    writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Hosts))
+                {
+                    writer.WritePropertyName("hosts"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Hosts)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstanceView))
+                {
+                    writer.WritePropertyName("instanceView"u8);
+                    writer.WriteObjectValue(InstanceView);
+                }
+                if (Optional.IsDefined(SupportAutomaticPlacement))
+                {
+                    writer.WritePropertyName("supportAutomaticPlacement"u8);
+                    writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(SupportAutomaticPlacement))
-            {
-                writer.WritePropertyName("supportAutomaticPlacement"u8);
-                writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -62,8 +80,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDedicatedHostGroupPatch(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDedicatedHostGroupPatch(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DedicatedHostGroupPatch>.Serialize(ModelSerializerOptions options)

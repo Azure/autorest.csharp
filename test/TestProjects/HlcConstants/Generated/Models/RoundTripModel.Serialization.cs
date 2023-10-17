@@ -36,8 +36,8 @@ namespace HlcConstants.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRoundTripModel(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripModel(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RoundTripModel>.Serialize(ModelSerializerOptions options)

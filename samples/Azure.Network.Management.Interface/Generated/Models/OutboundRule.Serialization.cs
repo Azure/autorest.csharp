@@ -25,49 +25,67 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(AllocatedOutboundPorts))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("allocatedOutboundPorts"u8);
-                writer.WriteNumberValue(AllocatedOutboundPorts.Value);
-            }
-            if (Optional.IsCollectionDefined(FrontendIPConfigurations))
-            {
-                writer.WritePropertyName("frontendIPConfigurations"u8);
-                writer.WriteStartArray();
-                foreach (var item in FrontendIPConfigurations)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(AllocatedOutboundPorts))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("allocatedOutboundPorts"u8);
+                    writer.WriteNumberValue(AllocatedOutboundPorts.Value);
                 }
-                writer.WriteEndArray();
+                if (Optional.IsCollectionDefined(FrontendIPConfigurations))
+                {
+                    writer.WritePropertyName("frontendIPConfigurations"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in FrontendIPConfigurations)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(BackendAddressPool))
+                {
+                    writer.WritePropertyName("backendAddressPool"u8);
+                    writer.WriteObjectValue(BackendAddressPool);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                if (Optional.IsDefined(Protocol))
+                {
+                    writer.WritePropertyName("protocol"u8);
+                    writer.WriteStringValue(Protocol.Value.ToString());
+                }
+                if (Optional.IsDefined(EnableTcpReset))
+                {
+                    writer.WritePropertyName("enableTcpReset"u8);
+                    writer.WriteBooleanValue(EnableTcpReset.Value);
+                }
+                if (Optional.IsDefined(IdleTimeoutInMinutes))
+                {
+                    writer.WritePropertyName("idleTimeoutInMinutes"u8);
+                    writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(BackendAddressPool))
-            {
-                writer.WritePropertyName("backendAddressPool"u8);
-                writer.WriteObjectValue(BackendAddressPool);
-            }
-            if (Optional.IsDefined(Protocol))
-            {
-                writer.WritePropertyName("protocol"u8);
-                writer.WriteStringValue(Protocol.Value.ToString());
-            }
-            if (Optional.IsDefined(EnableTcpReset))
-            {
-                writer.WritePropertyName("enableTcpReset"u8);
-                writer.WriteBooleanValue(EnableTcpReset.Value);
-            }
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
-            {
-                writer.WritePropertyName("idleTimeoutInMinutes"u8);
-                writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -75,8 +93,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOutboundRule(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutboundRule(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OutboundRule>.Serialize(ModelSerializerOptions options)

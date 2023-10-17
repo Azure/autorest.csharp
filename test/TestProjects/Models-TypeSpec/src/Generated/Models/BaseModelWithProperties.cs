@@ -17,13 +17,13 @@ namespace ModelsTypeSpec.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
         internal BaseModelWithProperties()
         {
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal BaseModelWithProperties(string optionalPropertyOnBase, IDictionary<string, BinaryData> serializedAdditionalRawData)

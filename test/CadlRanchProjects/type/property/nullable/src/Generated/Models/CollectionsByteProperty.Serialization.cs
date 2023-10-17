@@ -10,50 +10,123 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Nullable.Models
 {
-    public partial class CollectionsByteProperty
+    public partial class CollectionsByteProperty : IUtf8JsonSerializable, IModelJsonSerializable<CollectionsByteProperty>
     {
-        internal static CollectionsByteProperty DeserializeCollectionsByteProperty(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CollectionsByteProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CollectionsByteProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("requiredProperty"u8);
+            writer.WriteStringValue(RequiredProperty);
+            if (NullableProperty != null && Optional.IsCollectionDefined(NullableProperty))
+            {
+                writer.WritePropertyName("nullableProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in NullableProperty)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteBase64StringValue(item.ToArray(), "D");
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("nullableProperty");
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        CollectionsByteProperty IModelJsonSerializable<CollectionsByteProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCollectionsByteProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CollectionsByteProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CollectionsByteProperty IModelSerializable<CollectionsByteProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCollectionsByteProperty(document.RootElement, options);
+        }
+
+        internal static CollectionsByteProperty DeserializeCollectionsByteProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string requiredProperty = default;
             IReadOnlyList<BinaryData> nullableProperty = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("requiredProperty"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    requiredProperty = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("nullableProperty"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("requiredProperty"u8))
                     {
-                        nullableProperty = new ChangeTrackingList<BinaryData>();
+                        requiredProperty = property.Value.GetString();
                         continue;
                     }
-                    List<BinaryData> array = new List<BinaryData>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("nullableProperty"u8))
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
+                        if (property.Value.ValueKind == JsonValueKind.Null)
                         {
-                            array.Add(null);
+                            nullableProperty = new ChangeTrackingList<BinaryData>();
+                            continue;
                         }
-                        else
+                        List<BinaryData> array = new List<BinaryData>();
+                        foreach (var item in property.Value.EnumerateArray())
                         {
-                            array.Add(BinaryData.FromBytes(item.GetBytesFromBase64("D")));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(BinaryData.FromBytes(item.GetBytesFromBase64("D")));
+                            }
                         }
+                        nullableProperty = array;
+                        continue;
                     }
-                    nullableProperty = array;
-                    continue;
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new CollectionsByteProperty(requiredProperty, nullableProperty);
+            return new CollectionsByteProperty(requiredProperty, nullableProperty, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -61,7 +134,13 @@ namespace _Type.Property.Nullable.Models
         internal static CollectionsByteProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCollectionsByteProperty(document.RootElement);
+            return DeserializeCollectionsByteProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

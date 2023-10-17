@@ -19,6 +19,21 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<CheckNameAvailabilityResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NameAvailable))
+            {
+                writer.WritePropertyName("nameAvailable"u8);
+                writer.WriteBooleanValue(NameAvailable.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Reason))
+            {
+                writer.WritePropertyName("reason"u8);
+                writer.WriteStringValue(Reason.Value.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Message))
+            {
+                writer.WritePropertyName("message"u8);
+                writer.WriteStringValue(Message);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +41,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeCheckNameAvailabilityResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCheckNameAvailabilityResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<CheckNameAvailabilityResult>.Serialize(ModelSerializerOptions options)

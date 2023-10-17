@@ -6,15 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class MultivariateBatchDetectionOptions : IUtf8JsonSerializable
+    public partial class MultivariateBatchDetectionOptions : IUtf8JsonSerializable, IModelJsonSerializable<MultivariateBatchDetectionOptions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MultivariateBatchDetectionOptions>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MultivariateBatchDetectionOptions>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("dataSource"u8);
@@ -25,11 +29,47 @@ namespace AnomalyDetector.Models
             writer.WriteStringValue(StartTime, "O");
             writer.WritePropertyName("endTime"u8);
             writer.WriteStringValue(EndTime, "O");
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static MultivariateBatchDetectionOptions DeserializeMultivariateBatchDetectionOptions(JsonElement element)
+        MultivariateBatchDetectionOptions IModelJsonSerializable<MultivariateBatchDetectionOptions>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMultivariateBatchDetectionOptions(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MultivariateBatchDetectionOptions>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MultivariateBatchDetectionOptions IModelSerializable<MultivariateBatchDetectionOptions>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMultivariateBatchDetectionOptions(document.RootElement, options);
+        }
+
+        internal static MultivariateBatchDetectionOptions DeserializeMultivariateBatchDetectionOptions(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -38,30 +78,37 @@ namespace AnomalyDetector.Models
             int topContributorCount = default;
             DateTimeOffset startTime = default;
             DateTimeOffset endTime = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("dataSource"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    dataSource = new Uri(property.Value.GetString());
-                    continue;
+                    if (property.NameEquals("dataSource"u8))
+                    {
+                        dataSource = new Uri(property.Value.GetString());
+                        continue;
+                    }
+                    if (property.NameEquals("topContributorCount"u8))
+                    {
+                        topContributorCount = property.Value.GetInt32();
+                        continue;
+                    }
+                    if (property.NameEquals("startTime"u8))
+                    {
+                        startTime = property.Value.GetDateTimeOffset("O");
+                        continue;
+                    }
+                    if (property.NameEquals("endTime"u8))
+                    {
+                        endTime = property.Value.GetDateTimeOffset("O");
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("topContributorCount"u8))
-                {
-                    topContributorCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("startTime"u8))
-                {
-                    startTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("endTime"u8))
-                {
-                    endTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new MultivariateBatchDetectionOptions(dataSource, topContributorCount, startTime, endTime);
+            return new MultivariateBatchDetectionOptions(dataSource, topContributorCount, startTime, endTime, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -69,15 +116,13 @@ namespace AnomalyDetector.Models
         internal static MultivariateBatchDetectionOptions FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultivariateBatchDetectionOptions(document.RootElement);
+            return DeserializeMultivariateBatchDetectionOptions(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -5,14 +5,16 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IXmlSerializable
+    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithCustomUsageViaAttribute>, IXmlSerializable
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -36,7 +38,9 @@ namespace TypeSchemaMapping.Models
             return new ModelWithCustomUsageViaAttribute(modelProperty);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithCustomUsageViaAttribute>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelWithCustomUsageViaAttribute>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
@@ -47,8 +51,32 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(JsonElement element)
+        ModelWithCustomUsageViaAttribute IModelJsonSerializable<ModelWithCustomUsageViaAttribute>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithCustomUsageViaAttribute(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithCustomUsageViaAttribute>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithCustomUsageViaAttribute IModelSerializable<ModelWithCustomUsageViaAttribute>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithCustomUsageViaAttribute(document.RootElement, options);
+        }
+
+        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -19,6 +19,21 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<UpgradeOperationHistoricalStatusInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Properties))
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteObjectValue(Properties);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(UpgradeOperationHistoricalStatusInfoType.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +41,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUpgradeOperationHistoricalStatusInfo(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpgradeOperationHistoricalStatusInfo(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UpgradeOperationHistoricalStatusInfo>.Serialize(ModelSerializerOptions options)

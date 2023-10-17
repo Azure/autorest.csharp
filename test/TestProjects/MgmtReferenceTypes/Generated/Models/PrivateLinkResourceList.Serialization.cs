@@ -10,20 +10,57 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(PrivateLinkResourceListConverter))]
-    public partial class PrivateLinkResourceList : IUtf8JsonSerializable
+    public partial class PrivateLinkResourceList : IUtf8JsonSerializable, IModelJsonSerializable<PrivateLinkResourceList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PrivateLinkResourceList>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PrivateLinkResourceList>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
-        internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element)
+        PrivateLinkResourceList IModelJsonSerializable<PrivateLinkResourceList>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePrivateLinkResourceList(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PrivateLinkResourceList>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateLinkResourceList IModelSerializable<PrivateLinkResourceList>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateLinkResourceList(document.RootElement, options);
+        }
+
+        internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -32,21 +32,26 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of FacetResult. </summary>
         /// <param name="count"> The approximate count of documents falling within the bucket described by this facet. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.FacetResult"/> instance for mocking. </returns>
-        public static FacetResult FacetResult(long? count = null)
+        public static FacetResult FacetResult(long? count = null, IReadOnlyDictionary<string, object> additionalProperties = null)
         {
-            return new FacetResult(count);
+            additionalProperties ??= new Dictionary<string, object>();
+
+            return new FacetResult(count, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of SearchResult. </summary>
         /// <param name="score"> The relevance score of the document compared to other documents returned by the query. </param>
         /// <param name="highlights"> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.SearchResult"/> instance for mocking. </returns>
-        public static SearchResult SearchResult(double score = default, IReadOnlyDictionary<string, IList<string>> highlights = null)
+        public static SearchResult SearchResult(double score = default, IReadOnlyDictionary<string, IList<string>> highlights = null, IReadOnlyDictionary<string, object> additionalProperties = null)
         {
             highlights ??= new Dictionary<string, IList<string>>();
+            additionalProperties ??= new Dictionary<string, object>();
 
-            return new SearchResult(score, highlights);
+            return new SearchResult(score, highlights, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of SuggestDocumentsResult. </summary>
@@ -62,16 +67,13 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of SuggestResult. </summary>
         /// <param name="text"> The text of the suggestion result. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.SuggestResult"/> instance for mocking. </returns>
-        public static SuggestResult SuggestResult(string text = null)
+        public static SuggestResult SuggestResult(string text = null, IReadOnlyDictionary<string, object> additionalProperties = null)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
+            additionalProperties ??= new Dictionary<string, object>();
 
-            return new SuggestResult(text);
+            return new SuggestResult(text, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of SuggestRequest. </summary>

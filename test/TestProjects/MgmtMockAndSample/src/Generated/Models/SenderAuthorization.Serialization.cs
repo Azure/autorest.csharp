@@ -5,15 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class SenderAuthorization
+    public partial class SenderAuthorization : IUtf8JsonSerializable, IModelJsonSerializable<SenderAuthorization>
     {
-        internal static SenderAuthorization DeserializeSenderAuthorization(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SenderAuthorization>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SenderAuthorization>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Action))
+            {
+                writer.WritePropertyName("action"u8);
+                writer.WriteStringValue(Action);
+            }
+            if (Optional.IsDefined(Role))
+            {
+                writer.WritePropertyName("role"u8);
+                writer.WriteStringValue(Role);
+            }
+            if (Optional.IsDefined(Scope))
+            {
+                writer.WritePropertyName("scope"u8);
+                writer.WriteStringValue(Scope);
+            }
+            writer.WriteEndObject();
+        }
+
+        SenderAuthorization IModelJsonSerializable<SenderAuthorization>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSenderAuthorization(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SenderAuthorization>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SenderAuthorization IModelSerializable<SenderAuthorization>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSenderAuthorization(document.RootElement, options);
+        }
+
+        internal static SenderAuthorization DeserializeSenderAuthorization(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

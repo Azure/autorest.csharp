@@ -21,67 +21,95 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<VirtualMachineScaleSetExtensionPatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(ForceUpdateTag))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("forceUpdateTag"u8);
-                writer.WriteStringValue(ForceUpdateTag);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Publisher))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("publisher"u8);
-                writer.WriteStringValue(Publisher);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(TypePropertiesType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(TypePropertiesType);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(TypeHandlerVersion))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("typeHandlerVersion"u8);
-                writer.WriteStringValue(TypeHandlerVersion);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(AutoUpgradeMinorVersion))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("autoUpgradeMinorVersion"u8);
-                writer.WriteBooleanValue(AutoUpgradeMinorVersion.Value);
-            }
-            if (Optional.IsDefined(EnableAutomaticUpgrade))
-            {
-                writer.WritePropertyName("enableAutomaticUpgrade"u8);
-                writer.WriteBooleanValue(EnableAutomaticUpgrade.Value);
-            }
-            if (Optional.IsDefined(Settings))
-            {
-                writer.WritePropertyName("settings"u8);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(ForceUpdateTag))
+                {
+                    writer.WritePropertyName("forceUpdateTag"u8);
+                    writer.WriteStringValue(ForceUpdateTag);
+                }
+                if (Optional.IsDefined(Publisher))
+                {
+                    writer.WritePropertyName("publisher"u8);
+                    writer.WriteStringValue(Publisher);
+                }
+                if (Optional.IsDefined(TypePropertiesType))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(TypePropertiesType);
+                }
+                if (Optional.IsDefined(TypeHandlerVersion))
+                {
+                    writer.WritePropertyName("typeHandlerVersion"u8);
+                    writer.WriteStringValue(TypeHandlerVersion);
+                }
+                if (Optional.IsDefined(AutoUpgradeMinorVersion))
+                {
+                    writer.WritePropertyName("autoUpgradeMinorVersion"u8);
+                    writer.WriteBooleanValue(AutoUpgradeMinorVersion.Value);
+                }
+                if (Optional.IsDefined(EnableAutomaticUpgrade))
+                {
+                    writer.WritePropertyName("enableAutomaticUpgrade"u8);
+                    writer.WriteBooleanValue(EnableAutomaticUpgrade.Value);
+                }
+                if (Optional.IsDefined(Settings))
+                {
+                    writer.WritePropertyName("settings"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Settings);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Settings.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(Settings.ToString()).RootElement);
 #endif
-            }
-            if (Optional.IsDefined(ProtectedSettings))
-            {
-                writer.WritePropertyName("protectedSettings"u8);
+                }
+                if (Optional.IsDefined(ProtectedSettings))
+                {
+                    writer.WritePropertyName("protectedSettings"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(ProtectedSettings);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(ProtectedSettings.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(ProtectedSettings.ToString()).RootElement);
 #endif
-            }
-            if (Optional.IsCollectionDefined(ProvisionAfterExtensions))
-            {
-                writer.WritePropertyName("provisionAfterExtensions"u8);
-                writer.WriteStartArray();
-                foreach (var item in ProvisionAfterExtensions)
-                {
-                    writer.WriteStringValue(item);
                 }
-                writer.WriteEndArray();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                if (Optional.IsCollectionDefined(ProvisionAfterExtensions))
+                {
+                    writer.WritePropertyName("provisionAfterExtensions"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in ProvisionAfterExtensions)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -89,8 +117,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetExtensionPatch(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetExtensionPatch(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetExtensionPatch>.Serialize(ModelSerializerOptions options)

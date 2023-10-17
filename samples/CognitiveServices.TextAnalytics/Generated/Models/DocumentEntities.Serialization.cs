@@ -48,8 +48,8 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDocumentEntities(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDocumentEntities(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DocumentEntities>.Serialize(ModelSerializerOptions options)

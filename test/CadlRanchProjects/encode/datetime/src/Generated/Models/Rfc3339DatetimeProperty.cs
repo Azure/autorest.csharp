@@ -6,17 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using Azure.Core;
 
 namespace Encode.Datetime.Models
 {
     /// <summary> The Rfc3339DatetimeProperty. </summary>
     public partial class Rfc3339DatetimeProperty
     {
-        /// <summary> Initializes a new instance of Rfc3339DatetimeProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Rfc3339DatetimeProperty"/>. </summary>
         /// <param name="value"></param>
         public Rfc3339DatetimeProperty(DateTimeOffset value)
         {
             Value = value;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Rfc3339DatetimeProperty"/>. </summary>
+        /// <param name="value"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Rfc3339DatetimeProperty(DateTimeOffset value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Rfc3339DatetimeProperty"/> for deserialization. </summary>
+        internal Rfc3339DatetimeProperty()
+        {
         }
 
         /// <summary> Gets or sets the value. </summary>

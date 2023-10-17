@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelsTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="first"></param>
         /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
@@ -25,7 +25,7 @@ namespace ModelsTypeSpec.Models
             return new FirstDerivedOutputModel("first", serializedAdditionalRawData, first);
         }
 
-        /// <summary> Initializes a new instance of SecondDerivedOutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SecondDerivedOutputModel"/>. </summary>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="second"></param>
         /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
@@ -36,7 +36,7 @@ namespace ModelsTypeSpec.Models
             return new SecondDerivedOutputModel("second", serializedAdditionalRawData, second);
         }
 
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredNullableInt"> Required nullable int. </param>
@@ -84,7 +84,7 @@ namespace ModelsTypeSpec.Models
             return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredModel, requiredModel2, requiredIntList?.ToList(), requiredStringList?.ToList(), requiredModelList?.ToList(), requiredModelRecord, requiredCollectionWithNullableFloatElement?.ToList(), requiredCollectionWithNullableBooleanElement?.ToList(), requiredNullableModelList?.ToList(), requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredModelList?.ToList(), nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), nonRequiredNullableModelList?.ToList(), nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
@@ -136,7 +136,7 @@ namespace ModelsTypeSpec.Models
             return new RoundTripModel(serializedAdditionalRawData, requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
         }
 
-        /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithProperties"/>. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.BaseModelWithProperties"/> instance for mocking. </returns>
@@ -147,7 +147,7 @@ namespace ModelsTypeSpec.Models
             return new BaseModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithProperties"/>. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredList"> Required collection. </param>
@@ -160,7 +160,7 @@ namespace ModelsTypeSpec.Models
             return new DerivedModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData, requiredList?.ToList());
         }
 
-        /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.RoundTripReadOnlyModel"/>. </summary>
         /// <param name="requiredReadonlyString"> Required string, illustrating a readonly reference type property. </param>
         /// <param name="requiredReadonlyInt"> Required int, illustrating a readonly value type property. </param>
         /// <param name="optionalReadonlyString"> Optional string, illustrating a readonly reference type property. </param>
@@ -208,7 +208,7 @@ namespace ModelsTypeSpec.Models
             return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList(), serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>
@@ -233,7 +233,7 @@ namespace ModelsTypeSpec.Models
             return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.InputRecursiveModel"/>. </summary>
         /// <param name="message"> Message. </param>
         /// <param name="inner"> Required Record. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
@@ -245,7 +245,7 @@ namespace ModelsTypeSpec.Models
             return new InputRecursiveModel(message, inner, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ErrorModel"/>. </summary>
         /// <param name="message"> Error message. </param>
         /// <param name="innerError"> Required Record. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
@@ -257,7 +257,7 @@ namespace ModelsTypeSpec.Models
             return new ErrorModel(message, innerError, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of NoUseBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.NoUseBase"/>. </summary>
         /// <param name="baseModelProp"> base model property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.NoUseBase"/> instance for mocking. </returns>
@@ -268,7 +268,7 @@ namespace ModelsTypeSpec.Models
             return new NoUseBase(baseModelProp, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of SingleBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
@@ -280,7 +280,7 @@ namespace ModelsTypeSpec.Models
             return new UnknownSingleBase(kind, size, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of Facet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Facet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.Facet"/> instance for mocking. </returns>
@@ -291,7 +291,7 @@ namespace ModelsTypeSpec.Models
             return new Facet(field, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of NumericValuesFacetint32. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.NumericValuesFacetint32"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
@@ -305,7 +305,7 @@ namespace ModelsTypeSpec.Models
             return new NumericValuesFacetint32(field, serializedAdditionalRawData, values?.ToList(), value);
         }
 
-        /// <summary> Initializes a new instance of Int32ValuesFacet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Int32ValuesFacet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>

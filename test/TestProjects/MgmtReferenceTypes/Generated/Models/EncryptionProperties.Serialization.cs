@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(EncryptionPropertiesConverter))]
-    public partial class EncryptionProperties : IUtf8JsonSerializable
+    public partial class EncryptionProperties : IUtf8JsonSerializable, IModelJsonSerializable<EncryptionProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EncryptionProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<EncryptionProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Status))
@@ -31,8 +34,32 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static EncryptionProperties DeserializeEncryptionProperties(JsonElement element)
+        EncryptionProperties IModelJsonSerializable<EncryptionProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEncryptionProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EncryptionProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EncryptionProperties IModelSerializable<EncryptionProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEncryptionProperties(document.RootElement, options);
+        }
+
+        internal static EncryptionProperties DeserializeEncryptionProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

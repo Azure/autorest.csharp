@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MultipleMediaTypes.Models
@@ -13,7 +14,10 @@ namespace MultipleMediaTypes.Models
     /// <summary> The Body. </summary>
     public partial class Body
     {
-        /// <summary> Initializes a new instance of Body. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Body"/>. </summary>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         public Body(string id)
@@ -21,6 +25,21 @@ namespace MultipleMediaTypes.Models
             Argument.AssertNotNull(id, nameof(id));
 
             Id = id;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Body"/>. </summary>
+        /// <param name="id"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Body(string id, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Id = id;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Body"/> for deserialization. </summary>
+        internal Body()
+        {
         }
 
         /// <summary> Gets the id. </summary>

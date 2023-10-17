@@ -5,15 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VaultIssue
+    public partial class VaultIssue : IUtf8JsonSerializable, IModelJsonSerializable<VaultIssue>
     {
-        internal static VaultIssue DeserializeVaultIssue(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VaultIssue>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VaultIssue>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(VaultIssueType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(VaultIssueType);
+            }
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            if (Optional.IsDefined(Sev))
+            {
+                writer.WritePropertyName("sev"u8);
+                writer.WriteNumberValue(Sev.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        VaultIssue IModelJsonSerializable<VaultIssue>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultIssue(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VaultIssue>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VaultIssue IModelSerializable<VaultIssue>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVaultIssue(document.RootElement, options);
+        }
+
+        internal static VaultIssue DeserializeVaultIssue(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

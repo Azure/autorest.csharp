@@ -9,14 +9,52 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(OutputModelConverter))]
-    public partial class OutputModel
+    public partial class OutputModel : IUtf8JsonSerializable, IModelJsonSerializable<OutputModel>
     {
-        internal static OutputModel DeserializeOutputModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OutputModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<OutputModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(OutputModelProperty))
+            {
+                writer.WritePropertyName("Output_Model_Property"u8);
+                writer.WriteStringValue(OutputModelProperty);
+            }
+            writer.WriteEndObject();
+        }
+
+        OutputModel IModelJsonSerializable<OutputModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutputModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OutputModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OutputModel IModelSerializable<OutputModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOutputModel(document.RootElement, options);
+        }
+
+        internal static OutputModel DeserializeOutputModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -37,7 +75,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, OutputModel model, JsonSerializerOptions options)
             {
-                throw new NotImplementedException();
+                writer.WriteObjectValue(model);
             }
             public override OutputModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

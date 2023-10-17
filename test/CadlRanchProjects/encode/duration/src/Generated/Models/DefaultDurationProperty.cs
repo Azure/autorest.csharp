@@ -6,17 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using Azure.Core;
 
 namespace Encode.Duration.Models
 {
     /// <summary> The DefaultDurationProperty. </summary>
     public partial class DefaultDurationProperty
     {
-        /// <summary> Initializes a new instance of DefaultDurationProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DefaultDurationProperty"/>. </summary>
         /// <param name="value"></param>
         public DefaultDurationProperty(TimeSpan value)
         {
             Value = value;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DefaultDurationProperty"/>. </summary>
+        /// <param name="value"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DefaultDurationProperty(TimeSpan value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DefaultDurationProperty"/> for deserialization. </summary>
+        internal DefaultDurationProperty()
+        {
         }
 
         /// <summary> Gets or sets the value. </summary>

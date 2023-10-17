@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtNoTypeReplacement.Models
 {
-    internal partial class MiddleResourceModel : IUtf8JsonSerializable
+    internal partial class MiddleResourceModel : IUtf8JsonSerializable, IModelJsonSerializable<MiddleResourceModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MiddleResourceModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MiddleResourceModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -23,8 +27,32 @@ namespace MgmtNoTypeReplacement.Models
             writer.WriteEndObject();
         }
 
-        internal static MiddleResourceModel DeserializeMiddleResourceModel(JsonElement element)
+        MiddleResourceModel IModelJsonSerializable<MiddleResourceModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMiddleResourceModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MiddleResourceModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MiddleResourceModel IModelSerializable<MiddleResourceModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMiddleResourceModel(document.RootElement, options);
+        }
+
+        internal static MiddleResourceModel DeserializeMiddleResourceModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

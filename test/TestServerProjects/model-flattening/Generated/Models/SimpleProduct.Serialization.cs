@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace model_flattening.Models
 {
-    public partial class SimpleProduct : IUtf8JsonSerializable
+    public partial class SimpleProduct : IUtf8JsonSerializable, IModelJsonSerializable<SimpleProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SimpleProduct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SimpleProduct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("base_product_id"u8);
@@ -22,37 +26,67 @@ namespace model_flattening.Models
                 writer.WritePropertyName("base_product_description"u8);
                 writer.WriteStringValue(Description);
             }
-            writer.WritePropertyName("details"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(MaxProductDisplayName))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("max_product_display_name"u8);
-                writer.WriteStringValue(MaxProductDisplayName);
+                writer.WritePropertyName("details"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(MaxProductDisplayName))
+                {
+                    writer.WritePropertyName("max_product_display_name"u8);
+                    writer.WriteStringValue(MaxProductDisplayName);
+                }
+                if (Optional.IsDefined(Capacity))
+                {
+                    writer.WritePropertyName("max_product_capacity"u8);
+                    writer.WriteStringValue(Capacity.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    writer.WritePropertyName("max_product_image"u8);
+                    writer.WriteStartObject();
+                    if (Optional.IsDefined(GenericValue))
+                    {
+                        writer.WritePropertyName("generic_value"u8);
+                        writer.WriteStringValue(GenericValue);
+                    }
+                    if (Optional.IsDefined(OdataValue))
+                    {
+                        writer.WritePropertyName("@odata.value"u8);
+                        writer.WriteStringValue(OdataValue);
+                    }
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Capacity))
-            {
-                writer.WritePropertyName("max_product_capacity"u8);
-                writer.WriteStringValue(Capacity.Value.ToString());
-            }
-            writer.WritePropertyName("max_product_image"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(GenericValue))
-            {
-                writer.WritePropertyName("generic_value"u8);
-                writer.WriteStringValue(GenericValue);
-            }
-            if (Optional.IsDefined(OdataValue))
-            {
-                writer.WritePropertyName("@odata.value"u8);
-                writer.WriteStringValue(OdataValue);
-            }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static SimpleProduct DeserializeSimpleProduct(JsonElement element)
+        SimpleProduct IModelJsonSerializable<SimpleProduct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSimpleProduct(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SimpleProduct>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SimpleProduct IModelSerializable<SimpleProduct>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSimpleProduct(document.RootElement, options);
+        }
+
+        internal static SimpleProduct DeserializeSimpleProduct(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

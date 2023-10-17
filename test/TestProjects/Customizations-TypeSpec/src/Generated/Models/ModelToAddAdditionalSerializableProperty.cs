@@ -5,27 +5,42 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Model to add additional serializable property. </summary>
     public partial class ModelToAddAdditionalSerializableProperty
     {
-        /// <summary> Initializes a new instance of ModelToAddAdditionalSerializableProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public ModelToAddAdditionalSerializableProperty(int requiredInt)
         {
             RequiredInt = requiredInt;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ModelToAddAdditionalSerializableProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="additionalSerializableProperty"> to be removed by post process. </param>
         /// <param name="additionalNullableSerializableProperty"> to be removed by post process. </param>
-        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredInt = requiredInt;
             AdditionalSerializableProperty = additionalSerializableProperty;
             AdditionalNullableSerializableProperty = additionalNullableSerializableProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/> for deserialization. </summary>
+        internal ModelToAddAdditionalSerializableProperty()
+        {
         }
     }
 }

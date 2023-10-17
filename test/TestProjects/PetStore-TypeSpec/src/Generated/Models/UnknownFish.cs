@@ -5,21 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace PetStore.Models
 {
     /// <summary> Unknown version of Fish. </summary>
     internal partial class UnknownFish : Fish
     {
-        /// <summary> Initializes a new instance of UnknownFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownFish"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         internal UnknownFish(int size) : base(size)
         {
         }
 
-        /// <summary> Initializes a new instance of UnknownFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownFish"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
-        internal UnknownFish(string kind, int size) : base(kind, size)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownFish(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownFish"/> for deserialization. </summary>
+        internal UnknownFish()
         {
         }
     }

@@ -31,8 +31,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSubResource(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubResource(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SubResource>.Serialize(ModelSerializerOptions options)

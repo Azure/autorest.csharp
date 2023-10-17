@@ -18,7 +18,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripOptionalModel"/>. </summary>
         public RoundTripOptionalModel()
         {
             OptionalStringList = new ChangeTrackingList<string>();
@@ -31,7 +31,7 @@ namespace ModelsTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripOptionalModel"/>. </summary>
         /// <param name="optionalString"> Optional string, illustrating an optional reference type property. </param>
         /// <param name="optionalInt"> Optional int, illustrating an optional value type property. </param>
         /// <param name="optionalStringList"> Optional string collection. </param>

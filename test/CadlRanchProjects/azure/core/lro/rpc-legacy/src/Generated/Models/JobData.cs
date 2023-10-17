@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Azure.Lro.RpcLegacy.Models
@@ -13,7 +14,10 @@ namespace _Azure.Lro.RpcLegacy.Models
     /// <summary> Data of the job. </summary>
     public partial class JobData
     {
-        /// <summary> Initializes a new instance of JobData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="JobData"/>. </summary>
         /// <param name="comment"> Comment. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="comment"/> is null. </exception>
         public JobData(string comment)
@@ -21,6 +25,21 @@ namespace _Azure.Lro.RpcLegacy.Models
             Argument.AssertNotNull(comment, nameof(comment));
 
             Comment = comment;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="JobData"/>. </summary>
+        /// <param name="comment"> Comment. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal JobData(string comment, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Comment = comment;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="JobData"/> for deserialization. </summary>
+        internal JobData()
+        {
         }
 
         /// <summary> Comment. </summary>

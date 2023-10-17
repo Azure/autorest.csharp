@@ -21,6 +21,16 @@ namespace MgmtCollectionParent.Models
         void IModelJsonSerializable<OrderResourceList>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink"u8);
@@ -33,8 +43,8 @@ namespace MgmtCollectionParent.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOrderResourceList(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOrderResourceList(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OrderResourceList>.Serialize(ModelSerializerOptions options)

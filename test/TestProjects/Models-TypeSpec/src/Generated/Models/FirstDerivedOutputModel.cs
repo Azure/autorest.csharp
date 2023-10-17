@@ -13,7 +13,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> First derived model as an output. </summary>
     public partial class FirstDerivedOutputModel : OutputBaseModelWithDiscriminator
     {
-        /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirstDerivedOutputModel"/>. </summary>
         /// <param name="first"></param>
         internal FirstDerivedOutputModel(bool first)
         {
@@ -21,13 +21,18 @@ namespace ModelsTypeSpec.Models
             First = first;
         }
 
-        /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirstDerivedOutputModel"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="first"></param>
         internal FirstDerivedOutputModel(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData, bool first) : base(kind, serializedAdditionalRawData)
         {
             First = first;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FirstDerivedOutputModel"/> for deserialization. </summary>
+        internal FirstDerivedOutputModel()
+        {
         }
 
         /// <summary> Gets the first. </summary>

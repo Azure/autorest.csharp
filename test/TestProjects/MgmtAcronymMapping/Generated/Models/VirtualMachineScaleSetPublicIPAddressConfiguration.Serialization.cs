@@ -23,39 +23,42 @@ namespace MgmtAcronymMapping.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("idleTimeoutInMinutes"u8);
-                writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
-            }
-            if (Optional.IsDefined(DnsSettings))
-            {
-                writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
-            }
-            if (Optional.IsCollectionDefined(IPTags))
-            {
-                writer.WritePropertyName("ipTags"u8);
-                writer.WriteStartArray();
-                foreach (var item in IPTags)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(IdleTimeoutInMinutes))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("idleTimeoutInMinutes"u8);
+                    writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
                 }
-                writer.WriteEndArray();
+                if (Optional.IsDefined(DnsSettings))
+                {
+                    writer.WritePropertyName("dnsSettings"u8);
+                    writer.WriteObjectValue(DnsSettings);
+                }
+                if (Optional.IsCollectionDefined(IPTags))
+                {
+                    writer.WritePropertyName("ipTags"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in IPTags)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(PublicIPPrefix))
+                {
+                    writer.WritePropertyName("publicIPPrefix"u8);
+                    JsonSerializer.Serialize(writer, PublicIPPrefix);
+                }
+                if (Optional.IsDefined(PublicIPAddressVersion))
+                {
+                    writer.WritePropertyName("publicIPAddressVersion"u8);
+                    writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(PublicIPPrefix))
-            {
-                writer.WritePropertyName("publicIPPrefix"u8);
-                JsonSerializer.Serialize(writer, PublicIPPrefix);
-            }
-            if (Optional.IsDefined(PublicIPAddressVersion))
-            {
-                writer.WritePropertyName("publicIPAddressVersion"u8);
-                writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -63,8 +66,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetPublicIPAddressConfiguration(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetPublicIPAddressConfiguration(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetPublicIPAddressConfiguration>.Serialize(ModelSerializerOptions options)

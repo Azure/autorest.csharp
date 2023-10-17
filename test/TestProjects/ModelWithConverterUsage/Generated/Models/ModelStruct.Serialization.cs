@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(ModelStructConverter))]
-    public partial struct ModelStruct : IUtf8JsonSerializable
+    public partial struct ModelStruct : IUtf8JsonSerializable, IModelJsonSerializable<ModelStruct>, IModelJsonSerializable<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelStruct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelStruct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
@@ -26,8 +29,40 @@ namespace ModelWithConverterUsage.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelStruct DeserializeModelStruct(JsonElement element)
+        ModelStruct IModelJsonSerializable<ModelStruct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelStruct(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelStruct>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelStruct IModelSerializable<ModelStruct>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelStruct(document.RootElement, options);
+        }
+
+        void IModelJsonSerializable<object>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options) => ((IModelJsonSerializable<ModelStruct>)this).Serialize(writer, options);
+
+        object IModelJsonSerializable<object>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options) => ((IModelJsonSerializable<ModelStruct>)this).Deserialize(ref reader, options);
+
+        BinaryData IModelSerializable<object>.Serialize(ModelSerializerOptions options) => ((IModelJsonSerializable<ModelStruct>)this).Serialize(options);
+
+        object IModelSerializable<object>.Deserialize(BinaryData data, ModelSerializerOptions options) => ((IModelJsonSerializable<ModelStruct>)this).Deserialize(data, options);
+
+        internal static ModelStruct DeserializeModelStruct(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             Optional<string> modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {

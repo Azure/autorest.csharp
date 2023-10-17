@@ -19,6 +19,26 @@ namespace MgmtCollectionParent.Models
         void IModelJsonSerializable<StageDetails>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StageStatus))
+            {
+                writer.WritePropertyName("stageStatus"u8);
+                writer.WriteStringValue(StageStatus.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StageName))
+            {
+                writer.WritePropertyName("stageName"u8);
+                writer.WriteStringValue(StageName.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DisplayName))
+            {
+                writer.WritePropertyName("displayName"u8);
+                writer.WriteStringValue(DisplayName);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartOn))
+            {
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +46,8 @@ namespace MgmtCollectionParent.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStageDetails(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStageDetails(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StageDetails>.Serialize(ModelSerializerOptions options)

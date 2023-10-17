@@ -52,8 +52,8 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDocumentSentiment(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDocumentSentiment(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DocumentSentiment>.Serialize(ModelSerializerOptions options)

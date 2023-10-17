@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Union.Models
@@ -13,7 +14,10 @@ namespace _Type.Union.Models
     /// <summary> The ModelWithSimpleUnionPropertyInResponse. </summary>
     internal partial class ModelWithSimpleUnionPropertyInResponse
     {
-        /// <summary> Initializes a new instance of ModelWithSimpleUnionPropertyInResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionPropertyInResponse"/>. </summary>
         /// <param name="simpleUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="simpleUnion"/> is null. </exception>
         internal ModelWithSimpleUnionPropertyInResponse(object simpleUnion)
@@ -21,6 +25,21 @@ namespace _Type.Union.Models
             Argument.AssertNotNull(simpleUnion, nameof(simpleUnion));
 
             SimpleUnion = simpleUnion;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionPropertyInResponse"/>. </summary>
+        /// <param name="simpleUnion"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithSimpleUnionPropertyInResponse(object simpleUnion, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            SimpleUnion = simpleUnion;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionPropertyInResponse"/> for deserialization. </summary>
+        internal ModelWithSimpleUnionPropertyInResponse()
+        {
         }
 
         /// <summary> Gets the simple union. </summary>

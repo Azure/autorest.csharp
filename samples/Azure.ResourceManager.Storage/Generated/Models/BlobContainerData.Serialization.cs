@@ -23,50 +23,138 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<BlobContainerData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(DefaultEncryptionScope))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("defaultEncryptionScope"u8);
-                writer.WriteStringValue(DefaultEncryptionScope);
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
             }
-            if (Optional.IsDefined(DenyEncryptionScopeOverride))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("denyEncryptionScopeOverride"u8);
-                writer.WriteBooleanValue(DenyEncryptionScopeOverride.Value);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(PublicAccess))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("publicAccess"u8);
-                writer.WriteStringValue(PublicAccess.Value.ToSerialString());
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsCollectionDefined(Metadata))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("metadata"u8);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
                 writer.WriteStartObject();
-                foreach (var item in Metadata)
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Version))
                 {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
+                    writer.WritePropertyName("version"u8);
+                    writer.WriteStringValue(Version);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Deleted))
+                {
+                    writer.WritePropertyName("deleted"u8);
+                    writer.WriteBooleanValue(Deleted.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DeletedOn))
+                {
+                    writer.WritePropertyName("deletedTime"u8);
+                    writer.WriteStringValue(DeletedOn.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RemainingRetentionDays))
+                {
+                    writer.WritePropertyName("remainingRetentionDays"u8);
+                    writer.WriteNumberValue(RemainingRetentionDays.Value);
+                }
+                if (Optional.IsDefined(DefaultEncryptionScope))
+                {
+                    writer.WritePropertyName("defaultEncryptionScope"u8);
+                    writer.WriteStringValue(DefaultEncryptionScope);
+                }
+                if (Optional.IsDefined(DenyEncryptionScopeOverride))
+                {
+                    writer.WritePropertyName("denyEncryptionScopeOverride"u8);
+                    writer.WriteBooleanValue(DenyEncryptionScopeOverride.Value);
+                }
+                if (Optional.IsDefined(PublicAccess))
+                {
+                    writer.WritePropertyName("publicAccess"u8);
+                    writer.WriteStringValue(PublicAccess.Value.ToSerialString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastModifiedOn))
+                {
+                    writer.WritePropertyName("lastModifiedTime"u8);
+                    writer.WriteStringValue(LastModifiedOn.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LeaseStatus))
+                {
+                    writer.WritePropertyName("leaseStatus"u8);
+                    writer.WriteStringValue(LeaseStatus.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LeaseState))
+                {
+                    writer.WritePropertyName("leaseState"u8);
+                    writer.WriteStringValue(LeaseState.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LeaseDuration))
+                {
+                    writer.WritePropertyName("leaseDuration"u8);
+                    writer.WriteStringValue(LeaseDuration.Value.ToString());
+                }
+                if (Optional.IsCollectionDefined(Metadata))
+                {
+                    writer.WritePropertyName("metadata"u8);
+                    writer.WriteStartObject();
+                    foreach (var item in Metadata)
+                    {
+                        writer.WritePropertyName(item.Key);
+                        writer.WriteStringValue(item.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ImmutabilityPolicy))
+                {
+                    writer.WritePropertyName("immutabilityPolicy"u8);
+                    writer.WriteObjectValue(ImmutabilityPolicy);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LegalHold))
+                {
+                    writer.WritePropertyName("legalHold"u8);
+                    writer.WriteObjectValue(LegalHold);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(HasLegalHold))
+                {
+                    writer.WritePropertyName("hasLegalHold"u8);
+                    writer.WriteBooleanValue(HasLegalHold.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(HasImmutabilityPolicy))
+                {
+                    writer.WritePropertyName("hasImmutabilityPolicy"u8);
+                    writer.WriteBooleanValue(HasImmutabilityPolicy.Value);
+                }
+                if (Optional.IsDefined(ImmutableStorageWithVersioning))
+                {
+                    writer.WritePropertyName("immutableStorageWithVersioning"u8);
+                    writer.WriteObjectValue(ImmutableStorageWithVersioning);
+                }
+                if (Optional.IsDefined(EnableNfsV3RootSquash))
+                {
+                    writer.WritePropertyName("enableNfsV3RootSquash"u8);
+                    writer.WriteBooleanValue(EnableNfsV3RootSquash.Value);
+                }
+                if (Optional.IsDefined(EnableNfsV3AllSquash))
+                {
+                    writer.WritePropertyName("enableNfsV3AllSquash"u8);
+                    writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ImmutableStorageWithVersioning))
-            {
-                writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                writer.WriteObjectValue(ImmutableStorageWithVersioning);
-            }
-            if (Optional.IsDefined(EnableNfsV3RootSquash))
-            {
-                writer.WritePropertyName("enableNfsV3RootSquash"u8);
-                writer.WriteBooleanValue(EnableNfsV3RootSquash.Value);
-            }
-            if (Optional.IsDefined(EnableNfsV3AllSquash))
-            {
-                writer.WritePropertyName("enableNfsV3AllSquash"u8);
-                writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -74,8 +162,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBlobContainerData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBlobContainerData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BlobContainerData>.Serialize(ModelSerializerOptions options)

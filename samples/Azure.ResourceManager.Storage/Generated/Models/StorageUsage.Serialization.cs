@@ -19,6 +19,26 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<StorageUsage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Unit))
+            {
+                writer.WritePropertyName("unit"u8);
+                writer.WriteStringValue(Unit.Value.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CurrentValue))
+            {
+                writer.WritePropertyName("currentValue"u8);
+                writer.WriteNumberValue(CurrentValue.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Limit))
+            {
+                writer.WritePropertyName("limit"u8);
+                writer.WriteNumberValue(Limit.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteObjectValue(Name);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +46,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageUsage(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageUsage(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StorageUsage>.Serialize(ModelSerializerOptions options)

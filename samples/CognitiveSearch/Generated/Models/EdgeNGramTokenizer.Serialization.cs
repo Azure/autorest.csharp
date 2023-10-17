@@ -51,8 +51,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeEdgeNGramTokenizer(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEdgeNGramTokenizer(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<EdgeNGramTokenizer>.Serialize(ModelSerializerOptions options)

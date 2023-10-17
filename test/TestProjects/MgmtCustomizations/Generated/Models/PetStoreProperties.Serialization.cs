@@ -36,8 +36,8 @@ namespace MgmtCustomizations.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePetStoreProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetStoreProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PetStoreProperties>.Serialize(ModelSerializerOptions options)

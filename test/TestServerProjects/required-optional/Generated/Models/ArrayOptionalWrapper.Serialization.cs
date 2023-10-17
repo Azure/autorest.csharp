@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace required_optional.Models
 {
-    public partial class ArrayOptionalWrapper : IUtf8JsonSerializable
+    public partial class ArrayOptionalWrapper : IUtf8JsonSerializable, IModelJsonSerializable<ArrayOptionalWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ArrayOptionalWrapper>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ArrayOptionalWrapper>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
@@ -26,6 +31,57 @@ namespace required_optional.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
+        }
+
+        ArrayOptionalWrapper IModelJsonSerializable<ArrayOptionalWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeArrayOptionalWrapper(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ArrayOptionalWrapper>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ArrayOptionalWrapper IModelSerializable<ArrayOptionalWrapper>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeArrayOptionalWrapper(document.RootElement, options);
+        }
+
+        internal static ArrayOptionalWrapper DeserializeArrayOptionalWrapper(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<IList<string>> value = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("value"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    value = array;
+                    continue;
+                }
+            }
+            return new ArrayOptionalWrapper(Optional.ToList(value));
         }
     }
 }

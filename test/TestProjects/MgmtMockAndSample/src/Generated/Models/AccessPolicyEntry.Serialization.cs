@@ -8,12 +8,15 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class AccessPolicyEntry : IUtf8JsonSerializable
+    public partial class AccessPolicyEntry : IUtf8JsonSerializable, IModelJsonSerializable<AccessPolicyEntry>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AccessPolicyEntry>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AccessPolicyEntry>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("tenantId"u8);
@@ -30,8 +33,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static AccessPolicyEntry DeserializeAccessPolicyEntry(JsonElement element)
+        AccessPolicyEntry IModelJsonSerializable<AccessPolicyEntry>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAccessPolicyEntry(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AccessPolicyEntry>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AccessPolicyEntry IModelSerializable<AccessPolicyEntry>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAccessPolicyEntry(document.RootElement, options);
+        }
+
+        internal static AccessPolicyEntry DeserializeAccessPolicyEntry(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

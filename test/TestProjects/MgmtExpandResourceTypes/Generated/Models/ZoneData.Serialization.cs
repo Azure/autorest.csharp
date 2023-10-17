@@ -41,49 +41,97 @@ namespace MgmtExpandResourceTypes
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(ZoneType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("zoneType"u8);
-                writer.WriteStringValue(ZoneType.Value.ToSerialString());
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(MachineType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("machineType"u8);
-                writer.WriteNumberValue((int)MachineType.Value);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(StorageType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("storageType"u8);
-                writer.WriteNumberValue((int)StorageType.Value);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(MemoryType))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("memoryType"u8);
-                writer.WriteNumberValue((long)MemoryType.Value);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsCollectionDefined(RegistrationVirtualNetworks))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("registrationVirtualNetworks"u8);
-                writer.WriteStartArray();
-                foreach (var item in RegistrationVirtualNetworks)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaxNumberOfRecordSets))
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    writer.WritePropertyName("maxNumberOfRecordSets"u8);
+                    writer.WriteNumberValue(MaxNumberOfRecordSets.Value);
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(ResolutionVirtualNetworks))
-            {
-                writer.WritePropertyName("resolutionVirtualNetworks"u8);
-                writer.WriteStartArray();
-                foreach (var item in ResolutionVirtualNetworks)
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaxNumberOfRecordsPerRecordSet))
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    writer.WritePropertyName("maxNumberOfRecordsPerRecordSet"u8);
+                    writer.WriteNumberValue(MaxNumberOfRecordsPerRecordSet.Value);
                 }
-                writer.WriteEndArray();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NumberOfRecordSets))
+                {
+                    writer.WritePropertyName("numberOfRecordSets"u8);
+                    writer.WriteNumberValue(NumberOfRecordSets.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(NameServers))
+                {
+                    writer.WritePropertyName("nameServers"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NameServers)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(ZoneType))
+                {
+                    writer.WritePropertyName("zoneType"u8);
+                    writer.WriteStringValue(ZoneType.Value.ToSerialString());
+                }
+                if (Optional.IsDefined(MachineType))
+                {
+                    writer.WritePropertyName("machineType"u8);
+                    writer.WriteNumberValue((int)MachineType.Value);
+                }
+                if (Optional.IsDefined(StorageType))
+                {
+                    writer.WritePropertyName("storageType"u8);
+                    writer.WriteNumberValue((int)StorageType.Value);
+                }
+                if (Optional.IsDefined(MemoryType))
+                {
+                    writer.WritePropertyName("memoryType"u8);
+                    writer.WriteNumberValue((long)MemoryType.Value);
+                }
+                if (Optional.IsCollectionDefined(RegistrationVirtualNetworks))
+                {
+                    writer.WritePropertyName("registrationVirtualNetworks"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in RegistrationVirtualNetworks)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(ResolutionVirtualNetworks))
+                {
+                    writer.WritePropertyName("resolutionVirtualNetworks"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in ResolutionVirtualNetworks)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -91,8 +139,8 @@ namespace MgmtExpandResourceTypes
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeZoneData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeZoneData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ZoneData>.Serialize(ModelSerializerOptions options)

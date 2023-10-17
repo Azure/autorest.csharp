@@ -19,8 +19,18 @@ namespace MgmtCustomizations.Models
         void IModelJsonSerializable<Cat>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Meow))
+            {
+                writer.WritePropertyName("meow"u8);
+                writer.WriteStringValue(Meow);
+            }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             if (Optional.IsDefined(Size))
             {
                 writer.WritePropertyName("size"u8);
@@ -38,8 +48,8 @@ namespace MgmtCustomizations.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeCat(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCat(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Cat>.Serialize(ModelSerializerOptions options)

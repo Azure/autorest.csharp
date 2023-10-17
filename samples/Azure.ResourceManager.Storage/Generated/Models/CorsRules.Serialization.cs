@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeCorsRules(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCorsRules(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<CorsRules>.Serialize(ModelSerializerOptions options)

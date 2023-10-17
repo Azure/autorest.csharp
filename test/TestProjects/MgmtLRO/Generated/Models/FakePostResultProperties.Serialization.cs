@@ -5,15 +5,54 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtLRO.Models
 {
-    internal partial class FakePostResultProperties
+    internal partial class FakePostResultProperties : IUtf8JsonSerializable, IModelJsonSerializable<FakePostResultProperties>
     {
-        internal static FakePostResultProperties DeserializeFakePostResultProperties(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FakePostResultProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FakePostResultProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Bar))
+            {
+                writer.WritePropertyName("bar"u8);
+                writer.WriteStringValue(Bar);
+            }
+            writer.WriteEndObject();
+        }
+
+        FakePostResultProperties IModelJsonSerializable<FakePostResultProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFakePostResultProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FakePostResultProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakePostResultProperties IModelSerializable<FakePostResultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakePostResultProperties(document.RootElement, options);
+        }
+
+        internal static FakePostResultProperties DeserializeFakePostResultProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

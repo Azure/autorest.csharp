@@ -41,8 +41,8 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAzureResourceFlattenModel7(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureResourceFlattenModel7(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AzureResourceFlattenModel7>.Serialize(ModelSerializerOptions options)

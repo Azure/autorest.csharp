@@ -21,54 +21,82 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<BlobServiceData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Cors))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Sku))
             {
-                writer.WritePropertyName("cors"u8);
-                writer.WriteObjectValue(Cors);
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsDefined(DefaultServiceVersion))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("defaultServiceVersion"u8);
-                writer.WriteStringValue(DefaultServiceVersion);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(DeleteRetentionPolicy))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("deleteRetentionPolicy"u8);
-                writer.WriteObjectValue(DeleteRetentionPolicy);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(IsVersioningEnabled))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("isVersioningEnabled"u8);
-                writer.WriteBooleanValue(IsVersioningEnabled.Value);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(AutomaticSnapshotPolicyEnabled))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("automaticSnapshotPolicyEnabled"u8);
-                writer.WriteBooleanValue(AutomaticSnapshotPolicyEnabled.Value);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(ChangeFeed))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("changeFeed"u8);
-                writer.WriteObjectValue(ChangeFeed);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Cors))
+                {
+                    writer.WritePropertyName("cors"u8);
+                    writer.WriteObjectValue(Cors);
+                }
+                if (Optional.IsDefined(DefaultServiceVersion))
+                {
+                    writer.WritePropertyName("defaultServiceVersion"u8);
+                    writer.WriteStringValue(DefaultServiceVersion);
+                }
+                if (Optional.IsDefined(DeleteRetentionPolicy))
+                {
+                    writer.WritePropertyName("deleteRetentionPolicy"u8);
+                    writer.WriteObjectValue(DeleteRetentionPolicy);
+                }
+                if (Optional.IsDefined(IsVersioningEnabled))
+                {
+                    writer.WritePropertyName("isVersioningEnabled"u8);
+                    writer.WriteBooleanValue(IsVersioningEnabled.Value);
+                }
+                if (Optional.IsDefined(AutomaticSnapshotPolicyEnabled))
+                {
+                    writer.WritePropertyName("automaticSnapshotPolicyEnabled"u8);
+                    writer.WriteBooleanValue(AutomaticSnapshotPolicyEnabled.Value);
+                }
+                if (Optional.IsDefined(ChangeFeed))
+                {
+                    writer.WritePropertyName("changeFeed"u8);
+                    writer.WriteObjectValue(ChangeFeed);
+                }
+                if (Optional.IsDefined(RestorePolicy))
+                {
+                    writer.WritePropertyName("restorePolicy"u8);
+                    writer.WriteObjectValue(RestorePolicy);
+                }
+                if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
+                {
+                    writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
+                    writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
+                }
+                if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
+                {
+                    writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
+                    writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(RestorePolicy))
-            {
-                writer.WritePropertyName("restorePolicy"u8);
-                writer.WriteObjectValue(RestorePolicy);
-            }
-            if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
-            {
-                writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
-                writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
-            }
-            if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
-            {
-                writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
-                writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -76,8 +104,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBlobServiceData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBlobServiceData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BlobServiceData>.Serialize(ModelSerializerOptions options)

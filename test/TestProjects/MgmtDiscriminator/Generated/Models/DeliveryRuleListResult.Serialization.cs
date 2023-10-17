@@ -38,8 +38,8 @@ namespace MgmtDiscriminator.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDeliveryRuleListResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeliveryRuleListResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DeliveryRuleListResult>.Serialize(ModelSerializerOptions options)

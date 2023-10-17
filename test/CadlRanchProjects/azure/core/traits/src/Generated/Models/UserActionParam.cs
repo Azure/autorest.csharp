@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Specs_.Azure.Core.Traits.Models
@@ -13,7 +14,10 @@ namespace _Specs_.Azure.Core.Traits.Models
     /// <summary> User action param. </summary>
     public partial class UserActionParam
     {
-        /// <summary> Initializes a new instance of UserActionParam. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UserActionParam"/>. </summary>
         /// <param name="userActionValue"> User action value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userActionValue"/> is null. </exception>
         public UserActionParam(string userActionValue)
@@ -21,6 +25,21 @@ namespace _Specs_.Azure.Core.Traits.Models
             Argument.AssertNotNull(userActionValue, nameof(userActionValue));
 
             UserActionValue = userActionValue;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UserActionParam"/>. </summary>
+        /// <param name="userActionValue"> User action value. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UserActionParam(string userActionValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            UserActionValue = userActionValue;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UserActionParam"/> for deserialization. </summary>
+        internal UserActionParam()
+        {
         }
 
         /// <summary> User action value. </summary>

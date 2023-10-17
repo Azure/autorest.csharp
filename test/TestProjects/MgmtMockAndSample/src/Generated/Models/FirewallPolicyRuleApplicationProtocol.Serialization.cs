@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyRuleApplicationProtocol : IUtf8JsonSerializable
+    public partial class FirewallPolicyRuleApplicationProtocol : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyRuleApplicationProtocol>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyRuleApplicationProtocol>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirewallPolicyRuleApplicationProtocol>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ProtocolType))
@@ -28,8 +32,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyRuleApplicationProtocol DeserializeFirewallPolicyRuleApplicationProtocol(JsonElement element)
+        FirewallPolicyRuleApplicationProtocol IModelJsonSerializable<FirewallPolicyRuleApplicationProtocol>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyRuleApplicationProtocol(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyRuleApplicationProtocol>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyRuleApplicationProtocol IModelSerializable<FirewallPolicyRuleApplicationProtocol>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyRuleApplicationProtocol(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyRuleApplicationProtocol DeserializeFirewallPolicyRuleApplicationProtocol(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

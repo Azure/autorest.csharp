@@ -14,9 +14,10 @@ namespace FirstTestTypeSpec.Models
     /// <summary> A model with a few required nullable properties. </summary>
     internal partial class ModelWithRequiredNullableProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredNullableProperties"/>. </summary>
         /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
         /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
         /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
@@ -28,7 +29,7 @@ namespace FirstTestTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredNullableProperties"/>. </summary>
         /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
         /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
         /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
@@ -39,6 +40,11 @@ namespace FirstTestTypeSpec.Models
             RequiredExtensibleEnum = requiredExtensibleEnum;
             RequiredFixedEnum = requiredFixedEnum;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredNullableProperties"/> for deserialization. </summary>
+        internal ModelWithRequiredNullableProperties()
+        {
         }
 
         /// <summary> required nullable primitive type. </summary>

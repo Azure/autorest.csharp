@@ -26,14 +26,17 @@ namespace body_complex.Models
                 writer.WritePropertyName("propB1"u8);
                 writer.WriteStringValue(PropB1);
             }
-            writer.WritePropertyName("helper"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PropBH1))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("propBH1"u8);
-                writer.WriteStringValue(PropBH1);
+                writer.WritePropertyName("helper"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PropBH1))
+                {
+                    writer.WritePropertyName("propBH1"u8);
+                    writer.WriteStringValue(PropBH1);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -41,8 +44,8 @@ namespace body_complex.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownMyBaseType(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownMyBaseType(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UnknownMyBaseType>.Serialize(ModelSerializerOptions options)

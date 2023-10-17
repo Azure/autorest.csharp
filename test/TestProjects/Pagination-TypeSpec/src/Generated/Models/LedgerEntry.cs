@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Pagination.Models
@@ -13,7 +14,10 @@ namespace Pagination.Models
     /// <summary> The LedgerEntry. </summary>
     public partial class LedgerEntry
     {
-        /// <summary> Initializes a new instance of LedgerEntry. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LedgerEntry"/>. </summary>
         /// <param name="contents"> Contents of the ledger entry. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contents"/> is null. </exception>
         internal LedgerEntry(string contents)
@@ -21,17 +25,25 @@ namespace Pagination.Models
             Argument.AssertNotNull(contents, nameof(contents));
 
             Contents = contents;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of LedgerEntry. </summary>
+        /// <summary> Initializes a new instance of <see cref="LedgerEntry"/>. </summary>
         /// <param name="contents"> Contents of the ledger entry. </param>
         /// <param name="collectionId"></param>
         /// <param name="transactionId"></param>
-        internal LedgerEntry(string contents, string collectionId, string transactionId)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LedgerEntry(string contents, string collectionId, string transactionId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Contents = contents;
             CollectionId = collectionId;
             TransactionId = transactionId;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LedgerEntry"/> for deserialization. </summary>
+        internal LedgerEntry()
+        {
         }
 
         /// <summary> Contents of the ledger entry. </summary>

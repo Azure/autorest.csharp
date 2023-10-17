@@ -19,6 +19,31 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<TagProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Tag))
+            {
+                writer.WritePropertyName("tag"u8);
+                writer.WriteStringValue(Tag);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Timestamp))
+            {
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ObjectIdentifier))
+            {
+                writer.WritePropertyName("objectIdentifier"u8);
+                writer.WriteStringValue(ObjectIdentifier);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TenantId))
+            {
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Upn))
+            {
+                writer.WritePropertyName("upn"u8);
+                writer.WriteStringValue(Upn);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +51,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeTagProperty(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTagProperty(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<TagProperty>.Serialize(ModelSerializerOptions options)

@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VaultKey
+    public partial class VaultKey : IUtf8JsonSerializable, IModelJsonSerializable<VaultKey>
     {
-        internal static VaultKey DeserializeVaultKey(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VaultKey>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VaultKey>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Key))
+            {
+                writer.WritePropertyName("key"u8);
+                writer.WriteStringValue(Key);
+            }
+            if (Optional.IsDefined(Content))
+            {
+                writer.WritePropertyName("content"u8);
+                writer.WriteStringValue(Content);
+            }
+            writer.WriteEndObject();
+        }
+
+        VaultKey IModelJsonSerializable<VaultKey>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultKey(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VaultKey>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VaultKey IModelSerializable<VaultKey>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVaultKey(document.RootElement, options);
+        }
+
+        internal static VaultKey DeserializeVaultKey(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

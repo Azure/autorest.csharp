@@ -21,19 +21,22 @@ namespace MgmtExpandResourceTypes.Models
         void IModelJsonSerializable<DnsResourceReferenceContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(TargetResources))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("targetResources"u8);
-                writer.WriteStartArray();
-                foreach (var item in TargetResources)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsCollectionDefined(TargetResources))
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    writer.WritePropertyName("targetResources"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in TargetResources)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -41,8 +44,8 @@ namespace MgmtExpandResourceTypes.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDnsResourceReferenceContent(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDnsResourceReferenceContent(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DnsResourceReferenceContent>.Serialize(ModelSerializerOptions options)

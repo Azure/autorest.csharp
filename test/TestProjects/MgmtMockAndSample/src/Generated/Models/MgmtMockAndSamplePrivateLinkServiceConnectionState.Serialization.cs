@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class MgmtMockAndSamplePrivateLinkServiceConnectionState : IUtf8JsonSerializable
+    public partial class MgmtMockAndSamplePrivateLinkServiceConnectionState : IUtf8JsonSerializable, IModelJsonSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Status))
@@ -33,8 +37,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static MgmtMockAndSamplePrivateLinkServiceConnectionState DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(JsonElement element)
+        MgmtMockAndSamplePrivateLinkServiceConnectionState IModelJsonSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSamplePrivateLinkServiceConnectionState IModelSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(document.RootElement, options);
+        }
+
+        internal static MgmtMockAndSamplePrivateLinkServiceConnectionState DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

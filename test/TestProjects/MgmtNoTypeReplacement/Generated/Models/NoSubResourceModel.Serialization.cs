@@ -5,21 +5,54 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtNoTypeReplacement.Models
 {
-    internal partial class NoSubResourceModel : IUtf8JsonSerializable
+    internal partial class NoSubResourceModel : IUtf8JsonSerializable, IModelJsonSerializable<NoSubResourceModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NoSubResourceModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NoSubResourceModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
             writer.WriteEndObject();
         }
 
-        internal static NoSubResourceModel DeserializeNoSubResourceModel(JsonElement element)
+        NoSubResourceModel IModelJsonSerializable<NoSubResourceModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNoSubResourceModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NoSubResourceModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NoSubResourceModel IModelSerializable<NoSubResourceModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNoSubResourceModel(document.RootElement, options);
+        }
+
+        internal static NoSubResourceModel DeserializeNoSubResourceModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -9,14 +9,17 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    public partial class FakePolicyAssignmentData : IUtf8JsonSerializable
+    public partial class FakePolicyAssignmentData : IUtf8JsonSerializable, IModelJsonSerializable<FakePolicyAssignmentData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FakePolicyAssignmentData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FakePolicyAssignmentData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Location))
@@ -29,74 +32,126 @@ namespace MgmtScopeResource
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(DisplayName))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("displayName"u8);
-                writer.WriteStringValue(DisplayName);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(PolicyDefinitionId))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("policyDefinitionId"u8);
-                writer.WriteStringValue(PolicyDefinitionId);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsCollectionDefined(NotScopes))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("notScopes"u8);
-                writer.WriteStartArray();
-                foreach (var item in NotScopes)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsCollectionDefined(Parameters))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("parameters"u8);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
                 writer.WriteStartObject();
-                foreach (var item in Parameters)
+                if (Optional.IsDefined(DisplayName))
                 {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WritePropertyName("displayName"u8);
+                    writer.WriteStringValue(DisplayName);
                 }
-                writer.WriteEndObject();
-            }
-            if (Optional.IsDefined(Description))
-            {
-                writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(Description);
-            }
-            if (Optional.IsDefined(Metadata))
-            {
-                writer.WritePropertyName("metadata"u8);
+                if (Optional.IsDefined(PolicyDefinitionId))
+                {
+                    writer.WritePropertyName("policyDefinitionId"u8);
+                    writer.WriteStringValue(PolicyDefinitionId);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Scope))
+                {
+                    writer.WritePropertyName("scope"u8);
+                    writer.WriteStringValue(Scope);
+                }
+                if (Optional.IsCollectionDefined(NotScopes))
+                {
+                    writer.WritePropertyName("notScopes"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NotScopes)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(Parameters))
+                {
+                    writer.WritePropertyName("parameters"u8);
+                    writer.WriteStartObject();
+                    foreach (var item in Parameters)
+                    {
+                        writer.WritePropertyName(item.Key);
+                        writer.WriteObjectValue(item.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                if (Optional.IsDefined(Description))
+                {
+                    writer.WritePropertyName("description"u8);
+                    writer.WriteStringValue(Description);
+                }
+                if (Optional.IsDefined(Metadata))
+                {
+                    writer.WritePropertyName("metadata"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Metadata);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Metadata.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(Metadata.ToString()).RootElement);
 #endif
-            }
-            if (Optional.IsDefined(EnforcementMode))
-            {
-                writer.WritePropertyName("enforcementMode"u8);
-                writer.WriteStringValue(EnforcementMode.Value.ToString());
-            }
-            if (Optional.IsCollectionDefined(NonComplianceMessages))
-            {
-                writer.WritePropertyName("nonComplianceMessages"u8);
-                writer.WriteStartArray();
-                foreach (var item in NonComplianceMessages)
-                {
-                    writer.WriteObjectValue(item);
                 }
-                writer.WriteEndArray();
+                if (Optional.IsDefined(EnforcementMode))
+                {
+                    writer.WritePropertyName("enforcementMode"u8);
+                    writer.WriteStringValue(EnforcementMode.Value.ToString());
+                }
+                if (Optional.IsCollectionDefined(NonComplianceMessages))
+                {
+                    writer.WritePropertyName("nonComplianceMessages"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NonComplianceMessages)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element)
+        FakePolicyAssignmentData IModelJsonSerializable<FakePolicyAssignmentData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFakePolicyAssignmentData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FakePolicyAssignmentData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakePolicyAssignmentData IModelSerializable<FakePolicyAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakePolicyAssignmentData(document.RootElement, options);
+        }
+
+        internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

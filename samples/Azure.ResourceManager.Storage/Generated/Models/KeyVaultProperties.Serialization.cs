@@ -34,6 +34,16 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("keyvaulturi"u8);
                 writer.WriteStringValue(KeyVaultUri.AbsoluteUri);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CurrentVersionedKeyIdentifier))
+            {
+                writer.WritePropertyName("currentVersionedKeyIdentifier"u8);
+                writer.WriteStringValue(CurrentVersionedKeyIdentifier);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastKeyRotationTimestamp))
+            {
+                writer.WritePropertyName("lastKeyRotationTimestamp"u8);
+                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
+            }
             writer.WriteEndObject();
         }
 
@@ -41,8 +51,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeKeyVaultProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyVaultProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<KeyVaultProperties>.Serialize(ModelSerializerOptions options)

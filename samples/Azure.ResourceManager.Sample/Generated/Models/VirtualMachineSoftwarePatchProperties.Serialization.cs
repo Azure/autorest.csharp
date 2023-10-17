@@ -20,6 +20,61 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<VirtualMachineSoftwarePatchProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PatchId))
+            {
+                writer.WritePropertyName("patchId"u8);
+                writer.WriteStringValue(PatchId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Version))
+            {
+                writer.WritePropertyName("version"u8);
+                writer.WriteStringValue(Version);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Kbid))
+            {
+                writer.WritePropertyName("kbid"u8);
+                writer.WriteStringValue(Kbid);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Classifications))
+            {
+                writer.WritePropertyName("classifications"u8);
+                writer.WriteStartArray();
+                foreach (var item in Classifications)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RebootBehavior))
+            {
+                writer.WritePropertyName("rebootBehavior"u8);
+                writer.WriteStringValue(RebootBehavior.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ActivityId))
+            {
+                writer.WritePropertyName("activityId"u8);
+                writer.WriteStringValue(ActivityId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PublishedOn))
+            {
+                writer.WritePropertyName("publishedDate"u8);
+                writer.WriteStringValue(PublishedOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastModifiedOn))
+            {
+                writer.WritePropertyName("lastModifiedDateTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AssessmentState))
+            {
+                writer.WritePropertyName("assessmentState"u8);
+                writer.WriteStringValue(AssessmentState.Value.ToString());
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +82,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineSoftwarePatchProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineSoftwarePatchProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineSoftwarePatchProperties>.Serialize(ModelSerializerOptions options)

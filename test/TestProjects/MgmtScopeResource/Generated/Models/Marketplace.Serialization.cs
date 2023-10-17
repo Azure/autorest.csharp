@@ -9,14 +9,219 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class Marketplace
+    public partial class Marketplace : IUtf8JsonSerializable, IModelJsonSerializable<Marketplace>
     {
-        internal static Marketplace DeserializeMarketplace(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Marketplace>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Marketplace>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(BillingPeriodId))
+                {
+                    writer.WritePropertyName("billingPeriodId"u8);
+                    writer.WriteStringValue(BillingPeriodId);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(UsageStart))
+                {
+                    writer.WritePropertyName("usageStart"u8);
+                    writer.WriteStringValue(UsageStart.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(UsageEnd))
+                {
+                    writer.WritePropertyName("usageEnd"u8);
+                    writer.WriteStringValue(UsageEnd.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceRate))
+                {
+                    writer.WritePropertyName("resourceRate"u8);
+                    writer.WriteNumberValue(ResourceRate.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(OfferName))
+                {
+                    writer.WritePropertyName("offerName"u8);
+                    writer.WriteStringValue(OfferName);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceGroup))
+                {
+                    writer.WritePropertyName("resourceGroup"u8);
+                    writer.WriteStringValue(ResourceGroup);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AdditionalInfo))
+                {
+                    writer.WritePropertyName("additionalInfo"u8);
+                    writer.WriteStringValue(AdditionalInfo);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(OrderNumber))
+                {
+                    writer.WritePropertyName("orderNumber"u8);
+                    writer.WriteStringValue(OrderNumber);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstanceName))
+                {
+                    writer.WritePropertyName("instanceName"u8);
+                    writer.WriteStringValue(InstanceName);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstanceId))
+                {
+                    writer.WritePropertyName("instanceId"u8);
+                    writer.WriteStringValue(InstanceId);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Currency))
+                {
+                    writer.WritePropertyName("currency"u8);
+                    writer.WriteStringValue(Currency);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ConsumedQuantity))
+                {
+                    writer.WritePropertyName("consumedQuantity"u8);
+                    writer.WriteNumberValue(ConsumedQuantity.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(UnitOfMeasure))
+                {
+                    writer.WritePropertyName("unitOfMeasure"u8);
+                    writer.WriteStringValue(UnitOfMeasure);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PretaxCost))
+                {
+                    writer.WritePropertyName("pretaxCost"u8);
+                    writer.WriteNumberValue(PretaxCost.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(IsEstimated))
+                {
+                    writer.WritePropertyName("isEstimated"u8);
+                    writer.WriteBooleanValue(IsEstimated.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MeterId))
+                {
+                    writer.WritePropertyName("meterId"u8);
+                    writer.WriteStringValue(MeterId.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SubscriptionGuid))
+                {
+                    writer.WritePropertyName("subscriptionGuid"u8);
+                    writer.WriteStringValue(SubscriptionGuid.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SubscriptionName))
+                {
+                    writer.WritePropertyName("subscriptionName"u8);
+                    writer.WriteStringValue(SubscriptionName);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AccountName))
+                {
+                    writer.WritePropertyName("accountName"u8);
+                    writer.WriteStringValue(AccountName);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DepartmentName))
+                {
+                    writer.WritePropertyName("departmentName"u8);
+                    writer.WriteStringValue(DepartmentName);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ConsumedService))
+                {
+                    writer.WritePropertyName("consumedService"u8);
+                    writer.WriteStringValue(ConsumedService);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CostCenter))
+                {
+                    writer.WritePropertyName("costCenter"u8);
+                    writer.WriteStringValue(CostCenter);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AdditionalProperties))
+                {
+                    writer.WritePropertyName("additionalProperties"u8);
+                    writer.WriteStringValue(AdditionalProperties);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PublisherName))
+                {
+                    writer.WritePropertyName("publisherName"u8);
+                    writer.WriteStringValue(PublisherName);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PlanName))
+                {
+                    writer.WritePropertyName("planName"u8);
+                    writer.WriteStringValue(PlanName);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(IsRecurringCharge))
+                {
+                    writer.WritePropertyName("isRecurringCharge"u8);
+                    writer.WriteBooleanValue(IsRecurringCharge.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        Marketplace IModelJsonSerializable<Marketplace>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMarketplace(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Marketplace>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Marketplace IModelSerializable<Marketplace>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMarketplace(document.RootElement, options);
+        }
+
+        internal static Marketplace DeserializeMarketplace(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

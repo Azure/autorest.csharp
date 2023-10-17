@@ -42,8 +42,8 @@ namespace AppConfiguration.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeKeyListResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyListResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<KeyListResult>.Serialize(ModelSerializerOptions options)

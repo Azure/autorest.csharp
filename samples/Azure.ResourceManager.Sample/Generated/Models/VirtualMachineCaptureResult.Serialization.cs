@@ -20,6 +20,44 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<VirtualMachineCaptureResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Schema))
+            {
+                writer.WritePropertyName("$schema"u8);
+                writer.WriteStringValue(Schema);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ContentVersion))
+            {
+                writer.WritePropertyName("contentVersion"u8);
+                writer.WriteStringValue(ContentVersion);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Parameters))
+            {
+                writer.WritePropertyName("parameters"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Parameters);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Parameters.ToString()).RootElement);
+#endif
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Resources))
+            {
+                writer.WritePropertyName("resources"u8);
+                writer.WriteStartArray();
+                foreach (var item in Resources)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.ToString()).RootElement);
+#endif
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
@@ -32,8 +70,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineCaptureResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineCaptureResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineCaptureResult>.Serialize(ModelSerializerOptions options)

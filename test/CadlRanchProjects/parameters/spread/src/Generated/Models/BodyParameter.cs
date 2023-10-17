@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Parameters.Spread.Models
@@ -13,7 +14,10 @@ namespace Parameters.Spread.Models
     /// <summary> This is a simple model. </summary>
     public partial class BodyParameter
     {
-        /// <summary> Initializes a new instance of BodyParameter. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BodyParameter"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public BodyParameter(string name)
@@ -21,6 +25,21 @@ namespace Parameters.Spread.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="BodyParameter"/>. </summary>
+        /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BodyParameter(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="BodyParameter"/> for deserialization. </summary>
+        internal BodyParameter()
+        {
         }
 
         /// <summary> Gets the name. </summary>

@@ -9,12 +9,15 @@ using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CustomNamespace
 {
-    internal partial class RenamedThirdModel : IUtf8JsonSerializable
+    internal partial class RenamedThirdModel : IUtf8JsonSerializable, IModelJsonSerializable<RenamedThirdModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RenamedThirdModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RenamedThirdModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(CustomizedETagProperty))
@@ -30,8 +33,32 @@ namespace CustomNamespace
             writer.WriteEndObject();
         }
 
-        internal static RenamedThirdModel DeserializeRenamedThirdModel(JsonElement element)
+        RenamedThirdModel IModelJsonSerializable<RenamedThirdModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRenamedThirdModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RenamedThirdModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RenamedThirdModel IModelSerializable<RenamedThirdModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRenamedThirdModel(document.RootElement, options);
+        }
+
+        internal static RenamedThirdModel DeserializeRenamedThirdModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

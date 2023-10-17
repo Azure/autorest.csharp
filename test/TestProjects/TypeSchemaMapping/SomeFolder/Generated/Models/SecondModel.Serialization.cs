@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using NamespaceForEnums;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class SecondModel : IUtf8JsonSerializable
+    internal partial class SecondModel : IUtf8JsonSerializable, IModelJsonSerializable<SecondModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SecondModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SecondModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(IntProperty))
@@ -41,8 +45,32 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static SecondModel DeserializeSecondModel(JsonElement element)
+        SecondModel IModelJsonSerializable<SecondModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSecondModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SecondModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SecondModel IModelSerializable<SecondModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSecondModel(document.RootElement, options);
+        }
+
+        internal static SecondModel DeserializeSecondModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

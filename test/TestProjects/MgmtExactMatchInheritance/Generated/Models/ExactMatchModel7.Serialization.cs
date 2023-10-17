@@ -41,8 +41,8 @@ namespace MgmtExactMatchInheritance.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeExactMatchModel7(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeExactMatchModel7(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ExactMatchModel7>.Serialize(ModelSerializerOptions options)

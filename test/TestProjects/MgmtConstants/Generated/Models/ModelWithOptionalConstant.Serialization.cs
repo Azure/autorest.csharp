@@ -46,8 +46,8 @@ namespace MgmtConstants.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelWithOptionalConstant(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithOptionalConstant(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ModelWithOptionalConstant>.Serialize(ModelSerializerOptions options)

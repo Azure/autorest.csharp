@@ -56,8 +56,8 @@ namespace MgmtExtensionResource.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeParameterDefinitionsValueMetadata(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeParameterDefinitionsValueMetadata(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ParameterDefinitionsValueMetadata>.Serialize(ModelSerializerOptions options)
@@ -117,7 +117,7 @@ namespace MgmtExtensionResource.Models
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new ParameterDefinitionsValueMetadata(displayName.Value, description.Value, strongType.Value, Optional.ToNullable(assignPermissions));
+            return new ParameterDefinitionsValueMetadata(displayName.Value, description.Value, strongType.Value, Optional.ToNullable(assignPermissions), additionalProperties);
         }
     }
 }

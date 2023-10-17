@@ -5,16 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace Projection.ProjectedName.Models
 {
     /// <summary> The ClientProjectedNameModel. </summary>
     public partial class ClientProjectedNameModel
     {
-        /// <summary> Initializes a new instance of ClientProjectedNameModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ClientProjectedNameModel"/>. </summary>
         /// <param name="clientName"> Pass in true. </param>
         public ClientProjectedNameModel(bool clientName)
         {
             ClientName = clientName;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ClientProjectedNameModel"/>. </summary>
+        /// <param name="clientName"> Pass in true. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ClientProjectedNameModel(bool clientName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            ClientName = clientName;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ClientProjectedNameModel"/> for deserialization. </summary>
+        internal ClientProjectedNameModel()
+        {
         }
 
         /// <summary> Pass in true. </summary>

@@ -5,16 +5,70 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtResourceName.Models
 {
-    public partial class ResourceType
+    public partial class ResourceType : IUtf8JsonSerializable, IModelJsonSerializable<ResourceType>
     {
-        internal static ResourceType DeserializeResourceType(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ResourceType>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ResourceType>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(DisplayName))
+            {
+                writer.WritePropertyName("displayName"u8);
+                writer.WriteStringValue(DisplayName);
+            }
+            if (Optional.IsCollectionDefined(Operations))
+            {
+                writer.WritePropertyName("operations"u8);
+                writer.WriteStartArray();
+                foreach (var item in Operations)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        ResourceType IModelJsonSerializable<ResourceType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeResourceType(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ResourceType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResourceType IModelSerializable<ResourceType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResourceType(document.RootElement, options);
+        }
+
+        internal static ResourceType DeserializeResourceType(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

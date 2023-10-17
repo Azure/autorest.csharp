@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtOperations.Models
 {
-    public partial class AvailabilitySetUpdate : IUtf8JsonSerializable
+    public partial class AvailabilitySetUpdate : IUtf8JsonSerializable, IModelJsonSerializable<AvailabilitySetUpdate>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AvailabilitySetUpdate>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AvailabilitySetUpdate>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -26,20 +31,106 @@ namespace MgmtOperations.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformUpdateDomainCount))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("platformUpdateDomainCount"u8);
-                writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
-            }
-            if (Optional.IsDefined(PlatformFaultDomainCount))
-            {
-                writer.WritePropertyName("platformFaultDomainCount"u8);
-                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PlatformUpdateDomainCount))
+                {
+                    writer.WritePropertyName("platformUpdateDomainCount"u8);
+                    writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
+                }
+                if (Optional.IsDefined(PlatformFaultDomainCount))
+                {
+                    writer.WritePropertyName("platformFaultDomainCount"u8);
+                    writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                }
+                writer.WriteEndObject();
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
+        }
+
+        AvailabilitySetUpdate IModelJsonSerializable<AvailabilitySetUpdate>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAvailabilitySetUpdate(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AvailabilitySetUpdate>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AvailabilitySetUpdate IModelSerializable<AvailabilitySetUpdate>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAvailabilitySetUpdate(document.RootElement, options);
+        }
+
+        internal static AvailabilitySetUpdate DeserializeAvailabilitySetUpdate(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<IDictionary<string, string>> tags = default;
+            Optional<int> platformUpdateDomainCount = default;
+            Optional<int> platformFaultDomainCount = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("properties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("platformUpdateDomainCount"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            platformUpdateDomainCount = property0.Value.GetInt32();
+                            continue;
+                        }
+                        if (property0.NameEquals("platformFaultDomainCount"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            platformFaultDomainCount = property0.Value.GetInt32();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new AvailabilitySetUpdate(Optional.ToDictionary(tags), Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount));
         }
     }
 }

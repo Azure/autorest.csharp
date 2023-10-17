@@ -37,8 +37,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeIndexAction(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndexAction(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<IndexAction>.Serialize(ModelSerializerOptions options)
@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new IndexAction(Optional.ToNullable(searchAction));
+            return new IndexAction(Optional.ToNullable(searchAction), additionalProperties);
         }
     }
 }

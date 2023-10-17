@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyIntrusionDetection : IUtf8JsonSerializable
+    public partial class FirewallPolicyIntrusionDetection : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyIntrusionDetection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyIntrusionDetection>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirewallPolicyIntrusionDetection>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Mode))
@@ -28,8 +32,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyIntrusionDetection DeserializeFirewallPolicyIntrusionDetection(JsonElement element)
+        FirewallPolicyIntrusionDetection IModelJsonSerializable<FirewallPolicyIntrusionDetection>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyIntrusionDetection(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyIntrusionDetection>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyIntrusionDetection IModelSerializable<FirewallPolicyIntrusionDetection>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyIntrusionDetection(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyIntrusionDetection DeserializeFirewallPolicyIntrusionDetection(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

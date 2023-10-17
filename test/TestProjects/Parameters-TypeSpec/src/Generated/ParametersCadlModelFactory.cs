@@ -6,24 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace ParametersCadl.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class ParametersCadlModelFactory
     {
-        /// <summary> Initializes a new instance of Result. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Result"/>. </summary>
         /// <param name="id"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.Result"/> instance for mocking. </returns>
-        public static Result Result(string id = null)
+        public static Result Result(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new Result(id);
+            return new Result(id, serializedAdditionalRawData);
         }
     }
 }

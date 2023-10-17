@@ -5,15 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
 {
-    public partial class Siamese : IUtf8JsonSerializable
+    public partial class Siamese : IUtf8JsonSerializable, IModelJsonSerializable<Siamese>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Siamese>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Siamese>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("smart"u8);
@@ -22,11 +27,47 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             writer.WriteNumberValue(Age);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Siamese DeserializeSiamese(JsonElement element)
+        Siamese IModelJsonSerializable<Siamese>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSiamese(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Siamese>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Siamese IModelSerializable<Siamese>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSiamese(document.RootElement, options);
+        }
+
+        internal static Siamese DeserializeSiamese(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -34,41 +75,46 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             bool smart = default;
             int age = default;
             string name = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("smart"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    smart = property.Value.GetBoolean();
-                    continue;
+                    if (property.NameEquals("smart"u8))
+                    {
+                        smart = property.Value.GetBoolean();
+                        continue;
+                    }
+                    if (property.NameEquals("age"u8))
+                    {
+                        age = property.Value.GetInt32();
+                        continue;
+                    }
+                    if (property.NameEquals("name"u8))
+                    {
+                        name = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("age"u8))
-                {
-                    age = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new Siamese(name, age, smart);
+            return new Siamese(name, serializedAdditionalRawData, age, smart);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static Siamese FromResponse(Response response)
+        internal static new Siamese FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSiamese(document.RootElement);
+            return DeserializeSiamese(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

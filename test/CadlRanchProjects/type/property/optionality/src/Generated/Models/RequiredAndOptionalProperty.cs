@@ -5,25 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Property.Optionality.Models
 {
     /// <summary> Model with required and optional properties. </summary>
     public partial class RequiredAndOptionalProperty
     {
-        /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/>. </summary>
         /// <param name="requiredProperty"> required int property. </param>
         public RequiredAndOptionalProperty(int requiredProperty)
         {
             RequiredProperty = requiredProperty;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/>. </summary>
         /// <param name="optionalProperty"> optional string property. </param>
         /// <param name="requiredProperty"> required int property. </param>
-        internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OptionalProperty = optionalProperty;
             RequiredProperty = requiredProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/> for deserialization. </summary>
+        internal RequiredAndOptionalProperty()
+        {
         }
 
         /// <summary> optional string property. </summary>

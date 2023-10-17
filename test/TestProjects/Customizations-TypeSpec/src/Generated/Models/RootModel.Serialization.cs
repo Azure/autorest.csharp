@@ -5,15 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class RootModel : IUtf8JsonSerializable
+    public partial class RootModel : IUtf8JsonSerializable, IModelJsonSerializable<RootModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RootModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RootModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(PropertyExtensibleEnum))
@@ -66,11 +71,47 @@ namespace CustomizationsInTsp.Models
                 writer.WritePropertyName("propertyToMoveToCustomization"u8);
                 writer.WriteStringValue(PropertyToMoveToCustomization.Value.ToString());
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static RootModel DeserializeRootModel(JsonElement element)
+        RootModel IModelJsonSerializable<RootModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRootModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RootModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RootModel IModelSerializable<RootModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRootModel(document.RootElement, options);
+        }
+
+        internal static RootModel DeserializeRootModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -85,100 +126,107 @@ namespace CustomizationsInTsp.Models
             Optional<EnumToBeMadeExtensible> propertyEnumToBeMadeExtensible = default;
             Optional<ModelToAddAdditionalSerializableProperty> propertyModelToAddAdditionalSerializableProperty = default;
             Optional<NormalEnum> propertyToMoveToCustomization = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("propertyExtensibleEnum"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyExtensibleEnum"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyExtensibleEnum = new ExtensibleEnumWithOperator(property.Value.GetString());
                         continue;
                     }
-                    propertyExtensibleEnum = new ExtensibleEnumWithOperator(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("propertyModelToMakeInternal"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyModelToMakeInternal"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyModelToMakeInternal = ModelToMakeInternal.DeserializeModelToMakeInternal(property.Value);
                         continue;
                     }
-                    propertyModelToMakeInternal = ModelToMakeInternal.DeserializeModelToMakeInternal(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("propertyModelToRename"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyModelToRename"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyModelToRename = RenamedModel.DeserializeRenamedModel(property.Value);
                         continue;
                     }
-                    propertyModelToRename = RenamedModel.DeserializeRenamedModel(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("propertyModelToChangeNamespace"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyModelToChangeNamespace"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyModelToChangeNamespace = ModelToChangeNamespace.DeserializeModelToChangeNamespace(property.Value);
                         continue;
                     }
-                    propertyModelToChangeNamespace = ModelToChangeNamespace.DeserializeModelToChangeNamespace(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("propertyModelWithCustomizedProperties"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyModelWithCustomizedProperties"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyModelWithCustomizedProperties = ModelWithCustomizedProperties.DeserializeModelWithCustomizedProperties(property.Value);
                         continue;
                     }
-                    propertyModelWithCustomizedProperties = ModelWithCustomizedProperties.DeserializeModelWithCustomizedProperties(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("propertyEnumToRename"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyEnumToRename"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyEnumToRename = property.Value.GetString().ToRenamedEnum();
                         continue;
                     }
-                    propertyEnumToRename = property.Value.GetString().ToRenamedEnum();
-                    continue;
-                }
-                if (property.NameEquals("propertyEnumWithValueToRename"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyEnumWithValueToRename"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyEnumWithValueToRename = property.Value.GetString().ToEnumWithValueToRename();
                         continue;
                     }
-                    propertyEnumWithValueToRename = property.Value.GetString().ToEnumWithValueToRename();
-                    continue;
-                }
-                if (property.NameEquals("propertyEnumToBeMadeExtensible"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyEnumToBeMadeExtensible"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyEnumToBeMadeExtensible = new EnumToBeMadeExtensible(property.Value.GetString());
                         continue;
                     }
-                    propertyEnumToBeMadeExtensible = new EnumToBeMadeExtensible(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("propertyModelToAddAdditionalSerializableProperty"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyModelToAddAdditionalSerializableProperty"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyModelToAddAdditionalSerializableProperty = ModelToAddAdditionalSerializableProperty.DeserializeModelToAddAdditionalSerializableProperty(property.Value);
                         continue;
                     }
-                    propertyModelToAddAdditionalSerializableProperty = ModelToAddAdditionalSerializableProperty.DeserializeModelToAddAdditionalSerializableProperty(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("propertyToMoveToCustomization"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("propertyToMoveToCustomization"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        propertyToMoveToCustomization = new NormalEnum(property.Value.GetString());
                         continue;
                     }
-                    propertyToMoveToCustomization = new NormalEnum(property.Value.GetString());
-                    continue;
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization));
+            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -186,15 +234,13 @@ namespace CustomizationsInTsp.Models
         internal static RootModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRootModel(document.RootElement);
+            return DeserializeRootModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

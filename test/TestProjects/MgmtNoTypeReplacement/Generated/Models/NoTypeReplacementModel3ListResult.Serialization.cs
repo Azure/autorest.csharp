@@ -5,17 +5,66 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtNoTypeReplacement;
 
 namespace MgmtNoTypeReplacement.Models
 {
-    internal partial class NoTypeReplacementModel3ListResult
+    internal partial class NoTypeReplacementModel3ListResult : IUtf8JsonSerializable, IModelJsonSerializable<NoTypeReplacementModel3ListResult>
     {
-        internal static NoTypeReplacementModel3ListResult DeserializeNoTypeReplacementModel3ListResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NoTypeReplacementModel3ListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NoTypeReplacementModel3ListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        NoTypeReplacementModel3ListResult IModelJsonSerializable<NoTypeReplacementModel3ListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNoTypeReplacementModel3ListResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NoTypeReplacementModel3ListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NoTypeReplacementModel3ListResult IModelSerializable<NoTypeReplacementModel3ListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNoTypeReplacementModel3ListResult(document.RootElement, options);
+        }
+
+        internal static NoTypeReplacementModel3ListResult DeserializeNoTypeReplacementModel3ListResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

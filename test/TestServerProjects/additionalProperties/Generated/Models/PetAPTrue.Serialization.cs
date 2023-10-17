@@ -27,6 +27,11 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteBooleanValue(Status.Value);
+            }
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -39,8 +44,8 @@ namespace additionalProperties.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePetAPTrue(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetAPTrue(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PetAPTrue>.Serialize(ModelSerializerOptions options)
@@ -94,7 +99,7 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new PetAPTrue(id, name.Value, Optional.ToNullable(status));
+            return new PetAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties);
         }
     }
 }

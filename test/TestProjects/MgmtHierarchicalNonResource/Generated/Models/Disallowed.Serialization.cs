@@ -5,16 +5,60 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    internal partial class Disallowed
+    internal partial class Disallowed : IUtf8JsonSerializable, IModelJsonSerializable<Disallowed>
     {
-        internal static Disallowed DeserializeDisallowed(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Disallowed>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Disallowed>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(DiskTypes))
+            {
+                writer.WritePropertyName("diskTypes"u8);
+                writer.WriteStartArray();
+                foreach (var item in DiskTypes)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        Disallowed IModelJsonSerializable<Disallowed>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDisallowed(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Disallowed>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Disallowed IModelSerializable<Disallowed>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDisallowed(document.RootElement, options);
+        }
+
+        internal static Disallowed DeserializeDisallowed(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

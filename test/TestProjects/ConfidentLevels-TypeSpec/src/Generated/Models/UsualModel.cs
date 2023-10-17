@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,10 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a model without union types. </summary>
     internal partial class UsualModel
     {
-        /// <summary> Initializes a new instance of UsualModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UsualModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="age"> The age. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -23,17 +27,25 @@ namespace ConfidentLevelsInTsp.Models
 
             Name = name;
             Age = age;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of UsualModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UsualModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="age"> The age. </param>
         /// <param name="size"> The size. </param>
-        internal UsualModel(string name, int age, double? size)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UsualModel(string name, int age, double? size, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Age = age;
             Size = size;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UsualModel"/> for deserialization. </summary>
+        internal UsualModel()
+        {
         }
 
         /// <summary> The name. </summary>

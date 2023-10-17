@@ -21,6 +21,11 @@ namespace MgmtCustomizations.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             if (Optional.IsDefined(Size))
             {
                 writer.WritePropertyName("size"u8);
@@ -38,8 +43,8 @@ namespace MgmtCustomizations.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownPet(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownPet(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UnknownPet>.Serialize(ModelSerializerOptions options)

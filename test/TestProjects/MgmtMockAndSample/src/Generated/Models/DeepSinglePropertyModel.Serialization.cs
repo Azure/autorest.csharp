@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class DeepSinglePropertyModel : IUtf8JsonSerializable
+    internal partial class DeepSinglePropertyModel : IUtf8JsonSerializable, IModelJsonSerializable<DeepSinglePropertyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeepSinglePropertyModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeepSinglePropertyModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Deep))
@@ -23,8 +27,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static DeepSinglePropertyModel DeserializeDeepSinglePropertyModel(JsonElement element)
+        DeepSinglePropertyModel IModelJsonSerializable<DeepSinglePropertyModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeepSinglePropertyModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeepSinglePropertyModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeepSinglePropertyModel IModelSerializable<DeepSinglePropertyModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeepSinglePropertyModel(document.RootElement, options);
+        }
+
+        internal static DeepSinglePropertyModel DeserializeDeepSinglePropertyModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyIntrusionDetectionSignatureSpecification : IUtf8JsonSerializable
+    public partial class FirewallPolicyIntrusionDetectionSignatureSpecification : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
@@ -28,8 +32,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyIntrusionDetectionSignatureSpecification DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(JsonElement element)
+        FirewallPolicyIntrusionDetectionSignatureSpecification IModelJsonSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyIntrusionDetectionSignatureSpecification IModelSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyIntrusionDetectionSignatureSpecification DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

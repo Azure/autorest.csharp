@@ -63,6 +63,16 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("toBeDetached"u8);
                 writer.WriteBooleanValue(ToBeDetached.Value);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DiskIopsReadWrite))
+            {
+                writer.WritePropertyName("diskIOPSReadWrite"u8);
+                writer.WriteNumberValue(DiskIopsReadWrite.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DiskMBpsReadWrite))
+            {
+                writer.WritePropertyName("diskMBpsReadWrite"u8);
+                writer.WriteNumberValue(DiskMBpsReadWrite.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -70,8 +80,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDataDisk(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataDisk(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DataDisk>.Serialize(ModelSerializerOptions options)

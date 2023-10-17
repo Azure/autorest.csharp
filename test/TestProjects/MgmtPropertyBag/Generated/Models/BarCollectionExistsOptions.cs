@@ -14,7 +14,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> The BarCollectionExistsOptions. </summary>
     public partial class BarCollectionExistsOptions
     {
-        /// <summary> Initializes a new instance of BarCollectionExistsOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="BarCollectionExistsOptions"/>. </summary>
         /// <param name="barName"> The bar name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public BarCollectionExistsOptions(string barName)
@@ -23,6 +23,11 @@ namespace MgmtPropertyBag.Models
 
             BarName = barName;
             Items = new ChangeTrackingList<string>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="BarCollectionExistsOptions"/> for deserialization. </summary>
+        internal BarCollectionExistsOptions()
+        {
         }
 
         /// <summary> The bar name. </summary>

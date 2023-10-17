@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<FacetResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Count))
+            {
+                writer.WritePropertyName("count"u8);
+                writer.WriteNumberValue(Count.Value);
+            }
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -32,8 +37,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeFacetResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFacetResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<FacetResult>.Serialize(ModelSerializerOptions options)
@@ -75,7 +80,7 @@ namespace CognitiveSearch.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new FacetResult(Optional.ToNullable(count));
+            return new FacetResult(Optional.ToNullable(count), additionalProperties);
         }
     }
 }

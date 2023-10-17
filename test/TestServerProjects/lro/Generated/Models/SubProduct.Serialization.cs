@@ -19,14 +19,27 @@ namespace lro.Models
         void IModelJsonSerializable<SubProduct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(ProvisioningState))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningStateValues))
+                {
+                    writer.WritePropertyName("provisioningStateValues"u8);
+                    writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -34,8 +47,8 @@ namespace lro.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSubProduct(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubProduct(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SubProduct>.Serialize(ModelSerializerOptions options)

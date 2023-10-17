@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtOmitOperationGroups.Models
 {
-    public partial class ModelZ : IUtf8JsonSerializable
+    public partial class ModelZ : IUtf8JsonSerializable, IModelJsonSerializable<ModelZ>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelZ>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelZ>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(H))
@@ -20,11 +24,40 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WritePropertyName("h"u8);
                 writer.WriteStringValue(H);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(I))
+            {
+                writer.WritePropertyName("i"u8);
+                writer.WriteStringValue(I);
+            }
             writer.WriteEndObject();
         }
 
-        internal static ModelZ DeserializeModelZ(JsonElement element)
+        ModelZ IModelJsonSerializable<ModelZ>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelZ(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelZ>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelZ IModelSerializable<ModelZ>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelZ(document.RootElement, options);
+        }
+
+        internal static ModelZ DeserializeModelZ(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

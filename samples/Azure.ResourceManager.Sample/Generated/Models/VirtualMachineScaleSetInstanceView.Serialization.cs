@@ -20,11 +20,36 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<VirtualMachineScaleSetInstanceView>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(VirtualMachine))
+            {
+                writer.WritePropertyName("virtualMachine"u8);
+                writer.WriteObjectValue(VirtualMachine);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Extensions))
+            {
+                writer.WritePropertyName("extensions"u8);
+                writer.WriteStartArray();
+                foreach (var item in Extensions)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsCollectionDefined(Statuses))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OrchestrationServices))
+            {
+                writer.WritePropertyName("orchestrationServices"u8);
+                writer.WriteStartArray();
+                foreach (var item in OrchestrationServices)
                 {
                     writer.WriteObjectValue(item);
                 }
@@ -37,8 +62,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetInstanceView(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetInstanceView(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetInstanceView>.Serialize(ModelSerializerOptions options)

@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class ModelWithNullableObjectProperty : IUtf8JsonSerializable
+    internal partial class ModelWithNullableObjectProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithNullableObjectProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithNullableObjectProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelWithNullableObjectProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
@@ -23,8 +27,32 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelWithNullableObjectProperty DeserializeModelWithNullableObjectProperty(JsonElement element)
+        ModelWithNullableObjectProperty IModelJsonSerializable<ModelWithNullableObjectProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithNullableObjectProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithNullableObjectProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithNullableObjectProperty IModelSerializable<ModelWithNullableObjectProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithNullableObjectProperty(document.RootElement, options);
+        }
+
+        internal static ModelWithNullableObjectProperty DeserializeModelWithNullableObjectProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

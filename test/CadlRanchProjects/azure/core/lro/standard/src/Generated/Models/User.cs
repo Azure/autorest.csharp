@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Azure.Lro.Standard.Models
@@ -13,7 +14,10 @@ namespace _Azure.Lro.Standard.Models
     /// <summary> Details about a user. </summary>
     public partial class User
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="role"> The role of user. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="role"/> is null. </exception>
         public User(string role)
@@ -21,15 +25,23 @@ namespace _Azure.Lro.Standard.Models
             Argument.AssertNotNull(role, nameof(role));
 
             Role = role;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="role"> The role of user. </param>
-        internal User(string name, string role)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal User(string name, string role, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Role = role;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="User"/> for deserialization. </summary>
+        internal User()
+        {
         }
 
         /// <summary> The name of user. </summary>

@@ -35,19 +35,42 @@ namespace MgmtConstants
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Listener))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("listener"u8);
-                writer.WriteObjectValue(Listener);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Content))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("content"u8);
-                writer.WriteObjectValue(Content);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Listener))
+                {
+                    writer.WritePropertyName("listener"u8);
+                    writer.WriteObjectValue(Listener);
+                }
+                if (Optional.IsDefined(Content))
+                {
+                    writer.WritePropertyName("content"u8);
+                    writer.WriteObjectValue(Content);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -55,8 +78,8 @@ namespace MgmtConstants
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOptionalMachineData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOptionalMachineData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OptionalMachineData>.Serialize(ModelSerializerOptions options)

@@ -19,6 +19,11 @@ namespace AppConfiguration.Models
         void IModelJsonSerializable<Key>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +31,8 @@ namespace AppConfiguration.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeKey(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeKey(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Key>.Serialize(ModelSerializerOptions options)

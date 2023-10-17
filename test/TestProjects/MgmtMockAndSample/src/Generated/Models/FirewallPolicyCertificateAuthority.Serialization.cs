@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyCertificateAuthority : IUtf8JsonSerializable
+    public partial class FirewallPolicyCertificateAuthority : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyCertificateAuthority>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyCertificateAuthority>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirewallPolicyCertificateAuthority>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(KeyVaultSecretId))
@@ -28,8 +32,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyCertificateAuthority DeserializeFirewallPolicyCertificateAuthority(JsonElement element)
+        FirewallPolicyCertificateAuthority IModelJsonSerializable<FirewallPolicyCertificateAuthority>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyCertificateAuthority(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyCertificateAuthority>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyCertificateAuthority IModelSerializable<FirewallPolicyCertificateAuthority>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyCertificateAuthority(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyCertificateAuthority DeserializeFirewallPolicyCertificateAuthority(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

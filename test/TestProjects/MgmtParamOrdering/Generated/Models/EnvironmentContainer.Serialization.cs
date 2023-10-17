@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class EnvironmentContainer : IUtf8JsonSerializable
+    public partial class EnvironmentContainer : IUtf8JsonSerializable, IModelJsonSerializable<EnvironmentContainer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EnvironmentContainer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<EnvironmentContainer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Description))
@@ -46,8 +50,32 @@ namespace MgmtParamOrdering.Models
             writer.WriteEndObject();
         }
 
-        internal static EnvironmentContainer DeserializeEnvironmentContainer(JsonElement element)
+        EnvironmentContainer IModelJsonSerializable<EnvironmentContainer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEnvironmentContainer(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EnvironmentContainer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EnvironmentContainer IModelSerializable<EnvironmentContainer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEnvironmentContainer(document.RootElement, options);
+        }
+
+        internal static EnvironmentContainer DeserializeEnvironmentContainer(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class DedicatedHostGroupPatch : IUtf8JsonSerializable
+    public partial class DedicatedHostGroupPatch : IUtf8JsonSerializable, IModelJsonSerializable<DedicatedHostGroupPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DedicatedHostGroupPatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DedicatedHostGroupPatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Zones))
@@ -36,20 +41,121 @@ namespace MgmtParamOrdering.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("platformFaultDomainCount"u8);
-                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
-            }
-            if (Optional.IsDefined(SupportAutomaticPlacement))
-            {
-                writer.WritePropertyName("supportAutomaticPlacement"u8);
-                writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PlatformFaultDomainCount))
+                {
+                    writer.WritePropertyName("platformFaultDomainCount"u8);
+                    writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                }
+                if (Optional.IsDefined(SupportAutomaticPlacement))
+                {
+                    writer.WritePropertyName("supportAutomaticPlacement"u8);
+                    writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
+                }
+                writer.WriteEndObject();
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
+        }
+
+        DedicatedHostGroupPatch IModelJsonSerializable<DedicatedHostGroupPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDedicatedHostGroupPatch(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DedicatedHostGroupPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DedicatedHostGroupPatch IModelSerializable<DedicatedHostGroupPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDedicatedHostGroupPatch(document.RootElement, options);
+        }
+
+        internal static DedicatedHostGroupPatch DeserializeDedicatedHostGroupPatch(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<IList<string>> zones = default;
+            Optional<IDictionary<string, string>> tags = default;
+            Optional<int> platformFaultDomainCount = default;
+            Optional<bool> supportAutomaticPlacement = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("zones"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    zones = array;
+                    continue;
+                }
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("properties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("platformFaultDomainCount"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            platformFaultDomainCount = property0.Value.GetInt32();
+                            continue;
+                        }
+                        if (property0.NameEquals("supportAutomaticPlacement"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            supportAutomaticPlacement = property0.Value.GetBoolean();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new DedicatedHostGroupPatch(Optional.ToDictionary(tags), Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToNullable(supportAutomaticPlacement));
         }
     }
 }

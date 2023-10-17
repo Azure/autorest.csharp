@@ -9,13 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
-    public partial class VirtualMachineExtension : IUtf8JsonSerializable
+    public partial class VirtualMachineExtension : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineExtension>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineExtension>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VirtualMachineExtension>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -31,62 +34,114 @@ namespace MgmtPropertyChooser.Models
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(ForceUpdateTag))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("forceUpdateTag"u8);
-                writer.WriteStringValue(ForceUpdateTag);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Publisher))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("publisher"u8);
-                writer.WriteStringValue(Publisher);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(TypePropertiesType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(TypePropertiesType);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(TypeHandlerVersion))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("typeHandlerVersion"u8);
-                writer.WriteStringValue(TypeHandlerVersion);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(AutoUpgradeMinorVersion))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("autoUpgradeMinorVersion"u8);
-                writer.WriteBooleanValue(AutoUpgradeMinorVersion.Value);
-            }
-            if (Optional.IsDefined(EnableAutomaticUpgrade))
-            {
-                writer.WritePropertyName("enableAutomaticUpgrade"u8);
-                writer.WriteBooleanValue(EnableAutomaticUpgrade.Value);
-            }
-            if (Optional.IsDefined(Settings))
-            {
-                writer.WritePropertyName("settings"u8);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(ForceUpdateTag))
+                {
+                    writer.WritePropertyName("forceUpdateTag"u8);
+                    writer.WriteStringValue(ForceUpdateTag);
+                }
+                if (Optional.IsDefined(Publisher))
+                {
+                    writer.WritePropertyName("publisher"u8);
+                    writer.WriteStringValue(Publisher);
+                }
+                if (Optional.IsDefined(TypePropertiesType))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(TypePropertiesType);
+                }
+                if (Optional.IsDefined(TypeHandlerVersion))
+                {
+                    writer.WritePropertyName("typeHandlerVersion"u8);
+                    writer.WriteStringValue(TypeHandlerVersion);
+                }
+                if (Optional.IsDefined(AutoUpgradeMinorVersion))
+                {
+                    writer.WritePropertyName("autoUpgradeMinorVersion"u8);
+                    writer.WriteBooleanValue(AutoUpgradeMinorVersion.Value);
+                }
+                if (Optional.IsDefined(EnableAutomaticUpgrade))
+                {
+                    writer.WritePropertyName("enableAutomaticUpgrade"u8);
+                    writer.WriteBooleanValue(EnableAutomaticUpgrade.Value);
+                }
+                if (Optional.IsDefined(Settings))
+                {
+                    writer.WritePropertyName("settings"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Settings);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Settings.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(Settings.ToString()).RootElement);
 #endif
-            }
-            if (Optional.IsDefined(ProtectedSettings))
-            {
-                writer.WritePropertyName("protectedSettings"u8);
+                }
+                if (Optional.IsDefined(ProtectedSettings))
+                {
+                    writer.WritePropertyName("protectedSettings"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(ProtectedSettings);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(ProtectedSettings.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(ProtectedSettings.ToString()).RootElement);
 #endif
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineExtension DeserializeVirtualMachineExtension(JsonElement element)
+        VirtualMachineExtension IModelJsonSerializable<VirtualMachineExtension>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineExtension(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineExtension>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineExtension IModelSerializable<VirtualMachineExtension>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineExtension(document.RootElement, options);
+        }
+
+        internal static VirtualMachineExtension DeserializeVirtualMachineExtension(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

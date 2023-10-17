@@ -60,7 +60,7 @@ namespace MgmtPartialResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PublicIPAddressRestClient.CreateListAllRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PublicIPAddressRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace MgmtPartialResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PublicIPAddressRestClient.CreateListAllRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PublicIPAddressRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
     }
 }

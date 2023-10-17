@@ -25,6 +25,16 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
+            }
             if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
@@ -48,8 +58,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeResource(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeResource(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Resource>.Serialize(ModelSerializerOptions options)

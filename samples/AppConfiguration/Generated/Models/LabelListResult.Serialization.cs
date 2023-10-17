@@ -42,8 +42,8 @@ namespace AppConfiguration.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeLabelListResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLabelListResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<LabelListResult>.Serialize(ModelSerializerOptions options)

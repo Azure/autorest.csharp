@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    internal partial class DeploymentWhatIfSettings : IUtf8JsonSerializable
+    internal partial class DeploymentWhatIfSettings : IUtf8JsonSerializable, IModelJsonSerializable<DeploymentWhatIfSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeploymentWhatIfSettings>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeploymentWhatIfSettings>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ResultFormat))
@@ -21,6 +25,52 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(ResultFormat.Value.ToSerialString());
             }
             writer.WriteEndObject();
+        }
+
+        DeploymentWhatIfSettings IModelJsonSerializable<DeploymentWhatIfSettings>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeploymentWhatIfSettings(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeploymentWhatIfSettings>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeploymentWhatIfSettings IModelSerializable<DeploymentWhatIfSettings>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeploymentWhatIfSettings(document.RootElement, options);
+        }
+
+        internal static DeploymentWhatIfSettings DeserializeDeploymentWhatIfSettings(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<WhatIfResultFormat> resultFormat = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("resultFormat"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    resultFormat = property.Value.GetString().ToWhatIfResultFormat();
+                    continue;
+                }
+            }
+            return new DeploymentWhatIfSettings(Optional.ToNullable(resultFormat));
         }
     }
 }

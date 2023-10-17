@@ -19,6 +19,21 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<RollbackStatusInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
+            {
+                writer.WritePropertyName("successfullyRolledbackInstanceCount"u8);
+                writer.WriteNumberValue(SuccessfullyRolledbackInstanceCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(FailedRolledbackInstanceCount))
+            {
+                writer.WritePropertyName("failedRolledbackInstanceCount"u8);
+                writer.WriteNumberValue(FailedRolledbackInstanceCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RollbackError))
+            {
+                writer.WritePropertyName("rollbackError"u8);
+                writer.WriteObjectValue(RollbackError);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +41,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRollbackStatusInfo(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRollbackStatusInfo(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RollbackStatusInfo>.Serialize(ModelSerializerOptions options)

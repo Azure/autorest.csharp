@@ -41,19 +41,72 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(ProximityPlacementGroupType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("proximityPlacementGroupType"u8);
-                writer.WriteStringValue(ProximityPlacementGroupType.Value.ToString());
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(ColocationStatus))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("colocationStatus"u8);
-                writer.WriteObjectValue(ColocationStatus);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(ProximityPlacementGroupType))
+                {
+                    writer.WritePropertyName("proximityPlacementGroupType"u8);
+                    writer.WriteStringValue(ProximityPlacementGroupType.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(VirtualMachines))
+                {
+                    writer.WritePropertyName("virtualMachines"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VirtualMachines)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(VirtualMachineScaleSets))
+                {
+                    writer.WritePropertyName("virtualMachineScaleSets"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VirtualMachineScaleSets)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(AvailabilitySets))
+                {
+                    writer.WritePropertyName("availabilitySets"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in AvailabilitySets)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(ColocationStatus))
+                {
+                    writer.WritePropertyName("colocationStatus"u8);
+                    writer.WriteObjectValue(ColocationStatus);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -61,8 +114,8 @@ namespace Azure.ResourceManager.Sample
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeProximityPlacementGroupData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeProximityPlacementGroupData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ProximityPlacementGroupData>.Serialize(ModelSerializerOptions options)

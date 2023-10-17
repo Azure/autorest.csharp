@@ -5,12 +5,23 @@
 
 #nullable disable
 
+using System.Xml;
 using System.Xml.Linq;
+using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class BlobPrefix
+    public partial class BlobPrefix : IXmlSerializable
     {
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        {
+            writer.WriteStartElement(nameHint ?? "BlobPrefix");
+            writer.WriteStartElement("Name");
+            writer.WriteValue(Name);
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
         internal static BlobPrefix DeserializeBlobPrefix(XElement element)
         {
             string name = default;

@@ -39,8 +39,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeFreshnessScoringFunction(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFreshnessScoringFunction(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<FreshnessScoringFunction>.Serialize(ModelSerializerOptions options)

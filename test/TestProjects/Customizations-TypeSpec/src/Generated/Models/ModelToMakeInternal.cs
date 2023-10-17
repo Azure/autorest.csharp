@@ -5,16 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Public model made internal. </summary>
     internal partial class ModelToMakeInternal
     {
-        /// <summary> Initializes a new instance of ModelToMakeInternal. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelToMakeInternal"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public ModelToMakeInternal(int requiredInt)
         {
             RequiredInt = requiredInt;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelToMakeInternal"/>. </summary>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelToMakeInternal(int requiredInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            RequiredInt = requiredInt;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelToMakeInternal"/> for deserialization. </summary>
+        internal ModelToMakeInternal()
+        {
         }
 
         /// <summary> Required int. </summary>

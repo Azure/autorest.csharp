@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Optionality.Models
 {
-    public partial class CollectionsModelProperty : IUtf8JsonSerializable
+    public partial class CollectionsModelProperty : IUtf8JsonSerializable, IModelJsonSerializable<CollectionsModelProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CollectionsModelProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CollectionsModelProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Property))
@@ -27,34 +31,77 @@ namespace _Type.Property.Optionality.Models
                 }
                 writer.WriteEndArray();
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static CollectionsModelProperty DeserializeCollectionsModelProperty(JsonElement element)
+        CollectionsModelProperty IModelJsonSerializable<CollectionsModelProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCollectionsModelProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CollectionsModelProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CollectionsModelProperty IModelSerializable<CollectionsModelProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCollectionsModelProperty(document.RootElement, options);
+        }
+
+        internal static CollectionsModelProperty DeserializeCollectionsModelProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<IList<StringProperty>> property = default;
-            foreach (var property0 in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property0.NameEquals("property"u8))
+                foreach (var property0 in element.EnumerateObject())
                 {
-                    if (property0.Value.ValueKind == JsonValueKind.Null)
+                    if (property0.NameEquals("property"u8))
                     {
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<StringProperty> array = new List<StringProperty>();
+                        foreach (var item in property0.Value.EnumerateArray())
+                        {
+                            array.Add(StringProperty.DeserializeStringProperty(item));
+                        }
+                        property = array;
                         continue;
                     }
-                    List<StringProperty> array = new List<StringProperty>();
-                    foreach (var item in property0.Value.EnumerateArray())
-                    {
-                        array.Add(StringProperty.DeserializeStringProperty(item));
-                    }
-                    property = array;
-                    continue;
+                    additionalPropertiesDictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new CollectionsModelProperty(Optional.ToList(property));
+            return new CollectionsModelProperty(Optional.ToList(property), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -62,15 +109,13 @@ namespace _Type.Property.Optionality.Models
         internal static CollectionsModelProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCollectionsModelProperty(document.RootElement);
+            return DeserializeCollectionsModelProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

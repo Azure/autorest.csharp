@@ -20,6 +20,16 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<StorageAccountListKeysResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Keys))
+            {
+                writer.WritePropertyName("keys"u8);
+                writer.WriteStartArray();
+                foreach (var item in Keys)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +37,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageAccountListKeysResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageAccountListKeysResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StorageAccountListKeysResult>.Serialize(ModelSerializerOptions options)

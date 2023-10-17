@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Property.ValueTypes.Models
@@ -13,7 +14,10 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a property unknown, and the data is a int32. </summary>
     public partial class UnknownIntProperty
     {
-        /// <summary> Initializes a new instance of UnknownIntProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UnknownIntProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnknownIntProperty(BinaryData property)
@@ -21,6 +25,21 @@ namespace _Type.Property.ValueTypes.Models
             Argument.AssertNotNull(property, nameof(property));
 
             Property = property;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownIntProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownIntProperty(BinaryData property, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Property = property;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownIntProperty"/> for deserialization. </summary>
+        internal UnknownIntProperty()
+        {
         }
 
         /// <summary>

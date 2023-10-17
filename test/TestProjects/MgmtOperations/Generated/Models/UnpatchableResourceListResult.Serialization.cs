@@ -5,17 +5,61 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtOperations;
 
 namespace MgmtOperations.Models
 {
-    internal partial class UnpatchableResourceListResult
+    internal partial class UnpatchableResourceListResult : IUtf8JsonSerializable, IModelJsonSerializable<UnpatchableResourceListResult>
     {
-        internal static UnpatchableResourceListResult DeserializeUnpatchableResourceListResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnpatchableResourceListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnpatchableResourceListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        UnpatchableResourceListResult IModelJsonSerializable<UnpatchableResourceListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnpatchableResourceListResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnpatchableResourceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnpatchableResourceListResult IModelSerializable<UnpatchableResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnpatchableResourceListResult(document.RootElement, options);
+        }
+
+        internal static UnpatchableResourceListResult DeserializeUnpatchableResourceListResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

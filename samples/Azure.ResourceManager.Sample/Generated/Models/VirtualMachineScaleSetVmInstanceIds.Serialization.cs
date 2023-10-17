@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetVmInstanceIds(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetVmInstanceIds(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetVmInstanceIds>.Serialize(ModelSerializerOptions options)

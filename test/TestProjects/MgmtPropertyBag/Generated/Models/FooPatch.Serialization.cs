@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtPropertyBag.Models
 {
-    public partial class FooPatch : IUtf8JsonSerializable
+    public partial class FooPatch : IUtf8JsonSerializable, IModelJsonSerializable<FooPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FooPatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FooPatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Details))
@@ -21,6 +25,48 @@ namespace MgmtPropertyBag.Models
                 writer.WriteStringValue(Details);
             }
             writer.WriteEndObject();
+        }
+
+        FooPatch IModelJsonSerializable<FooPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFooPatch(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FooPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FooPatch IModelSerializable<FooPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFooPatch(document.RootElement, options);
+        }
+
+        internal static FooPatch DeserializeFooPatch(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> details = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("details"u8))
+                {
+                    details = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new FooPatch(details.Value);
         }
     }
 }

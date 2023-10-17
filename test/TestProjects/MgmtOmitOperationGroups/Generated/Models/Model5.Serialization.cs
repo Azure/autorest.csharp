@@ -5,21 +5,30 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtOmitOperationGroups.Models
 {
-    public partial class Model5 : IUtf8JsonSerializable
+    public partial class Model5 : IUtf8JsonSerializable, IModelJsonSerializable<Model5>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Model5>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Model5>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(K))
+            {
+                writer.WritePropertyName("k"u8);
+                writer.WriteStringValue(K);
             }
             if (Optional.IsCollectionDefined(Modelqs))
             {
@@ -34,8 +43,32 @@ namespace MgmtOmitOperationGroups.Models
             writer.WriteEndObject();
         }
 
-        internal static Model5 DeserializeModel5(JsonElement element)
+        Model5 IModelJsonSerializable<Model5>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModel5(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Model5>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Model5 IModelSerializable<Model5>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModel5(document.RootElement, options);
+        }
+
+        internal static Model5 DeserializeModel5(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

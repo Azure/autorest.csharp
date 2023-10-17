@@ -5,14 +5,51 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class DataContainer
+    public partial class DataContainer : IUtf8JsonSerializable, IModelJsonSerializable<DataContainer>
     {
-        internal static DataContainer DeserializeDataContainer(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DataContainer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DataContainer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("workspace"u8);
+            writer.WriteObjectValue(Workspace);
+            writer.WriteEndObject();
+        }
+
+        DataContainer IModelJsonSerializable<DataContainer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataContainer(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DataContainer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DataContainer IModelSerializable<DataContainer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDataContainer(document.RootElement, options);
+        }
+
+        internal static DataContainer DeserializeDataContainer(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

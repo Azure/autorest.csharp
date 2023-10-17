@@ -5,55 +5,128 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class MultivariateLastDetectionResult
+    public partial class MultivariateLastDetectionResult : IUtf8JsonSerializable, IModelJsonSerializable<MultivariateLastDetectionResult>
     {
-        internal static MultivariateLastDetectionResult DeserializeMultivariateLastDetectionResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MultivariateLastDetectionResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MultivariateLastDetectionResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(VariableStates))
+            {
+                writer.WritePropertyName("variableStates"u8);
+                writer.WriteStartArray();
+                foreach (var item in VariableStates)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(Results))
+            {
+                writer.WritePropertyName("results"u8);
+                writer.WriteStartArray();
+                foreach (var item in Results)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        MultivariateLastDetectionResult IModelJsonSerializable<MultivariateLastDetectionResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMultivariateLastDetectionResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MultivariateLastDetectionResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MultivariateLastDetectionResult IModelSerializable<MultivariateLastDetectionResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMultivariateLastDetectionResult(document.RootElement, options);
+        }
+
+        internal static MultivariateLastDetectionResult DeserializeMultivariateLastDetectionResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<IReadOnlyList<VariableState>> variableStates = default;
             Optional<IReadOnlyList<AnomalyState>> results = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("variableStates"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("variableStates"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<VariableState> array = new List<VariableState>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(VariableState.DeserializeVariableState(item));
+                        }
+                        variableStates = array;
                         continue;
                     }
-                    List<VariableState> array = new List<VariableState>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("results"u8))
                     {
-                        array.Add(VariableState.DeserializeVariableState(item));
-                    }
-                    variableStates = array;
-                    continue;
-                }
-                if (property.NameEquals("results"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<AnomalyState> array = new List<AnomalyState>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(AnomalyState.DeserializeAnomalyState(item));
+                        }
+                        results = array;
                         continue;
                     }
-                    List<AnomalyState> array = new List<AnomalyState>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(AnomalyState.DeserializeAnomalyState(item));
-                    }
-                    results = array;
-                    continue;
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new MultivariateLastDetectionResult(Optional.ToList(variableStates), Optional.ToList(results));
+            return new MultivariateLastDetectionResult(Optional.ToList(variableStates), Optional.ToList(results), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -61,7 +134,13 @@ namespace AnomalyDetector.Models
         internal static MultivariateLastDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultivariateLastDetectionResult(document.RootElement);
+            return DeserializeMultivariateLastDetectionResult(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

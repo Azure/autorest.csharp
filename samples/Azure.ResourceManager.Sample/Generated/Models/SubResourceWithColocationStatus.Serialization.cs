@@ -36,8 +36,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSubResourceWithColocationStatus(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubResourceWithColocationStatus(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SubResourceWithColocationStatus>.Serialize(ModelSerializerOptions options)

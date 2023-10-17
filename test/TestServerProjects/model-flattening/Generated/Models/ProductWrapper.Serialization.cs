@@ -5,15 +5,60 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace model_flattening.Models
 {
-    public partial class ProductWrapper
+    public partial class ProductWrapper : IUtf8JsonSerializable, IModelJsonSerializable<ProductWrapper>
     {
-        internal static ProductWrapper DeserializeProductWrapper(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ProductWrapper>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ProductWrapper>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("property"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Value))
+                {
+                    writer.WritePropertyName("value"u8);
+                    writer.WriteStringValue(Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        ProductWrapper IModelJsonSerializable<ProductWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeProductWrapper(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ProductWrapper>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProductWrapper IModelSerializable<ProductWrapper>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProductWrapper(document.RootElement, options);
+        }
+
+        internal static ProductWrapper DeserializeProductWrapper(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

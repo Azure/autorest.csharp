@@ -75,10 +75,20 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(VmHealth))
+            {
+                writer.WritePropertyName("vmHealth"u8);
+                writer.WriteObjectValue(VmHealth);
+            }
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AssignedHost))
+            {
+                writer.WritePropertyName("assignedHost"u8);
+                writer.WriteStringValue(AssignedHost);
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -102,8 +112,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineInstanceView(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineInstanceView(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineInstanceView>.Serialize(ModelSerializerOptions options)

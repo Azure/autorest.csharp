@@ -19,6 +19,16 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<OrchestrationServiceSummary>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ServiceName))
+            {
+                writer.WritePropertyName("serviceName"u8);
+                writer.WriteStringValue(ServiceName.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ServiceState))
+            {
+                writer.WritePropertyName("serviceState"u8);
+                writer.WriteStringValue(ServiceState.Value.ToString());
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +36,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOrchestrationServiceSummary(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOrchestrationServiceSummary(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OrchestrationServiceSummary>.Serialize(ModelSerializerOptions options)

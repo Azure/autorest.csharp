@@ -33,8 +33,8 @@ namespace body_complex.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDotFish(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDotFish(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DotFish>.Serialize(ModelSerializerOptions options)

@@ -19,16 +19,19 @@ namespace FlattenedParameters.Models
         void IModelJsonSerializable<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("flattened"u8);
-            writer.WriteStartObject();
-            writer.WritePropertyName("required"u8);
-            writer.WriteStringValue(Required);
-            if (Optional.IsDefined(NonRequired))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("non_required"u8);
-                writer.WriteStringValue(NonRequired);
+                writer.WritePropertyName("flattened"u8);
+                writer.WriteStartObject();
+                writer.WritePropertyName("required"u8);
+                writer.WriteStringValue(Required);
+                if (Optional.IsDefined(NonRequired))
+                {
+                    writer.WritePropertyName("non_required"u8);
+                    writer.WriteStringValue(NonRequired);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -36,8 +39,8 @@ namespace FlattenedParameters.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePaths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePaths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Serialize(ModelSerializerOptions options)

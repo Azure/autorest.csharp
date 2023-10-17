@@ -66,8 +66,8 @@ namespace body_complex.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSmartSalmon(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSmartSalmon(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SmartSalmon>.Serialize(ModelSerializerOptions options)
@@ -154,7 +154,7 @@ namespace body_complex.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value);
+            return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
         }
     }
 }

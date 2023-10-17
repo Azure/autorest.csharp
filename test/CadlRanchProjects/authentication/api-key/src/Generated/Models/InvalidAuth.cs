@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Authentication.ApiKey.Models
@@ -13,7 +14,10 @@ namespace Authentication.ApiKey.Models
     /// <summary> The InvalidAuth. </summary>
     public partial class InvalidAuth
     {
-        /// <summary> Initializes a new instance of InvalidAuth. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="InvalidAuth"/>. </summary>
         /// <param name="error"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         internal InvalidAuth(string error)
@@ -21,6 +25,21 @@ namespace Authentication.ApiKey.Models
             Argument.AssertNotNull(error, nameof(error));
 
             Error = error;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InvalidAuth"/>. </summary>
+        /// <param name="error"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InvalidAuth(string error, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Error = error;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InvalidAuth"/> for deserialization. </summary>
+        internal InvalidAuth()
+        {
         }
 
         /// <summary> Gets the error. </summary>

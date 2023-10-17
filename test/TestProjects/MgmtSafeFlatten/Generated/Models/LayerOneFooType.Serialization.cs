@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSafeFlatten.Models
 {
-    public partial class LayerOneFooType : IUtf8JsonSerializable
+    public partial class LayerOneFooType : IUtf8JsonSerializable, IModelJsonSerializable<LayerOneFooType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LayerOneFooType>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LayerOneFooType>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
@@ -22,8 +26,32 @@ namespace MgmtSafeFlatten.Models
             writer.WriteEndObject();
         }
 
-        internal static LayerOneFooType DeserializeLayerOneFooType(JsonElement element)
+        LayerOneFooType IModelJsonSerializable<LayerOneFooType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLayerOneFooType(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LayerOneFooType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LayerOneFooType IModelSerializable<LayerOneFooType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLayerOneFooType(document.RootElement, options);
+        }
+
+        internal static LayerOneFooType DeserializeLayerOneFooType(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

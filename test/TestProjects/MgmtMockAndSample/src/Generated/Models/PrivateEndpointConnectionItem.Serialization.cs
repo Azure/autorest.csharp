@@ -5,16 +5,81 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class PrivateEndpointConnectionItem
+    public partial class PrivateEndpointConnectionItem : IUtf8JsonSerializable, IModelJsonSerializable<PrivateEndpointConnectionItem>
     {
-        internal static PrivateEndpointConnectionItem DeserializePrivateEndpointConnectionItem(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PrivateEndpointConnectionItem>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PrivateEndpointConnectionItem>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PrivateEndpoint))
+                {
+                    writer.WritePropertyName("privateEndpoint"u8);
+                    JsonSerializer.Serialize(writer, PrivateEndpoint);
+                }
+                if (Optional.IsDefined(ConnectionState))
+                {
+                    writer.WritePropertyName("privateLinkServiceConnectionState"u8);
+                    writer.WriteObjectValue(ConnectionState);
+                }
+                if (Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        PrivateEndpointConnectionItem IModelJsonSerializable<PrivateEndpointConnectionItem>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePrivateEndpointConnectionItem(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PrivateEndpointConnectionItem>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateEndpointConnectionItem IModelSerializable<PrivateEndpointConnectionItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateEndpointConnectionItem(document.RootElement, options);
+        }
+
+        internal static PrivateEndpointConnectionItem DeserializePrivateEndpointConnectionItem(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

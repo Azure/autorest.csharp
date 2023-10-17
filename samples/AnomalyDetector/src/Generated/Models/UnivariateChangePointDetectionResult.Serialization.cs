@@ -5,17 +5,88 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class UnivariateChangePointDetectionResult
+    public partial class UnivariateChangePointDetectionResult : IUtf8JsonSerializable, IModelJsonSerializable<UnivariateChangePointDetectionResult>
     {
-        internal static UnivariateChangePointDetectionResult DeserializeUnivariateChangePointDetectionResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnivariateChangePointDetectionResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnivariateChangePointDetectionResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Period))
+            {
+                writer.WritePropertyName("period"u8);
+                writer.WriteNumberValue(Period.Value);
+            }
+            if (Optional.IsCollectionDefined(IsChangePoint))
+            {
+                writer.WritePropertyName("isChangePoint"u8);
+                writer.WriteStartArray();
+                foreach (var item in IsChangePoint)
+                {
+                    writer.WriteBooleanValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ConfidenceScores))
+            {
+                writer.WritePropertyName("confidenceScores"u8);
+                writer.WriteStartArray();
+                foreach (var item in ConfidenceScores)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        UnivariateChangePointDetectionResult IModelJsonSerializable<UnivariateChangePointDetectionResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnivariateChangePointDetectionResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnivariateChangePointDetectionResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnivariateChangePointDetectionResult IModelSerializable<UnivariateChangePointDetectionResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnivariateChangePointDetectionResult(document.RootElement, options);
+        }
+
+        internal static UnivariateChangePointDetectionResult DeserializeUnivariateChangePointDetectionResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -23,47 +94,54 @@ namespace AnomalyDetector.Models
             Optional<int> period = default;
             Optional<IReadOnlyList<bool>> isChangePoint = default;
             Optional<IReadOnlyList<float>> confidenceScores = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("period"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("period"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        period = property.Value.GetInt32();
                         continue;
                     }
-                    period = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("isChangePoint"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("isChangePoint"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<bool> array = new List<bool>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetBoolean());
+                        }
+                        isChangePoint = array;
                         continue;
                     }
-                    List<bool> array = new List<bool>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("confidenceScores"u8))
                     {
-                        array.Add(item.GetBoolean());
-                    }
-                    isChangePoint = array;
-                    continue;
-                }
-                if (property.NameEquals("confidenceScores"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<float> array = new List<float>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetSingle());
+                        }
+                        confidenceScores = array;
                         continue;
                     }
-                    List<float> array = new List<float>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetSingle());
-                    }
-                    confidenceScores = array;
-                    continue;
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), Optional.ToList(isChangePoint), Optional.ToList(confidenceScores));
+            return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), Optional.ToList(isChangePoint), Optional.ToList(confidenceScores), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -71,7 +149,13 @@ namespace AnomalyDetector.Models
         internal static UnivariateChangePointDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateChangePointDetectionResult(document.RootElement);
+            return DeserializeUnivariateChangePointDetectionResult(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

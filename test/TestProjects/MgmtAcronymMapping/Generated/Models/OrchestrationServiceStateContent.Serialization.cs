@@ -30,8 +30,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOrchestrationServiceStateContent(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOrchestrationServiceStateContent(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OrchestrationServiceStateContent>.Serialize(ModelSerializerOptions options)

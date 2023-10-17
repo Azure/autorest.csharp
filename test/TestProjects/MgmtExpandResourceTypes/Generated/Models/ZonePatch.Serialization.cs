@@ -38,8 +38,8 @@ namespace MgmtExpandResourceTypes.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeZonePatch(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeZonePatch(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ZonePatch>.Serialize(ModelSerializerOptions options)

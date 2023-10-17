@@ -5,29 +5,86 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    public partial class NoDecoratorModelInPublic
+    public partial class NoDecoratorModelInPublic : IUtf8JsonSerializable, IModelJsonSerializable<NoDecoratorModelInPublic>
     {
-        internal static NoDecoratorModelInPublic DeserializeNoDecoratorModelInPublic(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NoDecoratorModelInPublic>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NoDecoratorModelInPublic>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        NoDecoratorModelInPublic IModelJsonSerializable<NoDecoratorModelInPublic>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNoDecoratorModelInPublic(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NoDecoratorModelInPublic>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NoDecoratorModelInPublic IModelSerializable<NoDecoratorModelInPublic>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNoDecoratorModelInPublic(document.RootElement, options);
+        }
+
+        internal static NoDecoratorModelInPublic DeserializeNoDecoratorModelInPublic(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string name = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("name"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    name = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("name"u8))
+                    {
+                        name = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new NoDecoratorModelInPublic(name);
+            return new NoDecoratorModelInPublic(name, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -35,7 +92,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal static NoDecoratorModelInPublic FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNoDecoratorModelInPublic(document.RootElement);
+            return DeserializeNoDecoratorModelInPublic(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

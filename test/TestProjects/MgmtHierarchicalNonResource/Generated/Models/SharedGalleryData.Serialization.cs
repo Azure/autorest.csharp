@@ -5,15 +5,70 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource
 {
-    public partial class SharedGalleryData
+    public partial class SharedGalleryData : IUtf8JsonSerializable, IModelJsonSerializable<SharedGalleryData>
     {
-        internal static SharedGalleryData DeserializeSharedGalleryData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SharedGalleryData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SharedGalleryData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("identifier"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(UniqueId))
+                {
+                    writer.WritePropertyName("uniqueId"u8);
+                    writer.WriteStringValue(UniqueId);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        SharedGalleryData IModelJsonSerializable<SharedGalleryData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSharedGalleryData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SharedGalleryData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SharedGalleryData IModelSerializable<SharedGalleryData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSharedGalleryData(document.RootElement, options);
+        }
+
+        internal static SharedGalleryData DeserializeSharedGalleryData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

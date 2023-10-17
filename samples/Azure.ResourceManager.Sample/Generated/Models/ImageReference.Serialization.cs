@@ -39,6 +39,11 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("version"u8);
                 writer.WriteStringValue(Version);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ExactVersion))
+            {
+                writer.WritePropertyName("exactVersion"u8);
+                writer.WriteStringValue(ExactVersion);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
@@ -51,8 +56,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeImageReference(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImageReference(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ImageReference>.Serialize(ModelSerializerOptions options)

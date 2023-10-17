@@ -26,6 +26,16 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("days"u8);
                 writer.WriteNumberValue(Days.Value);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastEnabledOn))
+            {
+                writer.WritePropertyName("lastEnabledTime"u8);
+                writer.WriteStringValue(LastEnabledOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MinRestoreOn))
+            {
+                writer.WritePropertyName("minRestoreTime"u8);
+                writer.WriteStringValue(MinRestoreOn.Value, "O");
+            }
             writer.WriteEndObject();
         }
 
@@ -33,8 +43,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRestorePolicyProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRestorePolicyProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RestorePolicyProperties>.Serialize(ModelSerializerOptions options)

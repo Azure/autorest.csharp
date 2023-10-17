@@ -24,6 +24,16 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TimeStamp))
+            {
+                writer.WritePropertyName("timeStamp"u8);
+                writer.WriteStringValue(TimeStamp.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MigrationState))
+            {
+                writer.WritePropertyName("migrationState"u8);
+                writer.WriteStringValue(MigrationState.Value.ToString());
+            }
             writer.WriteEndObject();
         }
 
@@ -31,8 +41,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeImmutableStorageWithVersioning(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImmutableStorageWithVersioning(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ImmutableStorageWithVersioning>.Serialize(ModelSerializerOptions options)

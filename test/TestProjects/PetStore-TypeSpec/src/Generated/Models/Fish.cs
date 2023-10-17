@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace PetStore.Models
 {
     /// <summary>
@@ -14,20 +18,31 @@ namespace PetStore.Models
     /// </summary>
     public abstract partial class Fish
     {
-        /// <summary> Initializes a new instance of Fish. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Fish"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         protected Fish(int size)
         {
             Size = size;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Fish. </summary>
+        /// <summary> Initializes a new instance of <see cref="Fish"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
-        internal Fish(string kind, int size)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Fish(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Size = size;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Fish"/> for deserialization. </summary>
+        internal Fish()
+        {
         }
 
         /// <summary> Discriminator. </summary>

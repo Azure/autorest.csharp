@@ -21,24 +21,47 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<ImmutabilityPolicyProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
-                writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
             }
-            if (Optional.IsDefined(AllowProtectedAppendWrites))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(UpdateHistory))
             {
-                writer.WritePropertyName("allowProtectedAppendWrites"u8);
-                writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
+                writer.WritePropertyName("updateHistory"u8);
+                writer.WriteStartArray();
+                foreach (var item in UpdateHistory)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
-            if (Optional.IsDefined(AllowProtectedAppendWritesAll))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
-                writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+                {
+                    writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
+                    writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(State))
+                {
+                    writer.WritePropertyName("state"u8);
+                    writer.WriteStringValue(State.Value.ToString());
+                }
+                if (Optional.IsDefined(AllowProtectedAppendWrites))
+                {
+                    writer.WritePropertyName("allowProtectedAppendWrites"u8);
+                    writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
+                }
+                if (Optional.IsDefined(AllowProtectedAppendWritesAll))
+                {
+                    writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
+                    writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -46,8 +69,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeImmutabilityPolicyProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImmutabilityPolicyProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ImmutabilityPolicyProperties>.Serialize(ModelSerializerOptions options)

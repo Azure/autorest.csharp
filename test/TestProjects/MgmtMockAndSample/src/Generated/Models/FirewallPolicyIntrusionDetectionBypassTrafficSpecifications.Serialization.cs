@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyIntrusionDetectionBypassTrafficSpecifications : IUtf8JsonSerializable
+    public partial class FirewallPolicyIntrusionDetectionBypassTrafficSpecifications : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -84,8 +88,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyIntrusionDetectionBypassTrafficSpecifications DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(JsonElement element)
+        FirewallPolicyIntrusionDetectionBypassTrafficSpecifications IModelJsonSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyIntrusionDetectionBypassTrafficSpecifications IModelSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyIntrusionDetectionBypassTrafficSpecifications DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

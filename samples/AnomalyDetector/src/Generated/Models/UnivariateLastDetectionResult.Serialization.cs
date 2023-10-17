@@ -5,16 +5,84 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class UnivariateLastDetectionResult
+    public partial class UnivariateLastDetectionResult : IUtf8JsonSerializable, IModelJsonSerializable<UnivariateLastDetectionResult>
     {
-        internal static UnivariateLastDetectionResult DeserializeUnivariateLastDetectionResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnivariateLastDetectionResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnivariateLastDetectionResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("period"u8);
+            writer.WriteNumberValue(Period);
+            writer.WritePropertyName("suggestedWindow"u8);
+            writer.WriteNumberValue(SuggestedWindow);
+            writer.WritePropertyName("expectedValue"u8);
+            writer.WriteNumberValue(ExpectedValue);
+            writer.WritePropertyName("upperMargin"u8);
+            writer.WriteNumberValue(UpperMargin);
+            writer.WritePropertyName("lowerMargin"u8);
+            writer.WriteNumberValue(LowerMargin);
+            writer.WritePropertyName("isAnomaly"u8);
+            writer.WriteBooleanValue(IsAnomaly);
+            writer.WritePropertyName("isNegativeAnomaly"u8);
+            writer.WriteBooleanValue(IsNegativeAnomaly);
+            writer.WritePropertyName("isPositiveAnomaly"u8);
+            writer.WriteBooleanValue(IsPositiveAnomaly);
+            if (Optional.IsDefined(Severity))
+            {
+                writer.WritePropertyName("severity"u8);
+                writer.WriteNumberValue(Severity.Value);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        UnivariateLastDetectionResult IModelJsonSerializable<UnivariateLastDetectionResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnivariateLastDetectionResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnivariateLastDetectionResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnivariateLastDetectionResult IModelSerializable<UnivariateLastDetectionResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnivariateLastDetectionResult(document.RootElement, options);
+        }
+
+        internal static UnivariateLastDetectionResult DeserializeUnivariateLastDetectionResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -28,59 +96,66 @@ namespace AnomalyDetector.Models
             bool isNegativeAnomaly = default;
             bool isPositiveAnomaly = default;
             Optional<float> severity = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("period"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    period = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("suggestedWindow"u8))
-                {
-                    suggestedWindow = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("expectedValue"u8))
-                {
-                    expectedValue = property.Value.GetSingle();
-                    continue;
-                }
-                if (property.NameEquals("upperMargin"u8))
-                {
-                    upperMargin = property.Value.GetSingle();
-                    continue;
-                }
-                if (property.NameEquals("lowerMargin"u8))
-                {
-                    lowerMargin = property.Value.GetSingle();
-                    continue;
-                }
-                if (property.NameEquals("isAnomaly"u8))
-                {
-                    isAnomaly = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("isNegativeAnomaly"u8))
-                {
-                    isNegativeAnomaly = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("isPositiveAnomaly"u8))
-                {
-                    isPositiveAnomaly = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("severity"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("period"u8))
                     {
+                        period = property.Value.GetInt32();
                         continue;
                     }
-                    severity = property.Value.GetSingle();
-                    continue;
+                    if (property.NameEquals("suggestedWindow"u8))
+                    {
+                        suggestedWindow = property.Value.GetInt32();
+                        continue;
+                    }
+                    if (property.NameEquals("expectedValue"u8))
+                    {
+                        expectedValue = property.Value.GetSingle();
+                        continue;
+                    }
+                    if (property.NameEquals("upperMargin"u8))
+                    {
+                        upperMargin = property.Value.GetSingle();
+                        continue;
+                    }
+                    if (property.NameEquals("lowerMargin"u8))
+                    {
+                        lowerMargin = property.Value.GetSingle();
+                        continue;
+                    }
+                    if (property.NameEquals("isAnomaly"u8))
+                    {
+                        isAnomaly = property.Value.GetBoolean();
+                        continue;
+                    }
+                    if (property.NameEquals("isNegativeAnomaly"u8))
+                    {
+                        isNegativeAnomaly = property.Value.GetBoolean();
+                        continue;
+                    }
+                    if (property.NameEquals("isPositiveAnomaly"u8))
+                    {
+                        isPositiveAnomaly = property.Value.GetBoolean();
+                        continue;
+                    }
+                    if (property.NameEquals("severity"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        severity = property.Value.GetSingle();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToNullable(severity));
+            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToNullable(severity), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -88,7 +163,13 @@ namespace AnomalyDetector.Models
         internal static UnivariateLastDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateLastDetectionResult(document.RootElement);
+            return DeserializeUnivariateLastDetectionResult(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

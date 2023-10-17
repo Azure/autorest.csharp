@@ -5,16 +5,25 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class ResourceLinkProperties : IUtf8JsonSerializable
+    public partial class ResourceLinkProperties : IUtf8JsonSerializable, IModelJsonSerializable<ResourceLinkProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ResourceLinkProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ResourceLinkProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SourceId))
+            {
+                writer.WritePropertyName("sourceId"u8);
+                writer.WriteStringValue(SourceId);
+            }
             writer.WritePropertyName("targetId"u8);
             writer.WriteStringValue(TargetId);
             if (Optional.IsDefined(Notes))
@@ -25,8 +34,32 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        internal static ResourceLinkProperties DeserializeResourceLinkProperties(JsonElement element)
+        ResourceLinkProperties IModelJsonSerializable<ResourceLinkProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeResourceLinkProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ResourceLinkProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResourceLinkProperties IModelSerializable<ResourceLinkProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResourceLinkProperties(document.RootElement, options);
+        }
+
+        internal static ResourceLinkProperties DeserializeResourceLinkProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods
 {
-    public partial class FakeParentWithAncestorWithLocData : IUtf8JsonSerializable
+    public partial class FakeParentWithAncestorWithLocData : IUtf8JsonSerializable, IModelJsonSerializable<FakeParentWithAncestorWithLocData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FakeParentWithAncestorWithLocData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FakeParentWithAncestorWithLocData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Bar))
@@ -35,11 +39,55 @@ namespace MgmtListMethods
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
             writer.WriteEndObject();
         }
 
-        internal static FakeParentWithAncestorWithLocData DeserializeFakeParentWithAncestorWithLocData(JsonElement element)
+        FakeParentWithAncestorWithLocData IModelJsonSerializable<FakeParentWithAncestorWithLocData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFakeParentWithAncestorWithLocData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FakeParentWithAncestorWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeParentWithAncestorWithLocData IModelSerializable<FakeParentWithAncestorWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeParentWithAncestorWithLocData(document.RootElement, options);
+        }
+
+        internal static FakeParentWithAncestorWithLocData DeserializeFakeParentWithAncestorWithLocData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The dog. </summary>
     public partial class Dog : Pet
     {
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="woof"/> is null. </exception>
@@ -26,13 +27,19 @@ namespace ConfidentLevelsInTsp.Models
             Woof = woof;
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="woof"> Woof. </param>
-        internal Dog(string kind, string name, string woof) : base(kind, name)
+        internal Dog(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string woof) : base(kind, name, serializedAdditionalRawData)
         {
             Woof = woof;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Dog"/> for deserialization. </summary>
+        internal Dog()
+        {
         }
 
         /// <summary> Woof. </summary>

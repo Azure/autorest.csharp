@@ -21,7 +21,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminator"/>. </summary>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         protected BaseModelWithDiscriminator(int requiredPropertyOnBase)
         {
@@ -29,7 +29,7 @@ namespace ModelsTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
@@ -40,6 +40,11 @@ namespace ModelsTypeSpec.Models
             OptionalPropertyOnBase = optionalPropertyOnBase;
             RequiredPropertyOnBase = requiredPropertyOnBase;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminator"/> for deserialization. </summary>
+        internal BaseModelWithDiscriminator()
+        {
         }
 
         /// <summary> Discriminator. </summary>

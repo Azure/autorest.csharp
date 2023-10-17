@@ -25,14 +25,67 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(BackendIPConfigurations))
+                {
+                    writer.WritePropertyName("backendIPConfigurations"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in BackendIPConfigurations)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(LoadBalancingRules))
+                {
+                    writer.WritePropertyName("loadBalancingRules"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in LoadBalancingRules)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(OutboundRule))
+                {
+                    writer.WritePropertyName("outboundRule"u8);
+                    writer.WriteObjectValue(OutboundRule);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OutboundRules))
+                {
+                    writer.WritePropertyName("outboundRules"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OutboundRules)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -40,8 +93,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBackendAddressPool(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBackendAddressPool(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BackendAddressPool>.Serialize(ModelSerializerOptions options)

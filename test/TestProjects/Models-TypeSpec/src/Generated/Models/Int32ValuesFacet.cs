@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Facets an int32 field by the specified value ranges. </summary>
     public partial class Int32ValuesFacet : NumericValuesFacetint32
     {
-        /// <summary> Initializes a new instance of Int32ValuesFacet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Int32ValuesFacet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>
@@ -25,7 +25,7 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(values, nameof(values));
         }
 
-        /// <summary> Initializes a new instance of Int32ValuesFacet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Int32ValuesFacet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
@@ -34,6 +34,11 @@ namespace ModelsTypeSpec.Models
         internal Int32ValuesFacet(string field, IDictionary<string, BinaryData> serializedAdditionalRawData, IReadOnlyList<int> values, int value, Int32ValuesFacetKind kind) : base(field, serializedAdditionalRawData, values, value)
         {
             Kind = kind;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Int32ValuesFacet"/> for deserialization. </summary>
+        internal Int32ValuesFacet()
+        {
         }
 
         /// <summary> The facet type. </summary>

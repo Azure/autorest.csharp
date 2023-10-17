@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(MgmtReferenceTypesPlanConverter))]
-    public partial class MgmtReferenceTypesPlan : IUtf8JsonSerializable
+    public partial class MgmtReferenceTypesPlan : IUtf8JsonSerializable, IModelJsonSerializable<MgmtReferenceTypesPlan>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtReferenceTypesPlan>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MgmtReferenceTypesPlan>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -37,8 +40,32 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static MgmtReferenceTypesPlan DeserializeMgmtReferenceTypesPlan(JsonElement element)
+        MgmtReferenceTypesPlan IModelJsonSerializable<MgmtReferenceTypesPlan>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtReferenceTypesPlan(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtReferenceTypesPlan>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtReferenceTypesPlan IModelSerializable<MgmtReferenceTypesPlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtReferenceTypesPlan(document.RootElement, options);
+        }
+
+        internal static MgmtReferenceTypesPlan DeserializeMgmtReferenceTypesPlan(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

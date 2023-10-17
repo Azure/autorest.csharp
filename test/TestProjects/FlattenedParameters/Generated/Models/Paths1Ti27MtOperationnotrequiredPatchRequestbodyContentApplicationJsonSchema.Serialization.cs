@@ -19,19 +19,22 @@ namespace FlattenedParameters.Models
         void IModelJsonSerializable<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("flattened"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Required))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("required"u8);
-                writer.WriteStringValue(Required);
+                writer.WritePropertyName("flattened"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Required))
+                {
+                    writer.WritePropertyName("required"u8);
+                    writer.WriteStringValue(Required);
+                }
+                if (Optional.IsDefined(NonRequired))
+                {
+                    writer.WritePropertyName("non_required"u8);
+                    writer.WriteStringValue(NonRequired);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(NonRequired))
-            {
-                writer.WritePropertyName("non_required"u8);
-                writer.WriteStringValue(NonRequired);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -39,8 +42,8 @@ namespace FlattenedParameters.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Serialize(ModelSerializerOptions options)

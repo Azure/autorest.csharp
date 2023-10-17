@@ -5,14 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Model.Empty.Models
 {
     /// <summary> Empty model used in operation parameters. </summary>
     public partial class EmptyInput
     {
-        /// <summary> Initializes a new instance of EmptyInput. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="EmptyInput"/>. </summary>
         public EmptyInput()
         {
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="EmptyInput"/>. </summary>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EmptyInput(IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

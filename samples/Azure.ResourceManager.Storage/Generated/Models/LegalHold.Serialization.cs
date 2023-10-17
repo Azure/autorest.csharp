@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<LegalHold>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(HasLegalHold))
+            {
+                writer.WritePropertyName("hasLegalHold"u8);
+                writer.WriteBooleanValue(HasLegalHold.Value);
+            }
             writer.WritePropertyName("tags"u8);
             writer.WriteStartArray();
             foreach (var item in Tags)
@@ -39,8 +44,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeLegalHold(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLegalHold(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<LegalHold>.Serialize(ModelSerializerOptions options)

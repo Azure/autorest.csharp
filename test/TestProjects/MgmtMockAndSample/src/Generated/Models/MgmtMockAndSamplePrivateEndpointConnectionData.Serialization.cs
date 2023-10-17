@@ -5,18 +5,22 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class MgmtMockAndSamplePrivateEndpointConnectionData : IUtf8JsonSerializable
+    public partial class MgmtMockAndSamplePrivateEndpointConnectionData : IUtf8JsonSerializable, IModelJsonSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Etag))
@@ -24,29 +28,92 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PrivateEndpoint))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Location))
             {
-                writer.WritePropertyName("privateEndpoint"u8);
-                JsonSerializer.Serialize(writer, PrivateEndpoint);
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
             }
-            if (Optional.IsDefined(ConnectionState))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue(ConnectionState);
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ProvisioningState))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PrivateEndpoint))
+                {
+                    writer.WritePropertyName("privateEndpoint"u8);
+                    JsonSerializer.Serialize(writer, PrivateEndpoint);
+                }
+                if (Optional.IsDefined(ConnectionState))
+                {
+                    writer.WritePropertyName("privateLinkServiceConnectionState"u8);
+                    writer.WriteObjectValue(ConnectionState);
+                }
+                if (Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
-        internal static MgmtMockAndSamplePrivateEndpointConnectionData DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(JsonElement element)
+        MgmtMockAndSamplePrivateEndpointConnectionData IModelJsonSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSamplePrivateEndpointConnectionData IModelSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement, options);
+        }
+
+        internal static MgmtMockAndSamplePrivateEndpointConnectionData DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

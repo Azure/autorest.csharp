@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used both as input and output with primitive types. </summary>
     public partial class RoundTripPrimitiveModel : BaseModel
     {
-        /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredInt64"> Required int64, illustrating a value type property. </param>
@@ -44,7 +44,7 @@ namespace ModelsTypeSpec.Models
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
         }
 
-        /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/>. </summary>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
@@ -68,6 +68,11 @@ namespace ModelsTypeSpec.Models
             RequiredDateTimeOffset = requiredDateTimeOffset;
             RequiredTimeSpan = requiredTimeSpan;
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/> for deserialization. </summary>
+        internal RoundTripPrimitiveModel()
+        {
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>

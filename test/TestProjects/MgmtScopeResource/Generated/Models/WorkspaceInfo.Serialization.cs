@@ -5,15 +5,61 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class WorkspaceInfo
+    public partial class WorkspaceInfo : IUtf8JsonSerializable, IModelJsonSerializable<WorkspaceInfo>
     {
-        internal static WorkspaceInfo DeserializeWorkspaceInfo(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<WorkspaceInfo>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<WorkspaceInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("id"u8);
+            writer.WriteStringValue(Id);
+            writer.WritePropertyName("location"u8);
+            writer.WriteStringValue(Location);
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                writer.WritePropertyName("customerId"u8);
+                writer.WriteStringValue(CustomerId);
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        WorkspaceInfo IModelJsonSerializable<WorkspaceInfo>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeWorkspaceInfo(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<WorkspaceInfo>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WorkspaceInfo IModelSerializable<WorkspaceInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWorkspaceInfo(document.RootElement, options);
+        }
+
+        internal static WorkspaceInfo DeserializeWorkspaceInfo(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

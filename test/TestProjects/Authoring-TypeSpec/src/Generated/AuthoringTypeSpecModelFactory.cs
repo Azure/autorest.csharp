@@ -15,7 +15,7 @@ namespace AuthoringTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AuthoringTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of DeploymentJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeploymentJob"/>. </summary>
         /// <param name="jobId"> The job ID. </param>
         /// <param name="createdDateTime"> The creation date time of the job. </param>
         /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>
@@ -24,34 +24,29 @@ namespace AuthoringTypeSpec.Models
         /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
         /// <param name="errors"> The errors encountered while executing the job. </param>
         /// <param name="id"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.DeploymentJob"/> instance for mocking. </returns>
-        public static DeploymentJob DeploymentJob(string jobId = null, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, DateTimeOffset expirationDateTime = default, JobStatus status = default, IEnumerable<JobWarning> warnings = null, ResponseError errors = null, string id = null)
+        public static DeploymentJob DeploymentJob(string jobId = null, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, DateTimeOffset expirationDateTime = default, JobStatus status = default, IEnumerable<JobWarning> warnings = null, ResponseError errors = null, string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
             warnings ??= new List<JobWarning>();
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id);
+            return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of JobWarning. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.JobWarning"/>. </summary>
         /// <param name="code"> The warning code. </param>
         /// <param name="message"> The warning message. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.JobWarning"/> instance for mocking. </returns>
-        public static JobWarning JobWarning(string code = null, string message = null)
+        public static JobWarning JobWarning(string code = null, string message = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (code == null)
-            {
-                throw new ArgumentNullException(nameof(code));
-            }
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new JobWarning(code, message);
+            return new JobWarning(code, message, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of SwapDeploymentsJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SwapDeploymentsJob"/>. </summary>
         /// <param name="jobId"> The job ID. </param>
         /// <param name="createdDateTime"> The creation date time of the job. </param>
         /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>
@@ -60,12 +55,14 @@ namespace AuthoringTypeSpec.Models
         /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
         /// <param name="errors"> The errors encountered while executing the job. </param>
         /// <param name="id"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.SwapDeploymentsJob"/> instance for mocking. </returns>
-        public static SwapDeploymentsJob SwapDeploymentsJob(string jobId = null, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, DateTimeOffset expirationDateTime = default, JobStatus status = default, IEnumerable<JobWarning> warnings = null, ResponseError errors = null, string id = null)
+        public static SwapDeploymentsJob SwapDeploymentsJob(string jobId = null, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, DateTimeOffset expirationDateTime = default, JobStatus status = default, IEnumerable<JobWarning> warnings = null, ResponseError errors = null, string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
             warnings ??= new List<JobWarning>();
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id);
+            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id, serializedAdditionalRawData);
         }
     }
 }

@@ -27,6 +27,11 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteBooleanValue(Status.Value);
+            }
             writer.WritePropertyName("@odata.location"u8);
             writer.WriteStringValue(OdataLocation);
             if (Optional.IsCollectionDefined(AdditionalProperties))
@@ -40,10 +45,13 @@ namespace additionalProperties.Models
                 }
                 writer.WriteEndObject();
             }
-            foreach (var item in MoreAdditionalProperties)
+            if (MoreAdditionalProperties != null && options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                foreach (var item in MoreAdditionalProperties)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
             }
             writer.WriteEndObject();
         }
@@ -52,8 +60,8 @@ namespace additionalProperties.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePetAPInPropertiesWithAPString(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetAPInPropertiesWithAPString(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PetAPInPropertiesWithAPString>.Serialize(ModelSerializerOptions options)
@@ -85,50 +93,53 @@ namespace additionalProperties.Models
             Optional<IDictionary<string, float>> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
-            foreach (var property in element.EnumerateObject())
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("id"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    id = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("status"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("id"u8))
                     {
+                        id = property.Value.GetInt32();
                         continue;
                     }
-                    status = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("@odata.location"u8))
-                {
-                    odataLocation = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("additionalProperties"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("name"u8))
                     {
+                        name = property.Value.GetString();
                         continue;
                     }
-                    Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.NameEquals("status"u8))
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetSingle());
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        status = property.Value.GetBoolean();
+                        continue;
                     }
-                    additionalProperties = dictionary;
-                    continue;
+                    if (property.NameEquals("@odata.location"u8))
+                    {
+                        odataLocation = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("additionalProperties"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetSingle());
+                        }
+                        additionalProperties = dictionary;
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                moreAdditionalProperties = additionalPropertiesDictionary;
             }
-            moreAdditionalProperties = additionalPropertiesDictionary;
-            return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, Optional.ToDictionary(additionalProperties));
+            return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, Optional.ToDictionary(additionalProperties), moreAdditionalProperties);
         }
     }
 }

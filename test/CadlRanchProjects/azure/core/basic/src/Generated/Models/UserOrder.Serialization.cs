@@ -5,26 +5,72 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
-    public partial class UserOrder : IUtf8JsonSerializable
+    public partial class UserOrder : IUtf8JsonSerializable, IModelJsonSerializable<UserOrder>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UserOrder>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UserOrder>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteNumberValue(Id);
+            }
             writer.WritePropertyName("userId"u8);
             writer.WriteNumberValue(UserId);
             writer.WritePropertyName("detail"u8);
             writer.WriteStringValue(Detail);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static UserOrder DeserializeUserOrder(JsonElement element)
+        UserOrder IModelJsonSerializable<UserOrder>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUserOrder(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UserOrder>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UserOrder IModelSerializable<UserOrder>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUserOrder(document.RootElement, options);
+        }
+
+        internal static UserOrder DeserializeUserOrder(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -32,25 +78,32 @@ namespace _Specs_.Azure.Core.Basic.Models
             int id = default;
             int userId = default;
             string detail = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("id"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    id = property.Value.GetInt32();
-                    continue;
+                    if (property.NameEquals("id"u8))
+                    {
+                        id = property.Value.GetInt32();
+                        continue;
+                    }
+                    if (property.NameEquals("userId"u8))
+                    {
+                        userId = property.Value.GetInt32();
+                        continue;
+                    }
+                    if (property.NameEquals("detail"u8))
+                    {
+                        detail = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("userId"u8))
-                {
-                    userId = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("detail"u8))
-                {
-                    detail = property.Value.GetString();
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new UserOrder(id, userId, detail);
+            return new UserOrder(id, userId, detail, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -58,15 +111,13 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal static UserOrder FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUserOrder(document.RootElement);
+            return DeserializeUserOrder(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

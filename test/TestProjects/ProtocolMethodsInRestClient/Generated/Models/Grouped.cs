@@ -17,6 +17,15 @@ namespace ProtocolMethodsInRestClient.Models
             Second = second;
         }
 
+        /// <summary> Initializes a new instance of Grouped. </summary>
+        /// <param name="first"> First in group. </param>
+        /// <param name="second"> Second in group. </param>
+        internal Grouped(string first, int second)
+        {
+            First = first;
+            Second = second;
+        }
+
         /// <summary> First in group. </summary>
         public string First { get; set; }
         /// <summary> Second in group. </summary>

@@ -9,13 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtMultipleParentResource
 {
-    public partial class ChildBodyData : IUtf8JsonSerializable
+    public partial class ChildBodyData : IUtf8JsonSerializable, IModelJsonSerializable<ChildBodyData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ChildBodyData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ChildBodyData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -31,44 +34,96 @@ namespace MgmtMultipleParentResource
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(AsyncExecution))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("asyncExecution"u8);
-                writer.WriteBooleanValue(AsyncExecution.Value);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(RunAsUser))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("runAsUser"u8);
-                writer.WriteStringValue(RunAsUser);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(RunAsPassword))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("runAsPassword"u8);
-                writer.WriteStringValue(RunAsPassword);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(TimeoutInSeconds))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("timeoutInSeconds"u8);
-                writer.WriteNumberValue(TimeoutInSeconds.Value);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(OutputBlobUri))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("outputBlobUri"u8);
-                writer.WriteStringValue(OutputBlobUri.AbsoluteUri);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(AsyncExecution))
+                {
+                    writer.WritePropertyName("asyncExecution"u8);
+                    writer.WriteBooleanValue(AsyncExecution.Value);
+                }
+                if (Optional.IsDefined(RunAsUser))
+                {
+                    writer.WritePropertyName("runAsUser"u8);
+                    writer.WriteStringValue(RunAsUser);
+                }
+                if (Optional.IsDefined(RunAsPassword))
+                {
+                    writer.WritePropertyName("runAsPassword"u8);
+                    writer.WriteStringValue(RunAsPassword);
+                }
+                if (Optional.IsDefined(TimeoutInSeconds))
+                {
+                    writer.WritePropertyName("timeoutInSeconds"u8);
+                    writer.WriteNumberValue(TimeoutInSeconds.Value);
+                }
+                if (Optional.IsDefined(OutputBlobUri))
+                {
+                    writer.WritePropertyName("outputBlobUri"u8);
+                    writer.WriteStringValue(OutputBlobUri.AbsoluteUri);
+                }
+                if (Optional.IsDefined(ErrorBlobUri))
+                {
+                    writer.WritePropertyName("errorBlobUri"u8);
+                    writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ErrorBlobUri))
-            {
-                writer.WritePropertyName("errorBlobUri"u8);
-                writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static ChildBodyData DeserializeChildBodyData(JsonElement element)
+        ChildBodyData IModelJsonSerializable<ChildBodyData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeChildBodyData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ChildBodyData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ChildBodyData IModelSerializable<ChildBodyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeChildBodyData(document.RootElement, options);
+        }
+
+        internal static ChildBodyData DeserializeChildBodyData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

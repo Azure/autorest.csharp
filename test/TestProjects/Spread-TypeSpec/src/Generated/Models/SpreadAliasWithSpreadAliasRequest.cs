@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace SpreadTypeSpec.Models
@@ -13,7 +14,10 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadAliasWithSpreadAliasRequest. </summary>
     internal partial class SpreadAliasWithSpreadAliasRequest
     {
-        /// <summary> Initializes a new instance of SpreadAliasWithSpreadAliasRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithSpreadAliasRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -23,6 +27,23 @@ namespace SpreadTypeSpec.Models
 
             Name = name;
             Age = age;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithSpreadAliasRequest"/>. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SpreadAliasWithSpreadAliasRequest(string name, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            Age = age;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithSpreadAliasRequest"/> for deserialization. </summary>
+        internal SpreadAliasWithSpreadAliasRequest()
+        {
         }
 
         /// <summary> name of the Thing. </summary>

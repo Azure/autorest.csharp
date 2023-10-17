@@ -5,16 +5,212 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
-    public partial class OutputModel
+    public partial class OutputModel : IUtf8JsonSerializable, IModelJsonSerializable<OutputModel>
     {
-        internal static OutputModel DeserializeOutputModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OutputModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<OutputModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("RequiredString"u8);
+            writer.WriteStringValue(RequiredString);
+            writer.WritePropertyName("RequiredInt"u8);
+            writer.WriteNumberValue(RequiredInt);
+            writer.WritePropertyName("RequiredStringList"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredStringList)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("RequiredIntList"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredIntList)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsDefined(NonRequiredString))
+            {
+                writer.WritePropertyName("NonRequiredString"u8);
+                writer.WriteStringValue(NonRequiredString);
+            }
+            if (Optional.IsDefined(NonRequiredInt))
+            {
+                writer.WritePropertyName("NonRequiredInt"u8);
+                writer.WriteNumberValue(NonRequiredInt.Value);
+            }
+            if (Optional.IsCollectionDefined(NonRequiredStringList))
+            {
+                writer.WritePropertyName("NonRequiredStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in NonRequiredStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(NonRequiredIntList))
+            {
+                writer.WritePropertyName("NonRequiredIntList"u8);
+                writer.WriteStartArray();
+                foreach (var item in NonRequiredIntList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (RequiredNullableString != null)
+            {
+                writer.WritePropertyName("RequiredNullableString"u8);
+                writer.WriteStringValue(RequiredNullableString);
+            }
+            else
+            {
+                writer.WriteNull("RequiredNullableString");
+            }
+            if (RequiredNullableInt != null)
+            {
+                writer.WritePropertyName("RequiredNullableInt"u8);
+                writer.WriteNumberValue(RequiredNullableInt.Value);
+            }
+            else
+            {
+                writer.WriteNull("RequiredNullableInt");
+            }
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
+            {
+                writer.WritePropertyName("RequiredNullableStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("RequiredNullableStringList");
+            }
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+            {
+                writer.WritePropertyName("RequiredNullableIntList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableIntList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("RequiredNullableIntList");
+            }
+            if (Optional.IsDefined(NonRequiredNullableString))
+            {
+                if (NonRequiredNullableString != null)
+                {
+                    writer.WritePropertyName("NonRequiredNullableString"u8);
+                    writer.WriteStringValue(NonRequiredNullableString);
+                }
+                else
+                {
+                    writer.WriteNull("NonRequiredNullableString");
+                }
+            }
+            if (Optional.IsDefined(NonRequiredNullableInt))
+            {
+                if (NonRequiredNullableInt != null)
+                {
+                    writer.WritePropertyName("NonRequiredNullableInt"u8);
+                    writer.WriteNumberValue(NonRequiredNullableInt.Value);
+                }
+                else
+                {
+                    writer.WriteNull("NonRequiredNullableInt");
+                }
+            }
+            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
+            {
+                if (NonRequiredNullableStringList != null)
+                {
+                    writer.WritePropertyName("NonRequiredNullableStringList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NonRequiredNullableStringList)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("NonRequiredNullableStringList");
+                }
+            }
+            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
+            {
+                if (NonRequiredNullableIntList != null)
+                {
+                    writer.WritePropertyName("NonRequiredNullableIntList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NonRequiredNullableIntList)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("NonRequiredNullableIntList");
+                }
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("RequiredReadonlyInt"u8);
+                writer.WriteNumberValue(RequiredReadonlyInt);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NonRequiredReadonlyInt))
+            {
+                writer.WritePropertyName("NonRequiredReadonlyInt"u8);
+                writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        OutputModel IModelJsonSerializable<OutputModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutputModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OutputModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OutputModel IModelSerializable<OutputModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOutputModel(document.RootElement, options);
+        }
+
+        internal static OutputModel DeserializeOutputModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,14 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Parameters.Spread.Models
 {
-    internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable
+    internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable, IModelJsonSerializable<SpreadWithMultipleParametersRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SpreadWithMultipleParametersRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SpreadWithMultipleParametersRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("prop1"u8);
@@ -27,15 +33,112 @@ namespace Parameters.Spread.Models
             writer.WriteStringValue(Prop5);
             writer.WritePropertyName("prop6"u8);
             writer.WriteStringValue(Prop6);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
+        }
+
+        SpreadWithMultipleParametersRequest IModelJsonSerializable<SpreadWithMultipleParametersRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SpreadWithMultipleParametersRequest>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SpreadWithMultipleParametersRequest IModelSerializable<SpreadWithMultipleParametersRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
+        }
+
+        internal static SpreadWithMultipleParametersRequest DeserializeSpreadWithMultipleParametersRequest(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string prop1 = default;
+            string prop2 = default;
+            string prop3 = default;
+            string prop4 = default;
+            string prop5 = default;
+            string prop6 = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in element.EnumerateObject())
+                {
+                    if (property.NameEquals("prop1"u8))
+                    {
+                        prop1 = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("prop2"u8))
+                    {
+                        prop2 = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("prop3"u8))
+                    {
+                        prop3 = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("prop4"u8))
+                    {
+                        prop4 = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("prop5"u8))
+                    {
+                        prop5 = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("prop6"u8))
+                    {
+                        prop6 = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
+            }
+            return new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6, serializedAdditionalRawData);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SpreadWithMultipleParametersRequest FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -21,6 +21,11 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Tier))
+            {
+                writer.WritePropertyName("tier"u8);
+                writer.WriteStringValue(Tier.Value.ToSerialString());
+            }
             writer.WriteEndObject();
         }
 
@@ -28,8 +33,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageSku(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageSku(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StorageSku>.Serialize(ModelSerializerOptions options)

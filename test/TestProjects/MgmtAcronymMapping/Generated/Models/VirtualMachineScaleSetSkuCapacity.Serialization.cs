@@ -19,6 +19,26 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<VirtualMachineScaleSetSkuCapacity>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Minimum))
+            {
+                writer.WritePropertyName("minimum"u8);
+                writer.WriteNumberValue(Minimum.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Maximum))
+            {
+                writer.WritePropertyName("maximum"u8);
+                writer.WriteNumberValue(Maximum.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DefaultCapacity))
+            {
+                writer.WritePropertyName("defaultCapacity"u8);
+                writer.WriteNumberValue(DefaultCapacity.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ScaleType))
+            {
+                writer.WritePropertyName("scaleType"u8);
+                writer.WriteStringValue(ScaleType.Value.ToSerialString());
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +46,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetSkuCapacity(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetSkuCapacity(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetSkuCapacity>.Serialize(ModelSerializerOptions options)

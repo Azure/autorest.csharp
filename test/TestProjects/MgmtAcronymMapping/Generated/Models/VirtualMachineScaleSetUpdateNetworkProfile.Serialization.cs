@@ -43,8 +43,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetUpdateNetworkProfile(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetUpdateNetworkProfile(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetUpdateNetworkProfile>.Serialize(ModelSerializerOptions options)

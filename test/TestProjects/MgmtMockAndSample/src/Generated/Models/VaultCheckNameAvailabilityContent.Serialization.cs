@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VaultCheckNameAvailabilityContent : IUtf8JsonSerializable
+    public partial class VaultCheckNameAvailabilityContent : IUtf8JsonSerializable, IModelJsonSerializable<VaultCheckNameAvailabilityContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VaultCheckNameAvailabilityContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VaultCheckNameAvailabilityContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -20,6 +24,54 @@ namespace MgmtMockAndSample.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(ResourceType.ToString());
             writer.WriteEndObject();
+        }
+
+        VaultCheckNameAvailabilityContent IModelJsonSerializable<VaultCheckNameAvailabilityContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultCheckNameAvailabilityContent(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VaultCheckNameAvailabilityContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VaultCheckNameAvailabilityContent IModelSerializable<VaultCheckNameAvailabilityContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVaultCheckNameAvailabilityContent(document.RootElement, options);
+        }
+
+        internal static VaultCheckNameAvailabilityContent DeserializeVaultCheckNameAvailabilityContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            EncryptionType type = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"u8))
+                {
+                    type = new EncryptionType(property.Value.GetString());
+                    continue;
+                }
+            }
+            return new VaultCheckNameAvailabilityContent(name, type);
         }
     }
 }

@@ -31,8 +31,8 @@ namespace MgmtExpandResourceTypes.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePtrRecord(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePtrRecord(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PtrRecord>.Serialize(ModelSerializerOptions options)

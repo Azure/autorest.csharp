@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
-    internal partial class ParametersModel : IUtf8JsonSerializable
+    internal partial class ParametersModel : IUtf8JsonSerializable, IModelJsonSerializable<ParametersModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ParametersModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ParametersModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Code))
@@ -26,6 +30,54 @@ namespace ModelShapes.Models
                 writer.WriteStringValue(Status);
             }
             writer.WriteEndObject();
+        }
+
+        ParametersModel IModelJsonSerializable<ParametersModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeParametersModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ParametersModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ParametersModel IModelSerializable<ParametersModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeParametersModel(document.RootElement, options);
+        }
+
+        internal static ParametersModel DeserializeParametersModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> code = default;
+            Optional<string> status = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("Code"u8))
+                {
+                    code = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("Status"u8))
+                {
+                    status = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new ParametersModel(code.Value, status.Value);
         }
     }
 }

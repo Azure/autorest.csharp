@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace AnomalyDetector.Models
@@ -13,7 +14,10 @@ namespace AnomalyDetector.Models
     /// <summary> ErrorResponse contains code and message that shows the error information. </summary>
     public partial class ErrorResponse
     {
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
         /// <param name="code"> The error code. </param>
         /// <param name="message"> The message explaining the error reported by the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
@@ -24,6 +28,23 @@ namespace AnomalyDetector.Models
 
             Code = code;
             Message = message;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
+        /// <param name="code"> The error code. </param>
+        /// <param name="message"> The message explaining the error reported by the service. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorResponse(string code, string message, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Code = code;
+            Message = message;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/> for deserialization. </summary>
+        internal ErrorResponse()
+        {
         }
 
         /// <summary> The error code. </summary>

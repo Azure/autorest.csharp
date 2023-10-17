@@ -36,8 +36,8 @@ namespace body_array.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeProduct(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeProduct(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Product>.Serialize(ModelSerializerOptions options)

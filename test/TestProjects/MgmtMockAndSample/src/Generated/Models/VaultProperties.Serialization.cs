@@ -9,12 +9,15 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VaultProperties : IUtf8JsonSerializable
+    public partial class VaultProperties : IUtf8JsonSerializable, IModelJsonSerializable<VaultProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VaultProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VaultProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Duration))
@@ -45,6 +48,11 @@ namespace MgmtMockAndSample.Models
             {
                 writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(HsmPoolResourceId))
+            {
+                writer.WritePropertyName("hsmPoolResourceId"u8);
+                writer.WriteStringValue(HsmPoolResourceId);
             }
             if (Optional.IsCollectionDefined(Deployments))
             {
@@ -101,6 +109,16 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(PrivateEndpointConnections))
+            {
+                writer.WritePropertyName("privateEndpointConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpointConnections)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
@@ -124,8 +142,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static VaultProperties DeserializeVaultProperties(JsonElement element)
+        VaultProperties IModelJsonSerializable<VaultProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VaultProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VaultProperties IModelSerializable<VaultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVaultProperties(document.RootElement, options);
+        }
+
+        internal static VaultProperties DeserializeVaultProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

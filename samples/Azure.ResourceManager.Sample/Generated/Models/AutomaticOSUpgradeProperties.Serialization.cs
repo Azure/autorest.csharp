@@ -28,8 +28,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAutomaticOSUpgradeProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAutomaticOSUpgradeProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AutomaticOSUpgradeProperties>.Serialize(ModelSerializerOptions options)

@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(MgmtReferenceTypesSkuConverter))]
-    public partial class MgmtReferenceTypesSku : IUtf8JsonSerializable
+    public partial class MgmtReferenceTypesSku : IUtf8JsonSerializable, IModelJsonSerializable<MgmtReferenceTypesSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtReferenceTypesSku>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MgmtReferenceTypesSku>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -43,8 +46,32 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static MgmtReferenceTypesSku DeserializeMgmtReferenceTypesSku(JsonElement element)
+        MgmtReferenceTypesSku IModelJsonSerializable<MgmtReferenceTypesSku>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtReferenceTypesSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtReferenceTypesSku IModelSerializable<MgmtReferenceTypesSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
+        }
+
+        internal static MgmtReferenceTypesSku DeserializeMgmtReferenceTypesSku(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

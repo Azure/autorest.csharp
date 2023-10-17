@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace subscriptionId_apiVersion.Models
 {
-    public partial class SampleResourceGroup
+    public partial class SampleResourceGroup : IUtf8JsonSerializable, IModelJsonSerializable<SampleResourceGroup>
     {
-        internal static SampleResourceGroup DeserializeSampleResourceGroup(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SampleResourceGroup>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SampleResourceGroup>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location);
+            }
+            writer.WriteEndObject();
+        }
+
+        SampleResourceGroup IModelJsonSerializable<SampleResourceGroup>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSampleResourceGroup(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SampleResourceGroup>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SampleResourceGroup IModelSerializable<SampleResourceGroup>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSampleResourceGroup(document.RootElement, options);
+        }
+
+        internal static SampleResourceGroup DeserializeSampleResourceGroup(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -19,6 +19,26 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<RollingUpgradeProgressInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SuccessfulInstanceCount))
+            {
+                writer.WritePropertyName("successfulInstanceCount"u8);
+                writer.WriteNumberValue(SuccessfulInstanceCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(FailedInstanceCount))
+            {
+                writer.WritePropertyName("failedInstanceCount"u8);
+                writer.WriteNumberValue(FailedInstanceCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InProgressInstanceCount))
+            {
+                writer.WritePropertyName("inProgressInstanceCount"u8);
+                writer.WriteNumberValue(InProgressInstanceCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PendingInstanceCount))
+            {
+                writer.WritePropertyName("pendingInstanceCount"u8);
+                writer.WriteNumberValue(PendingInstanceCount.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +46,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRollingUpgradeProgressInfo(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRollingUpgradeProgressInfo(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RollingUpgradeProgressInfo>.Serialize(ModelSerializerOptions options)

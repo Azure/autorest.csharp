@@ -6,17 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using Azure.Core;
 
 namespace Encode.Datetime.Models
 {
     /// <summary> The UnixTimestampDatetimeProperty. </summary>
     public partial class UnixTimestampDatetimeProperty
     {
-        /// <summary> Initializes a new instance of UnixTimestampDatetimeProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UnixTimestampDatetimeProperty"/>. </summary>
         /// <param name="value"></param>
         public UnixTimestampDatetimeProperty(DateTimeOffset value)
         {
             Value = value;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnixTimestampDatetimeProperty"/>. </summary>
+        /// <param name="value"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnixTimestampDatetimeProperty(DateTimeOffset value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnixTimestampDatetimeProperty"/> for deserialization. </summary>
+        internal UnixTimestampDatetimeProperty()
+        {
         }
 
         /// <summary> Gets or sets the value. </summary>

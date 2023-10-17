@@ -46,8 +46,8 @@ namespace Azure.Storage.Tables.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeTableResponseProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTableResponseProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<TableResponseProperties>.Serialize(ModelSerializerOptions options)

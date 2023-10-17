@@ -19,6 +19,16 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<VirtualMachineStatusCodeCount>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Code))
+            {
+                writer.WritePropertyName("code"u8);
+                writer.WriteStringValue(Code);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Count))
+            {
+                writer.WritePropertyName("count"u8);
+                writer.WriteNumberValue(Count.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +36,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineStatusCodeCount(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineStatusCodeCount(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineStatusCodeCount>.Serialize(ModelSerializerOptions options)

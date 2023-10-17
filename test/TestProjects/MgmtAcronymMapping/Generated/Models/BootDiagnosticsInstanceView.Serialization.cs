@@ -19,6 +19,21 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<BootDiagnosticsInstanceView>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ConsoleScreenshotBlobUri))
+            {
+                writer.WritePropertyName("consoleScreenshotBlobUri"u8);
+                writer.WriteStringValue(ConsoleScreenshotBlobUri.AbsoluteUri);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SerialConsoleLogBlobUri))
+            {
+                writer.WritePropertyName("serialConsoleLogBlobUri"u8);
+                writer.WriteStringValue(SerialConsoleLogBlobUri.AbsoluteUri);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteObjectValue(Status);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +41,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBootDiagnosticsInstanceView(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBootDiagnosticsInstanceView(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BootDiagnosticsInstanceView>.Serialize(ModelSerializerOptions options)

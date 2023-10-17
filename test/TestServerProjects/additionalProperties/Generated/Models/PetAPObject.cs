@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace additionalProperties.Models
 {
@@ -17,18 +18,20 @@ namespace additionalProperties.Models
         public PetAPObject(int id)
         {
             Id = id;
-            AdditionalProperties = new Dictionary<string, object>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, object>();
         }
 
         /// <summary> Initializes a new instance of PetAPObject. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
-        internal PetAPObject(int id, string name, bool? status)
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        internal PetAPObject(int id, string name, bool? status, IDictionary<string, object> additionalProperties)
         {
             Id = id;
             Name = name;
             Status = status;
+            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> Gets or sets the id. </summary>

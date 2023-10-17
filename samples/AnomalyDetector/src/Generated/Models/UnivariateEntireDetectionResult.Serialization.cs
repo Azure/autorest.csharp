@@ -5,17 +5,117 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class UnivariateEntireDetectionResult
+    public partial class UnivariateEntireDetectionResult : IUtf8JsonSerializable, IModelJsonSerializable<UnivariateEntireDetectionResult>
     {
-        internal static UnivariateEntireDetectionResult DeserializeUnivariateEntireDetectionResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnivariateEntireDetectionResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnivariateEntireDetectionResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("period"u8);
+            writer.WriteNumberValue(Period);
+            writer.WritePropertyName("expectedValues"u8);
+            writer.WriteStartArray();
+            foreach (var item in ExpectedValues)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("upperMargins"u8);
+            writer.WriteStartArray();
+            foreach (var item in UpperMargins)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("lowerMargins"u8);
+            writer.WriteStartArray();
+            foreach (var item in LowerMargins)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("isAnomaly"u8);
+            writer.WriteStartArray();
+            foreach (var item in IsAnomaly)
+            {
+                writer.WriteBooleanValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("isNegativeAnomaly"u8);
+            writer.WriteStartArray();
+            foreach (var item in IsNegativeAnomaly)
+            {
+                writer.WriteBooleanValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("isPositiveAnomaly"u8);
+            writer.WriteStartArray();
+            foreach (var item in IsPositiveAnomaly)
+            {
+                writer.WriteBooleanValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(Severity))
+            {
+                writer.WritePropertyName("severity"u8);
+                writer.WriteStartArray();
+                foreach (var item in Severity)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        UnivariateEntireDetectionResult IModelJsonSerializable<UnivariateEntireDetectionResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnivariateEntireDetectionResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnivariateEntireDetectionResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnivariateEntireDetectionResult IModelSerializable<UnivariateEntireDetectionResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnivariateEntireDetectionResult(document.RootElement, options);
+        }
+
+        internal static UnivariateEntireDetectionResult DeserializeUnivariateEntireDetectionResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -28,89 +128,96 @@ namespace AnomalyDetector.Models
             IReadOnlyList<bool> isNegativeAnomaly = default;
             IReadOnlyList<bool> isPositiveAnomaly = default;
             Optional<IReadOnlyList<float>> severity = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("period"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    period = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("expectedValues"u8))
-                {
-                    List<float> array = new List<float>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("period"u8))
                     {
-                        array.Add(item.GetSingle());
-                    }
-                    expectedValues = array;
-                    continue;
-                }
-                if (property.NameEquals("upperMargins"u8))
-                {
-                    List<float> array = new List<float>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetSingle());
-                    }
-                    upperMargins = array;
-                    continue;
-                }
-                if (property.NameEquals("lowerMargins"u8))
-                {
-                    List<float> array = new List<float>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetSingle());
-                    }
-                    lowerMargins = array;
-                    continue;
-                }
-                if (property.NameEquals("isAnomaly"u8))
-                {
-                    List<bool> array = new List<bool>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetBoolean());
-                    }
-                    isAnomaly = array;
-                    continue;
-                }
-                if (property.NameEquals("isNegativeAnomaly"u8))
-                {
-                    List<bool> array = new List<bool>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetBoolean());
-                    }
-                    isNegativeAnomaly = array;
-                    continue;
-                }
-                if (property.NameEquals("isPositiveAnomaly"u8))
-                {
-                    List<bool> array = new List<bool>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetBoolean());
-                    }
-                    isPositiveAnomaly = array;
-                    continue;
-                }
-                if (property.NameEquals("severity"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        period = property.Value.GetInt32();
                         continue;
                     }
-                    List<float> array = new List<float>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("expectedValues"u8))
                     {
-                        array.Add(item.GetSingle());
+                        List<float> array = new List<float>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetSingle());
+                        }
+                        expectedValues = array;
+                        continue;
                     }
-                    severity = array;
-                    continue;
+                    if (property.NameEquals("upperMargins"u8))
+                    {
+                        List<float> array = new List<float>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetSingle());
+                        }
+                        upperMargins = array;
+                        continue;
+                    }
+                    if (property.NameEquals("lowerMargins"u8))
+                    {
+                        List<float> array = new List<float>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetSingle());
+                        }
+                        lowerMargins = array;
+                        continue;
+                    }
+                    if (property.NameEquals("isAnomaly"u8))
+                    {
+                        List<bool> array = new List<bool>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetBoolean());
+                        }
+                        isAnomaly = array;
+                        continue;
+                    }
+                    if (property.NameEquals("isNegativeAnomaly"u8))
+                    {
+                        List<bool> array = new List<bool>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetBoolean());
+                        }
+                        isNegativeAnomaly = array;
+                        continue;
+                    }
+                    if (property.NameEquals("isPositiveAnomaly"u8))
+                    {
+                        List<bool> array = new List<bool>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetBoolean());
+                        }
+                        isPositiveAnomaly = array;
+                        continue;
+                    }
+                    if (property.NameEquals("severity"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<float> array = new List<float>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetSingle());
+                        }
+                        severity = array;
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new UnivariateEntireDetectionResult(period, expectedValues, upperMargins, lowerMargins, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToList(severity));
+            return new UnivariateEntireDetectionResult(period, expectedValues, upperMargins, lowerMargins, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToList(severity), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -118,7 +225,13 @@ namespace AnomalyDetector.Models
         internal static UnivariateEntireDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateEntireDetectionResult(document.RootElement);
+            return DeserializeUnivariateEntireDetectionResult(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

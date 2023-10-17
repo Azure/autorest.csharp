@@ -22,29 +22,62 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<ObjectReplicationPolicyData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(SourceAccount))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("sourceAccount"u8);
-                writer.WriteStringValue(SourceAccount);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(DestinationAccount))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("destinationAccount"u8);
-                writer.WriteStringValue(DestinationAccount);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsCollectionDefined(Rules))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("rules"u8);
-                writer.WriteStartArray();
-                foreach (var item in Rules)
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PolicyId))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("policyId"u8);
+                    writer.WriteStringValue(PolicyId);
                 }
-                writer.WriteEndArray();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(EnabledOn))
+                {
+                    writer.WritePropertyName("enabledTime"u8);
+                    writer.WriteStringValue(EnabledOn.Value, "O");
+                }
+                if (Optional.IsDefined(SourceAccount))
+                {
+                    writer.WritePropertyName("sourceAccount"u8);
+                    writer.WriteStringValue(SourceAccount);
+                }
+                if (Optional.IsDefined(DestinationAccount))
+                {
+                    writer.WritePropertyName("destinationAccount"u8);
+                    writer.WriteStringValue(DestinationAccount);
+                }
+                if (Optional.IsCollectionDefined(Rules))
+                {
+                    writer.WritePropertyName("rules"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Rules)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -52,8 +85,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeObjectReplicationPolicyData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeObjectReplicationPolicyData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ObjectReplicationPolicyData>.Serialize(ModelSerializerOptions options)

@@ -19,6 +19,16 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<AutocompleteItem>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("text"u8);
+                writer.WriteStringValue(Text);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("queryPlusText"u8);
+                writer.WriteStringValue(QueryPlusText);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +36,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAutocompleteItem(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAutocompleteItem(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AutocompleteItem>.Serialize(ModelSerializerOptions options)

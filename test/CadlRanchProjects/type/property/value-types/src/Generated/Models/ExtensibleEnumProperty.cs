@@ -5,16 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Model with extensible enum properties. </summary>
     public partial class ExtensibleEnumProperty
     {
-        /// <summary> Initializes a new instance of ExtensibleEnumProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ExtensibleEnumProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         public ExtensibleEnumProperty(InnerEnum property)
         {
             Property = property;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ExtensibleEnumProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExtensibleEnumProperty(InnerEnum property, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Property = property;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ExtensibleEnumProperty"/> for deserialization. </summary>
+        internal ExtensibleEnumProperty()
+        {
         }
 
         /// <summary> Property. </summary>

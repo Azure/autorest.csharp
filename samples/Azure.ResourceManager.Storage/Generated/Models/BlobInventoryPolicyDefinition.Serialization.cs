@@ -45,8 +45,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBlobInventoryPolicyDefinition(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBlobInventoryPolicyDefinition(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BlobInventoryPolicyDefinition>.Serialize(ModelSerializerOptions options)

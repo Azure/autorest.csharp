@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
@@ -13,7 +14,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Used in internal operations, should be generated but not exported. </summary>
     internal partial class BaseModel
     {
-        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal BaseModel(string name)
@@ -21,6 +25,21 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
+        /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/> for deserialization. </summary>
+        internal BaseModel()
+        {
         }
 
         /// <summary> Gets the name. </summary>

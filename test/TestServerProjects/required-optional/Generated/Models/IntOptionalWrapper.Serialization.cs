@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace required_optional.Models
 {
-    public partial class IntOptionalWrapper : IUtf8JsonSerializable
+    public partial class IntOptionalWrapper : IUtf8JsonSerializable, IModelJsonSerializable<IntOptionalWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IntOptionalWrapper>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<IntOptionalWrapper>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Value))
@@ -21,6 +25,52 @@ namespace required_optional.Models
                 writer.WriteNumberValue(Value.Value);
             }
             writer.WriteEndObject();
+        }
+
+        IntOptionalWrapper IModelJsonSerializable<IntOptionalWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIntOptionalWrapper(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<IntOptionalWrapper>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IntOptionalWrapper IModelSerializable<IntOptionalWrapper>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIntOptionalWrapper(document.RootElement, options);
+        }
+
+        internal static IntOptionalWrapper DeserializeIntOptionalWrapper(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<int> value = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("value"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    value = property.Value.GetInt32();
+                    continue;
+                }
+            }
+            return new IntOptionalWrapper(Optional.ToNullable(value));
         }
     }
 }

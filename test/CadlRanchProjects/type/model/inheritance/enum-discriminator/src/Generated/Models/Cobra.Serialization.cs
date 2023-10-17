@@ -5,46 +5,94 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    public partial class Cobra : IUtf8JsonSerializable
+    public partial class Cobra : IUtf8JsonSerializable, IModelJsonSerializable<Cobra>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Cobra>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Cobra>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Cobra DeserializeCobra(JsonElement element)
+        Cobra IModelJsonSerializable<Cobra>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCobra(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Cobra>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Cobra IModelSerializable<Cobra>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCobra(document.RootElement, options);
+        }
+
+        internal static Cobra DeserializeCobra(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             SnakeKind kind = default;
             int length = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("kind"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    kind = property.Value.GetString().ToSnakeKind();
-                    continue;
+                    if (property.NameEquals("kind"u8))
+                    {
+                        kind = property.Value.GetString().ToSnakeKind();
+                        continue;
+                    }
+                    if (property.NameEquals("length"u8))
+                    {
+                        length = property.Value.GetInt32();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("length"u8))
-                {
-                    length = property.Value.GetInt32();
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new Cobra(kind, length);
+            return new Cobra(kind, length, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -52,15 +100,13 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal static new Cobra FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCobra(document.RootElement);
+            return DeserializeCobra(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

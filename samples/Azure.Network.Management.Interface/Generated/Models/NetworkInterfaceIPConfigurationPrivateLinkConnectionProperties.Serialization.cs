@@ -20,6 +20,26 @@ namespace Azure.Network.Management.Interface.Models
         void IModelJsonSerializable<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(GroupId))
+            {
+                writer.WritePropertyName("groupId"u8);
+                writer.WriteStringValue(GroupId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RequiredMemberName))
+            {
+                writer.WritePropertyName("requiredMemberName"u8);
+                writer.WriteStringValue(RequiredMemberName);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Fqdns))
+            {
+                writer.WritePropertyName("fqdns"u8);
+                writer.WriteStartArray();
+                foreach (var item in Fqdns)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +47,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties>.Serialize(ModelSerializerOptions options)

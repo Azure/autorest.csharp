@@ -21,14 +21,42 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<BlobInventoryPolicyData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Policy))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("policy"u8);
-                writer.WriteObjectValue(Policy);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastModifiedOn))
+                {
+                    writer.WritePropertyName("lastModifiedTime"u8);
+                    writer.WriteStringValue(LastModifiedOn.Value, "O");
+                }
+                if (Optional.IsDefined(Policy))
+                {
+                    writer.WritePropertyName("policy"u8);
+                    writer.WriteObjectValue(Policy);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -36,8 +64,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBlobInventoryPolicyData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBlobInventoryPolicyData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BlobInventoryPolicyData>.Serialize(ModelSerializerOptions options)

@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class MhsmPrivateLinkServiceConnectionState : IUtf8JsonSerializable
+    public partial class MhsmPrivateLinkServiceConnectionState : IUtf8JsonSerializable, IModelJsonSerializable<MhsmPrivateLinkServiceConnectionState>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MhsmPrivateLinkServiceConnectionState>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MhsmPrivateLinkServiceConnectionState>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Status))
@@ -33,8 +37,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static MhsmPrivateLinkServiceConnectionState DeserializeMhsmPrivateLinkServiceConnectionState(JsonElement element)
+        MhsmPrivateLinkServiceConnectionState IModelJsonSerializable<MhsmPrivateLinkServiceConnectionState>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMhsmPrivateLinkServiceConnectionState(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MhsmPrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmPrivateLinkServiceConnectionState IModelSerializable<MhsmPrivateLinkServiceConnectionState>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmPrivateLinkServiceConnectionState(document.RootElement, options);
+        }
+
+        internal static MhsmPrivateLinkServiceConnectionState DeserializeMhsmPrivateLinkServiceConnectionState(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -18,7 +18,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/>. </summary>
         /// <param name="optionalReadOnlyIntRecord"> Optional int record. </param>
         /// <param name="optionalReadOnlyStringRecord"> Optional string record. </param>
         /// <param name="requiredCollectionWithNullableIntElement"> Required collection of which the element is a nullable int. </param>
@@ -46,7 +46,7 @@ namespace ModelsTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/>. </summary>
         /// <param name="requiredReadonlyString"> Required string, illustrating a readonly reference type property. </param>
         /// <param name="requiredReadonlyInt"> Required int, illustrating a readonly value type property. </param>
         /// <param name="optionalReadonlyString"> Optional string, illustrating a readonly reference type property. </param>
@@ -99,6 +99,11 @@ namespace ModelsTypeSpec.Models
             RequiredCollectionWithNullableIntElement = requiredCollectionWithNullableIntElement;
             OptionalCollectionWithNullableBooleanElement = optionalCollectionWithNullableBooleanElement;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/> for deserialization. </summary>
+        internal RoundTripReadOnlyModel()
+        {
         }
 
         /// <summary> Required string, illustrating a readonly reference type property. </summary>

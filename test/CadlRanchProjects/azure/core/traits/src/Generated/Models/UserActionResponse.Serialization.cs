@@ -5,29 +5,86 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {
-    public partial class UserActionResponse
+    public partial class UserActionResponse : IUtf8JsonSerializable, IModelJsonSerializable<UserActionResponse>
     {
-        internal static UserActionResponse DeserializeUserActionResponse(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UserActionResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UserActionResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("userActionResult"u8);
+            writer.WriteStringValue(UserActionResult);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        UserActionResponse IModelJsonSerializable<UserActionResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUserActionResponse(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UserActionResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UserActionResponse IModelSerializable<UserActionResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUserActionResponse(document.RootElement, options);
+        }
+
+        internal static UserActionResponse DeserializeUserActionResponse(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string userActionResult = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("userActionResult"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    userActionResult = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("userActionResult"u8))
+                    {
+                        userActionResult = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new UserActionResponse(userActionResult);
+            return new UserActionResponse(userActionResult, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -35,7 +92,13 @@ namespace _Specs_.Azure.Core.Traits.Models
         internal static UserActionResponse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUserActionResponse(document.RootElement);
+            return DeserializeUserActionResponse(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

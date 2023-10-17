@@ -6,66 +6,55 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class SpecsAzureClientGeneratorCoreAccessModelFactory
     {
-        /// <summary> Initializes a new instance of NoDecoratorModelInPublic. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.NoDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.NoDecoratorModelInPublic"/> instance for mocking. </returns>
-        public static NoDecoratorModelInPublic NoDecoratorModelInPublic(string name = null)
+        public static NoDecoratorModelInPublic NoDecoratorModelInPublic(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new NoDecoratorModelInPublic(name);
+            return new NoDecoratorModelInPublic(name, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of PublicDecoratorModelInPublic. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.PublicDecoratorModelInPublic"/> instance for mocking. </returns>
-        public static PublicDecoratorModelInPublic PublicDecoratorModelInPublic(string name = null)
+        public static PublicDecoratorModelInPublic PublicDecoratorModelInPublic(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new PublicDecoratorModelInPublic(name);
+            return new PublicDecoratorModelInPublic(name, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of PublicDecoratorModelInInternal. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInInternal"/>. </summary>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.PublicDecoratorModelInInternal"/> instance for mocking. </returns>
-        public static PublicDecoratorModelInInternal PublicDecoratorModelInInternal(string name = null)
+        public static PublicDecoratorModelInInternal PublicDecoratorModelInInternal(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new PublicDecoratorModelInInternal(name);
+            return new PublicDecoratorModelInInternal(name, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of SharedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SharedModel"/>. </summary>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.SharedModel"/> instance for mocking. </returns>
-        public static SharedModel SharedModel(string name = null)
+        public static SharedModel SharedModel(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new SharedModel(name);
+            return new SharedModel(name, serializedAdditionalRawData);
         }
     }
 }

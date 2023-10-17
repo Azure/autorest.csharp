@@ -48,54 +48,57 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(UpgradePolicy))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("upgradePolicy"u8);
-                writer.WriteObjectValue(UpgradePolicy);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(UpgradePolicy))
+                {
+                    writer.WritePropertyName("upgradePolicy"u8);
+                    writer.WriteObjectValue(UpgradePolicy);
+                }
+                if (Optional.IsDefined(AutomaticRepairsPolicy))
+                {
+                    writer.WritePropertyName("automaticRepairsPolicy"u8);
+                    writer.WriteObjectValue(AutomaticRepairsPolicy);
+                }
+                if (Optional.IsDefined(VirtualMachineProfile))
+                {
+                    writer.WritePropertyName("virtualMachineProfile"u8);
+                    writer.WriteObjectValue(VirtualMachineProfile);
+                }
+                if (Optional.IsDefined(Overprovision))
+                {
+                    writer.WritePropertyName("overprovision"u8);
+                    writer.WriteBooleanValue(Overprovision.Value);
+                }
+                if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+                {
+                    writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
+                    writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
+                }
+                if (Optional.IsDefined(SinglePlacementGroup))
+                {
+                    writer.WritePropertyName("singlePlacementGroup"u8);
+                    writer.WriteBooleanValue(SinglePlacementGroup.Value);
+                }
+                if (Optional.IsDefined(AdditionalCapabilities))
+                {
+                    writer.WritePropertyName("additionalCapabilities"u8);
+                    writer.WriteObjectValue(AdditionalCapabilities);
+                }
+                if (Optional.IsDefined(ScaleInPolicy))
+                {
+                    writer.WritePropertyName("scaleInPolicy"u8);
+                    writer.WriteObjectValue(ScaleInPolicy);
+                }
+                if (Optional.IsDefined(ProximityPlacementGroup))
+                {
+                    writer.WritePropertyName("proximityPlacementGroup"u8);
+                    JsonSerializer.Serialize(writer, ProximityPlacementGroup);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(AutomaticRepairsPolicy))
-            {
-                writer.WritePropertyName("automaticRepairsPolicy"u8);
-                writer.WriteObjectValue(AutomaticRepairsPolicy);
-            }
-            if (Optional.IsDefined(VirtualMachineProfile))
-            {
-                writer.WritePropertyName("virtualMachineProfile"u8);
-                writer.WriteObjectValue(VirtualMachineProfile);
-            }
-            if (Optional.IsDefined(Overprovision))
-            {
-                writer.WritePropertyName("overprovision"u8);
-                writer.WriteBooleanValue(Overprovision.Value);
-            }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
-            {
-                writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
-                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
-            }
-            if (Optional.IsDefined(SinglePlacementGroup))
-            {
-                writer.WritePropertyName("singlePlacementGroup"u8);
-                writer.WriteBooleanValue(SinglePlacementGroup.Value);
-            }
-            if (Optional.IsDefined(AdditionalCapabilities))
-            {
-                writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
-            }
-            if (Optional.IsDefined(ScaleInPolicy))
-            {
-                writer.WritePropertyName("scaleInPolicy"u8);
-                writer.WriteObjectValue(ScaleInPolicy);
-            }
-            if (Optional.IsDefined(ProximityPlacementGroup))
-            {
-                writer.WritePropertyName("proximityPlacementGroup"u8);
-                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -103,8 +106,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetPatch(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetPatch(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetPatch>.Serialize(ModelSerializerOptions options)

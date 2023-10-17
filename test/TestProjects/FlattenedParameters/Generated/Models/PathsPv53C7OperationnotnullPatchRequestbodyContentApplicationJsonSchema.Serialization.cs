@@ -37,8 +37,8 @@ namespace FlattenedParameters.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>.Serialize(ModelSerializerOptions options)

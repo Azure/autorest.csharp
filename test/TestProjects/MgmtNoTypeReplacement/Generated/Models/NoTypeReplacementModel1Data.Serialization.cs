@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtNoTypeReplacement
 {
-    public partial class NoTypeReplacementModel1Data : IUtf8JsonSerializable
+    public partial class NoTypeReplacementModel1Data : IUtf8JsonSerializable, IModelJsonSerializable<NoTypeReplacementModel1Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NoTypeReplacementModel1Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NoTypeReplacementModel1Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -22,11 +26,55 @@ namespace MgmtNoTypeReplacement
                 writer.WritePropertyName("foo"u8);
                 JsonSerializer.Serialize(writer, Foo);
             }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
             writer.WriteEndObject();
         }
 
-        internal static NoTypeReplacementModel1Data DeserializeNoTypeReplacementModel1Data(JsonElement element)
+        NoTypeReplacementModel1Data IModelJsonSerializable<NoTypeReplacementModel1Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNoTypeReplacementModel1Data(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NoTypeReplacementModel1Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NoTypeReplacementModel1Data IModelSerializable<NoTypeReplacementModel1Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNoTypeReplacementModel1Data(document.RootElement, options);
+        }
+
+        internal static NoTypeReplacementModel1Data DeserializeNoTypeReplacementModel1Data(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,35 +5,94 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    internal partial class UnknownAbstractModel
+    internal partial class UnknownAbstractModel : IUtf8JsonSerializable, IModelJsonSerializable<UnknownAbstractModel>
     {
-        internal static UnknownAbstractModel DeserializeUnknownAbstractModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownAbstractModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownAbstractModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        UnknownAbstractModel IModelJsonSerializable<UnknownAbstractModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownAbstractModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownAbstractModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownAbstractModel IModelSerializable<UnknownAbstractModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownAbstractModel(document.RootElement, options);
+        }
+
+        internal static UnknownAbstractModel DeserializeUnknownAbstractModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string kind = "Unknown";
             string name = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("kind"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    kind = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("kind"u8))
+                    {
+                        kind = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("name"u8))
+                    {
+                        name = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new UnknownAbstractModel(kind, name);
+            return new UnknownAbstractModel(kind, name, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -41,7 +100,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal static new UnknownAbstractModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownAbstractModel(document.RootElement);
+            return DeserializeUnknownAbstractModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

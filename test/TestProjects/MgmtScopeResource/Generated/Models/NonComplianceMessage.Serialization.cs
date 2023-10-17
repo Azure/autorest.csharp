@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class NonComplianceMessage : IUtf8JsonSerializable
+    public partial class NonComplianceMessage : IUtf8JsonSerializable, IModelJsonSerializable<NonComplianceMessage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NonComplianceMessage>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NonComplianceMessage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("message"u8);
@@ -25,8 +29,32 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        internal static NonComplianceMessage DeserializeNonComplianceMessage(JsonElement element)
+        NonComplianceMessage IModelJsonSerializable<NonComplianceMessage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNonComplianceMessage(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NonComplianceMessage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NonComplianceMessage IModelSerializable<NonComplianceMessage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNonComplianceMessage(document.RootElement, options);
+        }
+
+        internal static NonComplianceMessage DeserializeNonComplianceMessage(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

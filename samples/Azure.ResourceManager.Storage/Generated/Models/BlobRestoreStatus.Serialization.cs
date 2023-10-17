@@ -19,6 +19,26 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<BlobRestoreStatus>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(FailureReason))
+            {
+                writer.WritePropertyName("failureReason"u8);
+                writer.WriteStringValue(FailureReason);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RestoreId))
+            {
+                writer.WritePropertyName("restoreId"u8);
+                writer.WriteStringValue(RestoreId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Parameters))
+            {
+                writer.WritePropertyName("parameters"u8);
+                writer.WriteObjectValue(Parameters);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +46,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeBlobRestoreStatus(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBlobRestoreStatus(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<BlobRestoreStatus>.Serialize(ModelSerializerOptions options)

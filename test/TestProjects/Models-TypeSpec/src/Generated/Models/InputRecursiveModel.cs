@@ -17,7 +17,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputRecursiveModel"/>. </summary>
         /// <param name="message"> Message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public InputRecursiveModel(string message)
@@ -28,7 +28,7 @@ namespace ModelsTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputRecursiveModel"/>. </summary>
         /// <param name="message"> Message. </param>
         /// <param name="inner"> Required Record. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
@@ -37,6 +37,11 @@ namespace ModelsTypeSpec.Models
             Message = message;
             Inner = inner;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InputRecursiveModel"/> for deserialization. </summary>
+        internal InputRecursiveModel()
+        {
         }
 
         /// <summary> Message. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Union.Models
@@ -13,7 +14,10 @@ namespace _Type.Union.Models
     /// <summary> The ModelWithNamedUnionPropertyInResponse. </summary>
     internal partial class ModelWithNamedUnionPropertyInResponse
     {
-        /// <summary> Initializes a new instance of ModelWithNamedUnionPropertyInResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithNamedUnionPropertyInResponse"/>. </summary>
         /// <param name="namedUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="namedUnion"/> is null. </exception>
         internal ModelWithNamedUnionPropertyInResponse(object namedUnion)
@@ -21,6 +25,21 @@ namespace _Type.Union.Models
             Argument.AssertNotNull(namedUnion, nameof(namedUnion));
 
             NamedUnion = namedUnion;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithNamedUnionPropertyInResponse"/>. </summary>
+        /// <param name="namedUnion"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithNamedUnionPropertyInResponse(object namedUnion, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            NamedUnion = namedUnion;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithNamedUnionPropertyInResponse"/> for deserialization. </summary>
+        internal ModelWithNamedUnionPropertyInResponse()
+        {
         }
 
         /// <summary> Gets the named union. </summary>

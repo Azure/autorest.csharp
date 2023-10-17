@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Parameters.Spread.Models
@@ -13,7 +14,10 @@ namespace Parameters.Spread.Models
     /// <summary> The SpreadWithMultipleParametersRequest. </summary>
     internal partial class SpreadWithMultipleParametersRequest
     {
-        /// <summary> Initializes a new instance of SpreadWithMultipleParametersRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/>. </summary>
         /// <param name="prop1"></param>
         /// <param name="prop2"></param>
         /// <param name="prop3"></param>
@@ -36,6 +40,31 @@ namespace Parameters.Spread.Models
             Prop4 = prop4;
             Prop5 = prop5;
             Prop6 = prop6;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/>. </summary>
+        /// <param name="prop1"></param>
+        /// <param name="prop2"></param>
+        /// <param name="prop3"></param>
+        /// <param name="prop4"></param>
+        /// <param name="prop5"></param>
+        /// <param name="prop6"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SpreadWithMultipleParametersRequest(string prop1, string prop2, string prop3, string prop4, string prop5, string prop6, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Prop1 = prop1;
+            Prop2 = prop2;
+            Prop3 = prop3;
+            Prop4 = prop4;
+            Prop5 = prop5;
+            Prop6 = prop6;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/> for deserialization. </summary>
+        internal SpreadWithMultipleParametersRequest()
+        {
         }
 
         /// <summary> Gets the prop 1. </summary>

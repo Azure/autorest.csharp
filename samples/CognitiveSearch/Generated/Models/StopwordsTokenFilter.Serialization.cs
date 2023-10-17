@@ -56,8 +56,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStopwordsTokenFilter(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStopwordsTokenFilter(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StopwordsTokenFilter>.Serialize(ModelSerializerOptions options)

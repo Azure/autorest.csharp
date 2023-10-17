@@ -5,17 +5,63 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
-    internal partial class FakeParentWithAncestorWithNonResChListResult
+    internal partial class FakeParentWithAncestorWithNonResChListResult : IUtf8JsonSerializable, IModelJsonSerializable<FakeParentWithAncestorWithNonResChListResult>
     {
-        internal static FakeParentWithAncestorWithNonResChListResult DeserializeFakeParentWithAncestorWithNonResChListResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FakeParentWithAncestorWithNonResChListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FakeParentWithAncestorWithNonResChListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("value"u8);
+            writer.WriteStartArray();
+            foreach (var item in Value)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        FakeParentWithAncestorWithNonResChListResult IModelJsonSerializable<FakeParentWithAncestorWithNonResChListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFakeParentWithAncestorWithNonResChListResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FakeParentWithAncestorWithNonResChListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeParentWithAncestorWithNonResChListResult IModelSerializable<FakeParentWithAncestorWithNonResChListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeParentWithAncestorWithNonResChListResult(document.RootElement, options);
+        }
+
+        internal static FakeParentWithAncestorWithNonResChListResult DeserializeFakeParentWithAncestorWithNonResChListResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

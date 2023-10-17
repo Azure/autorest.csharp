@@ -5,16 +5,71 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class MhsmPrivateEndpointConnectionItem
+    public partial class MhsmPrivateEndpointConnectionItem : IUtf8JsonSerializable, IModelJsonSerializable<MhsmPrivateEndpointConnectionItem>
     {
-        internal static MhsmPrivateEndpointConnectionItem DeserializeMhsmPrivateEndpointConnectionItem(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MhsmPrivateEndpointConnectionItem>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MhsmPrivateEndpointConnectionItem>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PrivateEndpoint))
+                {
+                    writer.WritePropertyName("privateEndpoint"u8);
+                    JsonSerializer.Serialize(writer, PrivateEndpoint);
+                }
+                if (Optional.IsDefined(PrivateLinkServiceConnectionState))
+                {
+                    writer.WritePropertyName("privateLinkServiceConnectionState"u8);
+                    writer.WriteObjectValue(PrivateLinkServiceConnectionState);
+                }
+                if (Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        MhsmPrivateEndpointConnectionItem IModelJsonSerializable<MhsmPrivateEndpointConnectionItem>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMhsmPrivateEndpointConnectionItem(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MhsmPrivateEndpointConnectionItem>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmPrivateEndpointConnectionItem IModelSerializable<MhsmPrivateEndpointConnectionItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmPrivateEndpointConnectionItem(document.RootElement, options);
+        }
+
+        internal static MhsmPrivateEndpointConnectionItem DeserializeMhsmPrivateEndpointConnectionItem(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

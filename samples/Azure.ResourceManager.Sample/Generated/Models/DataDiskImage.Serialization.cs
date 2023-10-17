@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<DataDiskImage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Lun))
+            {
+                writer.WritePropertyName("lun"u8);
+                writer.WriteNumberValue(Lun.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +31,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDataDiskImage(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataDiskImage(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DataDiskImage>.Serialize(ModelSerializerOptions options)

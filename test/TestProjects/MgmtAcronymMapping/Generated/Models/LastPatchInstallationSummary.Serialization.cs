@@ -19,6 +19,71 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<LastPatchInstallationSummary>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstallationActivityId))
+            {
+                writer.WritePropertyName("installationActivityId"u8);
+                writer.WriteStringValue(InstallationActivityId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaintenanceWindowExceeded))
+            {
+                writer.WritePropertyName("maintenanceWindowExceeded"u8);
+                writer.WriteBooleanValue(MaintenanceWindowExceeded.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RebootStatus))
+            {
+                writer.WritePropertyName("rebootStatus"u8);
+                writer.WriteStringValue(RebootStatus.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NotSelectedPatchCount))
+            {
+                writer.WritePropertyName("notSelectedPatchCount"u8);
+                writer.WriteNumberValue(NotSelectedPatchCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ExcludedPatchCount))
+            {
+                writer.WritePropertyName("excludedPatchCount"u8);
+                writer.WriteNumberValue(ExcludedPatchCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PendingPatchCount))
+            {
+                writer.WritePropertyName("pendingPatchCount"u8);
+                writer.WriteNumberValue(PendingPatchCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstalledPatchCount))
+            {
+                writer.WritePropertyName("installedPatchCount"u8);
+                writer.WriteNumberValue(InstalledPatchCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(FailedPatchCount))
+            {
+                writer.WritePropertyName("failedPatchCount"u8);
+                writer.WriteNumberValue(FailedPatchCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartOn))
+            {
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastModifiedOn))
+            {
+                writer.WritePropertyName("lastModifiedTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartedBy))
+            {
+                writer.WritePropertyName("startedBy"u8);
+                writer.WriteStringValue(StartedBy);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Error))
+            {
+                writer.WritePropertyName("error"u8);
+                writer.WriteObjectValue(Error);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +91,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeLastPatchInstallationSummary(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLastPatchInstallationSummary(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<LastPatchInstallationSummary>.Serialize(ModelSerializerOptions options)

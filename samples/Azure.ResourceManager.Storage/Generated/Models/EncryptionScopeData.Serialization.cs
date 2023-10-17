@@ -21,29 +21,62 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<EncryptionScopeData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Source))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("source"u8);
-                writer.WriteStringValue(Source.Value.ToString());
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(State))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("state"u8);
-                writer.WriteStringValue(State.Value.ToString());
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(KeyVaultProperties))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("keyVaultProperties"u8);
-                writer.WriteObjectValue(KeyVaultProperties);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(RequireInfrastructureEncryption))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("requireInfrastructureEncryption"u8);
-                writer.WriteBooleanValue(RequireInfrastructureEncryption.Value);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Source))
+                {
+                    writer.WritePropertyName("source"u8);
+                    writer.WriteStringValue(Source.Value.ToString());
+                }
+                if (Optional.IsDefined(State))
+                {
+                    writer.WritePropertyName("state"u8);
+                    writer.WriteStringValue(State.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CreatedOn))
+                {
+                    writer.WritePropertyName("creationTime"u8);
+                    writer.WriteStringValue(CreatedOn.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastModifiedOn))
+                {
+                    writer.WritePropertyName("lastModifiedTime"u8);
+                    writer.WriteStringValue(LastModifiedOn.Value, "O");
+                }
+                if (Optional.IsDefined(KeyVaultProperties))
+                {
+                    writer.WritePropertyName("keyVaultProperties"u8);
+                    writer.WriteObjectValue(KeyVaultProperties);
+                }
+                if (Optional.IsDefined(RequireInfrastructureEncryption))
+                {
+                    writer.WritePropertyName("requireInfrastructureEncryption"u8);
+                    writer.WriteBooleanValue(RequireInfrastructureEncryption.Value);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -51,8 +84,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeEncryptionScopeData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEncryptionScopeData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<EncryptionScopeData>.Serialize(ModelSerializerOptions options)

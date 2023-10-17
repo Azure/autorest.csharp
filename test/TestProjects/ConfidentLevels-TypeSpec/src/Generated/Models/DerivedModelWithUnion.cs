@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a derived model with unions. </summary>
     internal partial class DerivedModelWithUnion : BaseModel
     {
-        /// <summary> Initializes a new instance of DerivedModelWithUnion. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithUnion"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="unionProperty"> The union property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="unionProperty"/> is null. </exception>
@@ -25,13 +26,19 @@ namespace ConfidentLevelsInTsp.Models
             UnionProperty = unionProperty;
         }
 
-        /// <summary> Initializes a new instance of DerivedModelWithUnion. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithUnion"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="unionProperty"> The union property. </param>
-        internal DerivedModelWithUnion(string name, double? size, object unionProperty) : base(name, size)
+        internal DerivedModelWithUnion(string name, double? size, IDictionary<string, BinaryData> serializedAdditionalRawData, object unionProperty) : base(name, size, serializedAdditionalRawData)
         {
             UnionProperty = unionProperty;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithUnion"/> for deserialization. </summary>
+        internal DerivedModelWithUnion()
+        {
         }
 
         /// <summary> The union property. </summary>

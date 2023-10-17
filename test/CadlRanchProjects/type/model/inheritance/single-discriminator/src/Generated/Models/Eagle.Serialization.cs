@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    public partial class Eagle : IUtf8JsonSerializable
+    public partial class Eagle : IUtf8JsonSerializable, IModelJsonSerializable<Eagle>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Eagle>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Eagle>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Friends))
@@ -47,11 +51,47 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("wingspan"u8);
             writer.WriteNumberValue(Wingspan);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Eagle DeserializeEagle(JsonElement element)
+        Eagle IModelJsonSerializable<Eagle>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEagle(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Eagle>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Eagle IModelSerializable<Eagle>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEagle(document.RootElement, options);
+        }
+
+        internal static Eagle DeserializeEagle(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -61,57 +101,64 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             Optional<Bird> partner = default;
             string kind = default;
             int wingspan = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("friends"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("friends"u8))
                     {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        List<Bird> array = new List<Bird>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(DeserializeBird(item));
+                        }
+                        friends = array;
                         continue;
                     }
-                    List<Bird> array = new List<Bird>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("hate"u8))
                     {
-                        array.Add(DeserializeBird(item));
-                    }
-                    friends = array;
-                    continue;
-                }
-                if (property.NameEquals("hate"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        Dictionary<string, Bird> dictionary = new Dictionary<string, Bird>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            dictionary.Add(property0.Name, DeserializeBird(property0.Value));
+                        }
+                        hate = dictionary;
                         continue;
                     }
-                    Dictionary<string, Bird> dictionary = new Dictionary<string, Bird>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.NameEquals("partner"u8))
                     {
-                        dictionary.Add(property0.Name, DeserializeBird(property0.Value));
-                    }
-                    hate = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("partner"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        partner = DeserializeBird(property.Value);
                         continue;
                     }
-                    partner = DeserializeBird(property.Value);
-                    continue;
+                    if (property.NameEquals("kind"u8))
+                    {
+                        kind = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("wingspan"u8))
+                    {
+                        wingspan = property.Value.GetInt32();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("wingspan"u8))
-                {
-                    wingspan = property.Value.GetInt32();
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new Eagle(kind, wingspan, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
+            return new Eagle(kind, wingspan, serializedAdditionalRawData, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -119,15 +166,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static new Eagle FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeEagle(document.RootElement);
+            return DeserializeEagle(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

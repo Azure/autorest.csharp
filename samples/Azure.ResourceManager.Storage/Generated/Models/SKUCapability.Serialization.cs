@@ -19,6 +19,16 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<SKUCapability>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStringValue(Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +36,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSKUCapability(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSKUCapability(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SKUCapability>.Serialize(ModelSerializerOptions options)

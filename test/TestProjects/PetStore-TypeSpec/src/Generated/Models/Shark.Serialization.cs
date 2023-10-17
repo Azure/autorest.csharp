@@ -5,15 +5,69 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace PetStore.Models
 {
-    public partial class Shark
+    public partial class Shark : IUtf8JsonSerializable, IModelJsonSerializable<Shark>
     {
-        internal static Shark DeserializeShark(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Shark>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Shark>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("bite"u8);
+            writer.WriteStringValue(Bite);
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
+            writer.WritePropertyName("size"u8);
+            writer.WriteNumberValue(Size);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        Shark IModelJsonSerializable<Shark>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeShark(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Shark>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Shark IModelSerializable<Shark>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeShark(document.RootElement, options);
+        }
+
+        internal static Shark DeserializeShark(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -21,25 +75,32 @@ namespace PetStore.Models
             string bite = default;
             string kind = default;
             int size = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("bite"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    bite = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("bite"u8))
+                    {
+                        bite = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("kind"u8))
+                    {
+                        kind = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("size"u8))
+                    {
+                        size = property.Value.GetInt32();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("size"u8))
-                {
-                    size = property.Value.GetInt32();
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new Shark(kind, size, bite);
+            return new Shark(kind, size, serializedAdditionalRawData, bite);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -47,7 +108,13 @@ namespace PetStore.Models
         internal static new Shark FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeShark(document.RootElement);
+            return DeserializeShark(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

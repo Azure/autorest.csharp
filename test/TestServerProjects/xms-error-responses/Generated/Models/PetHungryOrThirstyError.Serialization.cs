@@ -5,15 +5,71 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    public partial class PetHungryOrThirstyError
+    public partial class PetHungryOrThirstyError : IUtf8JsonSerializable, IModelJsonSerializable<PetHungryOrThirstyError>
     {
-        internal static PetHungryOrThirstyError DeserializePetHungryOrThirstyError(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PetHungryOrThirstyError>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PetHungryOrThirstyError>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(HungryOrThirsty))
+            {
+                writer.WritePropertyName("hungryOrThirsty"u8);
+                writer.WriteStringValue(HungryOrThirsty);
+            }
+            if (Optional.IsDefined(Reason))
+            {
+                writer.WritePropertyName("reason"u8);
+                writer.WriteStringValue(Reason);
+            }
+            writer.WritePropertyName("errorType"u8);
+            writer.WriteStringValue(ErrorType);
+            if (Optional.IsDefined(ErrorMessage))
+            {
+                writer.WritePropertyName("errorMessage"u8);
+                writer.WriteStringValue(ErrorMessage);
+            }
+            if (Optional.IsDefined(ActionResponse))
+            {
+                writer.WritePropertyName("actionResponse"u8);
+                writer.WriteStringValue(ActionResponse);
+            }
+            writer.WriteEndObject();
+        }
+
+        PetHungryOrThirstyError IModelJsonSerializable<PetHungryOrThirstyError>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetHungryOrThirstyError(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PetHungryOrThirstyError>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PetHungryOrThirstyError IModelSerializable<PetHungryOrThirstyError>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePetHungryOrThirstyError(document.RootElement, options);
+        }
+
+        internal static PetHungryOrThirstyError DeserializePetHungryOrThirstyError(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

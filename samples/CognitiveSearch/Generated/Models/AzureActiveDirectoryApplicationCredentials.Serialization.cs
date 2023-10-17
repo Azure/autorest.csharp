@@ -33,8 +33,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAzureActiveDirectoryApplicationCredentials(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureActiveDirectoryApplicationCredentials(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AzureActiveDirectoryApplicationCredentials>.Serialize(ModelSerializerOptions options)

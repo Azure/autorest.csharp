@@ -24,19 +24,22 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("idleTimeoutInMinutes"u8);
-                writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(IdleTimeoutInMinutes))
+                {
+                    writer.WritePropertyName("idleTimeoutInMinutes"u8);
+                    writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
+                }
+                if (Optional.IsDefined(DnsSettings))
+                {
+                    writer.WritePropertyName("dnsSettings"u8);
+                    writer.WriteObjectValue(DnsSettings);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(DnsSettings))
-            {
-                writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -44,8 +47,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>.Serialize(ModelSerializerOptions options)

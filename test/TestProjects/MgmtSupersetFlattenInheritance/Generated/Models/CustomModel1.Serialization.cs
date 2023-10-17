@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
-    public partial class CustomModel1 : IUtf8JsonSerializable
+    public partial class CustomModel1 : IUtf8JsonSerializable, IModelJsonSerializable<CustomModel1>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CustomModel1>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CustomModel1>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
@@ -28,8 +32,32 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static CustomModel1 DeserializeCustomModel1(JsonElement element)
+        CustomModel1 IModelJsonSerializable<CustomModel1>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCustomModel1(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CustomModel1>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CustomModel1 IModelSerializable<CustomModel1>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCustomModel1(document.RootElement, options);
+        }
+
+        internal static CustomModel1 DeserializeCustomModel1(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

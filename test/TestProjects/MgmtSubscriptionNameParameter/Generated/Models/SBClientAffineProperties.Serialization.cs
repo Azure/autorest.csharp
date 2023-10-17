@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSubscriptionNameParameter.Models
 {
-    public partial class SBClientAffineProperties : IUtf8JsonSerializable
+    public partial class SBClientAffineProperties : IUtf8JsonSerializable, IModelJsonSerializable<SBClientAffineProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SBClientAffineProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SBClientAffineProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ClientId))
@@ -33,8 +37,32 @@ namespace MgmtSubscriptionNameParameter.Models
             writer.WriteEndObject();
         }
 
-        internal static SBClientAffineProperties DeserializeSBClientAffineProperties(JsonElement element)
+        SBClientAffineProperties IModelJsonSerializable<SBClientAffineProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSBClientAffineProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SBClientAffineProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SBClientAffineProperties IModelSerializable<SBClientAffineProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSBClientAffineProperties(document.RootElement, options);
+        }
+
+        internal static SBClientAffineProperties DeserializeSBClientAffineProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

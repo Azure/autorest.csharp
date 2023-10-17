@@ -23,50 +23,138 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<FileShareData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Metadata))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("metadata"u8);
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
                 writer.WriteStartObject();
-                foreach (var item in Metadata)
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastModifiedOn))
                 {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
+                    writer.WritePropertyName("lastModifiedTime"u8);
+                    writer.WriteStringValue(LastModifiedOn.Value, "O");
+                }
+                if (Optional.IsCollectionDefined(Metadata))
+                {
+                    writer.WritePropertyName("metadata"u8);
+                    writer.WriteStartObject();
+                    foreach (var item in Metadata)
+                    {
+                        writer.WritePropertyName(item.Key);
+                        writer.WriteStringValue(item.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                if (Optional.IsDefined(ShareQuota))
+                {
+                    writer.WritePropertyName("shareQuota"u8);
+                    writer.WriteNumberValue(ShareQuota.Value);
+                }
+                if (Optional.IsDefined(EnabledProtocols))
+                {
+                    writer.WritePropertyName("enabledProtocols"u8);
+                    writer.WriteStringValue(EnabledProtocols.Value.ToString());
+                }
+                if (Optional.IsDefined(RootSquash))
+                {
+                    writer.WritePropertyName("rootSquash"u8);
+                    writer.WriteStringValue(RootSquash.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Version))
+                {
+                    writer.WritePropertyName("version"u8);
+                    writer.WriteStringValue(Version);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Deleted))
+                {
+                    writer.WritePropertyName("deleted"u8);
+                    writer.WriteBooleanValue(Deleted.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DeletedOn))
+                {
+                    writer.WritePropertyName("deletedTime"u8);
+                    writer.WriteStringValue(DeletedOn.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RemainingRetentionDays))
+                {
+                    writer.WritePropertyName("remainingRetentionDays"u8);
+                    writer.WriteNumberValue(RemainingRetentionDays.Value);
+                }
+                if (Optional.IsDefined(AccessTier))
+                {
+                    writer.WritePropertyName("accessTier"u8);
+                    writer.WriteStringValue(AccessTier.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AccessTierChangeOn))
+                {
+                    writer.WritePropertyName("accessTierChangeTime"u8);
+                    writer.WriteStringValue(AccessTierChangeOn.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AccessTierStatus))
+                {
+                    writer.WritePropertyName("accessTierStatus"u8);
+                    writer.WriteStringValue(AccessTierStatus);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ShareUsageBytes))
+                {
+                    writer.WritePropertyName("shareUsageBytes"u8);
+                    writer.WriteNumberValue(ShareUsageBytes.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LeaseStatus))
+                {
+                    writer.WritePropertyName("leaseStatus"u8);
+                    writer.WriteStringValue(LeaseStatus.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LeaseState))
+                {
+                    writer.WritePropertyName("leaseState"u8);
+                    writer.WriteStringValue(LeaseState.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LeaseDuration))
+                {
+                    writer.WritePropertyName("leaseDuration"u8);
+                    writer.WriteStringValue(LeaseDuration.Value.ToString());
+                }
+                if (Optional.IsCollectionDefined(SignedIdentifiers))
+                {
+                    writer.WritePropertyName("signedIdentifiers"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in SignedIdentifiers)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SnapshotOn))
+                {
+                    writer.WritePropertyName("snapshotTime"u8);
+                    writer.WriteStringValue(SnapshotOn.Value, "O");
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ShareQuota))
-            {
-                writer.WritePropertyName("shareQuota"u8);
-                writer.WriteNumberValue(ShareQuota.Value);
-            }
-            if (Optional.IsDefined(EnabledProtocols))
-            {
-                writer.WritePropertyName("enabledProtocols"u8);
-                writer.WriteStringValue(EnabledProtocols.Value.ToString());
-            }
-            if (Optional.IsDefined(RootSquash))
-            {
-                writer.WritePropertyName("rootSquash"u8);
-                writer.WriteStringValue(RootSquash.Value.ToString());
-            }
-            if (Optional.IsDefined(AccessTier))
-            {
-                writer.WritePropertyName("accessTier"u8);
-                writer.WriteStringValue(AccessTier.Value.ToString());
-            }
-            if (Optional.IsCollectionDefined(SignedIdentifiers))
-            {
-                writer.WritePropertyName("signedIdentifiers"u8);
-                writer.WriteStartArray();
-                foreach (var item in SignedIdentifiers)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -74,8 +162,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeFileShareData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFileShareData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<FileShareData>.Serialize(ModelSerializerOptions options)

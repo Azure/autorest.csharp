@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
@@ -13,7 +14,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
     /// <summary> Not used anywhere, but access is override to public so still need to be generated and exported with serialization. </summary>
     public partial class OrphanModel
     {
-        /// <summary> Initializes a new instance of OrphanModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OrphanModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public OrphanModel(string name)
@@ -21,6 +25,21 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OrphanModel"/>. </summary>
+        /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OrphanModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OrphanModel"/> for deserialization. </summary>
+        internal OrphanModel()
+        {
         }
 
         /// <summary> Gets the name. </summary>

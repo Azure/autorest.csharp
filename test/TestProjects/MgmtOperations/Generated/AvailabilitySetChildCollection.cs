@@ -227,7 +227,7 @@ namespace MgmtOperations
         public virtual AsyncPageable<AvailabilitySetChildResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetChildavailabilitySetChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace MgmtOperations
         public virtual Pageable<AvailabilitySetChildResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetChildavailabilitySetChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

@@ -30,10 +30,30 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(AppliedDnsServers))
+            {
+                writer.WritePropertyName("appliedDnsServers"u8);
+                writer.WriteStartArray();
+                foreach (var item in AppliedDnsServers)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(InternalDnsNameLabel))
             {
                 writer.WritePropertyName("internalDnsNameLabel"u8);
                 writer.WriteStringValue(InternalDnsNameLabel);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InternalFqdn))
+            {
+                writer.WritePropertyName("internalFqdn"u8);
+                writer.WriteStringValue(InternalFqdn);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InternalDomainNameSuffix))
+            {
+                writer.WritePropertyName("internalDomainNameSuffix"u8);
+                writer.WriteStringValue(InternalDomainNameSuffix);
             }
             writer.WriteEndObject();
         }
@@ -42,8 +62,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkInterfaceDnsSettings(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNetworkInterfaceDnsSettings(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<NetworkInterfaceDnsSettings>.Serialize(ModelSerializerOptions options)

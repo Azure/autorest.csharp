@@ -19,6 +19,21 @@ namespace MgmtAcronymMapping.Models
         void IModelJsonSerializable<UpgradeOperationHistoryStatus>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Code))
+            {
+                writer.WritePropertyName("code"u8);
+                writer.WriteStringValue(Code.Value.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartOn))
+            {
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(EndOn))
+            {
+                writer.WritePropertyName("endTime"u8);
+                writer.WriteStringValue(EndOn.Value, "O");
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +41,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUpgradeOperationHistoryStatus(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpgradeOperationHistoryStatus(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UpgradeOperationHistoryStatus>.Serialize(ModelSerializerOptions options)

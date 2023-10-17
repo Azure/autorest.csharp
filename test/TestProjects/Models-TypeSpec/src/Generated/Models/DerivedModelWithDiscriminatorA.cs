@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Deriver model with discriminator property. </summary>
     public partial class DerivedModelWithDiscriminatorA : BaseModelWithDiscriminator
     {
-        /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorA"/>. </summary>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="requiredString"> Required string. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
@@ -26,7 +26,7 @@ namespace ModelsTypeSpec.Models
             RequiredString = requiredString;
         }
 
-        /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorA"/>. </summary>
         /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
@@ -35,6 +35,11 @@ namespace ModelsTypeSpec.Models
         internal DerivedModelWithDiscriminatorA(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, serializedAdditionalRawData)
         {
             RequiredString = requiredString;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorA"/> for deserialization. </summary>
+        internal DerivedModelWithDiscriminatorA()
+        {
         }
 
         /// <summary> Required string. </summary>

@@ -41,8 +41,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePrivateLinkServiceConnectionState(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePrivateLinkServiceConnectionState(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)

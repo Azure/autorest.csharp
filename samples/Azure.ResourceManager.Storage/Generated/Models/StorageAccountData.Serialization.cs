@@ -23,6 +23,16 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<StorageAccountData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Sku))
+            {
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Kind))
+            {
+                writer.WritePropertyName("kind"u8);
+                writer.WriteStringValue(Kind.Value.ToString());
+            }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
@@ -47,74 +57,202 @@ namespace Azure.ResourceManager.Storage
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
-                writer.WriteObjectValue(AzureFilesIdentityBasedAuthentication);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(EnableHttpsTrafficOnly))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("supportsHttpsTrafficOnly"u8);
-                writer.WriteBooleanValue(EnableHttpsTrafficOnly.Value);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(IsHnsEnabled))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("isHnsEnabled"u8);
-                writer.WriteBooleanValue(IsHnsEnabled.Value);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(LargeFileSharesState))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("largeFileSharesState"u8);
-                writer.WriteStringValue(LargeFileSharesState.Value.ToString());
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(RoutingPreference))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("routingPreference"u8);
-                writer.WriteObjectValue(RoutingPreference);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToSerialString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PrimaryEndpoints))
+                {
+                    writer.WritePropertyName("primaryEndpoints"u8);
+                    writer.WriteObjectValue(PrimaryEndpoints);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PrimaryLocation))
+                {
+                    writer.WritePropertyName("primaryLocation"u8);
+                    writer.WriteStringValue(PrimaryLocation);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StatusOfPrimary))
+                {
+                    writer.WritePropertyName("statusOfPrimary"u8);
+                    writer.WriteStringValue(StatusOfPrimary.Value.ToSerialString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastGeoFailoverOn))
+                {
+                    writer.WritePropertyName("lastGeoFailoverTime"u8);
+                    writer.WriteStringValue(LastGeoFailoverOn.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SecondaryLocation))
+                {
+                    writer.WritePropertyName("secondaryLocation"u8);
+                    writer.WriteStringValue(SecondaryLocation);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StatusOfSecondary))
+                {
+                    writer.WritePropertyName("statusOfSecondary"u8);
+                    writer.WriteStringValue(StatusOfSecondary.Value.ToSerialString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CreatedOn))
+                {
+                    writer.WritePropertyName("creationTime"u8);
+                    writer.WriteStringValue(CreatedOn.Value, "O");
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CustomDomain))
+                {
+                    writer.WritePropertyName("customDomain"u8);
+                    writer.WriteObjectValue(CustomDomain);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SasPolicy))
+                {
+                    writer.WritePropertyName("sasPolicy"u8);
+                    writer.WriteObjectValue(SasPolicy);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(KeyPolicy))
+                {
+                    writer.WritePropertyName("keyPolicy"u8);
+                    writer.WriteObjectValue(KeyPolicy);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(KeyCreationTime))
+                {
+                    writer.WritePropertyName("keyCreationTime"u8);
+                    writer.WriteObjectValue(KeyCreationTime);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SecondaryEndpoints))
+                {
+                    writer.WritePropertyName("secondaryEndpoints"u8);
+                    writer.WriteObjectValue(SecondaryEndpoints);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Encryption))
+                {
+                    writer.WritePropertyName("encryption"u8);
+                    writer.WriteObjectValue(Encryption);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AccessTier))
+                {
+                    writer.WritePropertyName("accessTier"u8);
+                    writer.WriteStringValue(AccessTier.Value.ToSerialString());
+                }
+                if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
+                {
+                    writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
+                    writer.WriteObjectValue(AzureFilesIdentityBasedAuthentication);
+                }
+                if (Optional.IsDefined(EnableHttpsTrafficOnly))
+                {
+                    writer.WritePropertyName("supportsHttpsTrafficOnly"u8);
+                    writer.WriteBooleanValue(EnableHttpsTrafficOnly.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NetworkRuleSet))
+                {
+                    writer.WritePropertyName("networkAcls"u8);
+                    writer.WriteObjectValue(NetworkRuleSet);
+                }
+                if (Optional.IsDefined(IsHnsEnabled))
+                {
+                    writer.WritePropertyName("isHnsEnabled"u8);
+                    writer.WriteBooleanValue(IsHnsEnabled.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(GeoReplicationStats))
+                {
+                    writer.WritePropertyName("geoReplicationStats"u8);
+                    writer.WriteObjectValue(GeoReplicationStats);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(FailoverInProgress))
+                {
+                    writer.WritePropertyName("failoverInProgress"u8);
+                    writer.WriteBooleanValue(FailoverInProgress.Value);
+                }
+                if (Optional.IsDefined(LargeFileSharesState))
+                {
+                    writer.WritePropertyName("largeFileSharesState"u8);
+                    writer.WriteStringValue(LargeFileSharesState.Value.ToString());
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(PrivateEndpointConnections))
+                {
+                    writer.WritePropertyName("privateEndpointConnections"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in PrivateEndpointConnections)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(RoutingPreference))
+                {
+                    writer.WritePropertyName("routingPreference"u8);
+                    writer.WriteObjectValue(RoutingPreference);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(BlobRestoreStatus))
+                {
+                    writer.WritePropertyName("blobRestoreStatus"u8);
+                    writer.WriteObjectValue(BlobRestoreStatus);
+                }
+                if (Optional.IsDefined(AllowBlobPublicAccess))
+                {
+                    writer.WritePropertyName("allowBlobPublicAccess"u8);
+                    writer.WriteBooleanValue(AllowBlobPublicAccess.Value);
+                }
+                if (Optional.IsDefined(MinimumTlsVersion))
+                {
+                    writer.WritePropertyName("minimumTlsVersion"u8);
+                    writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
+                }
+                if (Optional.IsDefined(AllowSharedKeyAccess))
+                {
+                    writer.WritePropertyName("allowSharedKeyAccess"u8);
+                    writer.WriteBooleanValue(AllowSharedKeyAccess.Value);
+                }
+                if (Optional.IsDefined(EnableNfsV3))
+                {
+                    writer.WritePropertyName("isNfsV3Enabled"u8);
+                    writer.WriteBooleanValue(EnableNfsV3.Value);
+                }
+                if (Optional.IsDefined(AllowCrossTenantReplication))
+                {
+                    writer.WritePropertyName("allowCrossTenantReplication"u8);
+                    writer.WriteBooleanValue(AllowCrossTenantReplication.Value);
+                }
+                if (Optional.IsDefined(DefaultToOAuthAuthentication))
+                {
+                    writer.WritePropertyName("defaultToOAuthAuthentication"u8);
+                    writer.WriteBooleanValue(DefaultToOAuthAuthentication.Value);
+                }
+                if (Optional.IsDefined(PublicNetworkAccess))
+                {
+                    writer.WritePropertyName("publicNetworkAccess"u8);
+                    writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
+                }
+                if (Optional.IsDefined(ImmutableStorageWithVersioning))
+                {
+                    writer.WritePropertyName("immutableStorageWithVersioning"u8);
+                    writer.WriteObjectValue(ImmutableStorageWithVersioning);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(AllowBlobPublicAccess))
-            {
-                writer.WritePropertyName("allowBlobPublicAccess"u8);
-                writer.WriteBooleanValue(AllowBlobPublicAccess.Value);
-            }
-            if (Optional.IsDefined(MinimumTlsVersion))
-            {
-                writer.WritePropertyName("minimumTlsVersion"u8);
-                writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
-            }
-            if (Optional.IsDefined(AllowSharedKeyAccess))
-            {
-                writer.WritePropertyName("allowSharedKeyAccess"u8);
-                writer.WriteBooleanValue(AllowSharedKeyAccess.Value);
-            }
-            if (Optional.IsDefined(EnableNfsV3))
-            {
-                writer.WritePropertyName("isNfsV3Enabled"u8);
-                writer.WriteBooleanValue(EnableNfsV3.Value);
-            }
-            if (Optional.IsDefined(AllowCrossTenantReplication))
-            {
-                writer.WritePropertyName("allowCrossTenantReplication"u8);
-                writer.WriteBooleanValue(AllowCrossTenantReplication.Value);
-            }
-            if (Optional.IsDefined(DefaultToOAuthAuthentication))
-            {
-                writer.WritePropertyName("defaultToOAuthAuthentication"u8);
-                writer.WriteBooleanValue(DefaultToOAuthAuthentication.Value);
-            }
-            if (Optional.IsDefined(PublicNetworkAccess))
-            {
-                writer.WritePropertyName("publicNetworkAccess"u8);
-                writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
-            }
-            if (Optional.IsDefined(ImmutableStorageWithVersioning))
-            {
-                writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                writer.WriteObjectValue(ImmutableStorageWithVersioning);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -122,8 +260,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageAccountData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageAccountData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StorageAccountData>.Serialize(ModelSerializerOptions options)

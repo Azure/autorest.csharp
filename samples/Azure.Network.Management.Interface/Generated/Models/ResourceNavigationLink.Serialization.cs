@@ -24,24 +24,42 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(LinkedResourceType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("linkedResourceType"u8);
-                writer.WriteStringValue(LinkedResourceType);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(LinkedResourceType))
+                {
+                    writer.WritePropertyName("linkedResourceType"u8);
+                    writer.WriteStringValue(LinkedResourceType);
+                }
+                if (Optional.IsDefined(Link))
+                {
+                    writer.WritePropertyName("link"u8);
+                    writer.WriteStringValue(Link);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Link))
-            {
-                writer.WritePropertyName("link"u8);
-                writer.WriteStringValue(Link);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -49,8 +67,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeResourceNavigationLink(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeResourceNavigationLink(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ResourceNavigationLink>.Serialize(ModelSerializerOptions options)

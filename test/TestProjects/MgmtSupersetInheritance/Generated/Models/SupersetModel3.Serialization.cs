@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSupersetInheritance.Models
 {
-    public partial class SupersetModel3 : IUtf8JsonSerializable
+    public partial class SupersetModel3 : IUtf8JsonSerializable, IModelJsonSerializable<SupersetModel3>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SupersetModel3>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SupersetModel3>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
@@ -38,8 +42,32 @@ namespace MgmtSupersetInheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static SupersetModel3 DeserializeSupersetModel3(JsonElement element)
+        SupersetModel3 IModelJsonSerializable<SupersetModel3>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSupersetModel3(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SupersetModel3>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SupersetModel3 IModelSerializable<SupersetModel3>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSupersetModel3(document.RootElement, options);
+        }
+
+        internal static SupersetModel3 DeserializeSupersetModel3(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

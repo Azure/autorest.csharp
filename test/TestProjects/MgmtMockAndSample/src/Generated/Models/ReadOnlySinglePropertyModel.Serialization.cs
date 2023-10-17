@@ -5,21 +5,54 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class ReadOnlySinglePropertyModel : IUtf8JsonSerializable
+    internal partial class ReadOnlySinglePropertyModel : IUtf8JsonSerializable, IModelJsonSerializable<ReadOnlySinglePropertyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ReadOnlySinglePropertyModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ReadOnlySinglePropertyModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ReadOnlySomething))
+            {
+                writer.WritePropertyName("readOnlySomething"u8);
+                writer.WriteStringValue(ReadOnlySomething);
+            }
             writer.WriteEndObject();
         }
 
-        internal static ReadOnlySinglePropertyModel DeserializeReadOnlySinglePropertyModel(JsonElement element)
+        ReadOnlySinglePropertyModel IModelJsonSerializable<ReadOnlySinglePropertyModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeReadOnlySinglePropertyModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ReadOnlySinglePropertyModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ReadOnlySinglePropertyModel IModelSerializable<ReadOnlySinglePropertyModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeReadOnlySinglePropertyModel(document.RootElement, options);
+        }
+
+        internal static ReadOnlySinglePropertyModel DeserializeReadOnlySinglePropertyModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,16 +5,25 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
-    public partial class SubResourceModel1 : IUtf8JsonSerializable
+    public partial class SubResourceModel1 : IUtf8JsonSerializable, IModelJsonSerializable<SubResourceModel1>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SubResourceModel1>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SubResourceModel1>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
@@ -23,8 +32,32 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static SubResourceModel1 DeserializeSubResourceModel1(JsonElement element)
+        SubResourceModel1 IModelJsonSerializable<SubResourceModel1>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubResourceModel1(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SubResourceModel1>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SubResourceModel1 IModelSerializable<SubResourceModel1>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSubResourceModel1(document.RootElement, options);
+        }
+
+        internal static SubResourceModel1 DeserializeSubResourceModel1(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

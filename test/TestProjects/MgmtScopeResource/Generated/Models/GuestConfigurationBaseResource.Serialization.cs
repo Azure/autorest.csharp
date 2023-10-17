@@ -5,16 +5,25 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class GuestConfigurationBaseResource : IUtf8JsonSerializable
+    public partial class GuestConfigurationBaseResource : IUtf8JsonSerializable, IModelJsonSerializable<GuestConfigurationBaseResource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<GuestConfigurationBaseResource>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<GuestConfigurationBaseResource>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
@@ -25,11 +34,40 @@ namespace MgmtScopeResource.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
             writer.WriteEndObject();
         }
 
-        internal static GuestConfigurationBaseResource DeserializeGuestConfigurationBaseResource(JsonElement element)
+        GuestConfigurationBaseResource IModelJsonSerializable<GuestConfigurationBaseResource>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeGuestConfigurationBaseResource(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<GuestConfigurationBaseResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GuestConfigurationBaseResource IModelSerializable<GuestConfigurationBaseResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGuestConfigurationBaseResource(document.RootElement, options);
+        }
+
+        internal static GuestConfigurationBaseResource DeserializeGuestConfigurationBaseResource(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

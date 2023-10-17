@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSafeFlatten.Models
 {
-    internal partial class UnknownLayerOneBaseType : IUtf8JsonSerializable
+    internal partial class UnknownLayerOneBaseType : IUtf8JsonSerializable, IModelJsonSerializable<UnknownLayerOneBaseType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownLayerOneBaseType>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownLayerOneBaseType>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -20,8 +24,32 @@ namespace MgmtSafeFlatten.Models
             writer.WriteEndObject();
         }
 
-        internal static UnknownLayerOneBaseType DeserializeUnknownLayerOneBaseType(JsonElement element)
+        UnknownLayerOneBaseType IModelJsonSerializable<UnknownLayerOneBaseType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownLayerOneBaseType(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownLayerOneBaseType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownLayerOneBaseType IModelSerializable<UnknownLayerOneBaseType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownLayerOneBaseType(document.RootElement, options);
+        }
+
+        internal static UnknownLayerOneBaseType DeserializeUnknownLayerOneBaseType(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

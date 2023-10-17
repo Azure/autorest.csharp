@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
-    public partial class FakeConfigurationListResult : IUtf8JsonSerializable
+    public partial class FakeConfigurationListResult : IUtf8JsonSerializable, IModelJsonSerializable<FakeConfigurationListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FakeConfigurationListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FakeConfigurationListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
@@ -30,8 +34,32 @@ namespace MgmtListMethods.Models
             writer.WriteEndObject();
         }
 
-        internal static FakeConfigurationListResult DeserializeFakeConfigurationListResult(JsonElement element)
+        FakeConfigurationListResult IModelJsonSerializable<FakeConfigurationListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFakeConfigurationListResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FakeConfigurationListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeConfigurationListResult IModelSerializable<FakeConfigurationListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeConfigurationListResult(document.RootElement, options);
+        }
+
+        internal static FakeConfigurationListResult DeserializeFakeConfigurationListResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

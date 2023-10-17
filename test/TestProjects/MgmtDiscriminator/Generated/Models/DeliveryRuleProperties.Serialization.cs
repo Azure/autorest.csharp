@@ -56,6 +56,11 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Foo))
+            {
+                writer.WritePropertyName("foo"u8);
+                writer.WriteStringValue(Foo);
+            }
             writer.WriteEndObject();
         }
 
@@ -63,8 +68,8 @@ namespace MgmtDiscriminator.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDeliveryRuleProperties(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeliveryRuleProperties(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DeliveryRuleProperties>.Serialize(ModelSerializerOptions options)

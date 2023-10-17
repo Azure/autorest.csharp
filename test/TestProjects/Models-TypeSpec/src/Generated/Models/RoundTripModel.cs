@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used both as input and output. </summary>
     public partial class RoundTripModel : BaseModel
     {
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredNullableInt"> Required nullable int. </param>
@@ -72,7 +72,7 @@ namespace ModelsTypeSpec.Models
             NonRequiredNullableStringList = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
@@ -136,6 +136,11 @@ namespace ModelsTypeSpec.Models
             RequiredNullableStringList = requiredNullableStringList;
             NonRequiredNullableIntList = nonRequiredNullableIntList;
             NonRequiredNullableStringList = nonRequiredNullableStringList;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/> for deserialization. </summary>
+        internal RoundTripModel()
+        {
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>

@@ -5,26 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class TypeModelInheritanceSingleDiscriminatorModelFactory
     {
-        /// <summary> Initializes a new instance of Dinosaur. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Dinosaur"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.Dinosaur"/> instance for mocking. </returns>
-        public static Dinosaur Dinosaur(string kind = null, int size = default)
+        public static Dinosaur Dinosaur(string kind = null, int size = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            return new UnknownDinosaur(kind, size);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new UnknownDinosaur(kind, size, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of TRex. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TRex"/>. </summary>
         /// <param name="size"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.TRex"/> instance for mocking. </returns>
-        public static TRex TRex(int size = default)
+        public static TRex TRex(int size = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            return new TRex("t-rex", size);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new TRex("t-rex", size, serializedAdditionalRawData);
         }
     }
 }

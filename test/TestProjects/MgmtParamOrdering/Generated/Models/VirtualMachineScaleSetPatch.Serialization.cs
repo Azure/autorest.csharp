@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class VirtualMachineScaleSetPatch : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetPatch : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetPatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VirtualMachineScaleSetPatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
@@ -32,6 +37,67 @@ namespace MgmtParamOrdering.Models
                 writer.WriteEndObject();
             }
             writer.WriteEndObject();
+        }
+
+        VirtualMachineScaleSetPatch IModelJsonSerializable<VirtualMachineScaleSetPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetPatch(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetPatch IModelSerializable<VirtualMachineScaleSetPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetPatch(document.RootElement, options);
+        }
+
+        internal static VirtualMachineScaleSetPatch DeserializeVirtualMachineScaleSetPatch(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<MgmtParamOrderingSku> sku = default;
+            Optional<IDictionary<string, string>> tags = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("sku"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    sku = MgmtParamOrderingSku.DeserializeMgmtParamOrderingSku(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+            }
+            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), sku.Value);
         }
     }
 }

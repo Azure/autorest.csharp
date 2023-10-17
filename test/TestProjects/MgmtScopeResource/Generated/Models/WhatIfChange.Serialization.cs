@@ -8,13 +8,73 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class WhatIfChange
+    public partial class WhatIfChange : IUtf8JsonSerializable, IModelJsonSerializable<WhatIfChange>
     {
-        internal static WhatIfChange DeserializeWhatIfChange(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<WhatIfChange>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<WhatIfChange>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("resourceId"u8);
+            writer.WriteStringValue(ResourceId);
+            writer.WritePropertyName("changeType"u8);
+            writer.WriteStringValue(ChangeType.ToSerialString());
+            if (Optional.IsDefined(UnsupportedReason))
+            {
+                writer.WritePropertyName("unsupportedReason"u8);
+                writer.WriteStringValue(UnsupportedReason);
+            }
+            if (Optional.IsDefined(Before))
+            {
+                writer.WritePropertyName("before"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Before);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Before.ToString()).RootElement);
+#endif
+            }
+            if (Optional.IsDefined(After))
+            {
+                writer.WritePropertyName("after"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(After);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(After.ToString()).RootElement);
+#endif
+            }
+            writer.WriteEndObject();
+        }
+
+        WhatIfChange IModelJsonSerializable<WhatIfChange>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeWhatIfChange(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<WhatIfChange>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WhatIfChange IModelSerializable<WhatIfChange>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWhatIfChange(document.RootElement, options);
+        }
+
+        internal static WhatIfChange DeserializeWhatIfChange(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

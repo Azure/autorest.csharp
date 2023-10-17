@@ -115,8 +115,8 @@ namespace Azure.AI.FormRecognizer.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeFieldValue(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFieldValue(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<FieldValue>.Serialize(ModelSerializerOptions options)

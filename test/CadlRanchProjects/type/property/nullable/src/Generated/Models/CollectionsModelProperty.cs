@@ -15,7 +15,10 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model with collection models properties. </summary>
     public partial class CollectionsModelProperty
     {
-        /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
@@ -25,15 +28,23 @@ namespace _Type.Property.Nullable.Models
 
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty?.ToList();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        internal CollectionsModelProperty(string requiredProperty, IReadOnlyList<InnerModel> nullableProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionsModelProperty(string requiredProperty, IReadOnlyList<InnerModel> nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/> for deserialization. </summary>
+        internal CollectionsModelProperty()
+        {
         }
 
         /// <summary> Required property. </summary>

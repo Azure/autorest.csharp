@@ -37,8 +37,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownScoringFunction(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownScoringFunction(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<UnknownScoringFunction>.Serialize(ModelSerializerOptions options)

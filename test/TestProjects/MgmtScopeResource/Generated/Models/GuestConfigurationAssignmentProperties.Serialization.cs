@@ -8,24 +8,140 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class GuestConfigurationAssignmentProperties : IUtf8JsonSerializable
+    public partial class GuestConfigurationAssignmentProperties : IUtf8JsonSerializable, IModelJsonSerializable<GuestConfigurationAssignmentProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<GuestConfigurationAssignmentProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<GuestConfigurationAssignmentProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TargetResourceId))
+            {
+                if (TargetResourceId != null)
+                {
+                    writer.WritePropertyName("targetResourceId"u8);
+                    writer.WriteStringValue(TargetResourceId);
+                }
+                else
+                {
+                    writer.WriteNull("targetResourceId");
+                }
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ComplianceStatus))
+            {
+                writer.WritePropertyName("complianceStatus"u8);
+                writer.WriteStringValue(ComplianceStatus.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastComplianceStatusChecked))
+            {
+                if (LastComplianceStatusChecked != null)
+                {
+                    writer.WritePropertyName("lastComplianceStatusChecked"u8);
+                    writer.WriteStringValue(LastComplianceStatusChecked.Value, "O");
+                }
+                else
+                {
+                    writer.WriteNull("lastComplianceStatusChecked");
+                }
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LatestReportId))
+            {
+                if (LatestReportId != null)
+                {
+                    writer.WritePropertyName("latestReportId"u8);
+                    writer.WriteStringValue(LatestReportId);
+                }
+                else
+                {
+                    writer.WriteNull("latestReportId");
+                }
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ParameterHash))
+            {
+                if (ParameterHash != null)
+                {
+                    writer.WritePropertyName("parameterHash"u8);
+                    writer.WriteStringValue(ParameterHash);
+                }
+                else
+                {
+                    writer.WriteNull("parameterHash");
+                }
+            }
             if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AssignmentHash))
+            {
+                if (AssignmentHash != null)
+                {
+                    writer.WritePropertyName("assignmentHash"u8);
+                    writer.WriteStringValue(AssignmentHash);
+                }
+                else
+                {
+                    writer.WriteNull("assignmentHash");
+                }
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            {
+                if (ProvisioningState != null)
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                else
+                {
+                    writer.WriteNull("provisioningState");
+                }
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceType))
+            {
+                if (ResourceType != null)
+                {
+                    writer.WritePropertyName("resourceType"u8);
+                    writer.WriteStringValue(ResourceType);
+                }
+                else
+                {
+                    writer.WriteNull("resourceType");
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element)
+        GuestConfigurationAssignmentProperties IModelJsonSerializable<GuestConfigurationAssignmentProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<GuestConfigurationAssignmentProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GuestConfigurationAssignmentProperties IModelSerializable<GuestConfigurationAssignmentProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);
+        }
+
+        internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

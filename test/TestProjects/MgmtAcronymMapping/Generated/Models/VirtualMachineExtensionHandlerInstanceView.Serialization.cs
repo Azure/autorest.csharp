@@ -41,8 +41,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineExtensionHandlerInstanceView(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineExtensionHandlerInstanceView(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineExtensionHandlerInstanceView>.Serialize(ModelSerializerOptions options)

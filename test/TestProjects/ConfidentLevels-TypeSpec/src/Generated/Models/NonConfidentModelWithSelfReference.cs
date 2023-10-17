@@ -15,7 +15,10 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Non-confident model that contains self reference. </summary>
     internal partial class NonConfidentModelWithSelfReference
     {
-        /// <summary> Initializes a new instance of NonConfidentModelWithSelfReference. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithSelfReference"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="selfReference"> The self reference. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
@@ -29,17 +32,25 @@ namespace ConfidentLevelsInTsp.Models
             Name = name;
             SelfReference = selfReference.ToList();
             UnionProperty = unionProperty;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of NonConfidentModelWithSelfReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithSelfReference"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="selfReference"> The self reference. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
-        internal NonConfidentModelWithSelfReference(string name, IList<NonConfidentModelWithSelfReference> selfReference, object unionProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonConfidentModelWithSelfReference(string name, IList<NonConfidentModelWithSelfReference> selfReference, object unionProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             SelfReference = selfReference;
             UnionProperty = unionProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithSelfReference"/> for deserialization. </summary>
+        internal NonConfidentModelWithSelfReference()
+        {
         }
 
         /// <summary> The name. </summary>

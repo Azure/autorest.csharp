@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<ListAccountSasResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AccountSasToken))
+            {
+                writer.WritePropertyName("accountSasToken"u8);
+                writer.WriteStringValue(AccountSasToken);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +31,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeListAccountSasResponse(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeListAccountSasResponse(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ListAccountSasResponse>.Serialize(ModelSerializerOptions options)

@@ -223,7 +223,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<MachineResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _machineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new MachineResource(Client, MachineData.DeserializeMachineData(e)), _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new MachineResource(Client, MachineData.DeserializeMachineData(e)), _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace MgmtResourceName
         public virtual Pageable<MachineResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _machineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new MachineResource(Client, MachineData.DeserializeMachineData(e)), _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new MachineResource(Client, MachineData.DeserializeMachineData(e)), _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

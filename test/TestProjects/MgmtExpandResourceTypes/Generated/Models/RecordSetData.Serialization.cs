@@ -28,120 +28,153 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Metadata))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("metadata"u8);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
                 writer.WriteStartObject();
-                foreach (var item in Metadata)
+                if (Optional.IsCollectionDefined(Metadata))
                 {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
+                    writer.WritePropertyName("metadata"u8);
+                    writer.WriteStartObject();
+                    foreach (var item in Metadata)
+                    {
+                        writer.WritePropertyName(item.Key);
+                        writer.WriteStringValue(item.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                if (Optional.IsDefined(TTL))
+                {
+                    writer.WritePropertyName("TTL"u8);
+                    writer.WriteNumberValue(TTL.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Fqdn))
+                {
+                    writer.WritePropertyName("fqdn"u8);
+                    writer.WriteStringValue(Fqdn);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                if (Optional.IsDefined(TargetResource))
+                {
+                    writer.WritePropertyName("targetResource"u8);
+                    JsonSerializer.Serialize(writer, TargetResource);
+                }
+                if (Optional.IsCollectionDefined(ARecords))
+                {
+                    writer.WritePropertyName("ARecords"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in ARecords)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(AaaaRecords))
+                {
+                    writer.WritePropertyName("AAAARecords"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in AaaaRecords)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(MxRecords))
+                {
+                    writer.WritePropertyName("MXRecords"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in MxRecords)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(NsRecords))
+                {
+                    writer.WritePropertyName("NSRecords"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NsRecords)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(PtrRecords))
+                {
+                    writer.WritePropertyName("PTRRecords"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in PtrRecords)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(SrvRecords))
+                {
+                    writer.WritePropertyName("SRVRecords"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in SrvRecords)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(TxtRecords))
+                {
+                    writer.WritePropertyName("TXTRecords"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in TxtRecords)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(CnameRecord))
+                {
+                    writer.WritePropertyName("CNAMERecord"u8);
+                    writer.WriteObjectValue(CnameRecord);
+                }
+                if (Optional.IsDefined(SoaRecord))
+                {
+                    writer.WritePropertyName("SOARecord"u8);
+                    writer.WriteObjectValue(SoaRecord);
+                }
+                if (Optional.IsCollectionDefined(CaaRecords))
+                {
+                    writer.WritePropertyName("caaRecords"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in CaaRecords)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(TTL))
-            {
-                writer.WritePropertyName("TTL"u8);
-                writer.WriteNumberValue(TTL.Value);
-            }
-            if (Optional.IsDefined(TargetResource))
-            {
-                writer.WritePropertyName("targetResource"u8);
-                JsonSerializer.Serialize(writer, TargetResource);
-            }
-            if (Optional.IsCollectionDefined(ARecords))
-            {
-                writer.WritePropertyName("ARecords"u8);
-                writer.WriteStartArray();
-                foreach (var item in ARecords)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(AaaaRecords))
-            {
-                writer.WritePropertyName("AAAARecords"u8);
-                writer.WriteStartArray();
-                foreach (var item in AaaaRecords)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(MxRecords))
-            {
-                writer.WritePropertyName("MXRecords"u8);
-                writer.WriteStartArray();
-                foreach (var item in MxRecords)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(NsRecords))
-            {
-                writer.WritePropertyName("NSRecords"u8);
-                writer.WriteStartArray();
-                foreach (var item in NsRecords)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(PtrRecords))
-            {
-                writer.WritePropertyName("PTRRecords"u8);
-                writer.WriteStartArray();
-                foreach (var item in PtrRecords)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(SrvRecords))
-            {
-                writer.WritePropertyName("SRVRecords"u8);
-                writer.WriteStartArray();
-                foreach (var item in SrvRecords)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(TxtRecords))
-            {
-                writer.WritePropertyName("TXTRecords"u8);
-                writer.WriteStartArray();
-                foreach (var item in TxtRecords)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(CnameRecord))
-            {
-                writer.WritePropertyName("CNAMERecord"u8);
-                writer.WriteObjectValue(CnameRecord);
-            }
-            if (Optional.IsDefined(SoaRecord))
-            {
-                writer.WritePropertyName("SOARecord"u8);
-                writer.WriteObjectValue(SoaRecord);
-            }
-            if (Optional.IsCollectionDefined(CaaRecords))
-            {
-                writer.WritePropertyName("caaRecords"u8);
-                writer.WriteStartArray();
-                foreach (var item in CaaRecords)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -149,8 +182,8 @@ namespace MgmtExpandResourceTypes
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRecordSetData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRecordSetData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RecordSetData>.Serialize(ModelSerializerOptions options)

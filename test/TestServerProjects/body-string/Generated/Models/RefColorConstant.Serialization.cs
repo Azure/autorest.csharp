@@ -33,8 +33,8 @@ namespace body_string.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRefColorConstant(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRefColorConstant(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RefColorConstant>.Serialize(ModelSerializerOptions options)

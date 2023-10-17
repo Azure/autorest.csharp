@@ -17,7 +17,10 @@ namespace AnomalyDetector.Models
     /// </summary>
     public partial class ModelInfo
     {
-        /// <summary> Initializes a new instance of ModelInfo. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
         /// <param name="dataSource">
         /// Source link to the input data to indicate an accessible Azure storage Uri,
         /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
@@ -40,9 +43,10 @@ namespace AnomalyDetector.Models
             StartTime = startTime;
             EndTime = endTime;
             Errors = new ChangeTrackingList<ErrorResponse>();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ModelInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
         /// <param name="dataSource">
         /// Source link to the input data to indicate an accessible Azure storage Uri,
         /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
@@ -72,7 +76,8 @@ namespace AnomalyDetector.Models
         /// <param name="status"> Model status. One of CREATED, RUNNING, READY, and FAILED. </param>
         /// <param name="errors"> Error messages when failed to create a model. </param>
         /// <param name="diagnosticsInfo"> Diagnostics information to help inspect the states of model or variable. </param>
-        internal ModelInfo(string dataSource, DataSchema? dataSchema, DateTimeOffset startTime, DateTimeOffset endTime, string displayName, int? slidingWindow, AlignPolicy alignPolicy, ModelStatus? status, IReadOnlyList<ErrorResponse> errors, DiagnosticsInfo diagnosticsInfo)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelInfo(string dataSource, DataSchema? dataSchema, DateTimeOffset startTime, DateTimeOffset endTime, string displayName, int? slidingWindow, AlignPolicy alignPolicy, ModelStatus? status, IReadOnlyList<ErrorResponse> errors, DiagnosticsInfo diagnosticsInfo, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DataSource = dataSource;
             DataSchema = dataSchema;
@@ -84,6 +89,12 @@ namespace AnomalyDetector.Models
             Status = status;
             Errors = errors;
             DiagnosticsInfo = diagnosticsInfo;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelInfo"/> for deserialization. </summary>
+        internal ModelInfo()
+        {
         }
 
         /// <summary>

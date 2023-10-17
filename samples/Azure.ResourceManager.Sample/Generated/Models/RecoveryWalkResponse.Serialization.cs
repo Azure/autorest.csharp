@@ -19,6 +19,16 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<RecoveryWalkResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(WalkPerformed))
+            {
+                writer.WritePropertyName("walkPerformed"u8);
+                writer.WriteBooleanValue(WalkPerformed.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NextPlatformUpdateDomain))
+            {
+                writer.WritePropertyName("nextPlatformUpdateDomain"u8);
+                writer.WriteNumberValue(NextPlatformUpdateDomain.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +36,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRecoveryWalkResponse(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRecoveryWalkResponse(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RecoveryWalkResponse>.Serialize(ModelSerializerOptions options)

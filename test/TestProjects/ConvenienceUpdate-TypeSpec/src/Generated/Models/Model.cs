@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConvenienceInCadl.Models
@@ -13,7 +14,10 @@ namespace ConvenienceInCadl.Models
     /// <summary> A model. </summary>
     public partial class Model
     {
-        /// <summary> Initializes a new instance of Model. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         public Model(string id)
@@ -21,6 +25,21 @@ namespace ConvenienceInCadl.Models
             Argument.AssertNotNull(id, nameof(id));
 
             Id = id;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
+        /// <param name="id"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model(string id, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Id = id;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Model"/> for deserialization. </summary>
+        internal Model()
+        {
         }
 
         /// <summary> Gets or sets the id. </summary>

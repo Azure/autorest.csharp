@@ -20,19 +20,22 @@ namespace MgmtExpandResourceTypes.Models
         void IModelJsonSerializable<DnsResourceReferenceResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DnsResourceReferences))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("dnsResourceReferences"u8);
-                writer.WriteStartArray();
-                foreach (var item in DnsResourceReferences)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsCollectionDefined(DnsResourceReferences))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("dnsResourceReferences"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in DnsResourceReferences)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -40,8 +43,8 @@ namespace MgmtExpandResourceTypes.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDnsResourceReferenceResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDnsResourceReferenceResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DnsResourceReferenceResult>.Serialize(ModelSerializerOptions options)

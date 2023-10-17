@@ -228,7 +228,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithNonResChRestClient.CreateListTestRequest(Id.SubscriptionId, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentWithNonResChRestClient.CreateListTestNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithNonResChResource(Client, FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(e)), _fakeParentWithNonResChClientDiagnostics, Pipeline, "FakeParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new FakeParentWithNonResChResource(Client, FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(e)), _fakeParentWithNonResChClientDiagnostics, Pipeline, "FakeParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithNonResChRestClient.CreateListTestRequest(Id.SubscriptionId, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentWithNonResChRestClient.CreateListTestNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithNonResChResource(Client, FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(e)), _fakeParentWithNonResChClientDiagnostics, Pipeline, "FakeParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new FakeParentWithNonResChResource(Client, FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(e)), _fakeParentWithNonResChClientDiagnostics, Pipeline, "FakeParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

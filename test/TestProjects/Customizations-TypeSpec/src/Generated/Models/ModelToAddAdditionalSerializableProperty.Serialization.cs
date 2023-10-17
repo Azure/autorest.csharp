@@ -5,15 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class ModelToAddAdditionalSerializableProperty : IUtf8JsonSerializable
+    public partial class ModelToAddAdditionalSerializableProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
@@ -35,11 +40,47 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("additionalNullableSerializableProperty");
                 }
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static ModelToAddAdditionalSerializableProperty DeserializeModelToAddAdditionalSerializableProperty(JsonElement element)
+        ModelToAddAdditionalSerializableProperty IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelToAddAdditionalSerializableProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelToAddAdditionalSerializableProperty IModelSerializable<ModelToAddAdditionalSerializableProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
+        }
+
+        internal static ModelToAddAdditionalSerializableProperty DeserializeModelToAddAdditionalSerializableProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,34 +88,41 @@ namespace CustomizationsInTsp.Models
             int requiredInt = default;
             Optional<int> additionalSerializableProperty = default;
             Optional<int?> additionalNullableSerializableProperty = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("requiredInt"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    DeserializeRequiredIntValue(property, ref requiredInt);
-                    continue;
-                }
-                if (property.NameEquals("additionalSerializableProperty"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("requiredInt"u8))
                     {
+                        DeserializeRequiredIntValue(property, ref requiredInt);
                         continue;
                     }
-                    additionalSerializableProperty = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("additionalNullableSerializableProperty"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("additionalSerializableProperty"u8))
                     {
-                        additionalNullableSerializableProperty = null;
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        additionalSerializableProperty = property.Value.GetInt32();
                         continue;
                     }
-                    additionalNullableSerializableProperty = property.Value.GetInt32();
-                    continue;
+                    if (property.NameEquals("additionalNullableSerializableProperty"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            additionalNullableSerializableProperty = null;
+                            continue;
+                        }
+                        additionalNullableSerializableProperty = property.Value.GetInt32();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
+            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty), serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -82,15 +130,13 @@ namespace CustomizationsInTsp.Models
         internal static ModelToAddAdditionalSerializableProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement);
+            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

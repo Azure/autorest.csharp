@@ -15,9 +15,10 @@ namespace FirstTestTypeSpec.Models
     /// <summary> A model with a few properties of literal types. </summary>
     internal partial class Thing
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
@@ -37,7 +38,7 @@ namespace FirstTestTypeSpec.Models
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredLiteralString"> required literal string. </param>
@@ -68,6 +69,11 @@ namespace FirstTestTypeSpec.Models
             OptionalNullableList = optionalNullableList;
             RequiredNullableList = requiredNullableList;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Thing"/> for deserialization. </summary>
+        internal Thing()
+        {
         }
 
         /// <summary> name of the Thing. </summary>

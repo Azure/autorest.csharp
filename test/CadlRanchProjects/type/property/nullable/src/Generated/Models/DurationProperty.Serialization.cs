@@ -6,41 +6,105 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Nullable.Models
 {
-    public partial class DurationProperty
+    public partial class DurationProperty : IUtf8JsonSerializable, IModelJsonSerializable<DurationProperty>
     {
-        internal static DurationProperty DeserializeDurationProperty(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DurationProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DurationProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("requiredProperty"u8);
+            writer.WriteStringValue(RequiredProperty);
+            if (NullableProperty != null)
+            {
+                writer.WritePropertyName("nullableProperty"u8);
+                writer.WriteStringValue(NullableProperty.Value, "P");
+            }
+            else
+            {
+                writer.WriteNull("nullableProperty");
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        DurationProperty IModelJsonSerializable<DurationProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDurationProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DurationProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DurationProperty IModelSerializable<DurationProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDurationProperty(document.RootElement, options);
+        }
+
+        internal static DurationProperty DeserializeDurationProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string requiredProperty = default;
             TimeSpan? nullableProperty = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("requiredProperty"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    requiredProperty = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("nullableProperty"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("requiredProperty"u8))
                     {
-                        nullableProperty = null;
+                        requiredProperty = property.Value.GetString();
                         continue;
                     }
-                    nullableProperty = property.Value.GetTimeSpan("P");
-                    continue;
+                    if (property.NameEquals("nullableProperty"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            nullableProperty = null;
+                            continue;
+                        }
+                        nullableProperty = property.Value.GetTimeSpan("P");
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new DurationProperty(requiredProperty, nullableProperty);
+            return new DurationProperty(requiredProperty, nullableProperty, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -48,7 +112,13 @@ namespace _Type.Property.Nullable.Models
         internal static DurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDurationProperty(document.RootElement);
+            return DeserializeDurationProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

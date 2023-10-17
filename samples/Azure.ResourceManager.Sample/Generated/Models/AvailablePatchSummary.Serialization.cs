@@ -19,6 +19,46 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<AvailablePatchSummary>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AssessmentActivityId))
+            {
+                writer.WritePropertyName("assessmentActivityId"u8);
+                writer.WriteStringValue(AssessmentActivityId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RebootPending))
+            {
+                writer.WritePropertyName("rebootPending"u8);
+                writer.WriteBooleanValue(RebootPending.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CriticalAndSecurityPatchCount))
+            {
+                writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
+                writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(OtherPatchCount))
+            {
+                writer.WritePropertyName("otherPatchCount"u8);
+                writer.WriteNumberValue(OtherPatchCount.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartOn))
+            {
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastModifiedOn))
+            {
+                writer.WritePropertyName("lastModifiedTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Error))
+            {
+                writer.WritePropertyName("error"u8);
+                writer.WriteObjectValue(Error);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +66,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeAvailablePatchSummary(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAvailablePatchSummary(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<AvailablePatchSummary>.Serialize(ModelSerializerOptions options)

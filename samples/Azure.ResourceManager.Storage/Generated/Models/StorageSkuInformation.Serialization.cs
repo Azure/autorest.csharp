@@ -22,6 +22,41 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Tier))
+            {
+                writer.WritePropertyName("tier"u8);
+                writer.WriteStringValue(Tier.Value.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceType))
+            {
+                writer.WritePropertyName("resourceType"u8);
+                writer.WriteStringValue(ResourceType.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Kind))
+            {
+                writer.WritePropertyName("kind"u8);
+                writer.WriteStringValue(Kind.Value.ToString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Locations))
+            {
+                writer.WritePropertyName("locations"u8);
+                writer.WriteStartArray();
+                foreach (var item in Locations)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Capabilities))
+            {
+                writer.WritePropertyName("capabilities"u8);
+                writer.WriteStartArray();
+                foreach (var item in Capabilities)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsCollectionDefined(Restrictions))
             {
                 writer.WritePropertyName("restrictions"u8);
@@ -39,8 +74,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageSkuInformation(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageSkuInformation(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<StorageSkuInformation>.Serialize(ModelSerializerOptions options)

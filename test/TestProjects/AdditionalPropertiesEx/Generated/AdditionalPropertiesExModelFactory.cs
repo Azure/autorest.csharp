@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace AdditionalPropertiesEx.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -12,18 +15,25 @@ namespace AdditionalPropertiesEx.Models
     {
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
         /// <param name="id"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModel"/> instance for mocking. </returns>
-        public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int id = default)
+        public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)
         {
-            return new OutputAdditionalPropertiesModel(id);
+            additionalProperties ??= new Dictionary<string, string>();
+
+            return new OutputAdditionalPropertiesModel(id, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModelStruct. </summary>
         /// <param name="id"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModelStruct"/> instance for mocking. </returns>
-        public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = default)
+        public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)
         {
-            return new OutputAdditionalPropertiesModelStruct(id);
+            additionalProperties ??= new Dictionary<string, string>();
+
+            return new OutputAdditionalPropertiesModelStruct(id, additionalProperties);
         }
     }
 }

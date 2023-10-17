@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Azure.Lro.Standard.Models
@@ -13,7 +14,10 @@ namespace _Azure.Lro.Standard.Models
     /// <summary> The exported user data. </summary>
     public partial class ExportedUser
     {
-        /// <summary> Initializes a new instance of ExportedUser. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ExportedUser"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="resourceUri"> The exported URI. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resourceUri"/> is null. </exception>
@@ -24,6 +28,23 @@ namespace _Azure.Lro.Standard.Models
 
             Name = name;
             ResourceUri = resourceUri;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ExportedUser"/>. </summary>
+        /// <param name="name"> The name of user. </param>
+        /// <param name="resourceUri"> The exported URI. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExportedUser(string name, string resourceUri, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            ResourceUri = resourceUri;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ExportedUser"/> for deserialization. </summary>
+        internal ExportedUser()
+        {
         }
 
         /// <summary> The name of user. </summary>

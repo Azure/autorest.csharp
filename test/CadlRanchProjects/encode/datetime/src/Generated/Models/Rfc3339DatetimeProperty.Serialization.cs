@@ -6,38 +6,85 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Encode.Datetime.Models
 {
-    public partial class Rfc3339DatetimeProperty : IUtf8JsonSerializable
+    public partial class Rfc3339DatetimeProperty : IUtf8JsonSerializable, IModelJsonSerializable<Rfc3339DatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Rfc3339DatetimeProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Rfc3339DatetimeProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(Value, "O");
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Rfc3339DatetimeProperty DeserializeRfc3339DatetimeProperty(JsonElement element)
+        Rfc3339DatetimeProperty IModelJsonSerializable<Rfc3339DatetimeProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRfc3339DatetimeProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Rfc3339DatetimeProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Rfc3339DatetimeProperty IModelSerializable<Rfc3339DatetimeProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRfc3339DatetimeProperty(document.RootElement, options);
+        }
+
+        internal static Rfc3339DatetimeProperty DeserializeRfc3339DatetimeProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             DateTimeOffset value = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("value"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    value = property.Value.GetDateTimeOffset("O");
-                    continue;
+                    if (property.NameEquals("value"u8))
+                    {
+                        value = property.Value.GetDateTimeOffset("O");
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new Rfc3339DatetimeProperty(value);
+            return new Rfc3339DatetimeProperty(value, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -45,15 +92,13 @@ namespace Encode.Datetime.Models
         internal static Rfc3339DatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRfc3339DatetimeProperty(document.RootElement);
+            return DeserializeRfc3339DatetimeProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

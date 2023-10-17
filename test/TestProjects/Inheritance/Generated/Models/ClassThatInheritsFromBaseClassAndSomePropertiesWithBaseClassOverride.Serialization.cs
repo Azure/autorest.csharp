@@ -98,8 +98,8 @@ namespace Inheritance.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Serialize(ModelSerializerOptions options)

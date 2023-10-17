@@ -34,8 +34,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePatternReplaceCharFilter(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePatternReplaceCharFilter(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PatternReplaceCharFilter>.Serialize(ModelSerializerOptions options)

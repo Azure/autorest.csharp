@@ -37,8 +37,8 @@ namespace MgmtDiscriminator.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOriginGroupOverride(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOriginGroupOverride(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OriginGroupOverride>.Serialize(ModelSerializerOptions options)

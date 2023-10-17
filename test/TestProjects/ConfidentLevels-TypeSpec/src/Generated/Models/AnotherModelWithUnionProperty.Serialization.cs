@@ -5,30 +5,86 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class AnotherModelWithUnionProperty
+    internal partial class AnotherModelWithUnionProperty : IUtf8JsonSerializable, IModelJsonSerializable<AnotherModelWithUnionProperty>
     {
-        internal static AnotherModelWithUnionProperty DeserializeAnotherModelWithUnionProperty(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AnotherModelWithUnionProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<AnotherModelWithUnionProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("unionProperty"u8);
+            writer.WriteObjectValue(UnionProperty);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        AnotherModelWithUnionProperty IModelJsonSerializable<AnotherModelWithUnionProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnotherModelWithUnionProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AnotherModelWithUnionProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AnotherModelWithUnionProperty IModelSerializable<AnotherModelWithUnionProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAnotherModelWithUnionProperty(document.RootElement, options);
+        }
+
+        internal static AnotherModelWithUnionProperty DeserializeAnotherModelWithUnionProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             object unionProperty = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("unionProperty"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    unionProperty = property.Value.GetObject();
-                    continue;
+                    if (property.NameEquals("unionProperty"u8))
+                    {
+                        unionProperty = property.Value.GetObject();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new AnotherModelWithUnionProperty(unionProperty);
+            return new AnotherModelWithUnionProperty(unionProperty, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -36,7 +92,13 @@ namespace ConfidentLevelsInTsp.Models
         internal static AnotherModelWithUnionProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAnotherModelWithUnionProperty(document.RootElement);
+            return DeserializeAnotherModelWithUnionProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

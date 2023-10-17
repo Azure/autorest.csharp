@@ -20,10 +20,25 @@ namespace Azure.Network.Management.Interface.Models
         void IModelJsonSerializable<VirtualNetworkTap>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -41,24 +56,47 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(NetworkInterfaceTapConfigurations))
+                {
+                    writer.WritePropertyName("networkInterfaceTapConfigurations"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NetworkInterfaceTapConfigurations)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceGuid))
+                {
+                    writer.WritePropertyName("resourceGuid"u8);
+                    writer.WriteStringValue(ResourceGuid);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
+                {
+                    writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
+                    writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
+                }
+                if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
+                {
+                    writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
+                    writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
+                }
+                if (Optional.IsDefined(DestinationPort))
+                {
+                    writer.WritePropertyName("destinationPort"u8);
+                    writer.WriteNumberValue(DestinationPort.Value);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
-            {
-                writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
-            }
-            if (Optional.IsDefined(DestinationPort))
-            {
-                writer.WritePropertyName("destinationPort"u8);
-                writer.WriteNumberValue(DestinationPort.Value);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -66,8 +104,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualNetworkTap(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualNetworkTap(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualNetworkTap>.Serialize(ModelSerializerOptions options)

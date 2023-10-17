@@ -136,7 +136,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetGroupsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetGroupsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
         }
 
         /// <summary> Initializes a new instance of ResourceGroup. </summary>

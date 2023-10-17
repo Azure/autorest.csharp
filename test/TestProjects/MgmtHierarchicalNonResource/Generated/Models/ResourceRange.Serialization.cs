@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class ResourceRange
+    public partial class ResourceRange : IUtf8JsonSerializable, IModelJsonSerializable<ResourceRange>
     {
-        internal static ResourceRange DeserializeResourceRange(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ResourceRange>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ResourceRange>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Min))
+            {
+                writer.WritePropertyName("min"u8);
+                writer.WriteNumberValue(Min.Value);
+            }
+            if (Optional.IsDefined(Max))
+            {
+                writer.WritePropertyName("max"u8);
+                writer.WriteNumberValue(Max.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        ResourceRange IModelJsonSerializable<ResourceRange>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeResourceRange(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ResourceRange>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResourceRange IModelSerializable<ResourceRange>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResourceRange(document.RootElement, options);
+        }
+
+        internal static ResourceRange DeserializeResourceRange(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -36,24 +36,52 @@ namespace MgmtAcronymMapping
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(SourceVirtualMachine))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("sourceVirtualMachine"u8);
-                JsonSerializer.Serialize(writer, SourceVirtualMachine);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(HyperVGeneration))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("hyperVGeneration"u8);
-                writer.WriteStringValue(HyperVGeneration.Value.ToString());
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(SourceVirtualMachine))
+                {
+                    writer.WritePropertyName("sourceVirtualMachine"u8);
+                    JsonSerializer.Serialize(writer, SourceVirtualMachine);
+                }
+                if (Optional.IsDefined(StorageProfile))
+                {
+                    writer.WritePropertyName("storageProfile"u8);
+                    writer.WriteObjectValue(StorageProfile);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                if (Optional.IsDefined(HyperVGeneration))
+                {
+                    writer.WritePropertyName("hyperVGeneration"u8);
+                    writer.WriteStringValue(HyperVGeneration.Value.ToString());
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -61,8 +89,8 @@ namespace MgmtAcronymMapping
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeImageData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImageData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ImageData>.Serialize(ModelSerializerOptions options)

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
@@ -13,7 +14,10 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty
     {
-        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
@@ -23,6 +27,23 @@ namespace _Type.Property.Nullable.Models
 
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
+        /// <param name="requiredProperty"> Required property. </param>
+        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DatetimeProperty(string requiredProperty, DateTimeOffset? nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            RequiredProperty = requiredProperty;
+            NullableProperty = nullableProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/> for deserialization. </summary>
+        internal DatetimeProperty()
+        {
         }
 
         /// <summary> Required property. </summary>

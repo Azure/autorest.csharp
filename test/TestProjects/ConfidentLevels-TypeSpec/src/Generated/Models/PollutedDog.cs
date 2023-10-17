@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The dog with a union type. </summary>
     internal partial class PollutedDog : PollutedPet
     {
-        /// <summary> Initializes a new instance of PollutedDog. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedDog"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
         /// <param name="color"> Color, could be specified by a string or by an array of int as RGB. </param>
@@ -29,15 +30,21 @@ namespace ConfidentLevelsInTsp.Models
             Color = color;
         }
 
-        /// <summary> Initializes a new instance of PollutedDog. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedDog"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="woof"> Woof. </param>
         /// <param name="color"> Color, could be specified by a string or by an array of int as RGB. </param>
-        internal PollutedDog(string kind, string name, string woof, object color) : base(kind, name)
+        internal PollutedDog(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string woof, object color) : base(kind, name, serializedAdditionalRawData)
         {
             Woof = woof;
             Color = color;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PollutedDog"/> for deserialization. </summary>
+        internal PollutedDog()
+        {
         }
 
         /// <summary> Woof. </summary>

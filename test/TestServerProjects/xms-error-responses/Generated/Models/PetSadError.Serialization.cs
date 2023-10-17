@@ -5,15 +5,66 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    public partial class PetSadError
+    public partial class PetSadError : IUtf8JsonSerializable, IModelJsonSerializable<PetSadError>
     {
-        internal static PetSadError DeserializePetSadError(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PetSadError>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PetSadError>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Reason))
+            {
+                writer.WritePropertyName("reason"u8);
+                writer.WriteStringValue(Reason);
+            }
+            writer.WritePropertyName("errorType"u8);
+            writer.WriteStringValue(ErrorType);
+            if (Optional.IsDefined(ErrorMessage))
+            {
+                writer.WritePropertyName("errorMessage"u8);
+                writer.WriteStringValue(ErrorMessage);
+            }
+            if (Optional.IsDefined(ActionResponse))
+            {
+                writer.WritePropertyName("actionResponse"u8);
+                writer.WriteStringValue(ActionResponse);
+            }
+            writer.WriteEndObject();
+        }
+
+        PetSadError IModelJsonSerializable<PetSadError>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetSadError(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PetSadError>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PetSadError IModelSerializable<PetSadError>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePetSadError(document.RootElement, options);
+        }
+
+        internal static PetSadError DeserializePetSadError(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

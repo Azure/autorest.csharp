@@ -40,44 +40,47 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Plan))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
-            }
-            if (Optional.IsDefined(OSDiskImage))
-            {
-                writer.WritePropertyName("osDiskImage"u8);
-                writer.WriteObjectValue(OSDiskImage);
-            }
-            if (Optional.IsCollectionDefined(DataDiskImages))
-            {
-                writer.WritePropertyName("dataDiskImages"u8);
-                writer.WriteStartArray();
-                foreach (var item in DataDiskImages)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Plan))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("plan"u8);
+                    writer.WriteObjectValue(Plan);
                 }
-                writer.WriteEndArray();
+                if (Optional.IsDefined(OSDiskImage))
+                {
+                    writer.WritePropertyName("osDiskImage"u8);
+                    writer.WriteObjectValue(OSDiskImage);
+                }
+                if (Optional.IsCollectionDefined(DataDiskImages))
+                {
+                    writer.WritePropertyName("dataDiskImages"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in DataDiskImages)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(AutomaticOSUpgradeProperties))
+                {
+                    writer.WritePropertyName("automaticOSUpgradeProperties"u8);
+                    writer.WriteObjectValue(AutomaticOSUpgradeProperties);
+                }
+                if (Optional.IsDefined(HyperVGeneration))
+                {
+                    writer.WritePropertyName("hyperVGeneration"u8);
+                    writer.WriteStringValue(HyperVGeneration.Value.ToString());
+                }
+                if (Optional.IsDefined(Disallowed))
+                {
+                    writer.WritePropertyName("disallowed"u8);
+                    writer.WriteObjectValue(Disallowed);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(AutomaticOSUpgradeProperties))
-            {
-                writer.WritePropertyName("automaticOSUpgradeProperties"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradeProperties);
-            }
-            if (Optional.IsDefined(HyperVGeneration))
-            {
-                writer.WritePropertyName("hyperVGeneration"u8);
-                writer.WriteStringValue(HyperVGeneration.Value.ToString());
-            }
-            if (Optional.IsDefined(Disallowed))
-            {
-                writer.WritePropertyName("disallowed"u8);
-                writer.WriteObjectValue(Disallowed);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -85,8 +88,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineImage(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineImage(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineImage>.Serialize(ModelSerializerOptions options)

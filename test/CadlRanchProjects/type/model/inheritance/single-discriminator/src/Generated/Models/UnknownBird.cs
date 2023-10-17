@@ -5,21 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> Unknown version of Bird. </summary>
     internal partial class UnknownBird : Bird
     {
-        /// <summary> Initializes a new instance of UnknownBird. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownBird"/>. </summary>
         /// <param name="wingspan"></param>
         internal UnknownBird(int wingspan) : base(wingspan)
         {
         }
 
-        /// <summary> Initializes a new instance of UnknownBird. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownBird"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
-        internal UnknownBird(string kind, int wingspan) : base(kind, wingspan)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownBird(string kind, int wingspan, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, wingspan, serializedAdditionalRawData)
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownBird"/> for deserialization. </summary>
+        internal UnknownBird()
         {
         }
     }

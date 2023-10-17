@@ -9,13 +9,82 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class DeletedVaultProperties
+    public partial class DeletedVaultProperties : IUtf8JsonSerializable, IModelJsonSerializable<DeletedVaultProperties>
     {
-        internal static DeletedVaultProperties DeserializeDeletedVaultProperties(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeletedVaultProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeletedVaultProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(VaultId))
+            {
+                writer.WritePropertyName("vaultId"u8);
+                writer.WriteStringValue(VaultId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DeletedOn))
+            {
+                writer.WritePropertyName("deletionDate"u8);
+                writer.WriteStringValue(DeletedOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ScheduledPurgeOn))
+            {
+                writer.WritePropertyName("scheduledPurgeDate"u8);
+                writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PurgeProtectionEnabled))
+            {
+                writer.WritePropertyName("purgeProtectionEnabled"u8);
+                writer.WriteBooleanValue(PurgeProtectionEnabled.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        DeletedVaultProperties IModelJsonSerializable<DeletedVaultProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeletedVaultProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeletedVaultProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedVaultProperties IModelSerializable<DeletedVaultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeletedVaultProperties(document.RootElement, options);
+        }
+
+        internal static DeletedVaultProperties DeserializeDeletedVaultProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

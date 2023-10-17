@@ -61,69 +61,102 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(UpgradePolicy))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("upgradePolicy"u8);
-                writer.WriteObjectValue(UpgradePolicy);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(AutomaticRepairsPolicy))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("automaticRepairsPolicy"u8);
-                writer.WriteObjectValue(AutomaticRepairsPolicy);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(VirtualMachineProfile))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("virtualMachineProfile"u8);
-                writer.WriteObjectValue(VirtualMachineProfile);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(Overprovision))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("overprovision"u8);
-                writer.WriteBooleanValue(Overprovision.Value);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
-                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(UpgradePolicy))
+                {
+                    writer.WritePropertyName("upgradePolicy"u8);
+                    writer.WriteObjectValue(UpgradePolicy);
+                }
+                if (Optional.IsDefined(AutomaticRepairsPolicy))
+                {
+                    writer.WritePropertyName("automaticRepairsPolicy"u8);
+                    writer.WriteObjectValue(AutomaticRepairsPolicy);
+                }
+                if (Optional.IsDefined(VirtualMachineProfile))
+                {
+                    writer.WritePropertyName("virtualMachineProfile"u8);
+                    writer.WriteObjectValue(VirtualMachineProfile);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                if (Optional.IsDefined(Overprovision))
+                {
+                    writer.WritePropertyName("overprovision"u8);
+                    writer.WriteBooleanValue(Overprovision.Value);
+                }
+                if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+                {
+                    writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
+                    writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(UniqueId))
+                {
+                    writer.WritePropertyName("uniqueId"u8);
+                    writer.WriteStringValue(UniqueId);
+                }
+                if (Optional.IsDefined(SinglePlacementGroup))
+                {
+                    writer.WritePropertyName("singlePlacementGroup"u8);
+                    writer.WriteBooleanValue(SinglePlacementGroup.Value);
+                }
+                if (Optional.IsDefined(ZoneBalance))
+                {
+                    writer.WritePropertyName("zoneBalance"u8);
+                    writer.WriteBooleanValue(ZoneBalance.Value);
+                }
+                if (Optional.IsDefined(PlatformFaultDomainCount))
+                {
+                    writer.WritePropertyName("platformFaultDomainCount"u8);
+                    writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                }
+                if (Optional.IsDefined(ProximityPlacementGroup))
+                {
+                    writer.WritePropertyName("proximityPlacementGroup"u8);
+                    JsonSerializer.Serialize(writer, ProximityPlacementGroup);
+                }
+                if (Optional.IsDefined(HostGroup))
+                {
+                    writer.WritePropertyName("hostGroup"u8);
+                    JsonSerializer.Serialize(writer, HostGroup);
+                }
+                if (Optional.IsDefined(AdditionalCapabilities))
+                {
+                    writer.WritePropertyName("additionalCapabilities"u8);
+                    writer.WriteObjectValue(AdditionalCapabilities);
+                }
+                if (Optional.IsDefined(ScaleInPolicy))
+                {
+                    writer.WritePropertyName("scaleInPolicy"u8);
+                    writer.WriteObjectValue(ScaleInPolicy);
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(SinglePlacementGroup))
-            {
-                writer.WritePropertyName("singlePlacementGroup"u8);
-                writer.WriteBooleanValue(SinglePlacementGroup.Value);
-            }
-            if (Optional.IsDefined(ZoneBalance))
-            {
-                writer.WritePropertyName("zoneBalance"u8);
-                writer.WriteBooleanValue(ZoneBalance.Value);
-            }
-            if (Optional.IsDefined(PlatformFaultDomainCount))
-            {
-                writer.WritePropertyName("platformFaultDomainCount"u8);
-                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
-            }
-            if (Optional.IsDefined(ProximityPlacementGroup))
-            {
-                writer.WritePropertyName("proximityPlacementGroup"u8);
-                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
-            }
-            if (Optional.IsDefined(HostGroup))
-            {
-                writer.WritePropertyName("hostGroup"u8);
-                JsonSerializer.Serialize(writer, HostGroup);
-            }
-            if (Optional.IsDefined(AdditionalCapabilities))
-            {
-                writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
-            }
-            if (Optional.IsDefined(ScaleInPolicy))
-            {
-                writer.WritePropertyName("scaleInPolicy"u8);
-                writer.WriteObjectValue(ScaleInPolicy);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -131,8 +164,8 @@ namespace Azure.ResourceManager.Sample
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<VirtualMachineScaleSetData>.Serialize(ModelSerializerOptions options)

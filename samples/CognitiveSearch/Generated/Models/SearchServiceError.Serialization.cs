@@ -20,6 +20,26 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<SearchServiceError>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Code))
+            {
+                writer.WritePropertyName("code"u8);
+                writer.WriteStringValue(Code);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("message"u8);
+                writer.WriteStringValue(Message);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Details))
+            {
+                writer.WritePropertyName("details"u8);
+                writer.WriteStartArray();
+                foreach (var item in Details)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +47,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSearchServiceError(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSearchServiceError(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<SearchServiceError>.Serialize(ModelSerializerOptions options)

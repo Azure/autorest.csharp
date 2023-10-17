@@ -6,33 +6,34 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class SpecsAzureCoreTraitsModelFactory
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="name"> The user's name. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
-        public static User User(int id = default, string name = null)
+        public static User User(int id = default, string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            return new User(id, name);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new User(id, name, serializedAdditionalRawData);
         }
 
-        /// <summary> Initializes a new instance of UserActionResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UserActionResponse"/>. </summary>
         /// <param name="userActionResult"> User action result. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="userActionResult"/> is null. </exception>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.UserActionResponse"/> instance for mocking. </returns>
-        public static UserActionResponse UserActionResponse(string userActionResult = null)
+        public static UserActionResponse UserActionResponse(string userActionResult = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
         {
-            if (userActionResult == null)
-            {
-                throw new ArgumentNullException(nameof(userActionResult));
-            }
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new UserActionResponse(userActionResult);
+            return new UserActionResponse(userActionResult, serializedAdditionalRawData);
         }
     }
 }

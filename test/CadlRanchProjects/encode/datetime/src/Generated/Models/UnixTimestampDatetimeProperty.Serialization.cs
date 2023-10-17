@@ -6,38 +6,85 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Encode.Datetime.Models
 {
-    public partial class UnixTimestampDatetimeProperty : IUtf8JsonSerializable
+    public partial class UnixTimestampDatetimeProperty : IUtf8JsonSerializable, IModelJsonSerializable<UnixTimestampDatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnixTimestampDatetimeProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnixTimestampDatetimeProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteNumberValue(Value, "U");
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static UnixTimestampDatetimeProperty DeserializeUnixTimestampDatetimeProperty(JsonElement element)
+        UnixTimestampDatetimeProperty IModelJsonSerializable<UnixTimestampDatetimeProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnixTimestampDatetimeProperty(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnixTimestampDatetimeProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnixTimestampDatetimeProperty IModelSerializable<UnixTimestampDatetimeProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnixTimestampDatetimeProperty(document.RootElement, options);
+        }
+
+        internal static UnixTimestampDatetimeProperty DeserializeUnixTimestampDatetimeProperty(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             DateTimeOffset value = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("value"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    value = DateTimeOffset.FromUnixTimeSeconds(property.Value.GetInt64());
-                    continue;
+                    if (property.NameEquals("value"u8))
+                    {
+                        value = DateTimeOffset.FromUnixTimeSeconds(property.Value.GetInt64());
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new UnixTimestampDatetimeProperty(value);
+            return new UnixTimestampDatetimeProperty(value, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -45,15 +92,13 @@ namespace Encode.Datetime.Models
         internal static UnixTimestampDatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnixTimestampDatetimeProperty(document.RootElement);
+            return DeserializeUnixTimestampDatetimeProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

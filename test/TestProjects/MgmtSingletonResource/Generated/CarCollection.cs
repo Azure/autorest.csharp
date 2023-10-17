@@ -223,7 +223,7 @@ namespace MgmtSingletonResource
         public virtual AsyncPageable<CarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _carRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new CarResource(Client, CarData.DeserializeCarData(e)), _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new CarResource(Client, CarData.DeserializeCarData(e)), _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace MgmtSingletonResource
         public virtual Pageable<CarResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _carRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new CarResource(Client, CarData.DeserializeCarData(e)), _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new CarResource(Client, CarData.DeserializeCarData(e)), _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

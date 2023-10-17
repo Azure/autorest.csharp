@@ -44,8 +44,8 @@ namespace MgmtDiscriminator.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeCacheExpirationActionParameters(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCacheExpirationActionParameters(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<CacheExpirationActionParameters>.Serialize(ModelSerializerOptions options)

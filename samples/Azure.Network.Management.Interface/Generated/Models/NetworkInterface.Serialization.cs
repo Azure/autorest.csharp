@@ -20,10 +20,25 @@ namespace Azure.Network.Management.Interface.Models
         void IModelJsonSerializable<NetworkInterface>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -41,39 +56,92 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(NetworkSecurityGroup))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue(NetworkSecurityGroup);
-            }
-            if (Optional.IsCollectionDefined(IpConfigurations))
-            {
-                writer.WritePropertyName("ipConfigurations"u8);
-                writer.WriteStartArray();
-                foreach (var item in IpConfigurations)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(VirtualMachine))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("virtualMachine"u8);
+                    writer.WriteObjectValue(VirtualMachine);
                 }
-                writer.WriteEndArray();
+                if (Optional.IsDefined(NetworkSecurityGroup))
+                {
+                    writer.WritePropertyName("networkSecurityGroup"u8);
+                    writer.WriteObjectValue(NetworkSecurityGroup);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PrivateEndpoint))
+                {
+                    writer.WritePropertyName("privateEndpoint"u8);
+                    writer.WriteObjectValue(PrivateEndpoint);
+                }
+                if (Optional.IsCollectionDefined(IpConfigurations))
+                {
+                    writer.WritePropertyName("ipConfigurations"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in IpConfigurations)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(TapConfigurations))
+                {
+                    writer.WritePropertyName("tapConfigurations"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in TapConfigurations)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsDefined(DnsSettings))
+                {
+                    writer.WritePropertyName("dnsSettings"u8);
+                    writer.WriteObjectValue(DnsSettings);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MacAddress))
+                {
+                    writer.WritePropertyName("macAddress"u8);
+                    writer.WriteStringValue(MacAddress);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Primary))
+                {
+                    writer.WritePropertyName("primary"u8);
+                    writer.WriteBooleanValue(Primary.Value);
+                }
+                if (Optional.IsDefined(EnableAcceleratedNetworking))
+                {
+                    writer.WritePropertyName("enableAcceleratedNetworking"u8);
+                    writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
+                }
+                if (Optional.IsDefined(EnableIPForwarding))
+                {
+                    writer.WritePropertyName("enableIPForwarding"u8);
+                    writer.WriteBooleanValue(EnableIPForwarding.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(HostedWorkloads))
+                {
+                    writer.WritePropertyName("hostedWorkloads"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in HostedWorkloads)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceGuid))
+                {
+                    writer.WritePropertyName("resourceGuid"u8);
+                    writer.WriteStringValue(ResourceGuid);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            if (Optional.IsDefined(DnsSettings))
-            {
-                writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
-            }
-            if (Optional.IsDefined(EnableAcceleratedNetworking))
-            {
-                writer.WritePropertyName("enableAcceleratedNetworking"u8);
-                writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
-            }
-            if (Optional.IsDefined(EnableIPForwarding))
-            {
-                writer.WritePropertyName("enableIPForwarding"u8);
-                writer.WriteBooleanValue(EnableIPForwarding.Value);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -81,8 +149,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkInterface(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNetworkInterface(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<NetworkInterface>.Serialize(ModelSerializerOptions options)

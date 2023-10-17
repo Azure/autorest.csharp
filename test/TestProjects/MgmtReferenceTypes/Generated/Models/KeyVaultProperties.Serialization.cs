@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(KeyVaultPropertiesConverter))]
-    public partial class KeyVaultProperties : IUtf8JsonSerializable
+    public partial class KeyVaultProperties : IUtf8JsonSerializable, IModelJsonSerializable<KeyVaultProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<KeyVaultProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<KeyVaultProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(KeyIdentifier))
@@ -31,8 +34,32 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static KeyVaultProperties DeserializeKeyVaultProperties(JsonElement element)
+        KeyVaultProperties IModelJsonSerializable<KeyVaultProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyVaultProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<KeyVaultProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyVaultProperties IModelSerializable<KeyVaultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyVaultProperties(document.RootElement, options);
+        }
+
+        internal static KeyVaultProperties DeserializeKeyVaultProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -36,8 +36,8 @@ namespace body_complex.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDatetimeWrapper(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDatetimeWrapper(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DatetimeWrapper>.Serialize(ModelSerializerOptions options)

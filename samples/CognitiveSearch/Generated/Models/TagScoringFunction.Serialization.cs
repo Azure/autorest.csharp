@@ -39,8 +39,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeTagScoringFunction(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTagScoringFunction(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<TagScoringFunction>.Serialize(ModelSerializerOptions options)

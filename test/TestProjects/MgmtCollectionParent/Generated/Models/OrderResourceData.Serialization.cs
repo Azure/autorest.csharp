@@ -22,9 +22,57 @@ namespace MgmtCollectionParent
         void IModelJsonSerializable<OrderResourceData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OrderItemIds))
+                {
+                    writer.WritePropertyName("orderItemIds"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OrderItemIds)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CurrentStage))
+                {
+                    writer.WritePropertyName("currentStage"u8);
+                    writer.WriteObjectValue(CurrentStage);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OrderStageHistory))
+                {
+                    writer.WritePropertyName("orderStageHistory"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OrderStageHistory)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -32,8 +80,8 @@ namespace MgmtCollectionParent
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeOrderResourceData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOrderResourceData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<OrderResourceData>.Serialize(ModelSerializerOptions options)

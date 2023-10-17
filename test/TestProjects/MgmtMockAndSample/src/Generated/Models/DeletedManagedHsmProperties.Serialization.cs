@@ -9,13 +9,82 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class DeletedManagedHsmProperties
+    public partial class DeletedManagedHsmProperties : IUtf8JsonSerializable, IModelJsonSerializable<DeletedManagedHsmProperties>
     {
-        internal static DeletedManagedHsmProperties DeserializeDeletedManagedHsmProperties(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeletedManagedHsmProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeletedManagedHsmProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MhsmId))
+            {
+                writer.WritePropertyName("mhsmId"u8);
+                writer.WriteStringValue(MhsmId);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DeletedOn))
+            {
+                writer.WritePropertyName("deletionDate"u8);
+                writer.WriteStringValue(DeletedOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ScheduledPurgeOn))
+            {
+                writer.WritePropertyName("scheduledPurgeDate"u8);
+                writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PurgeProtectionEnabled))
+            {
+                writer.WritePropertyName("purgeProtectionEnabled"u8);
+                writer.WriteBooleanValue(PurgeProtectionEnabled.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        DeletedManagedHsmProperties IModelJsonSerializable<DeletedManagedHsmProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeletedManagedHsmProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeletedManagedHsmProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedManagedHsmProperties IModelSerializable<DeletedManagedHsmProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeletedManagedHsmProperties(document.RootElement, options);
+        }
+
+        internal static DeletedManagedHsmProperties DeserializeDeletedManagedHsmProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

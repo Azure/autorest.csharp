@@ -132,8 +132,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeEffectiveNetworkSecurityRule(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEffectiveNetworkSecurityRule(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<EffectiveNetworkSecurityRule>.Serialize(ModelSerializerOptions options)

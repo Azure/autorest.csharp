@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<ListServiceSasResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ServiceSasToken))
+            {
+                writer.WritePropertyName("serviceSasToken"u8);
+                writer.WriteStringValue(ServiceSasToken);
+            }
             writer.WriteEndObject();
         }
 
@@ -26,8 +31,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeListServiceSasResponse(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeListServiceSasResponse(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ListServiceSasResponse>.Serialize(ModelSerializerOptions options)

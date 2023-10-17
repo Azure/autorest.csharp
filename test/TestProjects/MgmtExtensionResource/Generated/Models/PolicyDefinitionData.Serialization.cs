@@ -22,58 +22,81 @@ namespace MgmtExtensionResource
         void IModelJsonSerializable<PolicyDefinitionData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PolicyType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("policyType"u8);
-                writer.WriteStringValue(PolicyType.Value.ToString());
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Mode))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("mode"u8);
-                writer.WriteStringValue(Mode);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(DisplayName))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("displayName"u8);
-                writer.WriteStringValue(DisplayName);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(Description))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
             {
-                writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(Description);
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (Optional.IsDefined(PolicyRule))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("policyRule"u8);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(PolicyType))
+                {
+                    writer.WritePropertyName("policyType"u8);
+                    writer.WriteStringValue(PolicyType.Value.ToString());
+                }
+                if (Optional.IsDefined(Mode))
+                {
+                    writer.WritePropertyName("mode"u8);
+                    writer.WriteStringValue(Mode);
+                }
+                if (Optional.IsDefined(DisplayName))
+                {
+                    writer.WritePropertyName("displayName"u8);
+                    writer.WriteStringValue(DisplayName);
+                }
+                if (Optional.IsDefined(Description))
+                {
+                    writer.WritePropertyName("description"u8);
+                    writer.WriteStringValue(Description);
+                }
+                if (Optional.IsDefined(PolicyRule))
+                {
+                    writer.WritePropertyName("policyRule"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(PolicyRule);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(PolicyRule.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(PolicyRule.ToString()).RootElement);
 #endif
-            }
-            if (Optional.IsDefined(Metadata))
-            {
-                writer.WritePropertyName("metadata"u8);
+                }
+                if (Optional.IsDefined(Metadata))
+                {
+                    writer.WritePropertyName("metadata"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Metadata);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Metadata.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(Metadata.ToString()).RootElement);
 #endif
-            }
-            if (Optional.IsCollectionDefined(Parameters))
-            {
-                writer.WritePropertyName("parameters"u8);
-                writer.WriteStartObject();
-                foreach (var item in Parameters)
+                }
+                if (Optional.IsCollectionDefined(Parameters))
                 {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WritePropertyName("parameters"u8);
+                    writer.WriteStartObject();
+                    foreach (var item in Parameters)
+                    {
+                        writer.WritePropertyName(item.Key);
+                        writer.WriteObjectValue(item.Value);
+                    }
+                    writer.WriteEndObject();
                 }
                 writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -81,8 +104,8 @@ namespace MgmtExtensionResource
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePolicyDefinitionData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePolicyDefinitionData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PolicyDefinitionData>.Serialize(ModelSerializerOptions options)

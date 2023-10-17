@@ -20,10 +20,25 @@ namespace Azure.Network.Management.Interface.Models
         void IModelJsonSerializable<PrivateEndpoint>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -41,34 +56,52 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Subnet))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
-            }
-            if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
-            {
-                writer.WritePropertyName("privateLinkServiceConnections"u8);
-                writer.WriteStartArray();
-                foreach (var item in PrivateLinkServiceConnections)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Subnet))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("subnet"u8);
+                    writer.WriteObjectValue(Subnet);
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(ManualPrivateLinkServiceConnections))
-            {
-                writer.WritePropertyName("manualPrivateLinkServiceConnections"u8);
-                writer.WriteStartArray();
-                foreach (var item in ManualPrivateLinkServiceConnections)
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(NetworkInterfaces))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("networkInterfaces"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NetworkInterfaces)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
+                {
+                    writer.WritePropertyName("privateLinkServiceConnections"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in PrivateLinkServiceConnections)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                if (Optional.IsCollectionDefined(ManualPrivateLinkServiceConnections))
+                {
+                    writer.WritePropertyName("manualPrivateLinkServiceConnections"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in ManualPrivateLinkServiceConnections)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -76,8 +109,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializePrivateEndpoint(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePrivateEndpoint(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<PrivateEndpoint>.Serialize(ModelSerializerOptions options)

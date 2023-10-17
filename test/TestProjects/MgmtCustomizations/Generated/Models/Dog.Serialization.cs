@@ -21,6 +21,11 @@ namespace MgmtCustomizations.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             if (Optional.IsDefined(Size))
             {
                 writer.WritePropertyName("size"u8);
@@ -31,17 +36,23 @@ namespace MgmtCustomizations.Models
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WritePropertyName("dog"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Bark))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("bark"u8);
-                SerializeBarkProperty(writer);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    writer.WritePropertyName("dog"u8);
+                    writer.WriteStartObject();
+                    if (Optional.IsDefined(Bark))
+                    {
+                        writer.WritePropertyName("bark"u8);
+                        SerializeBarkProperty(writer);
+                    }
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -49,8 +60,8 @@ namespace MgmtCustomizations.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDog(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDog(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Dog>.Serialize(ModelSerializerOptions options)

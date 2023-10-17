@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Encode.Bytes.Models
@@ -13,7 +14,10 @@ namespace Encode.Bytes.Models
     /// <summary> The DefaultBytesProperty. </summary>
     public partial class DefaultBytesProperty
     {
-        /// <summary> Initializes a new instance of DefaultBytesProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DefaultBytesProperty"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public DefaultBytesProperty(BinaryData value)
@@ -21,6 +25,21 @@ namespace Encode.Bytes.Models
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DefaultBytesProperty"/>. </summary>
+        /// <param name="value"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DefaultBytesProperty(BinaryData value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DefaultBytesProperty"/> for deserialization. </summary>
+        internal DefaultBytesProperty()
+        {
         }
 
         /// <summary>

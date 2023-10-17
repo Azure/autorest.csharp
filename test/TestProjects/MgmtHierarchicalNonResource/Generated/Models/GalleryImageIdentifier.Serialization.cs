@@ -5,14 +5,55 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class GalleryImageIdentifier
+    public partial class GalleryImageIdentifier : IUtf8JsonSerializable, IModelJsonSerializable<GalleryImageIdentifier>
     {
-        internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<GalleryImageIdentifier>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<GalleryImageIdentifier>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("publisher"u8);
+            writer.WriteStringValue(Publisher);
+            writer.WritePropertyName("offer"u8);
+            writer.WriteStringValue(Offer);
+            writer.WritePropertyName("sku"u8);
+            writer.WriteStringValue(Sku);
+            writer.WriteEndObject();
+        }
+
+        GalleryImageIdentifier IModelJsonSerializable<GalleryImageIdentifier>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeGalleryImageIdentifier(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<GalleryImageIdentifier>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GalleryImageIdentifier IModelSerializable<GalleryImageIdentifier>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGalleryImageIdentifier(document.RootElement, options);
+        }
+
+        internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class ModelWithCustomizedProperties : IUtf8JsonSerializable
+    public partial class ModelWithCustomizedProperties : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithCustomizedProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithCustomizedProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ModelWithCustomizedProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("propertyToMakeInternal"u8);
@@ -84,11 +87,47 @@ namespace CustomizationsInTsp.Models
                 writer.WriteEndObject();
             }
             writer.WriteEndArray();
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static ModelWithCustomizedProperties DeserializeModelWithCustomizedProperties(JsonElement element)
+        ModelWithCustomizedProperties IModelJsonSerializable<ModelWithCustomizedProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithCustomizedProperties(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithCustomizedProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithCustomizedProperties IModelSerializable<ModelWithCustomizedProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithCustomizedProperties(document.RootElement, options);
+        }
+
+        internal static ModelWithCustomizedProperties DeserializeModelWithCustomizedProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -105,114 +144,121 @@ namespace CustomizationsInTsp.Models
             IDictionary<string, string> badDictionaryName = default;
             IList<IList<string>> badListOfListName = default;
             IList<IDictionary<string, string>> badListOfDictionaryName = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("propertyToMakeInternal"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    propertyToMakeInternal = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("propertyToRename"u8))
-                {
-                    propertyToRename = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("propertyToMakeFloat"u8))
-                {
-                    propertyToMakeFloat = property.Value.GetSingle();
-                    continue;
-                }
-                if (property.NameEquals("propertyToMakeInt"u8))
-                {
-                    propertyToMakeInt = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("propertyToMakeDuration"u8))
-                {
-                    propertyToMakeDuration = property.Value.GetTimeSpan("P");
-                    continue;
-                }
-                if (property.NameEquals("propertyToMakeString"u8))
-                {
-                    propertyToMakeString = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("propertyToMakeJsonElement"u8))
-                {
-                    propertyToMakeJsonElement = property.Value.Clone();
-                    continue;
-                }
-                if (property.NameEquals("propertyToField"u8))
-                {
-                    propertyToField = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("badListName"u8))
-                {
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("propertyToMakeInternal"u8))
                     {
-                        array.Add(item.GetString());
+                        propertyToMakeInternal = property.Value.GetInt32();
+                        continue;
                     }
-                    badListName = array;
-                    continue;
-                }
-                if (property.NameEquals("badDictionaryName"u8))
-                {
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.NameEquals("propertyToRename"u8))
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        propertyToRename = property.Value.GetInt32();
+                        continue;
                     }
-                    badDictionaryName = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("badListOfListName"u8))
-                {
-                    List<IList<string>> array = new List<IList<string>>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("propertyToMakeFloat"u8))
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
+                        propertyToMakeFloat = property.Value.GetSingle();
+                        continue;
+                    }
+                    if (property.NameEquals("propertyToMakeInt"u8))
+                    {
+                        propertyToMakeInt = property.Value.GetInt32();
+                        continue;
+                    }
+                    if (property.NameEquals("propertyToMakeDuration"u8))
+                    {
+                        propertyToMakeDuration = property.Value.GetTimeSpan("P");
+                        continue;
+                    }
+                    if (property.NameEquals("propertyToMakeString"u8))
+                    {
+                        propertyToMakeString = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("propertyToMakeJsonElement"u8))
+                    {
+                        propertyToMakeJsonElement = property.Value.Clone();
+                        continue;
+                    }
+                    if (property.NameEquals("propertyToField"u8))
+                    {
+                        propertyToField = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("badListName"u8))
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
                         {
-                            array.Add(null);
+                            array.Add(item.GetString());
                         }
-                        else
+                        badListName = array;
+                        continue;
+                    }
+                    if (property.NameEquals("badDictionaryName"u8))
+                    {
+                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                        foreach (var property0 in property.Value.EnumerateObject())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
+                        badDictionaryName = dictionary;
+                        continue;
+                    }
+                    if (property.NameEquals("badListOfListName"u8))
+                    {
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
-                        }
-                    }
-                    badListOfListName = array;
-                    continue;
-                }
-                if (property.NameEquals("badListOfDictionaryName"u8))
-                {
-                    List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property0 in item.EnumerateObject())
+                            else
                             {
-                                dictionary.Add(property0.Name, property0.Value.GetString());
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
                             }
-                            array.Add(dictionary);
                         }
+                        badListOfListName = array;
+                        continue;
                     }
-                    badListOfDictionaryName = array;
-                    continue;
+                    if (property.NameEquals("badListOfDictionaryName"u8))
+                    {
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property0 in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property0.Name, property0.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
+                        }
+                        badListOfDictionaryName = array;
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName);
+            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -220,15 +266,13 @@ namespace CustomizationsInTsp.Models
         internal static ModelWithCustomizedProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithCustomizedProperties(document.RootElement);
+            return DeserializeModelWithCustomizedProperties(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

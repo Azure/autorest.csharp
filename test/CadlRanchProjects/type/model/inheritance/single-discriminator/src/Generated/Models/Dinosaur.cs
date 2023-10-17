@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary>
@@ -14,20 +18,31 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// </summary>
     public abstract partial class Dinosaur
     {
-        /// <summary> Initializes a new instance of Dinosaur. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Dinosaur"/>. </summary>
         /// <param name="size"></param>
         protected Dinosaur(int size)
         {
             Size = size;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Dinosaur. </summary>
+        /// <summary> Initializes a new instance of <see cref="Dinosaur"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        internal Dinosaur(string kind, int size)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dinosaur(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Size = size;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Dinosaur"/> for deserialization. </summary>
+        internal Dinosaur()
+        {
         }
 
         /// <summary> Discriminator. </summary>

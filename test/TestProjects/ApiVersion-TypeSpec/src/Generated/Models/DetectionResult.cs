@@ -6,17 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using Azure.Core;
 
 namespace ApiVersionInTsp.Models
 {
     /// <summary> Detection results for the given resultId. </summary>
     public partial class DetectionResult
     {
-        /// <summary> Initializes a new instance of DetectionResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         internal DetectionResult(Guid resultId)
         {
             ResultId = resultId;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DetectionResult"/>. </summary>
+        /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DetectionResult(Guid resultId, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            ResultId = resultId;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DetectionResult"/> for deserialization. </summary>
+        internal DetectionResult()
+        {
         }
 
         /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>

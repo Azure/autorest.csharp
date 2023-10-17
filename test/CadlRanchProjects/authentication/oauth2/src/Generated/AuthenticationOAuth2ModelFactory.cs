@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Authentication.OAuth2.Models
 {

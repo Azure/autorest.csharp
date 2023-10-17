@@ -5,35 +5,112 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class RoleAssignmentCreateOrUpdateContent : IUtf8JsonSerializable
+    public partial class RoleAssignmentCreateOrUpdateContent : IUtf8JsonSerializable, IModelJsonSerializable<RoleAssignmentCreateOrUpdateContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RoleAssignmentCreateOrUpdateContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RoleAssignmentCreateOrUpdateContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(RoleDefinitionId))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("roleDefinitionId"u8);
-                writer.WriteStringValue(RoleDefinitionId);
-            }
-            if (Optional.IsDefined(PrincipalId))
-            {
-                writer.WritePropertyName("principalId"u8);
-                writer.WriteStringValue(PrincipalId);
-            }
-            if (Optional.IsDefined(CanDelegate))
-            {
-                writer.WritePropertyName("canDelegate"u8);
-                writer.WriteBooleanValue(CanDelegate.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(RoleDefinitionId))
+                {
+                    writer.WritePropertyName("roleDefinitionId"u8);
+                    writer.WriteStringValue(RoleDefinitionId);
+                }
+                if (Optional.IsDefined(PrincipalId))
+                {
+                    writer.WritePropertyName("principalId"u8);
+                    writer.WriteStringValue(PrincipalId);
+                }
+                if (Optional.IsDefined(CanDelegate))
+                {
+                    writer.WritePropertyName("canDelegate"u8);
+                    writer.WriteBooleanValue(CanDelegate.Value);
+                }
+                writer.WriteEndObject();
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
+        }
+
+        RoleAssignmentCreateOrUpdateContent IModelJsonSerializable<RoleAssignmentCreateOrUpdateContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoleAssignmentCreateOrUpdateContent(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RoleAssignmentCreateOrUpdateContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RoleAssignmentCreateOrUpdateContent IModelSerializable<RoleAssignmentCreateOrUpdateContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRoleAssignmentCreateOrUpdateContent(document.RootElement, options);
+        }
+
+        internal static RoleAssignmentCreateOrUpdateContent DeserializeRoleAssignmentCreateOrUpdateContent(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> roleDefinitionId = default;
+            Optional<string> principalId = default;
+            Optional<bool> canDelegate = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("properties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("roleDefinitionId"u8))
+                        {
+                            roleDefinitionId = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("principalId"u8))
+                        {
+                            principalId = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("canDelegate"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            canDelegate = property0.Value.GetBoolean();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new RoleAssignmentCreateOrUpdateContent(roleDefinitionId.Value, principalId.Value, Optional.ToNullable(canDelegate));
         }
     }
 }

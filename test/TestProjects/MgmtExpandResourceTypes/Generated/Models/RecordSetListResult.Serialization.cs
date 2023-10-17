@@ -31,6 +31,11 @@ namespace MgmtExpandResourceTypes.Models
                 }
                 writer.WriteEndArray();
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
             writer.WriteEndObject();
         }
 
@@ -38,8 +43,8 @@ namespace MgmtExpandResourceTypes.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeRecordSetListResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRecordSetListResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<RecordSetListResult>.Serialize(ModelSerializerOptions options)

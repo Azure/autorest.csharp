@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class ExtremelyDeepSinglePropertyModel : IUtf8JsonSerializable
+    internal partial class ExtremelyDeepSinglePropertyModel : IUtf8JsonSerializable, IModelJsonSerializable<ExtremelyDeepSinglePropertyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ExtremelyDeepSinglePropertyModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<ExtremelyDeepSinglePropertyModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Extreme))
@@ -23,8 +27,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static ExtremelyDeepSinglePropertyModel DeserializeExtremelyDeepSinglePropertyModel(JsonElement element)
+        ExtremelyDeepSinglePropertyModel IModelJsonSerializable<ExtremelyDeepSinglePropertyModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeExtremelyDeepSinglePropertyModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ExtremelyDeepSinglePropertyModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExtremelyDeepSinglePropertyModel IModelSerializable<ExtremelyDeepSinglePropertyModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeExtremelyDeepSinglePropertyModel(document.RootElement, options);
+        }
+
+        internal static ExtremelyDeepSinglePropertyModel DeserializeExtremelyDeepSinglePropertyModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

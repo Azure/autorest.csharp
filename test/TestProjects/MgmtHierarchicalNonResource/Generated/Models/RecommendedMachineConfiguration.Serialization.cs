@@ -5,15 +5,59 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class RecommendedMachineConfiguration
+    public partial class RecommendedMachineConfiguration : IUtf8JsonSerializable, IModelJsonSerializable<RecommendedMachineConfiguration>
     {
-        internal static RecommendedMachineConfiguration DeserializeRecommendedMachineConfiguration(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RecommendedMachineConfiguration>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RecommendedMachineConfiguration>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(VCpus))
+            {
+                writer.WritePropertyName("vCPUs"u8);
+                writer.WriteObjectValue(VCpus);
+            }
+            if (Optional.IsDefined(Memory))
+            {
+                writer.WritePropertyName("memory"u8);
+                writer.WriteObjectValue(Memory);
+            }
+            writer.WriteEndObject();
+        }
+
+        RecommendedMachineConfiguration IModelJsonSerializable<RecommendedMachineConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRecommendedMachineConfiguration(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RecommendedMachineConfiguration>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RecommendedMachineConfiguration IModelSerializable<RecommendedMachineConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRecommendedMachineConfiguration(document.RootElement, options);
+        }
+
+        internal static RecommendedMachineConfiguration DeserializeRecommendedMachineConfiguration(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

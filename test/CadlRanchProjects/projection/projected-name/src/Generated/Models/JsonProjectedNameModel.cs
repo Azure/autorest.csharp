@@ -5,16 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace Projection.ProjectedName.Models
 {
     /// <summary> The JsonProjectedNameModel. </summary>
     public partial class JsonProjectedNameModel
     {
-        /// <summary> Initializes a new instance of JsonProjectedNameModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="JsonProjectedNameModel"/>. </summary>
         /// <param name="defaultName"> Pass in true. </param>
         public JsonProjectedNameModel(bool defaultName)
         {
             DefaultName = defaultName;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="JsonProjectedNameModel"/>. </summary>
+        /// <param name="defaultName"> Pass in true. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal JsonProjectedNameModel(bool defaultName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            DefaultName = defaultName;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="JsonProjectedNameModel"/> for deserialization. </summary>
+        internal JsonProjectedNameModel()
+        {
         }
 
         /// <summary> Pass in true. </summary>

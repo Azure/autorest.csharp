@@ -86,14 +86,17 @@ namespace FirstTestTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableList");
             }
-            foreach (var item in _serializedAdditionalRawData)
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName(item.Key);
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -102,8 +105,8 @@ namespace FirstTestTypeSpec.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeThing(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeThing(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Thing>.Serialize(ModelSerializerOptions options)
@@ -143,112 +146,115 @@ namespace FirstTestTypeSpec.Models
             IList<int> requiredNullableList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("name"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("requiredUnion"u8))
-                {
-                    requiredUnion = property.Value.GetObject();
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralString"u8))
-                {
-                    requiredLiteralString = new ThingRequiredLiteralString(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralInt"u8))
-                {
-                    requiredLiteralInt = new ThingRequiredLiteralInt(property.Value.GetInt32());
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralFloat"u8))
-                {
-                    requiredLiteralFloat = new ThingRequiredLiteralFloat(property.Value.GetSingle());
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralBool"u8))
-                {
-                    requiredLiteralBool = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("optionalLiteralString"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("name"u8))
                     {
+                        name = property.Value.GetString();
                         continue;
                     }
-                    optionalLiteralString = new ThingOptionalLiteralString(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("optionalLiteralInt"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("requiredUnion"u8))
                     {
+                        requiredUnion = property.Value.GetObject();
                         continue;
                     }
-                    optionalLiteralInt = new ThingOptionalLiteralInt(property.Value.GetInt32());
-                    continue;
-                }
-                if (property.NameEquals("optionalLiteralFloat"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("requiredLiteralString"u8))
                     {
+                        requiredLiteralString = new ThingRequiredLiteralString(property.Value.GetString());
                         continue;
                     }
-                    optionalLiteralFloat = new ThingOptionalLiteralFloat(property.Value.GetSingle());
-                    continue;
-                }
-                if (property.NameEquals("optionalLiteralBool"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("requiredLiteralInt"u8))
                     {
+                        requiredLiteralInt = new ThingRequiredLiteralInt(property.Value.GetInt32());
                         continue;
                     }
-                    optionalLiteralBool = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("requiredBadDescription"u8))
-                {
-                    requiredBadDescription = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("optionalNullableList"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.NameEquals("requiredLiteralFloat"u8))
                     {
-                        optionalNullableList = null;
+                        requiredLiteralFloat = new ThingRequiredLiteralFloat(property.Value.GetSingle());
                         continue;
                     }
-                    List<int> array = new List<int>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("requiredLiteralBool"u8))
                     {
-                        array.Add(item.GetInt32());
-                    }
-                    optionalNullableList = array;
-                    continue;
-                }
-                if (property.NameEquals("requiredNullableList"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        requiredNullableList = null;
+                        requiredLiteralBool = property.Value.GetBoolean();
                         continue;
                     }
-                    List<int> array = new List<int>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.NameEquals("optionalLiteralString"u8))
                     {
-                        array.Add(item.GetInt32());
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        optionalLiteralString = new ThingOptionalLiteralString(property.Value.GetString());
+                        continue;
                     }
-                    requiredNullableList = array;
-                    continue;
+                    if (property.NameEquals("optionalLiteralInt"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        optionalLiteralInt = new ThingOptionalLiteralInt(property.Value.GetInt32());
+                        continue;
+                    }
+                    if (property.NameEquals("optionalLiteralFloat"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        optionalLiteralFloat = new ThingOptionalLiteralFloat(property.Value.GetSingle());
+                        continue;
+                    }
+                    if (property.NameEquals("optionalLiteralBool"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            continue;
+                        }
+                        optionalLiteralBool = property.Value.GetBoolean();
+                        continue;
+                    }
+                    if (property.NameEquals("requiredBadDescription"u8))
+                    {
+                        requiredBadDescription = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("optionalNullableList"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            optionalNullableList = null;
+                            continue;
+                        }
+                        List<int> array = new List<int>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetInt32());
+                        }
+                        optionalNullableList = array;
+                        continue;
+                    }
+                    if (property.NameEquals("requiredNullableList"u8))
+                    {
+                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            requiredNullableList = null;
+                            continue;
+                        }
+                        List<int> array = new List<int>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetInt32());
+                        }
+                        requiredNullableList = array;
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList, serializedAdditionalRawData);
         }
 

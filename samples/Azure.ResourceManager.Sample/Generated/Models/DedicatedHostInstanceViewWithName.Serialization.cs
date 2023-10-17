@@ -20,6 +20,16 @@ namespace Azure.ResourceManager.Sample.Models
         void IModelJsonSerializable<DedicatedHostInstanceViewWithName>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AssetId))
+            {
+                writer.WritePropertyName("assetId"u8);
+                writer.WriteStringValue(AssetId);
+            }
             if (Optional.IsDefined(AvailableCapacity))
             {
                 writer.WritePropertyName("availableCapacity"u8);
@@ -42,8 +52,8 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDedicatedHostInstanceViewWithName(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDedicatedHostInstanceViewWithName(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<DedicatedHostInstanceViewWithName>.Serialize(ModelSerializerOptions options)

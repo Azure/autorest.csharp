@@ -19,6 +19,36 @@ namespace Azure.ResourceManager.Storage.Models
         void IModelJsonSerializable<Endpoints>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Blob))
+            {
+                writer.WritePropertyName("blob"u8);
+                writer.WriteStringValue(Blob);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Queue))
+            {
+                writer.WritePropertyName("queue"u8);
+                writer.WriteStringValue(Queue);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Table))
+            {
+                writer.WritePropertyName("table"u8);
+                writer.WriteStringValue(Table);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(File))
+            {
+                writer.WritePropertyName("file"u8);
+                writer.WriteStringValue(File);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Web))
+            {
+                writer.WritePropertyName("web"u8);
+                writer.WriteStringValue(Web);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Dfs))
+            {
+                writer.WritePropertyName("dfs"u8);
+                writer.WriteStringValue(Dfs);
+            }
             if (Optional.IsDefined(MicrosoftEndpoints))
             {
                 writer.WritePropertyName("microsoftEndpoints"u8);
@@ -36,8 +66,8 @@ namespace Azure.ResourceManager.Storage.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeEndpoints(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEndpoints(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Endpoints>.Serialize(ModelSerializerOptions options)

@@ -22,24 +22,57 @@ namespace Azure.ResourceManager.Storage
         void IModelJsonSerializable<ImmutabilityPolicyData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
-                writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
             }
-            if (Optional.IsDefined(AllowProtectedAppendWrites))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("allowProtectedAppendWrites"u8);
-                writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(AllowProtectedAppendWritesAll))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
-                writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+                {
+                    writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
+                    writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(State))
+                {
+                    writer.WritePropertyName("state"u8);
+                    writer.WriteStringValue(State.Value.ToString());
+                }
+                if (Optional.IsDefined(AllowProtectedAppendWrites))
+                {
+                    writer.WritePropertyName("allowProtectedAppendWrites"u8);
+                    writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
+                }
+                if (Optional.IsDefined(AllowProtectedAppendWritesAll))
+                {
+                    writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
+                    writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
@@ -47,8 +80,8 @@ namespace Azure.ResourceManager.Storage
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeImmutabilityPolicyData(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImmutabilityPolicyData(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ImmutabilityPolicyData>.Serialize(ModelSerializerOptions options)

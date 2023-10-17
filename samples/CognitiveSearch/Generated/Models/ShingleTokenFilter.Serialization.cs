@@ -60,8 +60,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeShingleTokenFilter(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeShingleTokenFilter(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<ShingleTokenFilter>.Serialize(ModelSerializerOptions options)

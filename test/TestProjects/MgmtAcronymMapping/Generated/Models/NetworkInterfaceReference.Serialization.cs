@@ -24,14 +24,17 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Primary))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("primary"u8);
-                writer.WriteBooleanValue(Primary.Value);
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsDefined(Primary))
+                {
+                    writer.WritePropertyName("primary"u8);
+                    writer.WriteBooleanValue(Primary.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -39,8 +42,8 @@ namespace MgmtAcronymMapping.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkInterfaceReference(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNetworkInterfaceReference(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<NetworkInterfaceReference>.Serialize(ModelSerializerOptions options)

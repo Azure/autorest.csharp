@@ -20,6 +20,66 @@ namespace CognitiveSearch.Models
         void IModelJsonSerializable<IndexerExecutionResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.ToSerialString());
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ErrorMessage))
+            {
+                writer.WritePropertyName("errorMessage"u8);
+                writer.WriteStringValue(ErrorMessage);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartTime))
+            {
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartTime.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(EndTime))
+            {
+                writer.WritePropertyName("endTime"u8);
+                writer.WriteStringValue(EndTime.Value, "O");
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("errors"u8);
+                writer.WriteStartArray();
+                foreach (var item in Errors)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("warnings"u8);
+                writer.WriteStartArray();
+                foreach (var item in Warnings)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("itemsProcessed"u8);
+                writer.WriteNumberValue(ItemCount);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("itemsFailed"u8);
+                writer.WriteNumberValue(FailedItemCount);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InitialTrackingState))
+            {
+                writer.WritePropertyName("initialTrackingState"u8);
+                writer.WriteStringValue(InitialTrackingState);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(FinalTrackingState))
+            {
+                writer.WritePropertyName("finalTrackingState"u8);
+                writer.WriteStringValue(FinalTrackingState);
+            }
             writer.WriteEndObject();
         }
 
@@ -27,8 +87,8 @@ namespace CognitiveSearch.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeIndexerExecutionResult(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndexerExecutionResult(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<IndexerExecutionResult>.Serialize(ModelSerializerOptions options)

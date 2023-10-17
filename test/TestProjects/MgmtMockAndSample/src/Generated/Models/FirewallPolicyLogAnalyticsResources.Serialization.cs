@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyLogAnalyticsResources : IUtf8JsonSerializable
+    public partial class FirewallPolicyLogAnalyticsResources : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyLogAnalyticsResources>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyLogAnalyticsResources>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirewallPolicyLogAnalyticsResources>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Workspaces))
@@ -35,8 +39,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyLogAnalyticsResources DeserializeFirewallPolicyLogAnalyticsResources(JsonElement element)
+        FirewallPolicyLogAnalyticsResources IModelJsonSerializable<FirewallPolicyLogAnalyticsResources>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyLogAnalyticsResources(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyLogAnalyticsResources>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyLogAnalyticsResources IModelSerializable<FirewallPolicyLogAnalyticsResources>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyLogAnalyticsResources(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyLogAnalyticsResources DeserializeFirewallPolicyLogAnalyticsResources(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(CheckNameAvailabilityResponseConverter))]
-    public partial class CheckNameAvailabilityResponse : IUtf8JsonSerializable
+    public partial class CheckNameAvailabilityResponse : IUtf8JsonSerializable, IModelJsonSerializable<CheckNameAvailabilityResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CheckNameAvailabilityResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CheckNameAvailabilityResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(NameAvailable))
@@ -36,8 +39,32 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static CheckNameAvailabilityResponse DeserializeCheckNameAvailabilityResponse(JsonElement element)
+        CheckNameAvailabilityResponse IModelJsonSerializable<CheckNameAvailabilityResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCheckNameAvailabilityResponse(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CheckNameAvailabilityResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CheckNameAvailabilityResponse IModelSerializable<CheckNameAvailabilityResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCheckNameAvailabilityResponse(document.RootElement, options);
+        }
+
+        internal static CheckNameAvailabilityResponse DeserializeCheckNameAvailabilityResponse(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

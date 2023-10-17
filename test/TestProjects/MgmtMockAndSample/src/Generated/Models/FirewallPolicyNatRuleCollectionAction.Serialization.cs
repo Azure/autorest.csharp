@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class FirewallPolicyNatRuleCollectionAction : IUtf8JsonSerializable
+    internal partial class FirewallPolicyNatRuleCollectionAction : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyNatRuleCollectionAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyNatRuleCollectionAction>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirewallPolicyNatRuleCollectionAction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ActionType))
@@ -23,8 +27,32 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyNatRuleCollectionAction DeserializeFirewallPolicyNatRuleCollectionAction(JsonElement element)
+        FirewallPolicyNatRuleCollectionAction IModelJsonSerializable<FirewallPolicyNatRuleCollectionAction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyNatRuleCollectionAction(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyNatRuleCollectionAction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyNatRuleCollectionAction IModelSerializable<FirewallPolicyNatRuleCollectionAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyNatRuleCollectionAction(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyNatRuleCollectionAction DeserializeFirewallPolicyNatRuleCollectionAction(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -25,10 +25,25 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -46,79 +61,92 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(FrontendIPConfigurations))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("frontendIPConfigurations"u8);
-                writer.WriteStartArray();
-                foreach (var item in FrontendIPConfigurations)
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (Optional.IsCollectionDefined(FrontendIPConfigurations))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("frontendIPConfigurations"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in FrontendIPConfigurations)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(BackendAddressPools))
-            {
-                writer.WritePropertyName("backendAddressPools"u8);
-                writer.WriteStartArray();
-                foreach (var item in BackendAddressPools)
+                if (Optional.IsCollectionDefined(BackendAddressPools))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("backendAddressPools"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in BackendAddressPools)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(LoadBalancingRules))
-            {
-                writer.WritePropertyName("loadBalancingRules"u8);
-                writer.WriteStartArray();
-                foreach (var item in LoadBalancingRules)
+                if (Optional.IsCollectionDefined(LoadBalancingRules))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("loadBalancingRules"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in LoadBalancingRules)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(Probes))
-            {
-                writer.WritePropertyName("probes"u8);
-                writer.WriteStartArray();
-                foreach (var item in Probes)
+                if (Optional.IsCollectionDefined(Probes))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("probes"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Probes)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(InboundNatRules))
-            {
-                writer.WritePropertyName("inboundNatRules"u8);
-                writer.WriteStartArray();
-                foreach (var item in InboundNatRules)
+                if (Optional.IsCollectionDefined(InboundNatRules))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("inboundNatRules"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in InboundNatRules)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(InboundNatPools))
-            {
-                writer.WritePropertyName("inboundNatPools"u8);
-                writer.WriteStartArray();
-                foreach (var item in InboundNatPools)
+                if (Optional.IsCollectionDefined(InboundNatPools))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("inboundNatPools"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in InboundNatPools)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(OutboundRules))
-            {
-                writer.WritePropertyName("outboundRules"u8);
-                writer.WriteStartArray();
-                foreach (var item in OutboundRules)
+                if (Optional.IsCollectionDefined(OutboundRules))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("outboundRules"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OutboundRules)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceGuid))
+                {
+                    writer.WritePropertyName("resourceGuid"u8);
+                    writer.WriteStringValue(ResourceGuid);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -126,8 +154,8 @@ namespace Azure.Network.Management.Interface.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeLoadBalancer(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLoadBalancer(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<LoadBalancer>.Serialize(ModelSerializerOptions options)

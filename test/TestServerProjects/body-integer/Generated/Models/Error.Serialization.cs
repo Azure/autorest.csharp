@@ -36,8 +36,8 @@ namespace body_integer.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeError(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeError(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Error>.Serialize(ModelSerializerOptions options)

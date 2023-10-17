@@ -36,8 +36,8 @@ namespace lro.Models
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSku(doc.RootElement, options);
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSku(document.RootElement, options);
         }
 
         BinaryData IModelSerializable<Sku>.Serialize(ModelSerializerOptions options)

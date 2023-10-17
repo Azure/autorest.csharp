@@ -5,15 +5,75 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Pagination.Models
 {
-    public partial class LedgerEntry
+    public partial class LedgerEntry : IUtf8JsonSerializable, IModelJsonSerializable<LedgerEntry>
     {
-        internal static LedgerEntry DeserializeLedgerEntry(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LedgerEntry>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<LedgerEntry>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("contents"u8);
+            writer.WriteStringValue(Contents);
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("collectionId"u8);
+                writer.WriteStringValue(CollectionId);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("transactionId"u8);
+                writer.WriteStringValue(TransactionId);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        LedgerEntry IModelJsonSerializable<LedgerEntry>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLedgerEntry(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LedgerEntry>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LedgerEntry IModelSerializable<LedgerEntry>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLedgerEntry(document.RootElement, options);
+        }
+
+        internal static LedgerEntry DeserializeLedgerEntry(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -21,25 +81,32 @@ namespace Pagination.Models
             string contents = default;
             string collectionId = default;
             string transactionId = default;
-            foreach (var property in element.EnumerateObject())
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                if (property.NameEquals("contents"u8))
+                foreach (var property in element.EnumerateObject())
                 {
-                    contents = property.Value.GetString();
-                    continue;
+                    if (property.NameEquals("contents"u8))
+                    {
+                        contents = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("collectionId"u8))
+                    {
+                        collectionId = property.Value.GetString();
+                        continue;
+                    }
+                    if (property.NameEquals("transactionId"u8))
+                    {
+                        transactionId = property.Value.GetString();
+                        continue;
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                if (property.NameEquals("collectionId"u8))
-                {
-                    collectionId = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("transactionId"u8))
-                {
-                    transactionId = property.Value.GetString();
-                    continue;
-                }
+                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
-            return new LedgerEntry(contents, collectionId, transactionId);
+            return new LedgerEntry(contents, collectionId, transactionId, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -47,7 +114,13 @@ namespace Pagination.Models
         internal static LedgerEntry FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeLedgerEntry(document.RootElement);
+            return DeserializeLedgerEntry(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

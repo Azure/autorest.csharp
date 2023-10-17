@@ -8,13 +8,55 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class DeploymentExportResult
+    public partial class DeploymentExportResult : IUtf8JsonSerializable, IModelJsonSerializable<DeploymentExportResult>
     {
-        internal static DeploymentExportResult DeserializeDeploymentExportResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeploymentExportResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DeploymentExportResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Template))
+            {
+                writer.WritePropertyName("template"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Template);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Template.ToString()).RootElement);
+#endif
+            }
+            writer.WriteEndObject();
+        }
+
+        DeploymentExportResult IModelJsonSerializable<DeploymentExportResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeploymentExportResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeploymentExportResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeploymentExportResult IModelSerializable<DeploymentExportResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeploymentExportResult(document.RootElement, options);
+        }
+
+        internal static DeploymentExportResult DeserializeDeploymentExportResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

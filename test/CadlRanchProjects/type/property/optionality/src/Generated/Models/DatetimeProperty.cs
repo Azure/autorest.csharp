@@ -6,22 +6,30 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using Azure.Core;
 
 namespace _Type.Property.Optionality.Models
 {
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty
     {
-        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
         public DatetimeProperty()
         {
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
         /// <param name="property"> Property. </param>
-        internal DatetimeProperty(DateTimeOffset? property)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DatetimeProperty(DateTimeOffset? property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Property. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Payload.Pageable.Models
@@ -13,7 +14,10 @@ namespace Payload.Pageable.Models
     /// <summary> User model. </summary>
     public partial class User
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="name"> User name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal User(string name)
@@ -21,6 +25,21 @@ namespace Payload.Pageable.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
+        /// <param name="name"> User name. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal User(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="User"/> for deserialization. </summary>
+        internal User()
+        {
         }
 
         /// <summary> User name. </summary>

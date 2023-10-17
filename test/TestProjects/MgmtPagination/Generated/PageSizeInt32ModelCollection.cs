@@ -225,7 +225,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeInt32ModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeInt32ModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt32ModelResource(Client, PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(e)), _pageSizeInt32ModelClientDiagnostics, Pipeline, "PageSizeInt32ModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PageSizeInt32ModelResource(Client, PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(e)), _pageSizeInt32ModelClientDiagnostics, Pipeline, "PageSizeInt32ModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeInt32ModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeInt32ModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt32ModelResource(Client, PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(e)), _pageSizeInt32ModelClientDiagnostics, Pipeline, "PageSizeInt32ModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PageSizeInt32ModelResource(Client, PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(e)), _pageSizeInt32ModelClientDiagnostics, Pipeline, "PageSizeInt32ModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

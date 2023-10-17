@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(MgmtReferenceTypesPrivateLinkServiceConnectionStateConverter))]
-    public partial class MgmtReferenceTypesPrivateLinkServiceConnectionState : IUtf8JsonSerializable
+    public partial class MgmtReferenceTypesPrivateLinkServiceConnectionState : IUtf8JsonSerializable, IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Status))
@@ -36,8 +39,32 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static MgmtReferenceTypesPrivateLinkServiceConnectionState DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(JsonElement element)
+        MgmtReferenceTypesPrivateLinkServiceConnectionState IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtReferenceTypesPrivateLinkServiceConnectionState IModelSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(document.RootElement, options);
+        }
+
+        internal static MgmtReferenceTypesPrivateLinkServiceConnectionState DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

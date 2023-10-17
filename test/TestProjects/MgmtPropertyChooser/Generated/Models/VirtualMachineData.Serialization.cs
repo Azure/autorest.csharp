@@ -5,24 +5,38 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtPropertyChooser.Models;
 
 namespace MgmtPropertyChooser
 {
-    public partial class VirtualMachineData : IUtf8JsonSerializable
+    public partial class VirtualMachineData : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<VirtualMachineData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
                 JsonSerializer.Serialize(writer, Plan);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Resources))
+            {
+                writer.WritePropertyName("resources"u8);
+                writer.WriteStartArray();
+                foreach (var item in Resources)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(Identity))
             {
@@ -65,6 +79,16 @@ namespace MgmtPropertyChooser
                 }
                 writer.WriteEndArray();
             }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(FakeResources))
+            {
+                writer.WritePropertyName("fakeResources"u8);
+                writer.WriteStartArray();
+                foreach (var item in FakeResources)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(FakeSubResource))
             {
                 writer.WritePropertyName("fakeSubResource"u8);
@@ -88,24 +112,81 @@ namespace MgmtPropertyChooser
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(LicenseType))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("licenseType"u8);
-                writer.WriteStringValue(LicenseType);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            if (options.Format == ModelSerializerFormat.Json)
             {
-                writer.WritePropertyName("extensionsTimeBudget"u8);
-                writer.WriteStringValue(ExtensionsTimeBudget);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            writer.WriteEndObject();
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteStartObject();
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState);
+                }
+                if (Optional.IsDefined(LicenseType))
+                {
+                    writer.WritePropertyName("licenseType"u8);
+                    writer.WriteStringValue(LicenseType);
+                }
+                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(VmId))
+                {
+                    writer.WritePropertyName("vmId"u8);
+                    writer.WriteStringValue(VmId);
+                }
+                if (Optional.IsDefined(ExtensionsTimeBudget))
+                {
+                    writer.WritePropertyName("extensionsTimeBudget"u8);
+                    writer.WriteStringValue(ExtensionsTimeBudget);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
+        VirtualMachineData IModelJsonSerializable<VirtualMachineData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineData(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineData IModelSerializable<VirtualMachineData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineData(document.RootElement, options);
+        }
+
+        internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

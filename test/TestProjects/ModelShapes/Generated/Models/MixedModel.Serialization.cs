@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
-    public partial class MixedModel : IUtf8JsonSerializable
+    public partial class MixedModel : IUtf8JsonSerializable, IModelJsonSerializable<MixedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MixedModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MixedModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("RequiredString"u8);
@@ -168,11 +172,45 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                writer.WritePropertyName("RequiredReadonlyInt"u8);
+                writer.WriteNumberValue(RequiredReadonlyInt);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NonRequiredReadonlyInt))
+            {
+                writer.WritePropertyName("NonRequiredReadonlyInt"u8);
+                writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
+            }
             writer.WriteEndObject();
         }
 
-        internal static MixedModel DeserializeMixedModel(JsonElement element)
+        MixedModel IModelJsonSerializable<MixedModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMixedModel(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MixedModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MixedModel IModelSerializable<MixedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMixedModel(document.RootElement, options);
+        }
+
+        internal static MixedModel DeserializeMixedModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

@@ -5,15 +5,74 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtListMethods.Models
 {
-    public partial class UpdateWorkspaceQuotas
+    public partial class UpdateWorkspaceQuotas : IUtf8JsonSerializable, IModelJsonSerializable<UpdateWorkspaceQuotas>
     {
-        internal static UpdateWorkspaceQuotas DeserializeUpdateWorkspaceQuotas(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UpdateWorkspaceQuotas>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UpdateWorkspaceQuotas>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(UpdateWorkspaceQuotasType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(UpdateWorkspaceQuotasType);
+            }
+            if (Optional.IsDefined(Limit))
+            {
+                writer.WritePropertyName("limit"u8);
+                writer.WriteNumberValue(Limit.Value);
+            }
+            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Unit))
+            {
+                writer.WritePropertyName("unit"u8);
+                writer.WriteStringValue(Unit.Value.ToString());
+            }
+            if (Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
+            }
+            writer.WriteEndObject();
+        }
+
+        UpdateWorkspaceQuotas IModelJsonSerializable<UpdateWorkspaceQuotas>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpdateWorkspaceQuotas(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UpdateWorkspaceQuotas>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UpdateWorkspaceQuotas IModelSerializable<UpdateWorkspaceQuotas>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUpdateWorkspaceQuotas(document.RootElement, options);
+        }
+
+        internal static UpdateWorkspaceQuotas DeserializeUpdateWorkspaceQuotas(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;

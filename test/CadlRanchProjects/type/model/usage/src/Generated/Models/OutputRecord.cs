@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Model.Usage.Models
@@ -13,7 +14,10 @@ namespace _Type.Model.Usage.Models
     /// <summary> Record used in operation return type. </summary>
     public partial class OutputRecord
     {
-        /// <summary> Initializes a new instance of OutputRecord. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OutputRecord"/>. </summary>
         /// <param name="requiredProp"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProp"/> is null. </exception>
         internal OutputRecord(string requiredProp)
@@ -21,6 +25,21 @@ namespace _Type.Model.Usage.Models
             Argument.AssertNotNull(requiredProp, nameof(requiredProp));
 
             RequiredProp = requiredProp;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OutputRecord"/>. </summary>
+        /// <param name="requiredProp"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputRecord(string requiredProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            RequiredProp = requiredProp;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OutputRecord"/> for deserialization. </summary>
+        internal OutputRecord()
+        {
         }
 
         /// <summary> Gets the required prop. </summary>

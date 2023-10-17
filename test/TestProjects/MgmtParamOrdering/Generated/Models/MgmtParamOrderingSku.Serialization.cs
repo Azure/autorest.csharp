@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class MgmtParamOrderingSku : IUtf8JsonSerializable
+    public partial class MgmtParamOrderingSku : IUtf8JsonSerializable, IModelJsonSerializable<MgmtParamOrderingSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtParamOrderingSku>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<MgmtParamOrderingSku>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -31,6 +35,64 @@ namespace MgmtParamOrdering.Models
                 writer.WriteNumberValue(Capacity.Value);
             }
             writer.WriteEndObject();
+        }
+
+        MgmtParamOrderingSku IModelJsonSerializable<MgmtParamOrderingSku>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtParamOrderingSku(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtParamOrderingSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtParamOrderingSku IModelSerializable<MgmtParamOrderingSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtParamOrderingSku(document.RootElement, options);
+        }
+
+        internal static MgmtParamOrderingSku DeserializeMgmtParamOrderingSku(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> name = default;
+            Optional<string> tier = default;
+            Optional<long> capacity = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("tier"u8))
+                {
+                    tier = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("capacity"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    capacity = property.Value.GetInt64();
+                    continue;
+                }
+            }
+            return new MgmtParamOrderingSku(name.Value, tier.Value, Optional.ToNullable(capacity));
         }
     }
 }
