@@ -15,6 +15,12 @@ namespace AutoRest.CSharp.Mgmt.Report
         {
         }
 
+        public DictionaryReportSection(string name, Dictionary<string, T> dict)
+            : base(name)
+        {
+            this._dict = new Dictionary<string, T>(dict);
+        }
+
         public override Dictionary<string, object?> GenerateSection()
         {
             return this._dict.ToDictionary(kv => kv.Key, kv => (object?)kv.Value);

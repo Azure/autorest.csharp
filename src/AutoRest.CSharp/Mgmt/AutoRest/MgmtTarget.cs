@@ -144,6 +144,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var writer = new ResourceCollectionWriter(resourceCollection);
                 writer.Write();
 
+                var ri = new ResourceItem(resourceCollection, MgmtReport.Instance.TransformSection);
+                MgmtReport.Instance.ResourceCollectionSection.Add(ri.Name, ri);
+
                 AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", writer.ToString());
             }
 

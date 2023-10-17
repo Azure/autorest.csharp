@@ -17,29 +17,33 @@ namespace AutoRest.CSharp.Mgmt.Report
 
         public MgmtReport()
         {
-            this._sections.Add(this.ObjectModelSection.Name, this.ObjectModelSection);
-            this._sections.Add(this.EnumModelSection.Name, this.EnumModelSection);
-            this._sections.Add(this.ResourceSection.Name, this.ResourceSection);
-            this._sections.Add(this.TransformSection.Name, this.TransformSection);
+            this._sections.Add(this.ObjectModelSection);
+            this._sections.Add(this.EnumModelSection);
+            this._sections.Add(this.ResourceSection);
+            this._sections.Add(this.ResourceCollectionSection);
+            this._sections.Add(this.TransformSection);
+            this._sections.Add(this.HelpMessage);
         }
 
-        private Dictionary<string, ReportSection> _sections = new Dictionary<string, ReportSection>();
+        private List<ReportSection> _sections = new List<ReportSection>();
 
         public DictionaryReportSection<ObjectModelItem> ObjectModelSection { get; } = new DictionaryReportSection<ObjectModelItem>("ObjectModels");
         public DictionaryReportSection<EnumModelItem> EnumModelSection { get; } = new DictionaryReportSection<EnumModelItem>("EnumModels");
         public DictionaryReportSection<ResourceItem> ResourceSection { get; } = new DictionaryReportSection<ResourceItem>("Resources");
+        public DictionaryReportSection<ResourceItem> ResourceCollectionSection { get; } = new DictionaryReportSection<ResourceItem>("ResourceCollections");
         public TransformSection TransformSection { get; } = new TransformSection("Transforms");
-
-        public string GenerateReport(string format)
-        {
-            var reportObj = this._sections.ToDictionary(kv => kv.Key, kv => kv.Value.GenerateSection());
-            reportObj.Add("_help_message_", new Dictionary<string, object?>()
+        private DictionaryReportSection<string> HelpMessage { get; } = new DictionaryReportSection<string>("_help_message_",
+            new Dictionary<string, string>()
             {
                 { "1", "If the transform configuration has a '!' postfix (i.e. 'ProxyResource!'), it means the config is not from *.md config file (i.e. it's built-in through hard code)" },
                 { "2", "[{num}] in transform log is the index the transform is applied" },
                 { "3", "[=] in transform log means the value (target FullSerializedName) is the same as the key (transform configuration)" },
                 { "4", "Supported configuration: mgmt-debug.generate-report=true|false, mgmt-debug.report-only=true|false, mgmt-debug.report-format=yaml|json"}
             });
+
+        public string GenerateReport(string format)
+        {
+            var reportObj = this._sections.ToDictionary(s => s.Name, s => s.GenerateSection());
 
             switch (format.ToLower())
             {
@@ -65,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Report
         {
             foreach (var item in _sections)
             {
-                item.Value.Reset();
+                item.Reset();
             }
         }
     }
