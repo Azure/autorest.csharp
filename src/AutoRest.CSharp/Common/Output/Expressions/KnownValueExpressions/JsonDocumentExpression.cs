@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static JsonDocumentExpression Parse(ValueExpression json) => new(InvokeStatic(nameof(JsonDocument.Parse), json));
 
-        public static JsonDocumentExpression Parse(ResponseExpression response, bool async)
+        public static JsonDocumentExpression Parse(BaseResponseExpression response, bool async)
         {
             // Sync and async methods have different set of parameters
             return async

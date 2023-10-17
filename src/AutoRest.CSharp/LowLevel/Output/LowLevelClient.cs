@@ -49,6 +49,17 @@ namespace AutoRest.CSharp.Output.Models
         private bool? _isResourceClient;
         public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
+        private LowLevelClient? _topLevelClient;
+        public LowLevelClient TopLevelClient => _topLevelClient ??= GetTopLevelClient(this);
+
+        private LowLevelClient GetTopLevelClient(LowLevelClient client)
+        {
+            if (client.ParentClient is null)
+                return client;
+
+            return GetTopLevelClient(client.ParentClient);
+        }
+
         public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
@@ -61,7 +72,9 @@ namespace AutoRest.CSharp.Output.Models
 
             ClientOptions = clientOptions;
 
-            _clientParameters = clientParameters;
+            //we should not overload the concept of parameters.  ApiVersion is never a parameter for a client and should be treated differently.
+            //by adding it in the parameters we have to make sure we treat it differently in all places that loop over the parameter list.
+            _clientParameters = Configuration.IsBranded ? clientParameters : clientParameters.Where(p => !p.IsApiVersion).ToArray();
             _clientParameterExamples = examples;
             _authorization = authorization;
             _operations = operations;

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
@@ -229,7 +228,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             // handle credentials
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(typeof(AzureKeyCredential), Literal("<key>"))));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(Configuration.ApiTypes.KeyCredentialType, Configuration.ApiTypes.GetKeySampleExpression(_client.TopLevelClient.Type.Name))));
                 return true;
             }
 

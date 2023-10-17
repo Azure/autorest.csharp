@@ -93,7 +93,8 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        internal virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await TopActionAsync(action, context).ConfigureAwait(false);
@@ -103,20 +104,25 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        internal virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
+        public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = TopAction(action, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] top level method
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TopActionAsync(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -142,13 +148,17 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] top level method
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TopAction(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -306,7 +316,8 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        internal virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
@@ -320,7 +331,8 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        internal virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
+        public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
@@ -330,13 +342,17 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnonymousBodyAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -365,13 +381,17 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -761,7 +781,8 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        internal virtual async Task<Response<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
+        public virtual async Task<Response<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -780,7 +801,8 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        internal virtual Response<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
+        public virtual Response<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -792,13 +814,17 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -832,13 +858,17 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -952,7 +982,8 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        internal virtual async Task<Response<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2Async(CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await HelloDemo2Async(context).ConfigureAwait(false);
@@ -961,20 +992,25 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        internal virtual Response<Thing> HelloDemo2(CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2(CancellationToken)']/*" />
+        public virtual Response<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = HelloDemo2(context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Return hi in demo2
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloDemo2Async(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -999,13 +1035,17 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Return hi in demo2
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloDemo2(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1034,7 +1074,8 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual async Task<Response<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1048,7 +1089,8 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual Response<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
+        public virtual Response<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1058,13 +1100,17 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Create with literal value
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateLiteralAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1093,13 +1139,17 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Create with literal value
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateLiteral(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1130,7 +1180,8 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        internal virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await HelloLiteralAsync(context).ConfigureAwait(false);
@@ -1139,20 +1190,25 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        internal virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
+        public virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = HelloLiteral(context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Send literal parameters
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloLiteralAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1177,13 +1233,17 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Send literal parameters
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloLiteral(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1272,7 +1332,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1286,7 +1346,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1296,18 +1356,12 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="InternalProtocolAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1335,18 +1389,12 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="InternalProtocol(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
