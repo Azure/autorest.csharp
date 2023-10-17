@@ -4,59 +4,22 @@
  "ApiVersions": [
   "2022-05-15-preview"
  ],
- "Enums": [
-  {
-   "$id": "2",
-   "Name": "OperationState",
-   "EnumValueType": "String",
-   "AllowedValues": [
-    {
-     "$id": "3",
-     "Name": "InProgress",
-     "Value": "InProgress",
-     "Description": "The operation is in progress."
-    },
-    {
-     "$id": "4",
-     "Name": "Succeeded",
-     "Value": "Succeeded",
-     "Description": "The operation has completed successfully."
-    },
-    {
-     "$id": "5",
-     "Name": "Failed",
-     "Value": "Failed",
-     "Description": "The operation has failed."
-    },
-    {
-     "$id": "6",
-     "Name": "Canceled",
-     "Value": "Canceled",
-     "Description": "The operation has been canceled by the user."
-    }
-   ],
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Enum describing allowed operation states.",
-   "IsExtensible": true,
-   "IsNullable": false,
-   "Usage": "None"
-  }
- ],
+ "Enums": [],
  "Models": [
   {
-   "$id": "7",
+   "$id": "2",
    "Name": "Pet",
    "Namespace": "LroOperation",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "8",
+     "$id": "3",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "9",
+      "$id": "4",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -65,12 +28,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "10",
+     "$id": "5",
      "Name": "tag",
      "SerializedName": "tag",
      "Description": "",
      "Type": {
-      "$id": "11",
+      "$id": "6",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -79,12 +42,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "12",
+     "$id": "7",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "13",
+      "$id": "8",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -93,197 +56,26 @@
      "IsReadOnly": false
     }
    ]
-  },
-  {
-   "$id": "14",
-   "Name": "OperationStatusPetError",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "15",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The unique ID of the operation.",
-     "Type": {
-      "$id": "16",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "17",
-     "Name": "status",
-     "SerializedName": "status",
-     "Description": "The status of the operation",
-     "Type": {
-      "$ref": "2"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "18",
-     "Name": "error",
-     "SerializedName": "error",
-     "Description": "Error object that describes the error when status is \"Failed\".",
-     "Type": {
-      "$id": "19",
-      "Name": "Error",
-      "Namespace": "Azure.Core.Foundations",
-      "Description": "The error object.",
-      "IsNullable": false,
-      "Usage": "None",
-      "Properties": [
-       {
-        "$id": "20",
-        "Name": "code",
-        "SerializedName": "code",
-        "Description": "One of a server-defined set of error codes.",
-        "Type": {
-         "$id": "21",
-         "Name": "string",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "22",
-        "Name": "message",
-        "SerializedName": "message",
-        "Description": "A human-readable representation of the error.",
-        "Type": {
-         "$id": "23",
-         "Name": "string",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "24",
-        "Name": "target",
-        "SerializedName": "target",
-        "Description": "The target of the error.",
-        "Type": {
-         "$id": "25",
-         "Name": "string",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "IsRequired": false,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "26",
-        "Name": "details",
-        "SerializedName": "details",
-        "Description": "An array of details about specific errors that led to this reported error.",
-        "Type": {
-         "$id": "27",
-         "Name": "Array",
-         "ElementType": {
-          "$ref": "19"
-         },
-         "IsNullable": false
-        },
-        "IsRequired": false,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "28",
-        "Name": "innererror",
-        "SerializedName": "innererror",
-        "Description": "An object containing more specific information than the current object about the error.",
-        "Type": {
-         "$id": "29",
-         "Name": "InnerError",
-         "Namespace": "Azure.Core.Foundations",
-         "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-         "IsNullable": false,
-         "Usage": "None",
-         "Properties": [
-          {
-           "$id": "30",
-           "Name": "code",
-           "SerializedName": "code",
-           "Description": "One of a server-defined set of error codes.",
-           "Type": {
-            "$id": "31",
-            "Name": "string",
-            "Kind": "String",
-            "IsNullable": false
-           },
-           "IsRequired": false,
-           "IsReadOnly": false
-          },
-          {
-           "$id": "32",
-           "Name": "InnerErrorObject",
-           "SerializedName": "innererror",
-           "Description": "Inner error.",
-           "Type": {
-            "$ref": "29"
-           },
-           "IsRequired": false,
-           "IsReadOnly": false
-          }
-         ]
-        },
-        "IsRequired": false,
-        "IsReadOnly": false
-       }
-      ]
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "33",
-     "Name": "result",
-     "SerializedName": "result",
-     "Description": "The result of the operation.",
-     "Type": {
-      "$ref": "7"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$ref": "19"
-  },
-  {
-   "$ref": "29"
   }
  ],
  "Clients": [
   {
-   "$id": "34",
+   "$id": "9",
    "Name": "LroOperationClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "35",
+     "$id": "10",
      "Name": "createOrUpdate",
      "ResourceName": "Pet",
      "Description": "Creates a new pet or updates an existing one.",
      "Parameters": [
       {
-       "$id": "36",
+       "$id": "11",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Type": {
-        "$id": "37",
+        "$id": "12",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -299,12 +91,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "38",
+       "$id": "13",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "39",
+        "$id": "14",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -319,9 +111,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "15",
         "Type": {
-         "$id": "41",
+         "$id": "16",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -330,11 +122,11 @@
        }
       },
       {
-       "$id": "42",
+       "$id": "17",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "43",
+        "$id": "18",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -350,46 +142,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "44",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "This request has a JSON Merge Patch body.",
-       "Type": {
-        "$id": "45",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "46",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "47",
-        "Type": {
-         "$ref": "45"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "48",
+       "$id": "19",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
        "Type": {
-        "$ref": "7"
+        "$ref": "2"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -402,11 +160,38 @@
        "Kind": "Method"
       },
       {
-       "$id": "49",
+       "$id": "20",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "21",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "22",
+        "Type": {
+         "$ref": "21"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "50",
+        "$id": "24",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -421,9 +206,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "25",
         "Type": {
-         "$ref": "50"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
@@ -431,22 +216,22 @@
      ],
      "Responses": [
       {
-       "$id": "52",
+       "$id": "26",
        "StatusCodes": [
         201
        ],
        "BodyType": {
-        "$ref": "7"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "53",
+         "$id": "27",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "54",
+          "$id": "28",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -456,22 +241,22 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "55",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "7"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "56",
+         "$id": "30",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "57",
+          "$id": "31",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -481,35 +266,34 @@
        "IsErrorResponse": false
       }
      ],
-     "HttpMethod": "PATCH",
+     "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/Pet/{name}",
      "RequestMediaTypes": [
-      "application/merge-patch+json"
+      "application/json"
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "58",
+      "$id": "32",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "59",
+       "$id": "33",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "2"
        },
-       "ResultPath": "result",
        "BodyMediaType": "Json"
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "60"
+    "$id": "34"
    },
    "Creatable": true
   }
