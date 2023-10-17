@@ -31,10 +31,10 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private readonly CodeWriter _writer;
         private readonly XmlDocWriter _xmlDocWriter;
-        private readonly LowLevelClient _client;
+        private readonly DpgClient _client;
         private readonly DpgClientSampleProvider _sampleComposer;
 
-        public DpgClientWriter(LowLevelClient client, DpgClientSampleProvider sampleComposer, CodeWriter writer, XmlDocWriter xmlDocWriter)
+        public DpgClientWriter(DpgClient client, DpgClientSampleProvider sampleComposer, CodeWriter writer, XmlDocWriter xmlDocWriter)
         {
             _writer = writer;
             _xmlDocWriter = xmlDocWriter;
@@ -57,10 +57,29 @@ namespace AutoRest.CSharp.Generation.Writers
                     // Temporary sorting to minimize amount of changes in generated code.
                     foreach (var clientMethod in _client.OperationMethods.OrderBy(b => b.Order))
                     {
-                        WriteConvenienceMethod(clientMethod, true);
-                        WriteConvenienceMethod(clientMethod, false);
-                        WriteProtocolMethod(clientMethod, true);
-                        WriteProtocolMethod(clientMethod, false);
+                        if (clientMethod.ConvenienceAsync is {} convenienceAsync)
+                        {
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceAsync);
+                            _writer.WriteMethod(convenienceAsync);
+                        }
+
+                        if (clientMethod.Convenience is {} convenience)
+                        {
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenience);
+                            _writer.WriteMethod(convenience);
+                        }
+
+                        if (clientMethod.ProtocolAsync is {} protocolAsync)
+                        {
+                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, protocolAsync, clientMethod.ConvenienceAsync?.Signature as MethodSignature);
+                            _writer.WriteMethod(protocolAsync);
+                        }
+
+                        if (clientMethod.Protocol is {} protocol1)
+                        {
+                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, protocol1, clientMethod.Convenience?.Signature as MethodSignature);
+                            _writer.WriteMethod(protocol1);
+                        }
                     }
 
                     WriteSubClientFactoryMethod();
@@ -300,34 +319,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.RemoveTrailingComma();
                 writer.Line($"}});");
-            }
-        }
-
-        private void WriteConvenienceMethod(RestClientOperationMethods operationMethods, bool async)
-        {
-            if (async && operationMethods.ConvenienceAsync is {} convenienceAsync)
-            {
-                WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceAsync);
-                _writer.WriteMethod(convenienceAsync);
-            }
-            else if (operationMethods.Convenience is {} convenience)
-            {
-                WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenience);
-                _writer.WriteMethod(convenience);
-            }
-        }
-
-        private void WriteProtocolMethod(RestClientOperationMethods operationMethods, bool async)
-        {
-            if (async && operationMethods.ProtocolAsync is {} protocolAsync)
-            {
-                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, protocolAsync, operationMethods.ConvenienceAsync?.Signature as MethodSignature);
-                _writer.WriteMethod(protocolAsync);
-            }
-            else if (operationMethods.Protocol is {} protocol)
-            {
-                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, protocol, operationMethods.Convenience?.Signature as MethodSignature);
-                _writer.WriteMethod(protocol);
             }
         }
 

@@ -20,7 +20,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class LowLevelClient : TypeProvider
+    internal class DpgClient : TypeProvider
     {
         protected override string DefaultName { get; }
         protected override string DefaultNamespace { get; }
@@ -34,10 +34,10 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors { get; }
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
-        public IReadOnlyList<LowLevelClient> SubClients { get; init; }
+        public IReadOnlyList<DpgClient> SubClients { get; init; }
         public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
         public IReadOnlyList<RestClientOperationMethods> OperationMethods { get; }
-        public LowLevelClient? ParentClient;
+        public DpgClient? ParentClient;
         public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
         public ClientOptionsTypeProvider ClientOptions { get; }
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string key, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<InputClientExample> clientExamples, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
+        public DpgClient(string name, string ns, string key, string description, string libraryName, DpgClient? parentClient, IEnumerable<InputOperation> operations, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<InputClientExample> clientExamples, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models
 
             ResponseClassifierTypes = OperationMethods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
 
-            SubClients = Array.Empty<LowLevelClient>();
+            SubClients = Array.Empty<DpgClient>();
         }
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)

@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class DpgOperationSampleBuilder
     {
-        private readonly LowLevelClient? _client;
+        private readonly DpgClient? _client;
         private readonly IReadOnlyList<InputClientExample>? _clientExamples;
         private readonly INamedTypeSymbol? _existingType;
         private readonly IReadOnlyList<MethodSignatureBase> _clientInvocationChain;
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _clientInvocationChain = Array.Empty<MethodSignatureBase>();
         }
 
-        public DpgOperationSampleBuilder(LowLevelClient client, IReadOnlyList<InputClientExample>? clientExamples, INamedTypeSymbol? existingType)
+        public DpgOperationSampleBuilder(DpgClient client, IReadOnlyList<InputClientExample>? clientExamples, INamedTypeSymbol? existingType)
         {
             _client = client;
             _clientExamples = clientExamples;
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
         /// </summary>
         /// <returns></returns>
-        private static IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        private static IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(DpgClient client)
         {
             var callChain = new Stack<MethodSignatureBase>();
             while (client.FactoryMethod != null)
@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return true;
         }
 
-        private static bool ShouldGenerateSample(LowLevelClient client, MethodSignature protocolMethodSignature)
+        private static bool ShouldGenerateSample(DpgClient client, MethodSignature protocolMethodSignature)
             => protocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                 !protocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
                 !client.IsMethodSuppressed(protocolMethodSignature) &&

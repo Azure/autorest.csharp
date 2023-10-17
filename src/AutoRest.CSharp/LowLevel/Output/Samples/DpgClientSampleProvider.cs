@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         private static readonly CSharpAttribute[] Attributes = { new(typeof(TestAttribute)), new(typeof(IgnoreAttribute), "Only validating compilation of examples") };
         private readonly IReadOnlyDictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>> _restClientMethodsToTestMethods;
 
-        public DpgClientSampleProvider(string defaultNamespace, LowLevelClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public DpgClientSampleProvider(string defaultNamespace, DpgClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             DefaultNamespace = $"{defaultNamespace}.Samples";
             DefaultName = $"Samples_{client.Declaration.Name}";
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         private bool? _isEmpty;
         public bool IsEmpty => _isEmpty ??= !Methods.Any();
 
-        private static void BuildMethods(LowLevelClient client, out Dictionary<MethodSignatureBase, IReadOnlyList<(string ExampleInformation, Method TestMethod)>> restClientMethodsToTestMethods, out List<Method> methods)
+        private static void BuildMethods(DpgClient client, out Dictionary<MethodSignatureBase, IReadOnlyList<(string ExampleInformation, Method TestMethod)>> restClientMethodsToTestMethods, out List<Method> methods)
         {
             methods = new List<Method>();
             restClientMethodsToTestMethods = new Dictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>>();
@@ -105,6 +105,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                     Math.Max(sampleConvenienceMethods.Count, sampleConvenienceAsyncMethods.Count)
                 );
 
+                // [TODO]: Special order preserved to minimize the changes. Doesn't affect the semantics.
                 for (var i = 0; i < maxLength; i++)
                 {
                     if (sampleProtocolMethods.Count > i)

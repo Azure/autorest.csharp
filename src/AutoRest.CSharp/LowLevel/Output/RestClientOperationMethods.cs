@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Output.Models
         Method? NextPageConvenienceAsync,
         ResponseClassifierType ResponseClassifier,
 
+        // [TODO]: Order property is used required to preserve the order of methods in generated clients, it doesn't affect any semantics
         int Order,
         InputOperation Operation,
         CSharpType? ResponseType,

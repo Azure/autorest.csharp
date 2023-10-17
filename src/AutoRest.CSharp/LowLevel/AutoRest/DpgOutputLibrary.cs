@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
         public IEnumerable<ModelTypeProvider> Models => _models.Values;
-        public IReadOnlyList<LowLevelClient> RestClients { get; }
+        public IReadOnlyList<DpgClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels { get; }
         public ModelFactoryTypeProvider? ModelFactory { get; }
@@ -148,10 +148,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             return defaultDerivedType;
         }
 
-        private static IReadOnlyList<LowLevelClient> CreateClients(IEnumerable<DpgOutputLibraryBuilder.ClientInfo> topLevelClientInfos, ClientOptionsTypeProvider clientOptions, InputNamespace rootNamespace, TypeFactory typeFactory, string libraryName, SourceInputModel? sourceInputModel)
+        private static IReadOnlyList<DpgClient> CreateClients(IEnumerable<DpgOutputLibraryBuilder.ClientInfo> topLevelClientInfos, ClientOptionsTypeProvider clientOptions, InputNamespace rootNamespace, TypeFactory typeFactory, string libraryName, SourceInputModel? sourceInputModel)
         {
             var topLevelClients = CreateClients(topLevelClientInfos, clientOptions, null, rootNamespace, typeFactory, libraryName, sourceInputModel);
-            var allClients = new List<LowLevelClient>();
+            var allClients = new List<DpgClient>();
 
             // Simple implementation of breadth first traversal
             allClients.AddRange(topLevelClients);
@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return allClients;
         }
 
-        private static IEnumerable<LowLevelClient> CreateClients(IEnumerable<DpgOutputLibraryBuilder.ClientInfo> clientInfos, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, InputNamespace rootNamespace, TypeFactory typeFactory, string libraryName, SourceInputModel? sourceInputModel)
+        private static IEnumerable<DpgClient> CreateClients(IEnumerable<DpgOutputLibraryBuilder.ClientInfo> clientInfos, ClientOptionsTypeProvider clientOptions, DpgClient? parentClient, InputNamespace rootNamespace, TypeFactory typeFactory, string libraryName, SourceInputModel? sourceInputModel)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -171,13 +171,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
                     : BuilderHelpers.EscapeXmlDocDescription(clientInfo.Description);
 
-                var subClients = new List<LowLevelClient>();
+                var subClients = new List<DpgClient>();
                 var clientParameters = clientInfo.ClientParameters
                     .Select(p => RestClientBuilder.BuildConstructorParameter(p, typeFactory))
                     .OrderBy(p => p.IsOptionalInSignature)
                     .ToList();
 
-                var client = new LowLevelClient(
+                var client = new DpgClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
                     clientInfo.OperationGroupKey,
