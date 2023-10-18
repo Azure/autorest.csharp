@@ -66,12 +66,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (operation.Examples.FirstOrDefault(e => e.Key == exampleKey) is {} operationExample)
                 {
                     // add protocol method sample
-                    samples.Add(new(_clientInvocationChain, protocolMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, false, exampleKey));
+                    samples.Add(new(_client, _clientInvocationChain, protocolMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, false, exampleKey));
 
                     // add convenience method sample
                     if (convenienceMethodSignature != null && convenienceMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                     {
-                        samples.Add(new(_clientInvocationChain, convenienceMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, true, exampleKey));
+                        samples.Add(new(_client, _clientInvocationChain, convenienceMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, true, exampleKey));
                     }
                 }
             }

@@ -8,7 +8,6 @@ using System.Net.ClientModel.Core.Pipeline;
 using System.Net.ClientModel.Internal;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -22,8 +21,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class SystemApiTypes : ApiTypes
     {
-        public override BaseResponseExpression GetResponseExpression(ValueExpression untyped) => new ResultExpression(untyped);
-        public override BaseResponseExpression GetFromResponseExpression(ValueExpression untyped) => new PipelineResponseExpression(untyped);
+        public override ResponseExpression GetResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
+        public override ResponseExpression GetFromResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
 
         public override Type ResponseType => typeof(Result);
         public override Type ResponseOfTType => typeof(Result<>);
@@ -84,8 +83,6 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetSetUriString(string requestName, string uriName)
             => $"{requestName}.Uri = {uriName}.{nameof(RequestUri.ToUri)}();";
 
-        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeaderSystem;
-
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
 
@@ -93,15 +90,15 @@ namespace AutoRest.CSharp.Common.Input
         public override string ToRequestContentName => "ToRequestBody";
         public override string RequestContentCreateName => nameof(RequestBody.CreateFromStream);
 
-        public override BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
-            => new RequestUriExpression(valueExpression ?? Snippets.New.Instance(typeof(RequestUri)));
+        public override RawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
+            => new RawRequestUriBuilderExpression(valueExpression ?? Snippets.New.Instance(typeof(RequestUri)));
 
         public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonWriteable);
 
         public override Type Utf8JsonWriterExtensionsType => typeof(ModelSerializationExtensions);
 
-        public override BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
-            => new Utf8JsonRequestBodyExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestBody)));
+        public override Utf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
+            => new Utf8JsonRequestContentExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestBody)));
 
         public override Type OptionalType => typeof(OptionalProperty);
         public override Type OptionalPropertyType => typeof(OptionalProperty<>);
@@ -114,10 +111,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type JsonElementExtensionsType => typeof(ModelSerializationExtensions);
 
         public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
-            => new TypeReference(Configuration.ApiTypes.RequestContentType)
-            .InvokeStatic(
-                Configuration.ApiTypes.RequestContentCreateName,
-                BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream());
+            => new InvokeStaticMethodExpression(Configuration.ApiTypes.RequestContentType, Configuration.ApiTypes.RequestContentCreateName, new[]{ BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream() });
 
         public override string EndPointSampleValue => "https://my-service.com";
 
@@ -126,6 +120,6 @@ namespace AutoRest.CSharp.Common.Input
         public override ValueExpression GetKeySampleExpression(string clientName)
             => new InvokeStaticMethodExpression(typeof(Environment), nameof(Environment.GetEnvironmentVariable), new[] { new StringLiteralExpression($"{clientName}_KEY", false) });
 
-        public override string LiscenseString => string.Empty;
+        public override string LicenseString => string.Empty;
     }
 }

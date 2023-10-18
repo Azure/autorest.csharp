@@ -4,7 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;

@@ -6,7 +6,7 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -17,8 +17,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal abstract class ApiTypes
     {
-        public abstract BaseResponseExpression GetResponseExpression(ValueExpression untyped);
-        public abstract BaseResponseExpression GetFromResponseExpression(ValueExpression untyped);
+        public abstract ResponseExpression GetResponseExpression(ValueExpression untyped);
+        public abstract ResponseExpression GetFromResponseExpression(ValueExpression untyped);
 
         public abstract Type ResponseType { get; }
         public abstract Type ResponseOfTType { get; }
@@ -94,15 +94,13 @@ namespace AutoRest.CSharp.Common.Input
         public abstract FormattableString GetSetMethodString(string requestName, string method);
         public abstract FormattableString GetSetUriString(string requestName, string uriName);
 
-        public abstract Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod { get; }
-
         public abstract FormattableString GetSetContentString(string requestName, string contentName);
 
         public abstract Type RequestContentType { get; }
         public abstract string ToRequestContentName { get; }
         public abstract string RequestContentCreateName { get; }
 
-        public abstract BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null);
+        public abstract RawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null);
 
         public abstract Type IUtf8JsonSerializableType { get; }
         public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
@@ -113,7 +111,7 @@ namespace AutoRest.CSharp.Common.Input
         public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
         public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
 
-        public abstract BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null);
+        public abstract Utf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null);
 
         public abstract Type OptionalType { get; }
         public abstract Type OptionalPropertyType { get; }
@@ -139,6 +137,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract ValueExpression GetKeySampleExpression(string clientName);
 
-        public abstract string LiscenseString { get; }
+        public abstract string LicenseString { get; }
     }
 }

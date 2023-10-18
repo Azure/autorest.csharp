@@ -1,12 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.LowLevel.Output.Samples;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using NUnit.Framework;
 
 namespace AutoRest.CSharp.Common.Generation.Writers
@@ -14,10 +17,10 @@ namespace AutoRest.CSharp.Common.Generation.Writers
     internal class SmokeTestWriter
     {
         private readonly CodeWriter _writer;
-        private readonly LowLevelClient _client;
+        private readonly DpgClient _client;
         private readonly DpgClientSampleProvider _sampleProvider;
 
-        public SmokeTestWriter(LowLevelClient client, DpgClientSampleProvider sampleProvider)
+        public SmokeTestWriter(DpgClient client, DpgClientSampleProvider sampleProvider)
         {
             _writer = new CodeWriter();
             _client = client;
@@ -30,16 +33,22 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             {
                 using (_writer.Scope($"public partial class {_client.Type.Name}Tests"))
                 {
-                    _writer.Line($"[{typeof(TestAttribute)}]");
-                    using (_writer.Scope($"public void SmokeTest()"))
-                    {
-                        var exampleMethod = _client.ClientMethods.Where(m => m.Samples.Count() > 0).First().Samples.First();
-                        var clientVariableStatements = new List<MethodBodyStatement>();
-                        var newClientStatement = _sampleProvider.BuildGetClientStatement(exampleMethod, exampleMethod.ClientInvocationChain, clientVariableStatements, out var clientVar);
-                        _writer.WriteMethodBodyStatement(clientVariableStatements);
-                        _writer.WriteMethodBodyStatement(newClientStatement);
-                        _writer.WriteMethodBodyStatement(new InvokeStaticMethodStatement(typeof(Assert), nameof(Assert.IsNotNull), clientVar));
-                    }
+                    var exampleMethod = _client.OperationMethods.First(m => m.Samples.Count > 0).Samples.First();
+                    var clientVariableStatements = new List<MethodBodyStatement>();
+                    var newClientStatement = _sampleProvider.BuildGetClientStatement(_client.Type, exampleMethod, exampleMethod.ClientInvocationChain, clientVariableStatements, out var clientVar);
+
+                    var method = new Method
+                    (
+                        new MethodSignature("SmokeTest", null, null, MethodSignatureModifiers.Public, null, null, Array.Empty<Parameter>(), new[] { new CSharpAttribute(typeof(TestAttribute)) }),
+                        new[]
+                        {
+                            clientVariableStatements,
+                            newClientStatement,
+                            new InvokeStaticMethodStatement(typeof(Assert), nameof(Assert.IsNotNull), clientVar)
+                        }
+                    );
+
+                    _writer.WriteMethod(method);
                 }
             }
         }

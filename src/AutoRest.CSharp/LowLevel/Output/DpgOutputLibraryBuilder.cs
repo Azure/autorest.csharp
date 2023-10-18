@@ -3,23 +3,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using Configuration = AutoRest.CSharp.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
 {

@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -16,6 +18,10 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
+        public static ExtensibleSnippets Extensible { get; } = Configuration.IsBranded
+            ? new AzureExtensibleSnippets()
+            : new SystemExtensibleSnippets();
+
         public static MethodBodyStatement AsStatement(this IEnumerable<MethodBodyStatement> statements) => statements.ToArray();
 
         public static ValueExpression Dash { get; } = new KeywordExpression("_", null);

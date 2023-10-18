@@ -21,6 +21,8 @@ using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static partial class CodeWriterExtensions

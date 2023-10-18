@@ -1,12 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
 
-namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
+namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record RequestContentExpression(ValueExpression Untyped) : TypedValueExpression<RequestContent>(Untyped)
     {

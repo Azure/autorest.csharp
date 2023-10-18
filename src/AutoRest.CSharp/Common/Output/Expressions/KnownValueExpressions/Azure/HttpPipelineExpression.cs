@@ -8,7 +8,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
+namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record HttpPipelineExpression(ValueExpression Untyped) : TypedValueExpression<HttpPipeline>(Untyped)
     {

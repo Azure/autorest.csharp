@@ -36,12 +36,14 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public CSharpType? ResponseType { get; }
         public CSharpType? PageItemType { get; }
 
+        private readonly DpgClient _topLevelClient;
         private readonly InputType? _requestBodyType;
         private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         private readonly InputOperationExample _inputOperationExample;
 
-        public DpgOperationSample(IReadOnlyList<MethodSignatureBase> clientInvocationChain, MethodSignature signature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(DpgClient topLevelClient, IReadOnlyList<MethodSignatureBase> clientInvocationChain, MethodSignature signature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
+            _topLevelClient = topLevelClient;
             _requestBodyType = requestBodyType;
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
@@ -217,7 +219,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             // handle credentials
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(Configuration.ApiTypes.KeyCredentialType, Configuration.ApiTypes.GetKeySampleExpression(_client.TopLevelClient.Type.Name))));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(Configuration.ApiTypes.KeyCredentialType, Configuration.ApiTypes.GetKeySampleExpression(_topLevelClient.TopLevelClient.Type.Name))));
                 return true;
             }
 

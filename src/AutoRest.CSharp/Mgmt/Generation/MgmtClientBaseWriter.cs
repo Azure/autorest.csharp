@@ -7,13 +7,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -32,6 +31,7 @@ using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {

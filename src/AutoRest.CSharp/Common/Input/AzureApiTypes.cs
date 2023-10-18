@@ -3,7 +3,6 @@
 
 using System;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
@@ -19,8 +18,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class AzureApiTypes : ApiTypes
     {
-        public override BaseResponseExpression GetResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
-        public override BaseResponseExpression GetFromResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
+        public override ResponseExpression GetResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
+        public override ResponseExpression GetFromResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
 
         public override Type ResponseType => typeof(Response);
         public override Type ResponseOfTType => typeof(Response<>);
@@ -73,8 +72,6 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetSetUriString(string requestName, string uriName)
             => $"{requestName}.Uri = {uriName};";
 
-        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeader;
-
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
 
@@ -82,14 +79,14 @@ namespace AutoRest.CSharp.Common.Input
         public override string ToRequestContentName => "ToRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);
 
-        public override BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
+        public override RawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
             => new RawRequestUriBuilderExpression(valueExpression ?? Snippets.New.Instance(typeof(RawRequestUriBuilder)));
 
         public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonSerializable);
 
         public override Type Utf8JsonWriterExtensionsType => typeof(Utf8JsonWriterExtensions);
 
-        public override BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
+        public override Utf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
             => new Utf8JsonRequestContentExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestContent)));
 
         public override Type OptionalType => typeof(Optional);
@@ -103,7 +100,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type JsonElementExtensionsType => typeof(JsonElementExtensions);
 
         public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
-            => new TypeReference(Configuration.ApiTypes.RequestContentType).InvokeStatic(Configuration.ApiTypes.RequestContentCreateName, freeFormObjectExpression);
+            => new InvokeStaticMethodExpression(Configuration.ApiTypes.RequestContentType, Configuration.ApiTypes.RequestContentCreateName, new[]{freeFormObjectExpression});
 
         public override string EndPointSampleValue => "<https://my-service.azure.com>";
 
@@ -112,7 +109,7 @@ namespace AutoRest.CSharp.Common.Input
         public override ValueExpression GetKeySampleExpression(string clientName)
             => new StringLiteralExpression("<key>", false);
 
-        public override string LiscenseString => """
+        public override string LicenseString => """
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 

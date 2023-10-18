@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors { get; }
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
+        public DpgClient TopLevelClient { get; }
         public IReadOnlyList<DpgClient> SubClients { get; init; }
         public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
         public IReadOnlyList<RestClientOperationMethods> OperationMethods { get; }
@@ -54,6 +55,14 @@ namespace AutoRest.CSharp.Output.Models
             Description = description;
             IsSubClient = parentClient != null;
             ParentClient = parentClient;
+
+            TopLevelClient = this;
+            while (parentClient != null)
+            {
+                TopLevelClient = parentClient;
+                parentClient = parentClient.ParentClient;
+            }
+
             _typeFactory = typeFactory;
 
             ClientOptions = clientOptions;

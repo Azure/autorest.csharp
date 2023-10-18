@@ -3,14 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -21,8 +19,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
-using AutoRest.CSharp.Utilities;
-using Azure;
 using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -62,10 +58,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
         }
 
-        private bool? _isEmpty;
-        public bool IsEmpty => _isEmpty ??= !Methods.Any();
-
-        private static void BuildMethods(DpgClient client, out Dictionary<MethodSignatureBase, IReadOnlyList<(string ExampleInformation, Method TestMethod)>> restClientMethodsToTestMethods, out List<Method> methods)
+        private void BuildMethods(DpgClient client, out Dictionary<MethodSignatureBase, IReadOnlyList<(string ExampleInformation, Method TestMethod)>> restClientMethodsToTestMethods, out List<Method> methods)
         {
             methods = new List<Method>();
             restClientMethodsToTestMethods = new Dictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>>();
@@ -155,13 +148,13 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             return builder.ToString();
         }
 
-        private static IReadOnlyList<(string ExampleInformation, Method Method)> BuildSampleMethods(CSharpType clientType, MethodSignatureBase signature, IEnumerable<DpgOperationSample> samples, bool isConvenienceSample, bool isAsync)
+        private IReadOnlyList<(string ExampleInformation, Method Method)> BuildSampleMethods(CSharpType clientType, MethodSignatureBase signature, IEnumerable<DpgOperationSample> samples, bool isConvenienceSample, bool isAsync)
             => samples
                 .Where(s => s.IsConvenienceSample == isConvenienceSample)
                 .Select(s => (s.GetSampleInformation(signature), BuildSampleMethod(clientType, s, isAsync)))
                 .ToList();
 
-        private static Method BuildSampleMethod(CSharpType clientType, DpgOperationSample sample, bool isAsync)
+        private Method BuildSampleMethod(CSharpType clientType, DpgOperationSample sample, bool isAsync)
         {
             var signature = GetMethodSignature(sample, isAsync);
             var clientVariableStatements = new List<MethodBodyStatement>();
@@ -181,7 +174,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             });
         }
 
-        private static MethodBodyStatement BuildGetClientStatement(CSharpType clientType, DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        public MethodBodyStatement BuildGetClientStatement(CSharpType clientType, DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
             var first = methodsToCall[0];
             ValueExpression valueExpression = first switch

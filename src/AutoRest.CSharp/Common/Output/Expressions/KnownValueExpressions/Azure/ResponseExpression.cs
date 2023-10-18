@@ -6,7 +6,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using Azure;
 
-namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
+namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record ResponseExpression(ValueExpression Untyped) : TypedValueExpression<Response>(Untyped)
     {
