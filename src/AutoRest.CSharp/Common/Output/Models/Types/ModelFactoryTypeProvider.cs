@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties.Where(p => p != obj.AdditionalPropertiesProperty));
+            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties.Where(p => p != (obj as SerializableObjectType)?.RawDataField));
             // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
             if (properties.Any(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null)))
             {

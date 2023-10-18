@@ -13,10 +13,10 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -45,30 +45,30 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
-        private ObjectTypeProperty? _additionalPropertiesProperty;
-        public override ObjectTypeProperty? AdditionalPropertiesProperty
+        public override ObjectTypeProperty? AdditionalPropertiesProperty => null;
+
+        private ObjectTypeProperty? _rawDataField;
+        public override ObjectTypeProperty? RawDataField
         {
             get
             {
-                if (_additionalPropertiesProperty != null)
-                    return _additionalPropertiesProperty;
+                if (_rawDataField != null)
+                    return _rawDataField;
 
-                // TODO refactor later
-                // determines if we need a private additional properties property
-                if (!ShouldHaveRawData)
+                if (AdditionalPropertiesProperty != null || !ShouldHaveRawData)
                     return null;
 
-                // TODO -- when this model has derived types, the accessibility should change from private to `protected internal`
+                // when this model has derived types, the accessibility should change from private to `protected internal`
                 string accessibility = HasDerivedTypes() ? "protected internal" : "private";
 
-                _additionalPropertiesProperty = new ObjectTypeProperty(
+                _rawDataField = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration(_privateAdditionalPropertiesPropertyName,
                         _privateAdditionalPropertiesPropertyType, accessibility, null, _typeFactory),
                     _privateAdditionalPropertiesPropertyDescription,
                     true,
                     null);
 
-                return _additionalPropertiesProperty;
+                return _rawDataField;
             }
         }
 
@@ -180,12 +180,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // if there is additional properties property, we need to append it to the parameter list
             var parameters = Fields.SerializationParameters;
-            if (AdditionalPropertiesProperty != null)
+            if (RawDataField != null)
             {
                 var deserializationParameter = new Parameter(
-                    AdditionalPropertiesProperty.Declaration.Name.ToVariableName(),
-                    AdditionalPropertiesProperty.ParameterDescription,
-                    AdditionalPropertiesProperty.Declaration.Type,
+                    RawDataField.Declaration.Name.ToVariableName(),
+                    RawDataField.ParameterDescription,
+                    RawDataField.Declaration.Type,
                     null,
                     ValidationType.None,
                     null
@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
                         valueSerialization,
                         property.IsRequired,
-                        ShouldSkipSerialization(property, inputModelProperty),
+                        ShouldExcludeInWireSerialization(property, inputModelProperty),
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                         customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
                     ;
@@ -235,9 +235,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private static bool ShouldSkipSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
+        private static bool ShouldExcludeInWireSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
         {
-            // TODO -- need to change
             if (inputProperty.IsDiscriminator)
             {
                 return false;
@@ -374,8 +373,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var field in Fields)
                 yield return new ObjectTypeProperty(field, Fields.GetInputByField(field));
 
-            if (AdditionalPropertiesProperty is { } property)
-                yield return property;
+            if (RawDataField is { } rawData)
+                yield return rawData;
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -416,7 +415,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectTypeProperty? additionalPropertiesProperty = null;
             foreach (var obj in EnumerateHierarchy())
             {
-                additionalPropertiesProperty = obj.AdditionalPropertiesProperty;
+                additionalPropertiesProperty = obj.AdditionalPropertiesProperty ?? (obj as SerializableObjectType)?.RawDataField;
                 if (additionalPropertiesProperty != null)
                 {
                     break;
@@ -433,9 +432,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             var valueSerialization = new JsonValueSerialization(dictionaryValueType, Serialization.SerializationFormat.Default, true);
 
             return new JsonAdditionalPropertiesSerialization(
-                    additionalPropertiesProperty,
-                    valueSerialization,
-                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments));
+                additionalPropertiesProperty,
+                valueSerialization,
+                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments));
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()

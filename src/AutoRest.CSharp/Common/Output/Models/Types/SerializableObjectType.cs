@@ -9,6 +9,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
@@ -39,6 +40,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract bool EnsureHasXmlSerialization();
         protected abstract JsonObjectSerialization? EnsureJsonSerialization();
         protected abstract XmlObjectSerialization? EnsureXmlSerialization();
+
+        // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method
+        public virtual ObjectTypeProperty? RawDataField => null;
 
         private bool? _shouldHaveRawData;
         protected bool ShouldHaveRawData => _shouldHaveRawData ??= EnsureShouldHaveRawData();

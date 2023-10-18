@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -69,7 +70,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
-                    WritePrivateAdditionalPropertiesProperty(writer, schema.AdditionalPropertiesProperty);
+                    WritePrivateRawDataField(writer, schema);
 
                     WriteConstructor(writer, schema);
 
@@ -80,41 +81,30 @@ namespace AutoRest.CSharp.Generation.Writers
 
         protected virtual void WriteProperties(CodeWriter writer, ObjectType schema)
         {
+            var rawDataField = (schema as SerializableObjectType)?.RawDataField;
             foreach (var property in schema.Properties)
             {
-                if (property == schema.AdditionalPropertiesProperty)
-                {
-                    WriteAdditionalPropertiesProperty(writer, schema.AdditionalPropertiesProperty);
-                }
-                else
-                {
-                    WriteProperty(writer, property);
+                if (property == rawDataField)
+                    continue;
 
-                    if (property.FlattenedProperty != null)
-                        WriteProperty(writer, property.FlattenedProperty);
-                }
+                WriteProperty(writer, property);
+
+                if (property.FlattenedProperty != null)
+                    WriteProperty(writer, property.FlattenedProperty);
             }
         }
 
         // TODO -- this is workaround
-        private void WritePrivateAdditionalPropertiesProperty(CodeWriter writer, ObjectTypeProperty? additionalPropertiesProperty)
+        private void WritePrivateRawDataField(CodeWriter writer, ObjectType schema)
         {
-            if (additionalPropertiesProperty is null || additionalPropertiesProperty.Declaration.Accessibility == "public")
+            if ((schema as SerializableObjectType)?.RawDataField is not { } rawDataField)
                 return;
 
-            writer.WriteXmlDocumentationSummary($"{additionalPropertiesProperty.Description}");
-            writer.Append($"{additionalPropertiesProperty.Declaration.Accessibility} ")
-                .Line($"{additionalPropertiesProperty.Declaration.Type} {additionalPropertiesProperty.Declaration.Name};");
+            writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
+            writer.Append($"{rawDataField.Declaration.Accessibility} ")
+                .Line($"{rawDataField.Declaration.Type} {rawDataField.Declaration.Name};");
 
             writer.Line();
-        }
-
-        private void WriteAdditionalPropertiesProperty(CodeWriter writer, ObjectTypeProperty? additionalPropertiesProperty)
-        {
-            if (additionalPropertiesProperty is null || additionalPropertiesProperty.Declaration.Accessibility != "public")
-                return;
-
-            WriteProperty(writer, additionalPropertiesProperty);
         }
 
         private void WriteFieldModifiers(CodeWriter writer, FieldModifiers modifiers)

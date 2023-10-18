@@ -16,17 +16,9 @@ using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    [DebuggerDisplay("ObjectTypeProperty {{Name: {Declaration.Name}, Type: {Declaration.Type}}}")]
+    [DebuggerDisplay("Name: {Declaration.Name}, Type: {Declaration.Type}")]
     internal class ObjectTypeProperty
     {
-        internal static readonly ObjectTypeProperty RawData = GetRawDataWithAccessor("private");
-
-        internal static ObjectTypeProperty GetRawDataWithAccessor(string accessor) => new ObjectTypeProperty(
-            new MemberDeclarationOptions(accessor, "_serializedAdditionalRawData", typeof(Dictionary<string, BinaryData>)),
-            "Keeps track of any properties unknown to the library",
-            false,
-            null);
-
         public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty)
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
