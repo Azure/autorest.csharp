@@ -14,16 +14,16 @@ namespace SpecialWords
     public partial class SameAsModel
     {
         /// <summary> Initializes a new instance of SameAsModel. </summary>
-        /// <param name="sameAsModelValue"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sameAsModelValue"/> is null. </exception>
-        public SameAsModel(string sameAsModelValue)
+        /// <param name="sameAsModelProperty"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sameAsModelProperty"/> is null. </exception>
+        public SameAsModel(string sameAsModelProperty)
         {
-            Argument.AssertNotNull(sameAsModelValue, nameof(sameAsModelValue));
+            Argument.AssertNotNull(sameAsModelProperty, nameof(sameAsModelProperty));
 
-            SameAsModelValue = sameAsModelValue;
+            SameAsModelProperty = sameAsModelProperty;
         }
 
-        /// <summary> Gets the same as model value. </summary>
-        public string SameAsModelValue { get; }
+        /// <summary> Gets the same as model property. </summary>
+        public string SameAsModelProperty { get; }
     }
 }

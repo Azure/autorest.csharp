@@ -16,7 +16,7 @@ namespace SpecialWords
         {
             writer.WriteStartObject();
             writer.WritePropertyName("SameAsModel"u8);
-            writer.WriteStringValue(SameAsModelValue);
+            writer.WriteStringValue(SameAsModelProperty);
             writer.WriteEndObject();
         }
 
