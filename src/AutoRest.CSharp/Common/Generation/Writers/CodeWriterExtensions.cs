@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
@@ -19,7 +21,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -358,8 +359,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return parameter.Validation switch
             {
-                ValidationType.AssertNotNullOrEmpty => writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}({parameter.Name:I}, nameof({parameter.Name:I}));"),
-                ValidationType.AssertNotNull => writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.Name:I}, nameof({parameter.Name:I}));"),
+                ValidationType.AssertNotNullOrEmpty => writer.Line($"{Configuration.ApiTypes.ArgumentType}.{Configuration.ApiTypes.AssertNotNullOrEmptyName}({parameter.Name:I}, nameof({parameter.Name:I}));"),
+                ValidationType.AssertNotNull => writer.Line($"{Configuration.ApiTypes.ArgumentType}.{Configuration.ApiTypes.AssertNotNullName}({parameter.Name:I}, nameof({parameter.Name:I}));"),
                 _ => writer
             };
         }
@@ -416,10 +417,10 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString methodName, FormattableString parameters)
-            => writer.WriteMethodCall(asyncCall, methodName, methodName, parameters);
+            => writer.WriteMethodCall(asyncCall, methodName, methodName, parameters, false);
 
-        public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
-            => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRaw(";");
+        public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters, bool writeLine = true)
+            => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRawIf(";", writeLine);
 
         public static CodeWriter WriteMethodCall(this CodeWriter writer, MethodSignature method, IEnumerable<FormattableString> parameters, bool asyncCall)
         {

@@ -12,7 +12,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The model that contains self reference. </summary>
-    internal partial class NonConfidentModelWithIndirectSelfReference
+    public partial class NonConfidentModelWithIndirectSelfReference
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;

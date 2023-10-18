@@ -12,7 +12,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> Indirect self reference model. </summary>
-    internal partial class IndirectSelfReferenceModel
+    public partial class IndirectSelfReferenceModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
@@ -21,7 +21,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="something"> Something not important. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="something"/> or <paramref name="unionProperty"/> is null. </exception>
-        public IndirectSelfReferenceModel(string something, object unionProperty)
+        public IndirectSelfReferenceModel(string something, BinaryData unionProperty)
         {
             Argument.AssertNotNull(something, nameof(something));
             Argument.AssertNotNull(unionProperty, nameof(unionProperty));
@@ -36,7 +36,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="reference"> Reference back. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal IndirectSelfReferenceModel(string something, NonConfidentModelWithSelfReference reference, object unionProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal IndirectSelfReferenceModel(string something, NonConfidentModelWithSelfReference reference, BinaryData unionProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Something = something;
             Reference = reference;
@@ -53,7 +53,36 @@ namespace ConfidentLevelsInTsp.Models
         public string Something { get; }
         /// <summary> Reference back. </summary>
         public NonConfidentModelWithSelfReference Reference { get; set; }
-        /// <summary> The non-confident part. </summary>
-        public object UnionProperty { get; }
+        /// <summary>
+        /// The non-confident part
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public BinaryData UnionProperty { get; }
     }
 }

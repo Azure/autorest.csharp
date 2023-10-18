@@ -12,7 +12,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> This is a model with a property of literal type of numbers. </summary>
-    internal partial class ModelWithFloatLiteralTypeProperty
+    public partial class ModelWithFloatLiteralTypeProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;

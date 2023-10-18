@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -50,7 +51,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return;
             }
-
             using (writer.Namespace(declaration.Namespace))
             {
                 if (jsonSerialization is { IncludeConverter: true })
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer
                     .AppendIf($": ", hasJson || hasXml)
-                    .AppendIf($"{typeof(IUtf8JsonSerializable)}, {iModelJsonSerializableType}, ", hasJson)
+                    .AppendIf($"{Configuration.ApiTypes.IUtf8JsonSerializableType}, {iModelJsonSerializableType}, ", hasJson)
                     .AppendIf($"{typeof(IModelJsonSerializable<object>)}, ", hasJson && model.IsStruct)
                     .AppendIf($"{typeof(IXmlSerializable)}, ", hasXml)
                     //.AppendIf($"{iModelSerializableType}, ", hasXml) // TODO

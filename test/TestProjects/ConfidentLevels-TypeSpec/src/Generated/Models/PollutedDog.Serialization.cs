@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class PollutedDog : IUtf8JsonSerializable, IModelJsonSerializable<PollutedDog>
+    public partial class PollutedDog : IUtf8JsonSerializable, IModelJsonSerializable<PollutedDog>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PollutedDog>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
@@ -24,7 +24,11 @@ namespace ConfidentLevelsInTsp.Models
             writer.WritePropertyName("woof"u8);
             writer.WriteStringValue(Woof);
             writer.WritePropertyName("color"u8);
-            writer.WriteObjectValue(Color);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Color);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(Color.ToString()).RootElement);
+#endif
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("name"u8);
@@ -75,7 +79,7 @@ namespace ConfidentLevelsInTsp.Models
                 return null;
             }
             string woof = default;
-            object color = default;
+            BinaryData color = default;
             string kind = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -91,7 +95,7 @@ namespace ConfidentLevelsInTsp.Models
                     }
                     if (property.NameEquals("color"u8))
                     {
-                        color = property.Value.GetObject();
+                        color = BinaryData.FromString(property.Value.GetRawText());
                         continue;
                     }
                     if (property.NameEquals("kind"u8))

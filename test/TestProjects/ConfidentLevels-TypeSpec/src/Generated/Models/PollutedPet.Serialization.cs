@@ -13,7 +13,7 @@ using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class PollutedPet : IUtf8JsonSerializable, IModelJsonSerializable<PollutedPet>
+    public partial class PollutedPet : IUtf8JsonSerializable, IModelJsonSerializable<PollutedPet>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PollutedPet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 

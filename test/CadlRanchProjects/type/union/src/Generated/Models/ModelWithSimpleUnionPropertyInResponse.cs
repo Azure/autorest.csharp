@@ -12,7 +12,7 @@ using Azure.Core;
 namespace _Type.Union.Models
 {
     /// <summary> The ModelWithSimpleUnionPropertyInResponse. </summary>
-    internal partial class ModelWithSimpleUnionPropertyInResponse
+    public partial class ModelWithSimpleUnionPropertyInResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
@@ -20,7 +20,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionPropertyInResponse"/>. </summary>
         /// <param name="simpleUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="simpleUnion"/> is null. </exception>
-        internal ModelWithSimpleUnionPropertyInResponse(object simpleUnion)
+        internal ModelWithSimpleUnionPropertyInResponse(BinaryData simpleUnion)
         {
             Argument.AssertNotNull(simpleUnion, nameof(simpleUnion));
 
@@ -31,7 +31,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionPropertyInResponse"/>. </summary>
         /// <param name="simpleUnion"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithSimpleUnionPropertyInResponse(object simpleUnion, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithSimpleUnionPropertyInResponse(BinaryData simpleUnion, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SimpleUnion = simpleUnion;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -42,7 +42,36 @@ namespace _Type.Union.Models
         {
         }
 
-        /// <summary> Gets the simple union. </summary>
-        public object SimpleUnion { get; }
+        /// <summary>
+        /// Gets the simple union
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public BinaryData SimpleUnion { get; }
     }
 }

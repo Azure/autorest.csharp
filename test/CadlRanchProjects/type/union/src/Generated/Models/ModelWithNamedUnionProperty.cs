@@ -12,7 +12,7 @@ using Azure.Core;
 namespace _Type.Union.Models
 {
     /// <summary> The ModelWithNamedUnionProperty. </summary>
-    internal partial class ModelWithNamedUnionProperty
+    public partial class ModelWithNamedUnionProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
@@ -20,7 +20,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="ModelWithNamedUnionProperty"/>. </summary>
         /// <param name="namedUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="namedUnion"/> is null. </exception>
-        public ModelWithNamedUnionProperty(object namedUnion)
+        public ModelWithNamedUnionProperty(BinaryData namedUnion)
         {
             Argument.AssertNotNull(namedUnion, nameof(namedUnion));
 
@@ -31,7 +31,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="ModelWithNamedUnionProperty"/>. </summary>
         /// <param name="namedUnion"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithNamedUnionProperty(object namedUnion, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithNamedUnionProperty(BinaryData namedUnion, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             NamedUnion = namedUnion;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -42,7 +42,36 @@ namespace _Type.Union.Models
         {
         }
 
-        /// <summary> Gets the named union. </summary>
-        public object NamedUnion { get; }
+        /// <summary>
+        /// Gets the named union
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public BinaryData NamedUnion { get; }
     }
 }

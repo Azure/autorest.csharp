@@ -2,13 +2,10 @@
 // Licensed under the MIT License
 
 using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
-using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -48,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var resourceTypeExpression = ConstructResourceTypeExpression(resource);
             var diagPropertyName = GetDiagnosticsPropertyName(client, resource);
             FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceTypeExpression), DiagnosticsProperty);
-            _writer.Line($"private {typeof(ClientDiagnostics)} {diagPropertyName} => {GetDiagnosticFieldName(client, resource)} ??= {diagOptionsCtor};");
+            _writer.Line($"private {Configuration.ApiTypes.ClientDiagnosticsType} {diagPropertyName} => {GetDiagnosticFieldName(client, resource)} ??= {diagOptionsCtor};");
             var apiVersionExpression = resourceTypeExpression == null ? null : (FormattableString)$"GetApiVersionOrNull({resourceTypeExpression})";
             var restCtor = GetRestConstructorString(client, apiVersionExpression);
             _writer.Line($"private {client.Type} {GetRestPropertyName(client, resource)} => {GetRestFieldName(client, resource)} ??= {restCtor};");

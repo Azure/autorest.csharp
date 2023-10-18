@@ -12,7 +12,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> This is a model without union types. </summary>
-    internal partial class UsualModel
+    public partial class UsualModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;

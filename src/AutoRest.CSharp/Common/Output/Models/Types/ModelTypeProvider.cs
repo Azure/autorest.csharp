@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parent = GetBaseObjectType();
             if (parent is ModelTypeProvider parentModelType)
             {
-                if (parentModelType.Methods.Any(m => m.Signature.Name == "FromResponse"))
+                if (parentModelType.Methods.Any(m => m.Signature.Name == Configuration.ApiTypes.FromResponseName))
                     signatures |= MethodSignatureModifiers.New;
             }
             return signatures;
@@ -514,6 +514,23 @@ namespace AutoRest.CSharp.Output.Models.Types
                 value,
                 _defaultDerivedType!
             );
+        }
+
+        internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
+        {
+            var result = new ModelTypeProvider(
+                _inputModel.ReplaceProperty(property, inputType),
+                DefaultNamespace,
+                _sourceInputModel,
+                _typeFactory,
+                _derivedTypes,
+                _defaultDerivedType);
+            return result;
+        }
+
+        internal InputModelProperty? GetProperty(InputModelType key)
+        {
+            return _inputModel.GetProperty(key);
         }
     }
 }

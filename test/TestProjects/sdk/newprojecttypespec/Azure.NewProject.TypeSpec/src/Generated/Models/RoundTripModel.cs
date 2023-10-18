@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> this is a roundtrip model. </summary>
-    internal partial class RoundTripModel
+    public partial class RoundTripModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;

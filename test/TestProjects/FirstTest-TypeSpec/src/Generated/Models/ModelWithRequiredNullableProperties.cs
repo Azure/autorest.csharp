@@ -12,7 +12,7 @@ using Azure.Core;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few required nullable properties. </summary>
-    internal partial class ModelWithRequiredNullableProperties
+    public partial class ModelWithRequiredNullableProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;

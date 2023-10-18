@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class IndirectSelfReferenceModel : IUtf8JsonSerializable, IModelJsonSerializable<IndirectSelfReferenceModel>
+    public partial class IndirectSelfReferenceModel : IUtf8JsonSerializable, IModelJsonSerializable<IndirectSelfReferenceModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IndirectSelfReferenceModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
@@ -29,7 +29,11 @@ namespace ConfidentLevelsInTsp.Models
                 writer.WriteObjectValue(Reference);
             }
             writer.WritePropertyName("unionProperty"u8);
-            writer.WriteObjectValue(UnionProperty);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(UnionProperty);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(UnionProperty.ToString()).RootElement);
+#endif
             if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -77,7 +81,7 @@ namespace ConfidentLevelsInTsp.Models
             }
             string something = default;
             Optional<NonConfidentModelWithSelfReference> reference = default;
-            object unionProperty = default;
+            BinaryData unionProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             if (options.Format == ModelSerializerFormat.Json)
@@ -100,7 +104,7 @@ namespace ConfidentLevelsInTsp.Models
                     }
                     if (property.NameEquals("unionProperty"u8))
                     {
-                        unionProperty = property.Value.GetObject();
+                        unionProperty = BinaryData.FromString(property.Value.GetRawText());
                         continue;
                     }
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));

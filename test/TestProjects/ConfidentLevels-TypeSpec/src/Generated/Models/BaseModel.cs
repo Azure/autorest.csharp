@@ -12,7 +12,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The base model. </summary>
-    internal partial class BaseModel
+    public partial class BaseModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;

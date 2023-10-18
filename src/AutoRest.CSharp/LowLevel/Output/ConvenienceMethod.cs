@@ -12,8 +12,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -48,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
                     if (converter.ConvenienceSpread == null)
                     {
                         var parameter = convenienceParameter.GetConversionFormattable(protocolParameter.Type);
-                        if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
+                        if (protocolParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
                         {
                             contentInfo = new RequestContentParameterInfo(new CodeWriterDeclaration(KnownParameters.RequestContent.Name), $"{parameter:I}");
                             parameters.Add($"{contentInfo.ContentVariable:I}");
@@ -109,12 +107,12 @@ namespace AutoRest.CSharp.Output.Models
         // RequestContext context = FromCancellationToken(cancellationToken);
         private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
         {
-            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+            writer.Line($"{Configuration.ApiTypes.RequestContextType} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
         }
 
         private static void WriteBodyToRequestContent(CodeWriter writer, CodeWriterDeclaration contentVariable, FormattableString requestContentValue)
         {
-            writer.Line($"using {typeof(RequestContent)} {contentVariable:D} = {requestContentValue};");
+            writer.Line($"using {Configuration.ApiTypes.RequestContentType} {contentVariable:D} = {requestContentValue};");
         }
 
         public bool IsDeprecatedForExamples()

@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class ModelWithFloatLiteralTypeProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithFloatLiteralTypeProperty>
+    public partial class ModelWithFloatLiteralTypeProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithFloatLiteralTypeProperty>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithFloatLiteralTypeProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 

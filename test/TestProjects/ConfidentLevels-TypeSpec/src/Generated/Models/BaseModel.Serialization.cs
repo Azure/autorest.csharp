@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class BaseModel : IUtf8JsonSerializable, IModelJsonSerializable<BaseModel>
+    public partial class BaseModel : IUtf8JsonSerializable, IModelJsonSerializable<BaseModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<BaseModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 

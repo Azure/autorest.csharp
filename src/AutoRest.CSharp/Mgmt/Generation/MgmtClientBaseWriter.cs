@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -21,8 +21,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -419,7 +417,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString ConstructClientDiagnostic(CodeWriter writer, FormattableString providerNamespace, string diagnosticsOptionsVariable)
         {
-            return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
+            return $"new {Configuration.ApiTypes.ClientDiagnosticsType}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
         protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)
@@ -449,7 +447,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return UseField ? names.RestField : names.RestProperty;
         }
 
-        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), typeof(ClientDiagnostics));
+        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), Configuration.ApiTypes.ClientDiagnosticsType);
         private string GetDiagnosticName(MgmtRestClient client, Resource? resource)
         {
             var names = This.GetRestDiagNames(new NameSetKey(client, resource));
@@ -609,7 +607,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({firstPageRequestArguments})";
             FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({nextPageRequestArguments})" : (FormattableString?)null;
-            var pipelineReference = new Reference("Pipeline", typeof(HttpPipeline));
+            var pipelineReference = new Reference("Pipeline", Configuration.ApiTypes.HttpPipelineType);
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
@@ -667,7 +665,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(operation)))
             {
-                var response = new CodeWriterDeclaration("response");
+                var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
@@ -678,7 +676,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer
                         .Line($"if ({response}.Value == null)")
-                        .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
+                        .Line($"throw new {Configuration.ApiTypes.RequestFailedExceptionType}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
@@ -690,7 +688,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{response}.Value");
                 if (valueConverter != null)
                 {
-                    _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {response}.GetRawResponse());");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {response}.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
                 else
                 {
@@ -758,7 +756,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var response = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"var {Configuration.ApiTypes.ResponseParameterName} = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -782,14 +780,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"response");
+                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{Configuration.ApiTypes.ResponseParameterName}");
                 if (valueConverter != null)
                 {
-                    _writer.Append($"{typeof(Response)}.FromValue({valueConverter}, response.GetRawResponse())");
+                    _writer.Append($"{Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}())");
                 }
                 else
                 {
-                    _writer.Append($"response");
+                    _writer.Append($"{Configuration.ApiTypes.ResponseParameterName}");
                 }
             }
             else
@@ -804,7 +802,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
+                _writer.Append($").Request, {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
 
                 if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationId))
                 {

@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace _Type.Union.Models
 {
-    internal partial class ModelWithNamedUnionProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithNamedUnionProperty>
+    public partial class ModelWithNamedUnionProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithNamedUnionProperty>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithNamedUnionProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
@@ -22,7 +22,11 @@ namespace _Type.Union.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("namedUnion"u8);
-            writer.WriteObjectValue(NamedUnion);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(NamedUnion);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(NamedUnion.ToString()).RootElement);
+#endif
             if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -68,7 +72,7 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            object namedUnion = default;
+            BinaryData namedUnion = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             if (options.Format == ModelSerializerFormat.Json)
@@ -77,7 +81,7 @@ namespace _Type.Union.Models
                 {
                     if (property.NameEquals("namedUnion"u8))
                     {
-                        namedUnion = property.Value.GetObject();
+                        namedUnion = BinaryData.FromString(property.Value.GetRawText());
                         continue;
                     }
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));

@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class DerivedModelWithUnion : IUtf8JsonSerializable, IModelJsonSerializable<DerivedModelWithUnion>
+    public partial class DerivedModelWithUnion : IUtf8JsonSerializable, IModelJsonSerializable<DerivedModelWithUnion>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DerivedModelWithUnion>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
@@ -22,7 +22,11 @@ namespace ConfidentLevelsInTsp.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("unionProperty"u8);
-            writer.WriteObjectValue(UnionProperty);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(UnionProperty);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(UnionProperty.ToString()).RootElement);
+#endif
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (Optional.IsDefined(Size))
@@ -75,7 +79,7 @@ namespace ConfidentLevelsInTsp.Models
             {
                 return null;
             }
-            object unionProperty = default;
+            BinaryData unionProperty = default;
             string name = default;
             Optional<double> size = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -86,7 +90,7 @@ namespace ConfidentLevelsInTsp.Models
                 {
                     if (property.NameEquals("unionProperty"u8))
                     {
-                        unionProperty = property.Value.GetObject();
+                        unionProperty = BinaryData.FromString(property.Value.GetRawText());
                         continue;
                     }
                     if (property.NameEquals("name"u8))

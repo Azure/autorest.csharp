@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace _Type.Union.Models
 {
-    internal partial class ModelWithSimpleUnionProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithSimpleUnionProperty>
+    public partial class ModelWithSimpleUnionProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithSimpleUnionProperty>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithSimpleUnionProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
@@ -22,7 +22,11 @@ namespace _Type.Union.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("simpleUnion"u8);
-            writer.WriteObjectValue(SimpleUnion);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(SimpleUnion);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(SimpleUnion.ToString()).RootElement);
+#endif
             if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -68,7 +72,7 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            object simpleUnion = default;
+            BinaryData simpleUnion = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             if (options.Format == ModelSerializerFormat.Json)
@@ -77,7 +81,7 @@ namespace _Type.Union.Models
                 {
                     if (property.NameEquals("simpleUnion"u8))
                     {
-                        simpleUnion = property.Value.GetObject();
+                        simpleUnion = BinaryData.FromString(property.Value.GetRawText());
                         continue;
                     }
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));

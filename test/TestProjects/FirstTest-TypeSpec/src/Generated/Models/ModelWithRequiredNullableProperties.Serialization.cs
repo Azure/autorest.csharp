@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    internal partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithRequiredNullableProperties>
+    public partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithRequiredNullableProperties>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithRequiredNullableProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 

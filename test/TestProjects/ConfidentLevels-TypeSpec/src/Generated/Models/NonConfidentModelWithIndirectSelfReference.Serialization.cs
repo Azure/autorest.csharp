@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class NonConfidentModelWithIndirectSelfReference : IUtf8JsonSerializable, IModelJsonSerializable<NonConfidentModelWithIndirectSelfReference>
+    public partial class NonConfidentModelWithIndirectSelfReference : IUtf8JsonSerializable, IModelJsonSerializable<NonConfidentModelWithIndirectSelfReference>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NonConfidentModelWithIndirectSelfReference>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 

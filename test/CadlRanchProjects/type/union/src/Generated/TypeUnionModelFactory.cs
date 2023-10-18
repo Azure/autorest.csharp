@@ -13,5 +13,26 @@ namespace _Type.Union.Models
     /// <summary> Model factory for models. </summary>
     public static partial class TypeUnionModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithSimpleUnionPropertyInResponse"/>. </summary>
+        /// <param name="simpleUnion"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        /// <returns> A new <see cref="Models.ModelWithSimpleUnionPropertyInResponse"/> instance for mocking. </returns>
+        public static ModelWithSimpleUnionPropertyInResponse ModelWithSimpleUnionPropertyInResponse(BinaryData simpleUnion = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        {
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new ModelWithSimpleUnionPropertyInResponse(simpleUnion, serializedAdditionalRawData);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithNamedUnionPropertyInResponse"/>. </summary>
+        /// <param name="namedUnion"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        /// <returns> A new <see cref="Models.ModelWithNamedUnionPropertyInResponse"/> instance for mocking. </returns>
+        public static ModelWithNamedUnionPropertyInResponse ModelWithNamedUnionPropertyInResponse(BinaryData namedUnion = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        {
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new ModelWithNamedUnionPropertyInResponse(namedUnion, serializedAdditionalRawData);
+        }
     }
 }
