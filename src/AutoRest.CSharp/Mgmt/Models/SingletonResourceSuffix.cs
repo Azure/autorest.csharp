@@ -63,30 +63,5 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             return result;
         }
-
-        public FormattableString BuildResourceIdentifier(FormattableString originalId)
-        {
-            var list = new List<FormattableString>() { originalId };
-            for (int i = 0; i < _pairs.Count; i++)
-            {
-                var key = _pairs[i].Key;
-                var value = _pairs[i].Value;
-                if (key == Segment.Providers)
-                {
-                    // when we have a providers, we must have a next pair
-                    i++;
-                    var nextKey = _pairs[i].Key;
-                    var nextValue = _pairs[i].Value;
-                    list.Add($"{nameof(ResourceIdentifier.AppendProviderResource)}({value:L}, {nextKey:L}, {nextValue:L})");
-                }
-                else
-                {
-                    // if not, we just call the method to append this pair
-                    list.Add($"{nameof(ResourceIdentifier.AppendChildResource)}({key:L}, {value:L})");
-                }
-            }
-
-            return list.Join(".");
-        }
     }
 }

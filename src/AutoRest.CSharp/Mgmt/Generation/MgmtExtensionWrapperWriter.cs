@@ -26,19 +26,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 _writer.WriteMethod(extension.MockingExtensionFactoryMethod);
             }
-            //foreach (var extensionClient in This.MockingExtensions)
-            //{
-            //    if (extensionClient.IsEmpty)
-            //        continue;
-
-            //    _writer.Line();
-
-            //    var method = extensionClient.FactoryMethod;
-            //    using (_writer.WriteMethodDeclaration(method.Signature))
-            //    {
-            //        method.MethodBodyImplementation(_writer);
-            //    }
-            //}
 
             base.WritePrivateHelpers();
         }
