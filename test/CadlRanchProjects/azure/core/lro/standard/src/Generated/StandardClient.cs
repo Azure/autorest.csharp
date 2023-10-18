@@ -267,8 +267,8 @@ namespace _Azure.Lro.Standard
             Operation<BinaryData> response = await ExportAsync(waitUntil, name, format, context).ConfigureAwait(false);
             return ProtocolOperationHelpers.Convert(response, r =>
             {
-                ResourceOperationStatusUserExportedUserError rawResponse = ResourceOperationStatusUserExportedUserError.FromResponse(r);
-                return rawResponse.Result;
+                var resultJsonElement = System.Text.Json.JsonDocument.Parse(r.Content).RootElement.GetProperty("result");
+                return ExportedUser.DeserializeExportedUser(resultJsonElement);
             }, ClientDiagnostics, "StandardClient.Export");
         }
 
@@ -290,8 +290,8 @@ namespace _Azure.Lro.Standard
             Operation<BinaryData> response = Export(waitUntil, name, format, context);
             return ProtocolOperationHelpers.Convert(response, r =>
             {
-                ResourceOperationStatusUserExportedUserError rawResponse = ResourceOperationStatusUserExportedUserError.FromResponse(r);
-                return rawResponse.Result;
+                var resultJsonElement = System.Text.Json.JsonDocument.Parse(r.Content).RootElement.GetProperty("result");
+                return ExportedUser.DeserializeExportedUser(resultJsonElement);
             }, ClientDiagnostics, "StandardClient.Export");
         }
 

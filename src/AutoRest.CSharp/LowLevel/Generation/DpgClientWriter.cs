@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
@@ -373,10 +374,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{responseType.Name}.FromResponse";
             }
 
-            var bodyType = longRunning.FinalResponse.BodyType!;
             return @$"r => {{
-                {bodyType.Name} rawResponse = {bodyType.Name}.FromResponse(r);
-                return rawResponse.{longRunning.FinalResponse.ResultPath!.ToCleanName()};
+                var resultJsonElement = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(r.{nameof(Response.Content)}).{nameof(JsonDocument.RootElement)}.{nameof(JsonElement.GetProperty)}(""{longRunning.FinalResponse.ResultPath}"");
+                return {longRunning.ReturnType!.Name}.Deserialize{longRunning.ReturnType.Name}(resultJsonElement);
             }}";
         }
 
