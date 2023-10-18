@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Utilities;
+using System.Numerics;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -130,36 +131,60 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 Console.WriteLine($"Dealing with resource {resource.Type.Name}");
 
                 var resourceModel = new ResourceModel();
-                resourceModel.Operations = new List<ResourceOperation>();
-                var subscriptionExtension = MgmtContext.Library.GetExtension(typeof(SubscriptionResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName);
-                var resourceGroupExtension = MgmtContext.Library.GetExtension(typeof(ResourceGroupResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName);
-                var tenantExtension = MgmtContext.Library.GetExtension(typeof(TenantResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName);
-                var managementGroupExtension = MgmtContext.Library.GetExtension(typeof(ManagementGroupResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName);
-                var extensions = subscriptionExtension.Concat(resourceGroupExtension).Concat(tenantExtension).Concat(managementGroupExtension);
-                resource.AllOperations.ToList().ForEach(o => o.ToList().ForEach(op => Console.WriteLine(op.OperationId)));
-                resource.AllOperations.Concat(extensions).Concat(resource.ResourceCollection?.AllOperations ?? Enumerable.Empty<MgmtClientOperation>()).SelectMany(o => o).ToList().ForEach(r =>
+                resourceModel.GetOperations = new List<ResourceOperation>();
+                resourceModel.CreateOperations = new List<ResourceOperation>();
+                resourceModel.UpdateOperations = new List<ResourceOperation>();
+                resourceModel.DeleteOperations = new List<ResourceOperation>();
+                resourceModel.ListOperations = new List<ResourceOperation>();
+                resourceModel.OperationsFromResourceGroupExtension = new List<ResourceOperation>();
+                resourceModel.OperationsFromSubscriptionExtension = new List<ResourceOperation>();
+                resourceModel.OperationsFromManagementGroupExtension = new List<ResourceOperation>();
+                resourceModel.OperationsFromTenantExtension = new List<ResourceOperation>();
+                resourceModel.OtherOperations = new List<ResourceOperation>();
+
+                MgmtContext.Library.GetExtension(typeof(ResourceGroupResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName).SelectMany(o => o).ToList().ForEach(r =>
                 {
-                    if (!resourceModel.Operations.Any(o => o.OperationID == r.OperationId))
+                    resourceModel.OperationsFromResourceGroupExtension.Add(convertOperation(r));
+                });
+                MgmtContext.Library.GetExtension(typeof(SubscriptionResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName).SelectMany(o => o).ToList().ForEach(r =>
+                {
+                    resourceModel.OperationsFromSubscriptionExtension.Add(convertOperation(r));
+                });
+                MgmtContext.Library.GetExtension(typeof(ManagementGroupResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName).SelectMany(o => o).ToList().ForEach(r =>
+                {
+                    resourceModel.OperationsFromSubscriptionExtension.Add(convertOperation(r));
+                });
+                MgmtContext.Library.GetExtension(typeof(TenantResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName).SelectMany(o => o).ToList().ForEach(r =>
+                {
+                    resourceModel.OperationsFromSubscriptionExtension.Add(convertOperation(r));
+                });
+
+                if (resource.ResourceCollection != null && resource.ResourceCollection.GetAllOperation != null)
+                {
+                    resource.ResourceCollection.GetAllOperation.ToList().ForEach(o => resourceModel.ListOperations.Add(convertOperation(o)));
+                }
+
+                resource.GetOperation.ToList().ForEach(o => resourceModel.GetOperations.Add(convertOperation(o)));
+
+                if (resource.CreateOperation != null)
+                {
+                    resource.CreateOperation.ToList().ForEach(o => resourceModel.CreateOperations.Add(convertOperation(o)));
+                }
+                if (resource.UpdateOperation != null)
+                {
+                    resource.UpdateOperation.ToList().ForEach(o => resourceModel.UpdateOperations.Add(convertOperation(o)));
+                }
+                if (resource.DeleteOperation != null)
+                {
+                    resource.DeleteOperation.ToList().ForEach(o => resourceModel.DeleteOperations.Add(convertOperation(o)));
+                }
+
+                var existedOperation = resourceModel.GetOperations.Concat(resourceModel.CreateOperations).Concat(resourceModel.UpdateOperations).Concat(resourceModel.DeleteOperations);
+                resource.AllOperations.SelectMany(o => o).ToList().ForEach(r =>
+                {
+                    if (!existedOperation.Any(o => o.OperationID == r.OperationId))
                     {
-                        var resourceOperation = new ResourceOperation();
-                        resourceOperation.OperationID = r.OperationId;
-                        resourceOperation.Method = r.Method.Request.HttpMethod.ToString();
-                        resourceOperation.Path = r.RequestPath;
-                        resourceOperation.IsLongRunning = r.IsLongRunningOperation;
-                        resourceOperation.Description = r.Description;
-
-                        if (r.PagingMethod != null)
-                        {
-                            resourceOperation.PagingMetadata = new PagingMetadata()
-                            {
-                                ItemName = r.PagingMethod.ItemName,
-                                Method = r.PagingMethod.Method.Name,
-                                NextLinkName = r.PagingMethod.NextLinkName,
-                                NextPageMethod = r.PagingMethod.NextPageMethod?.Name
-                            };
-                        }
-
-                        resourceModel.Operations.Add(resourceOperation);
+                        resourceModel.OtherOperations.Add(convertOperation(r));
                     }
                 });
 
@@ -229,6 +254,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
                 await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
             }
+        }
+
+        private static ResourceOperation convertOperation(MgmtRestOperation o)
+        {
+            var resourceOperation = new ResourceOperation();
+            resourceOperation.Name = o.Name;
+            resourceOperation.OperationID = o.OperationId;
+            resourceOperation.Method = o.Method.Request.HttpMethod.ToString();
+            resourceOperation.Path = o.RequestPath;
+            resourceOperation.IsLongRunning = o.IsLongRunningOperation;
+            resourceOperation.Description = o.Description;
+
+            if (o.PagingMethod != null)
+            {
+                resourceOperation.PagingMetadata = new PagingMetadata()
+                {
+                    ItemName = o.PagingMethod.ItemName,
+                    Method = o.PagingMethod.Method.Name,
+                    NextLinkName = o.PagingMethod.NextLinkName,
+                    NextPageMethod = o.PagingMethod.NextPageMethod?.Name
+                };
+            }
+            return resourceOperation;
         }
 
         private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients)
