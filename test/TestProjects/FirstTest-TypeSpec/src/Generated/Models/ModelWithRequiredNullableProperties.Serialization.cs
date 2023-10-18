@@ -98,44 +98,44 @@ namespace FirstTestTypeSpec.Models
             StringFixedEnum? requiredFixedEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("requiredNullablePrimitive"u8))
                 {
-                    if (property.NameEquals("requiredNullablePrimitive"u8))
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            requiredNullablePrimitive = null;
-                            continue;
-                        }
-                        requiredNullablePrimitive = property.Value.GetInt32();
+                        requiredNullablePrimitive = null;
                         continue;
                     }
-                    if (property.NameEquals("requiredExtensibleEnum"u8))
+                    requiredNullablePrimitive = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("requiredExtensibleEnum"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            requiredExtensibleEnum = null;
-                            continue;
-                        }
-                        requiredExtensibleEnum = new StringExtensibleEnum(property.Value.GetString());
+                        requiredExtensibleEnum = null;
                         continue;
                     }
-                    if (property.NameEquals("requiredFixedEnum"u8))
+                    requiredExtensibleEnum = new StringExtensibleEnum(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("requiredFixedEnum"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            requiredFixedEnum = null;
-                            continue;
-                        }
-                        requiredFixedEnum = property.Value.GetString().ToStringFixedEnum();
+                        requiredFixedEnum = null;
                         continue;
                     }
+                    requiredFixedEnum = property.Value.GetString().ToStringFixedEnum();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum, serializedAdditionalRawData);
         }
 

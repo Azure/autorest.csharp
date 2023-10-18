@@ -522,7 +522,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    yield return Declare(variable.Value, Snippets.Default);
+                    yield return Declare(variable.Value, Default);
                 }
             }
 
@@ -532,28 +532,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 var dictionary = new VariableReference(objAdditionalProperties.Type, "additionalPropertiesDictionary");
                 yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
-
-                var statements = new MethodBodyStatement[]
+                yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
-                    new ForeachStatement("property", element.EnumerateObject(), out var property)
-                    {
-                        DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties.ValueSerialization, new JsonPropertyExpression(property), new DictionaryExpression(TypeFactory.GetElementType(objAdditionalProperties.Type), dictionary), propertyVariables, shouldTreatEmptyStringAsNull)
-                    },
-                    Assign(propertyVariables[objAdditionalProperties], dictionary)
+                    DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties, new JsonPropertyExpression(property), new DictionaryExpression(TypeFactory.GetElementType(objAdditionalProperties.Type), dictionary), propertyVariables, shouldTreatEmptyStringAsNull).ToArray()
                 };
-
-                // if the format is not json, we do not generate the extra raw data
-                if (objAdditionalProperties.ShouldExcludeInWireSerialization)
-                {
-                    yield return new IfStatement(isJsonFormatExpression)
-                    {
-                        statements
-                    };
-                }
-                else
-                {
-                    yield return statements;
-                }
+                yield return new AssignValueStatement(propertyVariables[objAdditionalProperties], dictionary);
             }
             else
             {
@@ -571,19 +554,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Return(New.Instance(serialization.Type, parameters));
         }
 
-        private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonSerialization? additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
+        private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonAdditionalPropertiesSerialization additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
-            if (additionalPropertiesSerialization is null)
-            {
-                return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
-            }
+            yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
+            // in the case here, this line returns an empty statement, we only want the value here
+            DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
+            var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
 
-            return new[]
+            if (additionalPropertiesSerialization.ShouldExcludeInWireSerialization)
             {
-                DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
-                DeserializeValue(additionalPropertiesSerialization, jsonProperty.Value, out var value),
-                dictionary.Add(jsonProperty.Name, value)
-            };
+                yield return new IfStatement(isJsonFormatExpression)
+                {
+                    additionalPropertiesStatement
+                };
+            }
+            else
+            {
+                yield return additionalPropertiesStatement;
+            }
         }
 
         private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
@@ -808,7 +796,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case JsonValueSerialization valueSerialization:
                     value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format);
-                    return new MethodBodyStatement();
+                    return MethodBodyStatement.Empty;
 
                 default:
                     throw new InvalidOperationException($"{serialization.GetType()} is not supported.");
