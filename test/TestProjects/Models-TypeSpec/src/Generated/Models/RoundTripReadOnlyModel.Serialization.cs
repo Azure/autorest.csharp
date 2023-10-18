@@ -289,246 +289,246 @@ namespace ModelsTypeSpec.Models
             Optional<IReadOnlyList<bool?>> optionalCollectionWithNullableBooleanElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("requiredReadonlyString"u8))
                 {
-                    if (property.NameEquals("requiredReadonlyString"u8))
+                    requiredReadonlyString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredReadonlyInt"u8))
+                {
+                    requiredReadonlyInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("optionalReadonlyString"u8))
+                {
+                    optionalReadonlyString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("optionalReadonlyInt"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        requiredReadonlyString = property.Value.GetString();
                         continue;
                     }
-                    if (property.NameEquals("requiredReadonlyInt"u8))
+                    optionalReadonlyInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("requiredReadonlyModel"u8))
+                {
+                    requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("optionalReadonlyModel"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        requiredReadonlyInt = property.Value.GetInt32();
                         continue;
                     }
-                    if (property.NameEquals("optionalReadonlyString"u8))
+                    optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("requiredReadonlyFixedStringEnum"u8))
+                {
+                    requiredReadonlyFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
+                    continue;
+                }
+                if (property.NameEquals("requiredReadonlyExtensibleEnum"u8))
+                {
+                    requiredReadonlyExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("optionalReadonlyFixedStringEnum"u8))
+                {
+                    optionalReadonlyFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
+                    continue;
+                }
+                if (property.NameEquals("optionalReadonlyExtensibleEnum"u8))
+                {
+                    optionalReadonlyExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("requiredReadonlyStringList"u8))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        optionalReadonlyString = property.Value.GetString();
+                        array.Add(item.GetString());
+                    }
+                    requiredReadonlyStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredReadonlyIntList"u8))
+                {
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredReadonlyIntList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredReadOnlyModelList"u8))
+                {
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                    }
+                    requiredReadOnlyModelList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredReadOnlyIntRecord"u8))
+                {
+                    Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetInt32());
+                    }
+                    requiredReadOnlyIntRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("requiredStringRecord"u8))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    requiredStringRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("requiredReadOnlyModelRecord"u8))
+                {
+                    Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                    }
+                    requiredReadOnlyModelRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("optionalReadonlyStringList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
-                    if (property.NameEquals("optionalReadonlyInt"u8))
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        array.Add(item.GetString());
+                    }
+                    optionalReadonlyStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalReadonlyIntList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    optionalReadonlyIntList = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalReadOnlyModelList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                    }
+                    optionalReadOnlyModelList = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalReadOnlyIntRecord"u8))
+                {
+                    Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetInt32());
+                    }
+                    optionalReadOnlyIntRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("optionalReadOnlyStringRecord"u8))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    optionalReadOnlyStringRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("optionalModelRecord"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                    }
+                    optionalModelRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("requiredCollectionWithNullableIntElement"u8))
+                {
+                    List<int?> array = new List<int?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            continue;
+                            array.Add(null);
                         }
-                        optionalReadonlyInt = property.Value.GetInt32();
-                        continue;
-                    }
-                    if (property.NameEquals("requiredReadonlyModel"u8))
-                    {
-                        requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
-                        continue;
-                    }
-                    if (property.NameEquals("optionalReadonlyModel"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
-                        continue;
-                    }
-                    if (property.NameEquals("requiredReadonlyFixedStringEnum"u8))
-                    {
-                        requiredReadonlyFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
-                        continue;
-                    }
-                    if (property.NameEquals("requiredReadonlyExtensibleEnum"u8))
-                    {
-                        requiredReadonlyExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
-                        continue;
-                    }
-                    if (property.NameEquals("optionalReadonlyFixedStringEnum"u8))
-                    {
-                        optionalReadonlyFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
-                        continue;
-                    }
-                    if (property.NameEquals("optionalReadonlyExtensibleEnum"u8))
-                    {
-                        optionalReadonlyExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
-                        continue;
-                    }
-                    if (property.NameEquals("requiredReadonlyStringList"u8))
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetString());
-                        }
-                        requiredReadonlyStringList = array;
-                        continue;
-                    }
-                    if (property.NameEquals("requiredReadonlyIntList"u8))
-                    {
-                        List<int> array = new List<int>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        else
                         {
                             array.Add(item.GetInt32());
                         }
-                        requiredReadonlyIntList = array;
-                        continue;
                     }
-                    if (property.NameEquals("requiredReadOnlyModelList"u8))
+                    requiredCollectionWithNullableIntElement = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalCollectionWithNullableBooleanElement"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        List<CollectionItem> array = new List<CollectionItem>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(CollectionItem.DeserializeCollectionItem(item));
-                        }
-                        requiredReadOnlyModelList = array;
                         continue;
                     }
-                    if (property.NameEquals("requiredReadOnlyIntRecord"u8))
+                    List<bool?> array = new List<bool?>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                        foreach (var property0 in property.Value.EnumerateObject())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            dictionary.Add(property0.Name, property0.Value.GetInt32());
+                            array.Add(null);
                         }
-                        requiredReadOnlyIntRecord = dictionary;
-                        continue;
+                        else
+                        {
+                            array.Add(item.GetBoolean());
+                        }
                     }
-                    if (property.NameEquals("requiredStringRecord"u8))
-                    {
-                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
-                        requiredStringRecord = dictionary;
-                        continue;
-                    }
-                    if (property.NameEquals("requiredReadOnlyModelRecord"u8))
-                    {
-                        Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
-                        }
-                        requiredReadOnlyModelRecord = dictionary;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalReadonlyStringList"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetString());
-                        }
-                        optionalReadonlyStringList = array;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalReadonlyIntList"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<int> array = new List<int>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetInt32());
-                        }
-                        optionalReadonlyIntList = array;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalReadOnlyModelList"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<CollectionItem> array = new List<CollectionItem>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(CollectionItem.DeserializeCollectionItem(item));
-                        }
-                        optionalReadOnlyModelList = array;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalReadOnlyIntRecord"u8))
-                    {
-                        Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetInt32());
-                        }
-                        optionalReadOnlyIntRecord = dictionary;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalReadOnlyStringRecord"u8))
-                    {
-                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
-                        optionalReadOnlyStringRecord = dictionary;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalModelRecord"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
-                        }
-                        optionalModelRecord = dictionary;
-                        continue;
-                    }
-                    if (property.NameEquals("requiredCollectionWithNullableIntElement"u8))
-                    {
-                        List<int?> array = new List<int?>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                        }
-                        requiredCollectionWithNullableIntElement = array;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalCollectionWithNullableBooleanElement"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<bool?> array = new List<bool?>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetBoolean());
-                            }
-                        }
-                        optionalCollectionWithNullableBooleanElement = array;
-                        continue;
-                    }
+                    optionalCollectionWithNullableBooleanElement = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelList), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement), serializedAdditionalRawData);
         }
 

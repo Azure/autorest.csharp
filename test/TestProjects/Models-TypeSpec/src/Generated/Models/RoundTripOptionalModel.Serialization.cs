@@ -201,187 +201,187 @@ namespace ModelsTypeSpec.Models
             Optional<IList<int?>> optionalCollectionWithNullableIntElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("optionalString"u8))
                 {
-                    if (property.NameEquals("optionalString"u8))
+                    optionalString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("optionalInt"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalString = property.Value.GetString();
                         continue;
                     }
-                    if (property.NameEquals("optionalInt"u8))
+                    optionalInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("optionalStringList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        optionalInt = property.Value.GetInt32();
                         continue;
                     }
-                    if (property.NameEquals("optionalStringList"u8))
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetString());
-                        }
-                        optionalStringList = array;
+                        array.Add(item.GetString());
+                    }
+                    optionalStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalIntList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
-                    if (property.NameEquals("optionalIntList"u8))
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
+                        array.Add(item.GetInt32());
+                    }
+                    optionalIntList = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalModelList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                    }
+                    optionalModelList = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalModel"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("optionalModelWithPropertiesOnBase"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("optionalFixedStringEnum"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
+                    continue;
+                }
+                if (property.NameEquals("optionalExtensibleEnum"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("optionalIntRecord"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetInt32());
+                    }
+                    optionalIntRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("optionalStringRecord"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    optionalStringRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("optionalModelRecord"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                    }
+                    optionalModelRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("optionalPlainDate"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalPlainDate = property.Value.GetDateTimeOffset("D");
+                    continue;
+                }
+                if (property.NameEquals("optionalPlainTime"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalPlainTime = property.Value.GetTimeSpan("T");
+                    continue;
+                }
+                if (property.NameEquals("optionalCollectionWithNullableIntElement"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int?> array = new List<int?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            continue;
+                            array.Add(null);
                         }
-                        List<int> array = new List<int>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        else
                         {
                             array.Add(item.GetInt32());
                         }
-                        optionalIntList = array;
-                        continue;
                     }
-                    if (property.NameEquals("optionalModelList"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<CollectionItem> array = new List<CollectionItem>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(CollectionItem.DeserializeCollectionItem(item));
-                        }
-                        optionalModelList = array;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalModel"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        optionalModel = DerivedModel.DeserializeDerivedModel(property.Value);
-                        continue;
-                    }
-                    if (property.NameEquals("optionalModelWithPropertiesOnBase"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value);
-                        continue;
-                    }
-                    if (property.NameEquals("optionalFixedStringEnum"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        optionalFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
-                        continue;
-                    }
-                    if (property.NameEquals("optionalExtensibleEnum"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        optionalExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
-                        continue;
-                    }
-                    if (property.NameEquals("optionalIntRecord"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetInt32());
-                        }
-                        optionalIntRecord = dictionary;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalStringRecord"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
-                        optionalStringRecord = dictionary;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalModelRecord"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
-                        }
-                        optionalModelRecord = dictionary;
-                        continue;
-                    }
-                    if (property.NameEquals("optionalPlainDate"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        optionalPlainDate = property.Value.GetDateTimeOffset("D");
-                        continue;
-                    }
-                    if (property.NameEquals("optionalPlainTime"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        optionalPlainTime = property.Value.GetTimeSpan("T");
-                        continue;
-                    }
-                    if (property.NameEquals("optionalCollectionWithNullableIntElement"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<int?> array = new List<int?>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                        }
-                        optionalCollectionWithNullableIntElement = array;
-                        continue;
-                    }
+                    optionalCollectionWithNullableIntElement = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoundTripOptionalModel(optionalString.Value, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelList), optionalModel.Value, optionalModelWithPropertiesOnBase.Value, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement), serializedAdditionalRawData);
         }
 

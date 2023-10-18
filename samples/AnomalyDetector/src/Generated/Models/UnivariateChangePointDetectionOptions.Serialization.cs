@@ -103,65 +103,65 @@ namespace AnomalyDetector.Models
             Optional<float> threshold = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("series"u8))
                 {
-                    if (property.NameEquals("series"u8))
+                    List<TimeSeriesPoint> array = new List<TimeSeriesPoint>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        List<TimeSeriesPoint> array = new List<TimeSeriesPoint>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(TimeSeriesPoint.DeserializeTimeSeriesPoint(item));
-                        }
-                        series = array;
+                        array.Add(TimeSeriesPoint.DeserializeTimeSeriesPoint(item));
+                    }
+                    series = array;
+                    continue;
+                }
+                if (property.NameEquals("granularity"u8))
+                {
+                    granularity = property.Value.GetString().ToTimeGranularity();
+                    continue;
+                }
+                if (property.NameEquals("customInterval"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
-                    if (property.NameEquals("granularity"u8))
+                    customInterval = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("period"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        granularity = property.Value.GetString().ToTimeGranularity();
                         continue;
                     }
-                    if (property.NameEquals("customInterval"u8))
+                    period = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("stableTrendWindow"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        customInterval = property.Value.GetInt32();
                         continue;
                     }
-                    if (property.NameEquals("period"u8))
+                    stableTrendWindow = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("threshold"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        period = property.Value.GetInt32();
                         continue;
                     }
-                    if (property.NameEquals("stableTrendWindow"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        stableTrendWindow = property.Value.GetInt32();
-                        continue;
-                    }
-                    if (property.NameEquals("threshold"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        threshold = property.Value.GetSingle();
-                        continue;
-                    }
+                    threshold = property.Value.GetSingle();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnivariateChangePointDetectionOptions(series, granularity, Optional.ToNullable(customInterval), Optional.ToNullable(period), Optional.ToNullable(stableTrendWindow), Optional.ToNullable(threshold), serializedAdditionalRawData);
         }
 

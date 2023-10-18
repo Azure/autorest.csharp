@@ -84,33 +84,33 @@ namespace ConfidentLevelsInTsp.Models
             Optional<double> size = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("unionProperty"u8))
                 {
-                    if (property.NameEquals("unionProperty"u8))
+                    unionProperty = BinaryData.FromString(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("size"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        unionProperty = BinaryData.FromString(property.Value.GetRawText());
                         continue;
                     }
-                    if (property.NameEquals("name"u8))
-                    {
-                        name = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("size"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        size = property.Value.GetDouble();
-                        continue;
-                    }
+                    size = property.Value.GetDouble();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DerivedModelWithUnion(name, Optional.ToNullable(size), serializedAdditionalRawData, unionProperty);
         }
 

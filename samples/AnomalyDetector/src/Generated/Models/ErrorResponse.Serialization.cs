@@ -74,24 +74,24 @@ namespace AnomalyDetector.Models
             string message = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("code"u8))
                 {
-                    if (property.NameEquals("code"u8))
-                    {
-                        code = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("message"u8))
-                    {
-                        message = property.Value.GetString();
-                        continue;
-                    }
+                    code = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("message"u8))
+                {
+                    message = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ErrorResponse(code, message, serializedAdditionalRawData);
         }
 

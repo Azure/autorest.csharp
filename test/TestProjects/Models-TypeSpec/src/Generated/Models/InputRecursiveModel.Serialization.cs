@@ -77,28 +77,28 @@ namespace ModelsTypeSpec.Models
             Optional<InputRecursiveModel> inner = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("message"u8))
                 {
-                    if (property.NameEquals("message"u8))
+                    message = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("inner"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        message = property.Value.GetString();
                         continue;
                     }
-                    if (property.NameEquals("inner"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        inner = DeserializeInputRecursiveModel(property.Value);
-                        continue;
-                    }
+                    inner = DeserializeInputRecursiveModel(property.Value);
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new InputRecursiveModel(message, inner.Value, serializedAdditionalRawData);
         }
 

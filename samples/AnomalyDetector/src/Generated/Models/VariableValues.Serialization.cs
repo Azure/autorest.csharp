@@ -87,39 +87,39 @@ namespace AnomalyDetector.Models
             IList<float> values = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("variable"u8))
                 {
-                    if (property.NameEquals("variable"u8))
+                    variable = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("timestamps"u8))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        variable = property.Value.GetString();
-                        continue;
+                        array.Add(item.GetString());
                     }
-                    if (property.NameEquals("timestamps"u8))
+                    timestamps = array;
+                    continue;
+                }
+                if (property.NameEquals("values"u8))
+                {
+                    List<float> array = new List<float>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetString());
-                        }
-                        timestamps = array;
-                        continue;
+                        array.Add(item.GetSingle());
                     }
-                    if (property.NameEquals("values"u8))
-                    {
-                        List<float> array = new List<float>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetSingle());
-                        }
-                        values = array;
-                        continue;
-                    }
+                    values = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VariableValues(variable, timestamps, values, serializedAdditionalRawData);
         }
 

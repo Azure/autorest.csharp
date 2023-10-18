@@ -77,24 +77,24 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, RecordItem> requiredModelRecord = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("requiredModelRecord"u8))
                 {
-                    if (property.NameEquals("requiredModelRecord"u8))
+                    Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
-                        }
-                        requiredModelRecord = dictionary;
-                        continue;
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
                     }
+                    requiredModelRecord = dictionary;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CollectionItem(requiredModelRecord, serializedAdditionalRawData);
         }
 

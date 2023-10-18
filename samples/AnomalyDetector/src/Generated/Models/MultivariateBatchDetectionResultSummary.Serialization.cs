@@ -96,52 +96,52 @@ namespace AnomalyDetector.Models
             MultivariateBatchDetectionOptions setupInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("status"u8))
                 {
-                    if (property.NameEquals("status"u8))
+                    status = property.Value.GetString().ToMultivariateBatchDetectionStatus();
+                    continue;
+                }
+                if (property.NameEquals("errors"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        status = property.Value.GetString().ToMultivariateBatchDetectionStatus();
                         continue;
                     }
-                    if (property.NameEquals("errors"u8))
+                    List<ErrorResponse> array = new List<ErrorResponse>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<ErrorResponse> array = new List<ErrorResponse>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(ErrorResponse.DeserializeErrorResponse(item));
-                        }
-                        errors = array;
+                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                    }
+                    errors = array;
+                    continue;
+                }
+                if (property.NameEquals("variableStates"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
-                    if (property.NameEquals("variableStates"u8))
+                    List<VariableState> array = new List<VariableState>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<VariableState> array = new List<VariableState>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(VariableState.DeserializeVariableState(item));
-                        }
-                        variableStates = array;
-                        continue;
+                        array.Add(VariableState.DeserializeVariableState(item));
                     }
-                    if (property.NameEquals("setupInfo"u8))
-                    {
-                        setupInfo = MultivariateBatchDetectionOptions.DeserializeMultivariateBatchDetectionOptions(property.Value);
-                        continue;
-                    }
+                    variableStates = array;
+                    continue;
+                }
+                if (property.NameEquals("setupInfo"u8))
+                {
+                    setupInfo = MultivariateBatchDetectionOptions.DeserializeMultivariateBatchDetectionOptions(property.Value);
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MultivariateBatchDetectionResultSummary(status, Optional.ToList(errors), Optional.ToList(variableStates), setupInfo, serializedAdditionalRawData);
         }
 

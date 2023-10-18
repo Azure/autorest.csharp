@@ -98,55 +98,55 @@ namespace AnomalyDetector.Models
             Optional<DateTimeOffset> lastTimestamp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("variable"u8))
                 {
-                    if (property.NameEquals("variable"u8))
+                    variable = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("filledNARatio"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        variable = property.Value.GetString();
                         continue;
                     }
-                    if (property.NameEquals("filledNARatio"u8))
+                    filledNARatio = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("effectiveCount"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        filledNARatio = property.Value.GetSingle();
                         continue;
                     }
-                    if (property.NameEquals("effectiveCount"u8))
+                    effectiveCount = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("firstTimestamp"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        effectiveCount = property.Value.GetInt32();
                         continue;
                     }
-                    if (property.NameEquals("firstTimestamp"u8))
+                    firstTimestamp = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("lastTimestamp"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        firstTimestamp = property.Value.GetDateTimeOffset("O");
                         continue;
                     }
-                    if (property.NameEquals("lastTimestamp"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        lastTimestamp = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
+                    lastTimestamp = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VariableState(variable.Value, Optional.ToNullable(filledNARatio), Optional.ToNullable(effectiveCount), Optional.ToNullable(firstTimestamp), Optional.ToNullable(lastTimestamp), serializedAdditionalRawData);
         }
 

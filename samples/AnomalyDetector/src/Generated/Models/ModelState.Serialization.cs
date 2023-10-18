@@ -112,70 +112,70 @@ namespace AnomalyDetector.Models
             Optional<IList<float>> latenciesInSeconds = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("epochIds"u8))
                 {
-                    if (property.NameEquals("epochIds"u8))
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<int> array = new List<int>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetInt32());
-                        }
-                        epochIds = array;
                         continue;
                     }
-                    if (property.NameEquals("trainLosses"u8))
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<float> array = new List<float>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetSingle());
-                        }
-                        trainLosses = array;
+                        array.Add(item.GetInt32());
+                    }
+                    epochIds = array;
+                    continue;
+                }
+                if (property.NameEquals("trainLosses"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
-                    if (property.NameEquals("validationLosses"u8))
+                    List<float> array = new List<float>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<float> array = new List<float>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetSingle());
-                        }
-                        validationLosses = array;
+                        array.Add(item.GetSingle());
+                    }
+                    trainLosses = array;
+                    continue;
+                }
+                if (property.NameEquals("validationLosses"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
-                    if (property.NameEquals("latenciesInSeconds"u8))
+                    List<float> array = new List<float>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<float> array = new List<float>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetSingle());
-                        }
-                        latenciesInSeconds = array;
+                        array.Add(item.GetSingle());
+                    }
+                    validationLosses = array;
+                    continue;
+                }
+                if (property.NameEquals("latenciesInSeconds"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
+                    List<float> array = new List<float>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetSingle());
+                    }
+                    latenciesInSeconds = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelState(Optional.ToList(epochIds), Optional.ToList(trainLosses), Optional.ToList(validationLosses), Optional.ToList(latenciesInSeconds), serializedAdditionalRawData);
         }
 

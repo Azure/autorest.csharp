@@ -79,29 +79,29 @@ namespace AnomalyDetector.Models
             int topContributorCount = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("variables"u8))
                 {
-                    if (property.NameEquals("variables"u8))
+                    List<VariableValues> array = new List<VariableValues>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        List<VariableValues> array = new List<VariableValues>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(VariableValues.DeserializeVariableValues(item));
-                        }
-                        variables = array;
-                        continue;
+                        array.Add(VariableValues.DeserializeVariableValues(item));
                     }
-                    if (property.NameEquals("topContributorCount"u8))
-                    {
-                        topContributorCount = property.Value.GetInt32();
-                        continue;
-                    }
+                    variables = array;
+                    continue;
+                }
+                if (property.NameEquals("topContributorCount"u8))
+                {
+                    topContributorCount = property.Value.GetInt32();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MultivariateLastDetectionOptions(variables, topContributorCount, serializedAdditionalRawData);
         }
 

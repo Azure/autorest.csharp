@@ -77,29 +77,29 @@ namespace ConfidentLevelsInTsp.Models
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("woof"u8))
                 {
-                    if (property.NameEquals("woof"u8))
-                    {
-                        woof = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("kind"u8))
-                    {
-                        kind = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("name"u8))
-                    {
-                        name = property.Value.GetString();
-                        continue;
-                    }
+                    woof = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Dog(kind, name, serializedAdditionalRawData, woof);
         }
 

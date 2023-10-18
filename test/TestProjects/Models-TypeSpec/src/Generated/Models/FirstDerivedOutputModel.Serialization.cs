@@ -74,24 +74,24 @@ namespace ModelsTypeSpec.Models
             string kind = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("first"u8))
                 {
-                    if (property.NameEquals("first"u8))
-                    {
-                        first = property.Value.GetBoolean();
-                        continue;
-                    }
-                    if (property.NameEquals("kind"u8))
-                    {
-                        kind = property.Value.GetString();
-                        continue;
-                    }
+                    first = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirstDerivedOutputModel(kind, serializedAdditionalRawData, first);
         }
 

@@ -93,52 +93,52 @@ namespace additionalProperties.Models
             Optional<IDictionary<string, float>> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("id"u8))
                 {
-                    if (property.NameEquals("id"u8))
+                    id = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("status"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        id = property.Value.GetInt32();
                         continue;
                     }
-                    if (property.NameEquals("name"u8))
+                    status = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("@odata.location"u8))
+                {
+                    odataLocation = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("additionalProperties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        name = property.Value.GetString();
                         continue;
                     }
-                    if (property.NameEquals("status"u8))
+                    Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        status = property.Value.GetBoolean();
-                        continue;
+                        dictionary.Add(property0.Name, property0.Value.GetSingle());
                     }
-                    if (property.NameEquals("@odata.location"u8))
-                    {
-                        odataLocation = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("additionalProperties"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                        foreach (var property0 in property.Value.EnumerateObject())
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetSingle());
-                        }
-                        additionalProperties = dictionary;
-                        continue;
-                    }
+                    additionalProperties = dictionary;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
                 }
-                moreAdditionalProperties = additionalPropertiesDictionary;
             }
+            moreAdditionalProperties = additionalPropertiesDictionary;
             return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, Optional.ToDictionary(additionalProperties), moreAdditionalProperties);
         }
     }

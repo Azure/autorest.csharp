@@ -85,39 +85,39 @@ namespace ModelsTypeSpec.Models
             string field = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("kind"u8))
                 {
-                    if (property.NameEquals("kind"u8))
+                    kind = new Int32ValuesFacetKind(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("values"u8))
+                {
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        kind = new Int32ValuesFacetKind(property.Value.GetString());
-                        continue;
+                        array.Add(item.GetInt32());
                     }
-                    if (property.NameEquals("values"u8))
-                    {
-                        List<int> array = new List<int>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetInt32());
-                        }
-                        values = array;
-                        continue;
-                    }
-                    if (property.NameEquals("value"u8))
-                    {
-                        value = property.Value.GetInt32();
-                        continue;
-                    }
-                    if (property.NameEquals("field"u8))
-                    {
-                        field = property.Value.GetString();
-                        continue;
-                    }
+                    values = array;
+                    continue;
+                }
+                if (property.NameEquals("value"u8))
+                {
+                    value = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("field"u8))
+                {
+                    field = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Int32ValuesFacet(field, serializedAdditionalRawData, values, value, kind);
         }
 

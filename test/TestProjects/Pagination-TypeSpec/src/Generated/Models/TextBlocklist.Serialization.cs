@@ -77,24 +77,24 @@ namespace Pagination.Models
             Optional<string> description = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("blocklistName"u8))
                 {
-                    if (property.NameEquals("blocklistName"u8))
-                    {
-                        blocklistName = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("description"u8))
-                    {
-                        description = property.Value.GetString();
-                        continue;
-                    }
+                    blocklistName = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("description"u8))
+                {
+                    description = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TextBlocklist(blocklistName, description.Value, serializedAdditionalRawData);
         }
 

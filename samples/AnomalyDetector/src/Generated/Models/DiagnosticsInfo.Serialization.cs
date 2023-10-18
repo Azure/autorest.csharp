@@ -85,37 +85,37 @@ namespace AnomalyDetector.Models
             Optional<IList<VariableState>> variableStates = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("modelState"u8))
                 {
-                    if (property.NameEquals("modelState"u8))
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        modelState = ModelState.DeserializeModelState(property.Value);
                         continue;
                     }
-                    if (property.NameEquals("variableStates"u8))
+                    modelState = ModelState.DeserializeModelState(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("variableStates"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<VariableState> array = new List<VariableState>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(VariableState.DeserializeVariableState(item));
-                        }
-                        variableStates = array;
                         continue;
                     }
+                    List<VariableState> array = new List<VariableState>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(VariableState.DeserializeVariableState(item));
+                    }
+                    variableStates = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DiagnosticsInfo(modelState.Value, Optional.ToList(variableStates), serializedAdditionalRawData);
         }
 

@@ -76,24 +76,24 @@ namespace Pagination.Models
             IReadOnlyList<string> value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("value"u8))
                 {
-                    if (property.NameEquals("value"u8))
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetString());
-                        }
-                        value = array;
-                        continue;
+                        array.Add(item.GetString());
                     }
+                    value = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DimensionValueListItem(value, serializedAdditionalRawData);
         }
 

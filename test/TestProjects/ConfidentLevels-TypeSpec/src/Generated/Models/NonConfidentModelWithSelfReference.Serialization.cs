@@ -86,34 +86,34 @@ namespace ConfidentLevelsInTsp.Models
             BinaryData unionProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("name"u8))
                 {
-                    if (property.NameEquals("name"u8))
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("selfReference"u8))
+                {
+                    List<NonConfidentModelWithSelfReference> array = new List<NonConfidentModelWithSelfReference>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        name = property.Value.GetString();
-                        continue;
+                        array.Add(DeserializeNonConfidentModelWithSelfReference(item));
                     }
-                    if (property.NameEquals("selfReference"u8))
-                    {
-                        List<NonConfidentModelWithSelfReference> array = new List<NonConfidentModelWithSelfReference>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(DeserializeNonConfidentModelWithSelfReference(item));
-                        }
-                        selfReference = array;
-                        continue;
-                    }
-                    if (property.NameEquals("unionProperty"u8))
-                    {
-                        unionProperty = BinaryData.FromString(property.Value.GetRawText());
-                        continue;
-                    }
+                    selfReference = array;
+                    continue;
+                }
+                if (property.NameEquals("unionProperty"u8))
+                {
+                    unionProperty = BinaryData.FromString(property.Value.GetRawText());
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NonConfidentModelWithSelfReference(name, selfReference, unionProperty, serializedAdditionalRawData);
         }
 

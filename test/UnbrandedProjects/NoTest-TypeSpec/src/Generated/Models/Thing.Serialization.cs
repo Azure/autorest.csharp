@@ -7,13 +7,128 @@ using System.Collections.Generic;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace NoTestTypeSpec.Models
 {
-    public partial class Thing
+    public partial class Thing : IUtf8JsonWriteable, IModelJsonSerializable<Thing>
     {
-        internal static Thing DeserializeThing(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Thing>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Thing>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("requiredUnion"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(RequiredUnion);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnion.ToString()).RootElement);
+#endif
+            writer.WritePropertyName("requiredLiteralString"u8);
+            writer.WriteStringValue(RequiredLiteralString.ToString());
+            writer.WritePropertyName("requiredLiteralInt"u8);
+            writer.WriteNumberValue(RequiredLiteralInt.ToSerialInt32());
+            writer.WritePropertyName("requiredLiteralFloat"u8);
+            writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
+            writer.WritePropertyName("requiredLiteralBool"u8);
+            writer.WriteBooleanValue(RequiredLiteralBool);
+            if (OptionalProperty.IsDefined(OptionalLiteralString))
+            {
+                writer.WritePropertyName("optionalLiteralString"u8);
+                writer.WriteStringValue(OptionalLiteralString.Value.ToString());
+            }
+            if (OptionalProperty.IsDefined(OptionalLiteralInt))
+            {
+                writer.WritePropertyName("optionalLiteralInt"u8);
+                writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
+            }
+            if (OptionalProperty.IsDefined(OptionalLiteralFloat))
+            {
+                writer.WritePropertyName("optionalLiteralFloat"u8);
+                writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
+            }
+            if (OptionalProperty.IsDefined(OptionalLiteralBool))
+            {
+                writer.WritePropertyName("optionalLiteralBool"u8);
+                writer.WriteBooleanValue(OptionalLiteralBool.Value);
+            }
+            writer.WritePropertyName("requiredBadDescription"u8);
+            writer.WriteStringValue(RequiredBadDescription);
+            if (OptionalProperty.IsCollectionDefined(OptionalNullableList))
+            {
+                if (OptionalNullableList != null)
+                {
+                    writer.WritePropertyName("optionalNullableList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalNullableList)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("optionalNullableList");
+                }
+            }
+            if (RequiredNullableList != null && OptionalProperty.IsCollectionDefined(RequiredNullableList))
+            {
+                writer.WritePropertyName("requiredNullableList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableList");
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        Thing IModelJsonSerializable<Thing>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeThing(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Thing>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Thing IModelSerializable<Thing>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeThing(document.RootElement, options);
+        }
+
+        internal static Thing DeserializeThing(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -31,6 +146,8 @@ namespace NoTestTypeSpec.Models
             string requiredBadDescription = default;
             OptionalProperty<IReadOnlyList<int>> optionalNullableList = default;
             IReadOnlyList<int> requiredNullableList = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -134,8 +251,13 @@ namespace NoTestTypeSpec.Models
                     requiredNullableList = array;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, OptionalProperty.ToNullable(optionalLiteralString), OptionalProperty.ToNullable(optionalLiteralInt), OptionalProperty.ToNullable(optionalLiteralFloat), OptionalProperty.ToNullable(optionalLiteralBool), requiredBadDescription, OptionalProperty.ToList(optionalNullableList), requiredNullableList);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, OptionalProperty.ToNullable(optionalLiteralString), OptionalProperty.ToNullable(optionalLiteralInt), OptionalProperty.ToNullable(optionalLiteralFloat), OptionalProperty.ToNullable(optionalLiteralBool), requiredBadDescription, OptionalProperty.ToList(optionalNullableList), requiredNullableList, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -143,7 +265,13 @@ namespace NoTestTypeSpec.Models
         internal static Thing FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeThing(document.RootElement);
+            return DeserializeThing(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            return RequestContent.CreateFromStream(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

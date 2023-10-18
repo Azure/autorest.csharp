@@ -86,38 +86,38 @@ namespace AnomalyDetector.Models
             Optional<ModelInfo> modelInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("modelId"u8))
                 {
-                    if (property.NameEquals("modelId"u8))
+                    modelId = property.Value.GetGuid();
+                    continue;
+                }
+                if (property.NameEquals("createdTime"u8))
+                {
+                    createdTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("lastUpdatedTime"u8))
+                {
+                    lastUpdatedTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("modelInfo"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        modelId = property.Value.GetGuid();
                         continue;
                     }
-                    if (property.NameEquals("createdTime"u8))
-                    {
-                        createdTime = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
-                    if (property.NameEquals("lastUpdatedTime"u8))
-                    {
-                        lastUpdatedTime = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
-                    if (property.NameEquals("modelInfo"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        modelInfo = ModelInfo.DeserializeModelInfo(property.Value);
-                        continue;
-                    }
+                    modelInfo = ModelInfo.DeserializeModelInfo(property.Value);
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo.Value, serializedAdditionalRawData);
         }
 

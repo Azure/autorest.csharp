@@ -71,19 +71,19 @@ namespace ModelsTypeSpec.Models
             string kind = "Unknown";
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("kind"u8))
                 {
-                    if (property.NameEquals("kind"u8))
-                    {
-                        kind = property.Value.GetString();
-                        continue;
-                    }
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownOutputBaseModelWithDiscriminator(kind, serializedAdditionalRawData);
         }
 

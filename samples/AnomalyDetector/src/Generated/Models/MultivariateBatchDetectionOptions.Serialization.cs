@@ -80,34 +80,34 @@ namespace AnomalyDetector.Models
             DateTimeOffset endTime = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("dataSource"u8))
                 {
-                    if (property.NameEquals("dataSource"u8))
-                    {
-                        dataSource = new Uri(property.Value.GetString());
-                        continue;
-                    }
-                    if (property.NameEquals("topContributorCount"u8))
-                    {
-                        topContributorCount = property.Value.GetInt32();
-                        continue;
-                    }
-                    if (property.NameEquals("startTime"u8))
-                    {
-                        startTime = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
-                    if (property.NameEquals("endTime"u8))
-                    {
-                        endTime = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
+                    dataSource = new Uri(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("topContributorCount"u8))
+                {
+                    topContributorCount = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("startTime"u8))
+                {
+                    startTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("endTime"u8))
+                {
+                    endTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MultivariateBatchDetectionOptions(dataSource, topContributorCount, startTime, endTime, serializedAdditionalRawData);
         }
 

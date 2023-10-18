@@ -80,29 +80,29 @@ namespace Pagination.Models
             string text = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("blockItemId"u8))
                 {
-                    if (property.NameEquals("blockItemId"u8))
-                    {
-                        blockItemId = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("description"u8))
-                    {
-                        description = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("text"u8))
-                    {
-                        text = property.Value.GetString();
-                        continue;
-                    }
+                    blockItemId = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("description"u8))
+                {
+                    description = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("text"u8))
+                {
+                    text = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TextBlockItem(blockItemId, description.Value, text, serializedAdditionalRawData);
         }
 

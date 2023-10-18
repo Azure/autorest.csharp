@@ -12,7 +12,10 @@ namespace NoTestTypeSpec.Models
     /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
     {
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
@@ -29,9 +32,10 @@ namespace NoTestTypeSpec.Models
             RequiredBadDescription = requiredBadDescription;
             OptionalNullableList = new OptionalList<int>();
             RequiredNullableList = requiredNullableList?.ToList();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredLiteralString"> required literal string. </param>
@@ -45,7 +49,8 @@ namespace NoTestTypeSpec.Models
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
-        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IReadOnlyList<int> optionalNullableList, IReadOnlyList<int> requiredNullableList)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IReadOnlyList<int> optionalNullableList, IReadOnlyList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -60,6 +65,12 @@ namespace NoTestTypeSpec.Models
             RequiredBadDescription = requiredBadDescription;
             OptionalNullableList = optionalNullableList;
             RequiredNullableList = requiredNullableList;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Thing"/> for deserialization. </summary>
+        internal Thing()
+        {
         }
 
         /// <summary> name of the Thing. </summary>

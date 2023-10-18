@@ -96,51 +96,51 @@ namespace AnomalyDetector.Models
             Optional<IReadOnlyList<float>> confidenceScores = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("period"u8))
                 {
-                    if (property.NameEquals("period"u8))
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        period = property.Value.GetInt32();
                         continue;
                     }
-                    if (property.NameEquals("isChangePoint"u8))
+                    period = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("isChangePoint"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<bool> array = new List<bool>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetBoolean());
-                        }
-                        isChangePoint = array;
                         continue;
                     }
-                    if (property.NameEquals("confidenceScores"u8))
+                    List<bool> array = new List<bool>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<float> array = new List<float>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetSingle());
-                        }
-                        confidenceScores = array;
+                        array.Add(item.GetBoolean());
+                    }
+                    isChangePoint = array;
+                    continue;
+                }
+                if (property.NameEquals("confidenceScores"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
+                    List<float> array = new List<float>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetSingle());
+                    }
+                    confidenceScores = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), Optional.ToList(isChangePoint), Optional.ToList(confidenceScores), serializedAdditionalRawData);
         }
 

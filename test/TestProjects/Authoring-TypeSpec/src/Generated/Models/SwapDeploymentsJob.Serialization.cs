@@ -109,59 +109,59 @@ namespace AuthoringTypeSpec.Models
             string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("jobId"u8))
                 {
-                    if (property.NameEquals("jobId"u8))
+                    jobId = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("createdDateTime"u8))
+                {
+                    createdDateTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("lastUpdatedDateTime"u8))
+                {
+                    lastUpdatedDateTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("expirationDateTime"u8))
+                {
+                    expirationDateTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("status"u8))
+                {
+                    status = new JobStatus(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("warnings"u8))
+                {
+                    List<JobWarning> array = new List<JobWarning>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        jobId = property.Value.GetString();
-                        continue;
+                        array.Add(JobWarning.DeserializeJobWarning(item));
                     }
-                    if (property.NameEquals("createdDateTime"u8))
-                    {
-                        createdDateTime = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
-                    if (property.NameEquals("lastUpdatedDateTime"u8))
-                    {
-                        lastUpdatedDateTime = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
-                    if (property.NameEquals("expirationDateTime"u8))
-                    {
-                        expirationDateTime = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
-                    if (property.NameEquals("status"u8))
-                    {
-                        status = new JobStatus(property.Value.GetString());
-                        continue;
-                    }
-                    if (property.NameEquals("warnings"u8))
-                    {
-                        List<JobWarning> array = new List<JobWarning>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(JobWarning.DeserializeJobWarning(item));
-                        }
-                        warnings = array;
-                        continue;
-                    }
-                    if (property.NameEquals("errors"u8))
-                    {
-                        errors = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
-                        continue;
-                    }
-                    if (property.NameEquals("id"u8))
-                    {
-                        id = property.Value.GetString();
-                        continue;
-                    }
+                    warnings = array;
+                    continue;
+                }
+                if (property.NameEquals("errors"u8))
+                {
+                    errors = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("id"u8))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, serializedAdditionalRawData);
         }
 

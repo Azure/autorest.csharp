@@ -86,37 +86,37 @@ namespace AnomalyDetector.Models
             Optional<CorrelationChanges> correlationChanges = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("variable"u8))
                 {
-                    if (property.NameEquals("variable"u8))
+                    variable = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("contributionScore"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        variable = property.Value.GetString();
                         continue;
                     }
-                    if (property.NameEquals("contributionScore"u8))
+                    contributionScore = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("correlationChanges"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        contributionScore = property.Value.GetSingle();
                         continue;
                     }
-                    if (property.NameEquals("correlationChanges"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value);
-                        continue;
-                    }
+                    correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value);
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AnomalyInterpretation(variable.Value, Optional.ToNullable(contributionScore), correlationChanges.Value, serializedAdditionalRawData);
         }
 

@@ -146,118 +146,118 @@ namespace CustomizationsInTsp.Models
             IList<IDictionary<string, string>> badListOfDictionaryName = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("propertyToMakeInternal"u8))
                 {
-                    if (property.NameEquals("propertyToMakeInternal"u8))
+                    propertyToMakeInternal = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("propertyToRename"u8))
+                {
+                    propertyToRename = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("propertyToMakeFloat"u8))
+                {
+                    propertyToMakeFloat = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("propertyToMakeInt"u8))
+                {
+                    propertyToMakeInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("propertyToMakeDuration"u8))
+                {
+                    propertyToMakeDuration = property.Value.GetTimeSpan("P");
+                    continue;
+                }
+                if (property.NameEquals("propertyToMakeString"u8))
+                {
+                    propertyToMakeString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("propertyToMakeJsonElement"u8))
+                {
+                    propertyToMakeJsonElement = property.Value.Clone();
+                    continue;
+                }
+                if (property.NameEquals("propertyToField"u8))
+                {
+                    propertyToField = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("badListName"u8))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        propertyToMakeInternal = property.Value.GetInt32();
-                        continue;
+                        array.Add(item.GetString());
                     }
-                    if (property.NameEquals("propertyToRename"u8))
+                    badListName = array;
+                    continue;
+                }
+                if (property.NameEquals("badDictionaryName"u8))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        propertyToRename = property.Value.GetInt32();
-                        continue;
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    if (property.NameEquals("propertyToMakeFloat"u8))
+                    badDictionaryName = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("badListOfListName"u8))
+                {
+                    List<IList<string>> array = new List<IList<string>>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        propertyToMakeFloat = property.Value.GetSingle();
-                        continue;
-                    }
-                    if (property.NameEquals("propertyToMakeInt"u8))
-                    {
-                        propertyToMakeInt = property.Value.GetInt32();
-                        continue;
-                    }
-                    if (property.NameEquals("propertyToMakeDuration"u8))
-                    {
-                        propertyToMakeDuration = property.Value.GetTimeSpan("P");
-                        continue;
-                    }
-                    if (property.NameEquals("propertyToMakeString"u8))
-                    {
-                        propertyToMakeString = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("propertyToMakeJsonElement"u8))
-                    {
-                        propertyToMakeJsonElement = property.Value.Clone();
-                        continue;
-                    }
-                    if (property.NameEquals("propertyToField"u8))
-                    {
-                        propertyToField = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("badListName"u8))
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            array.Add(item.GetString());
+                            array.Add(null);
                         }
-                        badListName = array;
-                        continue;
-                    }
-                    if (property.NameEquals("badDictionaryName"u8))
-                    {
-                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                        foreach (var property0 in property.Value.EnumerateObject())
+                        else
                         {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
+                            {
+                                array0.Add(item0.GetString());
+                            }
+                            array.Add(array0);
                         }
-                        badDictionaryName = dictionary;
-                        continue;
                     }
-                    if (property.NameEquals("badListOfListName"u8))
+                    badListOfListName = array;
+                    continue;
+                }
+                if (property.NameEquals("badListOfDictionaryName"u8))
+                {
+                    List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        List<IList<string>> array = new List<IList<string>>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                List<string> array0 = new List<string>();
-                                foreach (var item0 in item.EnumerateArray())
-                                {
-                                    array0.Add(item0.GetString());
-                                }
-                                array.Add(array0);
-                            }
+                            array.Add(null);
                         }
-                        badListOfListName = array;
-                        continue;
-                    }
-                    if (property.NameEquals("badListOfDictionaryName"u8))
-                    {
-                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        else
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property0 in item.EnumerateObject())
                             {
-                                array.Add(null);
+                                dictionary.Add(property0.Name, property0.Value.GetString());
                             }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property0 in item.EnumerateObject())
-                                {
-                                    dictionary.Add(property0.Name, property0.Value.GetString());
-                                }
-                                array.Add(dictionary);
-                            }
+                            array.Add(dictionary);
                         }
-                        badListOfDictionaryName = array;
-                        continue;
                     }
+                    badListOfDictionaryName = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, serializedAdditionalRawData);
         }
 

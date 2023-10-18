@@ -124,93 +124,93 @@ namespace AnomalyDetector.Models
             Optional<DiagnosticsInfo> diagnosticsInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("dataSource"u8))
                 {
-                    if (property.NameEquals("dataSource"u8))
+                    dataSource = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("dataSchema"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dataSource = property.Value.GetString();
                         continue;
                     }
-                    if (property.NameEquals("dataSchema"u8))
+                    dataSchema = new DataSchema(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("startTime"u8))
+                {
+                    startTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("endTime"u8))
+                {
+                    endTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("displayName"u8))
+                {
+                    displayName = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("slidingWindow"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        dataSchema = new DataSchema(property.Value.GetString());
                         continue;
                     }
-                    if (property.NameEquals("startTime"u8))
+                    slidingWindow = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("alignPolicy"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        startTime = property.Value.GetDateTimeOffset("O");
                         continue;
                     }
-                    if (property.NameEquals("endTime"u8))
+                    alignPolicy = AlignPolicy.DeserializeAlignPolicy(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("status"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        endTime = property.Value.GetDateTimeOffset("O");
                         continue;
                     }
-                    if (property.NameEquals("displayName"u8))
+                    status = property.Value.GetString().ToModelStatus();
+                    continue;
+                }
+                if (property.NameEquals("errors"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        displayName = property.Value.GetString();
                         continue;
                     }
-                    if (property.NameEquals("slidingWindow"u8))
+                    List<ErrorResponse> array = new List<ErrorResponse>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        slidingWindow = property.Value.GetInt32();
+                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                    }
+                    errors = array;
+                    continue;
+                }
+                if (property.NameEquals("diagnosticsInfo"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
                         continue;
                     }
-                    if (property.NameEquals("alignPolicy"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        alignPolicy = AlignPolicy.DeserializeAlignPolicy(property.Value);
-                        continue;
-                    }
-                    if (property.NameEquals("status"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        status = property.Value.GetString().ToModelStatus();
-                        continue;
-                    }
-                    if (property.NameEquals("errors"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<ErrorResponse> array = new List<ErrorResponse>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(ErrorResponse.DeserializeErrorResponse(item));
-                        }
-                        errors = array;
-                        continue;
-                    }
-                    if (property.NameEquals("diagnosticsInfo"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        diagnosticsInfo = DiagnosticsInfo.DeserializeDiagnosticsInfo(property.Value);
-                        continue;
-                    }
+                    diagnosticsInfo = DiagnosticsInfo.DeserializeDiagnosticsInfo(property.Value);
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelInfo(dataSource, Optional.ToNullable(dataSchema), startTime, endTime, displayName.Value, Optional.ToNullable(slidingWindow), alignPolicy.Value, Optional.ToNullable(status), Optional.ToList(errors), diagnosticsInfo.Value, serializedAdditionalRawData);
         }
 

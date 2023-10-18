@@ -88,43 +88,43 @@ namespace AnomalyDetector.Models
             Optional<IReadOnlyList<AnomalyInterpretation>> interpretation = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("isAnomaly"u8))
                 {
-                    if (property.NameEquals("isAnomaly"u8))
+                    isAnomaly = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("severity"u8))
+                {
+                    severity = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("score"u8))
+                {
+                    score = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("interpretation"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        isAnomaly = property.Value.GetBoolean();
                         continue;
                     }
-                    if (property.NameEquals("severity"u8))
+                    List<AnomalyInterpretation> array = new List<AnomalyInterpretation>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        severity = property.Value.GetSingle();
-                        continue;
+                        array.Add(AnomalyInterpretation.DeserializeAnomalyInterpretation(item));
                     }
-                    if (property.NameEquals("score"u8))
-                    {
-                        score = property.Value.GetSingle();
-                        continue;
-                    }
-                    if (property.NameEquals("interpretation"u8))
-                    {
-                        if (property.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            continue;
-                        }
-                        List<AnomalyInterpretation> array = new List<AnomalyInterpretation>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(AnomalyInterpretation.DeserializeAnomalyInterpretation(item));
-                        }
-                        interpretation = array;
-                        continue;
-                    }
+                    interpretation = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AnomalyValue(isAnomaly, severity, score, Optional.ToList(interpretation), serializedAdditionalRawData);
         }
 

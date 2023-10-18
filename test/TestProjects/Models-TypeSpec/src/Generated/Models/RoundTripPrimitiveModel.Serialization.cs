@@ -108,76 +108,76 @@ namespace ModelsTypeSpec.Models
             IList<float?> requiredCollectionWithNullableFloatElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("requiredString"u8))
                 {
-                    if (property.NameEquals("requiredString"u8))
+                    requiredString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredInt"u8))
+                {
+                    requiredInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("requiredInt64"u8))
+                {
+                    requiredInt64 = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("requiredSafeInt"u8))
+                {
+                    requiredSafeInt = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("requiredFloat"u8))
+                {
+                    requiredFloat = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("required_Double"u8))
+                {
+                    requiredDouble = property.Value.GetDouble();
+                    continue;
+                }
+                if (property.NameEquals("requiredBoolean"u8))
+                {
+                    requiredBoolean = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("requiredDateTimeOffset"u8))
+                {
+                    requiredDateTimeOffset = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("requiredTimeSpan"u8))
+                {
+                    requiredTimeSpan = property.Value.GetTimeSpan("P");
+                    continue;
+                }
+                if (property.NameEquals("requiredCollectionWithNullableFloatElement"u8))
+                {
+                    List<float?> array = new List<float?>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        requiredString = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("requiredInt"u8))
-                    {
-                        requiredInt = property.Value.GetInt32();
-                        continue;
-                    }
-                    if (property.NameEquals("requiredInt64"u8))
-                    {
-                        requiredInt64 = property.Value.GetInt64();
-                        continue;
-                    }
-                    if (property.NameEquals("requiredSafeInt"u8))
-                    {
-                        requiredSafeInt = property.Value.GetInt64();
-                        continue;
-                    }
-                    if (property.NameEquals("requiredFloat"u8))
-                    {
-                        requiredFloat = property.Value.GetSingle();
-                        continue;
-                    }
-                    if (property.NameEquals("required_Double"u8))
-                    {
-                        requiredDouble = property.Value.GetDouble();
-                        continue;
-                    }
-                    if (property.NameEquals("requiredBoolean"u8))
-                    {
-                        requiredBoolean = property.Value.GetBoolean();
-                        continue;
-                    }
-                    if (property.NameEquals("requiredDateTimeOffset"u8))
-                    {
-                        requiredDateTimeOffset = property.Value.GetDateTimeOffset("O");
-                        continue;
-                    }
-                    if (property.NameEquals("requiredTimeSpan"u8))
-                    {
-                        requiredTimeSpan = property.Value.GetTimeSpan("P");
-                        continue;
-                    }
-                    if (property.NameEquals("requiredCollectionWithNullableFloatElement"u8))
-                    {
-                        List<float?> array = new List<float?>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetSingle());
-                            }
+                            array.Add(null);
                         }
-                        requiredCollectionWithNullableFloatElement = array;
-                        continue;
+                        else
+                        {
+                            array.Add(item.GetSingle());
+                        }
                     }
+                    requiredCollectionWithNullableFloatElement = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoundTripPrimitiveModel(serializedAdditionalRawData, requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
         }
 
