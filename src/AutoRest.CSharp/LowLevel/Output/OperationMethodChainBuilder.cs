@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (Operation.LongRunning != null)
             {
-                return Operation.LongRunning.FinalResponse.ReturnType;
+                return Operation.LongRunning.ReturnType;
             }
 
             var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct();
