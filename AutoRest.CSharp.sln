@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29230.61
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp", "src\AutoRest.CSharp\AutoRest.CSharp.csproj", "{D1018BFE-551F-4EFD-B5C7-D3FF7A82351D}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.TestServerLowLevel.Tests", "test\AutoRest.TestServerLowLevel.Tests\AutoRest.TestServerLowLevel.Tests.csproj", "{B07A9571-CC0F-4AD1-AA84-0D2D567BABE4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadlRanchProjects.Tests", "test\CadlRanchProjects.Tests\CadlRanchProjects.Tests.csproj", "{4D29A8F5-E844-448F-9F27-E74BD04CCA1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnbrandedProjects.Tests", "test\UnbrandedProjects.Tests\UnbrandedProjects.Tests.csproj", "{B589D88B-9254-4A69-B8CE-2564DC3D2908}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{4D29A8F5-E844-448F-9F27-E74BD04CCA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D29A8F5-E844-448F-9F27-E74BD04CCA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D29A8F5-E844-448F-9F27-E74BD04CCA1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B589D88B-9254-4A69-B8CE-2564DC3D2908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B589D88B-9254-4A69-B8CE-2564DC3D2908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B589D88B-9254-4A69-B8CE-2564DC3D2908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B589D88B-9254-4A69-B8CE-2564DC3D2908}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

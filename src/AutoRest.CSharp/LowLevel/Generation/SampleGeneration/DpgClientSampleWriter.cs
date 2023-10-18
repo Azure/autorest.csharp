@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.LowLevel.Output.Samples;
 
@@ -20,7 +21,8 @@ namespace AutoRest.CSharp.LowLevel.Generation.SampleGeneration
         public void Write()
         {
             // since our generator source code does not have the Azure.Identity dependency, we have to add this dependency separately
-            _writer.UseNamespace("Azure.Identity");
+            if (Configuration.IsBranded)
+                _writer.UseNamespace("Azure.Identity");
 
             using (_writer.Namespace(_sampleProvider.Declaration.Namespace))
             {

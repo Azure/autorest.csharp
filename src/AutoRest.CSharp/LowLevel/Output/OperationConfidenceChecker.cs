@@ -7,9 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -103,7 +100,7 @@ namespace AutoRest.CSharp.Output.Models
             var confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
             if (type.IsAnonymousModel) // because the result of this is "Removal", we do not really need to consider customized code for it
             {
-                confidenceLevel = ConvenienceMethodConfidenceLevel.Removal;
+                confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
             }
 
             if (type.BaseModel != null)
@@ -163,36 +160,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private static ConvenienceMethodConfidenceLevel WalkLiteralType(InputLiteralType literalType, TypeFactory typeFactory)
         {
-            // a literal type is not confident, when we wrap it wiht a number-valued enum without proper names for its enum value items
-            if (literalType.LiteralValueType is not InputEnumType inputEnumType)
-                return ConvenienceMethodConfidenceLevel.Confident;
-
-            var isConfident = true;
-            var csharpType = typeFactory.CreateType(inputEnumType);
-            var serializedValueDict = inputEnumType.AllowedValues.ToDictionary(v => v.Value.ToString()!, v => v);
-            if (csharpType is { IsFrameworkType: false, Implementation: EnumType enumType })
-            {
-                foreach (var value in enumType.Values)
-                {
-                    // get the value of this enum
-                    var serializedValue = value.Value.Value?.ToString()!;
-                    var inputValue = serializedValueDict[serializedValue];
-                    if (!SyntaxFacts.IsValidIdentifier(inputValue.Name) && value.Declaration.Name == inputValue.Name.ToCleanName())
-                    {
-                        isConfident = false;
-                        break;
-                    }
-                }
-            }
-
-            return isConfident ? ConvenienceMethodConfidenceLevel.Confident : ConvenienceMethodConfidenceLevel.Internal;
+            return ConvenienceMethodConfidenceLevel.Confident;
         }
 
         private static ConvenienceMethodConfidenceLevel WalkUnionType(InputUnionType unionType)
         {
-            // the union types are always not confident.
-            // if any exceptions happen in the future, we could handle it here.
-            return ConvenienceMethodConfidenceLevel.Internal;
+            return ConvenienceMethodConfidenceLevel.Confident;
         }
     }
 }

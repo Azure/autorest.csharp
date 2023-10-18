@@ -12,7 +12,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The model that contains self reference. </summary>
-    internal partial class NonConfidentModelWithIndirectSelfReference
+    public partial class NonConfidentModelWithIndirectSelfReference
     {
         /// <summary> Initializes a new instance of NonConfidentModelWithIndirectSelfReference. </summary>
         /// <param name="name"> The name. </param>
