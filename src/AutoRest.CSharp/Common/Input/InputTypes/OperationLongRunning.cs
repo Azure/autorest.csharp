@@ -7,9 +7,9 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse)
+internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse, string? ResultPath)
 {
-    public OperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new OperationResponse()) { }
+    public OperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new OperationResponse(), null) { }
 
     /// <summary>
     /// Meaninngful return type of the long running operation.
@@ -21,11 +21,11 @@ internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, Opera
             if (FinalResponse.BodyType is null)
                 return null;
 
-            if (FinalResponse.ResultPath is null)
+            if (ResultPath is null)
                 return FinalResponse.BodyType;
 
             var rawResponseType = (InputModelType)FinalResponse.BodyType;
-            return rawResponseType.Properties.FirstOrDefault(p => p.SerializedName == FinalResponse.ResultPath)!.Type;
+            return rawResponseType.Properties.FirstOrDefault(p => p.SerializedName == ResultPath)!.Type;
         }
     }
 }

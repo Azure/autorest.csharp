@@ -146,7 +146,6 @@ namespace AutoRest.CSharp.Common.Input
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
-            ResultPath: null,
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
             Headers: GetResponseHeaders(response.HttpResponse.Headers),
             IsErrorResponse: false
@@ -168,7 +167,8 @@ namespace AutoRest.CSharp.Common.Input
 
             return new OperationLongRunning(
                 FinalStateVia: operation.LongRunningFinalStateVia,
-                FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse)
+                FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse),
+                ResultPath: null
             );
         }
 

@@ -11,5 +11,4 @@ export interface OperationResponse {
     BodyMediaType: BodyMediaType;
     Headers: HttpResponseHeader[];
     IsErrorResponse: boolean;
-    ResultPath?: string;
 }

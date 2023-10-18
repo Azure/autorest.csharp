@@ -366,13 +366,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string GetConvertMethodStatement(OperationLongRunning longRunning, CSharpType responseType)
         {
-            if (longRunning.FinalResponse.ResultPath.IsNullOrEmpty())
+            if (longRunning.ResultPath.IsNullOrEmpty())
             {
                 return $"{responseType.Name}.FromResponse";
             }
 
             return @$"r => {{
-                var resultJsonElement = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(r.{nameof(Response.Content)}).{nameof(JsonDocument.RootElement)}.{nameof(JsonElement.GetProperty)}(""{longRunning.FinalResponse.ResultPath}"");
+                var resultJsonElement = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(r.{nameof(Response.Content)}).{nameof(JsonDocument.RootElement)}.{nameof(JsonElement.GetProperty)}(""{longRunning.ResultPath}"");
                 return {longRunning.ReturnType!.Name}.Deserialize{longRunning.ReturnType.Name}(resultJsonElement);
             }}";
         }

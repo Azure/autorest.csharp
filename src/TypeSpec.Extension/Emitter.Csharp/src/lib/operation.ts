@@ -404,15 +404,15 @@ export function loadOperation(
                 // for now, let assume we don't allow return type
                 StatusCodes: op.verb === "delete" ? [204] : [200],
                 BodyType: bodyType,
-                ResultPath:
-                    metadata.logicalPath ??
-                    // https://github.com/Azure/typespec-azure/issues/3725
-                    (metadata.envelopeResult != metadata.logicalResult &&
-                    op.verb === "post"
-                        ? "result" // actually `result` is the only allowed path for now
-                        : undefined),
                 BodyMediaType: BodyMediaType.Json
-            } as OperationResponse
+            } as OperationResponse,
+            ResultPath:
+                metadata.logicalPath ??
+                // https://github.com/Azure/typespec-azure/issues/3725
+                (metadata.envelopeResult != metadata.logicalResult &&
+                op.verb === "post"
+                    ? "result" // actually `result` is the only allowed path for now
+                    : undefined)
         } as OperationLongRunning;
     }
 }
