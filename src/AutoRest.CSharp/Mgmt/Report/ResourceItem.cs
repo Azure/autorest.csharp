@@ -19,12 +19,20 @@ namespace AutoRest.CSharp.Mgmt.Report
             this.ContextPaths =
                 resource.AllOperations.SelectMany(cop => cop.Select(rop => rop.ContextualPath.ToString())).Distinct().ToList();
             this.RequestPath = resource.RequestPath.ToString();
+            this.isScopedResource = resource.RequestPath.GetScopePath().IsParameterizedScope();
+            if (isScopedResource)
+            {
+                var scopeTypes = resource.RequestPath.GetParameterizedScopeResourceTypes();
+                if (scopeTypes != null && scopeTypes.Length > 0)
+                    this.ScopeResourceTypes = scopeTypes.Select(st => st.ToString() ?? "<null>").ToList();
+            }
             this.ResourceType = resource.ResourceType.ToString() ?? "";
             this.IsSingleton = resource.IsSingleton;
             if (resource.SingletonResourceIdSuffix != null)
                 this.SingletonSuffix = resource.SingletonResourceIdSuffix.ToString();
             this.Operations = resource.AllOperations
                 .GroupBy(op => op.MethodSignature.Name)
+                .OrderBy(g => g.Key)
                 .ToDictionary(
                     g => g.Key,
                     g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection))).Distinct().ToList());
@@ -39,6 +47,12 @@ namespace AutoRest.CSharp.Mgmt.Report
         public List<string> ContextPaths { get; set; } = new List<string>();
         public string RequestPath { get; set; } = string.Empty;
         public string ResourceType { get; set; } = "";
+        [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitDefaults)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool isScopedResource { get; set; }
+        [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitNull)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? ScopeResourceTypes { get; set; }
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitDefaults)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool IsSingleton { get; set; } = false;

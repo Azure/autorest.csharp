@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Report
                 extension.AllOperations.SelectMany(cop => cop.Select(rop => rop.ContextualPath.ToString())).Distinct().ToList();
             this.Operations = extension.AllOperations
                 .GroupBy(op => op.MethodSignature.Name)
+                .OrderBy(g => g.Key)
                 .ToDictionary(
                     g => g.Key,
                     g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection))).Distinct().ToList());
