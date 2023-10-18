@@ -13,7 +13,6 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
@@ -56,7 +55,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             }
 
             // handle RequestContent
-            if (frameworkType == typeof(RequestContent))
+            if (frameworkType == Configuration.ApiTypes.RequestContentType)
             {
                 return GetExpressionForRequestContent(exampleValue);
             }
@@ -215,7 +214,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             else
             {
                 var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
-                return new TypeReference(typeof(RequestContent)).InvokeStatic(nameof(RequestContent.Create), freeFormObjectExpression);
+                return Configuration.ApiTypes.GetCreateFromStreamSampleExpression(freeFormObjectExpression);
             }
         }
 
@@ -265,9 +264,8 @@ namespace AutoRest.CSharp.LowLevel.Extensions
 
         private static ValueExpression GetExpressionForBinaryData(InputExampleValue exampleValue)
         {
-            // determine which method on BinaryData we want to use to serialize this BinaryData
-            string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue.RawValue is string ? nameof(BinaryData.FromString) : nameof(BinaryData.FromObjectAsJson);
-            return new TypeReference(typeof(BinaryData)).InvokeStatic(method, GetExpressionForFreeFormObject(exampleValue, true));
+            //always use FromObjectAsJson for BinaryData so that the serialization works correctly.
+            return BinaryDataExpression.FromObjectAsJson(GetExpressionForFreeFormObject(exampleValue, true));
         }
 
         private static ValueExpression GetExpressionForFreeFormObject(InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch

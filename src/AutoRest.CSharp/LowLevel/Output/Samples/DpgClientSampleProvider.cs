@@ -21,7 +21,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -130,7 +129,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             });
         }
 
-        private MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        internal MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
             var first = methodsToCall[0];
             ValueExpression valueExpression = first switch
@@ -157,7 +156,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             var returnType = GetReturnType(methodSignature.ReturnType);
             VariableReference resultVar = sample.IsLongRunning
                 ? new VariableReference(returnType, "operation")
-                : new VariableReference(returnType, "response");
+                : new VariableReference(returnType, Configuration.ApiTypes.ResponseParameterName);
 
             if (sample.IsPageable)
             {
@@ -173,7 +172,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                     yield return Declare(resultVar, invocation);
                     returnType = GetOperationValueType(returnType);
                     invocation = resultVar.Property("Value");
-                    resultVar = new VariableReference(returnType, "responseData");
+                    resultVar = new VariableReference(returnType, $"{Configuration.ApiTypes.ResponseParameterName}Data");
                     yield return Declare(resultVar, invocation);
                 }
                 /*
@@ -208,7 +207,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 {
                     returnType = GetOperationValueType(returnType);
                     invocation = resultVar.Property("Value");
-                    resultVar = new VariableReference(returnType, "responseData");
+                    resultVar = new VariableReference(returnType, $"{Configuration.ApiTypes.ResponseParameterName}Data");
                     yield return Declare(resultVar, invocation);
                 }
 
@@ -232,7 +231,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
         private IEnumerable<MethodBodyStatement> BuildResponseForStream(DpgOperationSample sample, VariableReference resultVar)
         {
-            var contentStreamExpression = new StreamExpression(resultVar.Property("ContentStream"));
+            var contentStreamExpression = new StreamExpression(resultVar.Property(Configuration.ApiTypes.ContentStreamName));
             yield return new IfStatement(NotEqual(contentStreamExpression, Null))
             {
                 UsingDeclare("outFileStream", new StreamExpression(new TypeReference(typeof(File)).InvokeStatic(nameof(File.OpenWrite), Literal("<filepath>"))), out var streamVariable),
@@ -250,16 +249,16 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             var responseType = responseVar.Type;
             if (responseType.EqualsIgnoreNullable(typeof(BinaryData)))
                 streamVar = responseVar.Invoke(nameof(BinaryData.ToStream));
-            else if (responseType.EqualsIgnoreNullable(typeof(Response)))
-                streamVar = responseVar.Property(nameof(Response.ContentStream));
+            else if (responseType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
+                streamVar = responseVar.Property(Configuration.ApiTypes.ContentStreamName);
             else if (TypeFactory.IsResponseOfT(responseType))
-                streamVar = responseVar.Invoke(nameof(Response<object>.GetRawResponse));
+                streamVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
             else
                 yield break;
 
             if (sample.ResultType != null)
             {
-                var resultVar = new VariableReference(typeof(JsonElement), "result");
+                var resultVar = new VariableReference(typeof(JsonElement), Configuration.ApiTypes.JsonElementVariableName);
                 yield return Declare(resultVar, new TypeReference(typeof(JsonDocument)).InvokeStatic(nameof(JsonDocument.Parse), streamVar).Property(nameof(JsonDocument.RootElement)));
 
                 var responseParsingStatements = new List<MethodBodyStatement>();
@@ -272,9 +271,9 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 // if there is not a schema for us to show, just print status code
                 ValueExpression statusVar = responseVar;
                 if (TypeFactory.IsResponseOfT(responseType))
-                    statusVar = responseVar.Invoke(nameof(Response<object>.GetRawResponse));
+                    statusVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
                 if (TypeFactory.IsResponseOfT(responseType) || TypeFactory.IsResponse(responseType))
-                    yield return InvokeConsoleWriteLine(statusVar.Property(nameof(Response.Status)));
+                    yield return InvokeConsoleWriteLine(statusVar.Property(Configuration.ApiTypes.StatusName));
             }
         }
 

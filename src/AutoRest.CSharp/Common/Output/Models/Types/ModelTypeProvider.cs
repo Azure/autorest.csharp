@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -80,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parent = GetBaseObjectType();
             if (parent is ModelTypeProvider parentModelType)
             {
-                if (parentModelType.Methods.Any(m => m.Signature.Name == "FromResponse"))
+                if (parentModelType.Methods.Any(m => m.Signature.Name == Configuration.ApiTypes.FromResponseName))
                     signatures |= MethodSignatureModifiers.New;
             }
             return signatures;
@@ -160,7 +159,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var property in objType.Properties)
                 {
-                    if (property.InputModelProperty is not {} inputModelProperty)
+                    if (property.InputModelProperty is not { } inputModelProperty)
                         continue;
 
                     var declaredName = property.Declaration.Name;
@@ -177,7 +176,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         ShouldSkipSerialization(property, inputModelProperty),
                         false,
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);;
+                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+                    ;
                 }
             }
         }
@@ -434,6 +434,23 @@ namespace AutoRest.CSharp.Output.Models.Types
                 value,
                 _defaultDerivedType!
             );
+        }
+
+        internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
+        {
+            var result = new ModelTypeProvider(
+                _inputModel.ReplaceProperty(property, inputType),
+                DefaultNamespace,
+                _sourceInputModel,
+                _typeFactory,
+                _derivedTypes,
+                _defaultDerivedType);
+            return result;
+        }
+
+        internal InputModelProperty? GetProperty(InputModelType key)
+        {
+            return _inputModel.GetProperty(key);
         }
     }
 }

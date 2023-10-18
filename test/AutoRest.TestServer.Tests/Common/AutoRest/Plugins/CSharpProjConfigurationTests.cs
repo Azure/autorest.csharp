@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using Moq;
 using NUnit.Framework;
-using static AutoRest.CSharp.Input.Configuration;
+using static AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Input
 {

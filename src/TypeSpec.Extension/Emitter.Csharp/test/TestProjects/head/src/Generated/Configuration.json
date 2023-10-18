@@ -1,0 +1,10 @@
+{
+  "output-folder": ".",
+  "namespace": "TypeSpec.HeadClient",
+  "library-name": "TypeSpec.HeadClient",
+  "shared-source-folders": [
+    "../../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
+    "../../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
+  ],
+  "use-overloads-between-protocol-and-convenience": true
+}

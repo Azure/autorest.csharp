@@ -3,8 +3,8 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -15,36 +15,39 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(clientOptions.Type.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(clientOptions.Description);
-                using (writer.Scope($"{clientOptions.Declaration.Accessibility} partial class {clientOptions.Type.Name}: {typeof(ClientOptions)}"))
+                using (writer.Scope($"{clientOptions.Declaration.Accessibility} partial class {clientOptions.Type.Name}: {Configuration.ApiTypes.ClientOptionsType}"))
                 {
-                    writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{clientOptions.ApiVersions.Last().Name};");
-                    writer.Line();
-                    writer.WriteXmlDocumentationSummary($"The version of the service to use.");
-                    using (writer.Scope($"public enum ServiceVersion"))
+                    if (clientOptions.ApiVersions is not null)
                     {
-                        foreach (var apiVersion in clientOptions.ApiVersions)
-                        {
-                            writer.WriteXmlDocumentationSummary($"{apiVersion.Description}");
-                            writer.Line($"{apiVersion.Name} = {apiVersion.Value:L},");
-                        }
-                    }
-
-                    writer.Line();
-                    writer.Line($"internal string Version {{ get; }}");
-                    writer.Line();
-
-                    writer.WriteXmlDocumentationSummary($"Initializes new instance of {clientOptions.Type.Name}.");
-                    using (writer.Scope($"public {clientOptions.Type.Name}(ServiceVersion version = LatestVersion)"))
-                    {
-                        writer.Append($"Version = version ");
-                        using (writer.Scope($"switch", end: "};"))
+                        writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{clientOptions.ApiVersions.Last().Name};");
+                        writer.Line();
+                        writer.WriteXmlDocumentationSummary($"The version of the service to use.");
+                        using (writer.Scope($"public enum ServiceVersion"))
                         {
                             foreach (var apiVersion in clientOptions.ApiVersions)
                             {
-                                writer.Line($"ServiceVersion.{apiVersion.Name} => {apiVersion.StringValue:L},");
+                                writer.WriteXmlDocumentationSummary($"{apiVersion.Description}");
+                                writer.Line($"{apiVersion.Name} = {apiVersion.Value:L},");
                             }
+                        }
+                        writer.Line();
 
-                            writer.Line($"_ => throw new {typeof(NotSupportedException)}()");
+                        writer.Line($"internal string Version {{ get; }}");
+                        writer.Line();
+
+                        writer.WriteXmlDocumentationSummary($"Initializes new instance of {clientOptions.Type.Name}.");
+                        using (writer.Scope($"public {clientOptions.Type.Name}(ServiceVersion version = LatestVersion)"))
+                        {
+                            writer.Append($"Version = version ");
+                            using (writer.Scope($"switch", end: "};"))
+                            {
+                                foreach (var apiVersion in clientOptions.ApiVersions)
+                                {
+                                    writer.Line($"ServiceVersion.{apiVersion.Name} => {apiVersion.StringValue:L},");
+                                }
+
+                                writer.Line($"_ => throw new {typeof(NotSupportedException)}()");
+                            }
                         }
                     }
                 }

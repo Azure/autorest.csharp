@@ -3,18 +3,14 @@
 
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -47,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"private readonly {_interimOperation.StateLockType} _stateLock;");
                     _writer.Line();
 
-                    _writer.Line($"private readonly {typeof(Response)} _interimResponse;");
+                    _writer.Line($"private readonly {Configuration.ApiTypes.ResponseType} _interimResponse;");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_interimOperation.TypeName} for mocking.");
@@ -56,12 +52,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_interimOperation.TypeName}({_interimOperation.IOperationSourceType} source, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia)"))
+                    using (_writer.Scope($"internal {_interimOperation.TypeName}({_interimOperation.IOperationSourceType} source, {Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia)"))
                     {
-                        _writer.Line($"_operation = new {_interimOperation.OperationType}(source, clientDiagnostics, pipeline, request, response, finalStateVia);");
+                        _writer.Line($"_operation = new {_interimOperation.OperationType}(source, clientDiagnostics, pipeline, request, {Configuration.ApiTypes.ResponseParameterName}, finalStateVia);");
                         _writer.Line($"_operationSource = source;");
                         _writer.Line($"_stateLock = new {_interimOperation.StateLockType}();");
-                        _writer.Line($"_interimResponse = response;");
+                        _writer.Line($"_interim{Configuration.ApiTypes.ResponseType.Name} = {Configuration.ApiTypes.ResponseParameterName};");
                     }
                     _writer.Line();
 
@@ -86,15 +82,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.GetRawResponse();");
+                    _writer.Line($"public override {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.GetRawResponseName}() => _operation.{Configuration.ApiTypes.GetRawResponseName}();");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override {typeof(Response)} UpdateStatus({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
+                    _writer.Line($"public override {Configuration.ApiTypes.ResponseType} UpdateStatus({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(typeof(Response))} UpdateStatusAsync({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
+                    _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(Configuration.ApiTypes.ResponseType)} UpdateStatusAsync({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
