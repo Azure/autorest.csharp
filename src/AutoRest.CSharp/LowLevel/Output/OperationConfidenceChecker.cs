@@ -161,32 +161,7 @@ namespace AutoRest.CSharp.Output.Models
             return confidenceLevel;
         }
 
-        private static ConvenienceMethodConfidenceLevel WalkEnumType(InputEnumType inputEnumType, TypeFactory typeFactory)
-        {
-            var isConfident = true;
-            var csharpType = typeFactory.CreateType(inputEnumType);
-            var serializedValueDict = inputEnumType.AllowedValues.ToDictionary(v => v.Value.ToString()!, v => v);
-            if (csharpType is { IsFrameworkType: false, Implementation: EnumType enumType })
-            {
-                foreach (var value in enumType.Values)
-                {
-                    // get the value of this enum
-                    var serializedValue = value.Value.Value?.ToString()!;
-                    var inputValue = serializedValueDict[serializedValue];
-                    if (!SyntaxFacts.IsValidIdentifier(inputValue.Name) && value.Declaration.Name == inputValue.Name.ToCleanName())
-                    {
-                        isConfident = false;
-                        break;
-                    }
-                }
-            }
-
-            return isConfident ? ConvenienceMethodConfidenceLevel.Confident : ConvenienceMethodConfidenceLevel.Internal;
-        }
-
-        private static ConvenienceMethodConfidenceLevel WalkUnionType(InputUnionType unionType)
-        {
-            return ConvenienceMethodConfidenceLevel.Confident;
-        }
+        private static ConvenienceMethodConfidenceLevel WalkEnumType(InputEnumType inputEnumType, TypeFactory typeFactory) => ConvenienceMethodConfidenceLevel.Confident;
+        private static ConvenienceMethodConfidenceLevel WalkUnionType(InputUnionType unionType) => ConvenienceMethodConfidenceLevel.Confident;
     }
 }
