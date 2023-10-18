@@ -56,12 +56,7 @@ namespace AutoRest.CSharp.Output.Models
             IsSubClient = parentClient != null;
             ParentClient = parentClient;
 
-            TopLevelClient = this;
-            while (parentClient != null)
-            {
-                TopLevelClient = parentClient;
-                parentClient = parentClient.ParentClient;
-            }
+            TopLevelClient = GetTopLevelClient(this);
 
             _typeFactory = typeFactory;
 
@@ -81,6 +76,15 @@ namespace AutoRest.CSharp.Output.Models
             ResponseClassifierTypes = OperationMethods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
 
             SubClients = Array.Empty<DpgClient>();
+        }
+
+        private static DpgClient GetTopLevelClient(DpgClient candidate)
+        {
+            while (candidate.ParentClient != null)
+            {
+                candidate = candidate.ParentClient;
+            }
+            return candidate;
         }
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)

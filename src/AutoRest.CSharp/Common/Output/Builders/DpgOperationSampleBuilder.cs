@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _client = client;
             _clientExamples = clientExamples;
             _existingType = existingType;
-            _clientInvocationChain = GetClientInvocationChain(_client);
+            _clientInvocationChain = GetClientInvocationChain(client);
         }
 
         public IReadOnlyList<DpgOperationSample> BuildSamples(InputOperation operation, MethodSignature protocolMethodSignature, MethodSignature? convenienceMethodSignature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType)
