@@ -11,14 +11,14 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The dog with a union type. </summary>
-    internal partial class PollutedDog : PollutedPet
+    public partial class PollutedDog : PollutedPet
     {
         /// <summary> Initializes a new instance of PollutedDog. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
         /// <param name="color"> Color, could be specified by a string or by an array of int as RGB. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="woof"/> or <paramref name="color"/> is null. </exception>
-        public PollutedDog(string name, string woof, object color) : base(name)
+        public PollutedDog(string name, string woof, BinaryData color) : base(name)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(woof, nameof(woof));
@@ -34,7 +34,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
         /// <param name="color"> Color, could be specified by a string or by an array of int as RGB. </param>
-        internal PollutedDog(string kind, string name, string woof, object color) : base(kind, name)
+        internal PollutedDog(string kind, string name, string woof, BinaryData color) : base(kind, name)
         {
             Woof = woof;
             Color = color;
@@ -42,7 +42,36 @@ namespace ConfidentLevelsInTsp.Models
 
         /// <summary> Woof. </summary>
         public string Woof { get; set; }
-        /// <summary> Color, could be specified by a string or by an array of int as RGB. </summary>
-        public object Color { get; set; }
+        /// <summary>
+        /// Color, could be specified by a string or by an array of int as RGB
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public BinaryData Color { get; set; }
     }
 }

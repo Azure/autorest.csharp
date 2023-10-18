@@ -13,7 +13,7 @@ using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    internal partial class RoundTripModel : IUtf8JsonSerializable
+    public partial class RoundTripModel : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

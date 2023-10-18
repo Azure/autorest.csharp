@@ -1,13 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.ResourceManager;
 
@@ -52,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static CSharpType WrapResponse(this CSharpType type, bool isAsync, bool isNullable)
         {
-            var response = new CSharpType(isNullable ? typeof(NullableResponse<>) : typeof(Response<>), type);
+            var response = new CSharpType(isNullable ? typeof(NullableResponse<>) : Configuration.ApiTypes.ResponseOfTType, type);
             return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
 

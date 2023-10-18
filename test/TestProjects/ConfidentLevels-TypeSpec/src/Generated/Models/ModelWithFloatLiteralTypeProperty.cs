@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> This is a model with a property of literal type of numbers. </summary>
-    internal partial class ModelWithFloatLiteralTypeProperty
+    public partial class ModelWithFloatLiteralTypeProperty
     {
         /// <summary> Initializes a new instance of ModelWithFloatLiteralTypeProperty. </summary>
         /// <param name="name"> The name. </param>

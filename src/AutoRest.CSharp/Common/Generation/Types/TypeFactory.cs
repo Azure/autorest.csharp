@@ -30,12 +30,12 @@ namespace AutoRest.CSharp.Generation.Types
             _library = library;
         }
 
-        private Type AzureResponseErrorType => typeof(Azure.ResponseError);
+        private Type AzureResponseErrorType => typeof(ResponseError);
 
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType       => CreateType(literalType.LiteralValueType),
-            InputUnionType unionType           => new CSharpType(typeof(object), unionType.IsNullable),
+            InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -127,12 +127,12 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 if (IsList(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingList<>), type.Arguments);
+                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
                 }
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingDictionary<,>), type.Arguments);
+                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
                 }
             }
 

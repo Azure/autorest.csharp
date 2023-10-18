@@ -2,17 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
-using static System.Net.Mime.MediaTypeNames;
+using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Common.AutoRest.Plugins
 {
@@ -70,6 +63,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private async Task WriteTestFiles()
         {
+            if (!Configuration.GenerateTestProject)
+                return;
+
             if (_isAzureSdk)
             {
                 Directory.CreateDirectory(Path.Combine(_testDirectory, "SessionRecords"));
@@ -285,7 +281,7 @@ extends:
 
         private string GetSrcCsproj()
         {
-            const string srcCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+            const string srcBrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <Description>This is the {0} client library for developing .NET applications with rich experience.</Description>
     <AssemblyTitle>Azure SDK Code Generation {0} for Azure Data Plane</AssemblyTitle>
@@ -306,12 +302,32 @@ extends:
 
 </Project>
 ";
-            return String.Format(srcCsprojContent, Configuration.Namespace);
+            const string srcUnbrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+  <PropertyGroup>
+    <Description>This is the {0} client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>SDK Code Generation {0}</AssemblyTitle>
+    <Version>1.0.0-beta.1</Version>
+    <PackageTags>{0}</PackageTags>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include=""System.Net.ClientModel"" Version=""1.0.0-beta.1"" />
+    <PackageReference Include=""System.Text.Json"" Version=""4.7.2"" />
+  </ItemGroup>
+
+</Project>
+";
+
+            var contentToUse = Configuration.IsBranded ? srcBrandedCsprojContent : srcUnbrandedCsprojContent;
+            return string.Format(contentToUse, Configuration.Namespace);
         }
 
         private string GetTestCsproj()
         {
-            string testCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+            string testBrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
 
@@ -324,10 +340,10 @@ extends:
 ";
             if (_isAzureSdk)
             {
-                testCsprojContent += @"    <ProjectReference Include=""$(AzureCoreTestFramework)"" />
+                testBrandedCsprojContent += @"    <ProjectReference Include=""$(AzureCoreTestFramework)"" />
 ";
             }
-            testCsprojContent += @"    <ProjectReference Include=""..\src\{0}.csproj"" />
+            testBrandedCsprojContent += @"    <ProjectReference Include=""..\src\{0}.csproj"" />
   </ItemGroup>
   
   <ItemGroup>
@@ -344,14 +360,36 @@ extends:
 ";
             if (_isAzureSdk)
             {
-                testCsprojContent += @"  <ItemGroup>
+                testBrandedCsprojContent += @"  <ItemGroup>
     <Folder Include=""SessionRecords\"" />
   </ItemGroup>
 ";
             }
-            testCsprojContent += @"</Project>
+            testBrandedCsprojContent += @"</Project>
 ";
-            return String.Format(testCsprojContent, Configuration.Namespace);
+            const string testUnbrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <!-- Ignore XML doc comments on test types and members -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include=""..\src\{0}.csproj"" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include=""NUnit"" Version=""3.13.2"" />
+    <PackageReference Include=""NUnit3TestAdapter"" Version=""4.4.2"" />
+    <PackageReference Include=""Microsoft.NET.Test.Sdk"" Version=""17.0.0"" />
+    <PackageReference Include=""Moq"" Version=""[4.18.2]"" />
+  </ItemGroup>
+
+</Project>
+";
+
+            var contentToUse = Configuration.IsBranded ? testBrandedCsprojContent : testUnbrandedCsprojContent;
+            return string.Format(contentToUse, Configuration.Namespace);
 
         }
 
@@ -370,9 +408,14 @@ EndProject
             }
             slnContent += @"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}"", ""src\{0}.csproj"", ""{{28FF4005-4467-4E36-92E7-DEA27DEB1519}}""
 EndProject
-Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}.Tests"", ""tests\{0}.Tests.csproj"", ""{{1F1CD1D4-9932-4B73-99D8-C252A67D4B46}}""
+";
+            if (Configuration.GenerateTestProject)
+            {
+                slnContent += @"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}.Tests"", ""tests\{0}.Tests.csproj"", ""{{1F1CD1D4-9932-4B73-99D8-C252A67D4B46}}""
 EndProject
-Global
+";
+            }
+            slnContent += @"Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
