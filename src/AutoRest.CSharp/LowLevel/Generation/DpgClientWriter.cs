@@ -364,11 +364,11 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        private string GetConvertMethodStatement(OperationLongRunning longRunning, CSharpType responseType)
+        private FormattableString GetConvertMethodStatement(OperationLongRunning longRunning, CSharpType responseType)
         {
             if (longRunning.ResultPath.IsNullOrEmpty())
             {
-                return $"{responseType.Name}.FromResponse";
+                return $"{responseType}.FromResponse";
             }
 
             return @$"r => {{
