@@ -98,7 +98,17 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteCancellationTokenToRequestContextMethod();
                     }
                     WriteResponseClassifierMethod(_writer, _client.ResponseClassifierTypes);
+                    WriteLongRunningResultRetrievalMethods();
                 }
+            }
+        }
+
+        private void WriteLongRunningResultRetrievalMethods()
+        {
+            foreach (var method in _client.ClientMethods.Select(c => c.LongRunningResultRetrievalMethod).WhereNotNull())
+            {
+                _writer.Line();
+                WriteLroResultRetrievalMethod(method);
             }
         }
 
@@ -358,23 +368,28 @@ namespace AutoRest.CSharp.Generation.Writers
                         .LineRaw(";");
                     // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
                     var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
-                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {GetConvertMethodStatement(clientMethod.LongRunning!, responseType)}, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
+                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {GetConversionMethodStatement(clientMethod.LongRunningResultRetrievalMethod, responseType)}, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
                 }
             }
             _writer.Line();
         }
 
-        private FormattableString GetConvertMethodStatement(OperationLongRunning longRunning, CSharpType responseType)
+        private FormattableString GetConversionMethodStatement(LongRunningResultRetrievalMethod? convertMethod, CSharpType responseType)
         {
-            if (longRunning.ResultPath.IsNullOrEmpty())
+            if (convertMethod is null)
             {
                 return $"{responseType}.FromResponse";
             }
+            return $"{convertMethod.MethodSignature.Name}";
+        }
 
-            return @$"r => {{
-                var resultJsonElement = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(r.{nameof(Response.Content)}).{nameof(JsonDocument.RootElement)}.{nameof(JsonElement.GetProperty)}(""{longRunning.ResultPath}"");
-                return {longRunning.ReturnType!.Name}.Deserialize{longRunning.ReturnType.Name}(resultJsonElement);
-            }}";
+        private void WriteLroResultRetrievalMethod(LongRunningResultRetrievalMethod method)
+        {
+            using (_writer.WriteMethodDeclaration(method.MethodSignature))
+            {
+                _writer.Line($"var resultJsonElement = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(response.{nameof(Response.Content)}).{nameof(JsonDocument.RootElement)}.{nameof(JsonElement.GetProperty)}(\"{method.ResultPath}\");");
+                _writer.Line($"return {method.ReturnType}.Deserialize{method.ReturnType.Name}(resultJsonElement);");
+            }
         }
 
         private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)

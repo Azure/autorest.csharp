@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models
             // samples will build below
             var samples = new List<DpgOperationSample>();
 
-            var method = new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, samples, convenienceMethodInfo.Message);
+            var method = new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, samples, convenienceMethodInfo.Message, GetLongRunningResultRetrievalMethod(Operation.LongRunning));
 
             BuildSamples(method, samples);
 
@@ -160,6 +160,14 @@ namespace AutoRest.CSharp.Output.Models
                     }
                 }
             }
+        }
+
+        private LongRunningResultRetrievalMethod? GetLongRunningResultRetrievalMethod(OperationLongRunning? longRunning)
+        {
+            if (longRunning is null || longRunning.ResultPath is null)
+                return null;
+
+            return new(_typeFactory.CreateType(longRunning.ReturnType!), longRunning.FinalResponse.BodyType!.Name, longRunning.ResultPath);
         }
 
         private ConvenienceMethodGenerationInfo ShouldGenerateConvenienceMethod()

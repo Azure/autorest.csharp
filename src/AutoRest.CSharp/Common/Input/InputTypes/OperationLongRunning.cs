@@ -3,7 +3,6 @@
 
 using Azure.Core;
 using System.Linq;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input;
 
