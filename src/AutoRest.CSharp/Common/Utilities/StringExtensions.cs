@@ -32,6 +32,10 @@ namespace AutoRest.CSharp.Utilities
         [return: NotNullIfNotNull("name")]
         public static string ToCleanName(this string name, bool isCamelCase = true)
         {
+            if (name.IsNullOrEmpty())
+            {
+                return name;
+            }
             StringBuilder nameBuilder = new StringBuilder();
 
             int i = 0;

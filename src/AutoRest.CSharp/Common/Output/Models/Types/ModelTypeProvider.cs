@@ -52,25 +52,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
             _sourceInputModel = sourceInputModel;
-            DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround only to solve the anonymous model names, in other cases, the name is unchanged.
+            DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             IsAccessibilityOverridden = inputModel.Accessibility != null;
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
-        }
-
-        // TODO -- this is only a workaround. We introduce this method only to solve the issue on model names when the model is anonymous where we take the id of the model as its name, and it is digits.
-        // For full solution, we should use the `ToCleanName` method which does (almost) the same when the name is digits, and it does more when the name contains other invalid identifier characters
-        // We did not use the `ToCleanName` method here because it will change the leading character captilized. Defer the decision of that to this issue: https://github.com/Azure/autorest.csharp/issues/3669
-        private static string GetValidIdentifier(string name)
-        {
-            if (char.IsDigit(name[0]))
-            {
-                return $"_{name}";
-            }
-
-            return name;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -110,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
