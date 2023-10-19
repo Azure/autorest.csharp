@@ -8,7 +8,7 @@
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> int fixed enum. </summary>
-    internal enum IntFixedEnum
+    public enum IntFixedEnum
     {
         /// <summary> 1. </summary>
         One = 1,

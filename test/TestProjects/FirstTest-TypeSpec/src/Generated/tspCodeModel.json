@@ -740,10 +740,10 @@
   },
   {
    "$id": "101",
-   "Name": "",
+   "Name": "Anon_1",
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": []
   },
   {

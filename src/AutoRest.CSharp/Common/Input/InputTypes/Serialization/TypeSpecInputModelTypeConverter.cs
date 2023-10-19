@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Model must have name");
 
             bool isAnonymousModel = false;
-            if (name.Length == 0)
+            if (name.StartsWith("Anon_", StringComparison.Ordinal))
             {
                 name = id ?? throw new JsonException("Model must have id"); // we just use id as the name of the model
                 isAnonymousModel = true;

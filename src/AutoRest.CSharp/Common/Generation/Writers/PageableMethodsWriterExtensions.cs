@@ -3,18 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using Autorest.CSharp.Core;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -51,10 +50,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (nextPageRequestVariable != null)
                     {
-                        writer.Line($"{typeof(HttpMessage)} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
+                        writer.Line($"{Configuration.ApiTypes.HttpMessageType} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
                     }
 
-                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(createLroRequestMethod.Name)}({createLroRequestMethod.Parameters.GetIdentifiersFormattable()});");
+                    writer.Line($"using {Configuration.ApiTypes.HttpMessageType} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(createLroRequestMethod.Name)}({createLroRequestMethod.Parameters.GetIdentifiersFormattable()});");
 
                     if (async)
                     {
@@ -82,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 foreach ((Parameter protocolParameter, Parameter? convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameterConverters)
                 {
-                    if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)) &&
+                    if (protocolParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) &&
                         convenienceParameter is { Name: var fromName, Type: { IsFrameworkType: false, Implementation: ModelTypeProvider }, IsOptionalInSignature: var isOptional })
                     {
                         writer
@@ -136,12 +135,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (firstPageRequestVariable != null)
             {
-                writer.Line($"{typeof(HttpMessage)} {firstPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}) => {firstPageRequest};");
+                writer.Line($"{Configuration.ApiTypes.HttpMessageType} {firstPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}) => {firstPageRequest};");
             }
 
             if (nextPageRequestVariable != null)
             {
-                writer.Line($"{typeof(HttpMessage)} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
+                writer.Line($"{Configuration.ApiTypes.HttpMessageType} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
             }
 
             return writer.Line($"return {typeof(GeneratorPageableHelpers)}.{(async ? nameof(GeneratorPageableHelpers.CreateAsyncPageable) : nameof(GeneratorPageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
@@ -178,7 +177,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var requestContextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
             if (parameters.Contains(KnownParameters.CancellationTokenParameter))
             {
-                writer.Line($"{KnownParameters.RequestContext.Type} {requestContextVariable:D} = {KnownParameters.CancellationTokenParameter.Name:I}.{nameof(CancellationToken.CanBeCanceled)} ? new {KnownParameters.RequestContext.Type} {{ {nameof(RequestContext.CancellationToken)} = {KnownParameters.CancellationTokenParameter.Name:I} }} : null;");
+                writer.Line($"{KnownParameters.RequestContext.Type} {requestContextVariable:D} = {KnownParameters.CancellationTokenParameter.Name:I}.{nameof(CancellationToken.CanBeCanceled)} ? new {KnownParameters.RequestContext.Type} {{ {Configuration.ApiTypes.CancellationTokenName} = {KnownParameters.CancellationTokenParameter.Name:I} }} : null;");
             }
             else
             {
@@ -213,7 +212,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameters = new List<FormattableString>();
             foreach (var parameter in createRequestMethod.Parameters)
             {
-                if (parameter == KnownParameters.RequestContext || parameter == KnownParameters.RequestContextRequired || parameter.Name == "nextLink" || parameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
+                if (parameter == KnownParameters.RequestContext || parameter == KnownParameters.RequestContextRequired || parameter.Name == "nextLink" || parameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
                 {
                     parameters.Add($"{parameter.Name}");
                     continue;

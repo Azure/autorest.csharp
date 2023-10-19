@@ -508,6 +508,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\Generated"
     },
+    "NoTest-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\NoTest-TypeSpec\\src\\Generated -n"
+    },
     "object-type": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\Generated"
@@ -543,6 +547,10 @@
     "PetStore-TypeSpec": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-TypeSpec\\src\\Generated -n"
+    },
+    "Platform-OpenAI-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\Platform-OpenAI-TypeSpec\\src\\Generated -n"
     },
     "ProtocolMethodsInRestClient": {
       "commandName": "Project",
@@ -767,6 +775,10 @@
     "typespec-type/union": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\union\\src\\Generated -n"
+    },
+    "Unbranded-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\Unbranded-TypeSpec\\src\\Generated -n"
     },
     "url": {
       "commandName": "Project",
