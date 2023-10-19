@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var methodBody = new MethodBodyStatement[]
             {
                 // write the initializers and validations
-                new ParameterValidationBlock(methodParameters),
+                new ParameterValidationBlock(methodParameters, true),
                 Return(New.Instance(ctorToCall.Signature, methodArguments))
             };
 
