@@ -418,7 +418,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected ObjectTypeProperty CreateProperty(Property property)
         {
-            var name = BuilderHelpers.DisambiguateName(Type.Name, property.CSharpName());
+            var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
             SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
 
             var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(memberMapping?.ExistingMember);
