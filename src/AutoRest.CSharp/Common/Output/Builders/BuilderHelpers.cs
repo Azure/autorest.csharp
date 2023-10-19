@@ -272,14 +272,14 @@ namespace AutoRest.CSharp.Output.Builders
                 EscapeXmlDocDescription(schema.Language.Default.Description);
         }
 
-        public static string DisambiguateName(CSharpType type, string name)
+        public static string DisambiguateName(CSharpType type, string name, string suffix = "Value")
         {
             if (name == type.Name ||
                 name == nameof(GetHashCode) ||
                 name == nameof(Equals) ||
                 name == nameof(ToString))
             {
-                return name + "Value";
+                return name + suffix;
             }
 
             return name;
