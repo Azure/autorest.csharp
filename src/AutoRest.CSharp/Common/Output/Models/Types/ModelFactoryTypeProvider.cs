@@ -99,11 +99,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             var assignmentProperty = propertyStack.Last();
             Debug.Assert(assignmentProperty.FlattenedProperty != null);
 
+            // determine whether this is a value type that changed to nullable because of other enclosing properties are nullable
+            var isOverriddenValueType = assignmentProperty.FlattenedProperty.IsOverriddenValueType;
+
             // iterate over the property stack to build a nested expression of variable assignment
             ObjectTypeProperty immediateParentProperty;
             property = propertyStack.Pop();
             // <parameterName> or <parameterName>.Value
-            ValueExpression result = p.NullableStructValue(parameter.Type);
+            ValueExpression result = isOverriddenValueType
+                ? p.NullableStructValue(parameter.Type) // when it is changed to nullable, we call .Value because its constructor will only take the non-nullable value
+                : p;
 
             CSharpType from = parameter.Type;
             while (propertyStack.Count > 0)
@@ -134,7 +139,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (assignmentProperty.FlattenedProperty != null)
             {
-                if (assignmentProperty.FlattenedProperty.IsOverriddenValueType)
+                if (isOverriddenValueType)
                     result = new TernaryConditionalOperator(
                         p.Property(nameof(Nullable<int>.HasValue)),
                         result,
