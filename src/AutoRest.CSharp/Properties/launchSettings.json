@@ -776,6 +776,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\value-types\\src\\Generated -n"
     },
+    "typespec-type/scalar": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\scalar\\src\\Generated -n"
+    },
     "typespec-type/union": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\union\\src\\Generated -n"
