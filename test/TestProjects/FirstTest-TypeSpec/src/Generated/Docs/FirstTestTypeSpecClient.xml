@@ -916,14 +916,14 @@ This sample shows how to call ReturnsAnonymousModelAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<object> response = await client.ReturnsAnonymousModelAsync();
+Response<ReturnsAnonymousModel_101> response = await client.ReturnsAnonymousModelAsync();
 ]]></code>
 This sample shows how to call ReturnsAnonymousModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<object> response = await client.ReturnsAnonymousModelAsync();
+Response<ReturnsAnonymousModel_101> response = await client.ReturnsAnonymousModelAsync();
 ]]></code></example>
     </member>
     <member name="ReturnsAnonymousModel(CancellationToken)">
@@ -933,14 +933,14 @@ This sample shows how to call ReturnsAnonymousModel.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<object> response = client.ReturnsAnonymousModel();
+Response<ReturnsAnonymousModel_101> response = client.ReturnsAnonymousModel();
 ]]></code>
 This sample shows how to call ReturnsAnonymousModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<object> response = client.ReturnsAnonymousModel();
+Response<ReturnsAnonymousModel_101> response = client.ReturnsAnonymousModel();
 ]]></code></example>
     </member>
     <member name="ReturnsAnonymousModelAsync(RequestContext)">

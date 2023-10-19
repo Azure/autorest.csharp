@@ -101,11 +101,6 @@ namespace AutoRest.CSharp.Output.Models
             visitedModels.Add(type, null);
 
             var confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
-            if (type.IsAnonymousModel) // because the result of this is "Removal", we do not really need to consider customized code for it
-            {
-                confidenceLevel = ConvenienceMethodConfidenceLevel.Removal;
-            }
-
             if (type.BaseModel != null)
             {
                 var baseModelLevel = WalkType(type.BaseModel, typeFactory, visitedModels);
