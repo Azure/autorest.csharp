@@ -34,6 +34,7 @@
         "special-headers/client-request-id",
         "special-headers/conditional-request",
         "special-headers/repeatability",
+        "special-words",
         "parameters/collection-format",
         "parameters/spread",
         "parameters/body-optionality",
