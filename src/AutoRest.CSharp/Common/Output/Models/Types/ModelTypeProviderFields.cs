@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<Parameter> SerializationParameters { get; }
         public int Count => _fields.Count;
 
-        public ModelTypeProviderFields(InputModelType inputModel, CSharpType type, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
+        public ModelTypeProviderFields(InputModelType inputModel, CSharpType modelType, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
-                var originalFieldName = BuilderHelpers.DisambiguateName(type, inputModelProperty.Name.ToCleanName(), "Property");
+                var originalFieldName = BuilderHelpers.DisambiguateName(modelType, inputModelProperty.Name.ToCleanName(), "Property");
                 var propertyType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 // We represent property being optional by making it nullable (when it is a value type)
