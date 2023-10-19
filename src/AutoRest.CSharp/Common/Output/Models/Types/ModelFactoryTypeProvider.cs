@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
                         // get the type of the first parameter of its ctor
                         var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = New.Instance(parentPropertyType, GetConversion(result, from, to));
+                        result = New.Instance(parentPropertyType, result.GetConversion(from, to));
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
@@ -154,33 +154,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        private static ValueExpression GetConversion(ValueExpression expression, CSharpType from, CSharpType to)
-        {
-            if (TypeFactory.RequiresToList(from, to))
-            {
-                if (from.IsNullable)
-                    expression = new NullConditionalExpression(expression);
-                return new InvokeStaticMethodExpression(typeof(Enumerable), nameof(Enumerable.ToList), new[] { expression }, CallAsExtension: true);
-            }
-
-            return expression;
-        }
-
         private Method CreateMethod(SerializableObjectType model)
         {
             var ctor = model.SerializationConstructor;
             var ctorToCall = ctor;
-            if (model.Declaration.IsAbstract)
+            var discriminator = model.Discriminator;
+            if (model.Declaration.IsAbstract && discriminator != null)
             {
-                // the model factory entry method `RequiresModelFactory` makes sure this:
-                // if this model is abstract, the discriminator must not be null.
-                ctorToCall = model.Discriminator!.DefaultObjectType.SerializationConstructor;
+                // the model factory entry method `RequiresModelFactory` makes sure this: if this model is abstract, the discriminator must not be null
+                ctorToCall = discriminator.DefaultObjectType.SerializationConstructor;
             }
             var methodParameters = new List<Parameter>(ctor.Signature.Parameters.Count);
             var methodArguments = new List<ValueExpression>(ctor.Signature.Parameters.Count);
 
-            var discriminator = model.Discriminator;
-            var parameterCache = new Dictionary<Parameter, ObjectTypeProperty>();
             foreach (var ctorParameter in ctorToCall.Signature.Parameters)
             {
                 var property = ctorToCall.FindPropertyInitializedByParameter(ctorParameter);
@@ -239,10 +225,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 methodParameters.Add(parameter);
 
-                var expression = BuildPropertyAssignmentExpression(parameter, property);
-                expression = GetConversion(expression, parameter.Type, ctorParameter.Type);
+                var expression = BuildPropertyAssignmentExpression(parameter, property).GetConversion(parameter.Type, ctorParameter.Type);
                 methodArguments.Add(expression);
-                parameterCache.Add(parameter, property);
             }
 
             FormattableString returnDescription = $"A new <see cref=\"{model.Type}\"/> instance for mocking.";
