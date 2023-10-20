@@ -44,25 +44,47 @@ namespace AutoRest.CSharp.Common.Input
             var modelCollectionsCache = new Dictionary<InputModelType, ModelCollections>();
 
             var sourceQueue = new Queue<InputModelType>(source);
+            var sourceHashSet = new HashSet<InputModelType>(source);
             while (sourceQueue.Any())
             {
                 var sourceModel = sourceQueue.Dequeue();
-                if (typesCache.ContainsKey(sourceModel with {IsNullable = false}))
+                var sourceNotNullable = sourceModel.IsNullable ? sourceModel with { IsNullable = false } : sourceModel;
+                if (typesCache.ContainsKey(sourceNotNullable))
                 {
                     continue;
                 }
 
-                while (sourceModel.BaseModel is {} sourceBaseModel && !typesCache.ContainsKey(sourceBaseModel))
+                while (sourceModel.BaseModel is {} sourceBaseModel)
                 {
+                    var sourceBaseModelNullable = sourceBaseModel.IsNullable ? sourceBaseModel with { IsNullable = false } : sourceBaseModel;
+                    if (typesCache.ContainsKey(sourceBaseModelNullable))
+                    {
+                        break;
+                    }
+
                     sourceQueue.Enqueue(sourceModel);
                     sourceModel = sourceBaseModel;
                 }
 
                 var targetModel = VisitModel(sourceModel, sourceModel.BaseModel is null ? null : (InputModelType?)typesCache[sourceModel.BaseModel]);
+
+                // Skip rebuilding target model if it is the same or another model in source
+                if (targetModel == sourceModel)
+                {
+                    typesCache[sourceNotNullable] = sourceNotNullable;
+                    continue;
+                }
+
+                if (sourceHashSet.Contains(targetModel))
+                {
+                    typesCache[sourceNotNullable] = targetModel.IsNullable ? targetModel with { IsNullable = false } : targetModel;
+                    continue;
+                }
+
                 var collections = new ModelCollections(targetModel.Properties, targetModel.DerivedModels, targetModel.CompositionModels, new List<InputModelProperty>(), new List<InputModelType>(), new List<InputModelType>());
                 modelCollectionsCache[sourceModel] = collections;
 
-                typesCache[sourceModel with {IsNullable = false}] = targetModel with
+                typesCache[sourceNotNullable] = targetModel with
                 {
                     IsNullable = false,
                     Properties = collections.TargetProperties,
@@ -74,21 +96,22 @@ namespace AutoRest.CSharp.Common.Input
             var targetModels = new List<InputModelType>();
             foreach (var sourceModel in source)
             {
-                var collections = modelCollectionsCache[sourceModel];
+                if (modelCollectionsCache.TryGetValue(sourceModel, out var collections))
+                {
+                    var properties = collections.SourceProperties.Select(p => VisitModelProperty(p, typesCache)).ToList();
+                    collections.TargetProperties.AddRange(properties);
 
-                var properties = collections.SourceProperties.Select(p => VisitModelProperty(p, typesCache)).ToList();
-                collections.TargetProperties.AddRange(properties);
+                    var derivedModels = collections.SourceDerived.Select(m => (InputModelType)GetTargetType(m, typesCache)).Distinct().ToList();
+                    collections.TargetDerived.AddRange(derivedModels);
 
-                var derivedModels = collections.SourceDerived.Select(m => (InputModelType)typesCache[m]).ToList();
-                collections.TargetDerived.AddRange(derivedModels);
-
-                var compositionModels = collections.SourceComposition.Select(m => (InputModelType)typesCache[m]).ToList();
-                collections.TargetComposition.AddRange(compositionModels);
+                    var compositionModels = collections.SourceComposition.Select(m => (InputModelType)GetTargetType(m, typesCache)).Distinct().ToList();
+                    collections.TargetComposition.AddRange(compositionModels);
+                }
 
                 targetModels.Add((InputModelType)typesCache[sourceModel]);
             }
 
-            return targetModels;
+            return targetModels.Distinct().ToList();
         }
 
         private IReadOnlyList<InputClient> VisitClients(IReadOnlyDictionary<InputType, InputType> typesCache, IReadOnlyList<InputClient> sourceClients)
@@ -162,7 +185,8 @@ namespace AutoRest.CSharp.Common.Input
 
         protected virtual InputEnumType VisitEnumType(InputEnumType enumType) => enumType;
 
-        protected virtual InputModelType VisitModel(InputModelType modelType, InputModelType? visitedBaseModel) => modelType;
+        protected virtual InputModelType VisitModel(InputModelType modelType, InputModelType? visitedBaseModel)
+            => Equals(visitedBaseModel, modelType.BaseModel) ? modelType : modelType with {BaseModel = visitedBaseModel};
 
         protected virtual InputModelProperty VisitModelProperty(InputModelProperty sourceModelProperty, IReadOnlyDictionary<InputType, InputType> typesMap)
         {

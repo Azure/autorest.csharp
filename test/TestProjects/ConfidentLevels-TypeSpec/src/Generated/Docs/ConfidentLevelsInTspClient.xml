@@ -354,13 +354,16 @@ ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
 NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>")
 {
-    Reference = {new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
+    Reference = 
     {
-        Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+        new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
         {
-            default
-        }, BinaryData.FromObjectAsJson("<unionProperty>")),
-    }},
+            Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+            {
+                default
+            }, BinaryData.FromObjectAsJson("<unionProperty>")),
+        }
+    },
 };
 Response response = await client.UnionWithInderictAsync(input);
 ]]></code></example>
@@ -382,13 +385,16 @@ ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
 NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>")
 {
-    Reference = {new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
+    Reference = 
     {
-        Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+        new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
         {
-            default
-        }, BinaryData.FromObjectAsJson("<unionProperty>")),
-    }},
+            Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+            {
+                default
+            }, BinaryData.FromObjectAsJson("<unionProperty>")),
+        }
+    },
 };
 Response response = client.UnionWithInderict(input);
 ]]></code></example>
