@@ -2,9 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -26,7 +24,6 @@ namespace AutoRest.CSharp.Common.Input
                 return rootNamespace;
             }
 
-            Debugger.Launch();
             var modelsToReplace = rootNamespace.Models
                 .Where(static m => m.BaseModel is { } bm && !bm.DerivedModels.Contains(m))
                 .ToDictionary(GetMatchingModelToReplace, static m => m);

@@ -27,6 +27,8 @@ namespace AutoRest.CSharp.Common.Input
 
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
+        public InputModelType GetNotNullable() => IsNullable ? this with { IsNullable = false } : this;
+
         private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {
             while (model != null)

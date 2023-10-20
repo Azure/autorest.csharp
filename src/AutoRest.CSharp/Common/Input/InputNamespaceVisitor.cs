@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Common.Input
             while (sourceQueue.Any())
             {
                 var sourceModel = sourceQueue.Dequeue();
-                var sourceNotNullable = sourceModel.IsNullable ? sourceModel with { IsNullable = false } : sourceModel;
+                var sourceNotNullable = sourceModel.GetNotNullable();
                 if (typesCache.ContainsKey(sourceNotNullable))
                 {
                     continue;
@@ -56,8 +56,8 @@ namespace AutoRest.CSharp.Common.Input
 
                 while (sourceModel.BaseModel is {} sourceBaseModel)
                 {
-                    var sourceBaseModelNullable = sourceBaseModel.IsNullable ? sourceBaseModel with { IsNullable = false } : sourceBaseModel;
-                    if (typesCache.ContainsKey(sourceBaseModelNullable))
+                    var sourceBaseNotNullable = sourceBaseModel.GetNotNullable();
+                    if (typesCache.ContainsKey(sourceBaseNotNullable))
                     {
                         break;
                     }
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (sourceHashSet.Contains(targetModel))
                 {
-                    typesCache[sourceNotNullable] = targetModel.IsNullable ? targetModel with { IsNullable = false } : targetModel;
+                    typesCache[sourceNotNullable] = targetModel.GetNotNullable();
                     continue;
                 }
 
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Common.Input
                     collections.TargetComposition.AddRange(compositionModels);
                 }
 
-                targetModels.Add((InputModelType)typesCache[sourceModel]);
+                targetModels.Add((InputModelType)typesCache[sourceModel.GetNotNullable()]);
             }
 
             return targetModels.Distinct().ToList();
