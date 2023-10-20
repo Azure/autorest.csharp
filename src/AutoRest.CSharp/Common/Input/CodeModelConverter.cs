@@ -438,7 +438,22 @@ namespace AutoRest.CSharp.Common.Input
                 return modelsCache[objectSchema] with {IsNullable = isNullable};
             }
 
-            return CreateType(schema, format, modelsCache) with
+            if (_enumsCache.TryGetValue(schema, out var enumType))
+            {
+                return enumType with {IsNullable = isNullable};
+            }
+
+            var type = CreateType(schema, format, modelsCache);
+            if (type.Serialization == InputTypeSerialization.Default)
+            {
+                return type with
+                {
+                    Serialization = GetSerialization(schema, SchemaTypeUsage.None),
+                    IsNullable = isNullable,
+                };
+            }
+
+            return type with
             {
                 IsNullable = isNullable,
             };
