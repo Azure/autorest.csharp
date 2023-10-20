@@ -15,13 +15,10 @@ namespace ParametersCadl.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.Result"/>. </summary>
         /// <param name="id"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.Result"/> instance for mocking. </returns>
-        public static Result Result(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static Result Result(string id = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Result(id, serializedAdditionalRawData);
+            return new Result(id, new Dictionary<string, BinaryData>());
         }
     }
 }

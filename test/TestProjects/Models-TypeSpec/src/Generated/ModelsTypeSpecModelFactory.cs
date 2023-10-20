@@ -60,9 +60,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableModelList"> Optional model nullable collection. </param>
         /// <param name="nonRequiredNullableStringList"> Optional string nullable collection. </param>
         /// <param name="nonRequiredNullableIntList"> Optional int nullable collection. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.InputModel"/> instance for mocking. </returns>
-        public static InputModel InputModel(string requiredString = null, int requiredInt = default, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, BaseModel requiredModel = null, BaseModel requiredModel2 = null, IEnumerable<int> requiredIntList = null, IEnumerable<string> requiredStringList = null, IEnumerable<CollectionItem> requiredModelList = null, IDictionary<string, RecordItem> requiredModelRecord = null, IEnumerable<float?> requiredCollectionWithNullableFloatElement = null, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement = null, IEnumerable<CollectionItem> requiredNullableModelList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<CollectionItem> nonRequiredModelList = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, IEnumerable<CollectionItem> nonRequiredNullableModelList = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static InputModel InputModel(string requiredString = null, int requiredInt = default, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, BaseModel requiredModel = null, BaseModel requiredModel2 = null, IEnumerable<int> requiredIntList = null, IEnumerable<string> requiredStringList = null, IEnumerable<CollectionItem> requiredModelList = null, IDictionary<string, RecordItem> requiredModelRecord = null, IEnumerable<float?> requiredCollectionWithNullableFloatElement = null, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement = null, IEnumerable<CollectionItem> requiredNullableModelList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<CollectionItem> nonRequiredModelList = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, IEnumerable<CollectionItem> nonRequiredNullableModelList = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null)
         {
             requiredIntList ??= new List<int>();
             requiredStringList ??= new List<string>();
@@ -79,9 +78,8 @@ namespace ModelsTypeSpec.Models
             nonRequiredNullableModelList ??= new List<CollectionItem>();
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredModel, requiredModel2, requiredIntList?.ToList(), requiredStringList?.ToList(), requiredModelList?.ToList(), requiredModelRecord, requiredCollectionWithNullableFloatElement?.ToList(), requiredCollectionWithNullableBooleanElement?.ToList(), requiredNullableModelList?.ToList(), requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredModelList?.ToList(), nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), nonRequiredNullableModelList?.ToList(), nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), serializedAdditionalRawData);
+            return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredModel, requiredModel2, requiredIntList?.ToList(), requiredStringList?.ToList(), requiredModelList?.ToList(), requiredModelRecord, requiredCollectionWithNullableFloatElement?.ToList(), requiredCollectionWithNullableBooleanElement?.ToList(), requiredNullableModelList?.ToList(), requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredModelList?.ToList(), nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), nonRequiredNullableModelList?.ToList(), nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
@@ -138,13 +136,10 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithProperties"/>. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.BaseModelWithProperties"/> instance for mocking. </returns>
-        public static BaseModelWithProperties BaseModelWithProperties(string optionalPropertyOnBase = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static BaseModelWithProperties BaseModelWithProperties(string optionalPropertyOnBase = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new BaseModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData);
+            return new BaseModelWithProperties(optionalPropertyOnBase, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithProperties"/>. </summary>
@@ -185,9 +180,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalModelRecord"> Optional model record. </param>
         /// <param name="requiredCollectionWithNullableIntElement"> Required collection of which the element is a nullable int. </param>
         /// <param name="optionalCollectionWithNullableBooleanElement"> Optional collection of which the element is a nullable boolean. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.RoundTripReadOnlyModel"/> instance for mocking. </returns>
-        public static RoundTripReadOnlyModel RoundTripReadOnlyModel(string requiredReadonlyString = null, int requiredReadonlyInt = default, string optionalReadonlyString = null, int? optionalReadonlyInt = null, DerivedModel requiredReadonlyModel = null, DerivedModel optionalReadonlyModel = null, FixedStringEnum requiredReadonlyFixedStringEnum = default, ExtensibleEnum requiredReadonlyExtensibleEnum = default, FixedStringEnum optionalReadonlyFixedStringEnum = default, ExtensibleEnum optionalReadonlyExtensibleEnum = default, IEnumerable<string> requiredReadonlyStringList = null, IEnumerable<int> requiredReadonlyIntList = null, IEnumerable<CollectionItem> requiredReadOnlyModelList = null, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord = null, IReadOnlyDictionary<string, string> requiredStringRecord = null, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord = null, IEnumerable<string> optionalReadonlyStringList = null, IEnumerable<int> optionalReadonlyIntList = null, IEnumerable<CollectionItem> optionalReadOnlyModelList = null, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = null, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = null, IReadOnlyDictionary<string, RecordItem> optionalModelRecord = null, IEnumerable<int?> requiredCollectionWithNullableIntElement = null, IEnumerable<bool?> optionalCollectionWithNullableBooleanElement = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static RoundTripReadOnlyModel RoundTripReadOnlyModel(string requiredReadonlyString = null, int requiredReadonlyInt = default, string optionalReadonlyString = null, int? optionalReadonlyInt = null, DerivedModel requiredReadonlyModel = null, DerivedModel optionalReadonlyModel = null, FixedStringEnum requiredReadonlyFixedStringEnum = default, ExtensibleEnum requiredReadonlyExtensibleEnum = default, FixedStringEnum optionalReadonlyFixedStringEnum = default, ExtensibleEnum optionalReadonlyExtensibleEnum = default, IEnumerable<string> requiredReadonlyStringList = null, IEnumerable<int> requiredReadonlyIntList = null, IEnumerable<CollectionItem> requiredReadOnlyModelList = null, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord = null, IReadOnlyDictionary<string, string> requiredStringRecord = null, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord = null, IEnumerable<string> optionalReadonlyStringList = null, IEnumerable<int> optionalReadonlyIntList = null, IEnumerable<CollectionItem> optionalReadOnlyModelList = null, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = null, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = null, IReadOnlyDictionary<string, RecordItem> optionalModelRecord = null, IEnumerable<int?> requiredCollectionWithNullableIntElement = null, IEnumerable<bool?> optionalCollectionWithNullableBooleanElement = null)
         {
             requiredReadonlyStringList ??= new List<string>();
             requiredReadonlyIntList ??= new List<int>();
@@ -203,9 +197,8 @@ namespace ModelsTypeSpec.Models
             optionalModelRecord ??= new Dictionary<string, RecordItem>();
             requiredCollectionWithNullableIntElement ??= new List<int?>();
             optionalCollectionWithNullableBooleanElement ??= new List<bool?>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList(), serializedAdditionalRawData);
+            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
@@ -218,9 +211,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalNullableList"> Optional model nullable collection. </param>
         /// <param name="optionalRecord"> Optional model record. </param>
         /// <param name="optionalNullableRecord"> Optional model nullable record. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
-        public static OutputModel OutputModel(string requiredString = null, int requiredInt = default, DerivedModel requiredModel = null, IEnumerable<CollectionItem> requiredList = null, IReadOnlyDictionary<string, RecordItem> requiredModelRecord = null, IEnumerable<CollectionItem> optionalList = null, IEnumerable<CollectionItem> optionalNullableList = null, IReadOnlyDictionary<string, RecordItem> optionalRecord = null, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static OutputModel OutputModel(string requiredString = null, int requiredInt = default, DerivedModel requiredModel = null, IEnumerable<CollectionItem> requiredList = null, IReadOnlyDictionary<string, RecordItem> requiredModelRecord = null, IEnumerable<CollectionItem> optionalList = null, IEnumerable<CollectionItem> optionalNullableList = null, IReadOnlyDictionary<string, RecordItem> optionalRecord = null, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord = null)
         {
             requiredList ??= new List<CollectionItem>();
             requiredModelRecord ??= new Dictionary<string, RecordItem>();
@@ -228,67 +220,51 @@ namespace ModelsTypeSpec.Models
             optionalNullableList ??= new List<CollectionItem>();
             optionalRecord ??= new Dictionary<string, RecordItem>();
             optionalNullableRecord ??= new Dictionary<string, RecordItem>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord, serializedAdditionalRawData);
+            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InputRecursiveModel"/>. </summary>
         /// <param name="message"> Message. </param>
         /// <param name="inner"> Required Record. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.InputRecursiveModel"/> instance for mocking. </returns>
-        public static InputRecursiveModel InputRecursiveModel(string message = null, InputRecursiveModel inner = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static InputRecursiveModel InputRecursiveModel(string message = null, InputRecursiveModel inner = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new InputRecursiveModel(message, inner, serializedAdditionalRawData);
+            return new InputRecursiveModel(message, inner, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ErrorModel"/>. </summary>
         /// <param name="message"> Error message. </param>
         /// <param name="innerError"> Required Record. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ErrorModel"/> instance for mocking. </returns>
-        public static ErrorModel ErrorModel(string message = null, ErrorModel innerError = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static ErrorModel ErrorModel(string message = null, ErrorModel innerError = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new ErrorModel(message, innerError, serializedAdditionalRawData);
+            return new ErrorModel(message, innerError, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NoUseBase"/>. </summary>
         /// <param name="baseModelProp"> base model property. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.NoUseBase"/> instance for mocking. </returns>
-        public static NoUseBase NoUseBase(string baseModelProp = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static NoUseBase NoUseBase(string baseModelProp = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new NoUseBase(baseModelProp, serializedAdditionalRawData);
+            return new NoUseBase(baseModelProp, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
-        public static SingleBase SingleBase(string kind = null, int size = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static SingleBase SingleBase(string kind = null, int size = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new UnknownSingleBase(kind, size, serializedAdditionalRawData);
+            return new UnknownSingleBase(kind, size, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Facet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.Facet"/> instance for mocking. </returns>
-        public static Facet Facet(string field = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static Facet Facet(string field = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Facet(field, serializedAdditionalRawData);
+            return new Facet(field, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NumericValuesFacetint32"/>. </summary>

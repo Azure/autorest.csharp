@@ -2,12 +2,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using System.Net.ClientModel.Internal;
+
 namespace OpenAI.Models
 {
     /// <summary> The CreateCategories. </summary>
     public partial class CreateCategories
     {
-        /// <summary> Initializes a new instance of CreateCategories. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateCategories"/>. </summary>
         /// <param name="hate">
         /// Content that expresses, incites, or promotes hate based on race, gender, ethnicity,
         /// religion, nationality, sexual orientation, disability status, or caste. Hateful content
@@ -52,6 +59,61 @@ namespace OpenAI.Models
             SexualMinors = sexualMinors;
             Violence = violence;
             ViolenceGraphic = violenceGraphic;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateCategories"/>. </summary>
+        /// <param name="hate">
+        /// Content that expresses, incites, or promotes hate based on race, gender, ethnicity,
+        /// religion, nationality, sexual orientation, disability status, or caste. Hateful content
+        /// aimed at non-protected groups (e.g., chess players) is harrassment.
+        /// </param>
+        /// <param name="hateThreatening">
+        /// Hateful content that also includes violence or serious harm towards the targeted group
+        /// based on race, gender, ethnicity, religion, nationality, sexual orientation, disability
+        /// status, or caste.
+        /// </param>
+        /// <param name="harassment"> Content that expresses, incites, or promotes harassing language towards any target. </param>
+        /// <param name="harassmentThreatening"> Harassment content that also includes violence or serious harm towards any target. </param>
+        /// <param name="selfHarm">
+        /// Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,
+        /// and eating disorders.
+        /// </param>
+        /// <param name="selfHarmIntent">
+        /// Content where the speaker expresses that they are engaging or intend to engage in acts of
+        /// self-harm, such as suicide, cutting, and eating disorders.
+        /// </param>
+        /// <param name="selfHarmInstructive">
+        /// Content that encourages performing acts of self-harm, such as suicide, cutting, and eating
+        /// disorders, or that gives instructions or advice on how to commit such acts.
+        /// </param>
+        /// <param name="sexual">
+        /// Content meant to arouse sexual excitement, such as the description of sexual activity, or
+        /// that promotes sexual services (excluding sex education and wellness).
+        /// </param>
+        /// <param name="sexualMinors"> Sexual content that includes an individual who is under 18 years old. </param>
+        /// <param name="violence"> Content that depicts death, violence, or physical injury. </param>
+        /// <param name="violenceGraphic"> Content that depicts death, violence, or physical injury in graphic detail. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateCategories(bool hate, bool hateThreatening, bool harassment, bool harassmentThreatening, bool selfHarm, bool selfHarmIntent, bool selfHarmInstructive, bool sexual, bool sexualMinors, bool violence, bool violenceGraphic, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Hate = hate;
+            HateThreatening = hateThreatening;
+            Harassment = harassment;
+            HarassmentThreatening = harassmentThreatening;
+            SelfHarm = selfHarm;
+            SelfHarmIntent = selfHarmIntent;
+            SelfHarmInstructive = selfHarmInstructive;
+            Sexual = sexual;
+            SexualMinors = sexualMinors;
+            Violence = violence;
+            ViolenceGraphic = violenceGraphic;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateCategories"/> for deserialization. </summary>
+        internal CreateCategories()
+        {
         }
 
         /// <summary>

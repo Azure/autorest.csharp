@@ -18,86 +18,66 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name. </param>
         /// <param name="age"> The age. </param>
         /// <param name="size"> The size. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.UsualModel"/> instance for mocking. </returns>
-        public static UsualModel UsualModel(string name = null, int age = default, double? size = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static UsualModel UsualModel(string name = null, int age = default, double? size = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new UsualModel(name, age, size, serializedAdditionalRawData);
+            return new UsualModel(name, age, size, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnotherModelWithUnionProperty"/>. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.AnotherModelWithUnionProperty"/> instance for mocking. </returns>
-        public static AnotherModelWithUnionProperty AnotherModelWithUnionProperty(BinaryData unionProperty = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static AnotherModelWithUnionProperty AnotherModelWithUnionProperty(BinaryData unionProperty = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new AnotherModelWithUnionProperty(unionProperty, serializedAdditionalRawData);
+            return new AnotherModelWithUnionProperty(unionProperty, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NonConfidentModelWithIndirectSelfReference"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="reference"> The self reference. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.NonConfidentModelWithIndirectSelfReference"/> instance for mocking. </returns>
-        public static NonConfidentModelWithIndirectSelfReference NonConfidentModelWithIndirectSelfReference(string name = null, IEnumerable<IndirectSelfReferenceModel> reference = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static NonConfidentModelWithIndirectSelfReference NonConfidentModelWithIndirectSelfReference(string name = null, IEnumerable<IndirectSelfReferenceModel> reference = null)
         {
             reference ??= new List<IndirectSelfReferenceModel>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new NonConfidentModelWithIndirectSelfReference(name, reference?.ToList(), serializedAdditionalRawData);
+            return new NonConfidentModelWithIndirectSelfReference(name, reference?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndirectSelfReferenceModel"/>. </summary>
         /// <param name="something"> Something not important. </param>
         /// <param name="reference"> Reference back. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.IndirectSelfReferenceModel"/> instance for mocking. </returns>
-        public static IndirectSelfReferenceModel IndirectSelfReferenceModel(string something = null, NonConfidentModelWithSelfReference reference = null, BinaryData unionProperty = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static IndirectSelfReferenceModel IndirectSelfReferenceModel(string something = null, NonConfidentModelWithSelfReference reference = null, BinaryData unionProperty = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new IndirectSelfReferenceModel(something, reference, unionProperty, serializedAdditionalRawData);
+            return new IndirectSelfReferenceModel(something, reference, unionProperty, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithIntegerLiteralTypeProperty"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="id"> The id. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ModelWithIntegerLiteralTypeProperty"/> instance for mocking. </returns>
-        public static ModelWithIntegerLiteralTypeProperty ModelWithIntegerLiteralTypeProperty(string name = null, ModelWithIntegerLiteralTypePropertyId id = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static ModelWithIntegerLiteralTypeProperty ModelWithIntegerLiteralTypeProperty(string name = null, ModelWithIntegerLiteralTypePropertyId id = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new ModelWithIntegerLiteralTypeProperty(name, id, serializedAdditionalRawData);
+            return new ModelWithIntegerLiteralTypeProperty(name, id, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithFloatLiteralTypeProperty"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="id"> The id. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ModelWithFloatLiteralTypeProperty"/> instance for mocking. </returns>
-        public static ModelWithFloatLiteralTypeProperty ModelWithFloatLiteralTypeProperty(string name = null, ModelWithFloatLiteralTypePropertyId id = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static ModelWithFloatLiteralTypeProperty ModelWithFloatLiteralTypeProperty(string name = null, ModelWithFloatLiteralTypePropertyId id = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new ModelWithFloatLiteralTypeProperty(name, id, serializedAdditionalRawData);
+            return new ModelWithFloatLiteralTypeProperty(name, id, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BaseModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.BaseModel"/> instance for mocking. </returns>
-        public static BaseModel BaseModel(string name = null, double? size = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static BaseModel BaseModel(string name = null, double? size = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new BaseModel(name, size, serializedAdditionalRawData);
+            return new BaseModel(name, size, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModel"/>. </summary>

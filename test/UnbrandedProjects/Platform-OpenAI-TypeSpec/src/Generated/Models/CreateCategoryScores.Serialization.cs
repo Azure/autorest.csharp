@@ -2,15 +2,86 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace OpenAI.Models
 {
-    public partial class CreateCategoryScores
+    public partial class CreateCategoryScores : IUtf8JsonWriteable, IModelJsonSerializable<CreateCategoryScores>
     {
-        internal static CreateCategoryScores DeserializeCreateCategoryScores(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CreateCategoryScores>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CreateCategoryScores>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("hate"u8);
+            writer.WriteNumberValue(Hate);
+            writer.WritePropertyName("hate/threatening"u8);
+            writer.WriteNumberValue(HateThreatening);
+            writer.WritePropertyName("harassment"u8);
+            writer.WriteNumberValue(Harassment);
+            writer.WritePropertyName("harassment/threatening"u8);
+            writer.WriteNumberValue(HarassmentThreatening);
+            writer.WritePropertyName("self-harm"u8);
+            writer.WriteNumberValue(SelfHarm);
+            writer.WritePropertyName("self-harm/intent"u8);
+            writer.WriteNumberValue(SelfHarmIntent);
+            writer.WritePropertyName("self-harm/instructive"u8);
+            writer.WriteNumberValue(SelfHarmInstructive);
+            writer.WritePropertyName("sexual"u8);
+            writer.WriteNumberValue(Sexual);
+            writer.WritePropertyName("sexual/minors"u8);
+            writer.WriteNumberValue(SexualMinors);
+            writer.WritePropertyName("violence"u8);
+            writer.WriteNumberValue(Violence);
+            writer.WritePropertyName("violence/graphic"u8);
+            writer.WriteNumberValue(ViolenceGraphic);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        CreateCategoryScores IModelJsonSerializable<CreateCategoryScores>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCreateCategoryScores(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CreateCategoryScores>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CreateCategoryScores IModelSerializable<CreateCategoryScores>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCreateCategoryScores(document.RootElement, options);
+        }
+
+        internal static CreateCategoryScores DeserializeCreateCategoryScores(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -26,6 +97,8 @@ namespace OpenAI.Models
             double sexualMinors = default;
             double violence = default;
             double violenceGraphic = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hate"u8))
@@ -83,8 +156,13 @@ namespace OpenAI.Models
                     violenceGraphic = property.Value.GetDouble();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new CreateCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new CreateCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -92,7 +170,13 @@ namespace OpenAI.Models
         internal static CreateCategoryScores FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateCategoryScores(document.RootElement);
+            return DeserializeCreateCategoryScores(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            return RequestContent.CreateFromStream(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -2,15 +2,70 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace OpenAI.Models
 {
-    public partial class CreateResult
+    public partial class CreateResult : IUtf8JsonWriteable, IModelJsonSerializable<CreateResult>
     {
-        internal static CreateResult DeserializeCreateResult(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CreateResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CreateResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("flagged"u8);
+            writer.WriteBooleanValue(Flagged);
+            writer.WritePropertyName("categories"u8);
+            writer.WriteObjectValue(Categories);
+            writer.WritePropertyName("category_scores"u8);
+            writer.WriteObjectValue(CategoryScores);
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        CreateResult IModelJsonSerializable<CreateResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCreateResult(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CreateResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CreateResult IModelSerializable<CreateResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCreateResult(document.RootElement, options);
+        }
+
+        internal static CreateResult DeserializeCreateResult(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -18,6 +73,8 @@ namespace OpenAI.Models
             bool flagged = default;
             CreateCategories categories = default;
             CreateCategoryScores categoryScores = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("flagged"u8))
@@ -35,8 +92,13 @@ namespace OpenAI.Models
                     categoryScores = CreateCategoryScores.DeserializeCreateCategoryScores(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new CreateResult(flagged, categories, categoryScores);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new CreateResult(flagged, categories, categoryScores, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -44,7 +106,13 @@ namespace OpenAI.Models
         internal static CreateResult FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateResult(document.RootElement);
+            return DeserializeCreateResult(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            return RequestContent.CreateFromStream(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

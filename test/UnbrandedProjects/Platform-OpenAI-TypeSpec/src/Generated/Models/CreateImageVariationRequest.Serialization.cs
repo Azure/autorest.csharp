@@ -2,15 +2,21 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Text.Json;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace OpenAI.Models
 {
-    public partial class CreateImageVariationRequest : IUtf8JsonWriteable
+    public partial class CreateImageVariationRequest : IUtf8JsonWriteable, IModelJsonSerializable<CreateImageVariationRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CreateImageVariationRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<CreateImageVariationRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("image"u8);
@@ -42,15 +48,119 @@ namespace OpenAI.Models
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
+        }
+
+        CreateImageVariationRequest IModelJsonSerializable<CreateImageVariationRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCreateImageVariationRequest(document.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CreateImageVariationRequest>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CreateImageVariationRequest IModelSerializable<CreateImageVariationRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCreateImageVariationRequest(document.RootElement, options);
+        }
+
+        internal static CreateImageVariationRequest DeserializeCreateImageVariationRequest(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            BinaryData image = default;
+            OptionalProperty<long?> n = default;
+            OptionalProperty<CreateImageVariationRequestSize> size = default;
+            OptionalProperty<CreateImageVariationRequestResponseFormat> responseFormat = default;
+            OptionalProperty<string> user = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("image"u8))
+                {
+                    image = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    continue;
+                }
+                if (property.NameEquals("n"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        n = null;
+                        continue;
+                    }
+                    n = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("size"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    size = new CreateImageVariationRequestSize(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("response_format"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    responseFormat = new CreateImageVariationRequestResponseFormat(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("user"u8))
+                {
+                    user = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
+            }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new CreateImageVariationRequest(image, OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(size), OptionalProperty.ToNullable(responseFormat), user.Value, serializedAdditionalRawData);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="result"> The result to deserialize the model from. </param>
+        internal static CreateImageVariationRequest FromResponse(PipelineResponse result)
+        {
+            using var document = JsonDocument.Parse(result.Content);
+            return DeserializeCreateImageVariationRequest(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
         internal virtual RequestBody ToRequestBody()
         {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.CreateFromStream(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

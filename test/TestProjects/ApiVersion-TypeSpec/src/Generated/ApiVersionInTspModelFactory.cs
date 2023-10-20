@@ -15,13 +15,10 @@ namespace ApiVersionInTsp.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.DetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.DetectionResult"/> instance for mocking. </returns>
-        public static DetectionResult DetectionResult(Guid resultId = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static DetectionResult DetectionResult(Guid resultId = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new DetectionResult(resultId, serializedAdditionalRawData);
+            return new DetectionResult(resultId, new Dictionary<string, BinaryData>());
         }
     }
 }

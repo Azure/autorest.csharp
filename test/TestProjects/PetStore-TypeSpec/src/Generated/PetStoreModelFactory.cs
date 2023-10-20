@@ -16,13 +16,10 @@ namespace PetStore.Models
         /// <summary> Initializes a new instance of <see cref="Models.Fish"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.Fish"/> instance for mocking. </returns>
-        public static Fish Fish(string kind = null, int size = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static Fish Fish(string kind = null, int size = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new UnknownFish(kind, size, serializedAdditionalRawData);
+            return new UnknownFish(kind, size, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Shark"/>. </summary>

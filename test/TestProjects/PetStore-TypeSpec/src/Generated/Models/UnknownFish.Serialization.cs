@@ -74,24 +74,24 @@ namespace PetStore.Models
             int size = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("kind"u8))
                 {
-                    if (property.NameEquals("kind"u8))
-                    {
-                        kind = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("size"u8))
-                    {
-                        size = property.Value.GetInt32();
-                        continue;
-                    }
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("size"u8))
+                {
+                    size = property.Value.GetInt32();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownFish(kind, size, serializedAdditionalRawData);
         }
 

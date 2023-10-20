@@ -18,50 +18,39 @@ namespace Pagination.Models
         /// <param name="contents"> Contents of the ledger entry. </param>
         /// <param name="collectionId"></param>
         /// <param name="transactionId"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.LedgerEntry"/> instance for mocking. </returns>
-        public static LedgerEntry LedgerEntry(string contents = null, string collectionId = null, string transactionId = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static LedgerEntry LedgerEntry(string contents = null, string collectionId = null, string transactionId = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new LedgerEntry(contents, collectionId, transactionId, serializedAdditionalRawData);
+            return new LedgerEntry(contents, collectionId, transactionId, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DimensionValueListItem"/>. </summary>
         /// <param name="value"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.DimensionValueListItem"/> instance for mocking. </returns>
-        public static DimensionValueListItem DimensionValueListItem(IEnumerable<string> value = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static DimensionValueListItem DimensionValueListItem(IEnumerable<string> value = null)
         {
             value ??= new List<string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new DimensionValueListItem(value?.ToList(), serializedAdditionalRawData);
+            return new DimensionValueListItem(value?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TextBlocklist"/>. </summary>
         /// <param name="blocklistName"> Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~. </param>
         /// <param name="description"> Text blocklist description. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.TextBlocklist"/> instance for mocking. </returns>
-        public static TextBlocklist TextBlocklist(string blocklistName = null, string description = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static TextBlocklist TextBlocklist(string blocklistName = null, string description = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new TextBlocklist(blocklistName, description, serializedAdditionalRawData);
+            return new TextBlocklist(blocklistName, description, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TextBlockItem"/>. </summary>
         /// <param name="blockItemId"> Block Item Id. It will be uuid. </param>
         /// <param name="description"> Block item description. </param>
         /// <param name="text"> Block item content. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.TextBlockItem"/> instance for mocking. </returns>
-        public static TextBlockItem TextBlockItem(string blockItemId = null, string description = null, string text = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static TextBlockItem TextBlockItem(string blockItemId = null, string description = null, string text = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new TextBlockItem(blockItemId, description, text, serializedAdditionalRawData);
+            return new TextBlockItem(blockItemId, description, text, new Dictionary<string, BinaryData>());
         }
     }
 }

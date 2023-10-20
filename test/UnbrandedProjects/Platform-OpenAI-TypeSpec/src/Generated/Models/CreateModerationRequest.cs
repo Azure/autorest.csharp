@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateModerationRequest. </summary>
     public partial class CreateModerationRequest
     {
-        /// <summary> Initializes a new instance of CreateModerationRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/>. </summary>
         /// <param name="input"> The input text to classify. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public CreateModerationRequest(BinaryData input)
@@ -18,9 +22,10 @@ namespace OpenAI.Models
             ClientUtilities.AssertNotNull(input, nameof(input));
 
             Input = input;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateModerationRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/>. </summary>
         /// <param name="input"> The input text to classify. </param>
         /// <param name="model">
         /// Two content moderations models are available: `text-moderation-stable` and
@@ -29,10 +34,17 @@ namespace OpenAI.Models
         /// `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy
         /// of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
         /// </param>
-        internal CreateModerationRequest(BinaryData input, CreateModerationRequestModel? model)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateModerationRequest(BinaryData input, CreateModerationRequestModel? model, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Input = input;
             Model = model;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/> for deserialization. </summary>
+        internal CreateModerationRequest()
+        {
         }
 
         /// <summary>
