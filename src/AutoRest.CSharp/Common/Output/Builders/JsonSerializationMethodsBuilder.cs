@@ -295,7 +295,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 (
                     "NET6_0_OR_GREATER",
                     utf8JsonWriter.WriteRawValue(value),
-                    InvokeJsonSerializerSerializeMethod(utf8JsonWriter, JsonDocumentExpression.Parse(value.InvokeToString()).RootElement)
+                    InvokeJsonSerializerSerializeMethod(utf8JsonWriter, JsonDocumentExpression.Parse(new BinaryDataExpression(value)).RootElement)
                 );
             }
 
@@ -614,11 +614,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static MethodBodyStatement BuildDeserializationForMethods(JsonSerialization serialization, bool async, ValueExpression? variable, ResponseExpression response, bool isBinaryData)
+        public static MethodBodyStatement BuildDeserializationForMethods(JsonSerialization serialization, bool async, ValueExpression? variable, StreamExpression stream, bool isBinaryData)
         {
             if (isBinaryData)
             {
-                var callFromStream = BinaryDataExpression.FromStream(response, async);
+                var callFromStream = BinaryDataExpression.FromStream(stream, async);
                 var variableExpression = variable is not null ? new BinaryDataExpression(variable) : null;
                 return AssignOrReturn(variableExpression, callFromStream);
             }
@@ -627,7 +627,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 return new[]
                 {
-                    UsingVar("document", JsonDocumentExpression.Parse(response, async), out var document),
+                    UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document),
                     DeserializeValue(serialization, document.RootElement, out var value),
                     AssignOrReturn(variable, value)
                 };
@@ -636,7 +636,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 return new MethodBodyStatement[]
                 {
-                    UsingVar("document", JsonDocumentExpression.Parse(response, async), out var document),
+                    UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document),
                     new IfElseStatement
                     (
                         document.RootElement.ValueKindEqualsNull(),

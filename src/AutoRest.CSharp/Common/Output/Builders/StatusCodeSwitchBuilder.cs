@@ -13,10 +13,8 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -348,7 +346,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     : Return(response);
             }
 
-            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, response, async, out TypedValueExpression value);
+            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, response.ContentStream, async, out TypedValueExpression value);
 
             var returnStatement = ResponseType is not null && !ResponseType.EqualsIgnoreNullable(type)
                 ? Return(ResponseExpression.FromValue(ResponseType, value, response))
@@ -366,7 +364,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     : Return(ResponseWithHeadersExpression.FromValue(headers, response));
             }
 
-            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, response, async, out TypedValueExpression value);
+            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, response.ContentStream, async, out TypedValueExpression value);
 
             var returnStatement = ResponseType is not null && !ResponseType.EqualsIgnoreNullable(type)
                     ? Return(ResponseWithHeadersExpression.FromValue(ResponseType, value, headers, response))
@@ -375,7 +373,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new[] { valueStatement, returnStatement };
         }
 
-        private static MethodBodyStatement BuildStatusCodeSwitchCaseValueStatement(CSharpType type, ObjectSerialization? serialization, ResponseExpression response, bool async, out TypedValueExpression value)
+        private static MethodBodyStatement BuildStatusCodeSwitchCaseValueStatement(CSharpType type, ObjectSerialization? serialization, StreamExpression stream, bool async, out TypedValueExpression value)
         {
             if (serialization is not null)
             {
@@ -384,8 +382,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     Declare(type, "value", Snippets.Default, out value),
                     serialization switch
                     {
-                        JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, response, type.Equals(typeof(BinaryData))),
-                        XmlElementSerialization xmlSerialization => XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, value, response),
+                        JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, stream, type.Equals(typeof(BinaryData))),
+                        XmlElementSerialization xmlSerialization => XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, value, stream),
                         _ => throw new NotImplementedException(serialization?.ToString() ?? $"No serialization for type {type}")
                     }
                 };
@@ -400,7 +398,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 return new[]
                 {
-                    Declare("streamReader", New.StreamReader(response.ContentStream), out StreamReaderExpression streamReader),
+                    Declare("streamReader", New.StreamReader(stream), out StreamReaderExpression streamReader),
                     Declare("value", streamReader.ReadToEnd(async), out value)
                 };
             }

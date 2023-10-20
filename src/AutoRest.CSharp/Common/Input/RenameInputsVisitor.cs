@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Common.Input
 
         protected override InputParameter VisitOperationParameter(InputParameter sourceParameter, InputOperation sourceOperation, IReadOnlyDictionary<InputType, InputType> typesMap)
         {
-            var parameter = sourceOperation.Paging is null && !Configuration.DisablePaginationTopRenaming && sourceParameter.Name.Equals(TopParameterName, StringComparison.OrdinalIgnoreCase) && !sourceOperation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase))
+            var parameter = sourceOperation.Paging is not null && !Configuration.DisablePaginationTopRenaming && sourceParameter.Name.Equals(TopParameterName, StringComparison.OrdinalIgnoreCase) && !sourceOperation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase))
                 ? sourceParameter with { Name = MaxCountParameterName }
                 : sourceParameter;
 

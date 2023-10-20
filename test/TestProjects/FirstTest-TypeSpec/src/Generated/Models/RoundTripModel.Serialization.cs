@@ -125,7 +125,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown).RootElement);
 #endif
             if (Optional.IsDefined(OptionalUnknown))
             {
@@ -133,7 +133,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalUnknown.ToString()).RootElement);
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalUnknown).RootElement);
 #endif
             }
             writer.WritePropertyName("requiredRecordUnknown"u8);
@@ -149,7 +149,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value).RootElement);
 #endif
             }
             writer.WriteEndObject();
@@ -168,7 +168,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value).RootElement);
 #endif
                 }
                 writer.WriteEndObject();

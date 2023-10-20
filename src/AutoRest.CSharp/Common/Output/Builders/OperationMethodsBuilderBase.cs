@@ -45,17 +45,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private readonly FormattableString? _description;
         private readonly MethodSignatureModifiers _protocolAccessibility;
         private readonly MethodParametersBuilder _parametersBuilder;
-        private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
         private readonly DpgOperationSampleBuilder _operationSampleBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SourceInputModel? _sourceInputModel;
 
-        public InputOperation Operation { get; }
+        protected InputOperation Operation { get; }
 
-        protected bool ShouldWrapInDiagnosticScope { get; }
         protected ValueExpression ClientDiagnosticsProperty { get; }
         protected HttpPipelineExpression PipelineField { get; }
-
+        protected StatusCodeSwitchBuilder StatusCodeSwitchBuilder { get; }
         protected MethodSignatureModifiers ConvenienceModifiers { get; }
 
         protected string CreateMessageMethodName { get; }
@@ -73,7 +71,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _fields = args.Fields;
             _clientName = args.ClientName;
             _clientNamespace = args.ClientNamespace;
-            _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
             _operationSampleBuilder = args.OperationSampleBuilder;
             _parametersBuilder = new MethodParametersBuilder(args.Operation, args.Fields, args.TypeFactory);
             _typeFactory = args.TypeFactory;
@@ -81,17 +78,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             Operation = args.Operation;
             GenerateProtocolMethods = args.GenerateProtocolMethods;
+            StatusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
             PipelineField = new HttpPipelineExpression(_fields.PipelineField);
 
             ProtocolMethodName = Operation.Name.ToCleanName();
             CreateMessageMethodName = $"Create{ProtocolMethodName}Request";
 
-            ResponseType = _statusCodeSwitchBuilder.ResponseType;
-            ProtocolMethodReturnType = _statusCodeSwitchBuilder.ProtocolReturnType;
-            RestClientConvenienceMethodReturnType = _statusCodeSwitchBuilder.RestClientConvenienceReturnType;
-            ConvenienceMethodReturnType = _statusCodeSwitchBuilder.ClientConvenienceReturnType;
-            ResponseClassifier = _statusCodeSwitchBuilder.ResponseClassifier;
+            ResponseType = StatusCodeSwitchBuilder.ResponseType;
+            ProtocolMethodReturnType = StatusCodeSwitchBuilder.ProtocolReturnType;
+            RestClientConvenienceMethodReturnType = StatusCodeSwitchBuilder.RestClientConvenienceReturnType;
+            ConvenienceMethodReturnType = StatusCodeSwitchBuilder.ClientConvenienceReturnType;
+            ResponseClassifier = StatusCodeSwitchBuilder.ResponseClassifier;
 
             _summary = FormattableStringHelpers.FromString(Operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(Operation.Summary) : null);
             _description = FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(Operation.Description));
@@ -167,14 +165,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 convenienceMethodSignature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, parameters.Convenience, RestClientConvenienceMethodReturnType, null);
 
-                convenience = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, _statusCodeSwitchBuilder, false), false);
-                convenienceAsync = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, _statusCodeSwitchBuilder, true), true);
+                convenience = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, StatusCodeSwitchBuilder, false), false);
+                convenienceAsync = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, StatusCodeSwitchBuilder, true), true);
             }
 
             var protocolMethodSignature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters.Protocol, ProtocolMethodReturnType, protocolMethodNonDocumentComment);
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
-            var samples = _operationSampleBuilder.BuildSamples(Operation, protocolMethodSignature, convenienceMethodSignature, requestBodyType, ResponseType, _statusCodeSwitchBuilder.PageItemType);
+            var samples = _operationSampleBuilder.BuildSamples(Operation, protocolMethodSignature, convenienceMethodSignature, requestBodyType, ResponseType, StatusCodeSwitchBuilder.PageItemType);
 
             return new RestClientOperationMethods
             (
@@ -191,7 +189,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 order,
                 Operation,
                 ResponseType,
-                _statusCodeSwitchBuilder.PageItemType,
+                StatusCodeSwitchBuilder.PageItemType,
                 samples,
                 createNextPageMessageMethodSignature
             );
@@ -241,8 +239,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 createNextPageMessageMethod,
                 null,
                 null,
-                BuildConvenienceMethod(convenienceMethodSignature, CreateLegacyConvenienceMethodBody(createRequestMessageMethod.Signature, _statusCodeSwitchBuilder, false), false),
-                BuildConvenienceMethod(convenienceMethodSignature, CreateLegacyConvenienceMethodBody(createRequestMessageMethod.Signature, _statusCodeSwitchBuilder, true), true),
+                BuildConvenienceMethod(convenienceMethodSignature, CreateLegacyConvenienceMethodBody(createRequestMessageMethod.Signature, StatusCodeSwitchBuilder, false), false),
+                BuildConvenienceMethod(convenienceMethodSignature, CreateLegacyConvenienceMethodBody(createRequestMessageMethod.Signature, StatusCodeSwitchBuilder, true), true),
                 BuildLegacyNextPageConvenienceMethod(parameters.Convenience, createNextPageMessageMethod, false),
                 BuildLegacyNextPageConvenienceMethod(parameters.Convenience, createNextPageMessageMethod, true),
                 ResponseClassifier,
@@ -250,7 +248,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 order,
                 Operation,
                 ResponseType,
-                _statusCodeSwitchBuilder.PageItemType,
+                StatusCodeSwitchBuilder.PageItemType,
                 Array.Empty<DpgOperationSample>(),
                 createNextPageMessageMethodSignature
             );

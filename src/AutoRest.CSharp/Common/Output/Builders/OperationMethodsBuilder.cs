@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 var value = new VariableReference(ResponseType, "value");
 
                 yield return new DeclareVariableStatement(value.Type, value.Declaration, Default);
-                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, response, false);
+                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, response.ContentStream, false);
                 yield return Return(ResponseExpression.FromValue(value, response));
             }
             else if (ResponseType is { IsFrameworkType: true })

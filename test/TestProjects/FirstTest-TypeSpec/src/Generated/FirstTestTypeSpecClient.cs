@@ -815,6 +815,7 @@ namespace FirstTestTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
+            return Response.FromValue(ReturnsAnonymousModel_101.FromResponse(response), response);
         }
 
         /// <summary> return anonymous model. </summary>
@@ -824,6 +825,7 @@ namespace FirstTestTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ReturnsAnonymousModel(context);
+            return Response.FromValue(ReturnsAnonymousModel_101.FromResponse(response), response);
         }
 
         /// <summary>

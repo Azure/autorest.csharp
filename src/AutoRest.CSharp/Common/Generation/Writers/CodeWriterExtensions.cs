@@ -454,15 +454,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant) => writer.Append(constant.GetConstantFormattable());
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, ResponseExpression responseExpression, CSharpType? type)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, StreamExpression stream, CSharpType? type)
         {
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, null, responseExpression, type is not null && type.Equals(typeof(BinaryData))));
+                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, null, stream, type is not null && type.Equals(typeof(BinaryData))));
                     break;
                 case XmlElementSerialization xmlSerialization:
-                    writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, null, responseExpression));
+                    writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, null, stream));
                     break;
                 default:
                     throw new NotImplementedException(serialization.ToString());

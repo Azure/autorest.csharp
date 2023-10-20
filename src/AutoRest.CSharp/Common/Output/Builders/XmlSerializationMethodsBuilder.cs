@@ -222,11 +222,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Return(New.Instance(objectSerialization.Type, parameters));
         }
 
-        public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, ResponseExpression response)
+        public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, StreamExpression stream)
         {
             return new[]
             {
-                Var("document", XDocumentExpression.Load(response.ContentStream, LoadOptions.PreserveWhitespace), out var document),
+                Var("document", XDocumentExpression.Load(stream, LoadOptions.PreserveWhitespace), out var document),
                 BuildDeserialization(serialization, variable, document)
             };
         }
