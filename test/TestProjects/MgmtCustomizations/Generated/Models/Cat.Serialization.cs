@@ -65,20 +65,6 @@ namespace MgmtCustomizations.Models
             return DeserializeCat(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Cat>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Cat IModelSerializable<Cat>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCat(document.RootElement, options);
-        }
-
         internal static Cat DeserializeCat(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -132,6 +118,21 @@ namespace MgmtCustomizations.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Cat(kind, name.Value, size, Optional.ToNullable(dateOfBirth), serializedAdditionalRawData, meow.Value);
+        }
+
+        BinaryData IModelSerializable<Cat>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Cat IModelSerializable<Cat>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCat(document.RootElement, options);
         }
     }
 }

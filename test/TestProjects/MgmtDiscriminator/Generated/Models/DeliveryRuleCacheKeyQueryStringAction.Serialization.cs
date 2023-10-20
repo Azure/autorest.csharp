@@ -52,20 +52,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleCacheKeyQueryStringAction(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeliveryRuleCacheKeyQueryStringAction>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeliveryRuleCacheKeyQueryStringAction IModelSerializable<DeliveryRuleCacheKeyQueryStringAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeliveryRuleCacheKeyQueryStringAction(document.RootElement, options);
-        }
-
         internal static DeliveryRuleCacheKeyQueryStringAction DeserializeDeliveryRuleCacheKeyQueryStringAction(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -103,6 +89,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeliveryRuleCacheKeyQueryStringAction(name, foo.Value, serializedAdditionalRawData, parameters);
+        }
+
+        BinaryData IModelSerializable<DeliveryRuleCacheKeyQueryStringAction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeliveryRuleCacheKeyQueryStringAction IModelSerializable<DeliveryRuleCacheKeyQueryStringAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeliveryRuleCacheKeyQueryStringAction(document.RootElement, options);
         }
     }
 }

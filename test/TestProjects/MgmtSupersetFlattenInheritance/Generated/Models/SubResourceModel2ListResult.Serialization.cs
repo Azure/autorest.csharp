@@ -58,20 +58,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeSubResourceModel2ListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SubResourceModel2ListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SubResourceModel2ListResult IModelSerializable<SubResourceModel2ListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSubResourceModel2ListResult(document.RootElement, options);
-        }
-
         internal static SubResourceModel2ListResult DeserializeSubResourceModel2ListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -112,6 +98,21 @@ namespace MgmtSupersetFlattenInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SubResourceModel2ListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SubResourceModel2ListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SubResourceModel2ListResult IModelSerializable<SubResourceModel2ListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSubResourceModel2ListResult(document.RootElement, options);
         }
     }
 }

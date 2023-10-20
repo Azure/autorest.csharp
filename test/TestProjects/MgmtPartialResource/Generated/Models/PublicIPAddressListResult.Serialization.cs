@@ -59,20 +59,6 @@ namespace MgmtPartialResource.Models
             return DeserializePublicIPAddressListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PublicIPAddressListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PublicIPAddressListResult IModelSerializable<PublicIPAddressListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePublicIPAddressListResult(document.RootElement, options);
-        }
-
         internal static PublicIPAddressListResult DeserializePublicIPAddressListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtPartialResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PublicIPAddressListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PublicIPAddressListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PublicIPAddressListResult IModelSerializable<PublicIPAddressListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePublicIPAddressListResult(document.RootElement, options);
         }
     }
 }

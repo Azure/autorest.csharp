@@ -48,20 +48,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyNatRuleCollectionAction(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyNatRuleCollectionAction>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyNatRuleCollectionAction IModelSerializable<FirewallPolicyNatRuleCollectionAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyNatRuleCollectionAction(document.RootElement, options);
-        }
-
         internal static FirewallPolicyNatRuleCollectionAction DeserializeFirewallPolicyNatRuleCollectionAction(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyNatRuleCollectionAction(Optional.ToNullable(type), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyNatRuleCollectionAction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyNatRuleCollectionAction IModelSerializable<FirewallPolicyNatRuleCollectionAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyNatRuleCollectionAction(document.RootElement, options);
         }
     }
 }

@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializePatchSettings(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PatchSettings>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PatchSettings IModelSerializable<PatchSettings>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePatchSettings(document.RootElement, options);
-        }
-
         internal static PatchSettings DeserializePatchSettings(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PatchSettings(Optional.ToNullable(patchMode), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PatchSettings>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PatchSettings IModelSerializable<PatchSettings>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePatchSettings(document.RootElement, options);
         }
     }
 }

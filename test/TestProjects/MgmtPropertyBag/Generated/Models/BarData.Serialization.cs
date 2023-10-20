@@ -69,20 +69,6 @@ namespace MgmtPropertyBag
             return DeserializeBarData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BarData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BarData IModelSerializable<BarData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBarData(document.RootElement, options);
-        }
-
         internal static BarData DeserializeBarData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtPropertyBag
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BarData(id, name, type, systemData.Value, details.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<BarData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BarData IModelSerializable<BarData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBarData(document.RootElement, options);
         }
     }
 }

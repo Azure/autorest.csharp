@@ -64,20 +64,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeLogAnalyticsInputBase(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<LogAnalyticsInputBase>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        LogAnalyticsInputBase IModelSerializable<LogAnalyticsInputBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLogAnalyticsInputBase(document.RootElement, options);
-        }
-
         internal static LogAnalyticsInputBase DeserializeLogAnalyticsInputBase(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -145,6 +131,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new LogAnalyticsInputBase(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<LogAnalyticsInputBase>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LogAnalyticsInputBase IModelSerializable<LogAnalyticsInputBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLogAnalyticsInputBase(document.RootElement, options);
         }
     }
 }

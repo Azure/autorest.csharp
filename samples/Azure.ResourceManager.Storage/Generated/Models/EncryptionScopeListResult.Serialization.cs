@@ -59,20 +59,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeEncryptionScopeListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<EncryptionScopeListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        EncryptionScopeListResult IModelSerializable<EncryptionScopeListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeEncryptionScopeListResult(document.RootElement, options);
-        }
-
         internal static EncryptionScopeListResult DeserializeEncryptionScopeListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new EncryptionScopeListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<EncryptionScopeListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EncryptionScopeListResult IModelSerializable<EncryptionScopeListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEncryptionScopeListResult(document.RootElement, options);
         }
     }
 }

@@ -43,20 +43,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateEndpointConnectionList(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PrivateEndpointConnectionList>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PrivateEndpointConnectionList IModelSerializable<PrivateEndpointConnectionList>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateEndpointConnectionList(document.RootElement, options);
-        }
-
         internal static PrivateEndpointConnectionList DeserializePrivateEndpointConnectionList(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new PrivateEndpointConnectionList(Optional.ToList(value));
+        }
+
+        BinaryData IModelSerializable<PrivateEndpointConnectionList>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateEndpointConnectionList IModelSerializable<PrivateEndpointConnectionList>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateEndpointConnectionList(document.RootElement, options);
         }
 
         internal partial class PrivateEndpointConnectionListConverter : JsonConverter<PrivateEndpointConnectionList>

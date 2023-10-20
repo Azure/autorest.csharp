@@ -42,20 +42,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeKeyVaultProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<KeyVaultProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        KeyVaultProperties IModelSerializable<KeyVaultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeKeyVaultProperties(document.RootElement, options);
-        }
-
         internal static KeyVaultProperties DeserializeKeyVaultProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -80,6 +66,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new KeyVaultProperties(keyIdentifier.Value, identity.Value);
+        }
+
+        BinaryData IModelSerializable<KeyVaultProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyVaultProperties IModelSerializable<KeyVaultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyVaultProperties(document.RootElement, options);
         }
 
         internal partial class KeyVaultPropertiesConverter : JsonConverter<KeyVaultProperties>

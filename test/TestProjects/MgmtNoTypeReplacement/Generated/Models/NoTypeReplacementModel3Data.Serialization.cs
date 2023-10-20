@@ -70,20 +70,6 @@ namespace MgmtNoTypeReplacement
             return DeserializeNoTypeReplacementModel3Data(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NoTypeReplacementModel3Data>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NoTypeReplacementModel3Data IModelSerializable<NoTypeReplacementModel3Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNoTypeReplacementModel3Data(document.RootElement, options);
-        }
-
         internal static NoTypeReplacementModel3Data DeserializeNoTypeReplacementModel3Data(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -141,6 +127,21 @@ namespace MgmtNoTypeReplacement
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NoTypeReplacementModel3Data(id, name, type, systemData.Value, foo.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NoTypeReplacementModel3Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NoTypeReplacementModel3Data IModelSerializable<NoTypeReplacementModel3Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNoTypeReplacementModel3Data(document.RootElement, options);
         }
     }
 }

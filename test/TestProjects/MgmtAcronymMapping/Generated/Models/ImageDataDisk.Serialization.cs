@@ -81,20 +81,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeImageDataDisk(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ImageDataDisk>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ImageDataDisk IModelSerializable<ImageDataDisk>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeImageDataDisk(document.RootElement, options);
-        }
-
         internal static ImageDataDisk DeserializeImageDataDisk(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -190,6 +176,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ImageDataDisk(snapshot, managedDisk, blobUri.Value, Optional.ToNullable(caching), Optional.ToNullable(diskSizeGB), Optional.ToNullable(storageAccountType), diskEncryptionSet, serializedAdditionalRawData, lun);
+        }
+
+        BinaryData IModelSerializable<ImageDataDisk>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ImageDataDisk IModelSerializable<ImageDataDisk>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeImageDataDisk(document.RootElement, options);
         }
     }
 }

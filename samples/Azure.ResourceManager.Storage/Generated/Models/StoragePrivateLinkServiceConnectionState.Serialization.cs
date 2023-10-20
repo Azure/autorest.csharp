@@ -58,20 +58,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStoragePrivateLinkServiceConnectionState(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StoragePrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StoragePrivateLinkServiceConnectionState IModelSerializable<StoragePrivateLinkServiceConnectionState>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStoragePrivateLinkServiceConnectionState(document.RootElement, options);
-        }
-
         internal static StoragePrivateLinkServiceConnectionState DeserializeStoragePrivateLinkServiceConnectionState(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StoragePrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionRequired.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StoragePrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StoragePrivateLinkServiceConnectionState IModelSerializable<StoragePrivateLinkServiceConnectionState>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStoragePrivateLinkServiceConnectionState(document.RootElement, options);
         }
     }
 }

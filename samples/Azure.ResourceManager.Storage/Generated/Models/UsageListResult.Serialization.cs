@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeUsageListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UsageListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UsageListResult IModelSerializable<UsageListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUsageListResult(document.RootElement, options);
-        }
-
         internal static UsageListResult DeserializeUsageListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UsageListResult(Optional.ToList(value), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UsageListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UsageListResult IModelSerializable<UsageListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUsageListResult(document.RootElement, options);
         }
     }
 }

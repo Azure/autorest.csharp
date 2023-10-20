@@ -55,20 +55,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeUnknownFirewallPolicyRule(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownFirewallPolicyRule>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownFirewallPolicyRule IModelSerializable<UnknownFirewallPolicyRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownFirewallPolicyRule(document.RootElement, options);
-        }
-
         internal static UnknownFirewallPolicyRule DeserializeUnknownFirewallPolicyRule(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownFirewallPolicyRule(name.Value, description.Value, ruleType, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownFirewallPolicyRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownFirewallPolicyRule IModelSerializable<UnknownFirewallPolicyRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownFirewallPolicyRule(document.RootElement, options);
         }
     }
 }

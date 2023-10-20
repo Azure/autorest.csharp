@@ -60,20 +60,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeRestorePolicyProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RestorePolicyProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RestorePolicyProperties IModelSerializable<RestorePolicyProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRestorePolicyProperties(document.RootElement, options);
-        }
-
         internal static RestorePolicyProperties DeserializeRestorePolicyProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -129,6 +115,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RestorePolicyProperties(enabled, Optional.ToNullable(days), Optional.ToNullable(lastEnabledTime), Optional.ToNullable(minRestoreTime), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RestorePolicyProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RestorePolicyProperties IModelSerializable<RestorePolicyProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRestorePolicyProperties(document.RootElement, options);
         }
     }
 }

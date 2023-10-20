@@ -95,20 +95,6 @@ namespace MgmtMultipleParentResource.Models
             return DeserializeTheParentPatch(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TheParentPatch>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TheParentPatch IModelSerializable<TheParentPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTheParentPatch(document.RootElement, options);
-        }
-
         internal static TheParentPatch DeserializeTheParentPatch(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -213,6 +199,21 @@ namespace MgmtMultipleParentResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TheParentPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
+        }
+
+        BinaryData IModelSerializable<TheParentPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TheParentPatch IModelSerializable<TheParentPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTheParentPatch(document.RootElement, options);
         }
     }
 }

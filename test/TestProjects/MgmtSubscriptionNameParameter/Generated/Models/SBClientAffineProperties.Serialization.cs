@@ -58,20 +58,6 @@ namespace MgmtSubscriptionNameParameter.Models
             return DeserializeSBClientAffineProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SBClientAffineProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SBClientAffineProperties IModelSerializable<SBClientAffineProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSBClientAffineProperties(document.RootElement, options);
-        }
-
         internal static SBClientAffineProperties DeserializeSBClientAffineProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -117,6 +103,21 @@ namespace MgmtSubscriptionNameParameter.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SBClientAffineProperties(clientId.Value, Optional.ToNullable(isDurable), Optional.ToNullable(isShared), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SBClientAffineProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SBClientAffineProperties IModelSerializable<SBClientAffineProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSBClientAffineProperties(document.RootElement, options);
         }
     }
 }

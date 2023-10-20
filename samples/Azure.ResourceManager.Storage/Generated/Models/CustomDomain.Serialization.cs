@@ -50,20 +50,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeCustomDomain(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CustomDomain>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CustomDomain IModelSerializable<CustomDomain>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCustomDomain(document.RootElement, options);
-        }
-
         internal static CustomDomain DeserializeCustomDomain(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -99,6 +85,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CustomDomain(name, Optional.ToNullable(useSubDomainName), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<CustomDomain>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CustomDomain IModelSerializable<CustomDomain>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCustomDomain(document.RootElement, options);
         }
     }
 }

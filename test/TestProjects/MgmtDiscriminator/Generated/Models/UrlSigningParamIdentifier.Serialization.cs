@@ -47,20 +47,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeUrlSigningParamIdentifier(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UrlSigningParamIdentifier>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UrlSigningParamIdentifier IModelSerializable<UrlSigningParamIdentifier>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUrlSigningParamIdentifier(document.RootElement, options);
-        }
-
         internal static UrlSigningParamIdentifier DeserializeUrlSigningParamIdentifier(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -92,6 +78,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UrlSigningParamIdentifier(paramIndicator, paramName, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UrlSigningParamIdentifier>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UrlSigningParamIdentifier IModelSerializable<UrlSigningParamIdentifier>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUrlSigningParamIdentifier(document.RootElement, options);
         }
     }
 }

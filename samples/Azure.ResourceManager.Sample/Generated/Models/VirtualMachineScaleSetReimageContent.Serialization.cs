@@ -58,20 +58,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetReimageContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetReimageContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineScaleSetReimageContent IModelSerializable<VirtualMachineScaleSetReimageContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetReimageContent(document.RootElement, options);
-        }
-
         internal static VirtualMachineScaleSetReimageContent DeserializeVirtualMachineScaleSetReimageContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -116,6 +102,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetReimageContent(Optional.ToNullable(tempDisk), serializedAdditionalRawData, Optional.ToList(instanceIds));
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetReimageContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetReimageContent IModelSerializable<VirtualMachineScaleSetReimageContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetReimageContent(document.RootElement, options);
         }
     }
 }

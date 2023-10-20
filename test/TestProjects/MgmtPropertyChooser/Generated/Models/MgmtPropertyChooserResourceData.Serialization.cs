@@ -77,20 +77,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeMgmtPropertyChooserResourceData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtPropertyChooserResourceData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtPropertyChooserResourceData IModelSerializable<MgmtPropertyChooserResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtPropertyChooserResourceData(document.RootElement, options);
-        }
-
         internal static MgmtPropertyChooserResourceData DeserializeMgmtPropertyChooserResourceData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -159,6 +145,21 @@ namespace MgmtPropertyChooser.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtPropertyChooserResourceData(id, name, type, systemData.Value, location, Optional.ToDictionary(tags), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtPropertyChooserResourceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtPropertyChooserResourceData IModelSerializable<MgmtPropertyChooserResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtPropertyChooserResourceData(document.RootElement, options);
         }
     }
 }

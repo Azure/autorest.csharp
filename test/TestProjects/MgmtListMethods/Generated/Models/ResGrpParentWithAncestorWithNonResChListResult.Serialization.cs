@@ -56,20 +56,6 @@ namespace MgmtListMethods.Models
             return DeserializeResGrpParentWithAncestorWithNonResChListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ResGrpParentWithAncestorWithNonResChListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ResGrpParentWithAncestorWithNonResChListResult IModelSerializable<ResGrpParentWithAncestorWithNonResChListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResGrpParentWithAncestorWithNonResChListResult(document.RootElement, options);
-        }
-
         internal static ResGrpParentWithAncestorWithNonResChListResult DeserializeResGrpParentWithAncestorWithNonResChListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtListMethods.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResGrpParentWithAncestorWithNonResChListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ResGrpParentWithAncestorWithNonResChListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResGrpParentWithAncestorWithNonResChListResult IModelSerializable<ResGrpParentWithAncestorWithNonResChListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResGrpParentWithAncestorWithNonResChListResult(document.RootElement, options);
         }
     }
 }

@@ -121,20 +121,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeBlobServiceData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BlobServiceData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BlobServiceData IModelSerializable<BlobServiceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBlobServiceData(document.RootElement, options);
-        }
-
         internal static BlobServiceData DeserializeBlobServiceData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -290,6 +276,21 @@ namespace Azure.ResourceManager.Storage
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BlobServiceData(id, name, type, systemData.Value, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value, lastAccessTimeTrackingPolicy.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<BlobServiceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BlobServiceData IModelSerializable<BlobServiceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBlobServiceData(document.RootElement, options);
         }
     }
 }

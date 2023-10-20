@@ -56,20 +56,6 @@ namespace MgmtConstants.Models
             return DeserializeOptionalMachineListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<OptionalMachineListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        OptionalMachineListResult IModelSerializable<OptionalMachineListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeOptionalMachineListResult(document.RootElement, options);
-        }
-
         internal static OptionalMachineListResult DeserializeOptionalMachineListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtConstants.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new OptionalMachineListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<OptionalMachineListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OptionalMachineListResult IModelSerializable<OptionalMachineListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOptionalMachineListResult(document.RootElement, options);
         }
     }
 }

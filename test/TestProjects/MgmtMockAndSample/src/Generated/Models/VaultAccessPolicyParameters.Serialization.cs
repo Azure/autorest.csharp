@@ -71,20 +71,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeVaultAccessPolicyParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VaultAccessPolicyParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VaultAccessPolicyParameters IModelSerializable<VaultAccessPolicyParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVaultAccessPolicyParameters(document.RootElement, options);
-        }
-
         internal static VaultAccessPolicyParameters DeserializeVaultAccessPolicyParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -148,6 +134,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VaultAccessPolicyParameters(id, name, type, systemData.Value, Optional.ToNullable(location), properties, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VaultAccessPolicyParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VaultAccessPolicyParameters IModelSerializable<VaultAccessPolicyParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVaultAccessPolicyParameters(document.RootElement, options);
         }
     }
 }

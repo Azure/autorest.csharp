@@ -54,20 +54,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeBlobServiceItems(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BlobServiceItems>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BlobServiceItems IModelSerializable<BlobServiceItems>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBlobServiceItems(document.RootElement, options);
-        }
-
         internal static BlobServiceItems DeserializeBlobServiceItems(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BlobServiceItems(Optional.ToList(value), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<BlobServiceItems>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BlobServiceItems IModelSerializable<BlobServiceItems>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBlobServiceItems(document.RootElement, options);
         }
     }
 }

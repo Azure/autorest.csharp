@@ -72,20 +72,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeUrlRedirectActionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UrlRedirectActionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UrlRedirectActionParameters IModelSerializable<UrlRedirectActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUrlRedirectActionParameters(document.RootElement, options);
-        }
-
         internal static UrlRedirectActionParameters DeserializeUrlRedirectActionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -151,6 +137,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UrlRedirectActionParameters(typeName, redirectType, Optional.ToNullable(destinationProtocol), customPath.Value, customHostname.Value, customQueryString.Value, customFragment.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UrlRedirectActionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UrlRedirectActionParameters IModelSerializable<UrlRedirectActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUrlRedirectActionParameters(document.RootElement, options);
         }
     }
 }

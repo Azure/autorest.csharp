@@ -55,20 +55,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetListSkusResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetListSkusResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineScaleSetListSkusResult IModelSerializable<VirtualMachineScaleSetListSkusResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetListSkusResult(document.RootElement, options);
-        }
-
         internal static VirtualMachineScaleSetListSkusResult DeserializeVirtualMachineScaleSetListSkusResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -105,6 +91,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetListSkusResult(vmssSkus, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetListSkusResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetListSkusResult IModelSerializable<VirtualMachineScaleSetListSkusResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetListSkusResult(document.RootElement, options);
         }
     }
 }

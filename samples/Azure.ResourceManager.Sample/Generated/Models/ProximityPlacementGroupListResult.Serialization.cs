@@ -56,20 +56,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeProximityPlacementGroupListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ProximityPlacementGroupListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ProximityPlacementGroupListResult IModelSerializable<ProximityPlacementGroupListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeProximityPlacementGroupListResult(document.RootElement, options);
-        }
-
         internal static ProximityPlacementGroupListResult DeserializeProximityPlacementGroupListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ProximityPlacementGroupListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ProximityPlacementGroupListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProximityPlacementGroupListResult IModelSerializable<ProximityPlacementGroupListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProximityPlacementGroupListResult(document.RootElement, options);
         }
     }
 }

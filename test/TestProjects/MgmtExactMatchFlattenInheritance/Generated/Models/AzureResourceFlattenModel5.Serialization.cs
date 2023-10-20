@@ -69,20 +69,6 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return DeserializeAzureResourceFlattenModel5(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AzureResourceFlattenModel5>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AzureResourceFlattenModel5 IModelSerializable<AzureResourceFlattenModel5>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAzureResourceFlattenModel5(document.RootElement, options);
-        }
-
         internal static AzureResourceFlattenModel5 DeserializeAzureResourceFlattenModel5(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -140,6 +126,21 @@ namespace MgmtExactMatchFlattenInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AzureResourceFlattenModel5(id, name, type, systemData.Value, Optional.ToNullable(foo), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AzureResourceFlattenModel5>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AzureResourceFlattenModel5 IModelSerializable<AzureResourceFlattenModel5>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAzureResourceFlattenModel5(document.RootElement, options);
         }
     }
 }

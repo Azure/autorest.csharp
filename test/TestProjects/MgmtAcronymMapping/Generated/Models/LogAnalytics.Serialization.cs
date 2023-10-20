@@ -72,20 +72,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeLogAnalytics(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<LogAnalytics>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        LogAnalytics IModelSerializable<LogAnalytics>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLogAnalytics(document.RootElement, options);
-        }
-
         internal static LogAnalytics DeserializeLogAnalytics(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -155,6 +141,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new LogAnalytics(properties.Value, Optional.ToNullable(contentType), content.Value, Optional.ToNullable(method), basePath.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<LogAnalytics>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LogAnalytics IModelSerializable<LogAnalytics>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLogAnalytics(document.RootElement, options);
         }
     }
 }

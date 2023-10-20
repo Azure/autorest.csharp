@@ -125,20 +125,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeNetworkRule(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NetworkRule>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NetworkRule IModelSerializable<NetworkRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNetworkRule(document.RootElement, options);
-        }
-
         internal static NetworkRule DeserializeNetworkRule(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -281,6 +267,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NetworkRule(name.Value, description.Value, ruleType, serializedAdditionalRawData, Optional.ToList(ipProtocols), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), Optional.ToList(sourceIpGroups), Optional.ToList(destinationIpGroups), Optional.ToList(destinationFqdns));
+        }
+
+        BinaryData IModelSerializable<NetworkRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NetworkRule IModelSerializable<NetworkRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNetworkRule(document.RootElement, options);
         }
     }
 }

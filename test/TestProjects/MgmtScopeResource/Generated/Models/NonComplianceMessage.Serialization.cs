@@ -50,20 +50,6 @@ namespace MgmtScopeResource.Models
             return DeserializeNonComplianceMessage(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NonComplianceMessage>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NonComplianceMessage IModelSerializable<NonComplianceMessage>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNonComplianceMessage(document.RootElement, options);
-        }
-
         internal static NonComplianceMessage DeserializeNonComplianceMessage(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -95,6 +81,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NonComplianceMessage(message, policyDefinitionReferenceId.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NonComplianceMessage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NonComplianceMessage IModelSerializable<NonComplianceMessage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNonComplianceMessage(document.RootElement, options);
         }
     }
 }

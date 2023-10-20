@@ -59,20 +59,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeCacheKeyQueryStringActionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CacheKeyQueryStringActionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CacheKeyQueryStringActionParameters IModelSerializable<CacheKeyQueryStringActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCacheKeyQueryStringActionParameters(document.RootElement, options);
-        }
-
         internal static CacheKeyQueryStringActionParameters DeserializeCacheKeyQueryStringActionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -115,6 +101,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CacheKeyQueryStringActionParameters(typeName, queryStringBehavior, queryParameters.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<CacheKeyQueryStringActionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CacheKeyQueryStringActionParameters IModelSerializable<CacheKeyQueryStringActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCacheKeyQueryStringActionParameters(document.RootElement, options);
         }
     }
 }

@@ -53,20 +53,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtMockAndSamplePrivateLinkResourceListResult IModelSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(document.RootElement, options);
-        }
-
         internal static MgmtMockAndSamplePrivateLinkResourceListResult DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtMockAndSamplePrivateLinkResourceListResult(Optional.ToList(value), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSamplePrivateLinkResourceListResult IModelSerializable<MgmtMockAndSamplePrivateLinkResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(document.RootElement, options);
         }
     }
 }

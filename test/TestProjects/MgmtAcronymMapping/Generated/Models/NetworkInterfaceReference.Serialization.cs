@@ -59,20 +59,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeNetworkInterfaceReference(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NetworkInterfaceReference>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NetworkInterfaceReference IModelSerializable<NetworkInterfaceReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNetworkInterfaceReference(document.RootElement, options);
-        }
-
         internal static NetworkInterfaceReference DeserializeNetworkInterfaceReference(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -120,6 +106,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NetworkInterfaceReference(id.Value, serializedAdditionalRawData, Optional.ToNullable(primary));
+        }
+
+        BinaryData IModelSerializable<NetworkInterfaceReference>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NetworkInterfaceReference IModelSerializable<NetworkInterfaceReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNetworkInterfaceReference(document.RootElement, options);
         }
     }
 }

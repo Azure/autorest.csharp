@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeTenantParentWithNonResChData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TenantParentWithNonResChData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TenantParentWithNonResChData IModelSerializable<TenantParentWithNonResChData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTenantParentWithNonResChData(document.RootElement, options);
-        }
-
         internal static TenantParentWithNonResChData DeserializeTenantParentWithNonResChData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TenantParentWithNonResChData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TenantParentWithNonResChData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TenantParentWithNonResChData IModelSerializable<TenantParentWithNonResChData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTenantParentWithNonResChData(document.RootElement, options);
         }
     }
 }

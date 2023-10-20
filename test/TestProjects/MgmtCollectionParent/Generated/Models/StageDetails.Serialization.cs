@@ -63,20 +63,6 @@ namespace MgmtCollectionParent.Models
             return DeserializeStageDetails(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StageDetails>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StageDetails IModelSerializable<StageDetails>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStageDetails(document.RootElement, options);
-        }
-
         internal static StageDetails DeserializeStageDetails(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -132,6 +118,21 @@ namespace MgmtCollectionParent.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StageDetails(Optional.ToNullable(stageStatus), Optional.ToNullable(stageName), displayName.Value, Optional.ToNullable(startTime), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StageDetails>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StageDetails IModelSerializable<StageDetails>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStageDetails(document.RootElement, options);
         }
     }
 }

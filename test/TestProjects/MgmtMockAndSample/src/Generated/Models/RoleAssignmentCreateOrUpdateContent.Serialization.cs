@@ -64,20 +64,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeRoleAssignmentCreateOrUpdateContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RoleAssignmentCreateOrUpdateContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RoleAssignmentCreateOrUpdateContent IModelSerializable<RoleAssignmentCreateOrUpdateContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRoleAssignmentCreateOrUpdateContent(document.RootElement, options);
-        }
-
         internal static RoleAssignmentCreateOrUpdateContent DeserializeRoleAssignmentCreateOrUpdateContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -131,6 +117,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoleAssignmentCreateOrUpdateContent(roleDefinitionId.Value, principalId.Value, Optional.ToNullable(canDelegate), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RoleAssignmentCreateOrUpdateContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RoleAssignmentCreateOrUpdateContent IModelSerializable<RoleAssignmentCreateOrUpdateContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRoleAssignmentCreateOrUpdateContent(document.RootElement, options);
         }
     }
 }

@@ -52,20 +52,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeUrlRedirectAction(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UrlRedirectAction>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UrlRedirectAction IModelSerializable<UrlRedirectAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUrlRedirectAction(document.RootElement, options);
-        }
-
         internal static UrlRedirectAction DeserializeUrlRedirectAction(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -103,6 +89,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UrlRedirectAction(name, foo.Value, serializedAdditionalRawData, parameters);
+        }
+
+        BinaryData IModelSerializable<UrlRedirectAction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UrlRedirectAction IModelSerializable<UrlRedirectAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUrlRedirectAction(document.RootElement, options);
         }
     }
 }

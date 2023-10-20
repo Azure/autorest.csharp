@@ -58,20 +58,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineExtensionHandlerInstanceView(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineExtensionHandlerInstanceView>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineExtensionHandlerInstanceView IModelSerializable<VirtualMachineExtensionHandlerInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineExtensionHandlerInstanceView(document.RootElement, options);
-        }
-
         internal static VirtualMachineExtensionHandlerInstanceView DeserializeVirtualMachineExtensionHandlerInstanceView(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineExtensionHandlerInstanceView(type.Value, typeHandlerVersion.Value, status.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineExtensionHandlerInstanceView>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineExtensionHandlerInstanceView IModelSerializable<VirtualMachineExtensionHandlerInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineExtensionHandlerInstanceView(document.RootElement, options);
         }
     }
 }

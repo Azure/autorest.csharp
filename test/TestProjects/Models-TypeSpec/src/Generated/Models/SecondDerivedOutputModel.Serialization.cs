@@ -48,20 +48,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeSecondDerivedOutputModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SecondDerivedOutputModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SecondDerivedOutputModel IModelSerializable<SecondDerivedOutputModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSecondDerivedOutputModel(document.RootElement, options);
-        }
-
         internal static SecondDerivedOutputModel DeserializeSecondDerivedOutputModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SecondDerivedOutputModel(kind, serializedAdditionalRawData, second);
+        }
+
+        BinaryData IModelSerializable<SecondDerivedOutputModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SecondDerivedOutputModel IModelSerializable<SecondDerivedOutputModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSecondDerivedOutputModel(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -63,20 +63,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeSrvRecord(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SrvRecord>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SrvRecord IModelSerializable<SrvRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSrvRecord(document.RootElement, options);
-        }
-
         internal static SrvRecord DeserializeSrvRecord(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -132,6 +118,21 @@ namespace MgmtExpandResourceTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SrvRecord(Optional.ToNullable(priority), Optional.ToNullable(weight), Optional.ToNullable(port), target.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SrvRecord>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SrvRecord IModelSerializable<SrvRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSrvRecord(document.RootElement, options);
         }
     }
 }

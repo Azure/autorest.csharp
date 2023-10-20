@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDedicatedHostGroupInstanceView(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DedicatedHostGroupInstanceView>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DedicatedHostGroupInstanceView IModelSerializable<DedicatedHostGroupInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDedicatedHostGroupInstanceView(document.RootElement, options);
-        }
-
         internal static DedicatedHostGroupInstanceView DeserializeDedicatedHostGroupInstanceView(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DedicatedHostGroupInstanceView(Optional.ToList(hosts), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DedicatedHostGroupInstanceView>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DedicatedHostGroupInstanceView IModelSerializable<DedicatedHostGroupInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDedicatedHostGroupInstanceView(document.RootElement, options);
         }
     }
 }

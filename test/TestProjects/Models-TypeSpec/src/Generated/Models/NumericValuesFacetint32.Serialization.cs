@@ -55,20 +55,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeNumericValuesFacetint32(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NumericValuesFacetint32>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NumericValuesFacetint32 IModelSerializable<NumericValuesFacetint32>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNumericValuesFacetint32(document.RootElement, options);
-        }
-
         internal static NumericValuesFacetint32 DeserializeNumericValuesFacetint32(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -111,6 +97,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NumericValuesFacetint32(field, serializedAdditionalRawData, values, value);
+        }
+
+        BinaryData IModelSerializable<NumericValuesFacetint32>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NumericValuesFacetint32 IModelSerializable<NumericValuesFacetint32>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNumericValuesFacetint32(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

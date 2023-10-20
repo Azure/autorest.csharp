@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RetrieveBootDiagnosticsDataResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RetrieveBootDiagnosticsDataResult IModelSerializable<RetrieveBootDiagnosticsDataResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement, options);
-        }
-
         internal static RetrieveBootDiagnosticsDataResult DeserializeRetrieveBootDiagnosticsDataResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri.Value, serialConsoleLogBlobUri.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RetrieveBootDiagnosticsDataResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RetrieveBootDiagnosticsDataResult IModelSerializable<RetrieveBootDiagnosticsDataResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement, options);
         }
     }
 }

@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeFakeParentWithAncestorWithNonResChData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FakeParentWithAncestorWithNonResChData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FakeParentWithAncestorWithNonResChData IModelSerializable<FakeParentWithAncestorWithNonResChData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFakeParentWithAncestorWithNonResChData(document.RootElement, options);
-        }
-
         internal static FakeParentWithAncestorWithNonResChData DeserializeFakeParentWithAncestorWithNonResChData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FakeParentWithAncestorWithNonResChData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FakeParentWithAncestorWithNonResChData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeParentWithAncestorWithNonResChData IModelSerializable<FakeParentWithAncestorWithNonResChData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeParentWithAncestorWithNonResChData(document.RootElement, options);
         }
     }
 }

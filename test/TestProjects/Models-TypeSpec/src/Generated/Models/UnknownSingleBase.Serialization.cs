@@ -48,20 +48,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeUnknownSingleBase(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownSingleBase>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownSingleBase IModelSerializable<UnknownSingleBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownSingleBase(document.RootElement, options);
-        }
-
         internal static UnknownSingleBase DeserializeUnknownSingleBase(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownSingleBase(kind, size, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownSingleBase>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownSingleBase IModelSerializable<UnknownSingleBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownSingleBase(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

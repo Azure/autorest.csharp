@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVaultCertificate(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VaultCertificate>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VaultCertificate IModelSerializable<VaultCertificate>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVaultCertificate(document.RootElement, options);
-        }
-
         internal static VaultCertificate DeserializeVaultCertificate(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VaultCertificate(certificateUrl.Value, certificateStore.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VaultCertificate>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VaultCertificate IModelSerializable<VaultCertificate>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVaultCertificate(document.RootElement, options);
         }
     }
 }

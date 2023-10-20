@@ -53,20 +53,6 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentValidateResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeploymentValidateResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeploymentValidateResult IModelSerializable<DeploymentValidateResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeploymentValidateResult(document.RootElement, options);
-        }
-
         internal static DeploymentValidateResult DeserializeDeploymentValidateResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeploymentValidateResult(errorResponse.Value, properties.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DeploymentValidateResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeploymentValidateResult IModelSerializable<DeploymentValidateResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeploymentValidateResult(document.RootElement, options);
         }
     }
 }

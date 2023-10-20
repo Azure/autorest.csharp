@@ -47,20 +47,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeOrchestrationServiceStateContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<OrchestrationServiceStateContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        OrchestrationServiceStateContent IModelSerializable<OrchestrationServiceStateContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeOrchestrationServiceStateContent(document.RootElement, options);
-        }
-
         internal static OrchestrationServiceStateContent DeserializeOrchestrationServiceStateContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -92,6 +78,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new OrchestrationServiceStateContent(serviceName, action, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<OrchestrationServiceStateContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OrchestrationServiceStateContent IModelSerializable<OrchestrationServiceStateContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOrchestrationServiceStateContent(document.RootElement, options);
         }
     }
 }

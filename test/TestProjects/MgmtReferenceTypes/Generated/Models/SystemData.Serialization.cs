@@ -62,20 +62,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeSystemData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SystemData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SystemData IModelSerializable<SystemData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSystemData(document.RootElement, options);
-        }
-
         internal static SystemData DeserializeSystemData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -140,6 +126,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new SystemData(createdBy.Value, Optional.ToNullable(createdByType), Optional.ToNullable(createdAt), lastModifiedBy.Value, Optional.ToNullable(lastModifiedByType), Optional.ToNullable(lastModifiedAt));
+        }
+
+        BinaryData IModelSerializable<SystemData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SystemData IModelSerializable<SystemData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSystemData(document.RootElement, options);
         }
 
         internal partial class SystemDataConverter : JsonConverter<SystemData>

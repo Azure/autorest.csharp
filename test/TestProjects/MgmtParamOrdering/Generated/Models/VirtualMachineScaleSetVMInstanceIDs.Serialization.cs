@@ -53,20 +53,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeVirtualMachineScaleSetVMInstanceIDs(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVMInstanceIDs>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineScaleSetVMInstanceIDs IModelSerializable<VirtualMachineScaleSetVMInstanceIDs>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMInstanceIDs(document.RootElement, options);
-        }
-
         internal static VirtualMachineScaleSetVMInstanceIDs DeserializeVirtualMachineScaleSetVMInstanceIDs(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace MgmtParamOrdering.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetVMInstanceIDs(Optional.ToList(instanceIds), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetVMInstanceIDs>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetVMInstanceIDs IModelSerializable<VirtualMachineScaleSetVMInstanceIDs>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetVMInstanceIDs(document.RootElement, options);
         }
     }
 }

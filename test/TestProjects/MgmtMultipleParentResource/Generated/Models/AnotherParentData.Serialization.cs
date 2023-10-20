@@ -118,20 +118,6 @@ namespace MgmtMultipleParentResource
             return DeserializeAnotherParentData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AnotherParentData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AnotherParentData IModelSerializable<AnotherParentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAnotherParentData(document.RootElement, options);
-        }
-
         internal static AnotherParentData DeserializeAnotherParentData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -270,6 +256,21 @@ namespace MgmtMultipleParentResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AnotherParentData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AnotherParentData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AnotherParentData IModelSerializable<AnotherParentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAnotherParentData(document.RootElement, options);
         }
     }
 }

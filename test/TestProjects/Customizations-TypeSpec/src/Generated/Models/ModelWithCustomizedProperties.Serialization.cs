@@ -110,20 +110,6 @@ namespace CustomizationsInTsp.Models
             return DeserializeModelWithCustomizedProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelWithCustomizedProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelWithCustomizedProperties IModelSerializable<ModelWithCustomizedProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithCustomizedProperties(document.RootElement, options);
-        }
-
         internal static ModelWithCustomizedProperties DeserializeModelWithCustomizedProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -259,6 +245,21 @@ namespace CustomizationsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ModelWithCustomizedProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithCustomizedProperties IModelSerializable<ModelWithCustomizedProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithCustomizedProperties(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

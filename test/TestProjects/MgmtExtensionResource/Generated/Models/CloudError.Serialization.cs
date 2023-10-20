@@ -48,20 +48,6 @@ namespace MgmtExtensionResource.Models
             return DeserializeCloudError(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CloudError>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CloudError IModelSerializable<CloudError>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCloudError(document.RootElement, options);
-        }
-
         internal static CloudError DeserializeCloudError(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtExtensionResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CloudError(error.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<CloudError>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CloudError IModelSerializable<CloudError>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCloudError(document.RootElement, options);
         }
     }
 }

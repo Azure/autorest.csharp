@@ -101,20 +101,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeObjectReplicationPolicyData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ObjectReplicationPolicyData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ObjectReplicationPolicyData IModelSerializable<ObjectReplicationPolicyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeObjectReplicationPolicyData(document.RootElement, options);
-        }
-
         internal static ObjectReplicationPolicyData DeserializeObjectReplicationPolicyData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -217,6 +203,21 @@ namespace Azure.ResourceManager.Storage
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ObjectReplicationPolicyData(id, name, type, systemData.Value, policyId.Value, Optional.ToNullable(enabledTime), sourceAccount.Value, destinationAccount.Value, Optional.ToList(rules), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ObjectReplicationPolicyData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ObjectReplicationPolicyData IModelSerializable<ObjectReplicationPolicyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeObjectReplicationPolicyData(document.RootElement, options);
         }
     }
 }

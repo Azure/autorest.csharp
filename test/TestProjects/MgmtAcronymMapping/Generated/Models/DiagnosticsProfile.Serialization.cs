@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeDiagnosticsProfile(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DiagnosticsProfile>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DiagnosticsProfile IModelSerializable<DiagnosticsProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDiagnosticsProfile(document.RootElement, options);
-        }
-
         internal static DiagnosticsProfile DeserializeDiagnosticsProfile(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DiagnosticsProfile(bootDiagnostics.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DiagnosticsProfile>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DiagnosticsProfile IModelSerializable<DiagnosticsProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDiagnosticsProfile(document.RootElement, options);
         }
     }
 }

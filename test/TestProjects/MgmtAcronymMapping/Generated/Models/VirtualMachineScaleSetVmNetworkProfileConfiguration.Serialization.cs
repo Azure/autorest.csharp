@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineScaleSetVmNetworkProfileConfiguration IModelSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(document.RootElement, options);
-        }
-
         internal static VirtualMachineScaleSetVmNetworkProfileConfiguration DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetVmNetworkProfileConfiguration(Optional.ToList(networkInterfaceConfigurations), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetVmNetworkProfileConfiguration IModelSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(document.RootElement, options);
         }
     }
 }

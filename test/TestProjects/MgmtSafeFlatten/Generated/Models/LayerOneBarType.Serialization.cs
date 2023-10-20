@@ -47,20 +47,6 @@ namespace MgmtSafeFlatten.Models
             return DeserializeLayerOneBarType(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<LayerOneBarType>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        LayerOneBarType IModelSerializable<LayerOneBarType>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLayerOneBarType(document.RootElement, options);
-        }
-
         internal static LayerOneBarType DeserializeLayerOneBarType(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -92,6 +78,21 @@ namespace MgmtSafeFlatten.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new LayerOneBarType(name, serializedAdditionalRawData, parameters);
+        }
+
+        BinaryData IModelSerializable<LayerOneBarType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LayerOneBarType IModelSerializable<LayerOneBarType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLayerOneBarType(document.RootElement, options);
         }
     }
 }

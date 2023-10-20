@@ -105,20 +105,6 @@ namespace MgmtAcronymMapping
             return DeserializeImageData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ImageData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ImageData IModelSerializable<ImageData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeImageData(document.RootElement, options);
-        }
-
         internal static ImageData DeserializeImageData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -235,6 +221,21 @@ namespace MgmtAcronymMapping
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ImageData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ImageData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ImageData IModelSerializable<ImageData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeImageData(document.RootElement, options);
         }
     }
 }

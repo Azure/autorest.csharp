@@ -46,20 +46,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownOutputBaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownOutputBaseModelWithDiscriminator IModelSerializable<UnknownOutputBaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement, options);
-        }
-
         internal static UnknownOutputBaseModelWithDiscriminator DeserializeUnknownOutputBaseModelWithDiscriminator(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownOutputBaseModelWithDiscriminator(kind, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownOutputBaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownOutputBaseModelWithDiscriminator IModelSerializable<UnknownOutputBaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

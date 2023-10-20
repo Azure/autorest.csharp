@@ -85,20 +85,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateLinkResourceData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PrivateLinkResourceData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PrivateLinkResourceData IModelSerializable<PrivateLinkResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateLinkResourceData(document.RootElement, options);
-        }
-
         internal static PrivateLinkResourceData DeserializePrivateLinkResourceData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -187,6 +173,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new PrivateLinkResourceData(id, name, type, systemData.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
+        }
+
+        BinaryData IModelSerializable<PrivateLinkResourceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateLinkResourceData IModelSerializable<PrivateLinkResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateLinkResourceData(document.RootElement, options);
         }
 
         internal partial class PrivateLinkResourceDataConverter : JsonConverter<PrivateLinkResourceData>

@@ -58,20 +58,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSampleSku(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SampleSku>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SampleSku IModelSerializable<SampleSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSampleSku(document.RootElement, options);
-        }
-
         internal static SampleSku DeserializeSampleSku(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SampleSku(name.Value, tier.Value, Optional.ToNullable(capacity), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SampleSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SampleSku IModelSerializable<SampleSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSampleSku(document.RootElement, options);
         }
     }
 }

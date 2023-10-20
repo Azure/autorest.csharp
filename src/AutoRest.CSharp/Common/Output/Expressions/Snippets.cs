@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static StringExpression Literal(string? value) => new(value is null ? Null : new StringLiteralExpression(value, false));
         public static StringExpression LiteralU8(string value) => new(new StringLiteralExpression(value, true));
 
+        public static BoolExpression GreaterThan(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression(">", left, right));
         public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
         public static BoolExpression NotEqual(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("!=", left, right));
         public static BoolExpression Is(ValueExpression value, CSharpType type) => new(new BinaryOperatorExpression("is", value, type));

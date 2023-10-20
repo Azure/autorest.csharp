@@ -48,20 +48,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeHardwareProfile(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<HardwareProfile>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        HardwareProfile IModelSerializable<HardwareProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeHardwareProfile(document.RootElement, options);
-        }
-
         internal static HardwareProfile DeserializeHardwareProfile(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new HardwareProfile(Optional.ToNullable(vmSize), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<HardwareProfile>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        HardwareProfile IModelSerializable<HardwareProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeHardwareProfile(document.RootElement, options);
         }
     }
 }

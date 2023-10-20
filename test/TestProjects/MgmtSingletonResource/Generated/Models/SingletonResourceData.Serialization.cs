@@ -69,20 +69,6 @@ namespace MgmtSingletonResource
             return DeserializeSingletonResourceData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SingletonResourceData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SingletonResourceData IModelSerializable<SingletonResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSingletonResourceData(document.RootElement, options);
-        }
-
         internal static SingletonResourceData DeserializeSingletonResourceData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtSingletonResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SingletonResourceData(id, name, type, systemData.Value, @new.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SingletonResourceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SingletonResourceData IModelSerializable<SingletonResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSingletonResourceData(document.RootElement, options);
         }
     }
 }

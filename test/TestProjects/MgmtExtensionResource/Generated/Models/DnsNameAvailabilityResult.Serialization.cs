@@ -48,20 +48,6 @@ namespace MgmtExtensionResource.Models
             return DeserializeDnsNameAvailabilityResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DnsNameAvailabilityResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DnsNameAvailabilityResult IModelSerializable<DnsNameAvailabilityResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDnsNameAvailabilityResult(document.RootElement, options);
-        }
-
         internal static DnsNameAvailabilityResult DeserializeDnsNameAvailabilityResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtExtensionResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DnsNameAvailabilityResult(Optional.ToNullable(available), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DnsNameAvailabilityResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DnsNameAvailabilityResult IModelSerializable<DnsNameAvailabilityResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDnsNameAvailabilityResult(document.RootElement, options);
         }
     }
 }

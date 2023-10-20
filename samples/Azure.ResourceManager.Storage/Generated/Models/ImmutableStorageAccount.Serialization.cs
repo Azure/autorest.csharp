@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeImmutableStorageAccount(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ImmutableStorageAccount>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ImmutableStorageAccount IModelSerializable<ImmutableStorageAccount>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeImmutableStorageAccount(document.RootElement, options);
-        }
-
         internal static ImmutableStorageAccount DeserializeImmutableStorageAccount(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ImmutableStorageAccount(Optional.ToNullable(enabled), immutabilityPolicy.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ImmutableStorageAccount>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ImmutableStorageAccount IModelSerializable<ImmutableStorageAccount>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeImmutableStorageAccount(document.RootElement, options);
         }
     }
 }

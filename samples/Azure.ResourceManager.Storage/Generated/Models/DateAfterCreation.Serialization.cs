@@ -45,20 +45,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeDateAfterCreation(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DateAfterCreation>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DateAfterCreation IModelSerializable<DateAfterCreation>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDateAfterCreation(document.RootElement, options);
-        }
-
         internal static DateAfterCreation DeserializeDateAfterCreation(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DateAfterCreation(daysAfterCreationGreaterThan, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DateAfterCreation>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DateAfterCreation IModelSerializable<DateAfterCreation>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDateAfterCreation(document.RootElement, options);
         }
     }
 }

@@ -82,20 +82,6 @@ namespace MgmtParent
             return DeserializeAvailabilitySetData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AvailabilitySetData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AvailabilitySetData IModelSerializable<AvailabilitySetData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAvailabilitySetData(document.RootElement, options);
-        }
-
         internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtParent
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AvailabilitySetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AvailabilitySetData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AvailabilitySetData IModelSerializable<AvailabilitySetData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAvailabilitySetData(document.RootElement, options);
         }
     }
 }

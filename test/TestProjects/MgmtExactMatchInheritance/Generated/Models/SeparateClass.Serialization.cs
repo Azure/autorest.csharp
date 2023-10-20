@@ -55,20 +55,6 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeSeparateClass(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SeparateClass>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SeparateClass IModelSerializable<SeparateClass>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSeparateClass(document.RootElement, options);
-        }
-
         internal static SeparateClass DeserializeSeparateClass(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -104,6 +90,21 @@ namespace MgmtExactMatchInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SeparateClass(stringProperty.Value, modelProperty.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SeparateClass>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SeparateClass IModelSerializable<SeparateClass>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSeparateClass(document.RootElement, options);
         }
 
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>

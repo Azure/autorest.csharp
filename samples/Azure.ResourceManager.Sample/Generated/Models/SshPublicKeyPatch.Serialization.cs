@@ -65,20 +65,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSshPublicKeyPatch(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SshPublicKeyPatch>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SshPublicKeyPatch IModelSerializable<SshPublicKeyPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSshPublicKeyPatch(document.RootElement, options);
-        }
-
         internal static SshPublicKeyPatch DeserializeSshPublicKeyPatch(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -131,6 +117,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SshPublicKeyPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, publicKey.Value);
+        }
+
+        BinaryData IModelSerializable<SshPublicKeyPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SshPublicKeyPatch IModelSerializable<SshPublicKeyPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSshPublicKeyPatch(document.RootElement, options);
         }
     }
 }

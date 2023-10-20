@@ -101,20 +101,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeEncryptionScopeData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<EncryptionScopeData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        EncryptionScopeData IModelSerializable<EncryptionScopeData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeEncryptionScopeData(document.RootElement, options);
-        }
-
         internal static EncryptionScopeData DeserializeEncryptionScopeData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -234,6 +220,21 @@ namespace Azure.ResourceManager.Storage
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new EncryptionScopeData(id, name, type, systemData.Value, Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value, Optional.ToNullable(requireInfrastructureEncryption), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<EncryptionScopeData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EncryptionScopeData IModelSerializable<EncryptionScopeData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEncryptionScopeData(document.RootElement, options);
         }
     }
 }

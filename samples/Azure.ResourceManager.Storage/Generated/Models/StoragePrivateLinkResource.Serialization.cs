@@ -95,20 +95,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStoragePrivateLinkResource(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StoragePrivateLinkResource>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StoragePrivateLinkResource IModelSerializable<StoragePrivateLinkResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStoragePrivateLinkResource(document.RootElement, options);
-        }
-
         internal static StoragePrivateLinkResource DeserializeStoragePrivateLinkResource(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -204,6 +190,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StoragePrivateLinkResource(id, name, type, systemData.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StoragePrivateLinkResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StoragePrivateLinkResource IModelSerializable<StoragePrivateLinkResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStoragePrivateLinkResource(document.RootElement, options);
         }
     }
 }

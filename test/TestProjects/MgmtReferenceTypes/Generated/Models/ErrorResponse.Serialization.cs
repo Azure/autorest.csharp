@@ -38,20 +38,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeErrorResponse(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ErrorResponse>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ErrorResponse IModelSerializable<ErrorResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeErrorResponse(document.RootElement, options);
-        }
-
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -74,6 +60,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new ErrorResponse(error.Value);
+        }
+
+        BinaryData IModelSerializable<ErrorResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ErrorResponse IModelSerializable<ErrorResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeErrorResponse(document.RootElement, options);
         }
 
         internal partial class ErrorResponseConverter : JsonConverter<ErrorResponse>

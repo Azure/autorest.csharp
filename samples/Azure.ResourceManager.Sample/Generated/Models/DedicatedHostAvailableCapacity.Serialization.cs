@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDedicatedHostAvailableCapacity(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DedicatedHostAvailableCapacity>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DedicatedHostAvailableCapacity IModelSerializable<DedicatedHostAvailableCapacity>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDedicatedHostAvailableCapacity(document.RootElement, options);
-        }
-
         internal static DedicatedHostAvailableCapacity DeserializeDedicatedHostAvailableCapacity(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DedicatedHostAvailableCapacity(Optional.ToList(allocatableVms), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DedicatedHostAvailableCapacity>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DedicatedHostAvailableCapacity IModelSerializable<DedicatedHostAvailableCapacity>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDedicatedHostAvailableCapacity(document.RootElement, options);
         }
     }
 }

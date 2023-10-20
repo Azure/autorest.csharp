@@ -69,20 +69,6 @@ namespace MgmtResourceName
             return DeserializeDiskData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DiskData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DiskData IModelSerializable<DiskData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDiskData(document.RootElement, options);
-        }
-
         internal static DiskData DeserializeDiskData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtResourceName
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DiskData(id, name, type, systemData.Value, @new.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DiskData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DiskData IModelSerializable<DiskData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDiskData(document.RootElement, options);
         }
     }
 }

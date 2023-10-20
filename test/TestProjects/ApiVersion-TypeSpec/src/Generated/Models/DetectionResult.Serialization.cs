@@ -46,20 +46,6 @@ namespace ApiVersionInTsp.Models
             return DeserializeDetectionResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DetectionResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DetectionResult IModelSerializable<DetectionResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDetectionResult(document.RootElement, options);
-        }
-
         internal static DetectionResult DeserializeDetectionResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace ApiVersionInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DetectionResult(resultId, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DetectionResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DetectionResult IModelSerializable<DetectionResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDetectionResult(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

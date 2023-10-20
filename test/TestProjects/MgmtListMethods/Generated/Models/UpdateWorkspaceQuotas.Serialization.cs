@@ -68,20 +68,6 @@ namespace MgmtListMethods.Models
             return DeserializeUpdateWorkspaceQuotas(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UpdateWorkspaceQuotas>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UpdateWorkspaceQuotas IModelSerializable<UpdateWorkspaceQuotas>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUpdateWorkspaceQuotas(document.RootElement, options);
-        }
-
         internal static UpdateWorkspaceQuotas DeserializeUpdateWorkspaceQuotas(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -143,6 +129,21 @@ namespace MgmtListMethods.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UpdateWorkspaceQuotas(id.Value, type.Value, Optional.ToNullable(limit), Optional.ToNullable(unit), Optional.ToNullable(status), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UpdateWorkspaceQuotas>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UpdateWorkspaceQuotas IModelSerializable<UpdateWorkspaceQuotas>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUpdateWorkspaceQuotas(document.RootElement, options);
         }
     }
 }

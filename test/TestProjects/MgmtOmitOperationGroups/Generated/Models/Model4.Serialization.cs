@@ -58,20 +58,6 @@ namespace MgmtOmitOperationGroups.Models
             return DeserializeModel4(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Model4>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Model4 IModelSerializable<Model4>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModel4(document.RootElement, options);
-        }
-
         internal static Model4 DeserializeModel4(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtOmitOperationGroups.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Model4(id.Value, j.Value, modelz.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<Model4>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Model4 IModelSerializable<Model4>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModel4(document.RootElement, options);
         }
     }
 }

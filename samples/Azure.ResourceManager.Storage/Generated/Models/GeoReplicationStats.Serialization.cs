@@ -58,20 +58,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeGeoReplicationStats(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<GeoReplicationStats>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        GeoReplicationStats IModelSerializable<GeoReplicationStats>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeGeoReplicationStats(document.RootElement, options);
-        }
-
         internal static GeoReplicationStats DeserializeGeoReplicationStats(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -121,6 +107,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new GeoReplicationStats(Optional.ToNullable(status), Optional.ToNullable(lastSyncTime), Optional.ToNullable(canFailover), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<GeoReplicationStats>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GeoReplicationStats IModelSerializable<GeoReplicationStats>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGeoReplicationStats(document.RootElement, options);
         }
     }
 }

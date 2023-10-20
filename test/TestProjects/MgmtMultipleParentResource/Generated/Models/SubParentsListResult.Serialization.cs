@@ -56,20 +56,6 @@ namespace MgmtMultipleParentResource.Models
             return DeserializeSubParentsListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SubParentsListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SubParentsListResult IModelSerializable<SubParentsListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSubParentsListResult(document.RootElement, options);
-        }
-
         internal static SubParentsListResult DeserializeSubParentsListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtMultipleParentResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SubParentsListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SubParentsListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SubParentsListResult IModelSerializable<SubParentsListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSubParentsListResult(document.RootElement, options);
         }
     }
 }

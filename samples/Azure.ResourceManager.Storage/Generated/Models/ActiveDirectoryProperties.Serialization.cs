@@ -55,20 +55,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeActiveDirectoryProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ActiveDirectoryProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ActiveDirectoryProperties IModelSerializable<ActiveDirectoryProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeActiveDirectoryProperties(document.RootElement, options);
-        }
-
         internal static ActiveDirectoryProperties DeserializeActiveDirectoryProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -124,6 +110,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ActiveDirectoryProperties(domainName, netBiosDomainName, forestName, domainGuid, domainSid, azureStorageSid, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ActiveDirectoryProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ActiveDirectoryProperties IModelSerializable<ActiveDirectoryProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeActiveDirectoryProperties(document.RootElement, options);
         }
     }
 }

@@ -63,20 +63,6 @@ namespace MgmtExactMatchFlattenInheritance
             return DeserializeCustomModel3Data(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CustomModel3Data>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CustomModel3Data IModelSerializable<CustomModel3Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCustomModel3Data(document.RootElement, options);
-        }
-
         internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -120,6 +106,21 @@ namespace MgmtExactMatchFlattenInheritance
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CustomModel3Data(id.Value, name.Value, type.Value, serializedAdditionalRawData, foo.Value);
+        }
+
+        BinaryData IModelSerializable<CustomModel3Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CustomModel3Data IModelSerializable<CustomModel3Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCustomModel3Data(document.RootElement, options);
         }
     }
 }

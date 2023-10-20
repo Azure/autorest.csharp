@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -16,7 +17,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtXmlDeserialization
 {
-    public partial class XmlInstanceData : IUtf8JsonSerializable, IModelJsonSerializable<XmlInstanceData>, IXmlSerializable
+    public partial class XmlInstanceData : IUtf8JsonSerializable, IModelJsonSerializable<XmlInstanceData>, IXmlSerializable, IModelSerializable<XmlInstanceData>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -39,7 +40,7 @@ namespace MgmtXmlDeserialization
             writer.WriteEndElement();
         }
 
-        internal static XmlInstanceData DeserializeXmlInstanceData(XElement element)
+        internal static XmlInstanceData DeserializeXmlInstanceData(XElement element, ModelSerializerOptions options = null)
         {
             ResourceIdentifier id = default;
             string name = default;
@@ -112,20 +113,6 @@ namespace MgmtXmlDeserialization
             return DeserializeXmlInstanceData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<XmlInstanceData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        XmlInstanceData IModelSerializable<XmlInstanceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeXmlInstanceData(document.RootElement, options);
-        }
-
         internal static XmlInstanceData DeserializeXmlInstanceData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -173,6 +160,46 @@ namespace MgmtXmlDeserialization
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new XmlInstanceData(id, name, type, systemData.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<XmlInstanceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                return ModelSerializer.SerializeCore(this, options);
+            }
+            else
+            {
+                using MemoryStream stream = new MemoryStream();
+                using XmlWriter writer = XmlWriter.Create(stream);
+                ((IXmlSerializable)this).Write(writer, null);
+                writer.Flush();
+                if (stream.Position > int.MaxValue)
+                {
+                    return BinaryData.FromStream(stream);
+                }
+                else
+                {
+                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                }
+            }
+        }
+
+        XmlInstanceData IModelSerializable<XmlInstanceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            if (data.ToMemory().Span.StartsWith("{"u8))
+            {
+                using JsonDocument document = JsonDocument.Parse(data);
+                return DeserializeXmlInstanceData(document.RootElement, options);
+            }
+            else
+            {
+                return DeserializeXmlInstanceData(XElement.Load(data.ToStream()), options);
+            }
         }
     }
 }

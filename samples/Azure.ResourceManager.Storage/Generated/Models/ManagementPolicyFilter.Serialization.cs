@@ -70,20 +70,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeManagementPolicyFilter(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ManagementPolicyFilter>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ManagementPolicyFilter IModelSerializable<ManagementPolicyFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeManagementPolicyFilter(document.RootElement, options);
-        }
-
         internal static ManagementPolicyFilter DeserializeManagementPolicyFilter(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -144,6 +130,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ManagementPolicyFilter(Optional.ToList(prefixMatch), blobTypes, Optional.ToList(blobIndexMatch), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ManagementPolicyFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ManagementPolicyFilter IModelSerializable<ManagementPolicyFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeManagementPolicyFilter(document.RootElement, options);
         }
     }
 }

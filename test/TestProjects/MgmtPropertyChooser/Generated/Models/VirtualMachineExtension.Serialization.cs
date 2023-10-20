@@ -136,20 +136,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeVirtualMachineExtension(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineExtension>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineExtension IModelSerializable<VirtualMachineExtension>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineExtension(document.RootElement, options);
-        }
-
         internal static VirtualMachineExtension DeserializeVirtualMachineExtension(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -300,6 +286,21 @@ namespace MgmtPropertyChooser.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineExtension(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineExtension>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineExtension IModelSerializable<VirtualMachineExtension>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineExtension(document.RootElement, options);
         }
     }
 }

@@ -69,20 +69,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyThreatIntelWhitelist(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyThreatIntelWhitelist>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyThreatIntelWhitelist IModelSerializable<FirewallPolicyThreatIntelWhitelist>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyThreatIntelWhitelist(document.RootElement, options);
-        }
-
         internal static FirewallPolicyThreatIntelWhitelist DeserializeFirewallPolicyThreatIntelWhitelist(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -139,6 +125,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyThreatIntelWhitelist(Optional.ToList(ipAddresses), Optional.ToList(fqdns), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyThreatIntelWhitelist>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyThreatIntelWhitelist IModelSerializable<FirewallPolicyThreatIntelWhitelist>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyThreatIntelWhitelist(document.RootElement, options);
         }
     }
 }

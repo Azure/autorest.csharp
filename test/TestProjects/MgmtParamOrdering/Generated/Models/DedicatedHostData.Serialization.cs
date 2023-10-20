@@ -82,20 +82,6 @@ namespace MgmtParamOrdering
             return DeserializeDedicatedHostData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DedicatedHostData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DedicatedHostData IModelSerializable<DedicatedHostData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDedicatedHostData(document.RootElement, options);
-        }
-
         internal static DedicatedHostData DeserializeDedicatedHostData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtParamOrdering
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DedicatedHostData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DedicatedHostData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DedicatedHostData IModelSerializable<DedicatedHostData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDedicatedHostData(document.RootElement, options);
         }
     }
 }

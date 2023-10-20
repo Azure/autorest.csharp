@@ -19,6 +19,14 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             return new BinaryDataExpression(InvokeStatic(methodName, response.ContentStream, async));
         }
 
+        public static BinaryDataExpression FromStream(ValueExpression stream, bool async)
+        {
+            var methodName = async ? nameof(BinaryData.FromStreamAsync) : nameof(BinaryData.FromStream);
+            return new(InvokeStatic(methodName, stream, async));
+        }
+
+        public ValueExpression ToMemory() => Invoke(nameof(BinaryData.ToMemory));
+
         public StreamExpression ToStream() => new(Invoke(nameof(BinaryData.ToStream)));
 
         public ValueExpression ToArray() => Invoke(nameof(BinaryData.ToArray));

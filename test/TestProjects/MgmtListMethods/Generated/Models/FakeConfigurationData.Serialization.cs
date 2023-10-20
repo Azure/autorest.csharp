@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeFakeConfigurationData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FakeConfigurationData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FakeConfigurationData IModelSerializable<FakeConfigurationData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFakeConfigurationData(document.RootElement, options);
-        }
-
         internal static FakeConfigurationData DeserializeFakeConfigurationData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FakeConfigurationData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, configValue.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FakeConfigurationData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeConfigurationData IModelSerializable<FakeConfigurationData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeConfigurationData(document.RootElement, options);
         }
     }
 }

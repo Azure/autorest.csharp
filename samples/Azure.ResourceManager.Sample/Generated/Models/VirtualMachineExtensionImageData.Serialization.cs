@@ -108,20 +108,6 @@ namespace Azure.ResourceManager.Sample
             return DeserializeVirtualMachineExtensionImageData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineExtensionImageData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineExtensionImageData IModelSerializable<VirtualMachineExtensionImageData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineExtensionImageData(document.RootElement, options);
-        }
-
         internal static VirtualMachineExtensionImageData DeserializeVirtualMachineExtensionImageData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -240,6 +226,21 @@ namespace Azure.ResourceManager.Sample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineExtensionImageData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineExtensionImageData IModelSerializable<VirtualMachineExtensionImageData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineExtensionImageData(document.RootElement, options);
         }
     }
 }

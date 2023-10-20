@@ -53,20 +53,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmPrivateLinkResourceListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MhsmPrivateLinkResourceListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MhsmPrivateLinkResourceListResult IModelSerializable<MhsmPrivateLinkResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMhsmPrivateLinkResourceListResult(document.RootElement, options);
-        }
-
         internal static MhsmPrivateLinkResourceListResult DeserializeMhsmPrivateLinkResourceListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MhsmPrivateLinkResourceListResult(Optional.ToList(value), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MhsmPrivateLinkResourceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmPrivateLinkResourceListResult IModelSerializable<MhsmPrivateLinkResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmPrivateLinkResourceListResult(document.RootElement, options);
         }
     }
 }

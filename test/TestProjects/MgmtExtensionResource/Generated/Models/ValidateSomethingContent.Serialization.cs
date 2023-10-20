@@ -48,20 +48,6 @@ namespace MgmtExtensionResource.Models
             return DeserializeValidateSomethingContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ValidateSomethingContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ValidateSomethingContent IModelSerializable<ValidateSomethingContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeValidateSomethingContent(document.RootElement, options);
-        }
-
         internal static ValidateSomethingContent DeserializeValidateSomethingContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtExtensionResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ValidateSomethingContent(something.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ValidateSomethingContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ValidateSomethingContent IModelSerializable<ValidateSomethingContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeValidateSomethingContent(document.RootElement, options);
         }
     }
 }

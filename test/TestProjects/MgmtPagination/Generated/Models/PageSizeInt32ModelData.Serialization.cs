@@ -58,20 +58,6 @@ namespace MgmtPagination
             return DeserializePageSizeInt32ModelData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PageSizeInt32ModelData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PageSizeInt32ModelData IModelSerializable<PageSizeInt32ModelData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePageSizeInt32ModelData(document.RootElement, options);
-        }
-
         internal static PageSizeInt32ModelData DeserializePageSizeInt32ModelData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -109,6 +95,21 @@ namespace MgmtPagination
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PageSizeInt32ModelData(id.Value, name.Value, type.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PageSizeInt32ModelData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PageSizeInt32ModelData IModelSerializable<PageSizeInt32ModelData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePageSizeInt32ModelData(document.RootElement, options);
         }
     }
 }

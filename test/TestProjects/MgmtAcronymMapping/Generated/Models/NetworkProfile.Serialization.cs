@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeNetworkProfile(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NetworkProfile>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NetworkProfile IModelSerializable<NetworkProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNetworkProfile(document.RootElement, options);
-        }
-
         internal static NetworkProfile DeserializeNetworkProfile(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NetworkProfile(Optional.ToList(networkInterfaces), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NetworkProfile>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NetworkProfile IModelSerializable<NetworkProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNetworkProfile(document.RootElement, options);
         }
     }
 }

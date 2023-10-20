@@ -83,20 +83,6 @@ namespace MgmtNonStringPathVariable
             return DeserializeFakeData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FakeData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FakeData IModelSerializable<FakeData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFakeData(document.RootElement, options);
-        }
-
         internal static FakeData DeserializeFakeData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -175,6 +161,21 @@ namespace MgmtNonStringPathVariable
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FakeData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FakeData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeData IModelSerializable<FakeData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeData(document.RootElement, options);
         }
     }
 }

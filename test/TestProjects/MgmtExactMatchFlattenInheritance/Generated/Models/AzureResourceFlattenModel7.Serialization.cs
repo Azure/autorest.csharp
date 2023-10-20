@@ -58,20 +58,6 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return DeserializeAzureResourceFlattenModel7(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AzureResourceFlattenModel7>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AzureResourceFlattenModel7 IModelSerializable<AzureResourceFlattenModel7>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAzureResourceFlattenModel7(document.RootElement, options);
-        }
-
         internal static AzureResourceFlattenModel7 DeserializeAzureResourceFlattenModel7(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -109,6 +95,21 @@ namespace MgmtExactMatchFlattenInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AzureResourceFlattenModel7(id.Value, name.Value, type.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AzureResourceFlattenModel7>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AzureResourceFlattenModel7 IModelSerializable<AzureResourceFlattenModel7>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAzureResourceFlattenModel7(document.RootElement, options);
         }
     }
 }

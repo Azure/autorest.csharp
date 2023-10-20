@@ -118,20 +118,6 @@ namespace MgmtMultipleParentResource
             return DeserializeChildBodyData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ChildBodyData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ChildBodyData IModelSerializable<ChildBodyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeChildBodyData(document.RootElement, options);
-        }
-
         internal static ChildBodyData DeserializeChildBodyData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -270,6 +256,21 @@ namespace MgmtMultipleParentResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ChildBodyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ChildBodyData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ChildBodyData IModelSerializable<ChildBodyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeChildBodyData(document.RootElement, options);
         }
     }
 }

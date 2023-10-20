@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountListKeysResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StorageAccountListKeysResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StorageAccountListKeysResult IModelSerializable<StorageAccountListKeysResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStorageAccountListKeysResult(document.RootElement, options);
-        }
-
         internal static StorageAccountListKeysResult DeserializeStorageAccountListKeysResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StorageAccountListKeysResult(Optional.ToList(keys), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StorageAccountListKeysResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StorageAccountListKeysResult IModelSerializable<StorageAccountListKeysResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStorageAccountListKeysResult(document.RootElement, options);
         }
     }
 }

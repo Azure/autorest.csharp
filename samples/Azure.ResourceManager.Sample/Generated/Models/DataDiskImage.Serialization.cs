@@ -48,20 +48,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDataDiskImage(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DataDiskImage>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DataDiskImage IModelSerializable<DataDiskImage>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDataDiskImage(document.RootElement, options);
-        }
-
         internal static DataDiskImage DeserializeDataDiskImage(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DataDiskImage(Optional.ToNullable(lun), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DataDiskImage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DataDiskImage IModelSerializable<DataDiskImage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDataDiskImage(document.RootElement, options);
         }
     }
 }

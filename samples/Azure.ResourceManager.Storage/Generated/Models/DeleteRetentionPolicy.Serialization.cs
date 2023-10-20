@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeDeleteRetentionPolicy(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeleteRetentionPolicy>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeleteRetentionPolicy IModelSerializable<DeleteRetentionPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeleteRetentionPolicy(document.RootElement, options);
-        }
-
         internal static DeleteRetentionPolicy DeserializeDeleteRetentionPolicy(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeleteRetentionPolicy(Optional.ToNullable(enabled), Optional.ToNullable(days), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DeleteRetentionPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeleteRetentionPolicy IModelSerializable<DeleteRetentionPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeleteRetentionPolicy(document.RootElement, options);
         }
     }
 }

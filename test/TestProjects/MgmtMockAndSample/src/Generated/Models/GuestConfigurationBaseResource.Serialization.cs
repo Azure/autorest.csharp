@@ -63,20 +63,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeGuestConfigurationBaseResource(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<GuestConfigurationBaseResource>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        GuestConfigurationBaseResource IModelSerializable<GuestConfigurationBaseResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeGuestConfigurationBaseResource(document.RootElement, options);
-        }
-
         internal static GuestConfigurationBaseResource DeserializeGuestConfigurationBaseResource(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -128,6 +114,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new GuestConfigurationBaseResource(id.Value, name.Value, Optional.ToNullable(location), Optional.ToNullable(type), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<GuestConfigurationBaseResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GuestConfigurationBaseResource IModelSerializable<GuestConfigurationBaseResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGuestConfigurationBaseResource(document.RootElement, options);
         }
     }
 }

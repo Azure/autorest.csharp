@@ -71,20 +71,6 @@ namespace FirstTestTypeSpec.Models
             return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelWithRequiredNullableProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelWithRequiredNullableProperties IModelSerializable<ModelWithRequiredNullableProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
-        }
-
         internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -137,6 +123,21 @@ namespace FirstTestTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ModelWithRequiredNullableProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithRequiredNullableProperties IModelSerializable<ModelWithRequiredNullableProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

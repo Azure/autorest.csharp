@@ -72,20 +72,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeRemoteAddressMatchConditionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RemoteAddressMatchConditionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RemoteAddressMatchConditionParameters IModelSerializable<RemoteAddressMatchConditionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRemoteAddressMatchConditionParameters(document.RootElement, options);
-        }
-
         internal static RemoteAddressMatchConditionParameters DeserializeRemoteAddressMatchConditionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -157,6 +143,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RemoteAddressMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(matchValues), Optional.ToList(transforms), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RemoteAddressMatchConditionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RemoteAddressMatchConditionParameters IModelSerializable<RemoteAddressMatchConditionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRemoteAddressMatchConditionParameters(document.RootElement, options);
         }
     }
 }

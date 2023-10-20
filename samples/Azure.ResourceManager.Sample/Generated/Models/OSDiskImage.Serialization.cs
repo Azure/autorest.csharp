@@ -45,20 +45,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeOSDiskImage(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<OSDiskImage>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        OSDiskImage IModelSerializable<OSDiskImage>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeOSDiskImage(document.RootElement, options);
-        }
-
         internal static OSDiskImage DeserializeOSDiskImage(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new OSDiskImage(operatingSystem, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<OSDiskImage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OSDiskImage IModelSerializable<OSDiskImage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOSDiskImage(document.RootElement, options);
         }
     }
 }

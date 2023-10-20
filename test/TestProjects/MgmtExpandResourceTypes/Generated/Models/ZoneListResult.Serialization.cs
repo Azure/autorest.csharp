@@ -59,20 +59,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeZoneListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ZoneListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ZoneListResult IModelSerializable<ZoneListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeZoneListResult(document.RootElement, options);
-        }
-
         internal static ZoneListResult DeserializeZoneListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtExpandResourceTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ZoneListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ZoneListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ZoneListResult IModelSerializable<ZoneListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeZoneListResult(document.RootElement, options);
         }
     }
 }

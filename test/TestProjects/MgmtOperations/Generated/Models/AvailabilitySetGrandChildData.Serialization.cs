@@ -82,20 +82,6 @@ namespace MgmtOperations
             return DeserializeAvailabilitySetGrandChildData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AvailabilitySetGrandChildData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AvailabilitySetGrandChildData IModelSerializable<AvailabilitySetGrandChildData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAvailabilitySetGrandChildData(document.RootElement, options);
-        }
-
         internal static AvailabilitySetGrandChildData DeserializeAvailabilitySetGrandChildData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtOperations
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AvailabilitySetGrandChildData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AvailabilitySetGrandChildData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AvailabilitySetGrandChildData IModelSerializable<AvailabilitySetGrandChildData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAvailabilitySetGrandChildData(document.RootElement, options);
         }
     }
 }

@@ -52,20 +52,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleRouteConfigurationOverrideAction(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeliveryRuleRouteConfigurationOverrideAction>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeliveryRuleRouteConfigurationOverrideAction IModelSerializable<DeliveryRuleRouteConfigurationOverrideAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeliveryRuleRouteConfigurationOverrideAction(document.RootElement, options);
-        }
-
         internal static DeliveryRuleRouteConfigurationOverrideAction DeserializeDeliveryRuleRouteConfigurationOverrideAction(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -103,6 +89,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeliveryRuleRouteConfigurationOverrideAction(name, foo.Value, serializedAdditionalRawData, parameters);
+        }
+
+        BinaryData IModelSerializable<DeliveryRuleRouteConfigurationOverrideAction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeliveryRuleRouteConfigurationOverrideAction IModelSerializable<DeliveryRuleRouteConfigurationOverrideAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeliveryRuleRouteConfigurationOverrideAction(document.RootElement, options);
         }
     }
 }

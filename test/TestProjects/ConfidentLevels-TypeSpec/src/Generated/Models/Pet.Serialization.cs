@@ -47,20 +47,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializePet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Pet>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Pet IModelSerializable<Pet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePet(document.RootElement, options);
-        }
-
         internal static Pet DeserializePet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -78,6 +64,21 @@ namespace ConfidentLevelsInTsp.Models
                 }
             }
             return UnknownPet.DeserializeUnknownPet(element);
+        }
+
+        BinaryData IModelSerializable<Pet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Pet IModelSerializable<Pet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePet(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

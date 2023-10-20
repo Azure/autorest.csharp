@@ -82,20 +82,6 @@ namespace MgmtExtensionCommonRestOperation
             return DeserializeTypeTwoData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TypeTwoData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TypeTwoData IModelSerializable<TypeTwoData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTypeTwoData(document.RootElement, options);
-        }
-
         internal static TypeTwoData DeserializeTypeTwoData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtExtensionCommonRestOperation
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TypeTwoData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TypeTwoData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TypeTwoData IModelSerializable<TypeTwoData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTypeTwoData(document.RootElement, options);
         }
     }
 }

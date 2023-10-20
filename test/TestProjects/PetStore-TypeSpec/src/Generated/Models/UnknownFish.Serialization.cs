@@ -48,20 +48,6 @@ namespace PetStore.Models
             return DeserializeUnknownFish(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownFish>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownFish IModelSerializable<UnknownFish>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownFish(document.RootElement, options);
-        }
-
         internal static UnknownFish DeserializeUnknownFish(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace PetStore.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownFish(kind, size, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownFish>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownFish IModelSerializable<UnknownFish>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownFish(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

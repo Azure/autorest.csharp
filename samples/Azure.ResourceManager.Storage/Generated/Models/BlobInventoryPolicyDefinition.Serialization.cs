@@ -61,20 +61,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeBlobInventoryPolicyDefinition(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BlobInventoryPolicyDefinition>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BlobInventoryPolicyDefinition IModelSerializable<BlobInventoryPolicyDefinition>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBlobInventoryPolicyDefinition(document.RootElement, options);
-        }
-
         internal static BlobInventoryPolicyDefinition DeserializeBlobInventoryPolicyDefinition(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -133,6 +119,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BlobInventoryPolicyDefinition(filters.Value, format, schedule, objectType, schemaFields, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<BlobInventoryPolicyDefinition>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BlobInventoryPolicyDefinition IModelSerializable<BlobInventoryPolicyDefinition>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBlobInventoryPolicyDefinition(document.RootElement, options);
         }
     }
 }

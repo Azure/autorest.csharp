@@ -47,20 +47,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeCheckNameAvailabilityResponse(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CheckNameAvailabilityResponse>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CheckNameAvailabilityResponse IModelSerializable<CheckNameAvailabilityResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCheckNameAvailabilityResponse(document.RootElement, options);
-        }
-
         internal static CheckNameAvailabilityResponse DeserializeCheckNameAvailabilityResponse(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -99,6 +85,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new CheckNameAvailabilityResponse(Optional.ToNullable(nameAvailable), Optional.ToNullable(reason), message.Value);
+        }
+
+        BinaryData IModelSerializable<CheckNameAvailabilityResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CheckNameAvailabilityResponse IModelSerializable<CheckNameAvailabilityResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCheckNameAvailabilityResponse(document.RootElement, options);
         }
 
         internal partial class CheckNameAvailabilityResponseConverter : JsonConverter<CheckNameAvailabilityResponse>

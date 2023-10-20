@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
@@ -16,6 +17,13 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
+        public static DeclarationStatement UsingDeclare(string name, CSharpType type, ValueExpression value, out VariableReference variable)
+        {
+            var declaration = new CodeWriterDeclaration(name);
+            variable = new VariableReference(type, declaration);
+            return new UsingDeclareVariableStatement(type, declaration, value);
+        }
+
         public static DeclarationStatement UsingDeclare(string name, JsonDocumentExpression value, out JsonDocumentExpression variable)
             => UsingDeclare(name, value, d => new JsonDocumentExpression(d), out variable);
 

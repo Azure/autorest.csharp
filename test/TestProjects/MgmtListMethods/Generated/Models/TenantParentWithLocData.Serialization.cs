@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeTenantParentWithLocData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TenantParentWithLocData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TenantParentWithLocData IModelSerializable<TenantParentWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTenantParentWithLocData(document.RootElement, options);
-        }
-
         internal static TenantParentWithLocData DeserializeTenantParentWithLocData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TenantParentWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TenantParentWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TenantParentWithLocData IModelSerializable<TenantParentWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTenantParentWithLocData(document.RootElement, options);
         }
     }
 }

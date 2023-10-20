@@ -72,20 +72,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeQueryStringMatchConditionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<QueryStringMatchConditionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        QueryStringMatchConditionParameters IModelSerializable<QueryStringMatchConditionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeQueryStringMatchConditionParameters(document.RootElement, options);
-        }
-
         internal static QueryStringMatchConditionParameters DeserializeQueryStringMatchConditionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -157,6 +143,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new QueryStringMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(matchValues), Optional.ToList(transforms), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<QueryStringMatchConditionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        QueryStringMatchConditionParameters IModelSerializable<QueryStringMatchConditionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeQueryStringMatchConditionParameters(document.RootElement, options);
         }
     }
 }

@@ -50,20 +50,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageSku(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StorageSku>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StorageSku IModelSerializable<StorageSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStorageSku(document.RootElement, options);
-        }
-
         internal static StorageSku DeserializeStorageSku(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -99,6 +85,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StorageSku(name, Optional.ToNullable(tier), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StorageSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StorageSku IModelSerializable<StorageSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStorageSku(document.RootElement, options);
         }
     }
 }

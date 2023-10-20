@@ -55,20 +55,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeAzureFilesIdentityBasedAuthentication(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AzureFilesIdentityBasedAuthentication>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AzureFilesIdentityBasedAuthentication IModelSerializable<AzureFilesIdentityBasedAuthentication>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAzureFilesIdentityBasedAuthentication(document.RootElement, options);
-        }
-
         internal static AzureFilesIdentityBasedAuthentication DeserializeAzureFilesIdentityBasedAuthentication(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -114,6 +100,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties.Value, Optional.ToNullable(defaultSharePermission), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AzureFilesIdentityBasedAuthentication>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AzureFilesIdentityBasedAuthentication IModelSerializable<AzureFilesIdentityBasedAuthentication>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAzureFilesIdentityBasedAuthentication(document.RootElement, options);
         }
     }
 }

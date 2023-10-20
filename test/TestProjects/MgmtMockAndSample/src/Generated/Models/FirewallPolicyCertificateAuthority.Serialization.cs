@@ -53,20 +53,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyCertificateAuthority(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyCertificateAuthority>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyCertificateAuthority IModelSerializable<FirewallPolicyCertificateAuthority>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyCertificateAuthority(document.RootElement, options);
-        }
-
         internal static FirewallPolicyCertificateAuthority DeserializeFirewallPolicyCertificateAuthority(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -98,6 +84,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyCertificateAuthority(keyVaultSecretId.Value, name.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyCertificateAuthority>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyCertificateAuthority IModelSerializable<FirewallPolicyCertificateAuthority>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyCertificateAuthority(document.RootElement, options);
         }
     }
 }

@@ -47,20 +47,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeDeletedShare(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeletedShare>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeletedShare IModelSerializable<DeletedShare>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeletedShare(document.RootElement, options);
-        }
-
         internal static DeletedShare DeserializeDeletedShare(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -92,6 +78,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeletedShare(deletedShareName, deletedShareVersion, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DeletedShare>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedShare IModelSerializable<DeletedShare>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeletedShare(document.RootElement, options);
         }
     }
 }

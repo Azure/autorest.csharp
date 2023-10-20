@@ -27,28 +27,28 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         public virtual ValueExpression Property(string propertyName)
             => new MemberExpression(this, propertyName);
 
-        public ValueExpression Invoke(string methodName)
+        public InvokeInstanceMethodExpression Invoke(string methodName)
             => new InvokeInstanceMethodExpression(this, methodName, Array.Empty<ValueExpression>(), null, false);
 
-        public ValueExpression Invoke(string methodName, ValueExpression arg)
+        public InvokeInstanceMethodExpression Invoke(string methodName, ValueExpression arg)
             => new InvokeInstanceMethodExpression(this, methodName, new[] { arg }, null, false);
 
-        public ValueExpression Invoke(string methodName, ValueExpression arg1, ValueExpression arg2)
+        public InvokeInstanceMethodExpression Invoke(string methodName, ValueExpression arg1, ValueExpression arg2)
             => new InvokeInstanceMethodExpression(this, methodName, new[] { arg1, arg2 }, null, false);
 
-        public ValueExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments)
+        public InvokeInstanceMethodExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments)
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, false);
 
-        public ValueExpression Invoke(MethodSignature method)
+        public InvokeInstanceMethodExpression Invoke(MethodSignature method)
             => new InvokeInstanceMethodExpression(this, method.Name, method.Parameters.Select(p => (ValueExpression)p).ToList(), null, method.Modifiers.HasFlag(MethodSignatureModifiers.Async));
 
-        public ValueExpression Invoke(MethodSignature method, IReadOnlyList<ValueExpression> arguments, bool addConfigureAwaitFalse = true)
+        public InvokeInstanceMethodExpression Invoke(MethodSignature method, IReadOnlyList<ValueExpression> arguments, bool addConfigureAwaitFalse = true)
             => new InvokeInstanceMethodExpression(this, method.Name, arguments, null, method.Modifiers.HasFlag(MethodSignatureModifiers.Async), AddConfigureAwaitFalse: addConfigureAwaitFalse);
 
-        public ValueExpression Invoke(string methodName, bool async)
+        public InvokeInstanceMethodExpression Invoke(string methodName, bool async)
             => new InvokeInstanceMethodExpression(this, methodName, Array.Empty<ValueExpression>(), null, async);
 
-        public ValueExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
+        public InvokeInstanceMethodExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, async);
 
         public CastExpression CastTo(CSharpType to) => new CastExpression(this, to);

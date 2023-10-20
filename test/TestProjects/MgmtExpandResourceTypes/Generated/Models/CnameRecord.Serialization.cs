@@ -48,20 +48,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeCnameRecord(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CnameRecord>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CnameRecord IModelSerializable<CnameRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCnameRecord(document.RootElement, options);
-        }
-
         internal static CnameRecord DeserializeCnameRecord(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtExpandResourceTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CnameRecord(cname.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<CnameRecord>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CnameRecord IModelSerializable<CnameRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCnameRecord(document.RootElement, options);
         }
     }
 }

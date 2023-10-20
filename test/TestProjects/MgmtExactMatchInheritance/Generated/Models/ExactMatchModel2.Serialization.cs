@@ -63,20 +63,6 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeExactMatchModel2(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ExactMatchModel2>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ExactMatchModel2 IModelSerializable<ExactMatchModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeExactMatchModel2(document.RootElement, options);
-        }
-
         internal static ExactMatchModel2 DeserializeExactMatchModel2(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -120,6 +106,21 @@ namespace MgmtExactMatchInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ExactMatchModel2(id.Value, name.Value, type.Value, serializedAdditionalRawData, @new.Value);
+        }
+
+        BinaryData IModelSerializable<ExactMatchModel2>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExactMatchModel2 IModelSerializable<ExactMatchModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel2(document.RootElement, options);
         }
     }
 }

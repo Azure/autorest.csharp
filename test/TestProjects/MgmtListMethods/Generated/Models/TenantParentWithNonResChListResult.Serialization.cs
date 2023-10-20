@@ -56,20 +56,6 @@ namespace MgmtListMethods.Models
             return DeserializeTenantParentWithNonResChListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TenantParentWithNonResChListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TenantParentWithNonResChListResult IModelSerializable<TenantParentWithNonResChListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTenantParentWithNonResChListResult(document.RootElement, options);
-        }
-
         internal static TenantParentWithNonResChListResult DeserializeTenantParentWithNonResChListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtListMethods.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TenantParentWithNonResChListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TenantParentWithNonResChListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TenantParentWithNonResChListResult IModelSerializable<TenantParentWithNonResChListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTenantParentWithNonResChListResult(document.RootElement, options);
         }
     }
 }

@@ -53,20 +53,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeResourceRange(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ResourceRange>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ResourceRange IModelSerializable<ResourceRange>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResourceRange(document.RootElement, options);
-        }
-
         internal static ResourceRange DeserializeResourceRange(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtHierarchicalNonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResourceRange(Optional.ToNullable(min), Optional.ToNullable(max), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ResourceRange>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResourceRange IModelSerializable<ResourceRange>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResourceRange(document.RootElement, options);
         }
     }
 }

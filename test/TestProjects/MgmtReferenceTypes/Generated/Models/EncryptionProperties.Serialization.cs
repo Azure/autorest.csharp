@@ -42,20 +42,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeEncryptionProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<EncryptionProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        EncryptionProperties IModelSerializable<EncryptionProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeEncryptionProperties(document.RootElement, options);
-        }
-
         internal static EncryptionProperties DeserializeEncryptionProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -88,6 +74,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new EncryptionProperties(Optional.ToNullable(status), keyVaultProperties.Value);
+        }
+
+        BinaryData IModelSerializable<EncryptionProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EncryptionProperties IModelSerializable<EncryptionProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEncryptionProperties(document.RootElement, options);
         }
 
         internal partial class EncryptionPropertiesConverter : JsonConverter<EncryptionProperties>

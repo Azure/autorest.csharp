@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeTenantParentWithNonResChWithLocData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TenantParentWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TenantParentWithNonResChWithLocData IModelSerializable<TenantParentWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTenantParentWithNonResChWithLocData(document.RootElement, options);
-        }
-
         internal static TenantParentWithNonResChWithLocData DeserializeTenantParentWithNonResChWithLocData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TenantParentWithNonResChWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TenantParentWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TenantParentWithNonResChWithLocData IModelSerializable<TenantParentWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTenantParentWithNonResChWithLocData(document.RootElement, options);
         }
     }
 }

@@ -120,20 +120,6 @@ namespace MgmtExtensionResource
             return DeserializePolicyDefinitionData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PolicyDefinitionData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PolicyDefinitionData IModelSerializable<PolicyDefinitionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePolicyDefinitionData(document.RootElement, options);
-        }
-
         internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -256,6 +242,21 @@ namespace MgmtExtensionResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PolicyDefinitionData(id, name, type, systemData.Value, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PolicyDefinitionData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PolicyDefinitionData IModelSerializable<PolicyDefinitionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePolicyDefinitionData(document.RootElement, options);
         }
     }
 }

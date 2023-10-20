@@ -80,20 +80,6 @@ namespace MgmtParent.Models
             return DeserializeDedicatedHostGroupPatch(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DedicatedHostGroupPatch>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DedicatedHostGroupPatch IModelSerializable<DedicatedHostGroupPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDedicatedHostGroupPatch(document.RootElement, options);
-        }
-
         internal static DedicatedHostGroupPatch DeserializeDedicatedHostGroupPatch(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -175,6 +161,21 @@ namespace MgmtParent.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DedicatedHostGroupPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToNullable(supportAutomaticPlacement));
+        }
+
+        BinaryData IModelSerializable<DedicatedHostGroupPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DedicatedHostGroupPatch IModelSerializable<DedicatedHostGroupPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDedicatedHostGroupPatch(document.RootElement, options);
         }
     }
 }

@@ -50,20 +50,6 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentWhatIf(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeploymentWhatIf>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeploymentWhatIf IModelSerializable<DeploymentWhatIf>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeploymentWhatIf(document.RootElement, options);
-        }
-
         internal static DeploymentWhatIf DeserializeDeploymentWhatIf(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -95,6 +81,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeploymentWhatIf(location.Value, properties, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DeploymentWhatIf>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeploymentWhatIf IModelSerializable<DeploymentWhatIf>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeploymentWhatIf(document.RootElement, options);
         }
     }
 }

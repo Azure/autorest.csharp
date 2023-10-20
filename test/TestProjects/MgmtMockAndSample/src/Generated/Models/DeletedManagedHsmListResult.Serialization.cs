@@ -59,20 +59,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeDeletedManagedHsmListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeletedManagedHsmListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeletedManagedHsmListResult IModelSerializable<DeletedManagedHsmListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeletedManagedHsmListResult(document.RootElement, options);
-        }
-
         internal static DeletedManagedHsmListResult DeserializeDeletedManagedHsmListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeletedManagedHsmListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DeletedManagedHsmListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedManagedHsmListResult IModelSerializable<DeletedManagedHsmListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeletedManagedHsmListResult(document.RootElement, options);
         }
     }
 }

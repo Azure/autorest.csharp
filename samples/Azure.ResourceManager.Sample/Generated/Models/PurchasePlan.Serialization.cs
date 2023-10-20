@@ -49,20 +49,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializePurchasePlan(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PurchasePlan>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PurchasePlan IModelSerializable<PurchasePlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePurchasePlan(document.RootElement, options);
-        }
-
         internal static PurchasePlan DeserializePurchasePlan(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -100,6 +86,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PurchasePlan(publisher, name, product, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PurchasePlan>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PurchasePlan IModelSerializable<PurchasePlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePurchasePlan(document.RootElement, options);
         }
     }
 }

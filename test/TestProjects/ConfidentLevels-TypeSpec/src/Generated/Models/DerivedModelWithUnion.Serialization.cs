@@ -57,20 +57,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeDerivedModelWithUnion(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DerivedModelWithUnion>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DerivedModelWithUnion IModelSerializable<DerivedModelWithUnion>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDerivedModelWithUnion(document.RootElement, options);
-        }
-
         internal static DerivedModelWithUnion DeserializeDerivedModelWithUnion(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -112,6 +98,21 @@ namespace ConfidentLevelsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DerivedModelWithUnion(name, Optional.ToNullable(size), serializedAdditionalRawData, unionProperty);
+        }
+
+        BinaryData IModelSerializable<DerivedModelWithUnion>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DerivedModelWithUnion IModelSerializable<DerivedModelWithUnion>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDerivedModelWithUnion(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

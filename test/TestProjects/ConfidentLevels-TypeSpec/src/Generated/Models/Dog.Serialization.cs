@@ -50,20 +50,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeDog(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Dog>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Dog IModelSerializable<Dog>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDog(document.RootElement, options);
-        }
-
         internal static Dog DeserializeDog(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace ConfidentLevelsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Dog(kind, name, serializedAdditionalRawData, woof);
+        }
+
+        BinaryData IModelSerializable<Dog>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Dog IModelSerializable<Dog>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDog(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

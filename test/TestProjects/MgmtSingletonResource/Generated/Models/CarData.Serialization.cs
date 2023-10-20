@@ -69,20 +69,6 @@ namespace MgmtSingletonResource
             return DeserializeCarData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CarData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CarData IModelSerializable<CarData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCarData(document.RootElement, options);
-        }
-
         internal static CarData DeserializeCarData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtSingletonResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CarData(id, name, type, systemData.Value, horsepower.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<CarData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CarData IModelSerializable<CarData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCarData(document.RootElement, options);
         }
     }
 }

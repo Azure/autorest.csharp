@@ -52,20 +52,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleQueryStringCondition(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeliveryRuleQueryStringCondition>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeliveryRuleQueryStringCondition IModelSerializable<DeliveryRuleQueryStringCondition>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeliveryRuleQueryStringCondition(document.RootElement, options);
-        }
-
         internal static DeliveryRuleQueryStringCondition DeserializeDeliveryRuleQueryStringCondition(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -103,6 +89,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeliveryRuleQueryStringCondition(name, foo.Value, serializedAdditionalRawData, parameters);
+        }
+
+        BinaryData IModelSerializable<DeliveryRuleQueryStringCondition>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeliveryRuleQueryStringCondition IModelSerializable<DeliveryRuleQueryStringCondition>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeliveryRuleQueryStringCondition(document.RootElement, options);
         }
     }
 }

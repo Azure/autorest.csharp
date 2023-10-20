@@ -58,20 +58,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeImagePurchasePlan(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ImagePurchasePlan>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ImagePurchasePlan IModelSerializable<ImagePurchasePlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeImagePurchasePlan(document.RootElement, options);
-        }
-
         internal static ImagePurchasePlan DeserializeImagePurchasePlan(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -109,6 +95,21 @@ namespace MgmtHierarchicalNonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ImagePurchasePlan(name.Value, publisher.Value, product.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ImagePurchasePlan>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ImagePurchasePlan IModelSerializable<ImagePurchasePlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeImagePurchasePlan(document.RootElement, options);
         }
     }
 }

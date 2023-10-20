@@ -80,20 +80,6 @@ namespace MgmtParamOrdering
             return DeserializeEnvironmentContainerResourceData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<EnvironmentContainerResourceData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        EnvironmentContainerResourceData IModelSerializable<EnvironmentContainerResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeEnvironmentContainerResourceData(document.RootElement, options);
-        }
-
         internal static EnvironmentContainerResourceData DeserializeEnvironmentContainerResourceData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -168,6 +154,21 @@ namespace MgmtParamOrdering
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new EnvironmentContainerResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<EnvironmentContainerResourceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EnvironmentContainerResourceData IModelSerializable<EnvironmentContainerResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEnvironmentContainerResourceData(document.RootElement, options);
         }
     }
 }

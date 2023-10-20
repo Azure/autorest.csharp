@@ -59,20 +59,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeRecordSetListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RecordSetListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RecordSetListResult IModelSerializable<RecordSetListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRecordSetListResult(document.RootElement, options);
-        }
-
         internal static RecordSetListResult DeserializeRecordSetListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtExpandResourceTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RecordSetListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RecordSetListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RecordSetListResult IModelSerializable<RecordSetListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRecordSetListResult(document.RootElement, options);
         }
     }
 }

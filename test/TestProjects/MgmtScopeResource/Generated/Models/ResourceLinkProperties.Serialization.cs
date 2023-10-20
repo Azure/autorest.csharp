@@ -55,20 +55,6 @@ namespace MgmtScopeResource.Models
             return DeserializeResourceLinkProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ResourceLinkProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ResourceLinkProperties IModelSerializable<ResourceLinkProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResourceLinkProperties(document.RootElement, options);
-        }
-
         internal static ResourceLinkProperties DeserializeResourceLinkProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResourceLinkProperties(sourceId.Value, targetId, notes.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ResourceLinkProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResourceLinkProperties IModelSerializable<ResourceLinkProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResourceLinkProperties(document.RootElement, options);
         }
     }
 }

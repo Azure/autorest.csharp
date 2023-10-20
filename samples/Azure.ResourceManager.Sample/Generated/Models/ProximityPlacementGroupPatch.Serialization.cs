@@ -54,20 +54,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeProximityPlacementGroupPatch(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ProximityPlacementGroupPatch>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ProximityPlacementGroupPatch IModelSerializable<ProximityPlacementGroupPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeProximityPlacementGroupPatch(document.RootElement, options);
-        }
-
         internal static ProximityPlacementGroupPatch DeserializeProximityPlacementGroupPatch(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ProximityPlacementGroupPatch(Optional.ToDictionary(tags), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ProximityPlacementGroupPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProximityPlacementGroupPatch IModelSerializable<ProximityPlacementGroupPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProximityPlacementGroupPatch(document.RootElement, options);
         }
     }
 }

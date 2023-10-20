@@ -53,20 +53,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyIntrusionDetectionSignatureSpecification IModelSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(document.RootElement, options);
-        }
-
         internal static FirewallPolicyIntrusionDetectionSignatureSpecification DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyIntrusionDetectionSignatureSpecification(id.Value, Optional.ToNullable(mode), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyIntrusionDetectionSignatureSpecification IModelSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(document.RootElement, options);
         }
     }
 }

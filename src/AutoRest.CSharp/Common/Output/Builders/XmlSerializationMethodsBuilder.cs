@@ -20,6 +20,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
@@ -28,13 +29,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class XmlSerializationMethodsBuilder
     {
+        private static readonly CSharpType nullableModelSerializerOptionsType = new CSharpType(typeof(ModelSerializerOptions), isNullable: true);
+
+        private static readonly Parameter xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, ValidationType.None, null);
+        private static readonly Parameter nameHint = new Parameter("nameHint", null, typeof(string), null, ValidationType.None, null);
+        private static readonly Parameter elementParameter = new Parameter("element", null, typeof(XElement), null, ValidationType.None, null);
+        private static readonly Parameter optionalOptionsParameter = new Parameter("options", null, nullableModelSerializerOptionsType, Constant.Default(nullableModelSerializerOptionsType), ValidationType.None, null);
+
         public static Method BuildXmlSerializableWrite(XmlObjectSerialization serialization)
         {
-            var xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, ValidationType.None, null);
-            var nameHint = new Parameter("nameHint", null, typeof(string), null, ValidationType.None, null);
             return new Method
             (
-                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{xmlWriter, nameHint}, ExplicitInterface: typeof(IXmlSerializable)),
+                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { xmlWriter, nameHint }, ExplicitInterface: typeof(IXmlSerializable)),
                 SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, nameHint).AsStatement()
             );
         }
@@ -73,7 +79,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement WrapInNullCheck(PropertySerialization serialization, MethodBodyStatement statement)
         {
-            if (serialization.SerializedType is {IsNullable: true} serializedType)
+            if (serialization.SerializedType is { IsNullable: true } serializedType)
             {
                 if (TypeFactory.IsCollectionType(serializedType) && serialization.IsRequired)
                 {
@@ -170,12 +176,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static Method BuildDeserialize(TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
-            var methodName = $"Deserialize{declaration.Name}";
-            var element = new Parameter("element", null, typeof(XElement), null, ValidationType.None, null);
             return new Method
             (
-                new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element}),
-                BuildDeserializeBody(new XElementExpression(element), serialization).ToArray()
+                new MethodSignature($"Deserialize{declaration.Name}", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { elementParameter, optionalOptionsParameter }),
+                BuildDeserializeBody(new XElementExpression(elementParameter), serialization).ToArray()
             );
         }
 
@@ -415,7 +419,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
-            if (element.ContentSerialization is {} contentSerialization)
+            if (element.ContentSerialization is { } contentSerialization)
             {
                 propertyVariables.Add(contentSerialization, new VariableReference(contentSerialization.Value.Type, contentSerialization.SerializationConstructorParameterName));
             }

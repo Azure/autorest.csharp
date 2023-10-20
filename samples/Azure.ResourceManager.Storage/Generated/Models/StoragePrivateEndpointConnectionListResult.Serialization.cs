@@ -54,20 +54,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStoragePrivateEndpointConnectionListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StoragePrivateEndpointConnectionListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StoragePrivateEndpointConnectionListResult IModelSerializable<StoragePrivateEndpointConnectionListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStoragePrivateEndpointConnectionListResult(document.RootElement, options);
-        }
-
         internal static StoragePrivateEndpointConnectionListResult DeserializeStoragePrivateEndpointConnectionListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StoragePrivateEndpointConnectionListResult(Optional.ToList(value), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StoragePrivateEndpointConnectionListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StoragePrivateEndpointConnectionListResult IModelSerializable<StoragePrivateEndpointConnectionListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStoragePrivateEndpointConnectionListResult(document.RootElement, options);
         }
     }
 }

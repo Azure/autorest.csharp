@@ -73,20 +73,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeUpgradeOperationHistoricalStatusInfoProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UpgradeOperationHistoricalStatusInfoProperties IModelSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUpgradeOperationHistoricalStatusInfoProperties(document.RootElement, options);
-        }
-
         internal static UpgradeOperationHistoricalStatusInfoProperties DeserializeUpgradeOperationHistoricalStatusInfoProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -166,6 +152,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UpgradeOperationHistoricalStatusInfoProperties IModelSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUpgradeOperationHistoricalStatusInfoProperties(document.RootElement, options);
         }
     }
 }

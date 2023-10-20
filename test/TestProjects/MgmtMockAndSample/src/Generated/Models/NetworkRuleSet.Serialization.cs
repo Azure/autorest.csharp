@@ -73,20 +73,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeNetworkRuleSet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NetworkRuleSet>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NetworkRuleSet IModelSerializable<NetworkRuleSet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNetworkRuleSet(document.RootElement, options);
-        }
-
         internal static NetworkRuleSet DeserializeNetworkRuleSet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -156,6 +142,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NetworkRuleSet(Optional.ToNullable(bypass), Optional.ToNullable(defaultAction), Optional.ToList(ipRules), Optional.ToList(virtualNetworkRules), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NetworkRuleSet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NetworkRuleSet IModelSerializable<NetworkRuleSet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNetworkRuleSet(document.RootElement, options);
         }
     }
 }

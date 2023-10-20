@@ -47,20 +47,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountCheckNameAvailabilityContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StorageAccountCheckNameAvailabilityContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StorageAccountCheckNameAvailabilityContent IModelSerializable<StorageAccountCheckNameAvailabilityContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStorageAccountCheckNameAvailabilityContent(document.RootElement, options);
-        }
-
         internal static StorageAccountCheckNameAvailabilityContent DeserializeStorageAccountCheckNameAvailabilityContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -92,6 +78,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StorageAccountCheckNameAvailabilityContent(name, type, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StorageAccountCheckNameAvailabilityContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StorageAccountCheckNameAvailabilityContent IModelSerializable<StorageAccountCheckNameAvailabilityContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStorageAccountCheckNameAvailabilityContent(document.RootElement, options);
         }
     }
 }

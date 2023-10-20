@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeResGrpParentWithNonResChData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ResGrpParentWithNonResChData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ResGrpParentWithNonResChData IModelSerializable<ResGrpParentWithNonResChData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResGrpParentWithNonResChData(document.RootElement, options);
-        }
-
         internal static ResGrpParentWithNonResChData DeserializeResGrpParentWithNonResChData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResGrpParentWithNonResChData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ResGrpParentWithNonResChData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResGrpParentWithNonResChData IModelSerializable<ResGrpParentWithNonResChData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResGrpParentWithNonResChData(document.RootElement, options);
         }
     }
 }

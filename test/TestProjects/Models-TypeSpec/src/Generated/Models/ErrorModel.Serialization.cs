@@ -54,20 +54,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeErrorModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ErrorModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ErrorModel IModelSerializable<ErrorModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeErrorModel(document.RootElement, options);
-        }
-
         internal static ErrorModel DeserializeErrorModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -103,6 +89,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ErrorModel(message, innerError.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ErrorModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ErrorModel IModelSerializable<ErrorModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeErrorModel(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

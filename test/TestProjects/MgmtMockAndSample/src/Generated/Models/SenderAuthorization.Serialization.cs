@@ -58,20 +58,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeSenderAuthorization(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SenderAuthorization>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SenderAuthorization IModelSerializable<SenderAuthorization>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSenderAuthorization(document.RootElement, options);
-        }
-
         internal static SenderAuthorization DeserializeSenderAuthorization(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -109,6 +95,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SenderAuthorization(action.Value, role.Value, scope.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SenderAuthorization>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SenderAuthorization IModelSerializable<SenderAuthorization>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSenderAuthorization(document.RootElement, options);
         }
     }
 }

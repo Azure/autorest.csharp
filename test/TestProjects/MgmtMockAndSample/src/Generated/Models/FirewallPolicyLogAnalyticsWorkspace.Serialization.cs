@@ -54,20 +54,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyLogAnalyticsWorkspace(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyLogAnalyticsWorkspace>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyLogAnalyticsWorkspace IModelSerializable<FirewallPolicyLogAnalyticsWorkspace>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyLogAnalyticsWorkspace(document.RootElement, options);
-        }
-
         internal static FirewallPolicyLogAnalyticsWorkspace DeserializeFirewallPolicyLogAnalyticsWorkspace(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -103,6 +89,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyLogAnalyticsWorkspace(region.Value, workspaceId, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyLogAnalyticsWorkspace>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyLogAnalyticsWorkspace IModelSerializable<FirewallPolicyLogAnalyticsWorkspace>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyLogAnalyticsWorkspace(document.RootElement, options);
         }
     }
 }

@@ -98,20 +98,6 @@ namespace MgmtExactMatchFlattenInheritance
             return DeserializeAzureResourceFlattenModel1Data(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AzureResourceFlattenModel1Data>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AzureResourceFlattenModel1Data IModelSerializable<AzureResourceFlattenModel1Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAzureResourceFlattenModel1Data(document.RootElement, options);
-        }
-
         internal static AzureResourceFlattenModel1Data DeserializeAzureResourceFlattenModel1Data(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -214,6 +200,21 @@ namespace MgmtExactMatchFlattenInheritance
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AzureResourceFlattenModel1Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(foo), foo0.Value, id0.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AzureResourceFlattenModel1Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AzureResourceFlattenModel1Data IModelSerializable<AzureResourceFlattenModel1Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAzureResourceFlattenModel1Data(document.RootElement, options);
         }
     }
 }

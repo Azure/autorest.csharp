@@ -53,20 +53,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicySnat(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicySnat>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicySnat IModelSerializable<FirewallPolicySnat>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicySnat(document.RootElement, options);
-        }
-
         internal static FirewallPolicySnat DeserializeFirewallPolicySnat(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicySnat(Optional.ToList(privateRanges), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicySnat>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicySnat IModelSerializable<FirewallPolicySnat>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicySnat(document.RootElement, options);
         }
     }
 }

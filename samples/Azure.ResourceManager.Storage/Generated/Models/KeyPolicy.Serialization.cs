@@ -45,20 +45,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeKeyPolicy(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<KeyPolicy>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        KeyPolicy IModelSerializable<KeyPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeKeyPolicy(document.RootElement, options);
-        }
-
         internal static KeyPolicy DeserializeKeyPolicy(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new KeyPolicy(keyExpirationPeriodInDays, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<KeyPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyPolicy IModelSerializable<KeyPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyPolicy(document.RootElement, options);
         }
     }
 }

@@ -82,20 +82,6 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeExactMatchModel10(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ExactMatchModel10>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ExactMatchModel10 IModelSerializable<ExactMatchModel10>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeExactMatchModel10(document.RootElement, options);
-        }
-
         internal static ExactMatchModel10 DeserializeExactMatchModel10(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -168,6 +154,21 @@ namespace MgmtExactMatchInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ExactMatchModel10(id, name, type, systemData.Value, Optional.ToNullable(location), Optional.ToDictionary(tags), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ExactMatchModel10>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExactMatchModel10 IModelSerializable<ExactMatchModel10>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel10(document.RootElement, options);
         }
 
         internal partial class ExactMatchModel10Converter : JsonConverter<ExactMatchModel10>

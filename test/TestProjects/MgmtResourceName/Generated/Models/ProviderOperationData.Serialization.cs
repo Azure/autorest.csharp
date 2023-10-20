@@ -90,20 +90,6 @@ namespace MgmtResourceName
             return DeserializeProviderOperationData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ProviderOperationData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ProviderOperationData IModelSerializable<ProviderOperationData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeProviderOperationData(document.RootElement, options);
-        }
-
         internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -187,6 +173,21 @@ namespace MgmtResourceName
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ProviderOperationData(id, name, type, systemData.Value, displayName.Value, Optional.ToList(resourceTypes), Optional.ToList(operations), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ProviderOperationData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProviderOperationData IModelSerializable<ProviderOperationData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProviderOperationData(document.RootElement, options);
         }
     }
 }

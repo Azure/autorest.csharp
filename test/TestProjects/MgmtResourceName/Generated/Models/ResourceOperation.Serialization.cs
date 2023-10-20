@@ -72,20 +72,6 @@ namespace MgmtResourceName.Models
             return DeserializeResourceOperation(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ResourceOperation>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ResourceOperation IModelSerializable<ResourceOperation>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResourceOperation(document.RootElement, options);
-        }
-
         internal static ResourceOperation DeserializeResourceOperation(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -139,6 +125,21 @@ namespace MgmtResourceName.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResourceOperation(name.Value, displayName.Value, description.Value, origin.Value, properties.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ResourceOperation>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResourceOperation IModelSerializable<ResourceOperation>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResourceOperation(document.RootElement, options);
         }
     }
 }

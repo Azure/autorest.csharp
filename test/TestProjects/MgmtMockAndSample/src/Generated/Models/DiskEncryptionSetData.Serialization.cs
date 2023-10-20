@@ -138,20 +138,6 @@ namespace MgmtMockAndSample
             return DeserializeDiskEncryptionSetData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DiskEncryptionSetData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DiskEncryptionSetData IModelSerializable<DiskEncryptionSetData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDiskEncryptionSetData(document.RootElement, options);
-        }
-
         internal static DiskEncryptionSetData DeserializeDiskEncryptionSetData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -324,6 +310,21 @@ namespace MgmtMockAndSample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DiskEncryptionSetData(id, name, type, systemData.Value, identity, Optional.ToNullable(encryptionType), activeKey.Value, Optional.ToList(previousKeys), provisioningState.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), Optional.ToNullable(lastKeyRotationTimestamp), federatedClientId.Value, Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(location), Optional.ToDictionary(tags), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DiskEncryptionSetData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DiskEncryptionSetData IModelSerializable<DiskEncryptionSetData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDiskEncryptionSetData(document.RootElement, options);
         }
     }
 }

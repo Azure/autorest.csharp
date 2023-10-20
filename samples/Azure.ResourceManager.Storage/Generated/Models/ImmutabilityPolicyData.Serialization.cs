@@ -97,20 +97,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeImmutabilityPolicyData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ImmutabilityPolicyData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ImmutabilityPolicyData IModelSerializable<ImmutabilityPolicyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeImmutabilityPolicyData(document.RootElement, options);
-        }
-
         internal static ImmutabilityPolicyData DeserializeImmutabilityPolicyData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -220,6 +206,21 @@ namespace Azure.ResourceManager.Storage
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ImmutabilityPolicyData(id, name, type, systemData.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll), Optional.ToNullable(etag), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ImmutabilityPolicyData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ImmutabilityPolicyData IModelSerializable<ImmutabilityPolicyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeImmutabilityPolicyData(document.RootElement, options);
         }
     }
 }

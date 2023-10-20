@@ -56,20 +56,6 @@ namespace MgmtSingletonResource.Models
             return DeserializeParentResourceListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ParentResourceListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ParentResourceListResult IModelSerializable<ParentResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeParentResourceListResult(document.RootElement, options);
-        }
-
         internal static ParentResourceListResult DeserializeParentResourceListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtSingletonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ParentResourceListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ParentResourceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ParentResourceListResult IModelSerializable<ParentResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeParentResourceListResult(document.RootElement, options);
         }
     }
 }

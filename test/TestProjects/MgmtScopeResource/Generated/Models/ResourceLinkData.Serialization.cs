@@ -70,20 +70,6 @@ namespace MgmtScopeResource
             return DeserializeResourceLinkData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ResourceLinkData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ResourceLinkData IModelSerializable<ResourceLinkData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResourceLinkData(document.RootElement, options);
-        }
-
         internal static ResourceLinkData DeserializeResourceLinkData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -141,6 +127,21 @@ namespace MgmtScopeResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResourceLinkData(id, name, type, systemData.Value, properties.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ResourceLinkData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResourceLinkData IModelSerializable<ResourceLinkData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResourceLinkData(document.RootElement, options);
         }
     }
 }

@@ -59,20 +59,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeNonConfidentModelWithSelfReference(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NonConfidentModelWithSelfReference>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NonConfidentModelWithSelfReference IModelSerializable<NonConfidentModelWithSelfReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNonConfidentModelWithSelfReference(document.RootElement, options);
-        }
-
         internal static NonConfidentModelWithSelfReference DeserializeNonConfidentModelWithSelfReference(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -115,6 +101,21 @@ namespace ConfidentLevelsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NonConfidentModelWithSelfReference(name, selfReference, unionProperty, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NonConfidentModelWithSelfReference>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NonConfidentModelWithSelfReference IModelSerializable<NonConfidentModelWithSelfReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNonConfidentModelWithSelfReference(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

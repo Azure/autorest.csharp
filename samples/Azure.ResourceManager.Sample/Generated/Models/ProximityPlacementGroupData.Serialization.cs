@@ -130,20 +130,6 @@ namespace Azure.ResourceManager.Sample
             return DeserializeProximityPlacementGroupData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ProximityPlacementGroupData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ProximityPlacementGroupData IModelSerializable<ProximityPlacementGroupData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeProximityPlacementGroupData(document.RootElement, options);
-        }
-
         internal static ProximityPlacementGroupData DeserializeProximityPlacementGroupData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -299,6 +285,21 @@ namespace Azure.ResourceManager.Sample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ProximityPlacementGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, extendedLocation, Optional.ToNullable(proximityPlacementGroupType), Optional.ToList(virtualMachines), Optional.ToList(virtualMachineScaleSets), Optional.ToList(availabilitySets), colocationStatus.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ProximityPlacementGroupData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProximityPlacementGroupData IModelSerializable<ProximityPlacementGroupData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProximityPlacementGroupData(document.RootElement, options);
         }
     }
 }

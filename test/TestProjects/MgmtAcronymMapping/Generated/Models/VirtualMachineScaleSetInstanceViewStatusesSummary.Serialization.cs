@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetInstanceViewStatusesSummary>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineScaleSetInstanceViewStatusesSummary IModelSerializable<VirtualMachineScaleSetInstanceViewStatusesSummary>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(document.RootElement, options);
-        }
-
         internal static VirtualMachineScaleSetInstanceViewStatusesSummary DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetInstanceViewStatusesSummary(Optional.ToList(statusesSummary), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetInstanceViewStatusesSummary>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetInstanceViewStatusesSummary IModelSerializable<VirtualMachineScaleSetInstanceViewStatusesSummary>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(document.RootElement, options);
         }
     }
 }

@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualMachineReimageContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineReimageContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineReimageContent IModelSerializable<VirtualMachineReimageContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineReimageContent(document.RootElement, options);
-        }
-
         internal static VirtualMachineReimageContent DeserializeVirtualMachineReimageContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineReimageContent(Optional.ToNullable(tempDisk), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineReimageContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineReimageContent IModelSerializable<VirtualMachineReimageContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineReimageContent(document.RootElement, options);
         }
     }
 }

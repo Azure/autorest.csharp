@@ -58,20 +58,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeImmutableStorageWithVersioning(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ImmutableStorageWithVersioning>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ImmutableStorageWithVersioning IModelSerializable<ImmutableStorageWithVersioning>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeImmutableStorageWithVersioning(document.RootElement, options);
-        }
-
         internal static ImmutableStorageWithVersioning DeserializeImmutableStorageWithVersioning(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -121,6 +107,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ImmutableStorageWithVersioning(Optional.ToNullable(enabled), Optional.ToNullable(timeStamp), Optional.ToNullable(migrationState), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ImmutableStorageWithVersioning>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ImmutableStorageWithVersioning IModelSerializable<ImmutableStorageWithVersioning>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeImmutableStorageWithVersioning(document.RootElement, options);
         }
     }
 }

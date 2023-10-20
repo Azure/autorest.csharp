@@ -59,20 +59,6 @@ namespace MgmtResourceName.Models
             return DeserializeProviderOperationsMetadataListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ProviderOperationsMetadataListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ProviderOperationsMetadataListResult IModelSerializable<ProviderOperationsMetadataListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeProviderOperationsMetadataListResult(document.RootElement, options);
-        }
-
         internal static ProviderOperationsMetadataListResult DeserializeProviderOperationsMetadataListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtResourceName.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ProviderOperationsMetadataListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ProviderOperationsMetadataListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProviderOperationsMetadataListResult IModelSerializable<ProviderOperationsMetadataListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProviderOperationsMetadataListResult(document.RootElement, options);
         }
     }
 }

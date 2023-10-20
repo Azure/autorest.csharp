@@ -53,20 +53,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyIntrusionDetection(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyIntrusionDetection>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyIntrusionDetection IModelSerializable<FirewallPolicyIntrusionDetection>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyIntrusionDetection(document.RootElement, options);
-        }
-
         internal static FirewallPolicyIntrusionDetection DeserializeFirewallPolicyIntrusionDetection(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyIntrusionDetection(Optional.ToNullable(mode), configuration.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyIntrusionDetection>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyIntrusionDetection IModelSerializable<FirewallPolicyIntrusionDetection>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyIntrusionDetection(document.RootElement, options);
         }
     }
 }

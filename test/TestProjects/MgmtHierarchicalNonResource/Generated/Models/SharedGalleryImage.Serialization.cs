@@ -120,20 +120,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeSharedGalleryImage(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SharedGalleryImage>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SharedGalleryImage IModelSerializable<SharedGalleryImage>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSharedGalleryImage(document.RootElement, options);
-        }
-
         internal static SharedGalleryImage DeserializeSharedGalleryImage(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -290,6 +276,21 @@ namespace MgmtHierarchicalNonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SharedGalleryImage(name.Value, location.Value, serializedAdditionalRawData, uniqueId.Value, Optional.ToNullable(osType), Optional.ToNullable(osState), Optional.ToNullable(endOfLifeDate), identifier.Value, recommended.Value, disallowed.Value, Optional.ToNullable(hyperVGeneration), Optional.ToList(features), purchasePlan.Value);
+        }
+
+        BinaryData IModelSerializable<SharedGalleryImage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SharedGalleryImage IModelSerializable<SharedGalleryImage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSharedGalleryImage(document.RootElement, options);
         }
     }
 }

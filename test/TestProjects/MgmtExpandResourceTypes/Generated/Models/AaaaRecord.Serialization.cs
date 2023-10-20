@@ -48,20 +48,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeAaaaRecord(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AaaaRecord>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AaaaRecord IModelSerializable<AaaaRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAaaaRecord(document.RootElement, options);
-        }
-
         internal static AaaaRecord DeserializeAaaaRecord(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtExpandResourceTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AaaaRecord(ipv6Address.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AaaaRecord>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AaaaRecord IModelSerializable<AaaaRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAaaaRecord(document.RootElement, options);
         }
     }
 }

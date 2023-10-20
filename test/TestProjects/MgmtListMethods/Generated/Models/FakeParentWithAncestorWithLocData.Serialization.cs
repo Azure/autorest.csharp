@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeFakeParentWithAncestorWithLocData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FakeParentWithAncestorWithLocData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FakeParentWithAncestorWithLocData IModelSerializable<FakeParentWithAncestorWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFakeParentWithAncestorWithLocData(document.RootElement, options);
-        }
-
         internal static FakeParentWithAncestorWithLocData DeserializeFakeParentWithAncestorWithLocData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FakeParentWithAncestorWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FakeParentWithAncestorWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeParentWithAncestorWithLocData IModelSerializable<FakeParentWithAncestorWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeParentWithAncestorWithLocData(document.RootElement, options);
         }
     }
 }

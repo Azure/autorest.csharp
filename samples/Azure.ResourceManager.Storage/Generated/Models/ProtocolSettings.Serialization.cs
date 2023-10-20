@@ -48,20 +48,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeProtocolSettings(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ProtocolSettings>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ProtocolSettings IModelSerializable<ProtocolSettings>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeProtocolSettings(document.RootElement, options);
-        }
-
         internal static ProtocolSettings DeserializeProtocolSettings(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ProtocolSettings(smb.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ProtocolSettings>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProtocolSettings IModelSerializable<ProtocolSettings>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProtocolSettings(document.RootElement, options);
         }
     }
 }

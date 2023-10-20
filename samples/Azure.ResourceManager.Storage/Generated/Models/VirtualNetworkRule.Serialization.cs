@@ -55,20 +55,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeVirtualNetworkRule(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualNetworkRule>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualNetworkRule IModelSerializable<VirtualNetworkRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualNetworkRule(document.RootElement, options);
-        }
-
         internal static VirtualNetworkRule DeserializeVirtualNetworkRule(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -114,6 +100,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualNetworkRule(id, Optional.ToNullable(action), Optional.ToNullable(state), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualNetworkRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualNetworkRule IModelSerializable<VirtualNetworkRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualNetworkRule(document.RootElement, options);
         }
     }
 }

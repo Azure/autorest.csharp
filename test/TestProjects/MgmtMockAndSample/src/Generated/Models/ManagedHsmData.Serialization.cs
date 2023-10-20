@@ -88,20 +88,6 @@ namespace MgmtMockAndSample
             return DeserializeManagedHsmData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ManagedHsmData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ManagedHsmData IModelSerializable<ManagedHsmData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeManagedHsmData(document.RootElement, options);
-        }
-
         internal static ManagedHsmData DeserializeManagedHsmData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -190,6 +176,21 @@ namespace MgmtMockAndSample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ManagedHsmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value, sku.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ManagedHsmData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ManagedHsmData IModelSerializable<ManagedHsmData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeManagedHsmData(document.RootElement, options);
         }
     }
 }

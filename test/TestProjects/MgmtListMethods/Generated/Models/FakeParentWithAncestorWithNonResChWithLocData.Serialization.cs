@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FakeParentWithAncestorWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FakeParentWithAncestorWithNonResChWithLocData IModelSerializable<FakeParentWithAncestorWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement, options);
-        }
-
         internal static FakeParentWithAncestorWithNonResChWithLocData DeserializeFakeParentWithAncestorWithNonResChWithLocData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FakeParentWithAncestorWithNonResChWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FakeParentWithAncestorWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeParentWithAncestorWithNonResChWithLocData IModelSerializable<FakeParentWithAncestorWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement, options);
         }
     }
 }

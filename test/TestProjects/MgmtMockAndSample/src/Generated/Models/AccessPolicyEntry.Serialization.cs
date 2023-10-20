@@ -54,20 +54,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeAccessPolicyEntry(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AccessPolicyEntry>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AccessPolicyEntry IModelSerializable<AccessPolicyEntry>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAccessPolicyEntry(document.RootElement, options);
-        }
-
         internal static AccessPolicyEntry DeserializeAccessPolicyEntry(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -115,6 +101,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AccessPolicyEntry(tenantId, objectId, Optional.ToNullable(applicationId), permissions, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AccessPolicyEntry>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AccessPolicyEntry IModelSerializable<AccessPolicyEntry>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAccessPolicyEntry(document.RootElement, options);
         }
     }
 }

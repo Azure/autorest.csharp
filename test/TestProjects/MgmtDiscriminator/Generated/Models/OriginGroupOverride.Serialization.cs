@@ -54,20 +54,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeOriginGroupOverride(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<OriginGroupOverride>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        OriginGroupOverride IModelSerializable<OriginGroupOverride>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeOriginGroupOverride(document.RootElement, options);
-        }
-
         internal static OriginGroupOverride DeserializeOriginGroupOverride(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -107,6 +93,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new OriginGroupOverride(originGroup, Optional.ToNullable(forwardingProtocol), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<OriginGroupOverride>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OriginGroupOverride IModelSerializable<OriginGroupOverride>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOriginGroupOverride(document.RootElement, options);
         }
     }
 }

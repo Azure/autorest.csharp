@@ -64,20 +64,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializePirSharedGalleryResource(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PirSharedGalleryResource>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PirSharedGalleryResource IModelSerializable<PirSharedGalleryResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePirSharedGalleryResource(document.RootElement, options);
-        }
-
         internal static PirSharedGalleryResource DeserializePirSharedGalleryResource(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -127,6 +113,21 @@ namespace MgmtHierarchicalNonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PirSharedGalleryResource(name.Value, location.Value, serializedAdditionalRawData, uniqueId.Value);
+        }
+
+        BinaryData IModelSerializable<PirSharedGalleryResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PirSharedGalleryResource IModelSerializable<PirSharedGalleryResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePirSharedGalleryResource(document.RootElement, options);
         }
     }
 }

@@ -49,20 +49,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeGalleryImageIdentifier(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<GalleryImageIdentifier>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        GalleryImageIdentifier IModelSerializable<GalleryImageIdentifier>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeGalleryImageIdentifier(document.RootElement, options);
-        }
-
         internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -100,6 +86,21 @@ namespace MgmtHierarchicalNonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new GalleryImageIdentifier(publisher, offer, sku, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<GalleryImageIdentifier>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GalleryImageIdentifier IModelSerializable<GalleryImageIdentifier>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGalleryImageIdentifier(document.RootElement, options);
         }
     }
 }

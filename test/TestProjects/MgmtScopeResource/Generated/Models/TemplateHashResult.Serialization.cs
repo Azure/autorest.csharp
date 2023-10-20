@@ -53,20 +53,6 @@ namespace MgmtScopeResource.Models
             return DeserializeTemplateHashResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TemplateHashResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TemplateHashResult IModelSerializable<TemplateHashResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTemplateHashResult(document.RootElement, options);
-        }
-
         internal static TemplateHashResult DeserializeTemplateHashResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -98,6 +84,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TemplateHashResult(minifiedTemplate.Value, templateHash.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TemplateHashResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TemplateHashResult IModelSerializable<TemplateHashResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTemplateHashResult(document.RootElement, options);
         }
     }
 }

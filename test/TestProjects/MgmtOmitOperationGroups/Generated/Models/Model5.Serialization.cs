@@ -63,20 +63,6 @@ namespace MgmtOmitOperationGroups.Models
             return DeserializeModel5(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Model5>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Model5 IModelSerializable<Model5>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModel5(document.RootElement, options);
-        }
-
         internal static Model5 DeserializeModel5(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -123,6 +109,21 @@ namespace MgmtOmitOperationGroups.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Model5(id.Value, k.Value, Optional.ToList(modelqs), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<Model5>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Model5 IModelSerializable<Model5>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModel5(document.RootElement, options);
         }
     }
 }

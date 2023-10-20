@@ -24,11 +24,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             => InvokeExtension(typeof(XElementExtensions), nameof(XElementExtensions.GetObjectValue), Snippets.Literal(format));
         public ValueExpression GetTimeSpanValue(string? format)
             => InvokeExtension(typeof(XElementExtensions), nameof(XElementExtensions.GetTimeSpanValue), Snippets.Literal(format));
-    }
 
-    internal sealed record XAttributeExpression(ValueExpression Untyped) : TypedValueExpression<XAttribute>(Untyped)
-    {
-        public XNameExpression Name => new(Property(nameof(XAttribute.Name)));
-        public StringExpression Value => new(Property(nameof(XAttribute.Value)));
+        public static XElementExpression Load(StreamExpression stream) => new(new InvokeStaticMethodExpression(typeof(XElement), nameof(XElement.Load), new[] { stream }));
     }
 }

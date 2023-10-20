@@ -74,20 +74,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateEndpointConnectionData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PrivateEndpointConnectionData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PrivateEndpointConnectionData IModelSerializable<PrivateEndpointConnectionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateEndpointConnectionData(document.RootElement, options);
-        }
-
         internal static PrivateEndpointConnectionData DeserializePrivateEndpointConnectionData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new PrivateEndpointConnectionData(id, name, type, systemData.Value, privateEndpoint.Value, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+        }
+
+        BinaryData IModelSerializable<PrivateEndpointConnectionData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateEndpointConnectionData IModelSerializable<PrivateEndpointConnectionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateEndpointConnectionData(document.RootElement, options);
         }
 
         internal partial class PrivateEndpointConnectionDataConverter : JsonConverter<PrivateEndpointConnectionData>

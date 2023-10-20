@@ -48,20 +48,6 @@ namespace AuthoringTypeSpec.Models
             return DeserializeJobWarning(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<JobWarning>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        JobWarning IModelSerializable<JobWarning>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeJobWarning(document.RootElement, options);
-        }
-
         internal static JobWarning DeserializeJobWarning(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace AuthoringTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new JobWarning(code, message, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<JobWarning>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        JobWarning IModelSerializable<JobWarning>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeJobWarning(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

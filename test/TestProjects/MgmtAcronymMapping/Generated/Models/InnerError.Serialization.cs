@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeInnerError(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<InnerError>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        InnerError IModelSerializable<InnerError>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeInnerError(document.RootElement, options);
-        }
-
         internal static InnerError DeserializeInnerError(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -98,6 +84,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new InnerError(exceptiontype.Value, errordetail.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<InnerError>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        InnerError IModelSerializable<InnerError>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeInnerError(document.RootElement, options);
         }
     }
 }

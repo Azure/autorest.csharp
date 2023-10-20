@@ -48,20 +48,6 @@ namespace MgmtOperations.Models
             return DeserializeTestAvailabilitySet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TestAvailabilitySet>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TestAvailabilitySet IModelSerializable<TestAvailabilitySet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTestAvailabilitySet(document.RootElement, options);
-        }
-
         internal static TestAvailabilitySet DeserializeTestAvailabilitySet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtOperations.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TestAvailabilitySet(bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TestAvailabilitySet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TestAvailabilitySet IModelSerializable<TestAvailabilitySet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTestAvailabilitySet(document.RootElement, options);
         }
     }
 }

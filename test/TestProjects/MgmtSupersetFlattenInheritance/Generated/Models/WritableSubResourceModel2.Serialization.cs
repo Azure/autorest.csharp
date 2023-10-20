@@ -64,20 +64,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeWritableSubResourceModel2(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<WritableSubResourceModel2>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        WritableSubResourceModel2 IModelSerializable<WritableSubResourceModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeWritableSubResourceModel2(document.RootElement, options);
-        }
-
         internal static WritableSubResourceModel2 DeserializeWritableSubResourceModel2(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -127,6 +113,21 @@ namespace MgmtSupersetFlattenInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new WritableSubResourceModel2(id.Value, id0.Value, foo.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<WritableSubResourceModel2>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WritableSubResourceModel2 IModelSerializable<WritableSubResourceModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWritableSubResourceModel2(document.RootElement, options);
         }
     }
 }

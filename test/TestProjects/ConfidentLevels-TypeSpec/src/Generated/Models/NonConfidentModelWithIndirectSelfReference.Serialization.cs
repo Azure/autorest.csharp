@@ -56,20 +56,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeNonConfidentModelWithIndirectSelfReference(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NonConfidentModelWithIndirectSelfReference>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NonConfidentModelWithIndirectSelfReference IModelSerializable<NonConfidentModelWithIndirectSelfReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNonConfidentModelWithIndirectSelfReference(document.RootElement, options);
-        }
-
         internal static NonConfidentModelWithIndirectSelfReference DeserializeNonConfidentModelWithIndirectSelfReference(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -110,6 +96,21 @@ namespace ConfidentLevelsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NonConfidentModelWithIndirectSelfReference(name, Optional.ToList(reference), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NonConfidentModelWithIndirectSelfReference>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NonConfidentModelWithIndirectSelfReference IModelSerializable<NonConfidentModelWithIndirectSelfReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNonConfidentModelWithIndirectSelfReference(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

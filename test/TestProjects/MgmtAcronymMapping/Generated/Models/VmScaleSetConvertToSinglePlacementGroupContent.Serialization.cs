@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VmScaleSetConvertToSinglePlacementGroupContent IModelSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(document.RootElement, options);
-        }
-
         internal static VmScaleSetConvertToSinglePlacementGroupContent DeserializeVmScaleSetConvertToSinglePlacementGroupContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VmScaleSetConvertToSinglePlacementGroupContent(activePlacementGroupId.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VmScaleSetConvertToSinglePlacementGroupContent IModelSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(document.RootElement, options);
         }
     }
 }

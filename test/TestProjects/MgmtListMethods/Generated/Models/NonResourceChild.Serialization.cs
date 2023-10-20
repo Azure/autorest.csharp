@@ -53,20 +53,6 @@ namespace MgmtListMethods.Models
             return DeserializeNonResourceChild(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NonResourceChild>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NonResourceChild IModelSerializable<NonResourceChild>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNonResourceChild(document.RootElement, options);
-        }
-
         internal static NonResourceChild DeserializeNonResourceChild(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace MgmtListMethods.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NonResourceChild(name.Value, Optional.ToNullable(numberOfCores), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NonResourceChild>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NonResourceChild IModelSerializable<NonResourceChild>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNonResourceChild(document.RootElement, options);
         }
     }
 }

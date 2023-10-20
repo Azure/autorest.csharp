@@ -54,20 +54,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeListBlobInventoryPolicy(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ListBlobInventoryPolicy>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ListBlobInventoryPolicy IModelSerializable<ListBlobInventoryPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeListBlobInventoryPolicy(document.RootElement, options);
-        }
-
         internal static ListBlobInventoryPolicy DeserializeListBlobInventoryPolicy(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ListBlobInventoryPolicy(Optional.ToList(value), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ListBlobInventoryPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ListBlobInventoryPolicy IModelSerializable<ListBlobInventoryPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeListBlobInventoryPolicy(document.RootElement, options);
         }
     }
 }

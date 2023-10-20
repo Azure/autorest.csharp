@@ -58,20 +58,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeCaaRecord(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CaaRecord>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CaaRecord IModelSerializable<CaaRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCaaRecord(document.RootElement, options);
-        }
-
         internal static CaaRecord DeserializeCaaRecord(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtExpandResourceTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CaaRecord(Optional.ToNullable(flags), tag.Value, value.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<CaaRecord>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CaaRecord IModelSerializable<CaaRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCaaRecord(document.RootElement, options);
         }
     }
 }

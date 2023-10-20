@@ -45,20 +45,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmipRule(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MhsmipRule>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MhsmipRule IModelSerializable<MhsmipRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMhsmipRule(document.RootElement, options);
-        }
-
         internal static MhsmipRule DeserializeMhsmipRule(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MhsmipRule(value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MhsmipRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmipRule IModelSerializable<MhsmipRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmipRule(document.RootElement, options);
         }
     }
 }

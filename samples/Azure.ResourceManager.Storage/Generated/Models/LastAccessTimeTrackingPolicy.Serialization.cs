@@ -65,20 +65,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeLastAccessTimeTrackingPolicy(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<LastAccessTimeTrackingPolicy>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        LastAccessTimeTrackingPolicy IModelSerializable<LastAccessTimeTrackingPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLastAccessTimeTrackingPolicy(document.RootElement, options);
-        }
-
         internal static LastAccessTimeTrackingPolicy DeserializeLastAccessTimeTrackingPolicy(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -139,6 +125,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new LastAccessTimeTrackingPolicy(enable, Optional.ToNullable(name), Optional.ToNullable(trackingGranularityInDays), Optional.ToList(blobType), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<LastAccessTimeTrackingPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LastAccessTimeTrackingPolicy IModelSerializable<LastAccessTimeTrackingPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLastAccessTimeTrackingPolicy(document.RootElement, options);
         }
     }
 }

@@ -83,20 +83,6 @@ namespace MgmtPartialResource
             return DeserializeConfigurationProfileAssignmentData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ConfigurationProfileAssignmentData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ConfigurationProfileAssignmentData IModelSerializable<ConfigurationProfileAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeConfigurationProfileAssignmentData(document.RootElement, options);
-        }
-
         internal static ConfigurationProfileAssignmentData DeserializeConfigurationProfileAssignmentData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -175,6 +161,21 @@ namespace MgmtPartialResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ConfigurationProfileAssignmentData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ConfigurationProfileAssignmentData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ConfigurationProfileAssignmentData IModelSerializable<ConfigurationProfileAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeConfigurationProfileAssignmentData(document.RootElement, options);
         }
     }
 }

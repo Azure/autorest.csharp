@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeLeaseShareResponse(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<LeaseShareResponse>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        LeaseShareResponse IModelSerializable<LeaseShareResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLeaseShareResponse(document.RootElement, options);
-        }
-
         internal static LeaseShareResponse DeserializeLeaseShareResponse(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -98,6 +84,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new LeaseShareResponse(leaseId.Value, leaseTimeSeconds.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<LeaseShareResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LeaseShareResponse IModelSerializable<LeaseShareResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLeaseShareResponse(document.RootElement, options);
         }
     }
 }

@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeMgmtGrpParentWithNonResChData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtGrpParentWithNonResChData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtGrpParentWithNonResChData IModelSerializable<MgmtGrpParentWithNonResChData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtGrpParentWithNonResChData(document.RootElement, options);
-        }
-
         internal static MgmtGrpParentWithNonResChData DeserializeMgmtGrpParentWithNonResChData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtGrpParentWithNonResChData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtGrpParentWithNonResChData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtGrpParentWithNonResChData IModelSerializable<MgmtGrpParentWithNonResChData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtGrpParentWithNonResChData(document.RootElement, options);
         }
     }
 }

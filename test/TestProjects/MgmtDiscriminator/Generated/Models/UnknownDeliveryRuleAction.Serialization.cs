@@ -50,20 +50,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeUnknownDeliveryRuleAction(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownDeliveryRuleAction>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownDeliveryRuleAction IModelSerializable<UnknownDeliveryRuleAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownDeliveryRuleAction(document.RootElement, options);
-        }
-
         internal static UnknownDeliveryRuleAction DeserializeUnknownDeliveryRuleAction(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -95,6 +81,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownDeliveryRuleAction(name, foo.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownDeliveryRuleAction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownDeliveryRuleAction IModelSerializable<UnknownDeliveryRuleAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownDeliveryRuleAction(document.RootElement, options);
         }
     }
 }

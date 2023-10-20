@@ -58,20 +58,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeApiErrorBase(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ApiErrorBase>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ApiErrorBase IModelSerializable<ApiErrorBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeApiErrorBase(document.RootElement, options);
-        }
-
         internal static ApiErrorBase DeserializeApiErrorBase(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -109,6 +95,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ApiErrorBase(code.Value, target.Value, message.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ApiErrorBase>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ApiErrorBase IModelSerializable<ApiErrorBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeApiErrorBase(document.RootElement, options);
         }
     }
 }

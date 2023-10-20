@@ -51,20 +51,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSampleUsage(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SampleUsage>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SampleUsage IModelSerializable<SampleUsage>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSampleUsage(document.RootElement, options);
-        }
-
         internal static SampleUsage DeserializeSampleUsage(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -108,6 +94,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SampleUsage(unit, currentValue, limit, name, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SampleUsage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SampleUsage IModelSerializable<SampleUsage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSampleUsage(document.RootElement, options);
         }
     }
 }

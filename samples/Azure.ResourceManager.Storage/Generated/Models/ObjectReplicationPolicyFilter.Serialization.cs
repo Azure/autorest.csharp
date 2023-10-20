@@ -58,20 +58,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeObjectReplicationPolicyFilter(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ObjectReplicationPolicyFilter>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ObjectReplicationPolicyFilter IModelSerializable<ObjectReplicationPolicyFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeObjectReplicationPolicyFilter(document.RootElement, options);
-        }
-
         internal static ObjectReplicationPolicyFilter DeserializeObjectReplicationPolicyFilter(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -112,6 +98,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ObjectReplicationPolicyFilter(Optional.ToList(prefixMatch), minCreationTime.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ObjectReplicationPolicyFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ObjectReplicationPolicyFilter IModelSerializable<ObjectReplicationPolicyFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeObjectReplicationPolicyFilter(document.RootElement, options);
         }
     }
 }

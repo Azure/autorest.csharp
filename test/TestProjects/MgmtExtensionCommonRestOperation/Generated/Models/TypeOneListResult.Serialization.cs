@@ -56,20 +56,6 @@ namespace MgmtExtensionCommonRestOperation.Models
             return DeserializeTypeOneListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TypeOneListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TypeOneListResult IModelSerializable<TypeOneListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTypeOneListResult(document.RootElement, options);
-        }
-
         internal static TypeOneListResult DeserializeTypeOneListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtExtensionCommonRestOperation.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TypeOneListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TypeOneListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TypeOneListResult IModelSerializable<TypeOneListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTypeOneListResult(document.RootElement, options);
         }
     }
 }

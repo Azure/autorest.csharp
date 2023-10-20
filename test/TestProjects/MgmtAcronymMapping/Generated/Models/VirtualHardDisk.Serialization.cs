@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualHardDisk(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualHardDisk>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualHardDisk IModelSerializable<VirtualHardDisk>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualHardDisk(document.RootElement, options);
-        }
-
         internal static VirtualHardDisk DeserializeVirtualHardDisk(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualHardDisk(uri.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualHardDisk>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualHardDisk IModelSerializable<VirtualHardDisk>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualHardDisk(document.RootElement, options);
         }
     }
 }

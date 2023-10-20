@@ -63,20 +63,6 @@ namespace MgmtScopeResource.Models
             return DeserializeGuestConfigurationBaseResource(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<GuestConfigurationBaseResource>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        GuestConfigurationBaseResource IModelSerializable<GuestConfigurationBaseResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeGuestConfigurationBaseResource(document.RootElement, options);
-        }
-
         internal static GuestConfigurationBaseResource DeserializeGuestConfigurationBaseResource(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -120,6 +106,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new GuestConfigurationBaseResource(id.Value, name.Value, location.Value, type.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<GuestConfigurationBaseResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GuestConfigurationBaseResource IModelSerializable<GuestConfigurationBaseResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGuestConfigurationBaseResource(document.RootElement, options);
         }
     }
 }

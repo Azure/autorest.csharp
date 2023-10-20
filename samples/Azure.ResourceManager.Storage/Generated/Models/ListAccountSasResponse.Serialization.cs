@@ -48,20 +48,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeListAccountSasResponse(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ListAccountSasResponse>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ListAccountSasResponse IModelSerializable<ListAccountSasResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeListAccountSasResponse(document.RootElement, options);
-        }
-
         internal static ListAccountSasResponse DeserializeListAccountSasResponse(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ListAccountSasResponse(accountSasToken.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ListAccountSasResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ListAccountSasResponse IModelSerializable<ListAccountSasResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeListAccountSasResponse(document.RootElement, options);
         }
     }
 }

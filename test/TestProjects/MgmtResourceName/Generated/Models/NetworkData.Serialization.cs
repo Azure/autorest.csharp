@@ -69,20 +69,6 @@ namespace MgmtResourceName
             return DeserializeNetworkData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NetworkData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NetworkData IModelSerializable<NetworkData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNetworkData(document.RootElement, options);
-        }
-
         internal static NetworkData DeserializeNetworkData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtResourceName
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NetworkData(id, name, type, systemData.Value, @new.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NetworkData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NetworkData IModelSerializable<NetworkData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNetworkData(document.RootElement, options);
         }
     }
 }

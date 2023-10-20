@@ -51,20 +51,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripRecursiveModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RoundTripRecursiveModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RoundTripRecursiveModel IModelSerializable<RoundTripRecursiveModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRoundTripRecursiveModel(document.RootElement, options);
-        }
-
         internal static RoundTripRecursiveModel DeserializeRoundTripRecursiveModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -100,6 +86,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoundTripRecursiveModel(message, inner.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RoundTripRecursiveModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RoundTripRecursiveModel IModelSerializable<RoundTripRecursiveModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRoundTripRecursiveModel(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

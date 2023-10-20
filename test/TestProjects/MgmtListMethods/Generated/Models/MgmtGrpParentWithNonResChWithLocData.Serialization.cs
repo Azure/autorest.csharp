@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeMgmtGrpParentWithNonResChWithLocData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtGrpParentWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtGrpParentWithNonResChWithLocData IModelSerializable<MgmtGrpParentWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtGrpParentWithNonResChWithLocData(document.RootElement, options);
-        }
-
         internal static MgmtGrpParentWithNonResChWithLocData DeserializeMgmtGrpParentWithNonResChWithLocData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtGrpParentWithNonResChWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtGrpParentWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtGrpParentWithNonResChWithLocData IModelSerializable<MgmtGrpParentWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtGrpParentWithNonResChWithLocData(document.RootElement, options);
         }
     }
 }

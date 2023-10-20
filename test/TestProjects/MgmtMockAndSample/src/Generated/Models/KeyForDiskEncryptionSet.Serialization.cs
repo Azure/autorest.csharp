@@ -51,20 +51,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeKeyForDiskEncryptionSet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<KeyForDiskEncryptionSet>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        KeyForDiskEncryptionSet IModelSerializable<KeyForDiskEncryptionSet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeKeyForDiskEncryptionSet(document.RootElement, options);
-        }
-
         internal static KeyForDiskEncryptionSet DeserializeKeyForDiskEncryptionSet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -100,6 +86,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new KeyForDiskEncryptionSet(sourceVault, keyUrl, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<KeyForDiskEncryptionSet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyForDiskEncryptionSet IModelSerializable<KeyForDiskEncryptionSet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyForDiskEncryptionSet(document.RootElement, options);
         }
     }
 }

@@ -58,20 +58,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeMgmtParamOrderingSku(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtParamOrderingSku>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtParamOrderingSku IModelSerializable<MgmtParamOrderingSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtParamOrderingSku(document.RootElement, options);
-        }
-
         internal static MgmtParamOrderingSku DeserializeMgmtParamOrderingSku(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtParamOrdering.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtParamOrderingSku(name.Value, tier.Value, Optional.ToNullable(capacity), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtParamOrderingSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtParamOrderingSku IModelSerializable<MgmtParamOrderingSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtParamOrderingSku(document.RootElement, options);
         }
     }
 }

@@ -56,20 +56,6 @@ namespace MgmtListMethods.Models
             return DeserializeMgmtGrpParentWithNonResChListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtGrpParentWithNonResChListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtGrpParentWithNonResChListResult IModelSerializable<MgmtGrpParentWithNonResChListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtGrpParentWithNonResChListResult(document.RootElement, options);
-        }
-
         internal static MgmtGrpParentWithNonResChListResult DeserializeMgmtGrpParentWithNonResChListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtListMethods.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtGrpParentWithNonResChListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtGrpParentWithNonResChListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtGrpParentWithNonResChListResult IModelSerializable<MgmtGrpParentWithNonResChListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtGrpParentWithNonResChListResult(document.RootElement, options);
         }
     }
 }

@@ -65,20 +65,6 @@ namespace MgmtNonStringPathVariable.Models
             return DeserializeBarPatch(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BarPatch>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BarPatch IModelSerializable<BarPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBarPatch(document.RootElement, options);
-        }
-
         internal static BarPatch DeserializeBarPatch(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -135,6 +121,21 @@ namespace MgmtNonStringPathVariable.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BarPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(buzz));
+        }
+
+        BinaryData IModelSerializable<BarPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BarPatch IModelSerializable<BarPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBarPatch(document.RootElement, options);
         }
     }
 }

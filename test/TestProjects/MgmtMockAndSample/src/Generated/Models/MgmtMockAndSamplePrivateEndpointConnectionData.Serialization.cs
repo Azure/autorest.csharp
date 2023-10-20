@@ -108,20 +108,6 @@ namespace MgmtMockAndSample
             return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtMockAndSamplePrivateEndpointConnectionData IModelSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement, options);
-        }
-
         internal static MgmtMockAndSamplePrivateEndpointConnectionData DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -242,6 +228,21 @@ namespace MgmtMockAndSample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, type, systemData.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(location), Optional.ToDictionary(tags), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSamplePrivateEndpointConnectionData IModelSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement, options);
         }
     }
 }

@@ -64,20 +64,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeNonResourceModel1(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NonResourceModel1>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NonResourceModel1 IModelSerializable<NonResourceModel1>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNonResourceModel1(document.RootElement, options);
-        }
-
         internal static NonResourceModel1 DeserializeNonResourceModel1(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -127,6 +113,21 @@ namespace MgmtSupersetFlattenInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NonResourceModel1(bar.Value, id.Value, foo.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NonResourceModel1>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NonResourceModel1 IModelSerializable<NonResourceModel1>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNonResourceModel1(document.RootElement, options);
         }
     }
 }

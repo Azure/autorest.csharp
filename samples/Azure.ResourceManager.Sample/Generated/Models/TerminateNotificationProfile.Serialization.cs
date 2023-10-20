@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeTerminateNotificationProfile(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TerminateNotificationProfile>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TerminateNotificationProfile IModelSerializable<TerminateNotificationProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTerminateNotificationProfile(document.RootElement, options);
-        }
-
         internal static TerminateNotificationProfile DeserializeTerminateNotificationProfile(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TerminateNotificationProfile(notBeforeTimeout.Value, Optional.ToNullable(enable), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TerminateNotificationProfile>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TerminateNotificationProfile IModelSerializable<TerminateNotificationProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTerminateNotificationProfile(document.RootElement, options);
         }
     }
 }

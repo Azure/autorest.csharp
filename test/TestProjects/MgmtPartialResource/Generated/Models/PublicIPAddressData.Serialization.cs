@@ -136,20 +136,6 @@ namespace MgmtPartialResource
             return DeserializePublicIPAddressData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PublicIPAddressData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PublicIPAddressData IModelSerializable<PublicIPAddressData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePublicIPAddressData(document.RootElement, options);
-        }
-
         internal static PublicIPAddressData DeserializePublicIPAddressData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -322,6 +308,21 @@ namespace MgmtPartialResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PublicIPAddressData(id, name, type, systemData.Value, sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PublicIPAddressData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PublicIPAddressData IModelSerializable<PublicIPAddressData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePublicIPAddressData(document.RootElement, options);
         }
     }
 }

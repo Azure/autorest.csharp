@@ -73,20 +73,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountMicrosoftEndpoints(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StorageAccountMicrosoftEndpoints>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StorageAccountMicrosoftEndpoints IModelSerializable<StorageAccountMicrosoftEndpoints>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStorageAccountMicrosoftEndpoints(document.RootElement, options);
-        }
-
         internal static StorageAccountMicrosoftEndpoints DeserializeStorageAccountMicrosoftEndpoints(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -142,6 +128,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StorageAccountMicrosoftEndpoints(blob.Value, queue.Value, table.Value, file.Value, web.Value, dfs.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StorageAccountMicrosoftEndpoints>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StorageAccountMicrosoftEndpoints IModelSerializable<StorageAccountMicrosoftEndpoints>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStorageAccountMicrosoftEndpoints(document.RootElement, options);
         }
     }
 }

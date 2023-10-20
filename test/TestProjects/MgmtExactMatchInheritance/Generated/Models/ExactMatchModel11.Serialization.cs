@@ -55,20 +55,6 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeExactMatchModel11(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ExactMatchModel11>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ExactMatchModel11 IModelSerializable<ExactMatchModel11>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeExactMatchModel11(document.RootElement, options);
-        }
-
         internal static ExactMatchModel11 DeserializeExactMatchModel11(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -104,6 +90,21 @@ namespace MgmtExactMatchInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ExactMatchModel11(name.Value, Optional.ToNullable(type), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ExactMatchModel11>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExactMatchModel11 IModelSerializable<ExactMatchModel11>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel11(document.RootElement, options);
         }
 
         internal partial class ExactMatchModel11Converter : JsonConverter<ExactMatchModel11>

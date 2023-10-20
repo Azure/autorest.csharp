@@ -50,20 +50,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeUnpollutedCat(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnpollutedCat>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnpollutedCat IModelSerializable<UnpollutedCat>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnpollutedCat(document.RootElement, options);
-        }
-
         internal static UnpollutedCat DeserializeUnpollutedCat(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace ConfidentLevelsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnpollutedCat(kind, name, serializedAdditionalRawData, meow);
+        }
+
+        BinaryData IModelSerializable<UnpollutedCat>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnpollutedCat IModelSerializable<UnpollutedCat>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnpollutedCat(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

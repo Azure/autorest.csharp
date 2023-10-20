@@ -58,20 +58,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeUpgradeOperationHistoryStatus(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UpgradeOperationHistoryStatus>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UpgradeOperationHistoryStatus IModelSerializable<UpgradeOperationHistoryStatus>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUpgradeOperationHistoryStatus(document.RootElement, options);
-        }
-
         internal static UpgradeOperationHistoryStatus DeserializeUpgradeOperationHistoryStatus(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -121,6 +107,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UpgradeOperationHistoryStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(endTime), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UpgradeOperationHistoryStatus>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UpgradeOperationHistoryStatus IModelSerializable<UpgradeOperationHistoryStatus>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUpgradeOperationHistoryStatus(document.RootElement, options);
         }
     }
 }

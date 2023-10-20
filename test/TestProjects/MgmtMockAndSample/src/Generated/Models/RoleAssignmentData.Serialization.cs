@@ -90,20 +90,6 @@ namespace MgmtMockAndSample
             return DeserializeRoleAssignmentData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RoleAssignmentData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RoleAssignmentData IModelSerializable<RoleAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRoleAssignmentData(document.RootElement, options);
-        }
-
         internal static RoleAssignmentData DeserializeRoleAssignmentData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -191,6 +177,21 @@ namespace MgmtMockAndSample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoleAssignmentData(id, name, type, systemData.Value, scope.Value, roleDefinitionId.Value, principalId.Value, Optional.ToNullable(canDelegate), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RoleAssignmentData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RoleAssignmentData IModelSerializable<RoleAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRoleAssignmentData(document.RootElement, options);
         }
     }
 }

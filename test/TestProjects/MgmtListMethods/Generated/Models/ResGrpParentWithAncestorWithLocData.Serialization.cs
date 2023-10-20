@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeResGrpParentWithAncestorWithLocData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ResGrpParentWithAncestorWithLocData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ResGrpParentWithAncestorWithLocData IModelSerializable<ResGrpParentWithAncestorWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResGrpParentWithAncestorWithLocData(document.RootElement, options);
-        }
-
         internal static ResGrpParentWithAncestorWithLocData DeserializeResGrpParentWithAncestorWithLocData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResGrpParentWithAncestorWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ResGrpParentWithAncestorWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResGrpParentWithAncestorWithLocData IModelSerializable<ResGrpParentWithAncestorWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResGrpParentWithAncestorWithLocData(document.RootElement, options);
         }
     }
 }

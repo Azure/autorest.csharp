@@ -52,20 +52,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleRemoteAddressCondition(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeliveryRuleRemoteAddressCondition>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeliveryRuleRemoteAddressCondition IModelSerializable<DeliveryRuleRemoteAddressCondition>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeliveryRuleRemoteAddressCondition(document.RootElement, options);
-        }
-
         internal static DeliveryRuleRemoteAddressCondition DeserializeDeliveryRuleRemoteAddressCondition(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -103,6 +89,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeliveryRuleRemoteAddressCondition(name, foo.Value, serializedAdditionalRawData, parameters);
+        }
+
+        BinaryData IModelSerializable<DeliveryRuleRemoteAddressCondition>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeliveryRuleRemoteAddressCondition IModelSerializable<DeliveryRuleRemoteAddressCondition>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeliveryRuleRemoteAddressCondition(document.RootElement, options);
         }
     }
 }

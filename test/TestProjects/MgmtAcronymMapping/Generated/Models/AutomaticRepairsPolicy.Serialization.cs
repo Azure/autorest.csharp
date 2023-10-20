@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeAutomaticRepairsPolicy(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AutomaticRepairsPolicy>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AutomaticRepairsPolicy IModelSerializable<AutomaticRepairsPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAutomaticRepairsPolicy(document.RootElement, options);
-        }
-
         internal static AutomaticRepairsPolicy DeserializeAutomaticRepairsPolicy(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AutomaticRepairsPolicy(Optional.ToNullable(enabled), gracePeriod.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AutomaticRepairsPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AutomaticRepairsPolicy IModelSerializable<AutomaticRepairsPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAutomaticRepairsPolicy(document.RootElement, options);
         }
     }
 }

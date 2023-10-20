@@ -99,20 +99,6 @@ namespace MgmtSafeFlatten
             return DeserializeTypeOneData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TypeOneData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TypeOneData IModelSerializable<TypeOneData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTypeOneData(document.RootElement, options);
-        }
-
         internal static TypeOneData DeserializeTypeOneData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -217,6 +203,21 @@ namespace MgmtSafeFlatten
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TypeOneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TypeOneData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TypeOneData IModelSerializable<TypeOneData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTypeOneData(document.RootElement, options);
         }
     }
 }

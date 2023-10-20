@@ -46,20 +46,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeErrorAdditionalInfo(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ErrorAdditionalInfo>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ErrorAdditionalInfo IModelSerializable<ErrorAdditionalInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeErrorAdditionalInfo(document.RootElement, options);
-        }
-
         internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -88,6 +74,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new ErrorAdditionalInfo(type.Value, info.Value);
+        }
+
+        BinaryData IModelSerializable<ErrorAdditionalInfo>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ErrorAdditionalInfo IModelSerializable<ErrorAdditionalInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeErrorAdditionalInfo(document.RootElement, options);
         }
 
         internal partial class ErrorAdditionalInfoConverter : JsonConverter<ErrorAdditionalInfo>

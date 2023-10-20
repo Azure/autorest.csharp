@@ -46,20 +46,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeNoUseBase(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NoUseBase>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NoUseBase IModelSerializable<NoUseBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNoUseBase(document.RootElement, options);
-        }
-
         internal static NoUseBase DeserializeNoUseBase(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NoUseBase(baseModelProp, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NoUseBase>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NoUseBase IModelSerializable<NoUseBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNoUseBase(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

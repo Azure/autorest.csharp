@@ -59,20 +59,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyLogAnalyticsResources(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyLogAnalyticsResources>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyLogAnalyticsResources IModelSerializable<FirewallPolicyLogAnalyticsResources>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyLogAnalyticsResources(document.RootElement, options);
-        }
-
         internal static FirewallPolicyLogAnalyticsResources DeserializeFirewallPolicyLogAnalyticsResources(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -117,6 +103,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyLogAnalyticsResources(Optional.ToList(workspaces), defaultWorkspaceId, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyLogAnalyticsResources>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyLogAnalyticsResources IModelSerializable<FirewallPolicyLogAnalyticsResources>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyLogAnalyticsResources(document.RootElement, options);
         }
     }
 }

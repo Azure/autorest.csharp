@@ -63,20 +63,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDedicatedHostInstanceView(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DedicatedHostInstanceView>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DedicatedHostInstanceView IModelSerializable<DedicatedHostInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDedicatedHostInstanceView(document.RootElement, options);
-        }
-
         internal static DedicatedHostInstanceView DeserializeDedicatedHostInstanceView(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -127,6 +113,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DedicatedHostInstanceView(assetId.Value, availableCapacity.Value, Optional.ToList(statuses), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DedicatedHostInstanceView>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DedicatedHostInstanceView IModelSerializable<DedicatedHostInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDedicatedHostInstanceView(document.RootElement, options);
         }
     }
 }

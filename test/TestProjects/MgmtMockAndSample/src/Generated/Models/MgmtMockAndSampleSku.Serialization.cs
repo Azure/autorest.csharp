@@ -47,20 +47,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMgmtMockAndSampleSku(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtMockAndSampleSku>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtMockAndSampleSku IModelSerializable<MgmtMockAndSampleSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtMockAndSampleSku(document.RootElement, options);
-        }
-
         internal static MgmtMockAndSampleSku DeserializeMgmtMockAndSampleSku(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -92,6 +78,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtMockAndSampleSku(family, name, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSampleSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSampleSku IModelSerializable<MgmtMockAndSampleSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSampleSku(document.RootElement, options);
         }
     }
 }

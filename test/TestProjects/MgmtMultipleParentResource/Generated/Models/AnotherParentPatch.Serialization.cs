@@ -95,20 +95,6 @@ namespace MgmtMultipleParentResource.Models
             return DeserializeAnotherParentPatch(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AnotherParentPatch>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AnotherParentPatch IModelSerializable<AnotherParentPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAnotherParentPatch(document.RootElement, options);
-        }
-
         internal static AnotherParentPatch DeserializeAnotherParentPatch(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -213,6 +199,21 @@ namespace MgmtMultipleParentResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AnotherParentPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
+        }
+
+        BinaryData IModelSerializable<AnotherParentPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AnotherParentPatch IModelSerializable<AnotherParentPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAnotherParentPatch(document.RootElement, options);
         }
     }
 }

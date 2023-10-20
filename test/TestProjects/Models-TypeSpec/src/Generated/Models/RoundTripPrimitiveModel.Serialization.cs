@@ -74,20 +74,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripPrimitiveModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RoundTripPrimitiveModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RoundTripPrimitiveModel IModelSerializable<RoundTripPrimitiveModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRoundTripPrimitiveModel(document.RootElement, options);
-        }
-
         internal static RoundTripPrimitiveModel DeserializeRoundTripPrimitiveModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -179,6 +165,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoundTripPrimitiveModel(serializedAdditionalRawData, requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
+        }
+
+        BinaryData IModelSerializable<RoundTripPrimitiveModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RoundTripPrimitiveModel IModelSerializable<RoundTripPrimitiveModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRoundTripPrimitiveModel(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

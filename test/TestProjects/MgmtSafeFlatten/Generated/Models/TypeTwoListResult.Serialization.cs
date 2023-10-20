@@ -56,20 +56,6 @@ namespace MgmtSafeFlatten.Models
             return DeserializeTypeTwoListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TypeTwoListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TypeTwoListResult IModelSerializable<TypeTwoListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTypeTwoListResult(document.RootElement, options);
-        }
-
         internal static TypeTwoListResult DeserializeTypeTwoListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtSafeFlatten.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TypeTwoListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TypeTwoListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TypeTwoListResult IModelSerializable<TypeTwoListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTypeTwoListResult(document.RootElement, options);
         }
     }
 }

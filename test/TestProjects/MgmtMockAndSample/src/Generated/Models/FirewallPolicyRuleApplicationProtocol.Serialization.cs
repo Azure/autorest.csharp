@@ -53,20 +53,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyRuleApplicationProtocol(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyRuleApplicationProtocol>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyRuleApplicationProtocol IModelSerializable<FirewallPolicyRuleApplicationProtocol>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyRuleApplicationProtocol(document.RootElement, options);
-        }
-
         internal static FirewallPolicyRuleApplicationProtocol DeserializeFirewallPolicyRuleApplicationProtocol(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyRuleApplicationProtocol(Optional.ToNullable(protocolType), Optional.ToNullable(port), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyRuleApplicationProtocol>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyRuleApplicationProtocol IModelSerializable<FirewallPolicyRuleApplicationProtocol>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyRuleApplicationProtocol(document.RootElement, options);
         }
     }
 }

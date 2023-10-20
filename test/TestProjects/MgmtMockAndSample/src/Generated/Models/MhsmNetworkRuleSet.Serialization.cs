@@ -74,20 +74,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmNetworkRuleSet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MhsmNetworkRuleSet>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MhsmNetworkRuleSet IModelSerializable<MhsmNetworkRuleSet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMhsmNetworkRuleSet(document.RootElement, options);
-        }
-
         internal static MhsmNetworkRuleSet DeserializeMhsmNetworkRuleSet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -157,6 +143,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MhsmNetworkRuleSet(Optional.ToNullable(bypass), Optional.ToNullable(defaultAction), Optional.ToList(ipRules), Optional.ToList(virtualNetworkRules), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MhsmNetworkRuleSet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmNetworkRuleSet IModelSerializable<MhsmNetworkRuleSet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmNetworkRuleSet(document.RootElement, options);
         }
     }
 }

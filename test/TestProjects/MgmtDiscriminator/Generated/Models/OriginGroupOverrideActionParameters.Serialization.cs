@@ -48,20 +48,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeOriginGroupOverrideActionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<OriginGroupOverrideActionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        OriginGroupOverrideActionParameters IModelSerializable<OriginGroupOverrideActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeOriginGroupOverrideActionParameters(document.RootElement, options);
-        }
-
         internal static OriginGroupOverrideActionParameters DeserializeOriginGroupOverrideActionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new OriginGroupOverrideActionParameters(typeName, originGroup, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<OriginGroupOverrideActionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OriginGroupOverrideActionParameters IModelSerializable<OriginGroupOverrideActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOriginGroupOverrideActionParameters(document.RootElement, options);
         }
     }
 }

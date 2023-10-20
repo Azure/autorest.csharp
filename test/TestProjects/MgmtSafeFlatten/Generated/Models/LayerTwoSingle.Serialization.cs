@@ -48,20 +48,6 @@ namespace MgmtSafeFlatten.Models
             return DeserializeLayerTwoSingle(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<LayerTwoSingle>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        LayerTwoSingle IModelSerializable<LayerTwoSingle>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLayerTwoSingle(document.RootElement, options);
-        }
-
         internal static LayerTwoSingle DeserializeLayerTwoSingle(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtSafeFlatten.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new LayerTwoSingle(myProp.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<LayerTwoSingle>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LayerTwoSingle IModelSerializable<LayerTwoSingle>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLayerTwoSingle(document.RootElement, options);
         }
     }
 }

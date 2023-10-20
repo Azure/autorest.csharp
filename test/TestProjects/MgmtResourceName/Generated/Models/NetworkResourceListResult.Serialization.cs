@@ -59,20 +59,6 @@ namespace MgmtResourceName.Models
             return DeserializeNetworkResourceListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NetworkResourceListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NetworkResourceListResult IModelSerializable<NetworkResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNetworkResourceListResult(document.RootElement, options);
-        }
-
         internal static NetworkResourceListResult DeserializeNetworkResourceListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtResourceName.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NetworkResourceListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NetworkResourceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NetworkResourceListResult IModelSerializable<NetworkResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNetworkResourceListResult(document.RootElement, options);
         }
     }
 }

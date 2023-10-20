@@ -45,20 +45,6 @@ namespace MgmtSafeFlatten.Models
             return DeserializeUnknownLayerOneBaseType(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownLayerOneBaseType>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownLayerOneBaseType IModelSerializable<UnknownLayerOneBaseType>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownLayerOneBaseType(document.RootElement, options);
-        }
-
         internal static UnknownLayerOneBaseType DeserializeUnknownLayerOneBaseType(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace MgmtSafeFlatten.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownLayerOneBaseType(name, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownLayerOneBaseType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownLayerOneBaseType IModelSerializable<UnknownLayerOneBaseType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownLayerOneBaseType(document.RootElement, options);
         }
     }
 }

@@ -70,20 +70,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeIdentityWithDifferentPropertyType(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<IdentityWithDifferentPropertyType>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        IdentityWithDifferentPropertyType IModelSerializable<IdentityWithDifferentPropertyType>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeIdentityWithDifferentPropertyType(document.RootElement, options);
-        }
-
         internal static IdentityWithDifferentPropertyType DeserializeIdentityWithDifferentPropertyType(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -144,6 +130,21 @@ namespace MgmtPropertyChooser.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new IdentityWithDifferentPropertyType(principalId.Value, Optional.ToNullable(tenantId), Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<IdentityWithDifferentPropertyType>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IdentityWithDifferentPropertyType IModelSerializable<IdentityWithDifferentPropertyType>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIdentityWithDifferentPropertyType(document.RootElement, options);
         }
     }
 }

@@ -49,20 +49,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeTagFilter(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TagFilter>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TagFilter IModelSerializable<TagFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTagFilter(document.RootElement, options);
-        }
-
         internal static TagFilter DeserializeTagFilter(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -100,6 +86,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TagFilter(name, op, value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TagFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TagFilter IModelSerializable<TagFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTagFilter(document.RootElement, options);
         }
     }
 }

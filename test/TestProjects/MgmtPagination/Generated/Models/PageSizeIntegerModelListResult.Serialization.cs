@@ -59,20 +59,6 @@ namespace MgmtPagination.Models
             return DeserializePageSizeIntegerModelListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PageSizeIntegerModelListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PageSizeIntegerModelListResult IModelSerializable<PageSizeIntegerModelListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePageSizeIntegerModelListResult(document.RootElement, options);
-        }
-
         internal static PageSizeIntegerModelListResult DeserializePageSizeIntegerModelListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtPagination.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PageSizeIntegerModelListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PageSizeIntegerModelListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PageSizeIntegerModelListResult IModelSerializable<PageSizeIntegerModelListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePageSizeIntegerModelListResult(document.RootElement, options);
         }
     }
 }

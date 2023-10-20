@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeKeyVaultSecretReference(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<KeyVaultSecretReference>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        KeyVaultSecretReference IModelSerializable<KeyVaultSecretReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeKeyVaultSecretReference(document.RootElement, options);
-        }
-
         internal static KeyVaultSecretReference DeserializeKeyVaultSecretReference(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new KeyVaultSecretReference(secretUrl, sourceVault, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<KeyVaultSecretReference>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyVaultSecretReference IModelSerializable<KeyVaultSecretReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyVaultSecretReference(document.RootElement, options);
         }
     }
 }

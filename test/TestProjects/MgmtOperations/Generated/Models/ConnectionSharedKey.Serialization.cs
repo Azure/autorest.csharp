@@ -79,20 +79,6 @@ namespace MgmtOperations.Models
             return DeserializeConnectionSharedKey(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ConnectionSharedKey>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ConnectionSharedKey IModelSerializable<ConnectionSharedKey>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeConnectionSharedKey(document.RootElement, options);
-        }
-
         internal static ConnectionSharedKey DeserializeConnectionSharedKey(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -167,6 +153,21 @@ namespace MgmtOperations.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ConnectionSharedKey(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ConnectionSharedKey>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ConnectionSharedKey IModelSerializable<ConnectionSharedKey>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeConnectionSharedKey(document.RootElement, options);
         }
     }
 }

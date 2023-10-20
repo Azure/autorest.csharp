@@ -53,20 +53,6 @@ namespace MgmtPartialResource.Models
             return DeserializePublicIPAddressSku(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PublicIPAddressSku>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PublicIPAddressSku IModelSerializable<PublicIPAddressSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePublicIPAddressSku(document.RootElement, options);
-        }
-
         internal static PublicIPAddressSku DeserializePublicIPAddressSku(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtPartialResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PublicIPAddressSku(Optional.ToNullable(name), Optional.ToNullable(tier), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PublicIPAddressSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PublicIPAddressSku IModelSerializable<PublicIPAddressSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePublicIPAddressSku(document.RootElement, options);
         }
     }
 }

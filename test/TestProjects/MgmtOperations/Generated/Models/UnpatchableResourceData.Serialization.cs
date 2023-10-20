@@ -82,20 +82,6 @@ namespace MgmtOperations
             return DeserializeUnpatchableResourceData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnpatchableResourceData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnpatchableResourceData IModelSerializable<UnpatchableResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnpatchableResourceData(document.RootElement, options);
-        }
-
         internal static UnpatchableResourceData DeserializeUnpatchableResourceData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtOperations
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnpatchableResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnpatchableResourceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnpatchableResourceData IModelSerializable<UnpatchableResourceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnpatchableResourceData(document.RootElement, options);
         }
     }
 }

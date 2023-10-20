@@ -58,20 +58,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtMockAndSamplePrivateLinkServiceConnectionState IModelSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(document.RootElement, options);
-        }
-
         internal static MgmtMockAndSamplePrivateLinkServiceConnectionState DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -117,6 +103,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtMockAndSamplePrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, Optional.ToNullable(actionsRequired), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSamplePrivateLinkServiceConnectionState IModelSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(document.RootElement, options);
         }
     }
 }

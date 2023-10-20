@@ -108,20 +108,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyIntrusionDetectionBypassTrafficSpecifications IModelSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(document.RootElement, options);
-        }
-
         internal static FirewallPolicyIntrusionDetectionBypassTrafficSpecifications DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -238,6 +224,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(name.Value, description.Value, Optional.ToNullable(protocol), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), Optional.ToList(sourceIpGroups), Optional.ToList(destinationIpGroups), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyIntrusionDetectionBypassTrafficSpecifications IModelSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(document.RootElement, options);
         }
     }
 }

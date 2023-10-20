@@ -47,20 +47,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeSasPolicy(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SasPolicy>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SasPolicy IModelSerializable<SasPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSasPolicy(document.RootElement, options);
-        }
-
         internal static SasPolicy DeserializeSasPolicy(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -92,6 +78,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SasPolicy(sasExpirationPeriod, expirationAction, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SasPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SasPolicy IModelSerializable<SasPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSasPolicy(document.RootElement, options);
         }
     }
 }

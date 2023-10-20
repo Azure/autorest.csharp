@@ -70,20 +70,6 @@ namespace MgmtCustomizations
             return DeserializePetStoreData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PetStoreData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PetStoreData IModelSerializable<PetStoreData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePetStoreData(document.RootElement, options);
-        }
-
         internal static PetStoreData DeserializePetStoreData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -141,6 +127,21 @@ namespace MgmtCustomizations
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PetStoreData(id, name, type, systemData.Value, properties.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PetStoreData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PetStoreData IModelSerializable<PetStoreData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePetStoreData(document.RootElement, options);
         }
     }
 }

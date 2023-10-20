@@ -51,20 +51,6 @@ namespace CustomizationsInTsp.Models
             return DeserializeRenamedModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RenamedModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RenamedModel IModelSerializable<RenamedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRenamedModel(document.RootElement, options);
-        }
-
         internal static RenamedModel DeserializeRenamedModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -100,6 +86,21 @@ namespace CustomizationsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RenamedModel(requiredInt, Optional.ToNullable(optionalInt), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RenamedModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RenamedModel IModelSerializable<RenamedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRenamedModel(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

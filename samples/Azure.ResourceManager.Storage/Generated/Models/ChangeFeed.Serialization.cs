@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeChangeFeed(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ChangeFeed>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ChangeFeed IModelSerializable<ChangeFeed>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeChangeFeed(document.RootElement, options);
-        }
-
         internal static ChangeFeed DeserializeChangeFeed(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ChangeFeed(Optional.ToNullable(enabled), Optional.ToNullable(retentionInDays), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ChangeFeed>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ChangeFeed IModelSerializable<ChangeFeed>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeChangeFeed(document.RootElement, options);
         }
     }
 }

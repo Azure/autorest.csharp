@@ -48,20 +48,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDisallowedConfiguration(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DisallowedConfiguration>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DisallowedConfiguration IModelSerializable<DisallowedConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDisallowedConfiguration(document.RootElement, options);
-        }
-
         internal static DisallowedConfiguration DeserializeDisallowedConfiguration(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DisallowedConfiguration(Optional.ToNullable(vmDiskType), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DisallowedConfiguration>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DisallowedConfiguration IModelSerializable<DisallowedConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDisallowedConfiguration(document.RootElement, options);
         }
     }
 }

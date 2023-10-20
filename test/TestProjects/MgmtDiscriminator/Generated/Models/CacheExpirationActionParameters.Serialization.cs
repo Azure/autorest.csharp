@@ -61,20 +61,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeCacheExpirationActionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CacheExpirationActionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CacheExpirationActionParameters IModelSerializable<CacheExpirationActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCacheExpirationActionParameters(document.RootElement, options);
-        }
-
         internal static CacheExpirationActionParameters DeserializeCacheExpirationActionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -123,6 +109,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CacheExpirationActionParameters(typeName, cacheBehavior, cacheType, Optional.ToNullable(cacheDuration), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<CacheExpirationActionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CacheExpirationActionParameters IModelSerializable<CacheExpirationActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCacheExpirationActionParameters(document.RootElement, options);
         }
     }
 }

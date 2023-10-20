@@ -63,20 +63,6 @@ namespace CustomizationsInTsp.Models
             return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelToAddAdditionalSerializableProperty>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelToAddAdditionalSerializableProperty IModelSerializable<ModelToAddAdditionalSerializableProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
-        }
-
         internal static ModelToAddAdditionalSerializableProperty DeserializeModelToAddAdditionalSerializableProperty(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -123,6 +109,21 @@ namespace CustomizationsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ModelToAddAdditionalSerializableProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelToAddAdditionalSerializableProperty IModelSerializable<ModelToAddAdditionalSerializableProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -70,20 +70,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeEnvironmentContainer(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<EnvironmentContainer>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        EnvironmentContainer IModelSerializable<EnvironmentContainer>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeEnvironmentContainer(document.RootElement, options);
-        }
-
         internal static EnvironmentContainer DeserializeEnvironmentContainer(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -139,6 +125,21 @@ namespace MgmtParamOrdering.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new EnvironmentContainer(description.Value, Optional.ToDictionary(properties), Optional.ToDictionary(tags), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<EnvironmentContainer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EnvironmentContainer IModelSerializable<EnvironmentContainer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEnvironmentContainer(document.RootElement, options);
         }
     }
 }

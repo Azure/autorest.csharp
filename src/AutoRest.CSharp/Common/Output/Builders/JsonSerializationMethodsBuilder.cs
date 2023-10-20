@@ -4,11 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
@@ -33,6 +35,7 @@ using Azure.Core.Serialization;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
+using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
@@ -49,9 +52,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static readonly ValueExpression jsonFormat = new TypeReference(typeof(ModelSerializerFormat)).Property(nameof(ModelSerializerFormat.Json));
         private static readonly BoolExpression isJsonFormatExpression = Equal(new ModelSerializerOptionsExpression(optionsParameter).Format, jsonFormat);
 
-        public static IEnumerable<Method> BuildModelJsonSerializableMethods(SerializableObjectType model, JsonObjectSerialization jsonObjectSerialization)
+        public static IEnumerable<Method> BuildJsonSerializableMethods(SerializableObjectType model, JsonObjectSerialization jsonObjectSerialization)
         {
-            var modelSerializableType = new CSharpType(typeof(IModelSerializable<>), model.Type);
             var modelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), model.Type);
 
             // void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -84,40 +86,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             );
 
-            // BinaryData IModelSerializable<T>.Serialize(ModelSerializerOptions options)
-            yield return new
-            (
-                new MethodSignature(nameof(IModelSerializable<object>.Serialize), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { optionsParameter }, ExplicitInterface: modelSerializableType),
-                new MethodBodyStatement[]
-                {
-                    // ModelSerializerHelper.ValidateFormat(this, options.Format);
-                    ModelSerializerHelperValidateFormat(This, ((ValueExpression)optionsParameter).Property(nameof(ModelSerializerOptions.Format))),
-                    // return ModelSerializer.SerializeCore(this, options);
-                    Return(new InvokeStaticMethodExpression(typeof(ModelSerializer), nameof(ModelSerializer.SerializeCore), new[] { This, optionsParameter }))
-                }
-            );
-
-            // T IModelSerializable<T>.Deserialize(BinaryData data, ModelSerializerOptions options)
-            yield return new
-            (
-                new MethodSignature(nameof(IModelSerializable<object>.Deserialize), null, null, MethodSignatureModifiers.None, model.Type, null, new[] { dataParameter, optionsParameter }, ExplicitInterface: modelSerializableType),
-                new MethodBodyStatement[]
-                {
-                    // ModelSerializerHelper.ValidateFormat(this, options.Format);
-                    ModelSerializerHelperValidateFormat(This, ((ValueExpression)optionsParameter).Property(nameof(ModelSerializerOptions.Format))),
-                    EmptyLine,
-                    // using var document = JsonDocument.ParseValue(ref reader);
-                    UsingDeclare("document", JsonDocumentExpression.Parse(dataParameter), out docVariable),
-                    // return DeserializeXXX(doc.RootElement, options);
-                    Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, optionsParameter))
-                }
-            );
-
-            // if the model is a struct, it needs to implement IModelJsonSerializable<object> as well which leads to another 4 methods
-            var modelSerializableObjectType = typeof(IModelSerializable<object>);
-            var modelJsonSerializableObjectType = typeof(IModelJsonSerializable<object>);
+            // if the model is a struct, it needs to implement IModelJsonSerializable<object> as well which leads to another 2 methods
             if (model.IsStruct)
             {
+                var modelJsonSerializableObjectType = typeof(IModelJsonSerializable<object>);
                 // void IModelJsonSerializable<object>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
                 yield return new
                 (
@@ -131,15 +103,135 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new MethodSignature(nameof(IModelJsonSerializable<object>.Deserialize), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { utf8JsonReaderParameter, optionsParameter }, ExplicitInterface: modelJsonSerializableObjectType),
                     This.CastTo(modelJsonSerializableType).Invoke(nameof(IModelJsonSerializable<object>.Deserialize), utf8JsonReaderParameter, optionsParameter)
                 );
+            }
+        }
 
-                // BinaryData Serialize(ModelSerializerOptions options)
+        private static MethodBodyStatement BuildModelSerializableSerializeMethod(bool hasJson, bool hasXml)
+        {
+            // return ModelSerializer.SerializeCore(this, options);
+            var jsonPart = Return(new InvokeStaticMethodExpression(typeof(ModelSerializer), nameof(ModelSerializer.SerializeCore), new[] { This, optionsParameter }));
+            /*  using MemoryStream stream = new MemoryStream();
+                using XmlWriter writer = XmlWriter.Create(stream);
+                ((IXmlSerializable)this).Write(writer, null);
+                writer.Flush();
+                if (stream.Position > int.MaxValue)
+                {
+                    return BinaryData.FromStream(stream);
+                }
+                else
+                {
+                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                }
+             */
+            var xmlPart = new MethodBodyStatement[]
+            {
+                UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
+                UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
+                This.CastTo(typeof(IXmlSerializable)).Invoke(nameof(IXmlSerializable.Write), xmlWriter, Null).ToStatement(),
+                xmlWriter.Invoke(nameof(MemoryStream.Flush)).ToStatement(),
+                new IfElseStatement(GreaterThan(stream.Property(nameof(Stream.Position)), IntExpression.MaxValue),
+                    // return BinaryData.FromStream(stream);
+                    Return(BinaryDataExpression.FromStream(stream, false)),
+                    // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                    Return(New.Instance(typeof(BinaryData),
+                        InvokeStaticMethodExpression.Extension(
+                            typeof(MemoryExtensions),
+                            nameof(MemoryExtensions.AsMemory),
+                            stream.Invoke(nameof(MemoryStream.GetBuffer)),
+                            new[]{Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int))}
+                            ))))
+            };
+
+            if (hasJson && hasXml)
+            {
+                // we have both, we need to wrap things in a if-else statement
+                return new IfElseStatement(isJsonFormatExpression, jsonPart, xmlPart);
+            }
+
+            if (hasJson)
+                return jsonPart;
+
+            if (hasXml)
+                return xmlPart;
+
+            throw new InvalidOperationException("We should never get here if we have neither json serialization nor xml serialization");
+        }
+
+        private static MethodBodyStatement BuildModelSerializableDeserializeMethod(SerializableObjectType model, bool hasJson, bool hasXml)
+        {
+            var data = new BinaryDataExpression(dataParameter);
+            /* using var document = JsonDocument.ParseValue(ref reader);
+             * return DeserializeXXX(doc.RootElement, options);
+             */
+            var jsonPart = new MethodBodyStatement[]
+            {
+                UsingDeclare("document", JsonDocumentExpression.Parse(dataParameter), out var docVariable),
+                Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, optionsParameter))
+            };
+            // return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
+            var xmlPart = Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), optionsParameter));
+
+            if (hasJson && hasXml)
+            {
+                // we have both, we need to wrap things in a if-else statement
+                // condition: data.ToMemory().Span.StartsWith("{"u8)
+                var condition = data.ToMemory().Property(nameof(ReadOnlyMemory<byte>.Span))
+                    .Invoke(nameof(MemoryExtensions.StartsWith), LiteralU8("{"));
+                return new IfElseStatement(condition, jsonPart, xmlPart);
+            }
+
+            if (hasJson)
+                return jsonPart;
+
+            if (hasXml)
+                return xmlPart;
+
+            throw new InvalidOperationException("We should never get here if we have neither json serialization nor xml serialization");
+        }
+
+        public static IEnumerable<Method> BuildModelSerializableMethods(SerializableObjectType model, bool hasJson, bool hasXml)
+        {
+            var modelSerializableType = new CSharpType(typeof(IModelSerializable<>), model.Type);
+            var modelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), model.Type);
+
+            // BinaryData IModelSerializable<T>.Serialize(ModelSerializerOptions options)
+            yield return new
+            (
+                new MethodSignature(nameof(IModelSerializable<object>.Serialize), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { optionsParameter }, ExplicitInterface: modelSerializableType),
+                new MethodBodyStatement[]
+                {
+                    // ModelSerializerHelper.ValidateFormat(this, options.Format);
+                    ModelSerializerHelperValidateFormat(This, ((ValueExpression)optionsParameter).Property(nameof(ModelSerializerOptions.Format))),
+                    EmptyLine,
+                    BuildModelSerializableSerializeMethod(hasJson, hasXml)
+                }
+            );
+
+            // T IModelSerializable<T>.Deserialize(BinaryData data, ModelSerializerOptions options)
+            yield return new
+            (
+                new MethodSignature(nameof(IModelSerializable<object>.Deserialize), null, null, MethodSignatureModifiers.None, model.Type, null, new[] { dataParameter, optionsParameter }, ExplicitInterface: modelSerializableType),
+                new MethodBodyStatement[]
+                {
+                    // ModelSerializerHelper.ValidateFormat(this, options.Format);
+                    ModelSerializerHelperValidateFormat(This, ((ValueExpression)optionsParameter).Property(nameof(ModelSerializerOptions.Format))),
+                    EmptyLine,
+                    BuildModelSerializableDeserializeMethod(model, hasJson, hasXml)
+                }
+            );
+
+            // if the model is a struct, it needs to implement IModelSerializable<object> as well which leads to another 2 methods
+            if (model.IsStruct)
+            {
+                var modelSerializableObjectType = typeof(IModelSerializable<object>);
+                // BinaryData IModelSerializable<object>.Serialize(ModelSerializerOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IModelSerializable<object>.Serialize), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { optionsParameter }, ExplicitInterface: modelSerializableObjectType),
                     This.CastTo(modelJsonSerializableType).Invoke(nameof(IModelSerializable<object>.Serialize), optionsParameter)
                 );
 
-                // object Deserialize(BinaryData data, ModelSerializerOptions options)
+                // object IModelSerializable<object>.Deserialize(BinaryData data, ModelSerializerOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IModelSerializable<object>.Deserialize), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { dataParameter, optionsParameter }, ExplicitInterface: modelSerializableObjectType),

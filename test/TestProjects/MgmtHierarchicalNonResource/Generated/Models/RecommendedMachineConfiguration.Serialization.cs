@@ -53,20 +53,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeRecommendedMachineConfiguration(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RecommendedMachineConfiguration>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RecommendedMachineConfiguration IModelSerializable<RecommendedMachineConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRecommendedMachineConfiguration(document.RootElement, options);
-        }
-
         internal static RecommendedMachineConfiguration DeserializeRecommendedMachineConfiguration(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtHierarchicalNonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RecommendedMachineConfiguration(vCpus.Value, memory.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RecommendedMachineConfiguration>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RecommendedMachineConfiguration IModelSerializable<RecommendedMachineConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRecommendedMachineConfiguration(document.RootElement, options);
         }
     }
 }

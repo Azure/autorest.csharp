@@ -50,20 +50,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeModelWithUnionProperty(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelWithUnionProperty>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelWithUnionProperty IModelSerializable<ModelWithUnionProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithUnionProperty(document.RootElement, options);
-        }
-
         internal static ModelWithUnionProperty DeserializeModelWithUnionProperty(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -89,6 +75,21 @@ namespace ConfidentLevelsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithUnionProperty(unionProperty, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ModelWithUnionProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithUnionProperty IModelSerializable<ModelWithUnionProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithUnionProperty(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

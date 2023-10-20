@@ -63,20 +63,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSamplePlan(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SamplePlan>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SamplePlan IModelSerializable<SamplePlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSamplePlan(document.RootElement, options);
-        }
-
         internal static SamplePlan DeserializeSamplePlan(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -120,6 +106,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SamplePlan(name.Value, publisher.Value, product.Value, promotionCode.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SamplePlan>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SamplePlan IModelSerializable<SamplePlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSamplePlan(document.RootElement, options);
         }
     }
 }

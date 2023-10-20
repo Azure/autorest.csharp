@@ -53,20 +53,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeKeyCreationTime(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<KeyCreationTime>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        KeyCreationTime IModelSerializable<KeyCreationTime>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeKeyCreationTime(document.RootElement, options);
-        }
-
         internal static KeyCreationTime DeserializeKeyCreationTime(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new KeyCreationTime(Optional.ToNullable(key1), Optional.ToNullable(key2), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<KeyCreationTime>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        KeyCreationTime IModelSerializable<KeyCreationTime>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeKeyCreationTime(document.RootElement, options);
         }
     }
 }

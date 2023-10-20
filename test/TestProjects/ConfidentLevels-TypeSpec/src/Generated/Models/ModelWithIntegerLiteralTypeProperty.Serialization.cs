@@ -48,20 +48,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeModelWithIntegerLiteralTypeProperty(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelWithIntegerLiteralTypeProperty>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelWithIntegerLiteralTypeProperty IModelSerializable<ModelWithIntegerLiteralTypeProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithIntegerLiteralTypeProperty(document.RootElement, options);
-        }
-
         internal static ModelWithIntegerLiteralTypeProperty DeserializeModelWithIntegerLiteralTypeProperty(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace ConfidentLevelsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithIntegerLiteralTypeProperty(name, id, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ModelWithIntegerLiteralTypeProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithIntegerLiteralTypeProperty IModelSerializable<ModelWithIntegerLiteralTypeProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithIntegerLiteralTypeProperty(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -75,20 +75,6 @@ namespace MgmtMockAndSample.Models
             return DeserializePrivateEndpointConnectionItem(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PrivateEndpointConnectionItem>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PrivateEndpointConnectionItem IModelSerializable<PrivateEndpointConnectionItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateEndpointConnectionItem(document.RootElement, options);
-        }
-
         internal static PrivateEndpointConnectionItem DeserializePrivateEndpointConnectionItem(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -162,6 +148,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PrivateEndpointConnectionItem(id.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PrivateEndpointConnectionItem>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateEndpointConnectionItem IModelSerializable<PrivateEndpointConnectionItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateEndpointConnectionItem(document.RootElement, options);
         }
     }
 }

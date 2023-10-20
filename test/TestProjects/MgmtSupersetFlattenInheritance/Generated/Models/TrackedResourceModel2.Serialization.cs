@@ -98,20 +98,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeTrackedResourceModel2(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TrackedResourceModel2>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TrackedResourceModel2 IModelSerializable<TrackedResourceModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTrackedResourceModel2(document.RootElement, options);
-        }
-
         internal static TrackedResourceModel2 DeserializeTrackedResourceModel2(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -210,6 +196,21 @@ namespace MgmtSupersetFlattenInheritance.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TrackedResourceModel2(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, bar.Value, foo0.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TrackedResourceModel2>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TrackedResourceModel2 IModelSerializable<TrackedResourceModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTrackedResourceModel2(document.RootElement, options);
         }
     }
 }

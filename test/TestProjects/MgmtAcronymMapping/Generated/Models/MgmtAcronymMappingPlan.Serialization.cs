@@ -63,20 +63,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeMgmtAcronymMappingPlan(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtAcronymMappingPlan>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtAcronymMappingPlan IModelSerializable<MgmtAcronymMappingPlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtAcronymMappingPlan(document.RootElement, options);
-        }
-
         internal static MgmtAcronymMappingPlan DeserializeMgmtAcronymMappingPlan(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -120,6 +106,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtAcronymMappingPlan(name.Value, publisher.Value, product.Value, promotionCode.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtAcronymMappingPlan>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtAcronymMappingPlan IModelSerializable<MgmtAcronymMappingPlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtAcronymMappingPlan(document.RootElement, options);
         }
     }
 }

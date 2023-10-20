@@ -70,20 +70,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeIdentityWithRenamedProperty(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<IdentityWithRenamedProperty>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        IdentityWithRenamedProperty IModelSerializable<IdentityWithRenamedProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeIdentityWithRenamedProperty(document.RootElement, options);
-        }
-
         internal static IdentityWithRenamedProperty DeserializeIdentityWithRenamedProperty(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -140,6 +126,21 @@ namespace MgmtPropertyChooser.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new IdentityWithRenamedProperty(testPrincipalId.Value, tenantId.Value, Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<IdentityWithRenamedProperty>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IdentityWithRenamedProperty IModelSerializable<IdentityWithRenamedProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIdentityWithRenamedProperty(document.RootElement, options);
         }
     }
 }

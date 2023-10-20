@@ -47,20 +47,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeBlobRestoreRange(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BlobRestoreRange>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BlobRestoreRange IModelSerializable<BlobRestoreRange>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBlobRestoreRange(document.RootElement, options);
-        }
-
         internal static BlobRestoreRange DeserializeBlobRestoreRange(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -92,6 +78,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BlobRestoreRange(startRange, endRange, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<BlobRestoreRange>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BlobRestoreRange IModelSerializable<BlobRestoreRange>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBlobRestoreRange(document.RootElement, options);
         }
     }
 }

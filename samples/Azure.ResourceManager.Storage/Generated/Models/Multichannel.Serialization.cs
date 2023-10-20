@@ -48,20 +48,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeMultichannel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Multichannel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Multichannel IModelSerializable<Multichannel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMultichannel(document.RootElement, options);
-        }
-
         internal static Multichannel DeserializeMultichannel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Multichannel(Optional.ToNullable(enabled), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<Multichannel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Multichannel IModelSerializable<Multichannel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMultichannel(document.RootElement, options);
         }
     }
 }

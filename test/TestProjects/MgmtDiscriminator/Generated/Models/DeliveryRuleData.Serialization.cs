@@ -70,20 +70,6 @@ namespace MgmtDiscriminator
             return DeserializeDeliveryRuleData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeliveryRuleData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeliveryRuleData IModelSerializable<DeliveryRuleData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeliveryRuleData(document.RootElement, options);
-        }
-
         internal static DeliveryRuleData DeserializeDeliveryRuleData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -141,6 +127,21 @@ namespace MgmtDiscriminator
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeliveryRuleData(id, name, type, systemData.Value, properties.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DeliveryRuleData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeliveryRuleData IModelSerializable<DeliveryRuleData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeliveryRuleData(document.RootElement, options);
         }
     }
 }

@@ -60,20 +60,6 @@ namespace MgmtCustomizations.Models
             return DeserializeUnknownPet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownPet>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownPet IModelSerializable<UnknownPet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownPet(document.RootElement, options);
-        }
-
         internal static UnknownPet DeserializeUnknownPet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -121,6 +107,21 @@ namespace MgmtCustomizations.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownPet(kind, name.Value, size, Optional.ToNullable(dateOfBirth), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownPet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownPet IModelSerializable<UnknownPet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownPet(document.RootElement, options);
         }
     }
 }

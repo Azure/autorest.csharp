@@ -46,20 +46,6 @@ namespace MultipleMediaTypes.Models
             return DeserializeBody(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Body>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Body IModelSerializable<Body>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBody(document.RootElement, options);
-        }
-
         internal static Body DeserializeBody(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace MultipleMediaTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Body(id, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<Body>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Body IModelSerializable<Body>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBody(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

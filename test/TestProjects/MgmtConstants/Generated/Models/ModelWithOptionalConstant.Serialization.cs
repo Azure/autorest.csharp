@@ -63,20 +63,6 @@ namespace MgmtConstants.Models
             return DeserializeModelWithOptionalConstant(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelWithOptionalConstant>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelWithOptionalConstant IModelSerializable<ModelWithOptionalConstant>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithOptionalConstant(document.RootElement, options);
-        }
-
         internal static ModelWithOptionalConstant DeserializeModelWithOptionalConstant(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtConstants.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant), Optional.ToNullable(optionalFloatConstant), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ModelWithOptionalConstant>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithOptionalConstant IModelSerializable<ModelWithOptionalConstant>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithOptionalConstant(document.RootElement, options);
         }
     }
 }

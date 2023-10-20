@@ -45,20 +45,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<OutputBaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        OutputBaseModelWithDiscriminator IModelSerializable<OutputBaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, options);
-        }
-
         internal static OutputBaseModelWithDiscriminator DeserializeOutputBaseModelWithDiscriminator(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -76,6 +62,21 @@ namespace ModelsTypeSpec.Models
                 }
             }
             return UnknownOutputBaseModelWithDiscriminator.DeserializeUnknownOutputBaseModelWithDiscriminator(element);
+        }
+
+        BinaryData IModelSerializable<OutputBaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OutputBaseModelWithDiscriminator IModelSerializable<OutputBaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -50,20 +50,6 @@ namespace PetStore.Models
             return DeserializeTuna(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Tuna>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Tuna IModelSerializable<Tuna>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTuna(document.RootElement, options);
-        }
-
         internal static Tuna DeserializeTuna(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace PetStore.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Tuna(kind, size, serializedAdditionalRawData, fat);
+        }
+
+        BinaryData IModelSerializable<Tuna>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Tuna IModelSerializable<Tuna>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTuna(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

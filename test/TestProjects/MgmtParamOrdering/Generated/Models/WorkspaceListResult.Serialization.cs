@@ -56,20 +56,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeWorkspaceListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<WorkspaceListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        WorkspaceListResult IModelSerializable<WorkspaceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeWorkspaceListResult(document.RootElement, options);
-        }
-
         internal static WorkspaceListResult DeserializeWorkspaceListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtParamOrdering.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new WorkspaceListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<WorkspaceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WorkspaceListResult IModelSerializable<WorkspaceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWorkspaceListResult(document.RootElement, options);
         }
     }
 }

@@ -48,20 +48,6 @@ namespace MgmtNoTypeReplacement.Models
             return DeserializeMiddleResourceModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MiddleResourceModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MiddleResourceModel IModelSerializable<MiddleResourceModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMiddleResourceModel(document.RootElement, options);
-        }
-
         internal static MiddleResourceModel DeserializeMiddleResourceModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtNoTypeReplacement.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MiddleResourceModel(foo.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MiddleResourceModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MiddleResourceModel IModelSerializable<MiddleResourceModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMiddleResourceModel(document.RootElement, options);
         }
     }
 }

@@ -48,20 +48,6 @@ namespace Azure.NewProject.TypeSpec.Models
             return DeserializeModelWithFormat(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelWithFormat>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelWithFormat IModelSerializable<ModelWithFormat>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithFormat(document.RootElement, options);
-        }
-
         internal static ModelWithFormat DeserializeModelWithFormat(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithFormat(sourceUrl, guid, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ModelWithFormat>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithFormat IModelSerializable<ModelWithFormat>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithFormat(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

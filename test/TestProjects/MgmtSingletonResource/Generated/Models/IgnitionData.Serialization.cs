@@ -69,20 +69,6 @@ namespace MgmtSingletonResource
             return DeserializeIgnitionData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<IgnitionData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        IgnitionData IModelSerializable<IgnitionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeIgnitionData(document.RootElement, options);
-        }
-
         internal static IgnitionData DeserializeIgnitionData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -140,6 +126,21 @@ namespace MgmtSingletonResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new IgnitionData(id, name, type, systemData.Value, Optional.ToNullable(pushButton), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<IgnitionData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IgnitionData IModelSerializable<IgnitionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIgnitionData(document.RootElement, options);
         }
     }
 }

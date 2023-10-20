@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeAutomaticOSUpgradePolicy(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AutomaticOSUpgradePolicy>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AutomaticOSUpgradePolicy IModelSerializable<AutomaticOSUpgradePolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAutomaticOSUpgradePolicy(document.RootElement, options);
-        }
-
         internal static AutomaticOSUpgradePolicy DeserializeAutomaticOSUpgradePolicy(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AutomaticOSUpgradePolicy(Optional.ToNullable(enableAutomaticOSUpgrade), Optional.ToNullable(disableAutomaticRollback), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AutomaticOSUpgradePolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AutomaticOSUpgradePolicy IModelSerializable<AutomaticOSUpgradePolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAutomaticOSUpgradePolicy(document.RootElement, options);
         }
     }
 }

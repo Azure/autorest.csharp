@@ -110,20 +110,6 @@ namespace MgmtMockAndSample
             return DeserializeMhsmPrivateEndpointConnectionData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MhsmPrivateEndpointConnectionData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MhsmPrivateEndpointConnectionData IModelSerializable<MhsmPrivateEndpointConnectionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMhsmPrivateEndpointConnectionData(document.RootElement, options);
-        }
-
         internal static MhsmPrivateEndpointConnectionData DeserializeMhsmPrivateEndpointConnectionData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -250,6 +236,21 @@ namespace MgmtMockAndSample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MhsmPrivateEndpointConnectionData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), sku.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MhsmPrivateEndpointConnectionData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmPrivateEndpointConnectionData IModelSerializable<MhsmPrivateEndpointConnectionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmPrivateEndpointConnectionData(document.RootElement, options);
         }
     }
 }

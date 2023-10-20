@@ -58,20 +58,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeUpgradeOperationHistoricalStatusInfo(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UpgradeOperationHistoricalStatusInfo>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UpgradeOperationHistoricalStatusInfo IModelSerializable<UpgradeOperationHistoricalStatusInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUpgradeOperationHistoricalStatusInfo(document.RootElement, options);
-        }
-
         internal static UpgradeOperationHistoricalStatusInfo DeserializeUpgradeOperationHistoricalStatusInfo(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -121,6 +107,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UpgradeOperationHistoricalStatusInfo(properties.Value, Optional.ToNullable(type), Optional.ToNullable(location), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UpgradeOperationHistoricalStatusInfo>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UpgradeOperationHistoricalStatusInfo IModelSerializable<UpgradeOperationHistoricalStatusInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUpgradeOperationHistoricalStatusInfo(document.RootElement, options);
         }
     }
 }

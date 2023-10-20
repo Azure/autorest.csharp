@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeScheduledEventsProfile(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ScheduledEventsProfile>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ScheduledEventsProfile IModelSerializable<ScheduledEventsProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeScheduledEventsProfile(document.RootElement, options);
-        }
-
         internal static ScheduledEventsProfile DeserializeScheduledEventsProfile(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ScheduledEventsProfile(terminateNotificationProfile.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ScheduledEventsProfile>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ScheduledEventsProfile IModelSerializable<ScheduledEventsProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeScheduledEventsProfile(document.RootElement, options);
         }
     }
 }

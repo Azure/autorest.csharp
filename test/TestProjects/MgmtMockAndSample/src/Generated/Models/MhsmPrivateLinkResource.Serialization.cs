@@ -113,20 +113,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmPrivateLinkResource(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MhsmPrivateLinkResource>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MhsmPrivateLinkResource IModelSerializable<MhsmPrivateLinkResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMhsmPrivateLinkResource(document.RootElement, options);
-        }
-
         internal static MhsmPrivateLinkResource DeserializeMhsmPrivateLinkResource(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -253,6 +239,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MhsmPrivateLinkResource(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames), sku.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MhsmPrivateLinkResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmPrivateLinkResource IModelSerializable<MhsmPrivateLinkResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmPrivateLinkResource(document.RootElement, options);
         }
     }
 }

@@ -59,20 +59,6 @@ namespace MgmtNoTypeReplacement.Models
             return DeserializeNoTypeReplacementModel3ListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NoTypeReplacementModel3ListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NoTypeReplacementModel3ListResult IModelSerializable<NoTypeReplacementModel3ListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNoTypeReplacementModel3ListResult(document.RootElement, options);
-        }
-
         internal static NoTypeReplacementModel3ListResult DeserializeNoTypeReplacementModel3ListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtNoTypeReplacement.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NoTypeReplacementModel3ListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NoTypeReplacementModel3ListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NoTypeReplacementModel3ListResult IModelSerializable<NoTypeReplacementModel3ListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNoTypeReplacementModel3ListResult(document.RootElement, options);
         }
     }
 }

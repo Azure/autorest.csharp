@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeAdditionalCapabilities(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AdditionalCapabilities>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AdditionalCapabilities IModelSerializable<AdditionalCapabilities>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAdditionalCapabilities(document.RootElement, options);
-        }
-
         internal static AdditionalCapabilities DeserializeAdditionalCapabilities(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AdditionalCapabilities(Optional.ToNullable(ultraSSDEnabled), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AdditionalCapabilities>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AdditionalCapabilities IModelSerializable<AdditionalCapabilities>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAdditionalCapabilities(document.RootElement, options);
         }
     }
 }

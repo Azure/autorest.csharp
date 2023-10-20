@@ -55,20 +55,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeDerivedModelWithDiscriminatorB(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DerivedModelWithDiscriminatorB>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DerivedModelWithDiscriminatorB IModelSerializable<DerivedModelWithDiscriminatorB>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDerivedModelWithDiscriminatorB(document.RootElement, options);
-        }
-
         internal static DerivedModelWithDiscriminatorB DeserializeDerivedModelWithDiscriminatorB(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -112,6 +98,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DerivedModelWithDiscriminatorB(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, serializedAdditionalRawData, requiredInt);
+        }
+
+        BinaryData IModelSerializable<DerivedModelWithDiscriminatorB>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DerivedModelWithDiscriminatorB IModelSerializable<DerivedModelWithDiscriminatorB>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDerivedModelWithDiscriminatorB(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

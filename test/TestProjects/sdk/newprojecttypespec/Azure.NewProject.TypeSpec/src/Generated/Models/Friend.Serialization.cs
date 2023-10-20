@@ -46,20 +46,6 @@ namespace Azure.NewProject.TypeSpec.Models
             return DeserializeFriend(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Friend>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Friend IModelSerializable<Friend>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFriend(document.RootElement, options);
-        }
-
         internal static Friend DeserializeFriend(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Friend(name, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<Friend>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Friend IModelSerializable<Friend>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFriend(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -56,20 +56,6 @@ namespace MgmtOperations.Models
             return DeserializeAvailabilitySetGrandChildListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AvailabilitySetGrandChildListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AvailabilitySetGrandChildListResult IModelSerializable<AvailabilitySetGrandChildListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAvailabilitySetGrandChildListResult(document.RootElement, options);
-        }
-
         internal static AvailabilitySetGrandChildListResult DeserializeAvailabilitySetGrandChildListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtOperations.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AvailabilitySetGrandChildListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AvailabilitySetGrandChildListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AvailabilitySetGrandChildListResult IModelSerializable<AvailabilitySetGrandChildListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAvailabilitySetGrandChildListResult(document.RootElement, options);
         }
     }
 }

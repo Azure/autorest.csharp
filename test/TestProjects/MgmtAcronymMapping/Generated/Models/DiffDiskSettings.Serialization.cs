@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeDiffDiskSettings(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DiffDiskSettings>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DiffDiskSettings IModelSerializable<DiffDiskSettings>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDiffDiskSettings(document.RootElement, options);
-        }
-
         internal static DiffDiskSettings DeserializeDiffDiskSettings(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DiffDiskSettings(Optional.ToNullable(option), Optional.ToNullable(placement), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DiffDiskSettings>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DiffDiskSettings IModelSerializable<DiffDiskSettings>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDiffDiskSettings(document.RootElement, options);
         }
     }
 }

@@ -46,20 +46,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeFacet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Facet>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Facet IModelSerializable<Facet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFacet(document.RootElement, options);
-        }
-
         internal static Facet DeserializeFacet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Facet(field, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<Facet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Facet IModelSerializable<Facet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFacet(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -48,20 +48,6 @@ namespace Pagination.Models
             return DeserializeListLedgerEntryInputBody(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ListLedgerEntryInputBody>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ListLedgerEntryInputBody IModelSerializable<ListLedgerEntryInputBody>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeListLedgerEntryInputBody(document.RootElement, options);
-        }
-
         internal static ListLedgerEntryInputBody DeserializeListLedgerEntryInputBody(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace Pagination.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ListLedgerEntryInputBody(requiredString, requiredInt, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ListLedgerEntryInputBody>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ListLedgerEntryInputBody IModelSerializable<ListLedgerEntryInputBody>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeListLedgerEntryInputBody(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

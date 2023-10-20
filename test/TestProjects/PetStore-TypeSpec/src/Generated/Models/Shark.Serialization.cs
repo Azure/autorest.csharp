@@ -50,20 +50,6 @@ namespace PetStore.Models
             return DeserializeShark(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Shark>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Shark IModelSerializable<Shark>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeShark(document.RootElement, options);
-        }
-
         internal static Shark DeserializeShark(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace PetStore.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Shark(kind, size, serializedAdditionalRawData, bite);
+        }
+
+        BinaryData IModelSerializable<Shark>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Shark IModelSerializable<Shark>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeShark(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

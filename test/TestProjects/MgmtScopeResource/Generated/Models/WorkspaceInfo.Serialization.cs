@@ -55,20 +55,6 @@ namespace MgmtScopeResource.Models
             return DeserializeWorkspaceInfo(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<WorkspaceInfo>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        WorkspaceInfo IModelSerializable<WorkspaceInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeWorkspaceInfo(document.RootElement, options);
-        }
-
         internal static WorkspaceInfo DeserializeWorkspaceInfo(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -118,6 +104,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new WorkspaceInfo(id, location, customerId, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<WorkspaceInfo>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WorkspaceInfo IModelSerializable<WorkspaceInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWorkspaceInfo(document.RootElement, options);
         }
     }
 }

@@ -54,20 +54,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeHeaderActionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<HeaderActionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        HeaderActionParameters IModelSerializable<HeaderActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeHeaderActionParameters(document.RootElement, options);
-        }
-
         internal static HeaderActionParameters DeserializeHeaderActionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -111,6 +97,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new HeaderActionParameters(typeName, headerAction, headerName, value.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<HeaderActionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        HeaderActionParameters IModelSerializable<HeaderActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeHeaderActionParameters(document.RootElement, options);
         }
     }
 }

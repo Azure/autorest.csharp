@@ -90,20 +90,6 @@ namespace MgmtMockAndSample
             return DeserializeFirewallPolicyRuleCollectionGroupData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyRuleCollectionGroupData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyRuleCollectionGroupData IModelSerializable<FirewallPolicyRuleCollectionGroupData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyRuleCollectionGroupData(document.RootElement, options);
-        }
-
         internal static FirewallPolicyRuleCollectionGroupData DeserializeFirewallPolicyRuleCollectionGroupData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -198,6 +184,21 @@ namespace MgmtMockAndSample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyRuleCollectionGroupData(id.Value, serializedAdditionalRawData, name.Value, etag.Value, Optional.ToNullable(type), Optional.ToNullable(priority), Optional.ToList(ruleCollections), Optional.ToNullable(provisioningState));
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyRuleCollectionGroupData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyRuleCollectionGroupData IModelSerializable<FirewallPolicyRuleCollectionGroupData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyRuleCollectionGroupData(document.RootElement, options);
         }
     }
 }

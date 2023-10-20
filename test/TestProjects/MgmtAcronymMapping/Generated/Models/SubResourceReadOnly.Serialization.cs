@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeSubResourceReadOnly(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SubResourceReadOnly>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SubResourceReadOnly IModelSerializable<SubResourceReadOnly>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSubResourceReadOnly(document.RootElement, options);
-        }
-
         internal static SubResourceReadOnly DeserializeSubResourceReadOnly(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SubResourceReadOnly(id.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SubResourceReadOnly>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SubResourceReadOnly IModelSerializable<SubResourceReadOnly>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSubResourceReadOnly(document.RootElement, options);
         }
     }
 }

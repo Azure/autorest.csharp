@@ -70,20 +70,6 @@ namespace MgmtMockAndSample
             return DeserializeDeletedVaultData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeletedVaultData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeletedVaultData IModelSerializable<DeletedVaultData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeletedVaultData(document.RootElement, options);
-        }
-
         internal static DeletedVaultData DeserializeDeletedVaultData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -141,6 +127,21 @@ namespace MgmtMockAndSample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeletedVaultData(id, name, type, systemData.Value, properties.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DeletedVaultData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedVaultData IModelSerializable<DeletedVaultData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeletedVaultData(document.RootElement, options);
         }
     }
 }

@@ -49,20 +49,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeBaseModelWithProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BaseModelWithProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BaseModelWithProperties IModelSerializable<BaseModelWithProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBaseModelWithProperties(document.RootElement, options);
-        }
-
         internal static BaseModelWithProperties DeserializeBaseModelWithProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -88,6 +74,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BaseModelWithProperties(optionalPropertyOnBase.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<BaseModelWithProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BaseModelWithProperties IModelSerializable<BaseModelWithProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBaseModelWithProperties(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

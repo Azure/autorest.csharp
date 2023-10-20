@@ -48,20 +48,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeListServiceSasResponse(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ListServiceSasResponse>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ListServiceSasResponse IModelSerializable<ListServiceSasResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeListServiceSasResponse(document.RootElement, options);
-        }
-
         internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ListServiceSasResponse(serviceSasToken.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ListServiceSasResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ListServiceSasResponse IModelSerializable<ListServiceSasResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeListServiceSasResponse(document.RootElement, options);
         }
     }
 }

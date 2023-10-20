@@ -137,20 +137,6 @@ namespace MgmtScopeResource.Models
             return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<GuestConfigurationAssignmentProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        GuestConfigurationAssignmentProperties IModelSerializable<GuestConfigurationAssignmentProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);
-        }
-
         internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -263,6 +249,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), resourceType.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<GuestConfigurationAssignmentProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GuestConfigurationAssignmentProperties IModelSerializable<GuestConfigurationAssignmentProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);
         }
     }
 }

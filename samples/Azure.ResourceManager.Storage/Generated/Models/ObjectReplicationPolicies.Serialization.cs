@@ -54,20 +54,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeObjectReplicationPolicies(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ObjectReplicationPolicies>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ObjectReplicationPolicies IModelSerializable<ObjectReplicationPolicies>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeObjectReplicationPolicies(document.RootElement, options);
-        }
-
         internal static ObjectReplicationPolicies DeserializeObjectReplicationPolicies(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ObjectReplicationPolicies(Optional.ToList(value), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ObjectReplicationPolicies>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ObjectReplicationPolicies IModelSerializable<ObjectReplicationPolicies>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeObjectReplicationPolicies(document.RootElement, options);
         }
     }
 }

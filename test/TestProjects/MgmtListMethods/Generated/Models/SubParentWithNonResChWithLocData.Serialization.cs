@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeSubParentWithNonResChWithLocData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SubParentWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SubParentWithNonResChWithLocData IModelSerializable<SubParentWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSubParentWithNonResChWithLocData(document.RootElement, options);
-        }
-
         internal static SubParentWithNonResChWithLocData DeserializeSubParentWithNonResChWithLocData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SubParentWithNonResChWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SubParentWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SubParentWithNonResChWithLocData IModelSerializable<SubParentWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSubParentWithNonResChWithLocData(document.RootElement, options);
         }
     }
 }

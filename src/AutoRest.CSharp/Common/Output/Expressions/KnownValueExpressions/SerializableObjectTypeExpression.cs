@@ -4,7 +4,6 @@
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -20,10 +19,16 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public static SerializableObjectTypeExpression FromResponse(SerializableObjectType serializableObjectType, BaseResponseExpression response)
             => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, Configuration.ApiTypes.FromResponseName, new[] { response }));
 
-        public static SerializableObjectTypeExpression Deserialize(SerializableObjectType serializableObjectType, ValueExpression element, ValueExpression? options = null)
+        public static SerializableObjectTypeExpression Deserialize(SerializableObjectType model, ValueExpression element, ValueExpression? options = null)
         {
             var arguments = options == null ? new[] { element } : new[] { element, options };
-            return new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, $"Deserialize{serializableObjectType.Declaration.Name}", arguments));
+            return new(model, new InvokeStaticMethodExpression(model.Type, $"Deserialize{model.Declaration.Name}", arguments));
+        }
+
+        public static SerializableObjectTypeExpression DeserializeXml(SerializableObjectType model, ValueExpression xElement, ValueExpression? options = null)
+        {
+            var arguments = options == null ? new[] { xElement } : new[] { xElement, options };
+            return new(model, new InvokeStaticMethodExpression(model.Type, $"Deserialize{model.Declaration.Name}", arguments));
         }
 
         public RequestContentExpression ToRequestContent() => new(Untyped.Invoke(Configuration.ApiTypes.ToRequestContentName));

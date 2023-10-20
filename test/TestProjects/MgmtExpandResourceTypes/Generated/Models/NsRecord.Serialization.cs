@@ -48,20 +48,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeNsRecord(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NsRecord>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NsRecord IModelSerializable<NsRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNsRecord(document.RootElement, options);
-        }
-
         internal static NsRecord DeserializeNsRecord(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtExpandResourceTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new NsRecord(nsdname.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<NsRecord>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NsRecord IModelSerializable<NsRecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNsRecord(document.RootElement, options);
         }
     }
 }

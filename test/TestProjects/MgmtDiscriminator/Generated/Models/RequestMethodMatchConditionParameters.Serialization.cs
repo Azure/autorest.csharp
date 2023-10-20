@@ -72,20 +72,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeRequestMethodMatchConditionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RequestMethodMatchConditionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RequestMethodMatchConditionParameters IModelSerializable<RequestMethodMatchConditionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRequestMethodMatchConditionParameters(document.RootElement, options);
-        }
-
         internal static RequestMethodMatchConditionParameters DeserializeRequestMethodMatchConditionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -157,6 +143,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RequestMethodMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(transforms), Optional.ToList(matchValues), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RequestMethodMatchConditionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RequestMethodMatchConditionParameters IModelSerializable<RequestMethodMatchConditionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRequestMethodMatchConditionParameters(document.RootElement, options);
         }
     }
 }

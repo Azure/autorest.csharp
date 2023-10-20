@@ -51,20 +51,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeInputRecursiveModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<InputRecursiveModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        InputRecursiveModel IModelSerializable<InputRecursiveModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeInputRecursiveModel(document.RootElement, options);
-        }
-
         internal static InputRecursiveModel DeserializeInputRecursiveModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -100,6 +86,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new InputRecursiveModel(message, inner.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<InputRecursiveModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        InputRecursiveModel IModelSerializable<InputRecursiveModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeInputRecursiveModel(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

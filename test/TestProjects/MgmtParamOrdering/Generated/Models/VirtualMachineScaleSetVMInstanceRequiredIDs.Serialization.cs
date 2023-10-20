@@ -50,20 +50,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeVirtualMachineScaleSetVMInstanceRequiredIDs(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVMInstanceRequiredIDs>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineScaleSetVMInstanceRequiredIDs IModelSerializable<VirtualMachineScaleSetVMInstanceRequiredIDs>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMInstanceRequiredIDs(document.RootElement, options);
-        }
-
         internal static VirtualMachineScaleSetVMInstanceRequiredIDs DeserializeVirtualMachineScaleSetVMInstanceRequiredIDs(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -94,6 +80,21 @@ namespace MgmtParamOrdering.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetVMInstanceRequiredIDs(instanceIds, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetVMInstanceRequiredIDs>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetVMInstanceRequiredIDs IModelSerializable<VirtualMachineScaleSetVMInstanceRequiredIDs>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetVMInstanceRequiredIDs(document.RootElement, options);
         }
     }
 }

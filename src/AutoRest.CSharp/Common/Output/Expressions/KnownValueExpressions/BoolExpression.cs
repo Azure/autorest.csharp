@@ -5,7 +5,5 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
-    internal sealed record BoolExpression(ValueExpression Untyped) : TypedValueExpression<bool>(Untyped)
-    {
-    }
+    internal sealed record BoolExpression(ValueExpression Untyped) : TypedValueExpression<bool>(Untyped);
 }

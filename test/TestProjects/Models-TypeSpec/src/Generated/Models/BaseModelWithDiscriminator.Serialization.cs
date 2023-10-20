@@ -52,20 +52,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BaseModelWithDiscriminator IModelSerializable<BaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
-        }
-
         internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -83,6 +69,21 @@ namespace ModelsTypeSpec.Models
                 }
             }
             return UnknownBaseModelWithDiscriminator.DeserializeUnknownBaseModelWithDiscriminator(element);
+        }
+
+        BinaryData IModelSerializable<BaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BaseModelWithDiscriminator IModelSerializable<BaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

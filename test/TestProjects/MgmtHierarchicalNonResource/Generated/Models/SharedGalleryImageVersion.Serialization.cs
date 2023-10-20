@@ -80,20 +80,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeSharedGalleryImageVersion(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SharedGalleryImageVersion>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SharedGalleryImageVersion IModelSerializable<SharedGalleryImageVersion>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSharedGalleryImageVersion(document.RootElement, options);
-        }
-
         internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -175,6 +161,21 @@ namespace MgmtHierarchicalNonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SharedGalleryImageVersion(name.Value, location.Value, serializedAdditionalRawData, uniqueId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(endOfLifeDate));
+        }
+
+        BinaryData IModelSerializable<SharedGalleryImageVersion>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SharedGalleryImageVersion IModelSerializable<SharedGalleryImageVersion>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSharedGalleryImageVersion(document.RootElement, options);
         }
     }
 }

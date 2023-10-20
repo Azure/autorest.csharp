@@ -56,20 +56,6 @@ namespace MgmtListMethods.Models
             return DeserializeFakeParentWithAncestorWithLocListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FakeParentWithAncestorWithLocListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FakeParentWithAncestorWithLocListResult IModelSerializable<FakeParentWithAncestorWithLocListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFakeParentWithAncestorWithLocListResult(document.RootElement, options);
-        }
-
         internal static FakeParentWithAncestorWithLocListResult DeserializeFakeParentWithAncestorWithLocListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtListMethods.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FakeParentWithAncestorWithLocListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FakeParentWithAncestorWithLocListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakeParentWithAncestorWithLocListResult IModelSerializable<FakeParentWithAncestorWithLocListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakeParentWithAncestorWithLocListResult(document.RootElement, options);
         }
     }
 }

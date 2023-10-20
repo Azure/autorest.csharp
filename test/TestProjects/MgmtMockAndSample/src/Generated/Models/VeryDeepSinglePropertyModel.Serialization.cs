@@ -48,20 +48,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeVeryDeepSinglePropertyModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VeryDeepSinglePropertyModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VeryDeepSinglePropertyModel IModelSerializable<VeryDeepSinglePropertyModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVeryDeepSinglePropertyModel(document.RootElement, options);
-        }
-
         internal static VeryDeepSinglePropertyModel DeserializeVeryDeepSinglePropertyModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VeryDeepSinglePropertyModel(very.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VeryDeepSinglePropertyModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VeryDeepSinglePropertyModel IModelSerializable<VeryDeepSinglePropertyModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVeryDeepSinglePropertyModel(document.RootElement, options);
         }
     }
 }

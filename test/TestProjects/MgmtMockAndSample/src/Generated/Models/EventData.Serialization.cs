@@ -53,20 +53,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeEventData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<EventData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        EventData IModelSerializable<EventData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeEventData(document.RootElement, options);
-        }
-
         internal static EventData DeserializeEventData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new EventData(authorization.Value, Optional.ToNullable(tenantId), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<EventData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EventData IModelSerializable<EventData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEventData(document.RootElement, options);
         }
     }
 }

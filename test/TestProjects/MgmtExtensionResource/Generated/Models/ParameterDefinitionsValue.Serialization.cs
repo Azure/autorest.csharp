@@ -81,20 +81,6 @@ namespace MgmtExtensionResource.Models
             return DeserializeParameterDefinitionsValue(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ParameterDefinitionsValue>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ParameterDefinitionsValue IModelSerializable<ParameterDefinitionsValue>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeParameterDefinitionsValue(document.RootElement, options);
-        }
-
         internal static ParameterDefinitionsValue DeserializeParameterDefinitionsValue(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -166,6 +152,21 @@ namespace MgmtExtensionResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ParameterDefinitionsValue(Optional.ToNullable(type), Optional.ToList(allowedValues), defaultValue.Value, metadata.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ParameterDefinitionsValue>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ParameterDefinitionsValue IModelSerializable<ParameterDefinitionsValue>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeParameterDefinitionsValue(document.RootElement, options);
         }
     }
 }

@@ -59,20 +59,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmPrivateEndpointConnectionsListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MhsmPrivateEndpointConnectionsListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MhsmPrivateEndpointConnectionsListResult IModelSerializable<MhsmPrivateEndpointConnectionsListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMhsmPrivateEndpointConnectionsListResult(document.RootElement, options);
-        }
-
         internal static MhsmPrivateEndpointConnectionsListResult DeserializeMhsmPrivateEndpointConnectionsListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MhsmPrivateEndpointConnectionsListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MhsmPrivateEndpointConnectionsListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MhsmPrivateEndpointConnectionsListResult IModelSerializable<MhsmPrivateEndpointConnectionsListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMhsmPrivateEndpointConnectionsListResult(document.RootElement, options);
         }
     }
 }

@@ -48,20 +48,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeARecord(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ARecord>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ARecord IModelSerializable<ARecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeARecord(document.RootElement, options);
-        }
-
         internal static ARecord DeserializeARecord(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtExpandResourceTypes.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ARecord(ipv4Address.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ARecord>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ARecord IModelSerializable<ARecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeARecord(document.RootElement, options);
         }
     }
 }

@@ -45,20 +45,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountRegenerateKeyContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StorageAccountRegenerateKeyContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StorageAccountRegenerateKeyContent IModelSerializable<StorageAccountRegenerateKeyContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStorageAccountRegenerateKeyContent(document.RootElement, options);
-        }
-
         internal static StorageAccountRegenerateKeyContent DeserializeStorageAccountRegenerateKeyContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new StorageAccountRegenerateKeyContent(keyName, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<StorageAccountRegenerateKeyContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StorageAccountRegenerateKeyContent IModelSerializable<StorageAccountRegenerateKeyContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeStorageAccountRegenerateKeyContent(document.RootElement, options);
         }
     }
 }

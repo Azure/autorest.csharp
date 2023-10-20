@@ -68,20 +68,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDiskInstanceView(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DiskInstanceView>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DiskInstanceView IModelSerializable<DiskInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDiskInstanceView(document.RootElement, options);
-        }
-
         internal static DiskInstanceView DeserializeDiskInstanceView(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -137,6 +123,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DiskInstanceView(name.Value, Optional.ToList(encryptionSettings), Optional.ToList(statuses), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DiskInstanceView>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DiskInstanceView IModelSerializable<DiskInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDiskInstanceView(document.RootElement, options);
         }
     }
 }

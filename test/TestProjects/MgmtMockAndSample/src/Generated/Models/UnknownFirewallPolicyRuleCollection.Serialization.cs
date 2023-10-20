@@ -55,20 +55,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeUnknownFirewallPolicyRuleCollection(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownFirewallPolicyRuleCollection>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownFirewallPolicyRuleCollection IModelSerializable<UnknownFirewallPolicyRuleCollection>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownFirewallPolicyRuleCollection(document.RootElement, options);
-        }
-
         internal static UnknownFirewallPolicyRuleCollection DeserializeUnknownFirewallPolicyRuleCollection(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -110,6 +96,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownFirewallPolicyRuleCollection(ruleCollectionType, name.Value, Optional.ToNullable(priority), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownFirewallPolicyRuleCollection>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownFirewallPolicyRuleCollection IModelSerializable<UnknownFirewallPolicyRuleCollection>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownFirewallPolicyRuleCollection(document.RootElement, options);
         }
     }
 }

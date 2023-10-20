@@ -42,20 +42,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeCheckNameAvailabilityRequest(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CheckNameAvailabilityRequest>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CheckNameAvailabilityRequest IModelSerializable<CheckNameAvailabilityRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCheckNameAvailabilityRequest(document.RootElement, options);
-        }
-
         internal static CheckNameAvailabilityRequest DeserializeCheckNameAvailabilityRequest(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new CheckNameAvailabilityRequest(name.Value, type);
+        }
+
+        BinaryData IModelSerializable<CheckNameAvailabilityRequest>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CheckNameAvailabilityRequest IModelSerializable<CheckNameAvailabilityRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCheckNameAvailabilityRequest(document.RootElement, options);
         }
 
         internal partial class CheckNameAvailabilityRequestConverter : JsonConverter<CheckNameAvailabilityRequest>

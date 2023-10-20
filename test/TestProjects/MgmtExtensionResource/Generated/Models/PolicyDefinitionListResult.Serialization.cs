@@ -59,20 +59,6 @@ namespace MgmtExtensionResource.Models
             return DeserializePolicyDefinitionListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PolicyDefinitionListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PolicyDefinitionListResult IModelSerializable<PolicyDefinitionListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePolicyDefinitionListResult(document.RootElement, options);
-        }
-
         internal static PolicyDefinitionListResult DeserializePolicyDefinitionListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtExtensionResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PolicyDefinitionListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PolicyDefinitionListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PolicyDefinitionListResult IModelSerializable<PolicyDefinitionListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePolicyDefinitionListResult(document.RootElement, options);
         }
     }
 }

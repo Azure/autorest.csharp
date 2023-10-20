@@ -59,20 +59,6 @@ namespace MgmtCollectionParent.Models
             return DeserializeOrderResourceList(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<OrderResourceList>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        OrderResourceList IModelSerializable<OrderResourceList>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeOrderResourceList(document.RootElement, options);
-        }
-
         internal static OrderResourceList DeserializeOrderResourceList(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtCollectionParent.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new OrderResourceList(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<OrderResourceList>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OrderResourceList IModelSerializable<OrderResourceList>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOrderResourceList(document.RootElement, options);
         }
     }
 }

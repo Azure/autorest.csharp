@@ -37,20 +37,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateEndpoint(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PrivateEndpoint>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PrivateEndpoint IModelSerializable<PrivateEndpoint>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateEndpoint(document.RootElement, options);
-        }
-
         internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -73,6 +59,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new PrivateEndpoint(id);
+        }
+
+        BinaryData IModelSerializable<PrivateEndpoint>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateEndpoint IModelSerializable<PrivateEndpoint>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateEndpoint(document.RootElement, options);
         }
 
         internal partial class PrivateEndpointConverter : JsonConverter<PrivateEndpoint>

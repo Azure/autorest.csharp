@@ -69,20 +69,6 @@ namespace MgmtScopeResource
             return DeserializeGuestConfigurationAssignmentData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<GuestConfigurationAssignmentData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        GuestConfigurationAssignmentData IModelSerializable<GuestConfigurationAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeGuestConfigurationAssignmentData(document.RootElement, options);
-        }
-
         internal static GuestConfigurationAssignmentData DeserializeGuestConfigurationAssignmentData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtScopeResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new GuestConfigurationAssignmentData(id.Value, name.Value, location.Value, type.Value, serializedAdditionalRawData, properties.Value);
+        }
+
+        BinaryData IModelSerializable<GuestConfigurationAssignmentData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        GuestConfigurationAssignmentData IModelSerializable<GuestConfigurationAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeGuestConfigurationAssignmentData(document.RootElement, options);
         }
     }
 }

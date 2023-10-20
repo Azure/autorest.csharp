@@ -48,20 +48,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeBillingProfile(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BillingProfile>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BillingProfile IModelSerializable<BillingProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBillingProfile(document.RootElement, options);
-        }
-
         internal static BillingProfile DeserializeBillingProfile(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BillingProfile(Optional.ToNullable(maxPrice), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<BillingProfile>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BillingProfile IModelSerializable<BillingProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBillingProfile(document.RootElement, options);
         }
     }
 }

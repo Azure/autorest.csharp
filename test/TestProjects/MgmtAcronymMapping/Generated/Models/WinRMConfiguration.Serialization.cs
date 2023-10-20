@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeWinRMConfiguration(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<WinRMConfiguration>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        WinRMConfiguration IModelSerializable<WinRMConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeWinRMConfiguration(document.RootElement, options);
-        }
-
         internal static WinRMConfiguration DeserializeWinRMConfiguration(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -101,6 +87,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new WinRMConfiguration(Optional.ToList(listeners), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<WinRMConfiguration>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WinRMConfiguration IModelSerializable<WinRMConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWinRMConfiguration(document.RootElement, options);
         }
     }
 }

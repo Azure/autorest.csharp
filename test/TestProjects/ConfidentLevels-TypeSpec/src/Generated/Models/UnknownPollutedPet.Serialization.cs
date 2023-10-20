@@ -48,20 +48,6 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeUnknownPollutedPet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownPollutedPet>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownPollutedPet IModelSerializable<UnknownPollutedPet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownPollutedPet(document.RootElement, options);
-        }
-
         internal static UnknownPollutedPet DeserializeUnknownPollutedPet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -93,6 +79,21 @@ namespace ConfidentLevelsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UnknownPollutedPet(kind, name, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<UnknownPollutedPet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownPollutedPet IModelSerializable<UnknownPollutedPet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownPollutedPet(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

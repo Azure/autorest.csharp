@@ -53,20 +53,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeSshPublicKeyInfo(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SshPublicKeyInfo>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SshPublicKeyInfo IModelSerializable<SshPublicKeyInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSshPublicKeyInfo(document.RootElement, options);
-        }
-
         internal static SshPublicKeyInfo DeserializeSshPublicKeyInfo(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -98,6 +84,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SshPublicKeyInfo(path.Value, keyData.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SshPublicKeyInfo>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SshPublicKeyInfo IModelSerializable<SshPublicKeyInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSshPublicKeyInfo(document.RootElement, options);
         }
     }
 }

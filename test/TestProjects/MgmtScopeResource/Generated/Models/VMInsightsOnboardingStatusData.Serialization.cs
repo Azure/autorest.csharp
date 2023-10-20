@@ -96,20 +96,6 @@ namespace MgmtScopeResource
             return DeserializeVMInsightsOnboardingStatusData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VMInsightsOnboardingStatusData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VMInsightsOnboardingStatusData IModelSerializable<VMInsightsOnboardingStatusData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVMInsightsOnboardingStatusData(document.RootElement, options);
-        }
-
         internal static VMInsightsOnboardingStatusData DeserializeVMInsightsOnboardingStatusData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -210,6 +196,21 @@ namespace MgmtScopeResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VMInsightsOnboardingStatusData(id, name, type, systemData.Value, resourceId.Value, Optional.ToNullable(onboardingStatus), Optional.ToNullable(dataStatus), Optional.ToList(data), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VMInsightsOnboardingStatusData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VMInsightsOnboardingStatusData IModelSerializable<VMInsightsOnboardingStatusData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVMInsightsOnboardingStatusData(document.RootElement, options);
         }
     }
 }

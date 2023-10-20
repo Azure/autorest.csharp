@@ -66,20 +66,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeRequestRateByIntervalContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RequestRateByIntervalContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RequestRateByIntervalContent IModelSerializable<RequestRateByIntervalContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRequestRateByIntervalContent(document.RootElement, options);
-        }
-
         internal static RequestRateByIntervalContent DeserializeRequestRateByIntervalContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -153,6 +139,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), serializedAdditionalRawData, intervalLength);
+        }
+
+        BinaryData IModelSerializable<RequestRateByIntervalContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RequestRateByIntervalContent IModelSerializable<RequestRateByIntervalContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRequestRateByIntervalContent(document.RootElement, options);
         }
     }
 }

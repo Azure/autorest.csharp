@@ -58,20 +58,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeMgmtAcronymMappingSku(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtAcronymMappingSku>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtAcronymMappingSku IModelSerializable<MgmtAcronymMappingSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtAcronymMappingSku(document.RootElement, options);
-        }
-
         internal static MgmtAcronymMappingSku DeserializeMgmtAcronymMappingSku(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -113,6 +99,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new MgmtAcronymMappingSku(name.Value, tier.Value, Optional.ToNullable(capacity), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<MgmtAcronymMappingSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtAcronymMappingSku IModelSerializable<MgmtAcronymMappingSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtAcronymMappingSku(document.RootElement, options);
         }
     }
 }

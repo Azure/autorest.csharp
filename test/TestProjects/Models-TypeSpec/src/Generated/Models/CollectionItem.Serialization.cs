@@ -52,20 +52,6 @@ namespace ModelsTypeSpec.Models
             return DeserializeCollectionItem(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CollectionItem>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CollectionItem IModelSerializable<CollectionItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCollectionItem(document.RootElement, options);
-        }
-
         internal static CollectionItem DeserializeCollectionItem(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -96,6 +82,21 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CollectionItem(requiredModelRecord, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<CollectionItem>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CollectionItem IModelSerializable<CollectionItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCollectionItem(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

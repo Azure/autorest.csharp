@@ -63,20 +63,6 @@ namespace MgmtListMethods.Models
             return DeserializeQuotaBaseProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<QuotaBaseProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        QuotaBaseProperties IModelSerializable<QuotaBaseProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeQuotaBaseProperties(document.RootElement, options);
-        }
-
         internal static QuotaBaseProperties DeserializeQuotaBaseProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -128,6 +114,21 @@ namespace MgmtListMethods.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new QuotaBaseProperties(id.Value, type.Value, Optional.ToNullable(limit), Optional.ToNullable(unit), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<QuotaBaseProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        QuotaBaseProperties IModelSerializable<QuotaBaseProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeQuotaBaseProperties(document.RootElement, options);
         }
     }
 }

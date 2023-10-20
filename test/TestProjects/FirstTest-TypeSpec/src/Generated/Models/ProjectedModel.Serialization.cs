@@ -46,20 +46,6 @@ namespace FirstTestTypeSpec.Models
             return DeserializeProjectedModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ProjectedModel>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ProjectedModel IModelSerializable<ProjectedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeProjectedModel(document.RootElement, options);
-        }
-
         internal static ProjectedModel DeserializeProjectedModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace FirstTestTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ProjectedModel(name, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ProjectedModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProjectedModel IModelSerializable<ProjectedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProjectedModel(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

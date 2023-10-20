@@ -77,20 +77,6 @@ namespace AuthoringTypeSpec.Models
             return DeserializeSwapDeploymentsJob(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SwapDeploymentsJob>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SwapDeploymentsJob IModelSerializable<SwapDeploymentsJob>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSwapDeploymentsJob(document.RootElement, options);
-        }
-
         internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -163,6 +149,21 @@ namespace AuthoringTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SwapDeploymentsJob>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SwapDeploymentsJob IModelSerializable<SwapDeploymentsJob>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSwapDeploymentsJob(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

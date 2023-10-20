@@ -53,20 +53,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializePirResource(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PirResource>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PirResource IModelSerializable<PirResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePirResource(document.RootElement, options);
-        }
-
         internal static PirResource DeserializePirResource(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -98,6 +84,21 @@ namespace MgmtHierarchicalNonResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PirResource(name.Value, location.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<PirResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PirResource IModelSerializable<PirResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePirResource(document.RootElement, options);
         }
     }
 }

@@ -46,20 +46,6 @@ namespace ConvenienceInCadl.Models
             return DeserializeModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Model>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Model IModelSerializable<Model>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModel(document.RootElement, options);
-        }
-
         internal static Model DeserializeModel(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace ConvenienceInCadl.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Model(id, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<Model>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Model IModelSerializable<Model>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModel(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

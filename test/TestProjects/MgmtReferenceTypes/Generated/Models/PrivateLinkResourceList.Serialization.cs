@@ -43,20 +43,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateLinkResourceList(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PrivateLinkResourceList>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PrivateLinkResourceList IModelSerializable<PrivateLinkResourceList>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateLinkResourceList(document.RootElement, options);
-        }
-
         internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -84,6 +70,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new PrivateLinkResourceList(Optional.ToList(value));
+        }
+
+        BinaryData IModelSerializable<PrivateLinkResourceList>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateLinkResourceList IModelSerializable<PrivateLinkResourceList>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateLinkResourceList(document.RootElement, options);
         }
 
         internal partial class PrivateLinkResourceListConverter : JsonConverter<PrivateLinkResourceList>

@@ -89,20 +89,6 @@ namespace MgmtMockAndSample
             return DeserializeVaultData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VaultData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VaultData IModelSerializable<VaultData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVaultData(document.RootElement, options);
-        }
-
         internal static VaultData DeserializeVaultData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -192,6 +178,21 @@ namespace MgmtMockAndSample
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VaultData(id, name, type, systemData.Value, Optional.ToNullable(location), Optional.ToDictionary(tags), properties, identity, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<VaultData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VaultData IModelSerializable<VaultData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVaultData(document.RootElement, options);
         }
     }
 }

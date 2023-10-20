@@ -77,20 +77,6 @@ namespace MgmtCustomizations.Models
             return DeserializeDog(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Dog>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Dog IModelSerializable<Dog>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDog(document.RootElement, options);
-        }
-
         internal static Dog DeserializeDog(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -168,6 +154,21 @@ namespace MgmtCustomizations.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Dog(kind, name.Value, size, Optional.ToNullable(dateOfBirth), serializedAdditionalRawData, bark.Value);
+        }
+
+        BinaryData IModelSerializable<Dog>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Dog IModelSerializable<Dog>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDog(document.RootElement, options);
         }
     }
 }

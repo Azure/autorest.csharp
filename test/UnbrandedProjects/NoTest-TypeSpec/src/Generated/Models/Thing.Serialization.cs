@@ -111,20 +111,6 @@ namespace NoTestTypeSpec.Models
             return DeserializeThing(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Thing>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Thing IModelSerializable<Thing>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeThing(document.RootElement, options);
-        }
-
         internal static Thing DeserializeThing(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -258,6 +244,21 @@ namespace NoTestTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, OptionalProperty.ToNullable(optionalLiteralString), OptionalProperty.ToNullable(optionalLiteralInt), OptionalProperty.ToNullable(optionalLiteralFloat), OptionalProperty.ToNullable(optionalLiteralBool), requiredBadDescription, OptionalProperty.ToList(optionalNullableList), requiredNullableList, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<Thing>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Thing IModelSerializable<Thing>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeThing(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

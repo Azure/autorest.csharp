@@ -91,20 +91,6 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentPropertiesExtended(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DeploymentPropertiesExtended>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DeploymentPropertiesExtended IModelSerializable<DeploymentPropertiesExtended>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDeploymentPropertiesExtended(document.RootElement, options);
-        }
-
         internal static DeploymentPropertiesExtended DeserializeDeploymentPropertiesExtended(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -200,6 +186,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), outputs.Value, parameters.Value, Optional.ToNullable(mode), errorResponse.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DeploymentPropertiesExtended>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeploymentPropertiesExtended IModelSerializable<DeploymentPropertiesExtended>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDeploymentPropertiesExtended(document.RootElement, options);
         }
     }
 }

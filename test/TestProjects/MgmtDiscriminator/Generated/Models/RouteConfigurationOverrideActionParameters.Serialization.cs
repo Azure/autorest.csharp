@@ -50,20 +50,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeRouteConfigurationOverrideActionParameters(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RouteConfigurationOverrideActionParameters>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RouteConfigurationOverrideActionParameters IModelSerializable<RouteConfigurationOverrideActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRouteConfigurationOverrideActionParameters(document.RootElement, options);
-        }
-
         internal static RouteConfigurationOverrideActionParameters DeserializeRouteConfigurationOverrideActionParameters(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -99,6 +85,21 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RouteConfigurationOverrideActionParameters(typeName, originGroupOverride.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<RouteConfigurationOverrideActionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RouteConfigurationOverrideActionParameters IModelSerializable<RouteConfigurationOverrideActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRouteConfigurationOverrideActionParameters(document.RootElement, options);
         }
     }
 }

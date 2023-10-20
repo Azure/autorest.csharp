@@ -46,20 +46,6 @@ namespace CustomizationsInTsp.Models
             return DeserializeModelToChangeNamespace(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelToChangeNamespace>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelToChangeNamespace IModelSerializable<ModelToChangeNamespace>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelToChangeNamespace(document.RootElement, options);
-        }
-
         internal static ModelToChangeNamespace DeserializeModelToChangeNamespace(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -85,6 +71,21 @@ namespace CustomizationsInTsp.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelToChangeNamespace(requiredInt, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ModelToChangeNamespace>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelToChangeNamespace IModelSerializable<ModelToChangeNamespace>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelToChangeNamespace(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

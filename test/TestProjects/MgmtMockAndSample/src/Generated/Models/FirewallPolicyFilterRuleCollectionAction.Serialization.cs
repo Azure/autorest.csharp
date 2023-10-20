@@ -48,20 +48,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyFilterRuleCollectionAction(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyFilterRuleCollectionAction>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FirewallPolicyFilterRuleCollectionAction IModelSerializable<FirewallPolicyFilterRuleCollectionAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyFilterRuleCollectionAction(document.RootElement, options);
-        }
-
         internal static FirewallPolicyFilterRuleCollectionAction DeserializeFirewallPolicyFilterRuleCollectionAction(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -91,6 +77,21 @@ namespace MgmtMockAndSample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FirewallPolicyFilterRuleCollectionAction(Optional.ToNullable(type), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyFilterRuleCollectionAction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyFilterRuleCollectionAction IModelSerializable<FirewallPolicyFilterRuleCollectionAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyFilterRuleCollectionAction(document.RootElement, options);
         }
     }
 }

@@ -146,20 +146,6 @@ namespace MgmtScopeResource
             return DeserializeFakePolicyAssignmentData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FakePolicyAssignmentData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FakePolicyAssignmentData IModelSerializable<FakePolicyAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFakePolicyAssignmentData(document.RootElement, options);
-        }
-
         internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -324,6 +310,21 @@ namespace MgmtScopeResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FakePolicyAssignmentData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakePolicyAssignmentData IModelSerializable<FakePolicyAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakePolicyAssignmentData(document.RootElement, options);
         }
     }
 }

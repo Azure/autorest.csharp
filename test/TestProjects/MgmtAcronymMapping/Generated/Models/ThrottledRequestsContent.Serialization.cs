@@ -64,20 +64,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeThrottledRequestsContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ThrottledRequestsContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ThrottledRequestsContent IModelSerializable<ThrottledRequestsContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeThrottledRequestsContent(document.RootElement, options);
-        }
-
         internal static ThrottledRequestsContent DeserializeThrottledRequestsContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -145,6 +131,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ThrottledRequestsContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ThrottledRequestsContent IModelSerializable<ThrottledRequestsContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeThrottledRequestsContent(document.RootElement, options);
         }
     }
 }

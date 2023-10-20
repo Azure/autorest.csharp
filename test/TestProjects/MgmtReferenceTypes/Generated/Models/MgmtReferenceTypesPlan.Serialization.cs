@@ -48,20 +48,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeMgmtReferenceTypesPlan(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtReferenceTypesPlan>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtReferenceTypesPlan IModelSerializable<MgmtReferenceTypesPlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtReferenceTypesPlan(document.RootElement, options);
-        }
-
         internal static MgmtReferenceTypesPlan DeserializeMgmtReferenceTypesPlan(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -104,6 +90,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new MgmtReferenceTypesPlan(name, publisher, product, promotionCode.Value, version.Value);
+        }
+
+        BinaryData IModelSerializable<MgmtReferenceTypesPlan>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtReferenceTypesPlan IModelSerializable<MgmtReferenceTypesPlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtReferenceTypesPlan(document.RootElement, options);
         }
 
         internal partial class MgmtReferenceTypesPlanConverter : JsonConverter<MgmtReferenceTypesPlan>

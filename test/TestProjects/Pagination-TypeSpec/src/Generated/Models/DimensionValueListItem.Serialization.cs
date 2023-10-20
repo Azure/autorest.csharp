@@ -51,20 +51,6 @@ namespace Pagination.Models
             return DeserializeDimensionValueListItem(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DimensionValueListItem>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DimensionValueListItem IModelSerializable<DimensionValueListItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDimensionValueListItem(document.RootElement, options);
-        }
-
         internal static DimensionValueListItem DeserializeDimensionValueListItem(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -95,6 +81,21 @@ namespace Pagination.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DimensionValueListItem(value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<DimensionValueListItem>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DimensionValueListItem IModelSerializable<DimensionValueListItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDimensionValueListItem(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

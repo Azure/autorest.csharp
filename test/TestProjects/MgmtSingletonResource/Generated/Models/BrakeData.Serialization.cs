@@ -69,20 +69,6 @@ namespace MgmtSingletonResource
             return DeserializeBrakeData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BrakeData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BrakeData IModelSerializable<BrakeData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBrakeData(document.RootElement, options);
-        }
-
         internal static BrakeData DeserializeBrakeData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -140,6 +126,21 @@ namespace MgmtSingletonResource
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new BrakeData(id, name, type, systemData.Value, Optional.ToNullable(hitBrake), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<BrakeData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BrakeData IModelSerializable<BrakeData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBrakeData(document.RootElement, options);
         }
     }
 }

@@ -69,20 +69,6 @@ namespace MgmtSupersetInheritance
             return DeserializeSupersetModel1Data(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SupersetModel1Data>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SupersetModel1Data IModelSerializable<SupersetModel1Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSupersetModel1Data(document.RootElement, options);
-        }
-
         internal static SupersetModel1Data DeserializeSupersetModel1Data(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtSupersetInheritance
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SupersetModel1Data(id, name, type, systemData.Value, @new.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SupersetModel1Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SupersetModel1Data IModelSerializable<SupersetModel1Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSupersetModel1Data(document.RootElement, options);
         }
     }
 }

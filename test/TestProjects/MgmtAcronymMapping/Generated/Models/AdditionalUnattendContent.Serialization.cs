@@ -63,20 +63,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeAdditionalUnattendContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<AdditionalUnattendContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        AdditionalUnattendContent IModelSerializable<AdditionalUnattendContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeAdditionalUnattendContent(document.RootElement, options);
-        }
-
         internal static AdditionalUnattendContent DeserializeAdditionalUnattendContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtAcronymMapping.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(backupFrequency), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<AdditionalUnattendContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AdditionalUnattendContent IModelSerializable<AdditionalUnattendContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeAdditionalUnattendContent(document.RootElement, options);
         }
     }
 }

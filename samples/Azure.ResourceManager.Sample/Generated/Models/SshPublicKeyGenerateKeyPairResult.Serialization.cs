@@ -49,20 +49,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSshPublicKeyGenerateKeyPairResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SshPublicKeyGenerateKeyPairResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SshPublicKeyGenerateKeyPairResult IModelSerializable<SshPublicKeyGenerateKeyPairResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSshPublicKeyGenerateKeyPairResult(document.RootElement, options);
-        }
-
         internal static SshPublicKeyGenerateKeyPairResult DeserializeSshPublicKeyGenerateKeyPairResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -100,6 +86,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SshPublicKeyGenerateKeyPairResult(privateKey, publicKey, id, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<SshPublicKeyGenerateKeyPairResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SshPublicKeyGenerateKeyPairResult IModelSerializable<SshPublicKeyGenerateKeyPairResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSshPublicKeyGenerateKeyPairResult(document.RootElement, options);
         }
     }
 }

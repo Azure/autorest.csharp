@@ -58,20 +58,6 @@ namespace MgmtListMethods.Models
             return DeserializeQuotaUpdateContent(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<QuotaUpdateContent>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        QuotaUpdateContent IModelSerializable<QuotaUpdateContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeQuotaUpdateContent(document.RootElement, options);
-        }
-
         internal static QuotaUpdateContent DeserializeQuotaUpdateContent(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -112,6 +98,21 @@ namespace MgmtListMethods.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new QuotaUpdateContent(Optional.ToList(value), location.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<QuotaUpdateContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        QuotaUpdateContent IModelSerializable<QuotaUpdateContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeQuotaUpdateContent(document.RootElement, options);
         }
     }
 }

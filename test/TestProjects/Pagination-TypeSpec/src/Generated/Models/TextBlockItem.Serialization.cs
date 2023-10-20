@@ -53,20 +53,6 @@ namespace Pagination.Models
             return DeserializeTextBlockItem(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<TextBlockItem>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        TextBlockItem IModelSerializable<TextBlockItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeTextBlockItem(document.RootElement, options);
-        }
-
         internal static TextBlockItem DeserializeTextBlockItem(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -104,6 +90,21 @@ namespace Pagination.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new TextBlockItem(blockItemId, description.Value, text, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<TextBlockItem>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TextBlockItem IModelSerializable<TextBlockItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeTextBlockItem(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

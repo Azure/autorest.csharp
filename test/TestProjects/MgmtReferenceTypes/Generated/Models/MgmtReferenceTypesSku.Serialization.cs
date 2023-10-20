@@ -54,20 +54,6 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtReferenceTypesSku>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MgmtReferenceTypesSku IModelSerializable<MgmtReferenceTypesSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
-        }
-
         internal static MgmtReferenceTypesSku DeserializeMgmtReferenceTypesSku(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -118,6 +104,21 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new MgmtReferenceTypesSku(name, Optional.ToNullable(tier), size.Value, family.Value, Optional.ToNullable(capacity));
+        }
+
+        BinaryData IModelSerializable<MgmtReferenceTypesSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtReferenceTypesSku IModelSerializable<MgmtReferenceTypesSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
         }
 
         internal partial class MgmtReferenceTypesSkuConverter : JsonConverter<MgmtReferenceTypesSku>

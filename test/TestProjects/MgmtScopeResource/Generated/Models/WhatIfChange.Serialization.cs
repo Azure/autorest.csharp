@@ -70,20 +70,6 @@ namespace MgmtScopeResource.Models
             return DeserializeWhatIfChange(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<WhatIfChange>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        WhatIfChange IModelSerializable<WhatIfChange>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeWhatIfChange(document.RootElement, options);
-        }
-
         internal static WhatIfChange DeserializeWhatIfChange(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -141,6 +127,21 @@ namespace MgmtScopeResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new WhatIfChange(resourceId, changeType, unsupportedReason.Value, before.Value, after.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<WhatIfChange>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WhatIfChange IModelSerializable<WhatIfChange>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeWhatIfChange(document.RootElement, options);
         }
     }
 }

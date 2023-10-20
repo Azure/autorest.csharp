@@ -54,20 +54,6 @@ namespace MgmtPartialResource.Models
             return DeserializeConfigurationProfileAssignmentList(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ConfigurationProfileAssignmentList>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ConfigurationProfileAssignmentList IModelSerializable<ConfigurationProfileAssignmentList>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeConfigurationProfileAssignmentList(document.RootElement, options);
-        }
-
         internal static ConfigurationProfileAssignmentList DeserializeConfigurationProfileAssignmentList(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -102,6 +88,21 @@ namespace MgmtPartialResource.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ConfigurationProfileAssignmentList(Optional.ToList(value), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ConfigurationProfileAssignmentList>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ConfigurationProfileAssignmentList IModelSerializable<ConfigurationProfileAssignmentList>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeConfigurationProfileAssignmentList(document.RootElement, options);
         }
     }
 }

@@ -82,20 +82,6 @@ namespace MgmtListMethods
             return DeserializeResGrpParentWithAncestorWithNonResChWithLocData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ResGrpParentWithAncestorWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ResGrpParentWithAncestorWithNonResChWithLocData IModelSerializable<ResGrpParentWithAncestorWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResGrpParentWithAncestorWithNonResChWithLocData(document.RootElement, options);
-        }
-
         internal static ResGrpParentWithAncestorWithNonResChWithLocData DeserializeResGrpParentWithAncestorWithNonResChWithLocData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -170,6 +156,21 @@ namespace MgmtListMethods
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResGrpParentWithAncestorWithNonResChWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ResGrpParentWithAncestorWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ResGrpParentWithAncestorWithNonResChWithLocData IModelSerializable<ResGrpParentWithAncestorWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeResGrpParentWithAncestorWithNonResChWithLocData(document.RootElement, options);
         }
     }
 }

@@ -56,20 +56,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeEnvironmentContainerResourceListResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<EnvironmentContainerResourceListResult>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        EnvironmentContainerResourceListResult IModelSerializable<EnvironmentContainerResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeEnvironmentContainerResourceListResult(document.RootElement, options);
-        }
-
         internal static EnvironmentContainerResourceListResult DeserializeEnvironmentContainerResourceListResult(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -106,6 +92,21 @@ namespace MgmtParamOrdering.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new EnvironmentContainerResourceListResult(value, nextLink.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<EnvironmentContainerResourceListResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EnvironmentContainerResourceListResult IModelSerializable<EnvironmentContainerResourceListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEnvironmentContainerResourceListResult(document.RootElement, options);
         }
     }
 }

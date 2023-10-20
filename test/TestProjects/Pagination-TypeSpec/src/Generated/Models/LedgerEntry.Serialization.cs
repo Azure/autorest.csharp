@@ -56,20 +56,6 @@ namespace Pagination.Models
             return DeserializeLedgerEntry(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<LedgerEntry>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        LedgerEntry IModelSerializable<LedgerEntry>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLedgerEntry(document.RootElement, options);
-        }
-
         internal static LedgerEntry DeserializeLedgerEntry(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -107,6 +93,21 @@ namespace Pagination.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new LedgerEntry(contents, collectionId, transactionId, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<LedgerEntry>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LedgerEntry IModelSerializable<LedgerEntry>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLedgerEntry(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

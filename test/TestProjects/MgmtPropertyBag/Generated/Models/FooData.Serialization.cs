@@ -69,20 +69,6 @@ namespace MgmtPropertyBag
             return DeserializeFooData(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FooData>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FooData IModelSerializable<FooData>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFooData(document.RootElement, options);
-        }
-
         internal static FooData DeserializeFooData(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -136,6 +122,21 @@ namespace MgmtPropertyBag
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FooData(id, name, type, systemData.Value, details.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FooData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FooData IModelSerializable<FooData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFooData(document.RootElement, options);
         }
     }
 }

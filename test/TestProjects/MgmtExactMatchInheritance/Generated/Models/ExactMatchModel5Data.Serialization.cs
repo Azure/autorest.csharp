@@ -84,20 +84,6 @@ namespace MgmtExactMatchInheritance
             return DeserializeExactMatchModel5Data(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ExactMatchModel5Data>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ExactMatchModel5Data IModelSerializable<ExactMatchModel5Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeExactMatchModel5Data(document.RootElement, options);
-        }
-
         internal static ExactMatchModel5Data DeserializeExactMatchModel5Data(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -172,6 +158,21 @@ namespace MgmtExactMatchInheritance
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ExactMatchModel5Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<ExactMatchModel5Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExactMatchModel5Data IModelSerializable<ExactMatchModel5Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel5Data(document.RootElement, options);
         }
 
         internal partial class ExactMatchModel5DataConverter : JsonConverter<ExactMatchModel5Data>

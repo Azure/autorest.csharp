@@ -48,20 +48,6 @@ namespace MgmtLRO.Models
             return DeserializeFakePostResultProperties(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FakePostResultProperties>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FakePostResultProperties IModelSerializable<FakePostResultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFakePostResultProperties(document.RootElement, options);
-        }
-
         internal static FakePostResultProperties DeserializeFakePostResultProperties(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -87,6 +73,21 @@ namespace MgmtLRO.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FakePostResultProperties(bar.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<FakePostResultProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FakePostResultProperties IModelSerializable<FakePostResultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFakePostResultProperties(document.RootElement, options);
         }
     }
 }

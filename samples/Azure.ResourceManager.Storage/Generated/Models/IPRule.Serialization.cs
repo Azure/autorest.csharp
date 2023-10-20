@@ -50,20 +50,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeIPRule(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<IPRule>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        IPRule IModelSerializable<IPRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeIPRule(document.RootElement, options);
-        }
-
         internal static IPRule DeserializeIPRule(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -99,6 +85,21 @@ namespace Azure.ResourceManager.Storage.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new IPRule(value, Optional.ToNullable(action), serializedAdditionalRawData);
+        }
+
+        BinaryData IModelSerializable<IPRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IPRule IModelSerializable<IPRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIPRule(document.RootElement, options);
         }
     }
 }

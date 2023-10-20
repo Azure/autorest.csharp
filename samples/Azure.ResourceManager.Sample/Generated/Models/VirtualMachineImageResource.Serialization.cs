@@ -63,20 +63,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineImageResource(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineImageResource>.Serialize(ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualMachineImageResource IModelSerializable<VirtualMachineImageResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineImageResource(document.RootElement, options);
-        }
-
         internal static VirtualMachineImageResource DeserializeVirtualMachineImageResource(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
@@ -129,6 +115,21 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineImageResource(id.Value, serializedAdditionalRawData, name, location, Optional.ToDictionary(tags));
+        }
+
+        BinaryData IModelSerializable<VirtualMachineImageResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineImageResource IModelSerializable<VirtualMachineImageResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineImageResource(document.RootElement, options);
         }
     }
 }
