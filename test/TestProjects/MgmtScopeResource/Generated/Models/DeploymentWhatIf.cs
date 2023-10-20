@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtScopeResource.Models
@@ -13,7 +14,10 @@ namespace MgmtScopeResource.Models
     /// <summary> Deployment What-if operation parameters. </summary>
     public partial class DeploymentWhatIf
     {
-        /// <summary> Initializes a new instance of DeploymentWhatIf. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="properties"> The deployment properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public DeploymentWhatIf(DeploymentWhatIfProperties properties)
@@ -23,13 +27,20 @@ namespace MgmtScopeResource.Models
             Properties = properties;
         }
 
-        /// <summary> Initializes a new instance of DeploymentWhatIf. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="properties"> The deployment properties. </param>
-        internal DeploymentWhatIf(string location, DeploymentWhatIfProperties properties)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentWhatIf(string location, DeploymentWhatIfProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Location = location;
             Properties = properties;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/> for deserialization. </summary>
+        internal DeploymentWhatIf()
+        {
         }
 
         /// <summary> The location to store the deployment data. </summary>

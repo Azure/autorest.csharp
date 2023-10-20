@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,19 +16,24 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class ScheduledEventsProfile
     {
-        /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ScheduledEventsProfile"/>. </summary>
         public ScheduledEventsProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="ScheduledEventsProfile"/>. </summary>
         /// <param name="terminateNotificationProfile">
         /// Specifies Terminate Scheduled Event related configurations.
         /// Serialized Name: ScheduledEventsProfile.terminateNotificationProfile
         /// </param>
-        internal ScheduledEventsProfile(TerminateNotificationProfile terminateNotificationProfile)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ScheduledEventsProfile(TerminateNotificationProfile terminateNotificationProfile, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TerminateNotificationProfile = terminateNotificationProfile;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

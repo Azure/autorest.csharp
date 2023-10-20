@@ -43,5 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return ObjectSchema.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
         }
+
+        // the reference types do not need raw data field
+        public override ObjectTypeProperty? RawDataField => null;
     }
 }

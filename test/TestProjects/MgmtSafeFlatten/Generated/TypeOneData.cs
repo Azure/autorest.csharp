@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,13 +20,16 @@ namespace MgmtSafeFlatten
     /// </summary>
     public partial class TypeOneData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of TypeOneData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TypeOneData"/>. </summary>
         /// <param name="location"> The location. </param>
         public TypeOneData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of TypeOneData. </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeOneData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -40,12 +44,19 @@ namespace MgmtSafeFlatten
         /// The available derived classes include <see cref="LayerOneBarType"/> and <see cref="LayerOneFooType"/>.
         /// </param>
         /// <param name="layerOneConflict"> The single value prop with conflict. </param>
-        internal TypeOneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, LayerOneSingle layerOne, LayerOneBaseType layerOneType, WritableSubResource layerOneConflict) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeOneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, LayerOneSingle layerOne, LayerOneBaseType layerOneType, WritableSubResource layerOneConflict, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             MyType = myType;
             LayerOne = layerOne;
             LayerOneType = layerOneType;
             LayerOneConflict = layerOneConflict;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TypeOneData"/> for deserialization. </summary>
+        internal TypeOneData()
+        {
         }
 
         /// <summary> The details of the type. </summary>

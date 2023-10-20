@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtOmitOperationGroups.Models;
@@ -14,12 +16,15 @@ namespace MgmtOmitOperationGroups
     /// <summary> A class representing the Model2 data model. </summary>
     public partial class Model2Data : ResourceData
     {
-        /// <summary> Initializes a new instance of Model2Data. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Model2Data"/>. </summary>
         public Model2Data()
         {
         }
 
-        /// <summary> Initializes a new instance of Model2Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model2Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -28,12 +33,14 @@ namespace MgmtOmitOperationGroups
         /// <param name="modelx"></param>
         /// <param name="f"></param>
         /// <param name="g"></param>
-        internal Model2Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string b, ModelX modelx, string f, string g) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model2Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string b, ModelX modelx, string f, string g, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             B = b;
             Modelx = modelx;
             F = f;
             G = g;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the b. </summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class AdditionalUnattendContent
     {
-        /// <summary> Initializes a new instance of AdditionalUnattendContent. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AdditionalUnattendContent"/>. </summary>
         public AdditionalUnattendContent()
         {
         }
 
-        /// <summary> Initializes a new instance of AdditionalUnattendContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="AdditionalUnattendContent"/>. </summary>
         /// <param name="passName">
         /// The pass name. Currently, the only allowable value is OobeSystem.
         /// Serialized Name: AdditionalUnattendContent.passName
@@ -35,12 +41,14 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the frequency for content backup
         /// Serialized Name: AdditionalUnattendContent.backupFrequency
         /// </param>
-        internal AdditionalUnattendContent(PassName? passName, ComponentName? componentName, SettingName? settingName, int? backupFrequency)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AdditionalUnattendContent(PassName? passName, ComponentName? componentName, SettingName? settingName, int? backupFrequency, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PassName = passName;
             ComponentName = componentName;
             SettingName = settingName;
             BackupFrequency = backupFrequency;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

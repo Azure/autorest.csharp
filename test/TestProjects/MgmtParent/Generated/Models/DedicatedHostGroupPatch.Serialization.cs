@@ -57,6 +57,18 @@ namespace MgmtParent.Models
                 }
                 writer.WriteEndObject();
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
@@ -94,6 +106,8 @@ namespace MgmtParent.Models
             Optional<IDictionary<string, string>> tags = default;
             Optional<int> platformFaultDomainCount = default;
             Optional<bool> supportAutomaticPlacement = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("zones"u8))
@@ -154,8 +168,13 @@ namespace MgmtParent.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DedicatedHostGroupPatch(Optional.ToDictionary(tags), Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToNullable(supportAutomaticPlacement));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new DedicatedHostGroupPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToNullable(supportAutomaticPlacement));
         }
     }
 }

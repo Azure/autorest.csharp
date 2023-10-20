@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,16 +19,17 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
         public VirtualMachineScaleSetPatch()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sku">
         /// The virtual machine scale set sku.
         /// Serialized Name: VirtualMachineScaleSetUpdate.sku
@@ -76,7 +78,7 @@ namespace MgmtAcronymMapping.Models
         /// Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.proximityPlacementGroup
         /// </param>
-        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVmProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup) : base(tags)
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVmProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup) : base(tags, serializedAdditionalRawData)
         {
             Sku = sku;
             Plan = plan;

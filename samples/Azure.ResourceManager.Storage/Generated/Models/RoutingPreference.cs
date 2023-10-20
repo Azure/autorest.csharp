@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Routing preference defines the type of network, either microsoft or internet routing to be used to deliver the user data, the default option is microsoft routing. </summary>
     public partial class RoutingPreference
     {
-        /// <summary> Initializes a new instance of RoutingPreference. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RoutingPreference"/>. </summary>
         public RoutingPreference()
         {
         }
 
-        /// <summary> Initializes a new instance of RoutingPreference. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoutingPreference"/>. </summary>
         /// <param name="routingChoice"> Routing Choice defines the kind of network routing opted by the user. </param>
         /// <param name="publishMicrosoftEndpoints"> A boolean flag which indicates whether microsoft routing storage endpoints are to be published. </param>
         /// <param name="publishInternetEndpoints"> A boolean flag which indicates whether internet routing storage endpoints are to be published. </param>
-        internal RoutingPreference(RoutingChoice? routingChoice, bool? publishMicrosoftEndpoints, bool? publishInternetEndpoints)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoutingPreference(RoutingChoice? routingChoice, bool? publishMicrosoftEndpoints, bool? publishInternetEndpoints, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RoutingChoice = routingChoice;
             PublishMicrosoftEndpoints = publishMicrosoftEndpoints;
             PublishInternetEndpoints = publishInternetEndpoints;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Routing Choice defines the kind of network routing opted by the user. </summary>

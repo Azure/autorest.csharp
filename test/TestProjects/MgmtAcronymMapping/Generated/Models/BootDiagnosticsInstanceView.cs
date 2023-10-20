@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class BootDiagnosticsInstanceView
     {
-        /// <summary> Initializes a new instance of BootDiagnosticsInstanceView. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BootDiagnosticsInstanceView"/>. </summary>
         internal BootDiagnosticsInstanceView()
         {
         }
 
-        /// <summary> Initializes a new instance of BootDiagnosticsInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnosticsInstanceView"/>. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI. &lt;br&gt;&lt;br&gt;NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage.
         /// Serialized Name: BootDiagnosticsInstanceView.consoleScreenshotBlobUri
@@ -33,11 +37,13 @@ namespace MgmtAcronymMapping.Models
         /// The boot diagnostics status information for the VM. &lt;br&gt;&lt;br&gt; NOTE: It will be set only if there are errors encountered in enabling boot diagnostics.
         /// Serialized Name: BootDiagnosticsInstanceView.status
         /// </param>
-        internal BootDiagnosticsInstanceView(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, InstanceViewStatus status)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BootDiagnosticsInstanceView(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, InstanceViewStatus status, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConsoleScreenshotBlobUri = consoleScreenshotBlobUri;
             SerialConsoleLogBlobUri = serialConsoleLogBlobUri;
             Status = status;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

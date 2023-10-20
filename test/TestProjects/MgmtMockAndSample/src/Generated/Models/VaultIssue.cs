@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> The VaultIssue. </summary>
     public partial class VaultIssue
     {
-        /// <summary> Initializes a new instance of VaultIssue. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VaultIssue"/>. </summary>
         internal VaultIssue()
         {
         }
 
-        /// <summary> Initializes a new instance of VaultIssue. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultIssue"/>. </summary>
         /// <param name="vaultIssueType"> The type of the issue. </param>
         /// <param name="description"> The description of the issue. </param>
         /// <param name="sev"> The severity of the issue. </param>
-        internal VaultIssue(string vaultIssueType, string description, int? sev)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultIssue(string vaultIssueType, string description, int? sev, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VaultIssueType = vaultIssueType;
             Description = description;
             Sev = sev;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of the issue. </summary>

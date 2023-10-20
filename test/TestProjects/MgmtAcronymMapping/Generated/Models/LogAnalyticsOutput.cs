@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,19 +16,24 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class LogAnalyticsOutput
     {
-        /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsOutput"/>. </summary>
         internal LogAnalyticsOutput()
         {
         }
 
-        /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsOutput"/>. </summary>
         /// <param name="output">
         /// Output file Uri path to blob container.
         /// Serialized Name: LogAnalyticsOutput.output
         /// </param>
-        internal LogAnalyticsOutput(string output)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalyticsOutput(string output, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Output = output;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtOperations.Models
 {
     /// <summary> The TestAvailabilitySet. </summary>
     public partial class TestAvailabilitySet
     {
-        /// <summary> Initializes a new instance of TestAvailabilitySet. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         internal TestAvailabilitySet()
         {
         }
 
-        /// <summary> Initializes a new instance of TestAvailabilitySet. </summary>
+        /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         /// <param name="bar"> specifies the bar. </param>
-        internal TestAvailabilitySet(string bar)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TestAvailabilitySet(string bar, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Bar = bar;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> specifies the bar. </summary>

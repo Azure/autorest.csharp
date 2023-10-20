@@ -5,11 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelShapes.Models
 {
     /// <summary> The UnusedModel. </summary>
     internal partial class UnusedModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of UnusedModel. </summary>
         internal UnusedModel()
         {
@@ -17,9 +23,11 @@ namespace ModelShapes.Models
 
         /// <summary> Initializes a new instance of UnusedModel. </summary>
         /// <param name="unusedString"></param>
-        internal UnusedModel(string unusedString)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnusedModel(string unusedString, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             UnusedString = unusedString;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the unused string. </summary>

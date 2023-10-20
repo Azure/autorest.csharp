@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class MgmtAcronymMappingSku
     {
-        /// <summary> Initializes a new instance of MgmtAcronymMappingSku. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MgmtAcronymMappingSku"/>. </summary>
         public MgmtAcronymMappingSku()
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtAcronymMappingSku. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtAcronymMappingSku"/>. </summary>
         /// <param name="name">
         /// The sku name.
         /// Serialized Name: Sku.name
@@ -31,11 +37,13 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the number of virtual machines in the scale set.
         /// Serialized Name: Sku.capacity
         /// </param>
-        internal MgmtAcronymMappingSku(string name, string tier, long? capacity)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtAcronymMappingSku(string name, string tier, long? capacity, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Tier = tier;
             Capacity = capacity;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

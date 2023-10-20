@@ -5,11 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelShapes.Models
 {
     /// <summary> The ReadonlyModel. </summary>
     public partial class ReadonlyModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of ReadonlyModel. </summary>
         internal ReadonlyModel()
         {
@@ -17,9 +23,11 @@ namespace ModelShapes.Models
 
         /// <summary> Initializes a new instance of ReadonlyModel. </summary>
         /// <param name="name"></param>
-        internal ReadonlyModel(string name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadonlyModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the name. </summary>

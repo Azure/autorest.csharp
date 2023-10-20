@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtScopeResource.Models
 {
     /// <summary> Deployment properties with additional details. </summary>
     public partial class DeploymentPropertiesExtended
     {
-        /// <summary> Initializes a new instance of DeploymentPropertiesExtended. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DeploymentPropertiesExtended"/>. </summary>
         internal DeploymentPropertiesExtended()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentPropertiesExtended. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentPropertiesExtended"/>. </summary>
         /// <param name="provisioningState"> Denotes the state of provisioning. </param>
         /// <param name="correlationId"> The correlation ID of the deployment. </param>
         /// <param name="timestamp"> The timestamp of the template deployment. </param>
@@ -26,7 +30,8 @@ namespace MgmtScopeResource.Models
         /// <param name="parameters"> Deployment parameters. </param>
         /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
         /// <param name="errorResponse"> The deployment error. </param>
-        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, BinaryData outputs, BinaryData parameters, DeploymentMode? mode, ErrorResponse errorResponse)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, BinaryData outputs, BinaryData parameters, DeploymentMode? mode, ErrorResponse errorResponse, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProvisioningState = provisioningState;
             CorrelationId = correlationId;
@@ -36,6 +41,7 @@ namespace MgmtScopeResource.Models
             Parameters = parameters;
             Mode = mode;
             ErrorResponse = errorResponse;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Denotes the state of provisioning. </summary>

@@ -35,6 +35,18 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("result"u8);
                 writer.WriteStringValue(Result);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
@@ -70,6 +82,8 @@ namespace MgmtMockAndSample.Models
             }
             Optional<IReadOnlyList<VaultIssue>> issues = default;
             Optional<string> result = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("issues"u8))
@@ -91,8 +105,13 @@ namespace MgmtMockAndSample.Models
                     result = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new VaultValidationResult(Optional.ToList(issues), result.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new VaultValidationResult(Optional.ToList(issues), result.Value, serializedAdditionalRawData);
         }
     }
 }

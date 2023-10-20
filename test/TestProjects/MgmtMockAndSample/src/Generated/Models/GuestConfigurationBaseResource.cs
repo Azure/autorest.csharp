@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
@@ -12,22 +14,27 @@ namespace MgmtMockAndSample.Models
     /// <summary> The core properties of ARM resources. </summary>
     public partial class GuestConfigurationBaseResource
     {
-        /// <summary> Initializes a new instance of GuestConfigurationBaseResource. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationBaseResource"/>. </summary>
         public GuestConfigurationBaseResource()
         {
         }
 
-        /// <summary> Initializes a new instance of GuestConfigurationBaseResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationBaseResource"/>. </summary>
         /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
-        internal GuestConfigurationBaseResource(string id, string name, AzureLocation? location, ResourceType? resourceType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GuestConfigurationBaseResource(string id, string name, AzureLocation? location, ResourceType? resourceType, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             Location = location;
             ResourceType = resourceType;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> ARM resource id of the guest configuration assignment. </summary>

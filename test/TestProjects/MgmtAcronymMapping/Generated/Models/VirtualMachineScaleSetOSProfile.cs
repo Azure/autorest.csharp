@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,16 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetOSProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOSProfile. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSProfile"/>. </summary>
         public VirtualMachineScaleSetOSProfile()
         {
             Secrets = new ChangeTrackingList<VaultSecretGroup>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOSProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSProfile"/>. </summary>
         /// <param name="computerNamePrefix">
         /// Specifies the computer name prefix for all of the virtual machines in the scale set. Computer name prefixes must be 1 to 15 characters long.
         /// Serialized Name: VirtualMachineScaleSetOSProfile.computerNamePrefix
@@ -51,7 +55,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies set of certificates that should be installed onto the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetOSProfile.secrets
         /// </param>
-        internal VirtualMachineScaleSetOSProfile(string computerNamePrefix, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetOSProfile(string computerNamePrefix, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ComputerNamePrefix = computerNamePrefix;
             AdminUsername = adminUsername;
@@ -60,6 +65,7 @@ namespace MgmtAcronymMapping.Models
             WindowsConfiguration = windowsConfiguration;
             LinuxConfiguration = linuxConfiguration;
             Secrets = secrets;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,19 +16,24 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VmScaleSetConvertToSinglePlacementGroupContent
     {
-        /// <summary> Initializes a new instance of VmScaleSetConvertToSinglePlacementGroupContent. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
         public VmScaleSetConvertToSinglePlacementGroupContent()
         {
         }
 
-        /// <summary> Initializes a new instance of VmScaleSetConvertToSinglePlacementGroupContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
         /// <param name="activePlacementGroupId">
         /// Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances.
         /// Serialized Name: VMScaleSetConvertToSinglePlacementGroupInput.activePlacementGroupId
         /// </param>
-        internal VmScaleSetConvertToSinglePlacementGroupContent(string activePlacementGroupId)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VmScaleSetConvertToSinglePlacementGroupContent(string activePlacementGroupId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ActivePlacementGroupId = activePlacementGroupId;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

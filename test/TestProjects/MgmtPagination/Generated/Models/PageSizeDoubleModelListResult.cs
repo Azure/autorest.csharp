@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtPagination;
@@ -14,19 +15,24 @@ namespace MgmtPagination.Models
     /// <summary> The PageSizeDoubleModelListResult. </summary>
     internal partial class PageSizeDoubleModelListResult
     {
-        /// <summary> Initializes a new instance of PageSizeDoubleModelListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PageSizeDoubleModelListResult"/>. </summary>
         internal PageSizeDoubleModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeDoubleModelData>();
         }
 
-        /// <summary> Initializes a new instance of PageSizeDoubleModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeDoubleModelListResult"/>. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal PageSizeDoubleModelListResult(IReadOnlyList<PageSizeDoubleModelData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PageSizeDoubleModelListResult(IReadOnlyList<PageSizeDoubleModelData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the value. </summary>

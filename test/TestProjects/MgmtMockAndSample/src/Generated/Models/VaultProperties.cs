@@ -14,7 +14,10 @@ namespace MgmtMockAndSample.Models
     /// <summary> Properties of the vault. </summary>
     public partial class VaultProperties
     {
-        /// <summary> Initializes a new instance of VaultProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VaultProperties"/>. </summary>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
         /// <param name="sku"> SKU details. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sku"/> is null. </exception>
@@ -29,7 +32,7 @@ namespace MgmtMockAndSample.Models
             PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionItem>();
         }
 
-        /// <summary> Initializes a new instance of VaultProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultProperties"/>. </summary>
         /// <param name="duration"> Time elapsed for task. </param>
         /// <param name="createOn"> The date and time when the cluster creating. </param>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
@@ -52,7 +55,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="readWriteSingleStringProperty"> This is a single property of string. </param>
         /// <param name="readOnlySingleStringProperty"> This is a single property of read-only string. </param>
         /// <param name="extremelyDeepStringProperty"> This is a single property of string. </param>
-        internal VaultProperties(TimeSpan? duration, DateTimeOffset? createOn, Guid tenantId, MgmtMockAndSampleSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, IList<string> deployments, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty, ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultProperties(TimeSpan? duration, DateTimeOffset? createOn, Guid tenantId, MgmtMockAndSampleSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, IList<string> deployments, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty, ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Duration = duration;
             CreateOn = createOn;
@@ -76,6 +80,12 @@ namespace MgmtMockAndSample.Models
             ReadWriteSingleStringProperty = readWriteSingleStringProperty;
             ReadOnlySingleStringProperty = readOnlySingleStringProperty;
             ExtremelyDeepStringProperty = extremelyDeepStringProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VaultProperties"/> for deserialization. </summary>
+        internal VaultProperties()
+        {
         }
 
         /// <summary> Time elapsed for task. </summary>

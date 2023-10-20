@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -16,26 +17,26 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSupersetFlattenInheritanceModelFactory
     {
-        /// <summary> Initializes a new instance of SubResourceModel1. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SubResourceModel1"/>. </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>
         /// <returns> A new <see cref="Models.SubResourceModel1"/> instance for mocking. </returns>
         public static SubResourceModel1 SubResourceModel1(string id = null, string foo = null)
         {
-            return new SubResourceModel1(id, foo);
+            return new SubResourceModel1(id, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of SubResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SubResourceModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="idPropertiesId"></param>
         /// <param name="foo"></param>
         /// <returns> A new <see cref="Models.SubResourceModel2"/> instance for mocking. </returns>
         public static SubResourceModel2 SubResourceModel2(string id = null, string idPropertiesId = null, string foo = null)
         {
-            return new SubResourceModel2(id, idPropertiesId, foo);
+            return new SubResourceModel2(id, idPropertiesId, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of ResourceModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSupersetFlattenInheritance.ResourceModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -44,10 +45,10 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <returns> A new <see cref="MgmtSupersetFlattenInheritance.ResourceModel1Data"/> instance for mocking. </returns>
         public static ResourceModel1Data ResourceModel1Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string foo = null)
         {
-            return new ResourceModel1Data(id, name, resourceType, systemData, foo);
+            return new ResourceModel1Data(id, name, resourceType, systemData, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of ResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -56,10 +57,10 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <returns> A new <see cref="Models.ResourceModel2"/> instance for mocking. </returns>
         public static ResourceModel2 ResourceModel2(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string foo = null)
         {
-            return new ResourceModel2(id, name, resourceType, systemData, foo);
+            return new ResourceModel2(id, name, resourceType, systemData, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSupersetFlattenInheritance.TrackedResourceModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -72,10 +73,10 @@ namespace MgmtSupersetFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TrackedResourceModel1Data(id, name, resourceType, systemData, tags, location, foo);
+            return new TrackedResourceModel1Data(id, name, resourceType, systemData, tags, location, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -90,7 +91,7 @@ namespace MgmtSupersetFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TrackedResourceModel2(id, name, resourceType, systemData, tags, location, foo, bar, fooPropertiesFoo);
+            return new TrackedResourceModel2(id, name, resourceType, systemData, tags, location, foo, bar, fooPropertiesFoo, new Dictionary<string, BinaryData>());
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -16,20 +18,25 @@ namespace MgmtSupersetInheritance
     /// </summary>
     public partial class SupersetModel1Data : ResourceData
     {
-        /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SupersetModel1Data"/>. </summary>
         public SupersetModel1Data()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="new"></param>
-        internal SupersetModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             New = @new;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the new. </summary>

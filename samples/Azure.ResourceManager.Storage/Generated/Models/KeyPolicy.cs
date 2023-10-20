@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> KeyPolicy assigned to the storage account. </summary>
     internal partial class KeyPolicy
     {
-        /// <summary> Initializes a new instance of KeyPolicy. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="KeyPolicy"/>. </summary>
         /// <param name="keyExpirationPeriodInDays"> The key expiration period in days. </param>
         public KeyPolicy(int keyExpirationPeriodInDays)
         {
             KeyExpirationPeriodInDays = keyExpirationPeriodInDays;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="KeyPolicy"/>. </summary>
+        /// <param name="keyExpirationPeriodInDays"> The key expiration period in days. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyPolicy(int keyExpirationPeriodInDays, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            KeyExpirationPeriodInDays = keyExpirationPeriodInDays;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="KeyPolicy"/> for deserialization. </summary>
+        internal KeyPolicy()
+        {
         }
 
         /// <summary> The key expiration period in days. </summary>

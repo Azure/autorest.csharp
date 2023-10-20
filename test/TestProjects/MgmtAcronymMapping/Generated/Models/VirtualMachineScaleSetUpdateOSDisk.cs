@@ -17,13 +17,16 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateOSDisk
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSDisk. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSDisk"/>. </summary>
         public VirtualMachineScaleSetUpdateOSDisk()
         {
             VhdContainers = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSDisk"/>. </summary>
         /// <param name="caching">
         /// The caching type.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.caching
@@ -48,7 +51,8 @@ namespace MgmtAcronymMapping.Models
         /// The managed disk parameters.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.managedDisk
         /// </param>
-        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Caching = caching;
             WriteAcceleratorEnabled = writeAcceleratorEnabled;
@@ -56,6 +60,7 @@ namespace MgmtAcronymMapping.Models
             Image = image;
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

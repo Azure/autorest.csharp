@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,16 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class ApiError
     {
-        /// <summary> Initializes a new instance of ApiError. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ApiError"/>. </summary>
         internal ApiError()
         {
             Details = new ChangeTrackingList<ApiErrorBase>();
         }
 
-        /// <summary> Initializes a new instance of ApiError. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiError"/>. </summary>
         /// <param name="details">
         /// The Api error details
         /// Serialized Name: ApiError.details
@@ -43,13 +47,15 @@ namespace MgmtAcronymMapping.Models
         /// The error message.
         /// Serialized Name: ApiError.message
         /// </param>
-        internal ApiError(IReadOnlyList<ApiErrorBase> details, InnerError innererror, string code, string target, string message)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ApiError(IReadOnlyList<ApiErrorBase> details, InnerError innererror, string code, string target, string message, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Details = details;
             Innererror = innererror;
             Code = code;
             Target = target;
             Message = message;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

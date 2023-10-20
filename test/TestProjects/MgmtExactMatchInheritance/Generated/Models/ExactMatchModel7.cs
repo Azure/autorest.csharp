@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel7. </summary>
     public partial class ExactMatchModel7
     {
-        /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel7"/>. </summary>
         public ExactMatchModel7()
         {
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel7"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="exactMatchModel7Type"></param>
-        internal ExactMatchModel7(string id, string name, string exactMatchModel7Type)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel7(string id, string name, string exactMatchModel7Type, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ID = id;
             Name = name;
             ExactMatchModel7Type = exactMatchModel7Type;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

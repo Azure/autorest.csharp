@@ -6,28 +6,34 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtCollectionParent.Models
 {
     /// <summary> Resource stage details. </summary>
     public partial class StageDetails
     {
-        /// <summary> Initializes a new instance of StageDetails. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="StageDetails"/>. </summary>
         internal StageDetails()
         {
         }
 
-        /// <summary> Initializes a new instance of StageDetails. </summary>
+        /// <summary> Initializes a new instance of <see cref="StageDetails"/>. </summary>
         /// <param name="stageStatus"> Stage status. </param>
         /// <param name="stageName"> Stage name. </param>
         /// <param name="displayName"> Display name of the resource stage. </param>
         /// <param name="startOn"> Stage start time. </param>
-        internal StageDetails(StageStatus? stageStatus, StageName? stageName, string displayName, DateTimeOffset? startOn)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StageDetails(StageStatus? stageStatus, StageName? stageName, string displayName, DateTimeOffset? startOn, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StageStatus = stageStatus;
             StageName = stageName;
             DisplayName = displayName;
             StartOn = startOn;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Stage status. </summary>

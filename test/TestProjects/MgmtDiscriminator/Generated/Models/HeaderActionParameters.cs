@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
@@ -13,7 +14,10 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the request header action. </summary>
     public partial class HeaderActionParameters
     {
-        /// <summary> Initializes a new instance of HeaderActionParameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="HeaderActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="headerAction"> Action to perform. </param>
         /// <param name="headerName"> Name of the header to modify. </param>
@@ -27,17 +31,24 @@ namespace MgmtDiscriminator.Models
             HeaderName = headerName;
         }
 
-        /// <summary> Initializes a new instance of HeaderActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="HeaderActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="headerAction"> Action to perform. </param>
         /// <param name="headerName"> Name of the header to modify. </param>
         /// <param name="value"> Value for the specified action. </param>
-        internal HeaderActionParameters(HeaderActionParametersTypeName typeName, HeaderAction headerAction, string headerName, string value)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal HeaderActionParameters(HeaderActionParametersTypeName typeName, HeaderAction headerAction, string headerName, string value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             HeaderAction = headerAction;
             HeaderName = headerName;
             Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="HeaderActionParameters"/> for deserialization. </summary>
+        internal HeaderActionParameters()
+        {
         }
 
         /// <summary> Gets or sets the type name. </summary>

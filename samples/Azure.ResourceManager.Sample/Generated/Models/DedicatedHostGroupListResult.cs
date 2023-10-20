@@ -19,7 +19,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DedicatedHostGroupListResult
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated host groups
         /// Serialized Name: DedicatedHostGroupListResult.value
@@ -32,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated host groups
         /// Serialized Name: DedicatedHostGroupListResult.value
@@ -41,10 +44,17 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups.
         /// Serialized Name: DedicatedHostGroupListResult.nextLink
         /// </param>
-        internal DedicatedHostGroupListResult(IReadOnlyList<DedicatedHostGroupData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostGroupListResult(IReadOnlyList<DedicatedHostGroupData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupListResult"/> for deserialization. </summary>
+        internal DedicatedHostGroupListResult()
+        {
         }
 
         /// <summary>

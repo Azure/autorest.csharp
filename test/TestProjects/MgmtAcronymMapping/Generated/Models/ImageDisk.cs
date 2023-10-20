@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -17,12 +18,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class ImageDisk
     {
-        /// <summary> Initializes a new instance of ImageDisk. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ImageDisk"/>. </summary>
         public ImageDisk()
         {
         }
 
-        /// <summary> Initializes a new instance of ImageDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDisk"/>. </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot
@@ -51,7 +55,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the customer managed disk encryption set resource id for the managed image disk.
         /// Serialized Name: ImageDisk.diskEncryptionSet
         /// </param>
-        internal ImageDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Snapshot = snapshot;
             ManagedDisk = managedDisk;
@@ -60,6 +65,7 @@ namespace MgmtAcronymMapping.Models
             DiskSizeGB = diskSizeGB;
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
@@ -13,7 +14,10 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> IP rule with specific IP or IP range in CIDR format. </summary>
     public partial class IPRule
     {
-        /// <summary> Initializes a new instance of IPRule. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="IPRule"/>. </summary>
         /// <param name="ipAddressOrRange"> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ipAddressOrRange"/> is null. </exception>
         public IPRule(string ipAddressOrRange)
@@ -23,13 +27,20 @@ namespace Azure.ResourceManager.Storage.Models
             IPAddressOrRange = ipAddressOrRange;
         }
 
-        /// <summary> Initializes a new instance of IPRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="IPRule"/>. </summary>
         /// <param name="ipAddressOrRange"> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </param>
         /// <param name="action"> The action of IP ACL rule. </param>
-        internal IPRule(string ipAddressOrRange, Action? action)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IPRule(string ipAddressOrRange, Action? action, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IPAddressOrRange = ipAddressOrRange;
             Action = action;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="IPRule"/> for deserialization. </summary>
+        internal IPRule()
+        {
         }
 
         /// <summary> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </summary>

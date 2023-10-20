@@ -16,7 +16,10 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> The List run command operation response. </summary>
     internal partial class ChildBodiesListResult
     {
-        /// <summary> Initializes a new instance of ChildBodiesListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ChildBodiesListResult"/>. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal ChildBodiesListResult(IEnumerable<ChildBodyData> value)
@@ -26,13 +29,20 @@ namespace MgmtMultipleParentResource.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ChildBodiesListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ChildBodiesListResult"/>. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <param name="nextLink"> The uri to fetch the next page of run commands. </param>
-        internal ChildBodiesListResult(IReadOnlyList<ChildBodyData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ChildBodiesListResult(IReadOnlyList<ChildBodyData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ChildBodiesListResult"/> for deserialization. </summary>
+        internal ChildBodiesListResult()
+        {
         }
 
         /// <summary> The list of run commands. </summary>

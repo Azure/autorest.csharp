@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
@@ -13,7 +14,10 @@ namespace MgmtMockAndSample.Models
     /// <summary> A rule governing the accessibility of a vault from a specific virtual network. </summary>
     public partial class VirtualNetworkRule
     {
-        /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualNetworkRule"/>. </summary>
         /// <param name="id"> Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         public VirtualNetworkRule(string id)
@@ -23,13 +27,20 @@ namespace MgmtMockAndSample.Models
             Id = id;
         }
 
-        /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualNetworkRule"/>. </summary>
         /// <param name="id"> Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'. </param>
         /// <param name="ignoreMissingVnetServiceEndpoint"> Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured. </param>
-        internal VirtualNetworkRule(string id, bool? ignoreMissingVnetServiceEndpoint)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualNetworkRule(string id, bool? ignoreMissingVnetServiceEndpoint, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             IgnoreMissingVnetServiceEndpoint = ignoreMissingVnetServiceEndpoint;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualNetworkRule"/> for deserialization. </summary>
+        internal VirtualNetworkRule()
+        {
         }
 
         /// <summary> Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'. </summary>

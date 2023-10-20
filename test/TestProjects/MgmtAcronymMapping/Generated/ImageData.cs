@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,13 +21,16 @@ namespace MgmtAcronymMapping
     /// </summary>
     public partial class ImageData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of ImageData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ImageData"/>. </summary>
         /// <param name="location"> The location. </param>
         public ImageData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of ImageData. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -49,12 +53,19 @@ namespace MgmtAcronymMapping
         /// Gets the HyperVGenerationType of the VirtualMachine created from the image
         /// Serialized Name: Image.properties.hyperVGeneration
         /// </param>
-        internal ImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationType? hyperVGeneration) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationType? hyperVGeneration, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;
             ProvisioningState = provisioningState;
             HyperVGeneration = hyperVGeneration;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ImageData"/> for deserialization. </summary>
+        internal ImageData()
+        {
         }
 
         /// <summary>

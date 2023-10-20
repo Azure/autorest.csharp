@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,16 +16,17 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class ImageReference : SubResource
     {
-        /// <summary> Initializes a new instance of ImageReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageReference"/>. </summary>
         public ImageReference()
         {
         }
 
-        /// <summary> Initializes a new instance of ImageReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageReference"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="publisher">
         /// The image publisher.
         /// Serialized Name: ImageReference.publisher
@@ -43,7 +47,7 @@ namespace MgmtAcronymMapping.Models
         /// Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'.
         /// Serialized Name: ImageReference.exactVersion
         /// </param>
-        internal ImageReference(string id, string publisher, string offer, string sku, string version, string exactVersion) : base(id)
+        internal ImageReference(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string publisher, string offer, string sku, string version, string exactVersion) : base(id, serializedAdditionalRawData)
         {
             Publisher = publisher;
             Offer = offer;

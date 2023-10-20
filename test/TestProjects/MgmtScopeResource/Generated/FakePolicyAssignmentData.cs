@@ -19,7 +19,10 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class FakePolicyAssignmentData : ResourceData
     {
-        /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         public FakePolicyAssignmentData()
         {
             NotScopes = new ChangeTrackingList<string>();
@@ -27,7 +30,7 @@ namespace MgmtScopeResource
             NonComplianceMessages = new ChangeTrackingList<NonComplianceMessage>();
         }
 
-        /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -43,7 +46,8 @@ namespace MgmtScopeResource
         /// <param name="metadata"> The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs. </param>
         /// <param name="enforcementMode"> The policy assignment enforcement mode. Possible values are Default and DoNotEnforce. </param>
         /// <param name="nonComplianceMessages"> The messages that describe why a resource is non-compliant with the policy. </param>
-        internal FakePolicyAssignmentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, ManagedServiceIdentity identity, string displayName, string policyDefinitionId, string scope, IList<string> notScopes, IDictionary<string, ParameterValuesValue> parameters, string description, BinaryData metadata, EnforcementMode? enforcementMode, IList<NonComplianceMessage> nonComplianceMessages) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakePolicyAssignmentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, ManagedServiceIdentity identity, string displayName, string policyDefinitionId, string scope, IList<string> notScopes, IDictionary<string, ParameterValuesValue> parameters, string description, BinaryData metadata, EnforcementMode? enforcementMode, IList<NonComplianceMessage> nonComplianceMessages, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Identity = identity;
@@ -56,6 +60,7 @@ namespace MgmtScopeResource
             Metadata = metadata;
             EnforcementMode = enforcementMode;
             NonComplianceMessages = nonComplianceMessages;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The location of the policy assignment. Only required when utilizing managed identity. </summary>

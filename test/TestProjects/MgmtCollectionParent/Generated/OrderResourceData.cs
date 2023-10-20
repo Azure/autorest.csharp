@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,14 +19,17 @@ namespace MgmtCollectionParent
     /// </summary>
     public partial class OrderResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of OrderResourceData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OrderResourceData"/>. </summary>
         internal OrderResourceData()
         {
             OrderItemIds = new ChangeTrackingList<string>();
             OrderStageHistory = new ChangeTrackingList<StageDetails>();
         }
 
-        /// <summary> Initializes a new instance of OrderResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="OrderResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -33,11 +37,13 @@ namespace MgmtCollectionParent
         /// <param name="orderItemIds"> List of order item ARM Ids which are part of an order. </param>
         /// <param name="currentStage"> Order current status. </param>
         /// <param name="orderStageHistory"> Order status history. </param>
-        internal OrderResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IReadOnlyList<string> orderItemIds, StageDetails currentStage, IReadOnlyList<StageDetails> orderStageHistory) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OrderResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IReadOnlyList<string> orderItemIds, StageDetails currentStage, IReadOnlyList<StageDetails> orderStageHistory, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             OrderItemIds = orderItemIds;
             CurrentStage = currentStage;
             OrderStageHistory = orderStageHistory;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of order item ARM Ids which are part of an order. </summary>

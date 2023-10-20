@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -15,12 +16,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class AvailablePatchSummary
     {
-        /// <summary> Initializes a new instance of AvailablePatchSummary. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AvailablePatchSummary"/>. </summary>
         internal AvailablePatchSummary()
         {
         }
 
-        /// <summary> Initializes a new instance of AvailablePatchSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailablePatchSummary"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: AvailablePatchSummary.status
@@ -53,7 +57,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: AvailablePatchSummary.error
         /// </param>
-        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             AssessmentActivityId = assessmentActivityId;
@@ -63,6 +68,7 @@ namespace Azure.ResourceManager.Sample.Models
             StartOn = startOn;
             LastModifiedOn = lastModifiedOn;
             Error = error;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

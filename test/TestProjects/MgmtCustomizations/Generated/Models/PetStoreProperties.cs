@@ -5,27 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtCustomizations.Models
 {
     /// <summary> The properties. </summary>
     public partial class PetStoreProperties
     {
-        /// <summary> Initializes a new instance of PetStoreProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PetStoreProperties"/>. </summary>
         public PetStoreProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of PetStoreProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreProperties"/>. </summary>
         /// <param name="order"> The order. </param>
         /// <param name="pet">
         /// A pet
         /// Please note <see cref="Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </param>
-        internal PetStoreProperties(int? order, Pet pet)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetStoreProperties(int? order, Pet pet, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Order = order;
             Pet = pet;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
         /// <summary>
         /// A pet

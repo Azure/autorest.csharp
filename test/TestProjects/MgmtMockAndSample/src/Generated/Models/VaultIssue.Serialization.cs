@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -33,6 +34,18 @@ namespace MgmtMockAndSample.Models
             {
                 writer.WritePropertyName("sev"u8);
                 writer.WriteNumberValue(Sev.Value);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -70,6 +83,8 @@ namespace MgmtMockAndSample.Models
             Optional<string> type = default;
             Optional<string> description = default;
             Optional<int> sev = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -91,8 +106,13 @@ namespace MgmtMockAndSample.Models
                     sev = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new VaultIssue(type.Value, description.Value, Optional.ToNullable(sev));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new VaultIssue(type.Value, description.Value, Optional.ToNullable(sev), serializedAdditionalRawData);
         }
     }
 }

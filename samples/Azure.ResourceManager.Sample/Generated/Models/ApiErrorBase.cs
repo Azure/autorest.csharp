@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ApiErrorBase
     {
-        /// <summary> Initializes a new instance of ApiErrorBase. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ApiErrorBase"/>. </summary>
         internal ApiErrorBase()
         {
         }
 
-        /// <summary> Initializes a new instance of ApiErrorBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiErrorBase"/>. </summary>
         /// <param name="code">
         /// The error code.
         /// Serialized Name: ApiErrorBase.code
@@ -31,11 +37,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The error message.
         /// Serialized Name: ApiErrorBase.message
         /// </param>
-        internal ApiErrorBase(string code, string target, string message)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ApiErrorBase(string code, string target, string message, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Target = target;
             Message = message;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

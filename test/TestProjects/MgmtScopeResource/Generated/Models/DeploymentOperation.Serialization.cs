@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -33,6 +34,18 @@ namespace MgmtScopeResource.Models
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -70,6 +83,8 @@ namespace MgmtScopeResource.Models
             Optional<string> id = default;
             Optional<string> operationId = default;
             Optional<DeploymentOperationProperties> properties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -91,8 +106,13 @@ namespace MgmtScopeResource.Models
                     properties = DeploymentOperationProperties.DeserializeDeploymentOperationProperties(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DeploymentOperation(id.Value, operationId.Value, properties.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new DeploymentOperation(id.Value, operationId.Value, properties.Value, serializedAdditionalRawData);
         }
     }
 }

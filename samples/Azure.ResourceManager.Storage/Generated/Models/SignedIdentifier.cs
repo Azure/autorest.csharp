@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The SignedIdentifier. </summary>
     public partial class SignedIdentifier
     {
-        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         public SignedIdentifier()
         {
         }
 
-        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         /// <param name="id"> An unique identifier of the stored access policy. </param>
         /// <param name="accessPolicy"> Access policy. </param>
-        internal SignedIdentifier(string id, AccessPolicy accessPolicy)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SignedIdentifier(string id, AccessPolicy accessPolicy, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             AccessPolicy = accessPolicy;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An unique identifier of the stored access policy. </summary>

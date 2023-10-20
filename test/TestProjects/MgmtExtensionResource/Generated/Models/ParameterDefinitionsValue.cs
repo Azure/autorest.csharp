@@ -14,23 +14,28 @@ namespace MgmtExtensionResource.Models
     /// <summary> The definition of a parameter that can be provided to the policy. </summary>
     public partial class ParameterDefinitionsValue
     {
-        /// <summary> Initializes a new instance of ParameterDefinitionsValue. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ParameterDefinitionsValue"/>. </summary>
         public ParameterDefinitionsValue()
         {
             AllowedValues = new ChangeTrackingList<BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ParameterDefinitionsValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterDefinitionsValue"/>. </summary>
         /// <param name="parameterType"> The data type of the parameter. </param>
         /// <param name="allowedValues"> The allowed values for the parameter. </param>
         /// <param name="defaultValue"> The default value for the parameter if no value is provided. </param>
         /// <param name="metadata"> General metadata for the parameter. </param>
-        internal ParameterDefinitionsValue(ParameterType? parameterType, IList<BinaryData> allowedValues, BinaryData defaultValue, ParameterDefinitionsValueMetadata metadata)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterDefinitionsValue(ParameterType? parameterType, IList<BinaryData> allowedValues, BinaryData defaultValue, ParameterDefinitionsValueMetadata metadata, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ParameterType = parameterType;
             AllowedValues = allowedValues;
             DefaultValue = defaultValue;
             Metadata = metadata;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The data type of the parameter. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,20 +17,25 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class WinRMConfiguration
     {
-        /// <summary> Initializes a new instance of WinRMConfiguration. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="WinRMConfiguration"/>. </summary>
         public WinRMConfiguration()
         {
             Listeners = new ChangeTrackingList<WinRMListener>();
         }
 
-        /// <summary> Initializes a new instance of WinRMConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMConfiguration"/>. </summary>
         /// <param name="listeners">
         /// The list of Windows Remote Management listeners
         /// Serialized Name: WinRMConfiguration.listeners
         /// </param>
-        internal WinRMConfiguration(IList<WinRMListener> listeners)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WinRMConfiguration(IList<WinRMListener> listeners, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Listeners = listeners;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

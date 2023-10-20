@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
@@ -13,7 +14,10 @@ namespace MgmtMockAndSample.Models
     /// <summary> A rule governing the accessibility of a managed hsm pool from a specific ip address or ip range. </summary>
     public partial class MhsmipRule
     {
-        /// <summary> Initializes a new instance of MhsmipRule. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MhsmipRule"/>. </summary>
         /// <param name="value"> An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public MhsmipRule(string value)
@@ -21,6 +25,20 @@ namespace MgmtMockAndSample.Models
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="MhsmipRule"/>. </summary>
+        /// <param name="value"> An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmipRule(string value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="MhsmipRule"/> for deserialization. </summary>
+        internal MhsmipRule()
+        {
         }
 
         /// <summary> An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). </summary>

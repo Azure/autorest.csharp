@@ -17,7 +17,10 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetOSDisk
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOSDisk. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/>. </summary>
         /// <param name="createOption">
         /// Specifies how the virtual machines in the scale set should be created.&lt;br&gt;&lt;br&gt; The only allowed value is: **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.createOption
@@ -28,7 +31,7 @@ namespace MgmtAcronymMapping.Models
             VhdContainers = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOSDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/>. </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.name
@@ -73,7 +76,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the SecurityType of the VM. Applicable for OS disks only.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.securityType
         /// </param>
-        internal VirtualMachineScaleSetOSDisk(string name, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, DiffDiskSettings diffDiskSettings, int? diskSizeGB, OperatingSystemType? osType, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, DiskSecurityType? securityType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetOSDisk(string name, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, DiffDiskSettings diffDiskSettings, int? diskSizeGB, OperatingSystemType? osType, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, DiskSecurityType? securityType, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Caching = caching;
@@ -86,6 +90,12 @@ namespace MgmtAcronymMapping.Models
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
             SecurityType = securityType;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetOSDisk()
+        {
         }
 
         /// <summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -15,17 +16,18 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ProximityPlacementGroupPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of ProximityPlacementGroupPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupPatch"/>. </summary>
         public ProximityPlacementGroupPatch()
         {
         }
 
-        /// <summary> Initializes a new instance of ProximityPlacementGroupPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
-        internal ProximityPlacementGroupPatch(IDictionary<string, string> tags) : base(tags)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProximityPlacementGroupPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
         }
     }

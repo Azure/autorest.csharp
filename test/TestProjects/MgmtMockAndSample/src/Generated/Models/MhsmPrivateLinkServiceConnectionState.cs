@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> An object that represents the approval state of the private link connection. </summary>
     public partial class MhsmPrivateLinkServiceConnectionState
     {
-        /// <summary> Initializes a new instance of MhsmPrivateLinkServiceConnectionState. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkServiceConnectionState"/>. </summary>
         public MhsmPrivateLinkServiceConnectionState()
         {
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateLinkServiceConnectionState. </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkServiceConnectionState"/>. </summary>
         /// <param name="status"> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </param>
         /// <param name="description"> The reason for approval or rejection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        internal MhsmPrivateLinkServiceConnectionState(MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status, string description, ActionsRequired? actionsRequired)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateLinkServiceConnectionState(MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status, string description, ActionsRequired? actionsRequired, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             Description = description;
             ActionsRequired = actionsRequired;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </summary>

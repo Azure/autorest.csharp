@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> An NS record. </summary>
     public partial class NsRecord
     {
-        /// <summary> Initializes a new instance of NsRecord. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="NsRecord"/>. </summary>
         public NsRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of NsRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="NsRecord"/>. </summary>
         /// <param name="nsdname"> The name server name for this NS record. </param>
-        internal NsRecord(string nsdname)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NsRecord(string nsdname, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Nsdname = nsdname;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name server name for this NS record. </summary>

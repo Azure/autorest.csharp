@@ -15,7 +15,10 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> The List Shared Gallery Image versions operation response. </summary>
     internal partial class SharedGalleryImageVersionList
     {
-        /// <summary> Initializes a new instance of SharedGalleryImageVersionList. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryImageVersionList"/>. </summary>
         /// <param name="value"> A list of shared gallery images versions. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SharedGalleryImageVersionList(IEnumerable<SharedGalleryImageVersion> value)
@@ -25,13 +28,20 @@ namespace MgmtHierarchicalNonResource.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of SharedGalleryImageVersionList. </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryImageVersionList"/>. </summary>
         /// <param name="value"> A list of shared gallery images versions. </param>
         /// <param name="nextLink"> The uri to fetch the next page of shared gallery image versions. Call ListNext() with this to fetch the next page of shared gallery image versions. </param>
-        internal SharedGalleryImageVersionList(IReadOnlyList<SharedGalleryImageVersion> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SharedGalleryImageVersionList(IReadOnlyList<SharedGalleryImageVersion> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryImageVersionList"/> for deserialization. </summary>
+        internal SharedGalleryImageVersionList()
+        {
         }
 
         /// <summary> A list of shared gallery images versions. </summary>

@@ -19,7 +19,10 @@ namespace MgmtMockAndSample
     /// </summary>
     public partial class VaultData : ResourceData
     {
-        /// <summary> Initializes a new instance of VaultData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VaultData"/>. </summary>
         /// <param name="properties"> Properties of the vault. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         internal VaultData(VaultProperties properties)
@@ -30,7 +33,7 @@ namespace MgmtMockAndSample
             Properties = properties;
         }
 
-        /// <summary> Initializes a new instance of VaultData. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -39,12 +42,19 @@ namespace MgmtMockAndSample
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <param name="identity"> Identity of the vault. </param>
-        internal VaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, IReadOnlyDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, IReadOnlyDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;
             Properties = properties;
             Identity = identity;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VaultData"/> for deserialization. </summary>
+        internal VaultData()
+        {
         }
 
         /// <summary> Azure location of the key vault resource. </summary>

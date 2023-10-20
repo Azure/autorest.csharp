@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,14 +17,17 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineExtensionInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionInstanceView. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionInstanceView"/>. </summary>
         public VirtualMachineExtensionInstanceView()
         {
             Substatuses = new ChangeTrackingList<InstanceViewStatus>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionInstanceView"/>. </summary>
         /// <param name="name">
         /// The virtual machine extension name.
         /// Serialized Name: VirtualMachineExtensionInstanceView.name
@@ -44,13 +48,15 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: VirtualMachineExtensionInstanceView.statuses
         /// </param>
-        internal VirtualMachineExtensionInstanceView(string name, string virtualMachineExtensionInstanceViewType, string typeHandlerVersion, IList<InstanceViewStatus> substatuses, IList<InstanceViewStatus> statuses)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionInstanceView(string name, string virtualMachineExtensionInstanceViewType, string typeHandlerVersion, IList<InstanceViewStatus> substatuses, IList<InstanceViewStatus> statuses, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             VirtualMachineExtensionInstanceViewType = virtualMachineExtensionInstanceViewType;
             TypeHandlerVersion = typeHandlerVersion;
             Substatuses = substatuses;
             Statuses = statuses;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

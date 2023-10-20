@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,22 @@ namespace MgmtParamOrdering.Models
     /// <summary> The parameters for updating a machine learning workspace. </summary>
     public partial class WorkspacePatch
     {
-        /// <summary> Initializes a new instance of WorkspacePatch. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="WorkspacePatch"/>. </summary>
         public WorkspacePatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of WorkspacePatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="WorkspacePatch"/>. </summary>
         /// <param name="tags"> The resource tags for the machine learning workspace. </param>
-        internal WorkspacePatch(IDictionary<string, string> tags)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WorkspacePatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tags = tags;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The resource tags for the machine learning workspace. </summary>

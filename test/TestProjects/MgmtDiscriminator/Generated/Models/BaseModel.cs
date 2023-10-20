@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The BaseModel. </summary>
     public partial class BaseModel
     {
-        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         public BaseModel()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="optionalString"></param>
-        internal BaseModel(string optionalString)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseModel(string optionalString, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OptionalString = optionalString;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the optional string. </summary>

@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtScopeResource.Models
 {
     /// <summary> Information from validate template deployment response. </summary>
     public partial class DeploymentValidateResult
     {
-        /// <summary> Initializes a new instance of DeploymentValidateResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DeploymentValidateResult"/>. </summary>
         internal DeploymentValidateResult()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentValidateResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentValidateResult"/>. </summary>
         /// <param name="errorResponse"> The deployment validation error. </param>
         /// <param name="properties"> The template deployment properties. </param>
-        internal DeploymentValidateResult(ErrorResponse errorResponse, DeploymentPropertiesExtended properties)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentValidateResult(ErrorResponse errorResponse, DeploymentPropertiesExtended properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ErrorResponse = errorResponse;
             Properties = properties;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The deployment validation error. </summary>

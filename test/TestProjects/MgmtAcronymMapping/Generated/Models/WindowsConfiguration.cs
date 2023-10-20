@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,16 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class WindowsConfiguration
     {
-        /// <summary> Initializes a new instance of WindowsConfiguration. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="WindowsConfiguration"/>. </summary>
         public WindowsConfiguration()
         {
             AdditionalUnattendContent = new ChangeTrackingList<AdditionalUnattendContent>();
         }
 
-        /// <summary> Initializes a new instance of WindowsConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="WindowsConfiguration"/>. </summary>
         /// <param name="provisionVmAgent">
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: WindowsConfiguration.provisionVMAgent
@@ -47,7 +51,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell.
         /// Serialized Name: WindowsConfiguration.winRM
         /// </param>
-        internal WindowsConfiguration(bool? provisionVmAgent, bool? enableAutomaticUpdates, string timeZone, IList<AdditionalUnattendContent> additionalUnattendContent, PatchSettings patchSettings, WinRMConfiguration winRM)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WindowsConfiguration(bool? provisionVmAgent, bool? enableAutomaticUpdates, string timeZone, IList<AdditionalUnattendContent> additionalUnattendContent, PatchSettings patchSettings, WinRMConfiguration winRM, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProvisionVmAgent = provisionVmAgent;
             EnableAutomaticUpdates = enableAutomaticUpdates;
@@ -55,6 +60,7 @@ namespace MgmtAcronymMapping.Models
             AdditionalUnattendContent = additionalUnattendContent;
             PatchSettings = patchSettings;
             WinRM = winRM;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

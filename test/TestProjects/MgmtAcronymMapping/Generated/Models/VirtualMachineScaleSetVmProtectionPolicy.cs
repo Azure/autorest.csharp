@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmProtectionPolicy
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProtectionPolicy. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProtectionPolicy"/>. </summary>
         public VirtualMachineScaleSetVmProtectionPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProtectionPolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProtectionPolicy"/>. </summary>
         /// <param name="protectFromScaleIn">
         /// Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleIn
@@ -27,10 +33,12 @@ namespace MgmtAcronymMapping.Models
         /// Indicates that model updates or actions (including scale-in) initiated on the virtual machine scale set should not be applied to the virtual machine scale set VM.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleSetActions
         /// </param>
-        internal VirtualMachineScaleSetVmProtectionPolicy(bool? protectFromScaleIn, bool? protectFromScaleSetActions)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmProtectionPolicy(bool? protectFromScaleIn, bool? protectFromScaleSetActions, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProtectFromScaleIn = protectFromScaleIn;
             ProtectFromScaleSetActions = protectFromScaleSetActions;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

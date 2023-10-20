@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtMockAndSample;
@@ -14,19 +15,24 @@ namespace MgmtMockAndSample.Models
     /// <summary> List of private endpoint connections associated with a managed HSM Pools. </summary>
     internal partial class MhsmPrivateEndpointConnectionsListResult
     {
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionsListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionsListResult"/>. </summary>
         internal MhsmPrivateEndpointConnectionsListResult()
         {
             Value = new ChangeTrackingList<MhsmPrivateEndpointConnectionData>();
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionsListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionsListResult"/>. </summary>
         /// <param name="value"> The private endpoint connection associated with a managed HSM Pools. </param>
         /// <param name="nextLink"> The URL to get the next set of managed HSM Pools. </param>
-        internal MhsmPrivateEndpointConnectionsListResult(IReadOnlyList<MhsmPrivateEndpointConnectionData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateEndpointConnectionsListResult(IReadOnlyList<MhsmPrivateEndpointConnectionData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The private endpoint connection associated with a managed HSM Pools. </summary>

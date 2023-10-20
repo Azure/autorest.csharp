@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSupersetFlattenInheritance.Models
 {
     /// <summary> SubResource with flatten properties. </summary>
     public partial class SubResourceModel2
     {
-        /// <summary> Initializes a new instance of SubResourceModel2. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SubResourceModel2"/>. </summary>
         public SubResourceModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="idPropertiesId"></param>
         /// <param name="foo"></param>
-        internal SubResourceModel2(string id, string idPropertiesId, string foo)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubResourceModel2(string id, string idPropertiesId, string foo, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             IdPropertiesId = idPropertiesId;
             Foo = foo;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

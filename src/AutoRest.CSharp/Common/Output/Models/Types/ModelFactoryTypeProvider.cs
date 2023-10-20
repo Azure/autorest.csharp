@@ -118,9 +118,19 @@ namespace AutoRest.CSharp.Output.Models.Types
                 switch (parentPropertyType)
                 {
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
+                        // when a property is flattened, it should only have one property. But the serialization ctor might takes two parameters because it may have the raw data field as an extra parameter
+                        var parameters = serializableObjectType.SerializationConstructor.Signature.Parameters;
+                        var arguments = new List<ValueExpression>();
                         // get the type of the first parameter of its ctor
-                        var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = New.Instance(parentPropertyType, result.GetConversion(from, to));
+                        var to = parameters[0].Type;
+                        arguments.Add(result.GetConversion(from, to));
+                        // check if we need extra parameters for the raw data field
+                        if (parameters.Count > 1)
+                        {
+                            // this parameter should be the raw data field, otherwise this property should not have been flattened in the first place
+                            arguments.Add(New.Instance(TypeFactory.GetImplementationType(parameters[1].Type)));
+                        }
+                        result = New.Instance(parentPropertyType, arguments.ToArray());
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it

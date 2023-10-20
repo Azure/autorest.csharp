@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,7 +21,10 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class ProximityPlacementGroupData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/>. </summary>
         /// <param name="location"> The location. </param>
         public ProximityPlacementGroupData(AzureLocation location) : base(location)
         {
@@ -29,7 +33,7 @@ namespace Azure.ResourceManager.Sample
             AvailabilitySets = new ChangeTrackingList<SubResourceWithColocationStatus>();
         }
 
-        /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -60,7 +64,8 @@ namespace Azure.ResourceManager.Sample
         /// Describes colocation status of the Proximity Placement Group.
         /// Serialized Name: ProximityPlacementGroup.properties.colocationStatus
         /// </param>
-        internal ProximityPlacementGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ExtendedLocation extendedLocation, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProximityPlacementGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ExtendedLocation extendedLocation, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             ExtendedLocation = extendedLocation;
             ProximityPlacementGroupType = proximityPlacementGroupType;
@@ -68,6 +73,12 @@ namespace Azure.ResourceManager.Sample
             VirtualMachineScaleSets = virtualMachineScaleSets;
             AvailabilitySets = availabilitySets;
             ColocationStatus = colocationStatus;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/> for deserialization. </summary>
+        internal ProximityPlacementGroupData()
+        {
         }
 
         /// <summary>

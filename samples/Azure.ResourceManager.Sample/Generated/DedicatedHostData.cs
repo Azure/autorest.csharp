@@ -21,7 +21,10 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class DedicatedHostData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of DedicatedHostData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostData"/>. </summary>
         /// <param name="location"> The location. </param>
         /// <param name="sku">
         /// SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
@@ -36,7 +39,7 @@ namespace Azure.ResourceManager.Sample
             VirtualMachines = new ChangeTrackingList<Resources.Models.SubResource>();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -79,7 +82,8 @@ namespace Azure.ResourceManager.Sample
         /// The dedicated host instance view.
         /// Serialized Name: DedicatedHost.properties.instanceView
         /// </param>
-        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             PlatformFaultDomain = platformFaultDomain;
@@ -90,6 +94,12 @@ namespace Azure.ResourceManager.Sample
             ProvisioningOn = provisioningOn;
             ProvisioningState = provisioningState;
             InstanceView = instanceView;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostData"/> for deserialization. </summary>
+        internal DedicatedHostData()
+        {
         }
 
         /// <summary>

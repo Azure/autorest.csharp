@@ -18,7 +18,10 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListOSUpgradeHistory
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListOSUpgradeHistory. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/>. </summary>
         /// <param name="value">
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
@@ -31,7 +34,7 @@ namespace MgmtAcronymMapping.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListOSUpgradeHistory. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/>. </summary>
         /// <param name="value">
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
@@ -40,10 +43,17 @@ namespace MgmtAcronymMapping.Models
         /// The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.nextLink
         /// </param>
-        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetListOSUpgradeHistory()
+        {
         }
 
         /// <summary>

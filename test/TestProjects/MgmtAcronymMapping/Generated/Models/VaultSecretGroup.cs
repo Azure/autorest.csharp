@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,13 +18,16 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VaultSecretGroup
     {
-        /// <summary> Initializes a new instance of VaultSecretGroup. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VaultSecretGroup"/>. </summary>
         public VaultSecretGroup()
         {
             VaultCertificates = new ChangeTrackingList<VaultCertificate>();
         }
 
-        /// <summary> Initializes a new instance of VaultSecretGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultSecretGroup"/>. </summary>
         /// <param name="sourceVault">
         /// The relative URL of the Key Vault containing all of the certificates in VaultCertificates.
         /// Serialized Name: VaultSecretGroup.sourceVault
@@ -32,10 +36,12 @@ namespace MgmtAcronymMapping.Models
         /// The list of key vault references in SourceVault which contain certificates.
         /// Serialized Name: VaultSecretGroup.vaultCertificates
         /// </param>
-        internal VaultSecretGroup(WritableSubResource sourceVault, IList<VaultCertificate> vaultCertificates)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultSecretGroup(WritableSubResource sourceVault, IList<VaultCertificate> vaultCertificates, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SourceVault = sourceVault;
             VaultCertificates = vaultCertificates;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

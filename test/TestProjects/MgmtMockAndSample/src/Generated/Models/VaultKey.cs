@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> The VaultKey. </summary>
     public partial class VaultKey
     {
-        /// <summary> Initializes a new instance of VaultKey. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VaultKey"/>. </summary>
         internal VaultKey()
         {
         }
 
-        /// <summary> Initializes a new instance of VaultKey. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultKey"/>. </summary>
         /// <param name="key"> name of the key. </param>
         /// <param name="content"> content of the key. </param>
-        internal VaultKey(string key, string content)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultKey(string key, string content, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Key = key;
             Content = content;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> name of the key. </summary>

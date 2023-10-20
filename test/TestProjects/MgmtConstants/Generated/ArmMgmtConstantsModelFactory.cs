@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -15,7 +16,7 @@ namespace MgmtConstants.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtConstantsModelFactory
     {
-        /// <summary> Initializes a new instance of OptionalMachineData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtConstants.OptionalMachineData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -29,10 +30,10 @@ namespace MgmtConstants.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new OptionalMachineData(id, name, resourceType, systemData, tags, location, listener, content);
+            return new OptionalMachineData(id, name, resourceType, systemData, tags, location, listener, content, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithRequiredConstant"/>. </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>
@@ -40,7 +41,7 @@ namespace MgmtConstants.Models
         /// <returns> A new <see cref="Models.ModelWithRequiredConstant"/> instance for mocking. </returns>
         public static ModelWithRequiredConstant ModelWithRequiredConstant(StringConstant requiredStringConstant = default, IntConstant requiredIntConstant = default, bool requiredBooleanConstant = default, FloatConstant requiredFloatConstant = default)
         {
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant);
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, new Dictionary<string, BinaryData>());
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -13,20 +15,25 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> The ModelQ. </summary>
     public partial class ModelQ : ResourceData
     {
-        /// <summary> Initializes a new instance of ModelQ. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelQ"/>. </summary>
         public ModelQ()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelQ. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelQ"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="m"></param>
-        internal ModelQ(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string m) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelQ(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string m, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             M = m;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the m. </summary>

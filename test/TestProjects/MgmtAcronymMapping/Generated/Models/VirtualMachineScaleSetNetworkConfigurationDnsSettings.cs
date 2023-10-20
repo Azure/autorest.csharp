@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,20 +17,25 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetNetworkConfigurationDnsSettings
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfigurationDnsSettings. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfigurationDnsSettings"/>. </summary>
         public VirtualMachineScaleSetNetworkConfigurationDnsSettings()
         {
             DnsServers = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfigurationDnsSettings. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfigurationDnsSettings"/>. </summary>
         /// <param name="dnsServers">
         /// List of DNS servers IP addresses
         /// Serialized Name: VirtualMachineScaleSetNetworkConfigurationDnsSettings.dnsServers
         /// </param>
-        internal VirtualMachineScaleSetNetworkConfigurationDnsSettings(IList<string> dnsServers)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetNetworkConfigurationDnsSettings(IList<string> dnsServers, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DnsServers = dnsServers;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

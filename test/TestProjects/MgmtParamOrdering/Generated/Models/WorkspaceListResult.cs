@@ -16,7 +16,10 @@ namespace MgmtParamOrdering.Models
     /// <summary> The list dedicated host operation response. </summary>
     internal partial class WorkspaceListResult
     {
-        /// <summary> Initializes a new instance of WorkspaceListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="WorkspaceListResult"/>. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal WorkspaceListResult(IEnumerable<WorkspaceData> value)
@@ -26,13 +29,20 @@ namespace MgmtParamOrdering.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of WorkspaceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="WorkspaceListResult"/>. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <param name="nextLink"> The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts. </param>
-        internal WorkspaceListResult(IReadOnlyList<WorkspaceData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WorkspaceListResult(IReadOnlyList<WorkspaceData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="WorkspaceListResult"/> for deserialization. </summary>
+        internal WorkspaceListResult()
+        {
         }
 
         /// <summary> The list of dedicated hosts. </summary>

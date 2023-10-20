@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using MgmtSupersetInheritance.Models;
 
 namespace MgmtSupersetInheritance
@@ -15,24 +17,29 @@ namespace MgmtSupersetInheritance
     /// </summary>
     public partial class SupersetModel7Data
     {
-        /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SupersetModel7Data"/>. </summary>
         public SupersetModel7Data()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel7Data"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
         /// <param name="new"></param>
         /// <param name="systemData"> Metadata pertaining to creation and last modification of the resource. </param>
-        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel7SystemData systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel7SystemData systemData, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
             New = @new;
             SystemData = systemData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class WritableSubResourceModel1ListResult
     {
-        /// <summary> Initializes a new instance of WritableSubResourceModel1ListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="WritableSubResourceModel1ListResult"/>. </summary>
         internal WritableSubResourceModel1ListResult()
         {
             Value = new ChangeTrackingList<WritableSubResourceModel1>();
         }
 
-        /// <summary> Initializes a new instance of WritableSubResourceModel1ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="WritableSubResourceModel1ListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal WritableSubResourceModel1ListResult(IReadOnlyList<WritableSubResourceModel1> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WritableSubResourceModel1ListResult(IReadOnlyList<WritableSubResourceModel1> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>

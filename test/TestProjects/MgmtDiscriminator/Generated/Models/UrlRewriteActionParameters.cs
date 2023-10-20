@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
@@ -13,7 +14,10 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the url rewrite action. </summary>
     public partial class UrlRewriteActionParameters
     {
-        /// <summary> Initializes a new instance of UrlRewriteActionParameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UrlRewriteActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="sourcePattern"> define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched. </param>
         /// <param name="destination"> Define the relative URL to which the above requests will be rewritten by. </param>
@@ -28,17 +32,24 @@ namespace MgmtDiscriminator.Models
             Destination = destination;
         }
 
-        /// <summary> Initializes a new instance of UrlRewriteActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRewriteActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="sourcePattern"> define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched. </param>
         /// <param name="destination"> Define the relative URL to which the above requests will be rewritten by. </param>
         /// <param name="preserveUnmatchedPath"> Whether to preserve unmatched path. Default value is true. </param>
-        internal UrlRewriteActionParameters(UrlRewriteActionParametersTypeName typeName, string sourcePattern, string destination, bool? preserveUnmatchedPath)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlRewriteActionParameters(UrlRewriteActionParametersTypeName typeName, string sourcePattern, string destination, bool? preserveUnmatchedPath, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             SourcePattern = sourcePattern;
             Destination = destination;
             PreserveUnmatchedPath = preserveUnmatchedPath;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UrlRewriteActionParameters"/> for deserialization. </summary>
+        internal UrlRewriteActionParameters()
+        {
         }
 
         /// <summary> Gets or sets the type name. </summary>

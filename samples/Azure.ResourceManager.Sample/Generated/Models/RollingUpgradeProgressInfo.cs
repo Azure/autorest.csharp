@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class RollingUpgradeProgressInfo
     {
-        /// <summary> Initializes a new instance of RollingUpgradeProgressInfo. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradeProgressInfo"/>. </summary>
         internal RollingUpgradeProgressInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of RollingUpgradeProgressInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradeProgressInfo"/>. </summary>
         /// <param name="successfulInstanceCount">
         /// The number of instances that have been successfully upgraded.
         /// Serialized Name: RollingUpgradeProgressInfo.successfulInstanceCount
@@ -35,12 +41,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// The number of instances that have not yet begun to be upgraded.
         /// Serialized Name: RollingUpgradeProgressInfo.pendingInstanceCount
         /// </param>
-        internal RollingUpgradeProgressInfo(int? successfulInstanceCount, int? failedInstanceCount, int? inProgressInstanceCount, int? pendingInstanceCount)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RollingUpgradeProgressInfo(int? successfulInstanceCount, int? failedInstanceCount, int? inProgressInstanceCount, int? pendingInstanceCount, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SuccessfulInstanceCount = successfulInstanceCount;
             FailedInstanceCount = failedInstanceCount;
             InProgressInstanceCount = inProgressInstanceCount;
             PendingInstanceCount = pendingInstanceCount;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

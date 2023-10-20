@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineStatusCodeCount
     {
-        /// <summary> Initializes a new instance of VirtualMachineStatusCodeCount. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineStatusCodeCount"/>. </summary>
         internal VirtualMachineStatusCodeCount()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineStatusCodeCount. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineStatusCodeCount"/>. </summary>
         /// <param name="code">
         /// The instance view status code.
         /// Serialized Name: VirtualMachineStatusCodeCount.code
@@ -27,10 +33,12 @@ namespace MgmtAcronymMapping.Models
         /// The number of instances having a particular status code.
         /// Serialized Name: VirtualMachineStatusCodeCount.count
         /// </param>
-        internal VirtualMachineStatusCodeCount(string code, int? count)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineStatusCodeCount(string code, int? count, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Count = count;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

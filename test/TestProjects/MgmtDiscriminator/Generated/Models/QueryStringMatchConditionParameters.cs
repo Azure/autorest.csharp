@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,10 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for QueryString match conditions. </summary>
     public partial class QueryStringMatchConditionParameters
     {
-        /// <summary> Initializes a new instance of QueryStringMatchConditionParameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="QueryStringMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         public QueryStringMatchConditionParameters(QueryStringMatchConditionParametersTypeName typeName, QueryStringOperator @operator)
@@ -24,19 +28,26 @@ namespace MgmtDiscriminator.Models
             Transforms = new ChangeTrackingList<Transform>();
         }
 
-        /// <summary> Initializes a new instance of QueryStringMatchConditionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="QueryStringMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         /// <param name="negateCondition"> Describes if this is negate condition or not. </param>
         /// <param name="matchValues"> The match value for the condition of the delivery rule. </param>
         /// <param name="transforms"> List of transforms. </param>
-        internal QueryStringMatchConditionParameters(QueryStringMatchConditionParametersTypeName typeName, QueryStringOperator @operator, bool? negateCondition, IList<string> matchValues, IList<Transform> transforms)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal QueryStringMatchConditionParameters(QueryStringMatchConditionParametersTypeName typeName, QueryStringOperator @operator, bool? negateCondition, IList<string> matchValues, IList<Transform> transforms, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             Operator = @operator;
             NegateCondition = negateCondition;
             MatchValues = matchValues;
             Transforms = transforms;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="QueryStringMatchConditionParameters"/> for deserialization. </summary>
+        internal QueryStringMatchConditionParameters()
+        {
         }
 
         /// <summary> Gets or sets the type name. </summary>

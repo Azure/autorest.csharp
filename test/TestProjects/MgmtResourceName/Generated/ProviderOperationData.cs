@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,14 +19,17 @@ namespace MgmtResourceName
     /// </summary>
     public partial class ProviderOperationData : ResourceData
     {
-        /// <summary> Initializes a new instance of ProviderOperationData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ProviderOperationData"/>. </summary>
         internal ProviderOperationData()
         {
             ResourceTypes = new ChangeTrackingList<Models.ResourceType>();
             Operations = new ChangeTrackingList<ResourceOperation>();
         }
 
-        /// <summary> Initializes a new instance of ProviderOperationData. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProviderOperationData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -33,11 +37,13 @@ namespace MgmtResourceName
         /// <param name="displayName"> The provider display name. </param>
         /// <param name="resourceTypes"> The provider resource types. </param>
         /// <param name="operations"> The provider operations. </param>
-        internal ProviderOperationData(ResourceIdentifier id, string name, Azure.Core.ResourceType resourceType, SystemData systemData, string displayName, IReadOnlyList<Models.ResourceType> resourceTypes, IReadOnlyList<ResourceOperation> operations) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProviderOperationData(ResourceIdentifier id, string name, Azure.Core.ResourceType resourceType, SystemData systemData, string displayName, IReadOnlyList<Models.ResourceType> resourceTypes, IReadOnlyList<ResourceOperation> operations, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             DisplayName = displayName;
             ResourceTypes = resourceTypes;
             Operations = operations;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The provider display name. </summary>

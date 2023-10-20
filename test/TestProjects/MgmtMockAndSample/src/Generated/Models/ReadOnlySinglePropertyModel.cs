@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> This is a single property of read-only string. </summary>
     internal partial class ReadOnlySinglePropertyModel
     {
-        /// <summary> Initializes a new instance of ReadOnlySinglePropertyModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ReadOnlySinglePropertyModel"/>. </summary>
         public ReadOnlySinglePropertyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ReadOnlySinglePropertyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadOnlySinglePropertyModel"/>. </summary>
         /// <param name="readOnlySomething"> This is a read only string property. </param>
-        internal ReadOnlySinglePropertyModel(string readOnlySomething)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadOnlySinglePropertyModel(string readOnlySomething, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ReadOnlySomething = readOnlySomething;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> This is a read only string property. </summary>

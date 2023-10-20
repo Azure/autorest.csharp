@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -30,6 +31,18 @@ namespace MgmtExactMatchInheritance.Models
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteObjectValue(ModelProperty);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -66,6 +79,8 @@ namespace MgmtExactMatchInheritance.Models
             }
             Optional<string> stringProperty = default;
             Optional<ExactMatchModel10> modelProperty = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"u8))
@@ -82,8 +97,13 @@ namespace MgmtExactMatchInheritance.Models
                     modelProperty = ExactMatchModel10.DeserializeExactMatchModel10(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SeparateClass(stringProperty.Value, modelProperty.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SeparateClass(stringProperty.Value, modelProperty.Value, serializedAdditionalRawData);
         }
 
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>

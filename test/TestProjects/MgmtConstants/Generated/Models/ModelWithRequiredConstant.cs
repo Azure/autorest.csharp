@@ -5,12 +5,18 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtConstants.Models
 {
     /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
     public partial class ModelWithRequiredConstant
     {
-        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         public ModelWithRequiredConstant()
         {
             RequiredStringConstant = StringConstant.Default;
@@ -19,17 +25,19 @@ namespace MgmtConstants.Models
             RequiredFloatConstant = FloatConstant._314;
         }
 
-        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>
         /// <param name="requiredFloatConstant"> A constant based on float. </param>
-        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant, FloatConstant requiredFloatConstant)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant, FloatConstant requiredFloatConstant, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredStringConstant = requiredStringConstant;
             RequiredIntConstant = requiredIntConstant;
             RequiredBooleanConstant = requiredBooleanConstant;
             RequiredFloatConstant = requiredFloatConstant;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A constant based on string, the only allowable value is default. </summary>

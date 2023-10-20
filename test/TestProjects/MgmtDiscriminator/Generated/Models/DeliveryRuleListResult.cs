@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtDiscriminator;
@@ -14,17 +15,22 @@ namespace MgmtDiscriminator.Models
     /// <summary> The list result of the rules. </summary>
     internal partial class DeliveryRuleListResult
     {
-        /// <summary> Initializes a new instance of DeliveryRuleListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleListResult"/>. </summary>
         internal DeliveryRuleListResult()
         {
             Value = new ChangeTrackingList<DeliveryRuleData>();
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleListResult"/>. </summary>
         /// <param name="value"> The values. </param>
-        internal DeliveryRuleListResult(IReadOnlyList<DeliveryRuleData> value)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleListResult(IReadOnlyList<DeliveryRuleData> value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The values. </summary>

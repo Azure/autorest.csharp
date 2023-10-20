@@ -6,22 +6,28 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtScopeResource.Models
 {
     /// <summary> The deployment export result. </summary>
     public partial class DeploymentExportResult
     {
-        /// <summary> Initializes a new instance of DeploymentExportResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         internal DeploymentExportResult()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentExportResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         /// <param name="template"> The template content. </param>
-        internal DeploymentExportResult(BinaryData template)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentExportResult(BinaryData template, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Template = template;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtNoTypeReplacement.Models
 {
     /// <summary> The MiddleResourceModel. </summary>
     internal partial class MiddleResourceModel
     {
-        /// <summary> Initializes a new instance of MiddleResourceModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MiddleResourceModel"/>. </summary>
         public MiddleResourceModel()
         {
         }
 
-        /// <summary> Initializes a new instance of MiddleResourceModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="MiddleResourceModel"/>. </summary>
         /// <param name="foo"></param>
-        internal MiddleResourceModel(NoSubResourceModel2 foo)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MiddleResourceModel(NoSubResourceModel2 foo, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Foo = foo;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the foo. </summary>

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -15,12 +17,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class UpgradeOperationHistoricalStatusInfo
     {
-        /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfo"/>. </summary>
         internal UpgradeOperationHistoricalStatusInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfo"/>. </summary>
         /// <param name="properties">
         /// Information about the properties of the upgrade operation.
         /// Serialized Name: UpgradeOperationHistoricalStatusInfo.properties
@@ -33,11 +38,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource location
         /// Serialized Name: UpgradeOperationHistoricalStatusInfo.location
         /// </param>
-        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, string upgradeOperationHistoricalStatusInfoType, AzureLocation? location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, string upgradeOperationHistoricalStatusInfoType, AzureLocation? location, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Properties = properties;
             UpgradeOperationHistoricalStatusInfoType = upgradeOperationHistoricalStatusInfoType;
             Location = location;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

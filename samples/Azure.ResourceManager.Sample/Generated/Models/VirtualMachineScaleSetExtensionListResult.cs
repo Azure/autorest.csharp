@@ -19,7 +19,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetExtensionListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionListResult"/>. </summary>
         /// <param name="value">
         /// The list of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value
@@ -32,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionListResult"/>. </summary>
         /// <param name="value">
         /// The list of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value
@@ -41,10 +44,17 @@ namespace Azure.ResourceManager.Sample.Models
         /// The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.nextLink
         /// </param>
-        internal VirtualMachineScaleSetExtensionListResult(IReadOnlyList<VirtualMachineScaleSetExtensionData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetExtensionListResult(IReadOnlyList<VirtualMachineScaleSetExtensionData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionListResult"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetExtensionListResult()
+        {
         }
 
         /// <summary>

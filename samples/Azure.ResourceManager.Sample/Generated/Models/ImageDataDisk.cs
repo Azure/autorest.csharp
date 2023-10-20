@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -16,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ImageDataDisk : ImageDisk
     {
-        /// <summary> Initializes a new instance of ImageDataDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: ImageDataDisk.lun
@@ -26,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             Lun = lun;
         }
 
-        /// <summary> Initializes a new instance of ImageDataDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDataDisk"/>. </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot
@@ -55,13 +56,19 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the customer managed disk encryption set resource id for the managed image disk.
         /// Serialized Name: ImageDisk.diskEncryptionSet
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: ImageDataDisk.lun
         /// </param>
-        internal ImageDataDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, int lun) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet)
+        internal ImageDataDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, IDictionary<string, BinaryData> serializedAdditionalRawData, int lun) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet, serializedAdditionalRawData)
         {
             Lun = lun;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ImageDataDisk"/> for deserialization. </summary>
+        internal ImageDataDisk()
+        {
         }
 
         /// <summary>

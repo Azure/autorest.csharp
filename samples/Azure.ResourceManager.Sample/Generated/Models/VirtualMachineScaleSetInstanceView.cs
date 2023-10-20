@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,7 +17,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         internal VirtualMachineScaleSetInstanceView()
         {
             Extensions = new ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary>();
@@ -24,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             OrchestrationServices = new ChangeTrackingList<OrchestrationServiceSummary>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachine">
         /// The instance view status summary for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.virtualMachine
@@ -41,12 +45,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// The orchestration services information.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.orchestrationServices
         /// </param>
-        internal VirtualMachineScaleSetInstanceView(VirtualMachineScaleSetInstanceViewStatusesSummary virtualMachine, IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary> extensions, IReadOnlyList<InstanceViewStatus> statuses, IReadOnlyList<OrchestrationServiceSummary> orchestrationServices)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetInstanceView(VirtualMachineScaleSetInstanceViewStatusesSummary virtualMachine, IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary> extensions, IReadOnlyList<InstanceViewStatus> statuses, IReadOnlyList<OrchestrationServiceSummary> orchestrationServices, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VirtualMachine = virtualMachine;
             Extensions = extensions;
             Statuses = statuses;
             OrchestrationServices = orchestrationServices;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

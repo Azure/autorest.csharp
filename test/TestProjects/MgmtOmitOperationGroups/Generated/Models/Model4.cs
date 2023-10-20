@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtOmitOperationGroups.Models
 {
     /// <summary> The Model4. </summary>
     public partial class Model4
     {
-        /// <summary> Initializes a new instance of Model4. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Model4"/>. </summary>
         internal Model4()
         {
         }
 
-        /// <summary> Initializes a new instance of Model4. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model4"/>. </summary>
         /// <param name="id"></param>
         /// <param name="j"></param>
         /// <param name="modelz"></param>
-        internal Model4(string id, string j, ModelZ modelz)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model4(string id, string j, ModelZ modelz, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             J = j;
             Modelz = modelz;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

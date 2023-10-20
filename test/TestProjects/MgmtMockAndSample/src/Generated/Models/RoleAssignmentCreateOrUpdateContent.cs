@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> Role assignment create parameters. </summary>
     public partial class RoleAssignmentCreateOrUpdateContent
     {
-        /// <summary> Initializes a new instance of RoleAssignmentCreateOrUpdateContent. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentCreateOrUpdateContent"/>. </summary>
         public RoleAssignmentCreateOrUpdateContent()
         {
         }
 
-        /// <summary> Initializes a new instance of RoleAssignmentCreateOrUpdateContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentCreateOrUpdateContent"/>. </summary>
         /// <param name="roleDefinitionId"> The role definition ID used in the role assignment. </param>
         /// <param name="principalId"> The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group. </param>
         /// <param name="canDelegate"> The delegation flag used for creating a role assignment. </param>
-        internal RoleAssignmentCreateOrUpdateContent(string roleDefinitionId, string principalId, bool? canDelegate)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoleAssignmentCreateOrUpdateContent(string roleDefinitionId, string principalId, bool? canDelegate, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RoleDefinitionId = roleDefinitionId;
             PrincipalId = principalId;
             CanDelegate = canDelegate;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The role definition ID used in the role assignment. </summary>

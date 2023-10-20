@@ -17,13 +17,16 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineAssessPatchesResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineAssessPatchesResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAssessPatchesResult"/>. </summary>
         internal VirtualMachineAssessPatchesResult()
         {
             Patches = new ChangeTrackingList<VirtualMachineSoftwarePatchProperties>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineAssessPatchesResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAssessPatchesResult"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: VirtualMachineAssessPatchesResult.status
@@ -56,7 +59,8 @@ namespace MgmtAcronymMapping.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: VirtualMachineAssessPatchesResult.error
         /// </param>
-        internal VirtualMachineAssessPatchesResult(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches, ApiError error)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineAssessPatchesResult(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches, ApiError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             AssessmentActivityId = assessmentActivityId;
@@ -66,6 +70,7 @@ namespace MgmtAcronymMapping.Models
             StartOn = startOn;
             Patches = patches;
             Error = error;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

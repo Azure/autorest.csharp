@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary> The TypeFour. </summary>
     internal partial class TypeFour
     {
-        /// <summary> Initializes a new instance of TypeFour. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
         internal TypeFour()
         {
         }
 
-        /// <summary> Initializes a new instance of TypeFour. </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
         /// <param name="myType"> The details of the type. </param>
         /// <param name="properties"> The single value prop. </param>
-        internal TypeFour(string myType, LayerOneProperties properties)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeFour(string myType, LayerOneProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MyType = myType;
             Properties = properties;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The details of the type. </summary>

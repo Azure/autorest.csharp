@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,13 +18,16 @@ namespace MgmtListMethods
     /// </summary>
     public partial class FakeConfigurationData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of FakeConfigurationData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FakeConfigurationData"/>. </summary>
         /// <param name="location"> The location. </param>
         public FakeConfigurationData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of FakeConfigurationData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeConfigurationData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,9 +35,16 @@ namespace MgmtListMethods
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="configValue"> Value of the configuration. </param>
-        internal FakeConfigurationData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string configValue) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakeConfigurationData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string configValue, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             ConfigValue = configValue;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FakeConfigurationData"/> for deserialization. </summary>
+        internal FakeConfigurationData()
+        {
         }
 
         /// <summary> Value of the configuration. </summary>

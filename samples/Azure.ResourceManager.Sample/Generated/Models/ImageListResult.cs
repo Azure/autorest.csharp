@@ -19,7 +19,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class ImageListResult
     {
-        /// <summary> Initializes a new instance of ImageListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/>. </summary>
         /// <param name="images">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -32,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
             Images = images.ToList();
         }
 
-        /// <summary> Initializes a new instance of ImageListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/>. </summary>
         /// <param name="images">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -41,10 +44,17 @@ namespace Azure.ResourceManager.Sample.Models
         /// The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images.
         /// Serialized Name: ImageListResult.nextLink
         /// </param>
-        internal ImageListResult(IReadOnlyList<ImageData> images, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageListResult(IReadOnlyList<ImageData> images, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Images = images;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/> for deserialization. </summary>
+        internal ImageListResult()
+        {
         }
 
         /// <summary>

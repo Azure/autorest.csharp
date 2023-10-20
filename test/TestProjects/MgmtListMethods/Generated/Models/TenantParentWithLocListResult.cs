@@ -16,7 +16,10 @@ namespace MgmtListMethods.Models
     /// <summary> The List Availability Set operation response. </summary>
     internal partial class TenantParentWithLocListResult
     {
-        /// <summary> Initializes a new instance of TenantParentWithLocListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TenantParentWithLocListResult"/>. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal TenantParentWithLocListResult(IEnumerable<TenantParentWithLocData> value)
@@ -26,13 +29,20 @@ namespace MgmtListMethods.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithLocListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="TenantParentWithLocListResult"/>. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
-        internal TenantParentWithLocListResult(IReadOnlyList<TenantParentWithLocData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TenantParentWithLocListResult(IReadOnlyList<TenantParentWithLocData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TenantParentWithLocListResult"/> for deserialization. </summary>
+        internal TenantParentWithLocListResult()
+        {
         }
 
         /// <summary> The list of fakes. </summary>

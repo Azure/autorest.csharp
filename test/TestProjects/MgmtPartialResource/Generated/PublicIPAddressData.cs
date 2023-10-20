@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,13 +19,16 @@ namespace MgmtPartialResource
     /// </summary>
     public partial class PublicIPAddressData : ResourceData
     {
-        /// <summary> Initializes a new instance of PublicIPAddressData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressData"/>. </summary>
         public PublicIPAddressData()
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PublicIPAddressData. </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -41,7 +45,8 @@ namespace MgmtPartialResource
         /// <param name="migrationPhase"> Migration phase of Public IP Address. </param>
         /// <param name="linkedPublicIPAddress"> The linked public IP address of the public IP address resource. </param>
         /// <param name="deleteOption"> Specify what happens to the public IP address when the VM using it is deleted. </param>
-        internal PublicIPAddressData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, string ipAddress, int? idleTimeoutInMinutes, string resourceGuid, PublicIPAddressData servicePublicIPAddress, PublicIPAddressMigrationPhase? migrationPhase, PublicIPAddressData linkedPublicIPAddress, DeleteOption? deleteOption) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicIPAddressData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, string ipAddress, int? idleTimeoutInMinutes, string resourceGuid, PublicIPAddressData servicePublicIPAddress, PublicIPAddressMigrationPhase? migrationPhase, PublicIPAddressData linkedPublicIPAddress, DeleteOption? deleteOption, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Sku = sku;
             Etag = etag;
@@ -55,6 +60,7 @@ namespace MgmtPartialResource
             MigrationPhase = migrationPhase;
             LinkedPublicIPAddress = linkedPublicIPAddress;
             DeleteOption = deleteOption;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The public IP address SKU. </summary>

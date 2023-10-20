@@ -19,7 +19,10 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets.
         /// Serialized Name: VirtualMachineScaleSetListResult.value
@@ -32,7 +35,7 @@ namespace MgmtAcronymMapping.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets.
         /// Serialized Name: VirtualMachineScaleSetListResult.value
@@ -41,10 +44,17 @@ namespace MgmtAcronymMapping.Models
         /// The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS.
         /// Serialized Name: VirtualMachineScaleSetListResult.nextLink
         /// </param>
-        internal VirtualMachineScaleSetListResult(IReadOnlyList<VirtualMachineScaleSetData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetListResult(IReadOnlyList<VirtualMachineScaleSetData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListResult"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetListResult()
+        {
         }
 
         /// <summary>

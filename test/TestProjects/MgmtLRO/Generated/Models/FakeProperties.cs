@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtLRO.Models
 {
     /// <summary> The instance view of a resource. </summary>
     public partial class FakeProperties
     {
-        /// <summary> Initializes a new instance of FakeProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FakeProperties"/>. </summary>
         public FakeProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of FakeProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeProperties"/>. </summary>
         /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
         /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
-        internal FakeProperties(int? platformUpdateDomainCount, int? platformFaultDomainCount)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakeProperties(int? platformUpdateDomainCount, int? platformFaultDomainCount, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PlatformUpdateDomainCount = platformUpdateDomainCount;
             PlatformFaultDomainCount = platformFaultDomainCount;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Update Domain count. </summary>

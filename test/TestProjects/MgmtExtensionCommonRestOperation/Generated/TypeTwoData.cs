@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,13 +18,16 @@ namespace MgmtExtensionCommonRestOperation
     /// </summary>
     public partial class TypeTwoData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of TypeTwoData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TypeTwoData"/>. </summary>
         /// <param name="location"> The location. </param>
         public TypeTwoData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of TypeTwoData. </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeTwoData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,9 +35,16 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="myType"> The details of the type. </param>
-        internal TypeTwoData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeTwoData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             MyType = myType;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TypeTwoData"/> for deserialization. </summary>
+        internal TypeTwoData()
+        {
         }
 
         /// <summary> The details of the type. </summary>

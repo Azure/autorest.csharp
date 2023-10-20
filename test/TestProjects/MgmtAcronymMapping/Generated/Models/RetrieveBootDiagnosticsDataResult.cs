@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class RetrieveBootDiagnosticsDataResult
     {
-        /// <summary> Initializes a new instance of RetrieveBootDiagnosticsDataResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RetrieveBootDiagnosticsDataResult"/>. </summary>
         internal RetrieveBootDiagnosticsDataResult()
         {
         }
 
-        /// <summary> Initializes a new instance of RetrieveBootDiagnosticsDataResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="RetrieveBootDiagnosticsDataResult"/>. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI
         /// Serialized Name: RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri
@@ -29,10 +33,12 @@ namespace MgmtAcronymMapping.Models
         /// The serial console log blob URI.
         /// Serialized Name: RetrieveBootDiagnosticsDataResult.serialConsoleLogBlobUri
         /// </param>
-        internal RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConsoleScreenshotBlobUri = consoleScreenshotBlobUri;
             SerialConsoleLogBlobUri = serialConsoleLogBlobUri;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

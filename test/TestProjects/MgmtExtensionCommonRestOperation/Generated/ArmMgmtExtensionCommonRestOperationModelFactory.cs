@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -16,7 +17,7 @@ namespace MgmtExtensionCommonRestOperation.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExtensionCommonRestOperationModelFactory
     {
-        /// <summary> Initializes a new instance of TypeOneData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtExtensionCommonRestOperation.TypeOneData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -29,10 +30,10 @@ namespace MgmtExtensionCommonRestOperation.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType);
+            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of TypeTwoData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtExtensionCommonRestOperation.TypeTwoData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -45,7 +46,7 @@ namespace MgmtExtensionCommonRestOperation.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType);
+            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType, new Dictionary<string, BinaryData>());
         }
     }
 }

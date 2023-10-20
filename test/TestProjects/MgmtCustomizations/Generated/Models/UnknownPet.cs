@@ -6,13 +6,14 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtCustomizations.Models
 {
     /// <summary> The UnknownPet. </summary>
     internal partial class UnknownPet : Pet
     {
-        /// <summary> Initializes a new instance of UnknownPet. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownPet"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
@@ -20,7 +21,8 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
-        internal UnknownPet(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth) : base(kind, name, size, dateOfBirth)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownPet(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, size, dateOfBirth, serializedAdditionalRawData)
         {
             Kind = kind;
         }

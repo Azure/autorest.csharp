@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtScopeResource.Models
@@ -13,7 +14,10 @@ namespace MgmtScopeResource.Models
     /// <summary> Information about a Log Analytics Workspace. </summary>
     public partial class WorkspaceInfo
     {
-        /// <summary> Initializes a new instance of WorkspaceInfo. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/>. </summary>
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
         /// <param name="location"> Location of the Log Analytics workspace. </param>
         /// <param name="customerId"> Log Analytics workspace identifier. </param>
@@ -27,6 +31,24 @@ namespace MgmtScopeResource.Models
             Id = id;
             Location = location;
             CustomerId = customerId;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/>. </summary>
+        /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
+        /// <param name="location"> Location of the Log Analytics workspace. </param>
+        /// <param name="customerId"> Log Analytics workspace identifier. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WorkspaceInfo(string id, string location, string customerId, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Id = id;
+            Location = location;
+            CustomerId = customerId;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/> for deserialization. </summary>
+        internal WorkspaceInfo()
+        {
         }
 
         /// <summary> Azure Resource Manager identifier of the Log Analytics Workspace. </summary>

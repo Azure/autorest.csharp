@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -38,6 +39,18 @@ namespace MgmtExactMatchInheritance.Models
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ExactMatchModel9Type);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -76,6 +89,8 @@ namespace MgmtExactMatchInheritance.Models
             Optional<int> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -102,8 +117,13 @@ namespace MgmtExactMatchInheritance.Models
                     type = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ExactMatchModel4(Optional.ToNullable(id), name.Value, type.Value, @new.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ExactMatchModel4(Optional.ToNullable(id), name.Value, type.Value, serializedAdditionalRawData, @new.Value);
         }
     }
 }

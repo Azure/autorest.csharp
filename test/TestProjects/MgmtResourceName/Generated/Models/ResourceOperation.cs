@@ -6,30 +6,36 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtResourceName.Models
 {
     /// <summary> Operation. </summary>
     public partial class ResourceOperation
     {
-        /// <summary> Initializes a new instance of ResourceOperation. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ResourceOperation"/>. </summary>
         internal ResourceOperation()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceOperation. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceOperation"/>. </summary>
         /// <param name="name"> The operation name. </param>
         /// <param name="displayName"> The operation display name. </param>
         /// <param name="description"> The operation description. </param>
         /// <param name="origin"> The operation origin. </param>
         /// <param name="properties"> The operation properties. </param>
-        internal ResourceOperation(string name, string displayName, string description, string origin, BinaryData properties)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceOperation(string name, string displayName, string description, string origin, BinaryData properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             DisplayName = displayName;
             Description = description;
             Origin = origin;
             Properties = properties;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The operation name. </summary>

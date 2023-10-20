@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(
                  new ConstructorSignature(
                      type,
-                     $"Initializes a new instance of {type.Name}",
+                     $"Initializes a new instance of <see cref=\"{type}\"/>",
                      null,
                      modifiers,
                      parameters,

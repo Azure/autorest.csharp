@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace MgmtExactMatchInheritance.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class ExactMatchModel3ListResult
     {
-        /// <summary> Initializes a new instance of ExactMatchModel3ListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel3ListResult"/>. </summary>
         internal ExactMatchModel3ListResult()
         {
             Value = new ChangeTrackingList<ExactMatchModel3>();
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel3ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel3ListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal ExactMatchModel3ListResult(IReadOnlyList<ExactMatchModel3> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel3ListResult(IReadOnlyList<ExactMatchModel3> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>

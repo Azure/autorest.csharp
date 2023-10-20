@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -14,13 +15,16 @@ namespace MgmtExactMatchInheritance
     /// <summary> A class representing the ExactMatchModel5 data model. </summary>
     public partial class ExactMatchModel5Data : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel5Data"/>. </summary>
         /// <param name="location"> The location. </param>
         public ExactMatchModel5Data(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel5Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -28,9 +32,16 @@ namespace MgmtExactMatchInheritance
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="new"></param>
-        internal ExactMatchModel5Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel5Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             New = @new;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel5Data"/> for deserialization. </summary>
+        internal ExactMatchModel5Data()
+        {
         }
 
         /// <summary> Gets or sets the new. </summary>

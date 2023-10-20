@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,6 +14,9 @@ namespace ModelShapes.Models
     /// <summary> The MixedModelWithReadonlyProperty. </summary>
     public partial class MixedModelWithReadonlyProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
         public MixedModelWithReadonlyProperty()
         {
@@ -22,10 +26,12 @@ namespace ModelShapes.Models
         /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
         /// <param name="readonlyProperty"></param>
         /// <param name="readonlyListProperty"></param>
-        internal MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty, IReadOnlyList<ReadonlyModel> readonlyListProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty, IReadOnlyList<ReadonlyModel> readonlyListProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ReadonlyProperty = readonlyProperty;
             ReadonlyListProperty = readonlyListProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the readonly property. </summary>

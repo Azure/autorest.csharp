@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,22 +14,27 @@ namespace MgmtParamOrdering.Models
     /// <summary> Container for environment specification versions. </summary>
     public partial class EnvironmentContainer
     {
-        /// <summary> Initializes a new instance of EnvironmentContainer. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainer"/>. </summary>
         public EnvironmentContainer()
         {
             Properties = new ChangeTrackingDictionary<string, string>();
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of EnvironmentContainer. </summary>
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainer"/>. </summary>
         /// <param name="description"> The asset description text. </param>
         /// <param name="properties"> The asset property dictionary. </param>
         /// <param name="tags"> Tag dictionary. Tags can be added, removed, and updated. </param>
-        internal EnvironmentContainer(string description, IDictionary<string, string> properties, IDictionary<string, string> tags)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EnvironmentContainer(string description, IDictionary<string, string> properties, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Description = description;
             Properties = properties;
             Tags = tags;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The asset description text. </summary>

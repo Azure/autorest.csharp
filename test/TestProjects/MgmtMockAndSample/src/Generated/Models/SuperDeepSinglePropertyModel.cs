@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> This is a single property of string. </summary>
     internal partial class SuperDeepSinglePropertyModel
     {
-        /// <summary> Initializes a new instance of SuperDeepSinglePropertyModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SuperDeepSinglePropertyModel"/>. </summary>
         public SuperDeepSinglePropertyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of SuperDeepSinglePropertyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="SuperDeepSinglePropertyModel"/>. </summary>
         /// <param name="super"> This is a single property of string. </param>
-        internal SuperDeepSinglePropertyModel(VeryDeepSinglePropertyModel super)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SuperDeepSinglePropertyModel(VeryDeepSinglePropertyModel super, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Super = super;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> This is a single property of string. </summary>

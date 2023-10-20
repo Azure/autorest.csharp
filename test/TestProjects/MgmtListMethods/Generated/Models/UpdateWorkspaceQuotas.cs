@@ -5,29 +5,37 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtListMethods.Models
 {
     /// <summary> The properties for update Quota response. </summary>
     public partial class UpdateWorkspaceQuotas
     {
-        /// <summary> Initializes a new instance of UpdateWorkspaceQuotas. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UpdateWorkspaceQuotas"/>. </summary>
         internal UpdateWorkspaceQuotas()
         {
         }
 
-        /// <summary> Initializes a new instance of UpdateWorkspaceQuotas. </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateWorkspaceQuotas"/>. </summary>
         /// <param name="id"> Specifies the resource ID. </param>
         /// <param name="updateWorkspaceQuotasType"> Specifies the resource type. </param>
         /// <param name="limit"> The maximum permitted quota of the resource. </param>
         /// <param name="unit"> An enum describing the unit of quota measurement. </param>
         /// <param name="status"> Status of update workspace quota. </param>
-        internal UpdateWorkspaceQuotas(string id, string updateWorkspaceQuotasType, long? limit, QuotaUnit? unit, Status? status)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpdateWorkspaceQuotas(string id, string updateWorkspaceQuotasType, long? limit, QuotaUnit? unit, Status? status, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             UpdateWorkspaceQuotasType = updateWorkspaceQuotasType;
             Limit = limit;
             Unit = unit;
             Status = status;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Specifies the resource ID. </summary>

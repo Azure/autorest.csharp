@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtScopeResource.Models
 {
     /// <summary> Deployment operation properties. </summary>
     public partial class DeploymentOperationProperties
     {
-        /// <summary> Initializes a new instance of DeploymentOperationProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperationProperties"/>. </summary>
         internal DeploymentOperationProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentOperationProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperationProperties"/>. </summary>
         /// <param name="provisioningOperation"> The name of the current provisioning operation. </param>
         /// <param name="provisioningState"> The state of the provisioning. </param>
         /// <param name="timestamp"> The date and time of the operation. </param>
@@ -28,7 +32,8 @@ namespace MgmtScopeResource.Models
         /// <param name="statusMessage"> Operation status message from the resource provider. This property is optional.  It will only be provided if an error was received from the resource provider. </param>
         /// <param name="request"> The HTTP request message. </param>
         /// <param name="response"> The HTTP response message. </param>
-        internal DeploymentOperationProperties(ProvisioningOperation? provisioningOperation, string provisioningState, DateTimeOffset? timestamp, TimeSpan? duration, TimeSpan? anotherDuration, string serviceRequestId, string statusCode, StatusMessage statusMessage, HttpMessage request, HttpMessage response)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentOperationProperties(ProvisioningOperation? provisioningOperation, string provisioningState, DateTimeOffset? timestamp, TimeSpan? duration, TimeSpan? anotherDuration, string serviceRequestId, string statusCode, StatusMessage statusMessage, HttpMessage request, HttpMessage response, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProvisioningOperation = provisioningOperation;
             ProvisioningState = provisioningState;
@@ -40,6 +45,7 @@ namespace MgmtScopeResource.Models
             StatusMessage = statusMessage;
             Request = request;
             Response = response;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the current provisioning operation. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -16,7 +17,7 @@ namespace MgmtOperations.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtOperationsModelFactory
     {
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtOperations.AvailabilitySetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -29,10 +30,10 @@ namespace MgmtOperations.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar);
+            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of ConnectionSharedKey. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ConnectionSharedKey"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -45,10 +46,10 @@ namespace MgmtOperations.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ConnectionSharedKey(id, name, resourceType, systemData, tags, location, value);
+            return new ConnectionSharedKey(id, name, resourceType, systemData, tags, location, value, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetChildData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtOperations.AvailabilitySetChildData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -61,10 +62,10 @@ namespace MgmtOperations.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetChildData(id, name, resourceType, systemData, tags, location, bar);
+            return new AvailabilitySetChildData(id, name, resourceType, systemData, tags, location, bar, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetGrandChildData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtOperations.AvailabilitySetGrandChildData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -77,18 +78,18 @@ namespace MgmtOperations.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetGrandChildData(id, name, resourceType, systemData, tags, location, bar);
+            return new AvailabilitySetGrandChildData(id, name, resourceType, systemData, tags, location, bar, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of TestAvailabilitySet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TestAvailabilitySet"/>. </summary>
         /// <param name="bar"> specifies the bar. </param>
         /// <returns> A new <see cref="Models.TestAvailabilitySet"/> instance for mocking. </returns>
         public static TestAvailabilitySet TestAvailabilitySet(string bar = null)
         {
-            return new TestAvailabilitySet(bar);
+            return new TestAvailabilitySet(bar, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of UnpatchableResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtOperations.UnpatchableResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -101,7 +102,7 @@ namespace MgmtOperations.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new UnpatchableResourceData(id, name, resourceType, systemData, tags, location, foo);
+            return new UnpatchableResourceData(id, name, resourceType, systemData, tags, location, foo, new Dictionary<string, BinaryData>());
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -16,7 +17,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtDiscriminatorModelFactory
     {
-        /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtDiscriminator.DeliveryRuleData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -25,10 +26,10 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="MgmtDiscriminator.DeliveryRuleData"/> instance for mocking. </returns>
         public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DeliveryRuleProperties properties = null)
         {
-            return new DeliveryRuleData(id, name, resourceType, systemData, properties);
+            return new DeliveryRuleData(id, name, resourceType, systemData, properties, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleProperties"/>. </summary>
         /// <param name="order"> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </param>
         /// <param name="conditions">
         /// The condition that must be matched for the actions to be executed
@@ -57,159 +58,201 @@ namespace MgmtDiscriminator.Models
             actions ??= new List<DeliveryRuleAction>();
             extraMappingInfo ??= new Dictionary<string, DeliveryRuleAction>();
 
-            return new DeliveryRuleProperties(order, conditions, actions?.ToList(), extraMappingInfo, pet, foo);
+            return new DeliveryRuleProperties(order, conditions, actions?.ToList(), extraMappingInfo, pet, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCondition"/>. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
         public static DeliveryRuleCondition DeliveryRuleCondition(string name = "Unknown", string foo = null)
         {
-            return new UnknownDeliveryRuleCondition(name, foo);
+            return new UnknownDeliveryRuleCondition(name, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
         public static DeliveryRuleAction DeliveryRuleAction(string name = "Unknown", string foo = null)
         {
-            return new DeliveryRuleAction(name, foo);
+            return new DeliveryRuleAction(name, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string id = null)
         {
-            return new UnknownPet(default, id);
+            return new UnknownPet(default, id, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
-        public static Cat Cat(string id = null, string meow = null)
+        public static Cat Cat(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, id, meow);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new Cat(PetKind.Cat, id, serializedAdditionalRawData, meow);
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string id = null, string bark = null)
+        public static Dog Dog(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string bark = null)
         {
-            return new Dog(PetKind.Dog, id, bark);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new Dog(PetKind.Dog, id, serializedAdditionalRawData, bark);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRemoteAddressCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRemoteAddressCondition"/>. </summary>
         /// <param name="foo"> For test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRemoteAddressCondition"/> instance for mocking. </returns>
-        public static DeliveryRuleRemoteAddressCondition DeliveryRuleRemoteAddressCondition(string foo = null, RemoteAddressMatchConditionParameters parameters = null)
+        public static DeliveryRuleRemoteAddressCondition DeliveryRuleRemoteAddressCondition(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, RemoteAddressMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleRemoteAddressCondition(MatchVariable.RemoteAddress, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new DeliveryRuleRemoteAddressCondition(MatchVariable.RemoteAddress, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRequestMethodCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRequestMethodCondition"/>. </summary>
         /// <param name="foo"> For test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRequestMethodCondition"/> instance for mocking. </returns>
-        public static DeliveryRuleRequestMethodCondition DeliveryRuleRequestMethodCondition(string foo = null, RequestMethodMatchConditionParameters parameters = null)
+        public static DeliveryRuleRequestMethodCondition DeliveryRuleRequestMethodCondition(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, RequestMethodMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleRequestMethodCondition(MatchVariable.RequestMethod, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new DeliveryRuleRequestMethodCondition(MatchVariable.RequestMethod, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleQueryStringCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleQueryStringCondition"/>. </summary>
         /// <param name="foo"> For test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleQueryStringCondition"/> instance for mocking. </returns>
-        public static DeliveryRuleQueryStringCondition DeliveryRuleQueryStringCondition(string foo = null, QueryStringMatchConditionParameters parameters = null)
+        public static DeliveryRuleQueryStringCondition DeliveryRuleQueryStringCondition(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, QueryStringMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UrlRedirectAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlRedirectAction"/> instance for mocking. </returns>
-        public static UrlRedirectAction UrlRedirectAction(string foo = null, UrlRedirectActionParameters parameters = null)
+        public static UrlRedirectAction UrlRedirectAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, UrlRedirectActionParameters parameters = null)
         {
-            return new UrlRedirectAction(DeliveryRuleActionType.UrlRedirect, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new UrlRedirectAction(DeliveryRuleActionType.UrlRedirect, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of UrlSigningAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UrlSigningAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlSigningAction"/> instance for mocking. </returns>
-        public static UrlSigningAction UrlSigningAction(string foo = null, UrlSigningActionParameters parameters = null)
+        public static UrlSigningAction UrlSigningAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, UrlSigningActionParameters parameters = null)
         {
-            return new UrlSigningAction(DeliveryRuleActionType.UrlSigning, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new UrlSigningAction(DeliveryRuleActionType.UrlSigning, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of OriginGroupOverrideAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.OriginGroupOverrideAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.OriginGroupOverrideAction"/> instance for mocking. </returns>
-        public static OriginGroupOverrideAction OriginGroupOverrideAction(string foo = null, OriginGroupOverrideActionParameters parameters = null)
+        public static OriginGroupOverrideAction OriginGroupOverrideAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, OriginGroupOverrideActionParameters parameters = null)
         {
-            return new OriginGroupOverrideAction(DeliveryRuleActionType.OriginGroupOverride, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new OriginGroupOverrideAction(DeliveryRuleActionType.OriginGroupOverride, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of UrlRewriteAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UrlRewriteAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlRewriteAction"/> instance for mocking. </returns>
-        public static UrlRewriteAction UrlRewriteAction(string foo = null, UrlRewriteActionParameters parameters = null)
+        public static UrlRewriteAction UrlRewriteAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, UrlRewriteActionParameters parameters = null)
         {
-            return new UrlRewriteAction(DeliveryRuleActionType.UrlRewrite, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new UrlRewriteAction(DeliveryRuleActionType.UrlRewrite, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRequestHeaderAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRequestHeaderAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRequestHeaderAction"/> instance for mocking. </returns>
-        public static DeliveryRuleRequestHeaderAction DeliveryRuleRequestHeaderAction(string foo = null, HeaderActionParameters parameters = null)
+        public static DeliveryRuleRequestHeaderAction DeliveryRuleRequestHeaderAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, HeaderActionParameters parameters = null)
         {
-            return new DeliveryRuleRequestHeaderAction(DeliveryRuleActionType.ModifyRequestHeader, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new DeliveryRuleRequestHeaderAction(DeliveryRuleActionType.ModifyRequestHeader, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleResponseHeaderAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleResponseHeaderAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleResponseHeaderAction"/> instance for mocking. </returns>
-        public static DeliveryRuleResponseHeaderAction DeliveryRuleResponseHeaderAction(string foo = null, HeaderActionParameters parameters = null)
+        public static DeliveryRuleResponseHeaderAction DeliveryRuleResponseHeaderAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, HeaderActionParameters parameters = null)
         {
-            return new DeliveryRuleResponseHeaderAction(DeliveryRuleActionType.ModifyResponseHeader, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new DeliveryRuleResponseHeaderAction(DeliveryRuleActionType.ModifyResponseHeader, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCacheExpirationAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCacheExpirationAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCacheExpirationAction"/> instance for mocking. </returns>
-        public static DeliveryRuleCacheExpirationAction DeliveryRuleCacheExpirationAction(string foo = null, CacheExpirationActionParameters parameters = null)
+        public static DeliveryRuleCacheExpirationAction DeliveryRuleCacheExpirationAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, CacheExpirationActionParameters parameters = null)
         {
-            return new DeliveryRuleCacheExpirationAction(DeliveryRuleActionType.CacheExpiration, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new DeliveryRuleCacheExpirationAction(DeliveryRuleActionType.CacheExpiration, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCacheKeyQueryStringAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/> instance for mocking. </returns>
-        public static DeliveryRuleCacheKeyQueryStringAction DeliveryRuleCacheKeyQueryStringAction(string foo = null, CacheKeyQueryStringActionParameters parameters = null)
+        public static DeliveryRuleCacheKeyQueryStringAction DeliveryRuleCacheKeyQueryStringAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, CacheKeyQueryStringActionParameters parameters = null)
         {
-            return new DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType.CacheKeyQueryString, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType.CacheKeyQueryString, foo, serializedAdditionalRawData, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRouteConfigurationOverrideAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>. </summary>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/> instance for mocking. </returns>
-        public static DeliveryRuleRouteConfigurationOverrideAction DeliveryRuleRouteConfigurationOverrideAction(string foo = null, RouteConfigurationOverrideActionParameters parameters = null)
+        public static DeliveryRuleRouteConfigurationOverrideAction DeliveryRuleRouteConfigurationOverrideAction(string foo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, RouteConfigurationOverrideActionParameters parameters = null)
         {
-            return new DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType.RouteConfigurationOverride, foo, parameters);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType.RouteConfigurationOverride, foo, serializedAdditionalRawData, parameters);
         }
     }
 }

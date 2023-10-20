@@ -5,27 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExactMatchFlattenInheritance.Models
 {
     /// <summary> This model is x-ms-azure-resource, has flatten properties, and WITHOUT enough reference type properties. </summary>
     public partial class AzureResourceFlattenModel4
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel4. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel4"/>. </summary>
         public AzureResourceFlattenModel4()
         {
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel4. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel4"/>. </summary>
         /// <param name="foo"> New property. </param>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
-        internal AzureResourceFlattenModel4(int? foo, string id, string name, string resourceType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AzureResourceFlattenModel4(int? foo, string id, string name, string resourceType, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Foo = foo;
             Id = id;
             Name = name;
             ResourceType = resourceType;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> New property. </summary>

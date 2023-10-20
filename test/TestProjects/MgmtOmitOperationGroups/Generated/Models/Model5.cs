@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,21 +14,26 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> The Model5. </summary>
     public partial class Model5
     {
-        /// <summary> Initializes a new instance of Model5. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Model5"/>. </summary>
         public Model5()
         {
             Modelqs = new ChangeTrackingList<ModelQ>();
         }
 
-        /// <summary> Initializes a new instance of Model5. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model5"/>. </summary>
         /// <param name="id"></param>
         /// <param name="k"></param>
         /// <param name="modelqs"></param>
-        internal Model5(string id, string k, IList<ModelQ> modelqs)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model5(string id, string k, IList<ModelQ> modelqs, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             K = k;
             Modelqs = modelqs;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

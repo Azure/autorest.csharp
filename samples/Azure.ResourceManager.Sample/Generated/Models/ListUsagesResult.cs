@@ -18,7 +18,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class ListUsagesResult
     {
-        /// <summary> Initializes a new instance of ListUsagesResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ListUsagesResult"/>. </summary>
         /// <param name="value">
         /// The list of compute resource usages.
         /// Serialized Name: ListUsagesResult.value
@@ -31,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ListUsagesResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListUsagesResult"/>. </summary>
         /// <param name="value">
         /// The list of compute resource usages.
         /// Serialized Name: ListUsagesResult.value
@@ -40,10 +43,17 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
         /// Serialized Name: ListUsagesResult.nextLink
         /// </param>
-        internal ListUsagesResult(IReadOnlyList<SampleUsage> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListUsagesResult(IReadOnlyList<SampleUsage> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ListUsagesResult"/> for deserialization. </summary>
+        internal ListUsagesResult()
+        {
         }
 
         /// <summary>

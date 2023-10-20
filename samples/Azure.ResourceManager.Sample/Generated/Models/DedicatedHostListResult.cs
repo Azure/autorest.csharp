@@ -19,7 +19,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DedicatedHostListResult
     {
-        /// <summary> Initializes a new instance of DedicatedHostListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated hosts
         /// Serialized Name: DedicatedHostListResult.value
@@ -32,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated hosts
         /// Serialized Name: DedicatedHostListResult.value
@@ -41,10 +44,17 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts.
         /// Serialized Name: DedicatedHostListResult.nextLink
         /// </param>
-        internal DedicatedHostListResult(IReadOnlyList<DedicatedHostData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostListResult(IReadOnlyList<DedicatedHostData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostListResult"/> for deserialization. </summary>
+        internal DedicatedHostListResult()
+        {
         }
 
         /// <summary>

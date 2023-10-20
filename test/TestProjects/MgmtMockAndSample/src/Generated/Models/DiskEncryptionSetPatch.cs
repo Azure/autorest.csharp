@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -14,20 +15,24 @@ namespace MgmtMockAndSample.Models
     /// <summary> disk encryption set update resource. </summary>
     public partial class DiskEncryptionSetPatch
     {
-        /// <summary> Initializes a new instance of DiskEncryptionSetPatch. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetPatch"/>. </summary>
         public DiskEncryptionSetPatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of DiskEncryptionSetPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="identity"> Identity for the virtual machine. </param>
         /// <param name="encryptionType"> The type of key used to encrypt the data of the disk. </param>
         /// <param name="activeKey"> Key Vault Key Url to be used for server side encryption of Managed Disks and Snapshots. </param>
         /// <param name="rotationToLatestKeyVersionEnabled"> Set this flag to true to enable auto-updating of this disk encryption set to the latest key version. </param>
         /// <param name="federatedClientId"> Multi-tenant application client id to access key vault in a different tenant. Setting the value to 'None' will clear the property. </param>
-        internal DiskEncryptionSetPatch(IDictionary<string, string> tags, ManagedServiceIdentity identity, DiskEncryptionSetType? encryptionType, KeyForDiskEncryptionSet activeKey, bool? rotationToLatestKeyVersionEnabled, string federatedClientId)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiskEncryptionSetPatch(IDictionary<string, string> tags, ManagedServiceIdentity identity, DiskEncryptionSetType? encryptionType, KeyForDiskEncryptionSet activeKey, bool? rotationToLatestKeyVersionEnabled, string federatedClientId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tags = tags;
             Identity = identity;
@@ -35,6 +40,7 @@ namespace MgmtMockAndSample.Models
             ActiveKey = activeKey;
             RotationToLatestKeyVersionEnabled = rotationToLatestKeyVersionEnabled;
             FederatedClientId = federatedClientId;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Resource tags. </summary>

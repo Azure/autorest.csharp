@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class SshPublicKeyInfo
     {
-        /// <summary> Initializes a new instance of SshPublicKeyInfo. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyInfo"/>. </summary>
         public SshPublicKeyInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of SshPublicKeyInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyInfo"/>. </summary>
         /// <param name="path">
         /// Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys
         /// Serialized Name: SshPublicKey.path
@@ -27,10 +33,12 @@ namespace MgmtAcronymMapping.Models
         /// SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
         /// Serialized Name: SshPublicKey.keyData
         /// </param>
-        internal SshPublicKeyInfo(string path, string keyData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SshPublicKeyInfo(string path, string keyData, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Path = path;
             KeyData = keyData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

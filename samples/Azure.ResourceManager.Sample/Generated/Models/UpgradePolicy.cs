@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class UpgradePolicy
     {
-        /// <summary> Initializes a new instance of UpgradePolicy. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UpgradePolicy"/>. </summary>
         public UpgradePolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of UpgradePolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradePolicy"/>. </summary>
         /// <param name="mode">
         /// Specifies the mode of an upgrade to virtual machines in the scale set.&lt;br /&gt;&lt;br /&gt; Possible values are:&lt;br /&gt;&lt;br /&gt; **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.&lt;br /&gt;&lt;br /&gt; **Automatic** - All virtual machines in the scale set are  automatically updated at the same time.
         /// Serialized Name: UpgradePolicy.mode
@@ -31,11 +37,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Configuration parameters used for performing automatic OS Upgrade.
         /// Serialized Name: UpgradePolicy.automaticOSUpgradePolicy
         /// </param>
-        internal UpgradePolicy(UpgradeMode? mode, RollingUpgradePolicy rollingUpgradePolicy, AutomaticOSUpgradePolicy automaticOSUpgradePolicy)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradePolicy(UpgradeMode? mode, RollingUpgradePolicy rollingUpgradePolicy, AutomaticOSUpgradePolicy automaticOSUpgradePolicy, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Mode = mode;
             RollingUpgradePolicy = rollingUpgradePolicy;
             AutomaticOSUpgradePolicy = automaticOSUpgradePolicy;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

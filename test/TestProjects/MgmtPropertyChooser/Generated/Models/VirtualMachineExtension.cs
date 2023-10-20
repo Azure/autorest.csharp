@@ -15,13 +15,16 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Describes a Virtual Machine Extension. </summary>
     public partial class VirtualMachineExtension : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtension"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineExtension(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtension"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -37,7 +40,8 @@ namespace MgmtPropertyChooser.Models
         /// <param name="settings"> Json formatted public settings for the extension. </param>
         /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal VirtualMachineExtension(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtension(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;
@@ -48,6 +52,12 @@ namespace MgmtPropertyChooser.Models
             Settings = settings;
             ProtectedSettings = protectedSettings;
             ProvisioningState = provisioningState;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtension"/> for deserialization. </summary>
+        internal VirtualMachineExtension()
+        {
         }
 
         /// <summary> How the extension handler should be forced to update even if the extension configuration has not changed. </summary>

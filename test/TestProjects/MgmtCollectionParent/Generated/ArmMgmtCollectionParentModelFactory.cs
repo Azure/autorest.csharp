@@ -17,7 +17,7 @@ namespace MgmtCollectionParent.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtCollectionParentModelFactory
     {
-        /// <summary> Initializes a new instance of OrderResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtCollectionParent.OrderResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,10 +31,10 @@ namespace MgmtCollectionParent.Models
             orderItemIds ??= new List<string>();
             orderStageHistory ??= new List<StageDetails>();
 
-            return new OrderResourceData(id, name, resourceType, systemData, orderItemIds?.ToList(), currentStage, orderStageHistory?.ToList());
+            return new OrderResourceData(id, name, resourceType, systemData, orderItemIds?.ToList(), currentStage, orderStageHistory?.ToList(), new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of StageDetails. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.StageDetails"/>. </summary>
         /// <param name="stageStatus"> Stage status. </param>
         /// <param name="stageName"> Stage name. </param>
         /// <param name="displayName"> Display name of the resource stage. </param>
@@ -42,7 +42,7 @@ namespace MgmtCollectionParent.Models
         /// <returns> A new <see cref="Models.StageDetails"/> instance for mocking. </returns>
         public static StageDetails StageDetails(StageStatus? stageStatus = null, StageName? stageName = null, string displayName = null, DateTimeOffset? startOn = null)
         {
-            return new StageDetails(stageStatus, stageName, displayName, startOn);
+            return new StageDetails(stageStatus, stageName, displayName, startOn, new Dictionary<string, BinaryData>());
         }
     }
 }

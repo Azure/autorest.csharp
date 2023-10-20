@@ -18,13 +18,16 @@ namespace MgmtExactMatchInheritance
     /// <summary> A class representing the ExactMatchModel1 data model. </summary>
     public partial class ExactMatchModel1Data : ResourceData
     {
-        /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel1Data"/>. </summary>
         public ExactMatchModel1Data()
         {
             SupportingUris = new ChangeTrackingList<Uri>();
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -50,7 +53,8 @@ namespace MgmtExactMatchInheritance
         /// <param name="type17"> Gets or sets the type 17. </param>
         /// <param name="type18"> Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls. </param>
         /// <param name="type19"> Azure Key Vault secret reference. </param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryElement<string> type5, DataFactoryElement<double> type6, DataFactoryElement<bool> type7, DataFactoryElement<int> type8, DataFactoryElement<BinaryData> type9, DataFactoryElement<IList<SeparateClass>> type10, DataFactoryElement<IList<string>> type11, DataFactoryElement<IDictionary<string, string>> type12, DataFactoryElement<IList<SeparateClass>> type13, DataFactoryElement<DateTimeOffset> type14, DataFactoryElement<TimeSpan> type15, DataFactoryElement<Uri> type16, DataFactoryLinkedServiceReference type17, DataFactorySecretString type18, DataFactoryKeyVaultSecretReference type19) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryElement<string> type5, DataFactoryElement<double> type6, DataFactoryElement<bool> type7, DataFactoryElement<int> type8, DataFactoryElement<BinaryData> type9, DataFactoryElement<IList<SeparateClass>> type10, DataFactoryElement<IList<string>> type11, DataFactoryElement<IDictionary<string, string>> type12, DataFactoryElement<IList<SeparateClass>> type13, DataFactoryElement<DateTimeOffset> type14, DataFactoryElement<TimeSpan> type15, DataFactoryElement<Uri> type16, DataFactoryLinkedServiceReference type17, DataFactorySecretString type18, DataFactoryKeyVaultSecretReference type19, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
@@ -73,6 +77,7 @@ namespace MgmtExactMatchInheritance
             Type17 = type17;
             Type18 = type18;
             Type19 = type19;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the new. </summary>

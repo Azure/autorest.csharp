@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Net;
 using Azure.Core;
@@ -14,20 +15,25 @@ namespace MgmtMockAndSample.Models
     /// <summary> ThreatIntel Whitelist for Firewall Policy. </summary>
     public partial class FirewallPolicyThreatIntelWhitelist
     {
-        /// <summary> Initializes a new instance of FirewallPolicyThreatIntelWhitelist. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyThreatIntelWhitelist"/>. </summary>
         public FirewallPolicyThreatIntelWhitelist()
         {
             IpAddresses = new ChangeTrackingList<IPAddress>();
             Fqdns = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyThreatIntelWhitelist. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyThreatIntelWhitelist"/>. </summary>
         /// <param name="ipAddresses"> List of IP addresses for the ThreatIntel Whitelist. </param>
         /// <param name="fqdns"> List of FQDNs for the ThreatIntel Whitelist. </param>
-        internal FirewallPolicyThreatIntelWhitelist(IList<IPAddress> ipAddresses, IList<string> fqdns)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyThreatIntelWhitelist(IList<IPAddress> ipAddresses, IList<string> fqdns, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IpAddresses = ipAddresses;
             Fqdns = fqdns;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of IP addresses for the ThreatIntel Whitelist. </summary>

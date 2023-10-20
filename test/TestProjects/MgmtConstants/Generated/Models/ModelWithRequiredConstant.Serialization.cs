@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -27,6 +28,18 @@ namespace MgmtConstants.Models
             writer.WriteBooleanValue(RequiredBooleanConstant);
             writer.WritePropertyName("requiredFloatConstant"u8);
             writer.WriteNumberValue(RequiredFloatConstant.ToSerialSingle());
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
@@ -64,6 +77,8 @@ namespace MgmtConstants.Models
             IntConstant requiredIntConstant = default;
             bool requiredBooleanConstant = default;
             FloatConstant requiredFloatConstant = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredStringConstant"u8))
@@ -86,8 +101,13 @@ namespace MgmtConstants.Models
                     requiredFloatConstant = new FloatConstant(property.Value.GetSingle());
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, serializedAdditionalRawData);
         }
     }
 }

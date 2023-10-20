@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtExactMatchInheritance.Models
@@ -12,20 +14,25 @@ namespace MgmtExactMatchInheritance.Models
     /// <summary> The ExactMatchModel8. </summary>
     public partial class ExactMatchModel8
     {
-        /// <summary> Initializes a new instance of ExactMatchModel8. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel8"/>. </summary>
         public ExactMatchModel8()
         {
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel8. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel8"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="bar"></param>
-        internal ExactMatchModel8(ResourceIdentifier id, string name, string bar)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel8(ResourceIdentifier id, string name, string bar, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             Bar = bar;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

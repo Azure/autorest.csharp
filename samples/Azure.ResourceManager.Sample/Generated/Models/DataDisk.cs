@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -15,7 +16,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DataDisk
     {
-        /// <summary> Initializes a new instance of DataDisk. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDisk.lun
@@ -30,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             CreateOption = createOption;
         }
 
-        /// <summary> Initializes a new instance of DataDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDisk.lun
@@ -79,7 +83,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
         /// Serialized Name: DataDisk.diskMBpsReadWrite
         /// </param>
-        internal DataDisk(int lun, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, bool? toBeDetached, long? diskIopsReadWrite, long? diskMBpsReadWrite)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataDisk(int lun, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, bool? toBeDetached, long? diskIopsReadWrite, long? diskMBpsReadWrite, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Lun = lun;
             Name = name;
@@ -93,6 +98,12 @@ namespace Azure.ResourceManager.Sample.Models
             ToBeDetached = toBeDetached;
             DiskIopsReadWrite = diskIopsReadWrite;
             DiskMBpsReadWrite = diskMBpsReadWrite;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DataDisk"/> for deserialization. </summary>
+        internal DataDisk()
+        {
         }
 
         /// <summary>

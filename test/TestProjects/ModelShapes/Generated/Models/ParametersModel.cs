@@ -5,11 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelShapes.Models
 {
     /// <summary> The ParametersModel. </summary>
     internal partial class ParametersModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of ParametersModel. </summary>
         public ParametersModel()
         {
@@ -18,10 +24,12 @@ namespace ModelShapes.Models
         /// <summary> Initializes a new instance of ParametersModel. </summary>
         /// <param name="code"></param>
         /// <param name="status"></param>
-        internal ParametersModel(string code, string status)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParametersModel(string code, string status, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Status = status;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the code. </summary>

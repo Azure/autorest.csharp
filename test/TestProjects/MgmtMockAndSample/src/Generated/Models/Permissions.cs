@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,10 @@ namespace MgmtMockAndSample.Models
     /// <summary> Permissions the identity has for keys, secrets, certificates and storage. </summary>
     public partial class Permissions
     {
-        /// <summary> Initializes a new instance of Permissions. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Permissions"/>. </summary>
         public Permissions()
         {
             Keys = new ChangeTrackingList<KeyPermission>();
@@ -22,17 +26,19 @@ namespace MgmtMockAndSample.Models
             Storage = new ChangeTrackingList<StoragePermission>();
         }
 
-        /// <summary> Initializes a new instance of Permissions. </summary>
+        /// <summary> Initializes a new instance of <see cref="Permissions"/>. </summary>
         /// <param name="keys"> Permissions to keys. </param>
         /// <param name="secrets"> Permissions to secrets. </param>
         /// <param name="certificates"> Permissions to certificates. </param>
         /// <param name="storage"> Permissions to storage accounts. </param>
-        internal Permissions(IList<KeyPermission> keys, IList<SecretPermission> secrets, IList<CertificatePermission> certificates, IList<StoragePermission> storage)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Permissions(IList<KeyPermission> keys, IList<SecretPermission> secrets, IList<CertificatePermission> certificates, IList<StoragePermission> storage, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Keys = keys;
             Secrets = secrets;
             Certificates = certificates;
             Storage = storage;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Permissions to keys. </summary>

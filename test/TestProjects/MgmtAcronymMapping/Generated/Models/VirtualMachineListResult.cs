@@ -19,7 +19,10 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class VirtualMachineListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machines.
         /// Serialized Name: VirtualMachineListResult.value
@@ -32,7 +35,7 @@ namespace MgmtAcronymMapping.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machines.
         /// Serialized Name: VirtualMachineListResult.value
@@ -41,10 +44,17 @@ namespace MgmtAcronymMapping.Models
         /// The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
         /// Serialized Name: VirtualMachineListResult.nextLink
         /// </param>
-        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineListResult"/> for deserialization. </summary>
+        internal VirtualMachineListResult()
+        {
         }
 
         /// <summary>

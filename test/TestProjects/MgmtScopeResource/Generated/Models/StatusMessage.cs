@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtScopeResource.Models
 {
     /// <summary> Operation status message object. </summary>
     public partial class StatusMessage
     {
-        /// <summary> Initializes a new instance of StatusMessage. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="StatusMessage"/>. </summary>
         internal StatusMessage()
         {
         }
 
-        /// <summary> Initializes a new instance of StatusMessage. </summary>
+        /// <summary> Initializes a new instance of <see cref="StatusMessage"/>. </summary>
         /// <param name="status"> Status of the deployment operation. </param>
         /// <param name="errorResponse"> The error reported by the operation. </param>
-        internal StatusMessage(string status, ErrorResponse errorResponse)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StatusMessage(string status, ErrorResponse errorResponse, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             ErrorResponse = errorResponse;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Status of the deployment operation. </summary>

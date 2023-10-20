@@ -19,7 +19,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class AvailabilitySetListResult
     {
-        /// <summary> Initializes a new instance of AvailabilitySetListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/>. </summary>
         /// <param name="value">
         /// The list of availability sets
         /// Serialized Name: AvailabilitySetListResult.value
@@ -32,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/>. </summary>
         /// <param name="value">
         /// The list of availability sets
         /// Serialized Name: AvailabilitySetListResult.value
@@ -41,10 +44,17 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
         /// Serialized Name: AvailabilitySetListResult.nextLink
         /// </param>
-        internal AvailabilitySetListResult(IReadOnlyList<AvailabilitySetData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailabilitySetListResult(IReadOnlyList<AvailabilitySetData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/> for deserialization. </summary>
+        internal AvailabilitySetListResult()
+        {
         }
 
         /// <summary>

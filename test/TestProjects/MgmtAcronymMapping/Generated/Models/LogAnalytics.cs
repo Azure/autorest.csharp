@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
@@ -16,12 +17,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class LogAnalytics
     {
-        /// <summary> Initializes a new instance of LogAnalytics. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         internal LogAnalytics()
         {
         }
 
-        /// <summary> Initializes a new instance of LogAnalytics. </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         /// <param name="properties">
         /// LogAnalyticsOutput
         /// Serialized Name: LogAnalyticsOperationResult.properties
@@ -42,13 +46,15 @@ namespace MgmtAcronymMapping.Models
         /// Gets the workflow trigger callback URL base path.
         /// Serialized Name: LogAnalyticsOperationResult.basePath
         /// </param>
-        internal LogAnalytics(LogAnalyticsOutput properties, ContentType? contentType, BinaryData content, RequestMethod? requestMethod, Uri basePathUri)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalytics(LogAnalyticsOutput properties, ContentType? contentType, BinaryData content, RequestMethod? requestMethod, Uri basePathUri, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Properties = properties;
             ContentType = contentType;
             Content = content;
             RequestMethod = requestMethod;
             BasePathUri = basePathUri;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExactMatchFlattenInheritance.Models
 {
     /// <summary> This model is x-ms-azure-resource, and is exactly a WritableSubResource type. </summary>
     public partial class AzureResourceFlattenModel7
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel7"/>. </summary>
         public AzureResourceFlattenModel7()
         {
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel7"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
-        internal AzureResourceFlattenModel7(string id, string name, string resourceType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AzureResourceFlattenModel7(string id, string name, string resourceType, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

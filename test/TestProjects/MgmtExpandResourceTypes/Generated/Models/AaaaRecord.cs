@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> An AAAA record. </summary>
     public partial class AaaaRecord
     {
-        /// <summary> Initializes a new instance of AaaaRecord. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AaaaRecord"/>. </summary>
         public AaaaRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of AaaaRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="AaaaRecord"/>. </summary>
         /// <param name="ipv6Address"> The IPv6 address of this AAAA record. </param>
-        internal AaaaRecord(string ipv6Address)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AaaaRecord(string ipv6Address, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Ipv6Address = ipv6Address;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The IPv6 address of this AAAA record. </summary>

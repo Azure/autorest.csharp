@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtScopeResource.Models
@@ -13,7 +14,10 @@ namespace MgmtScopeResource.Models
     /// <summary> The resource link properties. </summary>
     public partial class ResourceLinkProperties
     {
-        /// <summary> Initializes a new instance of ResourceLinkProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/>. </summary>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="targetId"/> is null. </exception>
         public ResourceLinkProperties(string targetId)
@@ -23,15 +27,22 @@ namespace MgmtScopeResource.Models
             TargetId = targetId;
         }
 
-        /// <summary> Initializes a new instance of ResourceLinkProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/>. </summary>
         /// <param name="sourceId"> The fully qualified ID of the source resource in the link. </param>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
         /// <param name="notes"> Notes about the resource link. </param>
-        internal ResourceLinkProperties(string sourceId, string targetId, string notes)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceLinkProperties(string sourceId, string targetId, string notes, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SourceId = sourceId;
             TargetId = targetId;
             Notes = notes;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/> for deserialization. </summary>
+        internal ResourceLinkProperties()
+        {
         }
 
         /// <summary> The fully qualified ID of the source resource in the link. </summary>

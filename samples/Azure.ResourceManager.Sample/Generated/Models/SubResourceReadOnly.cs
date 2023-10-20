@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,19 +16,24 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SubResourceReadOnly
     {
-        /// <summary> Initializes a new instance of SubResourceReadOnly. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
         public SubResourceReadOnly()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResourceReadOnly. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
         /// </param>
-        internal SubResourceReadOnly(string id)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubResourceReadOnly(string id, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

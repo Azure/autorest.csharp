@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
@@ -13,7 +14,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the route configuration override action for the delivery rule. Only applicable to Frontdoor Standard/Premium Profiles. </summary>
     public partial class DeliveryRuleRouteConfigurationOverrideAction : DeliveryRuleAction
     {
-        /// <summary> Initializes a new instance of DeliveryRuleRouteConfigurationOverrideAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public DeliveryRuleRouteConfigurationOverrideAction(RouteConfigurationOverrideActionParameters parameters)
@@ -24,14 +25,20 @@ namespace MgmtDiscriminator.Models
             Name = DeliveryRuleActionType.RouteConfigurationOverride;
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRouteConfigurationOverrideAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
-        internal DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType name, string foo, RouteConfigurationOverrideActionParameters parameters) : base(name, foo)
+        internal DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType name, string foo, IDictionary<string, BinaryData> serializedAdditionalRawData, RouteConfigurationOverrideActionParameters parameters) : base(name, foo, serializedAdditionalRawData)
         {
             Parameters = parameters;
             Name = name;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRouteConfigurationOverrideAction"/> for deserialization. </summary>
+        internal DeliveryRuleRouteConfigurationOverrideAction()
+        {
         }
 
         /// <summary> Defines the parameters for the action. </summary>

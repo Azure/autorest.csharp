@@ -15,7 +15,10 @@ namespace MgmtPropertyChooser.Models
     /// <summary> The Resource model definition. </summary>
     public partial class MgmtPropertyChooserResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/>. </summary>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public MgmtPropertyChooserResourceData(string location)
@@ -26,17 +29,24 @@ namespace MgmtPropertyChooser.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal MgmtPropertyChooserResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtPropertyChooserResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/> for deserialization. </summary>
+        internal MgmtPropertyChooserResourceData()
+        {
         }
 
         /// <summary> Resource location. </summary>

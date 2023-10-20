@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetNetworkConfiguration : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfiguration"/>. </summary>
         /// <param name="name">
         /// The network configuration name.
         /// Serialized Name: VirtualMachineScaleSetNetworkConfiguration.name
@@ -32,11 +32,12 @@ namespace Azure.ResourceManager.Sample.Models
             IPConfigurations = new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfiguration"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The network configuration name.
         /// Serialized Name: VirtualMachineScaleSetNetworkConfiguration.name
@@ -65,7 +66,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Whether IP forwarding enabled on this NIC.
         /// Serialized Name: VirtualMachineScaleSetNetworkConfiguration.properties.enableIPForwarding
         /// </param>
-        internal VirtualMachineScaleSetNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPConfiguration> ipConfigurations, bool? enableIPForwarding) : base(id)
+        internal VirtualMachineScaleSetNetworkConfiguration(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPConfiguration> ipConfigurations, bool? enableIPForwarding) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Primary = primary;
@@ -74,6 +75,11 @@ namespace Azure.ResourceManager.Sample.Models
             DnsSettings = dnsSettings;
             IPConfigurations = ipConfigurations;
             EnableIPForwarding = enableIPForwarding;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfiguration"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetNetworkConfiguration()
+        {
         }
 
         /// <summary>

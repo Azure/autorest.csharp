@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -14,7 +15,10 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the origin group override action. </summary>
     public partial class OriginGroupOverrideActionParameters
     {
-        /// <summary> Initializes a new instance of OriginGroupOverrideActionParameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="originGroup"/> is null. </exception>
@@ -24,6 +28,22 @@ namespace MgmtDiscriminator.Models
 
             TypeName = typeName;
             OriginGroup = originGroup;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideActionParameters"/>. </summary>
+        /// <param name="typeName"></param>
+        /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OriginGroupOverrideActionParameters(OriginGroupOverrideActionParametersTypeName typeName, WritableSubResource originGroup, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            TypeName = typeName;
+            OriginGroup = originGroup;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideActionParameters"/> for deserialization. </summary>
+        internal OriginGroupOverrideActionParameters()
+        {
         }
 
         /// <summary> Gets or sets the type name. </summary>

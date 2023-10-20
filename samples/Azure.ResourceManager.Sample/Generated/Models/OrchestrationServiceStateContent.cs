@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,7 +16,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class OrchestrationServiceStateContent
     {
-        /// <summary> Initializes a new instance of OrchestrationServiceStateContent. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/>. </summary>
         /// <param name="serviceName">
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceStateInput.serviceName
@@ -26,6 +32,28 @@ namespace Azure.ResourceManager.Sample.Models
         {
             ServiceName = serviceName;
             Action = action;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/>. </summary>
+        /// <param name="serviceName">
+        /// The name of the service.
+        /// Serialized Name: OrchestrationServiceStateInput.serviceName
+        /// </param>
+        /// <param name="action">
+        /// The action to be performed.
+        /// Serialized Name: OrchestrationServiceStateInput.action
+        /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OrchestrationServiceStateContent(OrchestrationServiceName serviceName, OrchestrationServiceStateAction action, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            ServiceName = serviceName;
+            Action = action;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/> for deserialization. </summary>
+        internal OrchestrationServiceStateContent()
+        {
         }
 
         /// <summary>

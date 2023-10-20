@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,7 +16,10 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetDataDisk
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetDataDisk. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetDataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.lun
@@ -28,7 +34,7 @@ namespace MgmtAcronymMapping.Models
             CreateOption = createOption;
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetDataDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetDataDisk"/>. </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.name
@@ -65,7 +71,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.diskMBpsReadWrite
         /// </param>
-        internal VirtualMachineScaleSetDataDisk(string name, int lun, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, VirtualMachineScaleSetManagedDiskParameters managedDisk, long? diskIopsReadWrite, long? diskMBpsReadWrite)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetDataDisk(string name, int lun, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, VirtualMachineScaleSetManagedDiskParameters managedDisk, long? diskIopsReadWrite, long? diskMBpsReadWrite, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Lun = lun;
@@ -76,6 +83,12 @@ namespace MgmtAcronymMapping.Models
             ManagedDisk = managedDisk;
             DiskIopsReadWrite = diskIopsReadWrite;
             DiskMBpsReadWrite = diskMBpsReadWrite;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetDataDisk"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetDataDisk()
+        {
         }
 
         /// <summary>

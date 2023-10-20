@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -17,7 +18,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class KeyVaultSecretReference
     {
-        /// <summary> Initializes a new instance of KeyVaultSecretReference. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="KeyVaultSecretReference"/>. </summary>
         /// <param name="secretUri">
         /// The URL referencing a secret in a Key Vault.
         /// Serialized Name: KeyVaultSecretReference.secretUrl
@@ -34,6 +38,28 @@ namespace Azure.ResourceManager.Sample.Models
 
             SecretUri = secretUri;
             SourceVault = sourceVault;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="KeyVaultSecretReference"/>. </summary>
+        /// <param name="secretUri">
+        /// The URL referencing a secret in a Key Vault.
+        /// Serialized Name: KeyVaultSecretReference.secretUrl
+        /// </param>
+        /// <param name="sourceVault">
+        /// The relative URL of the Key Vault containing the secret.
+        /// Serialized Name: KeyVaultSecretReference.sourceVault
+        /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyVaultSecretReference(Uri secretUri, WritableSubResource sourceVault, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            SecretUri = secretUri;
+            SourceVault = sourceVault;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="KeyVaultSecretReference"/> for deserialization. </summary>
+        internal KeyVaultSecretReference()
+        {
         }
 
         /// <summary>

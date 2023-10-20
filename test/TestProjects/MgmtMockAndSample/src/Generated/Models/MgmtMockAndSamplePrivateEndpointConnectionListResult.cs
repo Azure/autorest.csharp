@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtMockAndSample;
@@ -14,19 +15,24 @@ namespace MgmtMockAndSample.Models
     /// <summary> List of private endpoint connections. </summary>
     internal partial class MgmtMockAndSamplePrivateEndpointConnectionListResult
     {
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateEndpointConnectionListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateEndpointConnectionListResult"/>. </summary>
         internal MgmtMockAndSamplePrivateEndpointConnectionListResult()
         {
             Value = new ChangeTrackingList<MgmtMockAndSamplePrivateEndpointConnectionData>();
         }
 
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateEndpointConnectionListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateEndpointConnectionListResult"/>. </summary>
         /// <param name="value"> The list of private endpoint connections. </param>
         /// <param name="nextLink"> The URL to get the next set of private endpoint connections. </param>
-        internal MgmtMockAndSamplePrivateEndpointConnectionListResult(IReadOnlyList<MgmtMockAndSamplePrivateEndpointConnectionData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtMockAndSamplePrivateEndpointConnectionListResult(IReadOnlyList<MgmtMockAndSamplePrivateEndpointConnectionData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The list of private endpoint connections. </summary>

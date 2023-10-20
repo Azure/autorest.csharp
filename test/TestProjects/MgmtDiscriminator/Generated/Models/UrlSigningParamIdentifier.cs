@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
@@ -13,7 +14,10 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines how to identify a parameter for a specific purpose e.g. expires. </summary>
     public partial class UrlSigningParamIdentifier
     {
-        /// <summary> Initializes a new instance of UrlSigningParamIdentifier. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/>. </summary>
         /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>
         /// <param name="paramName"> Parameter name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="paramName"/> is null. </exception>
@@ -23,6 +27,22 @@ namespace MgmtDiscriminator.Models
 
             ParamIndicator = paramIndicator;
             ParamName = paramName;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/>. </summary>
+        /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>
+        /// <param name="paramName"> Parameter name. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlSigningParamIdentifier(ParamIndicator paramIndicator, string paramName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            ParamIndicator = paramIndicator;
+            ParamName = paramName;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/> for deserialization. </summary>
+        internal UrlSigningParamIdentifier()
+        {
         }
 
         /// <summary> Indicates the purpose of the parameter. </summary>

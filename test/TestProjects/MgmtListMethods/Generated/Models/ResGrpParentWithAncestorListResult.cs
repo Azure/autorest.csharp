@@ -16,7 +16,10 @@ namespace MgmtListMethods.Models
     /// <summary> The List operation response. </summary>
     internal partial class ResGrpParentWithAncestorListResult
     {
-        /// <summary> Initializes a new instance of ResGrpParentWithAncestorListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ResGrpParentWithAncestorListResult"/>. </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal ResGrpParentWithAncestorListResult(IEnumerable<ResGrpParentWithAncestorData> value)
@@ -26,13 +29,20 @@ namespace MgmtListMethods.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentWithAncestorListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResGrpParentWithAncestorListResult"/>. </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        internal ResGrpParentWithAncestorListResult(IReadOnlyList<ResGrpParentWithAncestorData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResGrpParentWithAncestorListResult(IReadOnlyList<ResGrpParentWithAncestorData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ResGrpParentWithAncestorListResult"/> for deserialization. </summary>
+        internal ResGrpParentWithAncestorListResult()
+        {
         }
 
         /// <summary> List. </summary>

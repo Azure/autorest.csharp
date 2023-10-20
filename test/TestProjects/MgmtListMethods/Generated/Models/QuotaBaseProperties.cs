@@ -5,27 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtListMethods.Models
 {
     /// <summary> The properties for Quota update or retrieval. </summary>
     public partial class QuotaBaseProperties
     {
-        /// <summary> Initializes a new instance of QuotaBaseProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="QuotaBaseProperties"/>. </summary>
         public QuotaBaseProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of QuotaBaseProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="QuotaBaseProperties"/>. </summary>
         /// <param name="id"> Specifies the resource ID. </param>
         /// <param name="quotaBasePropertiesType"> Specifies the resource type. </param>
         /// <param name="limit"> The maximum permitted quota of the resource. </param>
         /// <param name="unit"> An enum describing the unit of quota measurement. </param>
-        internal QuotaBaseProperties(string id, string quotaBasePropertiesType, long? limit, QuotaUnit? unit)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal QuotaBaseProperties(string id, string quotaBasePropertiesType, long? limit, QuotaUnit? unit, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             QuotaBasePropertiesType = quotaBasePropertiesType;
             Limit = limit;
             Unit = unit;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Specifies the resource ID. </summary>

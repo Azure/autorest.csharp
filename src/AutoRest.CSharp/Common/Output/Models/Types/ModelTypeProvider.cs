@@ -416,7 +416,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
             Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
-            var valueSerialization = new JsonValueSerialization(dictionaryValueType, Serialization.SerializationFormat.Default, true);
+            var valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
 
             return new JsonAdditionalPropertiesSerialization(
                 additionalPropertiesProperty,

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,13 +18,16 @@ namespace MgmtOperations
     /// </summary>
     public partial class UnpatchableResourceData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of UnpatchableResourceData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="UnpatchableResourceData"/>. </summary>
         /// <param name="location"> The location. </param>
         public UnpatchableResourceData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of UnpatchableResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnpatchableResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,9 +35,16 @@ namespace MgmtOperations
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal UnpatchableResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnpatchableResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string foo, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Foo = foo;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnpatchableResourceData"/> for deserialization. </summary>
+        internal UnpatchableResourceData()
+        {
         }
 
         /// <summary> specifies the foo. </summary>

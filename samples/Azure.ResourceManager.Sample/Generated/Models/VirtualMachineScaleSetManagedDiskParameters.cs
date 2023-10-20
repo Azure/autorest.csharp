@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -16,12 +18,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetManagedDiskParameters
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetManagedDiskParameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetManagedDiskParameters"/>. </summary>
         public VirtualMachineScaleSetManagedDiskParameters()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetManagedDiskParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetManagedDiskParameters"/>. </summary>
         /// <param name="storageAccountType">
         /// Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.
         /// Serialized Name: VirtualMachineScaleSetManagedDiskParameters.storageAccountType
@@ -30,10 +35,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the customer managed disk encryption set resource id for the managed disk.
         /// Serialized Name: VirtualMachineScaleSetManagedDiskParameters.diskEncryptionSet
         /// </param>
-        internal VirtualMachineScaleSetManagedDiskParameters(StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetManagedDiskParameters(StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

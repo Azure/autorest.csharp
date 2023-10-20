@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SampleSku
     {
-        /// <summary> Initializes a new instance of SampleSku. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
         public SampleSku()
         {
         }
 
-        /// <summary> Initializes a new instance of SampleSku. </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
         /// <param name="name">
         /// The sku name.
         /// Serialized Name: Sku.name
@@ -31,11 +37,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the number of virtual machines in the scale set.
         /// Serialized Name: Sku.capacity
         /// </param>
-        internal SampleSku(string name, string tier, long? capacity)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SampleSku(string name, string tier, long? capacity, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Tier = tier;
             Capacity = capacity;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

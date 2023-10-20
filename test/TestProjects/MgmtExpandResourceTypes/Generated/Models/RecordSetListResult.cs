@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtExpandResourceTypes;
@@ -14,19 +15,24 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> The response to a record set List operation. </summary>
     internal partial class RecordSetListResult
     {
-        /// <summary> Initializes a new instance of RecordSetListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RecordSetListResult"/>. </summary>
         internal RecordSetListResult()
         {
             Value = new ChangeTrackingList<RecordSetData>();
         }
 
-        /// <summary> Initializes a new instance of RecordSetListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="RecordSetListResult"/>. </summary>
         /// <param name="value"> Information about the record sets in the response. </param>
         /// <param name="nextLink"> The continuation token for the next page of results. </param>
-        internal RecordSetListResult(IReadOnlyList<RecordSetData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RecordSetListResult(IReadOnlyList<RecordSetData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Information about the record sets in the response. </summary>

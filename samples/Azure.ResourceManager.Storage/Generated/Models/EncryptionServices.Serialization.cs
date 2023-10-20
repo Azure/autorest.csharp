@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -38,6 +39,18 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 writer.WritePropertyName("queue"u8);
                 writer.WriteObjectValue(Queue);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -76,6 +89,8 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<EncryptionService> file = default;
             Optional<EncryptionService> table = default;
             Optional<EncryptionService> queue = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"u8))
@@ -114,8 +129,13 @@ namespace Azure.ResourceManager.Storage.Models
                     queue = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new EncryptionServices(blob.Value, file.Value, table.Value, queue.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new EncryptionServices(blob.Value, file.Value, table.Value, queue.Value, serializedAdditionalRawData);
         }
     }
 }

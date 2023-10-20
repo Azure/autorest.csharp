@@ -5,27 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The URIs that are used to perform a retrieval of a public blob, file, web or dfs object via a internet routing endpoint. </summary>
     public partial class StorageAccountInternetEndpoints
     {
-        /// <summary> Initializes a new instance of StorageAccountInternetEndpoints. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="StorageAccountInternetEndpoints"/>. </summary>
         internal StorageAccountInternetEndpoints()
         {
         }
 
-        /// <summary> Initializes a new instance of StorageAccountInternetEndpoints. </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountInternetEndpoints"/>. </summary>
         /// <param name="blob"> Gets the blob endpoint. </param>
         /// <param name="file"> Gets the file endpoint. </param>
         /// <param name="web"> Gets the web endpoint. </param>
         /// <param name="dfs"> Gets the dfs endpoint. </param>
-        internal StorageAccountInternetEndpoints(string blob, string file, string web, string dfs)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountInternetEndpoints(string blob, string file, string web, string dfs, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Blob = blob;
             File = file;
             Web = web;
             Dfs = dfs;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the blob endpoint. </summary>

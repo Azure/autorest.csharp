@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary> The LayerOneProperties. </summary>
     internal partial class LayerOneProperties
     {
-        /// <summary> Initializes a new instance of LayerOneProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LayerOneProperties"/>. </summary>
         internal LayerOneProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of LayerOneProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneProperties"/>. </summary>
         /// <param name="uniqueId"> The id of layer one. </param>
-        internal LayerOneProperties(string uniqueId)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LayerOneProperties(string uniqueId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             UniqueId = uniqueId;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The id of layer one. </summary>

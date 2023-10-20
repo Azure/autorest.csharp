@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace MgmtAcronymMapping.Models
@@ -15,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class LinuxConfiguration
     {
-        /// <summary> Initializes a new instance of LinuxConfiguration. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LinuxConfiguration"/>. </summary>
         public LinuxConfiguration()
         {
         }
 
-        /// <summary> Initializes a new instance of LinuxConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="LinuxConfiguration"/>. </summary>
         /// <param name="disablePasswordAuthentication">
         /// Specifies whether password authentication should be disabled.
         /// Serialized Name: LinuxConfiguration.disablePasswordAuthentication
@@ -33,11 +37,13 @@ namespace MgmtAcronymMapping.Models
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: LinuxConfiguration.provisionVMAgent
         /// </param>
-        internal LinuxConfiguration(bool? disablePasswordAuthentication, SshConfiguration ssh, bool? provisionVmAgent)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LinuxConfiguration(bool? disablePasswordAuthentication, SshConfiguration ssh, bool? provisionVmAgent, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DisablePasswordAuthentication = disablePasswordAuthentication;
             Ssh = ssh;
             ProvisionVmAgent = provisionVmAgent;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

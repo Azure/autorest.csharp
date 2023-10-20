@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SampleUsageName
     {
-        /// <summary> Initializes a new instance of SampleUsageName. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SampleUsageName"/>. </summary>
         internal SampleUsageName()
         {
         }
 
-        /// <summary> Initializes a new instance of SampleUsageName. </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsageName"/>. </summary>
         /// <param name="value">
         /// The name of the resource.
         /// Serialized Name: UsageName.value
@@ -27,10 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The localized name of the resource.
         /// Serialized Name: UsageName.localizedValue
         /// </param>
-        internal SampleUsageName(string value, string localizedValue)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SampleUsageName(string value, string localizedValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             LocalizedValue = localizedValue;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

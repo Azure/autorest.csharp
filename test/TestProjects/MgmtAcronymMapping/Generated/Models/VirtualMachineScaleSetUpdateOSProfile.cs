@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,16 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateOSProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSProfile. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateOSProfile()
         {
             Secrets = new ChangeTrackingList<VaultSecretGroup>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSProfile"/>. </summary>
         /// <param name="customData">
         /// A base-64 encoded string of custom data.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.customData
@@ -39,12 +43,14 @@ namespace MgmtAcronymMapping.Models
         /// The List of certificates for addition to the VM.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.secrets
         /// </param>
-        internal VirtualMachineScaleSetUpdateOSProfile(string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateOSProfile(string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CustomData = customData;
             WindowsConfiguration = windowsConfiguration;
             LinuxConfiguration = linuxConfiguration;
             Secrets = secrets;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

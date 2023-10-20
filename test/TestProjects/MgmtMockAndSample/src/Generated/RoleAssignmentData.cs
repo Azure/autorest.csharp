@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -16,12 +18,15 @@ namespace MgmtMockAndSample
     /// </summary>
     public partial class RoleAssignmentData : ResourceData
     {
-        /// <summary> Initializes a new instance of RoleAssignmentData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentData"/>. </summary>
         internal RoleAssignmentData()
         {
         }
 
-        /// <summary> Initializes a new instance of RoleAssignmentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -30,12 +35,14 @@ namespace MgmtMockAndSample
         /// <param name="roleDefinitionId"> The role definition ID. </param>
         /// <param name="principalId"> The principal ID. </param>
         /// <param name="canDelegate"> The Delegation flag for the role assignment. </param>
-        internal RoleAssignmentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string scope, string roleDefinitionId, string principalId, bool? canDelegate) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoleAssignmentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string scope, string roleDefinitionId, string principalId, bool? canDelegate, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Scope = scope;
             RoleDefinitionId = roleDefinitionId;
             PrincipalId = principalId;
             CanDelegate = canDelegate;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The role assignment scope. </summary>

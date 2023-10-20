@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtPagination
 {
     /// <summary> A class representing the PageSizeDoubleModel data model. </summary>
     public partial class PageSizeDoubleModelData
     {
-        /// <summary> Initializes a new instance of PageSizeDoubleModelData. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PageSizeDoubleModelData"/>. </summary>
         public PageSizeDoubleModelData()
         {
         }
 
-        /// <summary> Initializes a new instance of PageSizeDoubleModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeDoubleModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
-        internal PageSizeDoubleModelData(string id, string name, string resourceType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PageSizeDoubleModelData(string id, string name, string resourceType, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Resource ID. </summary>

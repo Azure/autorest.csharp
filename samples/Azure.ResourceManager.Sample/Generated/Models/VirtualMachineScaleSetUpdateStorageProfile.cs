@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,16 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateStorageProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateStorageProfile. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateStorageProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateStorageProfile()
         {
             DataDisks = new ChangeTrackingList<VirtualMachineScaleSetDataDisk>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateStorageProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateStorageProfile"/>. </summary>
         /// <param name="imageReference">
         /// The image reference.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.imageReference
@@ -35,11 +39,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The data disks.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.dataDisks
         /// </param>
-        internal VirtualMachineScaleSetUpdateStorageProfile(ImageReference imageReference, VirtualMachineScaleSetUpdateOSDisk osDisk, IList<VirtualMachineScaleSetDataDisk> dataDisks)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateStorageProfile(ImageReference imageReference, VirtualMachineScaleSetUpdateOSDisk osDisk, IList<VirtualMachineScaleSetDataDisk> dataDisks, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ImageReference = imageReference;
             OSDisk = osDisk;
             DataDisks = dataDisks;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

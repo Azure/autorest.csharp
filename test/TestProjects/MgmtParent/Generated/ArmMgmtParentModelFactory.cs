@@ -16,7 +16,7 @@ namespace MgmtParent.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtParentModelFactory
     {
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParent.AvailabilitySetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -29,10 +29,10 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar);
+            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParent.DedicatedHostGroupData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -45,10 +45,10 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParent.DedicatedHostData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -61,25 +61,27 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DedicatedHostPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="platformFaultDomain"> Fault domain of the dedicated host within a dedicated host group. </param>
         /// <param name="autoReplaceOnFailure"> Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided. </param>
         /// <param name="hostId"> A unique id generated and assigned to the dedicated host by the platform. &lt;br&gt;&lt;br&gt; Does not change throughout the lifetime of the host. </param>
         /// <param name="provisioningOn"> The date when the host was first provisioned. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <returns> A new <see cref="Models.DedicatedHostPatch"/> instance for mocking. </returns>
-        public static DedicatedHostPatch DedicatedHostPatch(IDictionary<string, string> tags = null, int? platformFaultDomain = null, bool? autoReplaceOnFailure = null, string hostId = null, DateTimeOffset? provisioningOn = null, string provisioningState = null)
+        public static DedicatedHostPatch DedicatedHostPatch(IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, int? platformFaultDomain = null, bool? autoReplaceOnFailure = null, string hostId = null, DateTimeOffset? provisioningOn = null, string provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new DedicatedHostPatch(tags, platformFaultDomain, autoReplaceOnFailure, hostId, provisioningOn, provisioningState);
+            return new DedicatedHostPatch(tags, serializedAdditionalRawData, platformFaultDomain, autoReplaceOnFailure, hostId, provisioningOn, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParent.VirtualMachineExtensionImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -92,7 +94,7 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar);
+            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar, new Dictionary<string, BinaryData>());
         }
     }
 }

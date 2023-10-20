@@ -6,22 +6,28 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtScopeResource.Models
 {
     /// <summary> The value of a parameter. </summary>
     public partial class ParameterValuesValue
     {
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>
         public ParameterValuesValue()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>
         /// <param name="value"> The value of the parameter. </param>
-        internal ParameterValuesValue(BinaryData value)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterValuesValue(BinaryData value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

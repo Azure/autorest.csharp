@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary>
@@ -14,16 +17,21 @@ namespace MgmtSafeFlatten.Models
     /// </summary>
     public abstract partial class LayerOneBaseType
     {
-        /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LayerOneBaseType"/>. </summary>
         protected LayerOneBaseType()
         {
         }
 
-        /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneBaseType"/>. </summary>
         /// <param name="name"></param>
-        internal LayerOneBaseType(LayerOneTypeName name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LayerOneBaseType(LayerOneTypeName name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

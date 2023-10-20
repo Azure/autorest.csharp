@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtParamOrdering.Models
 {
     /// <summary> The instance view of a virtual machine scale set. </summary>
     public partial class VirtualMachineScaleSetInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         internal VirtualMachineScaleSetInstanceView()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachine"> The instance view status summary for the virtual machine scale set. </param>
-        internal VirtualMachineScaleSetInstanceView(string virtualMachine)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetInstanceView(string virtualMachine, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VirtualMachine = virtualMachine;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The instance view status summary for the virtual machine scale set. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtResourceName;
@@ -14,19 +15,24 @@ namespace MgmtResourceName.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class MemoryResourceListResult
     {
-        /// <summary> Initializes a new instance of MemoryResourceListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MemoryResourceListResult"/>. </summary>
         internal MemoryResourceListResult()
         {
             Value = new ChangeTrackingList<MemoryData>();
         }
 
-        /// <summary> Initializes a new instance of MemoryResourceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MemoryResourceListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal MemoryResourceListResult(IReadOnlyList<MemoryData> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MemoryResourceListResult(IReadOnlyList<MemoryData> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>

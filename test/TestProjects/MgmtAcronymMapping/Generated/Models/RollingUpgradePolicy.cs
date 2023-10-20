@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class RollingUpgradePolicy
     {
-        /// <summary> Initializes a new instance of RollingUpgradePolicy. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradePolicy"/>. </summary>
         public RollingUpgradePolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of RollingUpgradePolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradePolicy"/>. </summary>
         /// <param name="maxBatchInstancePercent">
         /// The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability. The default value for this parameter is 20%.
         /// Serialized Name: RollingUpgradePolicy.maxBatchInstancePercent
@@ -35,12 +41,14 @@ namespace MgmtAcronymMapping.Models
         /// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format. The default value is 0 seconds (PT0S).
         /// Serialized Name: RollingUpgradePolicy.pauseTimeBetweenBatches
         /// </param>
-        internal RollingUpgradePolicy(int? maxBatchInstancePercent, int? maxUnhealthyInstancePercent, int? maxUnhealthyUpgradedInstancePercent, string pauseTimeBetweenBatches)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RollingUpgradePolicy(int? maxBatchInstancePercent, int? maxUnhealthyInstancePercent, int? maxUnhealthyUpgradedInstancePercent, string pauseTimeBetweenBatches, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MaxBatchInstancePercent = maxBatchInstancePercent;
             MaxUnhealthyInstancePercent = maxUnhealthyInstancePercent;
             MaxUnhealthyUpgradedInstancePercent = maxUnhealthyUpgradedInstancePercent;
             PauseTimeBetweenBatches = pauseTimeBetweenBatches;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

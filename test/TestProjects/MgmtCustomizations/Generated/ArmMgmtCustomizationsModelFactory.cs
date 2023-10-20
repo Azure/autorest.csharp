@@ -17,7 +17,7 @@ namespace MgmtCustomizations.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtCustomizationsModelFactory
     {
-        /// <summary> Initializes a new instance of PetStoreData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtCustomizations.PetStoreData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -26,10 +26,10 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="MgmtCustomizations.PetStoreData"/> instance for mocking. </returns>
         public static PetStoreData PetStoreData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PetStoreProperties properties = null)
         {
-            return new PetStoreData(id, name, resourceType, systemData, properties);
+            return new PetStoreData(id, name, resourceType, systemData, properties, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
@@ -39,35 +39,41 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string name = null, int size = default, DateTimeOffset? dateOfBirth = null)
         {
-            return new UnknownPet(default, name, size, dateOfBirth);
+            return new UnknownPet(default, name, size, dateOfBirth, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
-        public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string meow = null)
+        public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, name, size, dateOfBirth, meow);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new Cat(PetKind.Cat, name, size, dateOfBirth, serializedAdditionalRawData, meow);
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string bark = null)
+        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string bark = null)
         {
-            return new Dog(PetKind.Dog, name, size, dateOfBirth, bark);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new Dog(PetKind.Dog, name, size, dateOfBirth, serializedAdditionalRawData, bark);
         }
     }
 }

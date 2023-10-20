@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,18 +18,19 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class AvailabilitySetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of AvailabilitySetPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetPatch"/>. </summary>
         public AvailabilitySetPatch()
         {
             VirtualMachines = new ChangeTrackingList<WritableSubResource>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sku">
         /// Sku of the availability set
         /// Serialized Name: AvailabilitySetUpdate.sku
@@ -53,7 +55,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: AvailabilitySetUpdate.properties.statuses
         /// </param>
-        internal AvailabilitySetPatch(IDictionary<string, string> tags, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(tags)
+        internal AvailabilitySetPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(tags, serializedAdditionalRawData)
         {
             Sku = sku;
             PlatformUpdateDomainCount = platformUpdateDomainCount;

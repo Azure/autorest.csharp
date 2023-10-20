@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -13,12 +16,15 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineSize
     {
-        /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         internal VirtualMachineSize()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         /// <param name="name">
         /// The name of the virtual machine size.
         /// Serialized Name: VirtualMachineSize.name
@@ -43,7 +49,8 @@ namespace MgmtAcronymMapping.Models
         /// The maximum number of data disks that can be attached to the virtual machine size.
         /// Serialized Name: VirtualMachineSize.maxDataDiskCount
         /// </param>
-        internal VirtualMachineSize(string name, int? numberOfCores, int? osDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineSize(string name, int? numberOfCores, int? osDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             NumberOfCores = numberOfCores;
@@ -51,6 +58,7 @@ namespace MgmtAcronymMapping.Models
             ResourceDiskSizeInMB = resourceDiskSizeInMB;
             MemoryInMB = memoryInMB;
             MaxDataDiskCount = maxDataDiskCount;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>
