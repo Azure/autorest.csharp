@@ -242,8 +242,12 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (expression)
             {
                 case CastExpression cast:
+                    // wrap the cast expression with parenthesis, so that it would not cause ambiguity for leading recuisive calls
+                    // if the parenthesis are not needed, the roslyn reducer will remove it.
+                    writer.AppendRaw("(");
                     writer.Append($"({cast.Type})");
                     writer.WriteValueExpression(cast.Inner);
+                    writer.AppendRaw(")");
                     break;
                 case CollectionInitializerExpression(var items):
                     writer.AppendRaw("{ ");
@@ -542,11 +546,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(ternary.Consequent);
                     writer.AppendRaw(" : ");
                     writer.WriteValueExpression(ternary.Alternative);
-                    break;
-                case ParenthesizedExpression(var inner):
-                    writer.AppendRaw("(");
-                    writer.WriteValueExpression(inner);
-                    writer.AppendRaw(")");
                     break;
                 case PositionalParameterReference(var parameterName, var value):
                     writer.Append($"{parameterName}: ");

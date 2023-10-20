@@ -51,9 +51,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         public ValueExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, async);
 
-        public CastExpression Cast(CSharpType to) => new CastExpression(this, to);
-
-        public ParenthesizedExpression Wrap() => new ParenthesizedExpression(this);
+        public CastExpression CastTo(CSharpType to) => new CastExpression(this, to);
 
         private string GetDebuggerDisplay()
         {

@@ -216,11 +216,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var objectType = (ObjectType)objectSerialization.Type.Implementation;
             var parameterValues = propertyVariables.ToDictionary(v => v.Key.SerializationConstructorParameterName, v => (ValueExpression)v.Value);
-            var parameters = objectType.SerializationConstructor.Signature.Parameters
-                .Select(p => parameterValues[p.Name])
-                .ToArray();
 
-            yield return Return(New.Instance(objectSerialization.Type, parameters));
+            var arguments = new List<ValueExpression>();
+            foreach (var parameter in objectType.SerializationConstructor.Signature.Parameters)
+            {
+                if (parameterValues.TryGetValue(parameter.Name, out var argument))
+                    arguments.Add(argument);
+                else
+                {
+                    // this must be the raw data property
+                    arguments.Add(Default);
+                }
+            }
+
+            yield return Return(New.Instance(objectSerialization.Type, arguments.ToArray()));
         }
 
         public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, BaseResponseExpression response)
@@ -318,12 +327,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     frameworkType == typeof(string)
                 )
                 {
-                    return new CastExpression(value, type);
+                    return value.CastTo(type);
                 }
 
                 if (frameworkType == typeof(ResourceIdentifier))
                 {
-                    return New.ResourceIdentifier(new CastExpression(value, typeof(string)));
+                    return New.ResourceIdentifier(value.CastTo(typeof(string)));
                 }
 
                 if (frameworkType == typeof(SystemData))
@@ -334,19 +343,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (frameworkType == typeof(ResourceType))
                 {
-                    return new CastExpression(value, typeof(string));
+                    return value.CastTo(typeof(string));
                 }
 
                 if (frameworkType == typeof(Guid))
                 {
                     return value is XElementExpression xElement
                         ? New.Instance(typeof(Guid), xElement.Value)
-                        : new CastExpression(value, typeof(Guid));
+                        : value.CastTo(typeof(Guid));
                 }
 
                 if (frameworkType == typeof(Uri))
                 {
-                    return New.Instance(typeof(Uri), new CastExpression(value, typeof(string)));
+                    return New.Instance(typeof(Uri), value.CastTo(typeof(string)));
                 }
 
                 if (value is XElementExpression element)

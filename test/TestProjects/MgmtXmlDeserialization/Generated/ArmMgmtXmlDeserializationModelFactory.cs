@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtXmlDeserialization;
@@ -14,7 +16,7 @@ namespace MgmtXmlDeserialization.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtXmlDeserializationModelFactory
     {
-        /// <summary> Initializes a new instance of XmlInstanceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtXmlDeserialization.XmlInstanceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -22,7 +24,7 @@ namespace MgmtXmlDeserialization.Models
         /// <returns> A new <see cref="MgmtXmlDeserialization.XmlInstanceData"/> instance for mocking. </returns>
         public static XmlInstanceData XmlInstanceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null)
         {
-            return new XmlInstanceData(id, name, resourceType, systemData);
+            return new XmlInstanceData(id, name, resourceType, systemData, new Dictionary<string, BinaryData>());
         }
     }
 }

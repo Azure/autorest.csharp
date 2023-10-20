@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriterParameter }, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
-                This.Cast(modelJsonSerializableType).Wrap().Invoke(nameof(IModelJsonSerializable<object>.Serialize), utf8JsonWriterParameter, ModelSerializerOptionsExpression.DefaultWireOptions)
+                This.CastTo(modelJsonSerializableType).Invoke(nameof(IModelJsonSerializable<object>.Serialize), utf8JsonWriterParameter, ModelSerializerOptionsExpression.DefaultWireOptions)
             );
 
             // void IModelJsonSerializable<T>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
@@ -122,28 +122,28 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return new
                 (
                     new MethodSignature(nameof(IModelJsonSerializable<object>.Serialize), null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriterParameter, optionsParameter }, ExplicitInterface: modelJsonSerializableObjectType),
-                    This.Cast(modelJsonSerializableType).Wrap().Invoke(nameof(IModelJsonSerializable<object>.Serialize), utf8JsonWriterParameter, optionsParameter)
+                    This.CastTo(modelJsonSerializableType).Invoke(nameof(IModelJsonSerializable<object>.Serialize), utf8JsonWriterParameter, optionsParameter)
                 );
 
                 // object IModelJsonSerializable<T>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IModelJsonSerializable<object>.Deserialize), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { utf8JsonReaderParameter, optionsParameter }, ExplicitInterface: modelJsonSerializableObjectType),
-                    This.Cast(modelJsonSerializableType).Wrap().Invoke(nameof(IModelJsonSerializable<object>.Deserialize), utf8JsonReaderParameter, optionsParameter)
+                    This.CastTo(modelJsonSerializableType).Invoke(nameof(IModelJsonSerializable<object>.Deserialize), utf8JsonReaderParameter, optionsParameter)
                 );
 
                 // BinaryData Serialize(ModelSerializerOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IModelSerializable<object>.Serialize), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { optionsParameter }, ExplicitInterface: modelSerializableObjectType),
-                    This.Cast(modelJsonSerializableType).Wrap().Invoke(nameof(IModelSerializable<object>.Serialize), optionsParameter)
+                    This.CastTo(modelJsonSerializableType).Invoke(nameof(IModelSerializable<object>.Serialize), optionsParameter)
                 );
 
                 // object Deserialize(BinaryData data, ModelSerializerOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IModelSerializable<object>.Deserialize), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { dataParameter, optionsParameter }, ExplicitInterface: modelSerializableObjectType),
-                    This.Cast(modelJsonSerializableType).Wrap().Invoke(nameof(IModelSerializable<object>.Deserialize), dataParameter, optionsParameter)
+                    This.CastTo(modelJsonSerializableType).Invoke(nameof(IModelSerializable<object>.Deserialize), dataParameter, optionsParameter)
                 );
             }
         }
