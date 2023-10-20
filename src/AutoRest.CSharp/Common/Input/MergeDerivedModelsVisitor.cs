@@ -35,20 +35,20 @@ namespace AutoRest.CSharp.Common.Input
         private static InputModelType GetMatchingModelToReplace(InputModelType model)
             => model.BaseModel!.DerivedModels.First(dm => dm.Name == model.Name && dm.Namespace == model.Namespace);
 
-        protected override InputModelType VisitModel(InputModelType modelType, InputModelType? visitedBaseModel)
+        protected override InputModelType VisitModel(InputModelType modelType)
         {
             if (_modelsToReplace.TryGetValue(modelType, out var replacement))
             {
-                return base.VisitModel(replacement, visitedBaseModel);
+                return base.VisitModel(replacement);
             }
 
             if (!_baseModelsToUpdate.Contains(modelType))
             {
-                return base.VisitModel(modelType, visitedBaseModel);
+                return base.VisitModel(modelType);
             }
 
             var derivedModels = modelType.DerivedModels.Select(m => _modelsToReplace.TryGetValue(m, out var rm) ? rm : m).ToList();
-            return base.VisitModel(modelType with { DerivedModels = derivedModels }, visitedBaseModel);
+            return base.VisitModel(modelType with { DerivedModels = derivedModels });
 
         }
     }

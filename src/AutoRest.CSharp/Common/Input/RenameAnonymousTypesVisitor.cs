@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public static InputNamespace Visit(InputNamespace rootNamespace) => new RenameAnonymousTypesVisitor(rootNamespace).VisitNamespace(rootNamespace);
 
-        protected override InputModelType VisitModel(InputModelType modelType, InputModelType? visitedBaseModel)
+        protected override InputModelType VisitModel(InputModelType modelType)
         {
             if (modelType.IsAnonymousModel)
             {
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input
                 modelType = modelType with {Name = name, Usage = usage};
             }
 
-            return base.VisitModel(modelType, visitedBaseModel);
+            return base.VisitModel(modelType);
         }
 
         private string GetAnonymousModelNameAndUsage(in InputModelType anonymousModel, out InputModelTypeUsage usage)

@@ -295,7 +295,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 (
                     "NET6_0_OR_GREATER",
                     utf8JsonWriter.WriteRawValue(value),
-                    InvokeJsonSerializerSerializeMethod(utf8JsonWriter, JsonDocumentExpression.Parse(new BinaryDataExpression(value)).RootElement)
+                    new[]
+                    {
+                        UsingVar("document", JsonDocumentExpression.Parse(new BinaryDataExpression(value)), out var document),
+                        InvokeJsonSerializerSerializeMethod(utf8JsonWriter, document.RootElement)
+                    }
                 );
             }
 

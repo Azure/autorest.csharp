@@ -70,7 +70,8 @@ namespace Azure.ResourceManager.Sample
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Settings);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Settings.ToString()).RootElement);
+                using var document = JsonDocument.Parse(Settings);
+                JsonSerializer.Serialize(writer, document.RootElement);
 #endif
             }
             if (Optional.IsDefined(ProtectedSettings))
@@ -79,7 +80,8 @@ namespace Azure.ResourceManager.Sample
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(ProtectedSettings);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(ProtectedSettings.ToString()).RootElement);
+                using var document = JsonDocument.Parse(ProtectedSettings);
+                JsonSerializer.Serialize(writer, document.RootElement);
 #endif
             }
             if (Optional.IsDefined(InstanceView))

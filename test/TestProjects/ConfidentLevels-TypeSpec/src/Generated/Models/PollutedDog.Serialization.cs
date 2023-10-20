@@ -23,7 +23,8 @@ namespace ConfidentLevelsInTsp.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Color);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(Color.ToString()).RootElement);
+            using var document = JsonDocument.Parse(Color);
+            JsonSerializer.Serialize(writer, document.RootElement);
 #endif
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
