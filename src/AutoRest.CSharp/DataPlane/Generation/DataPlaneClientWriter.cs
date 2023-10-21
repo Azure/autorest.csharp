@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -56,7 +57,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (library.Authentication.ApiKey != null)
             {
                 CSharpType credentialType = typeof(AzureKeyCredential);
-                var ctorParams = RestClientBuilder.GetConstructorParameters(client.RestClient.ClientParameters, credentialType);
+                var ctorParams = RestClientBuilder.GetConstructorParameters(client.RestClient.ClientParameters, Configuration.ApiTypes.KeyCredentialType);
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                 foreach (Parameter parameter in ctorParams)
                 {
@@ -77,8 +78,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{library.Authentication.ApiKey.Name}\"));");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
+                    writer.Line(Configuration.ApiTypes.GetHttpPipelineKeyCredentialString(PipelineField, OptionsVariable, CredentialVariable, library.Authentication.ApiKey.Name));
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
                     {
@@ -129,7 +130,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
                     var scopesParam = new CodeWriterDeclaration("scopes");
                     writer.Append($"string[] {scopesParam:D} = ");
                     writer.Append($"{{ ");
@@ -140,7 +141,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.Line($"}};");
 
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scopesParam}));");
+                    writer.Line(Configuration.ApiTypes.GetHttpPipelineBearerString(PipelineField, OptionsVariable, CredentialVariable, scopesParam));
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
                     {

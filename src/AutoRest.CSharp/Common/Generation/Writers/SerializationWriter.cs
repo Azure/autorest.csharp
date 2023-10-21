@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -58,7 +59,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer
                         .AppendIf($": ", hasJson || hasXml)
-                        .AppendIf($"{typeof(IUtf8JsonSerializable)}, ", hasJson)
+                        .AppendIf($"{Configuration.ApiTypes.IUtf8JsonSerializableType}, ", hasJson)
                         .AppendIf($"{typeof(IXmlSerializable)}, ", hasXml)
                         .RemoveTrailingComma();
                 }

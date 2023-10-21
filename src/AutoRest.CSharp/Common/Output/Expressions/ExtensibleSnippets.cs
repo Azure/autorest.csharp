@@ -13,6 +13,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         public abstract JsonElementSnippets JsonElement { get; }
         public abstract XElementSnippets XElement { get; }
         public abstract XmlWriterSnippets XmlWriter { get; }
+        public abstract OperationResponseSnippets OperationResponse { get; }
+
+        internal abstract class OperationResponseSnippets
+        {
+            public abstract TypedValueExpression FromValue(TypedValueExpression value, TypedValueExpression response);
+        }
 
         internal abstract class JsonElementSnippets
         {

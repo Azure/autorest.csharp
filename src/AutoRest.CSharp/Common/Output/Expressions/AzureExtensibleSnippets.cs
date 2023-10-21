@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -15,6 +16,13 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         public override JsonElementSnippets JsonElement { get; } = new AzureJsonElementSnippets();
         public override XElementSnippets XElement { get; } = new AzureXElementSnippets();
         public override XmlWriterSnippets XmlWriter { get; } = new AzureXmlWriterSnippets();
+        public override OperationResponseSnippets OperationResponse { get; } = new AzureOperationResponseSnippets();
+
+        internal class AzureOperationResponseSnippets : OperationResponseSnippets
+        {
+            public override TypedValueExpression FromValue(TypedValueExpression value, TypedValueExpression response)
+                => ResponseExpression.FromValue(value, new ResponseExpression(response).GetRawResponse());
+        }
 
         private class AzureJsonElementSnippets : JsonElementSnippets
         {

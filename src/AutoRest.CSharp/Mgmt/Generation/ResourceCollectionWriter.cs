@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -60,13 +61,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(clientOperation.OperationMappings.Values.First())))
             {
                 var operation = clientOperation.OperationMappings.Values.First();
-                var response = new CodeWriterDeclaration("response");
+                var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
                 WriteArguments(_writer, clientOperation.ParameterMappings.Values.First().SkipLast(1));
                 _writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
+                _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({Configuration.ApiTypes.ResponseParameterName}.Value != null, {Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}());");
             }
         }
 
@@ -98,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             writer.WriteMethodBodyStatement(new[]
             {
-                Var("response", new(restClient.Invoke(CreateMethodName(operation.MethodName, async), arguments, async)), out ResponseExpression response),
+                Var(Configuration.ApiTypes.ResponseParameterName, new(restClient.Invoke(CreateMethodName(operation.MethodName, async), arguments, async)), out ResponseExpression response),
                 new IfStatement(Equal(response.Value, Null), AddBraces: false)
                 {
                     Return(New.Instance(new CSharpType(typeof(NoValueResponse<>), returnType), response.GetRawResponse()))

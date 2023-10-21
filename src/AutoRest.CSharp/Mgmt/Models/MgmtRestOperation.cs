@@ -263,7 +263,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             return null;
         }
 
-        public ValueExpression? GetConvertedValue(ValueExpression clientVariable, ValueExpression valueVariable) => GetConvertedValue(clientVariable, valueVariable, MgmtReturnType);
+        public ValueExpression? GetConvertedValue(ValueExpression clientVariable, ValueExpression valueVariable)
+            => GetConvertedValue(clientVariable, valueVariable, MgmtReturnType);
 
         private ValueExpression GetConvertedValue(Resource resource, ValueExpression clientVariable, ValueExpression valueVariable)
             => Snippets.New.Instance(resource.Type, clientVariable, valueVariable);

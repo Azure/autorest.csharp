@@ -424,7 +424,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString ConstructClientDiagnostic(CodeWriter writer, FormattableString providerNamespace, string diagnosticsOptionsVariable)
         {
-            return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
+            return $"new {Configuration.ApiTypes.ClientDiagnosticsType}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
         protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)
@@ -454,7 +454,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return UseField ? names.RestField : names.RestProperty;
         }
 
-        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), typeof(ClientDiagnostics));
+        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), Configuration.ApiTypes.ClientDiagnosticsType);
         private string GetDiagnosticName(MgmtRestClient client, Resource? resource)
         {
             var names = This.GetRestDiagNames(new NameSetKey(client, resource));
@@ -623,7 +623,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             var clientDiagnostics = new TypedMemberExpression(null, clientDiagnosticsReference.Name, clientDiagnosticsReference.Type);
-            var pipeline = new TypedMemberExpression(null, "Pipeline", typeof(HttpPipeline));
+            var pipeline = new TypedMemberExpression(null, "Pipeline", Configuration.ApiTypes.HttpPipelineType);
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
@@ -680,7 +680,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(operation)))
             {
-                var responseVariable = new VariableReference(typeof(Response), "response");
+                var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseParameterName);
                 _writer
                     .Append($"var {responseVariable.Declaration:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
@@ -775,7 +775,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteLROMethodBranch(MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMapping, bool async)
         {
-            var response = new VariableReference(typeof(Response), "response");
+            var response = new VariableReference(typeof(Response), Configuration.ApiTypes.ResponseParameterName);
             _writer.Append($"var {response.Declaration:D} = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"){GetConfigureAwait(async)};");

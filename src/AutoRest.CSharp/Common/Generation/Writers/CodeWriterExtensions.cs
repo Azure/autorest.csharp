@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -371,8 +372,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return parameter.Validation.Type switch
             {
-                ValidationType.AssertNotNullOrEmpty => writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}({parameter.Name:I}, nameof({parameter.Name:I}));"),
-                ValidationType.AssertNotNull => writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.Name:I}, nameof({parameter.Name:I}));"),
+                ValidationType.AssertNotNullOrEmpty => writer.Line($"{Configuration.ApiTypes.ArgumentType}.{Configuration.ApiTypes.AssertNotNullOrEmptyName}({parameter.Name:I}, nameof({parameter.Name:I}));"),
+                ValidationType.AssertNotNull => writer.Line($"{Configuration.ApiTypes.ArgumentType}.{Configuration.ApiTypes.AssertNotNullName}({parameter.Name:I}, nameof({parameter.Name:I}));"),
                 _ => writer
             };
         }

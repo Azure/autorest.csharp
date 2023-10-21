@@ -257,7 +257,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    _writer.Line($"return {typeof(Response)}.FromValue(result.Value, result.GetRawResponse());");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue(result.Value, result.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
             }
             else

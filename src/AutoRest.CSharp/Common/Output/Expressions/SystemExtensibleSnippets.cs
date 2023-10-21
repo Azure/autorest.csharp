@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -15,6 +17,13 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         public override JsonElementSnippets JsonElement { get; } = new SystemJsonElementSnippets();
         public override XElementSnippets XElement => throw new NotImplementedException("XElement extensions aren't supported in unbranded yet.");
         public override XmlWriterSnippets XmlWriter => throw new NotImplementedException("XmlWriter extensions aren't supported in unbranded yet.");
+        public override OperationResponseSnippets OperationResponse { get; } = new SystemOperationResponseSnippets();
+
+        private class SystemOperationResponseSnippets : OperationResponseSnippets
+        {
+            public override TypedValueExpression FromValue(TypedValueExpression value, TypedValueExpression response)
+                => ResultExpression.FromValue(value, new PipelineResponseExpression(response));
+        }
 
         private class SystemJsonElementSnippets : JsonElementSnippets
         {
