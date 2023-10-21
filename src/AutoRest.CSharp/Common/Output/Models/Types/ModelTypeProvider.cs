@@ -179,15 +179,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             return name;
         }
 
-        public bool HasFromResponseMethod => Methods.Any(m => m.Signature.Name == "FromResponse");
+        public bool HasFromOperationResponseMethod => IncludeDeserializer && !Configuration.AzureArm && (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any());
 
-        public bool HasToRequestContentMethod => Methods.Any(m => m.Signature.Name == "ToRequestContent");
+        public bool HasToRequestBodyMethod => IncludeSerializer && !Configuration.AzureArm && (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any());
 
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
             var signatures = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static;
             var parent = GetBaseObjectType();
-            if (parent is ModelTypeProvider { HasFromResponseMethod: true })
+            if (parent is ModelTypeProvider { HasFromOperationResponseMethod: true })
             {
                 signatures |= MethodSignatureModifiers.New;
             }
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else if (parent is ModelTypeProvider parentModelType)
             {
-                signatures |= parentModelType.HasToRequestContentMethod
+                signatures |= parentModelType.HasToRequestBodyMethod
                     ? MethodSignatureModifiers.Override
                     : MethodSignatureModifiers.Virtual;
             }
@@ -464,17 +464,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                     yield return jsonDeserialize;
                 }
 
-                if (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any())
+                if (HasFromOperationResponseMethod)
                 {
-                    if (IncludeDeserializer)
-                    {
-                        yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
-                    }
+                    yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
+                }
 
-                    if (IncludeSerializer)
-                    {
-                        yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers());
-                    }
+                if (HasToRequestBodyMethod)
+                {
+                    yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers());
                 }
             }
         }

@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer
                 .Line()
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
-                .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {_client.Fields.PipelineField.Name};");
+                .Line($"public virtual {Configuration.ApiTypes.HttpPipelineType} Pipeline => {_client.Fields.PipelineField.Name};");
 
             _writer.Line();
         }
@@ -166,8 +166,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(_client.ClientOptions.Type));
                 _writer.Line($"{_client.Fields.ClientDiagnosticsProperty.Name:I} = new {_client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
 
-                FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
-                FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
+                FormattableString perCallPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
+                FormattableString perRetryPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
 
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
@@ -177,19 +177,19 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         var fieldName = credentialField.Name;
                         _writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
-                        if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
+                        if (credentialField.Type.Equals(Configuration.ApiTypes.KeyCredentialType))
                         {
                             string prefixString = _client.Fields.AuthorizationApiKeyPrefixConstant != null ? $", {_client.Fields.AuthorizationApiKeyPrefixConstant.Name}" : "";
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
+                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{new {Configuration.ApiTypes.KeyCredentialPolicyType}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
+                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{new {Configuration.ApiTypes.BearerAuthenticationPolicyType}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
                         }
                     }
                 }
 
-                _writer.Line($"{_client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
+                _writer.Line(Configuration.ApiTypes.GetHttpPipelineClassifierString(_client.Fields.PipelineField.Name, clientOptionsParameter.Name, perCallPolicies, perRetryPolicies));
 
                 foreach (var parameter in _client.Parameters)
                 {
@@ -416,7 +416,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             codeWriter.WriteXmlDocumentationSummary(BuildProtocolMethodSummary(protocolMethod, convenienceMethod));
             codeWriter.WriteMethodDocumentationSignature(protocolMethod);
-            codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
+            codeWriter.WriteXmlDocumentationException(Configuration.ApiTypes.RequestFailedExceptionType, $"Service returned a non-success status code.");
 
             if (protocolMethod.ReturnType == null)
             {

@@ -12,7 +12,6 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -107,6 +106,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     case { Location: RequestLocation.Header } when SpecialHandledHeaders.IsNonParameterizedHeader(inputParameter.NameInRequest):
                         _requestPartsBuilder.AddNonParameterizedHeaderPart(inputParameter);
                         break;
+                    case { IsApiVersion: true } when !Configuration.IsBranded:
+                        // [TODO]: Where to get api version if it is passed neither in operation nor in constructor?
+                        break;
                     default:
                         AddReferenceAndParameter(inputParameter);
                         break;
@@ -186,7 +188,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         break;
                     case RequestLocation.Body:
                         CreateConversionToRequestContent(inputParameter, value, parameters, out var content, out var conversions);
-                        _requestPartsBuilder.AddBodyPart(value, conversions, content, inputParameter.Kind != InputOperationParameterKind.Method);
+                        _requestPartsBuilder.AddBodyPart(value, conversions, new RequestContentExpression(content), inputParameter.Kind != InputOperationParameterKind.Method);
                         break;
                 }
             }
@@ -412,7 +414,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     RequestContentExpression content;
                     // Don't dispose content for pageables
-                    _conversions[protocolMethodParameter] = _operation.Paging is not null ? Declare("content", argument, out content) : UsingDeclare("content", argument, out content);
+                    _conversions[protocolMethodParameter] = _operation.Paging is not null ? Declare("content", new RequestContentExpression(argument), out content) : UsingDeclare("content", new RequestContentExpression(argument), out content);
                     _arguments[protocolMethodParameter] = content;
                 }
 
@@ -654,12 +656,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, out RequestContentExpression content, out MethodBodyStatement? conversions)
+        private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, out TypedValueExpression content, out MethodBodyStatement? conversions)
         {
             conversions = null;
-            if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestContentMethod: true } model })
+            if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestBodyMethod: true } model })
             {
-                content = new SerializableObjectTypeExpression(model, value).ToRequestContent();
+                content = Extensible.Model.InvokeToRequestBodyMethod(value);
                 return;
             }
 
@@ -723,7 +725,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return RequestContentExpression.FromObject(value);
         }
 
-        private static void CreateConversionToUtf8JsonRequestContent(InputParameter inputParameter, TypedValueExpression value, out RequestContentExpression content, out MethodBodyStatement conversions)
+        private static void CreateConversionToUtf8JsonRequestContent(InputParameter inputParameter, TypedValueExpression value, out TypedValueExpression content, out MethodBodyStatement conversions)
         {
             var jsonSerialization = SerializationBuilder.BuildJsonSerialization(inputParameter.Type, value.Type);
             conversions = new[]
@@ -734,7 +736,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             content = utf8JsonContent;
         }
 
-        private static void CreateConversionToXmlWriterRequestContent(InputParameter inputParameter, TypedValueExpression value, out RequestContentExpression content, out MethodBodyStatement conversions)
+        private static void CreateConversionToXmlWriterRequestContent(InputParameter inputParameter, TypedValueExpression value, out TypedValueExpression content, out MethodBodyStatement conversions)
         {
             var xmlSerialization = SerializationBuilder.BuildXmlSerialization(inputParameter.Type, value.Type);
             conversions = new[]
@@ -745,7 +747,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             content = xmlWriterContent;
         }
 
-        private void GetConversionsForFlattenedParameter(IReadOnlyDictionary<InputParameter, Parameter> parameters, out RequestContentExpression content, out MethodBodyStatement conversion)
+        private void GetConversionsForFlattenedParameter(IReadOnlyDictionary<InputParameter, Parameter> parameters, out TypedValueExpression content, out MethodBodyStatement conversion)
         {
             var properties = new Dictionary<InputModelProperty, TypedValueExpression>();
             var conversions = new List<MethodBodyStatement>();

@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -21,16 +22,18 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         public override JsonElementSnippets JsonElement { get; } = new AzureJsonElementSnippets();
         public override XElementSnippets XElement { get; } = new AzureXElementSnippets();
         public override XmlWriterSnippets XmlWriter { get; } = new AzureXmlWriterSnippets();
-        public override OperationResponseSnippets OperationResponse { get; } = new AzureOperationResponseSnippets();
+        public override RestOperationsSnippets RestOperations { get; } = new AzureRestOperationsSnippets();
         public override ModelSnippets Model { get; } = new AzureModelSnippets();
 
         internal class AzureModelSnippets : ModelSnippets
         {
+            private const string ToRequestContentMethodName = "ToRequestContent";
+
             public override Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers)
             {
                 return new Method
                 (
-                    new MethodSignature("ToRequestBody", null, $"Convert into a Utf8JsonRequestContent.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
+                    new MethodSignature(ToRequestContentMethodName, null, $"Convert into a {nameof(Utf8JsonRequestContent)}.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
                     new[]
                     {
                         DeclareRequestContent(out var requestContent),
@@ -54,6 +57,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 );
             }
 
+            public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestContentExpression(model.Invoke(ToRequestContentMethodName));
+
             private static DeclarationStatement DeclareRequestContent(out Utf8JsonRequestContentExpression variable)
             {
                 var variableRef = new VariableReference(typeof(Utf8JsonRequestContent), "content");
@@ -62,7 +67,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             }
         }
 
-        internal class AzureOperationResponseSnippets : OperationResponseSnippets
+        internal class AzureRestOperationsSnippets : RestOperationsSnippets
         {
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
                 => ResponseExpression.FromValue(value, new ResponseExpression(response).GetRawResponse());

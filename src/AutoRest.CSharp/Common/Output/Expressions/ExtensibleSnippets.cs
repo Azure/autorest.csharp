@@ -14,12 +14,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions
     internal abstract class ExtensibleSnippets
     {
         public abstract JsonElementSnippets JsonElement { get; }
+        public abstract ModelSnippets Model { get; }
+        public abstract RestOperationsSnippets RestOperations { get; }
         public abstract XElementSnippets XElement { get; }
         public abstract XmlWriterSnippets XmlWriter { get; }
-        public abstract OperationResponseSnippets OperationResponse { get; }
-        public abstract ModelSnippets Model { get; }
 
-        internal abstract class OperationResponseSnippets
+        internal abstract class RestOperationsSnippets
         {
             public abstract TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response);
             public abstract BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response);
@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         {
             public abstract Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers);
             public abstract Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers);
+            public abstract TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model);
         }
 
         internal abstract class JsonElementSnippets

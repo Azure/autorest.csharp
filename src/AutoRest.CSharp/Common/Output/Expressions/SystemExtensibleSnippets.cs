@@ -4,7 +4,6 @@
 using System;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -22,7 +21,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         public override JsonElementSnippets JsonElement { get; } = new SystemJsonElementSnippets();
         public override XElementSnippets XElement => throw new NotImplementedException("XElement extensions aren't supported in unbranded yet.");
         public override XmlWriterSnippets XmlWriter => throw new NotImplementedException("XmlWriter extensions aren't supported in unbranded yet.");
-        public override OperationResponseSnippets OperationResponse { get; } = new SystemOperationResponseSnippets();
+        public override RestOperationsSnippets RestOperations { get; } = new SystemRestOperationsSnippets();
         public override ModelSnippets Model { get; } = new SystemModelSnippets();
 
         internal class SystemModelSnippets : ModelSnippets
@@ -31,7 +30,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             {
                 return new Method
                 (
-                    new MethodSignature("ToRequestBody", null, $"Convert into a Utf8JsonRequestBody.", modifiers, typeof(RequestBody), null, Array.Empty<Parameter>()),
+                    new MethodSignature("ToRequestBody", null, $"Convert into a {nameof(Utf8JsonRequestBody)}.", modifiers, typeof(RequestBody), null, Array.Empty<Parameter>()),
                     new[]
                     {
                         DeclareRequestBody(out var requestContent),
@@ -55,6 +54,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 );
             }
 
+            public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestBodyExpression(model.Invoke("ToRequestBody"));
+
             private static DeclarationStatement DeclareRequestBody(out Utf8JsonRequestBodyExpression variable)
             {
                 var variableRef = new VariableReference(typeof(Utf8JsonRequestBody), "content");
@@ -63,7 +64,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             }
         }
 
-        private class SystemOperationResponseSnippets : OperationResponseSnippets
+        private class SystemRestOperationsSnippets : RestOperationsSnippets
         {
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
                 => ResultExpression.FromValue(value, new PipelineResponseExpression(response));

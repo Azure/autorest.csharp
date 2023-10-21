@@ -62,7 +62,9 @@ namespace AutoRest.CSharp.Output.Models
 
             ClientOptions = clientOptions;
 
-            Parameters = clientParameters;
+            //we should not overload the concept of parameters.  ApiVersion is never a parameter for a client and should be treated differently.
+            //by adding it in the parameters we have to make sure we treat it differently in all places that loop over the parameter list.
+            Parameters = Configuration.IsBranded ? clientParameters : clientParameters.Where(p => !p.IsApiVersionParameter).ToArray();
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
             Fields = ClientFields.CreateForClient(Parameters, authorization);
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
