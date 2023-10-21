@@ -4,7 +4,10 @@
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.Common.Output.Expressions
 {
@@ -14,10 +17,18 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         public abstract XElementSnippets XElement { get; }
         public abstract XmlWriterSnippets XmlWriter { get; }
         public abstract OperationResponseSnippets OperationResponse { get; }
+        public abstract ModelSnippets Model { get; }
 
         internal abstract class OperationResponseSnippets
         {
-            public abstract TypedValueExpression FromValue(TypedValueExpression value, TypedValueExpression response);
+            public abstract TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response);
+            public abstract BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response);
+        }
+
+        internal abstract class ModelSnippets
+        {
+            public abstract Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers);
+            public abstract Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers);
         }
 
         internal abstract class JsonElementSnippets

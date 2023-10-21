@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
@@ -339,6 +340,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSampleRefsIfNecessary(MethodSignatureBase signature)
         {
+            if (!Configuration.IsBranded)
+                return;
+
             var samples = _sampleComposer.GetSampleInformation(signature).ToList();
             if (!samples.Any())
             {
@@ -440,11 +444,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 text = $"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
             }
-            else if (returnType.EqualsIgnoreNullable(typeof(Task<Response>)) || returnType.EqualsIgnoreNullable(typeof(Response)))
+            else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse()) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
             {
                 text = $"The response returned from the service.";
             }
-            else if (returnType.EqualsIgnoreNullable(typeof(Task<Response<bool>>)) || returnType.EqualsIgnoreNullable(typeof(Response<bool>)))
+            else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse(typeof(bool))) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetResponseOfT<bool>()))
             {
                 text = $"The response returned from the service.";
             }

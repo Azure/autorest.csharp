@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -23,7 +24,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return successInputResponses;
         }
 
-        public static StatusCodeSwitchBuilder CreateHeadAsBooleanOperationSwitch() => new(null, null, typeof(bool), typeof(Response<bool>), typeof(Response<bool>), null, typeof(Response<bool>), new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code)));
+        public static StatusCodeSwitchBuilder CreateHeadAsBooleanOperationSwitch() => new(null, null, typeof(bool), Configuration.ApiTypes.GetResponseOfT<bool>(), Configuration.ApiTypes.GetResponseOfT<bool>(), null, Configuration.ApiTypes.GetResponseOfT<bool>(), new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code)));
 
         private StatusCodeSwitchBuilder(IReadOnlyList<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>? successResponses, CSharpType? headerModelType, CSharpType? responseType, CSharpType protocolReturnType, CSharpType restClientConvenienceReturnType, CSharpType? pageItemType, CSharpType clientConvenienceReturnType, ResponseClassifierType responseClassifier)
         {
@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 (true, true) => typeof(Operation<Pageable<BinaryData>>),
                 (false, true) => typeof(Pageable<BinaryData>),
                 (true, false) => hasResponseType ? typeof(Operation<BinaryData>) : typeof(Operation),
-                _ => new CSharpType(typeof(Response))
+                _ => Configuration.ApiTypes.ResponseType
             };
         }
 
@@ -311,9 +311,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return (responseType, headerModelType) switch
             {
                 (not null, not null) => new CSharpType(typeof(ResponseWithHeaders<,>), responseType, headerModelType),
-                (not null, null) => new CSharpType(typeof(Response<>), responseType),
+                (not null, null) => new CSharpType(Configuration.ApiTypes.ResponseOfTType, responseType),
                 (null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
-                _ => new CSharpType(typeof(Response))
+                _ => Configuration.ApiTypes.ResponseType
             };
         }
 
@@ -324,7 +324,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 (true, not null) => new(typeof(Operation<>), new CSharpType(typeof(Pageable<>), pageItemType)),
                 (false, not null) => new(typeof(Pageable<>), pageItemType),
                 (true, null) => responseType is not null ? new CSharpType(typeof(Operation<>), responseType) : typeof(Operation),
-                _ => responseType is not null ? new CSharpType(typeof(Response<>), responseType) : new CSharpType(typeof(Azure.Response))
+                _ => responseType is not null ? new CSharpType(Configuration.ApiTypes.ResponseOfTType, responseType) : Configuration.ApiTypes.ResponseType
             };
         }
 
@@ -379,7 +379,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 return new[]
                 {
-                    Declare(type, "value", Snippets.Default, out value),
+                    Declare(type, "value", Default, out value),
                     serialization switch
                     {
                         JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, stream, type.Equals(typeof(BinaryData))),

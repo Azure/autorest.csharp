@@ -122,7 +122,8 @@ namespace UnbrandedTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
+            using var document = JsonDocument.Parse(RequiredUnknown);
+            JsonSerializer.Serialize(writer, document.RootElement);
 #endif
             if (OptionalProperty.IsDefined(OptionalUnknown))
             {
@@ -130,7 +131,8 @@ namespace UnbrandedTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalUnknown.ToString()).RootElement);
+                using var document0 = JsonDocument.Parse(OptionalUnknown);
+                JsonSerializer.Serialize(writer, document0.RootElement);
 #endif
             }
             writer.WritePropertyName("requiredRecordUnknown"u8);
@@ -146,7 +148,8 @@ namespace UnbrandedTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                using var document0 = JsonDocument.Parse(item.Value);
+                JsonSerializer.Serialize(writer, document0.RootElement);
 #endif
             }
             writer.WriteEndObject();
@@ -165,7 +168,8 @@ namespace UnbrandedTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using var document0 = JsonDocument.Parse(item.Value);
+                    JsonSerializer.Serialize(writer, document0.RootElement);
 #endif
                 }
                 writer.WriteEndObject();

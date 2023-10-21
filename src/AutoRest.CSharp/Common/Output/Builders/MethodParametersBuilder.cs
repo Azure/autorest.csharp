@@ -400,7 +400,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
-            if (protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
+            if (protocolMethodParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
                 CreateConversionToRequestContent(inputParameter, NullConditional(convenienceMethodParameter), new Dictionary<InputParameter, Parameter>(), out var argument, out var conversions);
                 if (conversions is not null)

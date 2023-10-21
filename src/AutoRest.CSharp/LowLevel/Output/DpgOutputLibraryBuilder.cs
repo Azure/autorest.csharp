@@ -57,7 +57,18 @@ namespace AutoRest.CSharp.Output.Models
                 ? (FormattableString)$"Client options for {clientName}."
                 : $"Client options for {_libraryName} library clients.";
 
-            return new ClientOptionsTypeProvider(_sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
+            IReadOnlyList<string> apiVersions = _sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions;
+            if (Configuration.IsBranded)
+            {
+                return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
+            }
+
+            if (apiVersions.Count <= 1)
+            {
+                return new ClientOptionsTypeProvider(null, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
+            }
+
+            throw new InvalidOperationException("Multiple API versions are not supported in the unbranded path.");
         }
 
         private static ClientInfo CreateClientInfo(InputClient inputClient, SourceInputModel? sourceInputModel, string rootNamespaceName)

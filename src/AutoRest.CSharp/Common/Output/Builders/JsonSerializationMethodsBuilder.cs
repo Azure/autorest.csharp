@@ -10,7 +10,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -42,20 +41,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             (
                 new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[]{utf8JsonWriter}, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
                 WriteObject(new Utf8JsonWriterExpression(utf8JsonWriter), jsonObjectSerialization)
-            );
-        }
-
-        public static Method BuildToRequestContent(MethodSignatureModifiers modifiers)
-        {
-            return new Method
-            (
-                new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a Utf8Json{Configuration.ApiTypes.RequestContentType.Name}.", modifiers, Configuration.ApiTypes.RequestContentType, null, Array.Empty<Parameter>()),
-                new[]
-                {
-                    Var("content", New.Utf8JsonRequestContent(), out var requestContent),
-                    requestContent.JsonWriter.WriteObjectValue(This),
-                    Return(requestContent)
-                }
             );
         }
 
@@ -327,20 +312,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             return new Method(signature, BuildDeserializeBody(element, serialization).ToArray());
-        }
-
-        public static Method BuildFromResponse(SerializableObjectType type, MethodSignatureModifiers modifiers)
-        {
-            var fromResponse = new Parameter(Configuration.ApiTypes.ResponseParameterName, $"The {Configuration.ApiTypes.ResponseParameterName} to deserialize the model from.", new CSharpType(Configuration.ApiTypes.FromResponseType), null, Validation.None, null);
-            return new Method
-            (
-                new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),
-                new MethodBodyStatement[]
-                {
-                    UsingVar("document", JsonDocumentExpression.Parse(new ResponseExpression(fromResponse).Content), out var document),
-                    Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
-                }
-            );
         }
 
         private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(Parameter element, JsonObjectSerialization serialization)

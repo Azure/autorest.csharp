@@ -1,11 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
+using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -17,11 +22,53 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         public override XElementSnippets XElement { get; } = new AzureXElementSnippets();
         public override XmlWriterSnippets XmlWriter { get; } = new AzureXmlWriterSnippets();
         public override OperationResponseSnippets OperationResponse { get; } = new AzureOperationResponseSnippets();
+        public override ModelSnippets Model { get; } = new AzureModelSnippets();
+
+        internal class AzureModelSnippets : ModelSnippets
+        {
+            public override Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers)
+            {
+                return new Method
+                (
+                    new MethodSignature("ToRequestBody", null, $"Convert into a Utf8JsonRequestContent.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
+                    new[]
+                    {
+                        DeclareRequestContent(out var requestContent),
+                        requestContent.JsonWriter.WriteObjectValue(This),
+                        Return(requestContent)
+                    }
+                );
+            }
+
+            public override Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers)
+            {
+                var fromResponse = new Parameter("response", "The response to deserialize the model from.", typeof(Response), null, Validation.None, null);
+                return new Method
+                (
+                    new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),
+                    new MethodBodyStatement[]
+                    {
+                        UsingVar("document", JsonDocumentExpression.Parse(new ResponseExpression(fromResponse).Content), out var document),
+                        Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
+                    }
+                );
+            }
+
+            private static DeclarationStatement DeclareRequestContent(out Utf8JsonRequestContentExpression variable)
+            {
+                var variableRef = new VariableReference(typeof(Utf8JsonRequestContent), "content");
+                variable = new Utf8JsonRequestContentExpression(variableRef);
+                return new DeclareVariableStatement(null, variableRef.Declaration, New.Instance(typeof(Utf8JsonRequestContent)));
+            }
+        }
 
         internal class AzureOperationResponseSnippets : OperationResponseSnippets
         {
-            public override TypedValueExpression FromValue(TypedValueExpression value, TypedValueExpression response)
+            public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
                 => ResponseExpression.FromValue(value, new ResponseExpression(response).GetRawResponse());
+
+            public override BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response)
+                => new ResponseExpression(response).Content;
         }
 
         private class AzureJsonElementSnippets : JsonElementSnippets

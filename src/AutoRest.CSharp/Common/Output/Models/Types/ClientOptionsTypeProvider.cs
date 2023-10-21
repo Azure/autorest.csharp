@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ClientOptionsTypeProvider : TypeProvider
     {
-        private static TextInfo TextInfo = CultureInfo.InvariantCulture.TextInfo;
+        private static readonly TextInfo TextInfo = CultureInfo.InvariantCulture.TextInfo;
 
         public FormattableString Description { get; }
         public IReadOnlyList<ApiVersion>? ApiVersions { get; }
@@ -26,7 +26,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             Description = description;
 
             if (versions is not null)
+            {
                 ApiVersions = ConvertApiVersions(versions);
+            }
         }
 
         private static ApiVersion[] ConvertApiVersions(IReadOnlyList<string> versions) =>
