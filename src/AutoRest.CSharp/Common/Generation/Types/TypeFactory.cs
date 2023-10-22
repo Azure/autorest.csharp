@@ -287,7 +287,7 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryElementOfDateTime => typeof(DataFactoryElement<DateTimeOffset>),
             XMsFormat.DataFactoryElementOfDuration => typeof(DataFactoryElement<TimeSpan>),
             XMsFormat.DataFactoryElementOfUri => typeof(DataFactoryElement<Uri>),
-            XMsFormat.DataFactoryElementOfObject => typeof(DataFactoryElement<BinaryData>),
+            XMsFormat.DataFactoryElementOfObject => typeof(DataFactoryElement<object>),
             XMsFormat.DataFactoryElementOfListOfString => typeof(DataFactoryElement<IList<string>>),
             XMsFormat.DataFactoryElementOfKeyValuePairs => typeof(DataFactoryElement<IDictionary<string, string>>),
             _ => null
