@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source

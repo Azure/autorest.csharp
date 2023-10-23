@@ -102,7 +102,7 @@ function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
         return $projectNamePath
     }
     
-    throw "There is no client.tsp or main.tsp or other tsp file named after project name" 
+    throw "There is no client.tsp or main.tsp or other tsp file named after project name in project $($tspDirectory.Name)" 
 }
 
 $testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json
@@ -191,13 +191,21 @@ function Add-TestProjects-Directory($directory) {
     if (Test-Path $tspConfigConfigurationPath) {
         $directoryToUse = $directory
         $launchSettingsArgs = ""
+        $options = ""
         if ($directory.FullName.Contains("\sdk\")) {
             $directoryToUse = $srcFolder
         }
         if ($directory.FullName.Contains(".NewProject.")) {
             $launchSettingsArgs = "-n"
         }
-        Add-TypeSpec $testName $directoryToUse "" "" $launchSettingsArgs
+        if ($directory.FullName.Contains("\UnbrandedProjects\")) {
+            if ($directoryToUse.Name -ne "src") {
+                $directoryToUse = Join-Path $directoryToUse "src"
+            }
+            $launchSettingsArgs = "-n"
+            $options = "--option @azure-tools/typespec-csharp.new-project=true"
+        }
+        Add-TypeSpec $testName $directoryToUse "" $options $launchSettingsArgs
     }
     elseif (Test-Path $readmeConfigurationPath) {
         $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true"
@@ -221,6 +229,14 @@ if (!($Exclude -contains "TestProjects")) {
     }
 }
 
+if (!($Exclude -contains "UnbrandedProjects")) {
+    # Local test projects
+    $testProjectRoot = Join-Path $repoRoot 'test' 'UnbrandedProjects'
+
+    foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
+        Add-TestProjects-Directory $directory
+    }
+}
 
 if (!($Exclude -contains "Samples")) {
     $sampleProjectsRoot = Join-Path $repoRoot 'samples'

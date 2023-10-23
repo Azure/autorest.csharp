@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Input

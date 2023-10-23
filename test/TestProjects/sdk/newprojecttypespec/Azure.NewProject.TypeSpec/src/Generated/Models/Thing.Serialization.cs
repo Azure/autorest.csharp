@@ -5,13 +5,14 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    internal partial class Thing : IUtf8JsonSerializable
+    public partial class Thing : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -19,7 +20,11 @@ namespace Azure.NewProject.TypeSpec.Models
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion"u8);
-            writer.WriteObjectValue(RequiredUnion);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(RequiredUnion);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnion.ToString()).RootElement);
+#endif
             writer.WritePropertyName("requiredLiteralString"u8);
             writer.WriteStringValue(RequiredLiteralString.ToString());
             writer.WritePropertyName("requiredLiteralInt"u8);
@@ -60,7 +65,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 return null;
             }
             string name = default;
-            object requiredUnion = default;
+            BinaryData requiredUnion = default;
             ThingRequiredLiteralString requiredLiteralString = default;
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
@@ -79,7 +84,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 if (property.NameEquals("requiredUnion"u8))
                 {
-                    requiredUnion = property.Value.GetObject();
+                    requiredUnion = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralString"u8))

@@ -10,13 +10,17 @@ using Azure.Core;
 
 namespace _Type.Union.Models
 {
-    internal partial class ModelWithNamedUnionProperty : IUtf8JsonSerializable
+    public partial class ModelWithNamedUnionProperty : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("namedUnion"u8);
-            writer.WriteObjectValue(NamedUnion);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(NamedUnion);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(NamedUnion.ToString()).RootElement);
+#endif
             writer.WriteEndObject();
         }
 

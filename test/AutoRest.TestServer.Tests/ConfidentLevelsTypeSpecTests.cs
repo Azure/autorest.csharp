@@ -12,16 +12,16 @@ namespace AutoRest.TestServer.Tests
 {
     public class ConfidentLevelsTypeSpecTests
     {
-        [TestCase(typeof(ModelWithUnionProperty), false)]
-        [TestCase(typeof(AnotherModelWithUnionProperty), false)]
-        [TestCase(typeof(NonConfidentModelWithSelfReference), false)]
-        [TestCase(typeof(NonConfidentModelWithIndirectSelfReference), false)]
-        [TestCase(typeof(IndirectSelfReferenceModel), false)]
-        [TestCase(typeof(ModelWithIntegerLiteralTypeProperty), false)]
-        [TestCase(typeof(ModelWithFloatLiteralTypeProperty), false)]
-        [TestCase(typeof(PollutedPet), false)]
-        [TestCase(typeof(UnpollutedCat), false)]
-        [TestCase(typeof(PollutedDog), false)]
+        [TestCase(typeof(ModelWithUnionProperty), true)]
+        [TestCase(typeof(AnotherModelWithUnionProperty), true)]
+        [TestCase(typeof(NonConfidentModelWithSelfReference), true)]
+        [TestCase(typeof(NonConfidentModelWithIndirectSelfReference), true)]
+        [TestCase(typeof(IndirectSelfReferenceModel), true)]
+        [TestCase(typeof(ModelWithIntegerLiteralTypeProperty), true)]
+        [TestCase(typeof(ModelWithFloatLiteralTypeProperty), true)]
+        [TestCase(typeof(PollutedPet), true)]
+        [TestCase(typeof(UnpollutedCat), true)]
+        [TestCase(typeof(PollutedDog), true)]
         [TestCase(typeof(Pet), true)]
         [TestCase(typeof(Cat), true)]
         [TestCase(typeof(Dog), true)]
@@ -30,16 +30,16 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(isPublic, model.IsPublic, $"model {model}.IsPublic should not {isPublic}");
         }
 
-        [TestCase(typeof(ConfidentLevelsInTspClient), "UnionInRequestProperty", false)]
-        [TestCase(typeof(ConfidentLevelsInTspClient), "UnionInResponseProperty", false)]
-        [TestCase(typeof(ConfidentLevelsInTspClient), "UnionWithSelfReference", false)]
-        [TestCase(typeof(ConfidentLevelsInTspClient), "UnionWithInderict", false)]
+        [TestCase(typeof(ConfidentLevelsInTspClient), "UnionInRequestProperty", true)]
+        [TestCase(typeof(ConfidentLevelsInTspClient), "UnionInResponseProperty", true)]
+        [TestCase(typeof(ConfidentLevelsInTspClient), "UnionWithSelfReference", true)]
+        [TestCase(typeof(ConfidentLevelsInTspClient), "UnionWithInderict", true)]
         [TestCase(typeof(ConfidentLevelsInTspClient), "literalOfInteger", false)]
         [TestCase(typeof(ConfidentLevelsInTspClient), "literalOfFloat", false)]
         [TestCase(typeof(ConfidentLevelsInTspClient), "ConfidentOperationWithDiscriminator", true)]
-        [TestCase(typeof(ConfidentLevelsInTspClient), "PollutedBaseMethod", false)]
-        [TestCase(typeof(ConfidentLevelsInTspClient), "pollutedDerivedMethod", false)]
-        [TestCase(typeof(ConfidentLevelsInTspClient), "unpollutedDerivedMethod", false)]
+        [TestCase(typeof(ConfidentLevelsInTspClient), "PollutedBaseMethod", true)]
+        [TestCase(typeof(ConfidentLevelsInTspClient), "pollutedDerivedMethod", true)]
+        [TestCase(typeof(ConfidentLevelsInTspClient), "unpollutedDerivedMethod", true)]
         public void LowConfidentOperationsShouldBeInternal(Type clientType, string methodName, bool isPublic)
         {
             var methods = clientType.GetMethods().Where(m => m.Name == methodName || m.Name == $"{methodName}Async");
@@ -63,7 +63,7 @@ namespace AutoRest.TestServer.Tests
         {
             var property = model.GetProperty(propertyName);
 
-            Assert.AreEqual(typeof(object), property.PropertyType, $"Type of property {property} in model {model} should always be object");
+            Assert.AreEqual(typeof(BinaryData), property.PropertyType, $"Type of property {property} in model {model} should always be object");
         }
     }
 }

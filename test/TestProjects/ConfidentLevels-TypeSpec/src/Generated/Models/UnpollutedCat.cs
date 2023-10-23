@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The cat without a union type. </summary>
-    internal partial class UnpollutedCat : PollutedPet
+    public partial class UnpollutedCat : PollutedPet
     {
         /// <summary> Initializes a new instance of UnpollutedCat. </summary>
         /// <param name="name"> The name of the pet. </param>

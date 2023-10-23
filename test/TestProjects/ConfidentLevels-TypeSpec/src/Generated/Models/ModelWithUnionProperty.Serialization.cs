@@ -10,13 +10,17 @@ using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class ModelWithUnionProperty : IUtf8JsonSerializable
+    public partial class ModelWithUnionProperty : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("unionProperty"u8);
-            writer.WriteObjectValue(UnionProperty);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(UnionProperty);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(UnionProperty.ToString()).RootElement);
+#endif
             writer.WriteEndObject();
         }
 

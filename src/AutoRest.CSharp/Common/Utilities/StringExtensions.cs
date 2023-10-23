@@ -6,8 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using Humanizer;
 using Humanizer.Inflections;
@@ -33,6 +32,10 @@ namespace AutoRest.CSharp.Utilities
         [return: NotNullIfNotNull("name")]
         public static string ToCleanName(this string name, bool isCamelCase = true)
         {
+            if (name.IsNullOrEmpty())
+            {
+                return name;
+            }
             StringBuilder nameBuilder = new StringBuilder();
 
             int i = 0;

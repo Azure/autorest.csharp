@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -91,7 +92,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
         {
-            if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
                 switch (parameter.Type)
                 {
@@ -132,14 +133,14 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(typeof(RequestContent)) => ".ToRequestContent()",
+                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
                 _ => null
             };
 
         public static FormattableString GetReferenceOrConstantFormattable(this ReferenceOrConstant value)
             => value.IsConstant ? value.Constant.GetConstantFormattable() : value.Reference.GetReferenceFormattable();
 
-        public static FormattableString GetConstantFormattable(this Constant constant)
+        public static FormattableString GetConstantFormattable(this Constant constant, bool writeAsString = false)
         {
             if (constant.Value == null)
             {
@@ -189,6 +190,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (frameworkType == typeof(ResourceType))
             {
                 return $"{((ResourceType)constant.Value).ToString():L}";
+            }
+
+            if (frameworkType == typeof(bool) && writeAsString)
+            {
+                return $"\"{constant.Value!.ToString()!.ToLower()}\"";
             }
 
             return $"{constant.Value:L}";

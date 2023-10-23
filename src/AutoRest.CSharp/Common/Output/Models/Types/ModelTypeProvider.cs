@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -31,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private TypeFactory _typeFactory;
         private SourceInputModel? _sourceInputModel;
         private InputModelType[]? _derivedTypes;
-        private ObjectType? _defaultDerivedType;
+        private SerializableObjectType? _defaultDerivedType;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -47,31 +46,18 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, SerializableObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
             _sourceInputModel = sourceInputModel;
-            DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround only to solve the anonymous model names, in other cases, the name is unchanged.
+            DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             IsAccessibilityOverridden = inputModel.Accessibility != null;
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
-        }
-
-        // TODO -- this is only a workaround. We introduce this method only to solve the issue on model names when the model is anonymous where we take the id of the model as its name, and it is digits.
-        // For full solution, we should use the `ToCleanName` method which does (almost) the same when the name is digits, and it does more when the name contains other invalid identifier characters
-        // We did not use the `ToCleanName` method here because it will change the leading character captilized. Defer the decision of that to this issue: https://github.com/Azure/autorest.csharp/issues/3669
-        private static string GetValidIdentifier(string name)
-        {
-            if (char.IsDigit(name[0]))
-            {
-                return $"_{name}";
-            }
-
-            return name;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -80,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parent = GetBaseObjectType();
             if (parent is ModelTypeProvider parentModelType)
             {
-                if (parentModelType.Methods.Any(m => m.Signature.Name == "FromResponse"))
+                if (parentModelType.Methods.Any(m => m.Signature.Name == Configuration.ApiTypes.FromResponseName))
                     signatures |= MethodSignatureModifiers.New;
             }
             return signatures;
@@ -111,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -160,7 +146,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var property in objType.Properties)
                 {
-                    if (property.InputModelProperty is not {} inputModelProperty)
+                    if (property.InputModelProperty is not { } inputModelProperty)
                         continue;
 
                     var declaredName = property.Declaration.Name;
@@ -177,7 +163,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         ShouldSkipSerialization(property, inputModelProperty),
                         false,
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);;
+                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+                    ;
                 }
             }
         }
@@ -434,6 +421,23 @@ namespace AutoRest.CSharp.Output.Models.Types
                 value,
                 _defaultDerivedType!
             );
+        }
+
+        internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
+        {
+            var result = new ModelTypeProvider(
+                _inputModel.ReplaceProperty(property, inputType),
+                DefaultNamespace,
+                _sourceInputModel,
+                _typeFactory,
+                _derivedTypes,
+                _defaultDerivedType);
+            return result;
+        }
+
+        internal InputModelProperty? GetProperty(InputModelType key)
+        {
+            return _inputModel.GetProperty(key);
         }
     }
 }
