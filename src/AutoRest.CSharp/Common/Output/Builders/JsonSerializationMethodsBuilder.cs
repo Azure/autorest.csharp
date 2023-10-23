@@ -295,7 +295,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 (
                     "NET6_0_OR_GREATER",
                     utf8JsonWriter.WriteRawValue(value),
-                    new UsingScopeStatement(typeof(JsonDocument), "document", JsonDocumentExpression.Parse(value.InvokeToString()), out var jsonDocumentVar)
+                    new UsingScopeStatement(typeof(JsonDocument), "document", JsonDocumentExpression.Parse(value), out var jsonDocumentVar)
                     {
                         InvokeJsonSerializerSerializeMethod(utf8JsonWriter, new JsonDocumentExpression(jsonDocumentVar).RootElement)
                     }
@@ -313,7 +313,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static MethodBodyStatement CheckCollectionItemForNull(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression value)
             => CollectionItemRequiresNullCheckInSerialization(valueSerialization)
                 ? new IfStatement(Equal(value, Null)) { utf8JsonWriter.WriteNullValue(), Continue }
-                : new MethodBodyStatement();
+                : MethodBodyStatement.Empty;
 
         public static Method? BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization, INamedTypeSymbol? existingType)
         {

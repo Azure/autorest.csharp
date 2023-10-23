@@ -21,7 +21,7 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Template);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Template.ToString()))
+                using (JsonDocument document = JsonDocument.Parse(Template))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -33,7 +33,7 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Parameters.ToString()))
+                using (JsonDocument document = JsonDocument.Parse(Parameters))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }

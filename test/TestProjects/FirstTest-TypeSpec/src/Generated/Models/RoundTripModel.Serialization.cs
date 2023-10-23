@@ -125,7 +125,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown.ToString()))
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -136,7 +136,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown.ToString()))
+                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -155,7 +155,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                using (JsonDocument document = JsonDocument.Parse(item.Value.ToString()))
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -177,7 +177,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value.ToString()))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }

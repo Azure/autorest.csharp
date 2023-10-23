@@ -923,7 +923,7 @@ namespace MgmtScopeResource
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(template);
 #else
-            using (JsonDocument document = JsonDocument.Parse(template.ToString()))
+            using (JsonDocument document = JsonDocument.Parse(template))
             {
                 JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
             }

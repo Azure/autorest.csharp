@@ -69,7 +69,7 @@ namespace MgmtPropertyChooser.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Settings);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Settings.ToString()))
+                using (JsonDocument document = JsonDocument.Parse(Settings))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -81,7 +81,7 @@ namespace MgmtPropertyChooser.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(ProtectedSettings);
 #else
-                using (JsonDocument document = JsonDocument.Parse(ProtectedSettings.ToString()))
+                using (JsonDocument document = JsonDocument.Parse(ProtectedSettings))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
