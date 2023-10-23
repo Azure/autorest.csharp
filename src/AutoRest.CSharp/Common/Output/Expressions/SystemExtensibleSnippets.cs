@@ -3,10 +3,10 @@
 
 using System;
 using System.Linq;
+using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -56,6 +56,15 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 );
             }
 
+            public override SerializableObjectTypeExpression InvokeFromOperationResponseMethod(SerializableObjectType type, TypedValueExpression result)
+            {
+                var response = result.Type.Equals(typeof(PipelineResponse))
+                    ? new PipelineResponseExpression(result)
+                    : new ResultExpression(result).GetRawResponse();
+
+                return new(type, new InvokeStaticMethodExpression(type.Type, "FromResponse", new[] { response }));
+            }
+
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestBodyExpression(model.Invoke("ToRequestBody"));
 
             private static DeclarationStatement DeclareRequestBody(out Utf8JsonRequestBodyExpression variable)
@@ -68,8 +77,13 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 
         private class SystemRestOperationsSnippets : RestOperationsSnippets
         {
-            public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
-                => ResultExpression.FromValue(value, new PipelineResponseExpression(response));
+            public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression result)
+            {
+                var response = result.Type.Equals(typeof(PipelineResponse))
+                    ? new PipelineResponseExpression(result)
+                    : new ResultExpression(result).GetRawResponse();
+                return ResultExpression.FromValue(value, response);
+            }
 
             public override BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response)
                 => new PipelineResponseExpression(response).Content;
@@ -79,6 +93,17 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 var messageVar = new VariableReference(typeof(PipelineMessage), "message");
                 message = messageVar;
                 return UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
+            }
+
+            public override MethodBodyStatement InvokeServiceOperationCallAndReturnHeadAsBool(TypedValueExpression pipeline, TypedValueExpression message, TypedValueExpression clientDiagnostics, bool async)
+            {
+                var resultVar = new VariableReference(typeof(NullableResult<bool>), "result");
+                var result = new ResultExpression(resultVar);
+                return new MethodBodyStatement[]
+                {
+                    Var(resultVar, new MessagePipelineExpression(pipeline).ProcessHeadAsBoolMessage(message, clientDiagnostics, new RequestOptionsExpression(KnownParameters.RequestContext), async)),
+                    Return(ResultExpression.FromValue(result.Value, result.GetRawResponse()))
+                };
             }
 
             public override TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async)

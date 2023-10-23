@@ -25,7 +25,20 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
             }
 
             var methodName = async ? nameof(PipelineProtocolExtensions.ProcessMessageAsync) : nameof(PipelineProtocolExtensions.ProcessMessage);
-            return new PipelineResponseExpression(InvokeExtension(typeof(PipelineProtocolExtensions), methodName, arguments, async));
+            return new(InvokeExtension(typeof(PipelineProtocolExtensions), methodName, arguments, async));
+        }
+
+        public ResultExpression ProcessHeadAsBoolMessage(TypedValueExpression message, ValueExpression clientDiagnostics, RequestOptionsExpression? requestContext, bool async)
+        {
+            var arguments = new List<ValueExpression>
+            {
+                message,
+                clientDiagnostics,
+                requestContext ?? Snippets.Null
+            };
+
+            var methodName = async ? nameof(PipelineProtocolExtensions.ProcessHeadAsBoolMessageAsync) : nameof(PipelineProtocolExtensions.ProcessHeadAsBoolMessage);
+            return new(InvokeExtension(typeof(PipelineProtocolExtensions), methodName, arguments, async));
         }
     }
 }

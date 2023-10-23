@@ -3,7 +3,6 @@
 
 using System;
 using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 
@@ -30,6 +29,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
         public ResultExpression FromValue(CSharpType explicitValueType, ValueExpression value)
             => new(new InvokeStaticMethodExpression(typeof(Result), nameof(Result.FromValue), new[] { value, this }, new[] { explicitValueType }));
 
-        public ResultExpression GetRawResponse() => new(Invoke(nameof(Result<object>.GetRawResponse)));
+        public PipelineResponseExpression GetRawResponse() => new(Invoke(nameof(Result<object>.GetRawResponse)));
     }
 }

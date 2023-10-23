@@ -254,15 +254,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _protocolParameters.Add(KnownParameters.RequestContext);
             _convenienceParameters.Add(KnownParameters.CancellationTokenParameter);
 
+            var requestContext = new VariableReference(Configuration.ApiTypes.RequestContextType, KnownParameters.RequestContext.Name);
+            _arguments[KnownParameters.RequestContext] = requestContext;
+
             if (_operation.Paging is not null || Configuration.Generation1ConvenienceClient || Configuration.AzureArm)
             {
-                _conversions[KnownParameters.RequestContext] = Declare(IfCancellationTokenCanBeCanceled(new CancellationTokenExpression(KnownParameters.CancellationTokenParameter)), out var requestContext);
-                _arguments[KnownParameters.RequestContext] = requestContext;
+                _conversions[KnownParameters.RequestContext] = Declare(requestContext, IfCancellationTokenCanBeCanceled(new CancellationTokenExpression(KnownParameters.CancellationTokenParameter)));
             }
             else
             {
-                _conversions[KnownParameters.RequestContext] = Declare(RequestContextExpression.FromCancellationToken(), out var requestContext);
-                _arguments[KnownParameters.RequestContext] = requestContext;
+                _conversions[KnownParameters.RequestContext] = Declare(requestContext, new InvokeStaticMethodExpression(null, "FromCancellationToken", new ValueExpression[] { KnownParameters.CancellationTokenParameter }));
             }
         }
 
@@ -412,10 +413,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    RequestContentExpression content;
+                    var requestContent = new VariableReference(Configuration.ApiTypes.RequestContentType, "content");
                     // Don't dispose content for pageables
-                    _conversions[protocolMethodParameter] = _operation.Paging is not null ? Declare("content", new RequestContentExpression(argument), out content) : UsingDeclare("content", new RequestContentExpression(argument), out content);
-                    _arguments[protocolMethodParameter] = content;
+                    _conversions[protocolMethodParameter] = _operation.Paging is not null ? Declare(requestContent, argument) : UsingDeclare(requestContent, argument);
+                    _arguments[protocolMethodParameter] = requestContent;
                 }
 
                 return;

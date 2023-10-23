@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             public abstract TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response);
             public abstract BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response);
             public abstract MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message);
+            public abstract MethodBodyStatement InvokeServiceOperationCallAndReturnHeadAsBool(TypedValueExpression pipeline, TypedValueExpression message, TypedValueExpression clientDiagnostics, bool async);
             public abstract TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async);
         }
 
@@ -31,6 +32,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         {
             public abstract Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers);
             public abstract Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers);
+            public abstract SerializableObjectTypeExpression InvokeFromOperationResponseMethod(SerializableObjectType type, TypedValueExpression response);
             public abstract TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model);
         }
 

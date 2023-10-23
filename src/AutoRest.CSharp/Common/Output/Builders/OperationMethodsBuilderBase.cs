@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected InputOperation Operation { get; }
 
-        protected ValueExpression ClientDiagnosticsProperty { get; }
+        protected TypedValueExpression ClientDiagnosticsProperty { get; }
         protected TypedValueExpression PipelineField { get; }
         protected StatusCodeSwitchBuilder StatusCodeSwitchBuilder { get; }
         protected MethodSignatureModifiers ConvenienceModifiers { get; }
@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected Method BuildCreateRequestMethod(IReadOnlyList<Parameter> parameters, CreateMessageMethodBuilder builder)
         {
-            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, parameters);
+            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, Configuration.ApiTypes.HttpMessageType, null, parameters);
             return new Method(signature, BuildCreateRequestMethodBody(builder));
         }
 

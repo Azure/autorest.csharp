@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 
         internal class AzureModelSnippets : ModelSnippets
         {
+            private const string FromResponseMethodName = "FromResponse";
             private const string ToRequestContentMethodName = "ToRequestContent";
 
             public override Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers)
@@ -49,7 +50,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 var fromResponse = new Parameter("response", "The response to deserialize the model from.", typeof(Response), null, Validation.None, null);
                 return new Method
                 (
-                    new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),
+                    new MethodSignature(FromResponseMethodName, null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),
                     new MethodBodyStatement[]
                     {
                         UsingVar("document", JsonDocumentExpression.Parse(new ResponseExpression(fromResponse).Content), out var document),
@@ -57,6 +58,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                     }
                 );
             }
+
+            public override SerializableObjectTypeExpression InvokeFromOperationResponseMethod(SerializableObjectType type, TypedValueExpression response)
+                => new(type, new InvokeStaticMethodExpression(type.Type, FromResponseMethodName, new[] { new ResponseExpression(response) }));
 
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestContentExpression(model.Invoke(ToRequestContentMethodName));
 
@@ -82,6 +86,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 message = messageVar;
                 return UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
             }
+
+            public override MethodBodyStatement InvokeServiceOperationCallAndReturnHeadAsBool(TypedValueExpression pipeline, TypedValueExpression message, TypedValueExpression clientDiagnostics, bool async)
+                => Return(new HttpPipelineExpression(pipeline).ProcessHeadAsBoolMessage(new HttpMessageExpression(message), clientDiagnostics, new RequestContextExpression(KnownParameters.RequestContext), async));
 
             public override TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async)
                 => new HttpPipelineExpression(pipeline).ProcessMessage(new HttpMessageExpression(message), new RequestContextExpression(KnownParameters.RequestContext), null, async);
