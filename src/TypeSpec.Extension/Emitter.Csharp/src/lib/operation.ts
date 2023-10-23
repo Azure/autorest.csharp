@@ -408,6 +408,7 @@ export function loadOperation(
             } as OperationResponse,
             ResultPath:
                 metadata.logicalPath ??
+                // TODO: roll back changes when `logicalPath` can be definitive
                 // https://github.com/Azure/typespec-azure/issues/3725
                 (metadata.envelopeResult != metadata.logicalResult &&
                 op.verb === "post"

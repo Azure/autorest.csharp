@@ -11,7 +11,7 @@ internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, Opera
     public OperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new OperationResponse(), null) { }
 
     /// <summary>
-    /// Meaninngful return type of the long running operation.
+    /// Meaningful return type of the long running operation.
     /// </summary>
     public InputType? ReturnType
     {
