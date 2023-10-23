@@ -164,10 +164,10 @@ namespace AutoRest.CSharp.Output.Models
 
         private LongRunningResultRetrievalMethod? GetLongRunningResultRetrievalMethod(OperationLongRunning? longRunning)
         {
-            if (longRunning is null || longRunning.ResultPath is null)
-                return null;
+            if (longRunning is { ResultPath: not null })
+                return new(_typeFactory.CreateType(longRunning.ReturnType!), longRunning.FinalResponse.BodyType!.Name, longRunning.ResultPath);
 
-            return new(_typeFactory.CreateType(longRunning.ReturnType!), longRunning.FinalResponse.BodyType!.Name, longRunning.ResultPath);
+            return null;
         }
 
         private ConvenienceMethodGenerationInfo ShouldGenerateConvenienceMethod()
