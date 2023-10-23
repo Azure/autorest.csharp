@@ -284,11 +284,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (hasStatusCodeRanges)
             {
                 // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "hasStatusCodeRanges" condition and this class
-                using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {typeof(ResponseClassifier)}"))
+                using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {Configuration.ApiTypes.ResponseClassifierType}"))
                 {
-                    using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
+                    using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message)"))
                     {
-                        using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{nameof(Response.Status)} switch", end: "};"))
+                        using (writer.Scope($"return message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.HttpMessageResponseStatusName} switch", end: "};"))
                         {
                             foreach (var statusCode in statusCodes)
                             {
@@ -302,15 +302,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
             }
 
-            writer.Line($"private static {typeof(ResponseClassifier)} _{responseClassifierTypeName.FirstCharToLowerCase()};");
-            writer.Append($"private static {typeof(ResponseClassifier)} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
+            writer.Line($"private static {Configuration.ApiTypes.ResponseClassifierType} _{responseClassifierTypeName.FirstCharToLowerCase()};");
+            writer.Append($"private static {Configuration.ApiTypes.ResponseClassifierType} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
             if (hasStatusCodeRanges)
             {
                 writer.Line($"{responseClassifierTypeName}Override();");
             }
             else
             {
-                writer.Append($"{typeof(StatusCodeClassifier)}(stackalloc ushort[]{{");
+                writer.Append($"{Configuration.ApiTypes.StatusCodeClassifierType}(stackalloc ushort[]{{");
                 foreach (var statusCode in statusCodes)
                 {
                     if (statusCode.Code != null)
@@ -375,9 +375,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteCancellationTokenToRequestContextMethod()
         {
             var defaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");
-            _writer.Line($"private static {typeof(RequestContext)} {defaultRequestContext:D} = new {typeof(RequestContext)}();");
+            _writer.Line($"private static {Configuration.ApiTypes.RequestContextType} {defaultRequestContext:D} = new {Configuration.ApiTypes.RequestContextType}();");
 
-            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
+            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, Configuration.ApiTypes.RequestContextType, null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
             using (_writer.WriteMethodDeclaration(methodSignature))
             {
                 using (_writer.Scope($"if (!{KnownParameters.CancellationTokenParameter.Name}.{nameof(CancellationToken.CanBeCanceled)})"))
@@ -385,7 +385,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.Line($"return {defaultRequestContext:I};");
                 }
 
-                _writer.Line().Line($"return new {typeof(RequestContext)}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
+                _writer.Line().Line($"return new {Configuration.ApiTypes.RequestContextType}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
             }
             _writer.Line();
         }

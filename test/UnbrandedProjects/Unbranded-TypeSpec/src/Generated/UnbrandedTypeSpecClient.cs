@@ -641,7 +641,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -676,7 +676,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

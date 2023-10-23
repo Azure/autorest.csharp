@@ -15,6 +15,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
         public BinaryDataExpression Content => throw new InvalidOperationException("Result does not have a Content property");
         public StreamExpression ContentStream => throw new InvalidOperationException("Result does not have a ContentStream property");
 
+        public static ResultExpression FromResponse(PipelineResponseExpression response)
+            => new(InvokeStatic(nameof(Result.FromResponse), response));
+
         public static ResultExpression FromValue(ValueExpression value, PipelineResponseExpression response)
             => new(InvokeStatic(nameof(Result.FromValue), value, response));
 

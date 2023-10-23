@@ -2,9 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -71,6 +73,16 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 
             public override BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response)
                 => new PipelineResponseExpression(response).Content;
+
+            public override MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message)
+            {
+                var messageVar = new VariableReference(typeof(PipelineMessage), "message");
+                message = messageVar;
+                return UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
+            }
+
+            public override TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async)
+                => ResultExpression.FromResponse(new MessagePipelineExpression(pipeline).ProcessMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), null, async));
         }
 
         private class SystemJsonElementSnippets : JsonElementSnippets

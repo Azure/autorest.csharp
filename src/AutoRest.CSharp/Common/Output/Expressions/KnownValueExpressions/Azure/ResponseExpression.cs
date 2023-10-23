@@ -3,7 +3,6 @@
 
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using Azure;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure

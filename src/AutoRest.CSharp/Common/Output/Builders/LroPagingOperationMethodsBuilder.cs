@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, createNextPageMessageSignature.Name, nextPageArguments, out createNextPageRequest);
             }
 
-            MethodBodyStatement declareMessageLine = UsingDeclare("message", InvokeCreateRequestMethod(createMessageSignature), out var message);
+            MethodBodyStatement declareMessageLine = Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message);
             MethodBodyStatement returnLine = Return(CreatePageable(message, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, typeof(BinaryData), _longRunning.FinalStateVia, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, new RequestContextExpression(KnownParameters.RequestContext), async));
 
             var body = nextPageRequestLine is not null

@@ -28,9 +28,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected override MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
             => WrapInDiagnosticScope(ProtocolMethodName,
-                UsingDeclare("message", InvokeCreateRequestMethod(createMessageSignature), out var message),
+                Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message),
                 EnableHttpRedirectIfSupported(message),
-                Return(PipelineField.ProcessMessage(message, new RequestContextExpression(KnownParameters.RequestContext), null, async))
+                Return(Extensible.RestOperations.InvokeServiceOperationCall(PipelineField, message, async))
             );
 
         protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)

@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         protected InputOperation Operation { get; }
 
         protected ValueExpression ClientDiagnosticsProperty { get; }
-        protected HttpPipelineExpression PipelineField { get; }
+        protected TypedValueExpression PipelineField { get; }
         protected StatusCodeSwitchBuilder StatusCodeSwitchBuilder { get; }
         protected MethodSignatureModifiers ConvenienceModifiers { get; }
 
@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             GenerateProtocolMethods = args.GenerateProtocolMethods;
             StatusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
-            PipelineField = new HttpPipelineExpression(_fields.PipelineField);
+            PipelineField = _fields.PipelineField;
 
             ProtocolMethodName = Operation.Name.ToCleanName();
             CreateMessageMethodName = $"Create{ProtocolMethodName}Request";
@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 UsingVar("message", InvokeCreateRequestMethod(createRequestMessageMethodSignature), out var message),
                 EnableHttpRedirectIfSupported(message),
-                PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
+                new HttpPipelineExpression(PipelineField).Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
                 statusCodeSwitchBuilder.Build(message, async)
             };
         }
@@ -359,7 +359,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected abstract MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async);
 
-        protected MethodBodyStatement EnableHttpRedirectIfSupported(HttpMessageExpression message)
+        protected MethodBodyStatement EnableHttpRedirectIfSupported(TypedValueExpression message)
             => Operation.Responses.Any(r => RedirectResponseCodes.Any(r.StatusCodes.Contains))
                 ? new InvokeStaticMethodStatement(typeof(RedirectPolicy), nameof(RedirectPolicy.SetAllowAutoRedirect), message, True)
                 : new MethodBodyStatement();

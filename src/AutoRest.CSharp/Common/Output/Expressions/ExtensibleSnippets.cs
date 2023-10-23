@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         {
             public abstract TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response);
             public abstract BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response);
+            public abstract MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message);
+            public abstract TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async);
         }
 
         internal abstract class ModelSnippets

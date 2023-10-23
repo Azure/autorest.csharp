@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected override MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
             => WrapInDiagnosticScope(ProtocolMethodName,
-                UsingDeclare("message", InvokeCreateRequestMethod(createMessageSignature), out var message),
+                Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message),
                 Return(InvokeProtocolOperationHelpersProcessMessageMethod(CreateScopeName(ProtocolMethodName), message, _longRunning.FinalStateVia, async))
             );
 

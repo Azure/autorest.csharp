@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -74,6 +75,16 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 
             public override BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response)
                 => new ResponseExpression(response).Content;
+
+            public override MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message)
+            {
+                var messageVar = new VariableReference(typeof(HttpMessage), "message");
+                message = messageVar;
+                return UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
+            }
+
+            public override TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async)
+                => new HttpPipelineExpression(pipeline).ProcessMessage(new HttpMessageExpression(message), new RequestContextExpression(KnownParameters.RequestContext), null, async);
         }
 
         private class AzureJsonElementSnippets : JsonElementSnippets
