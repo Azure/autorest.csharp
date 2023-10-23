@@ -205,8 +205,15 @@ stages:
             Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
             AutorestCSharpVersion: $(AutorestCSharpVersion)
             BranchName: $(BranchName)
+            ContinueOnError: true
         - job: Create_PR
           dependsOn: Update_Code
+          variables:
+            UpdateCodeResult: $[dependencies.Update_Code.result]
+            ${{ if eq(variables.UpdateCodeResult, 'Succeeded') }}:
+              PrTitle: 'Update AutoRest C# version to $(AutorestCSharpVersion)'
+            ${{ else }}:
+              PrTitle: 'Failed Update AutoRest C# version to $(AutorestCSharpVersion)'
           steps:
             - checkout: self
             - checkout: azure-sdk-tools
@@ -222,5 +229,5 @@ stages:
                   -PROwner "azure-sdk"
                   -PRBranch $(BranchName)
                   -AuthToken "$(azuresdk-github-pat)"
-                  -PRTitle "Update AutoRest C# version to $(AutorestCSharpVersion)"
+                  -PRTitle "$(PrTitle)"
                   -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"
