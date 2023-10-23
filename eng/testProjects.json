@@ -13,6 +13,7 @@
         "type/property/optionality",
         "type/property/value-types",
         "type/union",
+        "type/scalar",
         "authentication/api-key",
         "authentication/http/custom",
         "authentication/oauth2",
