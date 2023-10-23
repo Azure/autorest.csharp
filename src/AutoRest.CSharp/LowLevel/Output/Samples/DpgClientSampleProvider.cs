@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -62,6 +63,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         {
             methods = new List<Method>();
             restClientMethodsToTestMethods = new Dictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>>();
+            if (!Configuration.IsBranded)
+            {
+                return;
+            }
+
             foreach (var operationMethods in client.OperationMethods.OrderBy(m => m.Order))
             {
                 var samples = operationMethods.Samples;

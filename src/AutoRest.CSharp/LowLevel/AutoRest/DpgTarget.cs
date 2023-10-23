@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 dpgClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
 
-                if (sampleProvider.Methods.Any())
+                if (client.OperationMethods.Any())
                 {
                     if (Configuration.IsBranded)
                     {
