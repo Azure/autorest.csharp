@@ -20,14 +20,14 @@ namespace MgmtExactMatchInheritance
     /// <summary> A class to add extension methods to MgmtExactMatchInheritance. </summary>
     public static partial class MgmtExactMatchInheritanceExtensions
     {
-        private static MgmtExactMatchInheritanceArmClientMockingExtension GetMgmtExactMatchInheritanceArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtExactMatchInheritanceArmClient GetMockableMgmtExactMatchInheritanceArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtExactMatchInheritanceArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtExactMatchInheritanceArmClient(client0));
         }
 
-        private static MgmtExactMatchInheritanceResourceGroupMockingExtension GetMgmtExactMatchInheritanceResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtExactMatchInheritanceResourceGroupResource GetMockableMgmtExactMatchInheritanceResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtExactMatchInheritanceResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtExactMatchInheritanceResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace MgmtExactMatchInheritance
         /// You can use <see cref="ExactMatchModel1Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceArmClientMockingExtension.GetExactMatchModel1Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceArmClient.GetExactMatchModel1Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -43,7 +43,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel1Resource" /> object. </returns>
         public static ExactMatchModel1Resource GetExactMatchModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExactMatchInheritanceArmClientMockingExtension(client).GetExactMatchModel1Resource(id);
+            return GetMockableMgmtExactMatchInheritanceArmClient(client).GetExactMatchModel1Resource(id);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace MgmtExactMatchInheritance
         /// You can use <see cref="ExactMatchModel5Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel5Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceArmClientMockingExtension.GetExactMatchModel5Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceArmClient.GetExactMatchModel5Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -59,21 +59,21 @@ namespace MgmtExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel5Resource" /> object. </returns>
         public static ExactMatchModel5Resource GetExactMatchModel5Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExactMatchInheritanceArmClientMockingExtension(client).GetExactMatchModel5Resource(id);
+            return GetMockableMgmtExactMatchInheritanceArmClient(client).GetExactMatchModel5Resource(id);
         }
 
         /// <summary>
         /// Gets a collection of ExactMatchModel1Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel1s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel1s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ExactMatchModel1Resources and their operations over a ExactMatchModel1Resource. </returns>
         public static ExactMatchModel1Collection GetExactMatchModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel1s();
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel1s();
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel1Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel1Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -100,7 +100,7 @@ namespace MgmtExactMatchInheritance
         [ForwardsClientCalls]
         public static async Task<Response<ExactMatchModel1Resource>> GetExactMatchModel1Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel1Async(exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel1Async(exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -127,21 +127,21 @@ namespace MgmtExactMatchInheritance
         [ForwardsClientCalls]
         public static Response<ExactMatchModel1Resource> GetExactMatchModel1(this ResourceGroupResource resourceGroupResource, string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel1(exactMatchModel1SName, cancellationToken);
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel1(exactMatchModel1SName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of ExactMatchModel5Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel5s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel5s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ExactMatchModel5Resources and their operations over a ExactMatchModel5Resource. </returns>
         public static ExactMatchModel5Collection GetExactMatchModel5s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel5s();
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel5s();
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel5Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel5Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -168,7 +168,7 @@ namespace MgmtExactMatchInheritance
         [ForwardsClientCalls]
         public static async Task<Response<ExactMatchModel5Resource>> GetExactMatchModel5Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel5Async(exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel5Async(exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel5(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel5(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -195,7 +195,7 @@ namespace MgmtExactMatchInheritance
         [ForwardsClientCalls]
         public static Response<ExactMatchModel5Resource> GetExactMatchModel5(this ResourceGroupResource resourceGroupResource, string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel5(exactMatchModel5SName, cancellationToken);
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel5(exactMatchModel5SName, cancellationToken);
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel2(string,ExactMatchModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel2(string,ExactMatchModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -222,7 +222,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel2Async(exactMatchModel2SName, exactMatchModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).PutExactMatchModel2Async(exactMatchModel2SName, exactMatchModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel2(string,ExactMatchModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel2(string,ExactMatchModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -249,7 +249,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public static Response<ExactMatchModel2> PutExactMatchModel2(this ResourceGroupResource resourceGroupResource, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel2(exactMatchModel2SName, exactMatchModel2, cancellationToken);
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).PutExactMatchModel2(exactMatchModel2SName, exactMatchModel2, cancellationToken);
         }
 
         /// <summary>
@@ -265,7 +265,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -273,7 +273,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> An async collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3sAsync(cancellationToken);
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel3sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -297,7 +297,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> A collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ExactMatchModel3> GetExactMatchModel3s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3s(cancellationToken);
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel3s(cancellationToken);
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel3(string,ExactMatchModel3,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel3(string,ExactMatchModel3,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -324,7 +324,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public static async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel3Async(exactMatchModel3SName, exactMatchModel3, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).PutExactMatchModel3Async(exactMatchModel3SName, exactMatchModel3, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel3(string,ExactMatchModel3,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel3(string,ExactMatchModel3,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -351,7 +351,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public static Response<ExactMatchModel3> PutExactMatchModel3(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel3(exactMatchModel3SName, exactMatchModel3, cancellationToken);
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).PutExactMatchModel3(exactMatchModel3SName, exactMatchModel3, cancellationToken);
         }
 
         /// <summary>
@@ -367,7 +367,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -377,7 +377,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public static async Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3Async(exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel3Async(exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -393,7 +393,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -403,7 +403,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public static Response<ExactMatchModel3> GetExactMatchModel3(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3(exactMatchModel3SName, cancellationToken);
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).GetExactMatchModel3(exactMatchModel3SName, cancellationToken);
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel4(string,ExactMatchModel4,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel4(string,ExactMatchModel4,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -430,7 +430,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel4Async(exactMatchModel4SName, exactMatchModel4, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).PutExactMatchModel4Async(exactMatchModel4SName, exactMatchModel4, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -446,7 +446,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel4(string,ExactMatchModel4,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel4(string,ExactMatchModel4,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -457,7 +457,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public static Response<ExactMatchModel4> PutExactMatchModel4(this ResourceGroupResource resourceGroupResource, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel4(exactMatchModel4SName, exactMatchModel4, cancellationToken);
+            return GetMockableMgmtExactMatchInheritanceResourceGroupResource(resourceGroupResource).PutExactMatchModel4(exactMatchModel4SName, exactMatchModel4, cancellationToken);
         }
     }
 }

@@ -20,19 +20,19 @@ namespace MgmtPropertyBag
     /// <summary> A class to add extension methods to MgmtPropertyBag. </summary>
     public static partial class MgmtPropertyBagExtensions
     {
-        private static MgmtPropertyBagArmClientMockingExtension GetMgmtPropertyBagArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtPropertyBagArmClient GetMockableMgmtPropertyBagArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtPropertyBagArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtPropertyBagArmClient(client0));
         }
 
-        private static MgmtPropertyBagResourceGroupMockingExtension GetMgmtPropertyBagResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtPropertyBagResourceGroupResource GetMockableMgmtPropertyBagResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtPropertyBagResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtPropertyBagResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtPropertyBagSubscriptionMockingExtension GetMgmtPropertyBagSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtPropertyBagSubscriptionResource GetMockableMgmtPropertyBagSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtPropertyBagSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtPropertyBagSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace MgmtPropertyBag
         /// You can use <see cref="FooResource.CreateResourceIdentifier" /> to create a <see cref="FooResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagArmClientMockingExtension.GetFooResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagArmClient.GetFooResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -48,7 +48,7 @@ namespace MgmtPropertyBag
         /// <returns> Returns a <see cref="FooResource" /> object. </returns>
         public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtPropertyBagArmClientMockingExtension(client).GetFooResource(id);
+            return GetMockableMgmtPropertyBagArmClient(client).GetFooResource(id);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace MgmtPropertyBag
         /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagArmClientMockingExtension.GetBarResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagArmClient.GetBarResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -64,21 +64,21 @@ namespace MgmtPropertyBag
         /// <returns> Returns a <see cref="BarResource" /> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtPropertyBagArmClientMockingExtension(client).GetBarResource(id);
+            return GetMockableMgmtPropertyBagArmClient(client).GetBarResource(id);
         }
 
         /// <summary>
         /// Gets a collection of FooResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetFoos()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagResourceGroupResource.GetFoos()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
         public static FooCollection GetFoos(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetFoos();
+            return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFoos();
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetFooAsync(FooCollectionGetOptions,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagResourceGroupResource.GetFooAsync(FooCollectionGetOptions,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -105,7 +105,7 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static async Task<Response<FooResource>> GetFooAsync(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetFooAsync(options, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFooAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetFoo(FooCollectionGetOptions,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagResourceGroupResource.GetFoo(FooCollectionGetOptions,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -132,21 +132,21 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static Response<FooResource> GetFoo(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetFoo(options, cancellationToken);
+            return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFoo(options, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of BarResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetBars()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagResourceGroupResource.GetBars()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetBars();
+            return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetBarAsync(BarCollectionGetOptions,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagResourceGroupResource.GetBarAsync(BarCollectionGetOptions,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -173,7 +173,7 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetBarAsync(options, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBarAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetBar(BarCollectionGetOptions,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagResourceGroupResource.GetBar(BarCollectionGetOptions,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -200,7 +200,7 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetBar(options, cancellationToken);
+            return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBar(options, cancellationToken);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagSubscriptionMockingExtension.GetFoos(string,int?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagSubscriptionResource.GetFoos(string,int?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -227,7 +227,7 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPropertyBagSubscriptionMockingExtension(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
+            return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagSubscriptionMockingExtension.GetFoos(string,int?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagSubscriptionResource.GetFoos(string,int?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -254,7 +254,7 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPropertyBagSubscriptionMockingExtension(subscriptionResource).GetFoos(filter, top, cancellationToken);
+            return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetFoos(filter, top, cancellationToken);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagSubscriptionMockingExtension.GetBars(ETag?,int?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagSubscriptionResource.GetBars(ETag?,int?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -281,7 +281,7 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPropertyBagSubscriptionMockingExtension(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
+            return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
         }
 
         /// <summary>
@@ -298,7 +298,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagSubscriptionMockingExtension.GetBars(ETag?,int?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyBagSubscriptionResource.GetBars(ETag?,int?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -308,7 +308,7 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPropertyBagSubscriptionMockingExtension(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
+            return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
         }
     }
 }

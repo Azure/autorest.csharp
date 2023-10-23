@@ -19,14 +19,14 @@ namespace MgmtLRO
     /// <summary> A class to add extension methods to MgmtLRO. </summary>
     public static partial class MgmtLROExtensions
     {
-        private static MgmtLROArmClientMockingExtension GetMgmtLROArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtLROArmClient GetMockableMgmtLROArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtLROArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtLROArmClient(client0));
         }
 
-        private static MgmtLROResourceGroupMockingExtension GetMgmtLROResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtLROResourceGroupResource GetMockableMgmtLROResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtLROResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtLROResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace MgmtLRO
         /// You can use <see cref="FakeResource.CreateResourceIdentifier" /> to create a <see cref="FakeResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtLROArmClientMockingExtension.GetFakeResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtLROArmClient.GetFakeResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -42,7 +42,7 @@ namespace MgmtLRO
         /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
         public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtLROArmClientMockingExtension(client).GetFakeResource(id);
+            return GetMockableMgmtLROArmClient(client).GetFakeResource(id);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace MgmtLRO
         /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtLROArmClientMockingExtension.GetBarResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtLROArmClient.GetBarResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -58,21 +58,21 @@ namespace MgmtLRO
         /// <returns> Returns a <see cref="BarResource" /> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtLROArmClientMockingExtension(client).GetBarResource(id);
+            return GetMockableMgmtLROArmClient(client).GetBarResource(id);
         }
 
         /// <summary>
         /// Gets a collection of FakeResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetFakes()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtLROResourceGroupResource.GetFakes()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetFakes();
+            return GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace MgmtLRO
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetFakeAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtLROResourceGroupResource.GetFakeAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -101,7 +101,7 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static async Task<Response<FakeResource>> GetFakeAsync(this ResourceGroupResource resourceGroupResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetFakeAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetFakeAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace MgmtLRO
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetFake(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtLROResourceGroupResource.GetFake(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -130,21 +130,21 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static Response<FakeResource> GetFake(this ResourceGroupResource resourceGroupResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetFake(fakeName, expand, cancellationToken);
+            return GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetFake(fakeName, expand, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of BarResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetBars()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtLROResourceGroupResource.GetBars()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetBars();
+            return GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace MgmtLRO
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetBarAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtLROResourceGroupResource.GetBarAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -172,7 +172,7 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, string barName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetBarAsync(barName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetBarAsync(barName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace MgmtLRO
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetBar(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtLROResourceGroupResource.GetBar(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -200,7 +200,7 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, string barName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetBar(barName, cancellationToken);
+            return GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetBar(barName, cancellationToken);
         }
     }
 }

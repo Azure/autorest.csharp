@@ -34,16 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         internal static string GetMockingExtensionDefaultName(string resourceName)
-        {
-            const string resourceSuffix = "Resource";
-            // trim the Resource suffix if it has one. Actually it should always have one, eg, SubscriptionResource, ResourceGroupResource, etc.
-            if (resourceName.EndsWith(resourceSuffix))
-            {
-                resourceName = resourceName[..^resourceSuffix.Length];
-            }
-
-            return $"{MgmtContext.RPName}{resourceName}MockingExtension";
-        }
+            => $"Mockable{MgmtContext.RPName}{resourceName}";
 
         public override bool IsInitializedByProperties => true;
 

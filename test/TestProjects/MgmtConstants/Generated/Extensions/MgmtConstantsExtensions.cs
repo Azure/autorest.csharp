@@ -20,19 +20,19 @@ namespace MgmtConstants
     /// <summary> A class to add extension methods to MgmtConstants. </summary>
     public static partial class MgmtConstantsExtensions
     {
-        private static MgmtConstantsArmClientMockingExtension GetMgmtConstantsArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtConstantsArmClient GetMockableMgmtConstantsArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtConstantsArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtConstantsArmClient(client0));
         }
 
-        private static MgmtConstantsResourceGroupMockingExtension GetMgmtConstantsResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtConstantsResourceGroupResource GetMockableMgmtConstantsResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtConstantsResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtConstantsResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtConstantsSubscriptionMockingExtension GetMgmtConstantsSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtConstantsSubscriptionResource GetMockableMgmtConstantsSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtConstantsSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtConstantsSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace MgmtConstants
         /// You can use <see cref="OptionalMachineResource.CreateResourceIdentifier" /> to create an <see cref="OptionalMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtConstantsArmClientMockingExtension.GetOptionalMachineResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtConstantsArmClient.GetOptionalMachineResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -48,21 +48,21 @@ namespace MgmtConstants
         /// <returns> Returns a <see cref="OptionalMachineResource" /> object. </returns>
         public static OptionalMachineResource GetOptionalMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtConstantsArmClientMockingExtension(client).GetOptionalMachineResource(id);
+            return GetMockableMgmtConstantsArmClient(client).GetOptionalMachineResource(id);
         }
 
         /// <summary>
         /// Gets a collection of OptionalMachineResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtConstantsResourceGroupMockingExtension.GetOptionalMachines()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtConstantsResourceGroupResource.GetOptionalMachines()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of OptionalMachineResources and their operations over a OptionalMachineResource. </returns>
         public static OptionalMachineCollection GetOptionalMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtConstantsResourceGroupMockingExtension(resourceGroupResource).GetOptionalMachines();
+            return GetMockableMgmtConstantsResourceGroupResource(resourceGroupResource).GetOptionalMachines();
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace MgmtConstants
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtConstantsResourceGroupMockingExtension.GetOptionalMachineAsync(string,OptionalMachineExpand?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtConstantsResourceGroupResource.GetOptionalMachineAsync(string,OptionalMachineExpand?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -91,7 +91,7 @@ namespace MgmtConstants
         [ForwardsClientCalls]
         public static async Task<Response<OptionalMachineResource>> GetOptionalMachineAsync(this ResourceGroupResource resourceGroupResource, string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtConstantsResourceGroupMockingExtension(resourceGroupResource).GetOptionalMachineAsync(name, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtConstantsResourceGroupResource(resourceGroupResource).GetOptionalMachineAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace MgmtConstants
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtConstantsResourceGroupMockingExtension.GetOptionalMachine(string,OptionalMachineExpand?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtConstantsResourceGroupResource.GetOptionalMachine(string,OptionalMachineExpand?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -120,7 +120,7 @@ namespace MgmtConstants
         [ForwardsClientCalls]
         public static Response<OptionalMachineResource> GetOptionalMachine(this ResourceGroupResource resourceGroupResource, string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtConstantsResourceGroupMockingExtension(resourceGroupResource).GetOptionalMachine(name, expand, cancellationToken);
+            return GetMockableMgmtConstantsResourceGroupResource(resourceGroupResource).GetOptionalMachine(name, expand, cancellationToken);
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace MgmtConstants
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtConstantsSubscriptionMockingExtension.GetOptionalMachines(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtConstantsSubscriptionResource.GetOptionalMachines(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -146,7 +146,7 @@ namespace MgmtConstants
         /// <returns> An async collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OptionalMachineResource> GetOptionalMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtConstantsSubscriptionMockingExtension(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
+            return GetMockableMgmtConstantsSubscriptionResource(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace MgmtConstants
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtConstantsSubscriptionMockingExtension.GetOptionalMachines(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtConstantsSubscriptionResource.GetOptionalMachines(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -172,7 +172,7 @@ namespace MgmtConstants
         /// <returns> A collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OptionalMachineResource> GetOptionalMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtConstantsSubscriptionMockingExtension(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
+            return GetMockableMgmtConstantsSubscriptionResource(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
         }
     }
 }

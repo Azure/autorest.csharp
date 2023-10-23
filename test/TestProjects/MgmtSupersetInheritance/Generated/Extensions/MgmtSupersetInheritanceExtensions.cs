@@ -20,14 +20,14 @@ namespace MgmtSupersetInheritance
     /// <summary> A class to add extension methods to MgmtSupersetInheritance. </summary>
     public static partial class MgmtSupersetInheritanceExtensions
     {
-        private static MgmtSupersetInheritanceArmClientMockingExtension GetMgmtSupersetInheritanceArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtSupersetInheritanceArmClient GetMockableMgmtSupersetInheritanceArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtSupersetInheritanceArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtSupersetInheritanceArmClient(client0));
         }
 
-        private static MgmtSupersetInheritanceResourceGroupMockingExtension GetMgmtSupersetInheritanceResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtSupersetInheritanceResourceGroupResource GetMockableMgmtSupersetInheritanceResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtSupersetInheritanceResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtSupersetInheritanceResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace MgmtSupersetInheritance
         /// You can use <see cref="SupersetModel1Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceArmClientMockingExtension.GetSupersetModel1Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceArmClient.GetSupersetModel1Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -43,7 +43,7 @@ namespace MgmtSupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel1Resource" /> object. </returns>
         public static SupersetModel1Resource GetSupersetModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel1Resource(id);
+            return GetMockableMgmtSupersetInheritanceArmClient(client).GetSupersetModel1Resource(id);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace MgmtSupersetInheritance
         /// You can use <see cref="SupersetModel4Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel4Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceArmClientMockingExtension.GetSupersetModel4Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceArmClient.GetSupersetModel4Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -59,7 +59,7 @@ namespace MgmtSupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel4Resource" /> object. </returns>
         public static SupersetModel4Resource GetSupersetModel4Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel4Resource(id);
+            return GetMockableMgmtSupersetInheritanceArmClient(client).GetSupersetModel4Resource(id);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace MgmtSupersetInheritance
         /// You can use <see cref="SupersetModel6Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel6Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceArmClientMockingExtension.GetSupersetModel6Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceArmClient.GetSupersetModel6Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -75,7 +75,7 @@ namespace MgmtSupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel6Resource" /> object. </returns>
         public static SupersetModel6Resource GetSupersetModel6Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel6Resource(id);
+            return GetMockableMgmtSupersetInheritanceArmClient(client).GetSupersetModel6Resource(id);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace MgmtSupersetInheritance
         /// You can use <see cref="SupersetModel7Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel7Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceArmClientMockingExtension.GetSupersetModel7Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceArmClient.GetSupersetModel7Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -91,21 +91,21 @@ namespace MgmtSupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel7Resource" /> object. </returns>
         public static SupersetModel7Resource GetSupersetModel7Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel7Resource(id);
+            return GetMockableMgmtSupersetInheritanceArmClient(client).GetSupersetModel7Resource(id);
         }
 
         /// <summary>
         /// Gets a collection of SupersetModel1Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel1s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel1s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel1Resources and their operations over a SupersetModel1Resource. </returns>
         public static SupersetModel1Collection GetSupersetModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel1s();
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel1s();
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel1Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel1Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -132,7 +132,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static async Task<Response<SupersetModel1Resource>> GetSupersetModel1Async(this ResourceGroupResource resourceGroupResource, string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel1Async(supersetModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel1Async(supersetModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -159,21 +159,21 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static Response<SupersetModel1Resource> GetSupersetModel1(this ResourceGroupResource resourceGroupResource, string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel1(supersetModel1SName, cancellationToken);
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel1(supersetModel1SName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of SupersetModel4Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel4s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel4s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel4Resources and their operations over a SupersetModel4Resource. </returns>
         public static SupersetModel4Collection GetSupersetModel4s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel4s();
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel4s();
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel4Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel4Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -200,7 +200,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static async Task<Response<SupersetModel4Resource>> GetSupersetModel4Async(this ResourceGroupResource resourceGroupResource, string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel4Async(supersetModel4SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel4Async(supersetModel4SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel4(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel4(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -227,21 +227,21 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static Response<SupersetModel4Resource> GetSupersetModel4(this ResourceGroupResource resourceGroupResource, string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel4(supersetModel4SName, cancellationToken);
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel4(supersetModel4SName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of SupersetModel6Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel6s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel6s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel6Resources and their operations over a SupersetModel6Resource. </returns>
         public static SupersetModel6Collection GetSupersetModel6s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel6s();
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel6s();
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel6Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel6Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -268,7 +268,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static async Task<Response<SupersetModel6Resource>> GetSupersetModel6Async(this ResourceGroupResource resourceGroupResource, string supersetModel6SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel6Async(supersetModel6SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel6Async(supersetModel6SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -284,7 +284,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel6(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel6(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -295,21 +295,21 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static Response<SupersetModel6Resource> GetSupersetModel6(this ResourceGroupResource resourceGroupResource, string supersetModel6SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel6(supersetModel6SName, cancellationToken);
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel6(supersetModel6SName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of SupersetModel7Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel7s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel7s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel7Resources and their operations over a SupersetModel7Resource. </returns>
         public static SupersetModel7Collection GetSupersetModel7s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel7s();
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel7s();
         }
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel7Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel7Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -336,7 +336,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static async Task<Response<SupersetModel7Resource>> GetSupersetModel7Async(this ResourceGroupResource resourceGroupResource, string supersetModel7SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel7Async(supersetModel7SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel7Async(supersetModel7SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel7(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel7(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -363,7 +363,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static Response<SupersetModel7Resource> GetSupersetModel7(this ResourceGroupResource resourceGroupResource, string supersetModel7SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel7(supersetModel7SName, cancellationToken);
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel7(supersetModel7SName, cancellationToken);
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel2(string,SupersetModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.PutSupersetModel2(string,SupersetModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -390,7 +390,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public static async Task<Response<SupersetModel2>> PutSupersetModel2Async(this ResourceGroupResource resourceGroupResource, string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel2Async(supersetModel2SName, supersetModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).PutSupersetModel2Async(supersetModel2SName, supersetModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel2(string,SupersetModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.PutSupersetModel2(string,SupersetModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -417,7 +417,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public static Response<SupersetModel2> PutSupersetModel2(this ResourceGroupResource resourceGroupResource, string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel2(supersetModel2SName, supersetModel2, cancellationToken);
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).PutSupersetModel2(supersetModel2SName, supersetModel2, cancellationToken);
         }
 
         /// <summary>
@@ -433,7 +433,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -443,7 +443,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public static async Task<Response<SupersetModel2>> GetSupersetModel2Async(this ResourceGroupResource resourceGroupResource, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -459,7 +459,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -469,7 +469,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public static Response<SupersetModel2> GetSupersetModel2(this ResourceGroupResource resourceGroupResource, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel2(supersetModel2SName, cancellationToken);
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel2(supersetModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -485,7 +485,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel3(string,SupersetModel3,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.PutSupersetModel3(string,SupersetModel3,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -496,7 +496,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public static async Task<Response<SupersetModel3>> PutSupersetModel3Async(this ResourceGroupResource resourceGroupResource, string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel3Async(supersetModel3SName, supersetModel3, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).PutSupersetModel3Async(supersetModel3SName, supersetModel3, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -512,7 +512,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel3(string,SupersetModel3,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.PutSupersetModel3(string,SupersetModel3,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -523,7 +523,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public static Response<SupersetModel3> PutSupersetModel3(this ResourceGroupResource resourceGroupResource, string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel3(supersetModel3SName, supersetModel3, cancellationToken);
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).PutSupersetModel3(supersetModel3SName, supersetModel3, cancellationToken);
         }
 
         /// <summary>
@@ -539,7 +539,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel3(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel3(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -549,7 +549,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public static async Task<Response<SupersetModel3>> GetSupersetModel3Async(this ResourceGroupResource resourceGroupResource, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -565,7 +565,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel3(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel3(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -575,7 +575,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public static Response<SupersetModel3> GetSupersetModel3(this ResourceGroupResource resourceGroupResource, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel3(supersetModel3SName, cancellationToken);
+            return GetMockableMgmtSupersetInheritanceResourceGroupResource(resourceGroupResource).GetSupersetModel3(supersetModel3SName, cancellationToken);
         }
     }
 }

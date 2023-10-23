@@ -20,19 +20,19 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to MgmtExpandResourceTypes. </summary>
     public static partial class MgmtExpandResourceTypesExtensions
     {
-        private static MgmtExpandResourceTypesArmClientMockingExtension GetMgmtExpandResourceTypesArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtExpandResourceTypesArmClient GetMockableMgmtExpandResourceTypesArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtExpandResourceTypesArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtExpandResourceTypesArmClient(client0));
         }
 
-        private static MgmtExpandResourceTypesResourceGroupMockingExtension GetMgmtExpandResourceTypesResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtExpandResourceTypesResourceGroupResource GetMockableMgmtExpandResourceTypesResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtExpandResourceTypesResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtExpandResourceTypesResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtExpandResourceTypesSubscriptionMockingExtension GetMgmtExpandResourceTypesSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtExpandResourceTypesSubscriptionResource GetMockableMgmtExpandResourceTypesSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtExpandResourceTypesSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtExpandResourceTypesSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetAResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetAResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetAResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetAResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -48,7 +48,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetAResource" /> object. </returns>
         public static RecordSetAResource GetRecordSetAResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetAResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetAResource(id);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetAaaaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetAaaaResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetAaaaResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetAaaaResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -64,7 +64,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetAaaaResource" /> object. </returns>
         public static RecordSetAaaaResource GetRecordSetAaaaResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetAaaaResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetAaaaResource(id);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetCaaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetCaaResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetCaaResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetCaaResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -80,7 +80,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCaaResource" /> object. </returns>
         public static RecordSetCaaResource GetRecordSetCaaResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetCaaResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetCaaResource(id);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetCNameResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetCNameResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetCNameResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetCNameResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -96,7 +96,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCNameResource" /> object. </returns>
         public static RecordSetCNameResource GetRecordSetCNameResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetCNameResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetCNameResource(id);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetMxResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetMxResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetMxResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetMxResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -112,7 +112,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetMxResource" /> object. </returns>
         public static RecordSetMxResource GetRecordSetMxResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetMxResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetMxResource(id);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetNsResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetNsResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetNsResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetNsResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -128,7 +128,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetNsResource" /> object. </returns>
         public static RecordSetNsResource GetRecordSetNsResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetNsResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetNsResource(id);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetPtrResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetPtrResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetPtrResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetPtrResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -144,7 +144,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetPtrResource" /> object. </returns>
         public static RecordSetPtrResource GetRecordSetPtrResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetPtrResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetPtrResource(id);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetSoaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetSoaResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetSoaResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetSoaResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -160,7 +160,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSoaResource" /> object. </returns>
         public static RecordSetSoaResource GetRecordSetSoaResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetSoaResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetSoaResource(id);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetSrvResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetSrvResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetSrvResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetSrvResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -176,7 +176,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSrvResource" /> object. </returns>
         public static RecordSetSrvResource GetRecordSetSrvResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetSrvResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetSrvResource(id);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="RecordSetTxtResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetTxtResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetRecordSetTxtResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetRecordSetTxtResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -192,7 +192,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetTxtResource" /> object. </returns>
         public static RecordSetTxtResource GetRecordSetTxtResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetTxtResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetTxtResource(id);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace MgmtExpandResourceTypes
         /// You can use <see cref="ZoneResource.CreateResourceIdentifier" /> to create a <see cref="ZoneResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesArmClientMockingExtension.GetZoneResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesArmClient.GetZoneResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -208,21 +208,21 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="ZoneResource" /> object. </returns>
         public static ZoneResource GetZoneResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetZoneResource(id);
+            return GetMockableMgmtExpandResourceTypesArmClient(client).GetZoneResource(id);
         }
 
         /// <summary>
         /// Gets a collection of ZoneResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesResourceGroupMockingExtension.GetZones()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesResourceGroupResource.GetZones()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ZoneResources and their operations over a ZoneResource. </returns>
         public static ZoneCollection GetZones(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtExpandResourceTypesResourceGroupMockingExtension(resourceGroupResource).GetZones();
+            return GetMockableMgmtExpandResourceTypesResourceGroupResource(resourceGroupResource).GetZones();
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace MgmtExpandResourceTypes
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesResourceGroupMockingExtension.GetZoneAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesResourceGroupResource.GetZoneAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -250,7 +250,7 @@ namespace MgmtExpandResourceTypes
         [ForwardsClientCalls]
         public static async Task<Response<ZoneResource>> GetZoneAsync(this ResourceGroupResource resourceGroupResource, string zoneName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExpandResourceTypesResourceGroupMockingExtension(resourceGroupResource).GetZoneAsync(zoneName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExpandResourceTypesResourceGroupResource(resourceGroupResource).GetZoneAsync(zoneName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace MgmtExpandResourceTypes
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesResourceGroupMockingExtension.GetZone(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesResourceGroupResource.GetZone(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -278,7 +278,7 @@ namespace MgmtExpandResourceTypes
         [ForwardsClientCalls]
         public static Response<ZoneResource> GetZone(this ResourceGroupResource resourceGroupResource, string zoneName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExpandResourceTypesResourceGroupMockingExtension(resourceGroupResource).GetZone(zoneName, cancellationToken);
+            return GetMockableMgmtExpandResourceTypesResourceGroupResource(resourceGroupResource).GetZone(zoneName, cancellationToken);
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace MgmtExpandResourceTypes
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesSubscriptionMockingExtension.GetZonesByDnszone(int?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesSubscriptionResource.GetZonesByDnszone(int?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -304,7 +304,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
+            return GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -321,7 +321,7 @@ namespace MgmtExpandResourceTypes
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesSubscriptionMockingExtension.GetZonesByDnszone(int?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesSubscriptionResource.GetZonesByDnszone(int?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -330,7 +330,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
+            return GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace MgmtExpandResourceTypes
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesSubscriptionMockingExtension.GetByTargetResourcesDnsResourceReference(DnsResourceReferenceContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesSubscriptionResource.GetByTargetResourcesDnsResourceReference(DnsResourceReferenceContent,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -356,7 +356,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this SubscriptionResource subscriptionResource, DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace MgmtExpandResourceTypes
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesSubscriptionMockingExtension.GetByTargetResourcesDnsResourceReference(DnsResourceReferenceContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExpandResourceTypesSubscriptionResource.GetByTargetResourcesDnsResourceReference(DnsResourceReferenceContent,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -382,7 +382,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this SubscriptionResource subscriptionResource, DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
+            return GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
         }
     }
 }

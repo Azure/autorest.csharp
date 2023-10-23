@@ -20,19 +20,19 @@ namespace MgmtAcronymMapping
     /// <summary> A class to add extension methods to MgmtAcronymMapping. </summary>
     public static partial class MgmtAcronymMappingExtensions
     {
-        private static MgmtAcronymMappingArmClientMockingExtension GetMgmtAcronymMappingArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtAcronymMappingArmClient GetMockableMgmtAcronymMappingArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtAcronymMappingArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtAcronymMappingArmClient(client0));
         }
 
-        private static MgmtAcronymMappingResourceGroupMockingExtension GetMgmtAcronymMappingResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtAcronymMappingResourceGroupResource GetMockableMgmtAcronymMappingResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtAcronymMappingResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtAcronymMappingResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtAcronymMappingSubscriptionMockingExtension GetMgmtAcronymMappingSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtAcronymMappingSubscriptionResource GetMockableMgmtAcronymMappingSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtAcronymMappingSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtAcronymMappingSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace MgmtAcronymMapping
         /// You can use <see cref="VirtualMachineResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingArmClientMockingExtension.GetVirtualMachineResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingArmClient.GetVirtualMachineResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -48,7 +48,7 @@ namespace MgmtAcronymMapping
         /// <returns> Returns a <see cref="VirtualMachineResource" /> object. </returns>
         public static VirtualMachineResource GetVirtualMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtAcronymMappingArmClientMockingExtension(client).GetVirtualMachineResource(id);
+            return GetMockableMgmtAcronymMappingArmClient(client).GetVirtualMachineResource(id);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace MgmtAcronymMapping
         /// You can use <see cref="ImageResource.CreateResourceIdentifier" /> to create an <see cref="ImageResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingArmClientMockingExtension.GetImageResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingArmClient.GetImageResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -64,7 +64,7 @@ namespace MgmtAcronymMapping
         /// <returns> Returns a <see cref="ImageResource" /> object. </returns>
         public static ImageResource GetImageResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtAcronymMappingArmClientMockingExtension(client).GetImageResource(id);
+            return GetMockableMgmtAcronymMappingArmClient(client).GetImageResource(id);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace MgmtAcronymMapping
         /// You can use <see cref="VirtualMachineScaleSetResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingArmClientMockingExtension.GetVirtualMachineScaleSetResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingArmClient.GetVirtualMachineScaleSetResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -80,7 +80,7 @@ namespace MgmtAcronymMapping
         /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
         public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtAcronymMappingArmClientMockingExtension(client).GetVirtualMachineScaleSetResource(id);
+            return GetMockableMgmtAcronymMappingArmClient(client).GetVirtualMachineScaleSetResource(id);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace MgmtAcronymMapping
         /// You can use <see cref="VirtualMachineScaleSetExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingArmClientMockingExtension.GetVirtualMachineScaleSetExtensionResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingArmClient.GetVirtualMachineScaleSetExtensionResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -96,7 +96,7 @@ namespace MgmtAcronymMapping
         /// <returns> Returns a <see cref="VirtualMachineScaleSetExtensionResource" /> object. </returns>
         public static VirtualMachineScaleSetExtensionResource GetVirtualMachineScaleSetExtensionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtAcronymMappingArmClientMockingExtension(client).GetVirtualMachineScaleSetExtensionResource(id);
+            return GetMockableMgmtAcronymMappingArmClient(client).GetVirtualMachineScaleSetExtensionResource(id);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace MgmtAcronymMapping
         /// You can use <see cref="VirtualMachineScaleSetRollingUpgradeResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingArmClientMockingExtension.GetVirtualMachineScaleSetRollingUpgradeResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingArmClient.GetVirtualMachineScaleSetRollingUpgradeResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -112,7 +112,7 @@ namespace MgmtAcronymMapping
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> object. </returns>
         public static VirtualMachineScaleSetRollingUpgradeResource GetVirtualMachineScaleSetRollingUpgradeResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtAcronymMappingArmClientMockingExtension(client).GetVirtualMachineScaleSetRollingUpgradeResource(id);
+            return GetMockableMgmtAcronymMappingArmClient(client).GetVirtualMachineScaleSetRollingUpgradeResource(id);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace MgmtAcronymMapping
         /// You can use <see cref="VirtualMachineScaleSetVmResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVmResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingArmClientMockingExtension.GetVirtualMachineScaleSetVmResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingArmClient.GetVirtualMachineScaleSetVmResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -128,21 +128,21 @@ namespace MgmtAcronymMapping
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVmResource" /> object. </returns>
         public static VirtualMachineScaleSetVmResource GetVirtualMachineScaleSetVmResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtAcronymMappingArmClientMockingExtension(client).GetVirtualMachineScaleSetVmResource(id);
+            return GetMockableMgmtAcronymMappingArmClient(client).GetVirtualMachineScaleSetVmResource(id);
         }
 
         /// <summary>
         /// Gets a collection of VirtualMachineResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetVirtualMachines()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetVirtualMachines()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachines();
+            return GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetVirtualMachines();
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetVirtualMachineAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetVirtualMachineAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -171,7 +171,7 @@ namespace MgmtAcronymMapping
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(this ResourceGroupResource resourceGroupResource, string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineAsync(vmName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetVirtualMachineAsync(vmName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetVirtualMachine(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetVirtualMachine(string,InstanceViewType?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -200,21 +200,21 @@ namespace MgmtAcronymMapping
         [ForwardsClientCalls]
         public static Response<VirtualMachineResource> GetVirtualMachine(this ResourceGroupResource resourceGroupResource, string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachine(vmName, expand, cancellationToken);
+            return GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetVirtualMachine(vmName, expand, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of ImageResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetImages()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetImages()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
         public static ImageCollection GetImages(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetImages();
+            return GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetImages();
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetImageAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetImageAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -243,7 +243,7 @@ namespace MgmtAcronymMapping
         [ForwardsClientCalls]
         public static async Task<Response<ImageResource>> GetImageAsync(this ResourceGroupResource resourceGroupResource, string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetImageAsync(imageName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetImageAsync(imageName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetImage(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetImage(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -272,21 +272,21 @@ namespace MgmtAcronymMapping
         [ForwardsClientCalls]
         public static Response<ImageResource> GetImage(this ResourceGroupResource resourceGroupResource, string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetImage(imageName, expand, cancellationToken);
+            return GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetImage(imageName, expand, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of VirtualMachineScaleSetResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetVirtualMachineScaleSets()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetVirtualMachineScaleSets()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSets();
+            return GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSets();
         }
 
         /// <summary>
@@ -303,7 +303,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetVirtualMachineScaleSetAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetVirtualMachineScaleSetAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -314,7 +314,7 @@ namespace MgmtAcronymMapping
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(this ResourceGroupResource resourceGroupResource, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSetAsync(vmScaleSetName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSetAsync(vmScaleSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingResourceGroupMockingExtension.GetVirtualMachineScaleSet(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingResourceGroupResource.GetVirtualMachineScaleSet(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -342,7 +342,7 @@ namespace MgmtAcronymMapping
         [ForwardsClientCalls]
         public static Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(this ResourceGroupResource resourceGroupResource, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSet(vmScaleSetName, cancellationToken);
+            return GetMockableMgmtAcronymMappingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSet(vmScaleSetName, cancellationToken);
         }
 
         /// <summary>
@@ -359,7 +359,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachinesByLocation(AzureLocation,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.GetVirtualMachinesByLocation(AzureLocation,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -368,7 +368,7 @@ namespace MgmtAcronymMapping
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesByLocationAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachinesByLocationAsync(location, cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).GetVirtualMachinesByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachinesByLocation(AzureLocation,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.GetVirtualMachinesByLocation(AzureLocation,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -394,7 +394,7 @@ namespace MgmtAcronymMapping
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineResource> GetVirtualMachinesByLocation(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachinesByLocation(location, cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).GetVirtualMachinesByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -411,7 +411,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachines(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.GetVirtualMachines(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -420,7 +420,7 @@ namespace MgmtAcronymMapping
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachinesAsync(statusOnly, cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).GetVirtualMachinesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -437,7 +437,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachines(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.GetVirtualMachines(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -446,7 +446,7 @@ namespace MgmtAcronymMapping
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineResource> GetVirtualMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachines(statusOnly, cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).GetVirtualMachines(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -463,7 +463,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetImages(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.GetImages(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -471,7 +471,7 @@ namespace MgmtAcronymMapping
         /// <returns> An async collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ImageResource> GetImagesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).GetImagesAsync(cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).GetImagesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -488,7 +488,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetImages(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.GetImages(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -496,7 +496,7 @@ namespace MgmtAcronymMapping
         /// <returns> A collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ImageResource> GetImages(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).GetImages(cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).GetImages(cancellationToken);
         }
 
         /// <summary>
@@ -513,7 +513,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachineScaleSets(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.GetVirtualMachineScaleSets(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -521,7 +521,7 @@ namespace MgmtAcronymMapping
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineScaleSetsAsync(cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).GetVirtualMachineScaleSetsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -538,7 +538,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachineScaleSets(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.GetVirtualMachineScaleSets(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -546,7 +546,7 @@ namespace MgmtAcronymMapping
         /// <returns> A collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSets(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineScaleSets(cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).GetVirtualMachineScaleSets(cancellationToken);
         }
 
         /// <summary>
@@ -563,7 +563,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.ExportRequestRateByIntervalLogAnalytic(WaitUntil,AzureLocation,RequestRateByIntervalContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.ExportRequestRateByIntervalLogAnalytic(WaitUntil,AzureLocation,RequestRateByIntervalContent,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -574,7 +574,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).ExportRequestRateByIntervalLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).ExportRequestRateByIntervalLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -591,7 +591,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.ExportRequestRateByIntervalLogAnalytic(WaitUntil,AzureLocation,RequestRateByIntervalContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.ExportRequestRateByIntervalLogAnalytic(WaitUntil,AzureLocation,RequestRateByIntervalContent,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -602,7 +602,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static ArmOperation<LogAnalytics> ExportRequestRateByIntervalLogAnalytic(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).ExportRequestRateByIntervalLogAnalytic(waitUntil, location, content, cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).ExportRequestRateByIntervalLogAnalytic(waitUntil, location, content, cancellationToken);
         }
 
         /// <summary>
@@ -619,7 +619,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.ExportThrottledRequestsLogAnalytic(WaitUntil,AzureLocation,ThrottledRequestsContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.ExportThrottledRequestsLogAnalytic(WaitUntil,AzureLocation,ThrottledRequestsContent,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -630,7 +630,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).ExportThrottledRequestsLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).ExportThrottledRequestsLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -647,7 +647,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.ExportThrottledRequestsLogAnalytic(WaitUntil,AzureLocation,ThrottledRequestsContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtAcronymMappingSubscriptionResource.ExportThrottledRequestsLogAnalytic(WaitUntil,AzureLocation,ThrottledRequestsContent,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -658,7 +658,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static ArmOperation<LogAnalytics> ExportThrottledRequestsLogAnalytic(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            return GetMgmtAcronymMappingSubscriptionMockingExtension(subscriptionResource).ExportThrottledRequestsLogAnalytic(waitUntil, location, content, cancellationToken);
+            return GetMockableMgmtAcronymMappingSubscriptionResource(subscriptionResource).ExportThrottledRequestsLogAnalytic(waitUntil, location, content, cancellationToken);
         }
     }
 }

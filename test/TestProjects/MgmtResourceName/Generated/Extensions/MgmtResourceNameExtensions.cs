@@ -19,19 +19,19 @@ namespace MgmtResourceName
     /// <summary> A class to add extension methods to MgmtResourceName. </summary>
     public static partial class MgmtResourceNameExtensions
     {
-        private static MgmtResourceNameArmClientMockingExtension GetMgmtResourceNameArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtResourceNameArmClient GetMockableMgmtResourceNameArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtResourceNameArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtResourceNameArmClient(client0));
         }
 
-        private static MgmtResourceNameResourceGroupMockingExtension GetMgmtResourceNameResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtResourceNameResourceGroupResource GetMockableMgmtResourceNameResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtResourceNameResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtResourceNameResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtResourceNameTenantMockingExtension GetMgmtResourceNameTenantMockingExtension(ArmResource resource)
+        private static MockableMgmtResourceNameTenantResource GetMockableMgmtResourceNameTenantResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtResourceNameTenantMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtResourceNameTenantResource(client, resource.Id));
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace MgmtResourceName
         /// You can use <see cref="MachineResource.CreateResourceIdentifier" /> to create a <see cref="MachineResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetMachineResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameArmClient.GetMachineResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -47,7 +47,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="MachineResource" /> object. </returns>
         public static MachineResource GetMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtResourceNameArmClientMockingExtension(client).GetMachineResource(id);
+            return GetMockableMgmtResourceNameArmClient(client).GetMachineResource(id);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace MgmtResourceName
         /// You can use <see cref="Disk.CreateResourceIdentifier" /> to create a <see cref="Disk" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetDisk(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameArmClient.GetDisk(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -63,7 +63,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="Disk" /> object. </returns>
         public static Disk GetDisk(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtResourceNameArmClientMockingExtension(client).GetDisk(id);
+            return GetMockableMgmtResourceNameArmClient(client).GetDisk(id);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace MgmtResourceName
         /// You can use <see cref="Memory.CreateResourceIdentifier" /> to create a <see cref="Memory" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetMemory(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameArmClient.GetMemory(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -79,7 +79,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="Memory" /> object. </returns>
         public static Memory GetMemory(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtResourceNameArmClientMockingExtension(client).GetMemory(id);
+            return GetMockableMgmtResourceNameArmClient(client).GetMemory(id);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace MgmtResourceName
         /// You can use <see cref="NetworkResource.CreateResourceIdentifier" /> to create a <see cref="NetworkResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetNetworkResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameArmClient.GetNetworkResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -95,7 +95,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="NetworkResource" /> object. </returns>
         public static NetworkResource GetNetworkResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtResourceNameArmClientMockingExtension(client).GetNetworkResource(id);
+            return GetMockableMgmtResourceNameArmClient(client).GetNetworkResource(id);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace MgmtResourceName
         /// You can use <see cref="DisplayResource.CreateResourceIdentifier" /> to create a <see cref="DisplayResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetDisplayResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameArmClient.GetDisplayResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -111,7 +111,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="DisplayResource" /> object. </returns>
         public static DisplayResource GetDisplayResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtResourceNameArmClientMockingExtension(client).GetDisplayResource(id);
+            return GetMockableMgmtResourceNameArmClient(client).GetDisplayResource(id);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace MgmtResourceName
         /// You can use <see cref="ProviderOperationResource.CreateResourceIdentifier" /> to create a <see cref="ProviderOperationResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetProviderOperationResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameArmClient.GetProviderOperationResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -127,21 +127,21 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="ProviderOperationResource" /> object. </returns>
         public static ProviderOperationResource GetProviderOperationResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtResourceNameArmClientMockingExtension(client).GetProviderOperationResource(id);
+            return GetMockableMgmtResourceNameArmClient(client).GetProviderOperationResource(id);
         }
 
         /// <summary>
         /// Gets a collection of MachineResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMachines()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetMachines()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
         public static MachineCollection GetMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMachines();
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetMachines();
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMachineAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetMachineAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -168,7 +168,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<MachineResource>> GetMachineAsync(this ResourceGroupResource resourceGroupResource, string machineName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMachineAsync(machineName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetMachineAsync(machineName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMachine(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetMachine(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -195,21 +195,21 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<MachineResource> GetMachine(this ResourceGroupResource resourceGroupResource, string machineName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMachine(machineName, cancellationToken);
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetMachine(machineName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of Disks in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisks()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetDisks()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Disks and their operations over a Disk. </returns>
         public static DiskCollection GetDisks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisks();
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetDisks();
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDiskAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetDiskAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -236,7 +236,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<Disk>> GetDiskAsync(this ResourceGroupResource resourceGroupResource, string diskResourceName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDiskAsync(diskResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetDiskAsync(diskResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisk(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetDisk(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -263,21 +263,21 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<Disk> GetDisk(this ResourceGroupResource resourceGroupResource, string diskResourceName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisk(diskResourceName, cancellationToken);
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetDisk(diskResourceName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of Memories in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMemories()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetMemories()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Memories and their operations over a Memory. </returns>
         public static MemoryCollection GetMemories(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMemories();
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetMemories();
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMemoryAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetMemoryAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -304,7 +304,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<Memory>> GetMemoryAsync(this ResourceGroupResource resourceGroupResource, string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMemoryAsync(memoryResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetMemoryAsync(memoryResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -320,7 +320,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMemory(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetMemory(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -331,21 +331,21 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<Memory> GetMemory(this ResourceGroupResource resourceGroupResource, string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMemory(memoryResourceName, cancellationToken);
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetMemory(memoryResourceName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of NetworkResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetNetworks()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetNetworks()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
         public static NetworkCollection GetNetworks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetNetworks();
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetNetworks();
         }
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetNetworkAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetNetworkAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -372,7 +372,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<NetworkResource>> GetNetworkAsync(this ResourceGroupResource resourceGroupResource, string networkResourceName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetNetworkAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetNetworkAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -388,7 +388,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetNetwork(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetNetwork(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -399,21 +399,21 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<NetworkResource> GetNetwork(this ResourceGroupResource resourceGroupResource, string networkResourceName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetNetwork(networkResourceName, cancellationToken);
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetNetwork(networkResourceName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of DisplayResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisplayResources()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetDisplayResources()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DisplayResources and their operations over a DisplayResource. </returns>
         public static DisplayResourceCollection GetDisplayResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisplayResources();
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetDisplayResources();
         }
 
         /// <summary>
@@ -429,7 +429,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisplayResourceAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetDisplayResourceAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -440,7 +440,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<DisplayResource>> GetDisplayResourceAsync(this ResourceGroupResource resourceGroupResource, string displayResourceName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisplayResourceAsync(displayResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetDisplayResourceAsync(displayResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -456,7 +456,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisplayResource(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameResourceGroupResource.GetDisplayResource(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -467,21 +467,21 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<DisplayResource> GetDisplayResource(this ResourceGroupResource resourceGroupResource, string displayResourceName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisplayResource(displayResourceName, cancellationToken);
+            return GetMockableMgmtResourceNameResourceGroupResource(resourceGroupResource).GetDisplayResource(displayResourceName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of ProviderOperationResources in the TenantResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameTenantMockingExtension.GetProviderOperations()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameTenantResource.GetProviderOperations()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ProviderOperationResources and their operations over a ProviderOperationResource. </returns>
         public static ProviderOperationCollection GetProviderOperations(this TenantResource tenantResource)
         {
-            return GetMgmtResourceNameTenantMockingExtension(tenantResource).GetProviderOperations();
+            return GetMockableMgmtResourceNameTenantResource(tenantResource).GetProviderOperations();
         }
 
         /// <summary>
@@ -498,7 +498,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameTenantMockingExtension.GetProviderOperationAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameTenantResource.GetProviderOperationAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -510,7 +510,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<ProviderOperationResource>> GetProviderOperationAsync(this TenantResource tenantResource, string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtResourceNameTenantMockingExtension(tenantResource).GetProviderOperationAsync(resourceProviderNamespace, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtResourceNameTenantResource(tenantResource).GetProviderOperationAsync(resourceProviderNamespace, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -527,7 +527,7 @@ namespace MgmtResourceName
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtResourceNameTenantMockingExtension.GetProviderOperation(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtResourceNameTenantResource.GetProviderOperation(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -539,7 +539,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<ProviderOperationResource> GetProviderOperation(this TenantResource tenantResource, string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtResourceNameTenantMockingExtension(tenantResource).GetProviderOperation(resourceProviderNamespace, expand, cancellationToken);
+            return GetMockableMgmtResourceNameTenantResource(tenantResource).GetProviderOperation(resourceProviderNamespace, expand, cancellationToken);
         }
     }
 }

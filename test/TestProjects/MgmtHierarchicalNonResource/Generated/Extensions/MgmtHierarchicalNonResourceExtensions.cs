@@ -19,14 +19,14 @@ namespace MgmtHierarchicalNonResource
     /// <summary> A class to add extension methods to MgmtHierarchicalNonResource. </summary>
     public static partial class MgmtHierarchicalNonResourceExtensions
     {
-        private static MgmtHierarchicalNonResourceArmClientMockingExtension GetMgmtHierarchicalNonResourceArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtHierarchicalNonResourceArmClient GetMockableMgmtHierarchicalNonResourceArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtHierarchicalNonResourceArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtHierarchicalNonResourceArmClient(client0));
         }
 
-        private static MgmtHierarchicalNonResourceSubscriptionMockingExtension GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtHierarchicalNonResourceSubscriptionResource GetMockableMgmtHierarchicalNonResourceSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtHierarchicalNonResourceSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtHierarchicalNonResourceSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace MgmtHierarchicalNonResource
         /// You can use <see cref="SharedGalleryResource.CreateResourceIdentifier" /> to create a <see cref="SharedGalleryResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtHierarchicalNonResourceArmClientMockingExtension.GetSharedGalleryResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtHierarchicalNonResourceArmClient.GetSharedGalleryResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -42,14 +42,14 @@ namespace MgmtHierarchicalNonResource
         /// <returns> Returns a <see cref="SharedGalleryResource" /> object. </returns>
         public static SharedGalleryResource GetSharedGalleryResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtHierarchicalNonResourceArmClientMockingExtension(client).GetSharedGalleryResource(id);
+            return GetMockableMgmtHierarchicalNonResourceArmClient(client).GetSharedGalleryResource(id);
         }
 
         /// <summary>
         /// Gets a collection of SharedGalleryResources in the SubscriptionResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtHierarchicalNonResourceSubscriptionMockingExtension.GetSharedGalleries(string)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtHierarchicalNonResourceSubscriptionResource.GetSharedGalleries(string)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -59,7 +59,7 @@ namespace MgmtHierarchicalNonResource
         /// <returns> An object representing collection of SharedGalleryResources and their operations over a SharedGalleryResource. </returns>
         public static SharedGalleryCollection GetSharedGalleries(this SubscriptionResource subscriptionResource, string location)
         {
-            return GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(subscriptionResource).GetSharedGalleries(location);
+            return GetMockableMgmtHierarchicalNonResourceSubscriptionResource(subscriptionResource).GetSharedGalleries(location);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace MgmtHierarchicalNonResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtHierarchicalNonResourceSubscriptionMockingExtension.GetSharedGalleryAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtHierarchicalNonResourceSubscriptionResource.GetSharedGalleryAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -88,7 +88,7 @@ namespace MgmtHierarchicalNonResource
         [ForwardsClientCalls]
         public static async Task<Response<SharedGalleryResource>> GetSharedGalleryAsync(this SubscriptionResource subscriptionResource, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(subscriptionResource).GetSharedGalleryAsync(location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtHierarchicalNonResourceSubscriptionResource(subscriptionResource).GetSharedGalleryAsync(location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace MgmtHierarchicalNonResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtHierarchicalNonResourceSubscriptionMockingExtension.GetSharedGallery(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtHierarchicalNonResourceSubscriptionResource.GetSharedGallery(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -117,7 +117,7 @@ namespace MgmtHierarchicalNonResource
         [ForwardsClientCalls]
         public static Response<SharedGalleryResource> GetSharedGallery(this SubscriptionResource subscriptionResource, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(subscriptionResource).GetSharedGallery(location, galleryUniqueName, cancellationToken);
+            return GetMockableMgmtHierarchicalNonResourceSubscriptionResource(subscriptionResource).GetSharedGallery(location, galleryUniqueName, cancellationToken);
         }
     }
 }

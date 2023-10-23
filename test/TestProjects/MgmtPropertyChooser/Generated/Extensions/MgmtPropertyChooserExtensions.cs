@@ -20,14 +20,14 @@ namespace MgmtPropertyChooser
     /// <summary> A class to add extension methods to MgmtPropertyChooser. </summary>
     public static partial class MgmtPropertyChooserExtensions
     {
-        private static MgmtPropertyChooserArmClientMockingExtension GetMgmtPropertyChooserArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtPropertyChooserArmClient GetMockableMgmtPropertyChooserArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtPropertyChooserArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtPropertyChooserArmClient(client0));
         }
 
-        private static MgmtPropertyChooserResourceGroupMockingExtension GetMgmtPropertyChooserResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtPropertyChooserResourceGroupResource GetMockableMgmtPropertyChooserResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtPropertyChooserResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtPropertyChooserResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace MgmtPropertyChooser
         /// You can use <see cref="VirtualMachineResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyChooserArmClientMockingExtension.GetVirtualMachineResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyChooserArmClient.GetVirtualMachineResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -43,21 +43,21 @@ namespace MgmtPropertyChooser
         /// <returns> Returns a <see cref="VirtualMachineResource" /> object. </returns>
         public static VirtualMachineResource GetVirtualMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtPropertyChooserArmClientMockingExtension(client).GetVirtualMachineResource(id);
+            return GetMockableMgmtPropertyChooserArmClient(client).GetVirtualMachineResource(id);
         }
 
         /// <summary>
         /// Gets a collection of VirtualMachineResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyChooserResourceGroupMockingExtension.GetVirtualMachines()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyChooserResourceGroupResource.GetVirtualMachines()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtPropertyChooserResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachines();
+            return GetMockableMgmtPropertyChooserResourceGroupResource(resourceGroupResource).GetVirtualMachines();
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace MgmtPropertyChooser
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyChooserResourceGroupMockingExtension.GetVirtualMachineAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyChooserResourceGroupResource.GetVirtualMachineAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -86,7 +86,7 @@ namespace MgmtPropertyChooser
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(this ResourceGroupResource resourceGroupResource, string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtPropertyChooserResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineAsync(vmName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtPropertyChooserResourceGroupResource(resourceGroupResource).GetVirtualMachineAsync(vmName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace MgmtPropertyChooser
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPropertyChooserResourceGroupMockingExtension.GetVirtualMachine(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPropertyChooserResourceGroupResource.GetVirtualMachine(string,InstanceViewType?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -115,7 +115,7 @@ namespace MgmtPropertyChooser
         [ForwardsClientCalls]
         public static Response<VirtualMachineResource> GetVirtualMachine(this ResourceGroupResource resourceGroupResource, string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPropertyChooserResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachine(vmName, expand, cancellationToken);
+            return GetMockableMgmtPropertyChooserResourceGroupResource(resourceGroupResource).GetVirtualMachine(vmName, expand, cancellationToken);
         }
     }
 }

@@ -21,24 +21,24 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to MgmtExtensionResource. </summary>
     public static partial class MgmtExtensionResourceExtensions
     {
-        private static MgmtExtensionResourceArmClientMockingExtension GetMgmtExtensionResourceArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtExtensionResourceArmClient GetMockableMgmtExtensionResourceArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtExtensionResourceArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtExtensionResourceArmClient(client0));
         }
 
-        private static MgmtExtensionResourceManagementGroupMockingExtension GetMgmtExtensionResourceManagementGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtExtensionResourceManagementGroupResource GetMockableMgmtExtensionResourceManagementGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtExtensionResourceManagementGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtExtensionResourceManagementGroupResource(client, resource.Id));
         }
 
-        private static MgmtExtensionResourceSubscriptionMockingExtension GetMgmtExtensionResourceSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtExtensionResourceSubscriptionResource GetMockableMgmtExtensionResourceSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtExtensionResourceSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtExtensionResourceSubscriptionResource(client, resource.Id));
         }
 
-        private static MgmtExtensionResourceTenantMockingExtension GetMgmtExtensionResourceTenantMockingExtension(ArmResource resource)
+        private static MockableMgmtExtensionResourceTenantResource GetMockableMgmtExtensionResourceTenantResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtExtensionResourceTenantMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtExtensionResourceTenantResource(client, resource.Id));
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace MgmtExtensionResource
         /// You can use <see cref="SubSingletonResource.CreateResourceIdentifier" /> to create a <see cref="SubSingletonResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceArmClientMockingExtension.GetSubSingletonResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceArmClient.GetSubSingletonResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -54,7 +54,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public static SubSingletonResource GetSubSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExtensionResourceArmClientMockingExtension(client).GetSubSingletonResource(id);
+            return GetMockableMgmtExtensionResourceArmClient(client).GetSubSingletonResource(id);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace MgmtExtensionResource
         /// You can use <see cref="SubscriptionPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="SubscriptionPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceArmClientMockingExtension.GetSubscriptionPolicyDefinitionResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceArmClient.GetSubscriptionPolicyDefinitionResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -70,7 +70,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource" /> object. </returns>
         public static SubscriptionPolicyDefinitionResource GetSubscriptionPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExtensionResourceArmClientMockingExtension(client).GetSubscriptionPolicyDefinitionResource(id);
+            return GetMockableMgmtExtensionResourceArmClient(client).GetSubscriptionPolicyDefinitionResource(id);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace MgmtExtensionResource
         /// You can use <see cref="BuiltInPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="BuiltInPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceArmClientMockingExtension.GetBuiltInPolicyDefinitionResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceArmClient.GetBuiltInPolicyDefinitionResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -86,7 +86,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource" /> object. </returns>
         public static BuiltInPolicyDefinitionResource GetBuiltInPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExtensionResourceArmClientMockingExtension(client).GetBuiltInPolicyDefinitionResource(id);
+            return GetMockableMgmtExtensionResourceArmClient(client).GetBuiltInPolicyDefinitionResource(id);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace MgmtExtensionResource
         /// You can use <see cref="ManagementGroupPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="ManagementGroupPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceArmClientMockingExtension.GetManagementGroupPolicyDefinitionResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceArmClient.GetManagementGroupPolicyDefinitionResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -102,21 +102,21 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource" /> object. </returns>
         public static ManagementGroupPolicyDefinitionResource GetManagementGroupPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExtensionResourceArmClientMockingExtension(client).GetManagementGroupPolicyDefinitionResource(id);
+            return GetMockableMgmtExtensionResourceArmClient(client).GetManagementGroupPolicyDefinitionResource(id);
         }
 
         /// <summary>
         /// Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceManagementGroupMockingExtension.GetManagementGroupPolicyDefinitions()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceManagementGroupResource.GetManagementGroupPolicyDefinitions()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitionResources and their operations over a ManagementGroupPolicyDefinitionResource. </returns>
         public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroupResource managementGroupResource)
         {
-            return GetMgmtExtensionResourceManagementGroupMockingExtension(managementGroupResource).GetManagementGroupPolicyDefinitions();
+            return GetMockableMgmtExtensionResourceManagementGroupResource(managementGroupResource).GetManagementGroupPolicyDefinitions();
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceManagementGroupMockingExtension.GetManagementGroupPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceManagementGroupResource.GetManagementGroupPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
@@ -144,7 +144,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static async Task<Response<ManagementGroupPolicyDefinitionResource>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExtensionResourceManagementGroupMockingExtension(managementGroupResource).GetManagementGroupPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExtensionResourceManagementGroupResource(managementGroupResource).GetManagementGroupPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceManagementGroupMockingExtension.GetManagementGroupPolicyDefinition(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceManagementGroupResource.GetManagementGroupPolicyDefinition(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
@@ -172,35 +172,35 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static Response<ManagementGroupPolicyDefinitionResource> GetManagementGroupPolicyDefinition(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionResourceManagementGroupMockingExtension(managementGroupResource).GetManagementGroupPolicyDefinition(policyDefinitionName, cancellationToken);
+            return GetMockableMgmtExtensionResourceManagementGroupResource(managementGroupResource).GetManagementGroupPolicyDefinition(policyDefinitionName, cancellationToken);
         }
 
         /// <summary>
         /// Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.GetSubSingleton()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceSubscriptionResource.GetSubSingleton()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public static SubSingletonResource GetSubSingleton(this SubscriptionResource subscriptionResource)
         {
-            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubSingleton();
+            return GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).GetSubSingleton();
         }
 
         /// <summary>
         /// Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.GetSubscriptionPolicyDefinitions()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceSubscriptionResource.GetSubscriptionPolicyDefinitions()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubscriptionPolicyDefinitionResources and their operations over a SubscriptionPolicyDefinitionResource. </returns>
         public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions(this SubscriptionResource subscriptionResource)
         {
-            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubscriptionPolicyDefinitions();
+            return GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).GetSubscriptionPolicyDefinitions();
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.GetSubscriptionPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceSubscriptionResource.GetSubscriptionPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -228,7 +228,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static async Task<Response<SubscriptionPolicyDefinitionResource>> GetSubscriptionPolicyDefinitionAsync(this SubscriptionResource subscriptionResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubscriptionPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).GetSubscriptionPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.GetSubscriptionPolicyDefinition(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceSubscriptionResource.GetSubscriptionPolicyDefinition(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -256,7 +256,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static Response<SubscriptionPolicyDefinitionResource> GetSubscriptionPolicyDefinition(this SubscriptionResource subscriptionResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubscriptionPolicyDefinition(policyDefinitionName, cancellationToken);
+            return GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).GetSubscriptionPolicyDefinition(policyDefinitionName, cancellationToken);
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.CheckDnsNameAvailability(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceSubscriptionResource.CheckDnsNameAvailability(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -284,7 +284,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public static async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(this SubscriptionResource subscriptionResource, string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -301,7 +301,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.CheckDnsNameAvailability(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceSubscriptionResource.CheckDnsNameAvailability(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -312,7 +312,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public static Response<DnsNameAvailabilityResult> CheckDnsNameAvailability(this SubscriptionResource subscriptionResource, string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
+            return GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
         }
 
         /// <summary>
@@ -329,7 +329,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.ValidateSomethingOrphanedPost(ValidateSomethingContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceSubscriptionResource.ValidateSomethingOrphanedPost(ValidateSomethingContent,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -338,7 +338,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<Response> ValidateSomethingOrphanedPostAsync(this SubscriptionResource subscriptionResource, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).ValidateSomethingOrphanedPostAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).ValidateSomethingOrphanedPostAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.ValidateSomethingOrphanedPost(ValidateSomethingContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceSubscriptionResource.ValidateSomethingOrphanedPost(ValidateSomethingContent,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -364,21 +364,21 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static Response ValidateSomethingOrphanedPost(this SubscriptionResource subscriptionResource, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
+            return GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of BuiltInPolicyDefinitionResources in the TenantResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceTenantMockingExtension.GetBuiltInPolicyDefinitions()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceTenantResource.GetBuiltInPolicyDefinitions()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
         public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this TenantResource tenantResource)
         {
-            return GetMgmtExtensionResourceTenantMockingExtension(tenantResource).GetBuiltInPolicyDefinitions();
+            return GetMockableMgmtExtensionResourceTenantResource(tenantResource).GetBuiltInPolicyDefinitions();
         }
 
         /// <summary>
@@ -395,7 +395,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceTenantMockingExtension.GetBuiltInPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceTenantResource.GetBuiltInPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -406,7 +406,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExtensionResourceTenantMockingExtension(tenantResource).GetBuiltInPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExtensionResourceTenantResource(tenantResource).GetBuiltInPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -423,7 +423,7 @@ namespace MgmtExtensionResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceTenantMockingExtension.GetBuiltInPolicyDefinition(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionResourceTenantResource.GetBuiltInPolicyDefinition(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -434,7 +434,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionResourceTenantMockingExtension(tenantResource).GetBuiltInPolicyDefinition(policyDefinitionName, cancellationToken);
+            return GetMockableMgmtExtensionResourceTenantResource(tenantResource).GetBuiltInPolicyDefinition(policyDefinitionName, cancellationToken);
         }
     }
 }

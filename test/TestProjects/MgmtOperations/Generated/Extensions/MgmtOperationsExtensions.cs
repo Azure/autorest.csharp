@@ -20,14 +20,14 @@ namespace MgmtOperations
     /// <summary> A class to add extension methods to MgmtOperations. </summary>
     public static partial class MgmtOperationsExtensions
     {
-        private static MgmtOperationsArmClientMockingExtension GetMgmtOperationsArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtOperationsArmClient GetMockableMgmtOperationsArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtOperationsArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtOperationsArmClient(client0));
         }
 
-        private static MgmtOperationsResourceGroupMockingExtension GetMgmtOperationsResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtOperationsResourceGroupResource GetMockableMgmtOperationsResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtOperationsResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtOperationsResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace MgmtOperations
         /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsArmClientMockingExtension.GetAvailabilitySetResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsArmClient.GetAvailabilitySetResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -43,7 +43,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetResource(id);
+            return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetResource(id);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace MgmtOperations
         /// You can use <see cref="AvailabilitySetChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetChildResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsArmClientMockingExtension.GetAvailabilitySetChildResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsArmClient.GetAvailabilitySetChildResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -59,7 +59,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetChildResource" /> object. </returns>
         public static AvailabilitySetChildResource GetAvailabilitySetChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetChildResource(id);
+            return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetChildResource(id);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace MgmtOperations
         /// You can use <see cref="AvailabilitySetGrandChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetGrandChildResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsArmClientMockingExtension.GetAvailabilitySetGrandChildResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsArmClient.GetAvailabilitySetGrandChildResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -75,7 +75,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetGrandChildResource" /> object. </returns>
         public static AvailabilitySetGrandChildResource GetAvailabilitySetGrandChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetGrandChildResource(id);
+            return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetGrandChildResource(id);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace MgmtOperations
         /// You can use <see cref="UnpatchableResource.CreateResourceIdentifier" /> to create an <see cref="UnpatchableResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsArmClientMockingExtension.GetUnpatchableResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsArmClient.GetUnpatchableResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -91,21 +91,21 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>
         public static UnpatchableResource GetUnpatchableResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtOperationsArmClientMockingExtension(client).GetUnpatchableResource(id);
+            return GetMockableMgmtOperationsArmClient(client).GetUnpatchableResource(id);
         }
 
         /// <summary>
         /// Gets a collection of AvailabilitySetResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetAvailabilitySets()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsResourceGroupResource.GetAvailabilitySets()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySets();
+            return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace MgmtOperations
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetAvailabilitySetAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsResourceGroupResource.GetAvailabilitySetAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -134,7 +134,7 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetAvailabilitySetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace MgmtOperations
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetAvailabilitySet(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsResourceGroupResource.GetAvailabilitySet(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -163,21 +163,21 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static Response<AvailabilitySetResource> GetAvailabilitySet(this ResourceGroupResource resourceGroupResource, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySet(availabilitySetName, expand, cancellationToken);
+            return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetAvailabilitySet(availabilitySetName, expand, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of UnpatchableResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetUnpatchableResources()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsResourceGroupResource.GetUnpatchableResources()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetUnpatchableResources();
+            return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetUnpatchableResources();
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace MgmtOperations
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetUnpatchableResourceAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsResourceGroupResource.GetUnpatchableResourceAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -206,7 +206,7 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static async Task<Response<UnpatchableResource>> GetUnpatchableResourceAsync(this ResourceGroupResource resourceGroupResource, string name, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetUnpatchableResourceAsync(name, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetUnpatchableResourceAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace MgmtOperations
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetUnpatchableResource(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsResourceGroupResource.GetUnpatchableResource(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -235,7 +235,7 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static Response<UnpatchableResource> GetUnpatchableResource(this ResourceGroupResource resourceGroupResource, string name, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetUnpatchableResource(name, expand, cancellationToken);
+            return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetUnpatchableResource(name, expand, cancellationToken);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace MgmtOperations
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.TestLROMethodAvailabilitySet(WaitUntil,AvailabilitySetUpdate,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsResourceGroupResource.TestLROMethodAvailabilitySet(WaitUntil,AvailabilitySetUpdate,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -262,7 +262,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetUpdate"/> is null. </exception>
         public static async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, WaitUntil waitUntil, AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace MgmtOperations
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.TestLROMethodAvailabilitySet(WaitUntil,AvailabilitySetUpdate,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtOperationsResourceGroupResource.TestLROMethodAvailabilitySet(WaitUntil,AvailabilitySetUpdate,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -289,7 +289,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetUpdate"/> is null. </exception>
         public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroupResource resourceGroupResource, WaitUntil waitUntil, AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
-            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
+            return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
         }
     }
 }

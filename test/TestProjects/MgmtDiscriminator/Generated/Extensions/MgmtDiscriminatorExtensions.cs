@@ -19,14 +19,14 @@ namespace MgmtDiscriminator
     /// <summary> A class to add extension methods to MgmtDiscriminator. </summary>
     public static partial class MgmtDiscriminatorExtensions
     {
-        private static MgmtDiscriminatorArmClientMockingExtension GetMgmtDiscriminatorArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtDiscriminatorArmClient GetMockableMgmtDiscriminatorArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtDiscriminatorArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtDiscriminatorArmClient(client0));
         }
 
-        private static MgmtDiscriminatorResourceGroupMockingExtension GetMgmtDiscriminatorResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtDiscriminatorResourceGroupResource GetMockableMgmtDiscriminatorResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtDiscriminatorResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtDiscriminatorResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace MgmtDiscriminator
         /// You can use <see cref="DeliveryRuleResource.CreateResourceIdentifier" /> to create a <see cref="DeliveryRuleResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtDiscriminatorArmClientMockingExtension.GetDeliveryRuleResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorArmClient.GetDeliveryRuleResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -42,21 +42,21 @@ namespace MgmtDiscriminator
         /// <returns> Returns a <see cref="DeliveryRuleResource" /> object. </returns>
         public static DeliveryRuleResource GetDeliveryRuleResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtDiscriminatorArmClientMockingExtension(client).GetDeliveryRuleResource(id);
+            return GetMockableMgmtDiscriminatorArmClient(client).GetDeliveryRuleResource(id);
         }
 
         /// <summary>
         /// Gets a collection of DeliveryRuleResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtDiscriminatorResourceGroupMockingExtension.GetDeliveryRules()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorResourceGroupResource.GetDeliveryRules()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtDiscriminatorResourceGroupMockingExtension(resourceGroupResource).GetDeliveryRules();
+            return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRules();
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace MgmtDiscriminator
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtDiscriminatorResourceGroupMockingExtension.GetDeliveryRuleAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorResourceGroupResource.GetDeliveryRuleAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -84,7 +84,7 @@ namespace MgmtDiscriminator
         [ForwardsClientCalls]
         public static async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtDiscriminatorResourceGroupMockingExtension(resourceGroupResource).GetDeliveryRuleAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRuleAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace MgmtDiscriminator
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtDiscriminatorResourceGroupMockingExtension.GetDeliveryRule(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorResourceGroupResource.GetDeliveryRule(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -112,7 +112,7 @@ namespace MgmtDiscriminator
         [ForwardsClientCalls]
         public static Response<DeliveryRuleResource> GetDeliveryRule(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return GetMgmtDiscriminatorResourceGroupMockingExtension(resourceGroupResource).GetDeliveryRule(name, cancellationToken);
+            return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRule(name, cancellationToken);
         }
     }
 }

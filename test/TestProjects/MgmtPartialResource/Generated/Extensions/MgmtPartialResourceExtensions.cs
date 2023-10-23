@@ -19,19 +19,19 @@ namespace MgmtPartialResource
     /// <summary> A class to add extension methods to MgmtPartialResource. </summary>
     public static partial class MgmtPartialResourceExtensions
     {
-        private static MgmtPartialResourceArmClientMockingExtension GetMgmtPartialResourceArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtPartialResourceArmClient GetMockableMgmtPartialResourceArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtPartialResourceArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtPartialResourceArmClient(client0));
         }
 
-        private static MgmtPartialResourceResourceGroupMockingExtension GetMgmtPartialResourceResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtPartialResourceResourceGroupResource GetMockableMgmtPartialResourceResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtPartialResourceResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtPartialResourceResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtPartialResourceSubscriptionMockingExtension GetMgmtPartialResourceSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtPartialResourceSubscriptionResource GetMockableMgmtPartialResourceSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtPartialResourceSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtPartialResourceSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace MgmtPartialResource
         /// You can use <see cref="PublicIPAddressResource.CreateResourceIdentifier" /> to create a <see cref="PublicIPAddressResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceArmClientMockingExtension.GetPublicIPAddressResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceArmClient.GetPublicIPAddressResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -47,7 +47,7 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="PublicIPAddressResource" /> object. </returns>
         public static PublicIPAddressResource GetPublicIPAddressResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtPartialResourceArmClientMockingExtension(client).GetPublicIPAddressResource(id);
+            return GetMockableMgmtPartialResourceArmClient(client).GetPublicIPAddressResource(id);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace MgmtPartialResource
         /// You can use <see cref="ConfigurationProfileAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="ConfigurationProfileAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceArmClientMockingExtension.GetConfigurationProfileAssignmentResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceArmClient.GetConfigurationProfileAssignmentResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -63,7 +63,7 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="ConfigurationProfileAssignmentResource" /> object. </returns>
         public static ConfigurationProfileAssignmentResource GetConfigurationProfileAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtPartialResourceArmClientMockingExtension(client).GetConfigurationProfileAssignmentResource(id);
+            return GetMockableMgmtPartialResourceArmClient(client).GetConfigurationProfileAssignmentResource(id);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace MgmtPartialResource
         /// You can use <see cref="PartialVmssResource.CreateResourceIdentifier" /> to create a <see cref="PartialVmssResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceArmClientMockingExtension.GetPartialVmssResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceArmClient.GetPartialVmssResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -79,7 +79,7 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="PartialVmssResource" /> object. </returns>
         public static PartialVmssResource GetPartialVmssResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtPartialResourceArmClientMockingExtension(client).GetPartialVmssResource(id);
+            return GetMockableMgmtPartialResourceArmClient(client).GetPartialVmssResource(id);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace MgmtPartialResource
         /// You can use <see cref="VirtualMachineMgmtPartialResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineMgmtPartialResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceArmClientMockingExtension.GetVirtualMachineMgmtPartialResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceArmClient.GetVirtualMachineMgmtPartialResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -95,21 +95,21 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="VirtualMachineMgmtPartialResource" /> object. </returns>
         public static VirtualMachineMgmtPartialResource GetVirtualMachineMgmtPartialResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtPartialResourceArmClientMockingExtension(client).GetVirtualMachineMgmtPartialResource(id);
+            return GetMockableMgmtPartialResourceArmClient(client).GetVirtualMachineMgmtPartialResource(id);
         }
 
         /// <summary>
         /// Gets a collection of PublicIPAddressResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceResourceGroupMockingExtension.GetPublicIPAddresses()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceResourceGroupResource.GetPublicIPAddresses()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PublicIPAddressResources and their operations over a PublicIPAddressResource. </returns>
         public static PublicIPAddressCollection GetPublicIPAddresses(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtPartialResourceResourceGroupMockingExtension(resourceGroupResource).GetPublicIPAddresses();
+            return GetMockableMgmtPartialResourceResourceGroupResource(resourceGroupResource).GetPublicIPAddresses();
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace MgmtPartialResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceResourceGroupMockingExtension.GetPublicIPAddressAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceResourceGroupResource.GetPublicIPAddressAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -138,7 +138,7 @@ namespace MgmtPartialResource
         [ForwardsClientCalls]
         public static async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtPartialResourceResourceGroupMockingExtension(resourceGroupResource).GetPublicIPAddressAsync(publicIpAddressName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtPartialResourceResourceGroupResource(resourceGroupResource).GetPublicIPAddressAsync(publicIpAddressName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace MgmtPartialResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceResourceGroupMockingExtension.GetPublicIPAddress(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceResourceGroupResource.GetPublicIPAddress(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -167,7 +167,7 @@ namespace MgmtPartialResource
         [ForwardsClientCalls]
         public static Response<PublicIPAddressResource> GetPublicIPAddress(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPartialResourceResourceGroupMockingExtension(resourceGroupResource).GetPublicIPAddress(publicIpAddressName, expand, cancellationToken);
+            return GetMockableMgmtPartialResourceResourceGroupResource(resourceGroupResource).GetPublicIPAddress(publicIpAddressName, expand, cancellationToken);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace MgmtPartialResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceSubscriptionMockingExtension.GetPublicIPAddresses(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceSubscriptionResource.GetPublicIPAddresses(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -192,7 +192,7 @@ namespace MgmtPartialResource
         /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPartialResourceSubscriptionMockingExtension(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
+            return GetMockableMgmtPartialResourceSubscriptionResource(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace MgmtPartialResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceSubscriptionMockingExtension.GetPublicIPAddresses(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtPartialResourceSubscriptionResource.GetPublicIPAddresses(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -217,7 +217,7 @@ namespace MgmtPartialResource
         /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<PublicIPAddressResource> GetPublicIPAddresses(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPartialResourceSubscriptionMockingExtension(subscriptionResource).GetPublicIPAddresses(cancellationToken);
+            return GetMockableMgmtPartialResourceSubscriptionResource(subscriptionResource).GetPublicIPAddresses(cancellationToken);
         }
     }
 }

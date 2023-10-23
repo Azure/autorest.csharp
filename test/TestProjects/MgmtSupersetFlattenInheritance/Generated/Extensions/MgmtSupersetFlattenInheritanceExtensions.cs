@@ -20,14 +20,14 @@ namespace MgmtSupersetFlattenInheritance
     /// <summary> A class to add extension methods to MgmtSupersetFlattenInheritance. </summary>
     public static partial class MgmtSupersetFlattenInheritanceExtensions
     {
-        private static MgmtSupersetFlattenInheritanceArmClientMockingExtension GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtSupersetFlattenInheritanceArmClient GetMockableMgmtSupersetFlattenInheritanceArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtSupersetFlattenInheritanceArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtSupersetFlattenInheritanceArmClient(client0));
         }
 
-        private static MgmtSupersetFlattenInheritanceResourceGroupMockingExtension GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtSupersetFlattenInheritanceResourceGroupResource GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtSupersetFlattenInheritanceResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtSupersetFlattenInheritanceResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace MgmtSupersetFlattenInheritance
         /// You can use <see cref="ResourceModel1Resource.CreateResourceIdentifier" /> to create a <see cref="ResourceModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceArmClientMockingExtension.GetResourceModel1Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceArmClient.GetResourceModel1Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -43,7 +43,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> Returns a <see cref="ResourceModel1Resource" /> object. </returns>
         public static ResourceModel1Resource GetResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(client).GetResourceModel1Resource(id);
+            return GetMockableMgmtSupersetFlattenInheritanceArmClient(client).GetResourceModel1Resource(id);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace MgmtSupersetFlattenInheritance
         /// You can use <see cref="TrackedResourceModel1Resource.CreateResourceIdentifier" /> to create a <see cref="TrackedResourceModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceArmClientMockingExtension.GetTrackedResourceModel1Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceArmClient.GetTrackedResourceModel1Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -59,21 +59,21 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> Returns a <see cref="TrackedResourceModel1Resource" /> object. </returns>
         public static TrackedResourceModel1Resource GetTrackedResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(client).GetTrackedResourceModel1Resource(id);
+            return GetMockableMgmtSupersetFlattenInheritanceArmClient(client).GetTrackedResourceModel1Resource(id);
         }
 
         /// <summary>
         /// Gets a collection of ResourceModel1Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel1s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel1s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResourceModel1Resources and their operations over a ResourceModel1Resource. </returns>
         public static ResourceModel1Collection GetResourceModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel1s();
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel1s();
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel1Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel1Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -100,7 +100,7 @@ namespace MgmtSupersetFlattenInheritance
         [ForwardsClientCalls]
         public static async Task<Response<ResourceModel1Resource>> GetResourceModel1Async(this ResourceGroupResource resourceGroupResource, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel1Async(resourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel1Async(resourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -127,21 +127,21 @@ namespace MgmtSupersetFlattenInheritance
         [ForwardsClientCalls]
         public static Response<ResourceModel1Resource> GetResourceModel1(this ResourceGroupResource resourceGroupResource, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel1(resourceModel1SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel1(resourceModel1SName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of TrackedResourceModel1Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel1s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel1s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TrackedResourceModel1Resources and their operations over a TrackedResourceModel1Resource. </returns>
         public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel1s();
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel1s();
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel1Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel1Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -168,7 +168,7 @@ namespace MgmtSupersetFlattenInheritance
         [ForwardsClientCalls]
         public static async Task<Response<TrackedResourceModel1Resource>> GetTrackedResourceModel1Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel1Async(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel1Async(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -195,7 +195,7 @@ namespace MgmtSupersetFlattenInheritance
         [ForwardsClientCalls]
         public static Response<TrackedResourceModel1Resource> GetTrackedResourceModel1(this ResourceGroupResource resourceGroupResource, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel1(trackedResourceModel1SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel1(trackedResourceModel1SName, cancellationToken);
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel1s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -219,7 +219,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel1> GetCustomModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel1sAsync(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel1s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -243,7 +243,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel1> GetCustomModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel1s(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1s(cancellationToken);
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutCustomModel1(string,CustomModel1,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutCustomModel1(string,CustomModel1,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -270,7 +270,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         public static async Task<Response<CustomModel1>> PutCustomModel1Async(this ResourceGroupResource resourceGroupResource, string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutCustomModel1Async(customModel1SName, customModel1, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutCustomModel1Async(customModel1SName, customModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutCustomModel1(string,CustomModel1,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutCustomModel1(string,CustomModel1,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -297,7 +297,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         public static Response<CustomModel1> PutCustomModel1(this ResourceGroupResource resourceGroupResource, string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutCustomModel1(customModel1SName, customModel1, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutCustomModel1(customModel1SName, customModel1, cancellationToken);
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -323,7 +323,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public static async Task<Response<CustomModel1>> GetCustomModel1Async(this ResourceGroupResource resourceGroupResource, string customModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel1Async(customModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1Async(customModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -349,7 +349,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public static Response<CustomModel1> GetCustomModel1(this ResourceGroupResource resourceGroupResource, string customModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel1(customModel1SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1(customModel1SName, cancellationToken);
         }
 
         /// <summary>
@@ -365,7 +365,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -373,7 +373,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel2> GetCustomModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2sAsync(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -389,7 +389,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -397,7 +397,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel2> GetCustomModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2s(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -413,7 +413,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutCustomModel2(string,CustomModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutCustomModel2(string,CustomModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -424,7 +424,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
         public static async Task<Response<CustomModel2>> PutCustomModel2Async(this ResourceGroupResource resourceGroupResource, string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutCustomModel2Async(customModel2SName, customModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutCustomModel2Async(customModel2SName, customModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutCustomModel2(string,CustomModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutCustomModel2(string,CustomModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -451,7 +451,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
         public static Response<CustomModel2> PutCustomModel2(this ResourceGroupResource resourceGroupResource, string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutCustomModel2(customModel2SName, customModel2, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutCustomModel2(customModel2SName, customModel2, cancellationToken);
         }
 
         /// <summary>
@@ -467,7 +467,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -477,7 +477,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public static async Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroupResource resourceGroupResource, string customModel2SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2Async(customModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2Async(customModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -493,7 +493,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -503,7 +503,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public static Response<CustomModel2> GetCustomModel2(this ResourceGroupResource resourceGroupResource, string customModel2SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2(customModel2SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2(customModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -519,7 +519,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel1s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -527,7 +527,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel1sAsync(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -543,7 +543,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel1s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -551,7 +551,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel1> GetSubResourceModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel1s(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1s(cancellationToken);
         }
 
         /// <summary>
@@ -567,7 +567,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutSubResourceModel1(string,SubResourceModel1,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutSubResourceModel1(string,SubResourceModel1,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -578,7 +578,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
         public static async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSubResourceModel1Async(subResourceModel1SName, subResourceModel1, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutSubResourceModel1Async(subResourceModel1SName, subResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -594,7 +594,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutSubResourceModel1(string,SubResourceModel1,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutSubResourceModel1(string,SubResourceModel1,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -605,7 +605,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
         public static Response<SubResourceModel1> PutSubResourceModel1(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSubResourceModel1(subResourceModel1SName, subResourceModel1, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutSubResourceModel1(subResourceModel1SName, subResourceModel1, cancellationToken);
         }
 
         /// <summary>
@@ -621,7 +621,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -631,7 +631,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public static async Task<Response<SubResourceModel1>> GetSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel1Async(subResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1Async(subResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -647,7 +647,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -657,7 +657,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public static Response<SubResourceModel1> GetSubResourceModel1(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel1(subResourceModel1SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1(subResourceModel1SName, cancellationToken);
         }
 
         /// <summary>
@@ -673,7 +673,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -681,7 +681,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel2sAsync(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -697,7 +697,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -705,7 +705,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel2> GetSubResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel2s(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -721,7 +721,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutSubResourceModel2(string,SubResourceModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutSubResourceModel2(string,SubResourceModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -732,7 +732,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
         public static async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSubResourceModel2Async(subResourceModel2SName, subResourceModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutSubResourceModel2Async(subResourceModel2SName, subResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -748,7 +748,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutSubResourceModel2(string,SubResourceModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutSubResourceModel2(string,SubResourceModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -759,7 +759,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
         public static Response<SubResourceModel2> PutSubResourceModel2(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSubResourceModel2(subResourceModel2SName, subResourceModel2, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutSubResourceModel2(subResourceModel2SName, subResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -775,7 +775,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -785,7 +785,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public static async Task<Response<SubResourceModel2>> GetSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel2Async(subResourceModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2Async(subResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -801,7 +801,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -811,7 +811,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public static Response<SubResourceModel2> GetSubResourceModel2(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel2(subResourceModel2SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2(subResourceModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -827,7 +827,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel1s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -835,7 +835,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel1sAsync(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -851,7 +851,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel1s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -859,7 +859,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel1s(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1s(cancellationToken);
         }
 
         /// <summary>
@@ -875,7 +875,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutWritableSubResourceModel1(string,WritableSubResourceModel1,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutWritableSubResourceModel1(string,WritableSubResourceModel1,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -886,7 +886,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutWritableSubResourceModel1Async(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutWritableSubResourceModel1Async(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -902,7 +902,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutWritableSubResourceModel1(string,WritableSubResourceModel1,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutWritableSubResourceModel1(string,WritableSubResourceModel1,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -913,7 +913,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
         public static Response<WritableSubResourceModel1> PutWritableSubResourceModel1(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutWritableSubResourceModel1(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutWritableSubResourceModel1(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken);
         }
 
         /// <summary>
@@ -929,7 +929,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -939,7 +939,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel1Async(writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1Async(writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -955,7 +955,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -965,7 +965,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public static Response<WritableSubResourceModel1> GetWritableSubResourceModel1(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel1(writableSubResourceModel1SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1(writableSubResourceModel1SName, cancellationToken);
         }
 
         /// <summary>
@@ -981,7 +981,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -989,7 +989,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel2sAsync(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1005,7 +1005,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1013,7 +1013,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel2s(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -1029,7 +1029,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutWritableSubResourceModel2(string,WritableSubResourceModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutWritableSubResourceModel2(string,WritableSubResourceModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1040,7 +1040,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutWritableSubResourceModel2Async(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutWritableSubResourceModel2Async(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1056,7 +1056,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutWritableSubResourceModel2(string,WritableSubResourceModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutWritableSubResourceModel2(string,WritableSubResourceModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1067,7 +1067,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
         public static Response<WritableSubResourceModel2> PutWritableSubResourceModel2(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutWritableSubResourceModel2(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutWritableSubResourceModel2(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -1083,7 +1083,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1093,7 +1093,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel2Async(writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2Async(writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1109,7 +1109,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1119,7 +1119,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public static Response<WritableSubResourceModel2> GetWritableSubResourceModel2(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel2(writableSubResourceModel2SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2(writableSubResourceModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -1135,7 +1135,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1143,7 +1143,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceModel2> GetResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel2sAsync(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1159,7 +1159,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1167,7 +1167,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceModel2> GetResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel2s(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -1183,7 +1183,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutResourceModel2(string,ResourceModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutResourceModel2(string,ResourceModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1194,7 +1194,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
         public static async Task<Response<ResourceModel2>> PutResourceModel2Async(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutResourceModel2Async(resourceModel2SName, resourceModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutResourceModel2Async(resourceModel2SName, resourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1210,7 +1210,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutResourceModel2(string,ResourceModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutResourceModel2(string,ResourceModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1221,7 +1221,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
         public static Response<ResourceModel2> PutResourceModel2(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutResourceModel2(resourceModel2SName, resourceModel2, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutResourceModel2(resourceModel2SName, resourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -1237,7 +1237,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1247,7 +1247,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public static async Task<Response<ResourceModel2>> GetResourceModel2Async(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel2Async(resourceModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2Async(resourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1263,7 +1263,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1273,7 +1273,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public static Response<ResourceModel2> GetResourceModel2(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel2(resourceModel2SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2(resourceModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -1289,7 +1289,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1297,7 +1297,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel2sAsync(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1313,7 +1313,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel2s(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2s(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1321,7 +1321,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel2s(cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -1337,7 +1337,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutTrackedResourceModel2(string,TrackedResourceModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutTrackedResourceModel2(string,TrackedResourceModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1348,7 +1348,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
         public static async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutTrackedResourceModel2Async(trackedResourceModel2SName, trackedResourceModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutTrackedResourceModel2Async(trackedResourceModel2SName, trackedResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1364,7 +1364,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutTrackedResourceModel2(string,TrackedResourceModel2,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutTrackedResourceModel2(string,TrackedResourceModel2,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1375,7 +1375,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
         public static Response<TrackedResourceModel2> PutTrackedResourceModel2(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutTrackedResourceModel2(trackedResourceModel2SName, trackedResourceModel2, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutTrackedResourceModel2(trackedResourceModel2SName, trackedResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -1391,7 +1391,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1401,7 +1401,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public static async Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel2Async(trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2Async(trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1417,7 +1417,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1427,7 +1427,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public static Response<TrackedResourceModel2> GetTrackedResourceModel2(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel2(trackedResourceModel2SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2(trackedResourceModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -1443,7 +1443,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutNonResourceModel1(string,NonResourceModel1,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutNonResourceModel1(string,NonResourceModel1,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1454,7 +1454,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
         public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutNonResourceModel1Async(nonResourceModel1SName, nonResourceModel1, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutNonResourceModel1Async(nonResourceModel1SName, nonResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1470,7 +1470,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutNonResourceModel1(string,NonResourceModel1,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutNonResourceModel1(string,NonResourceModel1,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1481,7 +1481,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
         public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutNonResourceModel1(nonResourceModel1SName, nonResourceModel1, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutNonResourceModel1(nonResourceModel1SName, nonResourceModel1, cancellationToken);
         }
 
         /// <summary>
@@ -1497,7 +1497,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetNonResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetNonResourceModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1507,7 +1507,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public static async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetNonResourceModel1Async(nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetNonResourceModel1Async(nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1523,7 +1523,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetNonResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetNonResourceModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1533,7 +1533,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public static Response<NonResourceModel1> GetNonResourceModel1(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetNonResourceModel1(nonResourceModel1SName, cancellationToken);
+            return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetNonResourceModel1(nonResourceModel1SName, cancellationToken);
         }
     }
 }

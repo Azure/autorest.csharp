@@ -20,19 +20,19 @@ namespace MgmtParamOrdering
     /// <summary> A class to add extension methods to MgmtParamOrdering. </summary>
     public static partial class MgmtParamOrderingExtensions
     {
-        private static MgmtParamOrderingArmClientMockingExtension GetMgmtParamOrderingArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtParamOrderingArmClient GetMockableMgmtParamOrderingArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtParamOrderingArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtParamOrderingArmClient(client0));
         }
 
-        private static MgmtParamOrderingResourceGroupMockingExtension GetMgmtParamOrderingResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtParamOrderingResourceGroupResource GetMockableMgmtParamOrderingResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtParamOrderingResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtParamOrderingResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtParamOrderingSubscriptionMockingExtension GetMgmtParamOrderingSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtParamOrderingSubscriptionResource GetMockableMgmtParamOrderingSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtParamOrderingSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtParamOrderingSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace MgmtParamOrdering
         /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingArmClientMockingExtension.GetAvailabilitySetResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingArmClient.GetAvailabilitySetResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -48,7 +48,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtParamOrderingArmClientMockingExtension(client).GetAvailabilitySetResource(id);
+            return GetMockableMgmtParamOrderingArmClient(client).GetAvailabilitySetResource(id);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace MgmtParamOrdering
         /// You can use <see cref="DedicatedHostGroupResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingArmClientMockingExtension.GetDedicatedHostGroupResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingArmClient.GetDedicatedHostGroupResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -64,7 +64,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
         public static DedicatedHostGroupResource GetDedicatedHostGroupResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtParamOrderingArmClientMockingExtension(client).GetDedicatedHostGroupResource(id);
+            return GetMockableMgmtParamOrderingArmClient(client).GetDedicatedHostGroupResource(id);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace MgmtParamOrdering
         /// You can use <see cref="DedicatedHostResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingArmClientMockingExtension.GetDedicatedHostResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingArmClient.GetDedicatedHostResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -80,7 +80,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
         public static DedicatedHostResource GetDedicatedHostResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtParamOrderingArmClientMockingExtension(client).GetDedicatedHostResource(id);
+            return GetMockableMgmtParamOrderingArmClient(client).GetDedicatedHostResource(id);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace MgmtParamOrdering
         /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingArmClientMockingExtension.GetVirtualMachineExtensionImageResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingArmClient.GetVirtualMachineExtensionImageResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -96,7 +96,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
         public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtParamOrderingArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
+            return GetMockableMgmtParamOrderingArmClient(client).GetVirtualMachineExtensionImageResource(id);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace MgmtParamOrdering
         /// You can use <see cref="EnvironmentContainerResource.CreateResourceIdentifier" /> to create an <see cref="EnvironmentContainerResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingArmClientMockingExtension.GetEnvironmentContainerResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingArmClient.GetEnvironmentContainerResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -112,7 +112,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="EnvironmentContainerResource" /> object. </returns>
         public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtParamOrderingArmClientMockingExtension(client).GetEnvironmentContainerResource(id);
+            return GetMockableMgmtParamOrderingArmClient(client).GetEnvironmentContainerResource(id);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace MgmtParamOrdering
         /// You can use <see cref="WorkspaceResource.CreateResourceIdentifier" /> to create a <see cref="WorkspaceResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingArmClientMockingExtension.GetWorkspaceResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingArmClient.GetWorkspaceResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -128,7 +128,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="WorkspaceResource" /> object. </returns>
         public static WorkspaceResource GetWorkspaceResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtParamOrderingArmClientMockingExtension(client).GetWorkspaceResource(id);
+            return GetMockableMgmtParamOrderingArmClient(client).GetWorkspaceResource(id);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace MgmtParamOrdering
         /// You can use <see cref="VirtualMachineScaleSetResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingArmClientMockingExtension.GetVirtualMachineScaleSetResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingArmClient.GetVirtualMachineScaleSetResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -144,21 +144,21 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
         public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtParamOrderingArmClientMockingExtension(client).GetVirtualMachineScaleSetResource(id);
+            return GetMockableMgmtParamOrderingArmClient(client).GetVirtualMachineScaleSetResource(id);
         }
 
         /// <summary>
         /// Gets a collection of AvailabilitySetResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetAvailabilitySets()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetAvailabilitySets()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySets();
+            return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetAvailabilitySetAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetAvailabilitySetAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -186,7 +186,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetAvailabilitySetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetAvailabilitySet(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetAvailabilitySet(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -214,21 +214,21 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<AvailabilitySetResource> GetAvailabilitySet(this ResourceGroupResource resourceGroupResource, string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySet(availabilitySetName, cancellationToken);
+            return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetAvailabilitySet(availabilitySetName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetDedicatedHostGroups()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetDedicatedHostGroups()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetDedicatedHostGroups();
+            return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetDedicatedHostGroups();
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetDedicatedHostGroupAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetDedicatedHostGroupAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -257,7 +257,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetDedicatedHostGroupAsync(hostGroupName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetDedicatedHostGroupAsync(hostGroupName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetDedicatedHostGroup(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetDedicatedHostGroup(string,InstanceViewType?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -286,21 +286,21 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<DedicatedHostGroupResource> GetDedicatedHostGroup(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetDedicatedHostGroup(hostGroupName, expand, cancellationToken);
+            return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetDedicatedHostGroup(hostGroupName, expand, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of WorkspaceResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetWorkspaces()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetWorkspaces()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of WorkspaceResources and their operations over a WorkspaceResource. </returns>
         public static WorkspaceCollection GetWorkspaces(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetWorkspaces();
+            return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetWorkspaces();
         }
 
         /// <summary>
@@ -317,7 +317,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetWorkspaceAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetWorkspaceAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -328,7 +328,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<WorkspaceResource>> GetWorkspaceAsync(this ResourceGroupResource resourceGroupResource, string workspaceName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetWorkspaceAsync(workspaceName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetWorkspaceAsync(workspaceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetWorkspace(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetWorkspace(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -356,21 +356,21 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<WorkspaceResource> GetWorkspace(this ResourceGroupResource resourceGroupResource, string workspaceName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetWorkspace(workspaceName, cancellationToken);
+            return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetWorkspace(workspaceName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of VirtualMachineScaleSetResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetVirtualMachineScaleSets()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetVirtualMachineScaleSets()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSets();
+            return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSets();
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetVirtualMachineScaleSetAsync(string,ExpandTypesForGetVMScaleSet?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetVirtualMachineScaleSetAsync(string,ExpandTypesForGetVMScaleSet?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -399,7 +399,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(this ResourceGroupResource resourceGroupResource, string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -416,7 +416,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingResourceGroupMockingExtension.GetVirtualMachineScaleSet(string,ExpandTypesForGetVMScaleSet?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingResourceGroupResource.GetVirtualMachineScaleSet(string,ExpandTypesForGetVMScaleSet?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -428,14 +428,14 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(this ResourceGroupResource resourceGroupResource, string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSet(vmScaleSetName, expand, cancellationToken);
+            return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSet(vmScaleSetName, expand, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingSubscriptionMockingExtension.GetVirtualMachineExtensionImages(AzureLocation,string)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingSubscriptionResource.GetVirtualMachineExtensionImages(AzureLocation,string)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -446,7 +446,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
         public static VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName)
         {
-            return GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
+            return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
         }
 
         /// <summary>
@@ -463,7 +463,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingSubscriptionMockingExtension.GetVirtualMachineExtensionImageAsync(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingSubscriptionResource.GetVirtualMachineExtensionImageAsync(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -477,7 +477,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineExtensionImageResource>> GetVirtualMachineExtensionImageAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineExtensionImageAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImageAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -494,7 +494,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingSubscriptionMockingExtension.GetVirtualMachineExtensionImage(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingSubscriptionResource.GetVirtualMachineExtensionImage(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -508,7 +508,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<VirtualMachineExtensionImageResource> GetVirtualMachineExtensionImage(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineExtensionImage(location, publisherName, type, version, cancellationToken);
+            return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImage(location, publisherName, type, version, cancellationToken);
         }
 
         /// <summary>
@@ -525,7 +525,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingSubscriptionMockingExtension.GetAvailabilitySets(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingSubscriptionResource.GetAvailabilitySets(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -534,7 +534,7 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
+            return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -551,7 +551,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtParamOrderingSubscriptionMockingExtension.GetAvailabilitySets(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtParamOrderingSubscriptionResource.GetAvailabilitySets(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -560,7 +560,7 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetResource> GetAvailabilitySets(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
+            return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
         }
     }
 }

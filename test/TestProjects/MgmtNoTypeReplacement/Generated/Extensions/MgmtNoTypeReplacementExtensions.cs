@@ -19,14 +19,14 @@ namespace MgmtNoTypeReplacement
     /// <summary> A class to add extension methods to MgmtNoTypeReplacement. </summary>
     public static partial class MgmtNoTypeReplacementExtensions
     {
-        private static MgmtNoTypeReplacementArmClientMockingExtension GetMgmtNoTypeReplacementArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtNoTypeReplacementArmClient GetMockableMgmtNoTypeReplacementArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtNoTypeReplacementArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtNoTypeReplacementArmClient(client0));
         }
 
-        private static MgmtNoTypeReplacementResourceGroupMockingExtension GetMgmtNoTypeReplacementResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtNoTypeReplacementResourceGroupResource GetMockableMgmtNoTypeReplacementResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtNoTypeReplacementResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtNoTypeReplacementResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace MgmtNoTypeReplacement
         /// You can use <see cref="NoTypeReplacementModel1Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementArmClientMockingExtension.GetNoTypeReplacementModel1Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementArmClient.GetNoTypeReplacementModel1Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -42,7 +42,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
         public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel1Resource(id);
+            return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel1Resource(id);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace MgmtNoTypeReplacement
         /// You can use <see cref="NoTypeReplacementModel2Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementArmClientMockingExtension.GetNoTypeReplacementModel2Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementArmClient.GetNoTypeReplacementModel2Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -58,7 +58,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
         public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel2Resource(id);
+            return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel2Resource(id);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace MgmtNoTypeReplacement
         /// You can use <see cref="NoTypeReplacementModel3Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementArmClientMockingExtension.GetNoTypeReplacementModel3Resource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementArmClient.GetNoTypeReplacementModel3Resource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -74,21 +74,21 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
         public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel3Resource(id);
+            return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel3Resource(id);
         }
 
         /// <summary>
         /// Gets a collection of NoTypeReplacementModel1Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel1s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel1s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel1s();
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1s();
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace MgmtNoTypeReplacement
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel1Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel1Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -115,7 +115,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel1Resource>> GetNoTypeReplacementModel1Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel1Async(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1Async(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace MgmtNoTypeReplacement
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel1(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel1(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -142,21 +142,21 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel1Resource> GetNoTypeReplacementModel1(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel1(noTypeReplacementModel1SName, cancellationToken);
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1(noTypeReplacementModel1SName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of NoTypeReplacementModel2Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel2s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel2s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel2s();
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2s();
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace MgmtNoTypeReplacement
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel2Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel2Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -183,7 +183,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel2Resource>> GetNoTypeReplacementModel2Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel2Async(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2Async(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace MgmtNoTypeReplacement
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel2(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel2(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -210,21 +210,21 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel2Resource> GetNoTypeReplacementModel2(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel2(noTypeReplacementModel2SName, cancellationToken);
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2(noTypeReplacementModel2SName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of NoTypeReplacementModel3Resources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel3s()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel3s()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel3s();
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3s();
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace MgmtNoTypeReplacement
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel3Async(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel3Async(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -251,7 +251,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel3Resource>> GetNoTypeReplacementModel3Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel3Async(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3Async(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace MgmtNoTypeReplacement
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension.GetNoTypeReplacementModel3(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel3(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -278,7 +278,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel3Resource> GetNoTypeReplacementModel3(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel3(noTypeReplacementModel3SName, cancellationToken);
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3(noTypeReplacementModel3SName, cancellationToken);
         }
     }
 }

@@ -19,14 +19,14 @@ namespace MgmtMultipleParentResource
     /// <summary> A class to add extension methods to MgmtMultipleParentResource. </summary>
     public static partial class MgmtMultipleParentResourceExtensions
     {
-        private static MgmtMultipleParentResourceArmClientMockingExtension GetMgmtMultipleParentResourceArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtMultipleParentResourceArmClient GetMockableMgmtMultipleParentResourceArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtMultipleParentResourceArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtMultipleParentResourceArmClient(client0));
         }
 
-        private static MgmtMultipleParentResourceResourceGroupMockingExtension GetMgmtMultipleParentResourceResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtMultipleParentResourceResourceGroupResource GetMockableMgmtMultipleParentResourceResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtMultipleParentResourceResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtMultipleParentResourceResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace MgmtMultipleParentResource
         /// You can use <see cref="AnotherParentResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceArmClientMockingExtension.GetAnotherParentResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceArmClient.GetAnotherParentResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -42,7 +42,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParentResource" /> object. </returns>
         public static AnotherParentResource GetAnotherParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetAnotherParentResource(id);
+            return GetMockableMgmtMultipleParentResourceArmClient(client).GetAnotherParentResource(id);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace MgmtMultipleParentResource
         /// You can use <see cref="AnotherParentChildResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceArmClientMockingExtension.GetAnotherParentChildResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceArmClient.GetAnotherParentChildResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -58,7 +58,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParentChildResource" /> object. </returns>
         public static AnotherParentChildResource GetAnotherParentChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetAnotherParentChildResource(id);
+            return GetMockableMgmtMultipleParentResourceArmClient(client).GetAnotherParentChildResource(id);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace MgmtMultipleParentResource
         /// You can use <see cref="TheParentSubParentChildResource.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceArmClientMockingExtension.GetTheParentSubParentChildResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceArmClient.GetTheParentSubParentChildResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -74,7 +74,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParentSubParentChildResource" /> object. </returns>
         public static TheParentSubParentChildResource GetTheParentSubParentChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetTheParentSubParentChildResource(id);
+            return GetMockableMgmtMultipleParentResourceArmClient(client).GetTheParentSubParentChildResource(id);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace MgmtMultipleParentResource
         /// You can use <see cref="TheParentResource.CreateResourceIdentifier" /> to create a <see cref="TheParentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceArmClientMockingExtension.GetTheParentResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceArmClient.GetTheParentResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -90,7 +90,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParentResource" /> object. </returns>
         public static TheParentResource GetTheParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetTheParentResource(id);
+            return GetMockableMgmtMultipleParentResourceArmClient(client).GetTheParentResource(id);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace MgmtMultipleParentResource
         /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceArmClientMockingExtension.GetSubParentResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceArmClient.GetSubParentResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -106,21 +106,21 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
         public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetSubParentResource(id);
+            return GetMockableMgmtMultipleParentResourceArmClient(client).GetSubParentResource(id);
         }
 
         /// <summary>
         /// Gets a collection of AnotherParentResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetAnotherParents()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceResourceGroupResource.GetAnotherParents()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
         public static AnotherParentCollection GetAnotherParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetAnotherParents();
+            return GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetAnotherParents();
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace MgmtMultipleParentResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetAnotherParentAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceResourceGroupResource.GetAnotherParentAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -149,7 +149,7 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static async Task<Response<AnotherParentResource>> GetAnotherParentAsync(this ResourceGroupResource resourceGroupResource, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetAnotherParentAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetAnotherParentAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace MgmtMultipleParentResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetAnotherParent(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceResourceGroupResource.GetAnotherParent(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -178,21 +178,21 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static Response<AnotherParentResource> GetAnotherParent(this ResourceGroupResource resourceGroupResource, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetAnotherParent(anotherName, expand, cancellationToken);
+            return GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetAnotherParent(anotherName, expand, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of TheParentResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetTheParents()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceResourceGroupResource.GetTheParents()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
         public static TheParentCollection GetTheParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetTheParents();
+            return GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetTheParents();
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace MgmtMultipleParentResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetTheParentAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceResourceGroupResource.GetTheParentAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -221,7 +221,7 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static async Task<Response<TheParentResource>> GetTheParentAsync(this ResourceGroupResource resourceGroupResource, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetTheParentAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetTheParentAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace MgmtMultipleParentResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetTheParent(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMultipleParentResourceResourceGroupResource.GetTheParent(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -250,7 +250,7 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static Response<TheParentResource> GetTheParent(this ResourceGroupResource resourceGroupResource, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetTheParent(theParentName, expand, cancellationToken);
+            return GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetTheParent(theParentName, expand, cancellationToken);
         }
     }
 }

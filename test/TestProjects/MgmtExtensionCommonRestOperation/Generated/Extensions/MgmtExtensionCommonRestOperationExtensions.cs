@@ -19,19 +19,19 @@ namespace MgmtExtensionCommonRestOperation
     /// <summary> A class to add extension methods to MgmtExtensionCommonRestOperation. </summary>
     public static partial class MgmtExtensionCommonRestOperationExtensions
     {
-        private static MgmtExtensionCommonRestOperationArmClientMockingExtension GetMgmtExtensionCommonRestOperationArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtExtensionCommonRestOperationArmClient GetMockableMgmtExtensionCommonRestOperationArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtExtensionCommonRestOperationArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtExtensionCommonRestOperationArmClient(client0));
         }
 
-        private static MgmtExtensionCommonRestOperationResourceGroupMockingExtension GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtExtensionCommonRestOperationResourceGroupResource GetMockableMgmtExtensionCommonRestOperationResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtExtensionCommonRestOperationResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtExtensionCommonRestOperationResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtExtensionCommonRestOperationSubscriptionMockingExtension GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtExtensionCommonRestOperationSubscriptionResource GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtExtensionCommonRestOperationSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtExtensionCommonRestOperationSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace MgmtExtensionCommonRestOperation
         /// You can use <see cref="TypeOneResource.CreateResourceIdentifier" /> to create a <see cref="TypeOneResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationArmClientMockingExtension.GetTypeOneResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationArmClient.GetTypeOneResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -47,7 +47,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> Returns a <see cref="TypeOneResource" /> object. </returns>
         public static TypeOneResource GetTypeOneResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExtensionCommonRestOperationArmClientMockingExtension(client).GetTypeOneResource(id);
+            return GetMockableMgmtExtensionCommonRestOperationArmClient(client).GetTypeOneResource(id);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace MgmtExtensionCommonRestOperation
         /// You can use <see cref="TypeTwoResource.CreateResourceIdentifier" /> to create a <see cref="TypeTwoResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationArmClientMockingExtension.GetTypeTwoResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationArmClient.GetTypeTwoResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -63,21 +63,21 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> Returns a <see cref="TypeTwoResource" /> object. </returns>
         public static TypeTwoResource GetTypeTwoResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtExtensionCommonRestOperationArmClientMockingExtension(client).GetTypeTwoResource(id);
+            return GetMockableMgmtExtensionCommonRestOperationArmClient(client).GetTypeTwoResource(id);
         }
 
         /// <summary>
         /// Gets a collection of TypeOneResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationResourceGroupMockingExtension.GetTypeOnes()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationResourceGroupResource.GetTypeOnes()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
         public static TypeOneCollection GetTypeOnes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeOnes();
+            return GetMockableMgmtExtensionCommonRestOperationResourceGroupResource(resourceGroupResource).GetTypeOnes();
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationResourceGroupMockingExtension.GetTypeOneAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationResourceGroupResource.GetTypeOneAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -105,7 +105,7 @@ namespace MgmtExtensionCommonRestOperation
         [ForwardsClientCalls]
         public static async Task<Response<TypeOneResource>> GetTypeOneAsync(this ResourceGroupResource resourceGroupResource, string typeOneName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeOneAsync(typeOneName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExtensionCommonRestOperationResourceGroupResource(resourceGroupResource).GetTypeOneAsync(typeOneName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationResourceGroupMockingExtension.GetTypeOne(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationResourceGroupResource.GetTypeOne(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -133,21 +133,21 @@ namespace MgmtExtensionCommonRestOperation
         [ForwardsClientCalls]
         public static Response<TypeOneResource> GetTypeOne(this ResourceGroupResource resourceGroupResource, string typeOneName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeOne(typeOneName, cancellationToken);
+            return GetMockableMgmtExtensionCommonRestOperationResourceGroupResource(resourceGroupResource).GetTypeOne(typeOneName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of TypeTwoResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationResourceGroupMockingExtension.GetTypeTwos()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationResourceGroupResource.GetTypeTwos()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
         public static TypeTwoCollection GetTypeTwos(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeTwos();
+            return GetMockableMgmtExtensionCommonRestOperationResourceGroupResource(resourceGroupResource).GetTypeTwos();
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationResourceGroupMockingExtension.GetTypeTwoAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationResourceGroupResource.GetTypeTwoAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -175,7 +175,7 @@ namespace MgmtExtensionCommonRestOperation
         [ForwardsClientCalls]
         public static async Task<Response<TypeTwoResource>> GetTypeTwoAsync(this ResourceGroupResource resourceGroupResource, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeTwoAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtExtensionCommonRestOperationResourceGroupResource(resourceGroupResource).GetTypeTwoAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationResourceGroupMockingExtension.GetTypeTwo(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationResourceGroupResource.GetTypeTwo(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -203,7 +203,7 @@ namespace MgmtExtensionCommonRestOperation
         [ForwardsClientCalls]
         public static Response<TypeTwoResource> GetTypeTwo(this ResourceGroupResource resourceGroupResource, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeTwo(typeTwoName, cancellationToken);
+            return GetMockableMgmtExtensionCommonRestOperationResourceGroupResource(resourceGroupResource).GetTypeTwo(typeTwoName, cancellationToken);
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationSubscriptionMockingExtension.GetTypeOnes(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeOnes(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -228,7 +228,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(subscriptionResource).GetTypeOnesAsync(cancellationToken);
+            return GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(subscriptionResource).GetTypeOnesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationSubscriptionMockingExtension.GetTypeOnes(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeOnes(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -253,7 +253,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeOneResource> GetTypeOnes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(subscriptionResource).GetTypeOnes(cancellationToken);
+            return GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(subscriptionResource).GetTypeOnes(cancellationToken);
         }
 
         /// <summary>
@@ -270,7 +270,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationSubscriptionMockingExtension.GetTypeTwos(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeTwos(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -278,7 +278,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(subscriptionResource).GetTypeTwosAsync(cancellationToken);
+            return GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(subscriptionResource).GetTypeTwosAsync(cancellationToken);
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationSubscriptionMockingExtension.GetTypeTwos(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeTwos(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -303,7 +303,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeTwoResource> GetTypeTwos(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(subscriptionResource).GetTypeTwos(cancellationToken);
+            return GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(subscriptionResource).GetTypeTwos(cancellationToken);
         }
     }
 }

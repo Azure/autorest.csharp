@@ -19,19 +19,19 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to MgmtCollectionParent. </summary>
     public static partial class MgmtCollectionParentExtensions
     {
-        private static MgmtCollectionParentArmClientMockingExtension GetMgmtCollectionParentArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtCollectionParentArmClient GetMockableMgmtCollectionParentArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtCollectionParentArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtCollectionParentArmClient(client0));
         }
 
-        private static MgmtCollectionParentResourceGroupMockingExtension GetMgmtCollectionParentResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtCollectionParentResourceGroupResource GetMockableMgmtCollectionParentResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtCollectionParentResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtCollectionParentResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtCollectionParentSubscriptionMockingExtension GetMgmtCollectionParentSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtCollectionParentSubscriptionResource GetMockableMgmtCollectionParentSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtCollectionParentSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtCollectionParentSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace MgmtCollectionParent
         /// You can use <see cref="OrderResource.CreateResourceIdentifier" /> to create an <see cref="OrderResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentArmClientMockingExtension.GetOrderResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCollectionParentArmClient.GetOrderResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -47,21 +47,21 @@ namespace MgmtCollectionParent
         /// <returns> Returns a <see cref="OrderResource" /> object. </returns>
         public static OrderResource GetOrderResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtCollectionParentArmClientMockingExtension(client).GetOrderResource(id);
+            return GetMockableMgmtCollectionParentArmClient(client).GetOrderResource(id);
         }
 
         /// <summary>
         /// Gets a collection of OrderResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentResourceGroupMockingExtension.GetOrderResources()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCollectionParentResourceGroupResource.GetOrderResources()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public static OrderResourceCollection GetOrderResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtCollectionParentResourceGroupMockingExtension(resourceGroupResource).GetOrderResources();
+            return GetMockableMgmtCollectionParentResourceGroupResource(resourceGroupResource).GetOrderResources();
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace MgmtCollectionParent
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentResourceGroupMockingExtension.GetOrderResourceAsync(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCollectionParentResourceGroupResource.GetOrderResourceAsync(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -90,7 +90,7 @@ namespace MgmtCollectionParent
         [ForwardsClientCalls]
         public static async Task<Response<OrderResource>> GetOrderResourceAsync(this ResourceGroupResource resourceGroupResource, string location, string orderName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtCollectionParentResourceGroupMockingExtension(resourceGroupResource).GetOrderResourceAsync(location, orderName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtCollectionParentResourceGroupResource(resourceGroupResource).GetOrderResourceAsync(location, orderName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace MgmtCollectionParent
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentResourceGroupMockingExtension.GetOrderResource(string,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCollectionParentResourceGroupResource.GetOrderResource(string,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -119,7 +119,7 @@ namespace MgmtCollectionParent
         [ForwardsClientCalls]
         public static Response<OrderResource> GetOrderResource(this ResourceGroupResource resourceGroupResource, string location, string orderName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtCollectionParentResourceGroupMockingExtension(resourceGroupResource).GetOrderResource(location, orderName, cancellationToken);
+            return GetMockableMgmtCollectionParentResourceGroupResource(resourceGroupResource).GetOrderResource(location, orderName, cancellationToken);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace MgmtCollectionParent
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentSubscriptionMockingExtension.GetOrderResources(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCollectionParentSubscriptionResource.GetOrderResources(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -145,7 +145,7 @@ namespace MgmtCollectionParent
         /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtCollectionParentSubscriptionMockingExtension(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
+            return GetMockableMgmtCollectionParentSubscriptionResource(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace MgmtCollectionParent
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentSubscriptionMockingExtension.GetOrderResources(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCollectionParentSubscriptionResource.GetOrderResources(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -171,7 +171,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OrderResource> GetOrderResources(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtCollectionParentSubscriptionMockingExtension(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
+            return GetMockableMgmtCollectionParentSubscriptionResource(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
         }
     }
 }

@@ -19,14 +19,14 @@ namespace MgmtCustomizations
     /// <summary> A class to add extension methods to MgmtCustomizations. </summary>
     public static partial class MgmtCustomizationsExtensions
     {
-        private static MgmtCustomizationsArmClientMockingExtension GetMgmtCustomizationsArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtCustomizationsArmClient GetMockableMgmtCustomizationsArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtCustomizationsArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtCustomizationsArmClient(client0));
         }
 
-        private static MgmtCustomizationsResourceGroupMockingExtension GetMgmtCustomizationsResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtCustomizationsResourceGroupResource GetMockableMgmtCustomizationsResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtCustomizationsResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtCustomizationsResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace MgmtCustomizations
         /// You can use <see cref="PetStoreResource.CreateResourceIdentifier" /> to create a <see cref="PetStoreResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCustomizationsArmClientMockingExtension.GetPetStoreResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCustomizationsArmClient.GetPetStoreResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -42,21 +42,21 @@ namespace MgmtCustomizations
         /// <returns> Returns a <see cref="PetStoreResource" /> object. </returns>
         public static PetStoreResource GetPetStoreResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtCustomizationsArmClientMockingExtension(client).GetPetStoreResource(id);
+            return GetMockableMgmtCustomizationsArmClient(client).GetPetStoreResource(id);
         }
 
         /// <summary>
         /// Gets a collection of PetStoreResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCustomizationsResourceGroupMockingExtension.GetPetStores()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCustomizationsResourceGroupResource.GetPetStores()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PetStoreResources and their operations over a PetStoreResource. </returns>
         public static PetStoreCollection GetPetStores(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtCustomizationsResourceGroupMockingExtension(resourceGroupResource).GetPetStores();
+            return GetMockableMgmtCustomizationsResourceGroupResource(resourceGroupResource).GetPetStores();
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace MgmtCustomizations
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCustomizationsResourceGroupMockingExtension.GetPetStoreAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCustomizationsResourceGroupResource.GetPetStoreAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -84,7 +84,7 @@ namespace MgmtCustomizations
         [ForwardsClientCalls]
         public static async Task<Response<PetStoreResource>> GetPetStoreAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtCustomizationsResourceGroupMockingExtension(resourceGroupResource).GetPetStoreAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtCustomizationsResourceGroupResource(resourceGroupResource).GetPetStoreAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace MgmtCustomizations
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtCustomizationsResourceGroupMockingExtension.GetPetStore(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtCustomizationsResourceGroupResource.GetPetStore(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -112,7 +112,7 @@ namespace MgmtCustomizations
         [ForwardsClientCalls]
         public static Response<PetStoreResource> GetPetStore(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return GetMgmtCustomizationsResourceGroupMockingExtension(resourceGroupResource).GetPetStore(name, cancellationToken);
+            return GetMockableMgmtCustomizationsResourceGroupResource(resourceGroupResource).GetPetStore(name, cancellationToken);
         }
     }
 }

@@ -21,41 +21,41 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to MgmtScopeResource. </summary>
     public static partial class MgmtScopeResourceExtensions
     {
-        private static MgmtScopeResourceArmClientMockingExtension GetMgmtScopeResourceArmClientMockingExtension(ArmClient client)
+        private static MockableMgmtScopeResourceArmClient GetMockableMgmtScopeResourceArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MgmtScopeResourceArmClientMockingExtension(client0));
+            return client.GetCachedClient(client0 => new MockableMgmtScopeResourceArmClient(client0));
         }
 
-        private static MgmtScopeResourceArmMockingExtension GetMgmtScopeResourceArmMockingExtension(ArmResource resource)
+        private static MockableMgmtScopeResourceArmResource GetMockableMgmtScopeResourceArmResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtScopeResourceArmMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtScopeResourceArmResource(client, resource.Id));
         }
 
-        private static MgmtScopeResourceManagementGroupMockingExtension GetMgmtScopeResourceManagementGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtScopeResourceManagementGroupResource GetMockableMgmtScopeResourceManagementGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtScopeResourceManagementGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtScopeResourceManagementGroupResource(client, resource.Id));
         }
 
-        private static MgmtScopeResourceResourceGroupMockingExtension GetMgmtScopeResourceResourceGroupMockingExtension(ArmResource resource)
+        private static MockableMgmtScopeResourceResourceGroupResource GetMockableMgmtScopeResourceResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtScopeResourceResourceGroupMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtScopeResourceResourceGroupResource(client, resource.Id));
         }
 
-        private static MgmtScopeResourceSubscriptionMockingExtension GetMgmtScopeResourceSubscriptionMockingExtension(ArmResource resource)
+        private static MockableMgmtScopeResourceSubscriptionResource GetMockableMgmtScopeResourceSubscriptionResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtScopeResourceSubscriptionMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtScopeResourceSubscriptionResource(client, resource.Id));
         }
 
-        private static MgmtScopeResourceTenantMockingExtension GetMgmtScopeResourceTenantMockingExtension(ArmResource resource)
+        private static MockableMgmtScopeResourceTenantResource GetMockableMgmtScopeResourceTenantResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MgmtScopeResourceTenantMockingExtension(client, resource.Id));
+            return resource.GetCachedClient(client => new MockableMgmtScopeResourceTenantResource(client, resource.Id));
         }
 
         /// <summary>
         /// Gets a collection of FakePolicyAssignmentResources in the ArmClient.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetFakePolicyAssignments(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetFakePolicyAssignments(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -63,7 +63,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetFakePolicyAssignments(scope);
+            return GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignments(scope);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetFakePolicyAssignmentAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetFakePolicyAssignmentAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -92,7 +92,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceArmClientMockingExtension(client).GetFakePolicyAssignmentAsync(scope, policyAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignmentAsync(scope, policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetFakePolicyAssignment(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetFakePolicyAssignment(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -121,14 +121,14 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmClient client, ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetFakePolicyAssignment(scope, policyAssignmentName, cancellationToken);
+            return GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignment(scope, policyAssignmentName, cancellationToken);
         }
 
         /// <summary>
         /// Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmClient.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetVMInsightsOnboardingStatus(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetVMInsightsOnboardingStatus(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -136,14 +136,14 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetVMInsightsOnboardingStatus(scope);
+            return GetMockableMgmtScopeResourceArmClient(client).GetVMInsightsOnboardingStatus(scope);
         }
 
         /// <summary>
         /// Gets a collection of GuestConfigurationAssignmentResources in the ArmClient.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetGuestConfigurationAssignments(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetGuestConfigurationAssignments(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -151,7 +151,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetGuestConfigurationAssignments(scope);
+            return GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignments(scope);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetGuestConfigurationAssignmentAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetGuestConfigurationAssignmentAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -180,7 +180,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceArmClientMockingExtension(client).GetGuestConfigurationAssignmentAsync(scope, guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignmentAsync(scope, guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetGuestConfigurationAssignment(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetGuestConfigurationAssignment(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -209,7 +209,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetGuestConfigurationAssignment(scope, guestConfigurationAssignmentName, cancellationToken);
+            return GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignment(scope, guestConfigurationAssignmentName, cancellationToken);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetAll(ResourceIdentifier,Filter?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetAll(ResourceIdentifier,Filter?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -235,7 +235,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public static AsyncPageable<ResourceLinkResource> GetAllAsync(this ArmClient client, ResourceIdentifier scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetAllAsync(scope, filter, cancellationToken);
+            return GetMockableMgmtScopeResourceArmClient(client).GetAllAsync(scope, filter, cancellationToken);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetAll(ResourceIdentifier,Filter?,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetAll(ResourceIdentifier,Filter?,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -261,7 +261,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public static Pageable<ResourceLinkResource> GetAll(this ArmClient client, ResourceIdentifier scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetAll(scope, filter, cancellationToken);
+            return GetMockableMgmtScopeResourceArmClient(client).GetAll(scope, filter, cancellationToken);
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetMarketplaces(ResourceIdentifier,string,int?,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetMarketplaces(ResourceIdentifier,string,int?,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -289,7 +289,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public static AsyncPageable<Marketplace> GetMarketplacesAsync(this ArmClient client, ResourceIdentifier scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetMarketplacesAsync(scope, filter, top, skiptoken, cancellationToken);
+            return GetMockableMgmtScopeResourceArmClient(client).GetMarketplacesAsync(scope, filter, top, skiptoken, cancellationToken);
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetMarketplaces(ResourceIdentifier,string,int?,string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetMarketplaces(ResourceIdentifier,string,int?,string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -317,7 +317,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public static Pageable<Marketplace> GetMarketplaces(this ArmClient client, ResourceIdentifier scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetMarketplaces(scope, filter, top, skiptoken, cancellationToken);
+            return GetMockableMgmtScopeResourceArmClient(client).GetMarketplaces(scope, filter, top, skiptoken, cancellationToken);
         }
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace MgmtScopeResource
         /// You can use <see cref="FakePolicyAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="FakePolicyAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetFakePolicyAssignmentResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetFakePolicyAssignmentResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -333,7 +333,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="FakePolicyAssignmentResource" /> object. </returns>
         public static FakePolicyAssignmentResource GetFakePolicyAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetFakePolicyAssignmentResource(id);
+            return GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignmentResource(id);
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace MgmtScopeResource
         /// You can use <see cref="DeploymentExtendedResource.CreateResourceIdentifier" /> to create a <see cref="DeploymentExtendedResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetDeploymentExtendedResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetDeploymentExtendedResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -349,7 +349,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="DeploymentExtendedResource" /> object. </returns>
         public static DeploymentExtendedResource GetDeploymentExtendedResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetDeploymentExtendedResource(id);
+            return GetMockableMgmtScopeResourceArmClient(client).GetDeploymentExtendedResource(id);
         }
 
         /// <summary>
@@ -357,7 +357,7 @@ namespace MgmtScopeResource
         /// You can use <see cref="ResourceLinkResource.CreateResourceIdentifier" /> to create a <see cref="ResourceLinkResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetResourceLinkResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetResourceLinkResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -365,7 +365,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="ResourceLinkResource" /> object. </returns>
         public static ResourceLinkResource GetResourceLinkResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetResourceLinkResource(id);
+            return GetMockableMgmtScopeResourceArmClient(client).GetResourceLinkResource(id);
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace MgmtScopeResource
         /// You can use <see cref="VMInsightsOnboardingStatusResource.CreateResourceIdentifier" /> to create a <see cref="VMInsightsOnboardingStatusResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetVMInsightsOnboardingStatusResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetVMInsightsOnboardingStatusResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -381,7 +381,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatusResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetVMInsightsOnboardingStatusResource(id);
+            return GetMockableMgmtScopeResourceArmClient(client).GetVMInsightsOnboardingStatusResource(id);
         }
 
         /// <summary>
@@ -389,7 +389,7 @@ namespace MgmtScopeResource
         /// You can use <see cref="GuestConfigurationAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="GuestConfigurationAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetGuestConfigurationAssignmentResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetGuestConfigurationAssignmentResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -397,21 +397,21 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource" /> object. </returns>
         public static GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetMgmtScopeResourceArmClientMockingExtension(client).GetGuestConfigurationAssignmentResource(id);
+            return GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignmentResource(id);
         }
 
         /// <summary>
         /// Gets a collection of FakePolicyAssignmentResources in the ArmResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetFakePolicyAssignments()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetFakePolicyAssignments()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
         {
-            return GetMgmtScopeResourceArmMockingExtension(armResource).GetFakePolicyAssignments();
+            return GetMockableMgmtScopeResourceArmResource(armResource).GetFakePolicyAssignments();
         }
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetFakePolicyAssignmentAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetFakePolicyAssignmentAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
@@ -439,7 +439,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceArmMockingExtension(armResource).GetFakePolicyAssignmentAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceArmResource(armResource).GetFakePolicyAssignmentAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -456,7 +456,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetFakePolicyAssignment(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetFakePolicyAssignment(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
@@ -467,35 +467,35 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmMockingExtension(armResource).GetFakePolicyAssignment(policyAssignmentName, cancellationToken);
+            return GetMockableMgmtScopeResourceArmResource(armResource).GetFakePolicyAssignment(policyAssignmentName, cancellationToken);
         }
 
         /// <summary>
         /// Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetVMInsightsOnboardingStatus()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetVMInsightsOnboardingStatus()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
         {
-            return GetMgmtScopeResourceArmMockingExtension(armResource).GetVMInsightsOnboardingStatus();
+            return GetMockableMgmtScopeResourceArmResource(armResource).GetVMInsightsOnboardingStatus();
         }
 
         /// <summary>
         /// Gets a collection of GuestConfigurationAssignmentResources in the ArmResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetGuestConfigurationAssignments()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetGuestConfigurationAssignments()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmResource armResource)
         {
-            return GetMgmtScopeResourceArmMockingExtension(armResource).GetGuestConfigurationAssignments();
+            return GetMockableMgmtScopeResourceArmResource(armResource).GetGuestConfigurationAssignments();
         }
 
         /// <summary>
@@ -512,7 +512,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetGuestConfigurationAssignmentAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetGuestConfigurationAssignmentAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
@@ -523,7 +523,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceArmMockingExtension(armResource).GetGuestConfigurationAssignmentAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceArmResource(armResource).GetGuestConfigurationAssignmentAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -540,7 +540,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetGuestConfigurationAssignment(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetGuestConfigurationAssignment(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
@@ -551,21 +551,21 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmMockingExtension(armResource).GetGuestConfigurationAssignment(guestConfigurationAssignmentName, cancellationToken);
+            return GetMockableMgmtScopeResourceArmResource(armResource).GetGuestConfigurationAssignment(guestConfigurationAssignmentName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of DeploymentExtendedResources in the ManagementGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceManagementGroupMockingExtension.GetDeploymentExtendeds()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceManagementGroupResource.GetDeploymentExtendeds()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ManagementGroupResource managementGroupResource)
         {
-            return GetMgmtScopeResourceManagementGroupMockingExtension(managementGroupResource).GetDeploymentExtendeds();
+            return GetMockableMgmtScopeResourceManagementGroupResource(managementGroupResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -582,7 +582,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceManagementGroupMockingExtension.GetDeploymentExtendedAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceManagementGroupResource.GetDeploymentExtendedAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
@@ -593,7 +593,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceManagementGroupMockingExtension(managementGroupResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceManagementGroupResource(managementGroupResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -610,7 +610,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceManagementGroupMockingExtension.GetDeploymentExtended(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceManagementGroupResource.GetDeploymentExtended(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
@@ -621,21 +621,21 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceManagementGroupMockingExtension(managementGroupResource).GetDeploymentExtended(deploymentName, cancellationToken);
+            return GetMockableMgmtScopeResourceManagementGroupResource(managementGroupResource).GetDeploymentExtended(deploymentName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of DeploymentExtendedResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceResourceGroupMockingExtension.GetDeploymentExtendeds()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceResourceGroupResource.GetDeploymentExtendeds()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroupResource resourceGroupResource)
         {
-            return GetMgmtScopeResourceResourceGroupMockingExtension(resourceGroupResource).GetDeploymentExtendeds();
+            return GetMockableMgmtScopeResourceResourceGroupResource(resourceGroupResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -652,7 +652,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceResourceGroupMockingExtension.GetDeploymentExtendedAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceResourceGroupResource.GetDeploymentExtendedAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -663,7 +663,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceResourceGroupMockingExtension(resourceGroupResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceResourceGroupResource(resourceGroupResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -680,7 +680,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceResourceGroupMockingExtension.GetDeploymentExtended(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceResourceGroupResource.GetDeploymentExtended(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -691,21 +691,21 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceResourceGroupMockingExtension(resourceGroupResource).GetDeploymentExtended(deploymentName, cancellationToken);
+            return GetMockableMgmtScopeResourceResourceGroupResource(resourceGroupResource).GetDeploymentExtended(deploymentName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of DeploymentExtendedResources in the SubscriptionResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceSubscriptionMockingExtension.GetDeploymentExtendeds()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceSubscriptionResource.GetDeploymentExtendeds()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this SubscriptionResource subscriptionResource)
         {
-            return GetMgmtScopeResourceSubscriptionMockingExtension(subscriptionResource).GetDeploymentExtendeds();
+            return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -722,7 +722,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceSubscriptionMockingExtension.GetDeploymentExtendedAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceSubscriptionResource.GetDeploymentExtendedAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -733,7 +733,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceSubscriptionMockingExtension(subscriptionResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -750,7 +750,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceSubscriptionMockingExtension.GetDeploymentExtended(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceSubscriptionResource.GetDeploymentExtended(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -761,7 +761,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceSubscriptionMockingExtension(subscriptionResource).GetDeploymentExtended(deploymentName, cancellationToken);
+            return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetDeploymentExtended(deploymentName, cancellationToken);
         }
 
         /// <summary>
@@ -778,7 +778,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceSubscriptionMockingExtension.GetResourceLinks(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceSubscriptionResource.GetResourceLinks(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -787,7 +787,7 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceSubscriptionMockingExtension(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
+            return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
         }
 
         /// <summary>
@@ -804,7 +804,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceSubscriptionMockingExtension.GetResourceLinks(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceSubscriptionResource.GetResourceLinks(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
@@ -813,21 +813,21 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLinkResource> GetResourceLinks(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceSubscriptionMockingExtension(subscriptionResource).GetResourceLinks(filter, cancellationToken);
+            return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetResourceLinks(filter, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of DeploymentExtendedResources in the TenantResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.GetDeploymentExtendeds()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceTenantResource.GetDeploymentExtendeds()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this TenantResource tenantResource)
         {
-            return GetMgmtScopeResourceTenantMockingExtension(tenantResource).GetDeploymentExtendeds();
+            return GetMockableMgmtScopeResourceTenantResource(tenantResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -844,7 +844,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.GetDeploymentExtendedAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceTenantResource.GetDeploymentExtendedAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -855,7 +855,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceTenantMockingExtension(tenantResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceTenantResource(tenantResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -872,7 +872,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.GetDeploymentExtended(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceTenantResource.GetDeploymentExtended(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -883,14 +883,14 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceTenantMockingExtension(tenantResource).GetDeploymentExtended(deploymentName, cancellationToken);
+            return GetMockableMgmtScopeResourceTenantResource(tenantResource).GetDeploymentExtended(deploymentName, cancellationToken);
         }
 
         /// <summary>
         /// Gets a collection of ResourceLinkResources in the TenantResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.GetResourceLinks(string)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceTenantResource.GetResourceLinks(string)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -899,7 +899,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
         public static ResourceLinkCollection GetResourceLinks(this TenantResource tenantResource, string scope)
         {
-            return GetMgmtScopeResourceTenantMockingExtension(tenantResource).GetResourceLinks(scope);
+            return GetMockableMgmtScopeResourceTenantResource(tenantResource).GetResourceLinks(scope);
         }
 
         /// <summary>
@@ -916,7 +916,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.GetResourceLinkAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceTenantResource.GetResourceLinkAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -926,7 +926,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceTenantMockingExtension(tenantResource).GetResourceLinkAsync(scope, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceTenantResource(tenantResource).GetResourceLinkAsync(scope, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -943,7 +943,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.GetResourceLink(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceTenantResource.GetResourceLink(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -953,7 +953,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<ResourceLinkResource> GetResourceLink(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceTenantMockingExtension(tenantResource).GetResourceLink(scope, cancellationToken);
+            return GetMockableMgmtScopeResourceTenantResource(tenantResource).GetResourceLink(scope, cancellationToken);
         }
 
         /// <summary>
@@ -970,7 +970,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceTenantResource.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -979,7 +979,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceTenantMockingExtension(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtScopeResourceTenantResource(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -996,7 +996,7 @@ namespace MgmtScopeResource
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceTenantResource.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
@@ -1005,7 +1005,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceTenantMockingExtension(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
+            return GetMockableMgmtScopeResourceTenantResource(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }
 }
