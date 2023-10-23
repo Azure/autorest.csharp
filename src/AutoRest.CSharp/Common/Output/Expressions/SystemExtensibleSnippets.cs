@@ -14,6 +14,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions
@@ -56,15 +57,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 );
             }
 
-            public override SerializableObjectTypeExpression InvokeFromOperationResponseMethod(SerializableObjectType type, TypedValueExpression result)
-            {
-                var response = result.Type.Equals(typeof(PipelineResponse))
-                    ? new PipelineResponseExpression(result)
-                    : new ResultExpression(result).GetRawResponse();
-
-                return new(type, new InvokeStaticMethodExpression(type.Type, "FromResponse", new[] { response }));
-            }
-
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestBodyExpression(model.Invoke("ToRequestBody"));
 
             private static DeclarationStatement DeclareRequestBody(out Utf8JsonRequestBodyExpression variable)
@@ -79,14 +71,29 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         {
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression result)
             {
-                var response = result.Type.Equals(typeof(PipelineResponse))
-                    ? new PipelineResponseExpression(result)
-                    : new ResultExpression(result).GetRawResponse();
-                return ResultExpression.FromValue(value, response);
+                return ResultExpression.FromValue(value, GetRawResponse(result));
             }
 
-            public override BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response)
-                => new PipelineResponseExpression(response).Content;
+            public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression result)
+            {
+                var response = GetRawResponse(result);
+                var model = new InvokeStaticMethodExpression(type.Type, "FromResponse", new[] { response });
+                return ResultExpression.FromValue(model, response);
+            }
+
+            public override TypedValueExpression GetTypedResponseFromEnum(EnumType enumType, TypedValueExpression result)
+            {
+                var response = GetRawResponse(result);
+                return ResultExpression.FromValue(EnumExpression.ToEnum(enumType, response.Content.ToObjectFromJson(typeof(string))), response);
+            }
+
+            public override TypedValueExpression GetTypedResponseFromBinaryDate(Type responseType, TypedValueExpression result)
+            {
+                var rawResponse = GetRawResponse(result);
+                return responseType == typeof(BinaryData)
+                    ? ResultExpression.FromValue(rawResponse.Content, rawResponse)
+                    : ResultExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse);
+            }
 
             public override MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message)
             {
@@ -108,6 +115,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 
             public override TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async)
                 => ResultExpression.FromResponse(new MessagePipelineExpression(pipeline).ProcessMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), null, async));
+
+            private static PipelineResponseExpression GetRawResponse(TypedValueExpression result)
+                => result.Type.Equals(typeof(PipelineResponse))
+                    ? new PipelineResponseExpression(result)
+                    : new ResultExpression(result).GetRawResponse();
         }
 
         private class SystemJsonElementSnippets : JsonElementSnippets

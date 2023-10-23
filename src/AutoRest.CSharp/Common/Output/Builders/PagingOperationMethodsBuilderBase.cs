@@ -80,23 +80,24 @@ namespace AutoRest.CSharp.Output.Models
         private IReadOnlyList<Parameter> BuildNextLinkOperationCreateMessageParameters(InputOperation nextLinkOperation)
             => new MethodParametersBuilder(nextLinkOperation, null, _typeFactory).BuildParameters(GenerateProtocolMethods).CreateMessage;
 
-        protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature signature)
+        protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(RequestParts requestParts, MethodSignature signature)
         {
             if (Paging is not { NextLinkOperation: null, SelfNextLink: false })
             {
                 return null;
             }
 
+            var requestContext = signature.Parameters.FirstOrDefault(p => p.Type.Equals(Configuration.ApiTypes.RequestContextType)) is {} requestContextParameter ? (TypedValueExpression)requestContextParameter : null;
             return new[]
             {
-                builder.CreateHttpMessage(RequestMethod.Get, Operation.BufferResponse, _nextPageStatusCodeSwitchBuilder.ResponseClassifier, out var message, out var request, out var uriBuilder),
-                builder.AddUri(uriBuilder, Operation.Uri),
+                CreateMessageMethodBuilder.CreateHttpMessage(Fields, requestParts, RequestMethod.Get, requestContext, Operation.BufferResponse, _nextPageStatusCodeSwitchBuilder.ResponseClassifier, out var uriBuilder),
+                uriBuilder.AddUri(Operation.Uri),
                 uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false),
-                Assign(request.Uri, uriBuilder),
+                uriBuilder.SetUriToRequest(),
 
-                builder.AddHeaders(request),
-                builder.AddUserAgent(message),
-                Return(message)
+                uriBuilder.AddHeaders(),
+                uriBuilder.AddUserAgent(),
+                Return(uriBuilder.Message)
             };
         }
 

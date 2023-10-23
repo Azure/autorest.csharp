@@ -55,5 +55,5 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
     internal record RequestPart(string? NameInRequest, TypedValueExpression Value, MethodBodyStatement? Conversion, SerializationFormat SerializationFormat, string? ArraySerializationDelimiter = null, bool Explode = false, bool Escape = false, bool SkipNullCheck = false, bool CheckUndefinedCollection = false);
 
-    internal record BodyRequestPart(TypedValueExpression Value, RequestContentExpression Content, MethodBodyStatement? Conversion, bool SkipNullCheck = false) : RequestPart(null, Value, Conversion, SerializationFormat.Default, SkipNullCheck: SkipNullCheck);
+    internal record BodyRequestPart(TypedValueExpression Value, TypedValueExpression Content, MethodBodyStatement? Conversion, bool SkipNullCheck = false) : RequestPart(null, Value, Conversion, SerializationFormat.Default, SkipNullCheck: SkipNullCheck);
 }

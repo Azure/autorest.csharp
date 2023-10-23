@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static bool IsDictionary(CSharpType type, [MaybeNullWhen(false)] out CSharpType keyType, [MaybeNullWhen(false)] out CSharpType valueType)
         {
-            if (IsReadOnlyDictionary(type) || IsReadWriteDictionary(type))
+            if (IsDictionary(type))
             {
                 keyType = type.Arguments[0];
                 valueType = type.Arguments[1];
@@ -224,11 +224,11 @@ namespace AutoRest.CSharp.Generation.Types
             => type.IsFrameworkType && (type.FrameworkType == typeof(IDictionary<,>) || type.FrameworkType == typeof(Dictionary<,>));
 
         internal static bool IsList(CSharpType type)
-            => IsList(type, out _);
+            => IsReadOnlyList(type) || IsReadWriteList(type);
 
         internal static bool IsList(CSharpType type, [MaybeNullWhen(false)] out CSharpType elementType)
         {
-            if (IsReadOnlyList(type) || IsReadWriteList(type))
+            if (IsList(type))
             {
                 elementType = type.Arguments[0];
                 return true;

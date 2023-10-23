@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _bodyParts.Add(new RequestPart(inputParameter.NameInRequest, value, null, SerializationFormat.Default));
         }
 
-        public void AddBodyPart(TypedValueExpression value, MethodBodyStatement? conversions, RequestContentExpression content, bool skipNullCheck)
+        public void AddBodyPart(TypedValueExpression value, MethodBodyStatement? conversions, TypedValueExpression content, bool skipNullCheck)
         {
             _bodyParts.Add(new BodyRequestPart(value, content, conversions, SkipNullCheck: skipNullCheck));
         }

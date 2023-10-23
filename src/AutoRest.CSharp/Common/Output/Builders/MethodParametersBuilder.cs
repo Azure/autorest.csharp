@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         break;
                     case RequestLocation.Body:
                         CreateConversionToRequestContent(inputParameter, value, parameters, out var content, out var conversions);
-                        _requestPartsBuilder.AddBodyPart(value, conversions, new RequestContentExpression(content), inputParameter.Kind != InputOperationParameterKind.Method);
+                        _requestPartsBuilder.AddBodyPart(value, conversions, content, inputParameter.Kind != InputOperationParameterKind.Method);
                         break;
                 }
             }
@@ -326,7 +326,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (inputParameter.Location == RequestLocation.Body)
             {
                 protocolMethodParameter = inputParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable;
-                _requestPartsBuilder.AddBodyPart(protocolMethodParameter, null, new RequestContentExpression(protocolMethodParameter), !Configuration.Generation1ConvenienceClient);
+                _requestPartsBuilder.AddBodyPart(protocolMethodParameter, null, protocolMethodParameter, !Configuration.Generation1ConvenienceClient);
             }
             else
             {

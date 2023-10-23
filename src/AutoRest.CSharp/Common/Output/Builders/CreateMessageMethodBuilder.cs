@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -14,64 +13,54 @@ using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using ContentType = Azure.Core.ContentType;
+using RequestMethod = Azure.Core.RequestMethod;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
-    internal class CreateMessageMethodBuilder
+    internal abstract class CreateMessageMethodBuilder
     {
-        private readonly ClientFields _fields;
+        public abstract TypedValueExpression Message { get; }
+
         private readonly RequestParts _requestParts;
-        private readonly HttpPipelineExpression _pipeline;
-        private readonly RequestContextExpression? _requestContext;
-        private readonly BodyMediaType _bodyMediaType;
 
-        public CreateMessageMethodBuilder(ClientFields fields, RequestParts requestParts, RequestContextExpression? requestContext, BodyMediaType bodyMediaType)
+        protected CreateMessageMethodBuilder(RequestParts requestParts)
         {
-            _fields = fields;
             _requestParts = requestParts;
-            _requestContext = requestContext;
-            _bodyMediaType = bodyMediaType;
-            _pipeline  = new HttpPipelineExpression(_fields.PipelineField);
         }
 
-        public MethodBodyStatement CreateHttpMessage(RequestMethod requestMethod, bool bufferResponse, ResponseClassifierType? responseClassifierType, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
+        public static MethodBodyStatement CreateHttpMessage(ClientFields fields, RequestParts requestParts, RequestMethod requestMethod, TypedValueExpression? requestContext, bool bufferResponse, ResponseClassifierType? responseClassifierType, out CreateMessageMethodBuilder builder)
         {
-            var callPipelineCreateMessage = _requestContext is not null
-                ? responseClassifierType is not null
-                    ? _pipeline.CreateMessage(_requestContext, new MemberExpression(null, responseClassifierType.Name))
-                    : _pipeline.CreateMessage(_requestContext)
-                : _pipeline.CreateMessage();
+            MethodBodyStatement statement;
+            builder = Configuration.IsBranded
+                ? Azure.AzureCreateMessageMethodBuilder.CreateBuilder(fields, requestParts, requestMethod, requestContext, bufferResponse, responseClassifierType, out statement)
+                : System.SystemCreateMessageMethodBuilder.CreateBuilder(fields, requestParts, requestMethod.Method, requestContext, bufferResponse, responseClassifierType, out statement);
 
-            var statements = new List<MethodBodyStatement>
-            {
-                Var("message", callPipelineCreateMessage, out message),
-                Var("request", message.Request, out request)
-            };
-
-            if (!bufferResponse)
-            {
-                statements.Add(Assign(message.BufferResponse, False));
-            }
-
-            statements.Add(Assign(request.Method, new MemberExpression(typeof(RequestMethod), requestMethod.ToRequestMethodName())));
-            statements.Add(Var("uri", New.RawRequestUriBuilder(), out uriBuilder));
-
-            return statements;
+            return statement;
         }
 
-        public MethodBodyStatement AddUri(RawRequestUriBuilderExpression uriBuilder, string uri)
+        protected abstract MethodBodyStatement Reset(TypedValueExpression value);
+        protected abstract MethodBodyStatement AppendUri(string literal);
+        protected abstract MethodBodyStatement AppendUri(TypedValueExpression value, bool escape);
+        protected abstract MethodBodyStatement AppendPath(string literal);
+        protected abstract MethodBodyStatement AppendPath(TypedValueExpression value, SerializationFormat format, bool escape);
+        protected abstract MethodBodyStatement AddQuery(string nameInRequest, TypedValueExpression value, string? delimiter, SerializationFormat format, bool escape);
+        protected abstract MethodBodyStatement AddHeader(string? nameInRequest, TypedValueExpression value, string? delimiter, SerializationFormat format);
+        protected abstract MethodBodyStatement AddMultipartBody();
+        protected abstract MethodBodyStatement AddFormUrlEncodedBody();
+        protected abstract MethodBodyStatement AddBody(BodyRequestPart bodyRequestPart);
+
+        public MethodBodyStatement AddUri(string uri)
         {
             var lines = new List<MethodBodyStatement>();
             foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uri))
             {
                 if (isLiteral)
                 {
-                    lines.Add(uriBuilder.AppendRaw(span.ToString(), false));
+                    lines.Add(AppendUri( span.ToString()));
                 }
                 else
                 {
@@ -87,9 +76,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     if (requestPart is not null)
                     {
-                        lines.Add(requestPart.Value.Type.Equals(typeof(Uri))
-                            ? uriBuilder.Reset(requestPart.Value)
-                            : uriBuilder.AppendRaw(ConvertToRequestPartType(requestPart.Value, requestPart.Value.Type, convertOnlyExtendableEnumToString: true), requestPart.Escape));
+                        lines.Add(requestPart.Value.Type.Equals(typeof(Uri)) ? Reset(requestPart.Value) : AppendUri(ConvertToRequestPartType(requestPart.Value, convertOnlyExtendableEnumToString: true), requestPart.Escape));
                     }
                     else
                     {
@@ -101,14 +88,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return lines;
         }
 
-        public MethodBodyStatement AddPath(RawRequestUriBuilderExpression uriBuilder, string path)
+        public MethodBodyStatement AddPath(string path)
         {
             var lines = new List<MethodBodyStatement>();
             foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(path))
             {
                 if (isLiteral)
                 {
-                    lines.Add(uriBuilder.AppendPath(span.ToString(), false));
+                    lines.Add(AppendPath(span.ToString()));
                 }
                 else
                 {
@@ -125,8 +112,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     if (requestPart is not null)
                     {
                         lines.Add(requestPart.Value is not ConstantExpression && requestPart.NameInRequest == "nextLink"
-                            ? uriBuilder.AppendRawNextLink(requestPart.Value, requestPart.Escape)
-                            : uriBuilder.AppendPath(ConvertToRequestPartType(requestPart.Value, requestPart.Value.Type, requestPart.SerializationFormat), requestPart.SerializationFormat, requestPart.Escape));
+                            ? AppendRawNextLink(requestPart.Value, requestPart.Escape)
+                            : AppendPath(ConvertToRequestPartType(requestPart.Value, requestPart.SerializationFormat), requestPart.SerializationFormat, requestPart.Escape));
                     }
                     else
                     {
@@ -137,50 +124,44 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return lines;
         }
 
-        public MethodBodyStatement AddQuery(RawRequestUriBuilderExpression uriBuilder)
-            => _requestParts.QueryParts.Select(rp => NullCheckRequestPartValue(rp, GetAddToQueryStatement(uriBuilder, rp))).AsStatement();
+        public MethodBodyStatement AddQuery()
+            => _requestParts.QueryParts.Select(rp => NullCheckRequestPartValue(rp, GetAddToQueryStatement(rp))).AsStatement();
 
-        public MethodBodyStatement AddHeaders(RequestExpression request)
-            => _requestParts.HeaderParts.Select(rp => NullCheckRequestPartValue(rp, GetAddHeaderStatement(request, rp))).AsStatement();
+        public MethodBodyStatement AddHeaders()
+            => _requestParts.HeaderParts.Select(rp => NullCheckRequestPartValue(rp, GetAddHeaderStatement(rp))).AsStatement();
 
-        public MethodBodyStatement AddContentHeaders(RequestExpression request)
-            => _requestParts.ContentHeaderParts.Select(rp => NullCheckRequestPartValue(rp, GetAddHeaderStatement(request, rp))).AsStatement();
+        public MethodBodyStatement AddContentHeaders()
+            => _requestParts.ContentHeaderParts.Select(rp => NullCheckRequestPartValue(rp, GetAddHeaderStatement(rp))).AsStatement();
 
-        public MethodBodyStatement AddBody(RequestExpression request)
-            => _bodyMediaType switch
+        public MethodBodyStatement AddBody(BodyMediaType bodyMediaType)
+            => bodyMediaType switch
             {
                 BodyMediaType.Multipart => new[]
                 {
-                    AddContentHeaders(request),
-                    Var("content", New.MultipartFormDataContent(), out var multipartContent),
-                    _requestParts.BodyParts.Select(rp => NullCheckRequestPartValue(rp, GetAddMultipartBodyPartStatement(multipartContent, rp))).AsStatement(),
-                    multipartContent.ApplyToRequest(request)
+                    AddContentHeaders(),
+                    AddMultipartBody()
                 },
                 BodyMediaType.Form => new[]
                 {
-                    AddContentHeaders(request),
-                    Var("content", New.FormUrlEncodedContent(), out var urlContent),
-                    _requestParts.BodyParts.Select(rp => NullCheckRequestPartValue(rp, urlContent.Add(rp.NameInRequest!, ConvertToString(rp.Value)))).AsStatement(),
-                    Assign(request.Content, urlContent)
+                    AddContentHeaders(),
+                    AddFormUrlEncodedBody()
                 },
                 _ when _requestParts.BodyParts is [BodyRequestPart bodyRequestPart] =>
                     NullCheckRequestPartValue(bodyRequestPart, new[]
                     {
-                        AddContentHeaders(request),
-                        bodyRequestPart.Conversion ?? new MethodBodyStatement(),
-                        Assign(request.Content, bodyRequestPart.Content)
+                        AddContentHeaders(),
+                        AddBody(bodyRequestPart)
                     }),
                 _ => new MethodBodyStatement()
             };
 
-        public MethodBodyStatement AddUserAgent(HttpMessageExpression message)
-            => _fields.UserAgentField is not null
-                ? new InvokeInstanceMethodStatement(_fields.UserAgentField, nameof(TelemetryDetails.Apply), message)
-                : new MethodBodyStatement();
+        public abstract MethodBodyStatement AppendRawNextLink(TypedValueExpression value, bool escape);
+        public abstract MethodBodyStatement SetUriToRequest();
+        public abstract MethodBodyStatement AddUserAgent();
 
-        private static MethodBodyStatement GetAddToQueryStatement(RawRequestUriBuilderExpression uriBuilder, RequestPart requestPart)
+        private MethodBodyStatement GetAddToQueryStatement(RequestPart requestPart)
         {
-            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(requestPart.Value), requestPart.Value.Type, requestPart.SerializationFormat);
+            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(requestPart.Value), requestPart.SerializationFormat);
             if (requestPart.NameInRequest is not {} nameInRequest)
             {
                 throw new InvalidOperationException($" must have ");
@@ -190,61 +171,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 return new ForeachStatement("param", new EnumerableExpression(TypeFactory.GetElementType(requestPart.Value.Type), convertedValue), out var paramVariable)
                 {
-                    uriBuilder.AppendQuery(requestPart.NameInRequest, paramVariable, requestPart.SerializationFormat, requestPart.Escape)
+                    AddQuery(requestPart.NameInRequest, paramVariable, null, requestPart.SerializationFormat, requestPart.Escape)
                 };
             }
 
-            return requestPart.ArraySerializationDelimiter is { } delimiter
-                ? uriBuilder.AppendQueryDelimited(nameInRequest, convertedValue, delimiter, requestPart.SerializationFormat, requestPart.Escape)
-                : uriBuilder.AppendQuery(nameInRequest, convertedValue, requestPart.SerializationFormat, requestPart.Escape);
+            return AddQuery(nameInRequest, convertedValue, requestPart.ArraySerializationDelimiter, requestPart.SerializationFormat, requestPart.Escape);
         }
 
-        private static MethodBodyStatement GetAddHeaderStatement(RequestExpression request, RequestPart requestPart)
+        private MethodBodyStatement GetAddHeaderStatement(RequestPart requestPart)
         {
-            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(requestPart.Value), requestPart.Value.Type, requestPart.SerializationFormat);
-            if (requestPart.NameInRequest is null)
-            {
-                return requestPart.SerializationFormat == SerializationFormat.Default
-                    ? request.Headers.Add(convertedValue)
-                    : request.Headers.Add(convertedValue, requestPart.SerializationFormat);
-            }
-
-            if (requestPart.NameInRequest.Equals(SpecialHandledHeaders.ClientRequestId, StringComparison.OrdinalIgnoreCase))
-            {
-                return request.Headers.Add(SpecialHandledHeaders.ClientRequestId, request.ClientRequestId);
-            }
-
-            return requestPart.ArraySerializationDelimiter is {} delimiter
-                ? request.Headers.AddDelimited(requestPart.NameInRequest, convertedValue, delimiter, requestPart.SerializationFormat)
-                : request.Headers.Add(requestPart.NameInRequest, convertedValue, requestPart.SerializationFormat);
+            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(requestPart.Value), requestPart.SerializationFormat);
+            return AddHeader(requestPart.NameInRequest, convertedValue, requestPart.ArraySerializationDelimiter, requestPart.SerializationFormat);
         }
 
-        private static MethodBodyStatement GetAddMultipartBodyPartStatement(MultipartFormDataContentExpression multipartContent, RequestPart requestPart)
-        {
-            var nameInRequest = requestPart.NameInRequest!;
-            var value = requestPart.Value;
-            if (!TypeFactory.IsList(value.Type))
-            {
-                return multipartContent.Add(new RequestContentExpression(value), nameInRequest, Null);
-            }
-
-            return new ForeachStatement("value", new EnumerableExpression(TypeFactory.GetElementType(value.Type), requestPart.Value), out var item)
-            {
-                multipartContent.Add(RequestContentExpression.Create(item), nameInRequest, Null)
-            };
-        }
-
-        private static StringExpression ConvertToString(TypedValueExpression value)
-        {
-            if (value.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
-            {
-                return new EnumExpression(enumType, value.NullableStructValue(value.Type)).ToSerial();
-            }
-
-            return value.Type.EqualsIgnoreNullable(typeof(string)) ? new(value) : value.NullableStructValue(value.Type).InvokeToString();
-        }
-
-        private static MethodBodyStatement NullCheckRequestPartValue(RequestPart requestPart, MethodBodyStatement addRequestPartStatement)
+        protected static MethodBodyStatement NullCheckRequestPartValue(RequestPart requestPart, MethodBodyStatement addRequestPartStatement)
         {
             if (requestPart.SkipNullCheck)
             {
@@ -272,11 +212,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         }
 
-        private static ValueExpression ConvertToRequestPartType(ValueExpression value, CSharpType fromType, SerializationFormat format = SerializationFormat.Default, bool convertOnlyExtendableEnumToString = false)
+        private static TypedValueExpression ConvertToRequestPartType(TypedValueExpression value, SerializationFormat format = SerializationFormat.Default, bool convertOnlyExtendableEnumToString = false)
         {
-            if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
+            if (value.Type is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
             {
-                return new EnumExpression(enumType, value.NullableStructValue(fromType)).ToSerial();
+                return new EnumExpression(enumType, value.NullableStructValue(value.Type)).ToSerial();
             }
 
             if (value is ConstantExpression)
@@ -284,17 +224,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return value;
             }
 
-            if (fromType.EqualsIgnoreNullable(typeof(ContentType)))
+            if (value.Type.EqualsIgnoreNullable(typeof(ContentType)))
             {
-                return value.NullableStructValue(fromType).InvokeToString();
+                return value.NullableStructValue(value.Type).InvokeToString();
             }
 
-            if (fromType.EqualsIgnoreNullable(typeof(BinaryData)) && format is SerializationFormat.Bytes_Base64 or SerializationFormat.Bytes_Base64Url)
+            if (value.Type.EqualsIgnoreNullable(typeof(BinaryData)) && format is SerializationFormat.Bytes_Base64 or SerializationFormat.Bytes_Base64Url)
             {
                 return new BinaryDataExpression(value).ToArray();
             }
 
-            return value.NullableStructValue(fromType);
+            return value.NullableStructValue();
         }
     }
 }

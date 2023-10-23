@@ -42,9 +42,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(RestClientMethodParameters parameters, bool async)
         {
             var protocolMethodArguments = new List<ValueExpression>();
-
             yield return AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray();
-            yield return Declare(ProtocolMethodReturnType, Configuration.ApiTypes.ResponseParameterName, InvokeProtocolMethod(null, protocolMethodArguments, async), out var response);
+
+            var response = new VariableReference(ProtocolMethodReturnType, Configuration.ApiTypes.ResponseParameterName);
+            yield return Declare(response, InvokeProtocolMethod(null, protocolMethodArguments, async));
 
             if (ResponseType is null)
             {
@@ -52,11 +53,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             else if (ResponseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
             {
-                yield return Return(Extensible.RestOperations.GetTypedResponseFromValue(Extensible.Model.InvokeFromOperationResponseMethod(serializableObjectType, response), response));
+                yield return Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response));
             }
             else if (ResponseType is { IsFrameworkType: false, Implementation: EnumType enumType})
             {
-                yield return Return(Extensible.RestOperations.GetTypedResponseFromValue(EnumExpression.ToEnum(enumType, response.Content.ToObjectFromJson(typeof(string))), response));
+                yield return Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response));
             }
             else if (TypeFactory.IsCollectionType(ResponseType))
             {
@@ -65,19 +66,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 var value = new VariableReference(ResponseType, "value");
 
                 yield return new DeclareVariableStatement(value.Type, value.Declaration, Default);
-                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, response.ContentStream, false);
+                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, new ResponseExpression(response).ContentStream, false);
                 yield return Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response));
             }
             else if (ResponseType is { IsFrameworkType: true })
             {
-                if (ResponseType.EqualsIgnoreNullable(typeof(BinaryData)))
-                {
-                    yield return Return(Extensible.RestOperations.GetTypedResponseFromValue(response.Content, response));
-                }
-                else
-                {
-                    yield return Return(Extensible.RestOperations.GetTypedResponseFromValue(response.Content.ToObjectFromJson(ResponseType.FrameworkType), response));
-                }
+                yield return Return(Extensible.RestOperations.GetTypedResponseFromBinaryDate(ResponseType.FrameworkType, response));
             }
         }
     }

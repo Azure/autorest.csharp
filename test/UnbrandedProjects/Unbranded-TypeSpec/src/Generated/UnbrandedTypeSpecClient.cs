@@ -1478,6 +1478,11 @@ namespace UnbrandedTypeSpec
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalProtocolAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -1509,6 +1514,11 @@ namespace UnbrandedTypeSpec
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalProtocol(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1582,6 +1592,11 @@ namespace UnbrandedTypeSpec
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="StillConvenientValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1609,6 +1624,11 @@ namespace UnbrandedTypeSpec
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="StillConvenientValue(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1793,8 +1813,8 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
-            uri.AppendPath(123.ToString(), true);
-            uri.AppendQuery("p3", "true", true);
+            uri.AppendPath(123, true);
+            uri.AppendQuery("p3", true, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("p1", "test");
             request.SetHeaderValue("Accept", "application/json");
@@ -1809,7 +1829,7 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
-            uri.AppendPath(action.ToString("O"), true);
+            uri.AppendPath(action, "O", true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1895,7 +1915,7 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
-            uri.AppendPath(subscriptionId.ToString(), true);
+            uri.AppendPath(subscriptionId, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");

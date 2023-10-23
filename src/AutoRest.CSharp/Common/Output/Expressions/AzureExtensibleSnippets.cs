@@ -20,6 +20,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 {
     internal class AzureExtensibleSnippets : ExtensibleSnippets
     {
+        private const string FromResponseMethodName = "FromResponse";
+        private const string ToRequestContentMethodName = "ToRequestContent";
+
         public override JsonElementSnippets JsonElement { get; } = new AzureJsonElementSnippets();
         public override XElementSnippets XElement { get; } = new AzureXElementSnippets();
         public override XmlWriterSnippets XmlWriter { get; } = new AzureXmlWriterSnippets();
@@ -28,9 +31,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 
         internal class AzureModelSnippets : ModelSnippets
         {
-            private const string FromResponseMethodName = "FromResponse";
-            private const string ToRequestContentMethodName = "ToRequestContent";
-
             public override Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers)
             {
                 return new Method
@@ -59,9 +59,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 );
             }
 
-            public override SerializableObjectTypeExpression InvokeFromOperationResponseMethod(SerializableObjectType type, TypedValueExpression response)
-                => new(type, new InvokeStaticMethodExpression(type.Type, FromResponseMethodName, new[] { new ResponseExpression(response) }));
-
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestContentExpression(model.Invoke(ToRequestContentMethodName));
 
             private static DeclarationStatement DeclareRequestContent(out Utf8JsonRequestContentExpression variable)
@@ -77,8 +74,26 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
                 => ResponseExpression.FromValue(value, new ResponseExpression(response).GetRawResponse());
 
-            public override BinaryDataExpression GetBinaryDataFromResponse(TypedValueExpression response)
-                => new ResponseExpression(response).Content;
+            public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response)
+            {
+                var rawResponse = new ResponseExpression(response);
+                var model = new InvokeStaticMethodExpression(type.Type, FromResponseMethodName, new[] { rawResponse });
+                return ResponseExpression.FromValue(model, rawResponse.GetRawResponse());
+            }
+
+            public override TypedValueExpression GetTypedResponseFromEnum(EnumType enumType, TypedValueExpression response)
+            {
+                var rawResponse = new ResponseExpression(response);
+                return ResponseExpression.FromValue(EnumExpression.ToEnum(enumType, rawResponse.Content.ToObjectFromJson(typeof(string))), rawResponse);
+            }
+
+            public override TypedValueExpression GetTypedResponseFromBinaryDate(Type responseType, TypedValueExpression response)
+            {
+                var rawResponse = new ResponseExpression(response);
+                return responseType == typeof(BinaryData)
+                    ? ResponseExpression.FromValue(rawResponse.Content, rawResponse.GetRawResponse())
+                    : ResponseExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse.GetRawResponse());
+            }
 
             public override MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message)
             {

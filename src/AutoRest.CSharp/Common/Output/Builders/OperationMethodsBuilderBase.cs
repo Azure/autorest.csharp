@@ -37,7 +37,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static readonly int[] RedirectResponseCodes = { 300, 301, 302, 303, 307, 308 };
 
-        private readonly ClientFields _fields;
         private readonly string _clientName;
         private readonly string _clientNamespace;
 
@@ -51,6 +50,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected InputOperation Operation { get; }
 
+        protected ClientFields Fields { get; }
         protected TypedValueExpression ClientDiagnosticsProperty { get; }
         protected TypedValueExpression PipelineField { get; }
         protected StatusCodeSwitchBuilder StatusCodeSwitchBuilder { get; }
@@ -68,7 +68,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected OperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args)
         {
-            _fields = args.Fields;
             _clientName = args.ClientName;
             _clientNamespace = args.ClientNamespace;
             _operationSampleBuilder = args.OperationSampleBuilder;
@@ -79,8 +78,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             Operation = args.Operation;
             GenerateProtocolMethods = args.GenerateProtocolMethods;
             StatusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
-            ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
-            PipelineField = _fields.PipelineField;
+            Fields = args.Fields;
+            ClientDiagnosticsProperty = args.Fields.ClientDiagnosticsProperty;
+            PipelineField = args.Fields.PipelineField;
 
             ProtocolMethodName = Operation.Name.ToCleanName();
             CreateMessageMethodName = $"Create{ProtocolMethodName}Request";
@@ -112,12 +112,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 parameters = parameters.MakeAllProtocolParametersRequired();
             }
 
-            var requestContext = new RequestContextExpression(KnownParameters.RequestContext);
-            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, requestContext, Operation.RequestBodyMediaType);
-
-            var createMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
+            var createMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, parameters.RequestParts);
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
-            var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters, requestContext);
+            var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters);
 
             string? protocolMethodNonDocumentComment = null;
             MethodSignature? convenienceMethodSignature = null;
@@ -224,11 +221,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private RestClientOperationMethods BuildLegacy()
         {
             var parameters = _parametersBuilder.BuildParameters(false);
-            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, null, Operation.RequestBodyMediaType);
-
-            var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
+            var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, parameters.RequestParts);
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
-            var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters, null);
+            var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters);
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
             var convenienceMethodSignature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, parameters.Convenience, RestClientConvenienceMethodReturnType, null);
@@ -254,10 +249,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
         }
 
-        protected Method BuildCreateRequestMethod(IReadOnlyList<Parameter> parameters, CreateMessageMethodBuilder builder)
+        protected Method BuildCreateRequestMethod(IReadOnlyList<Parameter> parameters, RequestParts requestParts)
         {
             var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, Configuration.ApiTypes.HttpMessageType, null, parameters);
-            return new Method(signature, BuildCreateRequestMethodBody(builder));
+            var requestContext = signature.Parameters.FirstOrDefault(p => p.Type.Equals(Configuration.ApiTypes.RequestContextType)) is {} requestContextParameter ? (TypedValueExpression)requestContextParameter : null;
+            return new Method(signature, new[]
+            {
+                CreateMessageMethodBuilder.CreateHttpMessage(Fields, requestParts, Operation.HttpMethod, requestContext, Operation.BufferResponse, ResponseClassifier, out var builder),
+                builder.AddUri(Operation.Uri),
+                builder.AddPath(Operation.Path),
+                builder.AddQuery(),
+
+                builder.SetUriToRequest(),
+
+                builder.AddHeaders(),
+                builder.AddBody(Operation.RequestBodyMediaType),
+                builder.AddUserAgent(),
+                Return(builder.Message)
+            });
         }
 
         private bool ExistingProtocolMethodHasOptionalParameters(string clientNamespace, string clientName, IEnumerable<Parameter> parameters)
@@ -266,39 +275,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return existingProtocolMethod is { Parameters: [.., {IsOptional: true}]};
         }
 
-        private MethodBodyStatement BuildCreateRequestMethodBody(CreateMessageMethodBuilder builder)
-        {
-            return new[]
-            {
-                builder.CreateHttpMessage(Operation.HttpMethod, Operation.BufferResponse, ResponseClassifier, out var message, out var request, out var uriBuilder),
-                builder.AddUri(uriBuilder, Operation.Uri),
-                builder.AddPath(uriBuilder, Operation.Path),
-                builder.AddQuery(uriBuilder),
-
-                Assign(request.Uri, uriBuilder),
-
-                builder.AddHeaders(request),
-                builder.AddBody(request),
-                builder.AddUserAgent(message),
-                Return(message)
-            };
-        }
-
-        private Method? BuildCreateNextPageMessageMethod(MethodSignature? signature, RestClientMethodParameters parameters, RequestContextExpression? requestContext)
+        private Method? BuildCreateNextPageMessageMethod(MethodSignature? signature, RestClientMethodParameters parameters)
         {
             if (signature is null)
             {
                 return null;
             }
 
-            var builder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, requestContext, Operation.RequestBodyMediaType);
-            var body = BuildCreateNextPageMessageMethodBody(builder, signature);
+            var body = BuildCreateNextPageMessageMethodBody(parameters.RequestParts, signature);
             return body is not null ? new Method(signature, body) : null;
         }
 
         protected abstract MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters);
 
-        protected abstract MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature signature);
+        protected abstract MethodBodyStatement? BuildCreateNextPageMessageMethodBody(RequestParts requestParts, MethodSignature signature);
 
         protected string CreateScopeName(string methodName) => $"{_clientName}.{methodName}";
 
@@ -365,7 +355,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 : new MethodBodyStatement();
 
         protected MethodBodyStatement WrapInDiagnosticScope(string methodName, params MethodBodyStatement[] statements)
-            => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, statements);
+            => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), Fields.ClientDiagnosticsProperty, statements);
 
         protected static HttpMessageExpression InvokeCreateRequestMethod(MethodSignatureBase signature)
             => new(new InvokeInstanceMethodExpression(null, signature.Name, signature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
@@ -373,9 +363,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         protected ResponseExpression InvokeProtocolMethod(ValueExpression? instance, IReadOnlyList<ValueExpression> arguments, bool async)
             => new(new InvokeInstanceMethodExpression(instance, async ? $"{ProtocolMethodName}Async" : ProtocolMethodName, arguments, null, async));
 
-        protected ValueExpression InvokeProtocolOperationHelpersConvertMethod(SerializableObjectType responseType, ResponseExpression response, string scopeName)
+        protected ValueExpression InvokeProtocolOperationHelpersConvertMethod(SerializableObjectType responseType, TypedValueExpression response, string scopeName)
         {
-            var arguments = new ValueExpression[]{ response, SerializableObjectTypeExpression.FromResponseDelegate(responseType), _fields.ClientDiagnosticsProperty, Literal(scopeName) };
+            var arguments = new ValueExpression[]{ response, SerializableObjectTypeExpression.FromResponseDelegate(responseType), Fields.ClientDiagnosticsProperty, Literal(scopeName) };
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), nameof(ProtocolOperationHelpers.Convert), arguments);
         }
 
