@@ -387,7 +387,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         {
                             yield return conversion;
                         }
-                        
                     }
                 }
                 else

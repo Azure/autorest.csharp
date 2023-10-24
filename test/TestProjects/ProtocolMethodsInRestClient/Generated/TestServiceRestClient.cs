@@ -73,8 +73,8 @@ namespace ProtocolMethodsInRestClient
                 throw new ArgumentNullException(nameof(grouped));
             }
 
-            using RequestContent content = resource?.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            using RequestContent content = resource?.ToRequestContent();
             Response response = await CreateAsync(grouped.Second, content, grouped.First, context).ConfigureAwait(false);
             switch (response.Status)
             {
@@ -102,8 +102,8 @@ namespace ProtocolMethodsInRestClient
                 throw new ArgumentNullException(nameof(grouped));
             }
 
-            using RequestContent content = resource?.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            using RequestContent content = resource?.ToRequestContent();
             Response response = Create(grouped.Second, content, grouped.First, context);
             switch (response.Status)
             {

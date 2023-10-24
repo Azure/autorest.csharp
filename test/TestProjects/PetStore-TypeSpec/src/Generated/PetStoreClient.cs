@@ -222,8 +222,8 @@ namespace PetStore
         {
             Argument.AssertNotNull(pet, nameof(pet));
 
-            using RequestContent content = pet.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = pet.ToRequestContent();
             Response response = await CreateAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
@@ -236,8 +236,8 @@ namespace PetStore
         {
             Argument.AssertNotNull(pet, nameof(pet));
 
-            using RequestContent content = pet.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = pet.ToRequestContent();
             Response response = Create(content, context);
             return Response.FromValue(Pet.FromResponse(response), response);
         }

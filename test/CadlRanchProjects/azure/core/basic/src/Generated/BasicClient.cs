@@ -132,8 +132,8 @@ namespace _Specs_.Azure.Core.Basic
         {
             Argument.AssertNotNull(resource, nameof(resource));
 
-            using RequestContent content = resource.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = resource.ToRequestContent();
             Response response = await CreateOrReplaceAsync(id, content, context).ConfigureAwait(false);
             return Response.FromValue(User.FromResponse(response), response);
         }
@@ -149,8 +149,8 @@ namespace _Specs_.Azure.Core.Basic
         {
             Argument.AssertNotNull(resource, nameof(resource));
 
-            using RequestContent content = resource.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = resource.ToRequestContent();
             Response response = CreateOrReplace(id, content, context);
             return Response.FromValue(User.FromResponse(response), response);
         }

@@ -59,8 +59,8 @@ namespace ProtocolMethodsInRestClient
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Resource>> CreateAsync(Resource resource = null, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = resource?.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            using RequestContent content = resource?.ToRequestContent();
             Response response = await CreateAsync(content, context).ConfigureAwait(false);
             switch (response.Status)
             {
@@ -81,8 +81,8 @@ namespace ProtocolMethodsInRestClient
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Resource> Create(Resource resource = null, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = resource?.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            using RequestContent content = resource?.ToRequestContent();
             Response response = Create(content, context);
             switch (response.Status)
             {

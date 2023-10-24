@@ -66,8 +66,8 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using RequestContent content = thing.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = thing.ToRequestContent();
             Response response = await SpreadModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -81,8 +81,8 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using RequestContent content = thing.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = thing.ToRequestContent();
             Response response = SpreadModel(content, context);
             return response;
         }
@@ -176,6 +176,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -184,7 +185,6 @@ namespace SpreadTypeSpec
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(age);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -200,6 +200,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -208,7 +209,6 @@ namespace SpreadTypeSpec
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(age);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAlias(content, context);
             return response;
         }
@@ -305,6 +305,7 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -313,7 +314,6 @@ namespace SpreadTypeSpec
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(age);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadMultiTargetAliasAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
@@ -332,6 +332,7 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -340,7 +341,6 @@ namespace SpreadTypeSpec
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(age);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadMultiTargetAlias(id, top, content, context);
             return response;
         }
@@ -444,8 +444,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using RequestContent content = thing.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = thing.ToRequestContent();
             Response response = await SpreadAliasWithModelAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
@@ -463,8 +463,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using RequestContent content = thing.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = thing.ToRequestContent();
             Response response = SpreadAliasWithModel(id, top, content, context);
             return response;
         }
@@ -569,6 +569,7 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -577,7 +578,6 @@ namespace SpreadTypeSpec
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(age);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithSpreadAliasAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
@@ -596,6 +596,7 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -604,7 +605,6 @@ namespace SpreadTypeSpec
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(age);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithSpreadAlias(id, top, content, context);
             return response;
         }
@@ -713,6 +713,7 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -746,7 +747,6 @@ namespace SpreadTypeSpec
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithOptionalPropsAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
@@ -769,6 +769,7 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -802,7 +803,6 @@ namespace SpreadTypeSpec
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithOptionalProps(id, top, content, context);
             return response;
         }
@@ -903,6 +903,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -924,7 +925,6 @@ namespace SpreadTypeSpec
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithCollectionsAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -939,6 +939,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -960,7 +961,6 @@ namespace SpreadTypeSpec
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithCollections(content, context);
             return response;
         }
