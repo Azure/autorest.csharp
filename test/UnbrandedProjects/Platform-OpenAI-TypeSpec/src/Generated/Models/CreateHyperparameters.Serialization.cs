@@ -19,7 +19,10 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(NEpochs);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(NEpochs.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(NEpochs))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndObject();
