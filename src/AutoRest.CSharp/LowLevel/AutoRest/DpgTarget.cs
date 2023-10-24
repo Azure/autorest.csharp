@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
                         project.AddGeneratedDocFile(xmlDocWriter.Filename, xmlDocWriter.ToString());
                     }
-                    else
+                    else if (Configuration.GenerateTestProject)
                     {
                         var smokeTestWriter = new SmokeTestWriter(client, sampleProvider);
                         smokeTestWriter.Write();

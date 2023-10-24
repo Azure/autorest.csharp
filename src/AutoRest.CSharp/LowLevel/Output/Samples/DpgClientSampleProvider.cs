@@ -63,6 +63,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         {
             methods = new List<Method>();
             restClientMethodsToTestMethods = new Dictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>>();
+            if (!Configuration.IsBranded)
+            {
+                return;
+            }
+
             foreach (var operationMethods in client.OperationMethods.OrderBy(m => m.Order))
             {
                 var samples = operationMethods.Samples;
@@ -285,7 +290,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 {
                     Declare(rawResponse, invocation),
                     EmptyLine,
-                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, new ResponseExpression(rawResponse).ContentStream) : InvokeConsoleWriteLine(new ResponseExpression(rawResponse).Status)
+                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, new ResponseExpression(rawResponse).ContentStream) : InvokeConsoleWriteLine(new NullableResponseExpression(rawResponse).Value)
                 };
             }
 
