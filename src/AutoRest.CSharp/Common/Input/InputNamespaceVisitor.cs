@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Common.Input
                     targetModels.Add(targetWithReferences.Target);
                 }
 
-                typesCache.Add(sourceModel, targetWithReferences.Target);
+                typesCache.Add(sourceModel.GetNotNullable(), targetWithReferences.Target);
             }
 
             foreach (var (targetModelWithoutReferences, modelWithReferences) in targetModelToReferences)

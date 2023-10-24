@@ -9,18 +9,18 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class RenameAnonymousTypesVisitor : InputNamespaceVisitor
+    internal class FixAnonymousTypesVisitor : InputNamespaceVisitor
     {
         private readonly HashSet<string> _createdNames;
         private readonly InputNamespace _rootNamespace;
 
-        private RenameAnonymousTypesVisitor(InputNamespace rootNamespace)
+        private FixAnonymousTypesVisitor(InputNamespace rootNamespace)
         {
             _rootNamespace = rootNamespace;
             _createdNames = new HashSet<string>();
         }
 
-        public static InputNamespace Visit(InputNamespace rootNamespace) => new RenameAnonymousTypesVisitor(rootNamespace).VisitNamespace(rootNamespace);
+        public static InputNamespace Visit(InputNamespace rootNamespace) => new FixAnonymousTypesVisitor(rootNamespace).VisitNamespace(rootNamespace);
 
         protected override InputModelType VisitModel(InputModelType modelType)
         {
@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var name = GetAnonymousModelNameAndUsage(modelType, out var usage);
                 modelType = modelType with {Name = name, Usage = usage};
+                _createdNames.Add(name);
             }
 
             return base.VisitModel(modelType);
@@ -52,7 +53,7 @@ namespace AutoRest.CSharp.Common.Input
                         }
                         else
                         {
-                            FindMatchesRecursively(parameter.Type, anonymousModel, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names);
+                            FindMatchesRecursively(parameter.Type, anonymousModel, new List<string> { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names, ref usage, InputModelTypeUsage.Input);
                         }
                     }
 
@@ -70,7 +71,7 @@ namespace AutoRest.CSharp.Common.Input
                         }
                         else
                         {
-                            FindMatchesRecursively(responseType, anonymousModel, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names);
+                            FindMatchesRecursively(responseType, anonymousModel, new List<string> { operation.Name.FirstCharToUpperCase(), responseType.Name }, names, ref usage, InputModelTypeUsage.Output);
                         }
                     }
                 }
@@ -131,7 +132,7 @@ namespace AutoRest.CSharp.Common.Input
             return sb.ToString();
         }
 
-        private void FindMatchesRecursively(InputType type, InputModelType anonModel, List<string> current, List<List<string>> names)
+        private void FindMatchesRecursively(InputType type, InputModelType anonModel, List<string> current, List<List<string>> names, ref InputModelTypeUsage usage, InputModelTypeUsage usageValue)
         {
             InputModelType? model = GetInputModelType(type);
 
@@ -146,10 +147,11 @@ namespace AutoRest.CSharp.Common.Input
                 if (IsSameType(property.Type, anonModel))
                 {
                     names.Add(new List<string>(current) { GetNameWithCorrectPluralization(property.Type, property.Name).ToCleanName() });
+                    usage |= usageValue;
                 }
                 else
                 {
-                    FindMatchesRecursively(property.Type, anonModel, new List<string>(current) { GetTypeName(property.Type) }, names);
+                    FindMatchesRecursively(property.Type, anonModel, new List<string>(current) { GetTypeName(property.Type) }, names, ref usage, usageValue);
                 }
             }
         }
@@ -182,7 +184,8 @@ namespace AutoRest.CSharp.Common.Input
             {
                 InputListType listType => IsSameType(listType.ElementType, anonModel),
                 InputDictionaryType dictionaryType => IsSameType(dictionaryType.ValueType, anonModel),
-                _ => type.Equals(anonModel)
+                InputModelType model => model.GetNotNullable().Equals(anonModel.GetNotNullable()),
+                _ => false
             };
 
         private static string GetTypeName(InputType type)
