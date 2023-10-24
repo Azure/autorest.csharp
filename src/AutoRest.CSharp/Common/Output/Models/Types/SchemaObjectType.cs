@@ -81,10 +81,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 
-        private ObjectType? _defaultDerivedType;
+        private SerializableObjectType? _defaultDerivedType;
         private bool _hasCalculatedDefaultDerivedType;
 
-        public ObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
+        public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
@@ -360,7 +360,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 implementations = CreateDiscriminatorImplementations(schemaDiscriminator);
             }
 
-            ObjectType defaultDerivedType = DefaultDerivedType!;
+            SerializableObjectType defaultDerivedType = DefaultDerivedType!;
 
             var property = GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true);
 
@@ -686,7 +686,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return SerializationBuilder.BuildXmlObjectSerialization(serializationName, this, _typeFactory);
         }
 
-        private ObjectType? BuildDefaultDerivedType()
+        private SerializableObjectType? BuildDefaultDerivedType()
         {
             if (_hasCalculatedDefaultDerivedType)
                 return _defaultDerivedType;
@@ -701,7 +701,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (defaultDerivedSchema is null)
                 return null;
 
-            return library.FindTypeProviderForSchema(defaultDerivedSchema) as ObjectType;
+            return library.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
         }
     }
 }

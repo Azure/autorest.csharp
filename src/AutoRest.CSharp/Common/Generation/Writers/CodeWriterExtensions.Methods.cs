@@ -124,6 +124,22 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     break;
+                case UsingScopeStatement usingStatement:
+                    using (writer.AmbientScope())
+                    {
+                        writer.AppendRaw("using (");
+                        if (usingStatement.Type == null)
+                            writer.AppendRaw("var ");
+                        else
+                            writer.Append($"{usingStatement.Type} ");
+                        writer.Append($"{usingStatement.Variable:D} = ");
+                        writer.WriteValueExpression(usingStatement.Value);
+                        writer.LineRaw(")");
+                        writer.LineRaw("{");
+                        WriteMethodBodyStatement(writer, usingStatement.Body.AsStatement());
+                        writer.LineRaw("}");
+                    }
+                    break;
                 case DeclarationStatement line:
                     writer.WriteDeclaration(line);
                     break;

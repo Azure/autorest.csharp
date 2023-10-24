@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly InputModelType _inputModel;
         private readonly TypeFactory _typeFactory;
         private readonly IReadOnlyList<InputModelType> _derivedTypes;
-        private readonly ObjectType? _defaultDerivedType;
+        private readonly SerializableObjectType? _defaultDerivedType;
         private readonly ModelTypeMapping? _modelTypeMapping;
         private readonly InputModelTypeUsage _inputModelUsage;
         private readonly InputTypeSerialization _inputModelSerialization;
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, ObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, SerializableObjectType? defaultDerivedType = null)
             : base(Configuration.Generation1ConvenienceClient ? inputModel.Namespace ?? defaultNamespace : defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory;

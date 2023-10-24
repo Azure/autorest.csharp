@@ -19,8 +19,10 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(NamedUnion);
 #else
-            using var document = JsonDocument.Parse(NamedUnion);
-            JsonSerializer.Serialize(writer, document.RootElement);
+            using (JsonDocument document = JsonDocument.Parse(NamedUnion))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             writer.WriteEndObject();
         }
