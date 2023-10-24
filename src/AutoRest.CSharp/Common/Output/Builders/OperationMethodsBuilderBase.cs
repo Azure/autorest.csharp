@@ -371,6 +371,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected IEnumerable<MethodBodyStatement> AddProtocolMethodArguments(RestClientMethodParameters parameters, List<ValueExpression> protocolMethodArguments)
         {
+            MethodBodyStatement? requestContentConversion = null;
             foreach (var protocolParameter in parameters.Protocol)
             {
                 if (parameters.Arguments.TryGetValue(protocolParameter, out var argument))
@@ -378,13 +379,26 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     protocolMethodArguments.Add(argument);
                     if (parameters.Conversions.TryGetValue(protocolParameter, out var conversion))
                     {
-                        yield return conversion;
+                        if (protocolParameter.Equals(KnownParameters.RequestContent) || protocolParameter.Equals(KnownParameters.RequestContentNullable))
+                        {
+                            requestContentConversion = conversion;
+                        }
+                        else
+                        {
+                            yield return conversion;
+                        }
+                        
                     }
                 }
                 else
                 {
                     protocolMethodArguments.Add(protocolParameter);
                 }
+            }
+
+            if (requestContentConversion is not null)
+            {
+                yield return requestContentConversion;
             }
         }
 
