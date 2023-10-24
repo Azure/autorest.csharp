@@ -2,28 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Common.Input
 {
     internal class AzureApiTypes : ApiTypes
     {
-        public override ResponseExpression GetResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
-        public override ResponseExpression GetFromResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
-
         public override Type ResponseType => typeof(Response);
         public override Type ResponseOfTType => typeof(Response<>);
-        public override Type FromResponseType => typeof(Response);
         public override string FromResponseName => "FromResponse";
         public override string ResponseParameterName => "response";
         public override string ContentStreamName => nameof(Response.ContentStream);
@@ -31,8 +21,6 @@ namespace AutoRest.CSharp.Common.Input
         public override string GetRawResponseName => nameof(Response<object>.GetRawResponse);
         public override string GetRawResponseString(string responseVariable) => responseVariable;
 
-        public override Type PipelineExtensionsType => typeof(HttpPipelineExtensions);
-        protected override string ProcessHeadAsBoolMessageName => nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage);
         protected override string ProcessMessageName => nameof(HttpPipelineExtensions.ProcessMessage);
 
         public override Type HttpPipelineType => typeof(HttpPipeline);
@@ -62,9 +50,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type HttpPipelinePolicyType => typeof(HttpPipelinePolicy);
 
-        public override FormattableString ProtocolReturnStartString => $"return ";
-        public override FormattableString ProtocolReturnEndString => $";";
-
         public override string HttpMessageRequestName => nameof(HttpMessage.Request);
 
         public override FormattableString GetSetMethodString(string requestName, string method)
@@ -79,15 +64,9 @@ namespace AutoRest.CSharp.Common.Input
         public override string ToRequestContentName => "ToRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);
 
-        public override RawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
-            => new RawRequestUriBuilderExpression(valueExpression ?? Snippets.New.Instance(typeof(RawRequestUriBuilder)));
-
         public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonSerializable);
 
         public override Type Utf8JsonWriterExtensionsType => typeof(Utf8JsonWriterExtensions);
-
-        public override Utf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
-            => new Utf8JsonRequestContentExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestContent)));
 
         public override Type OptionalType => typeof(Optional);
         public override Type OptionalPropertyType => typeof(Optional<>);
@@ -97,14 +76,10 @@ namespace AutoRest.CSharp.Common.Input
         public override Type ResponseClassifierType => typeof(ResponseClassifier);
         public override Type StatusCodeClassifierType => typeof(StatusCodeClassifier);
 
-        public override Type JsonElementExtensionsType => typeof(JsonElementExtensions);
-
         public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
             => new InvokeStaticMethodExpression(Configuration.ApiTypes.RequestContentType, Configuration.ApiTypes.RequestContentCreateName, new[]{freeFormObjectExpression});
 
         public override string EndPointSampleValue => "<https://my-service.azure.com>";
-
-        public override string JsonElementVariableName => "result";
 
         public override ValueExpression GetKeySampleExpression(string clientName)
             => new StringLiteralExpression("<key>", false);

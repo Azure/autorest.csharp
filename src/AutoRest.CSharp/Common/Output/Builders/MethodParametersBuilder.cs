@@ -710,7 +710,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (value.Type.FrameworkType == typeof(BinaryData))
             {
-                return new RequestContentExpression(value);
+                return new BinaryDataExpression(value);
             }
 
             if (TypeFactory.IsList(value.Type))

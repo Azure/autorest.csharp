@@ -63,11 +63,6 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         {
             methods = new List<Method>();
             restClientMethodsToTestMethods = new Dictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>>();
-            if (!Configuration.IsBranded)
-            {
-                return;
-            }
-
             foreach (var operationMethods in client.OperationMethods.OrderBy(m => m.Order))
             {
                 var samples = operationMethods.Samples;
@@ -280,11 +275,12 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                  * This will generate code like:
                  * Response<T> operation = <invocation>;
                  */
+                var responseOfT = new VariableReference(returnType, "response");
                 return new[]
                 {
-                    Declare(returnType, "response", new ResponseExpression(invocation), out var responseOfT),
+                    Declare(responseOfT, new ResponseExpression(invocation)),
                     EmptyLine,
-                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, responseOfT.ContentStream) : InvokeConsoleWriteLine(responseOfT.Value)
+                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, new ResponseExpression(responseOfT).ContentStream) : InvokeConsoleWriteLine(new ResponseExpression(responseOfT).Value)
                 };
             }
 

@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
+        private ObjectTypeProperty? _additionalPropertiesProperty;
         private readonly InputModelType _inputModel;
         private readonly TypeFactory _typeFactory;
         private readonly IReadOnlyList<InputModelType> _derivedTypes;
@@ -48,8 +49,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         public ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
-        public override ObjectTypeProperty? AdditionalPropertiesProperty => Fields.AdditionalProperties is {} additionalProperties
-                ? Properties.First(p => p.Declaration.Name == additionalProperties.Name)
+        public override ObjectTypeProperty? AdditionalPropertiesProperty => _additionalPropertiesProperty ??= EnsureAdditionalPropertiesProperty();
+
+        private ObjectTypeProperty? EnsureAdditionalPropertiesProperty()
+            => Fields.AdditionalProperties is {} additionalPropertiesField
+                ? Properties.Last(p => p.Declaration.Name == additionalPropertiesField.Name)
                 : null;
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;

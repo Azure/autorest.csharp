@@ -11,18 +11,13 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Input
 {
     internal abstract class ApiTypes
     {
-        public abstract ResponseExpression GetResponseExpression(ValueExpression untyped);
-        public abstract ResponseExpression GetFromResponseExpression(ValueExpression untyped);
-
         public abstract Type ResponseType { get; }
         public abstract Type ResponseOfTType { get; }
-        public abstract Type FromResponseType { get; }
 
         public abstract string FromResponseName { get; }
         public abstract string ResponseParameterName { get; }
@@ -39,19 +34,10 @@ namespace AutoRest.CSharp.Common.Input
         public Type GetValueTaskOfResponse(Type? valueType = default) =>
             valueType is null ? typeof(ValueTask<>).MakeGenericType(ResponseType) : typeof(ValueTask<>).MakeGenericType(ResponseOfTType.MakeGenericType(valueType));
 
-        public abstract Type PipelineExtensionsType { get; }
-        protected abstract string ProcessHeadAsBoolMessageName { get; }
-        public string GetProcessHeadAsBoolMessageName(bool isAsync = false) => isAsync ? $"{ProcessHeadAsBoolMessageName}Async" : ProcessHeadAsBoolMessageName;
         protected abstract string ProcessMessageName { get; }
-        public string GetProcessMessageName(bool isAsync = false) => isAsync ? $"{ProcessMessageName}Async" : ProcessMessageName;
 
         public abstract Type HttpPipelineType { get; }
         public abstract string HttpPipelineCreateMessageName { get; }
-        public FormattableString GetHttpPipelineCreateMessageFormat(bool withContext)
-        {
-            FormattableString context = withContext ? (FormattableString)$"{KnownParameters.RequestContext.Name:I}" : $"";
-            return $"_pipeline.{Configuration.ApiTypes.HttpPipelineCreateMessageName}({context}";
-        }
 
         public abstract Type HttpMessageType { get; }
         public abstract string HttpMessageResponseName { get; }
@@ -69,7 +55,6 @@ namespace AutoRest.CSharp.Common.Input
         public string AssertNotNullName => nameof(ClientUtilities.AssertNotNull);
 
         public abstract Type RequestContextType { get; }
-        public string CancellationTokenName = nameof(RequestOptions.CancellationToken);
 
         public abstract Type ChangeTrackingListType { get; }
         public abstract Type ChangeTrackingDictionaryType { get; }
@@ -86,9 +71,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract Type HttpPipelinePolicyType { get; }
 
-        public abstract FormattableString ProtocolReturnStartString { get; }
-        public abstract FormattableString ProtocolReturnEndString { get; }
-
         public abstract string HttpMessageRequestName { get; }
 
         public abstract FormattableString GetSetMethodString(string requestName, string method);
@@ -100,8 +82,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract string ToRequestContentName { get; }
         public abstract string RequestContentCreateName { get; }
 
-        public abstract RawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null);
-
         public abstract Type IUtf8JsonSerializableType { get; }
         public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
 
@@ -111,10 +91,9 @@ namespace AutoRest.CSharp.Common.Input
         public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
         public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
 
-        public abstract Utf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null);
-
         public abstract Type OptionalType { get; }
         public abstract Type OptionalPropertyType { get; }
+
         public string OptionalIsCollectionDefinedName => nameof(OptionalProperty.IsCollectionDefined);
         public string OptionalIsDefinedName => nameof(OptionalProperty.IsDefined);
         public string OptionalToDictionaryName => nameof(OptionalProperty.ToDictionary);
@@ -123,17 +102,14 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract Type RequestFailedExceptionType { get; }
 
-        public abstract Type ResponseClassifierType { get; }
-        public abstract Type StatusCodeClassifierType { get; }
         public string ResponseClassifierIsErrorResponseName => nameof(ResponseErrorClassifier.IsErrorResponse);
-
-        public abstract Type JsonElementExtensionsType { get; }
-
-        public abstract ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression);
 
         public abstract string EndPointSampleValue { get; }
 
-        public abstract string JsonElementVariableName { get; }
+        public abstract Type ResponseClassifierType { get; }
+        public abstract Type StatusCodeClassifierType { get; }
+
+        public abstract ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression);
 
         public abstract ValueExpression GetKeySampleExpression(string clientName);
 

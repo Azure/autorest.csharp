@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override{Configuration.ApiTypes.ResponseType} UpdateStatus({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
+                    writer.Line($"public override {Configuration.ApiTypes.ResponseType} UpdateStatus({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
