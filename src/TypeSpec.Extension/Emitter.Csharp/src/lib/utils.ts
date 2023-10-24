@@ -1,4 +1,9 @@
-import { Model, getFriendlyName, getProjectedNames } from "@typespec/compiler";
+import {
+    Model,
+    Type,
+    getFriendlyName,
+    getProjectedNames
+} from "@typespec/compiler";
 import {
     projectedNameCSharpKey,
     projectedNameClientKey
@@ -38,10 +43,8 @@ const anonCounter = (function () {
 })();
 
 export function getModelName(context: SdkContext, m: Model): string {
-    const projectedNamesMap = getProjectedNames(context.program, m);
     const name =
-        projectedNamesMap?.get(projectedNameCSharpKey) ??
-        projectedNamesMap?.get(projectedNameClientKey) ??
+        getProjectedNameForCsharp(context, m) ??
         getFriendlyName(context.program, m) ??
         getNameForTemplate(m);
 
@@ -51,4 +54,13 @@ export function getModelName(context: SdkContext, m: Model): string {
     }
 
     return name;
+}
+
+export function getProjectedNameForCsharp(
+    context: SdkContext,
+    type: Type
+): string | undefined {
+    const projectedNamesMap = getProjectedNames(context.program, type);
+    return projectedNamesMap?.get(projectedNameCSharpKey) ??
+        projectedNamesMap?.get(projectedNameClientKey);
 }
