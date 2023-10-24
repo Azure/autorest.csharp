@@ -782,16 +782,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteLROMethodBranch(MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMapping, bool async)
         {
-            var responseType = new CSharpType(typeof(Response<>), operation.OriginalReturnType!);
+            var responseType = operation.OriginalReturnType is null ? typeof(Response) : new CSharpType(typeof(Response<>), operation.OriginalReturnType);
             var response = new VariableReference(responseType, Configuration.ApiTypes.ResponseParameterName);
             _writer.Append($"var {response.Declaration:D} = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"){GetConfigureAwait(async)};");
 
-            WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, new NullableResponseExpression(response), async);
+            WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, response, async);
         }
 
-        private void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMapping, NullableResponseExpression response, bool isAsync)
+        private void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMapping, TypedValueExpression response, bool isAsync)
         {
             if (operation.InterimOperation is not null)
             {
@@ -811,7 +811,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var convertedValue = operation.GetConvertedValue(new MemberExpression(null, ArmClientReference), response);
                 if (convertedValue != null)
                 {
-                    _writer.WriteValueExpression(ResponseExpression.FromValue(convertedValue, response.GetRawResponse()));
+                    _writer.WriteValueExpression(ResponseExpression.FromValue(convertedValue, new NullableResponseExpression(response).GetRawResponse()));
                 }
                 else
                 {
