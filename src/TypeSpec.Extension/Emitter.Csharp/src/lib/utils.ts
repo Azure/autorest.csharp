@@ -61,6 +61,8 @@ export function getProjectedNameForCsharp(
     type: Type
 ): string | undefined {
     const projectedNamesMap = getProjectedNames(context.program, type);
-    return projectedNamesMap?.get(projectedNameCSharpKey) ??
-        projectedNamesMap?.get(projectedNameClientKey);
+    return (
+        projectedNamesMap?.get(projectedNameCSharpKey) ??
+        projectedNamesMap?.get(projectedNameClientKey)
+    );
 }
