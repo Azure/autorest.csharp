@@ -16,7 +16,10 @@ using _Type.Model.Inheritance.NotDiscriminated.Models;
 namespace _Type.Model.Inheritance.NotDiscriminated
 {
     // Data plane generated client.
-    /// <summary> Illustrates not-discriminated inheritance model. </summary>
+    /// <summary>
+    /// Illustrates not-discriminated inheritance model.
+    /// Hello World
+    /// </summary>
     public partial class NotDiscriminatedClient
     {
         private readonly HttpPipeline _pipeline;

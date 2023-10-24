@@ -16,7 +16,10 @@ using _Specs_.Azure.Core.Traits.Models;
 namespace _Specs_.Azure.Core.Traits
 {
     // Data plane generated client.
-    /// <summary> Illustrates Azure Core operation customizations by traits. </summary>
+    /// <summary>
+    /// Illustrates Azure Core operation customizations by traits
+    /// Hello World
+    /// </summary>
     public partial class TraitsClient
     {
         private readonly HttpPipeline _pipeline;

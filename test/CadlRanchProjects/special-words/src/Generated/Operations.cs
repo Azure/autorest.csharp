@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace SpecialWords
 {
     // Data plane generated sub-client.
-    /// <summary> Test reserved words as operation name. </summary>
+    /// <summary>
+    /// Test reserved words as operation name.
+    /// Hello World
+    /// </summary>
     public partial class Operations
     {
         private readonly HttpPipeline _pipeline;

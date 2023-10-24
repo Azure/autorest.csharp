@@ -14,7 +14,10 @@ using OpenAI.Models;
 namespace OpenAI
 {
     // Data plane generated sub-client.
-    /// <summary> The FineTunes sub-client. </summary>
+    /// <summary>
+    /// The FineTunes sub-client.
+    /// Hello World
+    /// </summary>
     public partial class FineTunes
     {
         private const string AuthorizationHeader = "Authorization";

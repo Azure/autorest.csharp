@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of datetime values. </summary>
+    /// <summary>
+    /// Dictionary of datetime values
+    /// Hello World
+    /// </summary>
     public partial class DatetimeValue
     {
         private readonly HttpPipeline _pipeline;

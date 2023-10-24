@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of datetime values. </summary>
+    /// <summary>
+    /// Array of datetime values
+    /// Hello World
+    /// </summary>
     public partial class DatetimeValue
     {
         private readonly HttpPipeline _pipeline;

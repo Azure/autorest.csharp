@@ -16,7 +16,10 @@ using _Azure.Lro.Standard.Models;
 namespace _Azure.Lro.Standard
 {
     // Data plane generated client.
-    /// <summary> Illustrates bodies templated with Azure Core with long-running operation. </summary>
+    /// <summary>
+    /// Illustrates bodies templated with Azure Core with long-running operation
+    /// Hello World
+    /// </summary>
     public partial class StandardClient
     {
         private readonly HttpPipeline _pipeline;

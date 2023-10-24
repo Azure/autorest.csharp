@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace Projection.ProjectedName
 {
     // Data plane generated client.
-    /// <summary> Projection. </summary>
+    /// <summary>
+    /// Projection
+    /// Hello World
+    /// </summary>
     public partial class ProjectedNameClient
     {
         private readonly HttpPipeline _pipeline;

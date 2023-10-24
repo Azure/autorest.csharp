@@ -18,7 +18,10 @@ using _Type._Array.Models;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of model values. </summary>
+    /// <summary>
+    /// Array of model values
+    /// Hello World
+    /// </summary>
     public partial class ModelValue
     {
         private readonly HttpPipeline _pipeline;

@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace Client.Structure.Service.rename.operation
 {
     // Data plane generated client.
-    /// <summary> The RenamedOperation service client. </summary>
+    /// <summary>
+    /// The RenamedOperation service client.
+    /// Hello World
+    /// </summary>
     public partial class RenamedOperationClient
     {
         private readonly HttpPipeline _pipeline;

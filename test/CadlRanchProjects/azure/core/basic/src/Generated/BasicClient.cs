@@ -18,7 +18,10 @@ using _Specs_.Azure.Core.Basic.Models;
 namespace _Specs_.Azure.Core.Basic
 {
     // Data plane generated client.
-    /// <summary> Illustrates bodies templated with Azure Core. </summary>
+    /// <summary>
+    /// Illustrates bodies templated with Azure Core
+    /// Hello World
+    /// </summary>
     public partial class BasicClient
     {
         private readonly HttpPipeline _pipeline;

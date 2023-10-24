@@ -16,7 +16,10 @@ using _Type._Enum.Fixed.Models;
 namespace _Type._Enum.Fixed
 {
     // Data plane generated client.
-    /// <summary> The Fixed service client. </summary>
+    /// <summary>
+    /// The Fixed service client.
+    /// Hello World
+    /// </summary>
     public partial class FixedClient
     {
         private readonly HttpPipeline _pipeline;

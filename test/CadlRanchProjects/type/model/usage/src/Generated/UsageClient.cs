@@ -16,7 +16,10 @@ using _Type.Model.Usage.Models;
 namespace _Type.Model.Usage
 {
     // Data plane generated client.
-    /// <summary> Illustrates usage of Record in different places(Operation parameters, return type or both). </summary>
+    /// <summary>
+    /// Illustrates usage of Record in different places(Operation parameters, return type or both).
+    /// Hello World
+    /// </summary>
     public partial class UsageClient
     {
         private readonly HttpPipeline _pipeline;

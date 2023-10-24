@@ -16,7 +16,10 @@ using _Type._Enum.Extensible.Models;
 namespace _Type._Enum.Extensible
 {
     // Data plane generated client.
-    /// <summary> The Extensible service client. </summary>
+    /// <summary>
+    /// The Extensible service client.
+    /// Hello World
+    /// </summary>
     public partial class ExtensibleClient
     {
         private readonly HttpPipeline _pipeline;

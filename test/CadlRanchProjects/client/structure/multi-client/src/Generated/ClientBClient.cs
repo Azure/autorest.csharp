@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Client.Structure.Service.Multiple.Client
 {
     // Data plane generated client.
-    /// <summary> The ClientB service client. </summary>
+    /// <summary>
+    /// The ClientB service client.
+    /// Hello World
+    /// </summary>
     public partial class ClientBClient
     {
         private readonly HttpPipeline _pipeline;

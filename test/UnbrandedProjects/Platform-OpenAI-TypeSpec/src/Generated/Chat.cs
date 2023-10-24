@@ -11,7 +11,10 @@ using System.Threading;
 namespace OpenAI
 {
     // Data plane generated sub-client.
-    /// <summary> The Chat sub-client. </summary>
+    /// <summary>
+    /// The Chat sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Chat
     {
         private const string AuthorizationHeader = "Authorization";

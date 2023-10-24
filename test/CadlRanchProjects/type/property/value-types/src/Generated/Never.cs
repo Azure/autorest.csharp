@@ -16,7 +16,10 @@ using _Type.Property.ValueTypes.Models;
 namespace _Type.Property.ValueTypes
 {
     // Data plane generated sub-client.
-    /// <summary> The Never sub-client. </summary>
+    /// <summary>
+    /// The Never sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Never
     {
         private readonly HttpPipeline _pipeline;

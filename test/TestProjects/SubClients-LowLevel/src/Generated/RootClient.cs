@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace SubClients_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The Root service client. </summary>
+    /// <summary>
+    /// The Root service client.
+    /// Hello World
+    /// </summary>
     public partial class RootClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Server.Path.Multiple
 {
     // Data plane generated client.
-    /// <summary> The Multiple service client. </summary>
+    /// <summary>
+    /// The Multiple service client.
+    /// Hello World
+    /// </summary>
     public partial class MultipleClient
     {
         private readonly HttpPipeline _pipeline;

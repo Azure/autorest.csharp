@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of float values. </summary>
+    /// <summary>
+    /// Dictionary of float values
+    /// Hello World
+    /// </summary>
     public partial class Float32Value
     {
         private readonly HttpPipeline _pipeline;

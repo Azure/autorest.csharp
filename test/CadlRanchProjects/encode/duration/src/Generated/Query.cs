@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace Encode.Duration
 {
     // Data plane generated sub-client.
-    /// <summary> The Query sub-client. </summary>
+    /// <summary>
+    /// The Query sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Query
     {
         private readonly HttpPipeline _pipeline;

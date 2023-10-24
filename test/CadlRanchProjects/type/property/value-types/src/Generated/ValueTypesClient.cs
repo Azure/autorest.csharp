@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace _Type.Property.ValueTypes
 {
     // Data plane generated client.
-    /// <summary> The ValueTypes service client. </summary>
+    /// <summary>
+    /// The ValueTypes service client.
+    /// Hello World
+    /// </summary>
     public partial class ValueTypesClient
     {
         private readonly HttpPipeline _pipeline;

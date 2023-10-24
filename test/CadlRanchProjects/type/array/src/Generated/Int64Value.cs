@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of int64 values. </summary>
+    /// <summary>
+    /// Array of int64 values
+    /// Hello World
+    /// </summary>
     public partial class Int64Value
     {
         private readonly HttpPipeline _pipeline;

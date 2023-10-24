@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace Parameters.Spread
 {
     // Data plane generated client.
-    /// <summary> The Spread service client. </summary>
+    /// <summary>
+    /// The Spread service client.
+    /// Hello World
+    /// </summary>
     public partial class SpreadClient
     {
         private readonly HttpPipeline _pipeline;

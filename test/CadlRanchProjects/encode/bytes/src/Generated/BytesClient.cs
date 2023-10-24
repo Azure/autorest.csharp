@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace Encode.Bytes
 {
     // Data plane generated client.
-    /// <summary> The Bytes service client. </summary>
+    /// <summary>
+    /// The Bytes service client.
+    /// Hello World
+    /// </summary>
     public partial class BytesClient
     {
         private readonly HttpPipeline _pipeline;

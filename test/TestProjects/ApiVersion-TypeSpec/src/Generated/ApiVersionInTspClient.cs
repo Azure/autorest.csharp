@@ -16,7 +16,10 @@ using Azure.Core.Pipeline;
 namespace ApiVersionInTsp
 {
     // Data plane generated client.
-    /// <summary> CADL project to test api versions. </summary>
+    /// <summary>
+    /// CADL project to test api versions.
+    /// Hello World
+    /// </summary>
     public partial class ApiVersionInTspClient
     {
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";

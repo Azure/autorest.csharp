@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace SpecialHeaders.Repeatability
 {
     // Data plane generated client.
-    /// <summary> Illustrates OASIS repeatability headers. </summary>
+    /// <summary>
+    /// Illustrates OASIS repeatability headers
+    /// Hello World
+    /// </summary>
     public partial class RepeatabilityClient
     {
         private readonly HttpPipeline _pipeline;

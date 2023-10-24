@@ -16,7 +16,10 @@ using _Type.Property.Optionality.Models;
 namespace _Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> The String sub-client. </summary>
+    /// <summary>
+    /// The String sub-client.
+    /// Hello World
+    /// </summary>
     public partial class String
     {
         private readonly HttpPipeline _pipeline;

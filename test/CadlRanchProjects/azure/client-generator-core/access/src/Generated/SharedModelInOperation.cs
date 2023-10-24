@@ -16,7 +16,10 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 namespace _Specs_.Azure.ClientGenerator.Core.Access
 {
     // Data plane generated sub-client.
-    /// <summary> The SharedModelInOperation sub-client. </summary>
+    /// <summary>
+    /// The SharedModelInOperation sub-client.
+    /// Hello World
+    /// </summary>
     public partial class SharedModelInOperation
     {
         private readonly HttpPipeline _pipeline;

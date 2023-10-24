@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace SecurityDefinition_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The SecurityDefinition service client. </summary>
+    /// <summary>
+    /// The SecurityDefinition service client.
+    /// Hello World
+    /// </summary>
     public partial class SecurityDefinitionClient
     {
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";

@@ -16,7 +16,10 @@ using _Type.Property.Optionality.Models;
 namespace _Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> Test optional and required properties. </summary>
+    /// <summary>
+    /// Test optional and required properties
+    /// Hello World
+    /// </summary>
     public partial class RequiredAndOptional
     {
         private readonly HttpPipeline _pipeline;

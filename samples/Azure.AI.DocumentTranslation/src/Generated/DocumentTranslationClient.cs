@@ -16,7 +16,10 @@ using Azure.Core.Pipeline;
 namespace Azure.AI.DocumentTranslation
 {
     // Data plane generated client.
-    /// <summary> The DocumentTranslation service client. </summary>
+    /// <summary>
+    /// The DocumentTranslation service client.
+    /// Hello World
+    /// </summary>
     public partial class DocumentTranslationClient
     {
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";

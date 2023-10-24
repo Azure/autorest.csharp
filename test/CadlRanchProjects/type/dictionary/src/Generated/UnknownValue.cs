@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of unknown values. </summary>
+    /// <summary>
+    /// Dictionary of unknown values
+    /// Hello World
+    /// </summary>
     public partial class UnknownValue
     {
         private readonly HttpPipeline _pipeline;

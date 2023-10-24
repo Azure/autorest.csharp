@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of nullable float values. </summary>
+    /// <summary>
+    /// Array of nullable float values
+    /// Hello World
+    /// </summary>
     public partial class NullableFloatValue
     {
         private readonly HttpPipeline _pipeline;

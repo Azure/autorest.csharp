@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace body_string_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The String service client. </summary>
+    /// <summary>
+    /// The String service client.
+    /// Hello World
+    /// </summary>
     public partial class StringClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

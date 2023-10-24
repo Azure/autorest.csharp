@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Authentication.Union
 {
     // Data plane generated client.
-    /// <summary> Illustrates clients generated with ApiKey and OAuth2 authentication. </summary>
+    /// <summary>
+    /// Illustrates clients generated with ApiKey and OAuth2 authentication.
+    /// Hello World
+    /// </summary>
     public partial class UnionClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";

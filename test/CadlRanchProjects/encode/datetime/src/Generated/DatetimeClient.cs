@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace Encode.Datetime
 {
     // Data plane generated client.
-    /// <summary> The Datetime service client. </summary>
+    /// <summary>
+    /// The Datetime service client.
+    /// Hello World
+    /// </summary>
     public partial class DatetimeClient
     {
         private readonly HttpPipeline _pipeline;

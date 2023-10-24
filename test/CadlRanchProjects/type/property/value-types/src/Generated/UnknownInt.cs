@@ -16,7 +16,10 @@ using _Type.Property.ValueTypes.Models;
 namespace _Type.Property.ValueTypes
 {
     // Data plane generated sub-client.
-    /// <summary> The UnknownInt sub-client. </summary>
+    /// <summary>
+    /// The UnknownInt sub-client.
+    /// Hello World
+    /// </summary>
     public partial class UnknownInt
     {
         private readonly HttpPipeline _pipeline;

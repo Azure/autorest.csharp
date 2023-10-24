@@ -16,7 +16,10 @@ using Parameters.BodyOptionality.Models;
 namespace Parameters.BodyOptionality
 {
     // Data plane generated client.
-    /// <summary> Test describing optionality of the request body. </summary>
+    /// <summary>
+    /// Test describing optionality of the request body.
+    /// Hello World
+    /// </summary>
     public partial class BodyOptionalityClient
     {
         private readonly HttpPipeline _pipeline;

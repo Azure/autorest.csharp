@@ -16,7 +16,10 @@ using _Type.Property.Nullable.Models;
 namespace _Type.Property.Nullable
 {
     // Data plane generated sub-client.
-    /// <summary> The String sub-client. </summary>
+    /// <summary>
+    /// The String sub-client.
+    /// Hello World
+    /// </summary>
     public partial class String
     {
         private readonly HttpPipeline _pipeline;

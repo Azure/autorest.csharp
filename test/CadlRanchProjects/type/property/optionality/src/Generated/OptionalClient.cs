@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace _Type.Property.Optionality
 {
     // Data plane generated client.
-    /// <summary> The Optional service client. </summary>
+    /// <summary>
+    /// The Optional service client.
+    /// Hello World
+    /// </summary>
     public partial class OptionalClient
     {
         private readonly HttpPipeline _pipeline;

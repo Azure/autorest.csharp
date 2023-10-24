@@ -16,7 +16,10 @@ using _Type.Union.Models;
 namespace _Type.Union
 {
     // Data plane generated client.
-    /// <summary> Test for type of union. </summary>
+    /// <summary>
+    /// Test for type of union.
+    /// Hello World
+    /// </summary>
     public partial class UnionClient
     {
         private readonly HttpPipeline _pipeline;

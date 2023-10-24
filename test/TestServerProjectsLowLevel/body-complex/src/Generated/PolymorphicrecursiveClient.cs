@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace body_complex_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The Polymorphicrecursive service client. </summary>
+    /// <summary>
+    /// The Polymorphicrecursive service client.
+    /// Hello World
+    /// </summary>
     public partial class PolymorphicrecursiveClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

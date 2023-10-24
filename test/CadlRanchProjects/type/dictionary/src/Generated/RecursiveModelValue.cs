@@ -18,7 +18,10 @@ using _Type._Dictionary.Models;
 namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of model values. </summary>
+    /// <summary>
+    /// Dictionary of model values
+    /// Hello World
+    /// </summary>
     public partial class RecursiveModelValue
     {
         private readonly HttpPipeline _pipeline;

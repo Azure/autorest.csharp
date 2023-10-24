@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace RenameGetList
 {
     // Data plane generated client.
-    /// <summary> The RenameGetList service client. </summary>
+    /// <summary>
+    /// The RenameGetList service client.
+    /// Hello World
+    /// </summary>
     public partial class RenameGetListClient
     {
         private readonly HttpPipeline _pipeline;

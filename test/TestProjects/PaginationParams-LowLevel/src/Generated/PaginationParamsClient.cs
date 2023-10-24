@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace PaginationParams_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The PaginationParams service client. </summary>
+    /// <summary>
+    /// The PaginationParams service client.
+    /// Hello World
+    /// </summary>
     public partial class PaginationParamsClient
     {
         private static readonly string[] AuthorizationScopes = new string[] { "user_impersonation" };

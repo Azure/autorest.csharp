@@ -14,7 +14,10 @@ using UnbrandedTypeSpec.Models;
 namespace UnbrandedTypeSpec
 {
     // Data plane generated client.
-    /// <summary> This is a sample typespec project. </summary>
+    /// <summary>
+    /// This is a sample typespec project.
+    /// Hello World
+    /// </summary>
     public partial class UnbrandedTypeSpecClient
     {
         private const string AuthorizationHeader = "my-api-key";

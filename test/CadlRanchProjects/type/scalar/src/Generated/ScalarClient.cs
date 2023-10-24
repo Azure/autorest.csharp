@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace _Type.Scalar
 {
     // Data plane generated client.
-    /// <summary> The Scalar service client. </summary>
+    /// <summary>
+    /// The Scalar service client.
+    /// Hello World
+    /// </summary>
     public partial class ScalarClient
     {
         private readonly HttpPipeline _pipeline;

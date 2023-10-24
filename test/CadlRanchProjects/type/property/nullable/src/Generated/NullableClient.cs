@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace _Type.Property.Nullable
 {
     // Data plane generated client.
-    /// <summary> The Nullable service client. </summary>
+    /// <summary>
+    /// The Nullable service client.
+    /// Hello World
+    /// </summary>
     public partial class NullableClient
     {
         private readonly HttpPipeline _pipeline;

@@ -16,7 +16,10 @@ using _Type.Model.Empty.Models;
 namespace _Type.Model.Empty
 {
     // Data plane generated client.
-    /// <summary> Illustrates usage of empty model used in operation's parameters and responses. </summary>
+    /// <summary>
+    /// Illustrates usage of empty model used in operation's parameters and responses.
+    /// Hello World
+    /// </summary>
     public partial class EmptyClient
     {
         private readonly HttpPipeline _pipeline;

@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Dictionary
 {
     // Data plane generated client.
-    /// <summary> The Dictionary service client. </summary>
+    /// <summary>
+    /// The Dictionary service client.
+    /// Hello World
+    /// </summary>
     public partial class DictionaryClient
     {
         private readonly HttpPipeline _pipeline;

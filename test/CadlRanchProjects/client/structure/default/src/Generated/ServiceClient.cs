@@ -22,6 +22,7 @@ namespace Client.Structure.Service.Default
     /// 4. split one interface into two clients
     /// 5. have two clients with operations come from different interfaces
     /// 6. have two clients with a hierarchy relation.
+    /// Hello World
     /// </summary>
     public partial class ServiceClient
     {

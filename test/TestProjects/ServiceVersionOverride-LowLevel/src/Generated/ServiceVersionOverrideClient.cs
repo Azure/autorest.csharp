@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace ServiceVersionOverride_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The ServiceVersionOverride service client. </summary>
+    /// <summary>
+    /// The ServiceVersionOverride service client.
+    /// Hello World
+    /// </summary>
     public partial class ServiceVersionOverrideClient
     {
         private readonly HttpPipeline _pipeline;

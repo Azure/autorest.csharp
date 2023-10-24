@@ -16,7 +16,10 @@ using _Type.Property.ValueTypes.Models;
 namespace _Type.Property.ValueTypes
 {
     // Data plane generated sub-client.
-    /// <summary> The Enum sub-client. </summary>
+    /// <summary>
+    /// The Enum sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Enum
     {
         private readonly HttpPipeline _pipeline;

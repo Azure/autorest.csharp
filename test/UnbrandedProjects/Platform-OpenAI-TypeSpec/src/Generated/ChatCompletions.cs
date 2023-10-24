@@ -14,7 +14,10 @@ using OpenAI.Models;
 namespace OpenAI
 {
     // Data plane generated sub-client.
-    /// <summary> The ChatCompletions sub-client. </summary>
+    /// <summary>
+    /// The ChatCompletions sub-client.
+    /// Hello World
+    /// </summary>
     public partial class ChatCompletions
     {
         private const string AuthorizationHeader = "Authorization";

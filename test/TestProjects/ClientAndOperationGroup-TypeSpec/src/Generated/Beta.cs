@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace ClientAndOperationGroup
 {
     // Data plane generated sub-client.
-    /// <summary> The Beta sub-client. </summary>
+    /// <summary>
+    /// The Beta sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Beta
     {
         private readonly HttpPipeline _pipeline;

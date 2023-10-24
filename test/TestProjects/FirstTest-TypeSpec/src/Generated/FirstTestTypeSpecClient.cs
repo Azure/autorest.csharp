@@ -16,7 +16,10 @@ using FirstTestTypeSpec.Models;
 namespace FirstTestTypeSpec
 {
     // Data plane generated client.
-    /// <summary> This is a sample typespec project. </summary>
+    /// <summary>
+    /// This is a sample typespec project.
+    /// Hello World
+    /// </summary>
     public partial class FirstTestTypeSpecClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";

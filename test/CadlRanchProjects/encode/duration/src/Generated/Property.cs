@@ -16,7 +16,10 @@ using Encode.Duration.Models;
 namespace Encode.Duration
 {
     // Data plane generated sub-client.
-    /// <summary> The Property sub-client. </summary>
+    /// <summary>
+    /// The Property sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Property
     {
         private readonly HttpPipeline _pipeline;

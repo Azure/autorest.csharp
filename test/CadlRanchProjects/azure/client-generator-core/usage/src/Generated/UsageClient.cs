@@ -16,7 +16,10 @@ using _Specs_.Azure.ClientGenerator.Core.Usage.Models;
 namespace _Specs_.Azure.ClientGenerator.Core.Usage
 {
     // Data plane generated client.
-    /// <summary> The Usage service client. </summary>
+    /// <summary>
+    /// The Usage service client.
+    /// Hello World
+    /// </summary>
     public partial class UsageClient
     {
         private readonly HttpPipeline _pipeline;

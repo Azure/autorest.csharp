@@ -16,7 +16,10 @@ using _Type.Property.ValueTypes.Models;
 namespace _Type.Property.ValueTypes
 {
     // Data plane generated sub-client.
-    /// <summary> The Float sub-client. </summary>
+    /// <summary>
+    /// The Float sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Float
     {
         private readonly HttpPipeline _pipeline;

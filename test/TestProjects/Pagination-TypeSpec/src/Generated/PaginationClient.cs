@@ -16,7 +16,10 @@ using Pagination.Models;
 namespace Pagination
 {
     // Data plane generated client.
-    /// <summary> The Pagination service client. </summary>
+    /// <summary>
+    /// The Pagination service client.
+    /// Hello World
+    /// </summary>
     public partial class PaginationClient
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://pagination.azure.com/.default" };

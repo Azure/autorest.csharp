@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace Payload.ContentNegotiation
 {
     // Data plane generated client.
-    /// <summary> The ContentNegotiation service client. </summary>
+    /// <summary>
+    /// The ContentNegotiation service client.
+    /// Hello World
+    /// </summary>
     public partial class ContentNegotiationClient
     {
         private readonly HttpPipeline _pipeline;

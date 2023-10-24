@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace _Type.Scalar
 {
     // Data plane generated sub-client.
-    /// <summary> The Boolean sub-client. </summary>
+    /// <summary>
+    /// The Boolean sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Boolean
     {
         private readonly HttpPipeline _pipeline;

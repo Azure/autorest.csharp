@@ -12,7 +12,10 @@ using System.Threading;
 namespace OpenAI
 {
     // Data plane generated client.
-    /// <summary> The OpenAI service client. </summary>
+    /// <summary>
+    /// The OpenAI service client.
+    /// Hello World
+    /// </summary>
     public partial class OpenAIClient
     {
         private const string AuthorizationHeader = "Authorization";

@@ -16,7 +16,10 @@ using _Type.Model.Inheritance.SingleDiscriminator.Models;
 namespace _Type.Model.Inheritance.SingleDiscriminator
 {
     // Data plane generated client.
-    /// <summary> Illustrates inheritance with single discriminator. </summary>
+    /// <summary>
+    /// Illustrates inheritance with single discriminator.
+    /// Hello World
+    /// </summary>
     public partial class SingleDiscriminatorClient
     {
         private readonly HttpPipeline _pipeline;

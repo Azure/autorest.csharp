@@ -11,7 +11,10 @@ using System.Threading;
 namespace OpenAI
 {
     // Data plane generated sub-client.
-    /// <summary> The FineTuning sub-client. </summary>
+    /// <summary>
+    /// The FineTuning sub-client.
+    /// Hello World
+    /// </summary>
     public partial class FineTuning
     {
         private const string AuthorizationHeader = "Authorization";

@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace ClientAndOperationGroup
 {
     // Data plane generated client.
-    /// <summary> The ClientAndOperationGroup service client. </summary>
+    /// <summary>
+    /// The ClientAndOperationGroup service client.
+    /// Hello World
+    /// </summary>
     public partial class ClientAndOperationGroupClient
     {
         private readonly HttpPipeline _pipeline;

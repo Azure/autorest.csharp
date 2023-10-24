@@ -14,7 +14,10 @@ using OpenAI.Models;
 namespace OpenAI
 {
     // Data plane generated sub-client.
-    /// <summary> The AudioTranslations sub-client. </summary>
+    /// <summary>
+    /// The AudioTranslations sub-client.
+    /// Hello World
+    /// </summary>
     public partial class AudioTranslations
     {
         private const string AuthorizationHeader = "Authorization";

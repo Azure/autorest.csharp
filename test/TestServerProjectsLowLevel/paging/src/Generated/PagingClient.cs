@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace paging_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The Paging service client. </summary>
+    /// <summary>
+    /// The Paging service client.
+    /// Hello World
+    /// </summary>
     public partial class PagingClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

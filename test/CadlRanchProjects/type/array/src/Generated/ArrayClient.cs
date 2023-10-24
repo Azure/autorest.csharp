@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated client.
-    /// <summary> The Array service client. </summary>
+    /// <summary>
+    /// The Array service client.
+    /// Hello World
+    /// </summary>
     public partial class ArrayClient
     {
         private readonly HttpPipeline _pipeline;

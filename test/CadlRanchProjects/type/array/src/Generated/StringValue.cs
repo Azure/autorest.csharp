@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of string values. </summary>
+    /// <summary>
+    /// Array of string values
+    /// Hello World
+    /// </summary>
     public partial class StringValue
     {
         private readonly HttpPipeline _pipeline;

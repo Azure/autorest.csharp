@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace SpecialHeaders.ConditionalRequest
 {
     // Data plane generated client.
-    /// <summary> Illustrates conditional request headers. </summary>
+    /// <summary>
+    /// Illustrates conditional request headers
+    /// Hello World
+    /// </summary>
     public partial class ConditionalRequestClient
     {
         private readonly HttpPipeline _pipeline;

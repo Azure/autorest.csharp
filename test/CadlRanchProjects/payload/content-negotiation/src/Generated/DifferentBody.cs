@@ -16,7 +16,10 @@ using Payload.ContentNegotiation.Models;
 namespace Payload.ContentNegotiation
 {
     // Data plane generated sub-client.
-    /// <summary> The DifferentBody sub-client. </summary>
+    /// <summary>
+    /// The DifferentBody sub-client.
+    /// Hello World
+    /// </summary>
     public partial class DifferentBody
     {
         private readonly HttpPipeline _pipeline;

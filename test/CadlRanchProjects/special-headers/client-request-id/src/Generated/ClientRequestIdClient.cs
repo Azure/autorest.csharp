@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace SpecialHeaders.ClientRequestId
 {
     // Data plane generated client.
-    /// <summary> Azure client request id header configurations. </summary>
+    /// <summary>
+    /// Azure client request id header configurations.
+    /// Hello World
+    /// </summary>
     public partial class ClientRequestIdClient
     {
         private readonly HttpPipeline _pipeline;

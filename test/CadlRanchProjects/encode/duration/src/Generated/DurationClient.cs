@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace Encode.Duration
 {
     // Data plane generated client.
-    /// <summary> The Duration service client. </summary>
+    /// <summary>
+    /// The Duration service client.
+    /// Hello World
+    /// </summary>
     public partial class DurationClient
     {
         private readonly HttpPipeline _pipeline;

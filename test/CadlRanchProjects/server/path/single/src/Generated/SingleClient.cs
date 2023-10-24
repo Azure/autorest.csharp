@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Server.Path.Single
 {
     // Data plane generated client.
-    /// <summary> Illustrates server with a single path parameter @server. </summary>
+    /// <summary>
+    /// Illustrates server with a single path parameter @server
+    /// Hello World
+    /// </summary>
     public partial class SingleClient
     {
         private readonly HttpPipeline _pipeline;

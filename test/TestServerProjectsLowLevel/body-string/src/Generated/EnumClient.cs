@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace body_string_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The Enum service client. </summary>
+    /// <summary>
+    /// The Enum service client.
+    /// Hello World
+    /// </summary>
     public partial class EnumClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace SpecialWords
 {
     // Data plane generated client.
-    /// <summary> The SpecialWords service client. </summary>
+    /// <summary>
+    /// The SpecialWords service client.
+    /// Hello World
+    /// </summary>
     public partial class SpecialWordsClient
     {
         private readonly HttpPipeline _pipeline;

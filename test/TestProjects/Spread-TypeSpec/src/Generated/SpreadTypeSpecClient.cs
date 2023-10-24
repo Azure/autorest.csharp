@@ -18,7 +18,10 @@ using SpreadTypeSpec.Models;
 namespace SpreadTypeSpec
 {
     // Data plane generated client.
-    /// <summary> This is a spread model or alias service. </summary>
+    /// <summary>
+    /// This is a spread model or alias service.
+    /// Hello World
+    /// </summary>
     public partial class SpreadTypeSpecClient
     {
         private readonly HttpPipeline _pipeline;

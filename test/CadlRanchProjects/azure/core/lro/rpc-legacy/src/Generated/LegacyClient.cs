@@ -16,7 +16,10 @@ using _Azure.Lro.RpcLegacy.Models;
 namespace _Azure.Lro.RpcLegacy
 {
     // Data plane generated client.
-    /// <summary> POST to create resource, poll URL via operation-location header. </summary>
+    /// <summary>
+    /// POST to create resource, poll URL via operation-location header.
+    /// Hello World
+    /// </summary>
     public partial class LegacyClient
     {
         private readonly HttpPipeline _pipeline;

@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of boolean values. </summary>
+    /// <summary>
+    /// Dictionary of boolean values
+    /// Hello World
+    /// </summary>
     public partial class BooleanValue
     {
         private readonly HttpPipeline _pipeline;

@@ -16,7 +16,10 @@ using PetStore.Models;
 namespace PetStore
 {
     // Data plane generated client.
-    /// <summary> Manage your pets. You can delete or get the Pet from pet store. </summary>
+    /// <summary>
+    /// Manage your pets. You can delete or get the Pet from pet store.
+    /// Hello World
+    /// </summary>
     public partial class PetStoreClient
     {
         private readonly HttpPipeline _pipeline;

@@ -16,7 +16,10 @@ using _Type.Property.ValueTypes.Models;
 namespace _Type.Property.ValueTypes
 {
     // Data plane generated sub-client.
-    /// <summary> The Boolean sub-client. </summary>
+    /// <summary>
+    /// The Boolean sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Boolean
     {
         private readonly HttpPipeline _pipeline;

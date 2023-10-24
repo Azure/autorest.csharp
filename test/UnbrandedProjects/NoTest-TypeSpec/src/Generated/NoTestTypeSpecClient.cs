@@ -14,7 +14,10 @@ using NoTestTypeSpec.Models;
 namespace NoTestTypeSpec
 {
     // Data plane generated client.
-    /// <summary> This is a sample typespec project. </summary>
+    /// <summary>
+    /// This is a sample typespec project.
+    /// Hello World
+    /// </summary>
     public partial class NoTestTypeSpecClient
     {
         private const string AuthorizationHeader = "my-api-key";

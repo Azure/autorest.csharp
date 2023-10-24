@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace Parameters.CollectionFormat
 {
     // Data plane generated client.
-    /// <summary> The CollectionFormat service client. </summary>
+    /// <summary>
+    /// The CollectionFormat service client.
+    /// Hello World
+    /// </summary>
     public partial class CollectionFormatClient
     {
         private readonly HttpPipeline _pipeline;

@@ -16,7 +16,10 @@ using ParametersCadl.Models;
 namespace ParametersCadl
 {
     // Data plane generated client.
-    /// <summary> The ParametersCadl service client. </summary>
+    /// <summary>
+    /// The ParametersCadl service client.
+    /// Hello World
+    /// </summary>
     public partial class ParametersCadlClient
     {
         private readonly HttpPipeline _pipeline;

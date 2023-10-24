@@ -14,7 +14,10 @@ using OpenAI.Models;
 namespace OpenAI
 {
     // Data plane generated sub-client.
-    /// <summary> The Embeddings sub-client. </summary>
+    /// <summary>
+    /// The Embeddings sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Embeddings
     {
         private const string AuthorizationHeader = "Authorization";

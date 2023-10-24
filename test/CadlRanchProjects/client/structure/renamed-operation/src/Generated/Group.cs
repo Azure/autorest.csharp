@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Client.Structure.Service.rename.operation
 {
     // Data plane generated sub-client.
-    /// <summary> The Group sub-client. </summary>
+    /// <summary>
+    /// The Group sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Group
     {
         private readonly HttpPipeline _pipeline;

@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace Payload.ContentNegotiation
 {
     // Data plane generated sub-client.
-    /// <summary> The SameBody sub-client. </summary>
+    /// <summary>
+    /// The SameBody sub-client.
+    /// Hello World
+    /// </summary>
     public partial class SameBody
     {
         private readonly HttpPipeline _pipeline;

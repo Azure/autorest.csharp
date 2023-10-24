@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of nullable float values. </summary>
+    /// <summary>
+    /// Dictionary of nullable float values
+    /// Hello World
+    /// </summary>
     public partial class NullableFloatValue
     {
         private readonly HttpPipeline _pipeline;

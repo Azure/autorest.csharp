@@ -16,7 +16,10 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 namespace _Specs_.Azure.ClientGenerator.Core.Access
 {
     // Data plane generated sub-client.
-    /// <summary> The RelativeModelInOperation sub-client. </summary>
+    /// <summary>
+    /// The RelativeModelInOperation sub-client.
+    /// Hello World
+    /// </summary>
     public partial class RelativeModelInOperation
     {
         private readonly HttpPipeline _pipeline;

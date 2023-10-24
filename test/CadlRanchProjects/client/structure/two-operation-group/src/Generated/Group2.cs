@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Client.Structure.Service.TwoOperationGroup
 {
     // Data plane generated sub-client.
-    /// <summary> The Group2 sub-client. </summary>
+    /// <summary>
+    /// The Group2 sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Group2
     {
         private readonly HttpPipeline _pipeline;

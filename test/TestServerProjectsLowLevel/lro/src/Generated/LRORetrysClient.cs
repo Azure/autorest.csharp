@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace lro_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The LRORetrys service client. </summary>
+    /// <summary>
+    /// The LRORetrys service client.
+    /// Hello World
+    /// </summary>
     public partial class LRORetrysClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

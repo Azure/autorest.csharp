@@ -16,7 +16,10 @@ using Parameters.BodyOptionality.Models;
 namespace Parameters.BodyOptionality
 {
     // Data plane generated sub-client.
-    /// <summary> The OptionalExplicit sub-client. </summary>
+    /// <summary>
+    /// The OptionalExplicit sub-client.
+    /// Hello World
+    /// </summary>
     public partial class OptionalExplicit
     {
         private readonly HttpPipeline _pipeline;

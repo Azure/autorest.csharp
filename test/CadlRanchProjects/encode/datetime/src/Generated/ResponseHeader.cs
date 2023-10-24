@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Encode.Datetime
 {
     // Data plane generated sub-client.
-    /// <summary> The ResponseHeader sub-client. </summary>
+    /// <summary>
+    /// The ResponseHeader sub-client.
+    /// Hello World
+    /// </summary>
     public partial class ResponseHeader
     {
         private readonly HttpPipeline _pipeline;

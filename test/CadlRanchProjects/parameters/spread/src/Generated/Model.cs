@@ -16,7 +16,10 @@ using Parameters.Spread.Models;
 namespace Parameters.Spread
 {
     // Data plane generated sub-client.
-    /// <summary> The Model sub-client. </summary>
+    /// <summary>
+    /// The Model sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Model
     {
         private readonly HttpPipeline _pipeline;

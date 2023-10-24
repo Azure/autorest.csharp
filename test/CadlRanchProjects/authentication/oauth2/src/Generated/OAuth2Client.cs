@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Authentication.OAuth2
 {
     // Data plane generated client.
-    /// <summary> Illustrates clients generated with OAuth2 authentication. </summary>
+    /// <summary>
+    /// Illustrates clients generated with OAuth2 authentication.
+    /// Hello World
+    /// </summary>
     public partial class OAuth2Client
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://security.microsoft.com/.default" };

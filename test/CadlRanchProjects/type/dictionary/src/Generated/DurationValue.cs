@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of duration values. </summary>
+    /// <summary>
+    /// Dictionary of duration values
+    /// Hello World
+    /// </summary>
     public partial class DurationValue
     {
         private readonly HttpPipeline _pipeline;

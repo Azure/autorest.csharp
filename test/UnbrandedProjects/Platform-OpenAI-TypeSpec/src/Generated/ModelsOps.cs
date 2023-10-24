@@ -14,7 +14,10 @@ using OpenAI.Models;
 namespace OpenAI
 {
     // Data plane generated sub-client.
-    /// <summary> The ModelsOps sub-client. </summary>
+    /// <summary>
+    /// The ModelsOps sub-client.
+    /// Hello World
+    /// </summary>
     public partial class ModelsOps
     {
         private const string AuthorizationHeader = "Authorization";

@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace AnomalyDetector
 {
     // Data plane generated client.
-    /// <summary> The AnomalyDetector service client. </summary>
+    /// <summary>
+    /// The AnomalyDetector service client.
+    /// Hello World
+    /// </summary>
     public partial class AnomalyDetectorClient
     {
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";

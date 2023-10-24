@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace SpecialWords
 {
     // Data plane generated sub-client.
-    /// <summary> Verify model names. </summary>
+    /// <summary>
+    /// Verify model names
+    /// Hello World
+    /// </summary>
     public partial class ModelProperties
     {
         private readonly HttpPipeline _pipeline;

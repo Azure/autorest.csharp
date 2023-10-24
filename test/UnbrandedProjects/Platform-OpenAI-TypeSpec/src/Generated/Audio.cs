@@ -11,7 +11,10 @@ using System.Threading;
 namespace OpenAI
 {
     // Data plane generated sub-client.
-    /// <summary> The Audio sub-client. </summary>
+    /// <summary>
+    /// The Audio sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Audio
     {
         private const string AuthorizationHeader = "Authorization";

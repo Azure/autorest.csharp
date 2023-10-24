@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace security_aad_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The AutorestSecurityAad service client. </summary>
+    /// <summary>
+    /// The AutorestSecurityAad service client.
+    /// Hello World
+    /// </summary>
     public partial class AutorestSecurityAadClient
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://security.microsoft.com/.default" };

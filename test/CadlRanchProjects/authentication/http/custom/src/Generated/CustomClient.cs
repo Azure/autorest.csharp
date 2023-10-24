@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Authentication.Http.Custom
 {
     // Data plane generated client.
-    /// <summary> Illustrates clients generated with generic HTTP auth. </summary>
+    /// <summary>
+    /// Illustrates clients generated with generic HTTP auth.
+    /// Hello World
+    /// </summary>
     public partial class CustomClient
     {
         private const string AuthorizationHeader = "Authorization";

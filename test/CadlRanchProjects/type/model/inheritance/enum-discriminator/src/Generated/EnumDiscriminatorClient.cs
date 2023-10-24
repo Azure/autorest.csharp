@@ -16,7 +16,10 @@ using _Type.Model.Inheritance.EnumDiscriminator.Models;
 namespace _Type.Model.Inheritance.EnumDiscriminator
 {
     // Data plane generated client.
-    /// <summary> Illustrates inheritance with enum discriminator. </summary>
+    /// <summary>
+    /// Illustrates inheritance with enum discriminator.
+    /// Hello World
+    /// </summary>
     public partial class EnumDiscriminatorClient
     {
         private readonly HttpPipeline _pipeline;

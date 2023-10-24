@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace security_key_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The AutorestSecurityKey service client. </summary>
+    /// <summary>
+    /// The AutorestSecurityKey service client.
+    /// Hello World
+    /// </summary>
     public partial class AutorestSecurityKeyClient
     {
         private const string AuthorizationHeader = "security-key";

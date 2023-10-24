@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of duration values. </summary>
+    /// <summary>
+    /// Array of duration values
+    /// Hello World
+    /// </summary>
     public partial class DurationValue
     {
         private readonly HttpPipeline _pipeline;

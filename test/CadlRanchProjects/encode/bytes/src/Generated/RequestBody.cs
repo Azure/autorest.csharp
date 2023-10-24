@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace Encode.Bytes
 {
     // Data plane generated sub-client.
-    /// <summary> The RequestBody sub-client. </summary>
+    /// <summary>
+    /// The RequestBody sub-client.
+    /// Hello World
+    /// </summary>
     public partial class RequestBody
     {
         private readonly HttpPipeline _pipeline;

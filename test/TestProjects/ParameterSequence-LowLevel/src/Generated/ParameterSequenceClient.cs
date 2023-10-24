@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace ParameterSequence_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The ParameterSequence service client. </summary>
+    /// <summary>
+    /// The ParameterSequence service client.
+    /// Hello World
+    /// </summary>
     public partial class ParameterSequenceClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

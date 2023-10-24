@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of boolean values. </summary>
+    /// <summary>
+    /// Array of boolean values
+    /// Hello World
+    /// </summary>
     public partial class BooleanValue
     {
         private readonly HttpPipeline _pipeline;

@@ -12,7 +12,10 @@ using Azure.Core.Pipeline;
 namespace _Specs_.Azure.ClientGenerator.Core.Access
 {
     // Data plane generated client.
-    /// <summary> The Access service client. </summary>
+    /// <summary>
+    /// The Access service client.
+    /// Hello World
+    /// </summary>
     public partial class AccessClient
     {
         private readonly HttpPipeline _pipeline;

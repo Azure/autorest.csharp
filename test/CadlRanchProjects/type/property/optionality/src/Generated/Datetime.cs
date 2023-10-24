@@ -16,7 +16,10 @@ using _Type.Property.Optionality.Models;
 namespace _Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> The Datetime sub-client. </summary>
+    /// <summary>
+    /// The Datetime sub-client.
+    /// Hello World
+    /// </summary>
     public partial class Datetime
     {
         private readonly HttpPipeline _pipeline;

@@ -16,7 +16,10 @@ using ConfidentLevelsInTsp.Models;
 namespace ConfidentLevelsInTsp
 {
     // Data plane generated client.
-    /// <summary> CADL project to test various types of models. </summary>
+    /// <summary>
+    /// CADL project to test various types of models.
+    /// Hello World
+    /// </summary>
     public partial class ConfidentLevelsInTspClient
     {
         private readonly HttpPipeline _pipeline;

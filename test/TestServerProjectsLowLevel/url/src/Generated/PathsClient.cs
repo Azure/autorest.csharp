@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace url_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The Paths service client. </summary>
+    /// <summary>
+    /// The Paths service client.
+    /// Hello World
+    /// </summary>
     public partial class PathsClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

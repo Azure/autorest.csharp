@@ -15,7 +15,10 @@ using Azure.Core.Pipeline;
 namespace ResourceClients_LowLevel
 {
     // Data plane generated sub-client.
-    /// <summary> The ResourceGroup sub-client. </summary>
+    /// <summary>
+    /// The ResourceGroup sub-client.
+    /// Hello World
+    /// </summary>
     public partial class ResourceGroup
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

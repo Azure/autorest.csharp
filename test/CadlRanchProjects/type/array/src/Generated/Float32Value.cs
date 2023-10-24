@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of float values. </summary>
+    /// <summary>
+    /// Array of float values
+    /// Hello World
+    /// </summary>
     public partial class Float32Value
     {
         private readonly HttpPipeline _pipeline;

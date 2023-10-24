@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace httpInfrastructure_LowLevel
 {
     // Data plane generated client.
-    /// <summary> The HttpRedirects service client. </summary>
+    /// <summary>
+    /// The HttpRedirects service client.
+    /// Hello World
+    /// </summary>
     public partial class HttpRedirectsClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

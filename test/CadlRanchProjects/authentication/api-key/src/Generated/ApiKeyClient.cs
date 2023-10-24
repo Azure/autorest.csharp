@@ -14,7 +14,10 @@ using Azure.Core.Pipeline;
 namespace Authentication.ApiKey
 {
     // Data plane generated client.
-    /// <summary> Illustrates clients generated with ApiKey authentication. </summary>
+    /// <summary>
+    /// Illustrates clients generated with ApiKey authentication.
+    /// Hello World
+    /// </summary>
     public partial class ApiKeyClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";

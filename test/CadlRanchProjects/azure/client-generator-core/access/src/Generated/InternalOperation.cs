@@ -16,7 +16,10 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 namespace _Specs_.Azure.ClientGenerator.Core.Access
 {
     // Data plane generated sub-client.
-    /// <summary> The InternalOperation sub-client. </summary>
+    /// <summary>
+    /// The InternalOperation sub-client.
+    /// Hello World
+    /// </summary>
     public partial class InternalOperation
     {
         private readonly HttpPipeline _pipeline;

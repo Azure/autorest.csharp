@@ -17,7 +17,10 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of unknown values. </summary>
+    /// <summary>
+    /// Array of unknown values
+    /// Hello World
+    /// </summary>
     public partial class UnknownValue
     {
         private readonly HttpPipeline _pipeline;
