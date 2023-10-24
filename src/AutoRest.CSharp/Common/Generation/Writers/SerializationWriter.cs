@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input;
@@ -43,8 +44,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             //var typeOfT = model.IsUnknownDerivedType ? model.Inherits!.Implementation!.Type : model.Type;
             var typeOfT = model.Type;
-            CSharpType iModelSerializableType = new CSharpType(typeof(IModelSerializable<>), typeOfT);
-            CSharpType iModelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), typeOfT);
+            CSharpType iModelSerializableType = new CSharpType(typeof(IModel<>), typeOfT);
+            CSharpType iModelJsonSerializableType = new CSharpType(typeof(IJsonModel<>), typeOfT);
 
             if (!hasJson && !hasXml)
             {
@@ -63,7 +64,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer
                     .AppendIf($": ", hasJson || hasXml)
                     .AppendIf($"{Configuration.ApiTypes.IUtf8JsonSerializableType}, {iModelJsonSerializableType}, ", hasJson)
-                    .AppendIf($"{typeof(IModelJsonSerializable<object>)}, ", hasJson && model.IsStruct)
+                    .AppendIf($"{typeof(IJsonModel<object>)}, ", hasJson && model.IsStruct)
                     .AppendIf($"{typeof(IXmlSerializable)}, {iModelSerializableType}, ", hasXml)
                     .RemoveTrailingComma();
 
@@ -80,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteJsonSerialization(writer, model, jsonSerialization);
                     }
 
-                    WriteModelSerialization(writer, model, hasJson, hasXml);
+                    WriteIModelImplementations(writer, model, hasJson, hasXml);
 
                     foreach (var method in model.Methods)
                     {
@@ -129,9 +130,9 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         /// <summary>
-        /// This method writes the implementation of IUtf8JsonSerializable, IModelJsonSerializable{T} and the static deserialization method
-        /// If the model is defined as a struct, including the implemenation of IModelJsonSerializable{object}
-        /// NOTE: the inherited methods from IModelSerializable{T} and IModelSerializable{object} is excluded
+        /// This method writes the implementation of IUtf8JsonSerializable, IJsonModel{T} and the static deserialization method
+        /// If the model is defined as a struct, including the implemenation of IJsonModel{object}
+        /// NOTE: the inherited methods from IModel{T} and IModel{object} is excluded
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="model"></param>
@@ -139,7 +140,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WriteJsonSerialization(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization jsonSerialization)
         {
             // the methods that implement the interface IModelJsonSerializable<T> (do not include inherited methods)
-            foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializableMethods(model, jsonSerialization))
+            foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(model, jsonSerialization))
             {
                 writer.WriteMethod(method);
             }
@@ -152,15 +153,15 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         /// <summary>
-        /// This method writes the implementation of IModelSerializable{T}
+        /// This method writes the implementation of IModel{T}
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="model"></param>
         /// <param name="hasJson"></param>
         /// <param name="hasXml"></param>
-        private static void WriteModelSerialization(CodeWriter writer, SerializableObjectType model, bool hasJson, bool hasXml)
+        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, bool hasJson, bool hasXml)
         {
-            foreach (var method in JsonSerializationMethodsBuilder.BuildModelSerializableMethods(model, hasJson, hasXml))
+            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, hasJson, hasXml))
             {
                 writer.WriteMethod(method);
             }

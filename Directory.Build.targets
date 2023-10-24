@@ -62,7 +62,6 @@
     <Compile Include="$(AzureCoreSharedSources)XmlWriterContent.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)XmlWriterExtensions.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)TrimmingAttribute.cs" LinkBase="Shared/Core" />
-    <Compile Include="$(AzureCoreSharedSources)ModelSerializerHelper.cs" LinkBase="Shared/Core" />
     <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Generator.Shared/**/*.cs" Link="Shared/AutoRest/%(RecursiveDir)/%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup Condition="'$(IncludeManagementSharedCode)' == 'true'">
@@ -70,6 +69,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
+    <PackageReference Include="System.Net.ClientModel" />
     <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
     <PackageReference Include="Azure.ClientSdk.Analyzers" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" />

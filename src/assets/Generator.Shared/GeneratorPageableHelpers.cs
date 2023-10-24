@@ -5,20 +5,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Net.ClientModel;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.Core.Serialization;
 
 namespace Autorest.CSharp.Core
 {
     internal static class GeneratorPageableHelpers
     {
-        public delegate T ValueFactory<T>(JsonElement element, ModelSerializerOptions? options = default);
+        public delegate T ValueFactory<T>(JsonElement element, ModelReaderWriterOptions? options = default);
 
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,

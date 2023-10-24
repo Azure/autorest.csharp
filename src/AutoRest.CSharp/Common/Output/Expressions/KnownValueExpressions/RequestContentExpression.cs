@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal sealed record RequestContentExpression(ValueExpression Untyped) : TypedValueExpression<RequestContent>(Untyped)
     {
-        public static RequestContentExpression Create(ValueExpression serializable, ModelSerializerOptionsExpression options)
+        public static RequestContentExpression Create(ValueExpression serializable, ModelReaderWriterOptionsExpression options)
             => new(InvokeStatic(Configuration.ApiTypes.RequestContentCreateName, serializable, options));
         public static RequestContentExpression Create(ValueExpression serializable) => new(InvokeStatic(Configuration.ApiTypes.RequestContentCreateName, new[] { serializable }));
         public static RequestContentExpression FromEnumerable(ValueExpression enumerable) => new(new InvokeStaticMethodExpression(typeof(RequestContentHelper), nameof(RequestContentHelper.FromEnumerable), new[] { enumerable }));

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.ClientModel;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -20,7 +21,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class XmlSerializationMethodsBuilder
     {
-        private static readonly CSharpType nullableModelSerializerOptionsType = new CSharpType(typeof(ModelSerializerOptions), isNullable: true);
+        private static readonly CSharpType nullableModelSerializerOptionsType = new CSharpType(typeof(ModelReaderWriterOptions), isNullable: true);
 
         private static readonly Parameter xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, ValidationType.None, null);
         private static readonly Parameter nameHint = new Parameter("nameHint", null, typeof(string), null, ValidationType.None, null);

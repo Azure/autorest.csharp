@@ -7,7 +7,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
-    internal sealed record Utf8JsonRequestBodyExpression(ValueExpression Untyped) : BaseUtf8JsonRequestContentExpression(typeof(Utf8JsonRequestBody), Untyped)
+    internal sealed record Utf8JsonRequestBodyExpression(ValueExpression Untyped) : BaseUtf8JsonRequestContentExpression(typeof(Utf8JsonContentWriter), Untyped)
     {
     }
 }
