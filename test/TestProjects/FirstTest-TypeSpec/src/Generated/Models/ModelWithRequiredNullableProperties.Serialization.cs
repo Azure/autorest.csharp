@@ -7,18 +7,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithRequiredNullableProperties>
+    public partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable, IJsonModel<ModelWithRequiredNullableProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithRequiredNullableProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithRequiredNullableProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ModelWithRequiredNullableProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ModelWithRequiredNullableProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (RequiredNullablePrimitive != null)
@@ -48,7 +50,7 @@ namespace FirstTestTypeSpec.Models
             {
                 writer.WriteNull("requiredFixedEnum");
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,7 +65,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        ModelWithRequiredNullableProperties IModelJsonSerializable<ModelWithRequiredNullableProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelWithRequiredNullableProperties IJsonModel<ModelWithRequiredNullableProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -71,9 +73,9 @@ namespace FirstTestTypeSpec.Models
             return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
         }
 
-        internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelSerializerOptions options = null)
+        internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,7 +118,7 @@ namespace FirstTestTypeSpec.Models
                     requiredFixedEnum = property.Value.GetString().ToStringFixedEnum();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -125,14 +127,14 @@ namespace FirstTestTypeSpec.Models
             return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ModelWithRequiredNullableProperties>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ModelWithRequiredNullableProperties>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ModelWithRequiredNullableProperties IModelSerializable<ModelWithRequiredNullableProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ModelWithRequiredNullableProperties IModel<ModelWithRequiredNullableProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -145,13 +147,13 @@ namespace FirstTestTypeSpec.Models
         internal static ModelWithRequiredNullableProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

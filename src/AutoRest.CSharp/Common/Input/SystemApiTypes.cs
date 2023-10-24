@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Common.Input
         public override BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
             => new UriBuilderExpression(valueExpression ?? Snippets.New.Instance(typeof(UriBuilder)));
 
-        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonContentWriteable);
+        public override Type? IUtf8JsonSerializableType => null;
 
         public override Type Utf8JsonWriterExtensionsType => typeof(ModelReaderWriterExtensions);
 

@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null);
 
-        public abstract Type IUtf8JsonSerializableType { get; }
+        public abstract Type? IUtf8JsonSerializableType { get; }
         public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonContentWriteable.Write);
 
         public abstract Type Utf8JsonWriterExtensionsType { get; }

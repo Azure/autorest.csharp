@@ -7,25 +7,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class ModelWithFormat : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithFormat>
+    public partial class ModelWithFormat : IUtf8JsonSerializable, IJsonModel<ModelWithFormat>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithFormat>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithFormat>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ModelWithFormat>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ModelWithFormat>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("sourceUrl"u8);
             writer.WriteStringValue(SourceUrl.AbsoluteUri);
             writer.WritePropertyName("guid"u8);
             writer.WriteStringValue(Guid);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -40,7 +42,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        ModelWithFormat IModelJsonSerializable<ModelWithFormat>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelWithFormat IJsonModel<ModelWithFormat>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -48,9 +50,9 @@ namespace FirstTestTypeSpec.Models
             return DeserializeModelWithFormat(document.RootElement, options);
         }
 
-        internal static ModelWithFormat DeserializeModelWithFormat(JsonElement element, ModelSerializerOptions options = null)
+        internal static ModelWithFormat DeserializeModelWithFormat(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -72,7 +74,7 @@ namespace FirstTestTypeSpec.Models
                     guid = property.Value.GetGuid();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -81,14 +83,14 @@ namespace FirstTestTypeSpec.Models
             return new ModelWithFormat(sourceUrl, guid, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ModelWithFormat>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ModelWithFormat>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ModelWithFormat IModelSerializable<ModelWithFormat>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ModelWithFormat IModel<ModelWithFormat>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -101,13 +103,13 @@ namespace FirstTestTypeSpec.Models
         internal static ModelWithFormat FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithFormat(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeModelWithFormat(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

@@ -7,23 +7,25 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class ProjectedModel : IUtf8JsonSerializable, IModelJsonSerializable<ProjectedModel>
+    public partial class ProjectedModel : IUtf8JsonSerializable, IJsonModel<ProjectedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ProjectedModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProjectedModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ProjectedModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ProjectedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -38,7 +40,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        ProjectedModel IModelJsonSerializable<ProjectedModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ProjectedModel IJsonModel<ProjectedModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -46,9 +48,9 @@ namespace FirstTestTypeSpec.Models
             return DeserializeProjectedModel(document.RootElement, options);
         }
 
-        internal static ProjectedModel DeserializeProjectedModel(JsonElement element, ModelSerializerOptions options = null)
+        internal static ProjectedModel DeserializeProjectedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -64,7 +66,7 @@ namespace FirstTestTypeSpec.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -73,14 +75,14 @@ namespace FirstTestTypeSpec.Models
             return new ProjectedModel(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ProjectedModel>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ProjectedModel>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ProjectedModel IModelSerializable<ProjectedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ProjectedModel IModel<ProjectedModel>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -93,13 +95,13 @@ namespace FirstTestTypeSpec.Models
         internal static ProjectedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeProjectedModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeProjectedModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

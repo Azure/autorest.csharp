@@ -7,23 +7,25 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class Friend : IUtf8JsonSerializable, IModelJsonSerializable<Friend>
+    public partial class Friend : IUtf8JsonSerializable, IJsonModel<Friend>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Friend>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Friend>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<Friend>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<Friend>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -38,7 +40,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        Friend IModelJsonSerializable<Friend>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Friend IJsonModel<Friend>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -46,9 +48,9 @@ namespace FirstTestTypeSpec.Models
             return DeserializeFriend(document.RootElement, options);
         }
 
-        internal static Friend DeserializeFriend(JsonElement element, ModelSerializerOptions options = null)
+        internal static Friend DeserializeFriend(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -64,7 +66,7 @@ namespace FirstTestTypeSpec.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -73,14 +75,14 @@ namespace FirstTestTypeSpec.Models
             return new Friend(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<Friend>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<Friend>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        Friend IModelSerializable<Friend>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        Friend IModel<Friend>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -93,13 +95,13 @@ namespace FirstTestTypeSpec.Models
         internal static Friend FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeFriend(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }
