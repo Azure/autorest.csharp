@@ -230,7 +230,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                         Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
                         new ForeachStatement(foreachItemType, "item", operation.Value, isAsync, out var itemVar)
                         {
-                            ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
+                            sample.IsConvenienceSample ? new MethodBodyStatement() : ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
                         }
                     };
                 }
@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                      */
                     return new ForeachStatement(foreachItemType, "item", invocation, isAsync, out var itemVar)
                     {
-                        ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
+                        sample.IsConvenienceSample ? new MethodBodyStatement() : ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
                     };
                 }
             }

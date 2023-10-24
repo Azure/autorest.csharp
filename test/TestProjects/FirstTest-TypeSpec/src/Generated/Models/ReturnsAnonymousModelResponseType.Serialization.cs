@@ -10,9 +10,9 @@ using Azure;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class ReturnsAnonymousModel_101
+    public partial class ReturnsAnonymousModelResponseType
     {
-        internal static ReturnsAnonymousModel_101 DeserializeReturnsAnonymousModel_101(JsonElement element)
+        internal static ReturnsAnonymousModelResponseType DeserializeReturnsAnonymousModelResponseType(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -21,15 +21,15 @@ namespace FirstTestTypeSpec.Models
             foreach (var property in element.EnumerateObject())
             {
             }
-            return new ReturnsAnonymousModel_101();
+            return new ReturnsAnonymousModelResponseType();
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static ReturnsAnonymousModel_101 FromResponse(Response response)
+        internal static ReturnsAnonymousModelResponseType FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeReturnsAnonymousModel_101(document.RootElement);
+            return DeserializeReturnsAnonymousModelResponseType(document.RootElement);
         }
     }
 }
