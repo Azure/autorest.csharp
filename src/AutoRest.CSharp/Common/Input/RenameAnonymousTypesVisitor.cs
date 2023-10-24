@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Common.Input
                         if (IsSameType(responseType, anonymousModel))
                         {
                             usage |= InputModelTypeUsage.Output;
-                            names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(responseType, responseType.Name).ToCleanName() });
+                            names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(responseType, "ResponseType").ToCleanName() });
                         }
                         else
                         {

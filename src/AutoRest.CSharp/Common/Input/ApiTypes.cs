@@ -2,15 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -21,20 +17,14 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract string FromResponseName { get; }
         public abstract string ResponseParameterName { get; }
-        public abstract string ContentStreamName { get; }
-        public abstract string StatusName { get; }
 
         public abstract string GetRawResponseName { get; }
-        public string FromValueName = nameof(Result.FromValue);
-        public abstract string GetRawResponseString(string responseVariable);
 
         public Type GetResponseOfT<T>() => ResponseOfTType.MakeGenericType(typeof(T));
         public Type GetTaskOfResponse(Type? valueType = default) =>
             valueType is null ? typeof(Task<>).MakeGenericType(ResponseType) : typeof(Task<>).MakeGenericType(ResponseOfTType.MakeGenericType(valueType));
         public Type GetValueTaskOfResponse(Type? valueType = default) =>
             valueType is null ? typeof(ValueTask<>).MakeGenericType(ResponseType) : typeof(ValueTask<>).MakeGenericType(ResponseOfTType.MakeGenericType(valueType));
-
-        protected abstract string ProcessMessageName { get; }
 
         public abstract Type HttpPipelineType { get; }
         public abstract string HttpPipelineCreateMessageName { get; }
@@ -72,11 +62,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type HttpPipelinePolicyType { get; }
 
         public abstract string HttpMessageRequestName { get; }
-
-        public abstract FormattableString GetSetMethodString(string requestName, string method);
-        public abstract FormattableString GetSetUriString(string requestName, string uriName);
-
-        public abstract FormattableString GetSetContentString(string requestName, string contentName);
 
         public abstract Type RequestContentType { get; }
         public abstract string ToRequestContentName { get; }

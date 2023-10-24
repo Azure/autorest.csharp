@@ -275,12 +275,17 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                  * This will generate code like:
                  * Response<T> operation = <invocation>;
                  */
-                var responseOfT = new VariableReference(returnType, "response");
+                if (sample.IsConvenienceSample)
+                {
+                    return Declare(new VariableReference(returnType, "response"), invocation);
+                }
+
+                var rawResponse = new VariableReference(returnType, "response");
                 return new[]
                 {
-                    Declare(responseOfT, new ResponseExpression(invocation)),
+                    Declare(rawResponse, invocation),
                     EmptyLine,
-                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, new ResponseExpression(responseOfT).ContentStream) : InvokeConsoleWriteLine(new ResponseExpression(responseOfT).Value)
+                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, new ResponseExpression(rawResponse).ContentStream) : InvokeConsoleWriteLine(new ResponseExpression(rawResponse).Status)
                 };
             }
 

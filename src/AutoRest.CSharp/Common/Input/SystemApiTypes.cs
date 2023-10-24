@@ -19,12 +19,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type ResponseOfTType => typeof(Result<>);
         public override string FromResponseName => "FromResponse";
         public override string ResponseParameterName => "result";
-        public override string ContentStreamName => $"{GetRawResponseName}().{nameof(PipelineResponse.ContentStream)}";
-        public override string StatusName => $"{GetRawResponseName}().{nameof(PipelineResponse.Status)}";
         public override string GetRawResponseName => nameof(Result<object>.GetRawResponse);
-        public override string GetRawResponseString(string responseVariable) => $"{responseVariable}.{GetRawResponseName}()";
-
-        protected override string ProcessMessageName => nameof(PipelineProtocolExtensions.ProcessMessage);
 
         public override Type HttpPipelineType => typeof(MessagePipeline);
         public override string HttpPipelineCreateMessageName => nameof(MessagePipeline.CreateMessage);
@@ -55,21 +50,10 @@ namespace AutoRest.CSharp.Common.Input
 
         public override string HttpMessageRequestName => nameof(PipelineMessage.Request);
 
-        public override FormattableString GetSetMethodString(string requestName, string method)
-        {
-            return $"{requestName}.{nameof(PipelineRequest.SetMethod)}(\"{method}\");";
-        }
-
         private string GetHttpMethodName(string method)
         {
             return $"{method[0]}{method.Substring(1).ToLowerInvariant()}";
         }
-
-        public override FormattableString GetSetUriString(string requestName, string uriName)
-            => $"{requestName}.Uri = {uriName}.{nameof(RequestUri.ToUri)}();";
-
-        public override FormattableString GetSetContentString(string requestName, string contentName)
-            => $"{requestName}.Content = {contentName};";
 
         public override Type RequestContentType => typeof(RequestBody);
         public override string ToRequestContentName => "ToRequestBody";

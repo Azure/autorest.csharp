@@ -7,20 +7,17 @@ using Azure;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
-    internal sealed record ResponseExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Response), Untyped)
+    internal sealed record ResponseExpression(ValueExpression Untyped) : TypedValueExpression<Response>(Untyped)
     {
         public ValueExpression Status => Property(nameof(Response.Status));
-        public ValueExpression Value => Property(nameof(Response<object>.Value));
 
         public StreamExpression ContentStream => new(Property(nameof(Response.ContentStream)));
         public BinaryDataExpression Content => new(Property(nameof(Response.Content)));
 
-        public ResponseExpression GetRawResponse() => new(Invoke(nameof(GetRawResponse)));
-
-        public static ResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
+        public static NullableResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[] { value, rawResponse }));
 
-        public static ResponseExpression FromValue(CSharpType explicitValueType, ValueExpression value, ResponseExpression rawResponse)
+        public static NullableResponseExpression FromValue(CSharpType explicitValueType, ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[] { value, rawResponse }, new[] { explicitValueType }));
     }
 }

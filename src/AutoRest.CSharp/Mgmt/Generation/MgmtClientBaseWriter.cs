@@ -680,14 +680,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(operation)))
             {
-                var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseParameterName);
+                var responseType = operation.OriginalReturnType is null ? typeof(Response) : new CSharpType(typeof(Response<>), operation.OriginalReturnType);
+                var responseVariable = new VariableReference(responseType, Configuration.ApiTypes.ResponseParameterName);
                 _writer
                     .Append($"var {responseVariable.Declaration:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"){GetConfigureAwait(async)};");
 
-                var response = new ResponseExpression(responseVariable);
+                if (operation.OriginalReturnType is null)
+                {
+                    _writer.WriteMethodBodyStatement(Return(responseVariable));
+                    return;
+                }
+
+                var response = new NullableResponseExpression(responseVariable);
                 var armResource = new ArmResourceExpression(response.Value);
 
                 if (operation.ThrowIfNull)
@@ -803,7 +810,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var convertedValue = operation.GetConvertedValue(new MemberExpression(null, ArmClientReference), response);
                 if (convertedValue != null)
                 {
-                    _writer.WriteValueExpression(ResponseExpression.FromValue(convertedValue, response.GetRawResponse()));
+                    _writer.WriteValueExpression(ResponseExpression.FromValue(convertedValue, response));
                 }
                 else
                 {

@@ -3,7 +3,6 @@
 
 using System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -16,12 +15,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type ResponseOfTType => typeof(Response<>);
         public override string FromResponseName => "FromResponse";
         public override string ResponseParameterName => "response";
-        public override string ContentStreamName => nameof(Response.ContentStream);
-        public override string StatusName => nameof(Response.Status);
         public override string GetRawResponseName => nameof(Response<object>.GetRawResponse);
-        public override string GetRawResponseString(string responseVariable) => responseVariable;
-
-        protected override string ProcessMessageName => nameof(HttpPipelineExtensions.ProcessMessage);
 
         public override Type HttpPipelineType => typeof(HttpPipeline);
         public override string HttpPipelineCreateMessageName => nameof(HttpPipeline.CreateMessage);
@@ -51,14 +45,6 @@ namespace AutoRest.CSharp.Common.Input
         public override Type HttpPipelinePolicyType => typeof(HttpPipelinePolicy);
 
         public override string HttpMessageRequestName => nameof(HttpMessage.Request);
-
-        public override FormattableString GetSetMethodString(string requestName, string method)
-            => $"{requestName}.Method = {typeof(RequestMethod)}.{RequestMethod.Parse(method).ToRequestMethodName()};";
-        public override FormattableString GetSetUriString(string requestName, string uriName)
-            => $"{requestName}.Uri = {uriName};";
-
-        public override FormattableString GetSetContentString(string requestName, string contentName)
-            => $"{requestName}.Content = {contentName};";
 
         public override Type RequestContentType => typeof(RequestContent);
         public override string ToRequestContentName => "ToRequestContent";

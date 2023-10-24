@@ -97,9 +97,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var arguments = GetArguments(writer, parameterMappings.SkipLast(1));
             arguments.Add(new PositionalParameterReference(KnownParameters.CancellationTokenParameter.Name, KnownParameters.CancellationTokenParameter));
 
+            var responseVar = new VariableReference(new CSharpType(typeof(NullableResponse<>), returnType), Configuration.ApiTypes.ResponseParameterName);
+            var response = new NullableResponseExpression(responseVar);
             writer.WriteMethodBodyStatement(new[]
             {
-                Var(Configuration.ApiTypes.ResponseParameterName, new(restClient.Invoke(CreateMethodName(operation.MethodName, async), arguments, async)), out ResponseExpression response),
+                Var(responseVar, restClient.Invoke(CreateMethodName(operation.MethodName, async), arguments, async)),
                 new IfStatement(Equal(response.Value, Null), AddBraces: false)
                 {
                     Return(New.Instance(new CSharpType(typeof(NoValueResponse<>), returnType), response.GetRawResponse()))
