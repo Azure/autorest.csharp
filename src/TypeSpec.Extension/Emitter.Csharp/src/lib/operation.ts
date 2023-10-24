@@ -64,7 +64,7 @@ import {
     getFormattedType,
     getInputType
 } from "./model.js";
-import { capitalize } from "./utils.js";
+import { capitalize, getProjectedNameForCsharp } from "./utils.js";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -259,7 +259,7 @@ export function loadOperation(
                     : InputOperationParameterKind.Client
                 : InputOperationParameterKind.Method;
         return {
-            Name: param.name,
+            Name: getProjectedNameForCsharp(sdkContext, param) ?? param.name,
             NameInRequest: name,
             Description: getDoc(program, param),
             Type: inputType,
