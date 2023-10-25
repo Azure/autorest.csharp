@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Report
                 if (bodyRequestParam == null)
                 {
                     paramFullSerializedName = $"{operation.Operation.GetFullSerializedName()}.{bodyParam.Name}";
-                    string warning = $"Can't find corresponding RequestParameter for Parameter {operation.Name}.{bodyParam.Name}. OperationId = {operation.OperationId}. Try to use Parameter.Name to parse fullSerializedName as {paramFullSerializedName}";
+                    string warning = $"Can't find corresponding RequestParameter for Parameter {operation.OperationName}.{bodyParam.Name}. OperationId = {operation.OperationId}. Try to use Parameter.Name to parse fullSerializedName as {paramFullSerializedName}";
                     AutoRestLogger.Warning(warning).Wait();
                 }
                 else if (bodyRequestParam.CSharpName() != bodyParam.Name)
