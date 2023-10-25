@@ -63,5 +63,10 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             return result;
         }
+
+        public override string ToString()
+        {
+            return string.Join("/", this._pairs.Select(kv => $"{(kv.Key == Segment.Providers ? "" : $"{kv.Key}/")}{kv.Value}"));
+        }
     }
 }

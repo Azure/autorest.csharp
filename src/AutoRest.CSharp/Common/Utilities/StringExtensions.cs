@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Report;
 using Humanizer;
 using Humanizer.Inflections;
 using Microsoft.CodeAnalysis.CSharp;
@@ -100,9 +101,22 @@ namespace AutoRest.CSharp.Utilities
         [return: NotNullIfNotNull("name")]
         public static string ToMgmtVariableName(this string name)
         {
-            var variableName = NameTransformer.Instance.EnsureNameCase(name).VariableName;
+            string? tempName = name;
+            var newName = NameTransformer.Instance.EnsureNameCase(name, (applyStep) =>
+            {
+                // for variable name, only log when some real changes occur.
+                if (tempName != applyStep.NewName.VariableName)
+                {
+                    var finalName = ToCleanName(applyStep.NewName.VariableName, isCamelCase: false);
+                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                        TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue,
+                        $"Variables.{name}",
+                        $"ApplyAcronymMappingOnVariable", tempName, $"{applyStep.NewName.VariableName}(ToCleanName={finalName})");
+                    tempName = applyStep.NewName.VariableName;
+                }
+            });
 
-            return ToCleanName(variableName, isCamelCase: false);
+            return ToCleanName(newName.VariableName, isCamelCase: false);
         }
 
         public static GetPathPartsEnumerator GetPathParts(string? path) => new GetPathPartsEnumerator(path);
