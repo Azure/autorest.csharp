@@ -2,13 +2,14 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Net.ClientModel.Internal;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
 {
-    internal sealed record UriBuilderExpression(ValueExpression Untyped) : BaseRawRequestUriBuilderExpression(typeof(UriBuilder), Untyped)
+    internal sealed record RequestUriExpression(ValueExpression Untyped) : BaseRawRequestUriBuilderExpression(typeof(RequestUri), Untyped)
     {
-        protected override Type RequestUriBuilderExtensionsType => typeof(UriBuilder);
+        protected override Type RequestUriBuilderExtensionsType => typeof(RequestUri);
     }
 }

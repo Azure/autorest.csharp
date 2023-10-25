@@ -15,8 +15,8 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using Azure.Core;
 using Azure.Core.Pipeline; //needed because BearerTokenAuthenticationPolicy doesn't exist in System.ServiceModel.Rest yet
+using RequestBody = System.Net.ClientModel.Core.RequestBody;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type FromResponseType => typeof(PipelineResponse);
         public override string FromResponseName => "FromResponse";
         public override string ResponseParameterName => "result";
-        public override string ContentStreamName => $"{GetRawResponseName}().{nameof(PipelineResponse.Content)}";
+        public override string ContentStreamName => $"{GetRawResponseName}().{nameof(PipelineResponse.ContentStream)}";
         public override string StatusName => $"{GetRawResponseName}().{nameof(PipelineResponse.Status)}";
         public override string GetRawResponseName => nameof(Result<object>.GetRawResponse);
         public override string GetRawResponseString(string responseVariable) => $"{responseVariable}.{GetRawResponseName}()";
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies)
             => $"{pipelineField:I} = {typeof(MessagePipeline)}.{nameof(MessagePipeline.Create)}({optionsVariable:I}, {perRetryPolicies}, {perCallPolicies});";
 
-        public override Type HttpPipelinePolicyType => typeof(PipelinePolicy<PipelineMessage>);
+        public override Type HttpPipelinePolicyType => typeof(IPipelinePolicy<PipelineMessage>);
 
         public override FormattableString ProtocolReturnStartString => $"return {ResponseType}.{FromResponseName}(";
         public override FormattableString ProtocolReturnEndString => $");";
@@ -72,7 +72,9 @@ namespace AutoRest.CSharp.Common.Input
         public override string HttpMessageRequestName => nameof(PipelineMessage.Request);
 
         public override FormattableString GetSetMethodString(string requestName, string method)
-            => $"{requestName}.Method = {method:L};";
+        {
+            return $"{requestName}.{nameof(PipelineRequest.SetMethod)}(\"{method}\");";
+        }
 
         private string GetHttpMethodName(string method)
         {
@@ -80,26 +82,26 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override FormattableString GetSetUriString(string requestName, string uriName)
-            => $"{requestName}.Uri = {uriName}.{nameof(UriBuilder.Uri)};";
+            => $"{requestName}.Uri = {uriName}.{nameof(RequestUri.ToUri)}();";
 
         public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeaderSystem;
 
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
 
-        public override Type RequestContentType => typeof(PipelineContent);
-        public override string ToRequestContentName => "ToPipelineContent";
-        public override string RequestContentCreateName => nameof(PipelineContent.CreateContent);
+        public override Type RequestContentType => typeof(RequestBody);
+        public override string ToRequestContentName => "ToRequestBody";
+        public override string RequestContentCreateName => nameof(RequestBody.CreateFromStream);
 
         public override BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
-            => new UriBuilderExpression(valueExpression ?? Snippets.New.Instance(typeof(UriBuilder)));
+            => new RequestUriExpression(valueExpression ?? Snippets.New.Instance(typeof(RequestUri)));
 
-        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonContentWriteable);
+        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonWriteable);
 
-        public override Type Utf8JsonWriterExtensionsType => typeof(ModelReaderWriterExtensions);
+        public override Type Utf8JsonWriterExtensionsType => typeof(ModelSerializationExtensions);
 
         public override BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
-            => new Utf8JsonRequestBodyExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonContentWriter)));
+            => new Utf8JsonRequestBodyExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestBody)));
 
         public override Type OptionalType => typeof(OptionalProperty);
         public override Type OptionalPropertyType => typeof(OptionalProperty<>);
@@ -109,7 +111,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type ResponseClassifierType => typeof(ResponseErrorClassifier);
         public override Type StatusCodeClassifierType => typeof(StatusResponseClassifier);
 
-        public override Type JsonElementExtensionsType => typeof(ModelReaderWriterExtensions);
+        public override Type JsonElementExtensionsType => typeof(ModelSerializationExtensions);
 
         public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
             => new TypeReference(Configuration.ApiTypes.RequestContentType)

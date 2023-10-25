@@ -9,10 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {

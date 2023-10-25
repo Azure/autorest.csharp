@@ -106,13 +106,13 @@ namespace AutoRest.CSharp.Common.Input
         public abstract BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null);
 
         public abstract Type IUtf8JsonSerializableType { get; }
-        public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonContentWriteable.Write);
+        public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonSerializable.Write);
 
         public abstract Type Utf8JsonWriterExtensionsType { get; }
-        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(ModelReaderWriterExtensions.WriteObjectValue);
-        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(ModelReaderWriterExtensions.WriteNumberValue);
-        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelReaderWriterExtensions.WriteStringValue);
-        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelReaderWriterExtensions.WriteBase64StringValue);
+        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(Utf8JsonWriterExtensions.WriteObjectValue);
+        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(Utf8JsonWriterExtensions.WriteNumberValue);
+        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(Utf8JsonWriterExtensions.WriteStringValue);
+        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(Utf8JsonWriterExtensions.WriteBase64StringValue);
 
         public abstract BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null);
 

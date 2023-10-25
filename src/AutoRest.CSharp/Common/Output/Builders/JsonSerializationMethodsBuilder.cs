@@ -34,6 +34,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
