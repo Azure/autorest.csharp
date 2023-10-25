@@ -38,7 +38,7 @@ namespace FlattenedParameters
             _pipeline = pipeline;
         }
 
-        /// <param name="items"> The IList{string} to use. </param>
+        /// <param name="items"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -55,7 +55,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The IList{string} to use. </param>
+        /// <param name="items"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -72,7 +72,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The IList{string} to use. </param>
+        /// <param name="items"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationNotNullAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -89,7 +89,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The IList{string} to use. </param>
+        /// <param name="items"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response OperationNotNull(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {

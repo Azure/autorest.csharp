@@ -313,7 +313,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The IList{TimeSpan} to use. </param>
+        /// <param name="input"> The IEnumerable{TimeSpan} to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -348,7 +348,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The IList{TimeSpan} to use. </param>
+        /// <param name="input"> The IEnumerable{TimeSpan} to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

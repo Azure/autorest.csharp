@@ -31,7 +31,7 @@ namespace MgmtPropertyBag.Models
         public string Orderby { get; set; }
         /// <summary> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </summary>
         public ETag? IfMatch { get; set; }
-        /// <summary> The IList{string} to use. </summary>
+        /// <summary> The IEnumerable{string} to use. </summary>
         public IList<string> CountryOrRegions { get; }
     }
 }
