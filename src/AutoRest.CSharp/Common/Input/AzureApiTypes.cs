@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using Azure;
 using Azure.Core;
@@ -69,6 +70,8 @@ namespace AutoRest.CSharp.Common.Input
 
         public override ValueExpression GetKeySampleExpression(string clientName)
             => new StringLiteralExpression("<key>", false);
+
+        public override ExtensibleSnippets ExtensibleSnippets { get; } = new AzureExtensibleSnippets();
 
         public override string LicenseString => """
 // Copyright (c) Microsoft Corporation. All rights reserved.

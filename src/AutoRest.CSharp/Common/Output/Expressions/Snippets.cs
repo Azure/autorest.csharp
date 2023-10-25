@@ -18,9 +18,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
-        public static ExtensibleSnippets Extensible { get; } = Configuration.IsBranded
-            ? new AzureExtensibleSnippets()
-            : new SystemExtensibleSnippets();
+        public static ExtensibleSnippets Extensible => Configuration.ApiTypes.ExtensibleSnippets;
 
         public static MethodBodyStatement AsStatement(this IEnumerable<MethodBodyStatement> statements) => statements.ToArray();
 

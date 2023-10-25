@@ -6,6 +6,7 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Core.Pipeline;
 using System.Net.ClientModel.Internal;
+using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using Azure.Core.Pipeline; //needed because BearerTokenAuthenticationPolicy doesn't exist in System.ServiceModel.Rest yet
@@ -78,6 +79,8 @@ namespace AutoRest.CSharp.Common.Input
 
         public override ValueExpression GetKeySampleExpression(string clientName)
             => new InvokeStaticMethodExpression(typeof(Environment), nameof(Environment.GetEnvironmentVariable), new[] { new StringLiteralExpression($"{clientName}_KEY", false) });
+
+        public override ExtensibleSnippets ExtensibleSnippets { get; } = new SystemExtensibleSnippets();
 
         public override string LicenseString => string.Empty;
     }

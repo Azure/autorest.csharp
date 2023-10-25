@@ -5,6 +5,7 @@ using System;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 
@@ -97,6 +98,8 @@ namespace AutoRest.CSharp.Common.Input
         public abstract ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression);
 
         public abstract ValueExpression GetKeySampleExpression(string clientName);
+
+        public abstract ExtensibleSnippets ExtensibleSnippets { get; }
 
         public abstract string LicenseString { get; }
     }

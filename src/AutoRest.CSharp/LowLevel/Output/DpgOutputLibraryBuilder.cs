@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             rootNamespace = RenameInputsVisitor.Visit(rootNamespace);
             rootNamespace = FixAnonymousTypesVisitor.Visit(rootNamespace);
+            rootNamespace = ReplaceStringUnionTypesWithEnums.Visit(rootNamespace);
 
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
