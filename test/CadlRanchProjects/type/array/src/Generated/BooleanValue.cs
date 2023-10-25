@@ -152,7 +152,7 @@ namespace _Type._Array
             }
         }
 
-        /// <param name="body"> The IList{bool} to use. </param>
+        /// <param name="body"> The IEnumerable{bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{bool},CancellationToken)']/*" />
@@ -166,7 +166,7 @@ namespace _Type._Array
             return response;
         }
 
-        /// <param name="body"> The IList{bool} to use. </param>
+        /// <param name="body"> The IEnumerable{bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='Put(IEnumerable{bool},CancellationToken)']/*" />

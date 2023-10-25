@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             var description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 // [TODO] "The String to use." is special cased to reduce amount of changes. Remove during cleanup
-                ? type.Equals(typeof(string)) ? $"The String to use." : $"The {type.ToStringForDocs()} to use."
+                ? type.Equals(typeof(string)) ? $"The String to use." : $"The {TypeFactory.GetInputType(type).ToStringForDocs()} to use."
                 : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
 
             if (defaultValue != null)

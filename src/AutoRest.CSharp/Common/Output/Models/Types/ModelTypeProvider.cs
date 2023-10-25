@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ? this //if I have children and parents then I am my own defaultDerivedType
                 : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
-            DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround only to solve the anonymous model names, in other cases, the name is unchanged.
+            DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             TypeKind = IsStruct ? TypeKind.Struct : TypeKind.Class;
 
@@ -138,14 +138,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             var properties = inputModel.Properties.ToList();
             var compositionModels = inputModel.CompositionModels;
 
-            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, GetValidIdentifier(baseModel.Name)), existingBaseType))
+            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, baseModel.Name.ToCleanName()), existingBaseType))
             {
                 // First try to find composite type by name
                 // If failed, try find existing type with CodeGenModel that has expected name
                 var baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => m.Name == existingBaseType.Name);
                 if (baseTypeReplacement is null && sourceInputModel is not null)
                 {
-                    baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => SymbolEqualityComparer.Default.Equals(sourceInputModel.FindForType(ns, GetValidIdentifier(m.Name)), existingBaseType));
+                    baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => SymbolEqualityComparer.Default.Equals(sourceInputModel.FindForType(ns, m.Name.ToCleanName()), existingBaseType));
                 }
 
                 if (baseTypeReplacement is null)
@@ -168,19 +168,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return properties;
-        }
-
-        // TODO -- this is only a workaround. We introduce this method only to solve the issue on model names when the model is anonymous where we take the id of the model as its name, and it is digits.
-        // For full solution, we should use the `ToCleanName` method which does (almost) the same when the name is digits, and it does more when the name contains other invalid identifier characters
-        // We did not use the `ToCleanName` method here because it will change the leading character captilized. Defer the decision of that to this issue: https://github.com/Azure/autorest.csharp/issues/3669
-        private static string GetValidIdentifier(string name)
-        {
-            if (char.IsDigit(name[0]))
-            {
-                return $"_{name}";
-            }
-
-            return name;
         }
 
         public bool HasFromOperationResponseMethod => IncludeDeserializer && !Configuration.AzureArm && (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any());
@@ -523,6 +510,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             Constant? value = null;
 
             //only load implementations for the base type
+            // [TODO]: OrderBy(i => i.Key) is needed only to preserve the order. Remove it in a separate PR.
             var implementations = Configuration.Generation1ConvenienceClient
                 ? GetDerivedTypes(_derivedTypes).OrderBy(i => i.Key).ToArray()
                 : GetDerivedTypes(_derivedTypes).ToArray();
