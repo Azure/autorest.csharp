@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         public IEnumerable<Method> Methods => _methods ??= BuildSerializationMethods();
 
         private bool? _hasJsonSerialization;
-        private bool HasJsonSerialization => _hasJsonSerialization ??= EnsureHasJsonSerialization();
+        protected bool HasJsonSerialization => _hasJsonSerialization ??= EnsureHasJsonSerialization();
 
         private bool? _hasXmlSerialization;
         private bool HasXmlSerialization => _hasXmlSerialization ??= EnsureHasXmlSerialization();

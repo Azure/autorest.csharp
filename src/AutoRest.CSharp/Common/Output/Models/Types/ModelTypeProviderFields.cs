@@ -47,6 +47,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 originalFieldName = BuilderHelpers.DisambiguateName(modelName, originalFieldName);
                 var existingMember = sourceTypeMapping?.GetMemberByOriginalName(originalFieldName);
+                if (existingMember is not null)
+                {
+                    visitedMembers.Add(existingMember);
+                    if (existingMember.ContainingType.Name != modelName && existingMember.Name == originalFieldName)
+                    {
+                        // Member defined in a base type, don't generate parameters for it
+                        continue;
+                    }
+                }
 
                 var propertyType = GetPropertyDefaultType(inputModelUsage, inputModelProperty, typeFactory);
 

@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             (
                 httpMessage.Response.Status,
                 _successResponses!
-                    .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, headers, async), AddScope: true))
+                    .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, headers, async), AddScope: r.Type is not null))
                     .Append(SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response))))
                     .ToArray()
             );
@@ -227,7 +227,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 };
             }
 
-            return BuildStatusCodeSwitchCaseStatement(type, serialization, httpMessage.Response, async);
+            return headers is null
+                ? BuildStatusCodeSwitchCaseStatement(type, serialization, httpMessage.Response, async)
+                : BuildStatusCodeSwitchCaseStatement(type, serialization, httpMessage.Response, headers, async);
         }
 
         public MethodBodyStatement Build(ResponseExpression response, bool async)

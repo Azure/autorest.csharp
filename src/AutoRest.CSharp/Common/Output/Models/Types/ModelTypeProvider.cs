@@ -170,9 +170,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return properties;
         }
 
-        public bool HasFromOperationResponseMethod => IncludeDeserializer && !Configuration.AzureArm && (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any());
+        public bool HasFromOperationResponseMethod => IncludeDeserializer && HasJsonSerialization && !Configuration.AzureArm && (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any());
 
-        public bool HasToRequestBodyMethod => IncludeSerializer && !Configuration.AzureArm && (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any());
+        public bool HasToRequestBodyMethod => IncludeSerializer && HasJsonSerialization && !Configuration.AzureArm && (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any());
 
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
