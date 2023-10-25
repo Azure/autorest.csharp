@@ -67,7 +67,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             else
             {
-                yield return Declare(ProtocolMethodReturnType, "response", InvokeProtocolMethod(null, protocolMethodArguments, async), out var response);
+                var response = new VariableReference(ProtocolMethodReturnType, "response");
+                yield return Declare(response, InvokeProtocolMethod(null, protocolMethodArguments, async));
                 yield return Return(InvokeProtocolOperationHelpersConvertMethod((SerializableObjectType)ResponseType.Implementation, response, CreateScopeName(methodName)));
             }
         }

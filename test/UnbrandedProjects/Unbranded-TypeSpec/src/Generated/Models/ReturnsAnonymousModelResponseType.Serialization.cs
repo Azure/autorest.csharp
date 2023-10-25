@@ -7,9 +7,9 @@ using System.Text.Json;
 
 namespace UnbrandedTypeSpec.Models
 {
-    public partial class ReturnsAnonymousModel_142
+    public partial class ReturnsAnonymousModelResponseType
     {
-        internal static ReturnsAnonymousModel_142 DeserializeReturnsAnonymousModel_142(JsonElement element)
+        internal static ReturnsAnonymousModelResponseType DeserializeReturnsAnonymousModelResponseType(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -18,15 +18,15 @@ namespace UnbrandedTypeSpec.Models
             foreach (var property in element.EnumerateObject())
             {
             }
-            return new ReturnsAnonymousModel_142();
+            return new ReturnsAnonymousModelResponseType();
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ReturnsAnonymousModel_142 FromResponse(PipelineResponse result)
+        internal static ReturnsAnonymousModelResponseType FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeReturnsAnonymousModel_142(document.RootElement);
+            return DeserializeReturnsAnonymousModelResponseType(document.RootElement);
         }
     }
 }

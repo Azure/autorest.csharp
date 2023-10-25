@@ -57,8 +57,8 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await RequiredExplicitAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -71,8 +71,8 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = RequiredExplicit(content, context);
             return response;
         }
@@ -163,8 +163,8 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
-            using RequestContent content = bodyModel.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = bodyModel.ToRequestContent();
             Response response = await RequiredImplicitAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -177,8 +177,8 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
-            using RequestContent content = bodyModel.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = bodyModel.ToRequestContent();
             Response response = RequiredImplicit(content, context);
             return response;
         }

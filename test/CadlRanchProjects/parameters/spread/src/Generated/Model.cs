@@ -55,8 +55,8 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
-            using RequestContent content = bodyParameter.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = bodyParameter.ToRequestContent();
             Response response = await SpreadAsRequestBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -69,8 +69,8 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
-            using RequestContent content = bodyParameter.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = bodyParameter.ToRequestContent();
             Response response = SpreadAsRequestBody(content, context);
             return response;
         }

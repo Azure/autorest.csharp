@@ -161,8 +161,8 @@ namespace _Type._Array
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -175,8 +175,8 @@ namespace _Type._Array
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             Response response = Put(content, context);
             return response;
         }
