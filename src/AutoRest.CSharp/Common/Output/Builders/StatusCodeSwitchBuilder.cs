@@ -183,24 +183,51 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public MethodBodyStatement Build(HttpMessageExpression httpMessage, bool async)
         {
-            if (_successResponses is [{StatusCodes: {} statusCodes, Type: {} type} _] && type.Equals(typeof(Stream)))
+            // [TODO]: Protocol method doesn't provide access to the underlying HttpMessage instance to call httpMessage.ExtractResponseContent(),
+            // hence it requires convenience method to call pipeline method directly
+            if (_successResponses is not null && _successResponses.Any(sr => sr.Type is not null && sr.Type.Equals(typeof(Stream))))
             {
-                return new SwitchStatement
-                (
-                    httpMessage.Response.Status,
-                    new[]
-                    {
-                        new(statusCodes.Select(Int).ToList(), new MethodBodyStatement[]
-                        {
-                            Var("value", httpMessage.ExtractResponseContent(), out var value),
-                            Return(ResponseExpression.FromValue(value, httpMessage.Response))
-                        }, AddScope: true),
-                        SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response)))
-                    }
-                );
+                if (_headerModelType is null)
+                {
+                    return BuildSwitchStatementFromHttpMessage(httpMessage, null, async);
+
+                }
+
+                var headers = new VariableReference(_headerModelType, "headers");
+                return new MethodBodyStatement[]
+                {
+                    new DeclareVariableStatement(null, headers.Declaration, New.Instance(_headerModelType, httpMessage.Response)),
+                    BuildSwitchStatementFromHttpMessage(httpMessage, headers, async)
+                };
             }
 
             return Build(httpMessage.Response, async);
+        }
+
+        private SwitchStatement BuildSwitchStatementFromHttpMessage(HttpMessageExpression httpMessage, TypedValueExpression? headers, bool async)
+            => new
+            (
+                httpMessage.Response.Status,
+                _successResponses!
+                    .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, headers, async), AddScope: true))
+                    .Append(SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response))))
+                    .ToArray()
+            );
+
+        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, TypedValueExpression? headers, bool async)
+        {
+            if (type is not null && type.Equals(typeof(Stream)))
+            {
+                return new MethodBodyStatement[]
+                {
+                    Var("value", httpMessage.ExtractResponseContent(), out var value),
+                    Return(headers is null
+                        ? ResponseExpression.FromValue(value, httpMessage.Response)
+                        : ResponseWithHeadersExpression.FromValue(value, headers, httpMessage.Response))
+                };
+            }
+
+            return BuildStatusCodeSwitchCaseStatement(type, serialization, httpMessage.Response, async);
         }
 
         public MethodBodyStatement Build(ResponseExpression response, bool async)

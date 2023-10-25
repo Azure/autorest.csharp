@@ -66,6 +66,10 @@ namespace JsonAsBinary
                         var value = message.ExtractResponseContent();
                         return Response.FromValue(value, message.Response);
                     }
+                case 304:
+                    {
+                        return Response.FromValue((Stream)null, message.Response);
+                    }
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -83,6 +87,10 @@ namespace JsonAsBinary
                     {
                         var value = message.ExtractResponseContent();
                         return Response.FromValue(value, message.Response);
+                    }
+                case 304:
+                    {
+                        return Response.FromValue((Stream)null, message.Response);
                     }
                 default:
                     throw new RequestFailedException(message.Response);
