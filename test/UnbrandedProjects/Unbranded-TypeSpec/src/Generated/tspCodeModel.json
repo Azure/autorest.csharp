@@ -2563,7 +2563,7 @@
       },
       {
        "$id": "277",
-       "Name": "ModelWithProjectedName",
+       "Name": "ProjectedModel",
        "NameInRequest": "ModelWithProjectedName",
        "Description": "this is a model with a projected name",
        "Type": {

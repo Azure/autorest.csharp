@@ -99,11 +99,11 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.bodyParameter) {
+    if (typespecParameters.body?.parameter) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.bodyParameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
-    } else if (typespecParameters.bodyType) {
+    } else if (typespecParameters.body?.type) {
         if (resourceOperation) {
             parameters.push(
                 loadBodyParameter(sdkContext, resourceOperation.resourceType)
@@ -111,7 +111,7 @@ export function loadOperation(
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
                 sdkContext,
-                typespecParameters.bodyType
+                typespecParameters.body.type
             );
             if (effectiveBodyType.kind === "Model") {
                 if (effectiveBodyType.name !== "") {
@@ -297,7 +297,7 @@ export function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: body.name,
+            Name: getProjectedNameForCsharp(sdkContext, body) ?? body.name,
             NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,

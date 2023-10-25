@@ -935,8 +935,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
         }
 
         [Test]
@@ -946,8 +946,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
         }
 
         [Test]
@@ -991,8 +991,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
         }
 
         [Test]
@@ -1002,8 +1002,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
         }
 
         [Test]

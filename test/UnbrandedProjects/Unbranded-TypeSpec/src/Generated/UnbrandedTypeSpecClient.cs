@@ -1195,29 +1195,29 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
-        public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            ClientUtilities.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = modelWithProjectedName.ToRequestBody();
+            using RequestBody content = projectedModel.ToRequestBody();
             Result result = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
-        public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            ClientUtilities.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = modelWithProjectedName.ToRequestBody();
+            using RequestBody content = projectedModel.ToRequestBody();
             Result result = ProjectedNameModel(content, context);
             return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
