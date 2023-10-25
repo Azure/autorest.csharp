@@ -7,17 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class DataDisk : IUtf8JsonSerializable, IModelJsonSerializable<DataDisk>
+    public partial class DataDisk : IUtf8JsonSerializable, IJsonModel<DataDisk>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DataDisk>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDisk>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DataDisk>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<DataDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("lun"u8);
@@ -64,17 +66,17 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("toBeDetached"u8);
                 writer.WriteBooleanValue(ToBeDetached.Value);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DiskIopsReadWrite))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(DiskIopsReadWrite))
             {
                 writer.WritePropertyName("diskIOPSReadWrite"u8);
                 writer.WriteNumberValue(DiskIopsReadWrite.Value);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(DiskMBpsReadWrite))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(DiskMBpsReadWrite))
             {
                 writer.WritePropertyName("diskMBpsReadWrite"u8);
                 writer.WriteNumberValue(DiskMBpsReadWrite.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -82,14 +84,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        DataDisk IModelJsonSerializable<DataDisk>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DataDisk IJsonModel<DataDisk>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -97,9 +102,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDataDisk(document.RootElement, options);
         }
 
-        internal static DataDisk DeserializeDataDisk(JsonElement element, ModelSerializerOptions options = null)
+        internal static DataDisk DeserializeDataDisk(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -217,7 +222,7 @@ namespace Azure.ResourceManager.Sample.Models
                     diskMBpsReadWrite = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -226,14 +231,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new DataDisk(lun, name.Value, vhd.Value, image.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, Optional.ToNullable(toBeDetached), Optional.ToNullable(diskIOPSReadWrite), Optional.ToNullable(diskMBpsReadWrite), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<DataDisk>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<DataDisk>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        DataDisk IModelSerializable<DataDisk>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        DataDisk IModel<DataDisk>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

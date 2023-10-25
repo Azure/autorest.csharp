@@ -103,6 +103,7 @@ namespace MgmtScopeResource
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Metadata);
 #else
+<<<<<<< HEAD
                     JsonSerializer.Serialize(writer, JsonDocument.Parse(Metadata.ToString()).RootElement);
 #endif
                 }
@@ -132,6 +133,12 @@ namespace MgmtScopeResource
 				writer.WriteRawValue(item.Value);
 #else
                     JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+=======
+                using (JsonDocument document = JsonDocument.Parse(Metadata))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+>>>>>>> origin/feature/v3
 #endif
                 }
             }

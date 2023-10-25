@@ -7,25 +7,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class LogAnalytics : IUtf8JsonSerializable, IModelJsonSerializable<LogAnalytics>
+    public partial class LogAnalytics : IUtf8JsonSerializable, IJsonModel<LogAnalytics>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LogAnalytics>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LogAnalytics>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<LogAnalytics>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<LogAnalytics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Properties))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,14 +35,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        LogAnalytics IModelJsonSerializable<LogAnalytics>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        LogAnalytics IJsonModel<LogAnalytics>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -48,9 +53,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeLogAnalytics(document.RootElement, options);
         }
 
-        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element, ModelSerializerOptions options = null)
+        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -70,7 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
                     properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -79,14 +84,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new LogAnalytics(properties.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<LogAnalytics>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<LogAnalytics>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        LogAnalytics IModelSerializable<LogAnalytics>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        LogAnalytics IModel<LogAnalytics>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

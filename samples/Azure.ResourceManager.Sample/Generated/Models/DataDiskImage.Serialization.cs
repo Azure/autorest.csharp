@@ -7,25 +7,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class DataDiskImage : IUtf8JsonSerializable, IModelJsonSerializable<DataDiskImage>
+    public partial class DataDiskImage : IUtf8JsonSerializable, IJsonModel<DataDiskImage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DataDiskImage>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDiskImage>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DataDiskImage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<DataDiskImage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Lun))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Lun))
             {
                 writer.WritePropertyName("lun"u8);
                 writer.WriteNumberValue(Lun.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,14 +35,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        DataDiskImage IModelJsonSerializable<DataDiskImage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DataDiskImage IJsonModel<DataDiskImage>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -48,9 +53,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDataDiskImage(document.RootElement, options);
         }
 
-        internal static DataDiskImage DeserializeDataDiskImage(JsonElement element, ModelSerializerOptions options = null)
+        internal static DataDiskImage DeserializeDataDiskImage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -70,7 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
                     lun = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -79,14 +84,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new DataDiskImage(Optional.ToNullable(lun), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<DataDiskImage>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<DataDiskImage>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        DataDiskImage IModelSerializable<DataDiskImage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        DataDiskImage IModel<DataDiskImage>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

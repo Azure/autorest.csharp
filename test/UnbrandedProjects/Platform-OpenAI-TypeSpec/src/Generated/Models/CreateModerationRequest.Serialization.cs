@@ -23,7 +23,10 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Input);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(Input.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(Input))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (OptionalProperty.IsDefined(Model))
             {

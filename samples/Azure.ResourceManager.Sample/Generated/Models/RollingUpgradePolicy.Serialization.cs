@@ -7,17 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class RollingUpgradePolicy : IUtf8JsonSerializable, IModelJsonSerializable<RollingUpgradePolicy>
+    public partial class RollingUpgradePolicy : IUtf8JsonSerializable, IJsonModel<RollingUpgradePolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RollingUpgradePolicy>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RollingUpgradePolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<RollingUpgradePolicy>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<RollingUpgradePolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxBatchInstancePercent))
@@ -40,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("pauseTimeBetweenBatches"u8);
                 writer.WriteStringValue(PauseTimeBetweenBatches);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,14 +50,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        RollingUpgradePolicy IModelJsonSerializable<RollingUpgradePolicy>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RollingUpgradePolicy IJsonModel<RollingUpgradePolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -63,9 +68,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeRollingUpgradePolicy(document.RootElement, options);
         }
 
-        internal static RollingUpgradePolicy DeserializeRollingUpgradePolicy(JsonElement element, ModelSerializerOptions options = null)
+        internal static RollingUpgradePolicy DeserializeRollingUpgradePolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,7 +116,7 @@ namespace Azure.ResourceManager.Sample.Models
                     pauseTimeBetweenBatches = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -120,14 +125,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new RollingUpgradePolicy(Optional.ToNullable(maxBatchInstancePercent), Optional.ToNullable(maxUnhealthyInstancePercent), Optional.ToNullable(maxUnhealthyUpgradedInstancePercent), pauseTimeBetweenBatches.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<RollingUpgradePolicy>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<RollingUpgradePolicy>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        RollingUpgradePolicy IModelSerializable<RollingUpgradePolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        RollingUpgradePolicy IModel<RollingUpgradePolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

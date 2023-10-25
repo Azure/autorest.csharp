@@ -7,22 +7,24 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class OSDiskImage : IUtf8JsonSerializable, IModelJsonSerializable<OSDiskImage>
+    internal partial class OSDiskImage : IUtf8JsonSerializable, IJsonModel<OSDiskImage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OSDiskImage>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSDiskImage>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<OSDiskImage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<OSDiskImage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("operatingSystem"u8);
             writer.WriteStringValue(OperatingSystem.ToSerialString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -30,14 +32,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        OSDiskImage IModelJsonSerializable<OSDiskImage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        OSDiskImage IJsonModel<OSDiskImage>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -45,9 +50,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeOSDiskImage(document.RootElement, options);
         }
 
-        internal static OSDiskImage DeserializeOSDiskImage(JsonElement element, ModelSerializerOptions options = null)
+        internal static OSDiskImage DeserializeOSDiskImage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -63,7 +68,7 @@ namespace Azure.ResourceManager.Sample.Models
                     operatingSystem = property.Value.GetString().ToOperatingSystemType();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -72,14 +77,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new OSDiskImage(operatingSystem, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<OSDiskImage>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<OSDiskImage>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        OSDiskImage IModelSerializable<OSDiskImage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        OSDiskImage IModel<OSDiskImage>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

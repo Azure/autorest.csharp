@@ -7,20 +7,22 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class ProximityPlacementGroupData : IUtf8JsonSerializable, IModelJsonSerializable<ProximityPlacementGroupData>
+    public partial class ProximityPlacementGroupData : IUtf8JsonSerializable, IJsonModel<ProximityPlacementGroupData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ProximityPlacementGroupData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProximityPlacementGroupData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ProximityPlacementGroupData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ProximityPlacementGroupData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ExtendedLocation))
@@ -41,27 +43,27 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteStartObject();
@@ -70,7 +72,7 @@ namespace Azure.ResourceManager.Sample
                     writer.WritePropertyName("proximityPlacementGroupType"u8);
                     writer.WriteStringValue(ProximityPlacementGroupType.Value.ToString());
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(VirtualMachines))
+                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(VirtualMachines))
                 {
                     writer.WritePropertyName("virtualMachines"u8);
                     writer.WriteStartArray();
@@ -80,7 +82,7 @@ namespace Azure.ResourceManager.Sample
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(VirtualMachineScaleSets))
+                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(VirtualMachineScaleSets))
                 {
                     writer.WritePropertyName("virtualMachineScaleSets"u8);
                     writer.WriteStartArray();
@@ -90,7 +92,7 @@ namespace Azure.ResourceManager.Sample
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(AvailabilitySets))
+                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(AvailabilitySets))
                 {
                     writer.WritePropertyName("availabilitySets"u8);
                     writer.WriteStartArray();
@@ -107,7 +109,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -115,14 +117,17 @@ namespace Azure.ResourceManager.Sample
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ProximityPlacementGroupData IModelJsonSerializable<ProximityPlacementGroupData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ProximityPlacementGroupData IJsonModel<ProximityPlacementGroupData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -130,9 +135,9 @@ namespace Azure.ResourceManager.Sample
             return DeserializeProximityPlacementGroupData(document.RootElement, options);
         }
 
-        internal static ProximityPlacementGroupData DeserializeProximityPlacementGroupData(JsonElement element, ModelSerializerOptions options = null)
+        internal static ProximityPlacementGroupData DeserializeProximityPlacementGroupData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -278,7 +283,7 @@ namespace Azure.ResourceManager.Sample
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -287,14 +292,14 @@ namespace Azure.ResourceManager.Sample
             return new ProximityPlacementGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, extendedLocation, Optional.ToNullable(proximityPlacementGroupType), Optional.ToList(virtualMachines), Optional.ToList(virtualMachineScaleSets), Optional.ToList(availabilitySets), colocationStatus.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ProximityPlacementGroupData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ProximityPlacementGroupData>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ProximityPlacementGroupData IModelSerializable<ProximityPlacementGroupData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ProximityPlacementGroupData IModel<ProximityPlacementGroupData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

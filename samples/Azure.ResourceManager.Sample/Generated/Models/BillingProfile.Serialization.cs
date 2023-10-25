@@ -7,17 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class BillingProfile : IUtf8JsonSerializable, IModelJsonSerializable<BillingProfile>
+    internal partial class BillingProfile : IUtf8JsonSerializable, IJsonModel<BillingProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<BillingProfile>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BillingProfile>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<BillingProfile>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<BillingProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxPrice))
@@ -25,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("maxPrice"u8);
                 writer.WriteNumberValue(MaxPrice.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,14 +35,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        BillingProfile IModelJsonSerializable<BillingProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        BillingProfile IJsonModel<BillingProfile>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -48,9 +53,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeBillingProfile(document.RootElement, options);
         }
 
-        internal static BillingProfile DeserializeBillingProfile(JsonElement element, ModelSerializerOptions options = null)
+        internal static BillingProfile DeserializeBillingProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -70,7 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
                     maxPrice = property.Value.GetDouble();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -79,14 +84,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new BillingProfile(Optional.ToNullable(maxPrice), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<BillingProfile>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<BillingProfile>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        BillingProfile IModelSerializable<BillingProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        BillingProfile IModel<BillingProfile>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

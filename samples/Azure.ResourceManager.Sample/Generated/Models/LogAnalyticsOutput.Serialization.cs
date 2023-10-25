@@ -7,25 +7,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class LogAnalyticsOutput : IUtf8JsonSerializable, IModelJsonSerializable<LogAnalyticsOutput>
+    internal partial class LogAnalyticsOutput : IUtf8JsonSerializable, IJsonModel<LogAnalyticsOutput>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LogAnalyticsOutput>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LogAnalyticsOutput>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<LogAnalyticsOutput>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<LogAnalyticsOutput>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Output))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Output))
             {
                 writer.WritePropertyName("output"u8);
                 writer.WriteStringValue(Output);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,14 +35,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        LogAnalyticsOutput IModelJsonSerializable<LogAnalyticsOutput>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        LogAnalyticsOutput IJsonModel<LogAnalyticsOutput>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -48,9 +53,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeLogAnalyticsOutput(document.RootElement, options);
         }
 
-        internal static LogAnalyticsOutput DeserializeLogAnalyticsOutput(JsonElement element, ModelSerializerOptions options = null)
+        internal static LogAnalyticsOutput DeserializeLogAnalyticsOutput(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -66,7 +71,7 @@ namespace Azure.ResourceManager.Sample.Models
                     output = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -75,14 +80,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new LogAnalyticsOutput(output.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<LogAnalyticsOutput>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<LogAnalyticsOutput>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        LogAnalyticsOutput IModelSerializable<LogAnalyticsOutput>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        LogAnalyticsOutput IModel<LogAnalyticsOutput>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

@@ -7,17 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineCaptureContent : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineCaptureContent>
+    public partial class VirtualMachineCaptureContent : IUtf8JsonSerializable, IJsonModel<VirtualMachineCaptureContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineCaptureContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineCaptureContent>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineCaptureContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualMachineCaptureContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("vhdPrefix"u8);
@@ -26,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStringValue(DestinationContainerName);
             writer.WritePropertyName("overwriteVhds"u8);
             writer.WriteBooleanValue(OverwriteVhds);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -34,14 +36,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        VirtualMachineCaptureContent IModelJsonSerializable<VirtualMachineCaptureContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineCaptureContent IJsonModel<VirtualMachineCaptureContent>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -49,9 +54,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineCaptureContent(document.RootElement, options);
         }
 
-        internal static VirtualMachineCaptureContent DeserializeVirtualMachineCaptureContent(JsonElement element, ModelSerializerOptions options = null)
+        internal static VirtualMachineCaptureContent DeserializeVirtualMachineCaptureContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +84,7 @@ namespace Azure.ResourceManager.Sample.Models
                     overwriteVhds = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,14 +93,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineCaptureContent(vhdPrefix, destinationContainerName, overwriteVhds, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<VirtualMachineCaptureContent>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<VirtualMachineCaptureContent>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        VirtualMachineCaptureContent IModelSerializable<VirtualMachineCaptureContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineCaptureContent IModel<VirtualMachineCaptureContent>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

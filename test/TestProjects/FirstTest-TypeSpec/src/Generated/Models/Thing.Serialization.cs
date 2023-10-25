@@ -29,7 +29,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnion);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnion.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnion))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             writer.WritePropertyName("requiredLiteralString"u8);
             writer.WriteStringValue(RequiredLiteralString.ToString());

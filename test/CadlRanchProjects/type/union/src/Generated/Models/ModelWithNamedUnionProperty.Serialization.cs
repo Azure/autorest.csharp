@@ -25,7 +25,10 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(NamedUnion);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(NamedUnion.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(NamedUnion))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
             {

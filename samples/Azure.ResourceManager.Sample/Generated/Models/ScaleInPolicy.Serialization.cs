@@ -7,17 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class ScaleInPolicy : IUtf8JsonSerializable, IModelJsonSerializable<ScaleInPolicy>
+    internal partial class ScaleInPolicy : IUtf8JsonSerializable, IJsonModel<ScaleInPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ScaleInPolicy>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScaleInPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ScaleInPolicy>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ScaleInPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Rules))
@@ -30,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -38,14 +40,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ScaleInPolicy IModelJsonSerializable<ScaleInPolicy>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ScaleInPolicy IJsonModel<ScaleInPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -53,9 +58,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeScaleInPolicy(document.RootElement, options);
         }
 
-        internal static ScaleInPolicy DeserializeScaleInPolicy(JsonElement element, ModelSerializerOptions options = null)
+        internal static ScaleInPolicy DeserializeScaleInPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -80,7 +85,7 @@ namespace Azure.ResourceManager.Sample.Models
                     rules = array;
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -89,14 +94,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new ScaleInPolicy(Optional.ToList(rules), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ScaleInPolicy>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ScaleInPolicy>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ScaleInPolicy IModelSerializable<ScaleInPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ScaleInPolicy IModel<ScaleInPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 

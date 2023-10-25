@@ -81,7 +81,14 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Settings);
 #else
+<<<<<<< HEAD
                     JsonSerializer.Serialize(writer, JsonDocument.Parse(Settings.ToString()).RootElement);
+=======
+                using (JsonDocument document = JsonDocument.Parse(Settings))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+>>>>>>> origin/feature/v3
 #endif
                 }
                 if (Optional.IsDefined(ProtectedSettings))
@@ -90,6 +97,7 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(ProtectedSettings);
 #else
+<<<<<<< HEAD
                     JsonSerializer.Serialize(writer, JsonDocument.Parse(ProtectedSettings.ToString()).RootElement);
 #endif
                 }
@@ -119,6 +127,12 @@ namespace MgmtAcronymMapping.Models
 				writer.WriteRawValue(item.Value);
 #else
                     JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+=======
+                using (JsonDocument document = JsonDocument.Parse(ProtectedSettings))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+>>>>>>> origin/feature/v3
 #endif
                 }
             }

@@ -7,30 +7,32 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineStatusCodeCount : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineStatusCodeCount>
+    public partial class VirtualMachineStatusCodeCount : IUtf8JsonSerializable, IJsonModel<VirtualMachineStatusCodeCount>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineStatusCodeCount>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineStatusCodeCount>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineStatusCodeCount>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualMachineStatusCodeCount>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Code))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Count))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Count))
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteNumberValue(Count.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -38,14 +40,17 @@ namespace Azure.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        VirtualMachineStatusCodeCount IModelJsonSerializable<VirtualMachineStatusCodeCount>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineStatusCodeCount IJsonModel<VirtualMachineStatusCodeCount>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -53,9 +58,9 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineStatusCodeCount(document.RootElement, options);
         }
 
-        internal static VirtualMachineStatusCodeCount DeserializeVirtualMachineStatusCodeCount(JsonElement element, ModelSerializerOptions options = null)
+        internal static VirtualMachineStatusCodeCount DeserializeVirtualMachineStatusCodeCount(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -81,7 +86,7 @@ namespace Azure.ResourceManager.Sample.Models
                     count = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -90,14 +95,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineStatusCodeCount(code.Value, Optional.ToNullable(count), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<VirtualMachineStatusCodeCount>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<VirtualMachineStatusCodeCount>.Write(ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        VirtualMachineStatusCodeCount IModelSerializable<VirtualMachineStatusCodeCount>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineStatusCodeCount IModel<VirtualMachineStatusCodeCount>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
