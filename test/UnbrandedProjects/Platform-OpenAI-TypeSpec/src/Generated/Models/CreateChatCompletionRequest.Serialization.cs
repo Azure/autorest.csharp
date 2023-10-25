@@ -38,7 +38,10 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(FunctionCall);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(FunctionCall.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(FunctionCall))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (OptionalProperty.IsDefined(Temperature))
@@ -95,7 +98,10 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Stop);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Stop.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(Stop))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (OptionalProperty.IsDefined(PresencePenalty))

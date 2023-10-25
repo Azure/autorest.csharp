@@ -84,6 +84,7 @@ namespace CadlRanchProjects.Tests
         [TestCase("WithWhileAsync")]
         [TestCase("WithWithAsync")]
         [TestCase("WithYieldAsync")]
+        [TestCase("WithCancellationTokenAsync")]
         public Task SpecialWords_Parameters(string methodName) => Test(async (host) =>
         {
             var client = new SpecialWordsClient(host, null).GetParametersClient();
