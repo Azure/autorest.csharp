@@ -79,10 +79,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
 
                 var parameterName = field.Name.ToVariableName();
-                // we do not validate a parameter when it is a value type (struct or int, etc), or it is optional, or it it nullable, or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
-                var parameterValidation = field.Type.IsValueType || (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient) || !field.IsRequired || field.Type.IsNullable
-                    ? Validation.None
-                    : Validation.AssertNotNull;
+                var parameterValidation = GetParameterValidation(field, inputModelProperty);
 
                 var parameter = new Parameter(parameterName, BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description), field.Type, null, parameterValidation, null);
                 parametersToFields[parameter.Name] = field;
@@ -162,6 +159,35 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             PublicConstructorParameters = publicParameters;
             SerializationParameters = serializationParameters;
+        }
+
+        private static Validation GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
+        {
+            // we do not validate a parameter when it is a value type (struct or int, etc)
+            if (field.Type.IsValueType)
+            {
+                return Validation.None;
+            }
+
+            // or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
+            if (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient)
+            {
+                return Validation.None;
+            }
+
+            // or it is optional
+            if (!field.IsRequired)
+            {
+                return Validation.None;
+            }
+
+            // or it it nullable
+            if (field.Type.IsNullable)
+            {
+                return Validation.None;
+            }
+
+            return Validation.AssertNotNull;
         }
 
         public FieldDeclaration? GetFieldByParameterName(string name) => _parameterNamesToFields.TryGetValue(name, out var fieldDeclaration) ? fieldDeclaration : null;
