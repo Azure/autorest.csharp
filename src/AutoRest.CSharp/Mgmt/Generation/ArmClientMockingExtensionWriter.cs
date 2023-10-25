@@ -14,12 +14,12 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal sealed class ArmClientMockingExtensionWriter : MgmtExtensionClientWriter
+    internal sealed class ArmClientMockingExtensionWriter : MgmtMockableExtensionResourceWriter
     {
         private readonly Parameter _scopeParameter;
-        private ArmClientMockingExtension This { get; }
+        private MgmtMockableArmClient This { get; }
 
-        public ArmClientMockingExtensionWriter(ArmClientMockingExtension extensionClient) : base(extensionClient)
+        public ArmClientMockingExtensionWriter(MgmtMockableArmClient extensionClient) : base(extensionClient)
         {
             This = extensionClient;
             _scopeParameter = new Parameter(

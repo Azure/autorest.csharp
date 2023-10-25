@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private readonly List<MgmtExtension> _extensions;
         private readonly ArmResourceExtension _armResourceExtensionForChildResources;
-        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<Operation>> armResourceExtensionOperations, IEnumerable<MgmtMockingExtension> extensionClients, ArmResourceExtension armResourceExtensionForChildResources)
+        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<Operation>> armResourceExtensionOperations, IEnumerable<MgmtMockableExtension> extensionClients, ArmResourceExtension armResourceExtensionForChildResources)
             : base(Enumerable.Empty<Operation>(), extensionClients, typeof(ArmClient), RequestPath.Tenant)
         {
             _armResourceExtensionForChildResources = armResourceExtensionForChildResources;

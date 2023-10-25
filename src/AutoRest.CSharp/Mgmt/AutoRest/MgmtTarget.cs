@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             // write extension class
-            WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.ExtensionClients);
+            WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.MockableExtensions);
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
             lroWriter.Write();
@@ -232,7 +232,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
-        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockingExtension> extensionClients)
+        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockableExtensions)
         {
             if (isArmCore)
             {
@@ -253,12 +253,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     WriteExtensionFile(project, new MgmtExtensionWrapperWriter(extensionWrapper));
 
                 // and we write ExtensionClients
-                foreach (var extensionClient in extensionClients)
+                foreach (var mockableExtension in mockableExtensions)
                 {
-                    if (!extensionClient.IsEmpty)
+                    if (!mockableExtension.IsEmpty)
                     {
-                        MgmtReport.Instance.ExtensionSection.Add(extensionClient.ResourceName, new ExtensionItem(extensionClient, MgmtReport.Instance.TransformSection));
-                        WriteExtensionFile(project, MgmtExtensionClientWriter.GetWriter(extensionClient));
+                        MgmtReport.Instance.ExtensionSection.Add(mockableExtension.ResourceName, new ExtensionItem(mockableExtension, MgmtReport.Instance.TransformSection));
+                        WriteExtensionFile(project, MgmtMockableExtensionResourceWriter.GetWriter(mockableExtension));
                     }
                 }
             }

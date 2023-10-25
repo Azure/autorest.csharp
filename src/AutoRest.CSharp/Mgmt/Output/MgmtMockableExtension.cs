@@ -6,34 +6,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtMockingExtension : MgmtTypeProvider
+    internal class MgmtMockableExtension : MgmtTypeProvider
     {
         private readonly IEnumerable<MgmtClientOperation> _operations;
         private readonly MgmtExtension? _extensionForChildResources;
 
-        public MgmtMockingExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources)
+        public MgmtMockableExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources)
             : base(resourceType.Name)
         {
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
             ExtendedResourceType = resourceType;
-            // name of this class is like "ComputeResourceGroupResourceExtension"
-            DefaultName = GetMockingExtensionDefaultName(resourceType.Name);
+            // name of this class is like "MockableComputeResourceGroupResource"
+            DefaultName = GetMockableExtensionDefaultName(resourceType.Name);
         }
 
-        internal static string GetMockingExtensionDefaultName(string resourceName)
+        internal static string GetMockableExtensionDefaultName(string resourceName)
             => $"Mockable{MgmtContext.RPName}{resourceName}";
 
         public override bool IsInitializedByProperties => true;

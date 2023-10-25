@@ -431,7 +431,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             => !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionBuilder.Extensions;
-        public IEnumerable<MgmtMockingExtension> ExtensionClients => ExtensionBuilder.ExtensionClients;
+        public IEnumerable<MgmtMockableExtension> MockableExtensions => ExtensionBuilder.MockableExtensions;
         public MgmtExtensionWrapper ExtensionWrapper => ExtensionBuilder.ExtensionWrapper;
 
         public MgmtExtension GetExtension(Type armCoreType) => ExtensionBuilder.GetExtension(armCoreType);

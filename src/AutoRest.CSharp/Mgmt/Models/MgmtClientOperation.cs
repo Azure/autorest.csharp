@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 // find the corresponding extension of this method
                 var extendType = _extensionParameter.Type;
-                var mockingExtensionTypeName = MgmtMockingExtension.GetMockingExtensionDefaultName(extendType.Name);
+                var mockingExtensionTypeName = MgmtMockableExtension.GetMockableExtensionDefaultName(extendType.Name);
                 // construct the cref name
                 var builder = new StringBuilder(Name);
                 builder.Append("(");

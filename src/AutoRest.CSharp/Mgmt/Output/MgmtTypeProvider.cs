@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     /// <summary>
     /// MgmtTypeProvider represents the information that corresponds to the generated class in the SDK that contains operations in it.
-    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtension"/>, <see cref="MgmtExtension"/>, <see cref="MgmtMockingExtension"/> and <see cref="MgmtExtensionWrapper"/>
+    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtension"/>, <see cref="MgmtExtension"/>, <see cref="MgmtMockableExtension"/> and <see cref="MgmtExtensionWrapper"/>
     /// </summary>
     internal abstract class MgmtTypeProvider : TypeProvider
     {

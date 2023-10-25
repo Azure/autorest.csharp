@@ -19,9 +19,9 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ArmClientMockingExtension : MgmtMockingExtension
+    internal class MgmtMockableArmClient : MgmtMockableExtension
     {
-        public ArmClientMockingExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources) : base(resourceType, operations, extensionForChildResources)
+        public MgmtMockableArmClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources) : base(resourceType, operations, extensionForChildResources)
         {
         }
 
