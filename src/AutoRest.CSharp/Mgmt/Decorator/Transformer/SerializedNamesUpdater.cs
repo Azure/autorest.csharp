@@ -30,45 +30,33 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private static void UpdateChoiceSchema(ChoiceSchema choiceSchema)
         {
-            // construct the serialized information
-            var serializedName = CreateSerializedNameDescription(choiceSchema);
             // update the choice type, append the serialized name of this type to its original description
-            choiceSchema.Language.Default.Description = $"{CreateDescription(choiceSchema)}\n{serializedName}";
+            choiceSchema.Language.Default.Description = $"{CreateDescription(choiceSchema)}\n{CreateSerializedNameDescription(choiceSchema.GetFullSerializedName())}";
             // update the choice values
             foreach (var choice in choiceSchema.Choices)
             {
-                choice.Language.Default.Description = $"{CreateDescription(choice)}\n{serializedName}.{choice.Value}";
+                choice.Language.Default.Description = $"{CreateDescription(choice)}\n{CreateSerializedNameDescription(choiceSchema.GetFullSerializedName(choice))}";
             }
         }
 
         private static void UpdateSealedChoiceSchema(SealedChoiceSchema sealedChoiceSchema)
         {
-            // construct the serialized information
-            var serializedName = CreateSerializedNameDescription(sealedChoiceSchema);
             // update the sealed choice type, append the serialized name of this type to its original description
-            sealedChoiceSchema.Language.Default.Description = $"{CreateDescription(sealedChoiceSchema)}\n{serializedName}";
+            sealedChoiceSchema.Language.Default.Description = $"{CreateDescription(sealedChoiceSchema)}\n{CreateSerializedNameDescription(sealedChoiceSchema.GetFullSerializedName())}";
             foreach (var choice in sealedChoiceSchema.Choices)
             {
-                choice.Language.Default.Description = $"{CreateDescription(choice)}\n{serializedName}.{choice.Value}";
+                choice.Language.Default.Description = $"{CreateDescription(choice)}\n{CreateSerializedNameDescription(sealedChoiceSchema.GetFullSerializedName(choice))}";
             }
         }
 
         private static void UpdateObjectSchema(ObjectSchema objectSchema)
         {
-            // construct the serialized information
-            var serializedName = CreateSerializedNameDescription(objectSchema);
             // update the sealed choice type, append the serialized name of this type to its original description
-            objectSchema.Language.Default.Description = $"{CreateDescription(objectSchema)}\n{serializedName}";
+            objectSchema.Language.Default.Description = $"{CreateDescription(objectSchema)}\n{CreateSerializedNameDescription(objectSchema.GetFullSerializedName())}";
             foreach (var property in objectSchema.Properties)
             {
-                string propertySerializedName;
-                if (property.FlattenedNames.Count == 0)
-                    propertySerializedName = $"{property.SerializedName}";
-                else
-                    propertySerializedName = string.Join(".", property.FlattenedNames);
-
                 var originalDescription = string.IsNullOrEmpty(property.Language.Default.Description) ? string.Empty : $"{property.Language.Default.Description}\n";
-                property.Language.Default.Description = $"{originalDescription}{serializedName}.{propertySerializedName}";
+                property.Language.Default.Description = $"{originalDescription}{CreateSerializedNameDescription(objectSchema.GetFullSerializedName(property))}";
             }
         }
 
@@ -80,6 +68,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 ? choiceValue.Value
                 : choiceValue.Language.Default.Description;
 
-        private static string CreateSerializedNameDescription(Schema schema) => $"Serialized Name: {schema.GetOriginalName()}";
+        private static string CreateSerializedNameDescription(string fullSerializedName) => $"Serialized Name: {fullSerializedName}";
     }
 }
