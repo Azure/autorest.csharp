@@ -287,7 +287,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (methodBase.SummaryText is { } summaryText)
             {
-                writer.WriteXmlDocumentationSummary($"{summaryText}");
+                writer.WriteXmlDocumentationSummary(summaryText);
             }
 
             return writer.WriteMethodDocumentationSignature(methodBase);

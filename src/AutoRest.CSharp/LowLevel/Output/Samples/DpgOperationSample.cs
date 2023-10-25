@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             // then we return all the parameters on this operation
             var parameters = IsAllParametersUsed
                 ? OperationMethodSignature.Parameters
-                : OperationMethodSignature.Parameters.Where(p => p.DefaultValue == null);
+                : OperationMethodSignature.Parameters.Where(p => !p.IsOptionalInSignature);
 
             foreach (var parameter in parameters)
             {
