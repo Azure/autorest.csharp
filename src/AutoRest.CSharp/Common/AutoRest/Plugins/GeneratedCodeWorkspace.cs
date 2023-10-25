@@ -58,12 +58,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static Task<Project>? _cachedProject;
 
         private Project _project;
-        private Dictionary<string, string> _docFiles { get; init; }
+        private Dictionary<string, string> _docFiles { get; }
+        private Dictionary<string, string> _plainFiles { get; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
-            _docFiles = new Dictionary<string, string>();
+            _docFiles = new();
+            _plainFiles = new();
         }
 
         /// <summary>
@@ -100,6 +102,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             _docFiles.Add(name, text);
         }
 
+        public void AddPlainFiles(string name, string content)
+        {
+            _plainFiles.Add(name, content);
+        }
+
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
         {
             var compilation = await _project.GetCompilationAsync();
@@ -131,6 +138,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var doc in _docFiles)
             {
                 yield return (doc.Key, doc.Value);
+            }
+
+            foreach (var (file, content) in _plainFiles)
+            {
+                yield return (file, content);
             }
         }
 
