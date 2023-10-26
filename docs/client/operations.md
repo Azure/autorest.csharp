@@ -179,7 +179,7 @@ a pager that pages through the final lists of data.
 
 <!-- LINKS -->
 [operation_group_example]: https://github.com/Azure/azure-rest-api-specs/blob/master/specification/batch/data-plane/Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json#L64
-[mixin_example]: https://github.com/Azure/autorest/blob/new_docs/docs/openapi/examples/pets.json#L20
+[mixin_example]: https://github.com/Azure/autorest/blob/main/docs/openapi/examples/pets.json#L15
 [poller_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 [pageable]: https://docs.microsoft.com/en-us/dotnet/api/azure.pageable-1?view=azure-dotnet
 [async_pageable]: https://docs.microsoft.com/en-us/dotnet/api/azure.asyncpageable-1?view=azure-dotnet

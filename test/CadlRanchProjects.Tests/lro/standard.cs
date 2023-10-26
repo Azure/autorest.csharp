@@ -42,7 +42,10 @@ namespace CadlRanchProjects.Tests
         {
             var operation = await new StandardClient(host, null).ExportAsync(WaitUntil.Completed, "madge", "json");
             Assert.IsTrue(operation.HasCompleted);
-            // TODO: support model properties
+
+            var exportedUser = operation.Value;
+            Assert.AreEqual("madge", exportedUser.Name);
+            Assert.AreEqual("/users/madge", exportedUser.ResourceUri);
         });
     }
 }
