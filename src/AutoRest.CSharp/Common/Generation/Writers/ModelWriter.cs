@@ -290,7 +290,7 @@ Examples:
 To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
 </para>
 <para>
-To assign an already formated json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
+To assign an already formatted json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
 </para>
 <para>
 Examples:
