@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class CollectionItem : IUtf8JsonSerializable, IModelJsonSerializable<CollectionItem>
+    public partial class CollectionItem : IUtf8JsonSerializable, IJsonModel<CollectionItem>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CollectionItem>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CollectionItem>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<CollectionItem>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<CollectionItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -29,7 +30,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -37,24 +38,31 @@ namespace ModelsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        CollectionItem IModelJsonSerializable<CollectionItem>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        CollectionItem IJsonModel<CollectionItem>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeCollectionItem(document.RootElement, options);
         }
 
-        internal static CollectionItem DeserializeCollectionItem(JsonElement element, ModelSerializerOptions options = null)
+        internal static CollectionItem DeserializeCollectionItem(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -75,7 +83,7 @@ namespace ModelsTypeSpec.Models
                     requiredModelRecord = dictionary;
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -84,16 +92,24 @@ namespace ModelsTypeSpec.Models
             return new CollectionItem(requiredModelRecord, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<CollectionItem>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<CollectionItem>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        CollectionItem IModelSerializable<CollectionItem>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        CollectionItem IModel<CollectionItem>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeCollectionItem(document.RootElement, options);
@@ -104,13 +120,13 @@ namespace ModelsTypeSpec.Models
         internal static CollectionItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCollectionItem(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeCollectionItem(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelWithConverterUsage.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class OutputModel
     {
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         internal OutputModel()
         {
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="outputModelProperty"> Constant string. </param>
-        internal OutputModel(string outputModelProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputModel(string outputModelProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OutputModelProperty = outputModelProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Constant string. </summary>

@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodBodyStatement[]
                 {
                     // ModelSerializerHelper.ValidateFormat(this, options.Format);
-                    BuildModelSerializerHelperValidateFormatStatement(),
+                    BuildModelSerializerHelperValidateFormatStatement(model.Type, new ModelReaderWriterOptionsExpression(optionsParameter).Format, true),
                     EmptyLine,
                     // using var document = JsonDocument.ParseValue(ref reader);
                     UsingDeclare("document", JsonDocumentExpression.ParseValue(utf8JsonReaderParameter), out var docVariable),
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodBodyStatement[]
                 {
                     // ModelSerializerHelper.ValidateFormat(this, options.Format);
-                    BuildModelSerializerHelperValidateFormatStatement(),
+                    BuildModelSerializerHelperValidateFormatStatement(model.Type, new ModelReaderWriterOptionsExpression(optionsParameter).Format, true),
                     EmptyLine,
                     BuildModelWriteMethod(hasJson, hasXml)
                 }
@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodBodyStatement[]
                 {
                     // ModelSerializerHelper.ValidateFormat(this, options.Format);
-                    BuildModelSerializerHelperValidateFormatStatement(),
+                    BuildModelSerializerHelperValidateFormatStatement(model.Type, new ModelReaderWriterOptionsExpression(optionsParameter).Format, true),
                     EmptyLine,
                     BuildModelReadMethod(model, hasJson, hasXml)
                 }
@@ -244,8 +244,59 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement BuildModelSerializerHelperValidateFormatStatement()
-            => new InvokeStaticMethodStatement(typeof(ModelSerializerHelper), nameof(ModelSerializerHelper.ValidateFormat), This, new ModelReaderWriterOptionsExpression(optionsParameter).Format);
+        private static MethodBodyStatement BuildModelSerializerHelperValidateFormatStatement(CSharpType type, ValueExpression format, bool hasJson)
+        {
+            /*
+                bool implementsJson = model is IJsonModel<T>;
+                bool isValid = (format == ModelReaderWriterFormat.Json && implementsJson) || format == ModelReaderWriterFormat.Wire;
+                if (!isValid)
+                {
+                    throw new FormatException($"The model {model.GetType().Name} does not support '{format}' format.");
+                }
+             */
+            var iJsonModelType = new CSharpType(typeof(IJsonModel<>), type);
+            var isValid = new VariableReference(typeof(bool), "isValid");
+            if (hasJson)
+            {
+                return new MethodBodyStatement[]
+                {
+                    Declare(isValid, Or(Equal(format, ModelReaderWriterFormatExpression.Json), Equal(format, ModelReaderWriterFormatExpression.Wire))),
+                    new IfStatement(Not(new BoolExpression(isValid)))
+                    {
+                        Throw(New.Instance(typeof(FormatException), new InvokeStaticMethodExpression(
+                            typeof(string),
+                            nameof(string.Format),
+                            new ValueExpression[]
+                            {
+                                Literal("The model {0} does not support '{1}' format."),
+                                new InvokeInstanceMethodExpression(null, nameof(GetType), Array.Empty<ValueExpression>(), null, false).Property(nameof(Type.Name)),
+                                format
+                            })))
+                    }
+                };
+            }
+            else
+            {
+                var implementsJson = new VariableReference(typeof(bool), "implementsJson");
+                return new MethodBodyStatement[]
+                {
+                Declare(implementsJson, Is(This, iJsonModelType)),
+                Declare(isValid, Or(And(Equal(format, ModelReaderWriterFormatExpression.Json), new BoolExpression(implementsJson)), Equal(format, ModelReaderWriterFormatExpression.Wire))),
+                new IfStatement(Not(new BoolExpression(isValid)))
+                {
+                    Throw(New.Instance(typeof(FormatException), new InvokeStaticMethodExpression(
+                        typeof(string),
+                        nameof(string.Format),
+                        new ValueExpression[]
+                        {
+                            Literal("The model {0} does not support '{1}' format."),
+                            new InvokeInstanceMethodExpression(null, nameof(GetType), Array.Empty<ValueExpression>(), null, false).Property(nameof(Type.Name)),
+                            format
+                        })))
+                }
+                };
+            }
+        }
 
         public static Method BuildToRequestContent(MethodSignatureModifiers modifiers)
         {

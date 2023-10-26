@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class Int32ValuesFacet : IUtf8JsonSerializable, IModelJsonSerializable<Int32ValuesFacet>
+    public partial class Int32ValuesFacet : IUtf8JsonSerializable, IJsonModel<Int32ValuesFacet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Int32ValuesFacet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Int32ValuesFacet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<Int32ValuesFacet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<Int32ValuesFacet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -34,7 +35,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteNumberValue(Value);
             writer.WritePropertyName("field"u8);
             writer.WriteStringValue(Field);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -42,24 +43,31 @@ namespace ModelsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        Int32ValuesFacet IModelJsonSerializable<Int32ValuesFacet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Int32ValuesFacet IJsonModel<Int32ValuesFacet>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeInt32ValuesFacet(document.RootElement, options);
         }
 
-        internal static Int32ValuesFacet DeserializeInt32ValuesFacet(JsonElement element, ModelSerializerOptions options = null)
+        internal static Int32ValuesFacet DeserializeInt32ValuesFacet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +106,7 @@ namespace ModelsTypeSpec.Models
                     field = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,16 +115,24 @@ namespace ModelsTypeSpec.Models
             return new Int32ValuesFacet(field, serializedAdditionalRawData, values, value, kind);
         }
 
-        BinaryData IModelSerializable<Int32ValuesFacet>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<Int32ValuesFacet>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        Int32ValuesFacet IModelSerializable<Int32ValuesFacet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        Int32ValuesFacet IModel<Int32ValuesFacet>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeInt32ValuesFacet(document.RootElement, options);
@@ -127,13 +143,13 @@ namespace ModelsTypeSpec.Models
         internal static new Int32ValuesFacet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInt32ValuesFacet(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeInt32ValuesFacet(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

@@ -21,6 +21,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using NUnit.Framework.Constraints;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -371,9 +372,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return SerializationConstructor;
 
             // add an extra empty ctor if we do not have a ctor with no parameters
+            var accessibility = IsStruct ? MethodSignatureModifiers.Public : MethodSignatureModifiers.Internal;
             if (InitializationConstructor.Signature.Parameters.Count > 0 && SerializationConstructor.Signature.Parameters.Count > 0)
                 yield return new(
-                    new ConstructorSignature(Type, null, $"Initializes a new instance of <see cref=\"{Type}\"/> for deserialization.", MethodSignatureModifiers.Internal, Array.Empty<Parameter>()),
+                    new ConstructorSignature(Type, null, $"Initializes a new instance of <see cref=\"{Type}\"/> for deserialization.", accessibility, Array.Empty<Parameter>()),
                     Array.Empty<ObjectPropertyInitializer>(),
                     null);
         }

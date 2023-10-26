@@ -102,6 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
             writer.Append($"{rawDataField.Declaration.Accessibility} ")
+                .AppendRawIf("readonly ", schema.IsStruct)
                 .Line($"{rawDataField.Declaration.Type} {rawDataField.Declaration.Name};");
 
             writer.Line();

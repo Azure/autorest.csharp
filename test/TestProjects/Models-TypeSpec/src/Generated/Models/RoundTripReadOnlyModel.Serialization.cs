@@ -7,71 +7,72 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class RoundTripReadOnlyModel : IUtf8JsonSerializable, IModelJsonSerializable<RoundTripReadOnlyModel>
+    public partial class RoundTripReadOnlyModel : IUtf8JsonSerializable, IJsonModel<RoundTripReadOnlyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RoundTripReadOnlyModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripReadOnlyModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<RoundTripReadOnlyModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<RoundTripReadOnlyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadonlyString"u8);
                 writer.WriteStringValue(RequiredReadonlyString);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(OptionalReadonlyString))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(OptionalReadonlyString))
             {
                 writer.WritePropertyName("optionalReadonlyString"u8);
                 writer.WriteStringValue(OptionalReadonlyString);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(OptionalReadonlyInt))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(OptionalReadonlyInt))
             {
                 writer.WritePropertyName("optionalReadonlyInt"u8);
                 writer.WriteNumberValue(OptionalReadonlyInt.Value);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadonlyModel"u8);
                 writer.WriteObjectValue(RequiredReadonlyModel);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(OptionalReadonlyModel))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(OptionalReadonlyModel))
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
                 writer.WriteObjectValue(OptionalReadonlyModel);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadonlyFixedStringEnum"u8);
                 writer.WriteStringValue(RequiredReadonlyFixedStringEnum.ToSerialString());
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadonlyExtensibleEnum"u8);
                 writer.WriteStringValue(RequiredReadonlyExtensibleEnum.ToString());
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("optionalReadonlyFixedStringEnum"u8);
                 writer.WriteStringValue(OptionalReadonlyFixedStringEnum.ToSerialString());
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("optionalReadonlyExtensibleEnum"u8);
                 writer.WriteStringValue(OptionalReadonlyExtensibleEnum.ToString());
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadonlyStringList"u8);
                 writer.WriteStartArray();
@@ -81,7 +82,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadonlyIntList"u8);
                 writer.WriteStartArray();
@@ -91,7 +92,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadOnlyModelList"u8);
                 writer.WriteStartArray();
@@ -101,7 +102,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadOnlyIntRecord"u8);
                 writer.WriteStartObject();
@@ -112,7 +113,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredStringRecord"u8);
                 writer.WriteStartObject();
@@ -123,7 +124,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadOnlyModelRecord"u8);
                 writer.WriteStartObject();
@@ -134,7 +135,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OptionalReadonlyStringList))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OptionalReadonlyStringList))
             {
                 writer.WritePropertyName("optionalReadonlyStringList"u8);
                 writer.WriteStartArray();
@@ -144,7 +145,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OptionalReadonlyIntList))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OptionalReadonlyIntList))
             {
                 writer.WritePropertyName("optionalReadonlyIntList"u8);
                 writer.WriteStartArray();
@@ -154,7 +155,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OptionalReadOnlyModelList))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OptionalReadOnlyModelList))
             {
                 writer.WritePropertyName("optionalReadOnlyModelList"u8);
                 writer.WriteStartArray();
@@ -180,7 +181,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OptionalModelRecord))
+            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OptionalModelRecord))
             {
                 writer.WritePropertyName("optionalModelRecord"u8);
                 writer.WriteStartObject();
@@ -218,7 +219,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -226,24 +227,31 @@ namespace ModelsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        RoundTripReadOnlyModel IModelJsonSerializable<RoundTripReadOnlyModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RoundTripReadOnlyModel IJsonModel<RoundTripReadOnlyModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRoundTripReadOnlyModel(document.RootElement, options);
         }
 
-        internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element, ModelSerializerOptions options = null)
+        internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -509,7 +517,7 @@ namespace ModelsTypeSpec.Models
                     optionalCollectionWithNullableBooleanElement = array;
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -518,16 +526,24 @@ namespace ModelsTypeSpec.Models
             return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelList), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<RoundTripReadOnlyModel>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<RoundTripReadOnlyModel>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        RoundTripReadOnlyModel IModelSerializable<RoundTripReadOnlyModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        RoundTripReadOnlyModel IModel<RoundTripReadOnlyModel>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRoundTripReadOnlyModel(document.RootElement, options);
@@ -538,13 +554,13 @@ namespace ModelsTypeSpec.Models
         internal static RoundTripReadOnlyModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripReadOnlyModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeRoundTripReadOnlyModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

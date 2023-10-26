@@ -552,9 +552,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRawIf(op, operandOnTheLeft);
                     break;
                 case BinaryOperatorExpression(var op, var left, var right):
+                    // we should always write parenthesis around this expression since some or the logic operator has lower priority, and we might get trouble when there is a chain of binary operator expression, for instance (a || b) && c.
+                    writer.AppendRaw("(");
                     writer.WriteValueExpression(left);
                     writer.AppendRaw(" ").AppendRaw(op).AppendRaw(" ");
                     writer.WriteValueExpression(right);
+                    writer.AppendRaw(")");
                     break;
                 case TernaryConditionalOperator ternary:
                     writer.WriteValueExpression(ternary.Condition);
