@@ -111,7 +111,7 @@ namespace ProtocolMethodsInRestClient
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> PutStreamAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> PutStreamAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.PutStream");
             scope.Start();
@@ -141,7 +141,7 @@ namespace ProtocolMethodsInRestClient
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response PutStream(RequestContent content, RequestContext context)
+        public virtual Response PutStream(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.PutStream");
             scope.Start();
@@ -256,7 +256,7 @@ namespace ProtocolMethodsInRestClient
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> CreateAsync(int second, RequestContent content, string first, RequestContext context)
+        public virtual async Task<Response> CreateAsync(int second, RequestContent content, string first = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
@@ -288,7 +288,7 @@ namespace ProtocolMethodsInRestClient
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response Create(int second, RequestContent content, string first, RequestContext context)
+        public virtual Response Create(int second, RequestContent content, string first = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
