@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public bool BuildResponseParsing { get; }
         public string ExampleKey { get; }
         public CSharpType? ResponseType { get; }
+        public CSharpType? LroResultType { get; }
         public CSharpType? PageItemType { get; }
 
         private readonly DpgClient _topLevelClient;
@@ -41,7 +42,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         private readonly InputOperationExample _inputOperationExample;
 
-        public DpgOperationSample(DpgClient topLevelClient, IReadOnlyList<MethodSignatureBase> clientInvocationChain, MethodSignature signature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(DpgClient topLevelClient, IReadOnlyList<MethodSignatureBase> clientInvocationChain, MethodSignature signature, InputType? requestBodyType, CSharpType? responseType, CSharpType? lroResultType, CSharpType? pageItemType, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
             _topLevelClient = topLevelClient;
             _requestBodyType = requestBodyType;
@@ -56,6 +57,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             OperationMethodSignature = signature;
             ResponseType = responseType;
             IsLongRunning = signature.ReturnType is {} && (TypeFactory.IsOperation(signature.ReturnType) || TypeFactory.IsTaskOfOperation(signature.ReturnType));
+            LroResultType = lroResultType;
             PageItemType = pageItemType;
         }
 

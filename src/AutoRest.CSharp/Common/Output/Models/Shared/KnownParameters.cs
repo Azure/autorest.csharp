@@ -43,5 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static readonly Parameter CancellationTokenParameter = new("cancellationToken", "The cancellation token to use", new CSharpType(typeof(CancellationToken)), Constant.NewInstanceOf(typeof(CancellationToken)), Validation.None, null);
         public static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", "Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), Validation.None, null) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
+
+        public static readonly Parameter Response = new("response", $"Response returned from backend service", Configuration.ApiTypes.ResponseType, null, Validation.None, null);
     }
 }

@@ -251,7 +251,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             // if it is not pageable, we just call the operation, declare a local variable and assign the result to it
             if (sample is {ResponseType: {} responseType})
             {
-                if (sample.IsLongRunning)
+                if (sample.LroResultType is {} lroResultType)
                 {
                     /*
                     * This will generate code like:
@@ -263,7 +263,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                         return new[]
                         {
                             Declare(returnType, "operation", new OperationExpression(invocation), out var operationOfT),
-                            Declare(responseType, "responseData", operationOfT.Value, out _)
+                            Declare(lroResultType, "responseData", operationOfT.Value, out _)
                         };
                     }
 
@@ -272,7 +272,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                         Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
                         Declare("responseData", new BinaryDataExpression(operation.Value), out var responseData),
                         EmptyLine,
-                        ParseResponse(responseType, sample, responseData.ToStream())
+                        ParseResponse(lroResultType, sample, responseData.ToStream())
                     };
                 }
 

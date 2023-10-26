@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Output.Models
         Method? ConvenienceAsync,
         Method? NextPageConvenience,
         Method? NextPageConvenienceAsync,
+        Method? ResultConversionMethod,
         ResponseClassifierType ResponseClassifier,
 
         // [TODO]: Order property is used required to preserve the order of methods in generated clients, it doesn't affect any semantics

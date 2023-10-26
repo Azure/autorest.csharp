@@ -99,7 +99,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
+
                     WriteResponseClassifierMethod(_writer, _client.ResponseClassifierTypes);
+                    WriteLongRunningResultRetrievalMethods();
                 }
             }
         }
@@ -275,6 +277,15 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes)
             {
                 WriteResponseClassifier(writer, name, statusCodes);
+            }
+        }
+
+        private void WriteLongRunningResultRetrievalMethods()
+        {
+            foreach (var method in _client.OperationMethods.Select(c => c.ResultConversionMethod).WhereNotNull())
+            {
+                _writer.Line();
+                _writer.WriteMethod(method);
             }
         }
 
