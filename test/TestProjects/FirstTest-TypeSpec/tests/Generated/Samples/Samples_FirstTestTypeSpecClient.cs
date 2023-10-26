@@ -663,8 +663,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(friend);
         }
 
         [Test]
@@ -674,8 +674,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
@@ -719,8 +719,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(friend);
         }
 
         [Test]
@@ -730,8 +730,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]

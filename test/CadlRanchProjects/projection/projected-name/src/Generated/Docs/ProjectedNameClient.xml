@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OperationAsync(RequestContext)">
+    <member name="ClientNameAsync(RequestContext)">
       <example>
-This sample shows how to call OperationAsync.
+This sample shows how to call ClientNameAsync.
 <code><![CDATA[
 ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = await client.OperationAsync();
+Response response = await client.ClientNameAsync();
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call OperationAsync with all request content.
+This sample shows how to call ClientNameAsync with all request content.
 <code><![CDATA[
 ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = await client.OperationAsync();
+Response response = await client.ClientNameAsync();
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="Operation(RequestContext)">
+    <member name="ClientName(RequestContext)">
       <example>
-This sample shows how to call Operation.
+This sample shows how to call ClientName.
 <code><![CDATA[
 ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = client.Operation();
+Response response = client.ClientName();
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call Operation with all request content.
+This sample shows how to call ClientName with all request content.
 <code><![CDATA[
 ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = client.Operation();
+Response response = client.ClientName();
 
 Console.WriteLine(response.Status);
 ]]></code></example>
