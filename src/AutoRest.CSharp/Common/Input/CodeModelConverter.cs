@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Common.Input
                 Description: operationGroup.Language.Default.Description,
                 Operations: CreateOperations(operationGroup.Operations).Values.ToArray(),
                 Parameters: parameters,
-                ExampleMockValueBuilder.BuildClientExamples(parameters),
+                Array.Empty<InputClientExample>(),
                 null)
             {
                 Key = operationGroup.Key,
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(serviceRequest, operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
-                Examples: ExampleMockValueBuilder.BuildOperationExamples(parameters));
+                Examples: Array.Empty<InputOperationExample>());
 
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;
