@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
@@ -41,15 +42,35 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 else
                 {
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
-                    if (Configuration.MgmtTestConfiguration is not null)
+                    if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                 }
+                GenerateMgmtReport(project);
             }
             else
             {
                 await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter().CreateNamespace(codeModel, new SchemaUsageProvider(codeModel)), sourceInputModel, false);
             }
             return project;
+        }
+
+        private void GenerateMgmtReport(GeneratedCodeWorkspace project)
+        {
+            MgmtReport.Instance.TransformSection.ForEachTransform((t, usages) =>
+            {
+                string[] ignoreNoUsage = new string[]
+                {
+                    TransformTypeName.AcronymMapping,
+                    TransformTypeName.FormatByNameRules
+                };
+                if (usages.Count == 0 && !ignoreNoUsage.Contains(t.TransformType))
+                    AutoRestLogger.Warning($"No usage transform detected: {t}").Wait();
+            });
+            if (Configuration.MgmtConfiguration.MgmtDebug.GenerateReport)
+            {
+                string report = MgmtReport.Instance.GenerateReport(Configuration.MgmtConfiguration.MgmtDebug.ReportFormat);
+                project.AddPlainFiles("_mgmt-codegen-report.log", report);
+            }
         }
 
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(InputNamespace rootNamespace)
