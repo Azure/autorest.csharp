@@ -320,7 +320,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         RequestConditionHeaders.IfUnmodifiedSince => nameof(RequestConditions.IfUnmodifiedSince),
                         _ => throw new ArgumentOutOfRangeException()
                     };
-                    properties[propertyName] = New.Instance(typeof(ETag), convenienceParameter);
+
+                    properties[propertyName] = requestCondition switch
+                    {
+                        RequestConditionHeaders.IfMatch or RequestConditionHeaders.IfNoneMatch => New.Instance(typeof(ETag), convenienceParameter),
+                        RequestConditionHeaders.IfModifiedSince or RequestConditionHeaders.IfUnmodifiedSince => convenienceParameter,
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
+
                     _convenienceParameters.Add(convenienceParameter);
                 }
 
