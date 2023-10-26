@@ -16,6 +16,31 @@
     "application/json"
   ],
   "paths": {
+    "/template/stream": {
+      "put": {
+        "operationId": "PutStream",
+        "description": "Create or update stream.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      }
+    },
     "/template/resources": {
       "put": {
         "operationId": "Create",

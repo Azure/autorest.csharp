@@ -54,7 +54,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_12
+    - !ConstantSchema &ref_8
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -64,7 +64,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_14
+    - !ConstantSchema &ref_10
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -74,8 +74,19 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
+  binaries:
+    - !BinarySchema &ref_9
+      type: binary
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: binary
+          description: ''
+      protocol: !Protocols {}
   dateTimes:
-    - !DateTimeSchema &ref_11
+    - !DateTimeSchema &ref_16
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -93,7 +104,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_8
+            - !Parameter &ref_13
               schema: *ref_1
               groupedBy: !Parameter &ref_4
                 schema: *ref_2
@@ -123,7 +134,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_3
           originalParameter:
-            - !Parameter &ref_9
+            - !Parameter &ref_14
               schema: *ref_3
               groupedBy: *ref_4
               implementation: Method
@@ -152,7 +163,7 @@ schemas: !Schemas
           description: Parameter group
       protocol: !Protocols {}
   uuids:
-    - !UuidSchema &ref_10
+    - !UuidSchema &ref_15
       type: uuid
       apiVersions:
         - !ApiVersion 
@@ -163,7 +174,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_13
+    - !ObjectSchema &ref_17
       type: object
       apiVersions:
         - !ApiVersion 
@@ -218,16 +229,100 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: PutStream
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_7
+        requestMediaTypes:
+          application/json: !Request &ref_12
+            parameters:
+              - !Parameter 
+                schema: *ref_8
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_11
+                schema: *ref_9
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: body
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_10
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_11
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /template/stream
+                method: put
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_12
+        signatureParameters: []
+        responses:
+          - !BinaryResponse 
+            binary: true
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpBinaryResponse 
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: PutStream
+            description: Create or update stream.
+        protocol: !Protocols {}
+      - !Operation 
         operationId: Create
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_7
-          - *ref_8
-          - *ref_9
-          - !Parameter &ref_17
-            schema: *ref_10
+          - *ref_13
+          - *ref_14
+          - !Parameter &ref_20
+            schema: *ref_15
             implementation: Method
             language: !Languages 
               default:
@@ -239,8 +334,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_18
-            schema: *ref_11
+          - !Parameter &ref_21
+            schema: *ref_16
             implementation: Method
             language: !Languages 
               default:
@@ -253,10 +348,10 @@ operationGroups:
               http: !HttpParameter 
                 in: header
         requestMediaTypes:
-          application/json: !Request &ref_16
+          application/json: !Request &ref_19
             parameters:
               - !Parameter 
-                schema: *ref_12
+                schema: *ref_8
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -268,8 +363,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_15
-                schema: *ref_13
+              - !Parameter &ref_18
+                schema: *ref_17
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -281,7 +376,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -295,7 +390,7 @@ operationGroups:
                     in: header
               - *ref_4
             signatureParameters:
-              - *ref_15
+              - *ref_18
               - *ref_4
             language: !Languages 
               default:
@@ -310,13 +405,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_16
+          - *ref_19
         signatureParameters:
-          - *ref_17
-          - *ref_18
+          - *ref_20
+          - *ref_21
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -340,7 +435,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_7
-          - !Parameter &ref_19
+          - !Parameter &ref_22
             schema: *ref_1
             implementation: Method
             required: true
@@ -352,7 +447,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_20
+          - !Parameter &ref_23
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -375,8 +470,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_19
-          - *ref_20
+          - *ref_22
+          - *ref_23
         responses:
           - !Response 
             language: !Languages 
@@ -399,7 +494,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_7
-          - !Parameter &ref_21
+          - !Parameter &ref_24
             schema: *ref_1
             implementation: Method
             required: true
@@ -415,7 +510,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -438,10 +533,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_21
+          - *ref_24
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -474,10 +569,10 @@ operationGroups:
         parameters:
           - *ref_7
         requestMediaTypes:
-          application/json: !Request &ref_23
+          application/json: !Request &ref_26
             parameters:
               - !Parameter 
-                schema: *ref_12
+                schema: *ref_8
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -489,8 +584,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_22
-                schema: *ref_13
+              - !Parameter &ref_25
+                schema: *ref_17
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -502,7 +597,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -515,7 +610,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_22
+              - *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -529,11 +624,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_23
+          - *ref_26
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -557,7 +652,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_7
-          - !Parameter &ref_24
+          - !Parameter &ref_27
             schema: *ref_1
             implementation: Method
             required: true
@@ -581,7 +676,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_24
+          - *ref_27
         responses:
           - !Response 
             language: !Languages 
@@ -604,7 +699,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_7
-          - !Parameter &ref_25
+          - !Parameter &ref_28
             schema: *ref_1
             implementation: Method
             required: true
@@ -620,7 +715,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -643,10 +738,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_25
+          - *ref_28
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -679,10 +774,10 @@ operationGroups:
         parameters:
           - *ref_7
         requestMediaTypes:
-          application/json: !Request &ref_27
+          application/json: !Request &ref_30
             parameters:
               - !Parameter 
-                schema: *ref_12
+                schema: *ref_8
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -694,8 +789,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_26
-                schema: *ref_13
+              - !Parameter &ref_29
+                schema: *ref_17
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -707,7 +802,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -720,7 +815,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_26
+              - *ref_29
             language: !Languages 
               default:
                 name: ''
@@ -734,11 +829,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_27
+          - *ref_30
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -762,7 +857,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_7
-          - !Parameter &ref_28
+          - !Parameter &ref_31
             schema: *ref_1
             implementation: Method
             required: true
@@ -786,7 +881,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_28
+          - *ref_31
         responses:
           - !Response 
             language: !Languages 
@@ -809,7 +904,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_7
-          - !Parameter &ref_29
+          - !Parameter &ref_32
             schema: *ref_1
             implementation: Method
             required: true
@@ -825,7 +920,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -848,10 +943,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_29
+          - *ref_32
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -883,7 +978,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_7
-          - !Parameter &ref_30
+          - !Parameter &ref_33
             schema: *ref_1
             implementation: Method
             required: true
@@ -907,7 +1002,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_30
+          - *ref_33
         responses:
           - !Response 
             language: !Languages 
@@ -930,7 +1025,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_7
-          - !Parameter &ref_31
+          - !Parameter &ref_34
             schema: *ref_1
             implementation: Method
             required: true
@@ -946,7 +1041,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -969,10 +1064,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_31
+          - *ref_34
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -997,10 +1092,10 @@ operationGroups:
         parameters:
           - *ref_7
         requestMediaTypes:
-          application/json: !Request &ref_33
+          application/json: !Request &ref_36
             parameters:
               - !Parameter 
-                schema: *ref_12
+                schema: *ref_8
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1012,8 +1107,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_32
-                schema: *ref_13
+              - !Parameter &ref_35
+                schema: *ref_17
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1025,7 +1120,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1038,7 +1133,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_32
+              - *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -1052,11 +1147,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_33
+          - *ref_36
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''

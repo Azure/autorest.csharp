@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
@@ -162,8 +163,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 convenienceMethodSignature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, parameters.Convenience, RestClientConvenienceMethodReturnType, null);
 
-                convenience = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, StatusCodeSwitchBuilder, false), false);
-                convenienceAsync = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, StatusCodeSwitchBuilder, true), true);
+                convenience = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, createMessageMethod.Signature, StatusCodeSwitchBuilder, false), false);
+                convenienceAsync = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, createMessageMethod.Signature, StatusCodeSwitchBuilder, true), true);
             }
 
             var protocolMethodSignature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters.Protocol, ProtocolMethodReturnType, protocolMethodNonDocumentComment);
@@ -312,9 +313,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
             });
         }
 
-        private MethodBodyStatement CreateConvenienceMethodBodyForLegacyRestClient(RestClientMethodParameters parameters, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
+        private MethodBodyStatement CreateConvenienceMethodBodyForLegacyRestClient(RestClientMethodParameters parameters, MethodSignatureBase createRequestMessageMethodSignature, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
             var protocolMethodArguments = new List<ValueExpression>();
+            // [TODO]: Protocol method doesn't provide access to the underlying HttpMessage instance to call httpMessage.ExtractResponseContent(),
+            // hence it requires convenience method to call pipeline.Send method directly
+            if (statusCodeSwitchBuilder.ResponseType is {} responseType && responseType.Equals(typeof(Stream)))
+            {
+                return new[]
+                {
+                    AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray(),
+                    UsingVar("message", InvokeCreateRequestMethod(createRequestMessageMethodSignature), out var message),
+                    EnableHttpRedirectIfSupported(message),
+                    new HttpPipelineExpression(PipelineField).Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
+                    statusCodeSwitchBuilder.Build(message, async)
+                };
+            }
+
             return new[]
             {
                 AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray(),

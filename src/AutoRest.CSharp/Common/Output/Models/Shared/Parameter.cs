@@ -21,6 +21,9 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
+        public static Parameter FromInputParameter(in InputParameter operationParameter, bool keepClientDefaultValue, TypeFactory typeFactory)
+            => FromInputParameter(operationParameter, typeFactory.CreateType(operationParameter.Type), keepClientDefaultValue, typeFactory);
+
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, bool keepClientDefaultValue, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,6 +35,126 @@ namespace ProtocolMethodsInRestClient
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
+        }
+
+        internal HttpMessage CreatePutStreamRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/template/stream", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            if (content != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <summary> Create or update stream. </summary>
+        /// <param name="body"> The Stream to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<Stream>> PutStreamAsync(Stream body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            using RequestContent content = RequestContent.Create(body);
+            using var message = CreatePutStreamRequest(content, context);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        var value = message.ExtractResponseContent();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
+        /// <summary> Create or update stream. </summary>
+        /// <param name="body"> The Stream to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<Stream> PutStream(Stream body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            using RequestContent content = RequestContent.Create(body);
+            using var message = CreatePutStreamRequest(content, context);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        var value = message.ExtractResponseContent();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Create or update stream.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<Response> PutStreamAsync(RequestContent content, RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("TestServiceClient.PutStream");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutStreamRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Create or update stream.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual Response PutStream(RequestContent content, RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("TestServiceClient.PutStream");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutStreamRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         internal HttpMessage CreateCreateRequest(int second, RequestContent content, string first, RequestContext context)
@@ -183,7 +304,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceId, string ifMatch, RequestContext context)
+        internal HttpMessage CreateDeleteRequest(string resourceId, ETag? ifMatch, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -195,7 +316,7 @@ namespace ProtocolMethodsInRestClient
             request.Uri = uri;
             if (ifMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch);
+                request.Headers.Add("If-Match", ifMatch.Value);
             }
             return message;
         }
@@ -213,7 +334,7 @@ namespace ProtocolMethodsInRestClient
             }
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            Response response = await DeleteAsync(resourceId, ifMatch, context).ConfigureAwait(false);
+            Response response = await DeleteAsync(resourceId, new ETag(ifMatch), context).ConfigureAwait(false);
             switch (response.Status)
             {
                 case 204:
@@ -236,7 +357,7 @@ namespace ProtocolMethodsInRestClient
             }
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            Response response = Delete(resourceId, ifMatch, context);
+            Response response = Delete(resourceId, new ETag(ifMatch), context);
             switch (response.Status)
             {
                 case 204:
@@ -263,7 +384,7 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> DeleteAsync(string resourceId, string ifMatch, RequestContext context)
+        public virtual async Task<Response> DeleteAsync(string resourceId, ETag? ifMatch, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
@@ -298,7 +419,7 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response Delete(string resourceId, string ifMatch, RequestContext context)
+        public virtual Response Delete(string resourceId, ETag? ifMatch, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
