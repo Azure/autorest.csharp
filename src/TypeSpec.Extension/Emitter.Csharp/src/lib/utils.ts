@@ -49,21 +49,6 @@ const anonCounter = (function () {
     };
 })();
 
-/*
-export function getModelName(context: SdkContext, m: Model): string {
-    const name =
-        getProjectedNameForCsharp(context, m) ??
-        getFriendlyName(context.program, m) ??
-        getNameForTemplate(m);
-
-    if (name === "") {
-        anonCounter.increment();
-        return `Anon_${anonCounter.getCount()}`;
-    }
-
-    return name;
-}
-*/
 export function getProjectedNameForCsharp(
     context: SdkContext,
     type: Type
