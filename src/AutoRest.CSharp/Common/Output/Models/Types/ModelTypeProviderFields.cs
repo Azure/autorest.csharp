@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
                     var originalType = BuilderHelpers.GetTypeFromExisting(serializationMapping.ExistingMember, typeof(object), typeFactory);
                     var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, originalType, null, typeFactory, false, false);
-                    var parameter = new Parameter(field.Name.FirstCharToLowerCase(), "to be removed by post process", field.Type, null, Validation.None, null);
+                    var parameter = new Parameter(field.Name.ToVariableName(), "to be removed by post process", field.Type, null, Validation.None, null);
 
                     fields.Add(field);
                     serializationParameters.Add(parameter);
