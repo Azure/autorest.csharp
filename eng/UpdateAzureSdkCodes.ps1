@@ -16,19 +16,15 @@ Write-Host "Generating Azure SDK Codes..."
 
 if($ProjectListOverrideFile) {
     Write-Host "Initializing npm and npx cache"
-    Push-Location $SdkRepoRoot/sdk/template/Azure.Template
-    try {
-        dotnet build /t:GenerateCode
-        git restore .
-        git clean . -f
-    }
-    finally {
-        Pop-Location
-    }
+
+    $templatePath = "$SdkRepoRoot/sdk/template/Azure.Template"
+    Invoke "dotnet build /t:GenerateCode" -ExecutePath $templatePath
+    Invoke "git restore ." -ExecutePath $templatePath
+    Invoke "git clean . --force" -ExecutePath $templatePath
 
     $tempFolder = New-TemporaryFile
     $tempFolder | Remove-Item -Force
-    New-Item $tempFolder -ItemType Directory -Force -Verbose | Out-Null
+    New-Item $tempFolder -ItemType Directory -Force | Out-Null
 
     Push-Location $tempFolder
     try {
