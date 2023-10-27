@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag, bool hasBaseModel)
+        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, ObjectType? baseModel, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (existingMember is not null)
                 {
                     visitedMembers.Add(existingMember);
-                    if (hasBaseModel && existingMember.ContainingType.Name != modelName)
+                    if (baseModel is not null && existingMember.ContainingType.Name != modelName && baseModel.Constructors.Any())
                     {
                         // Member defined in a base type, don't generate parameters for it
                         continue;
