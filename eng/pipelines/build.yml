@@ -210,13 +210,19 @@ stages:
           dependsOn: Update_Code
           variables:
             UpdateCodeResult: $[dependencies.Update_Code.result]
-            ${{ if eq(variables.UpdateCodeResult, 'Succeeded') }}:
-              PrTitle: 'Update AutoRest C# version to $(AutorestCSharpVersion)'
-            ${{ else }}:
-              PrTitle: 'Failed Update AutoRest C# version to $(AutorestCSharpVersion)'
           steps:
             - checkout: self
             - checkout: azure-sdk-tools
+            - pwsh: |
+                if ('$(UpdateCodeResult)' -eq 'Succeeded') {
+                  $prTitle = 'Update AutoRest C# version to $(AutorestCSharpVersion)'
+                } else {
+                  $prTitle = 'Failed Update AutoRest C# version to $(AutorestCSharpVersion)'
+                }
+
+                Write-Host "Setting variable PrTitle to '$prTitle'"
+                Write-Host "##vso[task.setvariable variable=PrTitle]$prTitle"
+              displayName: 'Build PR Title'
             - task: PowerShell@2
               displayName: Create pull request
               inputs:
