@@ -47,7 +47,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Projection_ProjectedName_operation() => Test(async (host) =>
         {
-            Response response = await new ProjectedNameClient(host, null).OperationAsync();
+            Response response = await new ProjectedNameClient(host, null).ClientNameAsync();
             Assert.AreEqual(204, response.Status);
         });
 
