@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -22,11 +23,9 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.ResourceManager;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
