@@ -26,6 +26,12 @@ namespace AutoRest.CSharp.Input.Source
 
             foreach (ISymbol member in GetMembers(existingType))
             {
+                // If member is defined in both base and derived class, use derived one
+                if (member.Kind is SymbolKind.Property or SymbolKind.Field && !_propertyMappings.ContainsKey(member.Name))
+                {
+                    _propertyMappings[member.Name] = member;
+                }
+
                 string[]? serializationPath = null;
                 string? serializationHook = null;
                 string? deserializationHook = null;
@@ -36,12 +42,6 @@ namespace AutoRest.CSharp.Input.Source
                     if (codeGenAttributes.TryGetCodeGenMemberAttributeValue(attributeData, out var schemaMemberName))
                     {
                         _codeGenMemberMappings[schemaMemberName] = member;
-                    }
-
-                    // If member is defined in both base and derived class, use derived one
-                    if (member.Kind is SymbolKind.Property or SymbolKind.Field && !_propertyMappings.ContainsKey(member.Name))
-                    {
-                        _propertyMappings[member.Name] = member;
                     }
 
                     // handle CodeGenMemberSerialization attribute
