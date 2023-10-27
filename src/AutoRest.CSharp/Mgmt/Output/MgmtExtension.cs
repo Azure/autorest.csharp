@@ -165,16 +165,16 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private Method? _mockingExtensionFactoryMethod;
-        public Method MockingExtensionFactoryMethod => _mockingExtensionFactoryMethod ??= BuildMockingExtensionFactoryMethod();
+        public Method MockingExtensionFactoryMethod => _mockingExtensionFactoryMethod ??= BuildMockableExtensionFactoryMethod();
 
-        protected virtual Method BuildMockingExtensionFactoryMethod()
+        protected virtual Method BuildMockableExtensionFactoryMethod()
         {
             var signature = new MethodSignature(
-                MockingExtension.FactoryMethodName,
+                MockableExtension.FactoryMethodName,
                 null,
                 null,
                 MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
-                MockingExtension.Type,
+                MockableExtension.Type,
                 null,
                 new[] { _generalExtensionParameter });
 
@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var body = Snippets.Return(
                 extensionVariable.Invoke(
                     nameof(ArmResource.GetCachedClient),
-                    new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockingExtension.Type, clientVariable, extensionVariable.Property(nameof(ArmResource.Id))))
+                    new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable, extensionVariable.Property(nameof(ArmResource.Id))))
                 ));
 
             return new(signature, body);
@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             ValidationType.None,
             null);
 
-        public MgmtMockableExtension MockingExtension => Cache[ArmCoreType];
+        public MgmtMockableExtension MockableExtension => Cache[ArmCoreType];
 
         private readonly IEnumerable<MgmtMockableExtension> _mockingExtensions;
 
@@ -230,7 +230,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var methodRef = signatureOnMockingExtension.ToStringForDocs();
             return $@"<item>
 <term>Mocking</term>
-<description>To mock this method, please mock <see cref=""{MockingExtension.Type}.{methodRef}""/> instead.</description>
+<description>To mock this method, please mock <see cref=""{MockableExtension.Type}.{methodRef}""/> instead.</description>
 </item>";
         }
 

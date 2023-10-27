@@ -81,14 +81,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             };
         }
 
-        protected override Method BuildMockingExtensionFactoryMethod()
+        protected override Method BuildMockableExtensionFactoryMethod()
         {
             var signature = new MethodSignature(
-                MockingExtension.FactoryMethodName,
+                MockableExtension.FactoryMethodName,
                 null,
                 null,
                 MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
-                MockingExtension.Type,
+                MockableExtension.Type,
                 null,
                 new[] { ArmClientParameter });
 
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
             var body = Snippets.Return(
                 extensionVariable.Invoke(nameof(ArmClient.GetCachedClient),
-                new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockingExtension.Type, clientVariable))
+                new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable))
                 ));
             return new(signature, body);
         }
