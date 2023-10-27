@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 using SwitchExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.SwitchExpression;
 
@@ -590,6 +591,27 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case StringLiteralExpression(var literal, false):
                     writer.Literal(literal);
+                    break;
+                case FormattableStringExpression(var formattable):
+                    writer.AppendRaw("$\"");
+                    var argumentCount = 0;
+                    foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(formattable.Format))
+                    {
+                        if (isLiteral)
+                        {
+                            writer.AppendRaw(span.ToString());
+                            continue;
+                        }
+
+                        var arg = formattable.GetArgument(argumentCount);
+                        argumentCount++;
+                        // append the argument. The argument must be something assignable to ValueExpression here
+                        var a = (ValueExpression)arg!;
+                        writer.AppendRaw("{");
+                        writer.WriteValueExpression(a);
+                        writer.AppendRaw("}");
+                    }
+                    writer.AppendRaw("\"");
                     break;
             }
 
