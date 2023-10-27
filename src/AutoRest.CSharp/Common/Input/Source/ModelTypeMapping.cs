@@ -11,6 +11,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
+        private readonly Dictionary<string, ISymbol> _codeGenMemberMappings;
         private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _serializationMappings;
 
         public string[]? Usage { get; }
@@ -20,11 +21,11 @@ namespace AutoRest.CSharp.Input.Source
         {
             _existingType = existingType;
             _propertyMappings = new();
+            _codeGenMemberMappings = new();
             _serializationMappings = new(SymbolEqualityComparer.Default);
 
             foreach (ISymbol member in GetMembers(existingType))
             {
-                bool hasCodeGenMemberAttribute = false;
                 string[]? serializationPath = null;
                 string? serializationHook = null;
                 string? deserializationHook = null;
@@ -34,8 +35,13 @@ namespace AutoRest.CSharp.Input.Source
                     // handle CodeGenMember attribute
                     if (codeGenAttributes.TryGetCodeGenMemberAttributeValue(attributeData, out var schemaMemberName))
                     {
-                        hasCodeGenMemberAttribute = true;
-                        _propertyMappings[schemaMemberName] = member;
+                        _codeGenMemberMappings[schemaMemberName] = member;
+                    }
+
+                    // If member is defined in both base and derived class, use derived one
+                    if (member.Kind is SymbolKind.Property or SymbolKind.Field && !_propertyMappings.ContainsKey(member.Name))
+                    {
+                        _propertyMappings[member.Name] = member;
                     }
 
                     // handle CodeGenMemberSerialization attribute
@@ -51,12 +57,6 @@ namespace AutoRest.CSharp.Input.Source
                 {
                     _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHook, deserializationHook));
                 }
-
-                // If member is defined in both base and derived class, use derived one
-                if (member.Kind is SymbolKind.Property or SymbolKind.Field && !hasCodeGenMemberAttribute && !_propertyMappings.ContainsKey(member.Name))
-                {
-                    _propertyMappings.Add(member.Name, member);
-                }
             }
 
             foreach (var attributeData in existingType.GetAttributes())
@@ -71,9 +71,9 @@ namespace AutoRest.CSharp.Input.Source
         }
 
         public ISymbol? GetMemberByOriginalName(string name)
-        {
-            return !_propertyMappings.TryGetValue(name, out var memberSymbol) ? _existingType?.GetMembers(name).FirstOrDefault() : memberSymbol;
-        }
+            => _codeGenMemberMappings.TryGetValue(name, out var renamedSymbol)
+                ? renamedSymbol
+                : _propertyMappings.TryGetValue(name, out var memberSymbol) ? memberSymbol : null;
 
         public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)
         {

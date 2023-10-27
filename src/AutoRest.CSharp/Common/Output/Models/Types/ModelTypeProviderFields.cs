@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (existingMember is not null)
                 {
                     visitedMembers.Add(existingMember);
-                    if (existingMember.ContainingType.Name != modelName && existingMember.Name == originalFieldName)
+                    if (existingMember.ContainingType.Name != modelName)
                     {
                         // Member defined in a base type, don't generate parameters for it
                         continue;
@@ -76,16 +76,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
-
-                if (existingMember is not null)
-                {
-                    visitedMembers.Add(existingMember);
-                    if (existingMember.ContainingType.Name != modelName && existingMember.Name == originalFieldName)
-                    {
-                        // Member defined in a base type, don't generate parameters for it
-                        continue;
-                    }
-                }
 
                 var parameterName = field.Name.ToVariableName();
                 var parameterValidation = GetParameterValidation(field, inputModelProperty);
