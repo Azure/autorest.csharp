@@ -6,11 +6,22 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownTokenFilter
+    internal partial class UnknownTokenFilter : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WriteEndObject();
+        }
+
         internal static UnknownTokenFilter DeserializeUnknownTokenFilter(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)

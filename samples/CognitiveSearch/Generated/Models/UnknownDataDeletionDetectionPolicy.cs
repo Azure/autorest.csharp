@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Unknown version of DataDeletionDetectionPolicy. </summary>
+    /// <summary> The UnknownDataDeletionDetectionPolicy. </summary>
     internal partial class UnknownDataDeletionDetectionPolicy : DataDeletionDetectionPolicy
     {
         /// <summary> Initializes a new instance of UnknownDataDeletionDetectionPolicy. </summary>

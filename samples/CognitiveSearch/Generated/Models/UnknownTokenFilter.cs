@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Unknown version of TokenFilter. </summary>
+    /// <summary> The UnknownTokenFilter. </summary>
     internal partial class UnknownTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of UnknownTokenFilter. </summary>

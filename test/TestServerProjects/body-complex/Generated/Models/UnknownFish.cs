@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> Unknown version of Fish. </summary>
+    /// <summary> The UnknownFish. </summary>
     internal partial class UnknownFish : Fish
     {
         /// <summary> Initializes a new instance of UnknownFish. </summary>

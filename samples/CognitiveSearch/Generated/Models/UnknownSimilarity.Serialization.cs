@@ -6,11 +6,20 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownSimilarity
+    internal partial class UnknownSimilarity : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
+            writer.WriteEndObject();
+        }
+
         internal static UnknownSimilarity DeserializeUnknownSimilarity(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)

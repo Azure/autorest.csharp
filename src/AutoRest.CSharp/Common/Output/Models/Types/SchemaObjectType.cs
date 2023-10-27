@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        protected override IEnumerable<Method> BuildSerializationMethods()
+        protected override IEnumerable<Method> BuildMethods()
         {
             if (XmlSerialization is {} xmlSerialization)
             {

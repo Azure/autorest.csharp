@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureHasXmlSerialization() => _inputModelSerialization.Xml is not null;
 
-        protected override bool EnsureIncludeSerializer() => _inputModelUsage.HasFlag(InputModelTypeUsage.Input) && !_inputModel.IsUnknownDiscriminatorModel;
+        protected override bool EnsureIncludeSerializer() => _inputModelUsage.HasFlag(InputModelTypeUsage.Input) && (Configuration.Generation1ConvenienceClient || !_inputModel.IsUnknownDiscriminatorModel);
 
         protected override bool EnsureIncludeDeserializer() => _inputModelUsage.HasFlag(InputModelTypeUsage.Output);
 
@@ -428,7 +428,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return SerializationBuilder.BuildXmlObjectSerialization(_inputModelSerialization.Xml?.Name ?? _inputModel.Name, this, _typeFactory);
         }
 
-        protected override IEnumerable<Method> BuildSerializationMethods()
+        protected override IEnumerable<Method> BuildMethods()
         {
             if (XmlSerialization is {} xmlSerialization)
             {

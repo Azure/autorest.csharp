@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Unknown version of CognitiveServicesAccount. </summary>
+    /// <summary> The UnknownCognitiveServicesAccount. </summary>
     internal partial class UnknownCognitiveServicesAccount : CognitiveServicesAccount
     {
         /// <summary> Initializes a new instance of UnknownCognitiveServicesAccount. </summary>

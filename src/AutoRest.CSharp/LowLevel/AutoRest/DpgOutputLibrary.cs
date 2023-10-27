@@ -127,8 +127,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     actualBase.Namespace,
                     "internal",
                     null,
-                    $"Unknown version of {actualBase.Name}",
-                    actualBase.Usage,
+                    // [TODO]: Condition is added to minimize change
+                    Configuration.Generation1ConvenienceClient ? $"The {defaultDerivedName}" : $"Unknown version of {actualBase.Name}",
+                    Configuration.Generation1ConvenienceClient ? actualBase.Usage : InputModelTypeUsage.Output,
                     Array.Empty<InputModelProperty>(),
                     actualBase,
                     Array.Empty<InputModelType>(),
