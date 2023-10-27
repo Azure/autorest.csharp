@@ -14,29 +14,37 @@ Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
 Write-Host "Generating Azure SDK Codes..."
 
-Write-Host "Initializing npm and npx cache"
-$tempFolder = New-TemporaryFile
-$tempFolder | Remove-Item -Force
-New-Item $tempFolder -ItemType Directory -Force -Verbose | Out-Null
-
-Push-Location $tempFolder
-try {
-    Copy-Item "$SdkRepoRoot/eng/emitter-package.json" "package.json"
-    if(Test-Path "$SdkRepoRoot/eng/emitter-package-lock.json") {
-        Copy-Item "$SdkRepoRoot/eng/emitter-package-lock.json" "package-lock.json"
-        Invoke "npm ci" -ExecutePath $PWD
-    } else {
-        Invoke "npm install" -ExecutePath $PWD
-    }
-    Invoke "npx autorest --latest" -ExecutePath $PWD
-    Invoke "npx autorest --info" -ExecutePath $PWD
-}
-finally {
-    Pop-Location
-    $tempFolder | Remove-Item -Force -Recurse
-}
-
 if($ProjectListOverrideFile) {
+    Write-Host "Initializing npm and npx cache"
+    Push-Location $SdkRepoRoot/sdk/template/Azure.template
+    try {
+        dotnet build /t:GenerateCode
+        git restore .
+        git clean . -f
+    }
+    finally {
+        Pop-Location
+    }
+
+    $tempFolder = New-TemporaryFile
+    $tempFolder | Remove-Item -Force
+    New-Item $tempFolder -ItemType Directory -Force -Verbose | Out-Null
+
+    Push-Location $tempFolder
+    try {
+        Copy-Item "$SdkRepoRoot/eng/emitter-package.json" "package.json"
+        if(Test-Path "$SdkRepoRoot/eng/emitter-package-lock.json") {
+            Copy-Item "$SdkRepoRoot/eng/emitter-package-lock.json" "package-lock.json"
+            Invoke "npm ci" -ExecutePath $PWD
+        } else {
+            Invoke "npm install" -ExecutePath $PWD
+        }
+    }
+    finally {
+        Pop-Location
+        $tempFolder | Remove-Item -Force -Recurse
+    }
+
     Write-Host 'Generating projects in override file ' -ForegroundColor Green -NoNewline
     Write-Host "$ProjectListOverrideFile" -ForegroundColor Yellow
     if ($ShowSummary) {
