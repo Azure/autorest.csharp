@@ -16,7 +16,7 @@ Write-Host "Generating Azure SDK Codes..."
 
 if($ProjectListOverrideFile) {
     Write-Host "Initializing npm and npx cache"
-    Push-Location $SdkRepoRoot/sdk/template/Azure.template
+    Push-Location $SdkRepoRoot/sdk/template/Azure.Template
     try {
         dotnet build /t:GenerateCode
         git restore .
