@@ -1632,7 +1632,7 @@
       },
       {
        "$id": "198",
-       "Name": "NotFriend",
+       "Name": "Friend",
        "NameInRequest": "NotFriend",
        "Description": "this is not a friendly model but with a friendly name",
        "Type": {
@@ -1946,7 +1946,7 @@
       },
       {
        "$id": "225",
-       "Name": "ModelWithProjectedName",
+       "Name": "ProjectedModel",
        "NameInRequest": "ModelWithProjectedName",
        "Description": "this is a model with a projected name",
        "Type": {

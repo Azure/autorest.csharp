@@ -421,31 +421,31 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
-        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(notFriend, nameof(notFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = notFriend.ToRequestContent();
+            using RequestContent content = friend.ToRequestContent();
             Response response = await FriendlyModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
-        public virtual Response<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
+        public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(notFriend, nameof(notFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = notFriend.ToRequestContent();
+            using RequestContent content = friend.ToRequestContent();
             Response response = FriendlyModel(content, context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
@@ -701,31 +701,31 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(ProjectedModel,CancellationToken)']/*" />
-        public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = modelWithProjectedName.ToRequestContent();
+            using RequestContent content = projectedModel.ToRequestContent();
             Response response = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(ProjectedModel,CancellationToken)']/*" />
-        public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = modelWithProjectedName.ToRequestContent();
+            using RequestContent content = projectedModel.ToRequestContent();
             Response response = ProjectedNameModel(content, context);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
