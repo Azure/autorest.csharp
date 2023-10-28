@@ -52,7 +52,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     visitedMembers.Add(existingMember);
                     if (baseModel is not null && existingMember.ContainingType.Name != modelName && baseModel.Constructors.Any())
                     {
-                        // Member defined in a base type, don't generate parameters for it
+                        // Member defined in a base type and there is a constructor that is expected to initialize it
+                        // Don't generate in derived type
                         continue;
                     }
                 }
