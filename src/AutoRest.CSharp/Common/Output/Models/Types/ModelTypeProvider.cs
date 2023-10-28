@@ -153,9 +153,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var serializedName = inputModelProperty.SerializedName;
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
 
+                    var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
+                    TypedMemberExpression? enumerableExpression = null;
+                    if (TypeFactory.IsReadOnlyMemory(property.Declaration.Type))
+                    {
+                        enumerableExpression = property.Declaration.Type.IsNullable
+                            ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
+                            : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                    }
+
                     yield return new JsonPropertySerialization(
                         declaredName.ToVariableName(),
-                        new TypedMemberExpression(null, declaredName, property.Declaration.Type),
+                        memberValueExpression,
                         serializedName,
                         property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
                         valueSerialization,
@@ -163,7 +172,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         ShouldSkipSerialization(property, inputModelProperty),
                         false,
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
+                        enumerableExpression: enumerableExpression);
                     ;
                 }
             }
