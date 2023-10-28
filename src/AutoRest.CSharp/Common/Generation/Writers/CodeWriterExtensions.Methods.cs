@@ -46,37 +46,37 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
                 case IfStatement ifStatement:
-                    writer.WriteMethodBodyStatement(new IfElseStatement(ifStatement.Condition, ifStatement.Body, null, ifStatement.Inline, ifStatement.AddBraces));
-                    break;
-                case IfElseStatement(var condition, var ifBlock, var elseBlock, var inline, var addBraces):
                     writer.AppendRaw("if (");
-                    writer.WriteValueExpression(condition);
+                    writer.WriteValueExpression(ifStatement.Condition);
 
-                    if (inline)
+                    if (ifStatement.Inline)
                     {
                         writer.AppendRaw(") ");
                         using (writer.AmbientScope())
                         {
-                            WriteMethodBodyStatement(writer, ifBlock);
+                            WriteMethodBodyStatement(writer, ifStatement.Body);
                         }
                     }
                     else
                     {
                         writer.LineRaw(")");
-                        using (addBraces ? writer.Scope() : writer.AmbientScope())
+                        using (ifStatement.AddBraces ? writer.Scope() : writer.AmbientScope())
                         {
-                            WriteMethodBodyStatement(writer, ifBlock);
+                            WriteMethodBodyStatement(writer, ifStatement.Body);
                         }
                     }
 
+                    break;
+                case IfElseStatement(var ifBlock, var elseBlock):
+                    writer.WriteMethodBodyStatement(ifBlock);
                     if (elseBlock is not null)
                     {
-                        if (inline || !addBraces)
+                        if (ifBlock.Inline || !ifBlock.AddBraces)
                         {
                             using (writer.AmbientScope())
                             {
                                 writer.AppendRaw("else ");
-                                if (!inline)
+                                if (!ifBlock.Inline)
                                 {
                                     writer.Line();
                                 }

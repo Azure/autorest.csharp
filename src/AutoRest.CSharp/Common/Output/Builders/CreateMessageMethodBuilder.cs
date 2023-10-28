@@ -200,12 +200,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (requestPart.CheckUndefinedCollection && TypeFactory.IsCollectionType(type))
             {
-                return new IfElseStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value)), addRequestPartStatement, null);
+                return new IfStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value))) {addRequestPartStatement};
             }
 
             if (type.IsNullable)
             {
-                return new IfElseStatement(NotEqual(value, Null), addRequestPartStatement, null);
+                return new IfStatement(NotEqual(value, Null)) {addRequestPartStatement};
             }
 
             return addRequestPartStatement;

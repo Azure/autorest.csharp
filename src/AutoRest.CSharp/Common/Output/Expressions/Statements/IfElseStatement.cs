@@ -5,5 +5,9 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
-    internal record IfElseStatement(ValueExpression Condition, MethodBodyStatement If, MethodBodyStatement? Else, bool Inline = false, bool AddBraces = true) : MethodBodyStatement;
+    internal record IfElseStatement(IfStatement If, MethodBodyStatement? Else) : MethodBodyStatement
+    {
+        public IfElseStatement(ValueExpression condition, MethodBodyStatement ifStatement, MethodBodyStatement? elseStatement, bool inline = false, bool addBraces = true)
+            : this(new IfStatement(condition, inline, addBraces) { ifStatement }, elseStatement) {}
+    }
 }

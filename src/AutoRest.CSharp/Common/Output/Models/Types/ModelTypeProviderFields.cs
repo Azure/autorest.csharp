@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (existingMember is not null)
                 {
                     visitedMembers.Add(existingMember);
-                    if (baseModel is not null && existingMember.ContainingType.Name != modelName && baseModel.Constructors.Any())
+                    if (baseModel is {Constructors.Length: > 0} && (existingMember.ContainingType.Name != modelName || existingMember.IsOverride))
                     {
                         // Member defined in a base type and there is a constructor that is expected to initialize it
                         // Don't generate in derived type

@@ -23,6 +23,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
 
         protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
-            => throw new NotImplementedException();
+            => throw new NotImplementedException($"{methodName} protocol method returns `Response<bool>`, hence it should not have convenience method");
     }
 }

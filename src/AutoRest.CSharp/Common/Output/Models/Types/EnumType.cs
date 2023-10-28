@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     condition = Equal(valueParameter, enumValue);
                 }
 
-                bodyLines.Add(new IfElseStatement(condition, Return(EnumValue(enumType, enumTypeValue)), null, true));
+                bodyLines.Add(new IfStatement(condition, true) { Return(EnumValue(enumType, enumTypeValue)) });
             }
 
             bodyLines.Add(Throw(Snippets.New.ArgumentOutOfRangeException(enumType, valueParameter)));

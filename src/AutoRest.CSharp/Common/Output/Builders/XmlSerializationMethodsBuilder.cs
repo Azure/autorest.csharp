@@ -76,10 +76,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (TypeFactory.IsCollectionType(serializedType) && serialization.IsRequired)
                 {
-                    return new IfElseStatement(And(NotEqual(serialization.Value, Null), InvokeOptional.IsCollectionDefined(serialization.Value)), statement, null);
+                    return new IfStatement(And(NotEqual(serialization.Value, Null), InvokeOptional.IsCollectionDefined(serialization.Value))) {statement};
                 }
 
-                return new IfElseStatement(NotEqual(serialization.Value, Null), statement, null);
+                return new IfStatement(NotEqual(serialization.Value, Null)) {statement};
             }
 
             return statement;
