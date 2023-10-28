@@ -183,7 +183,17 @@
         "NonRequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } },
 
         "RequiredReadonlyInt": { "type": "integer", "readOnly": true },
-        "NonRequiredReadonlyInt": { "type": "integer", "readOnly": true }
+        "NonRequiredReadonlyInt": { "type": "integer", "readOnly": true },
+
+        "vector": {
+            "x-ms-embedding-vector": true,
+            "type": "array",
+            "items": {
+                "type": "number",
+                "format": "float"
+            },
+            "description": "The vector representation of a search query."
+        }
       },
       "required": [
         "RequiredString",

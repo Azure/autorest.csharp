@@ -38,11 +38,8 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("NonRequiredString"u8);
                 writer.WriteStringValue(NonRequiredString);
             }
-            if (Optional.IsDefined(NonRequiredInt))
-            {
-                writer.WritePropertyName("NonRequiredInt"u8);
-                writer.WriteNumberValue(NonRequiredInt.Value);
-            }
+            writer.WritePropertyName("NonRequiredInt"u8);
+            writer.WriteNumberValue(NonRequiredInt.Value);
             if (Optional.IsCollectionDefined(NonRequiredStringList))
             {
                 writer.WritePropertyName("NonRequiredStringList"u8);
@@ -121,17 +118,14 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableString");
                 }
             }
-            if (Optional.IsDefined(NonRequiredNullableInt))
+            if (NonRequiredNullableInt != null)
             {
-                if (NonRequiredNullableInt != null)
-                {
-                    writer.WritePropertyName("NonRequiredNullableInt"u8);
-                    writer.WriteNumberValue(NonRequiredNullableInt.Value);
-                }
-                else
-                {
-                    writer.WriteNull("NonRequiredNullableInt");
-                }
+                writer.WritePropertyName("NonRequiredNullableInt"u8);
+                writer.WriteNumberValue(NonRequiredNullableInt.Value);
+            }
+            else
+            {
+                writer.WriteNull("NonRequiredNullableInt");
             }
             if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
             {

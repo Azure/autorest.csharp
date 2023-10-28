@@ -122,7 +122,15 @@ schemas: !Schemas
           name: MixedModelNonRequiredReadonlyInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_35
+    - !NumberSchema &ref_34
+      type: number
+      precision: 32
+      language: !Languages 
+        default:
+          name: ArrayItemschema
+          description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_36
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -133,7 +141,7 @@ schemas: !Schemas
           name: OutputModelRequiredInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_38
+    - !NumberSchema &ref_39
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -144,7 +152,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_41
+    - !NumberSchema &ref_42
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -155,7 +163,7 @@ schemas: !Schemas
           name: OutputModelRequiredNullableInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_44
+    - !NumberSchema &ref_45
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -166,7 +174,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredNullableInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_46
+    - !NumberSchema &ref_47
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -177,7 +185,7 @@ schemas: !Schemas
           name: OutputModelRequiredReadonlyInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_47
+    - !NumberSchema &ref_48
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -376,7 +384,7 @@ schemas: !Schemas
           name: MixedModelNonRequiredNullableStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_34
+    - !StringSchema &ref_35
       type: string
       apiVersions:
         - !ApiVersion 
@@ -386,7 +394,7 @@ schemas: !Schemas
           name: OutputModelRequiredString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_36
+    - !StringSchema &ref_37
       type: string
       apiVersions:
         - !ApiVersion 
@@ -396,7 +404,7 @@ schemas: !Schemas
           name: OutputModelRequiredStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_37
+    - !StringSchema &ref_38
       type: string
       apiVersions:
         - !ApiVersion 
@@ -406,7 +414,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_39
+    - !StringSchema &ref_40
       type: string
       apiVersions:
         - !ApiVersion 
@@ -416,7 +424,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_40
+    - !StringSchema &ref_41
       type: string
       apiVersions:
         - !ApiVersion 
@@ -426,7 +434,7 @@ schemas: !Schemas
           name: OutputModelRequiredNullableString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_42
+    - !StringSchema &ref_43
       type: string
       apiVersions:
         - !ApiVersion 
@@ -436,7 +444,7 @@ schemas: !Schemas
           name: OutputModelRequiredNullableStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_43
+    - !StringSchema &ref_44
       type: string
       apiVersions:
         - !ApiVersion 
@@ -446,7 +454,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredNullableString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_45
+    - !StringSchema &ref_46
       type: string
       apiVersions:
         - !ApiVersion 
@@ -456,7 +464,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredNullableStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_48
+    - !StringSchema &ref_49
       type: string
       apiVersions:
         - !ApiVersion 
@@ -466,7 +474,7 @@ schemas: !Schemas
           name: ReadonlyModelName
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_50
+    - !StringSchema &ref_51
       type: string
       apiVersions:
         - !ApiVersion 
@@ -476,7 +484,7 @@ schemas: !Schemas
           name: ParametersModelCode
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_51
+    - !StringSchema &ref_52
       type: string
       apiVersions:
         - !ApiVersion 
@@ -486,7 +494,7 @@ schemas: !Schemas
           name: ParametersModelStatus
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_52
+    - !StringSchema &ref_53
       type: string
       apiVersions:
         - !ApiVersion 
@@ -497,7 +505,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_67
+    - !ConstantSchema &ref_69
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -507,7 +515,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_69
+    - !ConstantSchema &ref_71
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -518,7 +526,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_68
+    - !ObjectSchema &ref_70
       type: object
       apiVersions:
         - !ApiVersion 
@@ -543,7 +551,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_53
+          schema: !ArraySchema &ref_54
             type: array
             apiVersions:
               - !ApiVersion 
@@ -596,7 +604,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_54
+          schema: !ArraySchema &ref_55
             type: array
             apiVersions:
               - !ApiVersion 
@@ -651,7 +659,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_55
+          schema: !ArraySchema &ref_56
             type: array
             apiVersions:
               - !ApiVersion 
@@ -708,7 +716,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_56
+          schema: !ArraySchema &ref_57
             type: array
             apiVersions:
               - !ApiVersion 
@@ -754,7 +762,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_72
+    - !ObjectSchema &ref_74
       type: object
       apiVersions:
         - !ApiVersion 
@@ -786,7 +794,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_73
+    - !ObjectSchema &ref_75
       type: object
       apiVersions:
         - !ApiVersion 
@@ -811,7 +819,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_57
+          schema: !ArraySchema &ref_58
             type: array
             apiVersions:
               - !ApiVersion 
@@ -857,7 +865,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_58
+          schema: !ArraySchema &ref_59
             type: array
             apiVersions:
               - !ApiVersion 
@@ -905,7 +913,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_59
+          schema: !ArraySchema &ref_60
             type: array
             apiVersions:
               - !ApiVersion 
@@ -955,7 +963,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_60
+          schema: !ArraySchema &ref_61
             type: array
             apiVersions:
               - !ApiVersion 
@@ -1004,6 +1012,26 @@ schemas: !Schemas
               name: nonRequiredReadonlyInt
               description: ''
           protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_62
+            type: array
+            elementType: *ref_34
+            extensions:
+              x-ms-embedding-vector: true
+            language: !Languages 
+              default:
+                name: ArrayOfArrayItemschema
+                description: The vector representation of a search query.
+            protocol: !Protocols {}
+          required: false
+          serializedName: vector
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vector
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
@@ -1015,14 +1043,14 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_76
+    - !ObjectSchema &ref_78
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_34
+          schema: *ref_35
           required: true
           serializedName: RequiredString
           language: !Languages 
@@ -1031,7 +1059,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_35
+          schema: *ref_36
           required: true
           serializedName: RequiredInt
           language: !Languages 
@@ -1040,12 +1068,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_61
+          schema: !ArraySchema &ref_63
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_36
+            elementType: *ref_37
             language: !Languages 
               default:
                 name: OutputModelRequiredStringList
@@ -1068,7 +1096,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_37
+          schema: *ref_38
           required: false
           serializedName: NonRequiredString
           language: !Languages 
@@ -1077,7 +1105,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_38
+          schema: *ref_39
           required: false
           serializedName: NonRequiredInt
           language: !Languages 
@@ -1086,12 +1114,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_62
+          schema: !ArraySchema &ref_64
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_39
+            elementType: *ref_40
             language: !Languages 
               default:
                 name: OutputModelNonRequiredStringList
@@ -1114,7 +1142,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_40
+          schema: *ref_41
           nullable: true
           required: true
           serializedName: RequiredNullableString
@@ -1124,7 +1152,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_41
+          schema: *ref_42
           nullable: true
           required: true
           serializedName: RequiredNullableInt
@@ -1134,12 +1162,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_63
+          schema: !ArraySchema &ref_65
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_42
+            elementType: *ref_43
             language: !Languages 
               default:
                 name: OutputModelRequiredNullableStringList
@@ -1164,7 +1192,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_43
+          schema: *ref_44
           nullable: true
           required: false
           serializedName: NonRequiredNullableString
@@ -1174,7 +1202,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_44
+          schema: *ref_45
           nullable: true
           required: false
           serializedName: NonRequiredNullableInt
@@ -1184,12 +1212,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_64
+          schema: !ArraySchema &ref_66
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_45
+            elementType: *ref_46
             language: !Languages 
               default:
                 name: OutputModelNonRequiredNullableStringList
@@ -1214,7 +1242,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_46
+          schema: *ref_47
           readOnly: true
           required: true
           serializedName: RequiredReadonlyInt
@@ -1224,7 +1252,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_47
+          schema: *ref_48
           readOnly: true
           required: false
           serializedName: NonRequiredReadonlyInt
@@ -1243,21 +1271,21 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_77
+    - !ObjectSchema &ref_79
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_49
+          schema: !ObjectSchema &ref_50
             type: object
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
             properties:
               - !Property 
-                schema: *ref_48
+                schema: *ref_49
                 serializedName: Name
                 language: !Languages 
                   default:
@@ -1283,12 +1311,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_65
+          schema: !ArraySchema &ref_67
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_49
+            elementType: *ref_50
             language: !Languages 
               default:
                 name: MixedModelWithReadonlyPropertyReadonlyListProperty
@@ -1312,23 +1340,23 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_49
-    - !ObjectSchema &ref_80
+    - *ref_50
+    - !ObjectSchema &ref_82
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
-        - !Property &ref_82
-          schema: *ref_50
+        - !Property &ref_84
+          schema: *ref_51
           serializedName: Code
           language: !Languages 
             default:
               name: code
               description: ''
           protocol: !Protocols {}
-        - !Property &ref_83
-          schema: *ref_51
+        - !Property &ref_85
+          schema: *ref_52
           serializedName: Status
           language: !Languages 
             default:
@@ -1352,7 +1380,7 @@ schemas: !Schemas
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_52
+          schema: *ref_53
           serializedName: UnusedString
           language: !Languages 
             default:
@@ -1366,15 +1394,14 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
   arrays:
-    - *ref_53
-    - *ref_19
     - *ref_54
-    - *ref_23
+    - *ref_19
     - *ref_55
-    - *ref_27
+    - *ref_23
     - *ref_56
-    - *ref_31
+    - *ref_27
     - *ref_57
+    - *ref_31
     - *ref_58
     - *ref_59
     - *ref_60
@@ -1383,8 +1410,10 @@ schemas: !Schemas
     - *ref_63
     - *ref_64
     - *ref_65
+    - *ref_66
+    - *ref_67
 globalParameters:
-  - !Parameter &ref_66
+  - !Parameter &ref_68
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -1410,12 +1439,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_66
+          - *ref_68
         requestMediaTypes:
-          application/json: !Request &ref_71
+          application/json: !Request &ref_73
             parameters:
               - !Parameter 
-                schema: *ref_67
+                schema: *ref_69
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1427,8 +1456,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_70
-                schema: *ref_68
+              - !Parameter &ref_72
+                schema: *ref_70
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1440,7 +1469,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_71
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1453,7 +1482,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_70
+              - *ref_72
             language: !Languages 
               default:
                 name: ''
@@ -1467,7 +1496,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_71
+          - *ref_73
         signatureParameters: []
         responses:
           - !Response 
@@ -1481,7 +1510,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -1504,12 +1533,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_66
+          - *ref_68
         requestMediaTypes:
-          application/json: !Request &ref_75
+          application/json: !Request &ref_77
             parameters:
               - !Parameter 
-                schema: *ref_67
+                schema: *ref_69
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1521,8 +1550,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_74
-                schema: *ref_73
+              - !Parameter &ref_76
+                schema: *ref_75
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1534,7 +1563,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_71
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1547,7 +1576,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_74
+              - *ref_76
             language: !Languages 
               default:
                 name: ''
@@ -1561,11 +1590,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_75
+          - *ref_77
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_73
+            schema: *ref_75
             language: !Languages 
               default:
                 name: ''
@@ -1588,12 +1617,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_66
+          - *ref_68
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_71
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1618,7 +1647,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_76
+            schema: *ref_78
             language: !Languages 
               default:
                 name: ''
@@ -1641,12 +1670,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_66
+          - *ref_68
         requestMediaTypes:
-          application/json: !Request &ref_79
+          application/json: !Request &ref_81
             parameters:
               - !Parameter 
-                schema: *ref_67
+                schema: *ref_69
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1658,8 +1687,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_78
-                schema: *ref_77
+              - !Parameter &ref_80
+                schema: *ref_79
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1671,7 +1700,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_71
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1684,7 +1713,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_78
+              - *ref_80
             language: !Languages 
               default:
                 name: ''
@@ -1698,11 +1727,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_79
+          - *ref_81
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_77
+            schema: *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -1725,12 +1754,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_66
+          - *ref_68
         requestMediaTypes:
-          application/json: !Request &ref_86
+          application/json: !Request &ref_88
             parameters:
               - !Parameter 
-                schema: *ref_67
+                schema: *ref_69
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1742,8 +1771,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_81
-                schema: *ref_80
+              - !Parameter &ref_83
+                schema: *ref_82
                 flattened: true
                 implementation: Method
                 required: true
@@ -1757,31 +1786,31 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
                     style: json
-              - !VirtualParameter &ref_84
-                schema: *ref_50
+              - !VirtualParameter &ref_86
+                schema: *ref_51
                 implementation: Method
-                originalParameter: *ref_81
+                originalParameter: *ref_83
                 pathToProperty: []
-                targetProperty: *ref_82
+                targetProperty: *ref_84
                 language: !Languages 
                   default:
                     name: code
                     description: ''
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_85
-                schema: *ref_51
+              - !VirtualParameter &ref_87
+                schema: *ref_52
                 implementation: Method
-                originalParameter: *ref_81
+                originalParameter: *ref_83
                 pathToProperty: []
-                targetProperty: *ref_83
+                targetProperty: *ref_85
                 language: !Languages 
                   default:
                     name: status
                     description: ''
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_84
-              - *ref_85
+              - *ref_86
+              - *ref_87
             language: !Languages 
               default:
                 name: ''
@@ -1795,7 +1824,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_86
+          - *ref_88
         signatureParameters: []
         responses:
           - !Response 

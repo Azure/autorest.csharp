@@ -73,8 +73,8 @@
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\sdk\\newprojecttypespec\\Azure.NewProject.TypeSpec\\src\\Generated -n"
     },
     "Azure.ResourceManager.Sample": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Sample\\Generated"
+        "commandName": "Project",
+        "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelShapes\\Generated"
     },
     "Azure.ResourceManager.Storage": {
       "commandName": "Project",

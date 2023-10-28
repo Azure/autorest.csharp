@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -39,11 +40,8 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("NonRequiredString"u8);
                 writer.WriteStringValue(NonRequiredString);
             }
-            if (Optional.IsDefined(NonRequiredInt))
-            {
-                writer.WritePropertyName("NonRequiredInt"u8);
-                writer.WriteNumberValue(NonRequiredInt.Value);
-            }
+            writer.WritePropertyName("NonRequiredInt"u8);
+            writer.WriteNumberValue(NonRequiredInt.Value);
             if (Optional.IsCollectionDefined(NonRequiredStringList))
             {
                 writer.WritePropertyName("NonRequiredStringList"u8);
@@ -122,17 +120,14 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableString");
                 }
             }
-            if (Optional.IsDefined(NonRequiredNullableInt))
+            if (NonRequiredNullableInt != null)
             {
-                if (NonRequiredNullableInt != null)
-                {
-                    writer.WritePropertyName("NonRequiredNullableInt"u8);
-                    writer.WriteNumberValue(NonRequiredNullableInt.Value);
-                }
-                else
-                {
-                    writer.WriteNull("NonRequiredNullableInt");
-                }
+                writer.WritePropertyName("NonRequiredNullableInt"u8);
+                writer.WriteNumberValue(NonRequiredNullableInt.Value);
+            }
+            else
+            {
+                writer.WriteNull("NonRequiredNullableInt");
             }
             if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
             {
@@ -168,6 +163,13 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
+            writer.WritePropertyName("vector"u8);
+            writer.WriteStartArray();
+            foreach (var item in Vector.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 
@@ -195,6 +197,7 @@ namespace ModelShapes.Models
             Optional<IList<int>> nonRequiredNullableIntList = default;
             int requiredReadonlyInt = default;
             Optional<int> nonRequiredReadonlyInt = default;
+            Optional<ReadOnlyMemory<float>> vector = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("RequiredString"u8))
@@ -381,8 +384,24 @@ namespace ModelShapes.Models
                     nonRequiredReadonlyInt = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("vector"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vector = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
             }
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt));
+            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector);
         }
     }
 }

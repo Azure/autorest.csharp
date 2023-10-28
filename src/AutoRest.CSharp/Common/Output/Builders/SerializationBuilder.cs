@@ -273,9 +273,12 @@ namespace AutoRest.CSharp.Output.Builders
                 var isReadOnly = schemaProperty.IsReadOnly;
                 var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
 
+                var memberExpression = property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector
+                    ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
+                    : new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
                 yield return new JsonPropertySerialization(
                     parameter.Name,
-                    new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type),
+                    memberExpression,
                     serializedName,
                     property.ValueType,
                     serialization,

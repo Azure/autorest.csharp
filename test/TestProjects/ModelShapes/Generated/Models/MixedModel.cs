@@ -45,6 +45,7 @@ namespace ModelShapes.Models
             NonRequiredNullableStringList = new ChangeTrackingList<string>();
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
             RequiredReadonlyInt = requiredReadonlyInt;
+            Vector = new ChangeTrackingList<float>();
         }
 
         /// <summary> Initializes a new instance of MixedModel. </summary>
@@ -66,7 +67,8 @@ namespace ModelShapes.Models
         /// <param name="nonRequiredNullableIntList"></param>
         /// <param name="requiredReadonlyInt"></param>
         /// <param name="nonRequiredReadonlyInt"></param>
-        internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt)
+        /// <param name="vector"> The vector representation of a search query. </param>
+        internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt, ReadOnlyMemory<float> vector)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -86,6 +88,7 @@ namespace ModelShapes.Models
             NonRequiredNullableIntList = nonRequiredNullableIntList;
             RequiredReadonlyInt = requiredReadonlyInt;
             NonRequiredReadonlyInt = nonRequiredReadonlyInt;
+            Vector = vector;
         }
 
         /// <summary> Gets or sets the required string. </summary>
@@ -124,5 +127,7 @@ namespace ModelShapes.Models
         public int RequiredReadonlyInt { get; }
         /// <summary> Gets the non required readonly int. </summary>
         public int? NonRequiredReadonlyInt { get; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float> Vector { get; }
     }
 }
