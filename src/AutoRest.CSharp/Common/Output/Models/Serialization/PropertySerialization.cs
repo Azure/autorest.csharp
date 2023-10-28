@@ -19,6 +19,11 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public TypedValueExpression Value { get; }
 
         /// <summary>
+        /// Value expression to be enumerated over. Used in serialization logic only.
+        /// </summary>
+        public TypedValueExpression EnumerableValue { get; }
+
+        /// <summary>
         /// Name of the property in serialized string
         /// </summary>
         public string SerializedName { get; }
@@ -36,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         {
         }
 
-        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization, TypedValueExpression? enumerableValue = null)
         {
             SerializationConstructorParameterName = parameterName;
             Value = value;
@@ -45,6 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             IsRequired = isRequired;
             ShouldSkipSerialization = shouldSkipSerialization;
             ShouldSkipDeserialization = shouldSkipDeserialization;
+            EnumerableValue = enumerableValue ?? value;
         }
     }
 }

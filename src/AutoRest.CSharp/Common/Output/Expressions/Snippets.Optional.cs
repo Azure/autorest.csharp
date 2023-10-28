@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement)
             {
-                if (serialization.IsRequired || (serialization.Value.Type.IsFrameworkType && serialization.Value.Type.FrameworkType.IsValueType))
+                if (serialization.IsRequired || TypeFactory.IsReadOnlyMemory(serialization.Value.Type))
                 {
                     return statement;
                 }

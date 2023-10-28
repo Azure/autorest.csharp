@@ -273,12 +273,17 @@ namespace AutoRest.CSharp.Output.Builders
                 var isReadOnly = schemaProperty.IsReadOnly;
                 var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
 
-                var memberExpression = property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector
-                    ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
-                    : new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
+                var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
+                TypedMemberExpression? enumerableExpression = null;
+                if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
+                {
+                    enumerableExpression = property.Declaration.Type.IsNullable
+                    ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
+                    : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                }
                 yield return new JsonPropertySerialization(
                     parameter.Name,
-                    memberExpression,
+                    memberValueExpression,
                     serializedName,
                     property.ValueType,
                     serialization,
@@ -286,7 +291,8 @@ namespace AutoRest.CSharp.Output.Builders
                     isReadOnly,
                     false,
                     customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                    customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+                    customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
+                    enumerableExpression: enumerableExpression);
             }
 
             foreach ((string name, SerializationPropertyBag innerBag) in propertyBag.Bag)

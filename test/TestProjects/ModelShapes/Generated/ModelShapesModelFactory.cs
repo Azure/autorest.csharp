@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,8 +34,15 @@ namespace ModelShapes.Models
         /// <param name="requiredReadonlyInt"></param>
         /// <param name="nonRequiredReadonlyInt"></param>
         /// <param name="vector"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnly"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyRequired"> The vector representation of a search query. </param>
+        /// <param name="vectorRequired"> The vector representation of a search query. </param>
+        /// <param name="vectorNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyRequiredNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorRequiredNullable"> The vector representation of a search query. </param>
         /// <returns> A new <see cref="Models.MixedModel"/> instance for mocking. </returns>
-        public static MixedModel MixedModel(string requiredString = null, int requiredInt = default, IEnumerable<string> requiredStringList = null, IEnumerable<int> requiredIntList = null, string nonRequiredString = null, int? nonRequiredInt = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, string requiredNullableString = null, int? requiredNullableInt = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, string nonRequiredNullableString = null, int? nonRequiredNullableInt = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, IEnumerable<float> vector = null)
+        public static MixedModel MixedModel(string requiredString = null, int requiredInt = default, IEnumerable<string> requiredStringList = null, IEnumerable<int> requiredIntList = null, string nonRequiredString = null, int? nonRequiredInt = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, string requiredNullableString = null, int? requiredNullableInt = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, string nonRequiredNullableString = null, int? nonRequiredNullableInt = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, ReadOnlyMemory<float> vector = default, ReadOnlyMemory<float> vectorReadOnly = default, ReadOnlyMemory<float> vectorReadOnlyRequired = default, ReadOnlyMemory<float> vectorRequired = default, ReadOnlyMemory<float>? vectorNullable = null, ReadOnlyMemory<float>? vectorReadOnlyNullable = null, ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable = null, ReadOnlyMemory<float>? vectorRequiredNullable = null)
         {
             requiredStringList ??= new List<string>();
             requiredIntList ??= new List<int>();
@@ -44,9 +52,8 @@ namespace ModelShapes.Models
             requiredNullableIntList ??= new List<int>();
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
-            vector ??= new List<float>();
 
-            return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector);
+            return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable);
         }
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
@@ -68,8 +75,16 @@ namespace ModelShapes.Models
         /// <param name="nonRequiredNullableIntList"></param>
         /// <param name="requiredReadonlyInt"></param>
         /// <param name="nonRequiredReadonlyInt"></param>
+        /// <param name="vector"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnly"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyRequired"> The vector representation of a search query. </param>
+        /// <param name="vectorRequired"> The vector representation of a search query. </param>
+        /// <param name="vectorNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyRequiredNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorRequiredNullable"> The vector representation of a search query. </param>
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
-        public static OutputModel OutputModel(string requiredString = null, int requiredInt = default, IEnumerable<string> requiredStringList = null, IEnumerable<int> requiredIntList = null, string nonRequiredString = null, int? nonRequiredInt = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, string requiredNullableString = null, int? requiredNullableInt = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, string nonRequiredNullableString = null, int? nonRequiredNullableInt = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null)
+        public static OutputModel OutputModel(string requiredString = null, int requiredInt = default, IEnumerable<string> requiredStringList = null, IEnumerable<int> requiredIntList = null, string nonRequiredString = null, int? nonRequiredInt = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, string requiredNullableString = null, int? requiredNullableInt = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, string nonRequiredNullableString = null, int? nonRequiredNullableInt = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, ReadOnlyMemory<float> vector = default, ReadOnlyMemory<float> vectorReadOnly = default, ReadOnlyMemory<float> vectorReadOnlyRequired = default, ReadOnlyMemory<float> vectorRequired = default, ReadOnlyMemory<float>? vectorNullable = null, ReadOnlyMemory<float>? vectorReadOnlyNullable = null, ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable = null, ReadOnlyMemory<float>? vectorRequiredNullable = null)
         {
             requiredStringList ??= new List<string>();
             requiredIntList ??= new List<int>();
@@ -80,7 +95,7 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt);
+            return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable);
         }
 
         /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>

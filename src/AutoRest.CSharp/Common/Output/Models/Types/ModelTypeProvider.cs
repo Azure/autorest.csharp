@@ -281,7 +281,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
                     {
-                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        if (TypeFactory.IsReadOnlyMemory(propertyType))
+                        {
+                            initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
+                        }
+                        else
+                        {
+                            initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        }
                     }
                 }
 

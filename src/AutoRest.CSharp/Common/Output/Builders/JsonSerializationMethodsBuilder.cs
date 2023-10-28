@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && property.IsRequired
+                    var checkPropertyIsInitialized = (TypeFactory.IsCollectionType(property.SerializedType) && !TypeFactory.IsReadOnlyMemory(property.SerializedType)) && property.IsRequired
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 utf8JsonWriter.WritePropertyName(serialization.SerializedName),
                 serialization.CustomSerializationMethodName is {} serializationMethodName
                     ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter)
-                    : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.Value)
+                    : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.EnumerableValue) // EnumerableValue is equal to Value if its not an array
             };
         }
 
@@ -534,7 +534,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     };
                 }
 
-                if (jsonPropertySerialization.IsRequired)
+                if (jsonPropertySerialization.IsRequired && !TypeFactory.IsReadOnlyMemory(serializedType))
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
@@ -549,7 +549,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 };
             }
 
-            if (!jsonPropertySerialization.IsRequired &&
+            if ((!jsonPropertySerialization.IsRequired || TypeFactory.IsReadOnlyMemory(serializedType!)) && // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
                 serializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
                 serializedType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
             {
@@ -803,7 +803,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var targetType = jsonPropertySerialization.Value.Type;
-            if (TypeFactory.IsList(targetType))
+            if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType))
             {
                 return InvokeOptional.ToList(variable);
             }

@@ -116,6 +116,7 @@ namespace AutoRest.CSharp.Generation.Types
                 {
                     return new CSharpType(type.Arguments[0].FrameworkType.MakeArrayType());
                 }
+
                 if (IsList(type))
                 {
                     return new CSharpType(typeof(List<>), type.Arguments);
@@ -134,6 +135,11 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsFrameworkType)
             {
+                if (IsReadOnlyMemory(type))
+                {
+                    return new CSharpType(typeof(ReadOnlyMemory<>), type.Arguments);
+                }
+
                 if (IsList(type))
                 {
                     return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
@@ -335,6 +341,11 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsFrameworkType)
             {
+                if (IsReadOnlyMemory(type))
+                {
+                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
+                }
+
                 if (IsList(type))
                 {
                     return new CSharpType(
@@ -351,6 +362,11 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsFrameworkType)
             {
+                if (IsReadOnlyMemory(type))
+                {
+                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
+                }
+
                 if (IsList(type))
                 {
                     return new CSharpType(

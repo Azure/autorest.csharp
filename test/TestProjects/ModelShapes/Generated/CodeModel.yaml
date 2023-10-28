@@ -56,7 +56,15 @@ schemas: !Schemas
           name: InputModelNonRequiredNullableInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_17
+    - !NumberSchema &ref_14
+      type: number
+      precision: 32
+      language: !Languages 
+        default:
+          name: ArrayItemschema
+          description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_18
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -67,7 +75,7 @@ schemas: !Schemas
           name: MixedModelRequiredInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_21
+    - !NumberSchema &ref_22
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -78,7 +86,7 @@ schemas: !Schemas
           name: MixedModelNonRequiredInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_25
+    - !NumberSchema &ref_26
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -89,7 +97,7 @@ schemas: !Schemas
           name: MixedModelRequiredNullableInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_29
+    - !NumberSchema &ref_30
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -100,7 +108,7 @@ schemas: !Schemas
           name: MixedModelNonRequiredNullableInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_32
+    - !NumberSchema &ref_33
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -111,7 +119,7 @@ schemas: !Schemas
           name: MixedModelRequiredReadonlyInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_33
+    - !NumberSchema &ref_34
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -122,15 +130,7 @@ schemas: !Schemas
           name: MixedModelNonRequiredReadonlyInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_34
-      type: number
-      precision: 32
-      language: !Languages 
-        default:
-          name: ArrayItemschema
-          description: ''
-      protocol: !Protocols {}
-    - !NumberSchema &ref_36
+    - !NumberSchema &ref_44
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -141,7 +141,7 @@ schemas: !Schemas
           name: OutputModelRequiredInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_39
+    - !NumberSchema &ref_47
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -152,7 +152,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_42
+    - !NumberSchema &ref_50
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -163,7 +163,7 @@ schemas: !Schemas
           name: OutputModelRequiredNullableInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_45
+    - !NumberSchema &ref_53
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -174,7 +174,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredNullableInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_47
+    - !NumberSchema &ref_55
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -185,7 +185,7 @@ schemas: !Schemas
           name: OutputModelRequiredReadonlyInt
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_48
+    - !NumberSchema &ref_56
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -284,7 +284,7 @@ schemas: !Schemas
           name: InputModelNonRequiredNullableStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -294,7 +294,7 @@ schemas: !Schemas
           name: ErrorModelCode
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
@@ -304,7 +304,7 @@ schemas: !Schemas
           name: ErrorModelStatus
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_17
       type: string
       apiVersions:
         - !ApiVersion 
@@ -314,7 +314,7 @@ schemas: !Schemas
           name: MixedModelRequiredString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_18
+    - !StringSchema &ref_19
       type: string
       apiVersions:
         - !ApiVersion 
@@ -324,7 +324,7 @@ schemas: !Schemas
           name: MixedModelRequiredStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_20
+    - !StringSchema &ref_21
       type: string
       apiVersions:
         - !ApiVersion 
@@ -334,7 +334,7 @@ schemas: !Schemas
           name: MixedModelNonRequiredString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_22
+    - !StringSchema &ref_23
       type: string
       apiVersions:
         - !ApiVersion 
@@ -344,7 +344,7 @@ schemas: !Schemas
           name: MixedModelNonRequiredStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_24
+    - !StringSchema &ref_25
       type: string
       apiVersions:
         - !ApiVersion 
@@ -354,7 +354,7 @@ schemas: !Schemas
           name: MixedModelRequiredNullableString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_26
+    - !StringSchema &ref_27
       type: string
       apiVersions:
         - !ApiVersion 
@@ -364,7 +364,7 @@ schemas: !Schemas
           name: MixedModelRequiredNullableStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_28
+    - !StringSchema &ref_29
       type: string
       apiVersions:
         - !ApiVersion 
@@ -374,7 +374,7 @@ schemas: !Schemas
           name: MixedModelNonRequiredNullableString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_30
+    - !StringSchema &ref_31
       type: string
       apiVersions:
         - !ApiVersion 
@@ -384,7 +384,7 @@ schemas: !Schemas
           name: MixedModelNonRequiredNullableStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_35
+    - !StringSchema &ref_43
       type: string
       apiVersions:
         - !ApiVersion 
@@ -394,7 +394,7 @@ schemas: !Schemas
           name: OutputModelRequiredString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_37
+    - !StringSchema &ref_45
       type: string
       apiVersions:
         - !ApiVersion 
@@ -404,7 +404,7 @@ schemas: !Schemas
           name: OutputModelRequiredStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_38
+    - !StringSchema &ref_46
       type: string
       apiVersions:
         - !ApiVersion 
@@ -414,7 +414,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_40
+    - !StringSchema &ref_48
       type: string
       apiVersions:
         - !ApiVersion 
@@ -424,7 +424,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_41
+    - !StringSchema &ref_49
       type: string
       apiVersions:
         - !ApiVersion 
@@ -434,7 +434,7 @@ schemas: !Schemas
           name: OutputModelRequiredNullableString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_43
+    - !StringSchema &ref_51
       type: string
       apiVersions:
         - !ApiVersion 
@@ -444,7 +444,7 @@ schemas: !Schemas
           name: OutputModelRequiredNullableStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_44
+    - !StringSchema &ref_52
       type: string
       apiVersions:
         - !ApiVersion 
@@ -454,7 +454,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredNullableString
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_46
+    - !StringSchema &ref_54
       type: string
       apiVersions:
         - !ApiVersion 
@@ -464,7 +464,7 @@ schemas: !Schemas
           name: OutputModelNonRequiredNullableStringListItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_49
+    - !StringSchema &ref_57
       type: string
       apiVersions:
         - !ApiVersion 
@@ -474,7 +474,7 @@ schemas: !Schemas
           name: ReadonlyModelName
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_51
+    - !StringSchema &ref_59
       type: string
       apiVersions:
         - !ApiVersion 
@@ -484,7 +484,7 @@ schemas: !Schemas
           name: ParametersModelCode
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_52
+    - !StringSchema &ref_60
       type: string
       apiVersions:
         - !ApiVersion 
@@ -494,7 +494,7 @@ schemas: !Schemas
           name: ParametersModelStatus
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_53
+    - !StringSchema &ref_61
       type: string
       apiVersions:
         - !ApiVersion 
@@ -505,7 +505,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_69
+    - !ConstantSchema &ref_76
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -515,7 +515,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_71
+    - !ConstantSchema &ref_78
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -526,7 +526,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_70
+    - !ObjectSchema &ref_77
       type: object
       apiVersions:
         - !ApiVersion 
@@ -551,7 +551,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_54
+          schema: !ArraySchema &ref_62
             type: array
             apiVersions:
               - !ApiVersion 
@@ -570,7 +570,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_19
+          schema: !ArraySchema &ref_20
             type: array
             elementType: *ref_4
             language: !Languages 
@@ -604,7 +604,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_55
+          schema: !ArraySchema &ref_63
             type: array
             apiVersions:
               - !ApiVersion 
@@ -623,7 +623,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_23
+          schema: !ArraySchema &ref_24
             type: array
             elementType: *ref_4
             language: !Languages 
@@ -659,7 +659,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_56
+          schema: !ArraySchema &ref_64
             type: array
             apiVersions:
               - !ApiVersion 
@@ -679,7 +679,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_27
+          schema: !ArraySchema &ref_28
             type: array
             elementType: *ref_4
             language: !Languages 
@@ -716,7 +716,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_57
+          schema: !ArraySchema &ref_65
             type: array
             apiVersions:
               - !ApiVersion 
@@ -736,7 +736,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_31
+          schema: !ArraySchema &ref_32
             type: array
             elementType: *ref_4
             language: !Languages 
@@ -752,270 +752,10 @@ schemas: !Schemas
               name: nonRequiredNullableIntList
               description: ''
           protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-      language: !Languages 
-        default:
-          name: InputModel
-          description: ''
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_74
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      properties:
         - !Property 
-          schema: *ref_14
-          serializedName: Code
-          language: !Languages 
-            default:
-              name: code
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_15
-          serializedName: Status
-          language: !Languages 
-            default:
-              name: status
-              description: ''
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - exception
-      language: !Languages 
-        default:
-          name: ErrorModel
-          description: ''
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_75
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      properties:
-        - !Property 
-          schema: *ref_16
-          required: true
-          serializedName: RequiredString
-          language: !Languages 
-            default:
-              name: requiredString
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_17
-          required: true
-          serializedName: RequiredInt
-          language: !Languages 
-            default:
-              name: requiredInt
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: !ArraySchema &ref_58
+          schema: !ArraySchema &ref_35
             type: array
-            apiVersions:
-              - !ApiVersion 
-                version: 1.0.0
-            elementType: *ref_18
-            language: !Languages 
-              default:
-                name: MixedModelRequiredStringList
-                description: Array of MixedModelRequiredStringListItem
-            protocol: !Protocols {}
-          required: true
-          serializedName: RequiredStringList
-          language: !Languages 
-            default:
-              name: requiredStringList
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_19
-          required: true
-          serializedName: RequiredIntList
-          language: !Languages 
-            default:
-              name: requiredIntList
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_20
-          required: false
-          serializedName: NonRequiredString
-          language: !Languages 
-            default:
-              name: nonRequiredString
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_21
-          required: false
-          serializedName: NonRequiredInt
-          language: !Languages 
-            default:
-              name: nonRequiredInt
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: !ArraySchema &ref_59
-            type: array
-            apiVersions:
-              - !ApiVersion 
-                version: 1.0.0
-            elementType: *ref_22
-            language: !Languages 
-              default:
-                name: MixedModelNonRequiredStringList
-                description: Array of MixedModelNonRequiredStringListItem
-            protocol: !Protocols {}
-          required: false
-          serializedName: NonRequiredStringList
-          language: !Languages 
-            default:
-              name: nonRequiredStringList
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_23
-          required: false
-          serializedName: NonRequiredIntList
-          language: !Languages 
-            default:
-              name: nonRequiredIntList
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_24
-          nullable: true
-          required: true
-          serializedName: RequiredNullableString
-          language: !Languages 
-            default:
-              name: requiredNullableString
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_25
-          nullable: true
-          required: true
-          serializedName: RequiredNullableInt
-          language: !Languages 
-            default:
-              name: requiredNullableInt
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: !ArraySchema &ref_60
-            type: array
-            apiVersions:
-              - !ApiVersion 
-                version: 1.0.0
-            elementType: *ref_26
-            language: !Languages 
-              default:
-                name: MixedModelRequiredNullableStringList
-                description: Array of MixedModelRequiredNullableStringListItem
-            protocol: !Protocols {}
-          nullable: true
-          required: true
-          serializedName: RequiredNullableStringList
-          language: !Languages 
-            default:
-              name: requiredNullableStringList
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_27
-          nullable: true
-          required: true
-          serializedName: RequiredNullableIntList
-          language: !Languages 
-            default:
-              name: requiredNullableIntList
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_28
-          nullable: true
-          required: false
-          serializedName: NonRequiredNullableString
-          language: !Languages 
-            default:
-              name: nonRequiredNullableString
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_29
-          nullable: true
-          required: false
-          serializedName: NonRequiredNullableInt
-          language: !Languages 
-            default:
-              name: nonRequiredNullableInt
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: !ArraySchema &ref_61
-            type: array
-            apiVersions:
-              - !ApiVersion 
-                version: 1.0.0
-            elementType: *ref_30
-            language: !Languages 
-              default:
-                name: MixedModelNonRequiredNullableStringList
-                description: Array of MixedModelNonRequiredNullableStringListItem
-            protocol: !Protocols {}
-          nullable: true
-          required: false
-          serializedName: NonRequiredNullableStringList
-          language: !Languages 
-            default:
-              name: nonRequiredNullableStringList
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_31
-          nullable: true
-          required: false
-          serializedName: NonRequiredNullableIntList
-          language: !Languages 
-            default:
-              name: nonRequiredNullableIntList
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_32
-          readOnly: true
-          required: true
-          serializedName: RequiredReadonlyInt
-          language: !Languages 
-            default:
-              name: requiredReadonlyInt
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_33
-          readOnly: true
-          required: false
-          serializedName: NonRequiredReadonlyInt
-          language: !Languages 
-            default:
-              name: nonRequiredReadonlyInt
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: !ArraySchema &ref_62
-            type: array
-            elementType: *ref_34
+            elementType: *ref_14
             extensions:
               x-ms-embedding-vector: true
             language: !Languages 
@@ -1032,6 +772,510 @@ schemas: !Schemas
               name: vector
               description: The vector representation of a search query.
           protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_36
+            type: array
+            elementType: *ref_14
+            extensions:
+              x-ms-embedding-vector: true
+            language: !Languages 
+              default:
+                name: ArrayOfArrayItemschema
+                description: The vector representation of a search query.
+            protocol: !Protocols {}
+          readOnly: true
+          required: false
+          serializedName: vectorReadOnly
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnly
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_37
+            type: array
+            elementType: *ref_14
+            extensions:
+              x-ms-embedding-vector: true
+            language: !Languages 
+              default:
+                name: ArrayOfArrayItemschema
+                description: The vector representation of a search query.
+            protocol: !Protocols {}
+          readOnly: true
+          required: true
+          serializedName: vectorReadOnlyRequired
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyRequired
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_38
+            type: array
+            elementType: *ref_14
+            extensions:
+              x-ms-embedding-vector: true
+            language: !Languages 
+              default:
+                name: ArrayOfArrayItemschema
+                description: The vector representation of a search query.
+            protocol: !Protocols {}
+          required: true
+          serializedName: vectorRequired
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorRequired
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_39
+            type: array
+            elementType: *ref_14
+            extensions:
+              x-ms-embedding-vector: true
+            language: !Languages 
+              default:
+                name: ArrayOfArrayItemschema
+                description: The vector representation of a search query.
+            protocol: !Protocols {}
+          nullable: true
+          required: false
+          serializedName: vectorNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_40
+            type: array
+            elementType: *ref_14
+            extensions:
+              x-ms-embedding-vector: true
+            language: !Languages 
+              default:
+                name: ArrayOfArrayItemschema
+                description: The vector representation of a search query.
+            protocol: !Protocols {}
+          nullable: true
+          readOnly: true
+          required: false
+          serializedName: vectorReadOnlyNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_41
+            type: array
+            elementType: *ref_14
+            extensions:
+              x-ms-embedding-vector: true
+            language: !Languages 
+              default:
+                name: ArrayOfArrayItemschema
+                description: The vector representation of a search query.
+            protocol: !Protocols {}
+          nullable: true
+          readOnly: true
+          required: true
+          serializedName: vectorReadOnlyRequiredNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyRequiredNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_42
+            type: array
+            elementType: *ref_14
+            extensions:
+              x-ms-embedding-vector: true
+            language: !Languages 
+              default:
+                name: ArrayOfArrayItemschema
+                description: The vector representation of a search query.
+            protocol: !Protocols {}
+          nullable: true
+          required: true
+          serializedName: vectorRequiredNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorRequiredNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: InputModel
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_81
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: *ref_15
+          serializedName: Code
+          language: !Languages 
+            default:
+              name: code
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_16
+          serializedName: Status
+          language: !Languages 
+            default:
+              name: status
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      language: !Languages 
+        default:
+          name: ErrorModel
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_82
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: *ref_17
+          required: true
+          serializedName: RequiredString
+          language: !Languages 
+            default:
+              name: requiredString
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_18
+          required: true
+          serializedName: RequiredInt
+          language: !Languages 
+            default:
+              name: requiredInt
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_66
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            elementType: *ref_19
+            language: !Languages 
+              default:
+                name: MixedModelRequiredStringList
+                description: Array of MixedModelRequiredStringListItem
+            protocol: !Protocols {}
+          required: true
+          serializedName: RequiredStringList
+          language: !Languages 
+            default:
+              name: requiredStringList
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_20
+          required: true
+          serializedName: RequiredIntList
+          language: !Languages 
+            default:
+              name: requiredIntList
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_21
+          required: false
+          serializedName: NonRequiredString
+          language: !Languages 
+            default:
+              name: nonRequiredString
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_22
+          required: false
+          serializedName: NonRequiredInt
+          language: !Languages 
+            default:
+              name: nonRequiredInt
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_67
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            elementType: *ref_23
+            language: !Languages 
+              default:
+                name: MixedModelNonRequiredStringList
+                description: Array of MixedModelNonRequiredStringListItem
+            protocol: !Protocols {}
+          required: false
+          serializedName: NonRequiredStringList
+          language: !Languages 
+            default:
+              name: nonRequiredStringList
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_24
+          required: false
+          serializedName: NonRequiredIntList
+          language: !Languages 
+            default:
+              name: nonRequiredIntList
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_25
+          nullable: true
+          required: true
+          serializedName: RequiredNullableString
+          language: !Languages 
+            default:
+              name: requiredNullableString
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_26
+          nullable: true
+          required: true
+          serializedName: RequiredNullableInt
+          language: !Languages 
+            default:
+              name: requiredNullableInt
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_68
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            elementType: *ref_27
+            language: !Languages 
+              default:
+                name: MixedModelRequiredNullableStringList
+                description: Array of MixedModelRequiredNullableStringListItem
+            protocol: !Protocols {}
+          nullable: true
+          required: true
+          serializedName: RequiredNullableStringList
+          language: !Languages 
+            default:
+              name: requiredNullableStringList
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_28
+          nullable: true
+          required: true
+          serializedName: RequiredNullableIntList
+          language: !Languages 
+            default:
+              name: requiredNullableIntList
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_29
+          nullable: true
+          required: false
+          serializedName: NonRequiredNullableString
+          language: !Languages 
+            default:
+              name: nonRequiredNullableString
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_30
+          nullable: true
+          required: false
+          serializedName: NonRequiredNullableInt
+          language: !Languages 
+            default:
+              name: nonRequiredNullableInt
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_69
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            elementType: *ref_31
+            language: !Languages 
+              default:
+                name: MixedModelNonRequiredNullableStringList
+                description: Array of MixedModelNonRequiredNullableStringListItem
+            protocol: !Protocols {}
+          nullable: true
+          required: false
+          serializedName: NonRequiredNullableStringList
+          language: !Languages 
+            default:
+              name: nonRequiredNullableStringList
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_32
+          nullable: true
+          required: false
+          serializedName: NonRequiredNullableIntList
+          language: !Languages 
+            default:
+              name: nonRequiredNullableIntList
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_33
+          readOnly: true
+          required: true
+          serializedName: RequiredReadonlyInt
+          language: !Languages 
+            default:
+              name: requiredReadonlyInt
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_34
+          readOnly: true
+          required: false
+          serializedName: NonRequiredReadonlyInt
+          language: !Languages 
+            default:
+              name: nonRequiredReadonlyInt
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_35
+          required: false
+          serializedName: vector
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vector
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_36
+          readOnly: true
+          required: false
+          serializedName: vectorReadOnly
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnly
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_37
+          readOnly: true
+          required: true
+          serializedName: vectorReadOnlyRequired
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyRequired
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_38
+          required: true
+          serializedName: vectorRequired
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorRequired
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_39
+          nullable: true
+          required: false
+          serializedName: vectorNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_40
+          nullable: true
+          readOnly: true
+          required: false
+          serializedName: vectorReadOnlyNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_41
+          nullable: true
+          readOnly: true
+          required: true
+          serializedName: vectorReadOnlyRequiredNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyRequiredNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_42
+          nullable: true
+          required: true
+          serializedName: vectorRequiredNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorRequiredNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
@@ -1043,14 +1287,14 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_78
+    - !ObjectSchema &ref_85
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_35
+          schema: *ref_43
           required: true
           serializedName: RequiredString
           language: !Languages 
@@ -1059,7 +1303,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_36
+          schema: *ref_44
           required: true
           serializedName: RequiredInt
           language: !Languages 
@@ -1068,12 +1312,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_63
+          schema: !ArraySchema &ref_70
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_37
+            elementType: *ref_45
             language: !Languages 
               default:
                 name: OutputModelRequiredStringList
@@ -1087,7 +1331,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_19
+          schema: *ref_20
           required: true
           serializedName: RequiredIntList
           language: !Languages 
@@ -1096,7 +1340,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_38
+          schema: *ref_46
           required: false
           serializedName: NonRequiredString
           language: !Languages 
@@ -1105,7 +1349,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_39
+          schema: *ref_47
           required: false
           serializedName: NonRequiredInt
           language: !Languages 
@@ -1114,12 +1358,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_64
+          schema: !ArraySchema &ref_71
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_40
+            elementType: *ref_48
             language: !Languages 
               default:
                 name: OutputModelNonRequiredStringList
@@ -1133,7 +1377,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_23
+          schema: *ref_24
           required: false
           serializedName: NonRequiredIntList
           language: !Languages 
@@ -1142,7 +1386,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_41
+          schema: *ref_49
           nullable: true
           required: true
           serializedName: RequiredNullableString
@@ -1152,7 +1396,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_42
+          schema: *ref_50
           nullable: true
           required: true
           serializedName: RequiredNullableInt
@@ -1162,12 +1406,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_65
+          schema: !ArraySchema &ref_72
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_43
+            elementType: *ref_51
             language: !Languages 
               default:
                 name: OutputModelRequiredNullableStringList
@@ -1182,7 +1426,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_27
+          schema: *ref_28
           nullable: true
           required: true
           serializedName: RequiredNullableIntList
@@ -1192,7 +1436,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_44
+          schema: *ref_52
           nullable: true
           required: false
           serializedName: NonRequiredNullableString
@@ -1202,7 +1446,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_45
+          schema: *ref_53
           nullable: true
           required: false
           serializedName: NonRequiredNullableInt
@@ -1212,12 +1456,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_66
+          schema: !ArraySchema &ref_73
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_46
+            elementType: *ref_54
             language: !Languages 
               default:
                 name: OutputModelNonRequiredNullableStringList
@@ -1232,7 +1476,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_31
+          schema: *ref_32
           nullable: true
           required: false
           serializedName: NonRequiredNullableIntList
@@ -1242,7 +1486,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_47
+          schema: *ref_55
           readOnly: true
           required: true
           serializedName: RequiredReadonlyInt
@@ -1252,7 +1496,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_48
+          schema: *ref_56
           readOnly: true
           required: false
           serializedName: NonRequiredReadonlyInt
@@ -1260,6 +1504,102 @@ schemas: !Schemas
             default:
               name: nonRequiredReadonlyInt
               description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_35
+          required: false
+          serializedName: vector
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vector
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_36
+          readOnly: true
+          required: false
+          serializedName: vectorReadOnly
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnly
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_37
+          readOnly: true
+          required: true
+          serializedName: vectorReadOnlyRequired
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyRequired
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_38
+          required: true
+          serializedName: vectorRequired
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorRequired
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_39
+          nullable: true
+          required: false
+          serializedName: vectorNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_40
+          nullable: true
+          readOnly: true
+          required: false
+          serializedName: vectorReadOnlyNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_41
+          nullable: true
+          readOnly: true
+          required: true
+          serializedName: vectorReadOnlyRequiredNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorReadOnlyRequiredNullable
+              description: The vector representation of a search query.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_42
+          nullable: true
+          required: true
+          serializedName: vectorRequiredNullable
+          extensions:
+            x-ms-embedding-vector: true
+          language: !Languages 
+            default:
+              name: vectorRequiredNullable
+              description: The vector representation of a search query.
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -1271,21 +1611,21 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_79
+    - !ObjectSchema &ref_86
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_50
+          schema: !ObjectSchema &ref_58
             type: object
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
             properties:
               - !Property 
-                schema: *ref_49
+                schema: *ref_57
                 serializedName: Name
                 language: !Languages 
                   default:
@@ -1311,12 +1651,12 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_67
+          schema: !ArraySchema &ref_74
             type: array
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            elementType: *ref_50
+            elementType: *ref_58
             language: !Languages 
               default:
                 name: MixedModelWithReadonlyPropertyReadonlyListProperty
@@ -1340,23 +1680,23 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_50
-    - !ObjectSchema &ref_82
+    - *ref_58
+    - !ObjectSchema &ref_89
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
-        - !Property &ref_84
-          schema: *ref_51
+        - !Property &ref_91
+          schema: *ref_59
           serializedName: Code
           language: !Languages 
             default:
               name: code
               description: ''
           protocol: !Protocols {}
-        - !Property &ref_85
-          schema: *ref_52
+        - !Property &ref_92
+          schema: *ref_60
           serializedName: Status
           language: !Languages 
             default:
@@ -1380,7 +1720,7 @@ schemas: !Schemas
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_53
+          schema: *ref_61
           serializedName: UnusedString
           language: !Languages 
             default:
@@ -1394,26 +1734,33 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
   arrays:
-    - *ref_54
-    - *ref_19
-    - *ref_55
-    - *ref_23
-    - *ref_56
-    - *ref_27
-    - *ref_57
-    - *ref_31
-    - *ref_58
-    - *ref_59
-    - *ref_60
-    - *ref_61
     - *ref_62
+    - *ref_20
     - *ref_63
+    - *ref_24
     - *ref_64
+    - *ref_28
     - *ref_65
+    - *ref_32
+    - *ref_35
+    - *ref_36
+    - *ref_37
+    - *ref_38
+    - *ref_39
+    - *ref_40
+    - *ref_41
+    - *ref_42
     - *ref_66
     - *ref_67
+    - *ref_68
+    - *ref_69
+    - *ref_70
+    - *ref_71
+    - *ref_72
+    - *ref_73
+    - *ref_74
 globalParameters:
-  - !Parameter &ref_68
+  - !Parameter &ref_75
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -1439,12 +1786,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_68
+          - *ref_75
         requestMediaTypes:
-          application/json: !Request &ref_73
+          application/json: !Request &ref_80
             parameters:
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1456,8 +1803,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_72
-                schema: *ref_70
+              - !Parameter &ref_79
+                schema: *ref_77
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1469,7 +1816,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_71
+                schema: *ref_78
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1482,7 +1829,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_72
+              - *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -1496,7 +1843,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_73
+          - *ref_80
         signatureParameters: []
         responses:
           - !Response 
@@ -1510,7 +1857,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_74
+            schema: *ref_81
             language: !Languages 
               default:
                 name: ''
@@ -1533,12 +1880,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_68
+          - *ref_75
         requestMediaTypes:
-          application/json: !Request &ref_77
+          application/json: !Request &ref_84
             parameters:
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1550,8 +1897,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_76
-                schema: *ref_75
+              - !Parameter &ref_83
+                schema: *ref_82
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1563,7 +1910,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_71
+                schema: *ref_78
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1576,7 +1923,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_76
+              - *ref_83
             language: !Languages 
               default:
                 name: ''
@@ -1590,11 +1937,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_77
+          - *ref_84
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_75
+            schema: *ref_82
             language: !Languages 
               default:
                 name: ''
@@ -1617,12 +1964,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_68
+          - *ref_75
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_71
+                schema: *ref_78
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1647,7 +1994,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_78
+            schema: *ref_85
             language: !Languages 
               default:
                 name: ''
@@ -1670,12 +2017,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_68
+          - *ref_75
         requestMediaTypes:
-          application/json: !Request &ref_81
+          application/json: !Request &ref_88
             parameters:
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1687,8 +2034,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_80
-                schema: *ref_79
+              - !Parameter &ref_87
+                schema: *ref_86
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1700,7 +2047,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_71
+                schema: *ref_78
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1713,7 +2060,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_80
+              - *ref_87
             language: !Languages 
               default:
                 name: ''
@@ -1727,11 +2074,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_81
+          - *ref_88
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_86
             language: !Languages 
               default:
                 name: ''
@@ -1754,12 +2101,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_68
+          - *ref_75
         requestMediaTypes:
-          application/json: !Request &ref_88
+          application/json: !Request &ref_95
             parameters:
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1771,8 +2118,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_83
-                schema: *ref_82
+              - !Parameter &ref_90
+                schema: *ref_89
                 flattened: true
                 implementation: Method
                 required: true
@@ -1786,31 +2133,31 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
                     style: json
-              - !VirtualParameter &ref_86
-                schema: *ref_51
+              - !VirtualParameter &ref_93
+                schema: *ref_59
                 implementation: Method
-                originalParameter: *ref_83
+                originalParameter: *ref_90
                 pathToProperty: []
-                targetProperty: *ref_84
+                targetProperty: *ref_91
                 language: !Languages 
                   default:
                     name: code
                     description: ''
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_87
-                schema: *ref_52
+              - !VirtualParameter &ref_94
+                schema: *ref_60
                 implementation: Method
-                originalParameter: *ref_83
+                originalParameter: *ref_90
                 pathToProperty: []
-                targetProperty: *ref_85
+                targetProperty: *ref_92
                 language: !Languages 
                   default:
                     name: status
                     description: ''
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_86
-              - *ref_87
+              - *ref_93
+              - *ref_94
             language: !Languages 
               default:
                 name: ''
@@ -1824,7 +2171,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_88
+          - *ref_95
         signatureParameters: []
         responses:
           - !Response 
