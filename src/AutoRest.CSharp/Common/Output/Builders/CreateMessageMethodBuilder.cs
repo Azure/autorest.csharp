@@ -134,26 +134,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
             => _requestParts.ContentHeaderParts.Select(rp => NullCheckRequestPartValue(rp, GetAddHeaderStatement(rp))).AsStatement();
 
         public MethodBodyStatement AddBody(BodyMediaType bodyMediaType)
-            => bodyMediaType switch
+        {
+            if (_requestParts.BodyParts is [BodyRequestPart bodyRequestPart])
             {
-                BodyMediaType.Multipart => new[]
-                {
-                    AddContentHeaders(),
-                    AddMultipartBody()
-                },
-                BodyMediaType.Form => new[]
-                {
-                    AddContentHeaders(),
-                    AddFormUrlEncodedBody()
-                },
-                _ when _requestParts.BodyParts is [BodyRequestPart bodyRequestPart] =>
-                    NullCheckRequestPartValue(bodyRequestPart, new[]
-                    {
-                        AddContentHeaders(),
-                        AddBody(bodyRequestPart)
-                    }),
+                return NullCheckRequestPartValue(bodyRequestPart, new[] { AddContentHeaders(), AddBody(bodyRequestPart) });
+            }
+
+            return bodyMediaType switch
+            {
+                BodyMediaType.Multipart => new[] { AddContentHeaders(), AddMultipartBody() },
+                BodyMediaType.Form => new[] { AddContentHeaders(), AddFormUrlEncodedBody() },
                 _ => new MethodBodyStatement()
             };
+        }
 
         public abstract MethodBodyStatement AppendRawNextLink(TypedValueExpression value, bool escape);
         public abstract MethodBodyStatement SetUriToRequest();

@@ -658,6 +658,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     case { Location: RequestLocation.Uri or RequestLocation.Path }:
                         uriOrPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
+                    case { IsApiVersion: true, DefaultValue: not null }:
+                        optionalRequestParameters.Add(operationParameter);
+                        break;
                     case { IsRequired: true, DefaultValue: null }:
                         requiredRequestParameters.Add(operationParameter);
                         break;
