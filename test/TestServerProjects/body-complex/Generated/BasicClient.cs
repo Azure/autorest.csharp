@@ -76,7 +76,6 @@ namespace body_complex
         /// <summary> Please put {id: 2, name: 'abc', color: 'Magenta'}. </summary>
         /// <param name="complexBody"> Please put {id: 2, name: 'abc', color: 'Magenta'}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutValidAsync(Basic complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
@@ -95,7 +94,6 @@ namespace body_complex
         /// <summary> Please put {id: 2, name: 'abc', color: 'Magenta'}. </summary>
         /// <param name="complexBody"> Please put {id: 2, name: 'abc', color: 'Magenta'}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutValid(Basic complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");

@@ -42,7 +42,6 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="renamedPathParameter"/>, <paramref name="renamedQueryParameter"/> or <paramref name="renamedBodyParameter"/> is null. </exception>
         public virtual async Task<Response<RenamedSchema>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.RenamedOperation");
@@ -62,7 +61,6 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="renamedPathParameter"/>, <paramref name="renamedQueryParameter"/> or <paramref name="renamedBodyParameter"/> is null. </exception>
         public virtual Response<RenamedSchema> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.RenamedOperation");

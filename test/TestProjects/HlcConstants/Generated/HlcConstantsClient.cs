@@ -42,7 +42,6 @@ namespace HlcConstants
         /// <param name="optionalStringQuery"> The StringConstant? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="optionalBooleanQuery"> The bool? to use. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<RoundTripModel>> MixedAsync(RoundTripModel value, StringConstant? optionalStringQuery = null, bool? optionalBooleanQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.Mixed");
@@ -62,7 +61,6 @@ namespace HlcConstants
         /// <param name="optionalStringQuery"> The StringConstant? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="optionalBooleanQuery"> The bool? to use. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response<RoundTripModel> Mixed(RoundTripModel value, StringConstant? optionalStringQuery = null, bool? optionalBooleanQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.Mixed");
@@ -82,7 +80,6 @@ namespace HlcConstants
         /// <param name="optionalIntQuery"> The IntConstant? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="optionalFloatQuery"> The FloatConstant? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<RoundTripModel>> PostSomethingAsync(RoundTripModel value, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.PostSomething");
@@ -102,7 +99,6 @@ namespace HlcConstants
         /// <param name="optionalIntQuery"> The IntConstant? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="optionalFloatQuery"> The FloatConstant? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response<RoundTripModel> PostSomething(RoundTripModel value, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.PostSomething");

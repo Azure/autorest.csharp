@@ -363,7 +363,6 @@ namespace model_flattening
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
         public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestResourceFlatteningTestServiceClient.PostFlattenedSimpleProduct");
@@ -387,7 +386,6 @@ namespace model_flattening
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
         public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestResourceFlatteningTestServiceClient.PostFlattenedSimpleProduct");
@@ -406,7 +404,6 @@ namespace model_flattening
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="flattenParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="flattenParameterGroup"/> is null. </exception>
         public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestResourceFlatteningTestServiceClient.PutSimpleProductWithGrouping");
@@ -425,7 +422,6 @@ namespace model_flattening
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="flattenParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="flattenParameterGroup"/> is null. </exception>
         public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestResourceFlatteningTestServiceClient.PutSimpleProductWithGrouping");

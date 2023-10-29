@@ -98,7 +98,6 @@ namespace ProtocolMethodsInRestClient
         /// <param name="grouped"> Parameter group. </param>
         /// <param name="resource"> Information about the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="grouped"/> is null. </exception>
         public virtual async Task<Response<Resource>> CreateAsync(Grouped grouped, Resource resource = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Create");
@@ -118,7 +117,6 @@ namespace ProtocolMethodsInRestClient
         /// <param name="grouped"> Parameter group. </param>
         /// <param name="resource"> Information about the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="grouped"/> is null. </exception>
         public virtual Response<Resource> Create(Grouped grouped, Resource resource = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Create");
@@ -138,7 +136,6 @@ namespace ProtocolMethodsInRestClient
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         public virtual async Task<Response> DeleteAsync(string resourceId, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Delete");
@@ -158,7 +155,6 @@ namespace ProtocolMethodsInRestClient
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         public virtual Response Delete(string resourceId, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Delete");
@@ -177,7 +173,6 @@ namespace ProtocolMethodsInRestClient
         /// <summary> Retrieves information about the resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         public virtual async Task<Response<Resource>> GetAsync(string resourceId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Get");
@@ -196,7 +191,6 @@ namespace ProtocolMethodsInRestClient
         /// <summary> Retrieves information about the resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         public virtual Response<Resource> Get(string resourceId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Get");
