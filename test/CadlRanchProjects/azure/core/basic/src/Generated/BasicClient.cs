@@ -816,6 +816,7 @@ namespace _Specs_.Azure.Core.Basic
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/core/basic/users", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -853,7 +854,6 @@ namespace _Specs_.Azure.Core.Basic
                     uri.AppendQuery("expand", param, true);
                 }
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

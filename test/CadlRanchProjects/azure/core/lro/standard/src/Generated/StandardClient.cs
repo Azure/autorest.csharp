@@ -416,8 +416,8 @@ namespace _Azure.Lro.Standard
             uri.AppendPath("/azure/core/lro/standard/users/", false);
             uri.AppendPath(name, true);
             uri.AppendPath(":export", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("format", format, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

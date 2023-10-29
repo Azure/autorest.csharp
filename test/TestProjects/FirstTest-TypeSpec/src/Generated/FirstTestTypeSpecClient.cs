@@ -2539,11 +2539,11 @@ namespace FirstTestTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             if (optionalQuery != null)
             {
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("head-parameter", headParameter);
             request.Headers.Add("Accept", "application/json");

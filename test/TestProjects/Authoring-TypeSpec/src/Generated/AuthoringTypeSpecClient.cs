@@ -1363,8 +1363,8 @@ namespace AuthoringTypeSpec
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
             uri.AppendPath(":export", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("projectFileVersion", projectFileVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1547,7 +1547,6 @@ namespace AuthoringTypeSpec
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/global/languages", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -1560,6 +1559,7 @@ namespace AuthoringTypeSpec
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1574,7 +1574,6 @@ namespace AuthoringTypeSpec
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/global/training-config-versions", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -1587,6 +1586,7 @@ namespace AuthoringTypeSpec
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
