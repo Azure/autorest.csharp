@@ -421,7 +421,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             else
             {
-                protocolMethodParameter = Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type), _keepClientDefaultValue, _typeFactory);
+                var protocolMethodParameterType = ChangeTypeForProtocolMethod(inputParameter.Type);
+                protocolMethodParameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(protocolMethodParameterType), _keepClientDefaultValue, _typeFactory);
 
                 var value = GetValueForProtocolArgument(inputParameter with {GroupedBy = null}, protocolMethodParameter);
                 switch (inputParameter.Location)
@@ -491,6 +492,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(string)) && convenienceMethodParameter.Type is {IsFrameworkType: false, Implementation: EnumType enumType})
             {
                 _arguments[protocolMethodParameter] = new EnumExpression(enumType, NullConditional(convenienceMethodParameter)).ToSerial();
+                return;
+            }
+
+            if (protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(IEnumerable<string>)) && TypeFactory.IsList(convenienceMethodParameter.Type, out var elementType) && elementType is {IsFrameworkType: false, Implementation: EnumType elementEnumType})
+            {
+                var element = new VariableReference(elementType, "e");
+                var selector = new EnumExpression(elementEnumType, element).ToSerial();
+                _arguments[protocolMethodParameter] = new EnumerableExpression(elementType, NullConditional(convenienceMethodParameter)).Select(new TypedFuncExpression(new[] { element.Declaration }, selector));
                 return;
             }
 
@@ -622,11 +631,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _requestPartsBuilder.AddHeaderPart(inputParameter, GetValueForProtocolArgument(inputParameter, outputParameter), serializationFormat);
         }
 
-        private CSharpType ChangeTypeForProtocolMethod(InputType type) => type switch
+        private InputType ChangeTypeForProtocolMethod(InputType type) => type switch
         {
-            InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
-            InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
-            _ => _typeFactory.CreateType(type).WithNullable(type.IsNullable)
+            InputListType listType => listType with {ElementType = ChangeTypeForProtocolMethod(listType.ElementType)},
+            InputDictionaryType dictionaryType => dictionaryType with {ValueType = ChangeTypeForProtocolMethod(dictionaryType.ValueType)},
+            InputEnumType enumType => enumType.EnumValueType with {IsNullable = enumType.IsNullable},
+            InputModelType modelType => InputPrimitiveType.Object with {IsNullable = modelType.IsNullable},
+            _ => type
         };
 
         private static RequestContextExpression IfCancellationTokenCanBeCanceled(CancellationTokenExpression cancellationToken)

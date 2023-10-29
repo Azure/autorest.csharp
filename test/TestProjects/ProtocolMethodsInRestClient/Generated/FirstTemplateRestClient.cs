@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,7 +38,7 @@ namespace ProtocolMethodsInRestClient
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal HttpMessage CreateCreateRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateCreateRequest(RequestContent content, IEnumerable<string> select, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -44,6 +46,10 @@ namespace ProtocolMethodsInRestClient
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/firstTemplate/resources", false);
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             if (content != null)
@@ -56,12 +62,13 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Create or update resource. </summary>
         /// <param name="resource"> Information about the resource. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<Resource>> CreateAsync(Resource resource = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Resource>> CreateAsync(Resource resource = null, IEnumerable<KeyValueFields> select = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             using RequestContent content = resource?.ToRequestContent();
-            Response response = await CreateAsync(content, context).ConfigureAwait(false);
+            Response response = await CreateAsync(content, select?.Select(e => e.ToString()), context).ConfigureAwait(false);
             switch (response.Status)
             {
                 case 200:
@@ -78,12 +85,13 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Create or update resource. </summary>
         /// <param name="resource"> Information about the resource. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Resource> Create(Resource resource = null, CancellationToken cancellationToken = default)
+        public Response<Resource> Create(Resource resource = null, IEnumerable<KeyValueFields> select = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             using RequestContent content = resource?.ToRequestContent();
-            Response response = Create(content, context);
+            Response response = Create(content, select?.Select(e => e.ToString()), context);
             switch (response.Status)
             {
                 case 200:
@@ -109,16 +117,17 @@ namespace ProtocolMethodsInRestClient
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> CreateAsync(RequestContent content, IEnumerable<string> select = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTemplateClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(content, context);
+                using HttpMessage message = CreateCreateRequest(content, select, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -139,16 +148,17 @@ namespace ProtocolMethodsInRestClient
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response Create(RequestContent content, RequestContext context = null)
+        public virtual Response Create(RequestContent content, IEnumerable<string> select = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTemplateClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(content, context);
+                using HttpMessage message = CreateCreateRequest(content, select, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
