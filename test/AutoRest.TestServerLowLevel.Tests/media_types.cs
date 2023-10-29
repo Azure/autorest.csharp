@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests
             {
                 source = "anything"
             };
-            var response = await new MediaTypesClient(Key, host, null).AnalyzeBodyAsync(RequestContent.Create(value), ContentType.ApplicationJson, new());
+            var response = await new MediaTypesClient(host, Key, null).AnalyzeBodyAsync(RequestContent.Create(value), ContentType.ApplicationJson, new());
             Assert.AreEqual("Nice job with JSON", response.Content.ToObjectFromJson<string>());
         });
 
@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests
         public Task MediaTypePdf() => Test(async (host) =>
         {
             await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
-            var response = await new MediaTypesClient(Key, host, null).AnalyzeBodyAsync(RequestContent.Create(value), new ContentType("application/pdf"), new());
+            var response = await new MediaTypesClient(host, Key, null).AnalyzeBodyAsync(RequestContent.Create(value), new ContentType("application/pdf"), new());
             Assert.AreEqual("Nice job with PDF", response.Content.ToObjectFromJson<string>());
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -42,7 +42,7 @@ namespace AutoRest.TestServer.Tests
         public Task MediaTypeOctetStream() => Test(async (host) =>
         {
             await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
-            var response = await new MediaTypesClient(Key, host, null).AnalyzeBodyAsync(RequestContent.Create(value), ContentType.ApplicationOctetStream, new());
+            var response = await new MediaTypesClient(host, Key, null).AnalyzeBodyAsync(RequestContent.Create(value), ContentType.ApplicationOctetStream, new());
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         });

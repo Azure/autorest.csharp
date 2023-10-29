@@ -8,7 +8,7 @@ This sample shows how to call Put200SucceededAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put200SucceededAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -20,7 +20,7 @@ This sample shows how to call Put200SucceededAsync with all parameters and reque
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -52,7 +52,7 @@ This sample shows how to call Put200Succeeded and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put200Succeeded(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -64,7 +64,7 @@ This sample shows how to call Put200Succeeded with all parameters and request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -96,7 +96,7 @@ This sample shows how to call Patch200SucceededIgnoreHeadersAsync and parse the 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -108,7 +108,7 @@ This sample shows how to call Patch200SucceededIgnoreHeadersAsync with all param
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -140,7 +140,7 @@ This sample shows how to call Patch200SucceededIgnoreHeaders and parse the resul
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -152,7 +152,7 @@ This sample shows how to call Patch200SucceededIgnoreHeaders with all parameters
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -184,7 +184,7 @@ This sample shows how to call Patch201RetryWithAsyncHeaderAsync and parse the re
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -196,7 +196,7 @@ This sample shows how to call Patch201RetryWithAsyncHeaderAsync with all paramet
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -228,7 +228,7 @@ This sample shows how to call Patch201RetryWithAsyncHeader and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -240,7 +240,7 @@ This sample shows how to call Patch201RetryWithAsyncHeader with all parameters a
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -272,7 +272,7 @@ This sample shows how to call Patch202RetryWithAsyncAndLocationHeaderAsync and p
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -284,7 +284,7 @@ This sample shows how to call Patch202RetryWithAsyncAndLocationHeaderAsync with 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -316,7 +316,7 @@ This sample shows how to call Patch202RetryWithAsyncAndLocationHeader and parse 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -328,7 +328,7 @@ This sample shows how to call Patch202RetryWithAsyncAndLocationHeader with all p
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -360,7 +360,7 @@ This sample shows how to call Put201SucceededAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put201SucceededAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -372,7 +372,7 @@ This sample shows how to call Put201SucceededAsync with all parameters and reque
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -404,7 +404,7 @@ This sample shows how to call Put201Succeeded and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put201Succeeded(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -416,7 +416,7 @@ This sample shows how to call Put201Succeeded with all parameters and request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -510,7 +510,7 @@ This sample shows how to call Put200SucceededNoStateAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -522,7 +522,7 @@ This sample shows how to call Put200SucceededNoStateAsync with all parameters an
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -554,7 +554,7 @@ This sample shows how to call Put200SucceededNoState and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put200SucceededNoState(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -566,7 +566,7 @@ This sample shows how to call Put200SucceededNoState with all parameters and req
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -598,7 +598,7 @@ This sample shows how to call Put202Retry200Async and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put202Retry200Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -610,7 +610,7 @@ This sample shows how to call Put202Retry200Async with all parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -642,7 +642,7 @@ This sample shows how to call Put202Retry200 and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put202Retry200(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -654,7 +654,7 @@ This sample shows how to call Put202Retry200 with all parameters and request con
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -686,7 +686,7 @@ This sample shows how to call Put201CreatingSucceeded200Async and parse the resu
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -698,7 +698,7 @@ This sample shows how to call Put201CreatingSucceeded200Async with all parameter
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -730,7 +730,7 @@ This sample shows how to call Put201CreatingSucceeded200 and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -742,7 +742,7 @@ This sample shows how to call Put201CreatingSucceeded200 with all parameters and
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -774,7 +774,7 @@ This sample shows how to call Put200UpdatingSucceeded204Async and parse the resu
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -786,7 +786,7 @@ This sample shows how to call Put200UpdatingSucceeded204Async with all parameter
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -818,7 +818,7 @@ This sample shows how to call Put200UpdatingSucceeded204 and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -830,7 +830,7 @@ This sample shows how to call Put200UpdatingSucceeded204 with all parameters and
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -862,7 +862,7 @@ This sample shows how to call Put201CreatingFailed200Async and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -874,7 +874,7 @@ This sample shows how to call Put201CreatingFailed200Async with all parameters a
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -906,7 +906,7 @@ This sample shows how to call Put201CreatingFailed200 and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put201CreatingFailed200(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -918,7 +918,7 @@ This sample shows how to call Put201CreatingFailed200 with all parameters and re
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -950,7 +950,7 @@ This sample shows how to call Put200Acceptedcanceled200Async and parse the resul
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -962,7 +962,7 @@ This sample shows how to call Put200Acceptedcanceled200Async with all parameters
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -994,7 +994,7 @@ This sample shows how to call Put200Acceptedcanceled200 and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1006,7 +1006,7 @@ This sample shows how to call Put200Acceptedcanceled200 with all parameters and 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1038,7 +1038,7 @@ This sample shows how to call PutNoHeaderInRetryAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1050,7 +1050,7 @@ This sample shows how to call PutNoHeaderInRetryAsync with all parameters and re
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1082,7 +1082,7 @@ This sample shows how to call PutNoHeaderInRetry and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutNoHeaderInRetry(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1094,7 +1094,7 @@ This sample shows how to call PutNoHeaderInRetry with all parameters and request
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1126,7 +1126,7 @@ This sample shows how to call PutAsyncRetrySucceededAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1138,7 +1138,7 @@ This sample shows how to call PutAsyncRetrySucceededAsync with all parameters an
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1170,7 +1170,7 @@ This sample shows how to call PutAsyncRetrySucceeded and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1182,7 +1182,7 @@ This sample shows how to call PutAsyncRetrySucceeded with all parameters and req
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1214,7 +1214,7 @@ This sample shows how to call PutAsyncNoRetrySucceededAsync and parse the result
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1226,7 +1226,7 @@ This sample shows how to call PutAsyncNoRetrySucceededAsync with all parameters 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1258,7 +1258,7 @@ This sample shows how to call PutAsyncNoRetrySucceeded and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1270,7 +1270,7 @@ This sample shows how to call PutAsyncNoRetrySucceeded with all parameters and r
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1302,7 +1302,7 @@ This sample shows how to call PutAsyncRetryFailedAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1314,7 +1314,7 @@ This sample shows how to call PutAsyncRetryFailedAsync with all parameters and r
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1346,7 +1346,7 @@ This sample shows how to call PutAsyncRetryFailed and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRetryFailed(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1358,7 +1358,7 @@ This sample shows how to call PutAsyncRetryFailed with all parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1390,7 +1390,7 @@ This sample shows how to call PutAsyncNoRetrycanceledAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1402,7 +1402,7 @@ This sample shows how to call PutAsyncNoRetrycanceledAsync with all parameters a
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1434,7 +1434,7 @@ This sample shows how to call PutAsyncNoRetrycanceled and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1446,7 +1446,7 @@ This sample shows how to call PutAsyncNoRetrycanceled with all parameters and re
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1478,7 +1478,7 @@ This sample shows how to call PutAsyncNoHeaderInRetryAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1490,7 +1490,7 @@ This sample shows how to call PutAsyncNoHeaderInRetryAsync with all parameters a
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1522,7 +1522,7 @@ This sample shows how to call PutAsyncNoHeaderInRetry and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1534,7 +1534,7 @@ This sample shows how to call PutAsyncNoHeaderInRetry with all parameters and re
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1566,7 +1566,7 @@ This sample shows how to call PutNonResourceAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutNonResourceAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1578,7 +1578,7 @@ This sample shows how to call PutNonResourceAsync with all parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = "<id>",
@@ -1598,7 +1598,7 @@ This sample shows how to call PutNonResource and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutNonResource(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1610,7 +1610,7 @@ This sample shows how to call PutNonResource with all parameters and request con
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = "<id>",
@@ -1630,7 +1630,7 @@ This sample shows how to call PutAsyncNonResourceAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1642,7 +1642,7 @@ This sample shows how to call PutAsyncNonResourceAsync with all parameters and r
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = "<id>",
@@ -1662,7 +1662,7 @@ This sample shows how to call PutAsyncNonResource and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncNonResource(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1674,7 +1674,7 @@ This sample shows how to call PutAsyncNonResource with all parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = "<id>",
@@ -1694,7 +1694,7 @@ This sample shows how to call PutSubResourceAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutSubResourceAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1706,7 +1706,7 @@ This sample shows how to call PutSubResourceAsync with all parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1729,7 +1729,7 @@ This sample shows how to call PutSubResource and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutSubResource(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1741,7 +1741,7 @@ This sample shows how to call PutSubResource with all parameters and request con
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1764,7 +1764,7 @@ This sample shows how to call PutAsyncSubResourceAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1776,7 +1776,7 @@ This sample shows how to call PutAsyncSubResourceAsync with all parameters and r
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -1799,7 +1799,7 @@ This sample shows how to call PutAsyncSubResource and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncSubResource(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -1811,7 +1811,7 @@ This sample shows how to call PutAsyncSubResource with all parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2434,7 +2434,7 @@ This sample shows how to call Post202Retry200Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call Post202Retry200Async with all parameters and request content.
@@ -2442,7 +2442,7 @@ This sample shows how to call Post202Retry200Async with all parameters and reque
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2464,7 +2464,7 @@ This sample shows how to call Post202Retry200.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call Post202Retry200 with all parameters and request content.
@@ -2472,7 +2472,7 @@ This sample shows how to call Post202Retry200 with all parameters and request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2494,7 +2494,7 @@ This sample shows how to call Post202NoRetry204Async and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Post202NoRetry204Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -2506,7 +2506,7 @@ This sample shows how to call Post202NoRetry204Async with all parameters and req
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2538,7 +2538,7 @@ This sample shows how to call Post202NoRetry204 and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Post202NoRetry204(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -2550,7 +2550,7 @@ This sample shows how to call Post202NoRetry204 with all parameters and request 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2768,7 +2768,7 @@ This sample shows how to call PostAsyncRetrySucceededAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -2780,7 +2780,7 @@ This sample shows how to call PostAsyncRetrySucceededAsync with all parameters a
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2812,7 +2812,7 @@ This sample shows how to call PostAsyncRetrySucceeded and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -2824,7 +2824,7 @@ This sample shows how to call PostAsyncRetrySucceeded with all parameters and re
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2856,7 +2856,7 @@ This sample shows how to call PostAsyncNoRetrySucceededAsync and parse the resul
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -2868,7 +2868,7 @@ This sample shows how to call PostAsyncNoRetrySucceededAsync with all parameters
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2900,7 +2900,7 @@ This sample shows how to call PostAsyncNoRetrySucceeded and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -2912,7 +2912,7 @@ This sample shows how to call PostAsyncNoRetrySucceeded with all parameters and 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2944,7 +2944,7 @@ This sample shows how to call PostAsyncRetryFailedAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call PostAsyncRetryFailedAsync with all parameters and request content.
@@ -2952,7 +2952,7 @@ This sample shows how to call PostAsyncRetryFailedAsync with all parameters and 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -2974,7 +2974,7 @@ This sample shows how to call PostAsyncRetryFailed.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = client.PostAsyncRetryFailed(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call PostAsyncRetryFailed with all parameters and request content.
@@ -2982,7 +2982,7 @@ This sample shows how to call PostAsyncRetryFailed with all parameters and reque
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -3004,7 +3004,7 @@ This sample shows how to call PostAsyncRetrycanceledAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call PostAsyncRetrycanceledAsync with all parameters and request content.
@@ -3012,7 +3012,7 @@ This sample shows how to call PostAsyncRetrycanceledAsync with all parameters an
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -3034,7 +3034,7 @@ This sample shows how to call PostAsyncRetrycanceled.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call PostAsyncRetrycanceled with all parameters and request content.
@@ -3042,7 +3042,7 @@ This sample shows how to call PostAsyncRetrycanceled with all parameters and req
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsClient client = new LROsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {

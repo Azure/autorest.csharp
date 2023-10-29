@@ -8,6 +8,7 @@ This sample shows how to call DefaultAsync.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DefaultAsync with all parameters.
@@ -15,6 +16,7 @@ This sample shows how to call DefaultAsync with all parameters.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -25,6 +27,7 @@ This sample shows how to call Default.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.Default(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Default with all parameters.
@@ -32,6 +35,7 @@ This sample shows how to call Default with all parameters.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.Default(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -42,6 +46,7 @@ This sample shows how to call Rfc3339Async.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.Rfc3339Async(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc3339Async with all parameters.
@@ -49,6 +54,7 @@ This sample shows how to call Rfc3339Async with all parameters.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.Rfc3339Async(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -59,6 +65,7 @@ This sample shows how to call Rfc3339.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.Rfc3339(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc3339 with all parameters.
@@ -66,6 +73,7 @@ This sample shows how to call Rfc3339 with all parameters.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.Rfc3339(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -76,6 +84,7 @@ This sample shows how to call Rfc7231Async.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.Rfc7231Async(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc7231Async with all parameters.
@@ -83,6 +92,7 @@ This sample shows how to call Rfc7231Async with all parameters.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.Rfc7231Async(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -93,6 +103,7 @@ This sample shows how to call Rfc7231.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.Rfc7231(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc7231 with all parameters.
@@ -100,6 +111,7 @@ This sample shows how to call Rfc7231 with all parameters.
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.Rfc7231(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -109,14 +121,16 @@ This sample shows how to call UnixTimestampAsync.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimestampAsync with all parameters.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -126,14 +140,16 @@ This sample shows how to call UnixTimestamp.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimestamp with all parameters.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -143,20 +159,16 @@ This sample shows how to call UnixTimestampArrayAsync.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
-{
-    DateTimeOffset.FromUnixTimeSeconds(1652209051)
-});
+Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[] { DateTimeOffset.FromUnixTimeSeconds(1652209051L) });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimestampArrayAsync with all parameters.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
-{
-    DateTimeOffset.FromUnixTimeSeconds(1652209051)
-});
+Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[] { DateTimeOffset.FromUnixTimeSeconds(1652209051L) });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -166,20 +178,16 @@ This sample shows how to call UnixTimestampArray.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
-{
-    DateTimeOffset.FromUnixTimeSeconds(1652209051)
-});
+Response response = client.UnixTimestampArray(new DateTimeOffset[] { DateTimeOffset.FromUnixTimeSeconds(1652209051L) });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimestampArray with all parameters.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
-{
-    DateTimeOffset.FromUnixTimeSeconds(1652209051)
-});
+Response response = client.UnixTimestampArray(new DateTimeOffset[] { DateTimeOffset.FromUnixTimeSeconds(1652209051L) });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

@@ -30,14 +30,12 @@ jobs:
         useGlobalJson: true
         performMultiLevelLookup: true
     - ${{ if eq(parameters.usePackageJsonFromArtifacts, 'true') }}:
-      - task: DownloadPipelineArtifact@2
+      - download: current
+        artifact: package-json
         displayName: 'Download package-json artifact'
-        inputs: 
-          buildType: current
-          artifact: package-json
-          targetPath: $(Build.SourcesDirectory)
       - pwsh: |
-          Move-Item ./emitter-package.json ./src/TypeSpec.Extension/Emitter.Csharp/package.json -Force
+          Copy-Item $(Pipeline.Workspace)/package-json/package*.json ./ -Force
+          Copy-Item $(Pipeline.Workspace)/package-json/emitter/package.json ./src/TypeSpec.Extension/Emitter.Csharp/package.json -Force
           git add './package.json' './package-lock.json' './src/TypeSpec.Extension/Emitter.Csharp/package.json'
         displayName: 'Replace Emitter.Csharp/package.json'
         workingDirectory: $(Build.SourcesDirectory)

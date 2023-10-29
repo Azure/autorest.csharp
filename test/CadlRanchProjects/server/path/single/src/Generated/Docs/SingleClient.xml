@@ -9,6 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);
 
 Response response = await client.MyOpAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MyOpAsync with all request content.
@@ -17,6 +18,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);
 
 Response response = await client.MyOpAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -28,6 +30,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);
 
 Response response = client.MyOp();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MyOp with all request content.
@@ -36,6 +39,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);
 
 Response response = client.MyOp();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

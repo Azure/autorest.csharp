@@ -2,28 +2,26 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using Azure.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Communication
 {
     internal class StandaloneGeneratorRunner
     {
+        private static readonly string[] keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tspCodeModel.json" };
         public static async Task RunAsync(CommandLineOptions options)
         {
             string? projectPath = null;
             string outputPath;
-            string sampleOutputPath;
+            string generatedTestOutputPath;
             bool wasProjectPathPassedIn = options.ProjectPath is not null;
             if (options.Standalone is not null)
             {
@@ -33,9 +31,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
             else
             {
                 projectPath = options.ProjectPath!;
+                if (!projectPath!.EndsWith("src", StringComparison.Ordinal))
+                    projectPath = Path.Combine(projectPath, "src");
                 outputPath = Path.Combine(projectPath, "Generated");
             }
-            sampleOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated", "Samples");
+            generatedTestOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated");
 
             var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
             LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
@@ -72,9 +72,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
             if (options.ClearOutputFolder)
             {
-                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tspCodeModel.json" };
                 DeleteDirectory(outputPath, keepFiles);
-                DeleteDirectory(sampleOutputPath, keepFiles);
+                DeleteDirectory(generatedTestOutputPath, keepFiles);
             }
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())

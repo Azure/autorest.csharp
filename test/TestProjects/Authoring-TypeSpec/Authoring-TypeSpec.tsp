@@ -225,7 +225,7 @@ model SwapDeploymentsParams {
 
 interface Projects {
   @doc("Creates a new project or updates an existing one.")
-  createOrUpdate is LongRunningResourceCreateOrUpdate<Project>;
+  createOrUpdate is LongRunningResourceCreateOrReplace<Project>;
 
   @doc("Gets the details of a project.")
   get is ResourceRead<Project>;

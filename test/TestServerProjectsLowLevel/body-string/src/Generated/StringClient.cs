@@ -36,19 +36,19 @@ namespace body_string_LowLevel
         /// <summary> Initializes a new instance of StringClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public StringClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestSwaggerBATServiceClientOptions())
+        public StringClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new AutoRestSwaggerBATServiceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of StringClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public StringClient(AzureKeyCredential credential, Uri endpoint, AutoRestSwaggerBATServiceClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public StringClient(Uri endpoint, AzureKeyCredential credential, AutoRestSwaggerBATServiceClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestSwaggerBATServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

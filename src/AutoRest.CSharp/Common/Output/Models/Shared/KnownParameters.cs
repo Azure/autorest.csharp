@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
@@ -17,14 +15,15 @@ namespace AutoRest.CSharp.Output.Models.Shared
     {
         private static readonly CSharpType MatchConditionsType = new(typeof(MatchConditions), true);
         private static readonly CSharpType RequestConditionsType = new(typeof(RequestConditions), true);
-        private static readonly CSharpType RequestContentType = new(typeof(RequestContent));
-        private static readonly CSharpType RequestContentNullableType = new(typeof(RequestContent), true);
-        private static readonly CSharpType RequestContextType = new(typeof(RequestContext));
-        private static readonly CSharpType RequestContextNullableType = new(typeof(RequestContext), true);
+        private static readonly CSharpType RequestContentType = new(Configuration.ApiTypes.RequestContentType);
+        private static readonly CSharpType RequestContentNullableType = new(Configuration.ApiTypes.RequestContentType, true);
+        private static readonly CSharpType RequestContextType = new(Configuration.ApiTypes.RequestContextType);
+        private static readonly CSharpType RequestContextNullableType = new(Configuration.ApiTypes.RequestContextType, true);
+        private static readonly CSharpType ResponseType = new(Configuration.ApiTypes.ResponseType);
 
-        public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", $"The handler for diagnostic messaging in the client.", new CSharpType(typeof(ClientDiagnostics)), null, ValidationType.AssertNotNull, null);
-        public static readonly Parameter Pipeline = new("pipeline", $"The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(typeof(HttpPipeline)), null, ValidationType.AssertNotNull, null);
-        public static readonly Parameter KeyAuth = new("keyCredential", $"The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, ValidationType.None, null);
+        public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", $"The handler for diagnostic messaging in the client.", new CSharpType(Configuration.ApiTypes.ClientDiagnosticsType), null, ValidationType.AssertNotNull, null);
+        public static readonly Parameter Pipeline = new("pipeline", $"The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(Configuration.ApiTypes.HttpPipelineType), null, ValidationType.AssertNotNull, null);
+        public static readonly Parameter KeyAuth = new("keyCredential", $"The key credential to copy", new CSharpType(Configuration.ApiTypes.KeyCredentialType), null, ValidationType.None, null);
         public static readonly Parameter TokenAuth = new("tokenCredential", $"The token credential to copy", new CSharpType(typeof(TokenCredential)), null, ValidationType.None, null);
         public static readonly Parameter Endpoint = new("endpoint", $"Service endpoint", new CSharpType(typeof(Uri)), null, ValidationType.None, null, RequestLocation: RequestLocation.Uri);
 
@@ -44,5 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static readonly Parameter CancellationTokenParameter = new("cancellationToken", $"The cancellation token to use", new CSharpType(typeof(CancellationToken)), Constant.NewInstanceOf(typeof(CancellationToken)), ValidationType.None, null);
         public static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", $"Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), ValidationType.None, null) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
+
+        public static readonly Parameter Response = new("response", $"Response returned from backend service", ResponseType, null, ValidationType.None, null);
     }
 }

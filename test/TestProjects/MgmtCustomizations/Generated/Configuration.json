@@ -8,5 +8,8 @@
   ],
   "azure-arm": true,
   "public-clients": true,
-  "skip-csproj-packagereference": true
+  "skip-csproj-packagereference": true,
+  "RenameMapping": {
+    "Pet.dateOfBirth": "-|date-time"
+  }
 }

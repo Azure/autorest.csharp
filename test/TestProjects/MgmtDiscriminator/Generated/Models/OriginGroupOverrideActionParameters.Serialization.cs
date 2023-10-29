@@ -19,7 +19,8 @@ namespace MgmtDiscriminator.Models
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("originGroup"u8);
-            JsonSerializer.Serialize(writer, OriginGroup); writer.WriteEndObject();
+            JsonSerializer.Serialize(writer, OriginGroup);
+            writer.WriteEndObject();
         }
 
         internal static OriginGroupOverrideActionParameters DeserializeOriginGroupOverrideActionParameters(JsonElement element)

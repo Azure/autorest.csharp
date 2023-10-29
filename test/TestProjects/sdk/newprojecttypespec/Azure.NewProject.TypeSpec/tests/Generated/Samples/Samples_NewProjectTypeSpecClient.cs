@@ -18,11 +18,11 @@ using NUnit.Framework;
 
 namespace Azure.NewProject.TypeSpec.Samples
 {
-    public class Samples_NewProjectTypeSpecClient
+    public partial class Samples_NewProjectTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TopAction()
+        public void Example_TopAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,7 +42,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction_Async()
+        public async Task Example_TopAction_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -58,6 +58,28 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TopAction_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
         }
 
         [Test]
@@ -110,7 +132,29 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TopAction2()
+        public void Example_TopAction_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TopAction2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -130,7 +174,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction2_Async()
+        public async Task Example_TopAction2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -198,13 +242,13 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchAction()
+        public void Example_PatchAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -228,13 +272,13 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchAction_Async()
+        public async Task Example_PatchAction_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -264,7 +308,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -302,7 +346,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -334,13 +378,13 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AnonymousBody()
+        public void Example_AnonymousBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -364,13 +408,13 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnonymousBody_Async()
+        public async Task Example_AnonymousBody_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -394,13 +438,37 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_AnonymousBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+            Response<Thing> response = client.AnonymousBody(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnonymousBody_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -438,7 +506,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -470,13 +538,49 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FriendlyModel()
+        public void Example_AnonymousBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            };
+            Response<Thing> response = client.AnonymousBody(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnonymousBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            };
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FriendlyModel_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -488,13 +592,13 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FriendlyModel_Async()
+        public async Task Example_FriendlyModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -506,26 +610,26 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FriendlyModel_Convenience()
+        public void Example_FriendlyModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(friend);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FriendlyModel_Convenience_Async()
+        public async Task Example_FriendlyModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
@@ -536,7 +640,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -554,7 +658,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -572,8 +676,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(friend);
         }
 
         [Test]
@@ -584,31 +688,33 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AddTimeHeader()
+        public void Example_AddTimeHeader_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.AddTimeHeader();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AddTimeHeader_Async()
+        public async Task Example_AddTimeHeader_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -621,6 +727,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.AddTimeHeader();
+
             Console.WriteLine(response.Status);
         }
 
@@ -633,46 +740,49 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StringFormat()
+        public void Example_StringFormat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StringFormat_Async()
+        public async Task Example_StringFormat_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StringFormat_Convenience()
+        public void Example_StringFormat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -680,12 +790,11 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StringFormat_Convenience_Async()
+        public async Task Example_StringFormat_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -693,7 +802,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -704,12 +812,13 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -721,12 +830,13 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -740,7 +850,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -753,12 +862,11 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SayHi()
+        public void Example_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -778,7 +886,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SayHi_Async()
+        public async Task Example_SayHi_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -846,20 +954,20 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloAgain()
+        public void Example_HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -901,20 +1009,20 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloAgain_Async()
+        public async Task Example_HelloAgain_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -956,20 +1064,56 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_HelloAgain_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            });
+            Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloAgain_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            });
+            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -989,25 +1133,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredBadDescription = "<requiredBadDescription>",
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1063,14 +1207,14 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1090,25 +1234,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredBadDescription = "<requiredBadDescription>",
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1158,20 +1302,100 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoContentType()
+        public void Example_HelloAgain_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            })
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection = { FloatFixedEnum.One },
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection = { IntFixedEnum.One },
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+},
+            };
+            Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloAgain_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            })
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection = { FloatFixedEnum.One },
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection = { IntFixedEnum.One },
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+},
+            };
+            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NoContentType_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1213,20 +1437,20 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoContentType_Async()
+        public async Task Example_NoContentType_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1274,14 +1498,14 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1301,25 +1525,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredBadDescription = "<requiredBadDescription>",
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1375,14 +1599,14 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1402,25 +1626,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredBadDescription = "<requiredBadDescription>",
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1470,7 +1694,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloDemo2()
+        public void Example_HelloDemo2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1490,7 +1714,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloDemo2_Async()
+        public async Task Example_HelloDemo2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1506,6 +1730,28 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloDemo2_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = client.HelloDemo2();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloDemo2_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloDemo2Async();
         }
 
         [Test]
@@ -1558,13 +1804,35 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateLiteral()
+        public void Example_HelloDemo2_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            Response<Thing> response = client.HelloDemo2();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloDemo2_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloDemo2Async();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateLiteral_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -1588,13 +1856,13 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateLiteral_Async()
+        public async Task Example_CreateLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -1618,13 +1886,37 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_CreateLiteral_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+            Response<Thing> response = client.CreateLiteral(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateLiteral_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+            Response<Thing> response = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -1662,7 +1954,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -1694,7 +1986,43 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloLiteral()
+        public void Example_CreateLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            };
+            Response<Thing> response = client.CreateLiteral(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateLiteral_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            };
+            Response<Thing> response = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1714,7 +2042,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloLiteral_Async()
+        public async Task Example_HelloLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1730,6 +2058,28 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloLiteral_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = client.HelloLiteral();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloLiteral_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloLiteralAsync();
         }
 
         [Test]
@@ -1782,7 +2132,29 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue()
+        public void Example_HelloLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = client.HelloLiteral();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloLiteral_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloLiteralAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1796,7 +2168,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Async()
+        public async Task Example_GetUnknownValue_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

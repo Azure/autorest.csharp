@@ -326,6 +326,78 @@ namespace MgmtExpandResourceTypes
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<NullableResponse<RecordSetAaaaResource>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+
+            using var scope = _recordSetAaaaRecordSetsClientDiagnostics.CreateScope("RecordSetAaaaCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _recordSetAaaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<RecordSetAaaaResource>(response.GetRawResponse());
+                return Response.FromValue(new RecordSetAaaaResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual NullableResponse<RecordSetAaaaResource> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+
+            using var scope = _recordSetAaaaRecordSetsClientDiagnostics.CreateScope("RecordSetAaaaCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _recordSetAaaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<RecordSetAaaaResource>(response.GetRawResponse());
+                return Response.FromValue(new RecordSetAaaaResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<RecordSetAaaaResource> IEnumerable<RecordSetAaaaResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

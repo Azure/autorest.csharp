@@ -23,9 +23,11 @@ internal class PostProcessor
     private const string AspDotNetExtensionNamespace = "Microsoft.Extensions.Azure";
     private readonly string? _modelFactoryFullName;
     private readonly string? _aspExtensionClassName;
+    private readonly ImmutableHashSet<string> _modelsToKeep;
 
-    public PostProcessor(string? modelFactoryFullName = null, string? aspExtensionClassName = null)
+    public PostProcessor(ImmutableHashSet<string> modelsToKeep, string? modelFactoryFullName = null, string? aspExtensionClassName = null)
     {
+        _modelsToKeep = modelsToKeep;
         _modelFactoryFullName = modelFactoryFullName;
         _aspExtensionClassName = aspExtensionClassName;
     }
@@ -88,7 +90,7 @@ internal class PostProcessor
             documentCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
     }
 
-    protected virtual bool ShouldIncludeDocument(Document document) => !GeneratedCodeWorkspace.IsSharedDocument(document);
+    protected virtual bool ShouldIncludeDocument(Document document) => !GeneratedCodeWorkspace.IsSharedDocument(document) && !GeneratedCodeWorkspace.IsGeneratedTestDocument(document);
 
     /// <summary>
     /// This method marks the "not publicly" referenced types as internal if they are previously defined as public. It will do this job in the following steps:
@@ -352,10 +354,24 @@ internal class PostProcessor
 
     protected virtual bool IsRootDocument(Document document)
     {
+        var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
         // a document is a root document, when
         // 1. it is a custom document (not generated or shared)
         // 2. it is a client
-        return GeneratedCodeWorkspace.IsCustomDocument(document) || IsClientDocument(document);
+        // 3. user exceptions
+        return GeneratedCodeWorkspace.IsCustomDocument(document) || IsClientDocument(document) || ShouldKeepModel(root, _modelsToKeep);
+    }
+
+    private static bool ShouldKeepModel(SyntaxNode? root, ImmutableHashSet<string> modelsToKeep)
+    {
+        if (root is null)
+            return false;
+
+        // use `BaseTypeDeclarationSyntax` to also include enums because `EnumDeclarationSyntax` extends `BaseTypeDeclarationSyntax`
+        // `ClassDeclarationSyntax` and `StructDeclarationSyntax` both inherit `TypeDeclarationSyntax`
+        var typeNodes = root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>();
+        // there is possibility that we have multiple types defined in the same document (for instance, custom code)
+        return typeNodes.Any(t => modelsToKeep.Contains(t.Identifier.Text));
     }
 
     private static bool IsClientDocument(Document document)

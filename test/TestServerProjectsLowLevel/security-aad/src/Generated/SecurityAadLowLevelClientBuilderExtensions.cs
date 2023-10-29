@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Azure
         public static IAzureClientBuilder<AutorestSecurityAadClient, AutorestSecurityAadClientOptions> AddAutorestSecurityAadClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<AutorestSecurityAadClient, AutorestSecurityAadClientOptions>((options, cred) => new AutorestSecurityAadClient(cred, endpoint, options));
+            return builder.RegisterClientFactory<AutorestSecurityAadClient, AutorestSecurityAadClientOptions>((options, cred) => new AutorestSecurityAadClient(endpoint, cred, options));
         }
 
         /// <summary> Registers a <see cref="AutorestSecurityAadClient"/> instance. </summary>

@@ -4,6 +4,9 @@ parameters:
   - name: UseTypeSpecNext
     type: boolean
     default: false
+  - name: RunTests
+    type: boolean
+    default: true
 
 variables:
   nugetMultiFeedWarnLevel: 'none'
@@ -14,16 +17,12 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
-      ref: refs/tags/azure-sdk-tools_20230428.1
+      ref: main
     - repository: azure-sdk-for-net
       type: github
       name: Azure/azure-sdk-for-net
       endpoint: azure
       ref: main
-    - repository: azure-sdk-build-tools
-      type: git
-      name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20230829.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -53,9 +52,9 @@ stages:
               displayName: "Use 'next' TypeSpec dependencies"
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
             - pwsh: |
-                $dir = New-Item -ItemType Directory -Path $(Build.ArtifactStagingDirectory)/package-json -Verbose
+                $dir = New-Item -ItemType Directory -Path $(Build.ArtifactStagingDirectory)/package-json/emitter -Verbose
                 Copy-Item ./package*.json $(Build.ArtifactStagingDirectory)/package-json -Verbose
-                Copy-Item ./src/TypeSpec.Extension/Emitter.Csharp/package.json $(Build.ArtifactStagingDirectory)/package-json/emitter-package.json -Verbose
+                Copy-Item ./src/TypeSpec.Extension/Emitter.Csharp/package.json $(Build.ArtifactStagingDirectory)/package-json/emitter/package.json -Verbose
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               displayName: 'Stage package-json artifact'
               condition: succeededOrFailed()
@@ -71,44 +70,47 @@ stages:
               npm ls -a
             displayName: "List packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - script: |
-              npm run prettier
-            displayName: "Emitter format check"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+          - ${{ if eq(parameters.RunTests, 'true') }}:
+            - script: |
+                npm run prettier
+              displayName: "Emitter format check"
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
           - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
             name: Package
             displayName: "Pack Artifacts"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - task: Npm@1
-            displayName: 'Build CADL Ranch Mock Api project'
-            inputs:
-              command: custom
-              customCommand: run build
-              workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
-          - script: |
-              dotnet test AutoRest.CSharp.sln -v:q
-            displayName: "Test"
-            env:
-              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-              DOTNET_CLI_TELEMETRY_OPTOUT: 1
-              DOTNET_MULTILEVEL_LOOKUP: 0
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
+          - ${{ if eq(parameters.RunTests, 'true') }}:
+            - task: Npm@1
+              displayName: 'Build CADL Ranch Mock Api project'
+              inputs:
+                command: custom
+                customCommand: run build
+                workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
+            - script: |
+                dotnet test AutoRest.CSharp.sln -v:q
+              displayName: "Test"
+              env:
+                DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+                DOTNET_CLI_TELEMETRY_OPTOUT: 1
+                DOTNET_MULTILEVEL_LOOKUP: 0
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              continueOnError: ${{ parameters.UseTypeSpecNext }}
           - task: Npm@1
             displayName: 'Build TypeSpec csharp emitter'
             inputs:
               command: custom
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
-            displayName: 'E2E Test for TypeSpec emitter'
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
-          - script: |
-              npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
-            displayName: 'Unit Test'
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
+          - ${{ if eq(parameters.RunTests, 'true') }}:
+            - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
+              displayName: 'E2E Test for TypeSpec emitter'
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              continueOnError: ${{ parameters.UseTypeSpecNext }}
+            - script: |
+                npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
+              displayName: 'Unit Test'
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              continueOnError: ${{ parameters.UseTypeSpecNext }}
           - task: NuGetCommand@2
             displayName: 'Publish NugetPackage'
             inputs:
@@ -123,7 +125,7 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net6.0'
               publishRegistry: 'useFeed'
               publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
-          - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
+          - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.AutorestCSharpVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
             name: PackEmitter
             displayName: "Pack Emitter"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
@@ -134,11 +136,19 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp'
               publishRegistry: 'useFeed'
               publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
-          - publish: $(Build.ArtifactStagingDirectory)/packages
-            artifact: packages
+          - template: new-emitter-package-files.yml
+            parameters:
+              EmitterPackageJsonPath: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp/package.json'
+              AutorestCSharpVersion: $(Package.AutorestCSharpVersion)
+              TypeSpecEmitterVersion: $(PackEmitter.TypeSpecEmitterVersion)
+              OutputDirectory: $(Build.ArtifactStagingDirectory)
+              ToolsRepositoryPath: $(Build.SourcesDirectory)/azure-sdk-tools
+              UseInternalFeed: true
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: build_artifacts
             condition: succeededOrFailed()
-            displayName: "Publish packages artifact"
-  - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
+            displayName: "Publish build artifacts"
+  - ${{ if and(eq(parameters.UseTypeSpecNext, 'true'), eq(parameters.RunTests, 'true')) }}:
     - stage: 'Check_Code_Generation'
       dependsOn:
         - Build_and_Test
@@ -167,30 +177,33 @@ stages:
     dependsOn:
       - Build_and_Test
     variables:
-      AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.autorestVersion']]
-      TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['PackEmitter.emitterVersion']]
+      AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+      TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['PackEmitter.TypeSpecEmitterVersion']]
+      BranchName: "auto-update-autorest-$(AutorestCSharpVersion)"
     jobs:
       - template: update-generator-versions.yml
         parameters:
+          Name: Update_Generator_Version
           AutorestCSharpVersion: $(AutorestCSharpVersion)
-          TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
-          IsInternalFeed: true
+          BranchName: $(BranchName)
       - template: generate-sdk-job-matrix-files.yml
         parameters:
           Name: Generate_Job_Matrix
+          DependsOn: Update_Generator_Version
           JobCount: 7
+          BranchName: $(BranchName)
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
           Name: Update_Code
+          DependsOn: Generate_Job_Matrix
           Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
           AutorestCSharpVersion: $(AutorestCSharpVersion)
-          TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
-          IsInternalFeed: true
-          DependsOn: Generate_Job_Matrix
+          BranchName: $(BranchName)
+          ContinueOnError: true
       - job: Create_PR
-        dependsOn: 
-          - Update_Generator_Versions
-          - Update_Code
+        dependsOn: Update_Code
+        variables:
+          UpdateCodeResult: $[dependencies.Update_Code.result]
         steps:
           - checkout: self
             fetchDepth: 1
@@ -200,6 +213,16 @@ stages:
             name: PRUrl
             displayName: "Build PR Url"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - pwsh: |
+              if ('$(UpdateCodeResult)' -eq 'Succeeded') {
+                $prTitle = 'Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.RequestedFor) from $(Build.SourceBranch)'
+              } else {
+                $prTitle = 'Failed Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.RequestedFor) from $(Build.SourceBranch)'
+              }
+
+              Write-Host "Setting variable PrTitle to '$prTitle'"
+              Write-Host "##vso[task.setvariable variable=PrTitle]$prTitle"
+            displayName: 'Build PR Title'
           - task: PowerShell@2
             displayName: Create pull request
             inputs:
@@ -210,9 +233,9 @@ stages:
                 -RepoName "azure-sdk-for-net"
                 -BaseBranch "main"
                 -PROwner "azure-sdk"
-                -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
+                -PRBranch "$(BranchName)"
                 -AuthToken "$(azuresdk-github-pat)"
-                -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.QueuedBy) from $(Build.SourceBranch)"
+                -PRTitle "$(PrTitle)"
                 -PRBody "Triggered from $(PRUrl.PRUrl)"
                 -OpenAsDraft $true
                 -PRLabels "Do Not Merge"

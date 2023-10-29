@@ -16,7 +16,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Authentication_Union_validKey() => Test(async (host) =>
         {
-            Response response = await new UnionClient(new AzureKeyCredential("valid-key"), host, null).ValidKeyAsync();
+            Response response = await new UnionClient(host, new AzureKeyCredential("valid-key"), null).ValidKeyAsync();
             Assert.AreEqual(204, response.Status);
         });
 
@@ -25,7 +25,7 @@ namespace CadlRanchProjects.Tests
         {
             var options = new UnionClientOptions();
             options.AddPolicy(new MockBearerTokenAuthenticationPolicy(new MockCredential(), UnionClient.TokenScopes, options.Transport), HttpPipelinePosition.PerCall);
-            Response response = await new UnionClient(new MockCredential(), host, options).ValidTokenAsync();
+            Response response = await new UnionClient(host, new MockCredential(), options).ValidTokenAsync();
             Assert.AreEqual(204, response.Status);
         });
     }

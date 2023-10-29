@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -17,6 +18,12 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
+        public static FormattableString? FromString(string? s) =>
+            s is null ? null : s.Length == 0 ? $"" : (FormattableString)$"{s}";
+
+        public static bool IsNullOrEmpty(this FormattableString? fs) =>
+            fs is null || string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
+
         public static bool IsEmpty(this FormattableString fs) =>
             string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
 
@@ -85,25 +92,25 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
         {
-            if (TypeFactory.IsReadWriteDictionary(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
-            }
-
-            if (TypeFactory.IsList(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
-            }
-
-            if (parameter.Type is { IsFrameworkType: false, Implementation: EnumType enumType } && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                if (enumType.IsExtensible)
+                switch (parameter.Type)
                 {
-                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
-                }
-                else
-                {
-                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                    case { IsFrameworkType: true } when TypeFactory.IsReadWriteDictionary(parameter.Type):
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                    case { IsFrameworkType: true } when TypeFactory.IsList(parameter.Type):
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                    case { IsFrameworkType: false, Implementation: EnumType enumType }:
+                        if (enumType.IsExtensible)
+                        {
+                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
+                        }
+                        else
+                        {
+                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                        }
+                    case { IsFrameworkType: true }:
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
                 }
             }
 
@@ -126,14 +133,14 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(typeof(RequestContent)) => ".ToRequestContent()",
+                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
                 _ => null
             };
 
         public static FormattableString GetReferenceOrConstantFormattable(this ReferenceOrConstant value)
             => value.IsConstant ? value.Constant.GetConstantFormattable() : value.Reference.GetReferenceFormattable();
 
-        public static FormattableString GetConstantFormattable(this Constant constant)
+        public static FormattableString GetConstantFormattable(this Constant constant, bool writeAsString = false)
         {
             if (constant.Value == null)
             {
@@ -183,6 +190,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (frameworkType == typeof(ResourceType))
             {
                 return $"{((ResourceType)constant.Value).ToString():L}";
+            }
+
+            if (frameworkType == typeof(bool) && writeAsString)
+            {
+                return $"\"{constant.Value!.ToString()!.ToLower()}\"";
             }
 
             return $"{constant.Value:L}";

@@ -30,12 +30,12 @@ namespace AutoRest.CSharp.Generation.Types
             _library = library;
         }
 
-        private Type AzureResponseErrorType => typeof(Azure.ResponseError);
+        private Type AzureResponseErrorType => typeof(ResponseError);
 
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType       => CreateType(literalType.LiteralValueType),
-            InputUnionType unionType           => new CSharpType(typeof(object), unionType.IsNullable),
+            InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -127,12 +127,12 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 if (IsList(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingList<>), type.Arguments);
+                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
                 }
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingDictionary<,>), type.Arguments);
+                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
                 }
             }
 
@@ -204,7 +204,7 @@ namespace AutoRest.CSharp.Generation.Types
             => type.IsFrameworkType && type.FrameworkType == typeof(IReadOnlyDictionary<,>);
 
         internal static bool IsReadWriteDictionary(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(IDictionary<,>);
+            => type.IsFrameworkType && (type.FrameworkType == typeof(IDictionary<,>) || type.FrameworkType == typeof(Dictionary<,>));
 
         internal static bool IsList(CSharpType type)
             => IsReadOnlyList(type) || IsReadWriteList(type);
@@ -215,9 +215,7 @@ namespace AutoRest.CSharp.Generation.Types
                type.FrameworkType == typeof(IReadOnlyList<>));
 
         internal static bool IsReadWriteList(CSharpType type)
-            => type.IsFrameworkType &&
-               (type.FrameworkType == typeof(IList<>) ||
-               type.FrameworkType == typeof(ICollection<>));
+            => type.IsFrameworkType && (type.FrameworkType == typeof(IList<>) || type.FrameworkType == typeof(ICollection<>) || type.FrameworkType == typeof(List<>));
 
         internal static bool IsIEnumerableType(CSharpType type)
             => type.IsFrameworkType &&
@@ -225,6 +223,10 @@ namespace AutoRest.CSharp.Generation.Types
             type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
 
         internal static bool IsIEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IEnumerable<>);
+
+        internal static bool IsResponseOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Response<>);
+
+        internal static bool IsResponse(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Response);
 
         internal static bool IsOperationOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>);
 

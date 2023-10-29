@@ -8,7 +8,7 @@
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few required nullable properties. </summary>
-    internal partial class ModelWithRequiredNullableProperties
+    public partial class ModelWithRequiredNullableProperties
     {
         /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>
         /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>

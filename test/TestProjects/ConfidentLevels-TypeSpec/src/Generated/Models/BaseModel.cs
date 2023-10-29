@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The base model. </summary>
-    internal partial class BaseModel
+    public partial class BaseModel
     {
         /// <summary> Initializes a new instance of BaseModel. </summary>
         /// <param name="name"> The name. </param>

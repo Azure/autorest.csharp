@@ -1,14 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getOperationLink } from "@azure-tools/typespec-azure-core";
+import { getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
     createSdkContext,
     isApiVersion,
-    isInternal,
     shouldGenerateConvenient,
     shouldGenerateProtocol,
-    SdkContext
+    SdkContext,
+    getAccess,
+    isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -43,7 +44,7 @@ import {
     isInputLiteralType,
     isInputUnionType
 } from "../type/inputType.js";
-import { OperationFinalStateVia } from "../type/operationFinalStateVia.js";
+import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
 import { OperationLongRunning } from "../type/operationLongRunning.js";
 import { OperationPaging } from "../type/operationPaging.js";
 import { OperationResponse } from "../type/operationResponse.js";
@@ -63,7 +64,7 @@ import {
     getFormattedType,
     getInputType
 } from "./model.js";
-import { capitalize } from "./utils.js";
+import { capitalize, getProjectedNameForCsharp, getTypeName } from "./utils.js";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -98,11 +99,11 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.bodyParameter) {
+    if (typespecParameters.body?.parameter) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.bodyParameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
-    } else if (typespecParameters.bodyType) {
+    } else if (typespecParameters.body?.type) {
         if (resourceOperation) {
             parameters.push(
                 loadBodyParameter(sdkContext, resourceOperation.resourceType)
@@ -110,7 +111,7 @@ export function loadOperation(
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
                 sdkContext,
-                typespecParameters.bodyType
+                typespecParameters.body.type
             );
             if (effectiveBodyType.kind === "Model") {
                 if (effectiveBodyType.name !== "") {
@@ -192,14 +193,16 @@ export function loadOperation(
     /* TODO: handle lro */
 
     return {
-        Name: op.name,
+        Name: getTypeName(sdkContext, op),
         ResourceName:
             resourceOperation?.resourceType.name ??
             getOperationGroupName(sdkContext, op, serviceNamespaceType),
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
-        Accessibility: isInternal(sdkContext, op) ? "internal" : undefined,
+        Accessibility: isInternal(sdkContext, op)
+            ? "internal"
+            : getAccess(sdkContext, op),
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,
@@ -256,7 +259,7 @@ export function loadOperation(
                     : InputOperationParameterKind.Client
                 : InputOperationParameterKind.Method;
         return {
-            Name: param.name,
+            Name: getTypeName(sdkContext, param),
             NameInRequest: name,
             Description: getDoc(program, param),
             Type: inputType,
@@ -294,7 +297,7 @@ export function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: body.name,
+            Name: getTypeName(sdkContext, body),
             NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,
@@ -376,54 +379,42 @@ export function loadOperation(
         op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationLongRunning | undefined {
-        if (!isLongRunningOperation(context, op.operation)) return undefined;
+        const metadata = getLroMetadata(program, op.operation);
+        if (metadata === undefined) {
+            return undefined;
+        }
 
-        const finalResponse = loadLongRunningFinalResponse(
-            context,
-            op,
-            resourceOperation
-        );
-        if (finalResponse === undefined) return undefined;
+        var bodyType = undefined;
+        if (op.verb !== "delete") {
+            const formattedType = getFormattedType(
+                program,
+                // TODO: we should check `logicalPath` or other ways to determine body type,
+                // after https://github.com/Azure/typespec-azure/issues/3725 is fixed
+                op.verb === "post"
+                    ? metadata.envelopeResult
+                    : metadata.logicalResult
+            );
+            bodyType = getInputType(context, formattedType, models, enums);
+        }
 
         return {
-            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
-            FinalResponse: finalResponse
+            FinalStateVia: convertLroFinalStateVia(metadata.finalStateVia),
+            FinalResponse: {
+                // in swagger, we allow delete to return some meaningful body content
+                // for now, let assume we don't allow return type
+                StatusCodes: op.verb === "delete" ? [204] : [200],
+                BodyType: bodyType,
+                BodyMediaType: BodyMediaType.Json
+            } as OperationResponse,
+            ResultPath:
+                metadata.logicalPath ??
+                // TODO: roll back changes when `logicalPath` can be definitive
+                // https://github.com/Azure/typespec-azure/issues/3725
+                (metadata.envelopeResult != metadata.logicalResult &&
+                op.verb === "post"
+                    ? "result" // actually `result` is the only allowed path for now
+                    : undefined)
         } as OperationLongRunning;
-    }
-
-    function loadLongRunningFinalResponse(
-        context: SdkContext,
-        op: HttpOperation,
-        resourceOperation?: ResourceOperation
-    ): OperationResponse | undefined {
-        let finalResponse: any | undefined;
-        for (const response of op.responses) {
-            if (response.statusCode === "200") {
-                finalResponse = response;
-                break;
-            }
-            if (response.statusCode === "204") {
-                finalResponse = response;
-            }
-        }
-
-        if (finalResponse !== undefined) {
-            return loadOperationResponse(
-                context,
-                finalResponse,
-                resourceOperation
-            );
-        }
-
-        return loadOperationResponse(
-            context,
-            op.responses[0],
-            resourceOperation
-        );
-    }
-
-    function isLongRunningOperation(context: SdkContext, op: Operation) {
-        return getOperationLink(context.program, op, "polling") !== undefined;
     }
 }
 

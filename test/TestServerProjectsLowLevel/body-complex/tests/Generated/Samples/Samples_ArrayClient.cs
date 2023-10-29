@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -17,11 +16,11 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_ArrayClient
+    public partial class Samples_ArrayClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid()
+        public void Example_GetValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -34,7 +33,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
+        public async Task Example_GetValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -73,25 +72,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid()
+        public void Example_PutValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Async()
+        public async Task Example_PutValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -102,14 +103,15 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
-                array = new List<object>()
-{
+                array = new object[]
+            {
 "<array>"
-},
+            },
             });
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -120,20 +122,21 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
-                array = new List<object>()
-{
+                array = new object[]
+            {
 "<array>"
-},
+            },
             });
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty()
+        public void Example_GetEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -146,7 +149,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Async()
+        public async Task Example_GetEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -185,25 +188,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutEmpty()
+        public void Example_PutEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEmpty_Async()
+        public async Task Example_PutEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -214,14 +219,15 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
-                array = new List<object>()
-{
+                array = new object[]
+            {
 "<array>"
-},
+            },
             });
             Response response = client.PutEmpty(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -232,20 +238,21 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
-                array = new List<object>()
-{
+                array = new object[]
+            {
 "<array>"
-},
+            },
             });
             Response response = await client.PutEmptyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNotProvided()
+        public void Example_GetNotProvided_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -258,7 +265,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNotProvided_Async()
+        public async Task Example_GetNotProvided_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);

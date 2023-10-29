@@ -85,7 +85,6 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Dog input = new Golden(1234);
 Response response = await client.PutExtensibleModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutExtensibleModelAsync with all parameters.
 <code><![CDATA[
@@ -93,7 +92,6 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Dog input = new Golden(1234);
 Response response = await client.PutExtensibleModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutExtensibleModel(Dog,CancellationToken)">
@@ -104,7 +102,6 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Dog input = new Golden(1234);
 Response response = client.PutExtensibleModel(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutExtensibleModel with all parameters.
 <code><![CDATA[
@@ -112,7 +109,6 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Dog input = new Golden(1234);
 Response response = client.PutExtensibleModel(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutExtensibleModelAsync(RequestContent,RequestContext)">
@@ -121,24 +117,26 @@ This sample shows how to call PutExtensibleModelAsync.
 <code><![CDATA[
 EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "golden",
     weight = 1234,
 });
 Response response = await client.PutExtensibleModelAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutExtensibleModelAsync with all request content.
 <code><![CDATA[
 EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "golden",
     weight = 1234,
 });
 Response response = await client.PutExtensibleModelAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -148,24 +146,26 @@ This sample shows how to call PutExtensibleModel.
 <code><![CDATA[
 EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "golden",
     weight = 1234,
 });
 Response response = client.PutExtensibleModel(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutExtensibleModel with all request content.
 <code><![CDATA[
 EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "golden",
     weight = 1234,
 });
 Response response = client.PutExtensibleModel(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -405,7 +405,6 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Snake input = new Cobra(1234);
 Response response = await client.PutFixedModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutFixedModelAsync with all parameters.
 <code><![CDATA[
@@ -413,7 +412,6 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Snake input = new Cobra(1234);
 Response response = await client.PutFixedModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutFixedModel(Snake,CancellationToken)">
@@ -424,7 +422,6 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Snake input = new Cobra(1234);
 Response response = client.PutFixedModel(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutFixedModel with all parameters.
 <code><![CDATA[
@@ -432,7 +429,6 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Snake input = new Cobra(1234);
 Response response = client.PutFixedModel(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutFixedModelAsync(RequestContent,RequestContext)">
@@ -441,24 +437,26 @@ This sample shows how to call PutFixedModelAsync.
 <code><![CDATA[
 EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "cobra",
     length = 1234,
 });
 Response response = await client.PutFixedModelAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutFixedModelAsync with all request content.
 <code><![CDATA[
 EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "cobra",
     length = 1234,
 });
 Response response = await client.PutFixedModelAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -468,24 +466,26 @@ This sample shows how to call PutFixedModel.
 <code><![CDATA[
 EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "cobra",
     length = 1234,
 });
 Response response = client.PutFixedModel(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutFixedModel with all request content.
 <code><![CDATA[
 EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "cobra",
     length = 1234,
 });
 Response response = client.PutFixedModel(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

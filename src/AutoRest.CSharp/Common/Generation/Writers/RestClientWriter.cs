@@ -1,16 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure;
 using Azure.Core;
-using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -36,12 +36,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Equals(method.Operation));
                         if (protocolMethod != null)
                         {
-                            LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
+                            DpgClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
                             responseClassifierTypes.Add(protocolMethod.RequestMethod.ResponseClassifierType);
                         }
                     }
 
-                    LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
+                    DpgClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
         }
@@ -73,13 +73,13 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType returnType = bodyType switch
             {
                 null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
-                { } when headerModelType == null => new CSharpType(typeof(Response<>), bodyType),
+                { } when headerModelType == null => new CSharpType(Configuration.ApiTypes.ResponseOfTType, bodyType),
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
-                _ => new CSharpType(typeof(Response)),
+                _ => new CSharpType(Configuration.ApiTypes.ResponseType),
             };
 
             var parameters = operation.Parameters.Where(p => p.Name != KnownParameters.RequestContext.Name).Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature($"{methodName ?? operation.Name}", $"{operation.Summary}", $"{operation.Description}", modifiers, returnType, null, parameters).WithAsync(async);
+            var method = new MethodSignature($"{methodName ?? operation.Name}", FormattableStringHelpers.FromString(operation.Summary), FormattableStringHelpers.FromString(operation.Description), modifiers, returnType, null, parameters).WithAsync(async);
 
             writer.WriteXmlDocumentationSummary(method.SummaryText)
                 .WriteXmlDocumentationParameters(method.Parameters)

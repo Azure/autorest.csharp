@@ -73,6 +73,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return ShouldRemoveMember(symbol) ? null : base.VisitMethodDeclaration(node);
         }
 
+        public override SyntaxNode? VisitOperatorDeclaration(OperatorDeclarationSyntax node)
+        {
+            var symbol = _semanticModel.GetDeclaredSymbol(node);
+            return ShouldRemoveMember(symbol) ? null : base.VisitOperatorDeclaration(node);
+        }
+
+        public override SyntaxNode? VisitConversionOperatorDeclaration(ConversionOperatorDeclarationSyntax node)
+        {
+            var symbol = _semanticModel.GetDeclaredSymbol(node);
+            return ShouldRemoveMember(symbol) ? null : base.VisitConversionOperatorDeclaration(node);
+        }
+
         public override SyntaxNode? VisitFieldDeclaration(FieldDeclarationSyntax node)
         {
             var symbol = node.Declaration.Variables.Count == 1

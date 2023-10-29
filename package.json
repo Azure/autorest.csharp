@@ -2,10 +2,17 @@
   "name": "@autorest/csharp",
   "private": true,
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp/package.json",
+  "scripts": {
+    "ci-init": "pwsh ./eng/scripts/preview/Run-Initialize.ps1",
+    "ci-build": "pwsh ./eng/scripts/preview/Run-Build.ps1",
+    "ci-test": "pwsh ./eng/scripts/preview/Run-Test.ps1"
+  },
   "devDependencies": {
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/cadl-ranch-mockapis": "file:test/CadlRanchMockApis",
     "@microsoft.azure/autorest.testserver": "3.3.48",
-    "autorest": "3.6.3"
+    "autorest": "3.6.3",
+    "@typespec/openapi": "^0.49.0",
+    "@typespec/openapi3": "^0.49.0"
   }
 }

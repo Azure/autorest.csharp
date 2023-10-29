@@ -1,30 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)" />
-    <member name="SendInt(ModelWithSimpleUnionProperty,CancellationToken)" />
+    <member name="SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call SendIntAsync.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithSimpleUnionProperty input = new ModelWithSimpleUnionProperty(BinaryData.FromObjectAsJson(1234));
+Response response = await client.SendIntAsync(input);
+]]></code>
+This sample shows how to call SendIntAsync with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithSimpleUnionProperty input = new ModelWithSimpleUnionProperty(BinaryData.FromObjectAsJson(1234));
+Response response = await client.SendIntAsync(input);
+]]></code></example>
+    </member>
+    <member name="SendInt(ModelWithSimpleUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call SendInt.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithSimpleUnionProperty input = new ModelWithSimpleUnionProperty(BinaryData.FromObjectAsJson(1234));
+Response response = client.SendInt(input);
+]]></code>
+This sample shows how to call SendInt with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithSimpleUnionProperty input = new ModelWithSimpleUnionProperty(BinaryData.FromObjectAsJson(1234));
+Response response = client.SendInt(input);
+]]></code></example>
+    </member>
     <member name="SendIntAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call SendIntAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
 Response response = await client.SendIntAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntAsync with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
 Response response = await client.SendIntAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -34,49 +68,85 @@ This sample shows how to call SendInt.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
 Response response = client.SendInt(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendInt with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
 Response response = client.SendInt(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)" />
-    <member name="SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)" />
+    <member name="SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call SendIntArrayAsync.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithSimpleUnionProperty input = new ModelWithSimpleUnionProperty(BinaryData.FromObjectAsJson(1234));
+Response response = await client.SendIntArrayAsync(input);
+]]></code>
+This sample shows how to call SendIntArrayAsync with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithSimpleUnionProperty input = new ModelWithSimpleUnionProperty(BinaryData.FromObjectAsJson(1234));
+Response response = await client.SendIntArrayAsync(input);
+]]></code></example>
+    </member>
+    <member name="SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call SendIntArray.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithSimpleUnionProperty input = new ModelWithSimpleUnionProperty(BinaryData.FromObjectAsJson(1234));
+Response response = client.SendIntArray(input);
+]]></code>
+This sample shows how to call SendIntArray with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithSimpleUnionProperty input = new ModelWithSimpleUnionProperty(BinaryData.FromObjectAsJson(1234));
+Response response = client.SendIntArray(input);
+]]></code></example>
+    </member>
     <member name="SendIntArrayAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call SendIntArrayAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
 Response response = await client.SendIntArrayAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntArrayAsync with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
 Response response = await client.SendIntArrayAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -86,34 +156,84 @@ This sample shows how to call SendIntArray.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
 Response response = client.SendIntArray(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntArray with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
 Response response = client.SendIntArray(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)" />
-    <member name="SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)" />
+    <member name="SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call SendFirstNamedUnionValueAsync.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithNamedUnionProperty input = new ModelWithNamedUnionProperty(BinaryData.FromObjectAsJson(new
+{
+    prop1 = 1234,
+    name = "<name>",
+}));
+Response response = await client.SendFirstNamedUnionValueAsync(input);
+]]></code>
+This sample shows how to call SendFirstNamedUnionValueAsync with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithNamedUnionProperty input = new ModelWithNamedUnionProperty(BinaryData.FromObjectAsJson(new
+{
+    prop1 = 1234,
+    name = "<name>",
+}));
+Response response = await client.SendFirstNamedUnionValueAsync(input);
+]]></code></example>
+    </member>
+    <member name="SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call SendFirstNamedUnionValue.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithNamedUnionProperty input = new ModelWithNamedUnionProperty(BinaryData.FromObjectAsJson(new
+{
+    prop1 = 1234,
+    name = "<name>",
+}));
+Response response = client.SendFirstNamedUnionValue(input);
+]]></code>
+This sample shows how to call SendFirstNamedUnionValue with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithNamedUnionProperty input = new ModelWithNamedUnionProperty(BinaryData.FromObjectAsJson(new
+{
+    prop1 = 1234,
+    name = "<name>",
+}));
+Response response = client.SendFirstNamedUnionValue(input);
+]]></code></example>
+    </member>
     <member name="SendFirstNamedUnionValueAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call SendFirstNamedUnionValueAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -122,13 +242,14 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendFirstNamedUnionValueAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendFirstNamedUnionValueAsync with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -137,6 +258,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendFirstNamedUnionValueAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -146,7 +268,7 @@ This sample shows how to call SendFirstNamedUnionValue.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -155,13 +277,14 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendFirstNamedUnionValue(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendFirstNamedUnionValue with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -170,18 +293,67 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendFirstNamedUnionValue(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)" />
-    <member name="SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)" />
+    <member name="SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call SendSecondNamedUnionValueAsync.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithNamedUnionProperty input = new ModelWithNamedUnionProperty(BinaryData.FromObjectAsJson(new
+{
+    prop1 = 1234,
+    name = "<name>",
+}));
+Response response = await client.SendSecondNamedUnionValueAsync(input);
+]]></code>
+This sample shows how to call SendSecondNamedUnionValueAsync with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithNamedUnionProperty input = new ModelWithNamedUnionProperty(BinaryData.FromObjectAsJson(new
+{
+    prop1 = 1234,
+    name = "<name>",
+}));
+Response response = await client.SendSecondNamedUnionValueAsync(input);
+]]></code></example>
+    </member>
+    <member name="SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call SendSecondNamedUnionValue.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithNamedUnionProperty input = new ModelWithNamedUnionProperty(BinaryData.FromObjectAsJson(new
+{
+    prop1 = 1234,
+    name = "<name>",
+}));
+Response response = client.SendSecondNamedUnionValue(input);
+]]></code>
+This sample shows how to call SendSecondNamedUnionValue with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+ModelWithNamedUnionProperty input = new ModelWithNamedUnionProperty(BinaryData.FromObjectAsJson(new
+{
+    prop1 = 1234,
+    name = "<name>",
+}));
+Response response = client.SendSecondNamedUnionValue(input);
+]]></code></example>
+    </member>
     <member name="SendSecondNamedUnionValueAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call SendSecondNamedUnionValueAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -190,13 +362,14 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendSecondNamedUnionValueAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendSecondNamedUnionValueAsync with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -205,6 +378,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendSecondNamedUnionValueAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -214,7 +388,7 @@ This sample shows how to call SendSecondNamedUnionValue.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -223,13 +397,14 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendSecondNamedUnionValue(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendSecondNamedUnionValue with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -238,11 +413,40 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendSecondNamedUnionValue(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="ReceiveStringAsync(CancellationToken)" />
-    <member name="ReceiveString(CancellationToken)" />
+    <member name="ReceiveStringAsync(CancellationToken)">
+      <example>
+This sample shows how to call ReceiveStringAsync.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithSimpleUnionPropertyInResponse> response = await client.ReceiveStringAsync();
+]]></code>
+This sample shows how to call ReceiveStringAsync with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithSimpleUnionPropertyInResponse> response = await client.ReceiveStringAsync();
+]]></code></example>
+    </member>
+    <member name="ReceiveString(CancellationToken)">
+      <example>
+This sample shows how to call ReceiveString.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithSimpleUnionPropertyInResponse> response = client.ReceiveString();
+]]></code>
+This sample shows how to call ReceiveString with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithSimpleUnionPropertyInResponse> response = client.ReceiveString();
+]]></code></example>
+    </member>
     <member name="ReceiveStringAsync(RequestContext)">
       <example>
 This sample shows how to call ReceiveStringAsync and parse the result.
@@ -285,8 +489,36 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
-    <member name="ReceiveIntArrayAsync(CancellationToken)" />
-    <member name="ReceiveIntArray(CancellationToken)" />
+    <member name="ReceiveIntArrayAsync(CancellationToken)">
+      <example>
+This sample shows how to call ReceiveIntArrayAsync.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithSimpleUnionPropertyInResponse> response = await client.ReceiveIntArrayAsync();
+]]></code>
+This sample shows how to call ReceiveIntArrayAsync with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithSimpleUnionPropertyInResponse> response = await client.ReceiveIntArrayAsync();
+]]></code></example>
+    </member>
+    <member name="ReceiveIntArray(CancellationToken)">
+      <example>
+This sample shows how to call ReceiveIntArray.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithSimpleUnionPropertyInResponse> response = client.ReceiveIntArray();
+]]></code>
+This sample shows how to call ReceiveIntArray with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithSimpleUnionPropertyInResponse> response = client.ReceiveIntArray();
+]]></code></example>
+    </member>
     <member name="ReceiveIntArrayAsync(RequestContext)">
       <example>
 This sample shows how to call ReceiveIntArrayAsync and parse the result.
@@ -329,8 +561,36 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
-    <member name="ReceiveFirstNamedUnionValueAsync(CancellationToken)" />
-    <member name="ReceiveFirstNamedUnionValue(CancellationToken)" />
+    <member name="ReceiveFirstNamedUnionValueAsync(CancellationToken)">
+      <example>
+This sample shows how to call ReceiveFirstNamedUnionValueAsync.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithNamedUnionPropertyInResponse> response = await client.ReceiveFirstNamedUnionValueAsync();
+]]></code>
+This sample shows how to call ReceiveFirstNamedUnionValueAsync with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithNamedUnionPropertyInResponse> response = await client.ReceiveFirstNamedUnionValueAsync();
+]]></code></example>
+    </member>
+    <member name="ReceiveFirstNamedUnionValue(CancellationToken)">
+      <example>
+This sample shows how to call ReceiveFirstNamedUnionValue.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithNamedUnionPropertyInResponse> response = client.ReceiveFirstNamedUnionValue();
+]]></code>
+This sample shows how to call ReceiveFirstNamedUnionValue with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithNamedUnionPropertyInResponse> response = client.ReceiveFirstNamedUnionValue();
+]]></code></example>
+    </member>
     <member name="ReceiveFirstNamedUnionValueAsync(RequestContext)">
       <example>
 This sample shows how to call ReceiveFirstNamedUnionValueAsync and parse the result.
@@ -373,8 +633,36 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
-    <member name="ReceiveSecondNamedUnionValueAsync(CancellationToken)" />
-    <member name="ReceiveSecondNamedUnionValue(CancellationToken)" />
+    <member name="ReceiveSecondNamedUnionValueAsync(CancellationToken)">
+      <example>
+This sample shows how to call ReceiveSecondNamedUnionValueAsync.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithNamedUnionPropertyInResponse> response = await client.ReceiveSecondNamedUnionValueAsync();
+]]></code>
+This sample shows how to call ReceiveSecondNamedUnionValueAsync with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithNamedUnionPropertyInResponse> response = await client.ReceiveSecondNamedUnionValueAsync();
+]]></code></example>
+    </member>
+    <member name="ReceiveSecondNamedUnionValue(CancellationToken)">
+      <example>
+This sample shows how to call ReceiveSecondNamedUnionValue.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithNamedUnionPropertyInResponse> response = client.ReceiveSecondNamedUnionValue();
+]]></code>
+This sample shows how to call ReceiveSecondNamedUnionValue with all parameters.
+<code><![CDATA[
+UnionClient client = new UnionClient();
+
+Response<ModelWithNamedUnionPropertyInResponse> response = client.ReceiveSecondNamedUnionValue();
+]]></code></example>
+    </member>
     <member name="ReceiveSecondNamedUnionValueAsync(RequestContext)">
       <example>
 This sample shows how to call ReceiveSecondNamedUnionValueAsync and parse the result.
