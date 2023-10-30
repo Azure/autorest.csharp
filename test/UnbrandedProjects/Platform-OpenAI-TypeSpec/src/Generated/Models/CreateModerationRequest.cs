@@ -44,6 +44,17 @@ namespace OpenAI.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// The following types are supported by this property:
+        /// <list type="bullet">
+        /// <item>
+        /// string
+        /// </item>
+        /// <item>
+        /// IList&lt;string&gt;
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

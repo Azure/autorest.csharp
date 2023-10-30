@@ -32,6 +32,17 @@ namespace _Type.Union.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// The following types are supported by this property:
+        /// <list type="bullet">
+        /// <item>
+        /// Model1
+        /// </item>
+        /// <item>
+        /// Model2
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

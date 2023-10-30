@@ -32,17 +32,68 @@ namespace AutoRest.CSharp.Generation.Types
 
         private Type AzureResponseErrorType => typeof(ResponseError);
 
+        /// <summary>
+        /// This method will attempt to retrieve the <see cref="CSharpType"/> of the input type.
+        /// </summary>
+        /// <param name="inputType">The input type to convert.</param>
+        /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType       => CreateType(literalType.LiteralValueType),
-            InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable),
-            InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
+            InputLiteralType literalType => CreateType(literalType.LiteralValueType),
+            InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
-            InputModelType model               => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
-            InputPrimitiveType primitiveType   => primitiveType.Kind switch
+            InputModelType model => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
+            CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
+            _ => CreateCommonType(inputType),
+        };
+
+        public CSharpType CreateType(Schema schema, bool isNullable, string? formatOverride = default, Property? property = default) => CreateType(schema, formatOverride ?? schema.Extensions?.Format, isNullable, property);
+
+        // This function provide the capability to support the extensions is coming from outside, like parameter.
+        public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
+        {
+            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
+            ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
+            ArraySchema array => new CSharpType(GetListType(schema), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
+            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
+            CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
+            NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
+            AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
+                typeof(DataFactoryElement<>),
+                isNullable: isNullable,
+                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
+            _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
+            _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
+        };
+
+        /// <summary>
+        /// Similar to <see cref="CreateType(InputType)"/>, this method creates a CSharpType from an InputType that is not a model or enum type.
+        /// If the input type is a model or enum type, this method will throw an exception.
+        /// </summary>
+        /// <param name="inputType">The input type to convert.</param>
+        /// <returns>The converted <see cref="CSharpType"/> of the specified input type.</returns>
+        public static CSharpType CreateSimpleType(InputType inputType) => inputType switch
+        {
+            InputLiteralType literalType => CreateSimpleType(literalType.LiteralValueType),
+            InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateSimpleType(listType.ElementType)),
+            InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateSimpleType(dictionaryType.ValueType)),
+            _ => CreateCommonType(inputType)
+        };
+
+        /// <summary>
+        /// This method converts the input type to a CSharpType for input types that are union, primitive, or
+        /// intrinsic types.
+        /// </summary>
+        /// <param name="inputType">The input type to convert.</param>
+        /// <returns>The converted <see cref="CSharpType"/> of the specified input type.</returns>
+        public static CSharpType CreateCommonType(InputType inputType) => inputType switch
+        {
+            InputUnionType unionType => new CSharpType(typeof(BinaryData), unionType.IsNullable),
+            InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
                 InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
@@ -79,28 +130,7 @@ namespace AutoRest.CSharp.Generation.Types
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
             InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
-            CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
-        };
-
-        public CSharpType CreateType(Schema schema, bool isNullable, string? formatOverride = default, Property? property = default) => CreateType(schema, formatOverride ?? schema.Extensions?.Format, isNullable, property);
-
-        // This function provide the capability to support the extensions is coming from outside, like parameter.
-        public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
-        {
-            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
-            BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
-            ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-            ArraySchema array => new CSharpType(GetListType(schema), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
-            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
-            CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
-            NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
-                typeof(DataFactoryElement<>),
-                isNullable: isNullable,
-                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
-            _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
-            _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
 
         private Type GetListType(Schema schema)
