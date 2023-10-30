@@ -1271,6 +1271,184 @@ Response response = client.DateTimeBody(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="NullableDictionaryBodyAsync(IDictionary{string,string},CancellationToken)">
+      <example>
+This sample shows how to call NullableDictionaryBodyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.NullableDictionaryBodyAsync();
+]]></code>
+This sample shows how to call NullableDictionaryBodyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.NullableDictionaryBodyAsync(body: new Dictionary<string, string>
+{
+    ["key"] = "<body>"
+});
+]]></code></example>
+    </member>
+    <member name="NullableDictionaryBody(IDictionary{string,string},CancellationToken)">
+      <example>
+This sample shows how to call NullableDictionaryBody.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.NullableDictionaryBody();
+]]></code>
+This sample shows how to call NullableDictionaryBody with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.NullableDictionaryBody(body: new Dictionary<string, string>
+{
+    ["key"] = "<body>"
+});
+]]></code></example>
+    </member>
+    <member name="NullableDictionaryBodyAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call NullableDictionaryBodyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = null;
+Response response = await client.NullableDictionaryBodyAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call NullableDictionaryBodyAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = "<body>",
+});
+Response response = await client.NullableDictionaryBodyAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="NullableDictionaryBody(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call NullableDictionaryBody.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = null;
+Response response = client.NullableDictionaryBody(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call NullableDictionaryBody with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = "<body>",
+});
+Response response = client.NullableDictionaryBody(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="NullableArrayBodyAsync(IEnumerable{string},CancellationToken)">
+      <example>
+This sample shows how to call NullableArrayBodyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.NullableArrayBodyAsync();
+]]></code>
+This sample shows how to call NullableArrayBodyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.NullableArrayBodyAsync(body: new string[] { "<body>" });
+]]></code></example>
+    </member>
+    <member name="NullableArrayBody(IEnumerable{string},CancellationToken)">
+      <example>
+This sample shows how to call NullableArrayBody.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.NullableArrayBody();
+]]></code>
+This sample shows how to call NullableArrayBody with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.NullableArrayBody(body: new string[] { "<body>" });
+]]></code></example>
+    </member>
+    <member name="NullableArrayBodyAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call NullableArrayBodyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = null;
+Response response = await client.NullableArrayBodyAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call NullableArrayBodyAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new object[]
+{
+    "<body>"
+});
+Response response = await client.NullableArrayBodyAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="NullableArrayBody(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call NullableArrayBody.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = null;
+Response response = client.NullableArrayBody(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call NullableArrayBody with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new object[]
+{
+    "<body>"
+});
+Response response = client.NullableArrayBody(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
     <member name="ReturnStringAsync(CancellationToken)">
       <example>
 This sample shows how to call ReturnStringAsync.

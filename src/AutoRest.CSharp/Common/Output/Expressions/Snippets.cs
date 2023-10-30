@@ -38,7 +38,6 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", new[]{expression}, null, false);
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);
 
-        public static TypedValueExpression NullConditional(Parameter parameter) => parameter.IsOptionalInSignature ? ((TypedValueExpression)parameter).NullConditional() : parameter;
         public static ValueExpression NullCoalescing(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("??", left, right);
         public static ValueExpression EnumValue(EnumType type, EnumTypeValue value) => new MemberExpression(new TypeReference(type.Type), value.Declaration.Name);
         public static ValueExpression FrameworkEnumValue<TEnum>(TEnum value) where TEnum : struct, Enum => new MemberExpression(new TypeReference(typeof(TEnum)), Enum.GetName(value)!);
@@ -77,6 +76,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static KeywordStatement Continue => new("continue", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
+
+        public static EnumerableExpression InvokeArrayEmpty(CSharpType arrayItemType)
+            => new(arrayItemType, new InvokeStaticMethodExpression(typeof(Array), nameof(Array.Empty), Array.Empty<ValueExpression>(), new[] { arrayItemType }));
 
         public static StreamExpression InvokeFileOpenRead(string filePath)
             => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{Literal(filePath)}));

@@ -3,5 +3,5 @@
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record NullConditionalExpression(ValueExpression Inner) : ValueExpression;
+    internal record TypedNullConditionalExpression(TypedValueExpression Inner) : TypedValueExpression(Inner.Type, new NullConditionalExpression(Inner.Untyped));
 }

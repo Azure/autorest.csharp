@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         _requestPartsBuilder.AddBodyPart(inputParameter, value);
                         break;
                     case RequestLocation.Body:
-                        CreateConversionToRequestContent(inputParameter, value, parameters, out var content, out var conversions);
+                        CreateConversionToRequestContent(inputParameter, value, parameters, false, out var content, out var conversions);
                         _requestPartsBuilder.AddBodyPart(value, conversions, content, inputParameter.Kind != InputOperationParameterKind.Method);
                         break;
                 }
@@ -505,7 +505,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (protocolMethodParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
-                CreateConversionToRequestContent(inputParameter, NullConditional(convenienceMethodParameter), new Dictionary<InputParameter, Parameter>(), out var argument, out var conversions);
+                CreateConversionToRequestContent(inputParameter, convenienceMethodParameter, new Dictionary<InputParameter, Parameter>(), convenienceMethodParameter.IsOptionalInSignature, out var argument, out var conversions);
                 if (conversions is not null)
                 {
                     _arguments[protocolMethodParameter] = argument;
@@ -762,23 +762,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, out TypedValueExpression content, out MethodBodyStatement? conversions)
+        private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, bool valueCanBeNull, out TypedValueExpression content, out MethodBodyStatement? conversions)
         {
             conversions = null;
-            if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestBodyMethod: true } model })
+            if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestBodyMethod: true }})
             {
-                content = Extensible.Model.InvokeToRequestBodyMethod(value);
+                content = Extensible.Model.InvokeToRequestBodyMethod(NullConditional(value, valueCanBeNull));
                 return;
             }
 
             switch (_operation.RequestBodyMediaType)
             {
                 case BodyMediaType.Binary:
-                    content = RequestContentExpression.Create(RemoveAllNullConditional(value));
+                    content = NullTernary(value, RequestContentExpression.Create(value), valueCanBeNull);
                     break;
 
                 case BodyMediaType.Text:
-                    content = New.StringRequestContent(RemoveAllNullConditional(value));
+                    content = NullTernary(value, New.StringRequestContent(value), valueCanBeNull);
                     break;
 
                 case var _ when inputParameter.Kind == InputOperationParameterKind.Flattened:
@@ -787,7 +787,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 // [TODO] This case is added to minimize amount of changes
                 case var _ when value.Type is { IsFrameworkType: true } && !Configuration.Generation1ConvenienceClient && !Configuration.AzureArm:
-                    content = CreateRequestContentFromFrameworkType(value);
+                    content = NullTernary(value, CreateRequestContentFromFrameworkType(value), valueCanBeNull);
                     break;
 
                 case BodyMediaType.Json:
@@ -799,11 +799,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     break;
 
                 case var _ when value.Type is { IsFrameworkType: true }:
-                    content = CreateRequestContentFromFrameworkType(value);
+                    content = NullTernary(value, CreateRequestContentFromFrameworkType(value), valueCanBeNull);
                     break;
 
                 case var _ when value.Type is { Implementation: EnumType enumType }:
-                    content = BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, value).ToSerial());
+                    content = BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, NullConditional(value, valueCanBeNull)).ToSerial());
                     break;
 
                 default:
@@ -831,13 +831,22 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return RequestContentExpression.FromObject(value);
         }
 
+        private static TypedValueExpression NullTernary(TypedValueExpression value, TypedValueExpression content, bool valueCanBeNull)
+            => valueCanBeNull ? new TypedTernaryConditionalOperator(NotEqual(value, Null), content, Null) : content;
+
+        private static TypedValueExpression NullConditional(TypedValueExpression value, bool addNullConditional)
+            => addNullConditional ? value.NullConditional() : value;
+
+        private static TypedValueExpression NullConditional(Parameter parameter)
+            => NullConditional(parameter, parameter.IsOptionalInSignature);
+
         private static void CreateConversionToUtf8JsonRequestContent(InputParameter inputParameter, TypedValueExpression value, out TypedValueExpression content, out MethodBodyStatement conversions)
         {
             var jsonSerialization = SerializationBuilder.BuildJsonSerialization(inputParameter.Type, value.Type);
             conversions = new[]
             {
                 Var("content", New.Utf8JsonRequestContent(), out Utf8JsonRequestContentExpression utf8JsonContent),
-                JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, RemoveAllNullConditional(value)),
+                JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, value),
             };
             content = utf8JsonContent;
         }
@@ -848,7 +857,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             conversions = new[]
             {
                 Var("content", New.XmlWriterContent(), out XmlWriterContentExpression xmlWriterContent),
-                XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, RemoveAllNullConditional(value)),
+                XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, value),
             };
             content = xmlWriterContent;
         }
