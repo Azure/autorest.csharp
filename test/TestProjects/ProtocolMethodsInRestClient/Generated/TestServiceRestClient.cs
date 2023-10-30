@@ -61,7 +61,7 @@ namespace ProtocolMethodsInRestClient
         public async Task<Response<Stream>> PutStreamAsync(Stream body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            using RequestContent content = RequestContent.Create(body);
+            using RequestContent content = body != null ? RequestContent.Create(body) : null;
             using var message = CreatePutStreamRequest(content, context);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -82,7 +82,7 @@ namespace ProtocolMethodsInRestClient
         public Response<Stream> PutStream(Stream body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            using RequestContent content = RequestContent.Create(body);
+            using RequestContent content = body != null ? RequestContent.Create(body) : null;
             using var message = CreatePutStreamRequest(content, context);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
