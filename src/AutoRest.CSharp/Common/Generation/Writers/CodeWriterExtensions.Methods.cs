@@ -249,7 +249,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(localFunction.Body);
                     break;
                 case UnaryOperatorStatement unaryOperatorStatement:
-                    writer.WriteValueExpression(unaryOperatorStatement.Value);
+                    writer.WriteValueExpression(unaryOperatorStatement.Expression);
                     break;
             }
 

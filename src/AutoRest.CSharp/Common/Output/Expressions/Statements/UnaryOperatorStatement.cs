@@ -5,5 +5,5 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
-    internal record UnaryOperatorStatement(ValueExpression Value) : DeclarationStatement;
+    internal record UnaryOperatorStatement(UnaryOperatorExpression Expression) : DeclarationStatement;
 }

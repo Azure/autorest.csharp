@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = (TypeFactory.IsCollectionType(property.SerializedType) && !TypeFactory.IsReadOnlyMemory(property.SerializedType)) && property.IsRequired
+                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && !TypeFactory.IsReadOnlyMemory(property.SerializedType) && property.IsRequired
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -549,7 +549,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 };
             }
 
-            if ((!jsonPropertySerialization.IsRequired || TypeFactory.IsReadOnlyMemory(serializedType!)) && // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
+            // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
+            if ((!jsonPropertySerialization.IsRequired || (serializedType is not null && TypeFactory.IsReadOnlyMemory(serializedType))) &&
                 serializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
                 serializedType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
             {
@@ -652,27 +653,34 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             switch (serialization)
             {
-                case JsonArraySerialization jsonArray:
-                    bool isArray = TypeFactory.IsArray(jsonArray.ImplementationType);
-                    var array = new VariableReference(jsonArray.ImplementationType, "array");
-                    value = array;
-                    ValueExpression newExpression = isArray ? New.Array(jsonArray.ImplementationType, element.GetArrayLength()) : New.Instance(jsonArray.ImplementationType);
+                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.ImplementationType):
+                    var readOnlyMemory = new VariableReference(jsonReadOnlyMemory.ImplementationType, "array");
+                    value = readOnlyMemory;
                     VariableReference index = new VariableReference(typeof(int), "index");
 
-                    List<MethodBodyStatement> statements = new List<MethodBodyStatement>();
-                    if (isArray)
-                        statements.Add(Declare(index, Int(0)));
-
-                    statements.Add(Declare(array, newExpression));
-
-                    var foreachStatement = new ForeachStatement("item", element.EnumerateArray(), out ValueExpression item)
+                    return new MethodBodyStatement[]
                     {
-                        DeserializeArrayItem(jsonArray, value, new JsonElementExpression(item), index),
+                        Declare(index, Int(0)),
+                        Declare(readOnlyMemory, New.Array(jsonReadOnlyMemory.ImplementationType, element.GetArrayLength())),
+                        new ForeachStatement("item", element.EnumerateArray(), out ValueExpression readOnlyMemoryItem)
+                        {
+                            DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), index),
+                            Increment(index)
+                        }
                     };
-                    if (isArray)
-                        foreachStatement.Add(Increment(index));
-                    statements.Add(foreachStatement);
-                    return statements;
+
+                case JsonArraySerialization jsonArray:
+                    var array = new VariableReference(jsonArray.ImplementationType, "array");
+                    value = array;
+
+                    return new MethodBodyStatement[]
+                    {
+                        Declare(array, New.Instance(jsonArray.ImplementationType)),
+                        new ForeachStatement("item", element.EnumerateArray(), out ValueExpression arrayItem)
+                        {
+                            DeserializeArrayItem(jsonArray, value, new JsonElementExpression(arrayItem)),
+                        }
+                    };
 
                 case JsonDictionarySerialization jsonDictionary:
                     var dictionary = new VariableReference(jsonDictionary.Type, "dictionary");
@@ -700,23 +708,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement DeserializeArrayItem(JsonArraySerialization serialization, ValueExpression arrayVariable, JsonElementExpression arrayItemVariable, ValueExpression index)
+        private static MethodBodyStatement DeserializeArrayItem(JsonArraySerialization serialization, ValueExpression arrayVariable, JsonElementExpression arrayItemVariable, ValueExpression? index = null)
         {
-            bool isArray = TypeFactory.IsArray(serialization.ImplementationType);
+            bool isArray = index is not null;
 
             List<MethodBodyStatement> statements = new List<MethodBodyStatement>();
 
             MethodBodyStatement deserializeAndAssign = new[]
             {
                 DeserializeValue(serialization.ValueSerialization, arrayItemVariable, out var value),
-                isArray ? InvokeArrayElementAssignment(arrayVariable, index, value) : InvokeListAdd(arrayVariable, value)
+                isArray ? InvokeArrayElementAssignment(arrayVariable, index!, value) : InvokeListAdd(arrayVariable, value)
             };
 
             if (CollectionItemRequiresNullCheckInSerialization(serialization.ValueSerialization))
             {
                 statements.Add(new IfElseStatement(
                     arrayItemVariable.ValueKindEqualsNull(),
-                    isArray ? InvokeArrayElementAssignment(arrayVariable, index, Null) : InvokeListAdd(arrayVariable, Null),
+                    isArray ? InvokeArrayElementAssignment(arrayVariable, index!, Null) : InvokeListAdd(arrayVariable, Null),
                     deserializeAndAssign));
             }
             else
