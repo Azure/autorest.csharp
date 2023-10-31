@@ -787,7 +787,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 // [TODO] This case is added to minimize amount of changes
                 case var _ when value.Type is { IsFrameworkType: true } && !Configuration.Generation1ConvenienceClient && !Configuration.AzureArm:
-                    content = NullTernary(value, CreateRequestContentFromFrameworkType(value), valueCanBeNull);
+                    content = CreateRequestContentFromFrameworkType(value);
                     break;
 
                 case BodyMediaType.Json:
@@ -799,7 +799,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     break;
 
                 case var _ when value.Type is { IsFrameworkType: true }:
-                    content = NullTernary(value, CreateRequestContentFromFrameworkType(value), valueCanBeNull);
+                    content = CreateRequestContentFromFrameworkType(value);
                     break;
 
                 case var _ when value.Type is { Implementation: EnumType enumType }:

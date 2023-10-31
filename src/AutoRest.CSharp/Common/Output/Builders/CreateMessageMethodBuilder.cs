@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     if (requestPart is not null)
                     {
-                        lines.Add(requestPart.Value is not ConstantExpression && requestPart.NameInRequest == "nextLink"
+                        lines.Add(requestPart.Value is not ConstantExpression && requestPart.IsNextLink
                             ? AppendRawNextLink(requestPart.Value, requestPart.Escape)
                             : AppendPath(ConvertToRequestPartType(requestPart.Value, requestPart.SerializationFormat), requestPart.SerializationFormat, requestPart.Escape));
                     }

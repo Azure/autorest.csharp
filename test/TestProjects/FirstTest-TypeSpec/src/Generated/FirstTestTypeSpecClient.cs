@@ -1292,7 +1292,7 @@ namespace FirstTestTypeSpec
         public virtual async Task<Response> NullableDictionaryBodyAsync(IDictionary<string, string> body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
+            using RequestContent content = RequestContentHelper.FromDictionary(body);
             Response response = await NullableDictionaryBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1304,7 +1304,7 @@ namespace FirstTestTypeSpec
         public virtual Response NullableDictionaryBody(IDictionary<string, string> body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
+            using RequestContent content = RequestContentHelper.FromDictionary(body);
             Response response = NullableDictionaryBody(content, context);
             return response;
         }
@@ -1388,7 +1388,7 @@ namespace FirstTestTypeSpec
         public virtual async Task<Response> NullableArrayBodyAsync(IEnumerable<string> body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = body != null ? RequestContentHelper.FromEnumerable(body) : null;
+            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             Response response = await NullableArrayBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1400,7 +1400,7 @@ namespace FirstTestTypeSpec
         public virtual Response NullableArrayBody(IEnumerable<string> body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = body != null ? RequestContentHelper.FromEnumerable(body) : null;
+            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             Response response = NullableArrayBody(content, context);
             return response;
         }
