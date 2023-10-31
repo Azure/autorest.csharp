@@ -64,7 +64,7 @@ import {
     getFormattedType,
     getInputType
 } from "./model.js";
-import { capitalize, getProjectedNameForCsharp } from "./utils.js";
+import { capitalize, getProjectedNameForCsharp, getTypeName } from "./utils.js";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -99,11 +99,11 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.bodyParameter) {
+    if (typespecParameters.body?.parameter) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.bodyParameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
-    } else if (typespecParameters.bodyType) {
+    } else if (typespecParameters.body?.type) {
         if (resourceOperation) {
             parameters.push(
                 loadBodyParameter(sdkContext, resourceOperation.resourceType)
@@ -111,7 +111,7 @@ export function loadOperation(
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
                 sdkContext,
-                typespecParameters.bodyType
+                typespecParameters.body.type
             );
             if (effectiveBodyType.kind === "Model") {
                 if (effectiveBodyType.name !== "") {
@@ -193,7 +193,7 @@ export function loadOperation(
     /* TODO: handle lro */
 
     return {
-        Name: op.name,
+        Name: getTypeName(sdkContext, op),
         ResourceName:
             resourceOperation?.resourceType.name ??
             getOperationGroupName(sdkContext, op, serviceNamespaceType),
@@ -259,7 +259,7 @@ export function loadOperation(
                     : InputOperationParameterKind.Client
                 : InputOperationParameterKind.Method;
         return {
-            Name: getProjectedNameForCsharp(sdkContext, param) ?? param.name,
+            Name: getTypeName(sdkContext, param),
             NameInRequest: name,
             Description: getDoc(program, param),
             Type: inputType,
@@ -297,7 +297,7 @@ export function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: body.name,
+            Name: getTypeName(sdkContext, body),
             NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,
