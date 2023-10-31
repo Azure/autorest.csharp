@@ -574,16 +574,16 @@ This sample shows how to call FriendlyModelAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+Friend friend = new Friend("<name>");
+Response<Friend> response = await client.FriendlyModelAsync(friend);
 ]]></code>
 This sample shows how to call FriendlyModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+Friend friend = new Friend("<name>");
+Response<Friend> response = await client.FriendlyModelAsync(friend);
 ]]></code></example>
     </member>
     <member name="FriendlyModel(Friend,CancellationToken)">
@@ -593,16 +593,16 @@ This sample shows how to call FriendlyModel.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = client.FriendlyModel(notFriend);
+Friend friend = new Friend("<name>");
+Response<Friend> response = client.FriendlyModel(friend);
 ]]></code>
 This sample shows how to call FriendlyModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = client.FriendlyModel(notFriend);
+Friend friend = new Friend("<name>");
+Response<Friend> response = client.FriendlyModel(friend);
 ]]></code></example>
     </member>
     <member name="FriendlyModelAsync(RequestContent,RequestContext)">
@@ -816,16 +816,16 @@ This sample shows how to call ProjectedNameModelAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+ProjectedModel projectedModel = new ProjectedModel("<name>");
+Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
 ]]></code>
 This sample shows how to call ProjectedNameModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+ProjectedModel projectedModel = new ProjectedModel("<name>");
+Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
 ]]></code></example>
     </member>
     <member name="ProjectedNameModel(ProjectedModel,CancellationToken)">
@@ -835,16 +835,16 @@ This sample shows how to call ProjectedNameModel.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+ProjectedModel projectedModel = new ProjectedModel("<name>");
+Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
 ]]></code>
 This sample shows how to call ProjectedNameModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+ProjectedModel projectedModel = new ProjectedModel("<name>");
+Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
 ]]></code></example>
     </member>
     <member name="ProjectedNameModelAsync(RequestContent,RequestContext)">
