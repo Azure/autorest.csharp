@@ -27,6 +27,9 @@ namespace AutoRest.CSharp.LowLevel.Extensions
     {
         private static ValueExpression GetExpression(CSharpType type, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
+            // handle ReadOnlyMemory
+            if (TypeFactory.IsReadOnlyMemory(type))
+                return GetExpressionForList(type, exampleValue, serializationFormat, true);
             // handle list
             if (TypeFactory.IsList(type))
                 return GetExpressionForList(type, exampleValue, serializationFormat, includeCollectionInitialization);
