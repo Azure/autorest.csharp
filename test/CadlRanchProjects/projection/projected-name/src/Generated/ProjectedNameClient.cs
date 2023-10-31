@@ -62,14 +62,14 @@ namespace Projection.ProjectedName
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='OperationAsync(RequestContext)']/*" />
-        public virtual async Task<Response> OperationAsync(RequestContext context = null)
+        /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='ClientNameAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ClientNameAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ProjectedNameClient.Operation");
+            using var scope = ClientDiagnostics.CreateScope("ProjectedNameClient.ClientName");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest(context);
+                using HttpMessage message = CreateClientNameRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -93,14 +93,14 @@ namespace Projection.ProjectedName
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='Operation(RequestContext)']/*" />
-        public virtual Response Operation(RequestContext context = null)
+        /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='ClientName(RequestContext)']/*" />
+        public virtual Response ClientName(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ProjectedNameClient.Operation");
+            using var scope = ClientDiagnostics.CreateScope("ProjectedNameClient.ClientName");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest(context);
+                using HttpMessage message = CreateClientNameRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -188,7 +188,7 @@ namespace Projection.ProjectedName
             return Volatile.Read(ref _cachedProperty) ?? Interlocked.CompareExchange(ref _cachedProperty, new Property(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedProperty;
         }
 
-        internal HttpMessage CreateOperationRequest(RequestContext context)
+        internal HttpMessage CreateClientNameRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;

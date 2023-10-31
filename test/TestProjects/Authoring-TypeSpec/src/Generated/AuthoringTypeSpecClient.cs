@@ -1291,7 +1291,7 @@ namespace AuthoringTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
             var request = message.Request;
-            request.Method = RequestMethod.Patch;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
@@ -1300,7 +1300,7 @@ namespace AuthoringTypeSpec
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/merge-patch+json");
+            request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
         }

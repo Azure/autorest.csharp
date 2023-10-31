@@ -18,44 +18,44 @@ namespace Projection.ProjectedName.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_ShortVersion()
+        public void Example_ClientName_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = client.Operation();
+            Response response = client.ClientName();
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_ShortVersion_Async()
+        public async Task Example_ClientName_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = await client.OperationAsync();
+            Response response = await client.ClientNameAsync();
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
+        public void Example_ClientName_AllParameters()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = client.Operation();
+            Response response = client.ClientName();
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_AllParameters_Async()
+        public async Task Example_ClientName_AllParameters_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = await client.OperationAsync();
+            Response response = await client.ClientNameAsync();
 
             Console.WriteLine(response.Status);
         }

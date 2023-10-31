@@ -11,7 +11,7 @@
    "Name": "Pet",
    "Namespace": "LroOperation",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
@@ -143,40 +143,6 @@
       },
       {
        "$id": "19",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "This request has a JSON Merge Patch body.",
-       "Type": {
-        "$id": "20",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "21",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "22",
-        "Type": {
-         "$ref": "20"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "23",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -194,11 +160,38 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "20",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "21",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "22",
+        "Type": {
+         "$ref": "21"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "24",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -213,9 +206,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "25",
         "Type": {
-         "$ref": "25"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
@@ -223,7 +216,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "26",
        "StatusCodes": [
         201
        ],
@@ -233,12 +226,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "28",
+         "$id": "27",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "29",
+          "$id": "28",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -248,7 +241,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "30",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -258,12 +251,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "31",
+         "$id": "30",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "32",
+          "$id": "31",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -273,19 +266,19 @@
        "IsErrorResponse": false
       }
      ],
-     "HttpMethod": "PATCH",
+     "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/Pet/{name}",
      "RequestMediaTypes": [
-      "application/merge-patch+json"
+      "application/json"
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "33",
+      "$id": "32",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "34",
+       "$id": "33",
        "StatusCodes": [
         200
        ],
@@ -296,11 +289,11 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "34"
    },
    "Creatable": true
   }

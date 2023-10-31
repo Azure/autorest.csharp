@@ -925,29 +925,29 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
-        public virtual async Task<Result<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        public virtual async Task<Result<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
+            ClientUtilities.AssertNotNull(friend, nameof(friend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = notFriend.ToRequestBody();
+            using RequestBody content = friend.ToRequestBody();
             Result result = await FriendlyModelAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
-        public virtual Result<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        public virtual Result<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
+            ClientUtilities.AssertNotNull(friend, nameof(friend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = notFriend.ToRequestBody();
+            using RequestBody content = friend.ToRequestBody();
             Result result = FriendlyModel(content, context);
             return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1195,29 +1195,29 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
-        public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            ClientUtilities.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = modelWithProjectedName.ToRequestBody();
+            using RequestBody content = projectedModel.ToRequestBody();
             Result result = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
-        public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            ClientUtilities.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = modelWithProjectedName.ToRequestBody();
+            using RequestBody content = projectedModel.ToRequestBody();
             Result result = ProjectedNameModel(content, context);
             return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
