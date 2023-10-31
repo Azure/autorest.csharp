@@ -27,8 +27,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-        public EnumType(InputEnumType enumType, Schema schema, TypeFactory typeFactory, BuildContext context)
-            : this(enumType, GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context.SchemaUsageProvider), typeFactory, context.SourceInputModel)
+        public EnumType(InputEnumType enumType, TypeFactory typeFactory, BuildContext context)
+            : this(enumType, GetDefaultNamespace(enumType.Namespace, context), enumType.Accessibility ?? "public", typeFactory, context.SourceInputModel)
         {
         }
 
@@ -196,13 +196,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ? value.GetValueString()
                 : value.Description;
             return BuilderHelpers.EscapeXmlDocDescription(description);
-        }
-
-        public static string GetAccessibility(Schema schema, SchemaUsageProvider schemaUsageProvider)
-        {
-            var usage = schemaUsageProvider.GetUsage(schema);
-            var hasUsage = usage.HasFlag(SchemaTypeUsage.Model);
-            return schema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
         }
     }
 }

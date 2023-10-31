@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
-        public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
+        public override TypeProvider FindTypeProviderForInputType(InputType inputType) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
         public static IReadOnlyDictionary<InputEnumType, EnumType> CreateEnums(IReadOnlyList<InputEnumType> inputEnums, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
             => inputEnums.ToDictionary(e => e, e => new EnumType(e, defaultNamespace, "public", typeFactory, sourceInputModel), InputEnumType.IgnoreNullabilityComparer);

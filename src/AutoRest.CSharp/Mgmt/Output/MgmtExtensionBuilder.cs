@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
@@ -23,10 +23,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             public MgmtExtensionWrapper ExtensionWrapper => _extensionWrapper ??= new MgmtExtensionWrapper(Extensions, ExtensionClients);
         }
 
-        private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
-        private readonly IReadOnlyDictionary<RequestPath, IEnumerable<Operation>> _armResourceExtensionOperations;
+        private readonly IReadOnlyDictionary<Type, IEnumerable<InputOperation>> _extensionOperations;
+        private readonly IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> _armResourceExtensionOperations;
 
-        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<Operation>> extensionOperations, Dictionary<RequestPath, IEnumerable<Operation>> armResourceExtensionOperations)
+        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<InputOperation>> extensionOperations, Dictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations)
         {
             _extensionOperations = extensionOperations;
             _armResourceExtensionOperations = armResourceExtensionOperations;

@@ -4,22 +4,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Common.Input;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
     /// <summary>
     /// An <see cref="OperationSet"/> represents a collection of <see cref="Operation"/> with the same request path.
     /// </summary>
-    internal class OperationSet : IReadOnlyCollection<Operation>, IEquatable<OperationSet>
+    internal class OperationSet : IReadOnlyCollection<InputOperation>, IEquatable<OperationSet>
     {
-        private readonly OperationGroup? _operationGroup;
+        private readonly InputClient? _inputClient;
         private readonly IReadOnlyDictionary<string, OperationSet> _rawRequestPathToOperationSets;
         private readonly TypeFactory _typeFactory;
 
@@ -31,17 +30,17 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The operation set
         /// </summary>
-        private HashSet<Operation> Operations { get; }
+        private HashSet<InputOperation> Operations { get; }
 
         public int Count => Operations.Count;
 
-        public OperationSet(string requestPath, OperationGroup? operationGroup, IReadOnlyDictionary<string, OperationSet> rawRequestPathToOperationSets, TypeFactory typeFactory)
+        public OperationSet(string requestPath, InputClient? inputClient, IReadOnlyDictionary<string, OperationSet> rawRequestPathToOperationSets, TypeFactory typeFactory)
         {
-            _operationGroup = operationGroup;
+            _inputClient = inputClient;
             _rawRequestPathToOperationSets = rawRequestPathToOperationSets;
             _typeFactory = typeFactory;
             RequestPath = requestPath;
-            Operations = new HashSet<Operation>();
+            Operations = new HashSet<InputOperation>();
         }
 
         /// <summary>
@@ -49,15 +48,15 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="operation">The operation to be added</param>
         /// <exception cref="InvalidOperationException">when trying to add an operation with a different path from <see cref="RequestPath"/></exception>
-        public void Add(Operation operation)
+        public void Add(InputOperation operation)
         {
-            var path = operation.GetHttpPath();
+            var path = operation.Path;
             if (path != RequestPath)
                 throw new InvalidOperationException($"Cannot add operation with path {path} to OperationSet with path {RequestPath}");
             Operations.Add(operation);
         }
 
-        public IEnumerator<Operation> GetEnumerator() => Operations.GetEnumerator();
+        public IEnumerator<InputOperation> GetEnumerator() => Operations.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => Operations.GetEnumerator();
 
@@ -80,11 +79,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="method"></param>
         /// <returns></returns>
-        public Operation? GetOperation(HttpMethod method)
+        public InputOperation? GetOperation(RequestMethod method)
         {
             foreach (var operation in Operations)
             {
-                if (operation.GetHttpRequest()!.Method == method)
+                if (operation.HttpMethod == method)
                     return operation;
             }
 
@@ -101,11 +100,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         private RequestPath GetNonHintRequestPath()
         {
             var operation = FindBestOperation();
-            if (_operationGroup is not null && Operations.Any())
+            if (_inputClient is not null && Operations.Any())
             {
                 if (operation != null)
                 {
-                    return Models.RequestPath.FromOperation(operation, _operationGroup, _typeFactory);
+                    return Models.RequestPath.FromOperation(operation, _inputClient, _typeFactory);
                 }
             }
 
@@ -144,14 +143,14 @@ namespace AutoRest.CSharp.Mgmt.Models
             return Models.RequestPath.FromSegments(segments);
         }
 
-        private Operation? FindBestOperation()
+        private InputOperation? FindBestOperation()
         {
             // first we try GET operation
-            var getOperation = FindOperation(HttpMethod.Get);
+            var getOperation = FindOperation(RequestMethod.Get);
             if (getOperation != null)
                 return getOperation;
             // if no GET operation, we return PUT operation
-            var putOperation = FindOperation(HttpMethod.Put);
+            var putOperation = FindOperation(RequestMethod.Put);
             if (putOperation != null)
                 return putOperation;
 
@@ -159,9 +158,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             return Operations.FirstOrDefault();
         }
 
-        public Operation? FindOperation(HttpMethod method)
+        public InputOperation? FindOperation(RequestMethod method)
         {
-            return this.FirstOrDefault(operation => operation.GetHttpMethod() == method);
+            return this.FirstOrDefault(operation => operation.HttpMethod == method);
         }
 
         public bool IsById => NonHintRequestPath.IsById;

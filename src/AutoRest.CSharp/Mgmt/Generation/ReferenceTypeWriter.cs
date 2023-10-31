@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (objectType is not SchemaObjectType schema)
                 return;
-            var extensions = schema.ObjectSchema.Extensions;
+            var extensions = schema.InputModel.Extensions;
             if (extensions != null)
             {
                 if (Configuration.IsBranded)

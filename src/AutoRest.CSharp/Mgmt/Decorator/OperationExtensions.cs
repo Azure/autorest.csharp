@@ -18,11 +18,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OperationExtensions
     {
-        private static readonly ConcurrentDictionary<Operation, string> _operationIdCache = new ConcurrentDictionary<Operation, string>();
+        private static readonly ConcurrentDictionary<InputOperation, string> _operationIdCache = new ConcurrentDictionary<InputOperation, string>();
 
-        private static readonly ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath>();
+        private static readonly ConcurrentDictionary<(InputOperation, ResourceTypeSegment?), RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<(InputOperation, ResourceTypeSegment?), RequestPath>();
 
-        private static readonly ConcurrentDictionary<Operation, IEnumerable<Resource>> _operationToResourceCache = new ConcurrentDictionary<Operation, IEnumerable<Resource>>();
+        private static readonly ConcurrentDictionary<InputOperation, IEnumerable<Resource>> _operationToResourceCache = new ConcurrentDictionary<InputOperation, IEnumerable<Resource>>();
 
         /// <summary>
         /// Returns the CSharpName of an operation in management plane pattern where we replace the word List with Get or GetAll depending on if there are following words
@@ -30,9 +30,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="operation"></param>
         /// <param name="hasSuffix"></param>
         /// <returns></returns>
-        public static string MgmtCSharpName(this Operation operation, bool hasSuffix)
+        public static string MgmtCSharpName(this InputOperation operation, bool hasSuffix)
         {
-            var originalName = operation.CSharpName();
+            var originalName = operation.CleanName;
             var words = originalName.SplitByCamelCase();
             if (!words.First().Equals("List", StringComparison.InvariantCultureIgnoreCase))
                 return originalName;
@@ -52,12 +52,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="context"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static bool TryGetConfigOperationName(this Operation operation, [MaybeNullWhen(false)] out string name)
+        public static bool TryGetConfigOperationName(this InputOperation operation, [MaybeNullWhen(false)] out string name)
         {
-            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name);
+            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.Name!, out name);
         }
 
-        public static RequestPath GetRequestPath(this Operation operation, ResourceTypeSegment? hint = null)
+        public static RequestPath GetRequestPath(this InputOperation operation, ResourceTypeSegment? hint = null)
         {
             if (_operationToRequestPathCache.TryGetValue((operation, hint), out var requestPath))
                 return requestPath;
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return requestPath;
         }
 
-        public static bool IsResourceCollectionOperation(this Operation operation, [MaybeNullWhen(false)] out OperationSet operationSetOfResource)
+        public static bool IsResourceCollectionOperation(this InputOperation operation, [MaybeNullWhen(false)] out OperationSet operationSetOfResource)
         {
             operationSetOfResource = null;
             // first we need to ensure this operation at least returns a collection of something
@@ -146,12 +146,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return requestPath.Count;
         }
 
-        public static string GetHttpPath(this Operation operation)
+        public static string GetHttpPath(this InputOperation operation)
         {
-            var path = operation.GetHttpRequest()?.Path;
+            var path = operation.Path;
             // Do not trim the tenant resource path '/'.
             return (path?.Length == 1 ? path : path?.TrimEnd('/')) ??
-                throw new InvalidOperationException($"Cannot get HTTP path from operation {operation.CSharpName()}");
+                throw new InvalidOperationException($"Cannot get HTTP path from operation {operation.CleanName}");
         }
 
         public static HttpRequest? GetHttpRequest(this Operation operation)
@@ -166,11 +166,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        public static HttpMethod GetHttpMethod(this Operation operation)
-        {
-            return operation.GetHttpRequest()!.Method;
-        }
-
         public static RequestParameter? GetBodyParameter(this Operation operation)
         {
             var serviceRequest = operation.GetServiceRequest();
@@ -182,12 +177,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return operation.Requests.FirstOrDefault();
         }
 
-        public static ServiceResponse? GetServiceResponse(this Operation operation, StatusCodes code = StatusCodes._200)
+        public static OperationResponse? GetServiceResponse(this InputOperation operation, int code = 200)
         {
-            return operation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(code));
+            return operation.Responses.FirstOrDefault(r => r.StatusCodes.Contains(code));
         }
 
-        internal static IEnumerable<Resource> GetResourceFromResourceType(this Operation operation)
+        internal static IEnumerable<Resource> GetResourceFromResourceType(this InputOperation operation)
         {
             if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
                 return cacheResult;

@@ -3,8 +3,8 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 
@@ -12,10 +12,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        public ResourceData(ObjectSchema schema, TypeFactory typeFactory, string? name = default, string? nameSpace = default)
-            : base(schema, typeFactory, name, nameSpace)
+        public ResourceData(InputModelType inputType, TypeFactory typeFactory, string? name = default, string? nameSpace = default)
+            : base(inputType, typeFactory, name, nameSpace)
         {
-            _clientPrefix = schema.Name;
+            _clientPrefix = inputType.Name;
         }
 
         protected override bool IsResourceType => true;
@@ -23,9 +23,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override FormattableString CreateDescription()
         {
             FormattableString baseDescription = $"{BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.")}";
-            FormattableString extraDescription = string.IsNullOrWhiteSpace(ObjectSchema.Language.Default.Description) ?
+            FormattableString extraDescription = string.IsNullOrWhiteSpace(InputModel.Description) ?
                 (FormattableString)$"" :
-                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(ObjectSchema.Language.Default.Description)}";
+                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(InputModel.Description)}";
             return $"{baseDescription}{extraDescription}";
         }
 
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public bool IsTaggable => _isTaggable ??= EnsureIsTaggable();
         private bool EnsureIsTaggable()
         {
-            return ObjectSchema.HasTags();
+            return InputModel.HasTags();
         }
 
         private CSharpType? typeOfId;

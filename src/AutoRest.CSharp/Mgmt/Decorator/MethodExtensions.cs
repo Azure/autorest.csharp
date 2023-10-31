@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="valuePropertyName"></param>
         /// <param name="nextLinkPropertyName"></param>
         /// <returns></returns>
-        internal static bool IsListMethod(this Operation operation, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName, out string? nextLinkPropertyName)
+        internal static bool IsListMethod(this InputOperation operation, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName, out string? nextLinkPropertyName)
         {
             itemType = null;
             valuePropertyName = null;
@@ -71,12 +72,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="operation"></param>
         /// <param name="itemType">The type of the item in the collection</param>
         /// <returns></returns>
-        public static bool IsListMethod(this Operation operation, [MaybeNullWhen(false)] out CSharpType itemType) => IsListMethod(operation, out itemType, out _, out _);
+        public static bool IsListMethod(this InputOperation operation, [MaybeNullWhen(false)] out CSharpType itemType) => IsListMethod(operation, out itemType, out _, out _);
 
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject, string pagingItemName)
         {
-            return schemaObject.Properties.FirstOrDefault(p => p.SchemaProperty?.SerializedName == pagingItemName &&
-                p.SchemaProperty?.FlattenedNames.Count == 0 && p.Declaration.Type.IsFrameworkType &&
+            return schemaObject.Properties.FirstOrDefault(p => p.InputModelProperty!.SerializedName == pagingItemName &&
+                (p.InputModelProperty.FlattenedNames is null || p.InputModelProperty.FlattenedNames.Count == 0) && p.Declaration.Type.IsFrameworkType &&
                 TypeFactory.IsList(p.Declaration.Type));
         }
     }

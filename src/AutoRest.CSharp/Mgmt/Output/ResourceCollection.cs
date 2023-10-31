@@ -8,7 +8,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -26,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(OperationSet operationSet, IEnumerable<Operation> operations, Resource resource)
+        public ResourceCollection(OperationSet operationSet, IEnumerable<InputOperation> operations, Resource resource)
             : base(operationSet, operations, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
         {
             Resource = resource;
@@ -82,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override IReadOnlyList<ContextualParameterMapping> EnsureExtraContextualParameterMapping()
         {
             var result = new List<ContextualParameterMapping>();
-            Operation? op = null;
+            InputOperation? op = null;
             foreach (var operation in _clientOperations)
             {
                 if (IsListOperation(operation, OperationSet))
@@ -181,7 +180,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return diff.Where(segment => segment.IsReference);
         }
 
-        protected override bool ShouldIncludeOperation(Operation operation)
+        protected override bool ShouldIncludeOperation(InputOperation operation)
         {
             if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.OperationId!, out var positions))
             {

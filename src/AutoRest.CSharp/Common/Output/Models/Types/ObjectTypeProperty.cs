@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
-                  schemaProperty: null,
                   isRequired: field.IsRequired,
                   valueType: null,
                   inputModelProperty: inputModelProperty,
@@ -32,15 +31,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             InitializationValue = Configuration.Generation1ConvenienceClient ? null : field.DefaultValue;
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false, SourcePropertySerializationMapping? serializationMapping = null)
-            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability, serializationMapping: serializationMapping)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, CSharpType? valueType = null, bool optionalViaNullability = false, SourcePropertySerializationMapping? serializationMapping = null)
+            : this(declaration, parameterDescription, isReadOnly, inputModelProperty, inputModelProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability, serializationMapping: serializationMapping)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SourcePropertySerializationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SourcePropertySerializationMapping? serializationMapping = null)
         {
             IsReadOnly = isReadOnly;
-            SchemaProperty = schemaProperty;
             OptionalViaNullability = optionalViaNullability;
             ValueType = valueType ?? declaration.Type;
             Declaration = declaration;
@@ -62,11 +60,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 newDeclaration,
                 _baseParameterDescription,
                 IsReadOnly,
-                SchemaProperty,
+                InputModelProperty,
                 IsRequired,
                 valueType: ValueType,
                 optionalViaNullability: OptionalViaNullability,
-                inputModelProperty: InputModelProperty,
                 isFlattenedProperty: true);
         }
 
@@ -135,7 +132,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public string Description { get; }
         private FormattableString? _propertyDescription;
         public FormattableString PropertyDescription => _propertyDescription ??= CreatePropertyDescription();
-        public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
         private string? _parameterDescription;
         private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
@@ -162,23 +158,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
             var extraDescription = string.Empty;
-            var originalObjSchema = SchemaProperty?.Schema as ObjectSchema;
-            var identityTypeSchema = originalObjSchema?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Schema;
-            if (identityTypeSchema != null)
+            var originalModelType = InputModelProperty?.Type as InputModelType;
+            var identityType = originalModelType?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Type;
+            if (identityType != null)
             {
                 var supportedTypesToShow = new List<string>();
                 var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
-                // unwrap constant schema if it is
-                if (identityTypeSchema is ConstantSchema constantIdentitySchema && constantIdentitySchema.ValueType is ChoiceSchema identityTypeChoiceSchema)
-                    identityTypeSchema = identityTypeChoiceSchema;
-
-                if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                if (identityType is InputEnumType enumType && enumType.AllowedValues.Count < commonMsiSupportedTypeCount)
                 {
-                    supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();
-                }
-                else if (identityTypeSchema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Count < commonMsiSupportedTypeCount)
-                {
-                    supportedTypesToShow = sealedChoiceSchema.Choices.Select(c => c.Value).ToList();
+                    supportedTypesToShow = enumType.AllowedValues.Select(c => c.Name).ToList();
                 }
                 if (supportedTypesToShow.Count > 0)
                 {

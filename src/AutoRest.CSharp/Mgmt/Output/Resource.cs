@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string DataFieldName = "_data";
         protected readonly Parameter[] _armClientCtorParameters;
 
-        private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
+        private static readonly RequestMethod[] MethodToExclude = new[] { RequestMethod.Put, RequestMethod.Get, RequestMethod.Delete, RequestMethod.Patch };
 
         private static readonly Parameter TagKeyParameter = new Parameter(
             "key",
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public OperationSet OperationSet { get; }
 
-        protected IEnumerable<Operation> _clientOperations;
+        protected IEnumerable<InputOperation> _clientOperations;
 
         private RequestPath? _requestPath;
         public RequestPath RequestPath => _requestPath ??= OperationSet.GetRequestPath(ResourceType);
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <param name="resourceData">The corresponding resource data model</param>
         /// <param name="context">The build context of this resource instance</param>
         /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
-        protected internal Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
+        protected internal Resource(OperationSet operationSet, IEnumerable<InputOperation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
             : base(resourceName)
         {
             _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
@@ -131,16 +131,16 @@ namespace AutoRest.CSharp.Mgmt.Output
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
-        public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
+        public Resource(OperationSet operationSet, IEnumerable<InputOperation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
             : this(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
         { }
 
-        private static IEnumerable<Operation> GetClientOperations(OperationSet operationSet, IEnumerable<Operation> operations)
-            => operations.Concat(operationSet.Where(operation => !MethodToExclude.Contains(operation.GetHttpMethod())));
+        private static IEnumerable<InputOperation> GetClientOperations(OperationSet operationSet, IEnumerable<InputOperation> operations)
+            => operations.Concat(operationSet.Where(operation => !MethodToExclude.Contains(operation.HttpMethod)));
 
         protected bool IsById { get; }
 
-        protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName, bool? isLongRunning = null, bool throwIfNull = false)
+        protected MgmtClientOperation? GetOperationWithVerb(RequestMethod method, string operationName, bool? isLongRunning = null, bool throwIfNull = false)
         {
             var result = new List<MgmtRestOperation>();
             var operation = OperationSet.GetOperation(method);
@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return false;
             if (bodyParamType.Implementation is not SchemaObjectType schemaObject)
                 return false;
-            return schemaObject.ObjectSchema.HasTags();
+            return schemaObject.InputModel.HasTags();
         }
 
         private Parameter? GetBodyParameter()
@@ -232,14 +232,14 @@ namespace AutoRest.CSharp.Mgmt.Output
         private MgmtClientOperation? _getOperation;
         private MgmtClientOperation? _deleteOperation;
         private MgmtClientOperation? _updateOperation;
-        public virtual MgmtClientOperation? CreateOperation => _createOperation ??= GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
-        public virtual MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
-        public virtual MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
+        public virtual MgmtClientOperation? CreateOperation => _createOperation ??= GetOperationWithVerb(RequestMethod.Put, "CreateOrUpdate", true);
+        public virtual MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(RequestMethod.Get, "Get", throwIfNull: true)!;
+        public virtual MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(RequestMethod.Delete, "Delete", true);
         public virtual MgmtClientOperation? UpdateOperation => _updateOperation ??= EnsureUpdateOperation();
 
         private MgmtClientOperation? EnsureUpdateOperation()
         {
-            var updateOperation = GetOperationWithVerb(HttpMethod.Patch, "Update");
+            var updateOperation = GetOperationWithVerb(RequestMethod.Patch, "Update");
 
             if (updateOperation != null)
                 return updateOperation;
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        protected virtual bool ShouldIncludeOperation(Operation operation)
+        protected virtual bool ShouldIncludeOperation(InputOperation operation)
         {
             if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.OperationId!, out var positions))
             {
@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (!ShouldIncludeOperation(operation))
                     continue; // meaning this operation will be included in the collection
-                var method = operation.GetHttpMethod();
+                var method = operation.HttpMethod;
                 // we use the "unique" part of this operation's request path comparing with its containing resource's path as the key to categorize the operations
                 var requestPath = operation.GetRequestPath(ResourceType);
                 var key = $"{method}{resourceRequestPath.Minus(requestPath)}";
@@ -404,7 +404,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return operationRequestPath.GetScopePath().Append(contextualPath.TrimScope());
         }
 
-        protected bool IsListOperation(Operation operation, OperationSet operationSet)
+        protected bool IsListOperation(InputOperation operation, OperationSet operationSet)
         {
             return operation.IsResourceCollectionOperation(out var resourceOperationSet) && resourceOperationSet == operationSet;
         }

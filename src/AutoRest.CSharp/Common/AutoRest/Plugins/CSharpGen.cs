@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
@@ -33,17 +34,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (Configuration.AzureArm)
             {
+                CodeModelTransformer.Transform();
+                var codeModelConverter = new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel));
+                var inputNamespace = codeModelConverter.CreateNamespace();
                 if (Configuration.MgmtConfiguration.MgmtDebug.SkipCodeGen)
                 {
                     await AutoRestLogger.Warning("skip generating sdk code because 'mgmt-debug.skip-codegen' is true.");
                     if (Configuration.MgmtTestConfiguration is not null)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null);
+                        await MgmtTestTarget.ExecuteAsync(inputNamespace, project, codeModel, null);
                 }
                 else
                 {
-                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                    await MgmtTarget.ExecuteAsync(project, codeModel, inputNamespace, sourceInputModel);
                     if (Configuration.MgmtTestConfiguration is not null)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                        await MgmtTestTarget.ExecuteAsync(inputNamespace, project, codeModel, sourceInputModel);
                 }
             }
             else

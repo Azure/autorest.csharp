@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (ReferenceClassFinder.TryGetPropertyMetadata(sourceType, out var serializedNameDict))
                 {
                     // find if any PropertyInfo in the serializedNameDict could match the serialized name as this childProperty
-                    var childPropertySerializedName = childProperty.SchemaProperty!.SerializedName;
+                    var childPropertySerializedName = childProperty.InputModelProperty.SerializedName;
                     string? parentPropertyName = null;
                     foreach ((var propertyName, (var serializedName, _)) in serializedNameDict)
                     {

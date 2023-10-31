@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The underlying <see cref="Operation"/> object.
         /// </summary>
-        public Operation Operation { get; }
+        public InputOperation Operation { get; }
 
         public string OperationId => Operation.OperationId!;
         /// <summary>
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public CSharpType ReturnType => _wrappedMgmtReturnType ??= GetWrappedMgmtReturnType(MgmtReturnType);
 
         public MethodSignatureModifiers Accessibility { get; }
-        public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
+        public bool IsPagingOperation => Operation.Paging != null || IsListOperation;
 
         private string? _propertyBagName;
 
@@ -111,9 +111,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public OperationFinalStateVia? FinalStateVia { get; }
 
-        public Schema? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunningFinalResponse.ResponseSchema : null;
+        public InputType? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunning?.FinalResponse.BodyType : null;
 
-        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string operationName, bool? isLongRunning = null, bool throwIfNull = false, string? propertyBagName = null)
+        public MgmtRestOperation(InputOperation operation, RequestPath requestPath, RequestPath contextualPath, string operationName, bool? isLongRunning = null, bool throwIfNull = false, string? propertyBagName = null)
         {
             var restClient = MgmtContext.Library.GetRestClient(operation);
             var method = MgmtContext.Library.GetRestClientPublicMethodSignature(operation);
@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             ContextualPath = contextualPath;
             OperationName = operationName;
             Resource = GetResourceMatch(restClient, method, requestPath);
-            FinalStateVia = operation.IsLongRunning ? operation.LongRunningFinalStateVia : null;
+            FinalStateVia = operation.IsLongRunning ? operation.LongRunning?.FinalStateVia : null;
             OriginalReturnType = operation.IsLongRunning ? GetFinalResponse() : MgmtContext.Library.GetOperationMethods(operation).ResponseType;
             OperationSource = GetOperationSource();
             InterimOperation = GetInterimOperation();
@@ -195,10 +195,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (!IsLongRunningOperation || IsFakeLongRunningOperation)
                 return null;
 
+            // TODO: how to get extensions from InputOperation?
             if (Operation.IsInterimLongRunningStateEnabled)
             {
-                IEnumerable<Schema?> allSchemas = Operation.Responses.Select(r => r.ResponseSchema);
-                ImmutableHashSet<Schema?> schemas = allSchemas.ToImmutableHashSet();
+                IEnumerable<InputType?> allSchemas = Operation.Responses.Select(r => r.BodyType);
+                ImmutableHashSet<InputType?> schemas = allSchemas.ToImmutableHashSet();
                 if (MgmtReturnType is null || allSchemas.Count() != Operation.Responses.Count() || schemas.Count() != 1)
                     throw new NotSupportedException($"The interim state feature is only supported when all responses of the long running operation {OperationName} have the same shcema.");
 
@@ -211,13 +212,13 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private CSharpType? GetFinalResponse()
         {
-            var finalSchema = Operation.LongRunningFinalResponse.ResponseSchema;
+            var finalSchema = Operation.LongRunning?.FinalResponse.BodyType;
             if (finalSchema is null)
                 return null;
 
             try
             {
-                return finalSchema.Type == AllSchemaTypes.Object ? MgmtContext.Library.FindTypeForSchema(finalSchema) : new TypeFactory(MgmtContext.Library).CreateType(finalSchema, false);
+                return finalSchema is InputModelType inputModel ? MgmtContext.Library.ResolveModel(inputModel) : new TypeFactory(MgmtContext.Library).CreateType(finalSchema);
             }
             catch (Exception ex)
             {
@@ -288,7 +289,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Dictionary<ResourceMatchType, HashSet<Resource>> matches = new Dictionary<ResourceMatchType, HashSet<Resource>>();
             foreach (var resource in restClient.Resources)
             {
-                var match = GetMatchType(Operation.GetHttpMethod(), resource.RequestPath, requestPath, Operation.IsListMethod(out _));
+                var match = GetMatchType(Operation.HttpMethod, resource.RequestPath, requestPath, Operation.IsListMethod(out _));
                 if (match == ResourceMatchType.None)
                     continue;
                 if (match == ResourceMatchType.Exact)
@@ -393,12 +394,12 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
         }
 
-        private static bool TryGetListMatch(HttpMethod method, RequestPath resourcePath, RequestPath operationPath, bool isList, out ResourceMatchType matchType)
+        private static bool TryGetListMatch(RequestMethod method, RequestPath resourcePath, RequestPath operationPath, bool isList, out ResourceMatchType matchType)
         {
             matchType = ResourceMatchType.None;
             if (!isList)
                 return false;
-            if (method != HttpMethod.Get)
+            if (method != RequestMethod.Get)
                 return false;
             var operationLastSegment = operationPath.Last();
             if (!operationLastSegment.IsConstant)
@@ -422,7 +423,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return false;
         }
 
-        internal static ResourceMatchType GetMatchType(HttpMethod httpMethod, RequestPath resourcePath, RequestPath requestPath, bool isList)
+        internal static ResourceMatchType GetMatchType(RequestMethod httpMethod, RequestPath resourcePath, RequestPath requestPath, bool isList)
         {
             //check exact match
             if (resourcePath == requestPath)
@@ -437,7 +438,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (resourcePath.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 0, 1))
                 return isList ? ResourceMatchType.ChildList : ResourceMatchType.Context;
 
-            if (httpMethod == HttpMethod.Get)
+            if (httpMethod == RequestMethod.Get)
                 return ResourceMatchType.None;
 
             var resourceLastSegement = resourcePath.Last();
@@ -582,7 +583,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             };
         }
 
-        private static PagingMethod? GetPagingMethod(Operation operation)
+        private static PagingMethod? GetPagingMethod(InputOperation operation)
         {
             var methods = MgmtContext.Library.GetOperationMethods(operation);
             return operation.IsListMethod(out var itemType, out var valuePropertyName, out var nextLinkPropertyName)

@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<Operation, RequestPath> _operationToParentRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
+        private static ConcurrentDictionary<InputOperation, RequestPath> _inputOperationToParentRequestPathCache = new ConcurrentDictionary<InputOperation, RequestPath>();
 
         private static ConcurrentDictionary<MgmtTypeProvider, IEnumerable<MgmtTypeProvider>> _resourceParentCache = new ConcurrentDictionary<MgmtTypeProvider, IEnumerable<MgmtTypeProvider>>();
 
@@ -130,20 +131,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="operation"></param>
         /// <returns></returns>
-        public static RequestPath ParentRequestPath(this Operation operation)
+        public static RequestPath ParentRequestPath(this InputOperation operation)
         {
-            if (_operationToParentRequestPathCache.TryGetValue(operation, out var result))
+            if (_inputOperationToParentRequestPathCache.TryGetValue(operation, out var result))
                 return result;
 
-            result = operation.GetParentRequestPath();
-            _operationToParentRequestPathCache.TryAdd(operation, result);
+            result = GetParentRequestPath(operation);
+            _inputOperationToParentRequestPathCache.TryAdd(operation, result);
             return result;
         }
 
-        private static RequestPath GetParentRequestPath(this Operation operation)
+        private static RequestPath GetParentRequestPath(InputOperation operation)
         {
             // escape the calculation if this is configured in the configuration
-            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.Uri, out var rawPath))
                 return GetRequestPathFromRawPath(rawPath);
 
             var currentRequestPath = operation.GetRequestPath();

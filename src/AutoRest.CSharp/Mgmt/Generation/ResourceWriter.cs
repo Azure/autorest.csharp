@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var bodyParamType = parameters.First().Type;
             string bodyParamName = "current";
             //if we are using PATCH always minimize what we pass in the body to what we actually want to change
-            if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
+            if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.HttpMethod == RequestMethod.Patch)
             {
                 bodyParamName = "patch";
                 if (bodyParamType.TryCast<ObjectType>(out var objectType))

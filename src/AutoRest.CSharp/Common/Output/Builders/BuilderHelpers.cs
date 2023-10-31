@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -15,7 +14,6 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -60,49 +58,6 @@ namespace AutoRest.CSharp.Output.Builders
 
             return new Constant(normalizedValue, type);
         }
-
-        public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
-        {
-            ConstantSchema constantSchema => GetSerializationFormat(constantSchema.ValueType), // forward the constantSchema to its underlying type
-
-            ByteArraySchema byteArraySchema => byteArraySchema.Format switch
-            {
-                ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,
-                ByteArraySchemaFormat.Byte => SerializationFormat.Bytes_Base64,
-                _ => SerializationFormat.Default
-            },
-
-            UnixTimeSchema => SerializationFormat.DateTime_Unix,
-            DateTimeSchema dateTimeSchema => dateTimeSchema.Format switch
-            {
-                DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
-                DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
-                _ => SerializationFormat.Default
-            },
-
-            DateSchema _ => SerializationFormat.Date_ISO8601,
-            TimeSchema _ => SerializationFormat.Time_ISO8601,
-
-            DurationSchema _ => schema.Extensions?.Format switch
-            {
-                XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
-                _ => SerializationFormat.Duration_ISO8601
-            },
-
-            _ when schema.Type == AllSchemaTypes.Duration => SerializationFormat.Duration_ISO8601,
-            _ when schema.Type == AllSchemaTypes.DateTime => SerializationFormat.DateTime_ISO8601,
-            _ when schema.Type == AllSchemaTypes.Date => SerializationFormat.DateTime_ISO8601,
-            _ when schema.Type == AllSchemaTypes.Time => SerializationFormat.DateTime_ISO8601,
-
-            _ => schema.Extensions?.Format switch
-            {
-                XMsFormat.DateTime => SerializationFormat.DateTime_ISO8601,
-                XMsFormat.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
-                XMsFormat.DateTimeUnix => SerializationFormat.DateTime_Unix,
-                XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
-                _ => SerializationFormat.Default
-            }
-        };
 
         private const string EscapedAmpersand = "&amp;";
         private const string EscapedLessThan = "&lt;";

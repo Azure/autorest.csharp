@@ -443,8 +443,8 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             // skip the first because this stack include the property we are handling here right now
             foreach (var property in hierarchyStack.Reverse().Skip(1))
             {
-                var schemaProperty = property.SchemaProperty;
-                if (schemaProperty == null || exampleValue is not InputExampleObjectValue objectValue || !objectValue.Values.TryGetValue(schemaProperty.SerializedName, out var inner))
+                var inputModelProperty = property.InputModelProperty;
+                if (inputModelProperty == null || exampleValue is not InputExampleObjectValue objectValue || !objectValue.Values.TryGetValue(inputModelProperty.SerializedName, out var inner))
                     return null;
                 // get the value of this layer
                 exampleValue = inner;

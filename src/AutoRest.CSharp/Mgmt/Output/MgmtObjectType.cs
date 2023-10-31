@@ -19,8 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private ObjectTypeProperty[]? _myProperties;
 
-        public MgmtObjectType(ObjectSchema objectSchema, TypeFactory typeFactory, string? name = default, string? nameSpace = default)
-            : base(objectSchema, typeFactory, MgmtContext.Context)
+        public MgmtObjectType(InputModelType inputModelType, TypeFactory typeFactory, string? name = default, string? nameSpace = default)
+            : base(inputModelType, typeFactory, MgmtContext.Context)
         {
             _typeFactory = typeFactory;
             _defaultName = name;
@@ -30,21 +30,21 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual bool IsResourceType => false;
         private readonly TypeFactory _typeFactory;
         private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= GetDefaultName(ObjectSchema, IsResourceType);
+        protected override string DefaultName => _defaultName ??= GetDefaultName(InputModel, IsResourceType);
         private string? _defaultNamespace;
-        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, ObjectSchema, IsResourceType);
+        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, InputModel, IsResourceType);
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
+        private static string GetDefaultName(InputModelType inputModelType, bool isResourceType)
         {
-            var name = objectSchema.CSharpName();
+            var name = inputModelType.Name;
             return isResourceType ? name + "Data" : name;
         }
 
-        private static string GetDefaultNamespace(BuildContext context, Schema objectSchema, bool isResourceType)
+        private static string GetDefaultNamespace(BuildContext context, InputModelType inputModelType, bool isResourceType)
         {
-            return isResourceType ? context.DefaultNamespace : GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
+            return isResourceType ? context.DefaultNamespace : GetDefaultNamespace(inputModelType.Namespace, context);
         }
 
         private HashSet<string> GetParentPropertyNames()
@@ -165,9 +165,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
 
             // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
-            if (ObjectSchema.DiscriminatorValue == "Unknown" &&
-                ObjectSchema.Parents?.All.Count == 1 &&
-                ObjectSchema.Parents.All.First().Equals(schemaObjectType.ObjectSchema))
+            if (InputModel.DiscriminatorValue == "Unknown" &&
+                InputModel.Parents?.All.Count == 1 &&
+                InputModel.Parents.All.First().Equals(schemaObjectType.InputModel))
             {
                 descendantTypes.Add(Type);
             }
@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
-            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
+            if (!TryGetPropertyForSchemaProperty(p => p.InputModelProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
             {
                 if (Inherits?.Implementation is SystemObjectType)
                 {
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override FormattableString CreateDescription()
         {
-            return $"{ObjectSchema.CreateDescription()}";
+            return $"{InputModel.Description}";
         }
     }
 }

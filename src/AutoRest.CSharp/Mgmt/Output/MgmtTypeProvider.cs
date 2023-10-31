@@ -211,7 +211,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.GetParents().Contains(this));
 
-        protected string GetOperationName(Operation operation, string clientResourceName)
+        protected string GetOperationName(InputOperation operation, string clientResourceName)
         {
             // search the configuration for a override of this operation
             if (operation.TryGetConfigOperationName(out var name))
@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <param name="operation"></param>
         /// <param name="clientResourceName">For extension classes, use the ResourceName. For resources, use its operation group name</param>
         /// <returns></returns>
-        protected virtual string CalculateOperationName(Operation operation, string clientResourceName)
+        protected virtual string CalculateOperationName(InputOperation operation, string clientResourceName)
         {
             // search the configuration for a override of this operation
             if (operation.TryGetConfigOperationName(out var name))

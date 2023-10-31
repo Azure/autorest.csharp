@@ -7,7 +7,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -95,10 +97,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-
+            CodeModelTransformer.Transform();
+            var codeModelConverter = new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel));
+            var inputNamespace = codeModelConverter.CreateNamespace();
             var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
 
-            var context = new BuildContext(codeModel, null, config.Namespace);
+            var context = new BuildContext(inputNamespace, codeModel, null, config.Namespace);
             Execute(context.DefaultNamespace, async (filename, text) =>
             {
                 await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");

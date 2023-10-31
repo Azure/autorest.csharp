@@ -410,7 +410,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             foreach (var property in propertiesToExplore)
             {
                 var propertyType = property.ValueType;
-                if (!visitedTypes.Contains(propertyType) && property.SchemaProperty is {SerializedName: var propertyName})
+                if (!visitedTypes.Contains(propertyType) && property.InputModelProperty is {SerializedName: var propertyName})
                 {
                     // <invocation>.GetProperty("<propertyName>");
                     visitedTypes.Add(propertyType);

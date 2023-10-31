@@ -16,10 +16,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtRestClient : RestClient
     {
-        private readonly IReadOnlyList<Operation> _operations;
+        private readonly IReadOnlyList<InputOperation> _operations;
         private IReadOnlyList<Resource>? _resources;
 
-        public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, List<Operation> operations, string clientName, MgmtOutputLibrary library)
+        public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, IReadOnlyList<InputOperation> operations, string clientName, MgmtOutputLibrary library)
             : base(new ClientMethodsBuilder(inputClient.Operations, library, MgmtContext.Context.SourceInputModel, library.TypeFactory), clientParameters, restClientParameters, clientName, MgmtContext.Context.DefaultNamespace, inputClient.Key, MgmtContext.Context.SourceInputModel)
         {
             _operations = operations;

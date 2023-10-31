@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (exampleValue.Schema != null && ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Schema, out CSharpType? replaceType) && replaceType != null)
                 type = replaceType;
 
-            return type.IsFrameworkType ?
+            return type!.IsFrameworkType ?
                 writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :
                 writer.AppendTypeProviderValue(type, exampleValue);
         }
@@ -429,7 +429,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 // try every property, convert them to variable name and see if there are some of them matching
                 var property = propertyDict[parameter.Name];
                 ExampleValue? exampleValue;
-                if (!valueDict.TryGetValue(property.SchemaProperty!.SerializedName, out exampleValue))
+                if (!valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out exampleValue))
                 {
                     // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
                     if (TypeFactory.IsCollectionType(property.Declaration.Type))
@@ -452,7 +452,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         };
                     }
                     else
-                        throw new InvalidOperationException($"Example value for required property {property.SchemaProperty!.SerializedName} in class {objectType.Type.Name} is not found");
+                        throw new InvalidOperationException($"Example value for required property {property.InputModelProperty.SerializedName} in class {objectType.Type.Name} is not found");
                 }
                 properties.Remove(property);
                 writer.AppendExampleValue(exampleValue, type: property.Declaration.Type).AppendRaw(",");
@@ -482,11 +482,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             foreach (var property in properties)
             {
                 var propertyToDeal = property;
-                var schemaProperty = propertyToDeal.SchemaProperty;
-                if (schemaProperty == null)
-                    continue; // now we explicitly ignore all the AdditionalProperties
-
-                if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
+                var schemaProperty = propertyToDeal.InputModelProperty;
+                if (!valueDict.TryGetValue(schemaProperty!.SerializedName, out var exampleValue))
                     continue; // skip the property that does not have a value
 
                 // check if this property is safe-flattened
@@ -516,8 +513,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // skip the first because this stack include the property we are handling here right now
             foreach (var property in hierarchyStack.Reverse().Skip(1))
             {
-                var schemaProperty = property.SchemaProperty;
-                if (schemaProperty == null || exampleValue.Properties == null || !exampleValue.Properties.TryGetValue(schemaProperty.SerializedName, out var inner))
+                var inputModelProperty = property.InputModelProperty;
+                if (exampleValue.Properties == null || !exampleValue.Properties.TryGetValue(inputModelProperty!.SerializedName, out var inner))
                     return null;
                 // get the value of this layer
                 exampleValue = inner;

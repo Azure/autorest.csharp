@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -143,18 +144,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
                     new CSharpType(property.PropertyType, isNullable));
-                Property prop = new Property()
-                {
-                    Nullable = isNullable,
-                    ReadOnly = property.IsReadOnly(),
-                    SerializedName = GetSerializedName(property.Name),
-                    Summary = $"Gets{GetPropertySummary(setter)} {property.Name}",
-                    Required = IsRequired(property),
-                    Language = new Languages()
-                    {
-                        Default = new Language() { Name = property.Name },
-                    }
-                };
+                InputModelProperty prop = new InputModelProperty(property.Name, GetSerializedName(property.Name), $"Gets{GetPropertySummary(setter)} {property.Name}", null, null, IsRequired(property), property.IsReadOnly(), false, null);
 
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
@@ -167,7 +157,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     };
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
+                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Description, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
             }
         }
 

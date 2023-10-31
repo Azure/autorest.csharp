@@ -14,13 +14,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtReferenceType : MgmtObjectType
     {
-        public MgmtReferenceType(ObjectSchema objectSchema, TypeFactory typeFactory, string? name = default, string? nameSpace = default) : base(objectSchema, typeFactory, name, nameSpace)
+        public MgmtReferenceType(InputModelType inputModelType, TypeFactory typeFactory, string? name = default, string? nameSpace = default) : base(inputModelType, typeFactory, name, nameSpace)
         {
         }
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Extensions?.MgmtReferenceType is true;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.Extensions?.MgmtReferenceType is true;
 
-        public override bool IncludeConverter => (ObjectSchema.Extensions?.MgmtPropertyReferenceType == true || ObjectSchema.Extensions?.MgmtTypeReferenceType == true) && ObjectSchema.Extensions?.MgmtReferenceType != true || base.IncludeConverter;
+        public override bool IncludeConverter => (InputModel.Extensions?.MgmtPropertyReferenceType == true || InputModel.Extensions?.MgmtTypeReferenceType == true) && InputModel.Extensions?.MgmtReferenceType != true || base.IncludeConverter;
 
         protected override ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override CSharpType? CreateInheritedType()
         {
-            return ObjectSchema.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
+            return InputModel.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
         }
     }
 }

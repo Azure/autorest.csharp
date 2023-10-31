@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -102,7 +103,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
 
     public static RequestPath FromSegments(IEnumerable<Segment> segments) => new RequestPath(segments);
 
-    public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup, TypeFactory typeFactory)
+    public static RequestPath FromOperation(InputOperation operation, InputClient inpuClient, TypeFactory typeFactory)
     {
         foreach (var request in operation.Requests)
         {
@@ -123,7 +124,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
         }
 
-        throw new ErrorHelpers.ErrorException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
+        throw new ErrorHelpers.ErrorException($"We didn't find request path for {inpuClient.Key}.{operation.CleanName}");
     }
 
     private static Segment GetSegmentFromString(string str)

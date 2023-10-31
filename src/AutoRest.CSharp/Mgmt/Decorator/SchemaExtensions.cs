@@ -15,6 +15,16 @@ internal static class SchemaExtensions
     /// <summary>
     /// Union all the properties on myself and all the properties from my parents
     /// </summary>
+    /// <param name="inputModelType"></param>
+    /// <returns></returns>
+    internal static IEnumerable<InputModelProperty> GetAllProperties(this InputModelType inputModelType)
+    {
+        return inputModelType.DerivedModels!.OfType<InputModelType>().SelectMany(parentInputModelType => parentInputModelType.Properties).Concat(inputModelType.Properties);
+    }
+
+    /// <summary>
+    /// Union all the properties on myself and all the properties from my parents
+    /// </summary>
     /// <param name="schema"></param>
     /// <returns></returns>
     internal static IEnumerable<Property> GetAllProperties(this ObjectSchema schema)
@@ -22,47 +32,27 @@ internal static class SchemaExtensions
         return schema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties).Concat(schema.Properties);
     }
 
-    private static bool IsTagsProperty(Property property)
-        => property.CSharpName().Equals("Tags")
-            && property.Schema is DictionarySchema dictSchema
-            && dictSchema.ElementType.Type == AllSchemaTypes.String;
+    private static bool IsTagsProperty(InputModelProperty property)
+        => property.Type.Name.Equals("Tags")
+            && property.Type is InputDictionaryType dictType
+            && dictType.KeyType is InputPrimitiveType inputPrimitive
+            && inputPrimitive.Kind == InputTypeKind.String;
 
-    public static bool HasTags(this Schema schema)
+    public static bool HasTags(this InputType schema)
     {
-        if (schema is not ObjectSchema objSchema)
+        if (schema is not InputModelType inputModel)
         {
             return false;
         }
 
-        var allProperties = objSchema.GetAllProperties();
+        var allProperties = inputModel.GetAllProperties();
 
         return allProperties.Any(property => IsTagsProperty(property) && !property.IsReadOnly);
     }
 
-    public static bool IsTagsOnly(this Schema schema)
+    public static bool IsResourceModel(this InputModelType inputModelType)
     {
-        if (schema is not ObjectSchema objSchema)
-        {
-            return false;
-        }
-
-        var allProperties = objSchema.GetAllProperties();
-
-        // we are expecting this schema only has a `Tags` property
-        if (allProperties.Count() != 1)
-            return false;
-
-        var onlyProperty = allProperties.Single();
-
-        return IsTagsProperty(onlyProperty);
-    }
-
-    public static bool IsResourceModel(this Schema schema)
-    {
-        if (schema is not ObjectSchema objSchema)
-            return false;
-
-        var allProperties = objSchema.GetAllProperties();
+        var allProperties = inputModelType.GetAllProperties();
         bool idPropertyFound = false;
         bool typePropertyFound = !Configuration.MgmtConfiguration.DoesResourceModelRequireType;
         bool namePropertyFound = !Configuration.MgmtConfiguration.DoesResourceModelRequireName;
@@ -71,26 +61,38 @@ internal static class SchemaExtensions
         {
             // check if this property is flattened from lower level, we should only consider first level properties in this model
             // therefore if flattenedNames is not empty, this property is flattened, we skip this property
-            if (property.FlattenedNames.Any())
+            if (property.FlattenedNames is not null && property.FlattenedNames.Any())
                 continue;
+
             switch (property.SerializedName)
             {
                 case "id":
-                    if (property.Schema.Type == AllSchemaTypes.String || property.Schema.Type == AllSchemaTypes.ArmId)
+                    if (property.Type is InputPrimitiveType inputPrimitiveType && (inputPrimitiveType.Kind == InputTypeKind.String || inputPrimitiveType.Kind == InputTypeKind.ResourceIdentifier))
                         idPropertyFound = true;
                     continue;
                 case "type":
-                    if (property.Schema.Type == AllSchemaTypes.String)
+                    if (property.Type is InputPrimitiveType inputPrimitive && inputPrimitive.Kind == InputTypeKind.String)
                         typePropertyFound = true;
                     continue;
                 case "name":
-                    if (property.Schema.Type == AllSchemaTypes.String)
+                    if (property.Type is InputPrimitiveType primitive && primitive.Kind == InputTypeKind.String)
                         namePropertyFound = true;
                     continue;
             }
         }
 
         return idPropertyFound && typePropertyFound && namePropertyFound;
+    }
+
+    // TODO: we may reuse the IsResourceModel instead of creating this method, but the result for flattened properties is different as although models with matched flattened properties are not treated as Resource but they still inherit from ResourceData. We should probably consider to align the behavior before we can refactor the methods.
+    internal static bool IsResourceData(this InputModelType objSchema)
+    {
+        return objSchema.ContainsStringProperty("id") && objSchema.ContainsStringProperty("name") && objSchema.ContainsStringProperty("type");
+    }
+
+    private static bool ContainsStringProperty(this InputModelType inputModelType, string propertyName)
+    {
+        return inputModelType.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Type is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind == InputTypeKind.String);
     }
 
     // TODO: we may reuse the IsResourceModel instead of creating this method, but the result for flattened properties is different as although models with matched flattened properties are not treated as Resource but they still inherit from ResourceData. We should probably consider to align the behavior before we can refactor the methods.

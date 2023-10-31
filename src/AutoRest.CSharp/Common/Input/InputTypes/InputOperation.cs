@@ -55,4 +55,6 @@ internal record InputOperation(
     { }
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+
+    public bool IsLongRunning => LongRunning != null;
 }
