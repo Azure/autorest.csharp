@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
@@ -21,10 +22,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType {IsExtensible: true} e:
+                case EnumType { IsExtensible: true } e:
                     WriteExtensibleEnum(writer, e);
                     break;
-                case EnumType {IsExtensible: false} e:
+                case EnumType { IsExtensible: false } e:
                     WriteEnum(writer, e);
                     break;
                 default:
@@ -67,6 +68,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
+                    WritePrivateRawDataField(writer, schema);
+
                     WriteConstructor(writer, schema);
 
                     WriteProperties(writer, schema);
@@ -76,13 +79,31 @@ namespace AutoRest.CSharp.Generation.Writers
 
         protected virtual void WriteProperties(CodeWriter writer, ObjectType schema)
         {
+            var rawDataField = (schema as SerializableObjectType)?.RawDataField;
             foreach (var property in schema.Properties)
             {
+                if (property == rawDataField)
+                    continue;
+
                 WriteProperty(writer, property);
 
                 if (property.FlattenedProperty != null)
                     WriteProperty(writer, property.FlattenedProperty);
             }
+        }
+
+        // TODO -- this is workaround
+        private void WritePrivateRawDataField(CodeWriter writer, ObjectType schema)
+        {
+            if ((schema as SerializableObjectType)?.RawDataField is not { } rawDataField)
+                return;
+
+            writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
+            writer.Append($"{rawDataField.Declaration.Accessibility} ")
+                .AppendRawIf("readonly ", schema.IsStruct)
+                .Line($"{rawDataField.Declaration.Type} {rawDataField.Declaration.Name};");
+
+            writer.Line();
         }
 
         private void WriteFieldModifiers(CodeWriter writer, FieldModifiers modifiers)

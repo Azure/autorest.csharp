@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
 
             var parameterExpressions = sample.GetValueExpressionsForParameters(methodSignature.Parameters, variableDeclarations);
-            var invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
+            ValueExpression invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
 
             if (sample.PageItemType is {} pageItemType)
             {

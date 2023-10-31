@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
-        public bool IsInheritableCommonType => ObjectSchema is { Extensions: {} } && (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.MgmtTypeReferenceType);
+        public bool IsInheritableCommonType => ObjectSchema is { Extensions: { } } && (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.MgmtTypeReferenceType);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -113,6 +113,42 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 return _additionalPropertiesProperty;
             }
+        }
+
+        private ObjectTypeProperty? _rawDataField;
+        public override ObjectTypeProperty? RawDataField
+        {
+            get
+            {
+                if (_rawDataField != null)
+                    return _rawDataField;
+
+                if (AdditionalPropertiesProperty != null || !ShouldHaveRawData)
+                    return null;
+
+                // when this model has derived types, the accessibility should change from private to `protected internal`
+                string accessibility = HasDerivedTypes() ? "protected internal" : "private";
+
+                _rawDataField = new ObjectTypeProperty(
+                    BuilderHelpers.CreateMemberDeclaration(_privateAdditionalPropertiesPropertyName,
+                        _privateAdditionalPropertiesPropertyType, accessibility, null, _typeFactory),
+                    _privateAdditionalPropertiesPropertyDescription,
+                    true,
+                    null);
+
+                return _rawDataField;
+            }
+        }
+
+        private bool HasDerivedTypes()
+        {
+            if (ObjectSchema.Children is not null && ObjectSchema.Children.All.Count > 0)
+                return true;
+
+            if (ObjectSchema.Discriminator is not null)
+                return true;
+
+            return false;
         }
 
         protected override ObjectTypeConstructor BuildSerializationConstructor()
@@ -151,6 +187,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                 serializationConstructorParameters.Add(deserializationParameter);
 
                 serializationInitializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, GetPropertyDefaultValue(property)));
+            }
+
+            // add the raw data to serialization ctor parameter list
+            if (RawDataField != null)
+            {
+                var deserializationParameter = new Parameter(
+                    RawDataField.Declaration.Name.ToVariableName(),
+                    RawDataField.ParameterDescription,
+                    RawDataField.Declaration.Type,
+                    null,
+                    Validation.None,
+                    null
+                );
+                serializationConstructorParameters.Add(deserializationParameter);
+                serializationInitializers.Add(new ObjectPropertyInitializer(RawDataField, deserializationParameter, null));
             }
 
             if (InitializationConstructor.Signature.Parameters
@@ -199,27 +250,25 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<Method> BuildMethods()
         {
-            if (XmlSerialization is {} xmlSerialization)
+            // TODO -- move this thing to SerializationBuilder
+            if (XmlSerialization is { } xmlSerialization)
             {
-                if (IncludeSerializer)
-                {
-                    yield return XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(xmlSerialization);
-                }
-
-                if (IncludeDeserializer)
-                {
-                    yield return XmlSerializationMethodsBuilder.BuildDeserialize(Declaration, xmlSerialization);
-                }
+                yield return XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(xmlSerialization);
+                yield return XmlSerializationMethodsBuilder.BuildDeserialize(Declaration, xmlSerialization);
             }
 
-            if (JsonSerialization is { } serialization)
+            if (JsonSerialization is { } jsonSerialization)
             {
-                if (IncludeSerializer)
+                foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(this, jsonSerialization))
                 {
-                    yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(serialization);
+                    yield return method;
+                }
+                foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(this, HasJsonSerialization, HasXmlSerialization))
+                {
+                    yield return method; // TODO -- this is not entirely correct
                 }
 
-                if (IncludeDeserializer && JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization, ExistingType) is {} jsonDeserialize)
+                if (JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, jsonSerialization, ExistingType) is { } jsonDeserialize)
                 {
                     yield return jsonDeserialize;
                 }
@@ -323,21 +372,24 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
 
         protected bool SkipInitializerConstructor => ObjectSchema.Extensions is { SkipInitCtor: true };
-        protected bool SkipSerializerConstructor => !IncludeDeserializer;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
             // Skip initialization ctor if this instance is used to support forward compatibility in polymorphism.
             if (!SkipInitializerConstructor)
-            {
                 yield return InitializationConstructor;
-            }
 
             // Skip serialization ctor if they are the same
-            if (!SkipSerializerConstructor && InitializationConstructor != SerializationConstructor)
-            {
+            if (InitializationConstructor != SerializationConstructor)
                 yield return SerializationConstructor;
-            }
+
+            // add an extra empty ctor if we do not have a ctor with no parameters
+            var accessibility = IsStruct ? Public : Internal;
+            if (InitializationConstructor.Signature.Parameters.Count > 0 && SerializationConstructor.Signature.Parameters.Count > 0)
+                yield return new(
+                    new ConstructorSignature(Type, null, $"Initializes a new instance of <see cref=\"{Type}\"/> for deserialization.", accessibility, Array.Empty<Parameter>()),
+                    Array.Empty<ObjectPropertyInitializer>(),
+                    null);
         }
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
@@ -663,16 +715,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override bool EnsureHasXmlSerialization()
         {
             return _supportedSerializationFormats.Contains(KnownMediaType.Xml);
-        }
-
-        protected override bool EnsureIncludeSerializer()
-        {
-            return _usage.HasFlag(SchemaTypeUsage.Input);
-        }
-
-        protected override bool EnsureIncludeDeserializer()
-        {
-            return _usage.HasFlag(SchemaTypeUsage.Output);
         }
 
         protected override JsonObjectSerialization EnsureJsonSerialization()

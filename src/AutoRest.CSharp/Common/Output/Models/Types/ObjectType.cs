@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
+        public bool IsPropertyBag { get; protected init; }
         public bool IsStruct => ExistingType?.IsValueType ?? false;
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();

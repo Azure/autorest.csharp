@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static ValueExpression RequestFailedException(ResponseExpression response) => Instance(Configuration.ApiTypes.RequestFailedExceptionType, response);
 
-            public static ResourceIdentifierExpression ResourceIdentifier(ValueExpression resourceData) => new(Instance(typeof(ResourceIdentifier), new MemberExpression(resourceData, "Id")));
+            public static ResourceIdentifierExpression ResourceIdentifier(ValueExpression idString) => new(Instance(typeof(ResourceIdentifier), idString));
 
             public static StreamReaderExpression StreamReader(ValueExpression stream) => new(Instance(typeof(StreamReader), stream));
 

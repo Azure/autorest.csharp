@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.ClientModel;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -27,13 +28,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class XmlSerializationMethodsBuilder
     {
+        private static readonly CSharpType nullableModelSerializerOptionsType = new CSharpType(typeof(ModelReaderWriterOptions), isNullable: true);
+
+        private static readonly Parameter xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, Validation.None, null);
+        private static readonly Parameter nameHint = new Parameter("nameHint", null, typeof(string), null, Validation.None, null);
+        private static readonly Parameter elementParameter = new Parameter("element", null, typeof(XElement), null, Validation.None, null);
+        private static readonly Parameter optionalOptionsParameter = new Parameter("options", null, nullableModelSerializerOptionsType, Constant.Default(nullableModelSerializerOptionsType), Validation.None, null);
+
         public static Method BuildXmlSerializableWrite(XmlObjectSerialization serialization)
         {
-            var xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, Validation.None, null);
-            var nameHint = new Parameter("nameHint", null, typeof(string), null, Validation.None, null);
             return new Method
             (
-                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{xmlWriter, nameHint}, ExplicitInterface: typeof(IXmlSerializable)),
+                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { xmlWriter, nameHint }, ExplicitInterface: typeof(IXmlSerializable)),
                 SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, nameHint).AsStatement()
             );
         }
@@ -72,7 +78,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement WrapInNullCheck(PropertySerialization serialization, MethodBodyStatement statement)
         {
-            if (serialization.SerializedType is {IsNullable: true} serializedType)
+            if (serialization.SerializedType is { IsNullable: true } serializedType)
             {
                 if (TypeFactory.IsCollectionType(serializedType) && serialization.IsRequired)
                 {
@@ -169,12 +175,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static Method BuildDeserialize(TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
-            var methodName = $"Deserialize{declaration.Name}";
-            var element = new Parameter("element", null, typeof(XElement), null, Validation.None, null);
             return new Method
             (
-                new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element}),
-                BuildDeserializeBody(new XElementExpression(element), serialization).ToArray()
+                new MethodSignature($"Deserialize{declaration.Name}", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { elementParameter, optionalOptionsParameter }),
+                BuildDeserializeBody(new XElementExpression(elementParameter), serialization).ToArray()
             );
         }
 
@@ -215,11 +219,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var objectType = (ObjectType)objectSerialization.Type.Implementation;
             var parameterValues = propertyVariables.ToDictionary(v => v.Key.SerializationConstructorParameterName, v => (ValueExpression)v.Value);
-            var parameters = objectType.SerializationConstructor.Signature.Parameters
-                .Select(p => parameterValues[p.Name])
-                .ToArray();
 
-            yield return Return(New.Instance(objectSerialization.Type, parameters));
+            var arguments = new List<ValueExpression>();
+            foreach (var parameter in objectType.SerializationConstructor.Signature.Parameters)
+            {
+                if (parameterValues.TryGetValue(parameter.Name, out var argument))
+                    arguments.Add(argument);
+                else
+                {
+                    // this must be the raw data property
+                    arguments.Add(Default);
+                }
+            }
+
+            yield return Return(New.Instance(objectSerialization.Type, arguments.ToArray()));
         }
 
         public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, StreamExpression stream)
@@ -317,12 +330,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     frameworkType == typeof(string)
                 )
                 {
-                    return new CastExpression(value, type);
+                    return value.CastTo(type);
                 }
 
                 if (frameworkType == typeof(ResourceIdentifier))
                 {
-                    return New.ResourceIdentifier(new CastExpression(value, typeof(string)));
+                    return New.ResourceIdentifier(value.CastTo(typeof(string)));
                 }
 
                 if (frameworkType == typeof(SystemData))
@@ -333,19 +346,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (frameworkType == typeof(ResourceType))
                 {
-                    return new CastExpression(value, typeof(string));
+                    return value.CastTo(typeof(string));
                 }
 
                 if (frameworkType == typeof(Guid))
                 {
                     return value is XElementExpression xElement
                         ? New.Instance(typeof(Guid), xElement.Value)
-                        : new CastExpression(value, typeof(Guid));
+                        : value.CastTo(typeof(Guid));
                 }
 
                 if (frameworkType == typeof(Uri))
                 {
-                    return New.Instance(typeof(Uri), new CastExpression(value, typeof(string)));
+                    return New.Instance(typeof(Uri), value.CastTo(typeof(string)));
                 }
 
                 if (value is XElementExpression element)
@@ -405,7 +418,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
-            if (element.ContentSerialization is {} contentSerialization)
+            if (element.ContentSerialization is { } contentSerialization)
             {
                 propertyVariables.Add(contentSerialization, new VariableReference(contentSerialization.Value.Type, contentSerialization.SerializationConstructorParameterName));
             }

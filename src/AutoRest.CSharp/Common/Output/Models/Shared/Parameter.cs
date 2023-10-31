@@ -5,18 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, ValueExpression? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, bool IsEndpoint = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
+    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, ValueExpression? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, bool IsEndpoint = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false, bool IsRef = false)
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;

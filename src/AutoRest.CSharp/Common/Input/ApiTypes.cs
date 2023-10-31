@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -69,13 +70,13 @@ namespace AutoRest.CSharp.Common.Input
         public abstract string RequestContentCreateName { get; }
 
         public abstract Type IUtf8JsonSerializableType { get; }
-        public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
+        public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonSerializable.Write);
 
         public abstract Type Utf8JsonWriterExtensionsType { get; }
-        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(ModelSerializationExtensions.WriteObjectValue);
-        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(ModelSerializationExtensions.WriteNumberValue);
-        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
-        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
+        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(Utf8JsonWriterExtensions.WriteObjectValue);
+        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(Utf8JsonWriterExtensions.WriteNumberValue);
+        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(Utf8JsonWriterExtensions.WriteStringValue);
+        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(Utf8JsonWriterExtensions.WriteBase64StringValue);
 
         public abstract Type OptionalType { get; }
         public abstract Type OptionalPropertyType { get; }

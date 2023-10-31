@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 yield return Return(response);
             }
-            else if (ResponseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
+            else if (ResponseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { } } serializableObjectType})
             {
                 yield return Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response));
             }

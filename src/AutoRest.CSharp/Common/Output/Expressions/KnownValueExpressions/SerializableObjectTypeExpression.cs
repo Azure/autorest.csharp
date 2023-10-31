@@ -19,8 +19,17 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public static SerializableObjectTypeExpression FromResponse(SerializableObjectType serializableObjectType, ResponseExpression response)
             => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, "FromResponse", new[] { response }));
 
-        public static SerializableObjectTypeExpression Deserialize(SerializableObjectType serializableObjectType, ValueExpression element)
-            => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, $"Deserialize{serializableObjectType.Declaration.Name}", new[] { element }));
+        public static SerializableObjectTypeExpression Deserialize(SerializableObjectType model, ValueExpression element, ValueExpression? options = null)
+        {
+            var arguments = options == null ? new[] { element } : new[] { element, options };
+            return new(model, new InvokeStaticMethodExpression(model.Type, $"Deserialize{model.Declaration.Name}", arguments));
+        }
+
+        public static SerializableObjectTypeExpression DeserializeXml(SerializableObjectType model, ValueExpression xElement, ValueExpression? options = null)
+        {
+            var arguments = options == null ? new[] { xElement } : new[] { xElement, options };
+            return new(model, new InvokeStaticMethodExpression(model.Type, $"Deserialize{model.Declaration.Name}", arguments));
+        }
 
         public RequestContentExpression ToRequestContent() => new(Untyped.Invoke("ToRequestContent"));
 
