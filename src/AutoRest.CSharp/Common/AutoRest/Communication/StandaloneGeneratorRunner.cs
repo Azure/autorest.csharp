@@ -51,8 +51,9 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
+                    bool needAzureKeyAuth = rootNamespace.Auth?.ApiKey != null;
                     // TODO - add support for DataFactoryElement lookup
-                    await new NewProjectScaffolding().Execute();
+                    await new NewProjectScaffolding(needAzureKeyAuth).Execute();
                 }
             }
             else if (File.Exists(codeModelInputPath))

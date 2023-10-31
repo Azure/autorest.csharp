@@ -16,14 +16,16 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private string _testDirectory;
         private string _serviceDirectory;
         private bool _isAzureSdk;
+        private bool _NeedAzureKeyAuth;
 
-        public NewProjectScaffolding()
+        public NewProjectScaffolding(bool needAzureKeyAuth)
         {
             _serivceDirectoryName = Path.GetFileName(Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..")));
             _projectDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..");
             _testDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "tests");
             _serviceDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..");
             _isAzureSdk = Configuration.Namespace.StartsWith("Azure.");
+            _NeedAzureKeyAuth = needAzureKeyAuth;
         }
 
         public async Task<bool> Execute()
@@ -281,7 +283,7 @@ extends:
 
         private string GetSrcCsproj()
         {
-            const string srcBrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+            string srcBrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <Description>This is the {0} client library for developing .NET applications with rich experience.</Description>
     <AssemblyTitle>Azure SDK Code Generation {0} for Azure Data Plane</AssemblyTitle>
@@ -292,7 +294,13 @@ extends:
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include=""$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs"" LinkBase=""Shared/Core"" />
+    <Compile Include=""$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs"" LinkBase=""Shared/Core"" />";
+            if (_NeedAzureKeyAuth)
+            {
+                srcBrandedCsprojContent += @"
+    <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />";
+            }
+            srcBrandedCsprojContent += @"
   </ItemGroup>
 
   <ItemGroup>
