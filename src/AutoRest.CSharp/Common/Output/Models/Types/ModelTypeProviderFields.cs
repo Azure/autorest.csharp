@@ -277,9 +277,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var fieldType = BuilderHelpers.GetTypeFromExisting(existingMember, originalType, typeFactory);
             var fieldModifiers = GetAccessModifiers(existingMember);
+
+            FieldModifiers? setterModifiers = null;
             if (IsReadOnly(existingMember))
             {
                 fieldModifiers |= ReadOnly;
+            }
+            else if (existingMember is IPropertySymbol { SetMethod: {} setMethod } && GetAccessModifiers(setMethod) != Public)
+            {
+                setterModifiers = GetAccessModifiers(setMethod);
             }
 
             var writeAsProperty = existingMember is IPropertySymbol;
@@ -295,7 +301,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 IsRequired: isRequired,
                 WriteAsProperty: writeAsProperty,
                 OptionalViaNullability: optionalViaNullability,
-                SerializationMapping: serialization);
+                SerializationMapping: serialization,
+                SetterModifiers: setterModifiers);
         }
 
         private static FieldModifiers GetAccessModifiers(ISymbol existingMember) => existingMember.DeclaredAccessibility switch

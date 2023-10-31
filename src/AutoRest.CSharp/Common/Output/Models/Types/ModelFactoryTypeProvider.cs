@@ -269,7 +269,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var readOnlyProperties = properties
-                .Where(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
+                .Where(p => (p.IsReadOnly || p.SetterModifiers != null && p.SetterModifiers != FieldModifiers.Public) && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
                 .ToArray();
 
             if (!readOnlyProperties.Any())
