@@ -79,13 +79,13 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
+Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z") });
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
+Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z") });
 ]]></code></example>
     </member>
     <member name="Put(IEnumerable{DateTimeOffset},CancellationToken)">
@@ -94,13 +94,13 @@ This sample shows how to call Put.
 <code><![CDATA[
 DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
+Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z") });
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
+Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z") });
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -111,7 +111,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 using RequestContent content = RequestContent.Create(new object[]
 {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T18:57:31.2311892Z"
 });
 Response response = await client.PutAsync(content);
 
@@ -123,7 +123,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 using RequestContent content = RequestContent.Create(new object[]
 {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T18:57:31.2311892Z"
 });
 Response response = await client.PutAsync(content);
 
@@ -138,7 +138,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 using RequestContent content = RequestContent.Create(new object[]
 {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T18:57:31.2311892Z"
 });
 Response response = client.Put(content);
 
@@ -150,7 +150,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 using RequestContent content = RequestContent.Create(new object[]
 {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T18:57:31.2311892Z"
 });
 Response response = client.Put(content);
 

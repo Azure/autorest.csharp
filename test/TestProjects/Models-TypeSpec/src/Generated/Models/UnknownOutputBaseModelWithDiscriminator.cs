@@ -11,11 +11,6 @@ namespace ModelsTypeSpec.Models
     internal partial class UnknownOutputBaseModelWithDiscriminator : OutputBaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of UnknownOutputBaseModelWithDiscriminator. </summary>
-        internal UnknownOutputBaseModelWithDiscriminator()
-        {
-        }
-
-        /// <summary> Initializes a new instance of UnknownOutputBaseModelWithDiscriminator. </summary>
         /// <param name="kind"> Discriminator. </param>
         internal UnknownOutputBaseModelWithDiscriminator(string kind) : base(kind)
         {

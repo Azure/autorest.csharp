@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal enum ConvenienceMethodConfidenceLevel : int
+    internal enum ConvenienceMethodConfidenceLevel
     {
         Confident = 0,
         Internal = 1,

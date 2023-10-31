@@ -3,24 +3,23 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
-using AutoRest.CSharp.Utilities;
 using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -28,59 +27,117 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 {
     internal class DpgClientSampleProvider : TypeProvider
     {
-        public LowLevelClient Client { get; }
+        protected override string DefaultNamespace { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility => "public";
 
-        public DpgClientSampleProvider(string defaultNamespace, LowLevelClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public IReadOnlyList<Method> Methods { get; }
+
+        private static readonly CSharpAttribute[] Attributes = { new(typeof(TestAttribute)), new(typeof(IgnoreAttribute), "Only validating compilation of examples") };
+        private readonly IReadOnlyDictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>> _restClientMethodsToTestMethods;
+
+        public DpgClientSampleProvider(string defaultNamespace, DpgClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-            Client = client;
             DefaultNamespace = $"{defaultNamespace}.Samples";
             DefaultName = $"Samples_{client.Declaration.Name}";
-            _samples = client.ClientMethods.SelectMany(m => m.Samples);
+
+            BuildMethods(client, out var restClientMethodsToTestMethods, out var methods);
+            _restClientMethodsToTestMethods = restClientMethodsToTestMethods;
+            Methods = methods;
         }
 
-        private readonly IEnumerable<DpgOperationSample> _samples;
-        private Dictionary<MethodSignature, List<DpgOperationSample>>? methodToSampleDict;
-        private Dictionary<MethodSignature, List<DpgOperationSample>> MethodToSampleDict => methodToSampleDict ??= BuildMethodToSampleCache();
-
-        private Dictionary<MethodSignature, List<DpgOperationSample>> BuildMethodToSampleCache()
+        public IEnumerable<(string ExampleInformation, MethodBodyStatement TestMethodBody)> GetSampleInformation(MethodSignatureBase signature)
         {
-            var result = new Dictionary<MethodSignature, List<DpgOperationSample>>();
-            foreach (var sample in _samples)
+            if (!_restClientMethodsToTestMethods.TryGetValue(signature, out var testMethods))
             {
-                result.AddInList(sample.OperationMethodSignature.WithAsync(false), sample);
-                result.AddInList(sample.OperationMethodSignature.WithAsync(true), sample);
+                yield break;
             }
 
-            return result;
+            foreach ((string? exampleInformation, Method? testMethod) in testMethods)
+            {
+                yield return (exampleInformation, testMethod.Body ?? new MethodBodyStatement());
+            }
         }
 
-        public IEnumerable<(string ExampleInformation, string TestMethodName)> GetSampleInformation(MethodSignature signature, bool isAsync)
+        private void BuildMethods(DpgClient client, out Dictionary<MethodSignatureBase, IReadOnlyList<(string ExampleInformation, Method TestMethod)>> restClientMethodsToTestMethods, out List<Method> methods)
         {
-            if (MethodToSampleDict.TryGetValue(signature, out var result))
+            methods = new List<Method>();
+            restClientMethodsToTestMethods = new Dictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>>();
+            if (!Configuration.IsBranded)
             {
-                foreach (var sample in result)
+                return;
+            }
+
+            foreach (var operationMethods in client.OperationMethods.OrderBy(m => m.Order))
+            {
+                var samples = operationMethods.Samples;
+
+                IReadOnlyList<(string, Method Method)> sampleProtocolMethods = Array.Empty<(string, Method)>();
+                IReadOnlyList<(string, Method Method)> sampleProtocolAsyncMethods = Array.Empty<(string, Method)>();
+                IReadOnlyList<(string, Method Method)> sampleConvenienceMethods = Array.Empty<(string, Method)>();
+                IReadOnlyList<(string, Method Method)> sampleConvenienceAsyncMethods = Array.Empty<(string, Method)>();
+
+                if (operationMethods.Protocol is { } protocol)
                 {
-                    yield return (sample.GetSampleInformation(isAsync), GetMethodName(sample, isAsync));
+                    sampleProtocolMethods = BuildSampleMethods(client.Type, protocol.Signature, samples, false, false);
+                    restClientMethodsToTestMethods[protocol.Signature] = sampleProtocolMethods;
+                }
+                if (operationMethods.ProtocolAsync is { } protocolAsync)
+                {
+                    sampleProtocolAsyncMethods = BuildSampleMethods(client.Type, protocolAsync.Signature, samples, false, true);
+                    restClientMethodsToTestMethods[protocolAsync.Signature] = sampleProtocolAsyncMethods;
+                }
+                if (operationMethods.Convenience is { } convenience)
+                {
+                    sampleConvenienceMethods = BuildSampleMethods(client.Type, convenience.Signature, samples, true, false);
+                    restClientMethodsToTestMethods[convenience.Signature] = sampleConvenienceMethods;
+                }
+                if (operationMethods.ConvenienceAsync is { } convenienceAsync)
+                {
+                    sampleConvenienceAsyncMethods = BuildSampleMethods(client.Type, convenienceAsync.Signature, samples, true, true);
+                    restClientMethodsToTestMethods[convenienceAsync.Signature] = sampleConvenienceAsyncMethods;
+                }
+
+                // Group methods by sample type
+                var maxLength = Math.Max(
+                    Math.Max(sampleProtocolMethods.Count, sampleProtocolAsyncMethods.Count),
+                    Math.Max(sampleConvenienceMethods.Count, sampleConvenienceAsyncMethods.Count)
+                );
+
+                // [TODO]: Special order preserved to minimize the changes. Doesn't affect the semantics.
+                for (var i = 0; i < maxLength; i++)
+                {
+                    if (sampleProtocolMethods.Count > i)
+                    {
+                        methods.Add(sampleProtocolMethods[i].Method);
+                    }
+                    if (sampleProtocolAsyncMethods.Count > i)
+                    {
+                        methods.Add(sampleProtocolAsyncMethods[i].Method);
+                    }
+                    if (sampleConvenienceMethods.Count > i)
+                    {
+                        methods.Add(sampleConvenienceMethods[i].Method);
+                    }
+                    if (sampleConvenienceAsyncMethods.Count > i)
+                    {
+                        methods.Add(sampleConvenienceAsyncMethods[i].Method);
+                    }
                 }
             }
         }
 
-        private bool? _isEmpty;
-        public bool IsEmpty => _isEmpty ??= !Methods.Any();
+        private static MethodSignature GetMethodSignature(DpgOperationSample sample, bool isAsync) => new(
+                Name: GetMethodName(sample, isAsync),
+                Summary: null,
+                Description: null,
+                Modifiers: isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
+                ReturnType: isAsync ? typeof(Task) : (CSharpType?)null,
+                ReturnDescription: null,
+                Parameters: Array.Empty<Parameter>(),
+                Attributes: Attributes);
 
-        private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= EnsureMethods();
-
-        protected virtual IEnumerable<Method> EnsureMethods()
-        {
-            foreach (var sample in Client.ClientMethods.SelectMany(m => m.Samples))
-            {
-                yield return BuildSampleMethod(sample, false);
-                yield return BuildSampleMethod(sample, true);
-            }
-        }
-
-        protected virtual string GetMethodName(DpgOperationSample sample, bool isAsync)
+        private static string GetMethodName(DpgOperationSample sample, bool isAsync)
         {
             var builder = new StringBuilder("Example_").Append(sample.OperationMethodSignature.Name);
 
@@ -97,29 +154,23 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             return builder.ToString();
         }
 
-        protected virtual MethodSignature GetMethodSignature(DpgOperationSample sample, bool isAsync) => new(
-                Name: GetMethodName(sample, isAsync),
-                Summary: null,
-                Description: null,
-                Modifiers: isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
-                ReturnType: isAsync ? typeof(Task) : (CSharpType?)null,
-                ReturnDescription: null,
-                Parameters: Array.Empty<Parameter>(),
-                Attributes: _attributes);
+        private IReadOnlyList<(string ExampleInformation, Method Method)> BuildSampleMethods(CSharpType clientType, MethodSignatureBase signature, IEnumerable<DpgOperationSample> samples, bool isConvenienceSample, bool isAsync)
+            => samples
+                .Where(s => s.IsConvenienceSample == isConvenienceSample)
+                .Select(s => (s.GetSampleInformation(signature), BuildSampleMethod(clientType, s, isAsync)))
+                .ToList();
 
-        private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
-
-        private Method BuildSampleMethod(DpgOperationSample sample, bool isAsync)
+        private Method BuildSampleMethod(CSharpType clientType, DpgOperationSample sample, bool isAsync)
         {
             var signature = GetMethodSignature(sample, isAsync);
             var clientVariableStatements = new List<MethodBodyStatement>();
-            var newClientStatement = BuildGetClientStatement(sample, sample.ClientInvocationChain, clientVariableStatements, out var clientVar);
+            var newClientStatement = BuildGetClientStatement(clientType, sample, sample.ClientInvocationChain, clientVariableStatements, out var clientVar);
 
             // the method invocation statements go here
             var operationVariableStatements = new List<MethodBodyStatement>();
-            var operationInvocationStatements = BuildSampleOperationInvocation(sample, clientVar, operationVariableStatements, isAsync).ToArray();
+            var operationInvocationStatements = BuildSampleOperationInvocation(sample, clientVar, operationVariableStatements, isAsync);
 
-            return new Method(signature, new MethodBodyStatement[]
+            return new Method(signature, new[]
             {
                 clientVariableStatements,
                 newClientStatement,
@@ -129,7 +180,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             });
         }
 
-        internal MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        public MethodBodyStatement BuildGetClientStatement(CSharpType clientType, DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
             var first = methodsToCall[0];
             ValueExpression valueExpression = first switch
@@ -143,23 +194,27 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 valueExpression = valueExpression.Invoke(method.Name, sample.GetValueExpressionsForParameters(method.Parameters, variableDeclarations).ToArray());
             }
 
-            clientVar = new VariableReference(Client.Type, "client");
+            clientVar = new VariableReference(clientType, "client");
 
             return Declare(clientVar, valueExpression);
         }
 
-        private IEnumerable<MethodBodyStatement> BuildSampleOperationInvocation(DpgOperationSample sample, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync)
+        private static MethodBodyStatement BuildSampleOperationInvocation(DpgOperationSample sample, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync)
         {
             var methodSignature = sample.OperationMethodSignature.WithAsync(isAsync);
+            var returnType = methodSignature.ReturnType ?? throw new InvalidOperationException($"Operation method {methodSignature.Name} signature has no return type");
+            if (methodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Async) && TypeFactory.IsTaskOfT(returnType))
+            {
+                returnType = returnType.Arguments[0];
+            }
+
             var parameterExpressions = sample.GetValueExpressionsForParameters(methodSignature.Parameters, variableDeclarations);
             var invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
-            var returnType = GetReturnType(methodSignature.ReturnType);
-            VariableReference resultVar = sample.IsLongRunning
-                ? new VariableReference(returnType, "operation")
-                : new VariableReference(returnType, Configuration.ApiTypes.ResponseParameterName);
 
-            if (sample.IsPageable)
+            if (sample.PageItemType is {} pageItemType)
             {
+                var foreachItemType = sample.IsConvenienceSample ? pageItemType : typeof(BinaryData);
+
                 // if it is pageable, we need to wrap the invocation inside a foreach statement
                 // but before the foreach, if this operation is long-running, we still need to call it, and pass the operation.Value into the foreach
                 if (sample.IsLongRunning)
@@ -167,209 +222,209 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                     /*
                      * This will generate code like:
                      * Operation<T> operation = <invocation>;
-                     * BinaryData responseData = operation.Value;
+                     * await foreach (ItemType item in operation.Value)
+                     * {}
                      */
-                    yield return Declare(resultVar, invocation);
-                    returnType = GetOperationValueType(returnType);
-                    invocation = resultVar.Property("Value");
-                    resultVar = new VariableReference(returnType, $"{Configuration.ApiTypes.ResponseParameterName}Data");
-                    yield return Declare(resultVar, invocation);
+                    return new MethodBodyStatement[]
+                    {
+                        Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
+                        new ForeachStatement(foreachItemType, "item", operation.Value, isAsync, out var itemVar)
+                        {
+                            sample.IsConvenienceSample ? new MethodBodyStatement() : ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
+                        }
+                    };
                 }
+                else
+                {
+                    /*
+                     * This will generate code like:
+                     * await foreach (ItemType item in <invocation>)
+                     * {}
+                     */
+                    return new ForeachStatement(foreachItemType, "item", invocation, isAsync, out var itemVar)
+                    {
+                        sample.IsConvenienceSample ? new MethodBodyStatement() : ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
+                    };
+                }
+            }
+
+            // if it is not pageable, we just call the operation, declare a local variable and assign the result to it
+            if (sample is {ResponseType: {} responseType})
+            {
+                if (sample.LroResultType is {} lroResultType)
+                {
+                    /*
+                    * This will generate code like:
+                    * Operation<T> operation = <invocation>;
+                    * T responseData = operation.Value;
+                    */
+                    if (sample.IsConvenienceSample)
+                    {
+                        return new[]
+                        {
+                            Declare(returnType, "operation", new OperationExpression(invocation), out var operationOfT),
+                            Declare(lroResultType, "responseData", operationOfT.Value, out _)
+                        };
+                    }
+
+                    return new[]
+                    {
+                        Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
+                        Declare("responseData", new BinaryDataExpression(operation.Value), out var responseData),
+                        EmptyLine,
+                        ParseResponse(lroResultType, sample, responseData.ToStream())
+                    };
+                }
+
                 /*
                  * This will generate code like:
-                 * await foreach (ItemType item in <invocation>)
-                 * {}
+                 * Response<T> operation = <invocation>;
                  */
-                var itemType = GetPageableItemType(returnType);
-                var foreachStatement = new ForeachStatement(itemType, "item", invocation, isAsync, out var itemVar)
+                if (sample.IsConvenienceSample)
                 {
-                    BuildResponseStatements(sample, itemVar).ToArray()
+                    return Declare(new VariableReference(returnType, "response"), invocation);
+                }
+
+                var rawResponse = new VariableReference(returnType, "response");
+                return new[]
+                {
+                    Declare(rawResponse, invocation),
+                    EmptyLine,
+                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, new ResponseExpression(rawResponse).ContentStream) : InvokeConsoleWriteLine(new NullableResponseExpression(rawResponse).Value)
                 };
-                yield return foreachStatement;
             }
-            else
+
+            /*
+             * This will generate code like:
+             * Operation operation = <invocation>; // when it is long-running
+             * Response response = <invocation>; // when it is not long-running
+             */
+            if (sample.IsLongRunning)
             {
-                // if it is not pageable, we just call the operation, declare a local variable and assign the result to it
-                /*
-                 * This will generate code like:
-                 * Operation<T> operation = <invocation>; // when it is long-running
-                 * Response<T> response = <invocation>; // when it is not long-running
-                 */
-                yield return Declare(resultVar, invocation);
-
-                // generate an extra line when it is long-running
-                /*
-                 * This will generate code like:
-                 * Operation<T> operation = <invocation>;
-                 * BinaryData responseData = operation.Value;
-                 */
-                if (sample.IsLongRunning && TypeFactory.IsOperationOfT(returnType))
-                {
-                    returnType = GetOperationValueType(returnType);
-                    invocation = resultVar.Property("Value");
-                    resultVar = new VariableReference(returnType, $"{Configuration.ApiTypes.ResponseParameterName}Data");
-                    yield return Declare(resultVar, invocation);
-                }
-
-                yield return EmptyLine;
-
-                yield return BuildResponseStatements(sample, resultVar).ToArray();
+                return Declare("operation", new OperationExpression(invocation), out _);
             }
-        }
 
-        private IEnumerable<MethodBodyStatement> BuildResponseStatements(DpgOperationSample sample, VariableReference resultVar)
-        {
-            if (sample.IsResponseStream)
+            if (sample.IsConvenienceSample)
             {
-                return BuildResponseForStream(sample, resultVar);
+                return Declare("response", new ResponseExpression(invocation), out _);
             }
-            else
-            {
-                return BuildNormalResponse(sample, resultVar);
-            }
-        }
 
-        private IEnumerable<MethodBodyStatement> BuildResponseForStream(DpgOperationSample sample, VariableReference resultVar)
-        {
-            var contentStreamExpression = new StreamExpression(resultVar.Property(Configuration.ApiTypes.ContentStreamName));
-            yield return new IfStatement(NotEqual(contentStreamExpression, Null))
+            return new[]
             {
-                UsingDeclare("outFileStream", new StreamExpression(new TypeReference(typeof(File)).InvokeStatic(nameof(File.OpenWrite), Literal("<filepath>"))), out var streamVariable),
-                contentStreamExpression.CopyTo(streamVariable)
+                Declare("response", new ResponseExpression(invocation), out var response),
+                EmptyLine,
+                InvokeConsoleWriteLine(response.Status)
             };
         }
 
-        private IEnumerable<MethodBodyStatement> BuildNormalResponse(DpgOperationSample sample, VariableReference responseVar)
+        private static MethodBodyStatement ParseResponse(CSharpType responseType, DpgOperationSample sample, StreamExpression streamVar)
         {
-            // we do not write response handling for convenience method samples
+            if (responseType.Equals(typeof(Stream)))
+            {
+                return new IfStatement(NotEqual(streamVar, Null))
+                {
+                    UsingDeclare("outFileStream", new StreamExpression(InvokeFileOpenWrite("<filepath>")), out var streamVariable),
+                    streamVar.CopyTo(streamVariable)
+                };
+            }
+
             if (sample.IsConvenienceSample)
-                yield break;
-
-            ValueExpression streamVar;
-            var responseType = responseVar.Type;
-            if (responseType.EqualsIgnoreNullable(typeof(BinaryData)))
-                streamVar = responseVar.Invoke(nameof(BinaryData.ToStream));
-            else if (responseType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
-                streamVar = responseVar.Property(Configuration.ApiTypes.ContentStreamName);
-            else if (TypeFactory.IsResponseOfT(responseType))
-                streamVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
-            else
-                yield break;
-
-            if (sample.ResultType != null)
             {
-                var resultVar = new VariableReference(typeof(JsonElement), Configuration.ApiTypes.JsonElementVariableName);
-                yield return Declare(resultVar, new TypeReference(typeof(JsonDocument)).InvokeStatic(nameof(JsonDocument.Parse), streamVar).Property(nameof(JsonDocument.RootElement)));
-
-                var responseParsingStatements = new List<MethodBodyStatement>();
-                BuildResponseParseStatements(sample.IsAllParametersUsed, sample.ResultType, resultVar, responseParsingStatements, new HashSet<InputType>());
-
-                yield return responseParsingStatements;
+                return new MethodBodyStatement();
             }
-            else
+
+            var responseParsingStatements = new List<MethodBodyStatement>
             {
-                // if there is not a schema for us to show, just print status code
-                ValueExpression statusVar = responseVar;
-                if (TypeFactory.IsResponseOfT(responseType))
-                    statusVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
-                if (TypeFactory.IsResponseOfT(responseType) || TypeFactory.IsResponse(responseType))
-                    yield return InvokeConsoleWriteLine(statusVar.Property(Configuration.ApiTypes.StatusName));
-            }
+                Declare("result", JsonDocumentExpression.Parse(streamVar).RootElement, out var resultVar)
+            };
+            BuildResponseParseStatements(sample.IsAllParametersUsed, responseType, resultVar, responseParsingStatements, new HashSet<CSharpType>());
+            return responseParsingStatements;
         }
 
-        private static void BuildResponseParseStatements(bool useAllProperties, InputType type, ValueExpression invocation, List<MethodBodyStatement> statements, HashSet<InputType> visitedTypes)
+        private static void BuildResponseParseStatements(bool useAllProperties, CSharpType jsonElementType, JsonElementExpression jsonElement, List<MethodBodyStatement> statements, HashSet<CSharpType> visitedTypes)
         {
-            switch (type)
+            if (TypeFactory.IsList(jsonElementType, out var elementType))
             {
-                case InputListType listType:
-                    if (visitedTypes.Contains(listType.ElementType))
-                        return;
+                if (!visitedTypes.Contains(elementType))
+                {
                     // <invocation>[0]
-                    invocation = new IndexerExpression(invocation, Literal(0));
-                    BuildResponseParseStatements(useAllProperties, listType.ElementType, invocation, statements, visitedTypes);
-                    return;
-                case InputDictionaryType dictionaryType:
-                    if (visitedTypes.Contains(dictionaryType.ValueType))
-                        return;
-                    // <invocation>.GetProperty("<key>")
-                    invocation = invocation.Invoke("GetProperty", Literal("<key>"));
-                    BuildResponseParseStatements(useAllProperties, dictionaryType.ValueType, invocation, statements, visitedTypes);
-                    return;
-                case InputModelType modelType:
-                    BuildResponseParseStatementsForModelType(useAllProperties, modelType, invocation, statements, visitedTypes);
-                    return;
+                    BuildResponseParseStatements(useAllProperties, elementType, jsonElement[0], statements, visitedTypes);
+                }
             }
-            // we get primitive types, return the statement
-            var statement = InvokeConsoleWriteLine(invocation.InvokeToString());
-            statements.Add(statement);
+            else if (TypeFactory.IsDictionary(jsonElementType, out _, out var valueType))
+            {
+                if (!visitedTypes.Contains(valueType))
+                {
+                    // <invocation>.GetProperty("<key>")
+                    BuildResponseParseStatements(useAllProperties, valueType, jsonElement.GetProperty("<key>"), statements, visitedTypes);
+                }
+            }
+            else if (jsonElementType is { IsFrameworkType: false, Implementation: ObjectType implementation })
+            {
+                switch (implementation)
+                {
+                    case SerializableObjectType model:
+                        BuildResponseParseStatementsForModelType(useAllProperties, model, jsonElement, statements, visitedTypes);
+                        return;
+
+                    case SystemObjectType systemObjectType:
+                        BuildResponseParseStatementsForSystemType(useAllProperties, systemObjectType, jsonElement, statements, visitedTypes);
+                        return;
+                }
+            }
+            else
+            {
+                // we get primitive types, return the statement
+                var statement = InvokeConsoleWriteLine(jsonElement.InvokeToString());
+                statements.Add(statement);
+            }
         }
 
-        private static void BuildResponseParseStatementsForModelType(bool useAllProperties, InputModelType model, ValueExpression invocation, List<MethodBodyStatement> statements, HashSet<InputType> visitedTypes)
+        private static void BuildResponseParseStatementsForModelType(bool useAllProperties, SerializableObjectType model, JsonElementExpression jsonElement, List<MethodBodyStatement> statements, HashSet<CSharpType> visitedTypes)
         {
-            var allProperties = model.GetSelfAndBaseModels().SelectMany(m => m.Properties);
             var propertiesToExplore = useAllProperties
-                ? allProperties
-                : allProperties.Where(p => p.IsRequired);
+                ? model.JsonSerialization?.Properties
+                : model.JsonSerialization?.Properties.Where(p => p.IsRequired).ToArray();
 
-            if (!propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
+            if (propertiesToExplore is null ||  !propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
             {
                 // return the object
-                statements.Add(InvokeConsoleWriteLine(invocation.InvokeToString()));
+                statements.Add(InvokeConsoleWriteLine(jsonElement.InvokeToString()));
                 return;
             }
 
             foreach (var property in propertiesToExplore)
             {
-                if (!visitedTypes.Contains(property.Type))
+                var propertyType = property.Value.Type;
+                if (!visitedTypes.Contains(propertyType))
                 {
                     // <invocation>.GetProperty("<propertyName>");
-                    visitedTypes.Add(property.Type);
-                    var next = invocation.Invoke("GetProperty", Literal(property.SerializedName));
-                    BuildResponseParseStatements(useAllProperties, property.Type, next, statements, visitedTypes);
-                    visitedTypes.Remove(property.Type);
+                    visitedTypes.Add(propertyType);
+                    var next = jsonElement.GetProperty(property.SerializedName);
+                    BuildResponseParseStatements(useAllProperties, propertyType, next, statements, visitedTypes);
+                    visitedTypes.Remove(propertyType);
                 }
             }
         }
 
-        protected override string DefaultNamespace { get; }
-
-        protected override string DefaultName { get; }
-
-        protected override string DefaultAccessibility => "public";
-
-        private static CSharpType GetOperationValueType(CSharpType? returnType)
+        private static void BuildResponseParseStatementsForSystemType(bool useAllProperties, SystemObjectType systemObjectType, JsonElementExpression jsonElement, List<MethodBodyStatement> statements, HashSet<CSharpType> visitedTypes)
         {
-            if (returnType == null)
-                throw new InvalidOperationException("The return type of a client operation should never be null");
+            var propertiesToExplore = useAllProperties
+                ? systemObjectType.Properties
+                : systemObjectType.Properties.Where(p => p.IsRequired).ToArray();
 
-            returnType = GetReturnType(returnType);
-
-            Debug.Assert(TypeFactory.IsOperationOfT(returnType));
-
-            return returnType.Arguments.Single();
-        }
-
-        private static CSharpType GetReturnType(CSharpType? returnType)
-        {
-            if (returnType == null)
-                throw new InvalidOperationException("The return type of a client operation should never be null");
-
-            if (returnType.IsFrameworkType && returnType.FrameworkType.Equals(typeof(Task<>)))
+            foreach (var property in propertiesToExplore)
             {
-                return returnType.Arguments.Single();
+                var propertyType = property.ValueType;
+                if (!visitedTypes.Contains(propertyType) && property.InputModelProperty is {SerializedName: var propertyName})
+                {
+                    // <invocation>.GetProperty("<propertyName>");
+                    visitedTypes.Add(propertyType);
+                    var next = jsonElement.GetProperty(propertyName);
+                    BuildResponseParseStatements(useAllProperties, propertyType, next, statements, visitedTypes);
+                    visitedTypes.Remove(propertyType);
+                }
             }
-
-            return returnType;
-        }
-
-        private static CSharpType GetPageableItemType(CSharpType? returnType)
-        {
-            if (returnType == null)
-                throw new InvalidOperationException("The return type of a client operation should never be null");
-
-            Debug.Assert(TypeFactory.IsPageable(returnType) || TypeFactory.IsAsyncPageable(returnType));
-
-            return returnType.Arguments.Single();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -22,7 +22,6 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
@@ -30,8 +29,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
     {
         public static Method BuildXmlSerializableWrite(XmlObjectSerialization serialization)
         {
-            var xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, ValidationType.None, null);
-            var nameHint = new Parameter("nameHint", null, typeof(string), null, ValidationType.None, null);
+            var xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, Validation.None, null);
+            var nameHint = new Parameter("nameHint", null, typeof(string), null, Validation.None, null);
             return new Method
             (
                 new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{xmlWriter, nameHint}, ExplicitInterface: typeof(IXmlSerializable)),
@@ -77,20 +76,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (TypeFactory.IsCollectionType(serializedType) && serialization.IsRequired)
                 {
-                    return new IfElseStatement(And(NotEqual(serialization.Value, Null), InvokeOptional.IsCollectionDefined(serialization.Value)), statement, null);
+                    return new IfStatement(And(NotEqual(serialization.Value, Null), InvokeOptional.IsCollectionDefined(serialization.Value))) {statement};
                 }
 
-                return new IfElseStatement(NotEqual(serialization.Value, Null), statement, null);
+                return new IfStatement(NotEqual(serialization.Value, Null)) {statement};
             }
 
             return statement;
         }
 
-        public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, ValueExpression expression)
+        public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, TypedValueExpression expression)
             => serialization switch
             {
                 XmlArraySerialization array => SerializeArray(xmlWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)).AsStatement(),
-                XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(TypeFactory.GetElementType(dictionary.Type), expression)),
+                XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 XmlElementValueSerialization value => SerializeElement(xmlWriter, value, expression),
                 _ => throw new NotSupportedException()
             };
@@ -171,7 +170,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static Method BuildDeserialize(TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
             var methodName = $"Deserialize{declaration.Name}";
-            var element = new Parameter("element", null, typeof(XElement), null, ValidationType.None, null);
+            var element = new Parameter("element", null, typeof(XElement), null, Validation.None, null);
             return new Method
             (
                 new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element}),
@@ -223,11 +222,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Return(New.Instance(objectSerialization.Type, parameters));
         }
 
-        public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, BaseResponseExpression response)
+        public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, StreamExpression stream)
         {
             return new[]
             {
-                Var("document", XDocumentExpression.Load(response.ContentStream, LoadOptions.PreserveWhitespace), out var document),
+                Var("document", XDocumentExpression.Load(stream, LoadOptions.PreserveWhitespace), out var document),
                 BuildDeserialization(serialization, variable, document)
             };
         }
@@ -276,7 +275,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             deserializationStatement = new MethodBodyStatement[]
             {
-                Var("array", New.List(arraySerialization.Type), out var array),
+                Var("array", New.List(arraySerialization.Type.Arguments[0]), out var array),
                 new ForeachStatement("e", container.Elements(arraySerialization.ValueSerialization.Name), out var child)
                 {
                     BuildDeserializationForXContainer(arraySerialization.ValueSerialization, new XElementExpression(child), out var deserializedChild),
@@ -290,7 +289,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             deserializationStatement = new MethodBodyStatement[]
             {
-                Var("dictionary", New.Dictionary(dictionarySerialization.Type), out var dictionary),
+                Var("dictionary", New.Dictionary(dictionarySerialization.Type.Arguments[0], dictionarySerialization.Type.Arguments[1]), out var dictionary),
                 new ForeachStatement("e", container.Elements(), out var element)
                 {
                     BuildDeserializationForXContainer(dictionarySerialization.ValueSerialization, new XElementExpression(element), out var deserializedElement),

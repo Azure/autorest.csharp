@@ -11,12 +11,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     internal partial class UnknownBird : Bird
     {
         /// <summary> Initializes a new instance of UnknownBird. </summary>
-        /// <param name="wingspan"></param>
-        internal UnknownBird(int wingspan) : base(wingspan)
-        {
-        }
-
-        /// <summary> Initializes a new instance of UnknownBird. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
         internal UnknownBird(string kind, int wingspan) : base(kind, wingspan)

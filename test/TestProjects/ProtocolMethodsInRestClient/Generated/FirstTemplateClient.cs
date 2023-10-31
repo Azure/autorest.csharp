@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -59,14 +60,15 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Create or update resource. </summary>
         /// <param name="resource"> Information about the resource. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Resource>> CreateAsync(Resource resource = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Resource>> CreateAsync(Resource resource = null, IEnumerable<KeyValueFields> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FirstTemplateClient.Create");
             scope.Start();
             try
             {
-                return await RestClient.CreateAsync(resource, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateAsync(resource, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -77,14 +79,15 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Create or update resource. </summary>
         /// <param name="resource"> Information about the resource. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Resource> Create(Resource resource = null, CancellationToken cancellationToken = default)
+        public virtual Response<Resource> Create(Resource resource = null, IEnumerable<KeyValueFields> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FirstTemplateClient.Create");
             scope.Start();
             try
             {
-                return RestClient.Create(resource, cancellationToken);
+                return RestClient.Create(resource, select, cancellationToken);
             }
             catch (Exception e)
             {

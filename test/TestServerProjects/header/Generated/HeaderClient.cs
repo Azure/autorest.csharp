@@ -82,7 +82,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseExistingKeyAsync(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseExistingKeyAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -99,7 +99,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseExistingKey(cancellationToken).GetRawResponse();
+                return RestClient.ResponseExistingKey(cancellationToken);
             }
             catch (Exception e)
             {
@@ -152,7 +152,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseProtectedKeyAsync(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseProtectedKeyAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseProtectedKey(cancellationToken).GetRawResponse();
+                return RestClient.ResponseProtectedKey(cancellationToken);
             }
             catch (Exception e)
             {
@@ -225,7 +225,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseIntegerAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseIntegerAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -243,7 +243,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseInteger(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseInteger(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -299,7 +299,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseLongAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseLongAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -317,7 +317,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseLong(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseLong(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -373,7 +373,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseFloatAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseFloatAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -391,7 +391,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseFloat(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseFloat(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -447,7 +447,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDoubleAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDoubleAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -465,7 +465,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseDouble(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDouble(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -521,7 +521,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseBoolAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseBoolAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -539,7 +539,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseBool(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseBool(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -595,7 +595,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseStringAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseStringAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -613,7 +613,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseString(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseString(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -669,7 +669,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDateAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDateAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -687,7 +687,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseDate(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDate(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -743,7 +743,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDatetimeAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDatetimeAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -761,7 +761,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseDatetime(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDatetime(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -817,7 +817,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDatetimeRfc1123Async(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDatetimeRfc1123Async(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -835,7 +835,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseDatetimeRfc1123(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDatetimeRfc1123(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -891,7 +891,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDurationAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDurationAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -909,7 +909,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseDuration(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDuration(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -965,7 +965,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseByteAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseByteAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -983,7 +983,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseByte(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseByte(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -1039,7 +1039,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseEnumAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseEnumAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1057,7 +1057,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseEnum(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseEnum(scenario, cancellationToken);
             }
             catch (Exception e)
             {

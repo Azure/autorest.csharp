@@ -46,7 +46,7 @@ namespace HeaderCollectionPrefix
             scope.Start();
             try
             {
-                return (await RestClient.OperationAsync(metadata, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.OperationAsync(metadata, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -63,7 +63,7 @@ namespace HeaderCollectionPrefix
             scope.Start();
             try
             {
-                return RestClient.Operation(metadata, cancellationToken).GetRawResponse();
+                return RestClient.Operation(metadata, cancellationToken);
             }
             catch (Exception e)
             {

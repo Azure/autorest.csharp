@@ -44,12 +44,12 @@ namespace azure_parameter_grouping
             uri.Reset(_endpoint);
             uri.AppendPath("/parameterGrouping/postRequired/", false);
             uri.AppendPath(parameterGroupingPostRequiredParameters.Path, true);
-            if (parameterGroupingPostRequiredParameters?.Query != null)
+            if (parameterGroupingPostRequiredParameters.Query != null)
             {
                 uri.AppendQuery("query", parameterGroupingPostRequiredParameters.Query.Value, true);
             }
             request.Uri = uri;
-            if (parameterGroupingPostRequiredParameters?.CustomHeader != null)
+            if (parameterGroupingPostRequiredParameters.CustomHeader != null)
             {
                 request.Headers.Add("customHeader", parameterGroupingPostRequiredParameters.CustomHeader);
             }

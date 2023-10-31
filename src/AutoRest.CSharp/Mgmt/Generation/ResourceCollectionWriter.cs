@@ -5,13 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -43,8 +48,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var allPossibleTypes = This.ResourceTypes.SelectMany(p => p.Value).Distinct();
 
             FormattableString validResourceType = allPossibleTypes.Count() == 1
-                ? validResourceType = GetResourceTypeExpression(allPossibleTypes.First())
-                : validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
+                ? GetResourceTypeExpression(allPossibleTypes.First())
+                : $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
             _writer.Line();
 
             if (allPossibleTypes.Count() == 1)
@@ -59,9 +64,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
-                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First());
-                _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
+                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First().SkipLast(1));
+                _writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({Configuration.ApiTypes.ResponseParameterName}.Value != null, {Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}());");
             }
         }
@@ -85,24 +90,30 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
+        private void WriteGetMethodBranch(CodeWriter writer, MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMappings, bool async)
         {
-            var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
-            writer
-                .Append($"var {response:D} = {GetAwait(async)} ")
-                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(writer, parameterMappings);
-            writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            var returnType = operation.MgmtReturnType!;
+            var restClient = new MemberExpression(null, GetRestClientName(operation));
+            var arguments = GetArguments(writer, parameterMappings.SkipLast(1));
+            arguments.Add(new PositionalParameterReference(KnownParameters.CancellationTokenParameter.Name, KnownParameters.CancellationTokenParameter));
 
-            writer.Line($"if ({response}.Value == null)");
-            writer.Line($"return new {new CSharpType(typeof(NoValueResponse<>), operation.MgmtReturnType!)}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
-
-            if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
+            var responseVar = new VariableReference(new CSharpType(typeof(NullableResponse<>), returnType), Configuration.ApiTypes.ResponseParameterName);
+            var response = new NullableResponseExpression(responseVar);
+            writer.WriteMethodBodyStatement(new[]
             {
-                writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(This.Resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
-            }
-
-            writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.{Configuration.ApiTypes.GetRawResponseName}());");
+                Var(responseVar, restClient.Invoke(CreateMethodName(operation.MethodName, async), arguments, async)),
+                new IfStatement(Equal(response.Value, Null), AddBraces: false)
+                {
+                    Return(New.Instance(new CSharpType(typeof(NoValueResponse<>), returnType), response.GetRawResponse()))
+                },
+                AssignResourceIdentifierIfNeeded(operation, new(response.Value), parameterMappings),
+                Return(ResponseExpression.FromValue(New.Instance(returnType, new MemberExpression(null, ArmClientReference), response.Value), response.GetRawResponse()))
+            });
         }
+
+        private MethodBodyStatement AssignResourceIdentifierIfNeeded(MgmtRestOperation operation, ArmResourceExpression armResource, IReadOnlyList<ParameterMapping> parameterMappings)
+            => This.Resource.ResourceData.ShouldSetResourceIdentifier
+                ? Assign(armResource.Id, InvokeCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, armResource))
+                : new MethodBodyStatement();
     }
 }

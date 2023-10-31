@@ -133,7 +133,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get300Async(RequestContext)']/*" />
-        public virtual async Task<Response> Get300Async(RequestContext context = null)
+        public virtual async Task<Response> Get300Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
             scope.Start();
@@ -164,7 +164,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get300(RequestContext)']/*" />
-        public virtual Response Get300(RequestContext context = null)
+        public virtual Response Get300(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
             scope.Start();

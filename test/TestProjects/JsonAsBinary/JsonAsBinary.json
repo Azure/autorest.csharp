@@ -36,6 +36,9 @@
               "type": "string",
               "format": "binary"
             }
+          },
+          "304": {
+            "description": "Return no payload"
           }
         }
       }

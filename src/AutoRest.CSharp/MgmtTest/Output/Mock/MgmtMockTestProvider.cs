@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -15,7 +16,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
 {
     internal class MgmtMockTestProvider<T> : MgmtTestProvider where T : MgmtTypeProvider
     {
-        protected Parameter IsAsyncParameter => new(Name: "isAsync", Description: null, Type: typeof(bool), DefaultValue: null, ValidationType.None, null);
+        protected Parameter IsAsyncParameter => new(Name: "isAsync", Description: null, Type: typeof(bool), DefaultValue: null, Validation.None, null);
 
         public T Target { get; }
         public MgmtMockTestProvider(T provider, IEnumerable<MockTestCase> testCases) : base()
@@ -40,9 +41,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: MethodSignatureModifiers.Public,
                 Parameters: new[] { IsAsyncParameter },
-                Initializer: new ConstructorInitializer(
-                    true,
-                    new FormattableString[] { $"{IsAsyncParameter.Name:I}", $"{typeof(RecordedTestMode)}.Record" }));
+                Initializer: new ConstructorInitializer(true, new ValueExpression[]{ IsAsyncParameter, new MemberExpression(typeof(RecordedTestMode), nameof(RecordedTestMode.Record))}));
         }
     }
 }

@@ -6,24 +6,22 @@ using System.Xml;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
-using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal sealed record XmlWriterExpression(ValueExpression Untyped) : TypedValueExpression<XmlWriter>(Untyped)
     {
-        public MethodBodyStatement WriteStartAttribute(string localName) => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteStartAttribute), Snippets.Literal(localName));
+        public MethodBodyStatement WriteStartAttribute(string localName) => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteStartAttribute), Literal(localName));
         public MethodBodyStatement WriteEndAttribute() => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteEndAttribute));
 
-        public MethodBodyStatement WriteStartElement(string localName) => WriteStartElement(Snippets.Literal(localName));
+        public MethodBodyStatement WriteStartElement(string localName) => WriteStartElement(Literal(localName));
         public MethodBodyStatement WriteStartElement(ValueExpression localName) => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteStartElement), localName);
         public MethodBodyStatement WriteEndElement() => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteEndElement));
 
         public MethodBodyStatement WriteValue(ValueExpression value) => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteValue), value);
-        public MethodBodyStatement WriteValue(ValueExpression value, string format)
-            => new InvokeStaticMethodStatement(typeof(XmlWriterExtensions), nameof(XmlWriterExtensions.WriteValue), new[] { Untyped, value, Snippets.Literal(format) }, CallAsExtension: true);
+        public MethodBodyStatement WriteValue(ValueExpression value, string format) => Extensible.XmlWriter.WriteValue(this, value, format);
 
         public MethodBodyStatement WriteValue(ValueExpression value, Type frameworkType, SerializationFormat format)
         {
@@ -36,7 +34,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                 : WriteValue(value);
         }
 
-        public MethodBodyStatement WriteObjectValue(ValueExpression value, string? nameHint)
-            => new InvokeStaticMethodStatement(typeof(XmlWriterExtensions), nameof(XmlWriterExtensions.WriteObjectValue), new[] { Untyped, value, Snippets.Literal(nameHint) }, CallAsExtension: true);
+        public MethodBodyStatement WriteObjectValue(ValueExpression value, string? nameHint) => Extensible.XmlWriter.WriteObjectValue(this, value, nameHint);
     }
 }

@@ -6,10 +6,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -20,16 +19,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string ReferenceAttributeName = "ReferenceTypeAttribute";
         internal const string OptionalPropertiesName = "OptionalProperties";
 
-        private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
+        private static ConcurrentDictionary<InputModelType, CSharpType?> _valueCache = new ConcurrentDictionary<InputModelType, CSharpType?>();
 
-        public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
+        public static bool TryGetCachedExactMatch(InputModelType inputModel, out CSharpType? result)
         {
-            return _valueCache.TryGetValue(schema, out result);
+            return _valueCache.TryGetValue(inputModel, out result);
         }
 
         public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
-            if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
+            if (_valueCache.TryGetValue(originalType.InputModel, out var result))
                 return result;
             foreach (Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
@@ -37,11 +36,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
                 {
                     result = GetCSharpType(parentType);
-                    _valueCache.TryAdd(originalType.ObjectSchema, result);
+                    _valueCache.TryAdd(originalType.InputModel, result);
                     return result;
                 }
             }
-            _valueCache.TryAdd(originalType.ObjectSchema, null);
+            _valueCache.TryAdd(originalType.InputModel, null);
             return null;
         }
 

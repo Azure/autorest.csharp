@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsNullable)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable)
         : InputType(Name, IsNullable)
     {
         /// <summary>
@@ -20,20 +20,14 @@ namespace AutoRest.CSharp.Common.Input
 
         public bool IsAnonymousModel { get; init; } = false;
 
+        /// <summary>
+        /// Types provided as immediate parents in spec that aren't base model
+        /// </summary>
+        public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
+
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
-        public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
-
-        public IReadOnlyList<InputModelType> GetAllDerivedModels()
-        {
-            var list = new List<InputModelType>(DerivedModels);
-            for (var i = 0; i < list.Count; i++)
-            {
-                list.AddRange(list[i].DerivedModels);
-            }
-
-            return list;
-        }
+        public InputModelType GetNotNullable() => IsNullable ? this with { IsNullable = false } : this;
 
         private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {
@@ -42,90 +36,6 @@ namespace AutoRest.CSharp.Common.Input
                 yield return model;
                 model = model.BaseModel;
             }
-        }
-
-        internal InputModelType Update(string newName, InputModelTypeUsage usage)
-        {
-            return new InputModelType(
-                newName,
-                Namespace,
-                Accessibility,
-                Deprecated,
-                Description,
-                usage,
-                Properties,
-                BaseModel,
-                DerivedModels,
-                DiscriminatorValue,
-                DiscriminatorPropertyName,
-                IsNullable);
-        }
-
-        internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
-        {
-            return new InputModelType(
-                Name,
-                Namespace,
-                Accessibility,
-                Deprecated,
-                Description,
-                Usage,
-                GetNewProperties(property, inputType),
-                BaseModel,
-                DerivedModels,
-                DiscriminatorValue,
-                DiscriminatorPropertyName,
-                IsNullable);
-        }
-
-        private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputType inputType)
-        {
-            List<InputModelProperty> properties = new List<InputModelProperty>();
-            foreach (var myProperty in Properties)
-            {
-                if (myProperty.Equals(property))
-                {
-                    properties.Add(new InputModelProperty(
-                        myProperty.Name,
-                        myProperty.SerializedName,
-                        myProperty.Description,
-                        myProperty.Type.GetCollectionEquivalent(inputType),
-                        myProperty.IsRequired,
-                        myProperty.IsReadOnly,
-                        myProperty.IsDiscriminator));
-                }
-                else
-                {
-                    properties.Add(myProperty);
-                }
-            }
-            return properties;
-        }
-
-        public bool Equals(InputType other, bool handleCollections)
-        {
-            if (!handleCollections)
-                return Equals(other);
-
-            switch (other)
-            {
-                case InputDictionaryType otherDictionary:
-                    return Equals(otherDictionary.ValueType);
-                case InputListType otherList:
-                    return Equals(otherList.ElementType);
-                default:
-                    return Equals(other);
-            }
-        }
-
-        internal InputModelProperty? GetProperty(InputModelType key)
-        {
-            foreach (var property in Properties)
-            {
-                if (key.Equals(property.Type, true))
-                    return property;
-            }
-            return null;
         }
     }
 }

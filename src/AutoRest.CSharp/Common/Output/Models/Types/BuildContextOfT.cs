@@ -14,8 +14,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class BuildContext<T> : BuildContext where T : OutputLibrary
 #pragma warning restore SA1649 // File name should match first type name
     {
-        private TypeFactory? _typeFactory;
-
+        private readonly InputNamespace _inputNamespace;
         private T? _library;
         public T Library => _library ??= EnsureLibrary();
 
@@ -24,11 +23,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             T library;
             if (Configuration.Generation1ConvenienceClient)
             {
-                library = (T)(object)new DataPlaneOutputLibrary(CodeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
+                throw new InvalidOperationException($"{nameof(BuildContext)} isn't supported in legacy DataPlane");
             }
-            else if (Configuration.AzureArm)
+
+            if (Configuration.AzureArm)
             {
-                library = (T)(object)new MgmtOutputLibrary();
+                library = (T)(object)new MgmtOutputLibrary(_inputNamespace, SchemaUsageProvider);
             }
             else
             {
@@ -38,11 +38,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return library;
         }
 
-        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
-            : base(codeModel, sourceInputModel)
-        {
-        }
 
-        public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
+        public BuildContext(InputNamespace inputNamespace, CodeModel codeModel, SourceInputModel? sourceInputModel)
+            : base(inputNamespace, codeModel, sourceInputModel)
+        {
+            _inputNamespace = inputNamespace;
+        }
     }
 }

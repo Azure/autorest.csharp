@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -55,6 +56,42 @@ namespace ProtocolMethodsInRestClient
             RestClient = new TestServiceRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+        }
+
+        /// <summary> Create or update stream. </summary>
+        /// <param name="body"> The Stream to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Stream>> PutStreamAsync(Stream body = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TestServiceClient.PutStream");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutStreamAsync(body, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create or update stream. </summary>
+        /// <param name="body"> The Stream to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Stream> PutStream(Stream body = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TestServiceClient.PutStream");
+            scope.Start();
+            try
+            {
+                return RestClient.PutStream(body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create or update resource. </summary>

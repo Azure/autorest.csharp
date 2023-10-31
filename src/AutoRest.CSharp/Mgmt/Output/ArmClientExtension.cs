@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ArmClientExtension : MgmtExtension
     {
-        public ArmClientExtension(IEnumerable<Operation> allOperations)
+        public ArmClientExtension(IEnumerable<InputOperation> allOperations)
             : base(allOperations, Enumerable.Empty<MgmtExtensionClient>(), typeof(ArmClient), RequestPath.Tenant)
         {
         }

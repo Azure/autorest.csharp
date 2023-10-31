@@ -355,7 +355,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The PetKind to use. Allowed values: "dog" | "cat". </param>
+        /// <param name="kind"> The String to use. Allowed values: "dog" | "cat". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
@@ -395,7 +395,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The PetKind to use. Allowed values: "dog" | "cat". </param>
+        /// <param name="kind"> The String to use. Allowed values: "dog" | "cat". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
@@ -420,7 +420,7 @@ namespace PetStore
             }
         }
 
-        /// <param name="start"> The Int32 to use. </param>
+        /// <param name="start"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(int?,CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> GetFirstPetAsync(int? start = null, CancellationToken cancellationToken = default)
@@ -430,7 +430,7 @@ namespace PetStore
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
-        /// <param name="start"> The Int32 to use. </param>
+        /// <param name="start"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(int?,CancellationToken)']/*" />
         public virtual Response<Pet> GetFirstPet(int? start = null, CancellationToken cancellationToken = default)
@@ -455,7 +455,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="start"> The Int32 to use. </param>
+        /// <param name="start"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -491,7 +491,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="start"> The Int32 to use. </param>
+        /// <param name="start"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

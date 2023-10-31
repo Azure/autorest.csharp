@@ -81,14 +81,6 @@ namespace AutoRest.TestServer.Tests
                 typeof(TestServiceRestClient),
                 nameof(TestServiceRestClient.CreateCreateRequest),
                 new TypeAsserts.Parameter[] {
-                    new("grouped", typeof(Grouped)),
-                    new("resource", typeof(Resource))
-                });
-
-            TypeAsserts.HasInternalInstanceMethod(
-                typeof(TestServiceRestClient),
-                nameof(TestServiceRestClient.CreateCreateRequest),
-                new TypeAsserts.Parameter[] {
                     new("second", typeof(int)),
                     new("content", typeof(RequestContent)),
                     new("first", typeof(string)),

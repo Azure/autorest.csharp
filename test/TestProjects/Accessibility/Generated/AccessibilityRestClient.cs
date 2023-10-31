@@ -104,7 +104,7 @@ namespace Accessibility
 
         /// <param name="body"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> OperationInternalAsync(string body = null, CancellationToken cancellationToken = default)
+        internal async Task<Response> OperationInternalAsync(string body = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateOperationInternalRequest(body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -119,7 +119,7 @@ namespace Accessibility
 
         /// <param name="body"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response OperationInternal(string body = null, CancellationToken cancellationToken = default)
+        internal Response OperationInternal(string body = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateOperationInternalRequest(body);
             _pipeline.Send(message, cancellationToken);

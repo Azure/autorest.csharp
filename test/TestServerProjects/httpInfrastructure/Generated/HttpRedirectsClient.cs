@@ -46,7 +46,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Head300Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Head300Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -63,7 +63,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Head300(cancellationToken).GetRawResponse();
+                return RestClient.Head300(cancellationToken);
             }
             catch (Exception e)
             {
@@ -114,7 +114,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Head301Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Head301Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -131,7 +131,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Head301(cancellationToken).GetRawResponse();
+                return RestClient.Head301(cancellationToken);
             }
             catch (Exception e)
             {
@@ -148,7 +148,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Get301Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Get301Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -165,7 +165,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Get301(cancellationToken).GetRawResponse();
+                return RestClient.Get301(cancellationToken);
             }
             catch (Exception e)
             {
@@ -183,7 +183,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Put301Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Put301Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -201,7 +201,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Put301(booleanValue, cancellationToken).GetRawResponse();
+                return RestClient.Put301(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -218,7 +218,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Head302Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Head302Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -235,7 +235,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Head302(cancellationToken).GetRawResponse();
+                return RestClient.Head302(cancellationToken);
             }
             catch (Exception e)
             {
@@ -252,7 +252,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Get302Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Get302Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -269,7 +269,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Get302(cancellationToken).GetRawResponse();
+                return RestClient.Get302(cancellationToken);
             }
             catch (Exception e)
             {
@@ -287,7 +287,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Patch302Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Patch302Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -305,7 +305,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Patch302(booleanValue, cancellationToken).GetRawResponse();
+                return RestClient.Patch302(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -323,7 +323,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Post303Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Post303Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -341,7 +341,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Post303(booleanValue, cancellationToken).GetRawResponse();
+                return RestClient.Post303(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -358,7 +358,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Head307Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Head307Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -375,7 +375,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Head307(cancellationToken).GetRawResponse();
+                return RestClient.Head307(cancellationToken);
             }
             catch (Exception e)
             {
@@ -392,7 +392,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Get307Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Get307Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -409,7 +409,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Get307(cancellationToken).GetRawResponse();
+                return RestClient.Get307(cancellationToken);
             }
             catch (Exception e)
             {
@@ -426,7 +426,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Options307Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Options307Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -443,7 +443,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Options307(cancellationToken).GetRawResponse();
+                return RestClient.Options307(cancellationToken);
             }
             catch (Exception e)
             {
@@ -461,7 +461,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Put307Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Put307Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -479,7 +479,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Put307(booleanValue, cancellationToken).GetRawResponse();
+                return RestClient.Put307(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -497,7 +497,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Patch307Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Patch307Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -515,7 +515,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Patch307(booleanValue, cancellationToken).GetRawResponse();
+                return RestClient.Patch307(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -533,7 +533,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Post307Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Post307Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -551,7 +551,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Post307(booleanValue, cancellationToken).GetRawResponse();
+                return RestClient.Post307(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -569,7 +569,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return (await RestClient.Delete307Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Delete307Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -587,7 +587,7 @@ namespace httpInfrastructure
             scope.Start();
             try
             {
-                return RestClient.Delete307(booleanValue, cancellationToken).GetRawResponse();
+                return RestClient.Delete307(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {

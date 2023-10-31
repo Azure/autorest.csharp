@@ -142,7 +142,7 @@ namespace body_array
         }
 
         /// <summary> Set array value empty []. </summary>
-        /// <param name="arrayBody"> The ArrayOfPutContentSchemaItem to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutEmptyAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -160,7 +160,7 @@ namespace body_array
         }
 
         /// <summary> Set array value empty []. </summary>
-        /// <param name="arrayBody"> The ArrayOfPutContentSchemaItem to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutEmpty(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -212,7 +212,7 @@ namespace body_array
         }
 
         /// <summary> Set array value empty [true, false, false, true]. </summary>
-        /// <param name="arrayBody"> The ArrayOfBoolean to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutBooleanTfftAsync(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -230,7 +230,7 @@ namespace body_array
         }
 
         /// <summary> Set array value empty [true, false, false, true]. </summary>
-        /// <param name="arrayBody"> The ArrayOfBoolean to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutBooleanTfft(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -350,7 +350,7 @@ namespace body_array
         }
 
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
-        /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{int} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutIntegerValidAsync(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -368,7 +368,7 @@ namespace body_array
         }
 
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
-        /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{int} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutIntegerValid(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -488,7 +488,7 @@ namespace body_array
         }
 
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
-        /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{long} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutLongValidAsync(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -506,7 +506,7 @@ namespace body_array
         }
 
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
-        /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{long} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutLongValid(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -626,7 +626,7 @@ namespace body_array
         }
 
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{float} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutFloatValidAsync(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -644,7 +644,7 @@ namespace body_array
         }
 
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{float} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutFloatValid(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -764,7 +764,7 @@ namespace body_array
         }
 
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{double} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDoubleValidAsync(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -782,7 +782,7 @@ namespace body_array
         }
 
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{double} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDoubleValid(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -902,7 +902,7 @@ namespace body_array
         }
 
         /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
-        /// <param name="arrayBody"> The ArrayOfString to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutStringValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -920,7 +920,7 @@ namespace body_array
         }
 
         /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
-        /// <param name="arrayBody"> The ArrayOfString to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutStringValid(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -972,7 +972,7 @@ namespace body_array
         }
 
         /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
-        /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{FooEnum} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutEnumValidAsync(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -990,7 +990,7 @@ namespace body_array
         }
 
         /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
-        /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{FooEnum} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutEnumValid(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1042,7 +1042,7 @@ namespace body_array
         }
 
         /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
-        /// <param name="arrayBody"> The ArrayOfpathsBqqpc7ArrayPrimStringEnumFoo1Foo2Foo3PutRequestbodyContentApplicationJsonSchemaItems to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{Enum1} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutStringEnumValidAsync(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1060,7 +1060,7 @@ namespace body_array
         }
 
         /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
-        /// <param name="arrayBody"> The ArrayOfpathsBqqpc7ArrayPrimStringEnumFoo1Foo2Foo3PutRequestbodyContentApplicationJsonSchemaItems to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{Enum1} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutStringEnumValid(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1180,7 +1180,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']. </summary>
-        /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{Guid} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutUuidValidAsync(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1198,7 +1198,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']. </summary>
-        /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{Guid} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutUuidValid(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1284,7 +1284,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']. </summary>
-        /// <param name="arrayBody"> The ArrayOfDate to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1302,7 +1302,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']. </summary>
-        /// <param name="arrayBody"> The ArrayOfDate to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDateValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1422,7 +1422,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']. </summary>
-        /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateTimeValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1440,7 +1440,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']. </summary>
-        /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDateTimeValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1560,7 +1560,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']. </summary>
-        /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1578,7 +1578,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']. </summary>
-        /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDateTimeRfc1123Valid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1630,7 +1630,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']. </summary>
-        /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{TimeSpan} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDurationValidAsync(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1648,7 +1648,7 @@ namespace body_array
         }
 
         /// <summary> Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']. </summary>
-        /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{TimeSpan} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDurationValid(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1700,7 +1700,7 @@ namespace body_array
         }
 
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
-        /// <param name="arrayBody"> The ArrayOfByteArray to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{Byte[]} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutByteValidAsync(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1718,7 +1718,7 @@ namespace body_array
         }
 
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
-        /// <param name="arrayBody"> The ArrayOfByteArray to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{Byte[]} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutByteValid(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1974,7 +1974,7 @@ namespace body_array
         }
 
         /// <summary> Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]. </summary>
-        /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{Product} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutComplexValidAsync(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1992,7 +1992,7 @@ namespace body_array
         }
 
         /// <summary> Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]. </summary>
-        /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{Product} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutComplexValid(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2180,7 +2180,7 @@ namespace body_array
         }
 
         /// <summary> Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]. </summary>
-        /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{IList{string}} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutArrayValidAsync(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2198,7 +2198,7 @@ namespace body_array
         }
 
         /// <summary> Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]. </summary>
-        /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{IList{string}} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutArrayValid(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2386,7 +2386,7 @@ namespace body_array
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
-        /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{IDictionary{string,string}} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDictionaryValidAsync(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2404,7 +2404,7 @@ namespace body_array
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
-        /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
+        /// <param name="arrayBody"> The IEnumerable{IDictionary{string,string}} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDictionaryValid(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {

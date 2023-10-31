@@ -7,13 +7,11 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonDictionarySerialization : JsonSerialization
     {
-        public JsonDictionarySerialization(CSharpType type, JsonSerialization valueSerialization, bool isNullable) : base(isNullable)
+        public JsonDictionarySerialization(CSharpType type, JsonSerialization valueSerialization, bool isNullable) : base(type, isNullable)
         {
-            Type = type;
             ValueSerialization = valueSerialization;
         }
 
-        public CSharpType Type { get; }
         public JsonSerialization ValueSerialization { get; }
     }
 }

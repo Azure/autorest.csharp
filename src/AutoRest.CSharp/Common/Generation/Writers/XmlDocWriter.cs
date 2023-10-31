@@ -23,9 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public XmlDocWriter(string filename)
         {
             _membersElement = new XElement("members");
-            Document = new XDocument(
-                new XElement("doc", _membersElement)
-                );
+            Document = new XDocument(new XElement("doc", _membersElement));
             Filename = filename;
         }
 
@@ -45,41 +43,36 @@ namespace AutoRest.CSharp.Generation.Writers
             return this;
         }
 
-        public XmlDocWriter AddExamples(IEnumerable<(string ExampleInformation, string TestMethodName)> examples)
+        public XmlDocWriter AddExamples(IEnumerable<(string ExampleInformation, string ExampleCode)> examples)
         {
             if (_lastMember != null && examples.Any())
             {
                 var exampleElement = new XElement("example");
                 foreach (var example in examples)
                 {
-                    exampleElement.Add(
+                    exampleElement.Add
+                    (
                         Environment.NewLine,
                         example.ExampleInformation,
                         Environment.NewLine,
-                        new XElement("code", example.TestMethodName));
+                        new XElement("code", new XCData(Environment.NewLine + example.ExampleCode))
+                    );
                 }
-
                 _lastMember.Add(exampleElement);
             }
 
             return this;
         }
 
+
         public override string ToString()
         {
-            var writer = new XmlStringWriter();
-            XmlWriterSettings settings = new XmlWriterSettings { OmitXmlDeclaration = false, Indent = true };
-            using (XmlWriter xw = XmlWriter.Create(writer, settings))
-            {
-                Document.Save(xw);
-            }
-
-            return writer.ToString();
-        }
-
-        private class XmlStringWriter : StringWriter
-        {
-            public override Encoding Encoding => Encoding.UTF8;
+            using var memoryStream = new MemoryStream();
+            using var xmlWriter = XmlWriter.Create(memoryStream, new XmlWriterSettings { OmitXmlDeclaration = false, Indent = true });
+            Document.Save(xmlWriter);
+            xmlWriter.Flush();
+            ReadOnlySpan<byte> buffer = memoryStream.GetBuffer();
+            return Encoding.UTF8.GetString(buffer.Slice(0, (int)memoryStream.Length).Slice(3)); // skip BOM from array
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -73,74 +72,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
             };
 
-        public static FormattableString? GetParameterInitializer(this CSharpType parameterType, Constant? defaultValue)
-        {
-            if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
-            {
-                defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
-            }
-
-            if (defaultValue == null)
-            {
-                return null;
-            }
-
-            var constantFormattable = GetConstantFormattable(defaultValue.Value);
-            var conversion = GetConversionMethod(defaultValue.Value.Type, parameterType);
-            return conversion == null ? constantFormattable : $"{constantFormattable}{conversion}";
-        }
-
-        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
-        {
-            if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
-            {
-                switch (parameter.Type)
-                {
-                    case { IsFrameworkType: true } when TypeFactory.IsReadWriteDictionary(parameter.Type):
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
-                    case { IsFrameworkType: true } when TypeFactory.IsList(parameter.Type):
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
-                    case { IsFrameworkType: false, Implementation: EnumType enumType }:
-                        if (enumType.IsExtensible)
-                        {
-                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
-                        }
-                        else
-                        {
-                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
-                        }
-                    case { IsFrameworkType: true }:
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
-                }
-            }
-
-            var conversionMethod = GetConversionMethod(parameter.Type, toType);
-            if (conversionMethod == null)
-            {
-                return $"{parameter.Name:I}";
-            }
-
-            if (parameter.IsOptionalInSignature)
-            {
-                return $"{parameter.Name:I}?{conversionMethod}";
-            }
-
-            return $"{parameter.Name:I}{conversionMethod}";
-        }
-
-        public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
-            => fromType switch
-            {
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
-                _ => null
-            };
-
         public static FormattableString GetReferenceOrConstantFormattable(this ReferenceOrConstant value)
             => value.IsConstant ? value.Constant.GetConstantFormattable() : value.Reference.GetReferenceFormattable();
 
-        public static FormattableString GetConstantFormattable(this Constant constant, bool writeAsString = false)
+        public static FormattableString GetConstantFormattable(this Constant constant)
         {
             if (constant.Value == null)
             {
@@ -153,12 +88,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"new {constant.Type}()";
             }
 
-            if (constant.Value is Constant.Expression expression)
-            {
-                return expression.ExpressionValue;
-            }
-
-            if (constant is { Type: { IsFrameworkType: false }, Value: EnumTypeValue enumTypeValue })
+            if (constant is { Type.IsFrameworkType: false, Value: EnumTypeValue enumTypeValue })
             {
                 return $"{constant.Type}.{enumTypeValue.Declaration.Name}";
             }
@@ -166,10 +96,9 @@ namespace AutoRest.CSharp.Generation.Writers
             // we cannot check `constant.Value is string` because it is always string - this is an issue in yaml serialization)
             if (constant.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
             {
-                if (enumType.IsStringValueType)
-                    return $"new {constant.Type}({constant.Value:L})";
-                else
-                    return $"new {constant.Type}(({enumType.ValueType}){constant.Value})";
+                return enumType.IsStringValueType
+                    ? (FormattableString)$"new {constant.Type}({constant.Value:L})"
+                    : $"new {constant.Type}(({enumType.ValueType}){constant.Value})";
             }
 
             Type frameworkType = constant.Type.FrameworkType;
@@ -190,11 +119,6 @@ namespace AutoRest.CSharp.Generation.Writers
             if (frameworkType == typeof(ResourceType))
             {
                 return $"{((ResourceType)constant.Value).ToString():L}";
-            }
-
-            if (frameworkType == typeof(bool) && writeAsString)
-            {
-                return $"\"{constant.Value!.ToString()!.ToLower()}\"";
             }
 
             return $"{constant.Value:L}";

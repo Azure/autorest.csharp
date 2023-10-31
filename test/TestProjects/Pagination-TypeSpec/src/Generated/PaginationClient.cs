@@ -72,8 +72,8 @@ namespace Pagination
         {
             Argument.AssertNotNull(bodyInput, nameof(bodyInput));
 
-            RequestContent content = bodyInput.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            RequestContent content = bodyInput.ToRequestContent();
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
@@ -89,8 +89,8 @@ namespace Pagination
         {
             Argument.AssertNotNull(bodyInput, nameof(bodyInput));
 
-            RequestContent content = bodyInput.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            RequestContent content = bodyInput.ToRequestContent();
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);

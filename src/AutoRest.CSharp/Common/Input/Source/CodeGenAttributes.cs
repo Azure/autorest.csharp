@@ -66,30 +66,30 @@ namespace AutoRest.CSharp.Input.Source
             return propertyNames != null;
         }
 
-        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out (string? SerializationHook, string? DeserializationHook) hooks)
+        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out string? serializationHook, out string? deserializationHook)
         {
-            hooks = default;
-            if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
-                return false;
+            serializationHook = null;
+            deserializationHook = null;
 
-            string? serializationValueHook = null;
-            string? deserializationValueHook = null;
+            if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
+            {
+                return false;
+            }
 
             foreach (var namedArgument in attributeData.NamedArguments)
             {
                 switch (namedArgument.Key)
                 {
                     case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.SerializationValueHook):
-                        serializationValueHook = namedArgument.Value.Value as string;
+                        serializationHook = namedArgument.Value.Value as string;
                         break;
                     case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.DeserializationValueHook):
-                        deserializationValueHook = namedArgument.Value.Value as string;
+                        deserializationHook = namedArgument.Value.Value as string;
                         break;
                 }
             }
 
-            hooks = (serializationValueHook, deserializationValueHook);
-            return serializationValueHook != null || deserializationValueHook != null;
+            return serializationHook != null || deserializationHook != null;
         }
 
         public bool TryGetCodeGenModelAttributeValue(AttributeData attributeData, out string[]? usage, out string[]? formats)

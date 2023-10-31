@@ -19,33 +19,12 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public CSharpType Type { get; }
 
-        public InputExampleValue? Value { get; }
+        public ValueExpression Expression { get; }
 
-        public ValueExpression? Expression { get; }
-
-        private InputExampleParameterValue(string name, CSharpType type)
+        public InputExampleParameterValue(Parameter parameter, ValueExpression expression)
         {
-            Name = name;
-            Type = type;
-        }
-
-        public InputExampleParameterValue(Reference reference, InputExampleValue value) : this(reference.Name, reference.Type)
-        {
-            Value = value;
-        }
-
-        public InputExampleParameterValue(Reference reference, ValueExpression expression) : this(reference.Name, reference.Type)
-        {
-            Expression = expression;
-        }
-
-        public InputExampleParameterValue(Parameter parameter, InputExampleValue value) : this(parameter.Name, parameter.Type)
-        {
-            Value = value;
-        }
-
-        public InputExampleParameterValue(Parameter parameter, ValueExpression expression) : this(parameter.Name, parameter.Type)
-        {
+            Name = parameter.Name;
+            Type = parameter.Type;
             Expression = expression;
         }
     }

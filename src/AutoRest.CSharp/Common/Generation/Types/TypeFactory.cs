@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -18,6 +19,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Microsoft.CodeAnalysis;
+using Operation = Azure.Operation;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -34,7 +36,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType       => CreateType(literalType.LiteralValueType),
+            InputLiteralType literalType       => throw new InvalidOperationException("Literal type shouldn't be used outside of the Input layer"),
             InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
@@ -78,7 +80,8 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
+            InputSystemType systemType => new CSharpType(systemType.Type, CreateType(systemType.ElementType)).WithNullable(inputType.IsNullable),
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.Generation1ConvenienceClient ? typeof(object) : typeof(BinaryData),
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };
@@ -88,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Types
         // This function provide the capability to support the extensions is coming from outside, like parameter.
         public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
         {
-            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is { } type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
             ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
@@ -200,6 +203,20 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
 
+        internal static bool IsDictionary(CSharpType type, [MaybeNullWhen(false)] out CSharpType keyType, [MaybeNullWhen(false)] out CSharpType valueType)
+        {
+            if (IsDictionary(type))
+            {
+                keyType = type.Arguments[0];
+                valueType = type.Arguments[1];
+                return true;
+            }
+
+            keyType = null;
+            valueType = null;
+            return false;
+        }
+
         internal static bool IsReadOnlyDictionary(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(IReadOnlyDictionary<,>);
 
@@ -209,10 +226,20 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsList(CSharpType type)
             => IsReadOnlyList(type) || IsReadWriteList(type);
 
+        internal static bool IsList(CSharpType type, [MaybeNullWhen(false)] out CSharpType elementType)
+        {
+            if (IsList(type))
+            {
+                elementType = type.Arguments[0];
+                return true;
+            }
+
+            elementType = null;
+            return false;
+        }
+
         internal static bool IsReadOnlyList(CSharpType type)
-            => type.IsFrameworkType &&
-               (type.FrameworkType == typeof(IEnumerable<>) ||
-               type.FrameworkType == typeof(IReadOnlyList<>));
+            => type.IsFrameworkType && (type.FrameworkType == typeof(IEnumerable<>) || type.FrameworkType == typeof(IReadOnlyList<>));
 
         internal static bool IsReadWriteList(CSharpType type)
             => type.IsFrameworkType && (type.FrameworkType == typeof(IList<>) || type.FrameworkType == typeof(ICollection<>) || type.FrameworkType == typeof(List<>));
@@ -224,13 +251,16 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static bool IsIEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IEnumerable<>);
 
-        internal static bool IsResponseOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Response<>);
-
-        internal static bool IsResponse(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Response);
-
-        internal static bool IsOperationOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>);
-
         internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IAsyncEnumerable<>);
+
+        internal static bool IsOperation(CSharpType type)
+            => type.IsFrameworkType && (type.FrameworkType == typeof(Operation) || type.FrameworkType == typeof(Operation<>));
+
+        internal static bool IsTaskOfT(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(Task<>);
+
+        internal static bool IsTaskOfOperation(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(Task<>) && IsOperation(type.Arguments[0]);
 
         internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
 

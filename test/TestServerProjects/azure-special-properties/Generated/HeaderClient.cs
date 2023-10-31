@@ -47,7 +47,7 @@ namespace azure_special_properties
             scope.Start();
             try
             {
-                return (await RestClient.CustomNamedRequestIdAsync(fooClientRequestId, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CustomNamedRequestIdAsync(fooClientRequestId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -65,7 +65,7 @@ namespace azure_special_properties
             scope.Start();
             try
             {
-                return RestClient.CustomNamedRequestId(fooClientRequestId, cancellationToken).GetRawResponse();
+                return RestClient.CustomNamedRequestId(fooClientRequestId, cancellationToken);
             }
             catch (Exception e)
             {
@@ -83,7 +83,7 @@ namespace azure_special_properties
             scope.Start();
             try
             {
-                return (await RestClient.CustomNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CustomNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -101,7 +101,7 @@ namespace azure_special_properties
             scope.Start();
             try
             {
-                return RestClient.CustomNamedRequestIdParamGrouping(headerCustomNamedRequestIdParamGroupingParameters, cancellationToken).GetRawResponse();
+                return RestClient.CustomNamedRequestIdParamGrouping(headerCustomNamedRequestIdParamGroupingParameters, cancellationToken);
             }
             catch (Exception e)
             {
@@ -119,7 +119,7 @@ namespace azure_special_properties
             scope.Start();
             try
             {
-                return (await RestClient.CustomNamedRequestIdHeadAsync(fooClientRequestId, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CustomNamedRequestIdHeadAsync(fooClientRequestId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -137,7 +137,7 @@ namespace azure_special_properties
             scope.Start();
             try
             {
-                return RestClient.CustomNamedRequestIdHead(fooClientRequestId, cancellationToken).GetRawResponse();
+                return RestClient.CustomNamedRequestIdHead(fooClientRequestId, cancellationToken);
             }
             catch (Exception e)
             {

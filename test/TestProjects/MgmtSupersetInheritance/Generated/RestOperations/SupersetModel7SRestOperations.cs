@@ -135,7 +135,7 @@ namespace MgmtSupersetInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel7SName"> The String to use. </param>
-        /// <param name="data"> The SupersetModel7 to use. </param>
+        /// <param name="data"> The SupersetModel7Data to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel7SName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -165,7 +165,7 @@ namespace MgmtSupersetInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel7SName"> The String to use. </param>
-        /// <param name="data"> The SupersetModel7 to use. </param>
+        /// <param name="data"> The SupersetModel7Data to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel7SName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>

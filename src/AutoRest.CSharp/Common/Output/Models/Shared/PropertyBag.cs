@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Licensed under the MIT License. See Lic
 
-using System;
-using System.Collections.Generic;
-using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -38,8 +36,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 $"A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter.",
                 TypeFactory.GetInputType(PackModel.Type),
                 null,
-                ShouldValidateParameter ? ValidationType.AssertNotNull : ValidationType.None,
-                ShouldValidateParameter ? (FormattableString?)null : $"new {PackModel.Type.Name}()") with { IsPropertyBag = true };
+                ShouldValidateParameter ? Validation.AssertNotNull : Validation.None,
+                ShouldValidateParameter ? null : Snippets.New.Instance(PackModel.Type)) { IsPropertyBag = true };
         }
     }
 }

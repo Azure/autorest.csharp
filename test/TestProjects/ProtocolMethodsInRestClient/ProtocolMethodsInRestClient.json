@@ -16,6 +16,31 @@
     "application/json"
   ],
   "paths": {
+    "/template/stream": {
+      "put": {
+        "operationId": "PutStream",
+        "description": "Create or update stream.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      }
+    },
     "/template/resources": {
       "put": {
         "operationId": "Create",
@@ -137,6 +162,31 @@
             "schema": {
               "$ref": "#/definitions/Resource"
             }
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "key",
+                "label",
+                "content_type",
+                "value",
+                "last_modified",
+                "tags",
+                "locked",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true
+              }
+            },
+            "x-ms-parameter-location": "method",
+            "collectionFormat": "csv"
           }
         ],
         "responses": {

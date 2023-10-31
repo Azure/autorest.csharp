@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input;
@@ -46,6 +45,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return;
             }
+
             using (writer.Namespace(declaration.Namespace))
             {
                 if (jsonSerialization is { IncludeConverter: true })
@@ -67,36 +67,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
-                    if (xmlSerialization != null)
-                    {
-                        if (includeSerializer)
-                        {
-                            WriteXmlSerialize(writer, xmlSerialization);
-                        }
-
-                        if (includeDeserializer)
-                        {
-                            WriteXmlDeserialize(writer, declaration, xmlSerialization);
-                        }
-                    }
-
-                    if (jsonSerialization != null)
-                    {
-                        if (includeSerializer)
-                        {
-                            WriteJsonSerialize(writer, jsonSerialization);
-                        }
-
-                        if (includeDeserializer)
-                        {
-                            WriteJsonDeserialize(writer, declaration, jsonSerialization, model);
-                        }
-                    }
-
                     foreach (var method in model.Methods)
                     {
-                        writer.WriteXmlDocumentationSummary(method.Signature.Description);
-                        writer.WriteXmlDocumentationParameters(method.Signature.Parameters);
+                        writer.WriteMethodDocumentation(method.Signature);
                         writer.WriteMethod(method);
                     }
 
@@ -146,89 +119,20 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethod(XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(serialization));
         }
 
-        private static void WriteXmlDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
-        {
-            writer.WriteMethod(XmlSerializationMethodsBuilder.BuildDeserialize(declaration, serialization));
-        }
-
-        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, SerializableObjectType model)
-        {
-            if (JsonSerializationMethodsBuilder.BuildDeserialize(declaration, serialization, model.GetExistingType()) is {} deserialize)
-            {
-                writer.WriteMethod(deserialize);
-            }
-        }
-
-        private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)
-        {
-            writer.WriteMethod(JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(jsonSerialization));
-        }
-
         public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)
         {
             using (writer.Namespace(enumType.Declaration.Namespace))
             {
                 string declaredTypeName = enumType.Declaration.Name;
-
-                var isString = enumType.ValueType.FrameworkType == typeof(string);
-
                 using (writer.Scope($"internal static partial class {declaredTypeName}Extensions"))
                 {
-                    if (!enumType.IsIntValueType)
+                    if (enumType.SerializationMethod is { } serializationMethod)
                     {
-                        WriteEnumSerializationMethod(writer, enumType, declaredTypeName);
+                        writer.WriteMethod(serializationMethod);
                     }
-
-                    WriteEnumDeserializationMethod(writer, enumType, declaredTypeName, isString);
+                    writer.WriteMethod(enumType.DeserializationMethod);
                 }
             }
-        }
-
-        private static void WriteEnumSerializationMethod(CodeWriter writer, EnumType enumType, string declaredTypeName)
-        {
-            using (writer.Scope($"public static {enumType.ValueType} {enumType.SerializationMethodName}(this {declaredTypeName} value) => value switch", end: "};"))
-            {
-                foreach (EnumTypeValue value in enumType.Values)
-                {
-                    writer.Line($"{declaredTypeName}.{value.Declaration.Name} => {value.Value.Value:L},");
-                }
-
-                writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
-            }
-            writer.Line();
-        }
-
-        private static void WriteEnumDeserializationMethod(CodeWriter writer, EnumType schema, string declaredTypeName, bool isString)
-        {
-            using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this {schema.ValueType} value)"))
-            {
-                if (isString)
-                {
-                    foreach (EnumTypeValue value in schema.Values)
-                    {
-                        if (value.Value.Value is string strValue && strValue.All(char.IsAscii))
-                        {
-                            writer.Append($"if ({typeof(StringComparer)}.{nameof(StringComparer.OrdinalIgnoreCase)}.{nameof(StringComparer.Equals)}(value, {strValue:L}))");
-                        }
-                        else
-                        {
-                            writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
-                            writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase))");
-                        }
-                        writer.Line($" return {declaredTypeName}.{value.Declaration.Name};");
-                    }
-                }
-                else// int, and float
-                {
-                    foreach (EnumTypeValue value in schema.Values)
-                    {
-                        writer.Line($"if (value == {value.Value.Value:L}) return {declaredTypeName}.{value.Declaration.Name};");
-                    }
-                }
-
-                writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
-            }
-            writer.Line();
         }
     }
 }

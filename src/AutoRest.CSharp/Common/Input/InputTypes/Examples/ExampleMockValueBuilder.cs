@@ -1,44 +1,42 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal class ExampleMockValueBuilder
+    internal static class ExampleMockValueBuilder
     {
         public const string ShortVersionMockExampleKey = "ShortVersion";
         public const string MockExampleAllParameterKey = "AllParameters";
 
         private static readonly string EndpointMockValue = Configuration.ApiTypes.EndPointSampleValue;
 
-        private readonly static ConcurrentDictionary<InputType, InputExampleValue> _cache = new();
+        public static IReadOnlyList<InputClient> AddExamples(IReadOnlyList<InputClient> clients)
+            => clients.Select(c => c with { Examples = BuildClientExamples(c.Parameters), Operations = AddExamples(c.Operations) }).ToArray();
 
-        public static InputClientExample BuildClientExample(InputClient client, bool useAllParameters)
-        {
-            _cache.Clear();
-            var clientParameterExamples = new List<InputParameterExample>();
-            foreach (var parameter in client.Parameters)
+        private static IReadOnlyList<InputOperation> AddExamples(IReadOnlyList<InputOperation> operations)
+            => operations.Select(o => o with { Examples = BuildOperationExamples(o.Parameters) }).ToArray();
+
+        public static IReadOnlyList<InputClientExample> BuildClientExamples(IReadOnlyList<InputParameter> parameters)
+            => new InputClientExample[]
             {
-                if (!useAllParameters && !parameter.IsRequired)
-                {
-                    continue;
-                }
-                var parameterExample = BuildParameterExample(parameter, useAllParameters);
-                clientParameterExamples.Add(parameterExample);
-            }
+                new(ShortVersionMockExampleKey, BuildParameterExamples(parameters, false)),
+                new(MockExampleAllParameterKey, BuildParameterExamples(parameters, true))
+            };
 
-            return new(client, clientParameterExamples);
-        }
+        public static IReadOnlyList<InputOperationExample> BuildOperationExamples(IReadOnlyList<InputParameter> parameters)
+            => new InputOperationExample[]
+            {
+                new(ShortVersionMockExampleKey, BuildParameterExamples(parameters, false)),
+                new(MockExampleAllParameterKey, BuildParameterExamples(parameters, true))
+            };
 
-        public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
+        private static IReadOnlyList<InputParameterExample> BuildParameterExamples(IReadOnlyList<InputParameter> parameters, bool useAllParameters)
         {
-            _cache.Clear();
-
             var parameterExamples = new List<InputParameterExample>();
-            foreach (var parameter in operation.Parameters)
+            foreach (var parameter in parameters)
             {
                 if (!useAllParameters && !parameter.IsRequired)
                 {
@@ -48,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 parameterExamples.Add(parameterExample);
             }
 
-            return new(operation, parameterExamples);
+            return parameterExamples;
         }
 
         private static InputParameterExample BuildParameterExample(InputParameter parameter, bool useAllParameters)

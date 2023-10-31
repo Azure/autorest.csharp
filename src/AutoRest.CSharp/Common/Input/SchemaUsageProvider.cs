@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Input
         None = 0,
         Input = 1,
         Output = Input << 1,
-        RoundTrip = Input & Output,
+        RoundTrip = Input | Output,
         Model = Output << 1,
         Error = Model << 1,
         FlattenedParameters = Error << 1,

@@ -39,7 +39,7 @@ namespace CustomNamespace
             _pipeline = pipeline;
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The RenamedModelStruct? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
@@ -56,7 +56,7 @@ namespace CustomNamespace
             }
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The RenamedModelStruct? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
@@ -107,7 +107,7 @@ namespace CustomNamespace
             }
         }
 
-        /// <param name="body"> The ThirdModel to use. </param>
+        /// <param name="body"> The RenamedThirdModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RenamedThirdModel>> OperationThirdModelAsync(RenamedThirdModel body = null, CancellationToken cancellationToken = default)
         {
@@ -124,7 +124,7 @@ namespace CustomNamespace
             }
         }
 
-        /// <param name="body"> The ThirdModel to use. </param>
+        /// <param name="body"> The RenamedThirdModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RenamedThirdModel> OperationThirdModel(RenamedThirdModel body = null, CancellationToken cancellationToken = default)
         {
@@ -303,7 +303,7 @@ namespace CustomNamespace
             }
         }
 
-        /// <param name="body"> The Model to use. </param>
+        /// <param name="body"> The CustomizedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
@@ -321,7 +321,7 @@ namespace CustomNamespace
             }
         }
 
-        /// <param name="body"> The Model to use. </param>
+        /// <param name="body"> The CustomizedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual MainOperation StartOperation(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {

@@ -143,6 +143,15 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Return no payload
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '304'
         language: !Languages 
           default:
             name: Operation

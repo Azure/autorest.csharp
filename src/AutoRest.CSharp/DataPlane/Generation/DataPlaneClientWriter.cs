@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -13,6 +14,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -30,96 +32,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client.RestClient, true);
                     WriteClientCtors(writer, client, library);
 
-                    foreach (var clientMethod in client.Methods)
+                    foreach (var method in client.Methods)
                     {
-                        WriteClientMethod(writer, clientMethod, true);
-                        WriteClientMethod(writer, clientMethod, false);
-                    }
-
-                    foreach (var pagingMethod in client.PagingMethods)
-                    {
-                        WritePagingOperation(writer, client, pagingMethod, true);
-                        WritePagingOperation(writer, client, pagingMethod, false);
-                    }
-
-                    foreach (var longRunningOperation in client.LongRunningOperationMethods)
-                    {
-                        WriteStartOperationOperation(writer, longRunningOperation, true);
-                        WriteStartOperationOperation(writer, longRunningOperation, false);
+                        WriteMethod(writer, method);
                     }
                 }
             }
         }
 
-        private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)
-        {
-            CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
-            CSharpType responseType = bodyType != null ?
-                new CSharpType(Configuration.ApiTypes.ResponseOfTType, bodyType) :
-                Configuration.ApiTypes.ResponseType;
-
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
-
-            var parameters = clientMethod.RestClientMethod.Parameters;
-            writer.WriteXmlDocumentationSummary($"{clientMethod.RestClientMethod.SummaryText}");
-
-            foreach (Parameter parameter in parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-            }
-
-            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            writer.WriteXmlDocumentation("remarks", $"{clientMethod.RestClientMethod.DescriptionText}");
-
-            var methodName = CreateMethodName(clientMethod.Name, async);
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
-
-            foreach (Parameter parameter in parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (writer.Scope())
-            {
-                using (writer.WriteDiagnosticScope(clientMethod.Diagnostics, ClientDiagnosticsField))
-                {
-                    writer.Append($"return (");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-
-                    writer.Append($"RestClient.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
-                    foreach (var parameter in clientMethod.RestClientMethod.Parameters)
-                    {
-                        writer.Append($"{parameter.Name:I}, ");
-                    }
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-
-                    writer.Append($")");
-
-                    if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
-                    {
-                        writer.Append($".{Configuration.ApiTypes.GetRawResponseName}()");
-                    }
-
-                    writer.Line($";");
-                }
-            }
-
-            writer.Line();
-        }
-
-        private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
-
-        private const string EndpointVariable = "endpoint";
         private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
 
@@ -136,7 +56,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (library.Authentication.ApiKey != null)
             {
-                var ctorParams = client.GetClientConstructorParameters(Configuration.ApiTypes.KeyCredentialType);
+                CSharpType credentialType = typeof(AzureKeyCredential);
+                var ctorParams = RestClientBuilder.GetConstructorParameters(client.RestClient.ClientParameters, Configuration.ApiTypes.KeyCredentialType);
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                 foreach (Parameter parameter in ctorParams)
                 {
@@ -187,7 +108,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (library.Authentication.OAuth2 != null)
             {
-                var ctorParams = client.GetClientConstructorParameters(typeof(TokenCredential));
+                CSharpType credentialType = typeof(TokenCredential);
+                var ctorParams = RestClientBuilder.GetConstructorParameters(client.RestClient.ClientParameters, credentialType);
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                 foreach (Parameter parameter in ctorParams)
                 {
@@ -258,96 +180,20 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WritePagingOperation(CodeWriter writer, DataPlaneClient client, PagingMethod pagingMethod, bool async)
+        private void WriteMethod(CodeWriter writer, Method method)
         {
-            var pageType = pagingMethod.PagingResponse.ItemType;
-            var parameters = pagingMethod.Method.Parameters
-                .Where(p => p.Name != KnownParameters.RequestContext.Name)
-                .Append(KnownParameters.CancellationTokenParameter)
-                .ToList();
+            writer.WriteXmlDocumentationSummary($"{method.Signature.SummaryText}");
 
-            var pipelineReference = new Reference(PipelineField, Configuration.ApiTypes.HttpPipelineType);
-            var scopeName = pagingMethod.Diagnostics.ScopeName;
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkPropertyName;
-            var itemName = pagingMethod.PagingResponse.ItemPropertyName;
-            var signature = new MethodSignature(
-                pagingMethod.Name,
-                $"{pagingMethod.Method.SummaryText}",
-                $"{pagingMethod.Method.DescriptionText}",
-                MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
-                new CSharpType(typeof(Pageable<>), pageType),
-                null,
-                parameters);
-
-            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.SummaryText}");
-
-            foreach (Parameter parameter in parameters)
+            foreach (Parameter parameter in method.Signature.Parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
-            writer.WriteXmlDocumentationRequiredParametersException(parameters);
-            writer.WriteXmlDocumentation("remarks", $"{pagingMethod.Method.DescriptionText}");
-            writer.WritePageable(signature, pageType, new Reference(RestClientField, client.RestClient.Type), pagingMethod.Method, pagingMethod.NextPageMethod, ClientDiagnosticsField, pipelineReference, scopeName, itemName, nextLinkName, async);
-        }
-
-        private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)
-        {
-            RestClientMethod originalMethod = lroMethod.StartMethod;
-            CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
-            var parameters = originalMethod.Parameters;
-
-            writer.WriteXmlDocumentationSummary($"{originalMethod.SummaryText}");
-
-            foreach (Parameter parameter in parameters)
+            writer.WriteXmlDocumentationRequiredParametersException(method.Signature.Parameters);
+            writer.WriteXmlDocumentation("remarks", $"{method.Signature.DescriptionText}");
+            using (writer.WriteMethodDeclaration(method.Signature))
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(parameters);
-            writer.WriteXmlDocumentation("remarks", $"{originalMethod.DescriptionText}");
-
-            string asyncText = async ? "async " : string.Empty;
-            writer.Append($"{lroMethod.Accessibility} virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
-            foreach (Parameter parameter in parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(parameters);
-
-                using (writer.WriteDiagnosticScope(lroMethod.Diagnostics, ClientDiagnosticsField))
-                {
-                    string awaitText = async ? "await" : string.Empty;
-                    string configureText = async ? ".ConfigureAwait(false)" : string.Empty;
-                    writer.Append($"var originalResponse = {awaitText} RestClient.{CreateMethodName(originalMethod.Name, async)}(");
-                    foreach (Parameter parameter in parameters)
-                    {
-                        writer.Append($"{parameter.Name}, ");
-                    }
-
-                    writer.Line($"cancellationToken){configureText};");
-
-                    writer.Append($"return new {lroMethod.Operation.Type}({ClientDiagnosticsField.GetReferenceFormattable()}, {PipelineField}, RestClient.{RequestWriterHelpers.CreateRequestMethodName(originalMethod.Name)}(");
-                    foreach (Parameter parameter in parameters)
-                    {
-                        writer.Append($"{parameter.Name}, ");
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Append($").{Configuration.ApiTypes.HttpMessageRequestName}, originalResponse");
-
-                    var nextPageMethod = lroMethod.Operation.NextPageMethod;
-                    if (nextPageMethod != null)
-                    {
-                        writer.Append($", (_, nextLink) => RestClient.{RequestWriterHelpers.CreateRequestMethodName(nextPageMethod)}(nextLink, {parameters.GetIdentifiersFormattable()})");
-                    }
-
-                    writer.Line($");");
-                }
-
+                writer.WriteMethodBodyStatement(method.Body!);
             }
             writer.Line();
         }

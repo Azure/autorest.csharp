@@ -313,7 +313,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200Model201ModelDefaultError200Valid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -326,7 +326,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -365,7 +365,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200Model201ModelDefaultError201Valid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -378,7 +378,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -417,7 +417,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200Model201ModelDefaultError400Valid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -430,7 +430,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -469,7 +469,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -482,7 +482,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -521,7 +521,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -534,7 +534,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -573,7 +573,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -586,7 +586,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -625,7 +625,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -638,7 +638,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]

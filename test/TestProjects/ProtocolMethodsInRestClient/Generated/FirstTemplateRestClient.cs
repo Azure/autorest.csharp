@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,69 +38,7 @@ namespace ProtocolMethodsInRestClient
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal HttpMessage CreateCreateRequest(Resource resource)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/firstTemplate/resources", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            if (resource != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(resource);
-                request.Content = content;
-            }
-            return message;
-        }
-
-        /// <summary> Create or update resource. </summary>
-        /// <param name="resource"> Information about the resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<Resource>> CreateAsync(Resource resource = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateCreateRequest(resource);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        Resource value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Resource.DeserializeResource(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw new RequestFailedException(message.Response);
-            }
-        }
-
-        /// <summary> Create or update resource. </summary>
-        /// <param name="resource"> Information about the resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Resource> Create(Resource resource = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateCreateRequest(resource);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        Resource value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Resource.DeserializeResource(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw new RequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateCreateRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateCreateRequest(RequestContent content, IEnumerable<string> select, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -106,11 +46,64 @@ namespace ProtocolMethodsInRestClient
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/firstTemplate/resources", false);
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
+            if (content != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                request.Content = content;
+            }
             return message;
+        }
+
+        /// <summary> Create or update resource. </summary>
+        /// <param name="resource"> Information about the resource. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<Resource>> CreateAsync(Resource resource = null, IEnumerable<KeyValueFields> select = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            using RequestContent content = resource?.ToRequestContent();
+            Response response = await CreateAsync(content, select?.Select(e => e.ToString()), context).ConfigureAwait(false);
+            switch (response.Status)
+            {
+                case 200:
+                    {
+                        Resource value = default;
+                        using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = Resource.DeserializeResource(document.RootElement);
+                        return Response.FromValue(value, response);
+                    }
+                default:
+                    throw new RequestFailedException(response);
+            }
+        }
+
+        /// <summary> Create or update resource. </summary>
+        /// <param name="resource"> Information about the resource. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<Resource> Create(Resource resource = null, IEnumerable<KeyValueFields> select = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            using RequestContent content = resource?.ToRequestContent();
+            Response response = Create(content, select?.Select(e => e.ToString()), context);
+            switch (response.Status)
+            {
+                case 200:
+                    {
+                        Resource value = default;
+                        using var document = JsonDocument.Parse(response.ContentStream);
+                        value = Resource.DeserializeResource(document.RootElement);
+                        return Response.FromValue(value, response);
+                    }
+                default:
+                    throw new RequestFailedException(response);
+            }
         }
 
         /// <summary>
@@ -124,16 +117,17 @@ namespace ProtocolMethodsInRestClient
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> CreateAsync(RequestContent content, IEnumerable<string> select = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTemplateClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(content, context);
+                using HttpMessage message = CreateCreateRequest(content, select, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -154,16 +148,17 @@ namespace ProtocolMethodsInRestClient
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response Create(RequestContent content, RequestContext context = null)
+        public virtual Response Create(RequestContent content, IEnumerable<string> select = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTemplateClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(content, context);
+                using HttpMessage message = CreateCreateRequest(content, select, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -230,9 +225,9 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceId)
+        internal HttpMessage CreateGetRequest(string resourceId, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -255,19 +250,19 @@ namespace ProtocolMethodsInRestClient
                 throw new ArgumentNullException(nameof(resourceId));
             }
 
-            using var message = CreateGetRequest(resourceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            Response response = await GetAsync(resourceId, context).ConfigureAwait(false);
+            switch (response.Status)
             {
                 case 200:
                     {
                         Resource value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                         value = Resource.DeserializeResource(document.RootElement);
-                        return Response.FromValue(value, message.Response);
+                        return Response.FromValue(value, response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw new RequestFailedException(response);
             }
         }
 
@@ -282,34 +277,20 @@ namespace ProtocolMethodsInRestClient
                 throw new ArgumentNullException(nameof(resourceId));
             }
 
-            using var message = CreateGetRequest(resourceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            Response response = Get(resourceId, context);
+            switch (response.Status)
             {
                 case 200:
                     {
                         Resource value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(response.ContentStream);
                         value = Resource.DeserializeResource(document.RootElement);
-                        return Response.FromValue(value, message.Response);
+                        return Response.FromValue(value, response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw new RequestFailedException(response);
             }
-        }
-
-        internal HttpMessage CreateGetRequest(string resourceId, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/firstTemplate/resources/", false);
-            uri.AppendPath(resourceId, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
         }
 
         /// <summary>

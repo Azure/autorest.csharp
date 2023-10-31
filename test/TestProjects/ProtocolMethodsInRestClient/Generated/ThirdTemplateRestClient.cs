@@ -174,9 +174,7 @@ namespace ProtocolMethodsInRestClient
             if (resource != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(resource);
-                request.Content = content;
+                request.Content = resource.ToRequestContent();
             }
             return message;
         }

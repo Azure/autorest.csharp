@@ -241,7 +241,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors").GetProperty("details")[0].ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -265,7 +265,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors").GetProperty("details")[0].ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -373,7 +373,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors").GetProperty("details")[0].ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -397,7 +397,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors").GetProperty("details")[0].ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -899,7 +899,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
         }
 
         [Test]
@@ -918,7 +918,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
         }
 
         [Test]
@@ -967,7 +967,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
         }
 
         [Test]
@@ -986,7 +986,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
         }
 
         [Test]
@@ -1047,7 +1047,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
         }
 
         [Test]
@@ -1070,7 +1070,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
         }
 
         [Test]
@@ -1234,7 +1234,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
         }
 
         [Test]
@@ -1258,7 +1258,7 @@ namespace AuthoringTypeSpec.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
         }
     }
 }

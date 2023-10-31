@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -155,6 +154,8 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalSerializableProperty").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalNullableSerializableProperty").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
         }
 
@@ -246,6 +247,8 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalSerializableProperty").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalNullableSerializableProperty").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
         }
 
@@ -263,7 +266,7 @@ key = "<badListOfDictionaryName>",
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, default, "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
                 {
                     ["key"] = "<badDictionaryName>"
                 }, new IList<string>[]
@@ -299,7 +302,7 @@ new Dictionary<string, string>
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, default, "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
                 {
                     ["key"] = "<badDictionaryName>"
                 }, new IList<string>[]

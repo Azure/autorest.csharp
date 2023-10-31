@@ -96,18 +96,18 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private Parameter _generalExtensionParameter = new Parameter(
             "resource",
-            $"The resource parameters to use in these operations.",
+            "The resource parameters to use in these operations.",
             typeof(ArmResource),
             null,
-            ValidationType.None,
+            Validation.None,
             null);
 
         private Parameter _scopeParameter = new Parameter(
             "scope",
-            $"The scope to use in these operations",
+            "The scope to use in these operations",
             typeof(ResourceIdentifier),
             null,
-            ValidationType.None,
+            Validation.None,
             null);
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()

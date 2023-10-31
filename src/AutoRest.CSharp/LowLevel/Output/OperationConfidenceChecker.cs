@@ -7,6 +7,9 @@ using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -79,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models
                 InputModelType modelType => WalkModelType(modelType, typeFactory, visitedModels),
                 InputListType listType => WalkListType(listType, typeFactory, visitedModels),
                 InputDictionaryType dictType => WalkDictionaryType(dictType, typeFactory, visitedModels),
-                InputLiteralType literalType => WalkLiteralType(literalType, typeFactory),
+                InputEnumType enumType => WalkEnumType(enumType, typeFactory),
                 InputUnionType unionType => WalkUnionType(unionType),
                 _ => ConvenienceMethodConfidenceLevel.Confident
             };
@@ -98,11 +101,6 @@ namespace AutoRest.CSharp.Output.Models
             visitedModels.Add(type, null);
 
             var confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
-            if (type.IsAnonymousModel) // because the result of this is "Removal", we do not really need to consider customized code for it
-            {
-                confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
-            }
-
             if (type.BaseModel != null)
             {
                 var baseModelLevel = WalkType(type.BaseModel, typeFactory, visitedModels);
@@ -158,14 +156,7 @@ namespace AutoRest.CSharp.Output.Models
             return confidenceLevel;
         }
 
-        private static ConvenienceMethodConfidenceLevel WalkLiteralType(InputLiteralType literalType, TypeFactory typeFactory)
-        {
-            return ConvenienceMethodConfidenceLevel.Confident;
-        }
-
-        private static ConvenienceMethodConfidenceLevel WalkUnionType(InputUnionType unionType)
-        {
-            return ConvenienceMethodConfidenceLevel.Confident;
-        }
+        private static ConvenienceMethodConfidenceLevel WalkEnumType(InputEnumType inputEnumType, TypeFactory typeFactory) => ConvenienceMethodConfidenceLevel.Confident;
+        private static ConvenienceMethodConfidenceLevel WalkUnionType(InputUnionType unionType) => ConvenienceMethodConfidenceLevel.Confident;
     }
 }

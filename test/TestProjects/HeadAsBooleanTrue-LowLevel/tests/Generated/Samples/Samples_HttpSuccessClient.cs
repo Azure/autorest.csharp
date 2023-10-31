@@ -25,7 +25,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = client.Head200();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = await client.Head200Async();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = client.Head200();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = await client.Head200Async();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = client.Head204();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = await client.Head204Async();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -97,7 +97,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = client.Head204();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = await client.Head204Async();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -121,7 +121,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = client.Head404();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -133,7 +133,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = await client.Head404Async();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -145,7 +145,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = client.Head404();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -157,7 +157,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
             Response<bool> response = await client.Head404Async();
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
     }
 }

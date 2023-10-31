@@ -8,6 +8,9 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -21,10 +24,14 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -603,36 +610,44 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var pagingMethod = operation.PagingMethod!;
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
-            var nextPageRequestArguments = firstPageRequestArguments.IsEmpty() ? $"{KnownParameters.NextLink.Name}" : $"{KnownParameters.NextLink.Name}, {firstPageRequestArguments}";
+            firstPageRequestArguments.RemoveAt(firstPageRequestArguments.Count - 1);
 
-            FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({firstPageRequestArguments})";
-            FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({nextPageRequestArguments})" : (FormattableString?)null;
-            var pipelineReference = new Reference("Pipeline", Configuration.ApiTypes.HttpPipelineType);
+            var restClient = new MemberExpression(null, GetRestClientName(operation));
+
+            _writer.WriteMethodBodyStatement(DeclareFirstPageRequestLocalFunction(restClient, pagingMethod.CreateRequestMethodName, firstPageRequestArguments, out var firstPageRequest));
+            CodeWriterDeclaration? nextPageRequest = null;
+            if (pagingMethod.CreateNextPageRequestMethodName is {} nextPageMethod)
+            {
+                var nextPageRequestArguments = firstPageRequestArguments.Prepend(KnownParameters.NextLink);
+                _writer.WriteMethodBodyStatement(DeclareNextPageRequestLocalFunction(restClient, nextPageMethod, nextPageRequestArguments, out nextPageRequest));
+            }
+
+            var clientDiagnostics = new TypedMemberExpression(null, clientDiagnosticsReference.Name, clientDiagnosticsReference.Type);
+            var pipeline = new TypedMemberExpression(null, "Pipeline", Configuration.ApiTypes.HttpPipelineType);
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
-
-            _writer.WritePageableBody(parameterMappings.Select(p => p.Parameter).Append(KnownParameters.CancellationTokenParameter).ToList(), itemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemName, nextLinkName, async);
+            _writer.WriteMethodBodyStatement(Return(CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
         }
 
-        protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
+        protected ResourceIdentifierExpression InvokeCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, ArmResourceExpression armResource)
         {
             var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature;
             var cache = new List<ParameterMapping>(parameterMappings);
 
-            var parameterInvocations = new List<FormattableString>();
+            var parameterInvocations = new List<ValueExpression>();
             foreach (var reference in requestPath.Where(s => s.IsReference).Select(s => s.Reference))
             {
                 var match = cache.First(p => reference.Name.Equals(p.Parameter.Name, StringComparison.InvariantCultureIgnoreCase) && reference.Type.Equals(p.Parameter.Type));
                 cache.Remove(match);
-                parameterInvocations.Add(match.IsPassThru ? $"{match.Parameter.Name}" : match.ValueExpression);
+                parameterInvocations.Add(match.IsPassThru ? match.Parameter : match.ValueExpression);
             }
 
             if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Count)
             {
                 if (resource.ResourceData.GetTypeOfName() != null)
                 {
-                    parameterInvocations.Add($"{dataExpression}.Name");
+                    parameterInvocations.Add(armResource.Name);
                 }
                 else
                 {
@@ -640,7 +655,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
-            return $"{resource.Type.Name}.CreateResourceIdentifier({parameterInvocations.Join(", ")})";
+            return new ResourceIdentifierExpression(new InvokeStaticMethodExpression(resource.Type, "CreateResourceIdentifier", parameterInvocations));
         }
         #endregion
 
@@ -661,38 +676,49 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteNormalMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async)
+        protected virtual void WriteNormalMethodBranch(MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async)
         {
             using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(operation)))
             {
-                var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
+                var responseType = operation.OriginalReturnType is null ? typeof(Response) : new CSharpType(typeof(Response<>), operation.OriginalReturnType);
+                var responseVariable = new VariableReference(responseType, Configuration.ApiTypes.ResponseParameterName);
                 _writer
-                    .Append($"var {response:D} = {GetAwait(async)} ")
-                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+                    .Append($"var {responseVariable.Declaration:D} = {GetAwait(async)} ")
+                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
                 WriteArguments(_writer, parameterMappings);
-                _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"){GetConfigureAwait(async)};");
+
+                if (operation.OriginalReturnType is null)
+                {
+                    _writer.WriteMethodBodyStatement(Return(responseVariable));
+                    return;
+                }
+
+                var response = new NullableResponseExpression(responseVariable);
+                var armResource = new ArmResourceExpression(response.Value);
 
                 if (operation.ThrowIfNull)
                 {
-                    _writer
-                        .Line($"if ({response}.Value == null)")
-                        .Line($"throw new {Configuration.ApiTypes.RequestFailedExceptionType}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
+                    _writer.WriteMethodBodyStatement(new IfStatement(Equal(response.Value, Null), AddBraces: false)
+                    {
+                        Throw(Snippets.New.RequestFailedException(response.GetRawResponse()))
+                    });
                 }
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
+                    _writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, armResource)));
                 }
 
                 // the case that we did not need to wrap the result
-                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{response}.Value");
+                var valueConverter = operation.GetConvertedValue(new MemberExpression(null, ArmClientReference), armResource);
                 if (valueConverter != null)
                 {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {response}.{Configuration.ApiTypes.GetRawResponseName}());");
+                    _writer.WriteMethodBodyStatement(Return(ResponseExpression.FromValue(valueConverter, response.GetRawResponse())));
                 }
                 else
                 {
-                    _writer.Line($"return {response};");
+                    _writer.WriteMethodBodyStatement(Return(response));
                 }
             }
         }
@@ -754,16 +780,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        protected void WriteLROMethodBranch(MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var {Configuration.ApiTypes.ResponseParameterName} = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+            var responseType = operation.OriginalReturnType is null ? typeof(Response) : new CSharpType(typeof(Response<>), operation.OriginalReturnType);
+            var response = new VariableReference(responseType, Configuration.ApiTypes.ResponseParameterName);
+            _writer.Append($"var {response.Declaration:D} = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
             WriteArguments(_writer, parameterMapping);
-            _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"){GetConfigureAwait(async)};");
 
-            WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
+            WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, response, async);
         }
 
-        protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool isAsync)
+        private void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMapping, TypedValueExpression response, bool isAsync)
         {
             if (operation.InterimOperation is not null)
             {
@@ -780,14 +808,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{Configuration.ApiTypes.ResponseParameterName}");
-                if (valueConverter != null)
+                var convertedValue = operation.GetConvertedValue(new MemberExpression(null, ArmClientReference), response);
+                if (convertedValue != null)
                 {
-                    _writer.Append($"{Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}())");
+                    _writer.WriteValueExpression(ResponseExpression.FromValue(convertedValue, new NullableResponseExpression(response).GetRawResponse()));
                 }
                 else
                 {
-                    _writer.Append($"{Configuration.ApiTypes.ResponseParameterName}");
+                    _writer.WriteValueExpression(response);
                 }
             }
             else
@@ -799,10 +827,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .Append($"), ");
                 }
 
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
-                WriteArguments(_writer, parameterMapping);
-                _writer.RemoveTrailingComma();
-                _writer.Append($").Request, {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
+                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.Create{operation.MethodName}Request(");
+                WriteArguments(_writer, parameterMapping.Where(p => p.Parameter != KnownParameters.CancellationTokenParameter));
+                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
 
                 if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationId))
                 {
@@ -828,15 +855,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
         {
             var arguments = GetArguments(writer, mapping, passNullForOptionalParameters);
-            if (!arguments.IsEmpty())
+            if (arguments.Any())
             {
-                writer.Append(arguments).AppendRaw(", ");
+                foreach (var argument in arguments)
+                {
+                    writer.WriteValueExpression(argument);
+                    writer.AppendRaw(", ");
+                }
+                _writer.RemoveTrailingComma();
             }
         }
 
-        private static FormattableString GetArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
+        protected static List<ValueExpression> GetArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
         {
-            var args = new List<FormattableString>();
+            var args = new List<ValueExpression>();
             foreach (var parameter in mapping)
             {
                 if (parameter.IsPassThru)
@@ -846,25 +878,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // always use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
                         if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
                         {
-                            args.Add($"pageSizeHint");
+                            args.Add(new FormattableStringToExpression($"pageSizeHint"));
                         }
                         else
                         {
                             Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            if (parameter.Parameter.IsPropertyBag)
-                                args.Add($"{parameter.ValueExpression}");
-                            else
-                                args.Add($"{parameter.Parameter.Name}");
+                            args.Add(parameter.Parameter.IsPropertyBag ? parameter.ValueExpression : parameter.Parameter);
                         }
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
-                            args.Add($"null");
+                        if (passNullForOptionalParameters && parameter.Parameter.Validation == Validation.None)
+                            args.Add(Null);
                         else if (parameter.Parameter.IsPropertyBag)
-                            args.Add($"{parameter.ValueExpression}");
+                            args.Add(parameter.ValueExpression);
                         else
-                            args.Add($"{parameter.Parameter.Name}");
+                            args.Add(parameter.Parameter);
                     }
                 }
                 else
@@ -874,16 +903,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.UseNamespace(parameter.Parameter.Type.Namespace);
                     }
 
-                    foreach (var @namespace in parameter.Usings)
-                    {
-                        writer.UseNamespace(@namespace);
-                    }
-
-                    args.Add($"{parameter.ValueExpression}");
+                    args.Add(parameter.ValueExpression);
                 }
             }
 
-            return args.Join(", ");
+            return args;
         }
 
         public override string ToString()

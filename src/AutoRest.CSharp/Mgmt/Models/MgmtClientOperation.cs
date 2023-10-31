@@ -4,7 +4,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -33,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), null);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.OperationName).ToArray(), null);
             }
 
             return null;
@@ -44,8 +46,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyDictionary<RequestPath, MgmtRestOperation>? _operationMappings;
         public IReadOnlyDictionary<RequestPath, MgmtRestOperation> OperationMappings => _operationMappings ??= EnsureOperationMappings();
 
-        private IReadOnlyDictionary<RequestPath, IEnumerable<ParameterMapping>>? _parameterMappings;
-        public IReadOnlyDictionary<RequestPath, IEnumerable<ParameterMapping>> ParameterMappings => _parameterMappings ??= EnsureParameterMappings();
+        private IReadOnlyDictionary<RequestPath, IReadOnlyList<ParameterMapping>>? _parameterMappings;
+        public IReadOnlyDictionary<RequestPath, IReadOnlyList<ParameterMapping>> ParameterMappings => _parameterMappings ??= EnsureParameterMappings();
 
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
@@ -79,12 +81,12 @@ namespace AutoRest.CSharp.Mgmt.Models
                     ? Public | Static | Extension
                     : Public | Virtual
                 : Accessibility,
-            IsPagingOperation
-                ? new CSharpType(typeof(Pageable<>), ReturnType)
-                : ReturnType, null, MethodParameters.ToArray());
+            IsPagingOperation ? new CSharpType(typeof(Pageable<>), ReturnType) : ReturnType,
+            null,
+            MethodParameters);
 
         // TODO -- we need a better way to get the name of this
-        public string Name => _operations.First().Name;
+        public string Name => _operations.First().OperationName;
 
         // TODO -- we need a better way to get the description of this
         private FormattableString? _description;
@@ -144,28 +146,28 @@ namespace AutoRest.CSharp.Mgmt.Models
                 operation => operation);
         }
 
-        private IReadOnlyDictionary<RequestPath, IEnumerable<ParameterMapping>> EnsureParameterMappings()
+        private IReadOnlyDictionary<RequestPath, IReadOnlyList<ParameterMapping>> EnsureParameterMappings()
         {
-            var contextParams = Resource?.ResourceCollection?.ExtraContextualParameterMapping ?? Enumerable.Empty<ContextualParameterMapping>();
+            var contextParams = Resource?.ResourceCollection?.ExtraContextualParameterMapping ?? Array.Empty<ContextualParameterMapping>();
 
-            var contextualParameterMappings = new Dictionary<RequestPath, IEnumerable<ContextualParameterMapping>>();
+            var contextualParameterMappings = new Dictionary<RequestPath, IReadOnlyList<ContextualParameterMapping>>();
             foreach (var contextualPath in OperationMappings.Keys)
             {
                 var adjustedPath = Resource is not null ? contextualPath.ApplyHint(Resource.ResourceType) : contextualPath;
-                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariableName).Concat(contextParams));
+                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariableName).Concat(contextParams).ToList());
             }
 
-            var parameterMappings = new Dictionary<RequestPath, IEnumerable<ParameterMapping>>();
+            var parameterMappings = new Dictionary<RequestPath, IReadOnlyList<ParameterMapping>>();
             foreach (var operationMappings in OperationMappings)
             {
                 var parameterMapping = operationMappings.Value.BuildParameterMapping(contextualParameterMappings[operationMappings.Key]).ToList();
-                if (parameterMapping.Where(p => p.IsPassThru).Count() > PropertyBagThreshold)
+                if (parameterMapping.Count(p => p.IsPassThru) > PropertyBagThreshold)
                 {
                     for (int i = 0; i < parameterMapping.Count; ++i)
                     {
                         if (parameterMapping[i].IsPassThru)
                         {
-                            parameterMapping[i] = new ParameterMapping(parameterMapping[i].Parameter with { IsPropertyBag = true }, true, $"{parameterMapping[i].Parameter.GetPropertyBagValueExpression()}", Enumerable.Empty<string>());
+                            parameterMapping[i] = new ParameterMapping(parameterMapping[i].Parameter with { IsPropertyBag = true }, true, parameterMapping[i].Parameter.GetPropertyBagValueExpression());
                         }
                     }
                 }
@@ -181,10 +183,11 @@ namespace AutoRest.CSharp.Mgmt.Models
                 parameters.Add(_extensionParameter);
             if (IsLongRunningOperation)
                 parameters.Add(KnownParameters.WaitForCompletion);
-            var overrideParameters = OperationMappings.Values.First().OverrideParameters;
-            if (overrideParameters.Length > 0)
+
+            var operation = _operations.First();
+            if (operation.OverrideParameters.Any())
             {
-                parameters.AddRange(overrideParameters);
+                parameters.AddRange(operation.OverrideParameters);
             }
             else
             {
@@ -196,8 +199,10 @@ namespace AutoRest.CSharp.Mgmt.Models
                 {
                     parameters.AddRange(_passThroughParams);
                 }
+
+                parameters.Add(KnownParameters.CancellationTokenParameter);
             }
-            parameters.Add(KnownParameters.CancellationTokenParameter);
+
             return parameters;
         }
     }

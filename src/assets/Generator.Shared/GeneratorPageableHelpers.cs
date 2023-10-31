@@ -17,9 +17,6 @@ namespace Autorest.CSharp.Core
 {
     internal static class GeneratorPageableHelpers
     {
-        private static readonly byte[] DefaultItemPropertyName = Encoding.UTF8.GetBytes("value");
-        private static readonly byte[] DefaultNextLinkPropertyName = Encoding.UTF8.GetBytes("nextLink");
-
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,

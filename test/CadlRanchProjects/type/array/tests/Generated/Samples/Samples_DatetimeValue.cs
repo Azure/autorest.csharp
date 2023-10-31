@@ -111,7 +111,7 @@ namespace _Type._Array.Samples
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-"2022-05-10T14:57:31.2311892-04:00"
+"2022-05-10T18:57:31.2311892Z"
             });
             Response response = client.Put(content);
 
@@ -126,7 +126,7 @@ namespace _Type._Array.Samples
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-"2022-05-10T14:57:31.2311892-04:00"
+"2022-05-10T18:57:31.2311892Z"
             });
             Response response = await client.PutAsync(content);
 
@@ -139,7 +139,7 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
+            Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z") });
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
+            Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z") });
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace _Type._Array.Samples
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-"2022-05-10T14:57:31.2311892-04:00"
+"2022-05-10T18:57:31.2311892Z"
             });
             Response response = client.Put(content);
 
@@ -174,7 +174,7 @@ namespace _Type._Array.Samples
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-"2022-05-10T14:57:31.2311892-04:00"
+"2022-05-10T18:57:31.2311892Z"
             });
             Response response = await client.PutAsync(content);
 
@@ -187,7 +187,7 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
+            Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z") });
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
+            Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z") });
         }
     }
 }

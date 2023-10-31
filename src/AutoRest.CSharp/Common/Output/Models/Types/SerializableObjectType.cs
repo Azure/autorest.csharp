@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
@@ -14,11 +14,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected SerializableObjectType(BuildContext context) : base(context)
         {
         }
+
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
         }
-
-        public INamedTypeSymbol? GetExistingType() => ExistingType;
 
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
@@ -32,11 +31,16 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private XmlObjectSerialization? _xmlSerialization;
         public XmlObjectSerialization? XmlSerialization => HasXmlSerialization ? _xmlSerialization ??= EnsureXmlSerialization() : null;
 
+        private IEnumerable<Method>? _methods;
+        public IEnumerable<Method> Methods => _methods ??= BuildMethods();
+
         private bool? _hasJsonSerialization;
-        private bool HasJsonSerialization => _hasJsonSerialization ??= EnsureHasJsonSerialization();
+        protected bool HasJsonSerialization => _hasJsonSerialization ??= EnsureHasJsonSerialization();
 
         private bool? _hasXmlSerialization;
         private bool HasXmlSerialization => _hasXmlSerialization ??= EnsureHasXmlSerialization();
+
+        public abstract ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false);
 
         protected abstract bool EnsureHasJsonSerialization();
         protected abstract bool EnsureHasXmlSerialization();
@@ -44,5 +48,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract bool EnsureIncludeDeserializer();
         protected abstract JsonObjectSerialization? EnsureJsonSerialization();
         protected abstract XmlObjectSerialization? EnsureXmlSerialization();
+        protected abstract IEnumerable<Method> BuildMethods();
     }
 }

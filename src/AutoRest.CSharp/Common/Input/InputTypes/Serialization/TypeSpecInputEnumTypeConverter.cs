@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Common.Input
 
             if (usageString != null)
             {
-                Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
+                Enum.TryParse(usageString, ignoreCase: true, out usage);
             }
 
             if (allowedValues == null || allowedValues.Count == 0)

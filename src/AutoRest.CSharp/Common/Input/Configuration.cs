@@ -533,6 +533,7 @@ namespace AutoRest.CSharp.Common.Input
             writer.WriteNonEmptyArray(Options.ModelFactoryForHlc, ModelFactoryForHlc);
             WriteIfNotDefault(writer, Options.UnreferencedTypesHandling, UnreferencedTypesHandling);
             WriteIfNotDefault(writer, Options.UseOverloadsBetweenProtocolAndConvenience, UseOverloadsBetweenProtocolAndConvenience);
+            WriteIfNotDefault(writer, Options.KeepNonOverloadableProtocolSignature, KeepNonOverloadableProtocolSignature);
             WriteIfNotDefault(writer, Options.ProjectFolder, RelativeProjectFolder);
             WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, UseCoreDataFactoryReplacements);
             writer.WriteNonEmptyArray(Options.ProtocolMethodList, ProtocolMethodList);

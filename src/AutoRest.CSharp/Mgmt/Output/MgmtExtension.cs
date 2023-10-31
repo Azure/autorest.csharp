@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -20,9 +19,9 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public override bool IsStatic => IsArmCore ? false : true; // explicitly expand this for readability
 
-        private readonly IEnumerable<Operation> _allRawOperations;
+        private readonly IEnumerable<InputOperation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType, RequestPath? contextualPath = null)
+        public MgmtExtension(IEnumerable<InputOperation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType, RequestPath? contextualPath = null)
             : base(armCoreType.Name)
         {
             _allRawOperations = allRawOperations;
@@ -49,10 +48,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new Parameter(
                 VariableName,
-                $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
+                $"The <see cref=\"{new CSharpType(ArmCoreType).ToStringForDocs()}\" /> instance the method will execute against.",
                 ArmCoreType,
                 null,
-                ValidationType.None,
+                Validation.None,
                 null);
         }
 
@@ -103,13 +102,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             });
         }
 
-        public string GetOperationName(Operation operation) => GetOperationName(operation, ResourceName);
+        public string GetOperationName(InputOperation operation) => GetOperationName(operation, ResourceName);
 
-        protected override string CalculateOperationName(Operation operation, string clientResourceName)
+        protected override string CalculateOperationName(InputOperation operation, string clientResourceName)
         {
             var operationName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.TryCastResourceData(out var data))
+            if (operation.IsListMethod(out var itemType) && itemType.TryCastResourceData(out var data))
             {
                 var requestPath = operation.GetRequestPath();
                 // we need to find the correct resource type that links with this resource data

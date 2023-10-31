@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Input;
 using Microsoft.CodeAnalysis;
 
@@ -48,7 +49,9 @@ namespace AutoRest.CSharp.AutoRest.Communication
             {
                 var json = await File.ReadAllTextAsync(tspInputFile);
                 var rootNamespace = TypeSpecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {tspInputFile} has failed.");
-                workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
+
+                // TSP file may contain duplicated models with base types. MergeDerivedModelsVisitor merges them into one.
+                workspace = await new CSharpGen().ExecuteAsync(MergeDerivedModelsVisitor.Visit(rootNamespace));
                 if (options.IsNewProject)
                 {
                     // TODO - add support for DataFactoryElement lookup

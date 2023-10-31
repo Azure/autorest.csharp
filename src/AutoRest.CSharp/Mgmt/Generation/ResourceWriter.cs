@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -15,6 +18,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
@@ -200,7 +204,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var bodyParamType = parameters.First().Type;
             string bodyParamName = "current";
             //if we are using PATCH always minimize what we pass in the body to what we actually want to change
-            if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
+            if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.HttpMethod == RequestMethod.Patch)
             {
                 bodyParamName = "patch";
                 if (bodyParamType.TryCast<ObjectType>(out var objectType))
@@ -282,29 +286,38 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
+        private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IReadOnlyList<ParameterMapping> parameterMappings, bool isAsync)
         {
-            var originalResponse = new CodeWriterDeclaration("originalResponse");
+            var responseType = getOperation.OriginalReturnType is null ? typeof(Response) : new CSharpType(typeof(Response<>), getOperation.OriginalReturnType);
+            var responseVariable = new VariableReference(responseType, "originalResponse");
+
             _writer
-                .Append($"var {originalResponse:D} = {GetAwait(isAsync)} ")
-                .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.Method.Name, isAsync)}(");
+                .Append($"var {responseVariable.Declaration:D} = {GetAwait(isAsync)} ")
+                .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.MethodName, isAsync)}(");
 
             WriteArguments(_writer, parameterMappings, true);
-            _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
-
-            if (This.ResourceData.ShouldSetResourceIdentifier)
+            _writer.Line($"){GetConfigureAwait(isAsync)};");
+            if (getOperation.OriginalReturnType is null)
             {
-                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, getOperation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
+                _writer.WriteMethodBodyStatement(Return(responseVariable));
+                return;
             }
 
-            var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);
-            if (valueConverter != null)
+            var response = new NullableResponseExpression(responseVariable);
+            var armResource = new ArmResourceExpression(response.Value);
+            if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {originalResponse}.{Configuration.ApiTypes.GetRawResponseName}());");
+                _writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, armResource)));
+            }
+
+            var convertedValue = getOperation.GetConvertedValue(new MemberExpression(null, ArmClientReference), armResource, getOperation.MgmtReturnType);
+            if (convertedValue != null)
+            {
+                _writer.WriteMethodBodyStatement(Return(ResponseExpression.FromValue(convertedValue, response.GetRawResponse())));
             }
             else
             {
-                _writer.Line($"return {originalResponse}");
+                _writer.WriteMethodBodyStatement(Return(responseVariable));
             }
         }
     }

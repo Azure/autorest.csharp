@@ -94,7 +94,7 @@ Response response = await client.PutAsync(new InnerModel[]
 {
     new InnerModel("<property>")
     {
-        Children = {default},
+        Children = { default },
     }
 });
 ]]></code></example>
@@ -118,7 +118,7 @@ Response response = client.Put(new InnerModel[]
 {
     new InnerModel("<property>")
     {
-        Children = {default},
+        Children = { default },
     }
 });
 ]]></code></example>

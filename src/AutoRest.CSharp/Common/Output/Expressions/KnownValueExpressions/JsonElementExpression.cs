@@ -2,10 +2,8 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -19,9 +17,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public ValueExpression InvokeClone() => Invoke(nameof(JsonElement.Clone));
         public ValueExpression GetBoolean() => Invoke(nameof(JsonElement.GetBoolean));
-        public ValueExpression GetBytesFromBase64(string? format) => InvokeExtension(Configuration.ApiTypes.JsonElementExtensionsType, nameof(JsonElementExtensions.GetBytesFromBase64), Literal(format));
-        public ValueExpression GetChar() => InvokeExtension(Configuration.ApiTypes.JsonElementExtensionsType, nameof(JsonElementExtensions.GetChar));
-        public ValueExpression GetDateTimeOffset(string? format) => InvokeExtension(Configuration.ApiTypes.JsonElementExtensionsType, nameof(JsonElementExtensions.GetDateTimeOffset), Literal(format));
+        public ValueExpression GetBytesFromBase64(string? format) => Extensible.JsonElement.GetBytesFromBase64(this, format);
+        public ValueExpression GetChar() => Extensible.JsonElement.GetChar(this);
+        public ValueExpression GetDateTimeOffset(string? format) => Extensible.JsonElement.GetDateTimeOffset(this, format);
         public ValueExpression GetDateTime() => Invoke(nameof(JsonElement.GetDateTime));
         public ValueExpression GetDecimal() => Invoke(nameof(JsonElement.GetDecimal));
         public ValueExpression GetDouble() => Invoke(nameof(JsonElement.GetDouble));
@@ -29,11 +27,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public ValueExpression GetInt16() => Invoke(nameof(JsonElement.GetInt16));
         public ValueExpression GetInt32() => Invoke(nameof(JsonElement.GetInt32));
         public ValueExpression GetInt64() => Invoke(nameof(JsonElement.GetInt64));
-        public ValueExpression GetObject() => InvokeExtension(Configuration.ApiTypes.JsonElementExtensionsType, nameof(JsonElementExtensions.GetObject));
+        public ValueExpression GetObject() => Extensible.JsonElement.GetObject(this);
         public StringExpression GetRawText() => new(Invoke(nameof(JsonElement.GetRawText)));
         public ValueExpression GetSingle() => Untyped.Invoke(nameof(JsonElement.GetSingle));
         public StringExpression GetString() => new(Untyped.Invoke(nameof(JsonElement.GetString)));
-        public ValueExpression GetTimeSpan(string? format) => InvokeExtension(Configuration.ApiTypes.JsonElementExtensionsType, nameof(JsonElementExtensions.GetTimeSpan), Literal(format));
+        public ValueExpression GetTimeSpan(string? format) => Extensible.JsonElement.GetTimeSpan(this, format);
 
         public BoolExpression ValueKindEqualsNull()
             => new(new BinaryOperatorExpression("==", Property(nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Null)));

@@ -2,29 +2,45 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
-using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class PagingMethod
     {
-        public PagingMethod(RestClientMethod method, RestClientMethod? nextPageMethod, string name, Diagnostic diagnostics, PagingResponseInfo pagingResponse)
+        public PagingMethod(string createRequestMethodName, string? createNextPageRequestMethodName, string? nextLinkPropertyName, string itemPropertyName, CSharpType itemType)
         {
-            Method = method;
-            NextPageMethod = nextPageMethod;
-            Name = name;
-            Diagnostics = diagnostics;
-            PagingResponse = pagingResponse;
+            CreateRequestMethodName = createRequestMethodName;
+            CreateNextPageRequestMethodName = createNextPageRequestMethodName;
+            NextLinkName = nextLinkPropertyName;
+            ItemName = itemPropertyName;
+            ItemType = itemType;
         }
 
-        public string Name { get; }
-        public RestClientMethod Method { get; }
-        public RestClientMethod? NextPageMethod { get; }
-        public PagingResponseInfo PagingResponse { get; }
-        public Diagnostic Diagnostics { get; }
-        public string Accessibility => "public";
+        public PagingMethod(string createRequestMethodName, CSharpType itemType, string itemName)
+        {
+            CreateRequestMethodName = createRequestMethodName;
+            CreateNextPageRequestMethodName = null;
+            NextLinkName = null;
+            ItemName = itemName;
+            ItemType = itemType;
+        }
+
+        public string CreateRequestMethodName { get; }
+        public string? CreateNextPageRequestMethodName { get; }
+
+        public CSharpType ItemType { get; }
+
+        /// <summary>
+        /// This is the property name in the response body, usually the value of this is `Value`
+        /// </summary>
+        public string ItemName { get; }
+
+        /// <summary>
+        /// This is the name of the nextLink property if there is one.
+        /// </summary>
+        public string? NextLinkName { get; }
 
         /// <summary>
         /// Check whether the given parameter name is like page size

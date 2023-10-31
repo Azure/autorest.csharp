@@ -347,16 +347,16 @@ namespace OpenAI.Models
         /// <summary> Initializes a new instance of Embedding. </summary>
         /// <param name="index"> The index of the embedding in the list of embeddings. </param>
         /// <param name="object"> The object type, which is always "embedding". </param>
-        /// <param name="embeddingProperty">
+        /// <param name="embeddingValue">
         /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
         /// listed in the [embedding guide](/docs/guides/embeddings).
         /// </param>
         /// <returns> A new <see cref="Models.Embedding"/> instance for mocking. </returns>
-        public static Embedding Embedding(long index = default, EmbeddingObject @object = default, IEnumerable<double> embeddingProperty = null)
+        public static Embedding Embedding(long index = default, EmbeddingObject @object = default, IEnumerable<double> embeddingValue = null)
         {
-            embeddingProperty ??= new List<double>();
+            embeddingValue ??= new List<double>();
 
-            return new Embedding(index, @object, embeddingProperty?.ToList());
+            return new Embedding(index, @object, embeddingValue?.ToList());
         }
 
         /// <summary> Initializes a new instance of CreateUsage. </summary>

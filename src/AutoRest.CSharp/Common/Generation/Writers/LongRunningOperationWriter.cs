@@ -4,12 +4,15 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Autorest.CSharp.Core;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using Autorest.CSharp.Core;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -194,8 +197,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
         {
-            var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
-            using (writer.Scope($"{resultType} {interfaceType}.CreateResult({Configuration.ApiTypes.ResponseType} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseParameterName);
+            using (writer.Scope($"{resultType} {interfaceType}.CreateResult({responseVariable.Type} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, false);
             }
@@ -203,27 +206,27 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteCreateResultAsync(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
         {
-            var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
+            var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseParameterName);
             var asyncKeyword = pagingResponse == null && operation.ResultSerialization != null ? "async " : "";
-            using (writer.Scope($"{asyncKeyword}{new CSharpType(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            using (writer.Scope($"{asyncKeyword}{new CSharpType(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({responseVariable.Type} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, true);
             }
         }
 
-        private static void WriteCreateResultBody(CodeWriter writer, LongRunningOperation operation, CodeWriterDeclaration responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, bool async)
+        private static void WriteCreateResultBody(CodeWriter writer, LongRunningOperation operation, VariableReference responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, bool async)
         {
             if (pagingResponse != null)
             {
                 var scopeName = operation.Diagnostics.ScopeName;
                 var nextLinkName = pagingResponse.NextLinkPropertyName;
                 var itemName = pagingResponse.ItemPropertyName;
-                FormattableString returnValue = $"{typeof(GeneratorPageableHelpers)}.{nameof(GeneratorPageableHelpers.CreateAsyncPageable)}({responseVariable}, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, cancellationToken)";
+                FormattableString returnValue = $"{typeof(GeneratorPageableHelpers)}.{nameof(GeneratorPageableHelpers.CreateAsyncPageable)}({responseVariable.Declaration}, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, cancellationToken)";
                 WriteCreateResultReturnValue(writer, resultType, returnValue, async);
             }
             else if (operation.ResultSerialization != null)
             {
-                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, null, $"{responseVariable}", resultType);
+                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, new ResponseExpression(responseVariable).ContentStream, resultType);
             }
             else
             {

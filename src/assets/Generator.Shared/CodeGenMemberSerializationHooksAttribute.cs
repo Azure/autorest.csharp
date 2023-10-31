@@ -22,9 +22,5 @@ namespace Azure.Core
         /// private static void DeserializationHook(JsonProperty property, ref Optional&lt;TypeOfTheProperty&gt; propertyValue); // if the property is optional
         /// </summary>
         public string? DeserializationValueHook { get; set; }
-
-        public CodeGenMemberSerializationHooksAttribute()
-        {
-        }
     }
 }

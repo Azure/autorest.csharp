@@ -146,7 +146,7 @@ namespace _Type.Scalar
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(body);
+            using RequestContent content = body;
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -161,7 +161,7 @@ namespace _Type.Scalar
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(body);
+            using RequestContent content = body;
             Response response = Put(content, context);
             return response;
         }

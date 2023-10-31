@@ -18,7 +18,6 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -61,10 +60,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile(filename, text);
         }
 
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
         {
             var addedFilenames = new HashSet<string>();
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, codeModel, sourceInputModel));
             var serializeWriter = new SerializationWriter();
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
 
@@ -275,7 +274,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // since MgmtReferenceType inherits from MgmtObjectType which inherits from SchemaObjectType, we definitely do not want to exclude any generation of ReferenceTypes
             if (model is SchemaObjectType objSchema && model is not MgmtReferenceType)
             {
-                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
+                if (TypeReferenceTypeChooser.HasMatch(objSchema.InputModel))
                     return true;
             }
 
@@ -292,7 +291,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (model is MgmtReferenceType mgmtReferenceType)
             {
-                var extensions = mgmtReferenceType.ObjectSchema.Extensions;
+                var extensions = mgmtReferenceType.InputModel.Extensions;
                 if (extensions != null && extensions.MgmtReferenceType)
                     return;
             }
