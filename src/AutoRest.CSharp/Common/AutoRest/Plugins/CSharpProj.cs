@@ -66,7 +66,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <PackageReference Include=""Azure.Core.Experimental"" />
   </ItemGroup>
 ";
-        private string _llcAzureKeyAuth = @"<ItemGroup>
+        private string _llcAzureKeyAuth = @"
+  <ItemGroup>
     <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />
   </ItemGroup>";
 
