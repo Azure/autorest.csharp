@@ -18,9 +18,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
-        public static ExtensibleSnippets Extensible { get; } = Configuration.IsBranded
-            ? new AzureExtensibleSnippets()
-            : new SystemExtensibleSnippets();
+        public static ExtensibleSnippets Extensible => Configuration.ApiTypes.ExtensibleSnippets;
 
         public static MethodBodyStatement AsStatement(this IEnumerable<MethodBodyStatement> statements) => statements.ToArray();
 
@@ -40,7 +38,6 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", new[]{expression}, null, false);
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);
 
-        public static TypedValueExpression NullConditional(Parameter parameter) => parameter.IsOptionalInSignature ? ((TypedValueExpression)parameter).NullConditional() : parameter;
         public static ValueExpression NullCoalescing(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("??", left, right);
         public static ValueExpression EnumValue(EnumType type, EnumTypeValue value) => new MemberExpression(new TypeReference(type.Type), value.Declaration.Name);
         public static ValueExpression FrameworkEnumValue<TEnum>(TEnum value) where TEnum : struct, Enum => new MemberExpression(new TypeReference(typeof(TEnum)), Enum.GetName(value)!);
@@ -80,6 +77,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
 
+        public static EnumerableExpression InvokeArrayEmpty(CSharpType arrayItemType)
+            => new(arrayItemType, new InvokeStaticMethodExpression(typeof(Array), nameof(Array.Empty), Array.Empty<ValueExpression>(), new[] { arrayItemType }));
+
         public static StreamExpression InvokeFileOpenRead(string filePath)
             => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{Literal(filePath)}));
         public static StreamExpression InvokeFileOpenWrite(string filePath)
@@ -92,6 +92,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         // Expected signature: MethodName(JsonProperty property, ref Optional<T> optional)
         public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)
             => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[]{jsonProperty, new FormattableStringToExpression($"ref {variable}")});
+
+        public static AssignValueStatement AssignIfNull<T>(T variable, T expression) where T : ValueExpression => new(variable, expression, "??=");
 
         public static AssignValueStatement Assign<T>(T variable, T expression) where T : ValueExpression => new(variable, expression);
 

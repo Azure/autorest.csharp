@@ -11,6 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
@@ -54,7 +55,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool TryGetConfigOperationName(this InputOperation operation, [MaybeNullWhen(false)] out string name)
         {
-            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.Name!, out name);
+            if (Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name))
+            {
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem(TransformTypeName.OverrideOperationName, operation.OperationId!, name),
+                    operation.GetFullSerializedName(),
+                    "OverrideOperationName", operation.Language.Default.Name, name);
+                return true;
+            }
+            return false;
         }
 
         public static RequestPath GetRequestPath(this InputOperation operation, ResourceTypeSegment? hint = null)
@@ -199,6 +208,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return candidates;
+        }
+
+        internal static string GetFullSerializedName(this OperationGroup operationGroup)
+        {
+            return operationGroup.Language.Default.SerializedName ?? operationGroup.Language.Default.Name;
+        }
+
+        internal static string GetFullSerializedName(this Operation operation)
+        {
+            return operation.OperationId ?? operation.Language.Default.SerializedName ?? operation.Language.Default.Name;
+        }
+
+        internal static string GetFullSerializedName(this Operation operation, RequestParameter parameter)
+        {
+            return $"{operation.GetFullSerializedName()}.{parameter.GetOriginalName()}";
         }
     }
 }

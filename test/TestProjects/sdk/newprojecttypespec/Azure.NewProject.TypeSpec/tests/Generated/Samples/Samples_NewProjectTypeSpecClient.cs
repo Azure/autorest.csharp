@@ -616,8 +616,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(friend);
         }
 
         [Test]
@@ -628,8 +628,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
@@ -676,8 +676,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(friend);
         }
 
         [Test]
@@ -688,8 +688,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]

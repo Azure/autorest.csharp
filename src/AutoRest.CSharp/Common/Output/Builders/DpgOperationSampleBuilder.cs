@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _clientInvocationChain = GetClientInvocationChain(client);
         }
 
-        public IReadOnlyList<DpgOperationSample> BuildSamples(InputOperation operation, MethodSignature protocolMethodSignature, MethodSignature? convenienceMethodSignature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType)
+        public IReadOnlyList<DpgOperationSample> BuildSamples(InputOperation operation, MethodSignature protocolMethodSignature, MethodSignature? convenienceMethodSignature, InputType? requestBodyType, StatusCodeSwitchBuilder statusCodes)
         {
             // we do not generate any sample if these variables are null
             // they are only null when HLC calling methods in this class
@@ -66,12 +66,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (operation.Examples.FirstOrDefault(e => e.Key == exampleKey) is {} operationExample)
                 {
                     // add protocol method sample
-                    samples.Add(new(_client, _clientInvocationChain, protocolMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, false, exampleKey));
+                    samples.Add(new(_client, _clientInvocationChain, protocolMethodSignature, requestBodyType, statusCodes.ResponseType, statusCodes.LroResultType, statusCodes.PageItemType, clientParameters, operationExample, false, exampleKey));
 
                     // add convenience method sample
                     if (convenienceMethodSignature != null && convenienceMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                     {
-                        samples.Add(new(_client, _clientInvocationChain, convenienceMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, true, exampleKey));
+                        samples.Add(new(_client, _clientInvocationChain, convenienceMethodSignature, requestBodyType, statusCodes.ResponseType, statusCodes.LroResultType, statusCodes.PageItemType, clientParameters, operationExample, true, exampleKey));
                     }
                 }
             }

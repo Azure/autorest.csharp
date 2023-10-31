@@ -23,7 +23,9 @@ namespace AutoRest.CSharp.Output.Models
         public DpgOutputLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
         {
             rootNamespace = RenameInputsVisitor.Visit(rootNamespace);
-            rootNamespace = RenameAnonymousTypesVisitor.Visit(rootNamespace);
+            rootNamespace = FixAnonymousTypesVisitor.Visit(rootNamespace);
+            rootNamespace = ReplaceStringUnionTypesWithEnums.Visit(rootNamespace);
+            rootNamespace = rootNamespace with { Clients = ExampleMockValueBuilder.AddExamples(rootNamespace.Clients) };
 
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;

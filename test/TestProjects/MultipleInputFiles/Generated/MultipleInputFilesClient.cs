@@ -76,7 +76,6 @@ namespace MultipleInputFiles
 
         /// <param name="value"> The TestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response> Operation1Async(TestModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleInputFilesClient.Operation1");
@@ -94,7 +93,6 @@ namespace MultipleInputFiles
 
         /// <param name="value"> The TestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response Operation1(TestModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleInputFilesClient.Operation1");
@@ -112,7 +110,6 @@ namespace MultipleInputFiles
 
         /// <param name="value"> The TestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response> Operation2Async(TestModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleInputFilesClient.Operation2");
@@ -130,7 +127,6 @@ namespace MultipleInputFiles
 
         /// <param name="value"> The TestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response Operation2(TestModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleInputFilesClient.Operation2");

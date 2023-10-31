@@ -54,8 +54,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -68,8 +68,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = Default(content, context);
             return response;
         }
@@ -160,8 +160,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = await OctetStreamAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -174,8 +174,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = OctetStream(content, context);
             return response;
         }
@@ -266,8 +266,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = await CustomContentTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -280,8 +280,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = CustomContentType(content, context);
             return response;
         }
@@ -372,8 +372,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = await Base64Async(content, context).ConfigureAwait(false);
             return response;
         }
@@ -386,8 +386,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = Base64(content, context);
             return response;
         }
@@ -478,8 +478,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = await Base64urlAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -492,8 +492,8 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContent.Create(value);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(value);
             Response response = Base64url(content, context);
             return response;
         }

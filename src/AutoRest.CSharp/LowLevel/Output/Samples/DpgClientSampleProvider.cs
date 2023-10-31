@@ -230,7 +230,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                         Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
                         new ForeachStatement(foreachItemType, "item", operation.Value, isAsync, out var itemVar)
                         {
-                            ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
+                            sample.IsConvenienceSample ? new MethodBodyStatement() : ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
                         }
                     };
                 }
@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                      */
                     return new ForeachStatement(foreachItemType, "item", invocation, isAsync, out var itemVar)
                     {
-                        ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
+                        sample.IsConvenienceSample ? new MethodBodyStatement() : ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
                     };
                 }
             }
@@ -251,7 +251,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             // if it is not pageable, we just call the operation, declare a local variable and assign the result to it
             if (sample is {ResponseType: {} responseType})
             {
-                if (sample.IsLongRunning)
+                if (sample.LroResultType is {} lroResultType)
                 {
                     /*
                     * This will generate code like:
@@ -263,7 +263,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                         return new[]
                         {
                             Declare(returnType, "operation", new OperationExpression(invocation), out var operationOfT),
-                            Declare(responseType, "responseData", operationOfT.Value, out _)
+                            Declare(lroResultType, "responseData", operationOfT.Value, out _)
                         };
                     }
 
@@ -272,7 +272,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                         Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
                         Declare("responseData", new BinaryDataExpression(operation.Value), out var responseData),
                         EmptyLine,
-                        ParseResponse(responseType, sample, responseData.ToStream())
+                        ParseResponse(lroResultType, sample, responseData.ToStream())
                     };
                 }
 
@@ -280,11 +280,17 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                  * This will generate code like:
                  * Response<T> operation = <invocation>;
                  */
+                if (sample.IsConvenienceSample)
+                {
+                    return Declare(new VariableReference(returnType, "response"), invocation);
+                }
+
+                var rawResponse = new VariableReference(returnType, "response");
                 return new[]
                 {
-                    Declare(returnType, "response", new ResponseExpression(invocation), out var responseOfT),
+                    Declare(rawResponse, invocation),
                     EmptyLine,
-                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, responseOfT.ContentStream) : InvokeConsoleWriteLine(responseOfT.Value)
+                    sample.BuildResponseParsing ? ParseResponse(responseType, sample, new ResponseExpression(rawResponse).ContentStream) : InvokeConsoleWriteLine(new NullableResponseExpression(rawResponse).Value)
                 };
             }
 

@@ -65,8 +65,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await UnionInRequestPropertyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -80,8 +80,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = UnionInRequestProperty(content, context);
             return response;
         }
@@ -173,8 +173,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await UnionInResponsePropertyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(AnotherModelWithUnionProperty.FromResponse(response), response);
         }
@@ -188,8 +188,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = UnionInResponseProperty(content, context);
             return Response.FromValue(AnotherModelWithUnionProperty.FromResponse(response), response);
         }
@@ -281,8 +281,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await UnionWithSelfReferenceAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -296,8 +296,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = UnionWithSelfReference(content, context);
             return response;
         }
@@ -389,8 +389,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await UnionWithInderictAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -404,8 +404,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = UnionWithInderict(content, context);
             return response;
         }
@@ -497,8 +497,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await LiteralOfIntegerAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -512,8 +512,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = LiteralOfInteger(content, context);
             return response;
         }
@@ -605,8 +605,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await LiteralOfFloatAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -620,8 +620,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = LiteralOfFloat(content, context);
             return response;
         }
@@ -713,8 +713,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await ConfidentOperationWithDiscriminatorAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
@@ -728,8 +728,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = ConfidentOperationWithDiscriminator(content, context);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
@@ -821,8 +821,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await PollutedBaseMethodAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(PollutedPet.FromResponse(response), response);
         }
@@ -836,8 +836,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = PollutedBaseMethod(content, context);
             return Response.FromValue(PollutedPet.FromResponse(response), response);
         }
@@ -929,8 +929,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await PollutedDerivedMethodAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(PollutedDog.FromResponse(response), response);
         }
@@ -944,8 +944,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = PollutedDerivedMethod(content, context);
             return Response.FromValue(PollutedDog.FromResponse(response), response);
         }
@@ -1037,8 +1037,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await UnpollutedDerivedMethodAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(UnpollutedCat.FromResponse(response), response);
         }
@@ -1052,8 +1052,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = UnpollutedDerivedMethod(content, context);
             return Response.FromValue(UnpollutedCat.FromResponse(response), response);
         }
@@ -1145,8 +1145,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await UseDerivedModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1160,8 +1160,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = UseDerivedModel(content, context);
             return response;
         }
@@ -1253,8 +1253,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await UseDerivedModelWithUnionAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1268,8 +1268,8 @@ namespace ConfidentLevelsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = UseDerivedModelWithUnion(content, context);
             return response;
         }

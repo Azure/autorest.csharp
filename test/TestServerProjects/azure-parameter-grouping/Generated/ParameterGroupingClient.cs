@@ -41,7 +41,6 @@ namespace azure_parameter_grouping
         /// <summary> Post a bunch of required parameters grouped. </summary>
         /// <param name="parameterGroupingPostRequiredParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameterGroupingPostRequiredParameters"/> is null. </exception>
         public virtual async Task<Response> PostRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostRequired");
@@ -60,7 +59,6 @@ namespace azure_parameter_grouping
         /// <summary> Post a bunch of required parameters grouped. </summary>
         /// <param name="parameterGroupingPostRequiredParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameterGroupingPostRequiredParameters"/> is null. </exception>
         public virtual Response PostRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostRequired");

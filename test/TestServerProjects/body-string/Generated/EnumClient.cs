@@ -215,7 +215,6 @@ namespace body_string
         /// <summary> Sends value 'green-color' from a constant. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="enumStringBody"/> is null. </exception>
         public virtual async Task<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
@@ -234,7 +233,6 @@ namespace body_string
         /// <summary> Sends value 'green-color' from a constant. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="enumStringBody"/> is null. </exception>
         public virtual Response PutReferencedConstant(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");

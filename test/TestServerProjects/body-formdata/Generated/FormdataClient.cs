@@ -43,7 +43,6 @@ namespace body_formdata
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> or <paramref name="fileName"/> is null. </exception>
         public virtual async Task<Response<Stream>> UploadFileAsync(Stream fileContent, string fileName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataClient.UploadFile");
@@ -63,7 +62,6 @@ namespace body_formdata
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> or <paramref name="fileName"/> is null. </exception>
         public virtual Response<Stream> UploadFile(Stream fileContent, string fileName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataClient.UploadFile");
@@ -82,7 +80,6 @@ namespace body_formdata
         /// <summary> Upload file. </summary>
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         public virtual async Task<Response<Stream>> UploadFileViaBodyAsync(Stream fileContent, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataClient.UploadFileViaBody");
@@ -101,7 +98,6 @@ namespace body_formdata
         /// <summary> Upload file. </summary>
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         public virtual Response<Stream> UploadFileViaBody(Stream fileContent, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataClient.UploadFileViaBody");
@@ -120,7 +116,6 @@ namespace body_formdata
         /// <summary> Upload multiple files. </summary>
         /// <param name="fileContent"> Files to upload. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         public virtual async Task<Response<Stream>> UploadFilesAsync(IEnumerable<Stream> fileContent, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataClient.UploadFiles");
@@ -139,7 +134,6 @@ namespace body_formdata
         /// <summary> Upload multiple files. </summary>
         /// <param name="fileContent"> Files to upload. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         public virtual Response<Stream> UploadFiles(IEnumerable<Stream> fileContent, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataClient.UploadFiles");

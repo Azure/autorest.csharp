@@ -99,7 +99,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
+
                     WriteResponseClassifierMethod(_writer, _client.ResponseClassifierTypes);
+                    WriteLongRunningResultRetrievalMethods();
                 }
             }
         }
@@ -123,7 +125,7 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer
                 .Line()
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
-                .Line($"public virtual {Configuration.ApiTypes.HttpPipelineType} Pipeline => {_client.Fields.PipelineField.Name};");
+                .Line($"public virtual {_client.Fields.PipelineField.Type} Pipeline => {_client.Fields.PipelineField.Name};");
 
             _writer.Line();
         }
@@ -275,6 +277,15 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes)
             {
                 WriteResponseClassifier(writer, name, statusCodes);
+            }
+        }
+
+        private void WriteLongRunningResultRetrievalMethods()
+        {
+            foreach (var method in _client.OperationMethods.Select(c => c.ResultConversionMethod).WhereNotNull())
+            {
+                _writer.Line();
+                _writer.WriteMethod(method);
             }
         }
 

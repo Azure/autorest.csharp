@@ -41,7 +41,6 @@ namespace extensible_enums_swagger
         /// <summary> get pet by id. </summary>
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         public virtual async Task<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PetClient.GetByPetId");
@@ -60,7 +59,6 @@ namespace extensible_enums_swagger
         /// <summary> get pet by id. </summary>
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         public virtual Response<Pet> GetByPetId(string petId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PetClient.GetByPetId");

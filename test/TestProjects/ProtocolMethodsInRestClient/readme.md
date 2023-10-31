@@ -13,6 +13,7 @@ security-header-name: Fake-Subscription-Key
 protocol-method-list:
   - Create
   - Delete
+  - PutStream
   - firstTemplate_Create
   - firstTemplate_Get
   - secondTemplate_Get

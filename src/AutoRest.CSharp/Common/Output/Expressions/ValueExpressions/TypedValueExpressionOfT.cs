@@ -56,17 +56,31 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 
         private static ValueExpression ValidateType(ValueExpression untyped, Type type)
         {
+#if DEBUG
             if (untyped is not TypedValueExpression typed)
             {
                 return untyped;
             }
 
-            if (typed.Type.IsFrameworkType && typed.Type.FrameworkType.IsAssignableTo(type))
+            if (typed.Type.IsFrameworkType)
             {
-                return typed.Untyped;
+                if (typed.Type.FrameworkType.IsGenericTypeDefinition && type.IsGenericType)
+                {
+                    if (typed.Type.FrameworkType.MakeGenericType(type.GetGenericArguments()).IsAssignableTo(type))
+                    {
+                        return typed.Untyped;
+                    }
+                }
+                else if (typed.Type.FrameworkType.IsAssignableTo(type))
+                {
+                    return typed.Untyped;
+                }
             }
 
             throw new InvalidOperationException($"Expression with return type {typed.Type.ToStringForDocs()} is cast to type {type}");
+#else
+            return untyped;
+#endif
         }
     }
 }

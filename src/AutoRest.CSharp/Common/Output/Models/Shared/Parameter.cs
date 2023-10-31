@@ -21,6 +21,9 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
+        public static Parameter FromInputParameter(in InputParameter operationParameter, bool keepClientDefaultValue, TypeFactory typeFactory)
+            => FromInputParameter(operationParameter, typeFactory.CreateType(operationParameter.Type), keepClientDefaultValue, typeFactory);
+
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, bool keepClientDefaultValue, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();
@@ -95,7 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             var description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 // [TODO] "The String to use." is special cased to reduce amount of changes. Remove during cleanup
-                ? type.Equals(typeof(string)) ? $"The String to use." : $"The {type.ToStringForDocs()} to use."
+                ? type.Equals(typeof(string)) ? $"The String to use." : $"The {TypeFactory.GetInputType(type).ToStringForDocs()} to use."
                 : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
 
             if (defaultValue != null)

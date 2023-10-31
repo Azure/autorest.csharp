@@ -45,7 +45,6 @@ namespace required_optional
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="pathParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="pathParameter"/> is null. </exception>
         public virtual async Task<Response> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredPath");
@@ -64,7 +63,6 @@ namespace required_optional
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="pathParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="pathParameter"/> is null. </exception>
         public virtual Response GetRequiredPath(string pathParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredPath");

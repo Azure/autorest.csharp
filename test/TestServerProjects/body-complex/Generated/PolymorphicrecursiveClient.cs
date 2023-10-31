@@ -129,7 +129,6 @@ namespace body_complex
         /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphicrecursiveClient.PutValid");
@@ -202,7 +201,6 @@ namespace body_complex
         /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutValid(Fish complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphicrecursiveClient.PutValid");

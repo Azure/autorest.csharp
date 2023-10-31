@@ -10,6 +10,8 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Models;
 
@@ -58,7 +60,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                 }
             }
-            _valueCache.TryAdd(typeToReplace.InputModel, null);
+            else
+            {
+                MgmtReport.Instance.TransformSection.AddTransformLog(new TransformItem(TransformTypeName.NoPropertyTypeReplacement, typeToReplace.Type.Name), typeToReplace.Type.Name, "NoReplaceForType:" + typeToReplace.Type.Name);
+            }
+            _valueCache.TryAdd(typeToReplace.ObjectSchema, null);
             return null;
         }
 

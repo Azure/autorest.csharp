@@ -55,13 +55,13 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(name);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAsRequestBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -75,13 +75,13 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(name);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAsRequestBody(content, context);
             return response;
         }
@@ -177,13 +177,13 @@ namespace Parameters.Spread
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(name);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAsRequestParameterAsync(id, xMsTestHeader, content, context).ConfigureAwait(false);
             return response;
         }
@@ -201,13 +201,13 @@ namespace Parameters.Spread
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(name);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAsRequestParameter(id, xMsTestHeader, content, context);
             return response;
         }
@@ -323,6 +323,7 @@ namespace Parameters.Spread
             Argument.AssertNotNullOrEmpty(prop5, nameof(prop5));
             Argument.AssertNotNullOrEmpty(prop6, nameof(prop6));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -339,7 +340,6 @@ namespace Parameters.Spread
             writer.WritePropertyName("prop6"u8);
             writer.WriteStringValue(prop6);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadWithMultipleParametersAsync(id, xMsTestHeader, content, context).ConfigureAwait(false);
             return response;
         }
@@ -367,6 +367,7 @@ namespace Parameters.Spread
             Argument.AssertNotNullOrEmpty(prop5, nameof(prop5));
             Argument.AssertNotNullOrEmpty(prop6, nameof(prop6));
 
+            RequestContext context = FromCancellationToken(cancellationToken);
             var content = new Utf8JsonRequestContent();
             var writer = content.JsonWriter;
             writer.WriteStartObject();
@@ -383,7 +384,6 @@ namespace Parameters.Spread
             writer.WritePropertyName("prop6"u8);
             writer.WriteStringValue(prop6);
             writer.WriteEndObject();
-            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadWithMultipleParameters(id, xMsTestHeader, content, context);
             return response;
         }

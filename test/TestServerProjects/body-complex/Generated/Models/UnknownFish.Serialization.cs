@@ -11,8 +11,33 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownFish
+    internal partial class UnknownFish : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("fishtype"u8);
+            writer.WriteStringValue(Fishtype);
+            if (Optional.IsDefined(Species))
+            {
+                writer.WritePropertyName("species"u8);
+                writer.WriteStringValue(Species);
+            }
+            writer.WritePropertyName("length"u8);
+            writer.WriteNumberValue(Length);
+            if (Optional.IsCollectionDefined(Siblings))
+            {
+                writer.WritePropertyName("siblings"u8);
+                writer.WriteStartArray();
+                foreach (var item in Siblings)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
         internal static UnknownFish DeserializeUnknownFish(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)

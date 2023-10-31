@@ -132,8 +132,8 @@ namespace _Specs_.Azure.Core.Basic
         {
             Argument.AssertNotNull(resource, nameof(resource));
 
-            using RequestContent content = resource.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = resource.ToRequestContent();
             Response response = await CreateOrReplaceAsync(id, content, context).ConfigureAwait(false);
             return Response.FromValue(User.FromResponse(response), response);
         }
@@ -149,8 +149,8 @@ namespace _Specs_.Azure.Core.Basic
         {
             Argument.AssertNotNull(resource, nameof(resource));
 
-            using RequestContent content = resource.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = resource.ToRequestContent();
             Response response = CreateOrReplace(id, content, context);
             return Response.FromValue(User.FromResponse(response), response);
         }
@@ -912,8 +912,8 @@ namespace _Specs_.Azure.Core.Basic
             uri.AppendPath("/azure/core/basic/users/", false);
             uri.AppendPath(id, true);
             uri.AppendPath(":export", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("format", format, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

@@ -36,6 +36,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public CSharpType? ResponseType { get; }
         public CSharpType ProtocolReturnType { get; }
         public CSharpType RestClientConvenienceReturnType { get; }
+        public CSharpType? LroResultType { get; }
         public CSharpType? PageItemType { get; }
         public CSharpType ClientConvenienceReturnType { get; }
         public ResponseClassifierType ResponseClassifier { get; }
@@ -51,11 +52,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
 
             var pageItemInputType = GetPageItemType(commonResponseInputType, operation);
+            CSharpType? lroResultType = null;
             if (operation.LongRunning is { } lro)
             {
                 var response = GetLroSuccessInputResponse(operation, lro);
                 successInputResponses = new[] { response };
                 commonResponseInputType = response.Type;
+                lroResultType = lro.ReturnType is null ? null : TypeFactory.GetOutputType(typeFactory.CreateType(lro.ReturnType));
             }
 
             var commonResponseType = commonResponseInputType is null
@@ -81,16 +84,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var headerModelType = (library as DataPlaneOutputLibrary)?.FindHeaderModel(operation)?.Type;
+            var protocolReturnType = GetProtocolReturnType(commonResponseType is not null, operation.LongRunning is not null, operation.Paging is not null);
 
             return new StatusCodeSwitchBuilder
             (
                 successResponses,
                 headerModelType,
                 commonResponseType,
-                GetProtocolReturnType(commonResponseType is not null, operation.LongRunning is not null, operation.Paging is not null),
+                protocolReturnType,
                 GetRestClientConvenienceReturnType(commonResponseType, headerModelType),
+                lroResultType,
                 pageItemType,
-                GetClientConvenienceReturnType(commonResponseType, pageItemType, operation.LongRunning is not null),
+                GetClientConvenienceReturnType(commonResponseType, pageItemType, lroResultType, operation.LongRunning is not null),
                 new ResponseClassifierType(successInputResponses.SelectMany(s => s.StatusCodes).Distinct().Select(c => new StatusCodes(c, null)).OrderBy(c => c.Code))
             );
         }
@@ -158,9 +163,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return successInputResponses;
         }
 
-        public static StatusCodeSwitchBuilder CreateHeadAsBooleanOperationSwitch() => new(null, null, typeof(bool), Configuration.ApiTypes.GetResponseOfT<bool>(), Configuration.ApiTypes.GetResponseOfT<bool>(), null, Configuration.ApiTypes.GetResponseOfT<bool>(), new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code)));
+        public static StatusCodeSwitchBuilder CreateHeadAsBooleanOperationSwitch() => new(null, null, typeof(bool), Configuration.ApiTypes.GetResponseOfT<bool>(), Configuration.ApiTypes.GetResponseOfT<bool>(), null, null, Configuration.ApiTypes.GetResponseOfT<bool>(), new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code)));
 
-        private StatusCodeSwitchBuilder(IReadOnlyList<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>? successResponses, CSharpType? headerModelType, CSharpType? responseType, CSharpType protocolReturnType, CSharpType restClientConvenienceReturnType, CSharpType? pageItemType, CSharpType clientConvenienceReturnType, ResponseClassifierType responseClassifier)
+        private StatusCodeSwitchBuilder(IReadOnlyList<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>? successResponses, CSharpType? headerModelType, CSharpType? responseType, CSharpType protocolReturnType, CSharpType restClientConvenienceReturnType, CSharpType? lroResultType, CSharpType? pageItemType, CSharpType clientConvenienceReturnType, ResponseClassifierType responseClassifier)
         {
             _successResponses = successResponses;
             _headerModelType = headerModelType;
@@ -168,6 +173,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             ResponseType = responseType;
             ProtocolReturnType = protocolReturnType;
             RestClientConvenienceReturnType = restClientConvenienceReturnType;
+            LroResultType = lroResultType;
             PageItemType = pageItemType;
             ClientConvenienceReturnType = clientConvenienceReturnType;
             ResponseClassifier = responseClassifier;
@@ -178,29 +184,58 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var successResponses = new (CSharpType?, ObjectSerialization?, IReadOnlyList<int>)[]{(null, null, new[]{200})};
             var responseClassifierType = new ResponseClassifierType(new[] { new StatusCodes(200, null) }.OrderBy(c => c.Code));
 
-            return new StatusCodeSwitchBuilder(successResponses, _headerModelType, ResponseType, ProtocolReturnType, RestClientConvenienceReturnType, PageItemType, ClientConvenienceReturnType, responseClassifierType);
+            return new StatusCodeSwitchBuilder(successResponses, _headerModelType, ResponseType, ProtocolReturnType, RestClientConvenienceReturnType, LroResultType, PageItemType, ClientConvenienceReturnType, responseClassifierType);
         }
 
         public MethodBodyStatement Build(HttpMessageExpression httpMessage, bool async)
         {
-            if (_successResponses is [{StatusCodes: {} statusCodes, Type: {} type} _] && type.Equals(typeof(Stream)))
+            // [TODO]: Protocol method doesn't provide access to the underlying HttpMessage instance to call httpMessage.ExtractResponseContent(),
+            // hence it requires convenience method to call pipeline method directly
+            if (_successResponses is not null && _successResponses.Any(sr => sr.Type is not null && sr.Type.Equals(typeof(Stream))))
             {
-                return new SwitchStatement
-                (
-                    httpMessage.Response.Status,
-                    new[]
-                    {
-                        new(statusCodes.Select(Int).ToList(), new MethodBodyStatement[]
-                        {
-                            Var("value", httpMessage.ExtractResponseContent(), out var value),
-                            Return(ResponseExpression.FromValue(value, httpMessage.Response))
-                        }, AddScope: true),
-                        SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response)))
-                    }
-                );
+                if (_headerModelType is null)
+                {
+                    return BuildSwitchStatementFromHttpMessage(httpMessage, null, async);
+
+                }
+
+                var headers = new VariableReference(_headerModelType, "headers");
+                return new MethodBodyStatement[]
+                {
+                    new DeclareVariableStatement(null, headers.Declaration, New.Instance(_headerModelType, httpMessage.Response)),
+                    BuildSwitchStatementFromHttpMessage(httpMessage, headers, async)
+                };
             }
 
             return Build(httpMessage.Response, async);
+        }
+
+        private SwitchStatement BuildSwitchStatementFromHttpMessage(HttpMessageExpression httpMessage, TypedValueExpression? headers, bool async)
+            => new
+            (
+                httpMessage.Response.Status,
+                _successResponses!
+                    .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, headers, async), AddScope: r.Type is not null))
+                    .Append(SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response))))
+                    .ToArray()
+            );
+
+        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, TypedValueExpression? headers, bool async)
+        {
+            if (type is not null && type.Equals(typeof(Stream)))
+            {
+                return new MethodBodyStatement[]
+                {
+                    Var("value", httpMessage.ExtractResponseContent(), out var value),
+                    Return(headers is null
+                        ? ResponseExpression.FromValue(value, httpMessage.Response)
+                        : ResponseWithHeadersExpression.FromValue(value, headers, httpMessage.Response))
+                };
+            }
+
+            return headers is null
+                ? BuildStatusCodeSwitchCaseStatement(type, serialization, httpMessage.Response, async)
+                : BuildStatusCodeSwitchCaseStatement(type, serialization, httpMessage.Response, headers, async);
         }
 
         public MethodBodyStatement Build(ResponseExpression response, bool async)
@@ -317,13 +352,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        private static CSharpType GetClientConvenienceReturnType(CSharpType? responseType, CSharpType? pageItemType, bool isLro)
+        private static CSharpType GetClientConvenienceReturnType(CSharpType? responseType, CSharpType? pageItemType, CSharpType? lroResultType, bool isLro)
         {
             return (isLro, pageItemType) switch
             {
                 (true, not null) => new(typeof(Operation<>), new CSharpType(typeof(Pageable<>), pageItemType)),
                 (false, not null) => new(typeof(Pageable<>), pageItemType),
-                (true, null) => responseType is not null ? new CSharpType(typeof(Operation<>), responseType) : typeof(Operation),
+                (true, null) => lroResultType is not null ? new CSharpType(typeof(Operation<>), lroResultType) : typeof(Operation),
                 _ => responseType is not null ? new CSharpType(Configuration.ApiTypes.ResponseOfTType, responseType) : Configuration.ApiTypes.ResponseType
             };
         }

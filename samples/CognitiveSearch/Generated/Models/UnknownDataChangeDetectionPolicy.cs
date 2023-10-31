@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Unknown version of DataChangeDetectionPolicy. </summary>
+    /// <summary> The UnknownDataChangeDetectionPolicy. </summary>
     internal partial class UnknownDataChangeDetectionPolicy : DataChangeDetectionPolicy
     {
         /// <summary> Initializes a new instance of UnknownDataChangeDetectionPolicy. </summary>

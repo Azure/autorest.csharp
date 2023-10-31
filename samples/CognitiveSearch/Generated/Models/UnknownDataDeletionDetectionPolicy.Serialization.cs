@@ -6,11 +6,20 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownDataDeletionDetectionPolicy
+    internal partial class UnknownDataDeletionDetectionPolicy : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
+            writer.WriteEndObject();
+        }
+
         internal static UnknownDataDeletionDetectionPolicy DeserializeUnknownDataDeletionDetectionPolicy(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)

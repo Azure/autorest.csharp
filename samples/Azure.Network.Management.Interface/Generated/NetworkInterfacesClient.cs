@@ -72,7 +72,6 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="networkInterfaceName"/> is null. </exception>
         public virtual async Task<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.Get");
@@ -93,7 +92,6 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="networkInterfaceName"/> is null. </exception>
         public virtual Response<NetworkInterface> Get(string resourceGroupName, string networkInterfaceName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.Get");
@@ -114,7 +112,6 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="parameters"> Parameters supplied to update network interface tags. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="networkInterfaceName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual async Task<Response<NetworkInterface>> UpdateTagsAsync(string resourceGroupName, string networkInterfaceName, TagsObject parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.UpdateTags");
@@ -135,7 +132,6 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="parameters"> Parameters supplied to update network interface tags. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="networkInterfaceName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<NetworkInterface> UpdateTags(string resourceGroupName, string networkInterfaceName, TagsObject parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.UpdateTags");

@@ -64,7 +64,7 @@ import {
     getFormattedType,
     getInputType
 } from "./model.js";
-import { capitalize } from "./utils.js";
+import { capitalize, getProjectedNameForCsharp, getTypeName } from "./utils.js";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -99,11 +99,11 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.bodyParameter) {
+    if (typespecParameters.body?.parameter) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.bodyParameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
-    } else if (typespecParameters.bodyType) {
+    } else if (typespecParameters.body?.type) {
         if (resourceOperation) {
             parameters.push(
                 loadBodyParameter(sdkContext, resourceOperation.resourceType)
@@ -111,7 +111,7 @@ export function loadOperation(
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
                 sdkContext,
-                typespecParameters.bodyType
+                typespecParameters.body.type
             );
             if (effectiveBodyType.kind === "Model") {
                 if (effectiveBodyType.name !== "") {
@@ -193,7 +193,7 @@ export function loadOperation(
     /* TODO: handle lro */
 
     return {
-        Name: op.name,
+        Name: getTypeName(sdkContext, op),
         ResourceName:
             resourceOperation?.resourceType.name ??
             getOperationGroupName(sdkContext, op, serviceNamespaceType),
@@ -259,7 +259,7 @@ export function loadOperation(
                     : InputOperationParameterKind.Client
                 : InputOperationParameterKind.Method;
         return {
-            Name: param.name,
+            Name: getTypeName(sdkContext, param),
             NameInRequest: name,
             Description: getDoc(program, param),
             Type: inputType,
@@ -297,7 +297,7 @@ export function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: body.name,
+            Name: getTypeName(sdkContext, body),
             NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,
@@ -388,7 +388,11 @@ export function loadOperation(
         if (op.verb !== "delete") {
             const formattedType = getFormattedType(
                 program,
-                metadata.logicalResult
+                // TODO: we should check `logicalPath` or other ways to determine body type,
+                // after https://github.com/Azure/typespec-azure/issues/3725 is fixed
+                op.verb === "post"
+                    ? metadata.envelopeResult
+                    : metadata.logicalResult
             );
             bodyType = getInputType(context, formattedType, models, enums);
         }
@@ -401,7 +405,15 @@ export function loadOperation(
                 StatusCodes: op.verb === "delete" ? [204] : [200],
                 BodyType: bodyType,
                 BodyMediaType: BodyMediaType.Json
-            } as OperationResponse
+            } as OperationResponse,
+            ResultPath:
+                metadata.logicalPath ??
+                // TODO: roll back changes when `logicalPath` can be definitive
+                // https://github.com/Azure/typespec-azure/issues/3725
+                (metadata.envelopeResult != metadata.logicalResult &&
+                op.verb === "post"
+                    ? "result" // actually `result` is the only allowed path for now
+                    : undefined)
         } as OperationLongRunning;
     }
 }

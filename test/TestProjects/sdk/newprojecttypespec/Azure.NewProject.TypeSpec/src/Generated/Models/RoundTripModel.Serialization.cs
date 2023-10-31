@@ -108,8 +108,10 @@ namespace Azure.NewProject.TypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            using var document = JsonDocument.Parse(RequiredUnknown);
-            JsonSerializer.Serialize(writer, document.RootElement);
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (Optional.IsDefined(OptionalUnknown))
             {
@@ -117,8 +119,10 @@ namespace Azure.NewProject.TypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                using var document0 = JsonDocument.Parse(OptionalUnknown);
-                JsonSerializer.Serialize(writer, document0.RootElement);
+                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WritePropertyName("requiredRecordUnknown"u8);
@@ -134,8 +138,10 @@ namespace Azure.NewProject.TypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                using var document0 = JsonDocument.Parse(item.Value);
-                JsonSerializer.Serialize(writer, document0.RootElement);
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndObject();
@@ -154,8 +160,10 @@ namespace Azure.NewProject.TypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using var document0 = JsonDocument.Parse(item.Value);
-                    JsonSerializer.Serialize(writer, document0.RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
                 writer.WriteEndObject();

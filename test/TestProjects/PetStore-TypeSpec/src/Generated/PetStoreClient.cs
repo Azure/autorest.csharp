@@ -222,8 +222,8 @@ namespace PetStore
         {
             Argument.AssertNotNull(pet, nameof(pet));
 
-            using RequestContent content = pet.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = pet.ToRequestContent();
             Response response = await CreateAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
@@ -236,8 +236,8 @@ namespace PetStore
         {
             Argument.AssertNotNull(pet, nameof(pet));
 
-            using RequestContent content = pet.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = pet.ToRequestContent();
             Response response = Create(content, context);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
@@ -673,11 +673,11 @@ namespace PetStore
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pets", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             if (start != null)
             {
                 uri.AppendQuery("start", start.Value, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -691,11 +691,11 @@ namespace PetStore
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pets/getFish", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             if (kind != null)
             {
                 uri.AppendQuery("kind", kind, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

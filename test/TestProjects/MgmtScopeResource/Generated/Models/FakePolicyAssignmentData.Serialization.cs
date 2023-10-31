@@ -73,8 +73,10 @@ namespace MgmtScopeResource
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Metadata);
 #else
-                using var document = JsonDocument.Parse(Metadata);
-                JsonSerializer.Serialize(writer, document.RootElement);
+                using (JsonDocument document = JsonDocument.Parse(Metadata))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (Optional.IsDefined(EnforcementMode))

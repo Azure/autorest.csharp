@@ -7,7 +7,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> Unknown version of MyBaseType. </summary>
+    /// <summary> The UnknownMyBaseType. </summary>
     internal partial class UnknownMyBaseType : MyBaseType
     {
         /// <summary> Initializes a new instance of UnknownMyBaseType. </summary>

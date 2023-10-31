@@ -199,8 +199,11 @@ stages:
           Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           BranchName: $(BranchName)
+          ContinueOnError: true
       - job: Create_PR
         dependsOn: Update_Code
+        variables:
+          UpdateCodeResult: $[dependencies.Update_Code.result]
         steps:
           - checkout: self
             fetchDepth: 1
@@ -210,6 +213,16 @@ stages:
             name: PRUrl
             displayName: "Build PR Url"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - pwsh: |
+              if ('$(UpdateCodeResult)' -eq 'Succeeded') {
+                $prTitle = 'Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.RequestedFor) from $(Build.SourceBranch)'
+              } else {
+                $prTitle = 'Failed Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.RequestedFor) from $(Build.SourceBranch)'
+              }
+
+              Write-Host "Setting variable PrTitle to '$prTitle'"
+              Write-Host "##vso[task.setvariable variable=PrTitle]$prTitle"
+            displayName: 'Build PR Title'
           - task: PowerShell@2
             displayName: Create pull request
             inputs:
@@ -222,7 +235,7 @@ stages:
                 -PROwner "azure-sdk"
                 -PRBranch "$(BranchName)"
                 -AuthToken "$(azuresdk-github-pat)"
-                -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.QueuedBy) from $(Build.SourceBranch)"
+                -PRTitle "$(PrTitle)"
                 -PRBody "Triggered from $(PRUrl.PRUrl)"
                 -OpenAsDraft $true
                 -PRLabels "Do Not Merge"

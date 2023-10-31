@@ -152,7 +152,7 @@ namespace _Type._Array
             }
         }
 
-        /// <param name="body"> The IList{TimeSpan} to use. </param>
+        /// <param name="body"> The IEnumerable{TimeSpan} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{TimeSpan},CancellationToken)']/*" />
@@ -160,13 +160,13 @@ namespace _Type._Array
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The IList{TimeSpan} to use. </param>
+        /// <param name="body"> The IEnumerable{TimeSpan} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(IEnumerable{TimeSpan},CancellationToken)']/*" />
@@ -174,8 +174,8 @@ namespace _Type._Array
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromEnumerable(body);
             Response response = Put(content, context);
             return response;
         }

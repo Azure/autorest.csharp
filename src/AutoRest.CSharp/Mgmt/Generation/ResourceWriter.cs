@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -287,8 +288,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IReadOnlyList<ParameterMapping> parameterMappings, bool isAsync)
         {
-            var responseVariable = new VariableReference(typeof(Response), "originalResponse");
-            var response = new ResponseExpression(responseVariable);
+            var responseType = getOperation.OriginalReturnType is null ? typeof(Response) : new CSharpType(typeof(Response<>), getOperation.OriginalReturnType);
+            var responseVariable = new VariableReference(responseType, "originalResponse");
 
             _writer
                 .Append($"var {responseVariable.Declaration:D} = {GetAwait(isAsync)} ")
@@ -296,7 +297,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"){GetConfigureAwait(isAsync)};");
+            if (getOperation.OriginalReturnType is null)
+            {
+                _writer.WriteMethodBodyStatement(Return(responseVariable));
+                return;
+            }
 
+            var response = new NullableResponseExpression(responseVariable);
             var armResource = new ArmResourceExpression(response.Value);
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {

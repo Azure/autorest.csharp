@@ -46,7 +46,6 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="synonymMapName"/> or <paramref name="synonymMap"/> is null. </exception>
         public virtual async Task<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
@@ -69,7 +68,6 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="synonymMapName"/> or <paramref name="synonymMap"/> is null. </exception>
         public virtual Response<SynonymMap> CreateOrUpdate(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
@@ -90,7 +88,6 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="synonymMapName"/> is null. </exception>
         public virtual async Task<Response> DeleteAsync(string synonymMapName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
@@ -111,7 +108,6 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="synonymMapName"/> is null. </exception>
         public virtual Response Delete(string synonymMapName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
@@ -131,7 +127,6 @@ namespace CognitiveSearch
         /// <param name="synonymMapName"> The name of the synonym map to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="synonymMapName"/> is null. </exception>
         public virtual async Task<Response<SynonymMap>> GetAsync(string synonymMapName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Get");
@@ -151,7 +146,6 @@ namespace CognitiveSearch
         /// <param name="synonymMapName"> The name of the synonym map to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="synonymMapName"/> is null. </exception>
         public virtual Response<SynonymMap> Get(string synonymMapName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Get");
@@ -209,7 +203,6 @@ namespace CognitiveSearch
         /// <param name="synonymMap"> The definition of the synonym map to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="synonymMap"/> is null. </exception>
         public virtual async Task<Response<SynonymMap>> CreateAsync(SynonymMap synonymMap, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Create");
@@ -229,7 +222,6 @@ namespace CognitiveSearch
         /// <param name="synonymMap"> The definition of the synonym map to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="synonymMap"/> is null. </exception>
         public virtual Response<SynonymMap> Create(SynonymMap synonymMap, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Create");

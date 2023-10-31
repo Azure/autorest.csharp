@@ -389,6 +389,17 @@ op boolBody(@body body: boolean): void;
 @convenientAPI(true)
 op dateTimeBody(@body body: utcDateTime): void;
 
+@route("/nullableDictionaryBody")
+@doc("The body parameter type nullable dictionary.")
+@put
+@convenientAPI(true)
+op nullableDictionaryBody(@body body?: Record<string>): void;
+
+@route("/nullableArrayBody")
+@doc("The body parameter type nullable array.")
+@put
+@convenientAPI(true)
+op nullableArrayBody(@body body?: string[]): void;
 
 @route("/returnString")
 @doc("The return type is datetime.")

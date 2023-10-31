@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Unknown version of Similarity. </summary>
+    /// <summary> The UnknownSimilarity. </summary>
     internal partial class UnknownSimilarity : Similarity
     {
         /// <summary> Initializes a new instance of UnknownSimilarity. </summary>

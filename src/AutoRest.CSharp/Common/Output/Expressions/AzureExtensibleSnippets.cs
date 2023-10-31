@@ -72,13 +72,13 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         internal class AzureRestOperationsSnippets : RestOperationsSnippets
         {
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
-                => ResponseExpression.FromValue(value, new ResponseExpression(response).GetRawResponse());
+                => ResponseExpression.FromValue(value, new ResponseExpression(response));
 
             public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response)
             {
                 var rawResponse = new ResponseExpression(response);
                 var model = new InvokeStaticMethodExpression(type.Type, FromResponseMethodName, new[] { rawResponse });
-                return ResponseExpression.FromValue(model, rawResponse.GetRawResponse());
+                return ResponseExpression.FromValue(model, rawResponse);
             }
 
             public override TypedValueExpression GetTypedResponseFromEnum(EnumType enumType, TypedValueExpression response)
@@ -91,8 +91,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             {
                 var rawResponse = new ResponseExpression(response);
                 return responseType == typeof(BinaryData)
-                    ? ResponseExpression.FromValue(rawResponse.Content, rawResponse.GetRawResponse())
-                    : ResponseExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse.GetRawResponse());
+                    ? ResponseExpression.FromValue(rawResponse.Content, rawResponse)
+                    : ResponseExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse);
             }
 
             public override MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message)

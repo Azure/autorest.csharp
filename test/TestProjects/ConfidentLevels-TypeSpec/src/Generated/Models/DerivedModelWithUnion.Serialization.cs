@@ -19,8 +19,10 @@ namespace ConfidentLevelsInTsp.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(UnionProperty);
 #else
-            using var document = JsonDocument.Parse(UnionProperty);
-            JsonSerializer.Serialize(writer, document.RootElement);
+            using (JsonDocument document = JsonDocument.Parse(UnionProperty))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);

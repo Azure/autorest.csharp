@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -321,8 +322,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using RequestContent content = thing.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = thing.ToRequestContent();
             Response response = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -336,8 +337,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using RequestContent content = thing.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = thing.ToRequestContent();
             Response response = AnonymousBody(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -421,31 +422,31 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
-        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(notFriend, nameof(notFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
-            using RequestContent content = notFriend.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = friend.ToRequestContent();
             Response response = await FriendlyModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
-        public virtual Response<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
+        public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(notFriend, nameof(notFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
-            using RequestContent content = notFriend.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = friend.ToRequestContent();
             Response response = FriendlyModel(content, context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
@@ -598,8 +599,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
             return response;
         }
@@ -614,8 +615,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = StringFormat(subscriptionId, content, context);
             return response;
         }
@@ -701,31 +702,31 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(ProjectedModel,CancellationToken)']/*" />
-        public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            using RequestContent content = modelWithProjectedName.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = projectedModel.ToRequestContent();
             Response response = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(ProjectedModel,CancellationToken)']/*" />
-        public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            using RequestContent content = modelWithProjectedName.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = projectedModel.ToRequestContent();
             Response response = ProjectedNameModel(content, context);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
@@ -811,21 +812,21 @@ namespace FirstTestTypeSpec
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<ReturnsAnonymousModel_101>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ReturnsAnonymousModelResponseType>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(ReturnsAnonymousModel_101.FromResponse(response), response);
+            return Response.FromValue(ReturnsAnonymousModelResponseType.FromResponse(response), response);
         }
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(CancellationToken)']/*" />
-        public virtual Response<ReturnsAnonymousModel_101> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
+        public virtual Response<ReturnsAnonymousModelResponseType> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ReturnsAnonymousModel(context);
-            return Response.FromValue(ReturnsAnonymousModel_101.FromResponse(response), response);
+            return Response.FromValue(ReturnsAnonymousModelResponseType.FromResponse(response), response);
         }
 
         /// <summary>
@@ -980,8 +981,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromObject(body);
             Response response = await StringBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -996,8 +997,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromObject(body);
             Response response = StringBody(content, context);
             return response;
         }
@@ -1086,8 +1087,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> BoolBodyAsync(bool body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromObject(body);
             Response response = await BoolBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1098,8 +1099,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
         public virtual Response BoolBody(bool body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromObject(body);
             Response response = BoolBody(content, context);
             return response;
         }
@@ -1188,8 +1189,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromObject(body);
             Response response = await DateTimeBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1200,8 +1201,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response DateTimeBody(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromObject(body);
             Response response = DateTimeBody(content, context);
             return response;
         }
@@ -1275,6 +1276,198 @@ namespace FirstTestTypeSpec
             try
             {
                 using HttpMessage message = CreateDateTimeBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The body parameter type nullable dictionary. </summary>
+        /// <param name="body"> The IDictionary{string,string} to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NullableDictionaryBodyAsync(IDictionary{string,string},CancellationToken)']/*" />
+        public virtual async Task<Response> NullableDictionaryBodyAsync(IDictionary<string, string> body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            Response response = await NullableDictionaryBodyAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> The body parameter type nullable dictionary. </summary>
+        /// <param name="body"> The IDictionary{string,string} to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NullableDictionaryBody(IDictionary{string,string},CancellationToken)']/*" />
+        public virtual Response NullableDictionaryBody(IDictionary<string, string> body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            Response response = NullableDictionaryBody(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] The body parameter type nullable dictionary.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="NullableDictionaryBodyAsync(IDictionary{string,string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NullableDictionaryBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> NullableDictionaryBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.NullableDictionaryBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNullableDictionaryBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] The body parameter type nullable dictionary.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="NullableDictionaryBody(IDictionary{string,string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NullableDictionaryBody(RequestContent,RequestContext)']/*" />
+        public virtual Response NullableDictionaryBody(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.NullableDictionaryBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNullableDictionaryBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The body parameter type nullable array. </summary>
+        /// <param name="body"> The IEnumerable{string} to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NullableArrayBodyAsync(IEnumerable{string},CancellationToken)']/*" />
+        public virtual async Task<Response> NullableArrayBodyAsync(IEnumerable<string> body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromEnumerable(body);
+            Response response = await NullableArrayBodyAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> The body parameter type nullable array. </summary>
+        /// <param name="body"> The IEnumerable{string} to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NullableArrayBody(IEnumerable{string},CancellationToken)']/*" />
+        public virtual Response NullableArrayBody(IEnumerable<string> body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContentHelper.FromEnumerable(body);
+            Response response = NullableArrayBody(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] The body parameter type nullable array.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="NullableArrayBodyAsync(IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NullableArrayBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> NullableArrayBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.NullableArrayBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNullableArrayBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] The body parameter type nullable array.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="NullableArrayBody(IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NullableArrayBody(RequestContent,RequestContext)']/*" />
+        public virtual Response NullableArrayBody(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.NullableArrayBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNullableArrayBodyRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1550,8 +1743,8 @@ namespace FirstTestTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            using RequestContent content = action.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = action.ToRequestContent();
             Response response = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
@@ -1570,8 +1763,8 @@ namespace FirstTestTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            using RequestContent content = action.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = action.ToRequestContent();
             Response response = HelloAgain(p2, p1, content, context);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
@@ -1841,8 +2034,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await CreateLiteralAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -1856,8 +2049,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = CreateLiteral(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -2098,8 +2291,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await InternalProtocolAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -2112,8 +2305,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = InternalProtocol(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -2502,6 +2695,38 @@ namespace FirstTestTypeSpec
             return message;
         }
 
+        internal HttpMessage CreateNullableDictionaryBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/nullableDictionaryBody", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateNullableArrayBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/nullableArrayBody", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
         internal HttpMessage CreateReturnStringRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2539,11 +2764,11 @@ namespace FirstTestTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             if (optionalQuery != null)
             {
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("head-parameter", headParameter);
             request.Headers.Add("Accept", "application/json");

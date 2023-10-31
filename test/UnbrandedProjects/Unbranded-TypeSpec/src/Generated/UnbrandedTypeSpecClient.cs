@@ -143,8 +143,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(p1, nameof(p1));
             ClientUtilities.AssertNotNull(action, nameof(action));
 
-            using RequestBody content = action.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = action.ToRequestBody();
             Result result = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
             return Result.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -162,8 +162,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(p1, nameof(p1));
             ClientUtilities.AssertNotNull(action, nameof(action));
 
-            using RequestBody content = action.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = action.ToRequestBody();
             Result result = HelloAgain(p2, p1, content, context);
             return Result.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -424,8 +424,8 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            using RequestBody content = body.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = body.ToRequestBody();
             Result result = await CreateLiteralAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -438,8 +438,8 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            using RequestBody content = body.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = body.ToRequestBody();
             Result result = CreateLiteral(content, context);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -828,8 +828,8 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(thing, nameof(thing));
 
-            using RequestBody content = thing.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = thing.ToRequestBody();
             Result result = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -842,8 +842,8 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(thing, nameof(thing));
 
-            using RequestBody content = thing.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = thing.ToRequestBody();
             Result result = AnonymousBody(content, context);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -925,29 +925,29 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
-        public virtual async Task<Result<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        public virtual async Task<Result<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
+            ClientUtilities.AssertNotNull(friend, nameof(friend));
 
-            using RequestBody content = notFriend.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = friend.ToRequestBody();
             Result result = await FriendlyModelAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
-        public virtual Result<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        public virtual Result<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
+            ClientUtilities.AssertNotNull(friend, nameof(friend));
 
-            using RequestBody content = notFriend.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = friend.ToRequestBody();
             Result result = FriendlyModel(content, context);
             return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1095,8 +1095,8 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            using RequestBody content = body.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = body.ToRequestBody();
             Result result = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
             return result;
         }
@@ -1110,8 +1110,8 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            using RequestBody content = body.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = body.ToRequestBody();
             Result result = StringFormat(subscriptionId, content, context);
             return result;
         }
@@ -1195,29 +1195,29 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
-        public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            ClientUtilities.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            using RequestBody content = modelWithProjectedName.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = projectedModel.ToRequestBody();
             Result result = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
-        public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            ClientUtilities.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            using RequestBody content = modelWithProjectedName.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = projectedModel.ToRequestBody();
             Result result = ProjectedNameModel(content, context);
             return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1300,20 +1300,20 @@ namespace UnbrandedTypeSpec
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Result<ReturnsAnonymousModel_142>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Result<ReturnsAnonymousModelResponseType>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
-            return Result.FromValue(ReturnsAnonymousModel_142.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(ReturnsAnonymousModelResponseType.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Result<ReturnsAnonymousModel_142> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
+        public virtual Result<ReturnsAnonymousModelResponseType> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = ReturnsAnonymousModel(context);
-            return Result.FromValue(ReturnsAnonymousModel_142.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(ReturnsAnonymousModelResponseType.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -1450,8 +1450,8 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            using RequestBody content = body.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = body.ToRequestBody();
             Result result = await InternalProtocolAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1464,8 +1464,8 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            using RequestBody content = body.ToRequestBody();
             RequestOptions context = FromCancellationToken(cancellationToken);
+            using RequestBody content = body.ToRequestBody();
             Result result = InternalProtocol(content, context);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

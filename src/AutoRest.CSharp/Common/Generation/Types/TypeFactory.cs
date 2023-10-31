@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType       => throw new InvalidOperationException("Literal type shouldn't be used outside of the Input layer"),
-            InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable), //TODO -- need to support multiple union types.
+            InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),

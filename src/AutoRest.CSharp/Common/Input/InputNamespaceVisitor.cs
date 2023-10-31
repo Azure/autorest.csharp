@@ -73,12 +73,12 @@ namespace AutoRest.CSharp.Common.Input
                     targetModels.Add(targetWithReferences.Target);
                 }
 
-                typesCache.Add(sourceModel, targetWithReferences.Target);
+                typesCache.Add(sourceModel.GetNotNullable(), targetWithReferences.Target);
             }
 
             foreach (var (targetModelWithoutReferences, modelWithReferences) in targetModelToReferences)
             {
-                var properties = targetModelWithoutReferences.Properties.Select(p => VisitModelProperty(p, typesCache)).ToList();
+                var properties = targetModelWithoutReferences.Properties.Select(p => VisitModelProperty(targetModelWithoutReferences, p, typesCache)).ToList();
                 modelWithReferences.TargetProperties.AddRange(properties);
 
                 var derivedModels = targetModelWithoutReferences.DerivedModels.Select(m => (InputModelType)GetTargetType(m, typesCache)).Distinct().ToList();
@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.Common.Input
 
         protected virtual InputModelType VisitModel(InputModelType modelType) => modelType;
 
-        protected virtual InputModelProperty VisitModelProperty(InputModelProperty sourceModelProperty, IReadOnlyDictionary<InputType, InputType> typesMap)
+        protected virtual InputModelProperty VisitModelProperty(InputModelType model, InputModelProperty sourceModelProperty, IReadOnlyDictionary<InputType, InputType> typesMap)
         {
             var targetType = GetTargetType(sourceModelProperty.Type, typesMap);
             return targetType.Equals(sourceModelProperty.Type) ? sourceModelProperty : sourceModelProperty with { Type = targetType };

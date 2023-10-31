@@ -53,8 +53,10 @@ namespace MgmtMockAndSample
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(template);
 #else
-            using var document = JsonDocument.Parse(template);
-            JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+            using (JsonDocument document = JsonDocument.Parse(template))
+            {
+                JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+            }
 #endif
             request.Content = content;
             _userAgent.Apply(message);

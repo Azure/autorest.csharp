@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator;
 
@@ -109,4 +111,42 @@ internal static class SchemaExtensions
     internal static string GetOriginalName(this Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
 
     internal static string GetOriginalName(this RequestParameter parameter) => parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name;
+
+    internal static string GetFullSerializedName(this Schema schema) => schema.GetOriginalName();
+
+    internal static string GetFullSerializedName(this Schema schema, ChoiceValue choice)
+    {
+        return schema switch
+        {
+            ChoiceSchema c => c.GetFullSerializedName(choice),
+            SealedChoiceSchema sc => sc.GetFullSerializedName(choice),
+            _ => throw new InvalidOperationException("Given schema is not ChoiceSchema or SealedChoiceSchema: " + schema.Name)
+        };
+    }
+
+    internal static string GetFullSerializedName(this ChoiceSchema schema, ChoiceValue choice)
+    {
+        if (!schema.Choices.Contains(choice))
+            throw new InvalidOperationException($"choice value {choice.Value} doesn't belong to choice {schema.Name}");
+        return $"{schema.GetFullSerializedName()}.{choice.Value}";
+    }
+
+    internal static string GetFullSerializedName(this SealedChoiceSchema schema, ChoiceValue choice)
+    {
+        if (!schema.Choices.Contains(choice))
+            throw new InvalidOperationException($"choice value {choice.Value} doesn't belong to SealedChoice {schema.Name}");
+        return $"{schema.GetFullSerializedName()}.{choice.Value}";
+    }
+
+    internal static string GetFullSerializedName(this ObjectSchema schema, Property property)
+    {
+        if (!schema.Properties.Contains(property))
+            throw new InvalidOperationException($"property {property.SerializedName} doesn't belong to object {schema.Name}");
+        string propertySerializedName;
+        if (property.FlattenedNames.Count == 0)
+            propertySerializedName = $"{property.SerializedName}";
+        else
+            propertySerializedName = string.Join(".", property.FlattenedNames);
+        return $"{schema.GetFullSerializedName()}.{propertySerializedName}";
+    }
 }

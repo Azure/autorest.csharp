@@ -663,8 +663,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(friend);
         }
 
         [Test]
@@ -674,8 +674,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
@@ -719,8 +719,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(friend);
         }
 
         [Test]
@@ -730,8 +730,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
@@ -935,8 +935,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
         }
 
         [Test]
@@ -946,8 +946,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
         }
 
         [Test]
@@ -991,8 +991,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
         }
 
         [Test]
@@ -1002,8 +1002,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
         }
 
         [Test]
@@ -1039,7 +1039,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<ReturnsAnonymousModel_101> response = client.ReturnsAnonymousModel();
+            Response<ReturnsAnonymousModelResponseType> response = client.ReturnsAnonymousModel();
         }
 
         [Test]
@@ -1049,7 +1049,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<ReturnsAnonymousModel_101> response = await client.ReturnsAnonymousModelAsync();
+            Response<ReturnsAnonymousModelResponseType> response = await client.ReturnsAnonymousModelAsync();
         }
 
         [Test]
@@ -1085,7 +1085,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<ReturnsAnonymousModel_101> response = client.ReturnsAnonymousModel();
+            Response<ReturnsAnonymousModelResponseType> response = client.ReturnsAnonymousModel();
         }
 
         [Test]
@@ -1095,7 +1095,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<ReturnsAnonymousModel_101> response = await client.ReturnsAnonymousModelAsync();
+            Response<ReturnsAnonymousModelResponseType> response = await client.ReturnsAnonymousModelAsync();
         }
 
         [Test]
@@ -1420,6 +1420,208 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NullableDictionaryBody_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = client.NullableDictionaryBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NullableDictionaryBody_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = await client.NullableDictionaryBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NullableDictionaryBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.NullableDictionaryBody();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NullableDictionaryBody_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.NullableDictionaryBodyAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NullableDictionaryBody_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = "<body>",
+            });
+            Response response = client.NullableDictionaryBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NullableDictionaryBody_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = "<body>",
+            });
+            Response response = await client.NullableDictionaryBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NullableDictionaryBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.NullableDictionaryBody(body: new Dictionary<string, string>
+            {
+                ["key"] = "<body>"
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NullableDictionaryBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.NullableDictionaryBodyAsync(body: new Dictionary<string, string>
+            {
+                ["key"] = "<body>"
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NullableArrayBody_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = client.NullableArrayBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NullableArrayBody_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = await client.NullableArrayBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NullableArrayBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.NullableArrayBody();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NullableArrayBody_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.NullableArrayBodyAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NullableArrayBody_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new object[]
+            {
+"<body>"
+            });
+            Response response = client.NullableArrayBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NullableArrayBody_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new object[]
+            {
+"<body>"
+            });
+            Response response = await client.NullableArrayBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NullableArrayBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.NullableArrayBody(body: new string[] { "<body>" });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NullableArrayBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.NullableArrayBodyAsync(body: new string[] { "<body>" });
         }
 
         [Test]

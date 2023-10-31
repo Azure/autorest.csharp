@@ -41,7 +41,6 @@ namespace AdditionalPropertiesEx
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public virtual async Task<Response> WriteOnlyAsync(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("APClient.WriteOnly");
@@ -60,7 +59,6 @@ namespace AdditionalPropertiesEx
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public virtual Response WriteOnly(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("APClient.WriteOnly");

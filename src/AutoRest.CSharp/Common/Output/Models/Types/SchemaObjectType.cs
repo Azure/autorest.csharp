@@ -80,10 +80,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 
-        private ObjectType? _defaultDerivedType;
+        private SerializableObjectType? _defaultDerivedType;
         private bool _hasCalculatedDefaultDerivedType;
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.Discriminator?.All != null && InputModel.Parents?.All.Count == 0;
+        public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
         public bool IsInheritableCommonType => InputModel is { Extensions: {} } && (InputModel.Extensions.MgmtReferenceType || InputModel.Extensions.MgmtTypeReferenceType);
 
@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        protected override IEnumerable<Method> BuildSerializationMethods()
+        protected override IEnumerable<Method> BuildMethods()
         {
             if (XmlSerialization is {} xmlSerialization)
             {
@@ -357,7 +357,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 implementations = CreateDiscriminatorImplementations(schemaDiscriminator);
             }
 
-            ObjectType defaultDerivedType = _defaultDerivedType ??= BuildDefaultDerivedType()!;
+            SerializableObjectType defaultDerivedType = DefaultDerivedType!;
 
             var property = GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true);
 
@@ -683,7 +683,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return SerializationBuilder.BuildXmlObjectSerialization(serializationName, this, _typeFactory);
         }
 
-        private ObjectType? BuildDefaultDerivedType()
+        private SerializableObjectType? BuildDefaultDerivedType()
         {
             if (_hasCalculatedDefaultDerivedType)
                 return _defaultDerivedType;
@@ -698,8 +698,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (defaultDerivedSchema is null)
                 return null;
 
-            // TODO: Need to resolve TypeProvider from InputModelType
-            return library.FindTypeProviderForInputType(defaultDerivedSchema) as ObjectType;
+            return library.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
         }
     }
 }

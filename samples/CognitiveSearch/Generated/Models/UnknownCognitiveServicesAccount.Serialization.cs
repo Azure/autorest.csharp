@@ -10,8 +10,21 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownCognitiveServicesAccount
+    internal partial class UnknownCognitiveServicesAccount : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            writer.WriteEndObject();
+        }
+
         internal static UnknownCognitiveServicesAccount DeserializeUnknownCognitiveServicesAccount(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)

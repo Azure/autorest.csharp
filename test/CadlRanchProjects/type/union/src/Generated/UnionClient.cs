@@ -57,8 +57,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await SendIntAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -71,8 +71,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = SendInt(content, context);
             return response;
         }
@@ -163,8 +163,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await SendIntArrayAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -177,8 +177,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = SendIntArray(content, context);
             return response;
         }
@@ -269,8 +269,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await SendFirstNamedUnionValueAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -283,8 +283,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = SendFirstNamedUnionValue(content, context);
             return response;
         }
@@ -375,8 +375,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = await SendSecondNamedUnionValueAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -389,8 +389,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
             Response response = SendSecondNamedUnionValue(content, context);
             return response;
         }

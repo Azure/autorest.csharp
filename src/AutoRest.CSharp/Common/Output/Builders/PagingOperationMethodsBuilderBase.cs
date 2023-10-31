@@ -104,6 +104,8 @@ namespace AutoRest.CSharp.Output.Models
         protected IEnumerable<MethodBodyStatement> AddPageableMethodArguments(RestClientMethodParameters parameters, List<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
         {
             var conversions = new List<MethodBodyStatement>();
+            MethodBodyStatement? requestContentConversion = null;
+
             requestContextVariable = null;
             foreach (var protocolParameter in parameters.Protocol)
             {
@@ -117,7 +119,14 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (parameters.Conversions.TryGetValue(protocolParameter, out var conversion))
                     {
-                        conversions.Add(conversion);
+                        if (protocolParameter.Equals(KnownParameters.RequestContent) || protocolParameter.Equals(KnownParameters.RequestContentNullable))
+                        {
+                            requestContentConversion = conversion;
+                        }
+                        else
+                        {
+                            conversions.Add(conversion);
+                        }
                     }
                 }
                 else
@@ -129,6 +138,11 @@ namespace AutoRest.CSharp.Output.Models
             if (requestContextVariable == null && parameters.Convenience.Contains(KnownParameters.CancellationTokenParameter))
             {
                 requestContextVariable = KnownParameters.CancellationTokenParameter;
+            }
+
+            if (requestContentConversion is not null)
+            {
+                conversions.Add(requestContentConversion);
             }
 
             return conversions;

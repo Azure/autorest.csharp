@@ -146,8 +146,8 @@ namespace _Type.Property.ValueTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -161,8 +161,8 @@ namespace _Type.Property.ValueTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = Put(content, context);
             return response;
         }

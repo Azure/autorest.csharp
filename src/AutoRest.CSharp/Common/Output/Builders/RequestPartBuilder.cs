@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public void AddPathPart(InputParameter inputParameter, TypedValueExpression value)
         {
-            _pathParts.Add(new RequestPart(inputParameter.NameInRequest, value, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type), Escape: !inputParameter.SkipUrlEncoding));
+            _pathParts.Add(new RequestPart(inputParameter.NameInRequest, value, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type), Escape: !inputParameter.SkipUrlEncoding, IsNextLink: inputParameter.Name == "nextLink"));
         }
 
         public void AddQueryPart(InputParameter inputParameter, TypedValueExpression value, bool skipNullCheck)

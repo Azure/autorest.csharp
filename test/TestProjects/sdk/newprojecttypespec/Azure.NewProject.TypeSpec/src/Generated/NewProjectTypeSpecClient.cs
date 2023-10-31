@@ -321,8 +321,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using RequestContent content = thing.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = thing.ToRequestContent();
             Response response = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -336,8 +336,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using RequestContent content = thing.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = thing.ToRequestContent();
             Response response = AnonymousBody(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -421,31 +421,31 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
-        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(notFriend, nameof(notFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
-            using RequestContent content = notFriend.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = friend.ToRequestContent();
             Response response = await FriendlyModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
-        public virtual Response<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
+        public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(notFriend, nameof(notFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
-            using RequestContent content = notFriend.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = friend.ToRequestContent();
             Response response = FriendlyModel(content, context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
@@ -598,8 +598,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
             return response;
         }
@@ -614,8 +614,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = StringFormat(subscriptionId, content, context);
             return response;
         }
@@ -788,8 +788,8 @@ namespace Azure.NewProject.TypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            using RequestContent content = action.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = action.ToRequestContent();
             Response response = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
@@ -808,8 +808,8 @@ namespace Azure.NewProject.TypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            using RequestContent content = action.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = action.ToRequestContent();
             Response response = HelloAgain(p2, p1, content, context);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
@@ -1079,8 +1079,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await CreateLiteralAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -1094,8 +1094,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = CreateLiteral(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -1336,8 +1336,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = await InternalProtocolAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -1350,8 +1350,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
             Response response = InternalProtocol(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -1656,11 +1656,11 @@ namespace Azure.NewProject.TypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             if (optionalQuery != null)
             {
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("head-parameter", headParameter);
             request.Headers.Add("Accept", "application/json");

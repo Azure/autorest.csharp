@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             name = string.IsNullOrEmpty(name) ? namespaceName : name.ToCleanName();
 
-            if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
+            if (name.EndsWith(OperationsSuffixValue) && name.Length > OperationsSuffixValue.Length)
             {
                 name = name.Substring(0, name.Length - OperationsSuffixValue.Length);
             }

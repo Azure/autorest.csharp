@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 dpgClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
 
-                if (client.OperationMethods.Any())
+                if (client.OperationMethods.Any(m => m.Samples.Any()))
                 {
                     if (Configuration.IsBranded)
                     {
@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
                         project.AddGeneratedDocFile(xmlDocWriter.Filename, xmlDocWriter.ToString());
                     }
-                    else
+                    else if (Configuration.GenerateTestProject)
                     {
                         var smokeTestWriter = new SmokeTestWriter(client, sampleProvider);
                         smokeTestWriter.Write();

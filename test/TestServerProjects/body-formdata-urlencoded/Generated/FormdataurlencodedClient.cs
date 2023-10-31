@@ -88,7 +88,6 @@ namespace body_formdata_urlencoded
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="accessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="service"/> or <paramref name="accessToken"/> is null. </exception>
         public virtual async Task<Response> PartialConstantBodyAsync(string service, string accessToken, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataurlencodedClient.PartialConstantBody");
@@ -108,7 +107,6 @@ namespace body_formdata_urlencoded
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="accessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="service"/> or <paramref name="accessToken"/> is null. </exception>
         public virtual Response PartialConstantBody(string service, string accessToken, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataurlencodedClient.PartialConstantBody");

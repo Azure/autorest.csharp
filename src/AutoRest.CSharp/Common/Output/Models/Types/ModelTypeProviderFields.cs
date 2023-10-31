@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
+        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, ObjectType? baseModel, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -47,6 +47,16 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 originalFieldName = BuilderHelpers.DisambiguateName(modelName, originalFieldName);
                 var existingMember = sourceTypeMapping?.GetMemberByOriginalName(originalFieldName);
+                if (existingMember is not null)
+                {
+                    visitedMembers.Add(existingMember);
+                    if (baseModel is {Constructors.Length: > 0} && (existingMember.ContainingType.Name != modelName || existingMember.IsOverride))
+                    {
+                        // Member defined in a base type and there is a constructor that is expected to initialize it
+                        // Don't generate in derived type
+                        continue;
+                    }
+                }
 
                 var propertyType = GetPropertyDefaultType(inputModelUsage, inputModelProperty, typeFactory);
 
@@ -68,21 +78,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
 
-                if (existingMember is not null)
-                {
-                    visitedMembers.Add(existingMember);
-                    if (existingMember.ContainingType.Name != modelName && existingMember.Name == originalFieldName)
-                    {
-                        // Member defined in a base type, don't generate parameters for it
-                        continue;
-                    }
-                }
-
                 var parameterName = field.Name.ToVariableName();
-                // we do not validate a parameter when it is a value type (struct or int, etc), or it is optional, or it it nullable, or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
-                var parameterValidation = field.Type.IsValueType || (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient) || !field.IsRequired || field.Type.IsNullable
-                    ? Validation.None
-                    : Validation.AssertNotNull;
+                var parameterValidation = GetParameterValidation(field, inputModelProperty);
 
                 var parameter = new Parameter(parameterName, BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description), field.Type, null, parameterValidation, null);
                 parametersToFields[parameter.Name] = field;
@@ -149,7 +146,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
                     var originalType = BuilderHelpers.GetTypeFromExisting(serializationMapping.ExistingMember, typeof(object), typeFactory);
                     var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, originalType, null, typeFactory, false, false);
-                    var parameter = new Parameter(field.Name.FirstCharToLowerCase(), "to be removed by post process", field.Type, null, Validation.None, null);
+                    var parameter = new Parameter(field.Name.ToVariableName(), "to be removed by post process", field.Type, null, Validation.None, null);
 
                     fields.Add(field);
                     serializationParameters.Add(parameter);
@@ -162,6 +159,35 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             PublicConstructorParameters = publicParameters;
             SerializationParameters = serializationParameters;
+        }
+
+        private static Validation GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
+        {
+            // we do not validate a parameter when it is a value type (struct or int, etc)
+            if (field.Type.IsValueType)
+            {
+                return Validation.None;
+            }
+
+            // or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
+            if (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient)
+            {
+                return Validation.None;
+            }
+
+            // or it is optional
+            if (!field.IsRequired)
+            {
+                return Validation.None;
+            }
+
+            // or it it nullable
+            if (field.Type.IsNullable)
+            {
+                return Validation.None;
+            }
+
+            return Validation.AssertNotNull;
         }
 
         public FieldDeclaration? GetFieldByParameterName(string name) => _parameterNamesToFields.TryGetValue(name, out var fieldDeclaration) ? fieldDeclaration : null;
@@ -251,9 +277,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var fieldType = BuilderHelpers.GetTypeFromExisting(existingMember, originalType, typeFactory);
             var fieldModifiers = GetAccessModifiers(existingMember);
+
+            FieldModifiers? setterModifiers = null;
             if (IsReadOnly(existingMember))
             {
                 fieldModifiers |= ReadOnly;
+            }
+            else if (existingMember is IPropertySymbol { SetMethod: {} setMethod } && GetAccessModifiers(setMethod) != Public)
+            {
+                setterModifiers = GetAccessModifiers(setMethod);
             }
 
             var writeAsProperty = existingMember is IPropertySymbol;
@@ -269,7 +301,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 IsRequired: isRequired,
                 WriteAsProperty: writeAsProperty,
                 OptionalViaNullability: optionalViaNullability,
-                SerializationMapping: serialization);
+                SerializationMapping: serialization,
+                SetterModifiers: setterModifiers);
         }
 
         private static FieldModifiers GetAccessModifiers(ISymbol existingMember) => existingMember.DeclaredAccessibility switch

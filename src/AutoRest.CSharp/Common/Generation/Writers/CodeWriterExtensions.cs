@@ -8,7 +8,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -22,7 +21,6 @@ using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -287,7 +285,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (methodBase.SummaryText is { } summaryText)
             {
-                writer.WriteXmlDocumentationSummary($"{summaryText}");
+                writer.WriteXmlDocumentationSummary(summaryText);
             }
 
             return writer.WriteMethodDocumentationSignature(methodBase);
@@ -352,7 +350,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (parameter.Validation == Validation.None && parameter.Initializer != null)
             {
-                writer.WriteMethodBodyStatement(new AssignValueStatement(parameter, parameter.Initializer, "??="));
+                writer.WriteMethodBodyStatement(Snippets.AssignIfNull(parameter, parameter.Initializer));
                 return writer;
             }
 

@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     if (requestPart is not null)
                     {
-                        lines.Add(requestPart.Value is not ConstantExpression && requestPart.NameInRequest == "nextLink"
+                        lines.Add(requestPart.Value is not ConstantExpression && requestPart.IsNextLink
                             ? AppendRawNextLink(requestPart.Value, requestPart.Escape)
                             : AppendPath(ConvertToRequestPartType(requestPart.Value, requestPart.SerializationFormat), requestPart.SerializationFormat, requestPart.Escape));
                     }
@@ -134,26 +134,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
             => _requestParts.ContentHeaderParts.Select(rp => NullCheckRequestPartValue(rp, GetAddHeaderStatement(rp))).AsStatement();
 
         public MethodBodyStatement AddBody(BodyMediaType bodyMediaType)
-            => bodyMediaType switch
+        {
+            if (_requestParts.BodyParts is [BodyRequestPart bodyRequestPart])
             {
-                BodyMediaType.Multipart => new[]
-                {
-                    AddContentHeaders(),
-                    AddMultipartBody()
-                },
-                BodyMediaType.Form => new[]
-                {
-                    AddContentHeaders(),
-                    AddFormUrlEncodedBody()
-                },
-                _ when _requestParts.BodyParts is [BodyRequestPart bodyRequestPart] =>
-                    NullCheckRequestPartValue(bodyRequestPart, new[]
-                    {
-                        AddContentHeaders(),
-                        AddBody(bodyRequestPart)
-                    }),
+                return NullCheckRequestPartValue(bodyRequestPart, new[] { AddContentHeaders(), AddBody(bodyRequestPart) });
+            }
+
+            return bodyMediaType switch
+            {
+                BodyMediaType.Multipart => new[] { AddContentHeaders(), AddMultipartBody() },
+                BodyMediaType.Form => new[] { AddContentHeaders(), AddFormUrlEncodedBody() },
                 _ => new MethodBodyStatement()
             };
+        }
 
         public abstract MethodBodyStatement AppendRawNextLink(TypedValueExpression value, bool escape);
         public abstract MethodBodyStatement SetUriToRequest();
@@ -200,12 +193,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (requestPart.CheckUndefinedCollection && TypeFactory.IsCollectionType(type))
             {
-                return new IfElseStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value)), addRequestPartStatement, null);
+                return new IfStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value))) {addRequestPartStatement};
             }
 
             if (type.IsNullable)
             {
-                return new IfElseStatement(NotEqual(value, Null), addRequestPartStatement, null);
+                return new IfStatement(NotEqual(value, Null)) {addRequestPartStatement};
             }
 
             return addRequestPartStatement;

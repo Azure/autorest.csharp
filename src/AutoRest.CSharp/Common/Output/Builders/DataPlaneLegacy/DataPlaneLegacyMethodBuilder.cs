@@ -5,6 +5,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -35,7 +36,9 @@ namespace AutoRest.CSharp.Output.Models
             var signature = _method with
             {
                 ReturnType = returnType,
-                Modifiers = _method.Modifiers | MethodSignatureModifiers.Virtual
+                Modifiers = _method.Modifiers | MethodSignatureModifiers.Virtual,
+                // [TODO]: This validation is removed to minimize changes, reverse after PR #3726 is merged
+                Parameters = _method.Parameters.Select(p => p with {Validation = Validation.None}).ToList()
             };
             var body = WrapInDiagnosticScopeLegacy(_method.Name, Return(_restClient.Invoke(_method.WithAsync(async))));
             return new Method(signature.WithAsync(async), body);

@@ -313,7 +313,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The IList{DateTimeOffset} to use. </param>
+        /// <param name="value"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -348,7 +348,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The IList{DateTimeOffset} to use. </param>
+        /// <param name="value"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
