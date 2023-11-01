@@ -797,10 +797,11 @@
         200
        ],
        "BodyType": {
-        "$ref": "34"
+        "$ref": "14"
        },
        "BodyMediaType": "Json"
-      }
+      },
+      "ResultPath": "result"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
