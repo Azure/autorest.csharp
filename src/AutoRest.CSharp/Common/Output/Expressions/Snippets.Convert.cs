@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 
@@ -22,6 +23,8 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             return expression;
         }
+
+        internal static MethodBodyStatement Increment(VariableReference value) => new UnaryOperatorStatement(new UnaryOperatorExpression("++", value, true));
 
         public static class InvokeConvert
         {
