@@ -84,6 +84,55 @@ namespace CustomizationsInTsp.Models
                 writer.WriteEndObject();
             }
             writer.WriteEndArray();
+            writer.WritePropertyName("vector"u8);
+            writer.WriteStartArray();
+            foreach (var item in Vector.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (VectorOptional != null)
+            {
+                writer.WritePropertyName("vectorOptional"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorOptional.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorOptional");
+            }
+            if (VectorNullable != null)
+            {
+                writer.WritePropertyName("vectorNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorNullable");
+            }
+            if (VectorOptionalNullable != null)
+            {
+                writer.WritePropertyName("vectorOptionalNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorOptionalNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorOptionalNullable");
+            }
             writer.WriteEndObject();
         }
 
@@ -105,6 +154,14 @@ namespace CustomizationsInTsp.Models
             IDictionary<string, string> badDictionaryName = default;
             IList<IList<string>> badListOfListName = default;
             IList<IDictionary<string, string>> badListOfDictionaryName = default;
+            ReadOnlyMemory<float> vector = default;
+            Optional<ReadOnlyMemory<float>?> vectorOptional = default;
+            ReadOnlyMemory<float>? vectorNullable = default;
+            Optional<ReadOnlyMemory<float>?> vectorOptionalNullable = default;
+            ReadOnlyMemory<float> vectorReadOnly = default;
+            Optional<ReadOnlyMemory<float>?> vectorOptionalReadOnly = default;
+            ReadOnlyMemory<float>? vectorNullableReadOnly = default;
+            Optional<ReadOnlyMemory<float>?> vectorOptionalNullableReadOnly = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyToMakeInternal"u8))
@@ -211,8 +268,136 @@ namespace CustomizationsInTsp.Models
                     badListOfDictionaryName = array;
                     continue;
                 }
+                if (property.NameEquals("vector"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vector = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorOptional"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorOptional = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorOptionalNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorOptionalNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnly = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorOptionalReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorOptionalReadOnly = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorNullableReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorNullableReadOnly = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorOptionalNullableReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorOptionalNullableReadOnly = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
             }
-            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName);
+            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, vector, Optional.ToNullable(vectorOptional), vectorNullable, Optional.ToNullable(vectorOptionalNullable), vectorReadOnly, Optional.ToNullable(vectorOptionalReadOnly), vectorNullableReadOnly, Optional.ToNullable(vectorOptionalNullableReadOnly));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

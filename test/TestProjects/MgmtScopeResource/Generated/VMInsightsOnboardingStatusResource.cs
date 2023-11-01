@@ -25,6 +25,7 @@ namespace MgmtScopeResource
     public partial class VMInsightsOnboardingStatusResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VMInsightsOnboardingStatusResource"/> instance. </summary>
+        /// <param name="resourceUri"> The resourceUri. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string resourceUri)
         {
             var resourceId = $"{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default";

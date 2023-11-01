@@ -64,7 +64,7 @@ import {
     getFormattedType,
     getInputType
 } from "./model.js";
-import { capitalize, getProjectedNameForCsharp } from "./utils.js";
+import { capitalize, getProjectedNameForCsharp, getTypeName } from "./utils.js";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -99,45 +99,35 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.bodyParameter) {
+    if (typespecParameters.body?.parameter) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.bodyParameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
-    } else if (typespecParameters.bodyType) {
-        if (resourceOperation) {
-            parameters.push(
-                loadBodyParameter(sdkContext, resourceOperation.resourceType)
-            );
-        } else {
-            const effectiveBodyType = getEffectiveSchemaType(
-                sdkContext,
-                typespecParameters.bodyType
-            );
-            if (effectiveBodyType.kind === "Model") {
-                if (effectiveBodyType.name !== "") {
-                    parameters.push(
-                        loadBodyParameter(sdkContext, effectiveBodyType)
-                    );
-                } else {
-                    effectiveBodyType.name = `${capitalize(op.name)}Request`;
-                    let bodyParameter = loadBodyParameter(
-                        sdkContext,
-                        effectiveBodyType
-                    );
-                    bodyParameter.Kind = InputOperationParameterKind.Spread;
-                    parameters.push(bodyParameter);
-                }
+    } else if (typespecParameters.body?.type) {
+        const effectiveBodyType = getEffectiveSchemaType(
+            sdkContext,
+            typespecParameters.body.type
+        );
+        if (effectiveBodyType.kind === "Model") {
+            if (effectiveBodyType.name !== "") {
+                parameters.push(
+                    loadBodyParameter(sdkContext, effectiveBodyType)
+                );
+            } else {
+                effectiveBodyType.name = `${capitalize(op.name)}Request`;
+                let bodyParameter = loadBodyParameter(
+                    sdkContext,
+                    effectiveBodyType
+                );
+                bodyParameter.Kind = InputOperationParameterKind.Spread;
+                parameters.push(bodyParameter);
             }
         }
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(
-            sdkContext,
-            res,
-            resourceOperation
-        );
+        const operationResponse = loadOperationResponse(sdkContext, res);
         if (operationResponse) {
             responses.push(operationResponse);
         }
@@ -193,7 +183,7 @@ export function loadOperation(
     /* TODO: handle lro */
 
     return {
-        Name: op.name,
+        Name: getTypeName(sdkContext, op),
         ResourceName:
             resourceOperation?.resourceType.name ??
             getOperationGroupName(sdkContext, op, serviceNamespaceType),
@@ -214,11 +204,7 @@ export function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
-        LongRunning: loadLongRunningOperation(
-            sdkContext,
-            operation,
-            resourceOperation
-        ),
+        LongRunning: loadLongRunningOperation(sdkContext, operation),
         Paging: paging,
         GenerateProtocolMethod: generateProtocol,
         GenerateConvenienceMethod: generateConvenience
@@ -259,7 +245,7 @@ export function loadOperation(
                     : InputOperationParameterKind.Client
                 : InputOperationParameterKind.Method;
         return {
-            Name: getProjectedNameForCsharp(sdkContext, param) ?? param.name,
+            Name: getTypeName(sdkContext, param),
             NameInRequest: name,
             Description: getDoc(program, param),
             Type: inputType,
@@ -297,7 +283,7 @@ export function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: body.name,
+            Name: getTypeName(sdkContext, body),
             NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,
@@ -315,8 +301,7 @@ export function loadOperation(
 
     function loadOperationResponse(
         context: SdkContext,
-        response: HttpOperationResponse,
-        resourceOperation?: ResourceOperation
+        response: HttpOperationResponse
     ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
             return undefined;
@@ -328,23 +313,14 @@ export function loadOperation(
 
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            if (resourceOperation && resourceOperation.operation !== "list") {
-                type = getInputType(
-                    context,
-                    getFormattedType(program, resourceOperation.resourceType),
-                    models,
-                    enums
-                );
-            } else {
-                const typespecType = getEffectiveSchemaType(context, body.type);
-                const inputType: InputType = getInputType(
-                    context,
-                    getFormattedType(program, typespecType),
-                    models,
-                    enums
-                );
-                type = inputType;
-            }
+            const typespecType = getEffectiveSchemaType(context, body.type);
+            const inputType: InputType = getInputType(
+                context,
+                getFormattedType(program, typespecType),
+                models,
+                enums
+            );
+            type = inputType;
         }
 
         const headers = response.responses[0]?.headers;
@@ -376,8 +352,7 @@ export function loadOperation(
 
     function loadLongRunningOperation(
         context: SdkContext,
-        op: HttpOperation,
-        resourceOperation?: ResourceOperation
+        op: HttpOperation
     ): OperationLongRunning | undefined {
         const metadata = getLroMetadata(program, op.operation);
         if (metadata === undefined) {

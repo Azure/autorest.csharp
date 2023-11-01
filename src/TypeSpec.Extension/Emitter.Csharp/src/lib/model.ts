@@ -76,7 +76,7 @@ import {
     getUsageOverride,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getModelName } from "./utils.js";
+import { capitalize, getSerializeName, getTypeName } from "./utils.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -320,7 +320,7 @@ export function getInputType(
             default:
                 const sdkType = getClientType(context, type);
                 return {
-                    Name: type.name,
+                    Name: getTypeName(context, type),
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
                         formattedType.format,
@@ -357,7 +357,8 @@ export function getInputType(
         m: Model | Scalar,
         e: Enum
     ): InputEnumType {
-        let extensibleEnum = enums.get(m.name);
+        const name = getTypeName(context, m);
+        let extensibleEnum = enums.get(name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
             if (!innerEnum) {
@@ -366,7 +367,7 @@ export function getInputType(
                 );
             }
             extensibleEnum = {
-                Name: m.name,
+                Name: name,
                 EnumValueType: innerEnum.EnumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: innerEnum.AllowedValues,
                 Namespace: getFullNamespaceString(e.namespace),
@@ -376,7 +377,7 @@ export function getInputType(
                 IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
-            enums.set(m.name, extensibleEnum);
+            enums.set(name, extensibleEnum);
         }
         return extensibleEnum;
     }
@@ -448,7 +449,8 @@ export function getInputType(
         e: Enum,
         addToCollection: boolean = true
     ): InputEnumType {
-        let enumType = enums.get(e.name);
+        const name = getTypeName(context, e);
+        let enumType = enums.get(name);
         if (!enumType) {
             if (e.members.size === 0) {
                 throw new Error(
@@ -471,7 +473,7 @@ export function getInputType(
                     );
                 }
                 const member = {
-                    Name: key,
+                    Name: getTypeName(context, option),
                     Value: option.value ?? option?.name,
                     Description: getDoc(program, option)
                 } as InputEnumTypeValue;
@@ -479,7 +481,7 @@ export function getInputType(
             }
 
             enumType = {
-                Name: e.name,
+                Name: name,
                 EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: allowValues,
                 Namespace: getFullNamespaceString(e.namespace),
@@ -490,7 +492,7 @@ export function getInputType(
                 IsNullable: false
             } as InputEnumType;
             setUsage(context, e, enumType);
-            if (addToCollection) enums.set(e.name, enumType);
+            if (addToCollection) enums.set(name, enumType);
         }
         return enumType;
 
@@ -536,7 +538,7 @@ export function getInputType(
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(context, m) as Model;
-        const name = getModelName(context, m);
+        const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -644,13 +646,8 @@ export function getInputType(
                     isReadOnly = true;
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
-                const projectedNamesMap = getProjectedNames(program, value);
-                const name =
-                    projectedNamesMap?.get(projectedNameCSharpKey) ??
-                    projectedNamesMap?.get(projectedNameClientKey) ??
-                    value.name;
-                const serializedName =
-                    projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
+                const name = getTypeName(context, value);
+                const serializedName = getSerializeName(context, value);
                 const literalTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
@@ -838,7 +835,7 @@ export function getUsages(
         let effectiveType = type;
         if (type.kind === "Model") {
             effectiveType = getEffectiveSchemaType(context, type) as Model;
-            typeName = getModelName(context, effectiveType);
+            typeName = getTypeName(context, effectiveType);
         }
         const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {
@@ -872,21 +869,16 @@ export function getUsages(
         if (!op.parameters.body?.parameter && op.parameters.body?.type) {
             var effectiveBodyType = undefined;
             const affectTypes: Set<string> = new Set<string>();
-            if (resourceOperation) {
-                effectiveBodyType = resourceOperation.resourceType;
-                affectTypes.add(effectiveBodyType.name);
-            } else {
-                effectiveBodyType = getEffectiveSchemaType(
-                    context,
-                    op.parameters.body.type
-                );
-                if (effectiveBodyType.kind === "Model") {
-                    /* handle spread. */
-                    if (effectiveBodyType.name === "") {
-                        effectiveBodyType.name = `${capitalize(
-                            op.operation.name
-                        )}Request`;
-                    }
+            effectiveBodyType = getEffectiveSchemaType(
+                context,
+                op.parameters.body.type
+            );
+            if (effectiveBodyType.kind === "Model") {
+                /* handle spread. */
+                if (effectiveBodyType.name === "") {
+                    effectiveBodyType.name = `${capitalize(
+                        op.operation.name
+                    )}Request`;
                 }
             }
             if (effectiveBodyType.kind === "Model") {
@@ -908,31 +900,24 @@ export function getUsages(
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
                 let returnType = "";
+                const effectiveReturnType = getEffectiveSchemaType(
+                    context,
+                    resBody.type
+                );
                 if (
-                    resourceOperation &&
-                    resourceOperation.operation !== "list"
+                    effectiveReturnType.kind === "Model" &&
+                    effectiveReturnType.name !== ""
                 ) {
-                    returnType = resourceOperation.resourceType.name;
-                } else {
-                    const effectiveReturnType = getEffectiveSchemaType(
-                        context,
-                        resBody.type
-                    );
-                    if (
-                        effectiveReturnType.kind === "Model" &&
-                        effectiveReturnType.name !== ""
-                    ) {
-                        returnType = getModelName(context, effectiveReturnType);
-                    }
-                    /*propagate to sub models and composite models*/
-                    if (effectiveReturnType.kind === "Model") {
-                        getAllEffectedModels(
-                            effectiveReturnType,
-                            new Set<string>()
-                        ).forEach((element) => {
-                            affectedReturnTypes.add(element);
-                        });
-                    }
+                    returnType = getTypeName(context, effectiveReturnType);
+                }
+                /*propagate to sub models and composite models*/
+                if (effectiveReturnType.kind === "Model") {
+                    getAllEffectedModels(
+                        effectiveReturnType,
+                        new Set<string>()
+                    ).forEach((element) => {
+                        affectedReturnTypes.add(element);
+                    });
                 }
                 affectedReturnTypes.add(returnType);
                 for (const name of affectedReturnTypes) {
@@ -992,13 +977,13 @@ export function getUsages(
         ) {
             result.push(...getAllEffectedModels(model.indexer.value, visited));
         } else {
-            const name = getModelName(context, model);
+            const name = getTypeName(context, model);
             if (model.kind !== "Model" || visited.has(name)) return result;
             result.push(name);
             visited.add(name);
             const derivedModels = model.derivedModels;
             for (const derivedModel of derivedModels) {
-                result.push(getModelName(context, derivedModel));
+                result.push(getTypeName(context, derivedModel));
                 result.push(...getAllEffectedModels(derivedModel, visited));
             }
             for (const [_, prop] of model.properties) {

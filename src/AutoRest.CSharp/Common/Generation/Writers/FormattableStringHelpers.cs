@@ -75,6 +75,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString? GetParameterInitializer(this CSharpType parameterType, Constant? defaultValue)
         {
+            if (parameterType.IsValueType)
+            {
+                return null;
+            }
+
             if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
             {
                 defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));

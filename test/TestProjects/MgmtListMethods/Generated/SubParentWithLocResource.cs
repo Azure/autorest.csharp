@@ -27,6 +27,8 @@ namespace MgmtListMethods
     public partial class SubParentWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SubParentWithLocResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="subParentWithLocName"> The subParentWithLocName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string subParentWithLocName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}";

@@ -1,12 +1,19 @@
 import {
+    Enum,
+    EnumMember,
     Model,
+    ModelProperty,
+    Operation,
+    Scalar,
     Type,
     getFriendlyName,
+    getProjectedName,
     getProjectedNames
 } from "@typespec/compiler";
 import {
     projectedNameCSharpKey,
-    projectedNameClientKey
+    projectedNameClientKey,
+    projectedNameJsonKey
 } from "../constants.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 
@@ -42,20 +49,6 @@ const anonCounter = (function () {
     };
 })();
 
-export function getModelName(context: SdkContext, m: Model): string {
-    const name =
-        getProjectedNameForCsharp(context, m) ??
-        getFriendlyName(context.program, m) ??
-        getNameForTemplate(m);
-
-    if (name === "") {
-        anonCounter.increment();
-        return `Anon_${anonCounter.getCount()}`;
-    }
-
-    return name;
-}
-
 export function getProjectedNameForCsharp(
     context: SdkContext,
     type: Type
@@ -64,5 +57,34 @@ export function getProjectedNameForCsharp(
     return (
         projectedNamesMap?.get(projectedNameCSharpKey) ??
         projectedNamesMap?.get(projectedNameClientKey)
+    );
+}
+
+export function getTypeName(
+    context: SdkContext,
+    type: Model | Enum | EnumMember | ModelProperty | Scalar | Operation
+): string {
+    var name =
+        getProjectedNameForCsharp(context, type) ??
+        getFriendlyName(context.program, type);
+    if (name) return name;
+    if (type.kind === "Model") {
+        name = getNameForTemplate(type);
+        if (name === "") {
+            anonCounter.increment();
+            return `Anon_${anonCounter.getCount()}`;
+        }
+        return name;
+    }
+    return type.name;
+}
+
+export function getSerializeName(
+    context: SdkContext,
+    type: ModelProperty
+): string {
+    return (
+        getProjectedName(context.program, type, projectedNameJsonKey) ??
+        type.name
     );
 }
