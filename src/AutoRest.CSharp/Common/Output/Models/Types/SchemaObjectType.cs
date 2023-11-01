@@ -291,7 +291,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
                     {
-                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        if (TypeFactory.IsReadOnlyMemory(propertyType))
+                        {
+                            initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
+                        }
+                        else
+                        {
+                            initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        }
                     }
                 }
 
@@ -433,7 +440,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     }
 
-
                     yield return CreateProperty(property);
                 }
             }
@@ -481,7 +487,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = valueType.WithNullable(false);
             }
 
-            bool isCollection = TypeFactory.IsCollectionType(type);
+            bool isCollection = TypeFactory.IsCollectionType(type) && !TypeFactory.IsReadOnlyMemory(type);
 
             bool propertyShouldOmitSetter = IsStruct ||
                               !_usage.HasFlag(SchemaTypeUsage.Input) ||

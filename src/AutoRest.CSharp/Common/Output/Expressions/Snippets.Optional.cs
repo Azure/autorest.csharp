@@ -14,22 +14,22 @@ namespace AutoRest.CSharp.Common.Output.Models
     {
         public static class InvokeOptional
         {
-            public static BoolExpression IsCollectionDefined(ValueExpression collection) => new(new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalIsCollectionDefinedName, new[]{collection}));
-            public static BoolExpression IsDefined(ValueExpression value) => new(new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalIsDefinedName, new[]{value}));
-            public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToDictionaryName, new[]{dictionary});
-            public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToListName, new[]{collection});
-            public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[]{optional});
+            public static BoolExpression IsCollectionDefined(ValueExpression collection) => new(new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalIsCollectionDefinedName, new[] { collection }));
+            public static BoolExpression IsDefined(ValueExpression value) => new(new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalIsDefinedName, new[] { value }));
+            public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToDictionaryName, new[] { dictionary });
+            public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToListName, new[] { collection });
+            public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[] { optional });
 
             public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement)
             {
-                if (serialization.IsRequired)
+                if (serialization.IsRequired || TypeFactory.IsReadOnlyMemory(serialization.Value.Type))
                 {
                     return statement;
                 }
 
                 return TypeFactory.IsCollectionType(serialization.Value.Type)
-                    ? new IfStatement(IsCollectionDefined(serialization.Value)) {statement}
-                    : new IfStatement(IsDefined(serialization.Value)) {statement};
+                    ? new IfStatement(IsCollectionDefined(serialization.Value)) { statement }
+                    : new IfStatement(IsDefined(serialization.Value)) { statement };
             }
         }
     }

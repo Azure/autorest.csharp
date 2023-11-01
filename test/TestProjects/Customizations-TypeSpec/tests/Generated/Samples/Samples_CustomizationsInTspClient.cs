@@ -120,6 +120,22 @@ new
 key = "<badListOfDictionaryName>",
 }
             },
+                    vector = new object[]
+            {
+123.45F
+            },
+                    vectorOptional = new object[]
+            {
+123.45F
+            },
+                    vectorNullable = new object[]
+            {
+123.45F
+            },
+                    vectorOptionalNullable = new object[]
+            {
+123.45F
+            },
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
@@ -150,6 +166,14 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vector")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptional")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullable")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullable")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullableReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullableReadOnly")[0].ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -213,6 +237,22 @@ new
 key = "<badListOfDictionaryName>",
 }
             },
+                    vector = new object[]
+            {
+123.45F
+            },
+                    vectorOptional = new object[]
+            {
+123.45F
+            },
+                    vectorNullable = new object[]
+            {
+123.45F
+            },
+                    vectorOptionalNullable = new object[]
+            {
+123.45F
+            },
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
@@ -243,6 +283,14 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vector")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptional")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullable")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullable")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullableReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullableReadOnly")[0].ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -278,7 +326,11 @@ new Dictionary<string, string>
 {
 ["key"] = "<badListOfDictionaryName>"
 }
-            }),
+            }, new float[] { 123.45F }, new float[] { 123.45F })
+                {
+                    VectorOptional = new float[] { 123.45F },
+                    VectorOptionalNullable = new float[] { 123.45F },
+                },
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
@@ -314,7 +366,11 @@ new Dictionary<string, string>
 {
 ["key"] = "<badListOfDictionaryName>"
 }
-            }),
+            }, new float[] { 123.45F }, new float[] { 123.45F })
+                {
+                    VectorOptional = new float[] { 123.45F },
+                    VectorOptionalNullable = new float[] { 123.45F },
+                },
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
