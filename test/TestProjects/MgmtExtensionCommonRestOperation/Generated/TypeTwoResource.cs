@@ -27,6 +27,9 @@ namespace MgmtExtensionCommonRestOperation
     public partial class TypeTwoResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TypeTwoResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="typeTwoName"> The typeTwoName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string typeTwoName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}";

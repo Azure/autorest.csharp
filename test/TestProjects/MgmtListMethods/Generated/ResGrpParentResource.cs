@@ -27,6 +27,9 @@ namespace MgmtListMethods
     public partial class ResGrpParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResGrpParentResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="resGrpParentName"> The resGrpParentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resGrpParentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}";
