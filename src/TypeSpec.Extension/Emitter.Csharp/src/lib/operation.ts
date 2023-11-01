@@ -104,40 +104,30 @@ export function loadOperation(
             loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
     } else if (typespecParameters.body?.type) {
-        if (resourceOperation) {
-            parameters.push(
-                loadBodyParameter(sdkContext, resourceOperation.resourceType)
-            );
-        } else {
-            const effectiveBodyType = getEffectiveSchemaType(
-                sdkContext,
-                typespecParameters.body.type
-            );
-            if (effectiveBodyType.kind === "Model") {
-                if (effectiveBodyType.name !== "") {
-                    parameters.push(
-                        loadBodyParameter(sdkContext, effectiveBodyType)
-                    );
-                } else {
-                    effectiveBodyType.name = `${capitalize(op.name)}Request`;
-                    let bodyParameter = loadBodyParameter(
-                        sdkContext,
-                        effectiveBodyType
-                    );
-                    bodyParameter.Kind = InputOperationParameterKind.Spread;
-                    parameters.push(bodyParameter);
-                }
+        const effectiveBodyType = getEffectiveSchemaType(
+            sdkContext,
+            typespecParameters.body.type
+        );
+        if (effectiveBodyType.kind === "Model") {
+            if (effectiveBodyType.name !== "") {
+                parameters.push(
+                    loadBodyParameter(sdkContext, effectiveBodyType)
+                );
+            } else {
+                effectiveBodyType.name = `${capitalize(op.name)}Request`;
+                let bodyParameter = loadBodyParameter(
+                    sdkContext,
+                    effectiveBodyType
+                );
+                bodyParameter.Kind = InputOperationParameterKind.Spread;
+                parameters.push(bodyParameter);
             }
         }
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(
-            sdkContext,
-            res,
-            resourceOperation
-        );
+        const operationResponse = loadOperationResponse(sdkContext, res);
         if (operationResponse) {
             responses.push(operationResponse);
         }
@@ -215,11 +205,7 @@ export function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
-        LongRunning: loadLongRunningOperation(
-            sdkContext,
-            operation,
-            resourceOperation
-        ),
+        LongRunning: loadLongRunningOperation(sdkContext, operation),
         Paging: paging,
         GenerateProtocolMethod: generateProtocol,
         GenerateConvenienceMethod: generateConvenience
@@ -316,8 +302,7 @@ export function loadOperation(
 
     function loadOperationResponse(
         context: SdkContext,
-        response: HttpOperationResponse,
-        resourceOperation?: ResourceOperation
+        response: HttpOperationResponse
     ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
             return undefined;
@@ -329,23 +314,14 @@ export function loadOperation(
 
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            if (resourceOperation && resourceOperation.operation !== "list") {
-                type = getInputType(
-                    context,
-                    getFormattedType(program, resourceOperation.resourceType),
-                    models,
-                    enums
-                );
-            } else {
-                const typespecType = getEffectiveSchemaType(context, body.type);
-                const inputType: InputType = getInputType(
-                    context,
-                    getFormattedType(program, typespecType),
-                    models,
-                    enums
-                );
-                type = inputType;
-            }
+            const typespecType = getEffectiveSchemaType(context, body.type);
+            const inputType: InputType = getInputType(
+                context,
+                getFormattedType(program, typespecType),
+                models,
+                enums
+            );
+            type = inputType;
         }
 
         const headers = response.responses[0]?.headers;
@@ -377,8 +353,7 @@ export function loadOperation(
 
     function loadLongRunningOperation(
         context: SdkContext,
-        op: HttpOperation,
-        resourceOperation?: ResourceOperation
+        op: HttpOperation
     ): OperationLongRunning | undefined {
         const metadata = getLroMetadata(program, op.operation);
         if (metadata === undefined) {

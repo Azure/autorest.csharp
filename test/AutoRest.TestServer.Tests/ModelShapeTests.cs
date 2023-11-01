@@ -190,6 +190,10 @@ namespace AutoRest.TestServer.Tests
                 null,
                 null,
                 null,
+                null,
+                ReadOnlyMemory<float>.Empty,
+                ReadOnlyMemory<float>.Empty,
+                null,
                 null
             );
 
@@ -209,6 +213,10 @@ namespace AutoRest.TestServer.Tests
                 Array.Empty<int>(),
                 null,
                 null,
+                null,
+                null,
+                ReadOnlyMemory<float>.Empty,
+                ReadOnlyMemory<float>.Empty,
                 null,
                 null
             );
@@ -231,7 +239,12 @@ namespace AutoRest.TestServer.Tests
                 "string",
                 1,
                 Array.Empty<string>(),
-                Array.Empty<int>()
+                Array.Empty<int>(),
+                ReadOnlyMemory<float>.Empty,
+                ReadOnlyMemory<float>.Empty,
+                null,
+                null
+
             );
 
             var element = JsonAsserts.AssertSerializes(inputModel);
@@ -381,7 +394,12 @@ namespace AutoRest.TestServer.Tests
                 null,
                 null,
                 Array.Empty<string>(),
-                Array.Empty<int>()
+                Array.Empty<int>(),
+                ReadOnlyMemory<float>.Empty,
+                ReadOnlyMemory<float>.Empty,
+                null,
+                null
+
             );
         }
 
@@ -396,7 +414,12 @@ namespace AutoRest.TestServer.Tests
                 "string",
                 1,
                 Array.Empty<string>(),
-                Array.Empty<int>()
+                Array.Empty<int>(),
+                ReadOnlyMemory<float>.Empty,
+                ReadOnlyMemory<float>.Empty,
+                null,
+                null
+
             );
 
             inputModel.RequiredIntList.Add(1);
