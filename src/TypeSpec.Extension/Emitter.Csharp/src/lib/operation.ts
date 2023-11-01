@@ -173,15 +173,16 @@ export function loadOperation(
     for (const res of operation.responses) {
         const body = res.responses[0]?.body;
         if (body?.type) {
+            const bodyType = getEffectiveSchemaType(sdkContext, body.type);
             if (
-                body.type.kind === "Model" &&
-                hasDecorator(body?.type, "$pagedResult")
+                bodyType.kind === "Model" &&
+                hasDecorator(bodyType, "$pagedResult")
             ) {
                 const itemsProperty = Array.from(
-                    body.type.properties.values()
+                    bodyType.properties.values()
                 ).find((it) => hasDecorator(it, "$items"));
                 const nextLinkProperty = Array.from(
-                    body.type.properties.values()
+                    bodyType.properties.values()
                 ).find((it) => hasDecorator(it, "$nextLink"));
                 paging = {
                     NextLinkName: nextLinkProperty?.name,
