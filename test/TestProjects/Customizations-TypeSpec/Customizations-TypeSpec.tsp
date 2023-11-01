@@ -90,6 +90,34 @@ model ModelWithCustomizedProperties {
 
   @doc("Property renamed that is listofdictionary")
   badListOfDictionaryName: Record<string>[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>")
+  vector: float32[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  vectorOptional?: float32[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  vectorNullable: float32[] | null;
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  vectorOptionalNullable?: float32[] | null;
+
+  @doc("Property type changed to ReadOnlyMemory<float>")
+  @visibility("read")
+  vectorReadOnly: float32[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  @visibility("read")
+  vectorOptionalReadOnly?: float32[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  @visibility("read")
+  vectorNullableReadOnly: float32[] | null;
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  @visibility("read")
+  vectorOptionalNullableReadOnly?: float32[] | null;
 }
 
 @doc("Renamed enum (original name: EnumToRename)")

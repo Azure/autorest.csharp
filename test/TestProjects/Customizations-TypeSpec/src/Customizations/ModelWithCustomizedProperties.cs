@@ -75,5 +75,29 @@ namespace CustomizationsInTsp.Models
         /// </summary>
         [CodeGenMember("BadListOfDictionaryName")]
         public IList<IDictionary<string, string>> GoodListOfDictionaryName { get; }
+
+        /// <summary> Property type changed to ReadOnlyMemory&lt;float&gt;. </summary>
+        public ReadOnlyMemory<float> Vector { get; set; }
+
+        /// <summary> Property type changed to ReadOnlyMemory&lt;float&gt;. </summary>
+        public ReadOnlyMemory<float>? VectorOptional { get; set; }
+
+        /// <summary> Property type changed to ReadOnlyMemory&lt;float&gt;. </summary>
+        public ReadOnlyMemory<float>? VectorNullable { get; set; }
+
+        /// <summary> Property type changed to ReadOnlyMemory&lt;float&gt;. </summary>
+        public ReadOnlyMemory<float>? VectorOptionalNullable { get; set; }
+
+        /// <summary> Property type changed to ReadOnlyMemory&lt;float&gt;. </summary>
+        public ReadOnlyMemory<float> VectorReadOnly { get; }
+
+        /// <summary> Property type changed to ReadOnlyMemory&lt;float&gt;. </summary>
+        public ReadOnlyMemory<float>? VectorOptionalReadOnly { get; }
+
+        /// <summary> Property type changed to ReadOnlyMemory&lt;float&gt;. </summary>
+        public ReadOnlyMemory<float>? VectorNullableReadOnly { get; }
+
+        /// <summary> Property type changed to ReadOnlyMemory&lt;float&gt;. </summary>
+        public ReadOnlyMemory<float>? VectorOptionalNullableReadOnly { get; }
     }
 }

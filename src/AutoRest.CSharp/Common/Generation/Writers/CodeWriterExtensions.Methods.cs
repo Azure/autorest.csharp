@@ -248,6 +248,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(") => ");
                     writer.WriteValueExpression(localFunction.Body);
                     break;
+                case UnaryOperatorStatement unaryOperatorStatement:
+                    writer.WriteValueExpression(unaryOperatorStatement.Expression);
+                    break;
             }
 
             writer.LineRaw(";");
@@ -509,8 +512,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
 
-                case NewArrayExpression(var type, var items):
-                    if (items is { Elements.Count: > 0 })
+                case NewArrayExpression(var type, var items, var size):
+                    if (size is not null)
+                    {
+                        writer.Append($"new {type?.FrameworkType.GetElementType()}");
+                        writer.AppendRaw("[");
+                        writer.WriteValueExpression(size);
+                        writer.AppendRaw("]");
+                        break;
+                    }
+                    else if (items is { Elements.Count: > 0 })
                     {
                         if (type is null)
                         {
@@ -590,6 +601,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case StringLiteralExpression(var literal, false):
                     writer.Literal(literal);
+                    break;
+                case ArrayElementExpression(var array, var index):
+                    writer.WriteValueExpression(array);
+                    writer.AppendRaw("[");
+                    writer.WriteValueExpression(index);
+                    writer.AppendRaw("]");
                     break;
             }
 
