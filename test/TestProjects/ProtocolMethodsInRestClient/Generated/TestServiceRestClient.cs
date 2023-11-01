@@ -157,7 +157,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateCreateRequest(int second, RequestContent content, string first, RequestContext context)
+        internal HttpMessage CreateCreateRequest(int second, RequestContent content, string first, string format, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -169,6 +169,10 @@ namespace ProtocolMethodsInRestClient
             if (first != null)
             {
                 uri.AppendQuery("first", first, true);
+            }
+            if (format != null)
+            {
+                uri.AppendQuery("third", format, true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -196,7 +200,7 @@ namespace ProtocolMethodsInRestClient
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             using RequestContent content = resource?.ToRequestContent();
-            Response response = await CreateAsync(grouped.Second, content, grouped.First, context).ConfigureAwait(false);
+            Response response = await CreateAsync(grouped.Second, content, grouped.First, grouped.Format?.ToString(), context).ConfigureAwait(false);
             switch (response.Status)
             {
                 case 200:
@@ -225,7 +229,7 @@ namespace ProtocolMethodsInRestClient
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             using RequestContent content = resource?.ToRequestContent();
-            Response response = Create(grouped.Second, content, grouped.First, context);
+            Response response = Create(grouped.Second, content, grouped.First, grouped.Format?.ToString(), context);
             switch (response.Status)
             {
                 case 200:
@@ -253,16 +257,17 @@ namespace ProtocolMethodsInRestClient
         /// <param name="second"> Second in group. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="first"> First in group. </param>
+        /// <param name="format"> Third in group. Allowed values: "application/json;odata=nometadata" | "application/json;odata=minimalmetadata" | "application/json;odata=fullmetadata". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> CreateAsync(int second, RequestContent content, string first = null, RequestContext context = null)
+        public virtual async Task<Response> CreateAsync(int second, RequestContent content, string first = null, string format = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(second, content, first, context);
+                using HttpMessage message = CreateCreateRequest(second, content, first, format, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -285,16 +290,17 @@ namespace ProtocolMethodsInRestClient
         /// <param name="second"> Second in group. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="first"> First in group. </param>
+        /// <param name="format"> Third in group. Allowed values: "application/json;odata=nometadata" | "application/json;odata=minimalmetadata" | "application/json;odata=fullmetadata". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response Create(int second, RequestContent content, string first = null, RequestContext context = null)
+        public virtual Response Create(int second, RequestContent content, string first = null, string format = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(second, content, first, context);
+                using HttpMessage message = CreateCreateRequest(second, content, first, format, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)

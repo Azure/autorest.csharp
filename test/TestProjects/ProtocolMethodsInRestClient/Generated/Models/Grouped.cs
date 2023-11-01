@@ -21,5 +21,7 @@ namespace ProtocolMethodsInRestClient.Models
         public string First { get; set; }
         /// <summary> Second in group. </summary>
         public int Second { get; }
+        /// <summary> Third in group. </summary>
+        public MetadataFormat? Format { get; set; }
     }
 }

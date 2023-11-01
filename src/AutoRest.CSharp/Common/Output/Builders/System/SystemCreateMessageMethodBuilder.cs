@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Common.Output.Builders.System
             => new[]
             {
                 bodyRequestPart.Conversion ?? new MethodBodyStatement(),
-                Assign(_request.Content, new RequestBodyExpression(bodyRequestPart.Content))
+                Assign(_request.Content, new RequestBodyExpression(bodyRequestPart.ConvertedValue))
             };
 
         public override MethodBodyStatement AddUserAgent() => new();

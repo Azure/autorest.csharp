@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -461,7 +462,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 AddCreateMessageParameter(protocolMethodParameter);
                 _protocolParameters.Add(protocolMethodParameter);
-                _arguments[protocolMethodParameter] = GetValueForProtocolArgument(inputParameter, protocolMethodParameter);
+
+                var value = GetValueForProtocolArgument(inputParameter, protocolMethodParameter);
+                _arguments[protocolMethodParameter] = ConvertValue(value, protocolMethodParameter.Type, value.Type.IsNullable);
                 return;
             }
 
@@ -489,17 +492,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
-            if (protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(string)) && convenienceMethodParameter.Type is {IsFrameworkType: false, Implementation: EnumType enumType})
+            if (TryCreateConversionForEnum(convenienceMethodParameter, protocolMethodParameter.Type, convenienceMethodParameter.IsOptionalInSignature, out var convertedValue))
             {
-                _arguments[protocolMethodParameter] = new EnumExpression(enumType, NullConditional(convenienceMethodParameter)).ToSerial();
-                return;
-            }
-
-            if (protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(IEnumerable<string>)) && TypeFactory.IsList(convenienceMethodParameter.Type, out var elementType) && elementType is {IsFrameworkType: false, Implementation: EnumType elementEnumType})
-            {
-                var element = new VariableReference(elementType, "e");
-                var selector = new EnumExpression(elementEnumType, element).ToSerial();
-                _arguments[protocolMethodParameter] = new EnumerableExpression(elementType, NullConditional(convenienceMethodParameter)).Select(new TypedFuncExpression(new[] { element.Declaration }, selector));
+                _arguments[protocolMethodParameter] = convertedValue;
                 return;
             }
 
@@ -628,7 +623,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 AddParameter(inputParameter, outputParameter);
             }
 
-            _requestPartsBuilder.AddHeaderPart(inputParameter, GetValueForProtocolArgument(inputParameter, outputParameter), serializationFormat);
+            var value = GetValueForProtocolArgument(inputParameter, outputParameter);
+            _requestPartsBuilder.AddHeaderPart(inputParameter, value, serializationFormat);
         }
 
         private InputType ChangeTypeForProtocolMethod(InputType type) => type switch
@@ -644,7 +640,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             => new(new TernaryConditionalOperator(cancellationToken.CanBeCanceled, New.RequestContext(cancellationToken), Null));
 
         private IEnumerable<InputParameter> GetLegacySortedParameters()
-            => _unsortedParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
+            => _keepClientDefaultValue
+                ? _unsortedParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null })
+                : _unsortedParameters.OrderByDescending(p => p is { IsRequired: true });
 
         private IEnumerable<InputParameter> GetSortedParameters()
         {
@@ -741,25 +739,50 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case var _ when inputParameter.GroupedBy is {} groupedByInputParameter:
                     var groupedByParameterType = _typeFactory.CreateType(groupedByInputParameter.Type);
-                    var propertyName = groupedByParameterType.Implementation switch
+                    var (propertyName, propertyType) = groupedByParameterType.Implementation switch
                     {
-                        ModelTypeProvider modelType => modelType.Fields.GetFieldByParameterName(outputParameter.Name)?.Name,
-                        SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyForGroupedParameter(inputParameter.Name).Declaration.Name,
-                        _ => throw new InvalidOperationException($"Unexpected object type {groupedByParameterType.GetType()} for grouped parameter {outputParameter.Name}")
+                        ModelTypeProvider modelType when modelType.Fields.GetFieldByParameterName(outputParameter.Name) is {} field => (field.Name, field.Type),
+                        SchemaObjectType schemaObjectType when schemaObjectType.GetPropertyForGroupedParameter(inputParameter.Name).Declaration is {} declaration => (declaration.Name, declaration.Type),
+                        _ => throw new InvalidOperationException($"Unable to find object property for grouped parameter {outputParameter.Name} in {groupedByParameterType.Name}")
                     };
-
-                    if (propertyName is null)
-                    {
-                        throw new InvalidOperationException($"Unable to find object property for grouped parameter {outputParameter.Name} in {groupedByParameterType.Name}");
-                    }
 
                     var groupedByParameterName = groupedByInputParameter.Name.ToVariableName();
                     var groupedByParameterReference = new TypedMemberExpression(null, groupedByParameterName, groupedByParameterType);
-                    return new TypedMemberExpression(groupedByParameterReference.NullConditional(), propertyName, outputParameter.Type);
+                    return new TypedMemberExpression(groupedByParameterReference.NullConditional(), propertyName, propertyType);
 
                 default:
                     return outputParameter;
             }
+        }
+
+        private TypedValueExpression ConvertValue(TypedValueExpression value, CSharpType convertedValueType, bool valueCanBeNull)
+        {
+            if (TryCreateConversionForEnum(value, convertedValueType, valueCanBeNull, out var convertedValue))
+            {
+                return convertedValue;
+            }
+
+            return value;
+        }
+
+        private bool TryCreateConversionForEnum(TypedValueExpression value, CSharpType to, bool valueCanBeNull, [MaybeNullWhen(false)] out TypedValueExpression convertedValue)
+        {
+            if (to.EqualsIgnoreNullable(typeof(string)) && value.Type is {IsFrameworkType: false, Implementation: EnumType enumType})
+            {
+                convertedValue = new EnumExpression(enumType, NullConditional(value, valueCanBeNull)).ToSerial();
+                return true;
+            }
+
+            if (to.EqualsIgnoreNullable(typeof(IEnumerable<string>)) && TypeFactory.IsList(value.Type, out var elementType) && elementType is {IsFrameworkType: false, Implementation: EnumType elementEnumType})
+            {
+                var element = new VariableReference(elementType, "e");
+                var selector = new EnumExpression(elementEnumType, element).ToSerial();
+                convertedValue = new EnumerableExpression(elementType, NullConditional(value, valueCanBeNull)).Select(new TypedFuncExpression(new[] { element.Declaration }, selector));
+                return true;
+            }
+
+            convertedValue = null;
+            return false;
         }
 
         private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, bool valueCanBeNull, out TypedValueExpression content, out MethodBodyStatement? conversions)
@@ -836,9 +859,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static TypedValueExpression NullConditional(TypedValueExpression value, bool addNullConditional)
             => addNullConditional ? value.NullConditional() : value;
-
-        private static TypedValueExpression NullConditional(Parameter parameter)
-            => NullConditional(parameter, parameter.IsOptionalInSignature);
 
         private static void CreateConversionToUtf8JsonRequestContent(InputParameter inputParameter, TypedValueExpression value, out TypedValueExpression content, out MethodBodyStatement conversions)
         {

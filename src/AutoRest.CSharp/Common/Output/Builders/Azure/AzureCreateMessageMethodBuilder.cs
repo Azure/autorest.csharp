@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Common.Output.Builders.Azure
             => new[]
             {
                 Var("content", New.MultipartFormDataContent(), out var multipartContent),
-                _requestParts.BodyParts.Select(rp => NullCheckRequestPartValue(rp, GetAddMultipartBodyPartStatement(multipartContent, rp))).AsStatement(),
+                _requestParts.BodyParts.Select(rp => NullCheckRequestPartValue(rp.Value, GetAddMultipartBodyPartStatement(multipartContent, rp), rp.SkipNullCheck, false)).AsStatement(),
                 multipartContent.ApplyToRequest(_request)
             };
 
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Common.Output.Builders.Azure
             => new[]
             {
                 Var("content", New.FormUrlEncodedContent(), out var urlContent),
-                _requestParts.BodyParts.Select(rp => NullCheckRequestPartValue(rp, urlContent.Add(rp.NameInRequest!, ConvertToString(rp.Value)))).AsStatement(),
+                _requestParts.BodyParts.Select(rp => NullCheckRequestPartValue(rp.Value, urlContent.Add(rp.NameInRequest!, ConvertToString(rp.Value)), rp.SkipNullCheck, false)).AsStatement(),
                 Assign(_request.Content, urlContent)
             };
 
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Common.Output.Builders.Azure
             => new[]
             {
                 bodyRequestPart.Conversion ?? new MethodBodyStatement(),
-                Assign(_request.Content, new RequestContentExpression(bodyRequestPart.Content))
+                Assign(_request.Content, new RequestContentExpression(bodyRequestPart.ConvertedValue))
             };
 
         public override MethodBodyStatement AddUserAgent()
@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.Common.Output.Builders.Azure
                 ? new InvokeInstanceMethodStatement(_fields.UserAgentField, nameof(TelemetryDetails.Apply), _message)
                 : new MethodBodyStatement();
 
-        private static MethodBodyStatement GetAddMultipartBodyPartStatement(MultipartFormDataContentExpression multipartContent, RequestPart requestPart)
+        private static MethodBodyStatement GetAddMultipartBodyPartStatement(MultipartFormDataContentExpression multipartContent, BodyRequestPart requestPart)
         {
             var nameInRequest = requestPart.NameInRequest!;
             var value = requestPart.Value;

@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -50,9 +49,5 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
     }
 
-    internal record RequestParts(IReadOnlyList<RequestPart> UriParts, IReadOnlyList<RequestPart> PathParts, IReadOnlyList<RequestPart> QueryParts, IReadOnlyList<RequestPart> HeaderParts, IReadOnlyList<RequestPart> ContentHeaderParts, IReadOnlyList<RequestPart> BodyParts);
-
-    internal record RequestPart(string? NameInRequest, TypedValueExpression Value, MethodBodyStatement? Conversion, SerializationFormat SerializationFormat, string? ArraySerializationDelimiter = null, bool Explode = false, bool Escape = false, bool SkipNullCheck = false, bool CheckUndefinedCollection = false, bool IsNextLink = false);
-
-    internal record BodyRequestPart(TypedValueExpression Value, TypedValueExpression Content, MethodBodyStatement? Conversion, bool SkipNullCheck = false) : RequestPart(null, Value, Conversion, SerializationFormat.Default, SkipNullCheck: SkipNullCheck);
+    internal record RequestParts(IReadOnlyList<PathRequestPart> UriParts, IReadOnlyList<PathRequestPart> PathParts, IReadOnlyList<QueryRequestPart> QueryParts, IReadOnlyList<HeaderRequestPart> HeaderParts, IReadOnlyList<HeaderRequestPart> ContentHeaderParts, IReadOnlyList<BodyRequestPart> BodyParts);
 }

@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    RequestPart? requestPart = null;
+                    PathRequestPart? requestPart = null;
                     foreach (var part in _requestParts.UriParts)
                     {
                         if (part.NameInRequest.AsSpan().Equals(span, StringComparison.InvariantCulture))
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    RequestPart? requestPart = null;
+                    PathRequestPart? requestPart = null;
                     foreach (var part in _requestParts.PathParts)
                     {
                         if (part.NameInRequest.AsSpan().Equals(span, StringComparison.InvariantCulture))
@@ -125,19 +125,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
 
         public MethodBodyStatement AddQuery()
-            => _requestParts.QueryParts.Select(rp => NullCheckRequestPartValue(rp, GetAddToQueryStatement(rp))).AsStatement();
+            => _requestParts.QueryParts.Select(rp => NullCheckRequestPartValue(rp.Value, GetAddToQueryStatement(rp), rp.SkipNullCheck, rp.CheckUndefinedCollection)).AsStatement();
 
         public MethodBodyStatement AddHeaders()
-            => _requestParts.HeaderParts.Select(rp => NullCheckRequestPartValue(rp, GetAddHeaderStatement(rp))).AsStatement();
+            => _requestParts.HeaderParts.Select(rp => NullCheckRequestPartValue(rp.Value, GetAddHeaderStatement(rp), false, false)).AsStatement();
 
         public MethodBodyStatement AddContentHeaders()
-            => _requestParts.ContentHeaderParts.Select(rp => NullCheckRequestPartValue(rp, GetAddHeaderStatement(rp))).AsStatement();
+            => _requestParts.ContentHeaderParts.Select(rp => NullCheckRequestPartValue(rp.Value, GetAddHeaderStatement(rp), false, false)).AsStatement();
 
         public MethodBodyStatement AddBody(BodyMediaType bodyMediaType)
         {
-            if (_requestParts.BodyParts is [BodyRequestPart bodyRequestPart])
+            if (_requestParts.BodyParts is [{ NameInRequest: null } bodyRequestPart])
             {
-                return NullCheckRequestPartValue(bodyRequestPart, new[] { AddContentHeaders(), AddBody(bodyRequestPart) });
+                return NullCheckRequestPartValue(bodyRequestPart.Value, new[] { AddContentHeaders(), AddBody(bodyRequestPart) }, bodyRequestPart.SkipNullCheck, false);
             }
 
             return bodyMediaType switch
@@ -152,9 +152,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public abstract MethodBodyStatement SetUriToRequest();
         public abstract MethodBodyStatement AddUserAgent();
 
-        private MethodBodyStatement GetAddToQueryStatement(RequestPart requestPart)
+        private MethodBodyStatement GetAddToQueryStatement(QueryRequestPart requestPart)
         {
-            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(requestPart.Value), requestPart.SerializationFormat);
             if (requestPart.NameInRequest is not {} nameInRequest)
             {
                 throw new InvalidOperationException($" must have ");
@@ -162,36 +161,36 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (requestPart.Explode)
             {
-                return new ForeachStatement("param", new EnumerableExpression(TypeFactory.GetElementType(requestPart.Value.Type), convertedValue), out var paramVariable)
+                return new ForeachStatement("param", new EnumerableExpression(TypeFactory.GetElementType(requestPart.Value.Type), requestPart.Value), out var paramVariable)
                 {
-                    AddQuery(requestPart.NameInRequest, paramVariable, null, requestPart.SerializationFormat, requestPart.Escape)
+                    AddQuery(requestPart.NameInRequest, ConvertToRequestPartType(paramVariable, requestPart.SerializationFormat), null, requestPart.SerializationFormat, requestPart.Escape)
                 };
             }
 
+            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(requestPart.Value), requestPart.SerializationFormat);
             return AddQuery(nameInRequest, convertedValue, requestPart.ArraySerializationDelimiter, requestPart.SerializationFormat, requestPart.Escape);
         }
 
-        private MethodBodyStatement GetAddHeaderStatement(RequestPart requestPart)
+        private MethodBodyStatement GetAddHeaderStatement(HeaderRequestPart requestPart)
         {
             var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(requestPart.Value), requestPart.SerializationFormat);
             return AddHeader(requestPart.NameInRequest, convertedValue, requestPart.ArraySerializationDelimiter, requestPart.SerializationFormat);
         }
 
-        protected static MethodBodyStatement NullCheckRequestPartValue(RequestPart requestPart, MethodBodyStatement addRequestPartStatement)
+        protected static MethodBodyStatement NullCheckRequestPartValue(TypedValueExpression value, MethodBodyStatement addRequestPartStatement, bool skipNullCheck, bool checkUndefinedCollection)
         {
-            if (requestPart.SkipNullCheck)
+            if (skipNullCheck)
             {
                 return addRequestPartStatement;
             }
 
-            var value = requestPart.Value;
-            var type = requestPart.Value.Type;
+            var type = value.Type;
             if (value is ConstantExpression)
             {
                 return addRequestPartStatement;
             }
 
-            if (requestPart.CheckUndefinedCollection && TypeFactory.IsCollectionType(type))
+            if (checkUndefinedCollection && TypeFactory.IsCollectionType(type))
             {
                 return new IfStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value))) {addRequestPartStatement};
             }
@@ -209,7 +208,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (value.Type is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
             {
-                return new EnumExpression(enumType, value.NullableStructValue(value.Type)).ToSerial();
+                return new EnumExpression(enumType, value.NullableStructValue()).ToSerial();
             }
 
             if (value is ConstantExpression)

@@ -78,6 +78,28 @@
             }
           },
           {
+            "name": "third",
+            "description": "Third in group",
+            "type": "string",
+            "in": "query",
+            "required": false,
+            "x-nullable": true,
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "Grouped"
+            },
+            "x-ms-client-name": "Format",
+            "enum": [
+              "application/json;odata=nometadata",
+              "application/json;odata=minimalmetadata",
+              "application/json;odata=fullmetadata"
+            ],
+            "x-ms-enum": {
+              "name": "MetadataFormat",
+              "modelAsString": true
+            }
+          },
+          {
             "name": "Repeatability-Request-ID",
             "in": "header",
             "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
