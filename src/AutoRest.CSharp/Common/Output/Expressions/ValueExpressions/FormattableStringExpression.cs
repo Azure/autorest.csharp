@@ -6,6 +6,12 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
+    /// <summary>
+    /// Represents a FormattableString literal expression such as $"foo{bar}"
+    /// Constructed by a format string which should look like "foo{0}"
+    /// and a list of arguments of ValueExpressions
+    /// The constructor throws IndexOutOfRangeException when the count of arguments does not match in the format string and argument list.
+    /// </summary>
     internal sealed record FormattableStringExpression : ValueExpression
     {
         public FormattableStringExpression(string format, IReadOnlyList<ValueExpression> args)
