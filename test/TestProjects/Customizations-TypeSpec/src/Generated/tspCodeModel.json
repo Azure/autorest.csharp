@@ -486,6 +486,158 @@
         },
         "IsRequired": true,
         "IsReadOnly": false
+       },
+       {
+        "$id": "70",
+        "Name": "vector",
+        "SerializedName": "vector",
+        "Description": "Property type changed to ReadOnlyMemory<float>",
+        "Type": {
+         "$id": "71",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "72",
+          "Name": "float32",
+          "Kind": "Float32",
+          "IsNullable": false
+         },
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "73",
+        "Name": "vectorOptional",
+        "SerializedName": "vectorOptional",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
+         "$id": "74",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "75",
+          "Name": "float32",
+          "Kind": "Float32",
+          "IsNullable": false
+         },
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "76",
+        "Name": "vectorNullable",
+        "SerializedName": "vectorNullable",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
+         "$id": "77",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "78",
+          "Name": "float32",
+          "Kind": "Float32",
+          "IsNullable": false
+         },
+         "IsNullable": true
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "79",
+        "Name": "vectorOptionalNullable",
+        "SerializedName": "vectorOptionalNullable",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
+         "$id": "80",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "81",
+          "Name": "float32",
+          "Kind": "Float32",
+          "IsNullable": false
+         },
+         "IsNullable": true
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "82",
+        "Name": "vectorReadOnly",
+        "SerializedName": "vectorReadOnly",
+        "Description": "Property type changed to ReadOnlyMemory<float>",
+        "Type": {
+         "$id": "83",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "84",
+          "Name": "float32",
+          "Kind": "Float32",
+          "IsNullable": false
+         },
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": true
+       },
+       {
+        "$id": "85",
+        "Name": "vectorOptionalReadOnly",
+        "SerializedName": "vectorOptionalReadOnly",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
+         "$id": "86",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "87",
+          "Name": "float32",
+          "Kind": "Float32",
+          "IsNullable": false
+         },
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": true
+       },
+       {
+        "$id": "88",
+        "Name": "vectorNullableReadOnly",
+        "SerializedName": "vectorNullableReadOnly",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
+         "$id": "89",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "90",
+          "Name": "float32",
+          "Kind": "Float32",
+          "IsNullable": false
+         },
+         "IsNullable": true
+        },
+        "IsRequired": true,
+        "IsReadOnly": true
+       },
+       {
+        "$id": "91",
+        "Name": "vectorOptionalNullableReadOnly",
+        "SerializedName": "vectorOptionalNullableReadOnly",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
+         "$id": "92",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "93",
+          "Name": "float32",
+          "Kind": "Float32",
+          "IsNullable": false
+         },
+         "IsNullable": true
+        },
+        "IsRequired": false,
+        "IsReadOnly": true
        }
       ]
      },
@@ -493,7 +645,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "70",
+     "$id": "94",
      "Name": "propertyEnumToRename",
      "SerializedName": "propertyEnumToRename",
      "Description": "EnumToRename",
@@ -504,7 +656,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "71",
+     "$id": "95",
      "Name": "propertyEnumWithValueToRename",
      "SerializedName": "propertyEnumWithValueToRename",
      "Description": "EnumWithValueToRename",
@@ -515,7 +667,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "72",
+     "$id": "96",
      "Name": "propertyEnumToBeMadeExtensible",
      "SerializedName": "propertyEnumToBeMadeExtensible",
      "Description": "EnumToBeMadeExtensible",
@@ -526,12 +678,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "73",
+     "$id": "97",
      "Name": "propertyModelToAddAdditionalSerializableProperty",
      "SerializedName": "propertyModelToAddAdditionalSerializableProperty",
      "Description": "ModelToAddAdditionalSerializableProperty",
      "Type": {
-      "$id": "74",
+      "$id": "98",
       "Name": "ModelToAddAdditionalSerializableProperty",
       "Namespace": "CustomizationsInTsp",
       "Description": "Model to add additional serializable property",
@@ -539,12 +691,12 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "75",
+        "$id": "99",
         "Name": "requiredInt",
         "SerializedName": "requiredInt",
         "Description": "Required int",
         "Type": {
-         "$id": "76",
+         "$id": "100",
          "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
@@ -558,7 +710,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "77",
+     "$id": "101",
      "Name": "propertyToMoveToCustomization",
      "SerializedName": "propertyToMoveToCustomization",
      "Description": "Enum type property to move to customization code",
@@ -583,23 +735,23 @@
    "$ref": "37"
   },
   {
-   "$ref": "74"
+   "$ref": "98"
   }
  ],
  "Clients": [
   {
-   "$id": "78",
+   "$id": "102",
    "Name": "CustomizationsInTspClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "79",
+     "$id": "103",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInTsp",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
-       "$id": "80",
+       "$id": "104",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -616,11 +768,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "81",
+       "$id": "105",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "82",
+        "$id": "106",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -635,19 +787,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "83",
+        "$id": "107",
         "Type": {
-         "$ref": "82"
+         "$ref": "106"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "84",
+       "$id": "108",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "85",
+        "$id": "109",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -662,20 +814,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "86",
+        "$id": "110",
         "Type": {
-         "$ref": "85"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "87",
+       "$id": "111",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "88",
+        "$id": "112",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -690,9 +842,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "89",
+        "$id": "113",
         "Type": {
-         "$id": "90",
+         "$id": "114",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -703,7 +855,7 @@
      ],
      "Responses": [
       {
-       "$id": "91",
+       "$id": "115",
        "StatusCodes": [
         200
        ],
@@ -728,7 +880,7 @@
     }
    ],
    "Protocol": {
-    "$id": "92"
+    "$id": "116"
    },
    "Creatable": true
   }
