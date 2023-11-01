@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (requestPart.Explode)
             {
-                return new ForeachStatement("param", new EnumerableExpression(TypeFactory.GetElementType(requestPart.Value.Type), requestPart.Value), out var paramVariable)
+                return new ForeachStatement("param", new EnumerableExpression(TypeFactory.GetElementType(requestPart.Value.Type), RemoveAllNullConditional(requestPart.Value)), out var paramVariable)
                 {
                     AddQuery(requestPart.NameInRequest, ConvertToRequestPartType(paramVariable, requestPart.SerializationFormat), null, requestPart.SerializationFormat, requestPart.Escape)
                 };
