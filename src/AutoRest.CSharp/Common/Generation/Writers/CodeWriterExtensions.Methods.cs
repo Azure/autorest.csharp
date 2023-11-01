@@ -592,10 +592,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case StringLiteralExpression(var literal, false):
                     writer.Literal(literal);
                     break;
-                case FormattableStringExpression(var formattable):
+                case FormattableStringExpression(var format, var args):
                     writer.AppendRaw("$\"");
                     var argumentCount = 0;
-                    foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(formattable.Format))
+                    foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(format))
                     {
                         if (isLiteral)
                         {
@@ -603,12 +603,11 @@ namespace AutoRest.CSharp.Generation.Writers
                             continue;
                         }
 
-                        var arg = formattable.GetArgument(argumentCount);
+                        var arg = args[argumentCount];
                         argumentCount++;
-                        // append the argument. The argument must be something assignable to ValueExpression here
-                        var a = (ValueExpression)arg!;
+                        // append the argument
                         writer.AppendRaw("{");
-                        writer.WriteValueExpression(a);
+                        writer.WriteValueExpression(arg);
                         writer.AppendRaw("}");
                     }
                     writer.AppendRaw("\"");

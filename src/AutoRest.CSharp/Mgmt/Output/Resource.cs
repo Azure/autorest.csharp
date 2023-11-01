@@ -506,12 +506,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            var formattable = FormattableStringFactory.Create(formatBuilder.ToString(), signature.Parameters.Select(p => (ValueExpression)p).ToArray());
-
             var resourceId = new VariableReference(typeof(ResourceIdentifier), "resourceId");
             var methodBody = new MethodBodyStatement[]
             {
-                Var(resourceId, new FormattableStringExpression(formattable)),
+                Var(resourceId, new FormattableStringExpression(formatBuilder.ToString(), signature.Parameters.Select(p => (ValueExpression)p).ToArray())),
                 Return(Snippets.New.ResourceIdentifier(resourceId))
             };
             return new Method(signature, methodBody);
