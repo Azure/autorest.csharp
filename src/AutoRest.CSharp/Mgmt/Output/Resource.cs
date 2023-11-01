@@ -492,16 +492,18 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     first = false;
                     // If first segment is "{var}", then we should not add leading "/". Instead, we should let callers to specify, e.g. "{scope}/providers/Microsoft.Resources/..." v.s. "/subscriptions/{subscriptionId}/..."
-                    if (!RequestPath.Any() || RequestPath.First().IsConstant)
-                        formatBuilder.Append("/");
+                    if (RequestPath.Count == 0 || RequestPath[0].IsConstant)
+                        formatBuilder.Append('/');
                 }
                 else
-                    formatBuilder.Append("/");
+                    formatBuilder.Append('/');
                 if (segment.IsConstant)
                     formatBuilder.Append(segment.ConstantValue);
                 else
                 {
-                    formatBuilder.Append($"{{{refCount}}}");
+                    formatBuilder.Append('{')
+                        .Append(refCount)
+                        .Append('}');
                     refCount++;
                 }
             }
