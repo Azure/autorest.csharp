@@ -16,13 +16,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="Models.Dinosaur"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.Dinosaur"/> instance for mocking. </returns>
-        public static Dinosaur Dinosaur(string kind = null, int size = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static Dinosaur Dinosaur(string kind = null, int size = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new UnknownDinosaur(kind, size, serializedAdditionalRawData);
+            return new UnknownDinosaur(kind, size, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TRex"/>. </summary>

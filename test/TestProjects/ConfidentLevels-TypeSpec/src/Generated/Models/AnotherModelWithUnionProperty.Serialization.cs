@@ -7,27 +7,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    public partial class AnotherModelWithUnionProperty : IUtf8JsonSerializable, IModelJsonSerializable<AnotherModelWithUnionProperty>
+    public partial class AnotherModelWithUnionProperty : IUtf8JsonSerializable, IJsonModel<AnotherModelWithUnionProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AnotherModelWithUnionProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnotherModelWithUnionProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<AnotherModelWithUnionProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<AnotherModelWithUnionProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("unionProperty"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(UnionProperty);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(UnionProperty.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(UnionProperty))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -35,24 +39,31 @@ namespace ConfidentLevelsInTsp.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        AnotherModelWithUnionProperty IModelJsonSerializable<AnotherModelWithUnionProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        AnotherModelWithUnionProperty IJsonModel<AnotherModelWithUnionProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeAnotherModelWithUnionProperty(document.RootElement, options);
         }
 
-        internal static AnotherModelWithUnionProperty DeserializeAnotherModelWithUnionProperty(JsonElement element, ModelSerializerOptions options = null)
+        internal static AnotherModelWithUnionProperty DeserializeAnotherModelWithUnionProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -68,7 +79,7 @@ namespace ConfidentLevelsInTsp.Models
                     unionProperty = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -77,16 +88,24 @@ namespace ConfidentLevelsInTsp.Models
             return new AnotherModelWithUnionProperty(unionProperty, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<AnotherModelWithUnionProperty>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<AnotherModelWithUnionProperty>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        AnotherModelWithUnionProperty IModelSerializable<AnotherModelWithUnionProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        AnotherModelWithUnionProperty IModel<AnotherModelWithUnionProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeAnotherModelWithUnionProperty(document.RootElement, options);
@@ -97,13 +116,13 @@ namespace ConfidentLevelsInTsp.Models
         internal static AnotherModelWithUnionProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAnotherModelWithUnionProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeAnotherModelWithUnionProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

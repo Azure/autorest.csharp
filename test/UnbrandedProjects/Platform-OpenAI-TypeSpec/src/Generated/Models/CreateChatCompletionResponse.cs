@@ -12,7 +12,10 @@ namespace OpenAI.Models
     /// <summary> Represents a chat completion response returned by model, based on the provided input. </summary>
     public partial class CreateChatCompletionResponse
     {
-        /// <summary> Initializes a new instance of CreateChatCompletionResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponse"/>. </summary>
         /// <param name="id"> A unique identifier for the chat completion. </param>
         /// <param name="object"> The object type, which is always `chat.completion`. </param>
         /// <param name="created"> The Unix timestamp (in seconds) of when the chat completion was created. </param>
@@ -31,16 +34,18 @@ namespace OpenAI.Models
             Created = created;
             Model = model;
             Choices = choices.ToList();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateChatCompletionResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponse"/>. </summary>
         /// <param name="id"> A unique identifier for the chat completion. </param>
         /// <param name="object"> The object type, which is always `chat.completion`. </param>
         /// <param name="created"> The Unix timestamp (in seconds) of when the chat completion was created. </param>
         /// <param name="model"> The model used for the chat completion. </param>
         /// <param name="choices"> A list of chat completion choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
-        internal CreateChatCompletionResponse(string id, string @object, DateTimeOffset created, string model, IReadOnlyList<CreateChoice> choices, CompletionUsage usage)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateChatCompletionResponse(string id, string @object, DateTimeOffset created, string model, IReadOnlyList<CreateChoice> choices, CompletionUsage usage, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Object = @object;
@@ -48,6 +53,12 @@ namespace OpenAI.Models
             Model = model;
             Choices = choices;
             Usage = usage;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponse"/> for deserialization. </summary>
+        internal CreateChatCompletionResponse()
+        {
         }
 
         /// <summary> A unique identifier for the chat completion. </summary>

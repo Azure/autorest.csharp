@@ -15,7 +15,10 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> Contains a set of input documents to be analyzed by the service. </summary>
     public partial class MultiLanguageBatchInput
     {
-        /// <summary> Initializes a new instance of MultiLanguageBatchInput. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/>. </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="documents"/> is null. </exception>
         public MultiLanguageBatchInput(IEnumerable<MultiLanguageInput> documents)
@@ -25,11 +28,18 @@ namespace CognitiveServices.TextAnalytics.Models
             Documents = documents.ToList();
         }
 
-        /// <summary> Initializes a new instance of MultiLanguageBatchInput. </summary>
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/>. </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
-        internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Documents = documents;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/> for deserialization. </summary>
+        internal MultiLanguageBatchInput()
+        {
         }
 
         /// <summary> The set of documents to process as part of this batch. </summary>

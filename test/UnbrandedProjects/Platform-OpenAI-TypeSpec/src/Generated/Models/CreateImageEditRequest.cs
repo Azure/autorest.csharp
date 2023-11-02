@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateImageEditRequest. </summary>
     public partial class CreateImageEditRequest
     {
-        /// <summary> Initializes a new instance of CreateImageEditRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
         /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
         /// <param name="image">
         /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
@@ -24,9 +28,10 @@ namespace OpenAI.Models
 
             Prompt = prompt;
             Image = image;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateImageEditRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
         /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
         /// <param name="image">
         /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
@@ -41,7 +46,8 @@ namespace OpenAI.Models
         /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
-        internal CreateImageEditRequest(string prompt, BinaryData image, BinaryData mask, long? n, CreateImageEditRequestSize? size, CreateImageEditRequestResponseFormat? responseFormat, string user)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateImageEditRequest(string prompt, BinaryData image, BinaryData mask, long? n, CreateImageEditRequestSize? size, CreateImageEditRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prompt = prompt;
             Image = image;
@@ -50,6 +56,12 @@ namespace OpenAI.Models
             Size = size;
             ResponseFormat = responseFormat;
             User = user;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/> for deserialization. </summary>
+        internal CreateImageEditRequest()
+        {
         }
 
         /// <summary> A text description of the desired image(s). The maximum length is 1000 characters. </summary>

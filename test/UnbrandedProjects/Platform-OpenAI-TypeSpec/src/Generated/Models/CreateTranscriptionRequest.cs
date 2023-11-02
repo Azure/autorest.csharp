@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateTranscriptionRequest. </summary>
     public partial class CreateTranscriptionRequest
     {
-        /// <summary> Initializes a new instance of CreateTranscriptionRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/>. </summary>
         /// <param name="file">
         /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
         /// mpeg, mpga, m4a, ogg, wav, or webm.
@@ -23,9 +27,10 @@ namespace OpenAI.Models
 
             File = file;
             Model = model;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateTranscriptionRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/>. </summary>
         /// <param name="file">
         /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
         /// mpeg, mpga, m4a, ogg, wav, or webm.
@@ -50,7 +55,8 @@ namespace OpenAI.Models
         /// [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy
         /// and latency.
         /// </param>
-        internal CreateTranscriptionRequest(BinaryData file, CreateTranscriptionRequestModel model, string prompt, CreateTranscriptionRequestResponseFormat? responseFormat, double? temperature, string language)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateTranscriptionRequest(BinaryData file, CreateTranscriptionRequestModel model, string prompt, CreateTranscriptionRequestResponseFormat? responseFormat, double? temperature, string language, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             File = file;
             Model = model;
@@ -58,6 +64,12 @@ namespace OpenAI.Models
             ResponseFormat = responseFormat;
             Temperature = temperature;
             Language = language;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/> for deserialization. </summary>
+        internal CreateTranscriptionRequest()
+        {
         }
 
         /// <summary>

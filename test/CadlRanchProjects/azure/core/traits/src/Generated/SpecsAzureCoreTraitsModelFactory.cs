@@ -16,24 +16,18 @@ namespace _Specs_.Azure.Core.Traits.Models
         /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="name"> The user's name. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
-        public static User User(int id = default, string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static User User(int id = default, string name = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new User(id, name, serializedAdditionalRawData);
+            return new User(id, name, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UserActionResponse"/>. </summary>
         /// <param name="userActionResult"> User action result. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.UserActionResponse"/> instance for mocking. </returns>
-        public static UserActionResponse UserActionResponse(string userActionResult = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static UserActionResponse UserActionResponse(string userActionResult = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new UserActionResponse(userActionResult, serializedAdditionalRawData);
+            return new UserActionResponse(userActionResult, new Dictionary<string, BinaryData>());
         }
     }
 }

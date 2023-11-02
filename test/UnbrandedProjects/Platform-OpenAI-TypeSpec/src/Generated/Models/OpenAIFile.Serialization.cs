@@ -3,16 +3,81 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class OpenAIFile
+    public partial class OpenAIFile : IUtf8JsonWriteable, IJsonModel<OpenAIFile>
     {
-        internal static OpenAIFile DeserializeOpenAIFile(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<OpenAIFile>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+
+        void IJsonModel<OpenAIFile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("id"u8);
+            writer.WriteStringValue(Id);
+            writer.WritePropertyName("object"u8);
+            writer.WriteStringValue(Object.ToString());
+            writer.WritePropertyName("bytes"u8);
+            writer.WriteNumberValue(Bytes);
+            writer.WritePropertyName("createdAt"u8);
+            writer.WriteNumberValue(CreatedAt, "U");
+            writer.WritePropertyName("filename"u8);
+            writer.WriteStringValue(Filename);
+            writer.WritePropertyName("purpose"u8);
+            writer.WriteStringValue(Purpose);
+            writer.WritePropertyName("status"u8);
+            writer.WriteStringValue(Status.ToString());
+            if (OptionalProperty.IsDefined(StatusDetails))
+            {
+                if (StatusDetails != null)
+                {
+                    writer.WritePropertyName("status_details"u8);
+                    writer.WriteStringValue(StatusDetails);
+                }
+                else
+                {
+                    writer.WriteNull("status_details");
+                }
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        OpenAIFile IJsonModel<OpenAIFile>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOpenAIFile(document.RootElement, options);
+        }
+
+        internal static OpenAIFile DeserializeOpenAIFile(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -25,6 +90,8 @@ namespace OpenAI.Models
             string purpose = default;
             OpenAIFileStatus status = default;
             OptionalProperty<string> statusDetails = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -72,8 +139,36 @@ namespace OpenAI.Models
                     statusDetails = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new OpenAIFile(id, @object, bytes, createdAt, filename, purpose, status, statusDetails.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new OpenAIFile(id, @object, bytes, createdAt, filename, purpose, status, statusDetails.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<OpenAIFile>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        OpenAIFile IModel<OpenAIFile>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOpenAIFile(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -81,7 +176,13 @@ namespace OpenAI.Models
         internal static OpenAIFile FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeOpenAIFile(document.RootElement);
+            return DeserializeOpenAIFile(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            throw new Exception();
         }
     }
 }

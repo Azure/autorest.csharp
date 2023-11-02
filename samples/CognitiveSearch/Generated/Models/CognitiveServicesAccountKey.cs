@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> A cognitive service resource provisioned with a key that is attached to a skillset. </summary>
     public partial class CognitiveServicesAccountKey : CognitiveServicesAccount
     {
-        /// <summary> Initializes a new instance of CognitiveServicesAccountKey. </summary>
+        /// <summary> Initializes a new instance of <see cref="CognitiveServicesAccountKey"/>. </summary>
         /// <param name="key"> The key used to provision the cognitive service resource attached to a skillset. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public CognitiveServicesAccountKey(string key)
@@ -24,14 +25,20 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.CognitiveServicesByKey";
         }
 
-        /// <summary> Initializes a new instance of CognitiveServicesAccountKey. </summary>
+        /// <summary> Initializes a new instance of <see cref="CognitiveServicesAccountKey"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
         /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="key"> The key used to provision the cognitive service resource attached to a skillset. </param>
-        internal CognitiveServicesAccountKey(string odataType, string description, string key) : base(odataType, description)
+        internal CognitiveServicesAccountKey(string odataType, string description, IDictionary<string, BinaryData> serializedAdditionalRawData, string key) : base(odataType, description, serializedAdditionalRawData)
         {
             Key = key;
             OdataType = odataType ?? "#Microsoft.Azure.Search.CognitiveServicesByKey";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CognitiveServicesAccountKey"/> for deserialization. </summary>
+        internal CognitiveServicesAccountKey()
+        {
         }
 
         /// <summary> The key used to provision the cognitive service resource attached to a skillset. </summary>

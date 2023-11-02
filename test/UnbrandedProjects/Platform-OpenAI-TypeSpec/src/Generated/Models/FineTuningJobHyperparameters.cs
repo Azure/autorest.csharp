@@ -3,18 +3,24 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
 {
     /// <summary> The FineTuningJobHyperparameters. </summary>
     public partial class FineTuningJobHyperparameters
     {
-        /// <summary> Initializes a new instance of FineTuningJobHyperparameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobHyperparameters"/>. </summary>
         internal FineTuningJobHyperparameters()
         {
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of FineTuningJobHyperparameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobHyperparameters"/>. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
@@ -22,9 +28,11 @@ namespace OpenAI.Models
         /// "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
         /// number manually, we support any number between 1 and 50 epochs.
         /// </param>
-        internal FineTuningJobHyperparameters(BinaryData nEpochs)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FineTuningJobHyperparameters(BinaryData nEpochs, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             NEpochs = nEpochs;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

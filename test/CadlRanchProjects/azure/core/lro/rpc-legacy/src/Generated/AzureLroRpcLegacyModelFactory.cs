@@ -21,26 +21,21 @@ namespace _Azure.Lro.RpcLegacy.Models
         /// <param name="status"> The status of the processing job. </param>
         /// <param name="errors"> Error objects that describes the error when status is "Failed". </param>
         /// <param name="results"> The results. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.JobResult"/> instance for mocking. </returns>
-        public static JobResult JobResult(string jobId = null, string comment = null, JobStatus status = default, IEnumerable<ErrorResponse> errors = null, IEnumerable<string> results = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static JobResult JobResult(string jobId = null, string comment = null, JobStatus status = default, IEnumerable<ErrorResponse> errors = null, IEnumerable<string> results = null)
         {
             errors ??= new List<ErrorResponse>();
             results ??= new List<string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new JobResult(jobId, comment, status, errors?.ToList(), results?.ToList(), serializedAdditionalRawData);
+            return new JobResult(jobId, comment, status, errors?.ToList(), results?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ErrorResponse"/>. </summary>
         /// <param name="error"> The error object. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ErrorResponse"/> instance for mocking. </returns>
-        public static ErrorResponse ErrorResponse(ResponseError error = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static ErrorResponse ErrorResponse(ResponseError error = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new ErrorResponse(error, serializedAdditionalRawData);
+            return new ErrorResponse(error, new Dictionary<string, BinaryData>());
         }
     }
 }

@@ -3,25 +3,33 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
 {
     /// <summary> The CreateHyperparameters. </summary>
     public partial class CreateHyperparameters
     {
-        /// <summary> Initializes a new instance of CreateHyperparameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateHyperparameters"/>. </summary>
         public CreateHyperparameters()
         {
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateHyperparameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateHyperparameters"/>. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
         /// </param>
-        internal CreateHyperparameters(BinaryData nEpochs)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateHyperparameters(BinaryData nEpochs, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             NEpochs = nEpochs;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

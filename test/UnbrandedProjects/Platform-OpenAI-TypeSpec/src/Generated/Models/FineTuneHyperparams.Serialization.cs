@@ -2,16 +2,79 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class FineTuneHyperparams
+    public partial class FineTuneHyperparams : IUtf8JsonWriteable, IJsonModel<FineTuneHyperparams>
     {
-        internal static FineTuneHyperparams DeserializeFineTuneHyperparams(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTuneHyperparams>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+
+        void IJsonModel<FineTuneHyperparams>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("n_epochs"u8);
+            writer.WriteNumberValue(NEpochs);
+            writer.WritePropertyName("batch_size"u8);
+            writer.WriteNumberValue(BatchSize);
+            writer.WritePropertyName("prompt_loss_weight"u8);
+            writer.WriteNumberValue(PromptLossWeight);
+            writer.WritePropertyName("learning_rate_multiplier"u8);
+            writer.WriteNumberValue(LearningRateMultiplier);
+            if (OptionalProperty.IsDefined(ComputeClassificationMetrics))
+            {
+                writer.WritePropertyName("compute_classification_metrics"u8);
+                writer.WriteBooleanValue(ComputeClassificationMetrics.Value);
+            }
+            if (OptionalProperty.IsDefined(ClassificationPositiveClass))
+            {
+                writer.WritePropertyName("classification_positive_class"u8);
+                writer.WriteStringValue(ClassificationPositiveClass);
+            }
+            if (OptionalProperty.IsDefined(ClassificationNClasses))
+            {
+                writer.WritePropertyName("classification_n_classes"u8);
+                writer.WriteNumberValue(ClassificationNClasses.Value);
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        FineTuneHyperparams IJsonModel<FineTuneHyperparams>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFineTuneHyperparams(document.RootElement, options);
+        }
+
+        internal static FineTuneHyperparams DeserializeFineTuneHyperparams(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -23,6 +86,8 @@ namespace OpenAI.Models
             OptionalProperty<bool> computeClassificationMetrics = default;
             OptionalProperty<string> classificationPositiveClass = default;
             OptionalProperty<long> classificationNClasses = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("n_epochs"u8))
@@ -68,8 +133,36 @@ namespace OpenAI.Models
                     classificationNClasses = property.Value.GetInt64();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, OptionalProperty.ToNullable(computeClassificationMetrics), classificationPositiveClass.Value, OptionalProperty.ToNullable(classificationNClasses));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, OptionalProperty.ToNullable(computeClassificationMetrics), classificationPositiveClass.Value, OptionalProperty.ToNullable(classificationNClasses), serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<FineTuneHyperparams>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        FineTuneHyperparams IModel<FineTuneHyperparams>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFineTuneHyperparams(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -77,7 +170,13 @@ namespace OpenAI.Models
         internal static FineTuneHyperparams FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeFineTuneHyperparams(document.RootElement);
+            return DeserializeFineTuneHyperparams(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            throw new Exception();
         }
     }
 }

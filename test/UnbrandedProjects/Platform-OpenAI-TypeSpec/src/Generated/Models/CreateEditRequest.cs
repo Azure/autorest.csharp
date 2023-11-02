@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateEditRequest. </summary>
     public partial class CreateEditRequest
     {
-        /// <summary> Initializes a new instance of CreateEditRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
         /// model with this endpoint.
@@ -23,9 +27,10 @@ namespace OpenAI.Models
 
             Model = model;
             Instruction = instruction;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateEditRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
         /// model with this endpoint.
@@ -46,7 +51,8 @@ namespace OpenAI.Models
         ///
         /// We generally recommend altering this or `temperature` but not both.
         /// </param>
-        internal CreateEditRequest(CreateEditRequestModel model, string input, string instruction, long? n, double? temperature, double? topP)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateEditRequest(CreateEditRequestModel model, string input, string instruction, long? n, double? temperature, double? topP, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Input = input;
@@ -54,6 +60,12 @@ namespace OpenAI.Models
             N = n;
             Temperature = temperature;
             TopP = topP;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/> for deserialization. </summary>
+        internal CreateEditRequest()
+        {
         }
 
         /// <summary>

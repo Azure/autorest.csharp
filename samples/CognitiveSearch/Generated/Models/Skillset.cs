@@ -15,7 +15,10 @@ namespace CognitiveSearch.Models
     /// <summary> A list of skills. </summary>
     public partial class Skillset
     {
-        /// <summary> Initializes a new instance of Skillset. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Skillset"/>. </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills">
@@ -35,7 +38,7 @@ namespace CognitiveSearch.Models
             Skills = skills.ToList();
         }
 
-        /// <summary> Initializes a new instance of Skillset. </summary>
+        /// <summary> Initializes a new instance of <see cref="Skillset"/>. </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills">
@@ -49,13 +52,20 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="CognitiveServicesAccountKey"/> and <see cref="DefaultCognitiveServicesAccount"/>.
         /// </param>
         /// <param name="eTag"> The ETag of the skillset. </param>
-        internal Skillset(string name, string description, IList<Skill> skills, CognitiveServicesAccount cognitiveServicesAccount, string eTag)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Skillset(string name, string description, IList<Skill> skills, CognitiveServicesAccount cognitiveServicesAccount, string eTag, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Description = description;
             Skills = skills;
             CognitiveServicesAccount = cognitiveServicesAccount;
             ETag = eTag;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Skillset"/> for deserialization. </summary>
+        internal Skillset()
+        {
         }
 
         /// <summary> The name of the skillset. </summary>

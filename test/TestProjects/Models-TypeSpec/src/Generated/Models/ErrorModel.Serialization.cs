@@ -27,10 +27,13 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(InnerError))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("innerError"u8);
-                writer.WriteObjectValue(InnerError);
+                if (Optional.IsDefined(InnerError))
+                {
+                    writer.WritePropertyName("innerError"u8);
+                    writer.WriteObjectValue(InnerError);
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {

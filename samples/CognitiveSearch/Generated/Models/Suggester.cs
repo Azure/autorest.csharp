@@ -15,7 +15,10 @@ namespace CognitiveSearch.Models
     /// <summary> Defines how the Suggest API should apply to a group of fields in the index. </summary>
     public partial class Suggester
     {
-        /// <summary> Initializes a new instance of Suggester. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Suggester"/>. </summary>
         /// <param name="name"> The name of the suggester. </param>
         /// <param name="searchMode"> A value indicating the capabilities of the suggester. </param>
         /// <param name="sourceFields"> The list of field names to which the suggester applies. Each field must be searchable. </param>
@@ -30,15 +33,22 @@ namespace CognitiveSearch.Models
             SourceFields = sourceFields.ToList();
         }
 
-        /// <summary> Initializes a new instance of Suggester. </summary>
+        /// <summary> Initializes a new instance of <see cref="Suggester"/>. </summary>
         /// <param name="name"> The name of the suggester. </param>
         /// <param name="searchMode"> A value indicating the capabilities of the suggester. </param>
         /// <param name="sourceFields"> The list of field names to which the suggester applies. Each field must be searchable. </param>
-        internal Suggester(string name, SearchMode searchMode, IList<string> sourceFields)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Suggester(string name, SearchMode searchMode, IList<string> sourceFields, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             SearchMode = searchMode;
             SourceFields = sourceFields;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Suggester"/> for deserialization. </summary>
+        internal Suggester()
+        {
         }
 
         /// <summary> The name of the suggester. </summary>

@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateEmbeddingRequest. </summary>
     public partial class CreateEmbeddingRequest
     {
-        /// <summary> Initializes a new instance of CreateEmbeddingRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/>. </summary>
         /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
         /// <param name="input">
         /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
@@ -26,9 +30,10 @@ namespace OpenAI.Models
 
             Model = model;
             Input = input;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateEmbeddingRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/>. </summary>
         /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
         /// <param name="input">
         /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
@@ -38,11 +43,18 @@ namespace OpenAI.Models
         /// for counting tokens.
         /// </param>
         /// <param name="user"></param>
-        internal CreateEmbeddingRequest(CreateEmbeddingRequestModel model, BinaryData input, string user)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateEmbeddingRequest(CreateEmbeddingRequestModel model, BinaryData input, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Input = input;
             User = user;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/> for deserialization. </summary>
+        internal CreateEmbeddingRequest()
+        {
         }
 
         /// <summary> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </summary>

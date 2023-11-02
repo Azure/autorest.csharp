@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Encode.Duration.Models
 {
-    public partial class FloatSecondsDurationArrayProperty : IUtf8JsonSerializable, IModelJsonSerializable<FloatSecondsDurationArrayProperty>
+    public partial class FloatSecondsDurationArrayProperty : IUtf8JsonSerializable, IJsonModel<FloatSecondsDurationArrayProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FloatSecondsDurationArrayProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatSecondsDurationArrayProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<FloatSecondsDurationArrayProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<FloatSecondsDurationArrayProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
@@ -28,7 +29,7 @@ namespace Encode.Duration.Models
                 writer.WriteNumberValue(Convert.ToDouble(item.ToString("s\\.fff")));
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -36,38 +37,31 @@ namespace Encode.Duration.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        FloatSecondsDurationArrayProperty IModelJsonSerializable<FloatSecondsDurationArrayProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FloatSecondsDurationArrayProperty IJsonModel<FloatSecondsDurationArrayProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FloatSecondsDurationArrayProperty>.Serialize(ModelSerializerOptions options)
+        internal static FloatSecondsDurationArrayProperty DeserializeFloatSecondsDurationArrayProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FloatSecondsDurationArrayProperty IModelSerializable<FloatSecondsDurationArrayProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, options);
-        }
-
-        internal static FloatSecondsDurationArrayProperty DeserializeFloatSecondsDurationArrayProperty(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -76,25 +70,48 @@ namespace Encode.Duration.Models
             IList<TimeSpan> value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("value"u8))
                 {
-                    if (property.NameEquals("value"u8))
+                    List<TimeSpan> array = new List<TimeSpan>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        List<TimeSpan> array = new List<TimeSpan>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(TimeSpan.FromSeconds(item.GetDouble()));
-                        }
-                        value = array;
-                        continue;
+                        array.Add(TimeSpan.FromSeconds(item.GetDouble()));
                     }
+                    value = array;
+                    continue;
+                }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new FloatSecondsDurationArrayProperty(value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<FloatSecondsDurationArrayProperty>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        FloatSecondsDurationArrayProperty IModel<FloatSecondsDurationArrayProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -102,13 +119,13 @@ namespace Encode.Duration.Models
         internal static FloatSecondsDurationArrayProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

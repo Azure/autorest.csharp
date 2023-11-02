@@ -15,13 +15,10 @@ namespace Authentication.ApiKey.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.InvalidAuth"/>. </summary>
         /// <param name="error"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.InvalidAuth"/> instance for mocking. </returns>
-        public static InvalidAuth InvalidAuth(string error = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static InvalidAuth InvalidAuth(string error = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new InvalidAuth(error, serializedAdditionalRawData);
+            return new InvalidAuth(error, new Dictionary<string, BinaryData>());
         }
     }
 }

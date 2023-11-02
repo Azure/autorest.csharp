@@ -15,46 +15,34 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.NoDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.NoDecoratorModelInPublic"/> instance for mocking. </returns>
-        public static NoDecoratorModelInPublic NoDecoratorModelInPublic(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static NoDecoratorModelInPublic NoDecoratorModelInPublic(string name = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new NoDecoratorModelInPublic(name, serializedAdditionalRawData);
+            return new NoDecoratorModelInPublic(name, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.PublicDecoratorModelInPublic"/> instance for mocking. </returns>
-        public static PublicDecoratorModelInPublic PublicDecoratorModelInPublic(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static PublicDecoratorModelInPublic PublicDecoratorModelInPublic(string name = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new PublicDecoratorModelInPublic(name, serializedAdditionalRawData);
+            return new PublicDecoratorModelInPublic(name, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInInternal"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.PublicDecoratorModelInInternal"/> instance for mocking. </returns>
-        public static PublicDecoratorModelInInternal PublicDecoratorModelInInternal(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static PublicDecoratorModelInInternal PublicDecoratorModelInInternal(string name = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new PublicDecoratorModelInInternal(name, serializedAdditionalRawData);
+            return new PublicDecoratorModelInInternal(name, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SharedModel"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.SharedModel"/> instance for mocking. </returns>
-        public static SharedModel SharedModel(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static SharedModel SharedModel(string name = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new SharedModel(name, serializedAdditionalRawData);
+            return new SharedModel(name, new Dictionary<string, BinaryData>());
         }
     }
 }

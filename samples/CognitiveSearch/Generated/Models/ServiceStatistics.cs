@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> Response from a get service statistics request. If successful, it includes service level counters and limits. </summary>
     public partial class ServiceStatistics
     {
-        /// <summary> Initializes a new instance of ServiceStatistics. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/>. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="counters"/> or <paramref name="limits"/> is null. </exception>
@@ -24,6 +28,22 @@ namespace CognitiveSearch.Models
 
             Counters = counters;
             Limits = limits;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/>. </summary>
+        /// <param name="counters"> Service level resource counters. </param>
+        /// <param name="limits"> Service level general limits. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceStatistics(ServiceCounters counters, ServiceLimits limits, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Counters = counters;
+            Limits = limits;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/> for deserialization. </summary>
+        internal ServiceStatistics()
+        {
         }
 
         /// <summary> Service level resource counters. </summary>

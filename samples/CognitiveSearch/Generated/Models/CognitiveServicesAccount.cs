@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary>
@@ -14,18 +17,23 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class CognitiveServicesAccount
     {
-        /// <summary> Initializes a new instance of CognitiveServicesAccount. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CognitiveServicesAccount"/>. </summary>
         public CognitiveServicesAccount()
         {
         }
 
-        /// <summary> Initializes a new instance of CognitiveServicesAccount. </summary>
+        /// <summary> Initializes a new instance of <see cref="CognitiveServicesAccount"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
         /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
-        internal CognitiveServicesAccount(string odataType, string description)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CognitiveServicesAccount(string odataType, string description, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OdataType = odataType;
             Description = description;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Identifies the concrete type of the cognitive service resource attached to a skillset. </summary>

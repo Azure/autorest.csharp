@@ -7,27 +7,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace _Type.Union.Models
 {
-    public partial class ModelWithNamedUnionPropertyInResponse : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithNamedUnionPropertyInResponse>
+    public partial class ModelWithNamedUnionPropertyInResponse : IUtf8JsonSerializable, IJsonModel<ModelWithNamedUnionPropertyInResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithNamedUnionPropertyInResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithNamedUnionPropertyInResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ModelWithNamedUnionPropertyInResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ModelWithNamedUnionPropertyInResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("namedUnion"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(NamedUnion);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(NamedUnion.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(NamedUnion))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -35,38 +39,31 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ModelWithNamedUnionPropertyInResponse IModelJsonSerializable<ModelWithNamedUnionPropertyInResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelWithNamedUnionPropertyInResponse IJsonModel<ModelWithNamedUnionPropertyInResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelWithNamedUnionPropertyInResponse>.Serialize(ModelSerializerOptions options)
+        internal static ModelWithNamedUnionPropertyInResponse DeserializeModelWithNamedUnionPropertyInResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelWithNamedUnionPropertyInResponse IModelSerializable<ModelWithNamedUnionPropertyInResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement, options);
-        }
-
-        internal static ModelWithNamedUnionPropertyInResponse DeserializeModelWithNamedUnionPropertyInResponse(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -75,20 +72,43 @@ namespace _Type.Union.Models
             BinaryData namedUnion = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("namedUnion"u8))
                 {
-                    if (property.NameEquals("namedUnion"u8))
-                    {
-                        namedUnion = BinaryData.FromString(property.Value.GetRawText());
-                        continue;
-                    }
+                    namedUnion = BinaryData.FromString(property.Value.GetRawText());
+                    continue;
+                }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithNamedUnionPropertyInResponse(namedUnion, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<ModelWithNamedUnionPropertyInResponse>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        ModelWithNamedUnionPropertyInResponse IModel<ModelWithNamedUnionPropertyInResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -96,13 +116,13 @@ namespace _Type.Union.Models
         internal static ModelWithNamedUnionPropertyInResponse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeModelWithNamedUnionPropertyInResponse(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

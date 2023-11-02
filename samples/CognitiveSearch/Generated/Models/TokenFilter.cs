@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -17,7 +18,10 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class TokenFilter
     {
-        /// <summary> Initializes a new instance of TokenFilter. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TokenFilter"/>. </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public TokenFilter(string name)
@@ -27,13 +31,20 @@ namespace CognitiveSearch.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of TokenFilter. </summary>
+        /// <summary> Initializes a new instance of <see cref="TokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal TokenFilter(string odataType, string name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OdataType = odataType;
             Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TokenFilter"/> for deserialization. </summary>
+        internal TokenFilter()
+        {
         }
 
         /// <summary> Identifies the concrete type of the token filter. </summary>

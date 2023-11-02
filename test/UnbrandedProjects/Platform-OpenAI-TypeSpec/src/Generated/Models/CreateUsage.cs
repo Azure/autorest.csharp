@@ -2,18 +2,42 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using System.Net.ClientModel.Internal;
+
 namespace OpenAI.Models
 {
     /// <summary> The CreateUsage. </summary>
     public partial class CreateUsage
     {
-        /// <summary> Initializes a new instance of CreateUsage. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateUsage"/>. </summary>
         /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
         /// <param name="totalTokens"> The total number of tokens used by the request. </param>
         internal CreateUsage(long promptTokens, long totalTokens)
         {
             PromptTokens = promptTokens;
             TotalTokens = totalTokens;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateUsage"/>. </summary>
+        /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
+        /// <param name="totalTokens"> The total number of tokens used by the request. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateUsage(long promptTokens, long totalTokens, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            PromptTokens = promptTokens;
+            TotalTokens = totalTokens;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateUsage"/> for deserialization. </summary>
+        internal CreateUsage()
+        {
         }
 
         /// <summary> The number of tokens used by the prompt. </summary>

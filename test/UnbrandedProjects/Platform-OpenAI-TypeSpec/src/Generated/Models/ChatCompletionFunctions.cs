@@ -11,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The ChatCompletionFunctions. </summary>
     public partial class ChatCompletionFunctions
     {
-        /// <summary> Initializes a new instance of ChatCompletionFunctions. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/>. </summary>
         /// <param name="name">
         /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
         /// dashes, with a maximum length of 64.
@@ -31,9 +34,10 @@ namespace OpenAI.Models
 
             Name = name;
             Parameters = parameters;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ChatCompletionFunctions. </summary>
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/>. </summary>
         /// <param name="name">
         /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
         /// dashes, with a maximum length of 64.
@@ -49,11 +53,18 @@ namespace OpenAI.Models
         /// about the format.\n\nTo describe a function that accepts no parameters, provide the value
         /// `{\"type\": \"object\", \"properties\": {}}`.
         /// </param>
-        internal ChatCompletionFunctions(string name, string description, IDictionary<string, BinaryData> parameters)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ChatCompletionFunctions(string name, string description, IDictionary<string, BinaryData> parameters, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Description = description;
             Parameters = parameters;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/> for deserialization. </summary>
+        internal ChatCompletionFunctions()
+        {
         }
 
         /// <summary>

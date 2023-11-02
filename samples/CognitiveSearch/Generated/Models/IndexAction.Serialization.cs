@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexAction : IUtf8JsonSerializable, IModelJsonSerializable<IndexAction>
+    public partial class IndexAction : IUtf8JsonSerializable, IJsonModel<IndexAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IndexAction>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexAction>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<IndexAction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<IndexAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ActionType))
@@ -33,31 +34,21 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        IndexAction IModelJsonSerializable<IndexAction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        IndexAction IJsonModel<IndexAction>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeIndexAction(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<IndexAction>.Serialize(ModelSerializerOptions options)
+        internal static IndexAction DeserializeIndexAction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        IndexAction IModelSerializable<IndexAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeIndexAction(document.RootElement, options);
-        }
-
-        internal static IndexAction DeserializeIndexAction(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -81,6 +72,29 @@ namespace CognitiveSearch.Models
             }
             additionalProperties = additionalPropertiesDictionary;
             return new IndexAction(Optional.ToNullable(searchAction), additionalProperties);
+        }
+
+        BinaryData IModel<IndexAction>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        IndexAction IModel<IndexAction>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIndexAction(document.RootElement, options);
         }
     }
 }

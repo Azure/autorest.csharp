@@ -19,27 +19,22 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <param name="name"> The user's name. </param>
         /// <param name="orders"> The user's order list. </param>
         /// <param name="etag"> The entity tag for this resource. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
-        public static User User(int id = default, string name = null, IEnumerable<UserOrder> orders = null, string etag = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static User User(int id = default, string name = null, IEnumerable<UserOrder> orders = null, string etag = null)
         {
             orders ??= new List<UserOrder>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new User(id, name, orders?.ToList(), etag, serializedAdditionalRawData);
+            return new User(id, name, orders?.ToList(), etag, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UserOrder"/>. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="userId"> The user's id. </param>
         /// <param name="detail"> The user's order detail. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.UserOrder"/> instance for mocking. </returns>
-        public static UserOrder UserOrder(int id = default, int userId = default, string detail = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static UserOrder UserOrder(int id = default, int userId = default, string detail = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new UserOrder(id, userId, detail, serializedAdditionalRawData);
+            return new UserOrder(id, userId, detail, new Dictionary<string, BinaryData>());
         }
     }
 }

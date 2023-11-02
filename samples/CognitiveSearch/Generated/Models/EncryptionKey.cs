@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Cognitive Search, such as indexes and synonym maps. </summary>
     public partial class EncryptionKey
     {
-        /// <summary> Initializes a new instance of EncryptionKey. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="EncryptionKey"/>. </summary>
         /// <param name="keyVaultKeyName"> The name of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultKeyVersion"> The version of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultUri"> The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net. </param>
@@ -29,17 +33,24 @@ namespace CognitiveSearch.Models
             KeyVaultUri = keyVaultUri;
         }
 
-        /// <summary> Initializes a new instance of EncryptionKey. </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionKey"/>. </summary>
         /// <param name="keyVaultKeyName"> The name of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultKeyVersion"> The version of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultUri"> The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net. </param>
         /// <param name="accessCredentials"> Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead. </param>
-        internal EncryptionKey(string keyVaultKeyName, string keyVaultKeyVersion, string keyVaultUri, AzureActiveDirectoryApplicationCredentials accessCredentials)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EncryptionKey(string keyVaultKeyName, string keyVaultKeyVersion, string keyVaultUri, AzureActiveDirectoryApplicationCredentials accessCredentials, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyVaultKeyName = keyVaultKeyName;
             KeyVaultKeyVersion = keyVaultKeyVersion;
             KeyVaultUri = keyVaultUri;
             AccessCredentials = accessCredentials;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="EncryptionKey"/> for deserialization. </summary>
+        internal EncryptionKey()
+        {
         }
 
         /// <summary> The name of your Azure Key Vault key to be used to encrypt your data at rest. </summary>

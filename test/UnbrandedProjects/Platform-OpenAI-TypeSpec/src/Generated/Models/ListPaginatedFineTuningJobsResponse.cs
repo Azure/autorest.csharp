@@ -12,7 +12,10 @@ namespace OpenAI.Models
     /// <summary> The ListPaginatedFineTuningJobsResponse. </summary>
     public partial class ListPaginatedFineTuningJobsResponse
     {
-        /// <summary> Initializes a new instance of ListPaginatedFineTuningJobsResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ListPaginatedFineTuningJobsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <param name="hasMore"></param>
@@ -25,17 +28,25 @@ namespace OpenAI.Models
             Object = @object;
             Data = data.ToList();
             HasMore = hasMore;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ListPaginatedFineTuningJobsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListPaginatedFineTuningJobsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <param name="hasMore"></param>
-        internal ListPaginatedFineTuningJobsResponse(string @object, IReadOnlyList<FineTuningJob> data, bool hasMore)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListPaginatedFineTuningJobsResponse(string @object, IReadOnlyList<FineTuningJob> data, bool hasMore, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Object = @object;
             Data = data;
             HasMore = hasMore;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ListPaginatedFineTuningJobsResponse"/> for deserialization. </summary>
+        internal ListPaginatedFineTuningJobsResponse()
+        {
         }
 
         /// <summary> Gets the object. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed. </summary>
     public partial class DataContainer
     {
-        /// <summary> Initializes a new instance of DataContainer. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="name"> The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public DataContainer(string name)
@@ -23,13 +27,20 @@ namespace CognitiveSearch.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of DataContainer. </summary>
+        /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="name"> The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed. </param>
         /// <param name="query"> A query that is applied to this data container. The syntax and meaning of this parameter is datasource-specific. Not supported by Azure SQL datasources. </param>
-        internal DataContainer(string name, string query)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataContainer(string name, string query, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Query = query;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DataContainer"/> for deserialization. </summary>
+        internal DataContainer()
+        {
         }
 
         /// <summary> The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed. </summary>

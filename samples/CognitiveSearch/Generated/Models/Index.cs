@@ -15,7 +15,10 @@ namespace CognitiveSearch.Models
     /// <summary> Represents a search index definition, which describes the fields and search behavior of an index. </summary>
     public partial class Index
     {
-        /// <summary> Initializes a new instance of Index. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Index"/>. </summary>
         /// <param name="name"> The name of the index. </param>
         /// <param name="fields"> The fields of the index. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="fields"/> is null. </exception>
@@ -34,7 +37,7 @@ namespace CognitiveSearch.Models
             CharFilters = new ChangeTrackingList<CharFilter>();
         }
 
-        /// <summary> Initializes a new instance of Index. </summary>
+        /// <summary> Initializes a new instance of <see cref="Index"/>. </summary>
         /// <param name="name"> The name of the index. </param>
         /// <param name="fields"> The fields of the index. </param>
         /// <param name="scoringProfiles"> The scoring profiles for the index. </param>
@@ -68,7 +71,8 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="BM25Similarity"/> and <see cref="ClassicSimilarity"/>.
         /// </param>
         /// <param name="eTag"> The ETag of the index. </param>
-        internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, Similarity similarity, string eTag)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, Similarity similarity, string eTag, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Fields = fields;
@@ -83,6 +87,12 @@ namespace CognitiveSearch.Models
             EncryptionKey = encryptionKey;
             Similarity = similarity;
             ETag = eTag;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Index"/> for deserialization. </summary>
+        internal Index()
+        {
         }
 
         /// <summary> The name of the index. </summary>

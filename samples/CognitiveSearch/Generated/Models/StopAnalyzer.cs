@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Divides text at non-letters; Applies the lowercase and stopword token filters. This analyzer is implemented using Apache Lucene. </summary>
     public partial class StopAnalyzer : Analyzer
     {
-        /// <summary> Initializes a new instance of StopAnalyzer. </summary>
+        /// <summary> Initializes a new instance of <see cref="StopAnalyzer"/>. </summary>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public StopAnalyzer(string name) : base(name)
@@ -25,14 +25,20 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
         }
 
-        /// <summary> Initializes a new instance of StopAnalyzer. </summary>
+        /// <summary> Initializes a new instance of <see cref="StopAnalyzer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="stopwords"> A list of stopwords. </param>
-        internal StopAnalyzer(string odataType, string name, IList<string> stopwords) : base(odataType, name)
+        internal StopAnalyzer(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> stopwords) : base(odataType, name, serializedAdditionalRawData)
         {
             Stopwords = stopwords;
             OdataType = odataType ?? "#Microsoft.Azure.Search.StopAnalyzer";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="StopAnalyzer"/> for deserialization. </summary>
+        internal StopAnalyzer()
+        {
         }
 
         /// <summary> A list of stopwords. </summary>

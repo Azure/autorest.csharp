@@ -5,22 +5,26 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Defines a data deletion detection policy that implements a soft-deletion strategy. It determines whether an item should be deleted based on the value of a designated 'soft delete' column. </summary>
     public partial class SoftDeleteColumnDeletionDetectionPolicy : DataDeletionDetectionPolicy
     {
-        /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="SoftDeleteColumnDeletionDetectionPolicy"/>. </summary>
         public SoftDeleteColumnDeletionDetectionPolicy()
         {
             OdataType = "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
         }
 
-        /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="SoftDeleteColumnDeletionDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="softDeleteColumnName"> The name of the column to use for soft-deletion detection. </param>
         /// <param name="softDeleteMarkerValue"> The marker value that identifies an item as deleted. </param>
-        internal SoftDeleteColumnDeletionDetectionPolicy(string odataType, string softDeleteColumnName, string softDeleteMarkerValue) : base(odataType)
+        internal SoftDeleteColumnDeletionDetectionPolicy(string odataType, IDictionary<string, BinaryData> serializedAdditionalRawData, string softDeleteColumnName, string softDeleteMarkerValue) : base(odataType, serializedAdditionalRawData)
         {
             SoftDeleteColumnName = softDeleteColumnName;
             SoftDeleteMarkerValue = softDeleteMarkerValue;

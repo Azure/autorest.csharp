@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Defines a function that boosts scores based on the value of a date-time field. </summary>
     public partial class FreshnessScoringFunction : ScoringFunction
     {
-        /// <summary> Initializes a new instance of FreshnessScoringFunction. </summary>
+        /// <summary> Initializes a new instance of <see cref="FreshnessScoringFunction"/>. </summary>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="parameters"> Parameter values for the freshness scoring function. </param>
@@ -27,16 +28,22 @@ namespace CognitiveSearch.Models
             Type = "freshness";
         }
 
-        /// <summary> Initializes a new instance of FreshnessScoringFunction. </summary>
+        /// <summary> Initializes a new instance of <see cref="FreshnessScoringFunction"/>. </summary>
         /// <param name="type"> Indicates the type of function to use. Valid values include magnitude, freshness, distance, and tag. The function type must be lower case. </param>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="interpolation"> A value indicating how boosting will be interpolated across document scores; defaults to "Linear". </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Parameter values for the freshness scoring function. </param>
-        internal FreshnessScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, FreshnessScoringParameters parameters) : base(type, fieldName, boost, interpolation)
+        internal FreshnessScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, IDictionary<string, BinaryData> serializedAdditionalRawData, FreshnessScoringParameters parameters) : base(type, fieldName, boost, interpolation, serializedAdditionalRawData)
         {
             Parameters = parameters;
             Type = type ?? "freshness";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FreshnessScoringFunction"/> for deserialization. </summary>
+        internal FreshnessScoringFunction()
+        {
         }
 
         /// <summary> Parameter values for the freshness scoring function. </summary>

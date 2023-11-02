@@ -15,13 +15,10 @@ namespace Payload.ContentNegotiation.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.PngImageAsJson"/>. </summary>
         /// <param name="content"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.PngImageAsJson"/> instance for mocking. </returns>
-        public static PngImageAsJson PngImageAsJson(BinaryData content = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static PngImageAsJson PngImageAsJson(BinaryData content = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new PngImageAsJson(content, serializedAdditionalRawData);
+            return new PngImageAsJson(content, new Dictionary<string, BinaryData>());
         }
     }
 }

@@ -6,62 +6,78 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexerLimits : IUtf8JsonSerializable, IModelJsonSerializable<IndexerLimits>
+    public partial class IndexerLimits : IUtf8JsonSerializable, IJsonModel<IndexerLimits>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IndexerLimits>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerLimits>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<IndexerLimits>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<IndexerLimits>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaxRunTime))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("maxRunTime"u8);
-                writer.WriteStringValue(MaxRunTime.Value, "P");
+                if (Optional.IsDefined(MaxRunTime))
+                {
+                    writer.WritePropertyName("maxRunTime"u8);
+                    writer.WriteStringValue(MaxRunTime.Value, "P");
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaxDocumentExtractionSize))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("maxDocumentExtractionSize"u8);
-                writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
+                if (Optional.IsDefined(MaxDocumentExtractionSize))
+                {
+                    writer.WritePropertyName("maxDocumentExtractionSize"u8);
+                    writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaxDocumentContentCharactersToExtract))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("maxDocumentContentCharactersToExtract"u8);
-                writer.WriteNumberValue(MaxDocumentContentCharactersToExtract.Value);
+                if (Optional.IsDefined(MaxDocumentContentCharactersToExtract))
+                {
+                    writer.WritePropertyName("maxDocumentContentCharactersToExtract"u8);
+                    writer.WriteNumberValue(MaxDocumentContentCharactersToExtract.Value);
+                }
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        IndexerLimits IModelJsonSerializable<IndexerLimits>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        IndexerLimits IJsonModel<IndexerLimits>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeIndexerLimits(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<IndexerLimits>.Serialize(ModelSerializerOptions options)
+        internal static IndexerLimits DeserializeIndexerLimits(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        IndexerLimits IModelSerializable<IndexerLimits>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeIndexerLimits(document.RootElement, options);
-        }
-
-        internal static IndexerLimits DeserializeIndexerLimits(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -70,6 +86,8 @@ namespace CognitiveSearch.Models
             Optional<TimeSpan> maxRunTime = default;
             Optional<long> maxDocumentExtractionSize = default;
             Optional<long> maxDocumentContentCharactersToExtract = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxRunTime"u8))
@@ -99,8 +117,36 @@ namespace CognitiveSearch.Models
                     maxDocumentContentCharactersToExtract = property.Value.GetInt64();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new IndexerLimits(Optional.ToNullable(maxRunTime), Optional.ToNullable(maxDocumentExtractionSize), Optional.ToNullable(maxDocumentContentCharactersToExtract));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new IndexerLimits(Optional.ToNullable(maxRunTime), Optional.ToNullable(maxDocumentExtractionSize), Optional.ToNullable(maxDocumentContentCharactersToExtract), serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<IndexerLimits>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        IndexerLimits IModel<IndexerLimits>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeIndexerLimits(document.RootElement, options);
         }
     }
 }

@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class AccessCondition
     {
-        /// <summary> Initializes a new instance of AccessCondition. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AccessCondition"/>. </summary>
         public AccessCondition()
         {
         }
 
-        /// <summary> Initializes a new instance of AccessCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessCondition"/>. </summary>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        internal AccessCondition(string ifMatch, string ifNoneMatch)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessCondition(string ifMatch, string ifNoneMatch, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IfMatch = ifMatch;
             IfNoneMatch = ifNoneMatch;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </summary>

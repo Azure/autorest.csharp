@@ -15,13 +15,10 @@ namespace _Type.Model.Usage.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.OutputRecord"/>. </summary>
         /// <param name="requiredProp"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.OutputRecord"/> instance for mocking. </returns>
-        public static OutputRecord OutputRecord(string requiredProp = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static OutputRecord OutputRecord(string requiredProp = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new OutputRecord(requiredProp, serializedAdditionalRawData);
+            return new OutputRecord(requiredProp, new Dictionary<string, BinaryData>());
         }
     }
 }

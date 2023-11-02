@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Parameters.Spread.Models
 {
-    internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable, IModelJsonSerializable<SpreadWithMultipleParametersRequest>
+    internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable, IJsonModel<SpreadWithMultipleParametersRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SpreadWithMultipleParametersRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadWithMultipleParametersRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<SpreadWithMultipleParametersRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<SpreadWithMultipleParametersRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("prop1"u8);
@@ -33,7 +34,7 @@ namespace Parameters.Spread.Models
             writer.WriteStringValue(Prop5);
             writer.WritePropertyName("prop6"u8);
             writer.WriteStringValue(Prop6);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -41,38 +42,31 @@ namespace Parameters.Spread.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        SpreadWithMultipleParametersRequest IModelJsonSerializable<SpreadWithMultipleParametersRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SpreadWithMultipleParametersRequest IJsonModel<SpreadWithMultipleParametersRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SpreadWithMultipleParametersRequest>.Serialize(ModelSerializerOptions options)
+        internal static SpreadWithMultipleParametersRequest DeserializeSpreadWithMultipleParametersRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SpreadWithMultipleParametersRequest IModelSerializable<SpreadWithMultipleParametersRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
-        }
-
-        internal static SpreadWithMultipleParametersRequest DeserializeSpreadWithMultipleParametersRequest(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -86,45 +80,68 @@ namespace Parameters.Spread.Models
             string prop6 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("prop1"u8))
                 {
-                    if (property.NameEquals("prop1"u8))
-                    {
-                        prop1 = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("prop2"u8))
-                    {
-                        prop2 = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("prop3"u8))
-                    {
-                        prop3 = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("prop4"u8))
-                    {
-                        prop4 = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("prop5"u8))
-                    {
-                        prop5 = property.Value.GetString();
-                        continue;
-                    }
-                    if (property.NameEquals("prop6"u8))
-                    {
-                        prop6 = property.Value.GetString();
-                        continue;
-                    }
+                    prop1 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop2"u8))
+                {
+                    prop2 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop3"u8))
+                {
+                    prop3 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop4"u8))
+                {
+                    prop4 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop5"u8))
+                {
+                    prop5 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop6"u8))
+                {
+                    prop6 = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<SpreadWithMultipleParametersRequest>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        SpreadWithMultipleParametersRequest IModel<SpreadWithMultipleParametersRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -132,13 +149,13 @@ namespace Parameters.Spread.Models
         internal static SpreadWithMultipleParametersRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

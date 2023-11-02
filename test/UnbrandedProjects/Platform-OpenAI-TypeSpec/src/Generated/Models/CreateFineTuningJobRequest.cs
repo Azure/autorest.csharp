@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateFineTuningJobRequest. </summary>
     public partial class CreateFineTuningJobRequest
     {
-        /// <summary> Initializes a new instance of CreateFineTuningJobRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
         ///
@@ -32,9 +36,10 @@ namespace OpenAI.Models
 
             TrainingFile = trainingFile;
             Model = model;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateFineTuningJobRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
         ///
@@ -68,13 +73,20 @@ namespace OpenAI.Models
         /// For example, a `suffix` of "custom-model-name" would produce a model name like
         /// `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
         /// </param>
-        internal CreateFineTuningJobRequest(string trainingFile, string validationFile, CreateFineTuningJobRequestModel model, CreateHyperparameters hyperparameters, string suffix)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateFineTuningJobRequest(string trainingFile, string validationFile, CreateFineTuningJobRequestModel model, CreateHyperparameters hyperparameters, string suffix, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TrainingFile = trainingFile;
             ValidationFile = validationFile;
             Model = model;
             Hyperparameters = hyperparameters;
             Suffix = suffix;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequest"/> for deserialization. </summary>
+        internal CreateFineTuningJobRequest()
+        {
         }
 
         /// <summary>

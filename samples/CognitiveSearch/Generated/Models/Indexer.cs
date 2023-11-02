@@ -14,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> Represents an indexer. </summary>
     public partial class Indexer
     {
-        /// <summary> Initializes a new instance of Indexer. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Indexer"/>. </summary>
         /// <param name="name"> The name of the indexer. </param>
         /// <param name="dataSourceName"> The name of the datasource from which this indexer reads data. </param>
         /// <param name="targetIndexName"> The name of the index to which this indexer writes data. </param>
@@ -32,7 +35,7 @@ namespace CognitiveSearch.Models
             OutputFieldMappings = new ChangeTrackingList<FieldMapping>();
         }
 
-        /// <summary> Initializes a new instance of Indexer. </summary>
+        /// <summary> Initializes a new instance of <see cref="Indexer"/>. </summary>
         /// <param name="name"> The name of the indexer. </param>
         /// <param name="description"> The description of the indexer. </param>
         /// <param name="dataSourceName"> The name of the datasource from which this indexer reads data. </param>
@@ -44,7 +47,8 @@ namespace CognitiveSearch.Models
         /// <param name="outputFieldMappings"> Output field mappings are applied after enrichment and immediately before indexing. </param>
         /// <param name="isDisabled"> A value indicating whether the indexer is disabled. Default is false. </param>
         /// <param name="eTag"> The ETag of the Indexer. </param>
-        internal Indexer(string name, string description, string dataSourceName, string skillsetName, string targetIndexName, IndexingSchedule schedule, IndexingParameters parameters, IList<FieldMapping> fieldMappings, IList<FieldMapping> outputFieldMappings, bool? isDisabled, string eTag)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Indexer(string name, string description, string dataSourceName, string skillsetName, string targetIndexName, IndexingSchedule schedule, IndexingParameters parameters, IList<FieldMapping> fieldMappings, IList<FieldMapping> outputFieldMappings, bool? isDisabled, string eTag, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Description = description;
@@ -57,6 +61,12 @@ namespace CognitiveSearch.Models
             OutputFieldMappings = outputFieldMappings;
             IsDisabled = isDisabled;
             ETag = eTag;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Indexer"/> for deserialization. </summary>
+        internal Indexer()
+        {
         }
 
         /// <summary> The name of the indexer. </summary>

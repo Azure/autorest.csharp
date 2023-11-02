@@ -7,21 +7,22 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
-    public partial class UserOrder : IUtf8JsonSerializable, IModelJsonSerializable<UserOrder>
+    public partial class UserOrder : IUtf8JsonSerializable, IJsonModel<UserOrder>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UserOrder>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserOrder>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<UserOrder>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<UserOrder>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id);
@@ -30,7 +31,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             writer.WriteNumberValue(UserId);
             writer.WritePropertyName("detail"u8);
             writer.WriteStringValue(Detail);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -38,38 +39,31 @@ namespace _Specs_.Azure.Core.Basic.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        UserOrder IModelJsonSerializable<UserOrder>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        UserOrder IJsonModel<UserOrder>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeUserOrder(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UserOrder>.Serialize(ModelSerializerOptions options)
+        internal static UserOrder DeserializeUserOrder(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UserOrder IModelSerializable<UserOrder>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUserOrder(document.RootElement, options);
-        }
-
-        internal static UserOrder DeserializeUserOrder(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -80,30 +74,53 @@ namespace _Specs_.Azure.Core.Basic.Models
             string detail = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            if (options.Format == ModelSerializerFormat.Json)
+            foreach (var property in element.EnumerateObject())
             {
-                foreach (var property in element.EnumerateObject())
+                if (property.NameEquals("id"u8))
                 {
-                    if (property.NameEquals("id"u8))
-                    {
-                        id = property.Value.GetInt32();
-                        continue;
-                    }
-                    if (property.NameEquals("userId"u8))
-                    {
-                        userId = property.Value.GetInt32();
-                        continue;
-                    }
-                    if (property.NameEquals("detail"u8))
-                    {
-                        detail = property.Value.GetString();
-                        continue;
-                    }
+                    id = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("userId"u8))
+                {
+                    userId = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("detail"u8))
+                {
+                    detail = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
-                serializedAdditionalRawData = additionalPropertiesDictionary;
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UserOrder(id, userId, detail, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<UserOrder>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        UserOrder IModel<UserOrder>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUserOrder(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -111,13 +128,13 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal static UserOrder FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUserOrder(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeUserOrder(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

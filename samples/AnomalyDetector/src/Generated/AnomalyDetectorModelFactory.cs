@@ -17,13 +17,10 @@ namespace AnomalyDetector.Models
         /// <summary> Initializes a new instance of <see cref="Models.TimeSeriesPoint"/>. </summary>
         /// <param name="timestamp"> Optional argument, timestamp of a data point (ISO8601 format). </param>
         /// <param name="value"> The measurement of that point, should be float. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.TimeSeriesPoint"/> instance for mocking. </returns>
-        public static TimeSeriesPoint TimeSeriesPoint(DateTimeOffset? timestamp = null, float value = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static TimeSeriesPoint TimeSeriesPoint(DateTimeOffset? timestamp = null, float value = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new TimeSeriesPoint(timestamp, value, serializedAdditionalRawData);
+            return new TimeSeriesPoint(timestamp, value, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateEntireDetectionResult"/>. </summary>
@@ -71,9 +68,8 @@ namespace AnomalyDetector.Models
         /// The severity score for each input point. The larger the value is, the more
         /// sever the anomaly is. For normal points, the "severity" is always 0.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.UnivariateEntireDetectionResult"/> instance for mocking. </returns>
-        public static UnivariateEntireDetectionResult UnivariateEntireDetectionResult(int period = default, IEnumerable<float> expectedValues = null, IEnumerable<float> upperMargins = null, IEnumerable<float> lowerMargins = null, IEnumerable<bool> isAnomaly = null, IEnumerable<bool> isNegativeAnomaly = null, IEnumerable<bool> isPositiveAnomaly = null, IEnumerable<float> severity = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static UnivariateEntireDetectionResult UnivariateEntireDetectionResult(int period = default, IEnumerable<float> expectedValues = null, IEnumerable<float> upperMargins = null, IEnumerable<float> lowerMargins = null, IEnumerable<bool> isAnomaly = null, IEnumerable<bool> isNegativeAnomaly = null, IEnumerable<bool> isPositiveAnomaly = null, IEnumerable<float> severity = null)
         {
             expectedValues ??= new List<float>();
             upperMargins ??= new List<float>();
@@ -82,9 +78,8 @@ namespace AnomalyDetector.Models
             isNegativeAnomaly ??= new List<bool>();
             isPositiveAnomaly ??= new List<bool>();
             severity ??= new List<float>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new UnivariateEntireDetectionResult(period, expectedValues?.ToList(), upperMargins?.ToList(), lowerMargins?.ToList(), isAnomaly?.ToList(), isNegativeAnomaly?.ToList(), isPositiveAnomaly?.ToList(), severity?.ToList(), serializedAdditionalRawData);
+            return new UnivariateEntireDetectionResult(period, expectedValues?.ToList(), upperMargins?.ToList(), lowerMargins?.ToList(), isAnomaly?.ToList(), isNegativeAnomaly?.ToList(), isPositiveAnomaly?.ToList(), severity?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateLastDetectionResult"/>. </summary>
@@ -122,13 +117,10 @@ namespace AnomalyDetector.Models
         /// The severity score for the last input point. The larger the value is, the more
         /// sever the anomaly is. For normal points, the "severity" is always 0.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.UnivariateLastDetectionResult"/> instance for mocking. </returns>
-        public static UnivariateLastDetectionResult UnivariateLastDetectionResult(int period = default, int suggestedWindow = default, float expectedValue = default, float upperMargin = default, float lowerMargin = default, bool isAnomaly = default, bool isNegativeAnomaly = default, bool isPositiveAnomaly = default, float? severity = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static UnivariateLastDetectionResult UnivariateLastDetectionResult(int period = default, int suggestedWindow = default, float expectedValue = default, float upperMargin = default, float lowerMargin = default, bool isAnomaly = default, bool isNegativeAnomaly = default, bool isPositiveAnomaly = default, float? severity = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity, serializedAdditionalRawData);
+            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateChangePointDetectionOptions"/>. </summary>
@@ -158,14 +150,12 @@ namespace AnomalyDetector.Models
         /// value is, the larger the trend error will be which means less change point will
         /// be accepted.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.UnivariateChangePointDetectionOptions"/> instance for mocking. </returns>
-        public static UnivariateChangePointDetectionOptions UnivariateChangePointDetectionOptions(IEnumerable<TimeSeriesPoint> series = null, TimeGranularity granularity = default, int? customInterval = null, int? period = null, int? stableTrendWindow = null, float? threshold = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static UnivariateChangePointDetectionOptions UnivariateChangePointDetectionOptions(IEnumerable<TimeSeriesPoint> series = null, TimeGranularity granularity = default, int? customInterval = null, int? period = null, int? stableTrendWindow = null, float? threshold = null)
         {
             series ??= new List<TimeSeriesPoint>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new UnivariateChangePointDetectionOptions(series?.ToList(), granularity, customInterval, period, stableTrendWindow, threshold, serializedAdditionalRawData);
+            return new UnivariateChangePointDetectionOptions(series?.ToList(), granularity, customInterval, period, stableTrendWindow, threshold, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateChangePointDetectionResult"/>. </summary>
@@ -179,29 +169,25 @@ namespace AnomalyDetector.Models
         /// array is consistent with the input series.
         /// </param>
         /// <param name="confidenceScores"> the change point confidence of each point. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.UnivariateChangePointDetectionResult"/> instance for mocking. </returns>
-        public static UnivariateChangePointDetectionResult UnivariateChangePointDetectionResult(int? period = null, IEnumerable<bool> isChangePoint = null, IEnumerable<float> confidenceScores = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static UnivariateChangePointDetectionResult UnivariateChangePointDetectionResult(int? period = null, IEnumerable<bool> isChangePoint = null, IEnumerable<float> confidenceScores = null)
         {
             isChangePoint ??= new List<bool>();
             confidenceScores ??= new List<float>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new UnivariateChangePointDetectionResult(period, isChangePoint?.ToList(), confidenceScores?.ToList(), serializedAdditionalRawData);
+            return new UnivariateChangePointDetectionResult(period, isChangePoint?.ToList(), confidenceScores?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MultivariateDetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         /// <param name="summary"> Multivariate anomaly detection status. </param>
         /// <param name="results"> Detection result for each timestamp. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.MultivariateDetectionResult"/> instance for mocking. </returns>
-        public static MultivariateDetectionResult MultivariateDetectionResult(Guid resultId = default, MultivariateBatchDetectionResultSummary summary = null, IEnumerable<AnomalyState> results = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static MultivariateDetectionResult MultivariateDetectionResult(Guid resultId = default, MultivariateBatchDetectionResultSummary summary = null, IEnumerable<AnomalyState> results = null)
         {
             results ??= new List<AnomalyState>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new MultivariateDetectionResult(resultId, summary, results?.ToList(), serializedAdditionalRawData);
+            return new MultivariateDetectionResult(resultId, summary, results?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MultivariateBatchDetectionResultSummary"/>. </summary>
@@ -212,29 +198,25 @@ namespace AnomalyDetector.Models
         /// Detection request for batch inference. This is an asynchronous inference which
         /// will need another API to get detection results.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.MultivariateBatchDetectionResultSummary"/> instance for mocking. </returns>
-        public static MultivariateBatchDetectionResultSummary MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status = default, IEnumerable<ErrorResponse> errors = null, IEnumerable<VariableState> variableStates = null, MultivariateBatchDetectionOptions setupInfo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static MultivariateBatchDetectionResultSummary MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status = default, IEnumerable<ErrorResponse> errors = null, IEnumerable<VariableState> variableStates = null, MultivariateBatchDetectionOptions setupInfo = null)
         {
             errors ??= new List<ErrorResponse>();
             variableStates ??= new List<VariableState>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo, serializedAdditionalRawData);
+            return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyState"/>. </summary>
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
         /// <param name="value"> The detailed value of this anomalous timestamp. </param>
         /// <param name="errors"> Error message for the current timestamp. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.AnomalyState"/> instance for mocking. </returns>
-        public static AnomalyState AnomalyState(DateTimeOffset timestamp = default, AnomalyValue value = null, IEnumerable<ErrorResponse> errors = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static AnomalyState AnomalyState(DateTimeOffset timestamp = default, AnomalyValue value = null, IEnumerable<ErrorResponse> errors = null)
         {
             errors ??= new List<ErrorResponse>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new AnomalyState(timestamp, value, errors?.ToList(), serializedAdditionalRawData);
+            return new AnomalyState(timestamp, value, errors?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyValue"/>. </summary>
@@ -248,14 +230,12 @@ namespace AnomalyDetector.Models
         /// well.
         /// </param>
         /// <param name="interpretation"> Interpretation of this anomalous timestamp. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.AnomalyValue"/> instance for mocking. </returns>
-        public static AnomalyValue AnomalyValue(bool isAnomaly = default, float severity = default, float score = default, IEnumerable<AnomalyInterpretation> interpretation = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static AnomalyValue AnomalyValue(bool isAnomaly = default, float severity = default, float score = default, IEnumerable<AnomalyInterpretation> interpretation = null)
         {
             interpretation ??= new List<AnomalyInterpretation>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList(), serializedAdditionalRawData);
+            return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyInterpretation"/>. </summary>
@@ -265,25 +245,20 @@ namespace AnomalyDetector.Models
         /// number between 0 and 1.
         /// </param>
         /// <param name="correlationChanges"> Correlation changes among the anomalous variables. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.AnomalyInterpretation"/> instance for mocking. </returns>
-        public static AnomalyInterpretation AnomalyInterpretation(string variable = null, float? contributionScore = null, CorrelationChanges correlationChanges = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static AnomalyInterpretation AnomalyInterpretation(string variable = null, float? contributionScore = null, CorrelationChanges correlationChanges = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new AnomalyInterpretation(variable, contributionScore, correlationChanges, serializedAdditionalRawData);
+            return new AnomalyInterpretation(variable, contributionScore, correlationChanges, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CorrelationChanges"/>. </summary>
         /// <param name="changedVariables"> The correlated variables that have correlation changes under an anomaly. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.CorrelationChanges"/> instance for mocking. </returns>
-        public static CorrelationChanges CorrelationChanges(IEnumerable<string> changedVariables = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static CorrelationChanges CorrelationChanges(IEnumerable<string> changedVariables = null)
         {
             changedVariables ??= new List<string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new CorrelationChanges(changedVariables?.ToList(), serializedAdditionalRawData);
+            return new CorrelationChanges(changedVariables?.ToList(), new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelInfo"/>. </summary>
@@ -316,14 +291,12 @@ namespace AnomalyDetector.Models
         /// <param name="status"> Model status. One of CREATED, RUNNING, READY, and FAILED. </param>
         /// <param name="errors"> Error messages when failed to create a model. </param>
         /// <param name="diagnosticsInfo"> Diagnostics information to help inspect the states of model or variable. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ModelInfo"/> instance for mocking. </returns>
-        public static ModelInfo ModelInfo(string dataSource = null, DataSchema? dataSchema = null, DateTimeOffset startTime = default, DateTimeOffset endTime = default, string displayName = null, int? slidingWindow = null, AlignPolicy alignPolicy = null, ModelStatus? status = null, IEnumerable<ErrorResponse> errors = null, DiagnosticsInfo diagnosticsInfo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static ModelInfo ModelInfo(string dataSource = null, DataSchema? dataSchema = null, DateTimeOffset startTime = default, DateTimeOffset endTime = default, string displayName = null, int? slidingWindow = null, AlignPolicy alignPolicy = null, ModelStatus? status = null, IEnumerable<ErrorResponse> errors = null, DiagnosticsInfo diagnosticsInfo = null)
         {
             errors ??= new List<ErrorResponse>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new ModelInfo(dataSource, dataSchema, startTime, endTime, displayName, slidingWindow, alignPolicy, status, errors?.ToList(), diagnosticsInfo, serializedAdditionalRawData);
+            return new ModelInfo(dataSource, dataSchema, startTime, endTime, displayName, slidingWindow, alignPolicy, status, errors?.ToList(), diagnosticsInfo, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyDetectionModel"/>. </summary>
@@ -334,27 +307,22 @@ namespace AnomalyDetector.Models
         /// Training result of a model including its status, errors and diagnostics
         /// information.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.AnomalyDetectionModel"/> instance for mocking. </returns>
-        public static AnomalyDetectionModel AnomalyDetectionModel(Guid modelId = default, DateTimeOffset createdTime = default, DateTimeOffset lastUpdatedTime = default, ModelInfo modelInfo = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static AnomalyDetectionModel AnomalyDetectionModel(Guid modelId = default, DateTimeOffset createdTime = default, DateTimeOffset lastUpdatedTime = default, ModelInfo modelInfo = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo, serializedAdditionalRawData);
+            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MultivariateLastDetectionResult"/>. </summary>
         /// <param name="variableStates"> Variable Status. </param>
         /// <param name="results"> Anomaly status and information. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.MultivariateLastDetectionResult"/> instance for mocking. </returns>
-        public static MultivariateLastDetectionResult MultivariateLastDetectionResult(IEnumerable<VariableState> variableStates = null, IEnumerable<AnomalyState> results = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static MultivariateLastDetectionResult MultivariateLastDetectionResult(IEnumerable<VariableState> variableStates = null, IEnumerable<AnomalyState> results = null)
         {
             variableStates ??= new List<VariableState>();
             results ??= new List<AnomalyState>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new MultivariateLastDetectionResult(variableStates?.ToList(), results?.ToList(), serializedAdditionalRawData);
+            return new MultivariateLastDetectionResult(variableStates?.ToList(), results?.ToList(), new Dictionary<string, BinaryData>());
         }
     }
 }

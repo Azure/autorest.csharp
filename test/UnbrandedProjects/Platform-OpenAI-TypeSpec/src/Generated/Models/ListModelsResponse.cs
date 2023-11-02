@@ -12,7 +12,10 @@ namespace OpenAI.Models
     /// <summary> The ListModelsResponse. </summary>
     public partial class ListModelsResponse
     {
-        /// <summary> Initializes a new instance of ListModelsResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ListModelsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="object"/> or <paramref name="data"/> is null. </exception>
@@ -23,15 +26,23 @@ namespace OpenAI.Models
 
             Object = @object;
             Data = data.ToList();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ListModelsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListModelsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
-        internal ListModelsResponse(string @object, IReadOnlyList<Model> data)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListModelsResponse(string @object, IReadOnlyList<Model> data, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Object = @object;
             Data = data;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ListModelsResponse"/> for deserialization. </summary>
+        internal ListModelsResponse()
+        {
         }
 
         /// <summary> Gets the object. </summary>

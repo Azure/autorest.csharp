@@ -4,19 +4,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Text.Json;
-using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace OpenAI.Models
 {
-    public partial class CreateImageVariationRequest : IUtf8JsonWriteable, IModelJsonSerializable<CreateImageVariationRequest>
+    public partial class CreateImageVariationRequest : IUtf8JsonWriteable, IJsonModel<CreateImageVariationRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CreateImageVariationRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateImageVariationRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<CreateImageVariationRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<CreateImageVariationRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("image"u8);
@@ -48,7 +47,7 @@ namespace OpenAI.Models
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,38 +55,31 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        CreateImageVariationRequest IModelJsonSerializable<CreateImageVariationRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        CreateImageVariationRequest IJsonModel<CreateImageVariationRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeCreateImageVariationRequest(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CreateImageVariationRequest>.Serialize(ModelSerializerOptions options)
+        internal static CreateImageVariationRequest DeserializeCreateImageVariationRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CreateImageVariationRequest IModelSerializable<CreateImageVariationRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCreateImageVariationRequest(document.RootElement, options);
-        }
-
-        internal static CreateImageVariationRequest DeserializeCreateImageVariationRequest(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -140,7 +132,7 @@ namespace OpenAI.Models
                     user = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -149,18 +141,41 @@ namespace OpenAI.Models
             return new CreateImageVariationRequest(image, OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(size), OptionalProperty.ToNullable(responseFormat), user.Value, serializedAdditionalRawData);
         }
 
+        BinaryData IModel<CreateImageVariationRequest>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        CreateImageVariationRequest IModel<CreateImageVariationRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCreateImageVariationRequest(document.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateImageVariationRequest FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateImageVariationRequest(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeCreateImageVariationRequest(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
         internal virtual RequestBody ToRequestBody()
         {
-            return RequestContent.CreateFromStream(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

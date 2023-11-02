@@ -7,20 +7,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SuggestDocumentsResult : IUtf8JsonSerializable, IModelJsonSerializable<SuggestDocumentsResult>
+    public partial class SuggestDocumentsResult : IUtf8JsonSerializable, IJsonModel<SuggestDocumentsResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SuggestDocumentsResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SuggestDocumentsResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<SuggestDocumentsResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<SuggestDocumentsResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -30,39 +31,47 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Coverage))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("@search.coverage"u8);
-                writer.WriteNumberValue(Coverage.Value);
+                if (Optional.IsDefined(Coverage))
+                {
+                    writer.WritePropertyName("@search.coverage"u8);
+                    writer.WriteNumberValue(Coverage.Value);
+                }
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        SuggestDocumentsResult IModelJsonSerializable<SuggestDocumentsResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SuggestDocumentsResult IJsonModel<SuggestDocumentsResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSuggestDocumentsResult(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SuggestDocumentsResult>.Serialize(ModelSerializerOptions options)
+        internal static SuggestDocumentsResult DeserializeSuggestDocumentsResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SuggestDocumentsResult IModelSerializable<SuggestDocumentsResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSuggestDocumentsResult(document.RootElement, options);
-        }
-
-        internal static SuggestDocumentsResult DeserializeSuggestDocumentsResult(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -70,6 +79,8 @@ namespace CognitiveSearch.Models
             }
             IReadOnlyList<SuggestResult> value = default;
             Optional<double> searchCoverage = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -91,8 +102,36 @@ namespace CognitiveSearch.Models
                     searchCoverage = property.Value.GetDouble();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SuggestDocumentsResult(value, Optional.ToNullable(searchCoverage));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SuggestDocumentsResult(value, Optional.ToNullable(searchCoverage), serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<SuggestDocumentsResult>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        SuggestDocumentsResult IModel<SuggestDocumentsResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSuggestDocumentsResult(document.RootElement, options);
         }
     }
 }

@@ -6,25 +6,26 @@
 #nullable disable
 
 using System;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    public partial class PollutedPet : IUtf8JsonSerializable, IModelJsonSerializable<PollutedPet>
+    public partial class PollutedPet : IUtf8JsonSerializable, IJsonModel<PollutedPet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PollutedPet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PollutedPet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<PollutedPet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<PollutedPet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -32,24 +33,31 @@ namespace ConfidentLevelsInTsp.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        PollutedPet IModelJsonSerializable<PollutedPet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PollutedPet IJsonModel<PollutedPet>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializePollutedPet(document.RootElement, options);
         }
 
-        internal static PollutedPet DeserializePollutedPet(JsonElement element, ModelSerializerOptions options = null)
+        internal static PollutedPet DeserializePollutedPet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -66,16 +74,24 @@ namespace ConfidentLevelsInTsp.Models
             return UnknownPollutedPet.DeserializeUnknownPollutedPet(element);
         }
 
-        BinaryData IModelSerializable<PollutedPet>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<PollutedPet>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        PollutedPet IModelSerializable<PollutedPet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        PollutedPet IModel<PollutedPet>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializePollutedPet(document.RootElement, options);
@@ -86,13 +102,13 @@ namespace ConfidentLevelsInTsp.Models
         internal static PollutedPet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePollutedPet(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializePollutedPet(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

@@ -5,20 +5,24 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Defines a data change detection policy that captures changes using the Integrated Change Tracking feature of Azure SQL Database. </summary>
     public partial class SqlIntegratedChangeTrackingPolicy : DataChangeDetectionPolicy
     {
-        /// <summary> Initializes a new instance of SqlIntegratedChangeTrackingPolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="SqlIntegratedChangeTrackingPolicy"/>. </summary>
         public SqlIntegratedChangeTrackingPolicy()
         {
             OdataType = "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
         }
 
-        /// <summary> Initializes a new instance of SqlIntegratedChangeTrackingPolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="SqlIntegratedChangeTrackingPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
-        internal SqlIntegratedChangeTrackingPolicy(string odataType) : base(odataType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SqlIntegratedChangeTrackingPolicy(string odataType, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
         {
             OdataType = odataType ?? "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
         }

@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    public partial class DerivedModelWithUnion : IUtf8JsonSerializable, IModelJsonSerializable<DerivedModelWithUnion>
+    public partial class DerivedModelWithUnion : IUtf8JsonSerializable, IJsonModel<DerivedModelWithUnion>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DerivedModelWithUnion>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModelWithUnion>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DerivedModelWithUnion>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<DerivedModelWithUnion>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("unionProperty"u8);
@@ -37,7 +38,7 @@ namespace ConfidentLevelsInTsp.Models
                 writer.WritePropertyName("size"u8);
                 writer.WriteNumberValue(Size.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -45,24 +46,31 @@ namespace ConfidentLevelsInTsp.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        DerivedModelWithUnion IModelJsonSerializable<DerivedModelWithUnion>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DerivedModelWithUnion IJsonModel<DerivedModelWithUnion>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDerivedModelWithUnion(document.RootElement, options);
         }
 
-        internal static DerivedModelWithUnion DeserializeDerivedModelWithUnion(JsonElement element, ModelSerializerOptions options = null)
+        internal static DerivedModelWithUnion DeserializeDerivedModelWithUnion(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +102,7 @@ namespace ConfidentLevelsInTsp.Models
                     size = property.Value.GetDouble();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,16 +111,24 @@ namespace ConfidentLevelsInTsp.Models
             return new DerivedModelWithUnion(name, Optional.ToNullable(size), serializedAdditionalRawData, unionProperty);
         }
 
-        BinaryData IModelSerializable<DerivedModelWithUnion>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<DerivedModelWithUnion>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        DerivedModelWithUnion IModelSerializable<DerivedModelWithUnion>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        DerivedModelWithUnion IModel<DerivedModelWithUnion>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDerivedModelWithUnion(document.RootElement, options);
@@ -123,13 +139,13 @@ namespace ConfidentLevelsInTsp.Models
         internal static new DerivedModelWithUnion FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithUnion(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeDerivedModelWithUnion(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

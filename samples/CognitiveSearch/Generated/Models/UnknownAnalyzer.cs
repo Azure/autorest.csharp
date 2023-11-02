@@ -5,17 +5,26 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownAnalyzer. </summary>
     internal partial class UnknownAnalyzer : Analyzer
     {
-        /// <summary> Initializes a new instance of UnknownAnalyzer. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownAnalyzer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal UnknownAnalyzer(string odataType, string name) : base(odataType, name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownAnalyzer(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             OdataType = odataType ?? "Unknown";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownAnalyzer"/> for deserialization. </summary>
+        internal UnknownAnalyzer()
+        {
         }
     }
 }

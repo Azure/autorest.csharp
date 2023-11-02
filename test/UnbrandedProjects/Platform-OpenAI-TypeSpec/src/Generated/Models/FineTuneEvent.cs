@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The FineTuneEvent. </summary>
     public partial class FineTuneEvent
     {
-        /// <summary> Initializes a new instance of FineTuneEvent. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FineTuneEvent"/>. </summary>
         /// <param name="object"></param>
         /// <param name="createdAt"></param>
         /// <param name="level"></param>
@@ -26,6 +30,27 @@ namespace OpenAI.Models
             CreatedAt = createdAt;
             Level = level;
             Message = message;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FineTuneEvent"/>. </summary>
+        /// <param name="object"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="level"></param>
+        /// <param name="message"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FineTuneEvent(string @object, DateTimeOffset createdAt, string level, string message, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Object = @object;
+            CreatedAt = createdAt;
+            Level = level;
+            Message = message;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FineTuneEvent"/> for deserialization. </summary>
+        internal FineTuneEvent()
+        {
         }
 
         /// <summary> Gets the object. </summary>

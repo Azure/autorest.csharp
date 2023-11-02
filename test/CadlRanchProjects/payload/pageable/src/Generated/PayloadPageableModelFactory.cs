@@ -16,13 +16,10 @@ namespace Payload.Pageable.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
         /// <param name="name"> User name. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
-        public static User User(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static User User(string name = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new User(name, serializedAdditionalRawData);
+            return new User(name, new Dictionary<string, BinaryData>());
         }
     }
 }

@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateTranslationResponse. </summary>
     public partial class CreateTranslationResponse
     {
-        /// <summary> Initializes a new instance of CreateTranslationResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateTranslationResponse"/>. </summary>
         /// <param name="text"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal CreateTranslationResponse(string text)
@@ -18,6 +22,21 @@ namespace OpenAI.Models
             ClientUtilities.AssertNotNull(text, nameof(text));
 
             Text = text;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateTranslationResponse"/>. </summary>
+        /// <param name="text"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateTranslationResponse(string text, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Text = text;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateTranslationResponse"/> for deserialization. </summary>
+        internal CreateTranslationResponse()
+        {
         }
 
         /// <summary> Gets the text. </summary>

@@ -13,7 +13,10 @@ namespace OpenAI.Models
     [Obsolete("deprecated")]
     public partial class CreateEditResponse
     {
-        /// <summary> Initializes a new instance of CreateEditResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/>. </summary>
         /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
         /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
@@ -26,19 +29,27 @@ namespace OpenAI.Models
             Created = created;
             Choices = choices.ToList();
             Usage = usage;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateEditResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/>. </summary>
         /// <param name="object"> The object type, which is always `edit`. </param>
         /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
         /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
-        internal CreateEditResponse(CreateEditResponseObject @object, DateTimeOffset created, IReadOnlyList<CreateEditResponseChoice> choices, CompletionUsage usage)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateEditResponse(CreateEditResponseObject @object, DateTimeOffset created, IReadOnlyList<CreateEditResponseChoice> choices, CompletionUsage usage, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Object = @object;
             Created = created;
             Choices = choices;
             Usage = usage;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/> for deserialization. </summary>
+        internal CreateEditResponse()
+        {
         }
 
         /// <summary> The object type, which is always `edit`. </summary>

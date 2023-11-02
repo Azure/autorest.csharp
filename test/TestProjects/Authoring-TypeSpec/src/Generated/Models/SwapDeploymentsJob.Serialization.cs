@@ -7,33 +7,34 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace AuthoringTypeSpec.Models
 {
-    public partial class SwapDeploymentsJob : IUtf8JsonSerializable, IModelJsonSerializable<SwapDeploymentsJob>
+    public partial class SwapDeploymentsJob : IUtf8JsonSerializable, IJsonModel<SwapDeploymentsJob>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SwapDeploymentsJob>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SwapDeploymentsJob>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<SwapDeploymentsJob>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<SwapDeploymentsJob>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("jobId"u8);
             writer.WriteStringValue(JobId);
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("createdDateTime"u8);
                 writer.WriteStringValue(CreatedDateTime, "O");
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("lastUpdatedDateTime"u8);
                 writer.WriteStringValue(LastUpdatedDateTime, "O");
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("expirationDateTime"u8);
                 writer.WriteStringValue(ExpirationDateTime, "O");
@@ -49,12 +50,12 @@ namespace AuthoringTypeSpec.Models
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
             JsonSerializer.Serialize(writer, Errors);
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -62,24 +63,31 @@ namespace AuthoringTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        SwapDeploymentsJob IModelJsonSerializable<SwapDeploymentsJob>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SwapDeploymentsJob IJsonModel<SwapDeploymentsJob>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSwapDeploymentsJob(document.RootElement, options);
         }
 
-        internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element, ModelSerializerOptions options = null)
+        internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,7 +150,7 @@ namespace AuthoringTypeSpec.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -151,16 +159,24 @@ namespace AuthoringTypeSpec.Models
             return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<SwapDeploymentsJob>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<SwapDeploymentsJob>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        SwapDeploymentsJob IModelSerializable<SwapDeploymentsJob>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        SwapDeploymentsJob IModel<SwapDeploymentsJob>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeSwapDeploymentsJob(document.RootElement, options);
@@ -171,13 +187,13 @@ namespace AuthoringTypeSpec.Models
         internal static SwapDeploymentsJob FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSwapDeploymentsJob(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeSwapDeploymentsJob(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

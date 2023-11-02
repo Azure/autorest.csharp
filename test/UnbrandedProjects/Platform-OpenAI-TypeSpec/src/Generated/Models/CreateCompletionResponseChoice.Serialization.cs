@@ -2,15 +2,71 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
+using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class CreateCompletionResponseChoice
+    public partial class CreateCompletionResponseChoice : IUtf8JsonWriteable, IJsonModel<CreateCompletionResponseChoice>
     {
-        internal static CreateCompletionResponseChoice DeserializeCreateCompletionResponseChoice(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateCompletionResponseChoice>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+
+        void IJsonModel<CreateCompletionResponseChoice>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("index"u8);
+            writer.WriteNumberValue(Index);
+            writer.WritePropertyName("text"u8);
+            writer.WriteStringValue(Text);
+            if (Logprobs != null)
+            {
+                writer.WritePropertyName("logprobs"u8);
+                writer.WriteObjectValue(Logprobs);
+            }
+            else
+            {
+                writer.WriteNull("logprobs");
+            }
+            writer.WritePropertyName("finish_reason"u8);
+            writer.WriteStringValue(FinishReason.ToString());
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        CreateCompletionResponseChoice IJsonModel<CreateCompletionResponseChoice>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCreateCompletionResponseChoice(document.RootElement, options);
+        }
+
+        internal static CreateCompletionResponseChoice DeserializeCreateCompletionResponseChoice(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -19,6 +75,8 @@ namespace OpenAI.Models
             string text = default;
             CreateLogprobs logprobs = default;
             CreateCompletionResponseChoiceFinishReason finishReason = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("index"u8))
@@ -46,8 +104,36 @@ namespace OpenAI.Models
                     finishReason = new CreateCompletionResponseChoiceFinishReason(property.Value.GetString());
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new CreateCompletionResponseChoice(index, text, logprobs, finishReason);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new CreateCompletionResponseChoice(index, text, logprobs, finishReason, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<CreateCompletionResponseChoice>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        CreateCompletionResponseChoice IModel<CreateCompletionResponseChoice>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCreateCompletionResponseChoice(document.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -55,7 +141,13 @@ namespace OpenAI.Models
         internal static CreateCompletionResponseChoice FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateCompletionResponseChoice(document.RootElement);
+            return DeserializeCreateCompletionResponseChoice(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            throw new Exception();
         }
     }
 }

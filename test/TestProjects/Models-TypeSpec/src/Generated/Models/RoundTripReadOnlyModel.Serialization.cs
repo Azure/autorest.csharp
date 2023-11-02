@@ -32,25 +32,34 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(OptionalReadonlyString))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("optionalReadonlyString"u8);
-                writer.WriteStringValue(OptionalReadonlyString);
+                if (Optional.IsDefined(OptionalReadonlyString))
+                {
+                    writer.WritePropertyName("optionalReadonlyString"u8);
+                    writer.WriteStringValue(OptionalReadonlyString);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(OptionalReadonlyInt))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("optionalReadonlyInt"u8);
-                writer.WriteNumberValue(OptionalReadonlyInt.Value);
+                if (Optional.IsDefined(OptionalReadonlyInt))
+                {
+                    writer.WritePropertyName("optionalReadonlyInt"u8);
+                    writer.WriteNumberValue(OptionalReadonlyInt.Value);
+                }
             }
             if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("requiredReadonlyModel"u8);
                 writer.WriteObjectValue(RequiredReadonlyModel);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(OptionalReadonlyModel))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("optionalReadonlyModel"u8);
-                writer.WriteObjectValue(OptionalReadonlyModel);
+                if (Optional.IsDefined(OptionalReadonlyModel))
+                {
+                    writer.WritePropertyName("optionalReadonlyModel"u8);
+                    writer.WriteObjectValue(OptionalReadonlyModel);
+                }
             }
             if (options.Format == ModelReaderWriterFormat.Json)
             {
@@ -135,35 +144,44 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OptionalReadonlyStringList))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("optionalReadonlyStringList"u8);
-                writer.WriteStartArray();
-                foreach (var item in OptionalReadonlyStringList)
+                if (Optional.IsCollectionDefined(OptionalReadonlyStringList))
                 {
-                    writer.WriteStringValue(item);
+                    writer.WritePropertyName("optionalReadonlyStringList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalReadonlyStringList)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OptionalReadonlyIntList))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("optionalReadonlyIntList"u8);
-                writer.WriteStartArray();
-                foreach (var item in OptionalReadonlyIntList)
+                if (Optional.IsCollectionDefined(OptionalReadonlyIntList))
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WritePropertyName("optionalReadonlyIntList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalReadonlyIntList)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OptionalReadOnlyModelList))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("optionalReadOnlyModelList"u8);
-                writer.WriteStartArray();
-                foreach (var item in OptionalReadOnlyModelList)
+                if (Optional.IsCollectionDefined(OptionalReadOnlyModelList))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("optionalReadOnlyModelList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalReadOnlyModelList)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
             writer.WritePropertyName("optionalReadOnlyIntRecord"u8);
             writer.WriteStartObject();
@@ -181,16 +199,19 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OptionalModelRecord))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("optionalModelRecord"u8);
-                writer.WriteStartObject();
-                foreach (var item in OptionalModelRecord)
+                if (Optional.IsCollectionDefined(OptionalModelRecord))
                 {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WritePropertyName("optionalModelRecord"u8);
+                    writer.WriteStartObject();
+                    foreach (var item in OptionalModelRecord)
+                    {
+                        writer.WritePropertyName(item.Key);
+                        writer.WriteObjectValue(item.Value);
+                    }
+                    writer.WriteEndObject();
                 }
-                writer.WriteEndObject();
             }
             writer.WritePropertyName("requiredCollectionWithNullableIntElement"u8);
             writer.WriteStartArray();

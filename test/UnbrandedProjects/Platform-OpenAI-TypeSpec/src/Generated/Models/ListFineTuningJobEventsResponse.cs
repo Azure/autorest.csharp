@@ -12,7 +12,10 @@ namespace OpenAI.Models
     /// <summary> The ListFineTuningJobEventsResponse. </summary>
     public partial class ListFineTuningJobEventsResponse
     {
-        /// <summary> Initializes a new instance of ListFineTuningJobEventsResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ListFineTuningJobEventsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="object"/> or <paramref name="data"/> is null. </exception>
@@ -23,15 +26,23 @@ namespace OpenAI.Models
 
             Object = @object;
             Data = data.ToList();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ListFineTuningJobEventsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListFineTuningJobEventsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
-        internal ListFineTuningJobEventsResponse(string @object, IReadOnlyList<FineTuningJobEvent> data)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListFineTuningJobEventsResponse(string @object, IReadOnlyList<FineTuningJobEvent> data, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Object = @object;
             Data = data;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ListFineTuningJobEventsResponse"/> for deserialization. </summary>
+        internal ListFineTuningJobEventsResponse()
+        {
         }
 
         /// <summary> Gets the object. </summary>

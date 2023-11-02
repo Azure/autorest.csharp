@@ -12,7 +12,10 @@ namespace OpenAI.Models
     /// <summary> The FineTuningJob. </summary>
     public partial class FineTuningJob
     {
-        /// <summary> Initializes a new instance of FineTuningJob. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FineTuningJob"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
         /// <param name="finishedAt">
@@ -76,9 +79,10 @@ namespace OpenAI.Models
             ResultFiles = resultFiles.ToList();
             TrainedTokens = trainedTokens;
             Error = error;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of FineTuningJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJob"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="object"> The object type, which is always "fine_tuning.job". </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
@@ -120,7 +124,8 @@ namespace OpenAI.Models
         /// For fine-tuning jobs that have `failed`, this will contain more information on the cause of the
         /// failure.
         /// </param>
-        internal FineTuningJob(string id, FineTuningJobObject @object, DateTimeOffset createdAt, DateTimeOffset? finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IReadOnlyList<string> resultFiles, long? trainedTokens, FineTuningJobError error)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FineTuningJob(string id, FineTuningJobObject @object, DateTimeOffset createdAt, DateTimeOffset? finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IReadOnlyList<string> resultFiles, long? trainedTokens, FineTuningJobError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Object = @object;
@@ -136,6 +141,12 @@ namespace OpenAI.Models
             ResultFiles = resultFiles;
             TrainedTokens = trainedTokens;
             Error = error;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FineTuningJob"/> for deserialization. </summary>
+        internal FineTuningJob()
+        {
         }
 
         /// <summary> The object identifier, which can be referenced in the API endpoints. </summary>

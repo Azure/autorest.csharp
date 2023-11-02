@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateEditResponseChoice. </summary>
     public partial class CreateEditResponseChoice
     {
-        /// <summary> Initializes a new instance of CreateEditResponseChoice. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponseChoice"/>. </summary>
         /// <param name="text"> The edited result. </param>
         /// <param name="index"> The index of the choice in the list of choices. </param>
         /// <param name="finishReason">
@@ -26,6 +30,29 @@ namespace OpenAI.Models
             Text = text;
             Index = index;
             FinishReason = finishReason;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponseChoice"/>. </summary>
+        /// <param name="text"> The edited result. </param>
+        /// <param name="index"> The index of the choice in the list of choices. </param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
+        /// specified in the request was reached.
+        /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateEditResponseChoice(string text, long index, CreateEditResponseChoiceFinishReason finishReason, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Text = text;
+            Index = index;
+            FinishReason = finishReason;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponseChoice"/> for deserialization. </summary>
+        internal CreateEditResponseChoice()
+        {
         }
 
         /// <summary> The edited result. </summary>

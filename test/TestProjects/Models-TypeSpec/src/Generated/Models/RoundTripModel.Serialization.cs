@@ -83,10 +83,13 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(NonRequiredReadonlyInt))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("nonRequiredReadonlyInt"u8);
-                writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
+                if (Optional.IsDefined(NonRequiredReadonlyInt))
+                {
+                    writer.WritePropertyName("nonRequiredReadonlyInt"u8);
+                    writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
+                }
             }
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);

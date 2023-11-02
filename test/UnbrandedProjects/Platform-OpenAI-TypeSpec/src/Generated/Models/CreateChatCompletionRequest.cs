@@ -12,7 +12,10 @@ namespace OpenAI.Models
     /// <summary> The CreateChatCompletionRequest. </summary>
     public partial class CreateChatCompletionRequest
     {
-        /// <summary> Initializes a new instance of CreateChatCompletionRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
@@ -30,9 +33,10 @@ namespace OpenAI.Models
             Messages = messages.ToList();
             Functions = new OptionalList<ChatCompletionFunctions>();
             LogitBias = new OptionalDictionary<string, long>();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateChatCompletionRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
@@ -106,7 +110,8 @@ namespace OpenAI.Models
         /// as they become available, with the stream terminated by a `data: [DONE]` message.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </param>
-        internal CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IList<ChatCompletionRequestMessage> messages, IList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IList<ChatCompletionRequestMessage> messages, IList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Messages = messages;
@@ -122,6 +127,12 @@ namespace OpenAI.Models
             LogitBias = logitBias;
             User = user;
             Stream = stream;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/> for deserialization. </summary>
+        internal CreateChatCompletionRequest()
+        {
         }
 
         /// <summary>

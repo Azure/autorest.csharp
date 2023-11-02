@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateCompletionResponseChoice. </summary>
     public partial class CreateCompletionResponseChoice
     {
-        /// <summary> Initializes a new instance of CreateCompletionResponseChoice. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoice"/>. </summary>
         /// <param name="index"></param>
         /// <param name="text"></param>
         /// <param name="logprobs"></param>
@@ -30,6 +34,33 @@ namespace OpenAI.Models
             Text = text;
             Logprobs = logprobs;
             FinishReason = finishReason;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoice"/>. </summary>
+        /// <param name="index"></param>
+        /// <param name="text"></param>
+        /// <param name="logprobs"></param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
+        /// due to a flag from our content filters, `length` if the maximum number of tokens specified
+        /// in the request was reached, or `content_filter` if content was omitted due to a flag from our
+        /// content filters.
+        /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateCompletionResponseChoice(long index, string text, CreateLogprobs logprobs, CreateCompletionResponseChoiceFinishReason finishReason, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Index = index;
+            Text = text;
+            Logprobs = logprobs;
+            FinishReason = finishReason;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoice"/> for deserialization. </summary>
+        internal CreateCompletionResponseChoice()
+        {
         }
 
         /// <summary> Gets the index. </summary>

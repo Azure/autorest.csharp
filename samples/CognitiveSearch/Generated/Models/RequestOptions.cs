@@ -6,22 +6,28 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class RequestOptions
     {
-        /// <summary> Initializes a new instance of RequestOptions. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
         public RequestOptions()
         {
         }
 
-        /// <summary> Initializes a new instance of RequestOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
         /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        internal RequestOptions(Guid? xMsClientRequestId)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequestOptions(Guid? xMsClientRequestId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             XMsClientRequestId = xMsClientRequestId;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The tracking ID sent with the request to help with debugging. </summary>

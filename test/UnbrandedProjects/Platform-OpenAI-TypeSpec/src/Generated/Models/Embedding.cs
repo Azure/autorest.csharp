@@ -12,7 +12,10 @@ namespace OpenAI.Models
     /// <summary> Represents an embedding vector returned by embedding endpoint. </summary>
     public partial class Embedding
     {
-        /// <summary> Initializes a new instance of Embedding. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Embedding"/>. </summary>
         /// <param name="index"> The index of the embedding in the list of embeddings. </param>
         /// <param name="embeddingProperty">
         /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
@@ -25,20 +28,28 @@ namespace OpenAI.Models
 
             Index = index;
             EmbeddingProperty = embeddingProperty.ToList();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of Embedding. </summary>
+        /// <summary> Initializes a new instance of <see cref="Embedding"/>. </summary>
         /// <param name="index"> The index of the embedding in the list of embeddings. </param>
         /// <param name="object"> The object type, which is always "embedding". </param>
         /// <param name="embeddingProperty">
         /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
         /// listed in the [embedding guide](/docs/guides/embeddings).
         /// </param>
-        internal Embedding(long index, EmbeddingObject @object, IReadOnlyList<double> embeddingProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Embedding(long index, EmbeddingObject @object, IReadOnlyList<double> embeddingProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Index = index;
             Object = @object;
             EmbeddingProperty = embeddingProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Embedding"/> for deserialization. </summary>
+        internal Embedding()
+        {
         }
 
         /// <summary> The index of the embedding in the list of embeddings. </summary>

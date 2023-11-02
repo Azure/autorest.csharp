@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Represents a resource's usage and quota. </summary>
     public partial class ResourceCounter
     {
-        /// <summary> Initializes a new instance of ResourceCounter. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
         internal ResourceCounter(long usage)
         {
             Usage = usage;
         }
 
-        /// <summary> Initializes a new instance of ResourceCounter. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
         /// <param name="quota"> The resource amount quota. </param>
-        internal ResourceCounter(long usage, long? quota)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceCounter(long usage, long? quota, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Usage = usage;
             Quota = quota;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ResourceCounter"/> for deserialization. </summary>
+        internal ResourceCounter()
+        {
         }
 
         /// <summary> The resource usage amount. </summary>

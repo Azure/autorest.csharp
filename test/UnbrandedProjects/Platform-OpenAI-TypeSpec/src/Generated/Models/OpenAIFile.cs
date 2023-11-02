@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The `File` object represents a document that has been uploaded to OpenAI. </summary>
     public partial class OpenAIFile
     {
-        /// <summary> Initializes a new instance of OpenAIFile. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>
         /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
         /// <param name="bytes"> The size of the file in bytes. </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the file was created. </param>
@@ -33,9 +37,10 @@ namespace OpenAI.Models
             Filename = filename;
             Purpose = purpose;
             Status = status;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of OpenAIFile. </summary>
+        /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>
         /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
         /// <param name="object"> The object type, which is always "file". </param>
         /// <param name="bytes"> The size of the file in bytes. </param>
@@ -50,7 +55,8 @@ namespace OpenAI.Models
         /// Additional details about the status of the file. If the file is in the `error` state, this will
         /// include a message describing the error.
         /// </param>
-        internal OpenAIFile(string id, OpenAIFileObject @object, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status, string statusDetails)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OpenAIFile(string id, OpenAIFileObject @object, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status, string statusDetails, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Object = @object;
@@ -60,6 +66,12 @@ namespace OpenAI.Models
             Purpose = purpose;
             Status = status;
             StatusDetails = statusDetails;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OpenAIFile"/> for deserialization. </summary>
+        internal OpenAIFile()
+        {
         }
 
         /// <summary> The file identifier, which can be referenced in the API endpoints. </summary>

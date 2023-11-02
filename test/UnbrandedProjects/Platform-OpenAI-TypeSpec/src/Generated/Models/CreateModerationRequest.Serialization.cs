@@ -4,19 +4,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
 using System.Text.Json;
-using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace OpenAI.Models
 {
-    public partial class CreateModerationRequest : IUtf8JsonWriteable, IModelJsonSerializable<CreateModerationRequest>
+    public partial class CreateModerationRequest : IUtf8JsonWriteable, IJsonModel<CreateModerationRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CreateModerationRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateModerationRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<CreateModerationRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<CreateModerationRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("input"u8);
@@ -33,7 +32,7 @@ namespace OpenAI.Models
                 writer.WritePropertyName("model"u8);
                 writer.WriteStringValue(Model.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -41,38 +40,31 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        CreateModerationRequest IModelJsonSerializable<CreateModerationRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        CreateModerationRequest IJsonModel<CreateModerationRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeCreateModerationRequest(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CreateModerationRequest>.Serialize(ModelSerializerOptions options)
+        internal static CreateModerationRequest DeserializeCreateModerationRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        CreateModerationRequest IModelSerializable<CreateModerationRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCreateModerationRequest(document.RootElement, options);
-        }
-
-        internal static CreateModerationRequest DeserializeCreateModerationRequest(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +90,7 @@ namespace OpenAI.Models
                     model = new CreateModerationRequestModel(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,18 +99,41 @@ namespace OpenAI.Models
             return new CreateModerationRequest(input, OptionalProperty.ToNullable(model), serializedAdditionalRawData);
         }
 
+        BinaryData IModel<CreateModerationRequest>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        CreateModerationRequest IModel<CreateModerationRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeCreateModerationRequest(document.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateModerationRequest FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateModerationRequest(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeCreateModerationRequest(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
         internal virtual RequestBody ToRequestBody()
         {
-            return RequestContent.CreateFromStream(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,10 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The LanguageInput. </summary>
     public partial class LanguageInput
     {
-        /// <summary> Initializes a new instance of LanguageInput. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LanguageInput"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="text"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="text"/> is null. </exception>
@@ -26,15 +30,22 @@ namespace CognitiveServices.TextAnalytics.Models
             Text = text;
         }
 
-        /// <summary> Initializes a new instance of LanguageInput. </summary>
+        /// <summary> Initializes a new instance of <see cref="LanguageInput"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="text"></param>
         /// <param name="countryHint"></param>
-        internal LanguageInput(string id, string text, string countryHint)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LanguageInput(string id, string text, string countryHint, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Text = text;
             CountryHint = countryHint;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LanguageInput"/> for deserialization. </summary>
+        internal LanguageInput()
+        {
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> Represents a datasource definition, which can be used to configure an indexer. </summary>
     public partial class DataSource
     {
-        /// <summary> Initializes a new instance of DataSource. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DataSource"/>. </summary>
         /// <param name="name"> The name of the datasource. </param>
         /// <param name="type"> The type of the datasource. </param>
         /// <param name="credentials"> Credentials for the datasource. </param>
@@ -31,7 +35,7 @@ namespace CognitiveSearch.Models
             Container = container;
         }
 
-        /// <summary> Initializes a new instance of DataSource. </summary>
+        /// <summary> Initializes a new instance of <see cref="DataSource"/>. </summary>
         /// <param name="name"> The name of the datasource. </param>
         /// <param name="description"> The description of the datasource. </param>
         /// <param name="type"> The type of the datasource. </param>
@@ -48,7 +52,8 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="SoftDeleteColumnDeletionDetectionPolicy"/>.
         /// </param>
         /// <param name="eTag"> The ETag of the DataSource. </param>
-        internal DataSource(string name, string description, DataSourceType type, DataSourceCredentials credentials, DataContainer container, DataChangeDetectionPolicy dataChangeDetectionPolicy, DataDeletionDetectionPolicy dataDeletionDetectionPolicy, string eTag)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataSource(string name, string description, DataSourceType type, DataSourceCredentials credentials, DataContainer container, DataChangeDetectionPolicy dataChangeDetectionPolicy, DataDeletionDetectionPolicy dataDeletionDetectionPolicy, string eTag, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Description = description;
@@ -58,6 +63,12 @@ namespace CognitiveSearch.Models
             DataChangeDetectionPolicy = dataChangeDetectionPolicy;
             DataDeletionDetectionPolicy = dataDeletionDetectionPolicy;
             ETag = eTag;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DataSource"/> for deserialization. </summary>
+        internal DataSource()
+        {
         }
 
         /// <summary> The name of the datasource. </summary>

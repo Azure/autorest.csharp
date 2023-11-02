@@ -12,7 +12,10 @@ namespace OpenAI.Models
     /// <summary> The ImagesResponse. </summary>
     public partial class ImagesResponse
     {
-        /// <summary> Initializes a new instance of ImagesResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ImagesResponse"/>. </summary>
         /// <param name="created"></param>
         /// <param name="data"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
@@ -22,15 +25,23 @@ namespace OpenAI.Models
 
             Created = created;
             Data = data.ToList();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ImagesResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagesResponse"/>. </summary>
         /// <param name="created"></param>
         /// <param name="data"></param>
-        internal ImagesResponse(DateTimeOffset created, IReadOnlyList<Image> data)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImagesResponse(DateTimeOffset created, IReadOnlyList<Image> data, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Created = created;
             Data = data;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ImagesResponse"/> for deserialization. </summary>
+        internal ImagesResponse()
+        {
         }
 
         /// <summary> Gets the created. </summary>

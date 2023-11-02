@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateFileRequest. </summary>
     public partial class CreateFileRequest
     {
-        /// <summary> Initializes a new instance of CreateFileRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateFileRequest"/>. </summary>
         /// <param name="file">
         /// Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.
         ///
@@ -29,6 +33,31 @@ namespace OpenAI.Models
 
             File = file;
             Purpose = purpose;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateFileRequest"/>. </summary>
+        /// <param name="file">
+        /// Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.
+        ///
+        /// If the `purpose` is set to "fine-tune", the file will be used for fine-tuning.
+        /// </param>
+        /// <param name="purpose">
+        /// The intended purpose of the uploaded documents. Use "fine-tune" for
+        /// [fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the
+        /// uploaded file.
+        /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateFileRequest(BinaryData file, string purpose, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            File = file;
+            Purpose = purpose;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateFileRequest"/> for deserialization. </summary>
+        internal CreateFileRequest()
+        {
         }
 
         /// <summary>

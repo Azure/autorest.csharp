@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Limits the number of tokens while indexing. This token filter is implemented using Apache Lucene. </summary>
     public partial class LimitTokenFilter : TokenFilter
     {
-        /// <summary> Initializes a new instance of LimitTokenFilter. </summary>
+        /// <summary> Initializes a new instance of <see cref="LimitTokenFilter"/>. </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public LimitTokenFilter(string name) : base(name)
@@ -23,16 +24,22 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.LimitTokenFilter";
         }
 
-        /// <summary> Initializes a new instance of LimitTokenFilter. </summary>
+        /// <summary> Initializes a new instance of <see cref="LimitTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="maxTokenCount"> The maximum number of tokens to produce. Default is 1. </param>
         /// <param name="consumeAllTokens"> A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. </param>
-        internal LimitTokenFilter(string odataType, string name, int? maxTokenCount, bool? consumeAllTokens) : base(odataType, name)
+        internal LimitTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, int? maxTokenCount, bool? consumeAllTokens) : base(odataType, name, serializedAdditionalRawData)
         {
             MaxTokenCount = maxTokenCount;
             ConsumeAllTokens = consumeAllTokens;
             OdataType = odataType ?? "#Microsoft.Azure.Search.LimitTokenFilter";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LimitTokenFilter"/> for deserialization. </summary>
+        internal LimitTokenFilter()
+        {
         }
 
         /// <summary> The maximum number of tokens to produce. Default is 1. </summary>

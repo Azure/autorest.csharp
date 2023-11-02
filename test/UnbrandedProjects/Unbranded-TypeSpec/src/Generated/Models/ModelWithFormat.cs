@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace UnbrandedTypeSpec.Models
@@ -10,7 +11,10 @@ namespace UnbrandedTypeSpec.Models
     /// <summary> The ModelWithFormat. </summary>
     public partial class ModelWithFormat
     {
-        /// <summary> Initializes a new instance of ModelWithFormat. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>
@@ -20,6 +24,23 @@ namespace UnbrandedTypeSpec.Models
 
             SourceUrl = sourceUrl;
             Guid = guid;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
+        /// <param name="sourceUrl"> url format. </param>
+        /// <param name="guid"> uuid format. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            SourceUrl = sourceUrl;
+            Guid = guid;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/> for deserialization. </summary>
+        internal ModelWithFormat()
+        {
         }
 
         /// <summary> url format. </summary>

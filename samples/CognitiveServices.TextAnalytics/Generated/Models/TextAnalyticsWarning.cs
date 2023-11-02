@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,10 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The TextAnalyticsWarning. </summary>
     public partial class TextAnalyticsWarning
     {
-        /// <summary> Initializes a new instance of TextAnalyticsWarning. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TextAnalyticsWarning"/>. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
@@ -25,15 +29,22 @@ namespace CognitiveServices.TextAnalytics.Models
             Message = message;
         }
 
-        /// <summary> Initializes a new instance of TextAnalyticsWarning. </summary>
+        /// <summary> Initializes a new instance of <see cref="TextAnalyticsWarning"/>. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <param name="targetRef"> A JSON pointer reference indicating the target object. </param>
-        internal TextAnalyticsWarning(WarningCodeValue code, string message, string targetRef)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextAnalyticsWarning(WarningCodeValue code, string message, string targetRef, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
             TargetRef = targetRef;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TextAnalyticsWarning"/> for deserialization. </summary>
+        internal TextAnalyticsWarning()
+        {
         }
 
         /// <summary> Error code. </summary>

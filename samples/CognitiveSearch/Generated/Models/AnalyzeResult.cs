@@ -15,7 +15,10 @@ namespace CognitiveSearch.Models
     /// <summary> The result of testing an analyzer on text. </summary>
     public partial class AnalyzeResult
     {
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tokens"/> is null. </exception>
         internal AnalyzeResult(IEnumerable<TokenInfo> tokens)
@@ -25,11 +28,18 @@ namespace CognitiveSearch.Models
             Tokens = tokens.ToList();
         }
 
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
-        internal AnalyzeResult(IReadOnlyList<TokenInfo> tokens)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnalyzeResult(IReadOnlyList<TokenInfo> tokens, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tokens = tokens;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/> for deserialization. </summary>
+        internal AnalyzeResult()
+        {
         }
 
         /// <summary> The list of tokens returned by the analyzer specified in the request. </summary>

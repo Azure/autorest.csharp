@@ -11,7 +11,10 @@ namespace OpenAI.Models
     /// <summary> The CreateCompletionRequest. </summary>
     public partial class CreateCompletionRequest
     {
-        /// <summary> Initializes a new instance of CreateCompletionRequest. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
         /// see all of your available models, or see our [Model overview](/docs/models/overview) for
@@ -32,9 +35,10 @@ namespace OpenAI.Models
             Model = model;
             Prompt = prompt;
             LogitBias = new OptionalDictionary<string, long>();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CreateCompletionRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
         /// see all of your available models, or see our [Model overview](/docs/models/overview) for
@@ -124,7 +128,8 @@ namespace OpenAI.Models
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </param>
-        internal CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Prompt = prompt;
@@ -142,6 +147,12 @@ namespace OpenAI.Models
             Logprobs = logprobs;
             Echo = echo;
             BestOf = bestOf;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/> for deserialization. </summary>
+        internal CreateCompletionRequest()
+        {
         }
 
         /// <summary>

@@ -13,7 +13,10 @@ namespace OpenAI.Models
     [Obsolete("deprecated")]
     public partial class FineTune
     {
-        /// <summary> Initializes a new instance of FineTune. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FineTune"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
         /// <param name="updatedAt"> The Unix timestamp (in seconds) for when the fine-tuning job was last updated. </param>
@@ -54,9 +57,10 @@ namespace OpenAI.Models
             ValidationFiles = validationFiles.ToList();
             ResultFiles = resultFiles.ToList();
             Events = new OptionalList<FineTuneEvent>();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of FineTune. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTune"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="object"> The object type, which is always "fine-tune". </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
@@ -76,7 +80,8 @@ namespace OpenAI.Models
         /// <param name="validationFiles"> The list of files used for validation. </param>
         /// <param name="resultFiles"> The compiled results files for the fine-tuning job. </param>
         /// <param name="events"> The list of events that have been observed in the lifecycle of the FineTune job. </param>
-        internal FineTune(string id, FineTuneObject @object, DateTimeOffset createdAt, DateTimeOffset updatedAt, string model, string fineTunedModel, string organizationId, FineTuneStatus status, FineTuneHyperparams hyperparams, IReadOnlyList<OpenAIFile> trainingFiles, IReadOnlyList<OpenAIFile> validationFiles, IReadOnlyList<OpenAIFile> resultFiles, IReadOnlyList<FineTuneEvent> events)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FineTune(string id, FineTuneObject @object, DateTimeOffset createdAt, DateTimeOffset updatedAt, string model, string fineTunedModel, string organizationId, FineTuneStatus status, FineTuneHyperparams hyperparams, IReadOnlyList<OpenAIFile> trainingFiles, IReadOnlyList<OpenAIFile> validationFiles, IReadOnlyList<OpenAIFile> resultFiles, IReadOnlyList<FineTuneEvent> events, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Object = @object;
@@ -91,6 +96,12 @@ namespace OpenAI.Models
             ValidationFiles = validationFiles;
             ResultFiles = resultFiles;
             Events = events;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FineTune"/> for deserialization. </summary>
+        internal FineTune()
+        {
         }
 
         /// <summary> The object identifier, which can be referenced in the API endpoints. </summary>

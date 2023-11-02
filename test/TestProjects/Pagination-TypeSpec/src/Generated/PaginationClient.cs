@@ -612,7 +612,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPoolsRequest(filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPoolsNextPageRequest(nextLink, filter, select, expand, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPools", "value", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPools", "value", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -644,7 +644,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPoolsRequest(filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPoolsNextPageRequest(nextLink, filter, select, expand, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPools", "value", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPools", "value", "odata.nextLink", context);
         }
 
         internal HttpMessage CreateGetPaginationLedgerEntriesRequest(RequestContent content, RequestContext context)

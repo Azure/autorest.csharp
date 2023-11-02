@@ -17,25 +17,19 @@ namespace _Azure.Lro.Standard.Models
         /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="role"> The role of user. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
-        public static User User(string name = null, string role = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static User User(string name = null, string role = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new User(name, role, serializedAdditionalRawData);
+            return new User(name, role, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExportedUser"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="resourceUri"> The exported URI. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ExportedUser"/> instance for mocking. </returns>
-        public static ExportedUser ExportedUser(string name = null, string resourceUri = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static ExportedUser ExportedUser(string name = null, string resourceUri = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new ExportedUser(name, resourceUri, serializedAdditionalRawData);
+            return new ExportedUser(name, resourceUri, new Dictionary<string, BinaryData>());
         }
     }
 }

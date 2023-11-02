@@ -15,13 +15,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
-        public static Pet Pet(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static Pet Pet(string name = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Pet(name, serializedAdditionalRawData);
+            return new Pet(name, new Dictionary<string, BinaryData>());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>

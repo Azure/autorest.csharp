@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,10 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The Match. </summary>
     public partial class Match
     {
-        /// <summary> Initializes a new instance of Match. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Match"/>. </summary>
         /// <param name="confidenceScore"> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </param>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>
@@ -27,6 +31,26 @@ namespace CognitiveServices.TextAnalytics.Models
             Text = text;
             Offset = offset;
             Length = length;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Match"/>. </summary>
+        /// <param name="confidenceScore"> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </param>
+        /// <param name="text"> Entity text as appears in the request. </param>
+        /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>
+        /// <param name="length"> Length (in Unicode characters) for the entity match text. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Match(double confidenceScore, string text, int offset, int length, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            ConfidenceScore = confidenceScore;
+            Text = text;
+            Offset = offset;
+            Length = length;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Match"/> for deserialization. </summary>
+        internal Match()
+        {
         }
 
         /// <summary> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </summary>

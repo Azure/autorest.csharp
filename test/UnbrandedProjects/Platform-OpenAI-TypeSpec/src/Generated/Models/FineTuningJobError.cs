@@ -2,28 +2,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using System.Net.ClientModel.Internal;
+
 namespace OpenAI.Models
 {
     /// <summary> The FineTuningJobError. </summary>
     public partial class FineTuningJobError
     {
-        /// <summary> Initializes a new instance of FineTuningJobError. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobError"/>. </summary>
         internal FineTuningJobError()
         {
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of FineTuningJobError. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobError"/>. </summary>
         /// <param name="message"> A human-readable error message. </param>
         /// <param name="code"> A machine-readable error code. </param>
         /// <param name="param">
         /// The parameter that was invalid, usually `training_file` or `validation_file`. This field
         /// will be null if the failure was not parameter-specific.
         /// </param>
-        internal FineTuningJobError(string message, string code, string param)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FineTuningJobError(string message, string code, string param, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Message = message;
             Code = code;
             Param = param;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A human-readable error message. </summary>
