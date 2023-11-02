@@ -12,90 +12,83 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtNoTypeReplacement.Mocking;
 
 namespace MgmtNoTypeReplacement
 {
     /// <summary> A class to add extension methods to MgmtNoTypeReplacement. </summary>
     public static partial class MgmtNoTypeReplacementExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MockableMgmtNoTypeReplacementArmClient GetMockableMgmtNoTypeReplacementArmClient(ArmClient client)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
+            return client.GetCachedClient(client0 => new MockableMgmtNoTypeReplacementArmClient(client0));
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static MockableMgmtNoTypeReplacementResourceGroupResource GetMockableMgmtNoTypeReplacementResourceGroupResource(ArmResource resource)
         {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
+            return resource.GetCachedClient(client => new MockableMgmtNoTypeReplacementResourceGroupResource(client, resource.Id));
         }
-        #region NoTypeReplacementModel1Resource
+
         /// <summary>
         /// Gets an object representing a <see cref="NoTypeReplacementModel1Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="NoTypeReplacementModel1Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementArmClient.GetNoTypeReplacementModel1Resource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
         public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel1Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel1Resource(client, id);
-            }
-            );
+            return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel1Resource(id);
         }
-        #endregion
 
-        #region NoTypeReplacementModel2Resource
         /// <summary>
         /// Gets an object representing a <see cref="NoTypeReplacementModel2Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="NoTypeReplacementModel2Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementArmClient.GetNoTypeReplacementModel2Resource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
         public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel2Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel2Resource(client, id);
-            }
-            );
+            return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel2Resource(id);
         }
-        #endregion
 
-        #region NoTypeReplacementModel3Resource
         /// <summary>
         /// Gets an object representing a <see cref="NoTypeReplacementModel3Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="NoTypeReplacementModel3Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementArmClient.GetNoTypeReplacementModel3Resource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
         public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel3Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel3Resource(client, id);
-            }
-            );
+            return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel3Resource(id);
         }
-        #endregion
 
-        /// <summary> Gets a collection of NoTypeReplacementModel1Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of NoTypeReplacementModel1Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel1s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel1s();
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1s();
         }
 
         /// <summary>
@@ -109,16 +102,20 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel1Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel1Resource>> GetNoTypeReplacementModel1Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetNoTypeReplacementModel1s().GetAsync(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1Async(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -132,24 +129,34 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel1Resource> GetNoTypeReplacementModel1(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetNoTypeReplacementModel1s().Get(noTypeReplacementModel1SName, cancellationToken);
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1(noTypeReplacementModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel2Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of NoTypeReplacementModel2Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel2s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel2s();
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2s();
         }
 
         /// <summary>
@@ -163,16 +170,20 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel2Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel2Resource>> GetNoTypeReplacementModel2Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetNoTypeReplacementModel2s().GetAsync(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2Async(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -186,24 +197,34 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel2Resource> GetNoTypeReplacementModel2(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetNoTypeReplacementModel2s().Get(noTypeReplacementModel2SName, cancellationToken);
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2(noTypeReplacementModel2SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel3Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of NoTypeReplacementModel3Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel3s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel3s();
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3s();
         }
 
         /// <summary>
@@ -217,16 +238,20 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel3s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel3Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel3Resource>> GetNoTypeReplacementModel3Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetNoTypeReplacementModel3s().GetAsync(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3Async(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -240,16 +265,20 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel3s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtNoTypeReplacementResourceGroupResource.GetNoTypeReplacementModel3(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel3Resource> GetNoTypeReplacementModel3(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetNoTypeReplacementModel3s().Get(noTypeReplacementModel3SName, cancellationToken);
+            return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3(noTypeReplacementModel3SName, cancellationToken);
         }
     }
 }
