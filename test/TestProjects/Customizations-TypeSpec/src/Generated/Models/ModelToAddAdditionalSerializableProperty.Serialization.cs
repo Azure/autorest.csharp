@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class ModelToAddAdditionalSerializableProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>
+    public partial class ModelToAddAdditionalSerializableProperty : IUtf8JsonSerializable, IJsonModel<ModelToAddAdditionalSerializableProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelToAddAdditionalSerializableProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ModelToAddAdditionalSerializableProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
@@ -40,7 +41,7 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("additionalNullableSerializableProperty");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,24 +49,31 @@ namespace CustomizationsInTsp.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ModelToAddAdditionalSerializableProperty IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelToAddAdditionalSerializableProperty IJsonModel<ModelToAddAdditionalSerializableProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
         }
 
-        internal static ModelToAddAdditionalSerializableProperty DeserializeModelToAddAdditionalSerializableProperty(JsonElement element, ModelSerializerOptions options = null)
+        internal static ModelToAddAdditionalSerializableProperty DeserializeModelToAddAdditionalSerializableProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -102,7 +110,7 @@ namespace CustomizationsInTsp.Models
                     additionalNullableSerializableProperty = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -111,16 +119,24 @@ namespace CustomizationsInTsp.Models
             return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ModelToAddAdditionalSerializableProperty>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ModelToAddAdditionalSerializableProperty>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ModelToAddAdditionalSerializableProperty IModelSerializable<ModelToAddAdditionalSerializableProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ModelToAddAdditionalSerializableProperty IModel<ModelToAddAdditionalSerializableProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
@@ -131,13 +147,13 @@ namespace CustomizationsInTsp.Models
         internal static ModelToAddAdditionalSerializableProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

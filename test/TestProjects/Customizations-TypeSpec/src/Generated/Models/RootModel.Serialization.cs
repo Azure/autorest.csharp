@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class RootModel : IUtf8JsonSerializable, IModelJsonSerializable<RootModel>
+    public partial class RootModel : IUtf8JsonSerializable, IJsonModel<RootModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RootModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RootModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<RootModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<RootModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(PropertyExtensibleEnum))
@@ -71,7 +72,7 @@ namespace CustomizationsInTsp.Models
                 writer.WritePropertyName("propertyToMoveToCustomization"u8);
                 writer.WriteStringValue(PropertyToMoveToCustomization.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -79,24 +80,31 @@ namespace CustomizationsInTsp.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        RootModel IModelJsonSerializable<RootModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RootModel IJsonModel<RootModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRootModel(document.RootElement, options);
         }
 
-        internal static RootModel DeserializeRootModel(JsonElement element, ModelSerializerOptions options = null)
+        internal static RootModel DeserializeRootModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -206,7 +214,7 @@ namespace CustomizationsInTsp.Models
                     propertyToMoveToCustomization = new NormalEnum(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -215,16 +223,24 @@ namespace CustomizationsInTsp.Models
             return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<RootModel>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<RootModel>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        RootModel IModelSerializable<RootModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        RootModel IModel<RootModel>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRootModel(document.RootElement, options);
@@ -235,13 +251,13 @@ namespace CustomizationsInTsp.Models
         internal static RootModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRootModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeRootModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

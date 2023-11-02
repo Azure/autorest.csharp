@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line($"return data;");
                             _writer.Line();
                             _writer.Append($"var newId = {resourceType}.CreateResourceIdentifier(");
-                            var createIdMethod = resource.CreateResourceIdentifierMethodSignature;
+                            var createIdMethod = resource.CreateResourceIdentifierMethod.Signature;
                             foreach (var param in createIdMethod.Parameters)
                             {
                                 _writer.Line();

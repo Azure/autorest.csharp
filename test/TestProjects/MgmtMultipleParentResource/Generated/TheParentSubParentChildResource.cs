@@ -27,6 +27,11 @@ namespace MgmtMultipleParentResource
     public partial class TheParentSubParentChildResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TheParentSubParentChildResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="theParentName"> The theParentName. </param>
+        /// <param name="instanceId"> The instanceId. </param>
+        /// <param name="childName"> The childName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}";

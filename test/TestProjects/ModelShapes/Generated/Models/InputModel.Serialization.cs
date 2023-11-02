@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
-    public partial class InputModel : IUtf8JsonSerializable, IModelJsonSerializable<InputModel>
+    public partial class InputModel : IUtf8JsonSerializable, IJsonModel<InputModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<InputModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<InputModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<InputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("RequiredString"u8);
@@ -172,7 +173,103 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("vector"u8);
+            writer.WriteStartArray();
+            foreach (var item in Vector.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                writer.WritePropertyName("vectorReadOnly"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorReadOnly.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                writer.WritePropertyName("vectorReadOnlyRequired"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorReadOnlyRequired.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WritePropertyName("vectorRequired"u8);
+            writer.WriteStartArray();
+            foreach (var item in VectorRequired.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (VectorNullable != null)
+            {
+                writer.WritePropertyName("vectorNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorNullable");
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (VectorReadOnlyNullable != null)
+                {
+                    writer.WritePropertyName("vectorReadOnlyNullable"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorReadOnlyNullable.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorReadOnlyNullable");
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (VectorReadOnlyRequiredNullable != null)
+                {
+                    writer.WritePropertyName("vectorReadOnlyRequiredNullable"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorReadOnlyRequiredNullable.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorReadOnlyRequiredNullable");
+                }
+            }
+            if (VectorRequiredNullable != null)
+            {
+                writer.WritePropertyName("vectorRequiredNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorRequiredNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorRequiredNullable");
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -180,38 +277,31 @@ namespace ModelShapes.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        InputModel IModelJsonSerializable<InputModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        InputModel IJsonModel<InputModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeInputModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<InputModel>.Serialize(ModelSerializerOptions options)
+        internal static InputModel DeserializeInputModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        InputModel IModelSerializable<InputModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeInputModel(document.RootElement, options);
-        }
-
-        internal static InputModel DeserializeInputModel(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -233,6 +323,14 @@ namespace ModelShapes.Models
             Optional<int?> nonRequiredNullableInt = default;
             Optional<IList<string>> nonRequiredNullableStringList = default;
             Optional<IList<int>> nonRequiredNullableIntList = default;
+            Optional<ReadOnlyMemory<float>> vector = default;
+            Optional<ReadOnlyMemory<float>> vectorReadOnly = default;
+            ReadOnlyMemory<float> vectorReadOnlyRequired = default;
+            ReadOnlyMemory<float> vectorRequired = default;
+            Optional<ReadOnlyMemory<float>?> vectorNullable = default;
+            Optional<ReadOnlyMemory<float>?> vectorReadOnlyNullable = default;
+            ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable = default;
+            ReadOnlyMemory<float>? vectorRequiredNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -407,13 +505,164 @@ namespace ModelShapes.Models
                     nonRequiredNullableIntList = array;
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (property.NameEquals("vector"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vector = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnly = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnlyRequired"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnlyRequired = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorRequired"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorRequired = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnlyNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnlyNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnlyRequiredNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnlyRequiredNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorRequiredNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorRequiredNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), serializedAdditionalRawData);
+            return new InputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, Optional.ToNullable(vectorNullable), Optional.ToNullable(vectorReadOnlyNullable), vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<InputModel>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        InputModel IModel<InputModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeInputModel(document.RootElement, options);
         }
     }
 }

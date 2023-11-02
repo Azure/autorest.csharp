@@ -32,8 +32,10 @@ namespace CustomizationsInTsp.Models
         /// <param name="goodDictionaryName"> Property renamed that is dictionary. </param>
         /// <param name="goodListOfListName"> Property renamed that is listoflist. </param>
         /// <param name="goodListOfDictionaryName"> Property renamed that is listofdictionary. </param>
+        /// <param name="vector"> Property type changed to ReadOnlyMemory&lt;float&gt;. </param>
+        /// <param name="vectorNullable"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="propertyToMakeString"/>, <paramref name="propertyToField"/>, <paramref name="goodListName"/>, <paramref name="goodDictionaryName"/>, <paramref name="goodListOfListName"/> or <paramref name="goodListOfDictionaryName"/> is null. </exception>
-        public ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IEnumerable<string> goodListName, IDictionary<string, string> goodDictionaryName, IEnumerable<IList<string>> goodListOfListName, IEnumerable<IDictionary<string, string>> goodListOfDictionaryName)
+        public ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IEnumerable<string> goodListName, IDictionary<string, string> goodDictionaryName, IEnumerable<IList<string>> goodListOfListName, IEnumerable<IDictionary<string, string>> goodListOfDictionaryName, ReadOnlyMemory<float> vector, ReadOnlyMemory<float>? vectorNullable)
         {
             Argument.AssertNotNull(propertyToMakeString, nameof(propertyToMakeString));
             Argument.AssertNotNull(propertyToField, nameof(propertyToField));
@@ -54,6 +56,9 @@ namespace CustomizationsInTsp.Models
             GoodDictionaryName = goodDictionaryName;
             GoodListOfListName = goodListOfListName.ToList();
             GoodListOfDictionaryName = goodListOfDictionaryName.ToList();
+            Vector = vector;
+            VectorNullable = vectorNullable;
+            VectorReadOnly = ReadOnlyMemory<float>.Empty;
             _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
@@ -70,8 +75,16 @@ namespace CustomizationsInTsp.Models
         /// <param name="goodDictionaryName"> Property renamed that is dictionary. </param>
         /// <param name="goodListOfListName"> Property renamed that is listoflist. </param>
         /// <param name="goodListOfDictionaryName"> Property renamed that is listofdictionary. </param>
+        /// <param name="vector"> Property type changed to ReadOnlyMemory&lt;float&gt;. </param>
+        /// <param name="vectorOptional"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorNullable"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorOptionalNullable"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;. </param>
+        /// <param name="vectorOptionalReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorNullableReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorOptionalNullableReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName, ReadOnlyMemory<float> vector, ReadOnlyMemory<float>? vectorOptional, ReadOnlyMemory<float>? vectorNullable, ReadOnlyMemory<float>? vectorOptionalNullable, ReadOnlyMemory<float> vectorReadOnly, ReadOnlyMemory<float>? vectorOptionalReadOnly, ReadOnlyMemory<float>? vectorNullableReadOnly, ReadOnlyMemory<float>? vectorOptionalNullableReadOnly, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PropertyToMakeInternal = propertyToMakeInternal;
             RenamedProperty = renamedProperty;
@@ -85,6 +98,14 @@ namespace CustomizationsInTsp.Models
             GoodDictionaryName = goodDictionaryName;
             GoodListOfListName = goodListOfListName;
             GoodListOfDictionaryName = goodListOfDictionaryName;
+            Vector = vector;
+            VectorOptional = vectorOptional;
+            VectorNullable = vectorNullable;
+            VectorOptionalNullable = vectorOptionalNullable;
+            VectorReadOnly = vectorReadOnly;
+            VectorOptionalReadOnly = vectorOptionalReadOnly;
+            VectorNullableReadOnly = vectorNullableReadOnly;
+            VectorOptionalNullableReadOnly = vectorOptionalNullableReadOnly;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 

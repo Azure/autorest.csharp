@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class ModelWithCustomizedProperties : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithCustomizedProperties>
+    public partial class ModelWithCustomizedProperties : IUtf8JsonSerializable, IJsonModel<ModelWithCustomizedProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithCustomizedProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomizedProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ModelWithCustomizedProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ModelWithCustomizedProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("propertyToMakeInternal"u8);
@@ -87,7 +88,117 @@ namespace CustomizationsInTsp.Models
                 writer.WriteEndObject();
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("vector"u8);
+            writer.WriteStartArray();
+            foreach (var item in Vector.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (VectorOptional != null)
+            {
+                writer.WritePropertyName("vectorOptional"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorOptional.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorOptional");
+            }
+            if (VectorNullable != null)
+            {
+                writer.WritePropertyName("vectorNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorNullable");
+            }
+            if (VectorOptionalNullable != null)
+            {
+                writer.WritePropertyName("vectorOptionalNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorOptionalNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorOptionalNullable");
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                writer.WritePropertyName("vectorReadOnly"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorReadOnly.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (VectorOptionalReadOnly != null)
+                {
+                    writer.WritePropertyName("vectorOptionalReadOnly"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptionalReadOnly.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorOptionalReadOnly");
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (VectorNullableReadOnly != null)
+                {
+                    writer.WritePropertyName("vectorNullableReadOnly"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorNullableReadOnly.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorNullableReadOnly");
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (VectorOptionalNullableReadOnly != null)
+                {
+                    writer.WritePropertyName("vectorOptionalNullableReadOnly"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptionalNullableReadOnly.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorOptionalNullableReadOnly");
+                }
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -95,24 +206,31 @@ namespace CustomizationsInTsp.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ModelWithCustomizedProperties IModelJsonSerializable<ModelWithCustomizedProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelWithCustomizedProperties IJsonModel<ModelWithCustomizedProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeModelWithCustomizedProperties(document.RootElement, options);
         }
 
-        internal static ModelWithCustomizedProperties DeserializeModelWithCustomizedProperties(JsonElement element, ModelSerializerOptions options = null)
+        internal static ModelWithCustomizedProperties DeserializeModelWithCustomizedProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +248,14 @@ namespace CustomizationsInTsp.Models
             IDictionary<string, string> badDictionaryName = default;
             IList<IList<string>> badListOfListName = default;
             IList<IDictionary<string, string>> badListOfDictionaryName = default;
+            ReadOnlyMemory<float> vector = default;
+            Optional<ReadOnlyMemory<float>?> vectorOptional = default;
+            ReadOnlyMemory<float>? vectorNullable = default;
+            Optional<ReadOnlyMemory<float>?> vectorOptionalNullable = default;
+            ReadOnlyMemory<float> vectorReadOnly = default;
+            Optional<ReadOnlyMemory<float>?> vectorOptionalReadOnly = default;
+            ReadOnlyMemory<float>? vectorNullableReadOnly = default;
+            Optional<ReadOnlyMemory<float>?> vectorOptionalNullableReadOnly = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -238,25 +364,161 @@ namespace CustomizationsInTsp.Models
                     badListOfDictionaryName = array;
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (property.NameEquals("vector"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vector = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorOptional"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorOptional = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorOptionalNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorOptionalNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnly = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorOptionalReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorOptionalReadOnly = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorNullableReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorNullableReadOnly = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorOptionalNullableReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorOptionalNullableReadOnly = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, serializedAdditionalRawData);
+            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, vector, Optional.ToNullable(vectorOptional), vectorNullable, Optional.ToNullable(vectorOptionalNullable), vectorReadOnly, Optional.ToNullable(vectorOptionalReadOnly), vectorNullableReadOnly, Optional.ToNullable(vectorOptionalNullableReadOnly), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ModelWithCustomizedProperties>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ModelWithCustomizedProperties>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ModelWithCustomizedProperties IModelSerializable<ModelWithCustomizedProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ModelWithCustomizedProperties IModel<ModelWithCustomizedProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeModelWithCustomizedProperties(document.RootElement, options);
@@ -267,13 +529,13 @@ namespace CustomizationsInTsp.Models
         internal static ModelWithCustomizedProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithCustomizedProperties(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeModelWithCustomizedProperties(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
+            throw new Exception();
         }
     }
 }

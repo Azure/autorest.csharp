@@ -29,6 +29,8 @@ namespace MgmtListMethods
     public partial class MgmtGrpParentWithNonResChWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="MgmtGrpParentWithNonResChWithLocResource"/> instance. </summary>
+        /// <param name="groupId"> The groupId. </param>
+        /// <param name="mgmtGrpParentWithNonResChWithLocName"> The mgmtGrpParentWithNonResChWithLocName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string groupId, string mgmtGrpParentWithNonResChWithLocName)
         {
             var resourceId = $"/providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}";

@@ -16,12 +16,12 @@ namespace ModelShapes.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadonlyModel"/>. </summary>
         internal ReadonlyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadonlyModel"/>. </summary>
         /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ReadonlyModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)

@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
-    public partial class ReadonlyModel : IUtf8JsonSerializable, IModelJsonSerializable<ReadonlyModel>
+    public partial class ReadonlyModel : IUtf8JsonSerializable, IJsonModel<ReadonlyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ReadonlyModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ReadonlyModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ReadonlyModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ReadonlyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,7 +26,7 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("Name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,38 +34,31 @@ namespace ModelShapes.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ReadonlyModel IModelJsonSerializable<ReadonlyModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ReadonlyModel IJsonModel<ReadonlyModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeReadonlyModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ReadonlyModel>.Serialize(ModelSerializerOptions options)
+        internal static ReadonlyModel DeserializeReadonlyModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ReadonlyModel IModelSerializable<ReadonlyModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeReadonlyModel(document.RootElement, options);
-        }
-
-        internal static ReadonlyModel DeserializeReadonlyModel(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -80,13 +74,36 @@ namespace ModelShapes.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ReadonlyModel(name.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<ReadonlyModel>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        ReadonlyModel IModel<ReadonlyModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeReadonlyModel(document.RootElement, options);
         }
     }
 }

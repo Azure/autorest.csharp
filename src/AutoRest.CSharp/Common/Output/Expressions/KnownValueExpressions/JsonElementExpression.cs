@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public ValueExpression GetSingle() => Untyped.Invoke(nameof(JsonElement.GetSingle));
         public StringExpression GetString() => new(Untyped.Invoke(nameof(JsonElement.GetString)));
         public ValueExpression GetTimeSpan(string? format) => InvokeExtension(Configuration.ApiTypes.JsonElementExtensionsType, nameof(JsonElementExtensions.GetTimeSpan), Literal(format));
+        public ValueExpression GetArrayLength() => Invoke(nameof(JsonElement.GetArrayLength));
 
         public BoolExpression ValueKindEqualsNull()
             => new(new BinaryOperatorExpression("==", Property(nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Null)));

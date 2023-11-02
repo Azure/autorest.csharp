@@ -22,6 +22,9 @@ namespace MgmtPartialResource
     public partial class VirtualMachineMgmtPartialResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineMgmtPartialResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="vmName"> The vmName. </param>
         internal static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vmName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}";

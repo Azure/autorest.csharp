@@ -16,12 +16,12 @@ namespace ModelShapes.Models
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of UnusedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnusedModel"/>. </summary>
         internal UnusedModel()
         {
         }
 
-        /// <summary> Initializes a new instance of UnusedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnusedModel"/>. </summary>
         /// <param name="unusedString"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnusedModel(string unusedString, IDictionary<string, BinaryData> serializedAdditionalRawData)
