@@ -26,6 +26,9 @@ namespace MgmtListMethods
     public partial class FakeParentWithAncestorWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeParentWithAncestorWithLocResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="fakeName"> The fakeName. </param>
+        /// <param name="fakeParentWithAncestorWithLocName"> The fakeParentWithAncestorWithLocName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string fakeName, string fakeParentWithAncestorWithLocName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithLocs/{fakeParentWithAncestorWithLocName}";

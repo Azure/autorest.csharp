@@ -26,6 +26,9 @@ namespace MgmtNoTypeReplacement
     public partial class NoTypeReplacementModel1Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="NoTypeReplacementModel1Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="noTypeReplacementModel1SName"> The noTypeReplacementModel1SName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}";

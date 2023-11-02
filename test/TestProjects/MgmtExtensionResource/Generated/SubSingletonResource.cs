@@ -26,6 +26,7 @@ namespace MgmtExtensionResource
     public partial class SubSingletonResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SubSingletonResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default";
