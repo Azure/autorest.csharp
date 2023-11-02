@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtExpandResourceTypes.Models
 {
-    public partial class ARecord : IUtf8JsonSerializable, IModelJsonSerializable<ARecord>
+    public partial class ARecord : IUtf8JsonSerializable, IJsonModel<ARecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ARecord>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ARecord>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ARecord>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ARecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Ipv4Address))
@@ -25,7 +26,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("ipv4Address"u8);
                 writer.WriteStringValue(Ipv4Address);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,24 +34,31 @@ namespace MgmtExpandResourceTypes.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ARecord IModelJsonSerializable<ARecord>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ARecord IJsonModel<ARecord>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeARecord(document.RootElement, options);
         }
 
-        internal static ARecord DeserializeARecord(JsonElement element, ModelSerializerOptions options = null)
+        internal static ARecord DeserializeARecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -66,7 +74,7 @@ namespace MgmtExpandResourceTypes.Models
                     ipv4Address = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -75,16 +83,24 @@ namespace MgmtExpandResourceTypes.Models
             return new ARecord(ipv4Address.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ARecord>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ARecord>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ARecord IModelSerializable<ARecord>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ARecord IModel<ARecord>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeARecord(document.RootElement, options);

@@ -7,40 +7,53 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class RollingUpgradeProgressInfo : IUtf8JsonSerializable, IModelJsonSerializable<RollingUpgradeProgressInfo>
+    public partial class RollingUpgradeProgressInfo : IUtf8JsonSerializable, IJsonModel<RollingUpgradeProgressInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RollingUpgradeProgressInfo>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RollingUpgradeProgressInfo>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<RollingUpgradeProgressInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<RollingUpgradeProgressInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SuccessfulInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("successfulInstanceCount"u8);
-                writer.WriteNumberValue(SuccessfulInstanceCount.Value);
+                if (Optional.IsDefined(SuccessfulInstanceCount))
+                {
+                    writer.WritePropertyName("successfulInstanceCount"u8);
+                    writer.WriteNumberValue(SuccessfulInstanceCount.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(FailedInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("failedInstanceCount"u8);
-                writer.WriteNumberValue(FailedInstanceCount.Value);
+                if (Optional.IsDefined(FailedInstanceCount))
+                {
+                    writer.WritePropertyName("failedInstanceCount"u8);
+                    writer.WriteNumberValue(FailedInstanceCount.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InProgressInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("inProgressInstanceCount"u8);
-                writer.WriteNumberValue(InProgressInstanceCount.Value);
+                if (Optional.IsDefined(InProgressInstanceCount))
+                {
+                    writer.WritePropertyName("inProgressInstanceCount"u8);
+                    writer.WriteNumberValue(InProgressInstanceCount.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PendingInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("pendingInstanceCount"u8);
-                writer.WriteNumberValue(PendingInstanceCount.Value);
+                if (Optional.IsDefined(PendingInstanceCount))
+                {
+                    writer.WritePropertyName("pendingInstanceCount"u8);
+                    writer.WriteNumberValue(PendingInstanceCount.Value);
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,24 +61,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        RollingUpgradeProgressInfo IModelJsonSerializable<RollingUpgradeProgressInfo>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RollingUpgradeProgressInfo IJsonModel<RollingUpgradeProgressInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRollingUpgradeProgressInfo(document.RootElement, options);
         }
 
-        internal static RollingUpgradeProgressInfo DeserializeRollingUpgradeProgressInfo(JsonElement element, ModelSerializerOptions options = null)
+        internal static RollingUpgradeProgressInfo DeserializeRollingUpgradeProgressInfo(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,7 +135,7 @@ namespace MgmtAcronymMapping.Models
                     pendingInstanceCount = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -124,16 +144,24 @@ namespace MgmtAcronymMapping.Models
             return new RollingUpgradeProgressInfo(Optional.ToNullable(successfulInstanceCount), Optional.ToNullable(failedInstanceCount), Optional.ToNullable(inProgressInstanceCount), Optional.ToNullable(pendingInstanceCount), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<RollingUpgradeProgressInfo>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<RollingUpgradeProgressInfo>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        RollingUpgradeProgressInfo IModelSerializable<RollingUpgradeProgressInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        RollingUpgradeProgressInfo IModel<RollingUpgradeProgressInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRollingUpgradeProgressInfo(document.RootElement, options);

@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetNetworkConfiguration : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetNetworkConfiguration>
+    public partial class VirtualMachineScaleSetNetworkConfiguration : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetNetworkConfiguration>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetNetworkConfiguration>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetNetworkConfiguration>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetNetworkConfiguration>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualMachineScaleSetNetworkConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -28,48 +29,45 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Primary))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(Primary))
-                {
-                    writer.WritePropertyName("primary"u8);
-                    writer.WriteBooleanValue(Primary.Value);
-                }
-                if (Optional.IsDefined(EnableAcceleratedNetworking))
-                {
-                    writer.WritePropertyName("enableAcceleratedNetworking"u8);
-                    writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
-                }
-                if (Optional.IsDefined(NetworkSecurityGroup))
-                {
-                    writer.WritePropertyName("networkSecurityGroup"u8);
-                    JsonSerializer.Serialize(writer, NetworkSecurityGroup);
-                }
-                if (Optional.IsDefined(DnsSettings))
-                {
-                    writer.WritePropertyName("dnsSettings"u8);
-                    writer.WriteObjectValue(DnsSettings);
-                }
-                if (Optional.IsCollectionDefined(IPConfigurations))
-                {
-                    writer.WritePropertyName("ipConfigurations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in IPConfigurations)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsDefined(EnableIPForwarding))
-                {
-                    writer.WritePropertyName("enableIPForwarding"u8);
-                    writer.WriteBooleanValue(EnableIPForwarding.Value);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("primary"u8);
+                writer.WriteBooleanValue(Primary.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (Optional.IsDefined(EnableAcceleratedNetworking))
+            {
+                writer.WritePropertyName("enableAcceleratedNetworking"u8);
+                writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
+            }
+            if (Optional.IsDefined(NetworkSecurityGroup))
+            {
+                writer.WritePropertyName("networkSecurityGroup"u8);
+                JsonSerializer.Serialize(writer, NetworkSecurityGroup);
+            }
+            if (Optional.IsDefined(DnsSettings))
+            {
+                writer.WritePropertyName("dnsSettings"u8);
+                writer.WriteObjectValue(DnsSettings);
+            }
+            if (Optional.IsCollectionDefined(IPConfigurations))
+            {
+                writer.WritePropertyName("ipConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in IPConfigurations)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(EnableIPForwarding))
+            {
+                writer.WritePropertyName("enableIPForwarding"u8);
+                writer.WriteBooleanValue(EnableIPForwarding.Value);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -77,24 +75,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        VirtualMachineScaleSetNetworkConfiguration IModelJsonSerializable<VirtualMachineScaleSetNetworkConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetNetworkConfiguration IJsonModel<VirtualMachineScaleSetNetworkConfiguration>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetNetworkConfiguration(document.RootElement, options);
         }
 
-        internal static VirtualMachineScaleSetNetworkConfiguration DeserializeVirtualMachineScaleSetNetworkConfiguration(JsonElement element, ModelSerializerOptions options = null)
+        internal static VirtualMachineScaleSetNetworkConfiguration DeserializeVirtualMachineScaleSetNetworkConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -193,7 +198,7 @@ namespace MgmtAcronymMapping.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -202,16 +207,24 @@ namespace MgmtAcronymMapping.Models
             return new VirtualMachineScaleSetNetworkConfiguration(id.Value, serializedAdditionalRawData, name, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup, dnsSettings.Value, Optional.ToList(ipConfigurations), Optional.ToNullable(enableIPForwarding));
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetNetworkConfiguration>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<VirtualMachineScaleSetNetworkConfiguration>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        VirtualMachineScaleSetNetworkConfiguration IModelSerializable<VirtualMachineScaleSetNetworkConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetNetworkConfiguration IModel<VirtualMachineScaleSetNetworkConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetNetworkConfiguration(document.RootElement, options);

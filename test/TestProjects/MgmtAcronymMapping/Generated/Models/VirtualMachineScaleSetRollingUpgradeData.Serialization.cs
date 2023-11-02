@@ -7,19 +7,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtAcronymMapping.Models;
 
 namespace MgmtAcronymMapping
 {
-    public partial class VirtualMachineScaleSetRollingUpgradeData : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetRollingUpgradeData>
+    public partial class VirtualMachineScaleSetRollingUpgradeData : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetRollingUpgradeData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetRollingUpgradeData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetRollingUpgradeData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetRollingUpgradeData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualMachineScaleSetRollingUpgradeData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -35,53 +36,65 @@ namespace MgmtAcronymMapping
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Policy))
+                if (Optional.IsDefined(Policy))
                 {
                     writer.WritePropertyName("policy"u8);
                     writer.WriteObjectValue(Policy);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RunningStatus))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(RunningStatus))
                 {
                     writer.WritePropertyName("runningStatus"u8);
                     writer.WriteObjectValue(RunningStatus);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Progress))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(Progress))
                 {
                     writer.WritePropertyName("progress"u8);
                     writer.WriteObjectValue(Progress);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Error))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(Error))
                 {
                     writer.WritePropertyName("error"u8);
                     writer.WriteObjectValue(Error);
                 }
-                writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -89,24 +102,31 @@ namespace MgmtAcronymMapping
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        VirtualMachineScaleSetRollingUpgradeData IModelJsonSerializable<VirtualMachineScaleSetRollingUpgradeData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetRollingUpgradeData IJsonModel<VirtualMachineScaleSetRollingUpgradeData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetRollingUpgradeData(document.RootElement, options);
         }
 
-        internal static VirtualMachineScaleSetRollingUpgradeData DeserializeVirtualMachineScaleSetRollingUpgradeData(JsonElement element, ModelSerializerOptions options = null)
+        internal static VirtualMachineScaleSetRollingUpgradeData DeserializeVirtualMachineScaleSetRollingUpgradeData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -217,7 +237,7 @@ namespace MgmtAcronymMapping
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -226,16 +246,24 @@ namespace MgmtAcronymMapping
             return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, policy.Value, runningStatus.Value, progress.Value, error.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetRollingUpgradeData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<VirtualMachineScaleSetRollingUpgradeData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        VirtualMachineScaleSetRollingUpgradeData IModelSerializable<VirtualMachineScaleSetRollingUpgradeData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetRollingUpgradeData IModel<VirtualMachineScaleSetRollingUpgradeData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetRollingUpgradeData(document.RootElement, options);

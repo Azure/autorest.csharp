@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class ManagedDiskParameters : IUtf8JsonSerializable, IModelJsonSerializable<ManagedDiskParameters>
+    public partial class ManagedDiskParameters : IUtf8JsonSerializable, IJsonModel<ManagedDiskParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ManagedDiskParameters>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedDiskParameters>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ManagedDiskParameters>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ManagedDiskParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(StorageAccountType))
@@ -36,7 +37,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -44,24 +45,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ManagedDiskParameters IModelJsonSerializable<ManagedDiskParameters>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ManagedDiskParameters IJsonModel<ManagedDiskParameters>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeManagedDiskParameters(document.RootElement, options);
         }
 
-        internal static ManagedDiskParameters DeserializeManagedDiskParameters(JsonElement element, ModelSerializerOptions options = null)
+        internal static ManagedDiskParameters DeserializeManagedDiskParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -97,7 +105,7 @@ namespace MgmtAcronymMapping.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -106,16 +114,24 @@ namespace MgmtAcronymMapping.Models
             return new ManagedDiskParameters(id.Value, serializedAdditionalRawData, Optional.ToNullable(storageAccountType), diskEncryptionSet);
         }
 
-        BinaryData IModelSerializable<ManagedDiskParameters>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ManagedDiskParameters>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ManagedDiskParameters IModelSerializable<ManagedDiskParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ManagedDiskParameters IModel<ManagedDiskParameters>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeManagedDiskParameters(document.RootElement, options);

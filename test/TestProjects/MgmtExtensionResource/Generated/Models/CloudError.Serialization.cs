@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtExtensionResource.Models
 {
-    internal partial class CloudError : IUtf8JsonSerializable, IModelJsonSerializable<CloudError>
+    internal partial class CloudError : IUtf8JsonSerializable, IJsonModel<CloudError>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CloudError>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CloudError>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<CloudError>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<CloudError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ErrorResponse))
@@ -25,7 +26,7 @@ namespace MgmtExtensionResource.Models
                 writer.WritePropertyName("error"u8);
                 writer.WriteObjectValue(ErrorResponse);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,24 +34,31 @@ namespace MgmtExtensionResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        CloudError IModelJsonSerializable<CloudError>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        CloudError IJsonModel<CloudError>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeCloudError(document.RootElement, options);
         }
 
-        internal static CloudError DeserializeCloudError(JsonElement element, ModelSerializerOptions options = null)
+        internal static CloudError DeserializeCloudError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -70,7 +78,7 @@ namespace MgmtExtensionResource.Models
                     error = Models.ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -79,16 +87,24 @@ namespace MgmtExtensionResource.Models
             return new CloudError(error.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<CloudError>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<CloudError>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        CloudError IModelSerializable<CloudError>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        CloudError IModel<CloudError>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeCloudError(document.RootElement, options);

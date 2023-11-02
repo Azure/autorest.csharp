@@ -7,46 +7,56 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtAcronymMapping.Models;
 
 namespace MgmtAcronymMapping
 {
-    public partial class VirtualMachineScaleSetVmData : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmData>
+    public partial class VirtualMachineScaleSetVmData : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetVmData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetVmData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetVmData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualMachineScaleSetVmData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstanceId))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("instanceId"u8);
-                writer.WriteStringValue(InstanceId);
+                if (Optional.IsDefined(InstanceId))
+                {
+                    writer.WritePropertyName("instanceId"u8);
+                    writer.WriteStringValue(InstanceId);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Sku))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                if (Optional.IsDefined(Sku))
+                {
+                    writer.WritePropertyName("sku"u8);
+                    writer.WriteObjectValue(Sku);
+                }
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Zones))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("zones"u8);
-                writer.WriteStartArray();
-                foreach (var item in Zones)
+                if (Optional.IsCollectionDefined(Zones))
                 {
-                    writer.WriteStringValue(item);
+                    writer.WritePropertyName("zones"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Zones)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -61,113 +71,128 @@ namespace MgmtAcronymMapping
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LatestModelApplied))
+                if (Optional.IsDefined(LatestModelApplied))
                 {
                     writer.WritePropertyName("latestModelApplied"u8);
                     writer.WriteBooleanValue(LatestModelApplied.Value);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(VmId))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(VmId))
                 {
                     writer.WritePropertyName("vmId"u8);
                     writer.WriteStringValue(VmId);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstanceView))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(InstanceView))
                 {
                     writer.WritePropertyName("instanceView"u8);
                     writer.WriteObjectValue(InstanceView);
                 }
-                if (Optional.IsDefined(HardwareProfile))
-                {
-                    writer.WritePropertyName("hardwareProfile"u8);
-                    writer.WriteObjectValue(HardwareProfile);
-                }
-                if (Optional.IsDefined(StorageProfile))
-                {
-                    writer.WritePropertyName("storageProfile"u8);
-                    writer.WriteObjectValue(StorageProfile);
-                }
-                if (Optional.IsDefined(AdditionalCapabilities))
-                {
-                    writer.WritePropertyName("additionalCapabilities"u8);
-                    writer.WriteObjectValue(AdditionalCapabilities);
-                }
-                if (Optional.IsDefined(OSProfile))
-                {
-                    writer.WritePropertyName("osProfile"u8);
-                    writer.WriteObjectValue(OSProfile);
-                }
-                if (Optional.IsDefined(SecurityProfile))
-                {
-                    writer.WritePropertyName("securityProfile"u8);
-                    writer.WriteObjectValue(SecurityProfile);
-                }
-                if (Optional.IsDefined(NetworkProfile))
-                {
-                    writer.WritePropertyName("networkProfile"u8);
-                    writer.WriteObjectValue(NetworkProfile);
-                }
-                if (Optional.IsDefined(NetworkProfileConfiguration))
-                {
-                    writer.WritePropertyName("networkProfileConfiguration"u8);
-                    writer.WriteObjectValue(NetworkProfileConfiguration);
-                }
-                if (Optional.IsDefined(DiagnosticsProfile))
-                {
-                    writer.WritePropertyName("diagnosticsProfile"u8);
-                    writer.WriteObjectValue(DiagnosticsProfile);
-                }
-                if (Optional.IsDefined(AvailabilitySet))
-                {
-                    writer.WritePropertyName("availabilitySet"u8);
-                    JsonSerializer.Serialize(writer, AvailabilitySet);
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (Optional.IsDefined(HardwareProfile))
+            {
+                writer.WritePropertyName("hardwareProfile"u8);
+                writer.WriteObjectValue(HardwareProfile);
+            }
+            if (Optional.IsDefined(StorageProfile))
+            {
+                writer.WritePropertyName("storageProfile"u8);
+                writer.WriteObjectValue(StorageProfile);
+            }
+            if (Optional.IsDefined(AdditionalCapabilities))
+            {
+                writer.WritePropertyName("additionalCapabilities"u8);
+                writer.WriteObjectValue(AdditionalCapabilities);
+            }
+            if (Optional.IsDefined(OSProfile))
+            {
+                writer.WritePropertyName("osProfile"u8);
+                writer.WriteObjectValue(OSProfile);
+            }
+            if (Optional.IsDefined(SecurityProfile))
+            {
+                writer.WritePropertyName("securityProfile"u8);
+                writer.WriteObjectValue(SecurityProfile);
+            }
+            if (Optional.IsDefined(NetworkProfile))
+            {
+                writer.WritePropertyName("networkProfile"u8);
+                writer.WriteObjectValue(NetworkProfile);
+            }
+            if (Optional.IsDefined(NetworkProfileConfiguration))
+            {
+                writer.WritePropertyName("networkProfileConfiguration"u8);
+                writer.WriteObjectValue(NetworkProfileConfiguration);
+            }
+            if (Optional.IsDefined(DiagnosticsProfile))
+            {
+                writer.WritePropertyName("diagnosticsProfile"u8);
+                writer.WriteObjectValue(DiagnosticsProfile);
+            }
+            if (Optional.IsDefined(AvailabilitySet))
+            {
+                writer.WritePropertyName("availabilitySet"u8);
+                JsonSerializer.Serialize(writer, AvailabilitySet);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState);
                 }
-                if (Optional.IsDefined(LicenseType))
-                {
-                    writer.WritePropertyName("licenseType"u8);
-                    writer.WriteStringValue(LicenseType);
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ModelDefinitionApplied))
+            }
+            if (Optional.IsDefined(LicenseType))
+            {
+                writer.WritePropertyName("licenseType"u8);
+                writer.WriteStringValue(LicenseType);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ModelDefinitionApplied))
                 {
                     writer.WritePropertyName("modelDefinitionApplied"u8);
                     writer.WriteStringValue(ModelDefinitionApplied);
                 }
-                if (Optional.IsDefined(ProtectionPolicy))
-                {
-                    writer.WritePropertyName("protectionPolicy"u8);
-                    writer.WriteObjectValue(ProtectionPolicy);
-                }
-                writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (Optional.IsDefined(ProtectionPolicy))
+            {
+                writer.WritePropertyName("protectionPolicy"u8);
+                writer.WriteObjectValue(ProtectionPolicy);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -175,24 +200,31 @@ namespace MgmtAcronymMapping
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        VirtualMachineScaleSetVmData IModelJsonSerializable<VirtualMachineScaleSetVmData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmData IJsonModel<VirtualMachineScaleSetVmData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetVmData(document.RootElement, options);
         }
 
-        internal static VirtualMachineScaleSetVmData DeserializeVirtualMachineScaleSetVmData(JsonElement element, ModelSerializerOptions options = null)
+        internal static VirtualMachineScaleSetVmData DeserializeVirtualMachineScaleSetVmData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -448,7 +480,7 @@ namespace MgmtAcronymMapping
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -457,16 +489,24 @@ namespace MgmtAcronymMapping
             return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVmData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<VirtualMachineScaleSetVmData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        VirtualMachineScaleSetVmData IModelSerializable<VirtualMachineScaleSetVmData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmData IModel<VirtualMachineScaleSetVmData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetVmData(document.RootElement, options);

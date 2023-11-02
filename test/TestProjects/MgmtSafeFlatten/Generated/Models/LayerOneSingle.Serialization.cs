@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtSafeFlatten.Models
 {
-    internal partial class LayerOneSingle : IUtf8JsonSerializable, IModelJsonSerializable<LayerOneSingle>
+    internal partial class LayerOneSingle : IUtf8JsonSerializable, IJsonModel<LayerOneSingle>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LayerOneSingle>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LayerOneSingle>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<LayerOneSingle>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<LayerOneSingle>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(LayerTwo))
@@ -25,7 +26,7 @@ namespace MgmtSafeFlatten.Models
                 writer.WritePropertyName("layerTwo"u8);
                 writer.WriteObjectValue(LayerTwo);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,24 +34,31 @@ namespace MgmtSafeFlatten.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        LayerOneSingle IModelJsonSerializable<LayerOneSingle>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        LayerOneSingle IJsonModel<LayerOneSingle>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeLayerOneSingle(document.RootElement, options);
         }
 
-        internal static LayerOneSingle DeserializeLayerOneSingle(JsonElement element, ModelSerializerOptions options = null)
+        internal static LayerOneSingle DeserializeLayerOneSingle(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -70,7 +78,7 @@ namespace MgmtSafeFlatten.Models
                     layerTwo = LayerTwoSingle.DeserializeLayerTwoSingle(property.Value);
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -79,16 +87,24 @@ namespace MgmtSafeFlatten.Models
             return new LayerOneSingle(layerTwo.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<LayerOneSingle>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<LayerOneSingle>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        LayerOneSingle IModelSerializable<LayerOneSingle>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        LayerOneSingle IModel<LayerOneSingle>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeLayerOneSingle(document.RootElement, options);

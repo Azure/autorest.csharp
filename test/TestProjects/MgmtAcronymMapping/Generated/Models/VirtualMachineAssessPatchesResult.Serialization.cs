@@ -7,65 +7,90 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineAssessPatchesResult : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineAssessPatchesResult>
+    public partial class VirtualMachineAssessPatchesResult : IUtf8JsonSerializable, IJsonModel<VirtualMachineAssessPatchesResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineAssessPatchesResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineAssessPatchesResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineAssessPatchesResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualMachineAssessPatchesResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("status"u8);
-                writer.WriteStringValue(Status.Value.ToString());
-            }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AssessmentActivityId))
-            {
-                writer.WritePropertyName("assessmentActivityId"u8);
-                writer.WriteStringValue(AssessmentActivityId);
-            }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RebootPending))
-            {
-                writer.WritePropertyName("rebootPending"u8);
-                writer.WriteBooleanValue(RebootPending.Value);
-            }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CriticalAndSecurityPatchCount))
-            {
-                writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
-                writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
-            }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(OtherPatchCount))
-            {
-                writer.WritePropertyName("otherPatchCount"u8);
-                writer.WriteNumberValue(OtherPatchCount.Value);
-            }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartOn))
-            {
-                writer.WritePropertyName("startDateTime"u8);
-                writer.WriteStringValue(StartOn.Value, "O");
-            }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Patches))
-            {
-                writer.WritePropertyName("patches"u8);
-                writer.WriteStartArray();
-                foreach (var item in Patches)
+                if (Optional.IsDefined(Status))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("status"u8);
+                    writer.WriteStringValue(Status.Value.ToString());
                 }
-                writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Error))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
+                if (Optional.IsDefined(AssessmentActivityId))
+                {
+                    writer.WritePropertyName("assessmentActivityId"u8);
+                    writer.WriteStringValue(AssessmentActivityId);
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(RebootPending))
+                {
+                    writer.WritePropertyName("rebootPending"u8);
+                    writer.WriteBooleanValue(RebootPending.Value);
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(CriticalAndSecurityPatchCount))
+                {
+                    writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
+                    writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(OtherPatchCount))
+                {
+                    writer.WritePropertyName("otherPatchCount"u8);
+                    writer.WriteNumberValue(OtherPatchCount.Value);
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(StartOn))
+                {
+                    writer.WritePropertyName("startDateTime"u8);
+                    writer.WriteStringValue(StartOn.Value, "O");
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(Patches))
+                {
+                    writer.WritePropertyName("patches"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Patches)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(Error))
+                {
+                    writer.WritePropertyName("error"u8);
+                    writer.WriteObjectValue(Error);
+                }
+            }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -73,24 +98,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        VirtualMachineAssessPatchesResult IModelJsonSerializable<VirtualMachineAssessPatchesResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineAssessPatchesResult IJsonModel<VirtualMachineAssessPatchesResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineAssessPatchesResult(document.RootElement, options);
         }
 
-        internal static VirtualMachineAssessPatchesResult DeserializeVirtualMachineAssessPatchesResult(JsonElement element, ModelSerializerOptions options = null)
+        internal static VirtualMachineAssessPatchesResult DeserializeVirtualMachineAssessPatchesResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -181,7 +213,7 @@ namespace MgmtAcronymMapping.Models
                     error = ApiError.DeserializeApiError(property.Value);
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -190,16 +222,24 @@ namespace MgmtAcronymMapping.Models
             return new VirtualMachineAssessPatchesResult(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startDateTime), Optional.ToList(patches), error.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<VirtualMachineAssessPatchesResult>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<VirtualMachineAssessPatchesResult>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        VirtualMachineAssessPatchesResult IModelSerializable<VirtualMachineAssessPatchesResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineAssessPatchesResult IModel<VirtualMachineAssessPatchesResult>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineAssessPatchesResult(document.RootElement, options);

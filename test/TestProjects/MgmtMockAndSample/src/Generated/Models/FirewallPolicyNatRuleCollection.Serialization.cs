@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyNatRuleCollection : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyNatRuleCollection>
+    public partial class FirewallPolicyNatRuleCollection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyNatRuleCollection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyNatRuleCollection>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyNatRuleCollection>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<FirewallPolicyNatRuleCollection>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<FirewallPolicyNatRuleCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Action))
@@ -47,7 +48,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,24 +56,31 @@ namespace MgmtMockAndSample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        FirewallPolicyNatRuleCollection IModelJsonSerializable<FirewallPolicyNatRuleCollection>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FirewallPolicyNatRuleCollection IJsonModel<FirewallPolicyNatRuleCollection>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeFirewallPolicyNatRuleCollection(document.RootElement, options);
         }
 
-        internal static FirewallPolicyNatRuleCollection DeserializeFirewallPolicyNatRuleCollection(JsonElement element, ModelSerializerOptions options = null)
+        internal static FirewallPolicyNatRuleCollection DeserializeFirewallPolicyNatRuleCollection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -129,7 +137,7 @@ namespace MgmtMockAndSample.Models
                     priority = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -138,16 +146,24 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyNatRuleCollection(ruleCollectionType, name.Value, Optional.ToNullable(priority), serializedAdditionalRawData, action.Value, Optional.ToList(rules));
         }
 
-        BinaryData IModelSerializable<FirewallPolicyNatRuleCollection>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<FirewallPolicyNatRuleCollection>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        FirewallPolicyNatRuleCollection IModelSerializable<FirewallPolicyNatRuleCollection>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        FirewallPolicyNatRuleCollection IModel<FirewallPolicyNatRuleCollection>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeFirewallPolicyNatRuleCollection(document.RootElement, options);

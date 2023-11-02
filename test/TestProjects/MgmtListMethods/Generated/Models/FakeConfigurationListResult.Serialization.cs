@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
-    public partial class FakeConfigurationListResult : IUtf8JsonSerializable, IModelJsonSerializable<FakeConfigurationListResult>
+    public partial class FakeConfigurationListResult : IUtf8JsonSerializable, IJsonModel<FakeConfigurationListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FakeConfigurationListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeConfigurationListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<FakeConfigurationListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<FakeConfigurationListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
@@ -31,7 +32,7 @@ namespace MgmtListMethods.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -39,24 +40,31 @@ namespace MgmtListMethods.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        FakeConfigurationListResult IModelJsonSerializable<FakeConfigurationListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FakeConfigurationListResult IJsonModel<FakeConfigurationListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeFakeConfigurationListResult(document.RootElement, options);
         }
 
-        internal static FakeConfigurationListResult DeserializeFakeConfigurationListResult(JsonElement element, ModelSerializerOptions options = null)
+        internal static FakeConfigurationListResult DeserializeFakeConfigurationListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -81,7 +89,7 @@ namespace MgmtListMethods.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -90,16 +98,24 @@ namespace MgmtListMethods.Models
             return new FakeConfigurationListResult(Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<FakeConfigurationListResult>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<FakeConfigurationListResult>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        FakeConfigurationListResult IModelSerializable<FakeConfigurationListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        FakeConfigurationListResult IModel<FakeConfigurationListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeFakeConfigurationListResult(document.RootElement, options);

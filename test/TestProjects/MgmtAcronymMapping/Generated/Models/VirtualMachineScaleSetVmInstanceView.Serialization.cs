@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetVmInstanceView : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmInstanceView>
+    public partial class VirtualMachineScaleSetVmInstanceView : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetVmInstanceView>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmInstanceView>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetVmInstanceView>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetVmInstanceView>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualMachineScaleSetVmInstanceView>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(PlatformUpdateDomain))
@@ -55,10 +56,13 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(VmHealth))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("vmHealth"u8);
-                writer.WriteObjectValue(VmHealth);
+                if (Optional.IsDefined(VmHealth))
+                {
+                    writer.WritePropertyName("vmHealth"u8);
+                    writer.WriteObjectValue(VmHealth);
+                }
             }
             if (Optional.IsDefined(BootDiagnostics))
             {
@@ -75,17 +79,20 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AssignedHost))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("assignedHost"u8);
-                writer.WriteStringValue(AssignedHost);
+                if (Optional.IsDefined(AssignedHost))
+                {
+                    writer.WritePropertyName("assignedHost"u8);
+                    writer.WriteStringValue(AssignedHost);
+                }
             }
             if (Optional.IsDefined(PlacementGroupId))
             {
                 writer.WritePropertyName("placementGroupId"u8);
                 writer.WriteStringValue(PlacementGroupId);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -93,24 +100,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        VirtualMachineScaleSetVmInstanceView IModelJsonSerializable<VirtualMachineScaleSetVmInstanceView>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmInstanceView IJsonModel<VirtualMachineScaleSetVmInstanceView>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetVmInstanceView(document.RootElement, options);
         }
 
-        internal static VirtualMachineScaleSetVmInstanceView DeserializeVirtualMachineScaleSetVmInstanceView(JsonElement element, ModelSerializerOptions options = null)
+        internal static VirtualMachineScaleSetVmInstanceView DeserializeVirtualMachineScaleSetVmInstanceView(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -232,7 +246,7 @@ namespace MgmtAcronymMapping.Models
                     placementGroupId = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -241,16 +255,24 @@ namespace MgmtAcronymMapping.Models
             return new VirtualMachineScaleSetVmInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVmInstanceView>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<VirtualMachineScaleSetVmInstanceView>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        VirtualMachineScaleSetVmInstanceView IModelSerializable<VirtualMachineScaleSetVmInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmInstanceView IModel<VirtualMachineScaleSetVmInstanceView>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetVmInstanceView(document.RootElement, options);

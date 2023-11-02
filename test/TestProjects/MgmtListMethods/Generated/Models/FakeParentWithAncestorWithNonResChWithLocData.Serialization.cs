@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods
 {
-    public partial class FakeParentWithAncestorWithNonResChWithLocData : IUtf8JsonSerializable, IModelJsonSerializable<FakeParentWithAncestorWithNonResChWithLocData>
+    public partial class FakeParentWithAncestorWithNonResChWithLocData : IUtf8JsonSerializable, IJsonModel<FakeParentWithAncestorWithNonResChWithLocData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FakeParentWithAncestorWithNonResChWithLocData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeParentWithAncestorWithNonResChWithLocData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<FakeParentWithAncestorWithNonResChWithLocData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<FakeParentWithAncestorWithNonResChWithLocData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Bar))
@@ -39,27 +40,30 @@ namespace MgmtListMethods
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -67,24 +71,31 @@ namespace MgmtListMethods
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        FakeParentWithAncestorWithNonResChWithLocData IModelJsonSerializable<FakeParentWithAncestorWithNonResChWithLocData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FakeParentWithAncestorWithNonResChWithLocData IJsonModel<FakeParentWithAncestorWithNonResChWithLocData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement, options);
         }
 
-        internal static FakeParentWithAncestorWithNonResChWithLocData DeserializeFakeParentWithAncestorWithNonResChWithLocData(JsonElement element, ModelSerializerOptions options = null)
+        internal static FakeParentWithAncestorWithNonResChWithLocData DeserializeFakeParentWithAncestorWithNonResChWithLocData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -149,7 +160,7 @@ namespace MgmtListMethods
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -158,16 +169,24 @@ namespace MgmtListMethods
             return new FakeParentWithAncestorWithNonResChWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<FakeParentWithAncestorWithNonResChWithLocData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<FakeParentWithAncestorWithNonResChWithLocData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        FakeParentWithAncestorWithNonResChWithLocData IModelSerializable<FakeParentWithAncestorWithNonResChWithLocData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        FakeParentWithAncestorWithNonResChWithLocData IModel<FakeParentWithAncestorWithNonResChWithLocData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement, options);

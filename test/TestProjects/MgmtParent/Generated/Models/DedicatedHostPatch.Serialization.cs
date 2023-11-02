@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtParent.Models
 {
-    public partial class DedicatedHostPatch : IUtf8JsonSerializable, IModelJsonSerializable<DedicatedHostPatch>
+    public partial class DedicatedHostPatch : IUtf8JsonSerializable, IJsonModel<DedicatedHostPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DedicatedHostPatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DedicatedHostPatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<DedicatedHostPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -31,38 +32,44 @@ namespace MgmtParent.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PlatformFaultDomain))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(PlatformFaultDomain))
-                {
-                    writer.WritePropertyName("platformFaultDomain"u8);
-                    writer.WriteNumberValue(PlatformFaultDomain.Value);
-                }
-                if (Optional.IsDefined(AutoReplaceOnFailure))
-                {
-                    writer.WritePropertyName("autoReplaceOnFailure"u8);
-                    writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(HostId))
+                writer.WritePropertyName("platformFaultDomain"u8);
+                writer.WriteNumberValue(PlatformFaultDomain.Value);
+            }
+            if (Optional.IsDefined(AutoReplaceOnFailure))
+            {
+                writer.WritePropertyName("autoReplaceOnFailure"u8);
+                writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(HostId))
                 {
                     writer.WritePropertyName("hostId"u8);
                     writer.WriteStringValue(HostId);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningOn))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningOn))
                 {
                     writer.WritePropertyName("provisioningTime"u8);
                     writer.WriteStringValue(ProvisioningOn.Value, "O");
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState);
                 }
-                writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -70,24 +77,31 @@ namespace MgmtParent.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        DedicatedHostPatch IModelJsonSerializable<DedicatedHostPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DedicatedHostPatch IJsonModel<DedicatedHostPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDedicatedHostPatch(document.RootElement, options);
         }
 
-        internal static DedicatedHostPatch DeserializeDedicatedHostPatch(JsonElement element, ModelSerializerOptions options = null)
+        internal static DedicatedHostPatch DeserializeDedicatedHostPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -166,7 +180,7 @@ namespace MgmtParent.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -175,16 +189,24 @@ namespace MgmtParent.Models
             return new DedicatedHostPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToNullable(provisioningTime), provisioningState.Value);
         }
 
-        BinaryData IModelSerializable<DedicatedHostPatch>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<DedicatedHostPatch>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        DedicatedHostPatch IModelSerializable<DedicatedHostPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        DedicatedHostPatch IModel<DedicatedHostPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDedicatedHostPatch(document.RootElement, options);

@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    internal partial class DiagnosticsProfile : IUtf8JsonSerializable, IModelJsonSerializable<DiagnosticsProfile>
+    internal partial class DiagnosticsProfile : IUtf8JsonSerializable, IJsonModel<DiagnosticsProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DiagnosticsProfile>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiagnosticsProfile>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DiagnosticsProfile>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<DiagnosticsProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(BootDiagnostics))
@@ -25,7 +26,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,24 +34,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        DiagnosticsProfile IModelJsonSerializable<DiagnosticsProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DiagnosticsProfile IJsonModel<DiagnosticsProfile>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDiagnosticsProfile(document.RootElement, options);
         }
 
-        internal static DiagnosticsProfile DeserializeDiagnosticsProfile(JsonElement element, ModelSerializerOptions options = null)
+        internal static DiagnosticsProfile DeserializeDiagnosticsProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -70,7 +78,7 @@ namespace MgmtAcronymMapping.Models
                     bootDiagnostics = BootDiagnostics.DeserializeBootDiagnostics(property.Value);
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -79,16 +87,24 @@ namespace MgmtAcronymMapping.Models
             return new DiagnosticsProfile(bootDiagnostics.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<DiagnosticsProfile>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<DiagnosticsProfile>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        DiagnosticsProfile IModelSerializable<DiagnosticsProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        DiagnosticsProfile IModel<DiagnosticsProfile>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDiagnosticsProfile(document.RootElement, options);

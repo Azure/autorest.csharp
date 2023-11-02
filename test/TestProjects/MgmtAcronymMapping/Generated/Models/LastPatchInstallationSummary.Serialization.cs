@@ -7,85 +7,125 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class LastPatchInstallationSummary : IUtf8JsonSerializable, IModelJsonSerializable<LastPatchInstallationSummary>
+    public partial class LastPatchInstallationSummary : IUtf8JsonSerializable, IJsonModel<LastPatchInstallationSummary>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LastPatchInstallationSummary>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LastPatchInstallationSummary>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<LastPatchInstallationSummary>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<LastPatchInstallationSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("status"u8);
-                writer.WriteStringValue(Status.Value.ToString());
+                if (Optional.IsDefined(Status))
+                {
+                    writer.WritePropertyName("status"u8);
+                    writer.WriteStringValue(Status.Value.ToString());
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstallationActivityId))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("installationActivityId"u8);
-                writer.WriteStringValue(InstallationActivityId);
+                if (Optional.IsDefined(InstallationActivityId))
+                {
+                    writer.WritePropertyName("installationActivityId"u8);
+                    writer.WriteStringValue(InstallationActivityId);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MaintenanceWindowExceeded))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("maintenanceWindowExceeded"u8);
-                writer.WriteBooleanValue(MaintenanceWindowExceeded.Value);
+                if (Optional.IsDefined(MaintenanceWindowExceeded))
+                {
+                    writer.WritePropertyName("maintenanceWindowExceeded"u8);
+                    writer.WriteBooleanValue(MaintenanceWindowExceeded.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RebootStatus))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("rebootStatus"u8);
-                writer.WriteStringValue(RebootStatus.Value.ToString());
+                if (Optional.IsDefined(RebootStatus))
+                {
+                    writer.WritePropertyName("rebootStatus"u8);
+                    writer.WriteStringValue(RebootStatus.Value.ToString());
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NotSelectedPatchCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("notSelectedPatchCount"u8);
-                writer.WriteNumberValue(NotSelectedPatchCount.Value);
+                if (Optional.IsDefined(NotSelectedPatchCount))
+                {
+                    writer.WritePropertyName("notSelectedPatchCount"u8);
+                    writer.WriteNumberValue(NotSelectedPatchCount.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ExcludedPatchCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("excludedPatchCount"u8);
-                writer.WriteNumberValue(ExcludedPatchCount.Value);
+                if (Optional.IsDefined(ExcludedPatchCount))
+                {
+                    writer.WritePropertyName("excludedPatchCount"u8);
+                    writer.WriteNumberValue(ExcludedPatchCount.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PendingPatchCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("pendingPatchCount"u8);
-                writer.WriteNumberValue(PendingPatchCount.Value);
+                if (Optional.IsDefined(PendingPatchCount))
+                {
+                    writer.WritePropertyName("pendingPatchCount"u8);
+                    writer.WriteNumberValue(PendingPatchCount.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(InstalledPatchCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("installedPatchCount"u8);
-                writer.WriteNumberValue(InstalledPatchCount.Value);
+                if (Optional.IsDefined(InstalledPatchCount))
+                {
+                    writer.WritePropertyName("installedPatchCount"u8);
+                    writer.WriteNumberValue(InstalledPatchCount.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(FailedPatchCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("failedPatchCount"u8);
-                writer.WriteNumberValue(FailedPatchCount.Value);
+                if (Optional.IsDefined(FailedPatchCount))
+                {
+                    writer.WritePropertyName("failedPatchCount"u8);
+                    writer.WriteNumberValue(FailedPatchCount.Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("startTime"u8);
-                writer.WriteStringValue(StartOn.Value, "O");
+                if (Optional.IsDefined(StartOn))
+                {
+                    writer.WritePropertyName("startTime"u8);
+                    writer.WriteStringValue(StartOn.Value, "O");
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastModifiedOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("lastModifiedTime"u8);
-                writer.WriteStringValue(LastModifiedOn.Value, "O");
+                if (Optional.IsDefined(LastModifiedOn))
+                {
+                    writer.WritePropertyName("lastModifiedTime"u8);
+                    writer.WriteStringValue(LastModifiedOn.Value, "O");
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartedBy))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("startedBy"u8);
-                writer.WriteStringValue(StartedBy);
+                if (Optional.IsDefined(StartedBy))
+                {
+                    writer.WritePropertyName("startedBy"u8);
+                    writer.WriteStringValue(StartedBy);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Error))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
+                if (Optional.IsDefined(Error))
+                {
+                    writer.WritePropertyName("error"u8);
+                    writer.WriteObjectValue(Error);
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -93,24 +133,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        LastPatchInstallationSummary IModelJsonSerializable<LastPatchInstallationSummary>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        LastPatchInstallationSummary IJsonModel<LastPatchInstallationSummary>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeLastPatchInstallationSummary(document.RootElement, options);
         }
 
-        internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element, ModelSerializerOptions options = null)
+        internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -242,7 +289,7 @@ namespace MgmtAcronymMapping.Models
                     error = ApiError.DeserializeApiError(property.Value);
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -251,16 +298,24 @@ namespace MgmtAcronymMapping.Models
             return new LastPatchInstallationSummary(Optional.ToNullable(status), installationActivityId.Value, Optional.ToNullable(maintenanceWindowExceeded), Optional.ToNullable(rebootStatus), Optional.ToNullable(notSelectedPatchCount), Optional.ToNullable(excludedPatchCount), Optional.ToNullable(pendingPatchCount), Optional.ToNullable(installedPatchCount), Optional.ToNullable(failedPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), startedBy.Value, error.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<LastPatchInstallationSummary>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<LastPatchInstallationSummary>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        LastPatchInstallationSummary IModelSerializable<LastPatchInstallationSummary>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        LastPatchInstallationSummary IModel<LastPatchInstallationSummary>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeLastPatchInstallationSummary(document.RootElement, options);

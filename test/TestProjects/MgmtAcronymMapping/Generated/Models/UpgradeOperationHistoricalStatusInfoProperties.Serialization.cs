@@ -7,50 +7,69 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class UpgradeOperationHistoricalStatusInfoProperties : IUtf8JsonSerializable, IModelJsonSerializable<UpgradeOperationHistoricalStatusInfoProperties>
+    public partial class UpgradeOperationHistoricalStatusInfoProperties : IUtf8JsonSerializable, IJsonModel<UpgradeOperationHistoricalStatusInfoProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UpgradeOperationHistoricalStatusInfoProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpgradeOperationHistoricalStatusInfoProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<UpgradeOperationHistoricalStatusInfoProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RunningStatus))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("runningStatus"u8);
-                writer.WriteObjectValue(RunningStatus);
+                if (Optional.IsDefined(RunningStatus))
+                {
+                    writer.WritePropertyName("runningStatus"u8);
+                    writer.WriteObjectValue(RunningStatus);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Progress))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("progress"u8);
-                writer.WriteObjectValue(Progress);
+                if (Optional.IsDefined(Progress))
+                {
+                    writer.WritePropertyName("progress"u8);
+                    writer.WriteObjectValue(Progress);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Error))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
+                if (Optional.IsDefined(Error))
+                {
+                    writer.WritePropertyName("error"u8);
+                    writer.WriteObjectValue(Error);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StartedBy))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("startedBy"u8);
-                writer.WriteStringValue(StartedBy.Value.ToSerialString());
+                if (Optional.IsDefined(StartedBy))
+                {
+                    writer.WritePropertyName("startedBy"u8);
+                    writer.WriteStringValue(StartedBy.Value.ToSerialString());
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TargetImageReference))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("targetImageReference"u8);
-                writer.WriteObjectValue(TargetImageReference);
+                if (Optional.IsDefined(TargetImageReference))
+                {
+                    writer.WritePropertyName("targetImageReference"u8);
+                    writer.WriteObjectValue(TargetImageReference);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(RollbackInfo))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("rollbackInfo"u8);
-                writer.WriteObjectValue(RollbackInfo);
+                if (Optional.IsDefined(RollbackInfo))
+                {
+                    writer.WritePropertyName("rollbackInfo"u8);
+                    writer.WriteObjectValue(RollbackInfo);
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,24 +77,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        UpgradeOperationHistoricalStatusInfoProperties IModelJsonSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        UpgradeOperationHistoricalStatusInfoProperties IJsonModel<UpgradeOperationHistoricalStatusInfoProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeUpgradeOperationHistoricalStatusInfoProperties(document.RootElement, options);
         }
 
-        internal static UpgradeOperationHistoricalStatusInfoProperties DeserializeUpgradeOperationHistoricalStatusInfoProperties(JsonElement element, ModelSerializerOptions options = null)
+        internal static UpgradeOperationHistoricalStatusInfoProperties DeserializeUpgradeOperationHistoricalStatusInfoProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -145,7 +171,7 @@ namespace MgmtAcronymMapping.Models
                     rollbackInfo = RollbackStatusInfo.DeserializeRollbackStatusInfo(property.Value);
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -154,16 +180,24 @@ namespace MgmtAcronymMapping.Models
             return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<UpgradeOperationHistoricalStatusInfoProperties>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        UpgradeOperationHistoricalStatusInfoProperties IModelSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        UpgradeOperationHistoricalStatusInfoProperties IModel<UpgradeOperationHistoricalStatusInfoProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUpgradeOperationHistoricalStatusInfoProperties(document.RootElement, options);

@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class DiskEncryptionSetPatch : IUtf8JsonSerializable, IModelJsonSerializable<DiskEncryptionSetPatch>
+    public partial class DiskEncryptionSetPatch : IUtf8JsonSerializable, IJsonModel<DiskEncryptionSetPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DiskEncryptionSetPatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskEncryptionSetPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DiskEncryptionSetPatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<DiskEncryptionSetPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -38,33 +39,30 @@ namespace MgmtMockAndSample.Models
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, Identity, serializeOptions);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(EncryptionType))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(EncryptionType))
-                {
-                    writer.WritePropertyName("encryptionType"u8);
-                    writer.WriteStringValue(EncryptionType.Value.ToString());
-                }
-                if (Optional.IsDefined(ActiveKey))
-                {
-                    writer.WritePropertyName("activeKey"u8);
-                    writer.WriteObjectValue(ActiveKey);
-                }
-                if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
-                {
-                    writer.WritePropertyName("rotationToLatestKeyVersionEnabled"u8);
-                    writer.WriteBooleanValue(RotationToLatestKeyVersionEnabled.Value);
-                }
-                if (Optional.IsDefined(FederatedClientId))
-                {
-                    writer.WritePropertyName("federatedClientId"u8);
-                    writer.WriteStringValue(FederatedClientId);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("encryptionType"u8);
+                writer.WriteStringValue(EncryptionType.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (Optional.IsDefined(ActiveKey))
+            {
+                writer.WritePropertyName("activeKey"u8);
+                writer.WriteObjectValue(ActiveKey);
+            }
+            if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
+            {
+                writer.WritePropertyName("rotationToLatestKeyVersionEnabled"u8);
+                writer.WriteBooleanValue(RotationToLatestKeyVersionEnabled.Value);
+            }
+            if (Optional.IsDefined(FederatedClientId))
+            {
+                writer.WritePropertyName("federatedClientId"u8);
+                writer.WriteStringValue(FederatedClientId);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -72,24 +70,31 @@ namespace MgmtMockAndSample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        DiskEncryptionSetPatch IModelJsonSerializable<DiskEncryptionSetPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DiskEncryptionSetPatch IJsonModel<DiskEncryptionSetPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDiskEncryptionSetPatch(document.RootElement, options);
         }
 
-        internal static DiskEncryptionSetPatch DeserializeDiskEncryptionSetPatch(JsonElement element, ModelSerializerOptions options = null)
+        internal static DiskEncryptionSetPatch DeserializeDiskEncryptionSetPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -173,7 +178,7 @@ namespace MgmtMockAndSample.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -182,16 +187,24 @@ namespace MgmtMockAndSample.Models
             return new DiskEncryptionSetPatch(Optional.ToDictionary(tags), identity, Optional.ToNullable(encryptionType), activeKey.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), federatedClientId.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<DiskEncryptionSetPatch>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<DiskEncryptionSetPatch>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        DiskEncryptionSetPatch IModelSerializable<DiskEncryptionSetPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        DiskEncryptionSetPatch IModel<DiskEncryptionSetPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDiskEncryptionSetPatch(document.RootElement, options);

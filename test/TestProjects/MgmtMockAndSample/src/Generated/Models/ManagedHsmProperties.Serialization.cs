@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class ManagedHsmProperties : IUtf8JsonSerializable, IModelJsonSerializable<ManagedHsmProperties>
+    public partial class ManagedHsmProperties : IUtf8JsonSerializable, IJsonModel<ManagedHsmProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ManagedHsmProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedHsmProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ManagedHsmProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ManagedHsmProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Settings))
@@ -64,10 +65,13 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(HsmUri))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("hsmUri"u8);
-                writer.WriteStringValue(HsmUri.AbsoluteUri);
+                if (Optional.IsDefined(HsmUri))
+                {
+                    writer.WritePropertyName("hsmUri"u8);
+                    writer.WriteStringValue(HsmUri.AbsoluteUri);
+                }
             }
             if (Optional.IsDefined(EnableSoftDelete))
             {
@@ -89,42 +93,54 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(StatusMessage))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("statusMessage"u8);
-                writer.WriteStringValue(StatusMessage);
+                if (Optional.IsDefined(StatusMessage))
+                {
+                    writer.WritePropertyName("statusMessage"u8);
+                    writer.WriteStringValue(StatusMessage);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
+                if (Optional.IsDefined(ProvisioningState))
+                {
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
             }
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(PrivateEndpointConnections))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("privateEndpointConnections"u8);
-                writer.WriteStartArray();
-                foreach (var item in PrivateEndpointConnections)
+                if (Optional.IsCollectionDefined(PrivateEndpointConnections))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("privateEndpointConnections"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in PrivateEndpointConnections)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ScheduledPurgeOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("scheduledPurgeDate"u8);
-                writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
+                if (Optional.IsDefined(ScheduledPurgeOn))
+                {
+                    writer.WritePropertyName("scheduledPurgeDate"u8);
+                    writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -132,24 +148,31 @@ namespace MgmtMockAndSample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ManagedHsmProperties IModelJsonSerializable<ManagedHsmProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ManagedHsmProperties IJsonModel<ManagedHsmProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeManagedHsmProperties(document.RootElement, options);
         }
 
-        internal static ManagedHsmProperties DeserializeManagedHsmProperties(JsonElement element, ModelSerializerOptions options = null)
+        internal static ManagedHsmProperties DeserializeManagedHsmProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -325,7 +348,7 @@ namespace MgmtMockAndSample.Models
                     scheduledPurgeDate = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -334,16 +357,24 @@ namespace MgmtMockAndSample.Models
             return new ManagedHsmProperties(settings.Value, protectedSettings.Value, rawMessage.Value, Optional.ToNullable(tenantId), Optional.ToList(initialAdminObjectIds), hsmUri.Value, Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enablePurgeProtection), Optional.ToNullable(createMode), statusMessage.Value, Optional.ToNullable(provisioningState), networkAcls.Value, Optional.ToList(privateEndpointConnections), Optional.ToNullable(publicNetworkAccess), Optional.ToNullable(scheduledPurgeDate), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ManagedHsmProperties>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ManagedHsmProperties>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ManagedHsmProperties IModelSerializable<ManagedHsmProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ManagedHsmProperties IModel<ManagedHsmProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeManagedHsmProperties(document.RootElement, options);

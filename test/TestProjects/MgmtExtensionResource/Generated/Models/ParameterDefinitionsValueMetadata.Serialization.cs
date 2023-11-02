@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtExtensionResource.Models
 {
-    public partial class ParameterDefinitionsValueMetadata : IUtf8JsonSerializable, IModelJsonSerializable<ParameterDefinitionsValueMetadata>
+    public partial class ParameterDefinitionsValueMetadata : IUtf8JsonSerializable, IJsonModel<ParameterDefinitionsValueMetadata>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ParameterDefinitionsValueMetadata>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ParameterDefinitionsValueMetadata>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ParameterDefinitionsValueMetadata>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ParameterDefinitionsValueMetadata>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(DisplayName))
@@ -55,17 +56,21 @@ namespace MgmtExtensionResource.Models
             writer.WriteEndObject();
         }
 
-        ParameterDefinitionsValueMetadata IModelJsonSerializable<ParameterDefinitionsValueMetadata>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ParameterDefinitionsValueMetadata IJsonModel<ParameterDefinitionsValueMetadata>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeParameterDefinitionsValueMetadata(document.RootElement, options);
         }
 
-        internal static ParameterDefinitionsValueMetadata DeserializeParameterDefinitionsValueMetadata(JsonElement element, ModelSerializerOptions options = null)
+        internal static ParameterDefinitionsValueMetadata DeserializeParameterDefinitionsValueMetadata(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,16 +114,24 @@ namespace MgmtExtensionResource.Models
             return new ParameterDefinitionsValueMetadata(displayName.Value, description.Value, strongType.Value, Optional.ToNullable(assignPermissions), additionalProperties);
         }
 
-        BinaryData IModelSerializable<ParameterDefinitionsValueMetadata>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ParameterDefinitionsValueMetadata>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ParameterDefinitionsValueMetadata IModelSerializable<ParameterDefinitionsValueMetadata>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ParameterDefinitionsValueMetadata IModel<ParameterDefinitionsValueMetadata>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeParameterDefinitionsValueMetadata(document.RootElement, options);

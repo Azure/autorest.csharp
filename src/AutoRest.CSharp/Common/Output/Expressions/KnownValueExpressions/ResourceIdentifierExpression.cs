@@ -11,6 +11,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     {
         public static ResourceIdentifierExpression ReferenceField(string fieldName) => new(new MemberExpression(null, fieldName));
 
+        public static ResourceIdentifierExpression Root => new(new MemberExpression(typeof(ResourceIdentifier), nameof(ResourceIdentifier.Root)));
+
         public StringExpression Name => new(Property(nameof(ResourceIdentifier.Name)));
         public ResourceIdentifierExpression Parent => new(Property(nameof(ResourceIdentifier.Parent)));
         public StringExpression Provider => new(Property(nameof(ResourceIdentifier.Provider)));

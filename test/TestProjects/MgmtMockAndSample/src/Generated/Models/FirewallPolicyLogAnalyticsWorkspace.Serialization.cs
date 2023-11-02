@@ -7,18 +7,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyLogAnalyticsWorkspace : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyLogAnalyticsWorkspace>
+    public partial class FirewallPolicyLogAnalyticsWorkspace : IUtf8JsonSerializable, IJsonModel<FirewallPolicyLogAnalyticsWorkspace>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyLogAnalyticsWorkspace>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyLogAnalyticsWorkspace>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<FirewallPolicyLogAnalyticsWorkspace>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<FirewallPolicyLogAnalyticsWorkspace>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Region))
@@ -31,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("workspaceId"u8);
                 JsonSerializer.Serialize(writer, WorkspaceId);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -39,24 +40,31 @@ namespace MgmtMockAndSample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        FirewallPolicyLogAnalyticsWorkspace IModelJsonSerializable<FirewallPolicyLogAnalyticsWorkspace>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FirewallPolicyLogAnalyticsWorkspace IJsonModel<FirewallPolicyLogAnalyticsWorkspace>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeFirewallPolicyLogAnalyticsWorkspace(document.RootElement, options);
         }
 
-        internal static FirewallPolicyLogAnalyticsWorkspace DeserializeFirewallPolicyLogAnalyticsWorkspace(JsonElement element, ModelSerializerOptions options = null)
+        internal static FirewallPolicyLogAnalyticsWorkspace DeserializeFirewallPolicyLogAnalyticsWorkspace(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -82,7 +90,7 @@ namespace MgmtMockAndSample.Models
                     workspaceId = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -91,16 +99,24 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyLogAnalyticsWorkspace(region.Value, workspaceId, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<FirewallPolicyLogAnalyticsWorkspace>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<FirewallPolicyLogAnalyticsWorkspace>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        FirewallPolicyLogAnalyticsWorkspace IModelSerializable<FirewallPolicyLogAnalyticsWorkspace>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        FirewallPolicyLogAnalyticsWorkspace IModel<FirewallPolicyLogAnalyticsWorkspace>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeFirewallPolicyLogAnalyticsWorkspace(document.RootElement, options);

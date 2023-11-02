@@ -7,70 +7,86 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class GuestConfigurationAssignmentProperties : IUtf8JsonSerializable, IModelJsonSerializable<GuestConfigurationAssignmentProperties>
+    public partial class GuestConfigurationAssignmentProperties : IUtf8JsonSerializable, IJsonModel<GuestConfigurationAssignmentProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<GuestConfigurationAssignmentProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GuestConfigurationAssignmentProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<GuestConfigurationAssignmentProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<GuestConfigurationAssignmentProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(TargetResourceId))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                if (TargetResourceId != null)
+                if (Optional.IsDefined(TargetResourceId))
                 {
-                    writer.WritePropertyName("targetResourceId"u8);
-                    writer.WriteStringValue(TargetResourceId);
-                }
-                else
-                {
-                    writer.WriteNull("targetResourceId");
+                    if (TargetResourceId != null)
+                    {
+                        writer.WritePropertyName("targetResourceId"u8);
+                        writer.WriteStringValue(TargetResourceId);
+                    }
+                    else
+                    {
+                        writer.WriteNull("targetResourceId");
+                    }
                 }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ComplianceStatus))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("complianceStatus"u8);
-                writer.WriteStringValue(ComplianceStatus.Value.ToString());
-            }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastComplianceStatusChecked))
-            {
-                if (LastComplianceStatusChecked != null)
+                if (Optional.IsDefined(ComplianceStatus))
                 {
-                    writer.WritePropertyName("lastComplianceStatusChecked"u8);
-                    writer.WriteStringValue(LastComplianceStatusChecked.Value, "O");
-                }
-                else
-                {
-                    writer.WriteNull("lastComplianceStatusChecked");
+                    writer.WritePropertyName("complianceStatus"u8);
+                    writer.WriteStringValue(ComplianceStatus.Value.ToString());
                 }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LatestReportId))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                if (LatestReportId != null)
+                if (Optional.IsDefined(LastComplianceStatusChecked))
                 {
-                    writer.WritePropertyName("latestReportId"u8);
-                    writer.WriteStringValue(LatestReportId);
-                }
-                else
-                {
-                    writer.WriteNull("latestReportId");
+                    if (LastComplianceStatusChecked != null)
+                    {
+                        writer.WritePropertyName("lastComplianceStatusChecked"u8);
+                        writer.WriteStringValue(LastComplianceStatusChecked.Value, "O");
+                    }
+                    else
+                    {
+                        writer.WriteNull("lastComplianceStatusChecked");
+                    }
                 }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ParameterHash))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                if (ParameterHash != null)
+                if (Optional.IsDefined(LatestReportId))
                 {
-                    writer.WritePropertyName("parameterHash"u8);
-                    writer.WriteStringValue(ParameterHash);
+                    if (LatestReportId != null)
+                    {
+                        writer.WritePropertyName("latestReportId"u8);
+                        writer.WriteStringValue(LatestReportId);
+                    }
+                    else
+                    {
+                        writer.WriteNull("latestReportId");
+                    }
                 }
-                else
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ParameterHash))
                 {
-                    writer.WriteNull("parameterHash");
+                    if (ParameterHash != null)
+                    {
+                        writer.WritePropertyName("parameterHash"u8);
+                        writer.WriteStringValue(ParameterHash);
+                    }
+                    else
+                    {
+                        writer.WriteNull("parameterHash");
+                    }
                 }
             }
             if (Optional.IsDefined(Context))
@@ -78,43 +94,52 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AssignmentHash))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                if (AssignmentHash != null)
+                if (Optional.IsDefined(AssignmentHash))
                 {
-                    writer.WritePropertyName("assignmentHash"u8);
-                    writer.WriteStringValue(AssignmentHash);
-                }
-                else
-                {
-                    writer.WriteNull("assignmentHash");
+                    if (AssignmentHash != null)
+                    {
+                        writer.WritePropertyName("assignmentHash"u8);
+                        writer.WriteStringValue(AssignmentHash);
+                    }
+                    else
+                    {
+                        writer.WriteNull("assignmentHash");
+                    }
                 }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                if (ProvisioningState != null)
+                if (Optional.IsDefined(ProvisioningState))
                 {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("provisioningState");
+                    if (ProvisioningState != null)
+                    {
+                        writer.WritePropertyName("provisioningState"u8);
+                        writer.WriteStringValue(ProvisioningState.Value.ToString());
+                    }
+                    else
+                    {
+                        writer.WriteNull("provisioningState");
+                    }
                 }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceType))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                if (ResourceType != null)
+                if (Optional.IsDefined(ResourceType))
                 {
-                    writer.WritePropertyName("resourceType"u8);
-                    writer.WriteStringValue(ResourceType.Value);
-                }
-                else
-                {
-                    writer.WriteNull("resourceType");
+                    if (ResourceType != null)
+                    {
+                        writer.WritePropertyName("resourceType"u8);
+                        writer.WriteStringValue(ResourceType.Value);
+                    }
+                    else
+                    {
+                        writer.WriteNull("resourceType");
+                    }
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -122,24 +147,31 @@ namespace MgmtMockAndSample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        GuestConfigurationAssignmentProperties IModelJsonSerializable<GuestConfigurationAssignmentProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        GuestConfigurationAssignmentProperties IJsonModel<GuestConfigurationAssignmentProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);
         }
 
-        internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element, ModelSerializerOptions options = null)
+        internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -242,7 +274,7 @@ namespace MgmtMockAndSample.Models
                     resourceType = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -251,16 +283,24 @@ namespace MgmtMockAndSample.Models
             return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(resourceType), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<GuestConfigurationAssignmentProperties>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<GuestConfigurationAssignmentProperties>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        GuestConfigurationAssignmentProperties IModelSerializable<GuestConfigurationAssignmentProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        GuestConfigurationAssignmentProperties IModel<GuestConfigurationAssignmentProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);

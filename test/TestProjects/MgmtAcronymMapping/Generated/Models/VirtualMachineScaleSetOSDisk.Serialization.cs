@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetOSDisk : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetOSDisk>
+    public partial class VirtualMachineScaleSetOSDisk : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetOSDisk>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetOSDisk>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetOSDisk>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetOSDisk>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualMachineScaleSetOSDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -77,7 +78,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("securityType"u8);
                 writer.WriteStringValue(SecurityType.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -85,24 +86,31 @@ namespace MgmtAcronymMapping.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        VirtualMachineScaleSetOSDisk IModelJsonSerializable<VirtualMachineScaleSetOSDisk>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetOSDisk IJsonModel<VirtualMachineScaleSetOSDisk>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetOSDisk(document.RootElement, options);
         }
 
-        internal static VirtualMachineScaleSetOSDisk DeserializeVirtualMachineScaleSetOSDisk(JsonElement element, ModelSerializerOptions options = null)
+        internal static VirtualMachineScaleSetOSDisk DeserializeVirtualMachineScaleSetOSDisk(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -219,7 +227,7 @@ namespace MgmtAcronymMapping.Models
                     securityType = new DiskSecurityType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -228,16 +236,24 @@ namespace MgmtAcronymMapping.Models
             return new VirtualMachineScaleSetOSDisk(name.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, diffDiskSettings.Value, Optional.ToNullable(diskSizeGB), Optional.ToNullable(osType), image.Value, Optional.ToList(vhdContainers), managedDisk.Value, Optional.ToNullable(securityType), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetOSDisk>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<VirtualMachineScaleSetOSDisk>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        VirtualMachineScaleSetOSDisk IModelSerializable<VirtualMachineScaleSetOSDisk>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetOSDisk IModel<VirtualMachineScaleSetOSDisk>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetOSDisk(document.RootElement, options);

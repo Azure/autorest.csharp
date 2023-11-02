@@ -7,67 +7,68 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class RoleAssignmentData : IUtf8JsonSerializable, IModelJsonSerializable<RoleAssignmentData>
+    public partial class RoleAssignmentData : IUtf8JsonSerializable, IJsonModel<RoleAssignmentData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RoleAssignmentData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoleAssignmentData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<RoleAssignmentData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<RoleAssignmentData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Scope))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(Scope))
-                {
-                    writer.WritePropertyName("scope"u8);
-                    writer.WriteStringValue(Scope);
-                }
-                if (Optional.IsDefined(RoleDefinitionId))
-                {
-                    writer.WritePropertyName("roleDefinitionId"u8);
-                    writer.WriteStringValue(RoleDefinitionId);
-                }
-                if (Optional.IsDefined(PrincipalId))
-                {
-                    writer.WritePropertyName("principalId"u8);
-                    writer.WriteStringValue(PrincipalId);
-                }
-                if (Optional.IsDefined(CanDelegate))
-                {
-                    writer.WritePropertyName("canDelegate"u8);
-                    writer.WriteBooleanValue(CanDelegate.Value);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("scope"u8);
+                writer.WriteStringValue(Scope);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (Optional.IsDefined(RoleDefinitionId))
+            {
+                writer.WritePropertyName("roleDefinitionId"u8);
+                writer.WriteStringValue(RoleDefinitionId);
+            }
+            if (Optional.IsDefined(PrincipalId))
+            {
+                writer.WritePropertyName("principalId"u8);
+                writer.WriteStringValue(PrincipalId);
+            }
+            if (Optional.IsDefined(CanDelegate))
+            {
+                writer.WritePropertyName("canDelegate"u8);
+                writer.WriteBooleanValue(CanDelegate.Value);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,24 +76,31 @@ namespace MgmtMockAndSample
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        RoleAssignmentData IModelJsonSerializable<RoleAssignmentData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RoleAssignmentData IJsonModel<RoleAssignmentData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRoleAssignmentData(document.RootElement, options);
         }
 
-        internal static RoleAssignmentData DeserializeRoleAssignmentData(JsonElement element, ModelSerializerOptions options = null)
+        internal static RoleAssignmentData DeserializeRoleAssignmentData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -170,7 +178,7 @@ namespace MgmtMockAndSample
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -179,16 +187,24 @@ namespace MgmtMockAndSample
             return new RoleAssignmentData(id, name, type, systemData.Value, scope.Value, roleDefinitionId.Value, principalId.Value, Optional.ToNullable(canDelegate), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<RoleAssignmentData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<RoleAssignmentData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        RoleAssignmentData IModelSerializable<RoleAssignmentData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        RoleAssignmentData IModel<RoleAssignmentData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRoleAssignmentData(document.RootElement, options);

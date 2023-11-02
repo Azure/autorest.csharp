@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class DeploymentWhatIf : IUtf8JsonSerializable, IModelJsonSerializable<DeploymentWhatIf>
+    public partial class DeploymentWhatIf : IUtf8JsonSerializable, IJsonModel<DeploymentWhatIf>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeploymentWhatIf>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentWhatIf>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DeploymentWhatIf>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<DeploymentWhatIf>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Location))
@@ -27,7 +28,7 @@ namespace MgmtScopeResource.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteObjectValue(Properties);
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -35,24 +36,31 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        DeploymentWhatIf IModelJsonSerializable<DeploymentWhatIf>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DeploymentWhatIf IJsonModel<DeploymentWhatIf>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDeploymentWhatIf(document.RootElement, options);
         }
 
-        internal static DeploymentWhatIf DeserializeDeploymentWhatIf(JsonElement element, ModelSerializerOptions options = null)
+        internal static DeploymentWhatIf DeserializeDeploymentWhatIf(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -74,7 +82,7 @@ namespace MgmtScopeResource.Models
                     properties = DeploymentWhatIfProperties.DeserializeDeploymentWhatIfProperties(property.Value);
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -83,16 +91,24 @@ namespace MgmtScopeResource.Models
             return new DeploymentWhatIf(location.Value, properties, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<DeploymentWhatIf>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<DeploymentWhatIf>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        DeploymentWhatIf IModelSerializable<DeploymentWhatIf>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        DeploymentWhatIf IModel<DeploymentWhatIf>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDeploymentWhatIf(document.RootElement, options);

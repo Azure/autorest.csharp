@@ -7,111 +7,104 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
-    public partial class PolicyDefinitionData : IUtf8JsonSerializable, IModelJsonSerializable<PolicyDefinitionData>
+    public partial class PolicyDefinitionData : IUtf8JsonSerializable, IJsonModel<PolicyDefinitionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PolicyDefinitionData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PolicyDefinitionData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<PolicyDefinitionData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<PolicyDefinitionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PolicyType))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(PolicyType))
-                {
-                    writer.WritePropertyName("policyType"u8);
-                    writer.WriteStringValue(PolicyType.Value.ToString());
-                }
-                if (Optional.IsDefined(Mode))
-                {
-                    writer.WritePropertyName("mode"u8);
-                    writer.WriteStringValue(Mode);
-                }
-                if (Optional.IsDefined(DisplayName))
-                {
-                    writer.WritePropertyName("displayName"u8);
-                    writer.WriteStringValue(DisplayName);
-                }
-                if (Optional.IsDefined(Description))
-                {
-                    writer.WritePropertyName("description"u8);
-                    writer.WriteStringValue(Description);
-                }
-                if (Optional.IsDefined(PolicyRule))
-                {
-                    writer.WritePropertyName("policyRule"u8);
+                writer.WritePropertyName("policyType"u8);
+                writer.WriteStringValue(PolicyType.Value.ToString());
+            }
+            if (Optional.IsDefined(Mode))
+            {
+                writer.WritePropertyName("mode"u8);
+                writer.WriteStringValue(Mode);
+            }
+            if (Optional.IsDefined(DisplayName))
+            {
+                writer.WritePropertyName("displayName"u8);
+                writer.WriteStringValue(DisplayName);
+            }
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            if (Optional.IsDefined(PolicyRule))
+            {
+                writer.WritePropertyName("policyRule"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(PolicyRule);
 #else
-<<<<<<< HEAD
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(PolicyRule.ToString()).RootElement);
-=======
                 using (JsonDocument document = JsonDocument.Parse(PolicyRule))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
->>>>>>> origin/feature/v3
 #endif
-                }
-                if (Optional.IsDefined(Metadata))
-                {
-                    writer.WritePropertyName("metadata"u8);
+            }
+            if (Optional.IsDefined(Metadata))
+            {
+                writer.WritePropertyName("metadata"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Metadata);
 #else
-<<<<<<< HEAD
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(Metadata.ToString()).RootElement);
-=======
                 using (JsonDocument document = JsonDocument.Parse(Metadata))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
->>>>>>> origin/feature/v3
 #endif
-                }
-                if (Optional.IsCollectionDefined(Parameters))
+            }
+            if (Optional.IsCollectionDefined(Parameters))
+            {
+                writer.WritePropertyName("parameters"u8);
+                writer.WriteStartObject();
+                foreach (var item in Parameters)
                 {
-                    writer.WritePropertyName("parameters"u8);
-                    writer.WriteStartObject();
-                    foreach (var item in Parameters)
-                    {
-                        writer.WritePropertyName(item.Key);
-                        writer.WriteObjectValue(item.Value);
-                    }
-                    writer.WriteEndObject();
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value);
                 }
                 writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -119,24 +112,31 @@ namespace MgmtExtensionResource
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        PolicyDefinitionData IModelJsonSerializable<PolicyDefinitionData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PolicyDefinitionData IJsonModel<PolicyDefinitionData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializePolicyDefinitionData(document.RootElement, options);
         }
 
-        internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element, ModelSerializerOptions options = null)
+        internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -249,7 +249,7 @@ namespace MgmtExtensionResource
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -258,16 +258,24 @@ namespace MgmtExtensionResource
             return new PolicyDefinitionData(id, name, type, systemData.Value, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<PolicyDefinitionData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<PolicyDefinitionData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        PolicyDefinitionData IModelSerializable<PolicyDefinitionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        PolicyDefinitionData IModel<PolicyDefinitionData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializePolicyDefinitionData(document.RootElement, options);
