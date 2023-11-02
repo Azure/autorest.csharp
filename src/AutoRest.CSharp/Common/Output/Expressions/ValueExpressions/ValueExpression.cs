@@ -53,6 +53,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         public ValueExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, async);
 
+        public CastExpression CastTo(CSharpType to) => new CastExpression(this, to);
+
         private string GetDebuggerDisplay()
         {
             using var writer = new DebuggerCodeWriter();
