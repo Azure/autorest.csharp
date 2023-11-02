@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_special_properties.Models
 {
     /// <summary> The OdataFilter. </summary>
     internal partial class OdataFilter
     {
-        /// <summary> Initializes a new instance of OdataFilter. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OdataFilter"/>. </summary>
         internal OdataFilter()
         {
         }
 
-        /// <summary> Initializes a new instance of OdataFilter. </summary>
+        /// <summary> Initializes a new instance of <see cref="OdataFilter"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        internal OdataFilter(int? id, string name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OdataFilter(int? id, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

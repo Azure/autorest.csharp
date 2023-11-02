@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class AzureFilesIdentityBasedAuthentication : IUtf8JsonSerializable, IModelJsonSerializable<AzureFilesIdentityBasedAuthentication>
+    public partial class AzureFilesIdentityBasedAuthentication : IUtf8JsonSerializable, IJsonModel<AzureFilesIdentityBasedAuthentication>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AzureFilesIdentityBasedAuthentication>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureFilesIdentityBasedAuthentication>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<AzureFilesIdentityBasedAuthentication>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<AzureFilesIdentityBasedAuthentication>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("directoryServiceOptions"u8);
@@ -32,7 +33,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("defaultSharePermission"u8);
                 writer.WriteStringValue(DefaultSharePermission.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -40,24 +41,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        AzureFilesIdentityBasedAuthentication IModelJsonSerializable<AzureFilesIdentityBasedAuthentication>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        AzureFilesIdentityBasedAuthentication IJsonModel<AzureFilesIdentityBasedAuthentication>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeAzureFilesIdentityBasedAuthentication(document.RootElement, options);
         }
 
-        internal static AzureFilesIdentityBasedAuthentication DeserializeAzureFilesIdentityBasedAuthentication(JsonElement element, ModelSerializerOptions options = null)
+        internal static AzureFilesIdentityBasedAuthentication DeserializeAzureFilesIdentityBasedAuthentication(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +101,7 @@ namespace Azure.ResourceManager.Storage.Models
                     defaultSharePermission = new DefaultSharePermission(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,16 +110,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties.Value, Optional.ToNullable(defaultSharePermission), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<AzureFilesIdentityBasedAuthentication>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<AzureFilesIdentityBasedAuthentication>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        AzureFilesIdentityBasedAuthentication IModelSerializable<AzureFilesIdentityBasedAuthentication>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        AzureFilesIdentityBasedAuthentication IModel<AzureFilesIdentityBasedAuthentication>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeAzureFilesIdentityBasedAuthentication(document.RootElement, options);

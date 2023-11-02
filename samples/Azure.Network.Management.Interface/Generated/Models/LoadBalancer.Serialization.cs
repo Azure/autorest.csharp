@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class LoadBalancer : IUtf8JsonSerializable, IModelJsonSerializable<LoadBalancer>
+    public partial class LoadBalancer : IUtf8JsonSerializable, IJsonModel<LoadBalancer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LoadBalancer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LoadBalancer>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<LoadBalancer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<LoadBalancer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
@@ -25,25 +26,34 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
+                if (Optional.IsDefined(Name))
+                {
+                    writer.WritePropertyName("name"u8);
+                    writer.WriteStringValue(Name);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
+                if (Optional.IsDefined(Type))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(Type);
+                }
             }
             if (Optional.IsDefined(Location))
             {
@@ -61,120 +71,128 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(FrontendIPConfigurations))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsCollectionDefined(FrontendIPConfigurations))
+                writer.WritePropertyName("frontendIPConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in FrontendIPConfigurations)
                 {
-                    writer.WritePropertyName("frontendIPConfigurations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in FrontendIPConfigurations)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(BackendAddressPools))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(BackendAddressPools))
+            {
+                writer.WritePropertyName("backendAddressPools"u8);
+                writer.WriteStartArray();
+                foreach (var item in BackendAddressPools)
                 {
-                    writer.WritePropertyName("backendAddressPools"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in BackendAddressPools)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(LoadBalancingRules))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(LoadBalancingRules))
+            {
+                writer.WritePropertyName("loadBalancingRules"u8);
+                writer.WriteStartArray();
+                foreach (var item in LoadBalancingRules)
                 {
-                    writer.WritePropertyName("loadBalancingRules"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in LoadBalancingRules)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(Probes))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(Probes))
+            {
+                writer.WritePropertyName("probes"u8);
+                writer.WriteStartArray();
+                foreach (var item in Probes)
                 {
-                    writer.WritePropertyName("probes"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Probes)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(InboundNatRules))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(InboundNatRules))
+            {
+                writer.WritePropertyName("inboundNatRules"u8);
+                writer.WriteStartArray();
+                foreach (var item in InboundNatRules)
                 {
-                    writer.WritePropertyName("inboundNatRules"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in InboundNatRules)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(InboundNatPools))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(InboundNatPools))
+            {
+                writer.WritePropertyName("inboundNatPools"u8);
+                writer.WriteStartArray();
+                foreach (var item in InboundNatPools)
                 {
-                    writer.WritePropertyName("inboundNatPools"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in InboundNatPools)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(OutboundRules))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(OutboundRules))
+            {
+                writer.WritePropertyName("outboundRules"u8);
+                writer.WriteStartArray();
+                foreach (var item in OutboundRules)
                 {
-                    writer.WritePropertyName("outboundRules"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in OutboundRules)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceGuid))
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ResourceGuid))
                 {
                     writer.WritePropertyName("resourceGuid"u8);
                     writer.WriteStringValue(ResourceGuid);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        LoadBalancer IModelJsonSerializable<LoadBalancer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        LoadBalancer IJsonModel<LoadBalancer>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeLoadBalancer(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<LoadBalancer>.Serialize(ModelSerializerOptions options)
+        internal static LoadBalancer DeserializeLoadBalancer(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        LoadBalancer IModelSerializable<LoadBalancer>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLoadBalancer(document.RootElement, options);
-        }
-
-        internal static LoadBalancer DeserializeLoadBalancer(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -196,6 +214,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<IList<OutboundRule>> outboundRules = default;
             Optional<string> resourceGuid = default;
             Optional<ProvisioningState> provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -370,8 +390,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new LoadBalancer(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, Optional.ToList(frontendIPConfigurations), Optional.ToList(backendAddressPools), Optional.ToList(loadBalancingRules), Optional.ToList(probes), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new LoadBalancer(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), serializedAdditionalRawData, sku.Value, etag.Value, Optional.ToList(frontendIPConfigurations), Optional.ToList(backendAddressPools), Optional.ToList(loadBalancingRules), Optional.ToList(probes), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), resourceGuid.Value, Optional.ToNullable(provisioningState));
+        }
+
+        BinaryData IModel<LoadBalancer>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        LoadBalancer IModel<LoadBalancer>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeLoadBalancer(document.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Response for list tap configurations API service call. </summary>
     internal partial class NetworkInterfaceTapConfigurationListResult
     {
-        /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceTapConfigurationListResult"/>. </summary>
         internal NetworkInterfaceTapConfigurationListResult()
         {
             Value = new ChangeTrackingList<NetworkInterfaceTapConfiguration>();
         }
 
-        /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceTapConfigurationListResult"/>. </summary>
         /// <param name="value"> A list of tap configurations. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
-        internal NetworkInterfaceTapConfigurationListResult(IReadOnlyList<NetworkInterfaceTapConfiguration> value, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterfaceTapConfigurationListResult(IReadOnlyList<NetworkInterfaceTapConfiguration> value, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A list of tap configurations. </summary>

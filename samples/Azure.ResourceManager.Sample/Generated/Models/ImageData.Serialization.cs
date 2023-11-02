@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.Sample.Models;
@@ -53,37 +52,40 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
+            }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(SourceVirtualMachine))
+            {
+                writer.WritePropertyName("sourceVirtualMachine"u8);
+                JsonSerializer.Serialize(writer, SourceVirtualMachine);
+            }
+            if (Optional.IsDefined(StorageProfile))
+            {
+                writer.WritePropertyName("storageProfile"u8);
+                writer.WriteObjectValue(StorageProfile);
             }
             if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(SourceVirtualMachine))
-                {
-                    writer.WritePropertyName("sourceVirtualMachine"u8);
-                    JsonSerializer.Serialize(writer, SourceVirtualMachine);
-                }
-                if (Optional.IsDefined(StorageProfile))
-                {
-                    writer.WritePropertyName("storageProfile"u8);
-                    writer.WriteObjectValue(StorageProfile);
-                }
-                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ProvisioningState))
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState);
                 }
-                if (Optional.IsDefined(HyperVGeneration))
-                {
-                    writer.WritePropertyName("hyperVGeneration"u8);
-                    writer.WriteStringValue(HyperVGeneration.Value.ToString());
-                }
-                writer.WriteEndObject();
             }
+            if (Optional.IsDefined(HyperVGeneration))
+            {
+                writer.WritePropertyName("hyperVGeneration"u8);
+                writer.WriteStringValue(HyperVGeneration.Value.ToString());
+            }
+            writer.WriteEndObject();
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -104,7 +106,11 @@ namespace Azure.ResourceManager.Sample
 
         ImageData IJsonModel<ImageData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeImageData(document.RootElement, options);
@@ -230,14 +236,22 @@ namespace Azure.ResourceManager.Sample
 
         BinaryData IModel<ImageData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         ImageData IModel<ImageData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeImageData(document.RootElement, options);

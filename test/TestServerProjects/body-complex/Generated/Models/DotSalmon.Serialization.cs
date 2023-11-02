@@ -6,17 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class DotSalmon : IUtf8JsonSerializable, IModelJsonSerializable<DotSalmon>
+    public partial class DotSalmon : IUtf8JsonSerializable, IJsonModel<DotSalmon>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DotSalmon>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DotSalmon>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DotSalmon>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<DotSalmon>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Location))
@@ -36,34 +38,39 @@ namespace body_complex.Models
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        DotSalmon IModelJsonSerializable<DotSalmon>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DotSalmon IJsonModel<DotSalmon>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDotSalmon(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DotSalmon>.Serialize(ModelSerializerOptions options)
+        internal static DotSalmon DeserializeDotSalmon(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        DotSalmon IModelSerializable<DotSalmon>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDotSalmon(document.RootElement, options);
-        }
-
-        internal static DotSalmon DeserializeDotSalmon(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -73,6 +80,8 @@ namespace body_complex.Models
             Optional<bool> iswild = default;
             string fishType = default;
             Optional<string> species = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -99,8 +108,36 @@ namespace body_complex.Models
                     species = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DotSalmon(fishType, species.Value, location.Value, Optional.ToNullable(iswild));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new DotSalmon(fishType, species.Value, serializedAdditionalRawData, location.Value, Optional.ToNullable(iswild));
+        }
+
+        BinaryData IModel<DotSalmon>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        DotSalmon IModel<DotSalmon>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDotSalmon(document.RootElement, options);
         }
     }
 }

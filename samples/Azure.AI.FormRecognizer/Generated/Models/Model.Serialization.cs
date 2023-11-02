@@ -6,17 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class Model : IUtf8JsonSerializable, IModelJsonSerializable<Model>
+    public partial class Model : IUtf8JsonSerializable, IJsonModel<Model>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Model>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<Model>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<Model>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("modelInfo"u8);
@@ -31,34 +33,39 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WritePropertyName("trainResult"u8);
                 writer.WriteObjectValue(TrainResult);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        Model IModelJsonSerializable<Model>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Model IJsonModel<Model>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Model>.Serialize(ModelSerializerOptions options)
+        internal static Model DeserializeModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Model IModelSerializable<Model>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModel(document.RootElement, options);
-        }
-
-        internal static Model DeserializeModel(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -67,6 +74,8 @@ namespace Azure.AI.FormRecognizer.Models
             ModelInfo modelInfo = default;
             Optional<KeysResult> keys = default;
             Optional<TrainResult> trainResult = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("modelInfo"u8))
@@ -92,8 +101,36 @@ namespace Azure.AI.FormRecognizer.Models
                     trainResult = TrainResult.DeserializeTrainResult(property.Value);
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Model(modelInfo, keys.Value, trainResult.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Model(modelInfo, keys.Value, trainResult.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<Model>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        Model IModel<Model>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeModel(document.RootElement, options);
         }
     }
 }

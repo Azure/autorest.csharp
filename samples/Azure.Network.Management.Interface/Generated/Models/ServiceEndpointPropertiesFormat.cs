@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,21 +14,26 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> The service endpoint properties. </summary>
     public partial class ServiceEndpointPropertiesFormat
     {
-        /// <summary> Initializes a new instance of ServiceEndpointPropertiesFormat. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ServiceEndpointPropertiesFormat"/>. </summary>
         public ServiceEndpointPropertiesFormat()
         {
             Locations = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of ServiceEndpointPropertiesFormat. </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceEndpointPropertiesFormat"/>. </summary>
         /// <param name="service"> The type of the endpoint service. </param>
         /// <param name="locations"> A list of locations. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint resource. </param>
-        internal ServiceEndpointPropertiesFormat(string service, IList<string> locations, ProvisioningState? provisioningState)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceEndpointPropertiesFormat(string service, IList<string> locations, ProvisioningState? provisioningState, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Service = service;
             Locations = locations;
             ProvisioningState = provisioningState;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of the endpoint service. </summary>

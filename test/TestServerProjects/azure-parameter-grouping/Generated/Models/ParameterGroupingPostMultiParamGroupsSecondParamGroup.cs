@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostMultiParamGroupsSecondParamGroup
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostMultiParamGroupsSecondParamGroup"/>. </summary>
         public ParameterGroupingPostMultiParamGroupsSecondParamGroup()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostMultiParamGroupsSecondParamGroup"/>. </summary>
         /// <param name="headerTwo"></param>
         /// <param name="queryTwo"> Query parameter with default. </param>
-        internal ParameterGroupingPostMultiParamGroupsSecondParamGroup(string headerTwo, int? queryTwo)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostMultiParamGroupsSecondParamGroup(string headerTwo, int? queryTwo, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HeaderTwo = headerTwo;
             QueryTwo = queryTwo;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the header two. </summary>

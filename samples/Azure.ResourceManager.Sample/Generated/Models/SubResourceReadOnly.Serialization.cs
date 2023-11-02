@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,10 +21,13 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<SubResourceReadOnly>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Id))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                if (Optional.IsDefined(Id))
+                {
+                    writer.WritePropertyName("id"u8);
+                    writer.WriteStringValue(Id);
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -47,7 +49,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         SubResourceReadOnly IJsonModel<SubResourceReadOnly>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSubResourceReadOnly(document.RootElement, options);
@@ -82,14 +88,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<SubResourceReadOnly>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         SubResourceReadOnly IModel<SubResourceReadOnly>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeSubResourceReadOnly(document.RootElement, options);

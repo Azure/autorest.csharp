@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,10 +21,13 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<DedicatedHostInstanceView>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(AssetId))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("assetId"u8);
-                writer.WriteStringValue(AssetId);
+                if (Optional.IsDefined(AssetId))
+                {
+                    writer.WritePropertyName("assetId"u8);
+                    writer.WriteStringValue(AssetId);
+                }
             }
             if (Optional.IsDefined(AvailableCapacity))
             {
@@ -62,7 +64,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         DedicatedHostInstanceView IJsonModel<DedicatedHostInstanceView>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDedicatedHostInstanceView(document.RootElement, options);
@@ -122,14 +128,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<DedicatedHostInstanceView>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         DedicatedHostInstanceView IModel<DedicatedHostInstanceView>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDedicatedHostInstanceView(document.RootElement, options);

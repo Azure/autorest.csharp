@@ -175,9 +175,14 @@ namespace AutoRest.CSharp.Generation.Types
             return name != null;
         }
 
-        public string ToStringForDocs()
+        public string ToStringForDocs(bool includeNamespace = false)
         {
-            var sb = new StringBuilder(TryGetCSharpFriendlyName(out var keywordName) ? keywordName : Name);
+            var sb = new StringBuilder();
+            if (includeNamespace)
+            {
+                sb.Append(Namespace).Append('.');
+            }
+            sb.Append(TryGetCSharpFriendlyName(out var keywordName) ? keywordName : Name);
             if (IsNullable && IsValueType)
             {
                 sb.Append("?");

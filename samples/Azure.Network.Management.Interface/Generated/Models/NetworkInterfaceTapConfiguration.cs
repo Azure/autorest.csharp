@@ -5,24 +5,28 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Tap configuration in a Network Interface. </summary>
     public partial class NetworkInterfaceTapConfiguration : SubResource
     {
-        /// <summary> Initializes a new instance of NetworkInterfaceTapConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceTapConfiguration"/>. </summary>
         public NetworkInterfaceTapConfiguration()
         {
         }
 
-        /// <summary> Initializes a new instance of NetworkInterfaceTapConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceTapConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Sub Resource type. </param>
         /// <param name="virtualNetworkTap"> The reference to the Virtual Network Tap resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface tap configuration resource. </param>
-        internal NetworkInterfaceTapConfiguration(string id, string name, string etag, string type, VirtualNetworkTap virtualNetworkTap, ProvisioningState? provisioningState) : base(id)
+        internal NetworkInterfaceTapConfiguration(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, string type, VirtualNetworkTap virtualNetworkTap, ProvisioningState? provisioningState) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

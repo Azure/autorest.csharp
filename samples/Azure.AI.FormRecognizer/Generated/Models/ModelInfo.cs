@@ -6,13 +6,17 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Basic custom model information. </summary>
     public partial class ModelInfo
     {
-        /// <summary> Initializes a new instance of ModelInfo. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="status"> Status of the model. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
@@ -23,6 +27,26 @@ namespace Azure.AI.FormRecognizer.Models
             Status = status;
             CreatedDateTime = createdDateTime;
             LastUpdatedDateTime = lastUpdatedDateTime;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="status"> Status of the model. </param>
+        /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
+        /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelInfo(Guid modelId, ModelStatus status, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            ModelId = modelId;
+            Status = status;
+            CreatedDateTime = createdDateTime;
+            LastUpdatedDateTime = lastUpdatedDateTime;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelInfo"/> for deserialization. </summary>
+        internal ModelInfo()
+        {
         }
 
         /// <summary> Model identifier. </summary>

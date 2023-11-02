@@ -16,15 +16,9 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false, bool IsAdditionalProperties = false, bool IsRef = false)
+    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false, bool IsRef = false)
     {
-        internal static readonly Parameter RawData = new Parameter(
-                "serializedAdditionalRawData",
-                $"Keeps track of any properties unknown to the library",
-                typeof(Dictionary<string, BinaryData>),
-                null,
-                ValidationType.None,
-                null); // TODO -- maybe we should treat this as an additional properties property as well?
+        public bool IsRawData { get; init; }
 
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;

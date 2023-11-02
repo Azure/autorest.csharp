@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> NetworkSecurityGroup resource. </summary>
     public partial class NetworkSecurityGroup : Resource
     {
-        /// <summary> Initializes a new instance of NetworkSecurityGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkSecurityGroup"/>. </summary>
         public NetworkSecurityGroup()
         {
             SecurityRules = new ChangeTrackingList<SecurityRule>();
@@ -22,12 +23,13 @@ namespace Azure.Network.Management.Interface.Models
             Subnets = new ChangeTrackingList<Subnet>();
         }
 
-        /// <summary> Initializes a new instance of NetworkSecurityGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkSecurityGroup"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="securityRules"> A collection of security rules of the network security group. </param>
         /// <param name="defaultSecurityRules"> The default security rules of network security group. </param>
@@ -35,7 +37,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="resourceGuid"> The resource GUID property of the network security group resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network security group resource. </param>
-        internal NetworkSecurityGroup(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<SecurityRule> securityRules, IReadOnlyList<SecurityRule> defaultSecurityRules, IReadOnlyList<NetworkInterface> networkInterfaces, IReadOnlyList<Subnet> subnets, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
+        internal NetworkSecurityGroup(string id, string name, string type, string location, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, string etag, IList<SecurityRule> securityRules, IReadOnlyList<SecurityRule> defaultSecurityRules, IReadOnlyList<NetworkInterface> networkInterfaces, IReadOnlyList<Subnet> subnets, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags, serializedAdditionalRawData)
         {
             Etag = etag;
             SecurityRules = securityRules;

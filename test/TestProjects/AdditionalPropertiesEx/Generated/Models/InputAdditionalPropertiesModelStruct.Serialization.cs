@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace AdditionalPropertiesEx.Models
 {
-    public partial struct InputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IModelJsonSerializable<InputAdditionalPropertiesModelStruct>, IModelJsonSerializable<object>
+    public partial struct InputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModel<InputAdditionalPropertiesModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<InputAdditionalPropertiesModelStruct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<InputAdditionalPropertiesModelStruct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<InputAdditionalPropertiesModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
@@ -30,39 +31,25 @@ namespace AdditionalPropertiesEx.Models
             writer.WriteEndObject();
         }
 
-        InputAdditionalPropertiesModelStruct IModelJsonSerializable<InputAdditionalPropertiesModelStruct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        InputAdditionalPropertiesModelStruct IJsonModel<InputAdditionalPropertiesModelStruct>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<InputAdditionalPropertiesModelStruct>.Serialize(ModelSerializerOptions options)
+        void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Write(writer, options);
+
+        object IJsonModel<object>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Read(ref reader, options);
+
+        internal static InputAdditionalPropertiesModelStruct DeserializeInputAdditionalPropertiesModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        InputAdditionalPropertiesModelStruct IModelSerializable<InputAdditionalPropertiesModelStruct>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement, options);
-        }
-
-        void IModelJsonSerializable<object>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options) => ((IModelJsonSerializable<InputAdditionalPropertiesModelStruct>)this).Serialize(writer, options);
-
-        object IModelJsonSerializable<object>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options) => ((IModelJsonSerializable<InputAdditionalPropertiesModelStruct>)this).Deserialize(ref reader, options);
-
-        BinaryData IModelSerializable<object>.Serialize(ModelSerializerOptions options) => ((IModelJsonSerializable<InputAdditionalPropertiesModelStruct>)this).Serialize(options);
-
-        object IModelSerializable<object>.Deserialize(BinaryData data, ModelSerializerOptions options) => ((IModelJsonSerializable<InputAdditionalPropertiesModelStruct>)this).Deserialize(data, options);
-
-        internal static InputAdditionalPropertiesModelStruct DeserializeInputAdditionalPropertiesModelStruct(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             int id = default;
             IDictionary<string, object> additionalProperties = default;
@@ -79,5 +66,32 @@ namespace AdditionalPropertiesEx.Models
             additionalProperties = additionalPropertiesDictionary;
             return new InputAdditionalPropertiesModelStruct(id, additionalProperties);
         }
+
+        BinaryData IModel<InputAdditionalPropertiesModelStruct>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        InputAdditionalPropertiesModelStruct IModel<InputAdditionalPropertiesModelStruct>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement, options);
+        }
+
+        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Write(options);
+
+        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Read(data, options);
     }
 }

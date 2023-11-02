@@ -5,26 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_special_properties.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error
     {
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         internal Error()
         {
             ConstantId = ErrorConstantId._1;
         }
 
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         /// <param name="status"></param>
         /// <param name="constantId"></param>
         /// <param name="message"></param>
-        internal Error(int? status, ErrorConstantId constantId, string message)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(int? status, ErrorConstantId constantId, string message, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             ConstantId = constantId;
             Message = message;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the status. </summary>

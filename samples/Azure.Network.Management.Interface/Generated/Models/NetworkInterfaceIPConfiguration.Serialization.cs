@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class NetworkInterfaceIPConfiguration : IUtf8JsonSerializable, IModelJsonSerializable<NetworkInterfaceIPConfiguration>
+    public partial class NetworkInterfaceIPConfiguration : IUtf8JsonSerializable, IJsonModel<NetworkInterfaceIPConfiguration>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NetworkInterfaceIPConfiguration>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceIPConfiguration>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<NetworkInterfaceIPConfiguration>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<NetworkInterfaceIPConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,140 +26,151 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(VirtualNetworkTaps))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsCollectionDefined(VirtualNetworkTaps))
+                writer.WritePropertyName("virtualNetworkTaps"u8);
+                writer.WriteStartArray();
+                foreach (var item in VirtualNetworkTaps)
                 {
-                    writer.WritePropertyName("virtualNetworkTaps"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VirtualNetworkTaps)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
+            {
+                writer.WritePropertyName("applicationGatewayBackendAddressPools"u8);
+                writer.WriteStartArray();
+                foreach (var item in ApplicationGatewayBackendAddressPools)
                 {
-                    writer.WritePropertyName("applicationGatewayBackendAddressPools"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ApplicationGatewayBackendAddressPools)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
+            {
+                writer.WritePropertyName("loadBalancerBackendAddressPools"u8);
+                writer.WriteStartArray();
+                foreach (var item in LoadBalancerBackendAddressPools)
                 {
-                    writer.WritePropertyName("loadBalancerBackendAddressPools"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in LoadBalancerBackendAddressPools)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(LoadBalancerInboundNatRules))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(LoadBalancerInboundNatRules))
+            {
+                writer.WritePropertyName("loadBalancerInboundNatRules"u8);
+                writer.WriteStartArray();
+                foreach (var item in LoadBalancerInboundNatRules)
                 {
-                    writer.WritePropertyName("loadBalancerInboundNatRules"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in LoadBalancerInboundNatRules)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsDefined(PrivateIPAddress))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(PrivateIPAddress))
+            {
+                writer.WritePropertyName("privateIPAddress"u8);
+                writer.WriteStringValue(PrivateIPAddress);
+            }
+            if (Optional.IsDefined(PrivateIPAllocationMethod))
+            {
+                writer.WritePropertyName("privateIPAllocationMethod"u8);
+                writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
+            }
+            if (Optional.IsDefined(PrivateIPAddressVersion))
+            {
+                writer.WritePropertyName("privateIPAddressVersion"u8);
+                writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
+            }
+            if (Optional.IsDefined(Subnet))
+            {
+                writer.WritePropertyName("subnet"u8);
+                writer.WriteObjectValue(Subnet);
+            }
+            if (Optional.IsDefined(Primary))
+            {
+                writer.WritePropertyName("primary"u8);
+                writer.WriteBooleanValue(Primary.Value);
+            }
+            if (Optional.IsDefined(PublicIPAddress))
+            {
+                writer.WritePropertyName("publicIPAddress"u8);
+                writer.WriteObjectValue(PublicIPAddress);
+            }
+            if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
+            {
+                writer.WritePropertyName("applicationSecurityGroups"u8);
+                writer.WriteStartArray();
+                foreach (var item in ApplicationSecurityGroups)
                 {
-                    writer.WritePropertyName("privateIPAddress"u8);
-                    writer.WriteStringValue(PrivateIPAddress);
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsDefined(PrivateIPAllocationMethod))
-                {
-                    writer.WritePropertyName("privateIPAllocationMethod"u8);
-                    writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
-                }
-                if (Optional.IsDefined(PrivateIPAddressVersion))
-                {
-                    writer.WritePropertyName("privateIPAddressVersion"u8);
-                    writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
-                }
-                if (Optional.IsDefined(Subnet))
-                {
-                    writer.WritePropertyName("subnet"u8);
-                    writer.WriteObjectValue(Subnet);
-                }
-                if (Optional.IsDefined(Primary))
-                {
-                    writer.WritePropertyName("primary"u8);
-                    writer.WriteBooleanValue(Primary.Value);
-                }
-                if (Optional.IsDefined(PublicIPAddress))
-                {
-                    writer.WritePropertyName("publicIPAddress"u8);
-                    writer.WriteObjectValue(PublicIPAddress);
-                }
-                if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
-                {
-                    writer.WritePropertyName("applicationSecurityGroups"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ApplicationSecurityGroups)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(PrivateLinkConnectionProperties))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(PrivateLinkConnectionProperties))
                 {
                     writer.WritePropertyName("privateLinkConnectionProperties"u8);
                     writer.WriteObjectValue(PrivateLinkConnectionProperties);
                 }
-                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        NetworkInterfaceIPConfiguration IModelJsonSerializable<NetworkInterfaceIPConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        NetworkInterfaceIPConfiguration IJsonModel<NetworkInterfaceIPConfiguration>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeNetworkInterfaceIPConfiguration(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<NetworkInterfaceIPConfiguration>.Serialize(ModelSerializerOptions options)
+        internal static NetworkInterfaceIPConfiguration DeserializeNetworkInterfaceIPConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        NetworkInterfaceIPConfiguration IModelSerializable<NetworkInterfaceIPConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeNetworkInterfaceIPConfiguration(document.RootElement, options);
-        }
-
-        internal static NetworkInterfaceIPConfiguration DeserializeNetworkInterfaceIPConfiguration(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -180,6 +192,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<IList<ApplicationSecurityGroup>> applicationSecurityGroups = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties> privateLinkConnectionProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -347,8 +361,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new NetworkInterfaceIPConfiguration(id.Value, name.Value, etag.Value, Optional.ToList(virtualNetworkTaps), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, Optional.ToList(applicationSecurityGroups), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new NetworkInterfaceIPConfiguration(id.Value, serializedAdditionalRawData, name.Value, etag.Value, Optional.ToList(virtualNetworkTaps), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, Optional.ToList(applicationSecurityGroups), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
+        }
+
+        BinaryData IModel<NetworkInterfaceIPConfiguration>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        NetworkInterfaceIPConfiguration IModel<NetworkInterfaceIPConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeNetworkInterfaceIPConfiguration(document.RootElement, options);
         }
     }
 }

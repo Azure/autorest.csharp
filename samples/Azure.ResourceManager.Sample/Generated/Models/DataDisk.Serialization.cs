@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -66,15 +65,21 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("toBeDetached"u8);
                 writer.WriteBooleanValue(ToBeDetached.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(DiskIopsReadWrite))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("diskIOPSReadWrite"u8);
-                writer.WriteNumberValue(DiskIopsReadWrite.Value);
+                if (Optional.IsDefined(DiskIopsReadWrite))
+                {
+                    writer.WritePropertyName("diskIOPSReadWrite"u8);
+                    writer.WriteNumberValue(DiskIopsReadWrite.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(DiskMBpsReadWrite))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("diskMBpsReadWrite"u8);
-                writer.WriteNumberValue(DiskMBpsReadWrite.Value);
+                if (Optional.IsDefined(DiskMBpsReadWrite))
+                {
+                    writer.WritePropertyName("diskMBpsReadWrite"u8);
+                    writer.WriteNumberValue(DiskMBpsReadWrite.Value);
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -96,7 +101,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         DataDisk IJsonModel<DataDisk>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDataDisk(document.RootElement, options);
@@ -233,14 +242,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<DataDisk>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         DataDisk IModel<DataDisk>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDataDisk(document.RootElement, options);

@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class OutboundRule : IUtf8JsonSerializable, IModelJsonSerializable<OutboundRule>
+    public partial class OutboundRule : IUtf8JsonSerializable, IJsonModel<OutboundRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OutboundRule>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutboundRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<OutboundRule>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<OutboundRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,95 +26,106 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
+                if (Optional.IsDefined(Type))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(Type);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(AllocatedOutboundPorts))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(AllocatedOutboundPorts))
+                writer.WritePropertyName("allocatedOutboundPorts"u8);
+                writer.WriteNumberValue(AllocatedOutboundPorts.Value);
+            }
+            if (Optional.IsCollectionDefined(FrontendIPConfigurations))
+            {
+                writer.WritePropertyName("frontendIPConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in FrontendIPConfigurations)
                 {
-                    writer.WritePropertyName("allocatedOutboundPorts"u8);
-                    writer.WriteNumberValue(AllocatedOutboundPorts.Value);
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(FrontendIPConfigurations))
-                {
-                    writer.WritePropertyName("frontendIPConfigurations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in FrontendIPConfigurations)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsDefined(BackendAddressPool))
-                {
-                    writer.WritePropertyName("backendAddressPool"u8);
-                    writer.WriteObjectValue(BackendAddressPool);
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(BackendAddressPool))
+            {
+                writer.WritePropertyName("backendAddressPool"u8);
+                writer.WriteObjectValue(BackendAddressPool);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                if (Optional.IsDefined(Protocol))
+            }
+            if (Optional.IsDefined(Protocol))
+            {
+                writer.WritePropertyName("protocol"u8);
+                writer.WriteStringValue(Protocol.Value.ToString());
+            }
+            if (Optional.IsDefined(EnableTcpReset))
+            {
+                writer.WritePropertyName("enableTcpReset"u8);
+                writer.WriteBooleanValue(EnableTcpReset.Value);
+            }
+            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            {
+                writer.WritePropertyName("idleTimeoutInMinutes"u8);
+                writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    writer.WritePropertyName("protocol"u8);
-                    writer.WriteStringValue(Protocol.Value.ToString());
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
-                if (Optional.IsDefined(EnableTcpReset))
-                {
-                    writer.WritePropertyName("enableTcpReset"u8);
-                    writer.WriteBooleanValue(EnableTcpReset.Value);
-                }
-                if (Optional.IsDefined(IdleTimeoutInMinutes))
-                {
-                    writer.WritePropertyName("idleTimeoutInMinutes"u8);
-                    writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
-                }
-                writer.WriteEndObject();
             }
             writer.WriteEndObject();
         }
 
-        OutboundRule IModelJsonSerializable<OutboundRule>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        OutboundRule IJsonModel<OutboundRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeOutboundRule(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<OutboundRule>.Serialize(ModelSerializerOptions options)
+        internal static OutboundRule DeserializeOutboundRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        OutboundRule IModelSerializable<OutboundRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeOutboundRule(document.RootElement, options);
-        }
-
-        internal static OutboundRule DeserializeOutboundRule(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +142,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<LoadBalancerOutboundRuleProtocol> protocol = default;
             Optional<bool> enableTcpReset = default;
             Optional<int> idleTimeoutInMinutes = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -232,8 +246,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new OutboundRule(id.Value, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), Optional.ToList(frontendIPConfigurations), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new OutboundRule(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), Optional.ToList(frontendIPConfigurations), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes));
+        }
+
+        BinaryData IModel<OutboundRule>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        OutboundRule IModel<OutboundRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeOutboundRule(document.RootElement, options);
         }
     }
 }

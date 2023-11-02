@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_array.Models
 {
     /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         public Product()
         {
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="integer"></param>
         /// <param name="string"></param>
-        internal Product(int? integer, string @string)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Product(int? integer, string @string, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Integer = integer;
             String = @string;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the integer. </summary>

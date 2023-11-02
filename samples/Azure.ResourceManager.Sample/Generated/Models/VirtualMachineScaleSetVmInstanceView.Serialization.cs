@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -67,10 +66,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(VmHealth))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("vmHealth"u8);
-                writer.WriteObjectValue(VmHealth);
+                if (Optional.IsDefined(VmHealth))
+                {
+                    writer.WritePropertyName("vmHealth"u8);
+                    writer.WriteObjectValue(VmHealth);
+                }
             }
             if (Optional.IsDefined(BootDiagnostics))
             {
@@ -87,10 +89,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(AssignedHost))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("assignedHost"u8);
-                writer.WriteStringValue(AssignedHost);
+                if (Optional.IsDefined(AssignedHost))
+                {
+                    writer.WritePropertyName("assignedHost"u8);
+                    writer.WriteStringValue(AssignedHost);
+                }
             }
             if (Optional.IsDefined(PlacementGroupId))
             {
@@ -117,7 +122,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineScaleSetVmInstanceView IJsonModel<VirtualMachineScaleSetVmInstanceView>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetVmInstanceView(document.RootElement, options);
@@ -269,14 +278,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineScaleSetVmInstanceView>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineScaleSetVmInstanceView IModel<VirtualMachineScaleSetVmInstanceView>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetVmInstanceView(document.RootElement, options);

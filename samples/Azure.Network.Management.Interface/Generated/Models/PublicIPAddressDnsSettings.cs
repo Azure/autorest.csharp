@@ -5,25 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Contains FQDN of the DNS record associated with the public IP address. </summary>
     public partial class PublicIPAddressDnsSettings
     {
-        /// <summary> Initializes a new instance of PublicIPAddressDnsSettings. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressDnsSettings"/>. </summary>
         public PublicIPAddressDnsSettings()
         {
         }
 
-        /// <summary> Initializes a new instance of PublicIPAddressDnsSettings. </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressDnsSettings"/>. </summary>
         /// <param name="domainNameLabel"> The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system. </param>
         /// <param name="fqdn"> The Fully Qualified Domain Name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone. </param>
         /// <param name="reverseFqdn"> The reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. </param>
-        internal PublicIPAddressDnsSettings(string domainNameLabel, string fqdn, string reverseFqdn)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicIPAddressDnsSettings(string domainNameLabel, string fqdn, string reverseFqdn, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DomainNameLabel = domainNameLabel;
             Fqdn = fqdn;
             ReverseFqdn = reverseFqdn;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system. </summary>

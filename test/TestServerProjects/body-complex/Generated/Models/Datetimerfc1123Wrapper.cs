@@ -6,24 +6,30 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
     /// <summary> The Datetimerfc1123Wrapper. </summary>
     public partial class Datetimerfc1123Wrapper
     {
-        /// <summary> Initializes a new instance of Datetimerfc1123Wrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Datetimerfc1123Wrapper"/>. </summary>
         public Datetimerfc1123Wrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of Datetimerfc1123Wrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="Datetimerfc1123Wrapper"/>. </summary>
         /// <param name="field"></param>
         /// <param name="now"></param>
-        internal Datetimerfc1123Wrapper(DateTimeOffset? field, DateTimeOffset? now)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Datetimerfc1123Wrapper(DateTimeOffset? field, DateTimeOffset? now, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field = field;
             Now = now;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

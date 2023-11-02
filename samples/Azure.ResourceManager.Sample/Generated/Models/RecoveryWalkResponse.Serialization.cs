@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,15 +21,21 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<RecoveryWalkResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(WalkPerformed))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("walkPerformed"u8);
-                writer.WriteBooleanValue(WalkPerformed.Value);
+                if (Optional.IsDefined(WalkPerformed))
+                {
+                    writer.WritePropertyName("walkPerformed"u8);
+                    writer.WriteBooleanValue(WalkPerformed.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(NextPlatformUpdateDomain))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("nextPlatformUpdateDomain"u8);
-                writer.WriteNumberValue(NextPlatformUpdateDomain.Value);
+                if (Optional.IsDefined(NextPlatformUpdateDomain))
+                {
+                    writer.WritePropertyName("nextPlatformUpdateDomain"u8);
+                    writer.WriteNumberValue(NextPlatformUpdateDomain.Value);
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -52,7 +57,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         RecoveryWalkResponse IJsonModel<RecoveryWalkResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRecoveryWalkResponse(document.RootElement, options);
@@ -101,14 +110,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<RecoveryWalkResponse>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         RecoveryWalkResponse IModel<RecoveryWalkResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRecoveryWalkResponse(document.RootElement, options);

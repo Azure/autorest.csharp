@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ProtectedAppendWritesHistory : IUtf8JsonSerializable, IModelJsonSerializable<ProtectedAppendWritesHistory>
+    public partial class ProtectedAppendWritesHistory : IUtf8JsonSerializable, IJsonModel<ProtectedAppendWritesHistory>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ProtectedAppendWritesHistory>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProtectedAppendWritesHistory>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ProtectedAppendWritesHistory>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ProtectedAppendWritesHistory>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(AllowProtectedAppendWritesAll))
@@ -25,12 +26,15 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Timestamp))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("timestamp"u8);
-                writer.WriteStringValue(Timestamp.Value, "O");
+                if (Optional.IsDefined(Timestamp))
+                {
+                    writer.WritePropertyName("timestamp"u8);
+                    writer.WriteStringValue(Timestamp.Value, "O");
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -38,24 +42,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ProtectedAppendWritesHistory IModelJsonSerializable<ProtectedAppendWritesHistory>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ProtectedAppendWritesHistory IJsonModel<ProtectedAppendWritesHistory>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeProtectedAppendWritesHistory(document.RootElement, options);
         }
 
-        internal static ProtectedAppendWritesHistory DeserializeProtectedAppendWritesHistory(JsonElement element, ModelSerializerOptions options = null)
+        internal static ProtectedAppendWritesHistory DeserializeProtectedAppendWritesHistory(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +96,7 @@ namespace Azure.ResourceManager.Storage.Models
                     timestamp = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,16 +105,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new ProtectedAppendWritesHistory(Optional.ToNullable(allowProtectedAppendWritesAll), Optional.ToNullable(timestamp), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ProtectedAppendWritesHistory>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ProtectedAppendWritesHistory>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ProtectedAppendWritesHistory IModelSerializable<ProtectedAppendWritesHistory>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ProtectedAppendWritesHistory IModel<ProtectedAppendWritesHistory>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeProtectedAppendWritesHistory(document.RootElement, options);

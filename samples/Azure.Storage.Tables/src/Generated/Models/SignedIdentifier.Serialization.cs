@@ -5,13 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class SignedIdentifier : IXmlSerializable
+    public partial class SignedIdentifier : IXmlSerializable, IModel<SignedIdentifier>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -23,7 +27,7 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
+        internal static SignedIdentifier DeserializeSignedIdentifier(XElement element, ModelReaderWriterOptions options = null)
         {
             string id = default;
             AccessPolicy accessPolicy = default;
@@ -35,7 +39,40 @@ namespace Azure.Storage.Tables.Models
             {
                 accessPolicy = AccessPolicy.DeserializeAccessPolicy(accessPolicyElement);
             }
-            return new SignedIdentifier(id, accessPolicy);
+            return new SignedIdentifier(id, accessPolicy, default);
+        }
+
+        BinaryData IModel<SignedIdentifier>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        SignedIdentifier IModel<SignedIdentifier>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return DeserializeSignedIdentifier(XElement.Load(data.ToStream()), options);
         }
     }
 }

@@ -7,27 +7,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class StorageSku : IUtf8JsonSerializable, IModelJsonSerializable<StorageSku>
+    public partial class StorageSku : IUtf8JsonSerializable, IJsonModel<StorageSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StorageSku>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageSku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<StorageSku>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<StorageSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Tier))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("tier"u8);
-                writer.WriteStringValue(Tier.Value.ToSerialString());
+                if (Optional.IsDefined(Tier))
+                {
+                    writer.WritePropertyName("tier"u8);
+                    writer.WriteStringValue(Tier.Value.ToSerialString());
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -35,24 +39,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        StorageSku IModelJsonSerializable<StorageSku>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        StorageSku IJsonModel<StorageSku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeStorageSku(document.RootElement, options);
         }
 
-        internal static StorageSku DeserializeStorageSku(JsonElement element, ModelSerializerOptions options = null)
+        internal static StorageSku DeserializeStorageSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -78,7 +89,7 @@ namespace Azure.ResourceManager.Storage.Models
                     tier = property.Value.GetString().ToStorageSkuTier();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -87,16 +98,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new StorageSku(name, Optional.ToNullable(tier), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<StorageSku>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<StorageSku>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        StorageSku IModelSerializable<StorageSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        StorageSku IModel<StorageSku>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeStorageSku(document.RootElement, options);

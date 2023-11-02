@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,25 +21,37 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<VirtualMachineScaleSetSkuCapacity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Minimum))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("minimum"u8);
-                writer.WriteNumberValue(Minimum.Value);
+                if (Optional.IsDefined(Minimum))
+                {
+                    writer.WritePropertyName("minimum"u8);
+                    writer.WriteNumberValue(Minimum.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Maximum))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("maximum"u8);
-                writer.WriteNumberValue(Maximum.Value);
+                if (Optional.IsDefined(Maximum))
+                {
+                    writer.WritePropertyName("maximum"u8);
+                    writer.WriteNumberValue(Maximum.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(DefaultCapacity))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("defaultCapacity"u8);
-                writer.WriteNumberValue(DefaultCapacity.Value);
+                if (Optional.IsDefined(DefaultCapacity))
+                {
+                    writer.WritePropertyName("defaultCapacity"u8);
+                    writer.WriteNumberValue(DefaultCapacity.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ScaleType))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("scaleType"u8);
-                writer.WriteStringValue(ScaleType.Value.ToSerialString());
+                if (Optional.IsDefined(ScaleType))
+                {
+                    writer.WritePropertyName("scaleType"u8);
+                    writer.WriteStringValue(ScaleType.Value.ToSerialString());
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -62,7 +73,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineScaleSetSkuCapacity IJsonModel<VirtualMachineScaleSetSkuCapacity>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetSkuCapacity(document.RootElement, options);
@@ -131,14 +146,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineScaleSetSkuCapacity>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineScaleSetSkuCapacity IModel<VirtualMachineScaleSetSkuCapacity>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetSkuCapacity(document.RootElement, options);

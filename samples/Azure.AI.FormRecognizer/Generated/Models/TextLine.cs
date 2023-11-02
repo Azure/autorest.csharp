@@ -15,7 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> An object representing an extracted text line. </summary>
     public partial class TextLine
     {
-        /// <summary> Initializes a new instance of TextLine. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TextLine"/>. </summary>
         /// <param name="text"> The text content of the line. </param>
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
         /// <param name="words"> List of words in the text line. </param>
@@ -31,17 +34,24 @@ namespace Azure.AI.FormRecognizer.Models
             Words = words.ToList();
         }
 
-        /// <summary> Initializes a new instance of TextLine. </summary>
+        /// <summary> Initializes a new instance of <see cref="TextLine"/>. </summary>
         /// <param name="text"> The text content of the line. </param>
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
         /// <param name="language"> The detected language of this line, if different from the overall page language. </param>
         /// <param name="words"> List of words in the text line. </param>
-        internal TextLine(string text, IReadOnlyList<float> boundingBox, Language? language, IReadOnlyList<TextWord> words)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextLine(string text, IReadOnlyList<float> boundingBox, Language? language, IReadOnlyList<TextWord> words, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Text = text;
             BoundingBox = boundingBox;
             Language = language;
             Words = words;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TextLine"/> for deserialization. </summary>
+        internal TextLine()
+        {
         }
 
         /// <summary> The text content of the line. </summary>

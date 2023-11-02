@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
@@ -13,7 +14,10 @@ namespace Azure.Storage.Tables.Models
     /// <summary> An Access policy. </summary>
     public partial class AccessPolicy
     {
-        /// <summary> Initializes a new instance of AccessPolicy. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
         /// <param name="permission"> the permissions for the acl policy. </param>
@@ -25,6 +29,24 @@ namespace Azure.Storage.Tables.Models
             Start = start;
             Expiry = expiry;
             Permission = permission;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
+        /// <param name="start"> the date-time the policy is active. </param>
+        /// <param name="expiry"> the date-time the policy expires. </param>
+        /// <param name="permission"> the permissions for the acl policy. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Start = start;
+            Expiry = expiry;
+            Permission = permission;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/> for deserialization. </summary>
+        internal AccessPolicy()
+        {
         }
 
         /// <summary> the date-time the policy is active. </summary>

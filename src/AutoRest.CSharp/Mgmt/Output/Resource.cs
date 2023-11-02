@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
-                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+                    Arguments: new ValueExpression[] { new FormattableStringToExpression($"{ArmClientParameter.Name:I}"), new FormattableStringToExpression(ResourceDataIdExpression($"{ResourceDataParameter.Name:I}")) }));
         }
 
         public override CSharpType? BaseType => typeof(ArmResource);

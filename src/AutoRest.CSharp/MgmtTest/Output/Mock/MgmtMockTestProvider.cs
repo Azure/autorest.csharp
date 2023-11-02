@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -42,7 +43,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
                 Parameters: new[] { IsAsyncParameter },
                 Initializer: new ConstructorInitializer(
                     true,
-                    new FormattableString[] { $"{IsAsyncParameter.Name:I}", $"{typeof(RecordedTestMode)}.Record" }));
+                    new ValueExpression[] { new FormattableStringToExpression($"{IsAsyncParameter.Name:I}"), new FormattableStringToExpression($"{typeof(RecordedTestMode)}.Record") }));
         }
     }
 }

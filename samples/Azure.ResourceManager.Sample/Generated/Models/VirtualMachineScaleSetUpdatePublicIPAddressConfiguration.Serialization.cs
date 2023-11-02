@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,22 +26,19 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(IdleTimeoutInMinutes))
-                {
-                    writer.WritePropertyName("idleTimeoutInMinutes"u8);
-                    writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
-                }
-                if (Optional.IsDefined(DnsSettings))
-                {
-                    writer.WritePropertyName("dnsSettings"u8);
-                    writer.WriteObjectValue(DnsSettings);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("idleTimeoutInMinutes"u8);
+                writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
             }
+            if (Optional.IsDefined(DnsSettings))
+            {
+                writer.WritePropertyName("dnsSettings"u8);
+                writer.WriteObjectValue(DnsSettings);
+            }
+            writer.WriteEndObject();
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -63,7 +59,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineScaleSetUpdatePublicIPAddressConfiguration IJsonModel<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(document.RootElement, options);
@@ -130,14 +130,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineScaleSetUpdatePublicIPAddressConfiguration IModel<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(document.RootElement, options);

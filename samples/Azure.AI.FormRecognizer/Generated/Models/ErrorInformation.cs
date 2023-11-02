@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -13,7 +14,10 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> The ErrorInformation. </summary>
     public partial class ErrorInformation
     {
-        /// <summary> Initializes a new instance of ErrorInformation. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ErrorInformation"/>. </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
@@ -24,6 +28,22 @@ namespace Azure.AI.FormRecognizer.Models
 
             Code = code;
             Message = message;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ErrorInformation"/>. </summary>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorInformation(string code, string message, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Code = code;
+            Message = message;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ErrorInformation"/> for deserialization. </summary>
+        internal ErrorInformation()
+        {
         }
 
         /// <summary> Gets the code. </summary>

@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class ServiceEndpointPolicyDefinition : IUtf8JsonSerializable, IModelJsonSerializable<ServiceEndpointPolicyDefinition>
+    public partial class ServiceEndpointPolicyDefinition : IUtf8JsonSerializable, IJsonModel<ServiceEndpointPolicyDefinition>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ServiceEndpointPolicyDefinition>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceEndpointPolicyDefinition>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ServiceEndpointPolicyDefinition>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ServiceEndpointPolicyDefinition>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,75 +26,83 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Description))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(Description))
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            if (Optional.IsDefined(Service))
+            {
+                writer.WritePropertyName("service"u8);
+                writer.WriteStringValue(Service);
+            }
+            if (Optional.IsCollectionDefined(ServiceResources))
+            {
+                writer.WritePropertyName("serviceResources"u8);
+                writer.WriteStartArray();
+                foreach (var item in ServiceResources)
                 {
-                    writer.WritePropertyName("description"u8);
-                    writer.WriteStringValue(Description);
+                    writer.WriteStringValue(item);
                 }
-                if (Optional.IsDefined(Service))
-                {
-                    writer.WritePropertyName("service"u8);
-                    writer.WriteStringValue(Service);
-                }
-                if (Optional.IsCollectionDefined(ServiceResources))
-                {
-                    writer.WritePropertyName("serviceResources"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ServiceResources)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        ServiceEndpointPolicyDefinition IModelJsonSerializable<ServiceEndpointPolicyDefinition>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ServiceEndpointPolicyDefinition IJsonModel<ServiceEndpointPolicyDefinition>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeServiceEndpointPolicyDefinition(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ServiceEndpointPolicyDefinition>.Serialize(ModelSerializerOptions options)
+        internal static ServiceEndpointPolicyDefinition DeserializeServiceEndpointPolicyDefinition(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ServiceEndpointPolicyDefinition IModelSerializable<ServiceEndpointPolicyDefinition>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeServiceEndpointPolicyDefinition(document.RootElement, options);
-        }
-
-        internal static ServiceEndpointPolicyDefinition DeserializeServiceEndpointPolicyDefinition(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -106,6 +115,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> service = default;
             Optional<IList<string>> serviceResources = default;
             Optional<ProvisioningState> provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -168,8 +179,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ServiceEndpointPolicyDefinition(id.Value, name.Value, etag.Value, description.Value, service.Value, Optional.ToList(serviceResources), Optional.ToNullable(provisioningState));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ServiceEndpointPolicyDefinition(id.Value, serializedAdditionalRawData, name.Value, etag.Value, description.Value, service.Value, Optional.ToList(serviceResources), Optional.ToNullable(provisioningState));
+        }
+
+        BinaryData IModel<ServiceEndpointPolicyDefinition>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        ServiceEndpointPolicyDefinition IModel<ServiceEndpointPolicyDefinition>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeServiceEndpointPolicyDefinition(document.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,22 @@ namespace body_complex.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
         public ArrayWrapper()
         {
             Array = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
         /// <param name="array"></param>
-        internal ArrayWrapper(IList<string> array)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ArrayWrapper(IList<string> array, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Array = array;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the array. </summary>

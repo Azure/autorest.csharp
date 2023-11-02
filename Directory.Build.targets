@@ -69,7 +69,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
-    <PackageReference Include="System.Net.ClientModel" />
     <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
     <PackageReference Include="Azure.ClientSdk.Analyzers" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" />

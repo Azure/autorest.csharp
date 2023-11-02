@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace azure_parameter_grouping.Models
@@ -13,7 +14,10 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostRequiredParameters
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostRequiredParameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/>. </summary>
         /// <param name="path"> Path parameter. </param>
         /// <param name="body"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="path"/> is null. </exception>
@@ -25,17 +29,24 @@ namespace azure_parameter_grouping.Models
             Body = body;
         }
 
-        /// <summary> Initializes a new instance of ParameterGroupingPostRequiredParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/>. </summary>
         /// <param name="customHeader"></param>
         /// <param name="query"> Query parameter with default. </param>
         /// <param name="path"> Path parameter. </param>
         /// <param name="body"></param>
-        internal ParameterGroupingPostRequiredParameters(string customHeader, int? query, string path, int body)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostRequiredParameters(string customHeader, int? query, string path, int body, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CustomHeader = customHeader;
             Query = query;
             Path = path;
             Body = body;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/> for deserialization. </summary>
+        internal ParameterGroupingPostRequiredParameters()
+        {
         }
 
         /// <summary> Gets or sets the custom header. </summary>

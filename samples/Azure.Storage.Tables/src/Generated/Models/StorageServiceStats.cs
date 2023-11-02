@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> Stats for the storage service. </summary>
     public partial class StorageServiceStats
     {
-        /// <summary> Initializes a new instance of StorageServiceStats. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="StorageServiceStats"/>. </summary>
         internal StorageServiceStats()
         {
         }
 
-        /// <summary> Initializes a new instance of StorageServiceStats. </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceStats"/>. </summary>
         /// <param name="geoReplication"> Geo-Replication information for the Secondary Storage Service. </param>
-        internal StorageServiceStats(GeoReplication geoReplication)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageServiceStats(GeoReplication geoReplication, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             GeoReplication = geoReplication;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Geo-Replication information for the Secondary Storage Service. </summary>

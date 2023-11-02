@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The BooleanWrapper. </summary>
     public partial class BooleanWrapper
     {
-        /// <summary> Initializes a new instance of BooleanWrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BooleanWrapper"/>. </summary>
         public BooleanWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of BooleanWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="BooleanWrapper"/>. </summary>
         /// <param name="fieldTrue"></param>
         /// <param name="fieldFalse"></param>
-        internal BooleanWrapper(bool? fieldTrue, bool? fieldFalse)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BooleanWrapper(bool? fieldTrue, bool? fieldFalse, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             FieldTrue = fieldTrue;
             FieldFalse = fieldFalse;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field true. </summary>

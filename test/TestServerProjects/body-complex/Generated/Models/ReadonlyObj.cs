@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The ReadonlyObj. </summary>
     public partial class ReadonlyObj
     {
-        /// <summary> Initializes a new instance of ReadonlyObj. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ReadonlyObj"/>. </summary>
         public ReadonlyObj()
         {
         }
 
-        /// <summary> Initializes a new instance of ReadonlyObj. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadonlyObj"/>. </summary>
         /// <param name="id"></param>
         /// <param name="size"></param>
-        internal ReadonlyObj(string id, int? size)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadonlyObj(string id, int? size, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Size = size;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

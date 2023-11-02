@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The IntWrapper. </summary>
     public partial class IntWrapper
     {
-        /// <summary> Initializes a new instance of IntWrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         public IntWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of IntWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         /// <param name="field1"></param>
         /// <param name="field2"></param>
-        internal IntWrapper(int? field1, int? field2)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IntWrapper(int? field1, int? field2, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field1 = field1;
             Field2 = field2;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field 1. </summary>

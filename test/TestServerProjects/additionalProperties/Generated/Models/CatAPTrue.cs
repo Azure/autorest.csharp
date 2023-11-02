@@ -12,13 +12,13 @@ namespace additionalProperties.Models
     /// <summary> The CatAPTrue. </summary>
     public partial class CatAPTrue : PetAPTrue
     {
-        /// <summary> Initializes a new instance of CatAPTrue. </summary>
+        /// <summary> Initializes a new instance of <see cref="CatAPTrue"/>. </summary>
         /// <param name="id"></param>
         public CatAPTrue(int id) : base(id)
         {
         }
 
-        /// <summary> Initializes a new instance of CatAPTrue. </summary>
+        /// <summary> Initializes a new instance of <see cref="CatAPTrue"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
@@ -27,6 +27,11 @@ namespace additionalProperties.Models
         internal CatAPTrue(int id, string name, bool? status, IDictionary<string, object> additionalProperties, bool? friendly) : base(id, name, status, additionalProperties)
         {
             Friendly = friendly;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CatAPTrue"/> for deserialization. </summary>
+        internal CatAPTrue()
+        {
         }
 
         /// <summary> Gets or sets the friendly. </summary>

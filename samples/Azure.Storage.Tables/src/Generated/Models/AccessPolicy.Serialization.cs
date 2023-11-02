@@ -6,13 +6,16 @@
 #nullable disable
 
 using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class AccessPolicy : IXmlSerializable
+    public partial class AccessPolicy : IXmlSerializable, IModel<AccessPolicy>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -29,7 +32,7 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static AccessPolicy DeserializeAccessPolicy(XElement element)
+        internal static AccessPolicy DeserializeAccessPolicy(XElement element, ModelReaderWriterOptions options = null)
         {
             DateTimeOffset start = default;
             DateTimeOffset expiry = default;
@@ -46,7 +49,40 @@ namespace Azure.Storage.Tables.Models
             {
                 permission = (string)permissionElement;
             }
-            return new AccessPolicy(start, expiry, permission);
+            return new AccessPolicy(start, expiry, permission, default);
+        }
+
+        BinaryData IModel<AccessPolicy>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        AccessPolicy IModel<AccessPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return DeserializeAccessPolicy(XElement.Load(data.ToStream()), options);
         }
     }
 }

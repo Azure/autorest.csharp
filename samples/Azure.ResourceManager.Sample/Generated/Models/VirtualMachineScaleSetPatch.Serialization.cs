@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
@@ -50,57 +49,54 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(UpgradePolicy))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(UpgradePolicy))
-                {
-                    writer.WritePropertyName("upgradePolicy"u8);
-                    writer.WriteObjectValue(UpgradePolicy);
-                }
-                if (Optional.IsDefined(AutomaticRepairsPolicy))
-                {
-                    writer.WritePropertyName("automaticRepairsPolicy"u8);
-                    writer.WriteObjectValue(AutomaticRepairsPolicy);
-                }
-                if (Optional.IsDefined(VirtualMachineProfile))
-                {
-                    writer.WritePropertyName("virtualMachineProfile"u8);
-                    writer.WriteObjectValue(VirtualMachineProfile);
-                }
-                if (Optional.IsDefined(Overprovision))
-                {
-                    writer.WritePropertyName("overprovision"u8);
-                    writer.WriteBooleanValue(Overprovision.Value);
-                }
-                if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
-                {
-                    writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
-                    writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
-                }
-                if (Optional.IsDefined(SinglePlacementGroup))
-                {
-                    writer.WritePropertyName("singlePlacementGroup"u8);
-                    writer.WriteBooleanValue(SinglePlacementGroup.Value);
-                }
-                if (Optional.IsDefined(AdditionalCapabilities))
-                {
-                    writer.WritePropertyName("additionalCapabilities"u8);
-                    writer.WriteObjectValue(AdditionalCapabilities);
-                }
-                if (Optional.IsDefined(ScaleInPolicy))
-                {
-                    writer.WritePropertyName("scaleInPolicy"u8);
-                    writer.WriteObjectValue(ScaleInPolicy);
-                }
-                if (Optional.IsDefined(ProximityPlacementGroup))
-                {
-                    writer.WritePropertyName("proximityPlacementGroup"u8);
-                    JsonSerializer.Serialize(writer, ProximityPlacementGroup);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("upgradePolicy"u8);
+                writer.WriteObjectValue(UpgradePolicy);
             }
+            if (Optional.IsDefined(AutomaticRepairsPolicy))
+            {
+                writer.WritePropertyName("automaticRepairsPolicy"u8);
+                writer.WriteObjectValue(AutomaticRepairsPolicy);
+            }
+            if (Optional.IsDefined(VirtualMachineProfile))
+            {
+                writer.WritePropertyName("virtualMachineProfile"u8);
+                writer.WriteObjectValue(VirtualMachineProfile);
+            }
+            if (Optional.IsDefined(Overprovision))
+            {
+                writer.WritePropertyName("overprovision"u8);
+                writer.WriteBooleanValue(Overprovision.Value);
+            }
+            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            {
+                writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
+                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
+            }
+            if (Optional.IsDefined(SinglePlacementGroup))
+            {
+                writer.WritePropertyName("singlePlacementGroup"u8);
+                writer.WriteBooleanValue(SinglePlacementGroup.Value);
+            }
+            if (Optional.IsDefined(AdditionalCapabilities))
+            {
+                writer.WritePropertyName("additionalCapabilities"u8);
+                writer.WriteObjectValue(AdditionalCapabilities);
+            }
+            if (Optional.IsDefined(ScaleInPolicy))
+            {
+                writer.WritePropertyName("scaleInPolicy"u8);
+                writer.WriteObjectValue(ScaleInPolicy);
+            }
+            if (Optional.IsDefined(ProximityPlacementGroup))
+            {
+                writer.WritePropertyName("proximityPlacementGroup"u8);
+                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
+            }
+            writer.WriteEndObject();
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -121,7 +117,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineScaleSetPatch IJsonModel<VirtualMachineScaleSetPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetPatch(document.RootElement, options);
@@ -297,14 +297,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineScaleSetPatch>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineScaleSetPatch IModel<VirtualMachineScaleSetPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetPatch(document.RootElement, options);

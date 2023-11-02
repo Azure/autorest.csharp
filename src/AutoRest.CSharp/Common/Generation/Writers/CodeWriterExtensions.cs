@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(isBase ? ": base(" : ": this(");
                     foreach (var argument in arguments)
                     {
-                        writer.WriteValueExpression(new FormattableStringToExpression(argument));
+                        writer.WriteValueExpression(argument);
                         writer.AppendRaw(", ");
                     }
                     writer.RemoveTrailingComma();

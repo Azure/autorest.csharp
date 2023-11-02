@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,22 +14,23 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Backend Address Pool of an application gateway. </summary>
     public partial class ApplicationGatewayBackendAddressPool : SubResource
     {
-        /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddressPool"/>. </summary>
         public ApplicationGatewayBackendAddressPool()
         {
             BackendIPConfigurations = new ChangeTrackingList<NetworkInterfaceIPConfiguration>();
             BackendAddresses = new ChangeTrackingList<ApplicationGatewayBackendAddress>();
         }
 
-        /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddressPool"/>. </summary>
         /// <param name="id"> Resource ID. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> Name of the backend address pool that is unique within an Application Gateway. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
         /// <param name="backendIPConfigurations"> Collection of references to IPs defined in network interfaces. </param>
         /// <param name="backendAddresses"> Backend addresses. </param>
         /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
-        internal ApplicationGatewayBackendAddressPool(string id, string name, string etag, string type, IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations, IList<ApplicationGatewayBackendAddress> backendAddresses, ProvisioningState? provisioningState) : base(id)
+        internal ApplicationGatewayBackendAddressPool(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, string type, IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations, IList<ApplicationGatewayBackendAddress> backendAddresses, ProvisioningState? provisioningState) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

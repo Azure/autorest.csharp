@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,49 +21,61 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<VirtualMachineCaptureResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Schema))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("$schema"u8);
-                writer.WriteStringValue(Schema);
+                if (Optional.IsDefined(Schema))
+                {
+                    writer.WritePropertyName("$schema"u8);
+                    writer.WriteStringValue(Schema);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ContentVersion))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("contentVersion"u8);
-                writer.WriteStringValue(ContentVersion);
+                if (Optional.IsDefined(ContentVersion))
+                {
+                    writer.WritePropertyName("contentVersion"u8);
+                    writer.WriteStringValue(ContentVersion);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Parameters))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("parameters"u8);
+                if (Optional.IsDefined(Parameters))
+                {
+                    writer.WritePropertyName("parameters"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Parameters))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
-            }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(Resources))
-            {
-                writer.WritePropertyName("resources"u8);
-                writer.WriteStartArray();
-                foreach (var item in Resources)
-                {
-                    if (item == null)
-                    {
-                        writer.WriteNullValue();
-                        continue;
-                    }
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item))
+                    using (JsonDocument document = JsonDocument.Parse(Parameters))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
 #endif
                 }
-                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(Resources))
+                {
+                    writer.WritePropertyName("resources"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Resources)
+                    {
+                        if (item == null)
+                        {
+                            writer.WriteNullValue();
+                            continue;
+                        }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item);
+#else
+                        using (JsonDocument document = JsonDocument.Parse(item))
+                        {
+                            JsonSerializer.Serialize(writer, document.RootElement);
+                        }
+#endif
+                    }
+                    writer.WriteEndArray();
+                }
             }
             if (Optional.IsDefined(Id))
             {
@@ -91,7 +102,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineCaptureResult IJsonModel<VirtualMachineCaptureResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineCaptureResult(document.RootElement, options);
@@ -170,14 +185,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineCaptureResult>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineCaptureResult IModel<VirtualMachineCaptureResult>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineCaptureResult(document.RootElement, options);

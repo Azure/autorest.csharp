@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class SmartSalmon : IUtf8JsonSerializable, IModelJsonSerializable<SmartSalmon>
+    public partial class SmartSalmon : IUtf8JsonSerializable, IJsonModel<SmartSalmon>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SmartSalmon>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SmartSalmon>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<SmartSalmon>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<SmartSalmon>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(CollegeDegree))
@@ -62,31 +63,21 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        SmartSalmon IModelJsonSerializable<SmartSalmon>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SmartSalmon IJsonModel<SmartSalmon>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSmartSalmon(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SmartSalmon>.Serialize(ModelSerializerOptions options)
+        internal static SmartSalmon DeserializeSmartSalmon(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SmartSalmon IModelSerializable<SmartSalmon>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSmartSalmon(document.RootElement, options);
-        }
-
-        internal static SmartSalmon DeserializeSmartSalmon(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -155,6 +146,29 @@ namespace body_complex.Models
             }
             additionalProperties = additionalPropertiesDictionary;
             return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
+        }
+
+        BinaryData IModel<SmartSalmon>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        SmartSalmon IModel<SmartSalmon>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSmartSalmon(document.RootElement, options);
         }
     }
 }

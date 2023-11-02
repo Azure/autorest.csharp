@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary>
@@ -14,18 +17,23 @@ namespace body_complex.Models
     /// </summary>
     public abstract partial class DotFish
     {
-        /// <summary> Initializes a new instance of DotFish. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DotFish"/>. </summary>
         protected DotFish()
         {
         }
 
-        /// <summary> Initializes a new instance of DotFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="DotFish"/>. </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
-        internal DotFish(string fishType, string species)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DotFish(string fishType, string species, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             FishType = fishType;
             Species = species;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the fish type. </summary>

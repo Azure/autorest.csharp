@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,25 +21,37 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<RollingUpgradeRunningStatus>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Code))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("code"u8);
-                writer.WriteStringValue(Code.Value.ToSerialString());
+                if (Optional.IsDefined(Code))
+                {
+                    writer.WritePropertyName("code"u8);
+                    writer.WriteStringValue(Code.Value.ToSerialString());
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(StartOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("startTime"u8);
-                writer.WriteStringValue(StartOn.Value, "O");
+                if (Optional.IsDefined(StartOn))
+                {
+                    writer.WritePropertyName("startTime"u8);
+                    writer.WriteStringValue(StartOn.Value, "O");
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(LastAction))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("lastAction"u8);
-                writer.WriteStringValue(LastAction.Value.ToSerialString());
+                if (Optional.IsDefined(LastAction))
+                {
+                    writer.WritePropertyName("lastAction"u8);
+                    writer.WriteStringValue(LastAction.Value.ToSerialString());
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(LastActionOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("lastActionTime"u8);
-                writer.WriteStringValue(LastActionOn.Value, "O");
+                if (Optional.IsDefined(LastActionOn))
+                {
+                    writer.WritePropertyName("lastActionTime"u8);
+                    writer.WriteStringValue(LastActionOn.Value, "O");
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -62,7 +73,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         RollingUpgradeRunningStatus IJsonModel<RollingUpgradeRunningStatus>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRollingUpgradeRunningStatus(document.RootElement, options);
@@ -131,14 +146,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<RollingUpgradeRunningStatus>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         RollingUpgradeRunningStatus IModel<RollingUpgradeRunningStatus>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRollingUpgradeRunningStatus(document.RootElement, options);

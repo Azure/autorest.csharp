@@ -7,25 +7,29 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ListServiceSasResponse : IUtf8JsonSerializable, IModelJsonSerializable<ListServiceSasResponse>
+    public partial class ListServiceSasResponse : IUtf8JsonSerializable, IJsonModel<ListServiceSasResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ListServiceSasResponse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListServiceSasResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ListServiceSasResponse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ListServiceSasResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ServiceSasToken))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("serviceSasToken"u8);
-                writer.WriteStringValue(ServiceSasToken);
+                if (Optional.IsDefined(ServiceSasToken))
+                {
+                    writer.WritePropertyName("serviceSasToken"u8);
+                    writer.WriteStringValue(ServiceSasToken);
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -33,24 +37,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ListServiceSasResponse IModelJsonSerializable<ListServiceSasResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ListServiceSasResponse IJsonModel<ListServiceSasResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeListServiceSasResponse(document.RootElement, options);
         }
 
-        internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element, ModelSerializerOptions options = null)
+        internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -66,7 +77,7 @@ namespace Azure.ResourceManager.Storage.Models
                     serviceSasToken = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -75,16 +86,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new ListServiceSasResponse(serviceSasToken.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ListServiceSasResponse>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ListServiceSasResponse>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ListServiceSasResponse IModelSerializable<ListServiceSasResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ListServiceSasResponse IModel<ListServiceSasResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeListServiceSasResponse(document.RootElement, options);

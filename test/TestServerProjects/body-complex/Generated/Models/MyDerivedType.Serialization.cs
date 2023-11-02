@@ -6,17 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class MyDerivedType : IUtf8JsonSerializable, IModelJsonSerializable<MyDerivedType>
+    public partial class MyDerivedType : IUtf8JsonSerializable, IJsonModel<MyDerivedType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MyDerivedType>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyDerivedType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<MyDerivedType>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<MyDerivedType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(PropD1))
@@ -31,45 +33,47 @@ namespace body_complex.Models
                 writer.WritePropertyName("propB1"u8);
                 writer.WriteStringValue(PropB1);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("helper"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PropBH1))
             {
-                writer.WritePropertyName("helper"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(PropBH1))
+                writer.WritePropertyName("propBH1"u8);
+                writer.WriteStringValue(PropBH1);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    writer.WritePropertyName("propBH1"u8);
-                    writer.WriteStringValue(PropBH1);
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
-                writer.WriteEndObject();
             }
             writer.WriteEndObject();
         }
 
-        MyDerivedType IModelJsonSerializable<MyDerivedType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MyDerivedType IJsonModel<MyDerivedType>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeMyDerivedType(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MyDerivedType>.Serialize(ModelSerializerOptions options)
+        internal static MyDerivedType DeserializeMyDerivedType(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        MyDerivedType IModelSerializable<MyDerivedType>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMyDerivedType(document.RootElement, options);
-        }
-
-        internal static MyDerivedType DeserializeMyDerivedType(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,6 +83,8 @@ namespace body_complex.Models
             MyKind kind = default;
             Optional<string> propB1 = default;
             Optional<string> propBH1 = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propD1"u8))
@@ -113,8 +119,36 @@ namespace body_complex.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new MyDerivedType(kind, propB1.Value, propBH1.Value, propD1.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new MyDerivedType(kind, propB1.Value, propBH1.Value, serializedAdditionalRawData, propD1.Value);
+        }
+
+        BinaryData IModel<MyDerivedType>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        MyDerivedType IModel<MyDerivedType>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeMyDerivedType(document.RootElement, options);
         }
     }
 }

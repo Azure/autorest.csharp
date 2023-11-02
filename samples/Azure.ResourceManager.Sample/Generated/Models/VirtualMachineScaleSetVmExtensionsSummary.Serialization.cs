@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,20 +21,26 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<VirtualMachineScaleSetVmExtensionsSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Name))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(StatusesSummary))
-            {
-                writer.WritePropertyName("statusesSummary"u8);
-                writer.WriteStartArray();
-                foreach (var item in StatusesSummary)
+                if (Optional.IsDefined(Name))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("name"u8);
+                    writer.WriteStringValue(Name);
                 }
-                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(StatusesSummary))
+                {
+                    writer.WritePropertyName("statusesSummary"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in StatusesSummary)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -57,7 +62,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineScaleSetVmExtensionsSummary IJsonModel<VirtualMachineScaleSetVmExtensionsSummary>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetVmExtensionsSummary(document.RootElement, options);
@@ -107,14 +116,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineScaleSetVmExtensionsSummary>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineScaleSetVmExtensionsSummary IModel<VirtualMachineScaleSetVmExtensionsSummary>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetVmExtensionsSummary(document.RootElement, options);

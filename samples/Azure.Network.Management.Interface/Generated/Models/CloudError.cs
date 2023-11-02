@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> An error response from the service. </summary>
     internal partial class CloudError
     {
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         internal CloudError()
         {
         }
 
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         /// <param name="error"> Cloud error body. </param>
-        internal CloudError(CloudErrorBody error)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CloudError(CloudErrorBody error, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Error = error;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Cloud error body. </summary>

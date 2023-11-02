@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Private endpoint resource. </summary>
     public partial class PrivateEndpoint : Resource
     {
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         public PrivateEndpoint()
         {
             NetworkInterfaces = new ChangeTrackingList<NetworkInterface>();
@@ -21,19 +22,20 @@ namespace Azure.Network.Management.Interface.Models
             ManualPrivateLinkServiceConnections = new ChangeTrackingList<PrivateLinkServiceConnection>();
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="subnet"> The ID of the subnet from which the private IP will be allocated. </param>
         /// <param name="networkInterfaces"> An array of references to the network interfaces created for this private endpoint. </param>
         /// <param name="provisioningState"> The provisioning state of the private endpoint resource. </param>
         /// <param name="privateLinkServiceConnections"> A grouping of information about the connection to the remote resource. </param>
         /// <param name="manualPrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </param>
-        internal PrivateEndpoint(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, Subnet subnet, IReadOnlyList<NetworkInterface> networkInterfaces, ProvisioningState? provisioningState, IList<PrivateLinkServiceConnection> privateLinkServiceConnections, IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections) : base(id, name, type, location, tags)
+        internal PrivateEndpoint(string id, string name, string type, string location, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, string etag, Subnet subnet, IReadOnlyList<NetworkInterface> networkInterfaces, ProvisioningState? provisioningState, IList<PrivateLinkServiceConnection> privateLinkServiceConnections, IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections) : base(id, name, type, location, tags, serializedAdditionalRawData)
         {
             Etag = etag;
             Subnet = subnet;

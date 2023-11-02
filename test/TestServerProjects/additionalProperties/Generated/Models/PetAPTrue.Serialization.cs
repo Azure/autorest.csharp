@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace additionalProperties.Models
 {
-    public partial class PetAPTrue : IUtf8JsonSerializable, IModelJsonSerializable<PetAPTrue>
+    public partial class PetAPTrue : IUtf8JsonSerializable, IJsonModel<PetAPTrue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PetAPTrue>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPTrue>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<PetAPTrue>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<PetAPTrue>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
@@ -27,10 +28,13 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Status))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("status"u8);
-                writer.WriteBooleanValue(Status.Value);
+                if (Optional.IsDefined(Status))
+                {
+                    writer.WritePropertyName("status"u8);
+                    writer.WriteBooleanValue(Status.Value);
+                }
             }
             foreach (var item in AdditionalProperties)
             {
@@ -40,31 +44,21 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        PetAPTrue IModelJsonSerializable<PetAPTrue>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PetAPTrue IJsonModel<PetAPTrue>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializePetAPTrue(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PetAPTrue>.Serialize(ModelSerializerOptions options)
+        internal static PetAPTrue DeserializePetAPTrue(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PetAPTrue IModelSerializable<PetAPTrue>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePetAPTrue(document.RootElement, options);
-        }
-
-        internal static PetAPTrue DeserializePetAPTrue(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -100,6 +94,29 @@ namespace additionalProperties.Models
             }
             additionalProperties = additionalPropertiesDictionary;
             return new PetAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties);
+        }
+
+        BinaryData IModel<PetAPTrue>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        PetAPTrue IModel<PetAPTrue>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePetAPTrue(document.RootElement, options);
         }
     }
 }

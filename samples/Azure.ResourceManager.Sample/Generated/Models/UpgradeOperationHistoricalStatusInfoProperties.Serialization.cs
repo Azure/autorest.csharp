@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,35 +21,53 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<UpgradeOperationHistoricalStatusInfoProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(RunningStatus))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("runningStatus"u8);
-                writer.WriteObjectValue(RunningStatus);
+                if (Optional.IsDefined(RunningStatus))
+                {
+                    writer.WritePropertyName("runningStatus"u8);
+                    writer.WriteObjectValue(RunningStatus);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Progress))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("progress"u8);
-                writer.WriteObjectValue(Progress);
+                if (Optional.IsDefined(Progress))
+                {
+                    writer.WritePropertyName("progress"u8);
+                    writer.WriteObjectValue(Progress);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Error))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
+                if (Optional.IsDefined(Error))
+                {
+                    writer.WritePropertyName("error"u8);
+                    writer.WriteObjectValue(Error);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(StartedBy))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("startedBy"u8);
-                writer.WriteStringValue(StartedBy.Value.ToSerialString());
+                if (Optional.IsDefined(StartedBy))
+                {
+                    writer.WritePropertyName("startedBy"u8);
+                    writer.WriteStringValue(StartedBy.Value.ToSerialString());
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(TargetImageReference))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("targetImageReference"u8);
-                writer.WriteObjectValue(TargetImageReference);
+                if (Optional.IsDefined(TargetImageReference))
+                {
+                    writer.WritePropertyName("targetImageReference"u8);
+                    writer.WriteObjectValue(TargetImageReference);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(RollbackInfo))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("rollbackInfo"u8);
-                writer.WriteObjectValue(RollbackInfo);
+                if (Optional.IsDefined(RollbackInfo))
+                {
+                    writer.WritePropertyName("rollbackInfo"u8);
+                    writer.WriteObjectValue(RollbackInfo);
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -72,7 +89,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         UpgradeOperationHistoricalStatusInfoProperties IJsonModel<UpgradeOperationHistoricalStatusInfoProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeUpgradeOperationHistoricalStatusInfoProperties(document.RootElement, options);
@@ -161,14 +182,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<UpgradeOperationHistoricalStatusInfoProperties>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         UpgradeOperationHistoricalStatusInfoProperties IModel<UpgradeOperationHistoricalStatusInfoProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUpgradeOperationHistoricalStatusInfoProperties(document.RootElement, options);

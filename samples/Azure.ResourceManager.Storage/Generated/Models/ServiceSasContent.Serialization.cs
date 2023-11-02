@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ServiceSasContent : IUtf8JsonSerializable, IModelJsonSerializable<ServiceSasContent>
+    public partial class ServiceSasContent : IUtf8JsonSerializable, IJsonModel<ServiceSasContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ServiceSasContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceSasContent>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ServiceSasContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ServiceSasContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("canonicalizedResource"u8);
@@ -107,7 +108,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("rsct"u8);
                 writer.WriteStringValue(ContentType);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -115,24 +116,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ServiceSasContent IModelJsonSerializable<ServiceSasContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ServiceSasContent IJsonModel<ServiceSasContent>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeServiceSasContent(document.RootElement, options);
         }
 
-        internal static ServiceSasContent DeserializeServiceSasContent(JsonElement element, ModelSerializerOptions options = null)
+        internal static ServiceSasContent DeserializeServiceSasContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -270,7 +278,7 @@ namespace Azure.ResourceManager.Storage.Models
                     rsct = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -279,16 +287,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new ServiceSasContent(canonicalizedResource, Optional.ToNullable(signedResource), Optional.ToNullable(signedPermission), signedIp.Value, Optional.ToNullable(signedProtocol), Optional.ToNullable(signedStart), Optional.ToNullable(signedExpiry), signedIdentifier.Value, startPk.Value, endPk.Value, startRk.Value, endRk.Value, keyToSign.Value, rscc.Value, rscd.Value, rsce.Value, rscl.Value, rsct.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ServiceSasContent>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ServiceSasContent>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ServiceSasContent IModelSerializable<ServiceSasContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ServiceSasContent IModel<ServiceSasContent>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeServiceSasContent(document.RootElement, options);

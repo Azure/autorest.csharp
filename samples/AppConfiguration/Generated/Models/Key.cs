@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace AppConfiguration.Models
 {
     /// <summary> The Key. </summary>
     public partial class Key
     {
-        /// <summary> Initializes a new instance of Key. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Key"/>. </summary>
         internal Key()
         {
         }
 
-        /// <summary> Initializes a new instance of Key. </summary>
+        /// <summary> Initializes a new instance of <see cref="Key"/>. </summary>
         /// <param name="name"></param>
-        internal Key(string name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Key(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the name. </summary>

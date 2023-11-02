@@ -143,9 +143,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature EnsurePublicConstructorSignature()
         {
             //get base public ctor params
-            GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true, CreatePublicConstructorParameter);
+            GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, out var baseInitializers, true, CreatePublicConstructorParameter);
 
-            FormattableString summary = $"Initializes a new instance of <see cref=\"{Type}\"/>";
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
                 : MethodSignatureModifiers.Internal;
@@ -153,11 +152,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_inputModel.DiscriminatorPropertyName is not null)
                 accessibility = MethodSignatureModifiers.Protected;
 
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
-
             return new ConstructorSignature(
                 Type,
-                summary,
+                $"Initializes a new instance of <see cref=\"{Type.ToStringForDocs(true)}\"/>",
                 null,
                 accessibility,
                 fullParameterList,
@@ -177,18 +174,19 @@ namespace AutoRest.CSharp.Output.Models.Types
                     null,
                     ValidationType.None,
                     null
-                );
+                )
+                {
+                    IsRawData = true
+                };
                 parameters = parameters.Append(deserializationParameter).ToList();
             }
 
             //get base public ctor params
-            GetConstructorParameters(parameters, out var fullParameterList, out var parametersToPassToBase, false, CreateSerializationConstructorParameter);
-
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
+            GetConstructorParameters(parameters, out var fullParameterList, out var parametersToPassToBase, out var baseInitializers, false, CreateSerializationConstructorParameter);
 
             return new ConstructorSignature(
                 Type,
-                $"Initializes a new instance of <see cref=\"{Type}\"/>",
+                $"Initializes a new instance of <see cref=\"{Type.ToStringForDocs(true)}\"/>",
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,
@@ -248,22 +246,37 @@ namespace AutoRest.CSharp.Output.Models.Types
             return inputProperty.IsReadOnly;
         }
 
-        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
+        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out IReadOnlyList<Parameter> fullParameterList, out IReadOnlyList<Parameter> parametersToPassToBase, out IReadOnlyList<ValueExpression> baseInitializers, bool isInitializer, Func<Parameter, Parameter> creator)
         {
-            fullParameterList = new List<Parameter>();
+            var parameterList = new List<Parameter>();
             var parent = GetBaseObjectType();
             parametersToPassToBase = Array.Empty<Parameter>();
+            baseInitializers = Array.Empty<ValueExpression>();
             if (parent is not null)
             {
                 var ctor = isInitializer ? parent.InitializationConstructor : parent.SerializationConstructor;
-                parametersToPassToBase = ctor.Signature.Parameters;
-                fullParameterList.AddRange(parametersToPassToBase);
+                var baseParameters = new List<Parameter>();
+                var baseParameterInitializers = new List<ValueExpression>();
+                foreach (var p in ctor.Signature.Parameters)
+                {
+                    if (p.IsRawData && AdditionalPropertiesProperty != null)
+                    {
+                        baseParameterInitializers.Add(Snippets.Null);
+                        // do not add into the list
+                    }
+                    else
+                    {
+                        baseParameterInitializers.Add(p);
+                        baseParameters.Add(p);
+                    }
+                }
+                parameterList.AddRange(baseParameters);
+                parametersToPassToBase = baseParameters;
+                baseInitializers = baseParameterInitializers;
             }
-            fullParameterList.AddRange(parameters.Select(creator));
+            parameterList.AddRange(parameters.Select(creator));
+            fullParameterList = parameterList;
         }
-
-        private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
-            => ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
             => p with { Type = TypeFactory.GetInputType(p.Type) };

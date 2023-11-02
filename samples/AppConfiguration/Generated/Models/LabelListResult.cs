@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace AppConfiguration.Models
     /// <summary> The result of a list request. </summary>
     internal partial class LabelListResult
     {
-        /// <summary> Initializes a new instance of LabelListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="LabelListResult"/>. </summary>
         internal LabelListResult()
         {
             Items = new ChangeTrackingList<Label>();
         }
 
-        /// <summary> Initializes a new instance of LabelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="LabelListResult"/>. </summary>
         /// <param name="items"> The collection value. </param>
         /// <param name="nextLink"> The URI that can be used to request the next set of paged results. </param>
-        internal LabelListResult(IReadOnlyList<Label> items, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LabelListResult(IReadOnlyList<Label> items, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Items = items;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The collection value. </summary>

@@ -5,13 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class RetentionPolicy : IXmlSerializable
+    public partial class RetentionPolicy : IXmlSerializable, IModel<RetentionPolicy>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -28,7 +32,7 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static RetentionPolicy DeserializeRetentionPolicy(XElement element)
+        internal static RetentionPolicy DeserializeRetentionPolicy(XElement element, ModelReaderWriterOptions options = null)
         {
             bool enabled = default;
             int? days = default;
@@ -40,7 +44,40 @@ namespace Azure.Storage.Tables.Models
             {
                 days = (int?)daysElement;
             }
-            return new RetentionPolicy(enabled, days);
+            return new RetentionPolicy(enabled, days, default);
+        }
+
+        BinaryData IModel<RetentionPolicy>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        RetentionPolicy IModel<RetentionPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return DeserializeRetentionPolicy(XElement.Load(data.ToStream()), options);
         }
     }
 }

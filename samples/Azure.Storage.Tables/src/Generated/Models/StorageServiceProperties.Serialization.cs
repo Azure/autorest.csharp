@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class StorageServiceProperties : IXmlSerializable
+    public partial class StorageServiceProperties : IXmlSerializable, IModel<StorageServiceProperties>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -41,7 +45,7 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
+        internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element, ModelReaderWriterOptions options = null)
         {
             Logging logging = default;
             Metrics hourMetrics = default;
@@ -68,7 +72,40 @@ namespace Azure.Storage.Tables.Models
                 }
                 cors = array;
             }
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors);
+            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, default);
+        }
+
+        BinaryData IModel<StorageServiceProperties>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        StorageServiceProperties IModel<StorageServiceProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return DeserializeStorageServiceProperties(XElement.Load(data.ToStream()), options);
         }
     }
 }

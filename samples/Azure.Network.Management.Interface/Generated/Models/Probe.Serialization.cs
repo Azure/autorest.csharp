@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class Probe : IUtf8JsonSerializable, IModelJsonSerializable<Probe>
+    public partial class Probe : IUtf8JsonSerializable, IJsonModel<Probe>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Probe>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Probe>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<Probe>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<Probe>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,26 +26,32 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
+                if (Optional.IsDefined(Type))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(Type);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(LoadBalancingRules))
+                if (Optional.IsCollectionDefined(LoadBalancingRules))
                 {
                     writer.WritePropertyName("loadBalancingRules"u8);
                     writer.WriteStartArray();
@@ -54,66 +61,74 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (Optional.IsDefined(Protocol))
-                {
-                    writer.WritePropertyName("protocol"u8);
-                    writer.WriteStringValue(Protocol.Value.ToString());
-                }
-                if (Optional.IsDefined(Port))
-                {
-                    writer.WritePropertyName("port"u8);
-                    writer.WriteNumberValue(Port.Value);
-                }
-                if (Optional.IsDefined(IntervalInSeconds))
-                {
-                    writer.WritePropertyName("intervalInSeconds"u8);
-                    writer.WriteNumberValue(IntervalInSeconds.Value);
-                }
-                if (Optional.IsDefined(NumberOfProbes))
-                {
-                    writer.WritePropertyName("numberOfProbes"u8);
-                    writer.WriteNumberValue(NumberOfProbes.Value);
-                }
-                if (Optional.IsDefined(RequestPath))
-                {
-                    writer.WritePropertyName("requestPath"u8);
-                    writer.WriteStringValue(RequestPath);
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (Optional.IsDefined(Protocol))
+            {
+                writer.WritePropertyName("protocol"u8);
+                writer.WriteStringValue(Protocol.Value.ToString());
+            }
+            if (Optional.IsDefined(Port))
+            {
+                writer.WritePropertyName("port"u8);
+                writer.WriteNumberValue(Port.Value);
+            }
+            if (Optional.IsDefined(IntervalInSeconds))
+            {
+                writer.WritePropertyName("intervalInSeconds"u8);
+                writer.WriteNumberValue(IntervalInSeconds.Value);
+            }
+            if (Optional.IsDefined(NumberOfProbes))
+            {
+                writer.WritePropertyName("numberOfProbes"u8);
+                writer.WriteNumberValue(NumberOfProbes.Value);
+            }
+            if (Optional.IsDefined(RequestPath))
+            {
+                writer.WritePropertyName("requestPath"u8);
+                writer.WriteStringValue(RequestPath);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        Probe IModelJsonSerializable<Probe>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Probe IJsonModel<Probe>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeProbe(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Probe>.Serialize(ModelSerializerOptions options)
+        internal static Probe DeserializeProbe(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Probe IModelSerializable<Probe>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeProbe(document.RootElement, options);
-        }
-
-        internal static Probe DeserializeProbe(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +145,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<int> numberOfProbes = default;
             Optional<string> requestPath = default;
             Optional<ProvisioningState> provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -228,8 +245,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Probe(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(loadBalancingRules), Optional.ToNullable(protocol), Optional.ToNullable(port), Optional.ToNullable(intervalInSeconds), Optional.ToNullable(numberOfProbes), requestPath.Value, Optional.ToNullable(provisioningState));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Probe(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, Optional.ToList(loadBalancingRules), Optional.ToNullable(protocol), Optional.ToNullable(port), Optional.ToNullable(intervalInSeconds), Optional.ToNullable(numberOfProbes), requestPath.Value, Optional.ToNullable(provisioningState));
+        }
+
+        BinaryData IModel<Probe>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        Probe IModel<Probe>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeProbe(document.RootElement, options);
         }
     }
 }

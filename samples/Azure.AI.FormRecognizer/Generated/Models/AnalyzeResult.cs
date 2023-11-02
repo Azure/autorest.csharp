@@ -15,7 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Analyze operation result. </summary>
     public partial class AnalyzeResult
     {
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="version"/> or <paramref name="readResults"/> is null. </exception>
@@ -31,19 +34,26 @@ namespace Azure.AI.FormRecognizer.Models
             Errors = new ChangeTrackingList<ErrorInformation>();
         }
 
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
         /// <param name="pageResults"> Page-level information extracted from the input. </param>
         /// <param name="documentResults"> Document-level information extracted from the input. </param>
         /// <param name="errors"> List of errors reported during the analyze operation. </param>
-        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Version = version;
             ReadResults = readResults;
             PageResults = pageResults;
             DocumentResults = documentResults;
             Errors = errors;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/> for deserialization. </summary>
+        internal AnalyzeResult()
+        {
         }
 
         /// <summary> Version of schema used for this result. </summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary>
@@ -14,20 +17,25 @@ namespace body_complex.Models
     /// </summary>
     public abstract partial class MyBaseType
     {
-        /// <summary> Initializes a new instance of MyBaseType. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MyBaseType"/>. </summary>
         protected MyBaseType()
         {
         }
 
-        /// <summary> Initializes a new instance of MyBaseType. </summary>
+        /// <summary> Initializes a new instance of <see cref="MyBaseType"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
-        internal MyBaseType(MyKind kind, string propB1, string propBH1)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MyBaseType(MyKind kind, string propB1, string propBH1, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             PropB1 = propB1;
             PropBH1 = propBH1;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the kind. </summary>

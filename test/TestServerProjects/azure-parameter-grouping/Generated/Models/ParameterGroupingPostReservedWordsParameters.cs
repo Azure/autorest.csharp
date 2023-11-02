@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostReservedWordsParameters
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostReservedWordsParameters. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         public ParameterGroupingPostReservedWordsParameters()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterGroupingPostReservedWordsParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         /// <param name="from"> 'from' is a reserved word. Pass in 'bob' to pass. </param>
         /// <param name="accept"> 'accept' is a reserved word. Pass in 'yes' to pass. </param>
-        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             From = @from;
             Accept = accept;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> 'from' is a reserved word. Pass in 'bob' to pass. </summary>

@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,20 +21,26 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<VirtualMachineScaleSetInstanceView>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(VirtualMachine))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("virtualMachine"u8);
-                writer.WriteObjectValue(VirtualMachine);
-            }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(Extensions))
-            {
-                writer.WritePropertyName("extensions"u8);
-                writer.WriteStartArray();
-                foreach (var item in Extensions)
+                if (Optional.IsDefined(VirtualMachine))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("virtualMachine"u8);
+                    writer.WriteObjectValue(VirtualMachine);
                 }
-                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(Extensions))
+                {
+                    writer.WritePropertyName("extensions"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Extensions)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -47,15 +52,18 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(OrchestrationServices))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("orchestrationServices"u8);
-                writer.WriteStartArray();
-                foreach (var item in OrchestrationServices)
+                if (Optional.IsCollectionDefined(OrchestrationServices))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("orchestrationServices"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OrchestrationServices)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -77,7 +85,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineScaleSetInstanceView IJsonModel<VirtualMachineScaleSetInstanceView>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetInstanceView(document.RootElement, options);
@@ -161,14 +173,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineScaleSetInstanceView>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineScaleSetInstanceView IModel<VirtualMachineScaleSetInstanceView>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetInstanceView(document.RootElement, options);

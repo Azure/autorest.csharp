@@ -297,6 +297,7 @@ extends:
 
   <ItemGroup>
     <PackageReference Include=""Azure.Core"" />
+    <PackageReference Include=""System.Net.ClientModel"" />
     <PackageReference Include=""System.Text.Json"" />
   </ItemGroup>
 

@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class RestorePolicyProperties : IUtf8JsonSerializable, IModelJsonSerializable<RestorePolicyProperties>
+    public partial class RestorePolicyProperties : IUtf8JsonSerializable, IJsonModel<RestorePolicyProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RestorePolicyProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RestorePolicyProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<RestorePolicyProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<RestorePolicyProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("enabled"u8);
@@ -27,17 +28,23 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("days"u8);
                 writer.WriteNumberValue(Days.Value);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastEnabledOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("lastEnabledTime"u8);
-                writer.WriteStringValue(LastEnabledOn.Value, "O");
+                if (Optional.IsDefined(LastEnabledOn))
+                {
+                    writer.WritePropertyName("lastEnabledTime"u8);
+                    writer.WriteStringValue(LastEnabledOn.Value, "O");
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MinRestoreOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("minRestoreTime"u8);
-                writer.WriteStringValue(MinRestoreOn.Value, "O");
+                if (Optional.IsDefined(MinRestoreOn))
+                {
+                    writer.WritePropertyName("minRestoreTime"u8);
+                    writer.WriteStringValue(MinRestoreOn.Value, "O");
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -45,24 +52,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        RestorePolicyProperties IModelJsonSerializable<RestorePolicyProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RestorePolicyProperties IJsonModel<RestorePolicyProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRestorePolicyProperties(document.RootElement, options);
         }
 
-        internal static RestorePolicyProperties DeserializeRestorePolicyProperties(JsonElement element, ModelSerializerOptions options = null)
+        internal static RestorePolicyProperties DeserializeRestorePolicyProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,7 +122,7 @@ namespace Azure.ResourceManager.Storage.Models
                     minRestoreTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -117,16 +131,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new RestorePolicyProperties(enabled, Optional.ToNullable(days), Optional.ToNullable(lastEnabledTime), Optional.ToNullable(minRestoreTime), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<RestorePolicyProperties>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<RestorePolicyProperties>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        RestorePolicyProperties IModelSerializable<RestorePolicyProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        RestorePolicyProperties IModel<RestorePolicyProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRestorePolicyProperties(document.RootElement, options);

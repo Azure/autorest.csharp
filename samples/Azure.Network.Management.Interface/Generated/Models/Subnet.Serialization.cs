@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class Subnet : IUtf8JsonSerializable, IModelJsonSerializable<Subnet>
+    public partial class Subnet : IUtf8JsonSerializable, IJsonModel<Subnet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Subnet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Subnet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<Subnet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<Subnet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,71 +26,74 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(AddressPrefix))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(AddressPrefix))
+                writer.WritePropertyName("addressPrefix"u8);
+                writer.WriteStringValue(AddressPrefix);
+            }
+            if (Optional.IsCollectionDefined(AddressPrefixes))
+            {
+                writer.WritePropertyName("addressPrefixes"u8);
+                writer.WriteStartArray();
+                foreach (var item in AddressPrefixes)
                 {
-                    writer.WritePropertyName("addressPrefix"u8);
-                    writer.WriteStringValue(AddressPrefix);
+                    writer.WriteStringValue(item);
                 }
-                if (Optional.IsCollectionDefined(AddressPrefixes))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(NetworkSecurityGroup))
+            {
+                writer.WritePropertyName("networkSecurityGroup"u8);
+                writer.WriteObjectValue(NetworkSecurityGroup);
+            }
+            if (Optional.IsDefined(RouteTable))
+            {
+                writer.WritePropertyName("routeTable"u8);
+                writer.WriteObjectValue(RouteTable);
+            }
+            if (Optional.IsDefined(NatGateway))
+            {
+                writer.WritePropertyName("natGateway"u8);
+                writer.WriteObjectValue(NatGateway);
+            }
+            if (Optional.IsCollectionDefined(ServiceEndpoints))
+            {
+                writer.WritePropertyName("serviceEndpoints"u8);
+                writer.WriteStartArray();
+                foreach (var item in ServiceEndpoints)
                 {
-                    writer.WritePropertyName("addressPrefixes"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in AddressPrefixes)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsDefined(NetworkSecurityGroup))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ServiceEndpointPolicies))
+            {
+                writer.WritePropertyName("serviceEndpointPolicies"u8);
+                writer.WriteStartArray();
+                foreach (var item in ServiceEndpointPolicies)
                 {
-                    writer.WritePropertyName("networkSecurityGroup"u8);
-                    writer.WriteObjectValue(NetworkSecurityGroup);
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsDefined(RouteTable))
-                {
-                    writer.WritePropertyName("routeTable"u8);
-                    writer.WriteObjectValue(RouteTable);
-                }
-                if (Optional.IsDefined(NatGateway))
-                {
-                    writer.WritePropertyName("natGateway"u8);
-                    writer.WriteObjectValue(NatGateway);
-                }
-                if (Optional.IsCollectionDefined(ServiceEndpoints))
-                {
-                    writer.WritePropertyName("serviceEndpoints"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ServiceEndpoints)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsCollectionDefined(ServiceEndpointPolicies))
-                {
-                    writer.WritePropertyName("serviceEndpointPolicies"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ServiceEndpointPolicies)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(PrivateEndpoints))
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(PrivateEndpoints))
                 {
                     writer.WritePropertyName("privateEndpoints"u8);
                     writer.WriteStartArray();
@@ -99,7 +103,10 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(IpConfigurations))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(IpConfigurations))
                 {
                     writer.WritePropertyName("ipConfigurations"u8);
                     writer.WriteStartArray();
@@ -109,7 +116,10 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(IpConfigurationProfiles))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(IpConfigurationProfiles))
                 {
                     writer.WritePropertyName("ipConfigurationProfiles"u8);
                     writer.WriteStartArray();
@@ -119,7 +129,10 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(ResourceNavigationLinks))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(ResourceNavigationLinks))
                 {
                     writer.WritePropertyName("resourceNavigationLinks"u8);
                     writer.WriteStartArray();
@@ -129,7 +142,10 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(ServiceAssociationLinks))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(ServiceAssociationLinks))
                 {
                     writer.WritePropertyName("serviceAssociationLinks"u8);
                     writer.WriteStartArray();
@@ -139,66 +155,77 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (Optional.IsCollectionDefined(Delegations))
+            }
+            if (Optional.IsCollectionDefined(Delegations))
+            {
+                writer.WritePropertyName("delegations"u8);
+                writer.WriteStartArray();
+                foreach (var item in Delegations)
                 {
-                    writer.WritePropertyName("delegations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Delegations)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Purpose))
+                writer.WriteEndArray();
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(Purpose))
                 {
                     writer.WritePropertyName("purpose"u8);
                     writer.WriteStringValue(Purpose);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                if (Optional.IsDefined(PrivateEndpointNetworkPolicies))
+            }
+            if (Optional.IsDefined(PrivateEndpointNetworkPolicies))
+            {
+                writer.WritePropertyName("privateEndpointNetworkPolicies"u8);
+                writer.WriteStringValue(PrivateEndpointNetworkPolicies);
+            }
+            if (Optional.IsDefined(PrivateLinkServiceNetworkPolicies))
+            {
+                writer.WritePropertyName("privateLinkServiceNetworkPolicies"u8);
+                writer.WriteStringValue(PrivateLinkServiceNetworkPolicies);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    writer.WritePropertyName("privateEndpointNetworkPolicies"u8);
-                    writer.WriteStringValue(PrivateEndpointNetworkPolicies);
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
-                if (Optional.IsDefined(PrivateLinkServiceNetworkPolicies))
-                {
-                    writer.WritePropertyName("privateLinkServiceNetworkPolicies"u8);
-                    writer.WriteStringValue(PrivateLinkServiceNetworkPolicies);
-                }
-                writer.WriteEndObject();
             }
             writer.WriteEndObject();
         }
 
-        Subnet IModelJsonSerializable<Subnet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Subnet IJsonModel<Subnet>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSubnet(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<Subnet>.Serialize(ModelSerializerOptions options)
+        internal static Subnet DeserializeSubnet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        Subnet IModelSerializable<Subnet>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSubnet(document.RootElement, options);
-        }
-
-        internal static Subnet DeserializeSubnet(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -224,6 +251,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<ProvisioningState> provisioningState = default;
             Optional<string> privateEndpointNetworkPolicies = default;
             Optional<string> privateLinkServiceNetworkPolicies = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -435,8 +464,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Subnet(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToList(addressPrefixes), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, Optional.ToList(serviceEndpoints), Optional.ToList(serviceEndpointPolicies), Optional.ToList(privateEndpoints), Optional.ToList(ipConfigurations), Optional.ToList(ipConfigurationProfiles), Optional.ToList(resourceNavigationLinks), Optional.ToList(serviceAssociationLinks), Optional.ToList(delegations), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Subnet(id.Value, serializedAdditionalRawData, name.Value, etag.Value, addressPrefix.Value, Optional.ToList(addressPrefixes), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, Optional.ToList(serviceEndpoints), Optional.ToList(serviceEndpointPolicies), Optional.ToList(privateEndpoints), Optional.ToList(ipConfigurations), Optional.ToList(ipConfigurationProfiles), Optional.ToList(resourceNavigationLinks), Optional.ToList(serviceAssociationLinks), Optional.ToList(delegations), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value);
+        }
+
+        BinaryData IModel<Subnet>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        Subnet IModel<Subnet>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSubnet(document.RootElement, options);
         }
     }
 }

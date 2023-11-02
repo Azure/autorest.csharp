@@ -5,18 +5,22 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Inbound NAT pool of the load balancer. </summary>
     public partial class InboundNatPool : SubResource
     {
-        /// <summary> Initializes a new instance of InboundNatPool. </summary>
+        /// <summary> Initializes a new instance of <see cref="InboundNatPool"/>. </summary>
         public InboundNatPool()
         {
         }
 
-        /// <summary> Initializes a new instance of InboundNatPool. </summary>
+        /// <summary> Initializes a new instance of <see cref="InboundNatPool"/>. </summary>
         /// <param name="id"> Resource ID. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -29,7 +33,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="enableFloatingIP"> Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint. </param>
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="provisioningState"> The provisioning state of the inbound NAT pool resource. </param>
-        internal InboundNatPool(string id, string name, string etag, string type, SubResource frontendIPConfiguration, TransportProtocol? protocol, int? frontendPortRangeStart, int? frontendPortRangeEnd, int? backendPort, int? idleTimeoutInMinutes, bool? enableFloatingIP, bool? enableTcpReset, ProvisioningState? provisioningState) : base(id)
+        internal InboundNatPool(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, string type, SubResource frontendIPConfiguration, TransportProtocol? protocol, int? frontendPortRangeStart, int? frontendPortRangeEnd, int? backendPort, int? idleTimeoutInMinutes, bool? enableFloatingIP, bool? enableTcpReset, ProvisioningState? provisioningState) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

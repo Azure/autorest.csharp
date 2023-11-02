@@ -7,74 +7,81 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Storage.Models;
 
 namespace Azure.ResourceManager.Storage
 {
-    public partial class ImmutabilityPolicyData : IUtf8JsonSerializable, IModelJsonSerializable<ImmutabilityPolicyData>
+    public partial class ImmutabilityPolicyData : IUtf8JsonSerializable, IJsonModel<ImmutabilityPolicyData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ImmutabilityPolicyData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImmutabilityPolicyData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ImmutabilityPolicyData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ImmutabilityPolicyData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag.Value.ToString());
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag.Value.ToString());
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
-            }
-            if (options.Format == ModelSerializerFormat.Json)
-            {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+                if (Optional.IsDefined(SystemData))
                 {
-                    writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
-                    writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(State))
+            }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+            {
+                writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
+                writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(State))
                 {
                     writer.WritePropertyName("state"u8);
                     writer.WriteStringValue(State.Value.ToString());
                 }
-                if (Optional.IsDefined(AllowProtectedAppendWrites))
-                {
-                    writer.WritePropertyName("allowProtectedAppendWrites"u8);
-                    writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
-                }
-                if (Optional.IsDefined(AllowProtectedAppendWritesAll))
-                {
-                    writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
-                    writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
-                }
-                writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (Optional.IsDefined(AllowProtectedAppendWrites))
+            {
+                writer.WritePropertyName("allowProtectedAppendWrites"u8);
+                writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
+            }
+            if (Optional.IsDefined(AllowProtectedAppendWritesAll))
+            {
+                writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
+                writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -82,24 +89,31 @@ namespace Azure.ResourceManager.Storage
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        ImmutabilityPolicyData IModelJsonSerializable<ImmutabilityPolicyData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ImmutabilityPolicyData IJsonModel<ImmutabilityPolicyData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeImmutabilityPolicyData(document.RootElement, options);
         }
 
-        internal static ImmutabilityPolicyData DeserializeImmutabilityPolicyData(JsonElement element, ModelSerializerOptions options = null)
+        internal static ImmutabilityPolicyData DeserializeImmutabilityPolicyData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -199,7 +213,7 @@ namespace Azure.ResourceManager.Storage
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -208,16 +222,24 @@ namespace Azure.ResourceManager.Storage
             return new ImmutabilityPolicyData(id, name, type, systemData.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll), Optional.ToNullable(etag), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<ImmutabilityPolicyData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ImmutabilityPolicyData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        ImmutabilityPolicyData IModelSerializable<ImmutabilityPolicyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ImmutabilityPolicyData IModel<ImmutabilityPolicyData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeImmutabilityPolicyData(document.RootElement, options);

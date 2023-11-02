@@ -13,7 +13,7 @@ namespace additionalProperties.Models
     /// <summary> The PetAPString. </summary>
     public partial class PetAPString
     {
-        /// <summary> Initializes a new instance of PetAPString. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPString"/>. </summary>
         /// <param name="id"></param>
         public PetAPString(int id)
         {
@@ -21,7 +21,7 @@ namespace additionalProperties.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of PetAPString. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPString"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
@@ -32,6 +32,11 @@ namespace additionalProperties.Models
             Name = name;
             Status = status;
             AdditionalProperties = additionalProperties;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PetAPString"/> for deserialization. </summary>
+        internal PetAPString()
+        {
         }
 
         /// <summary> Gets or sets the id. </summary>

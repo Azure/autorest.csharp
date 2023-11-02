@@ -7,40 +7,53 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class StorageAccountKey : IUtf8JsonSerializable, IModelJsonSerializable<StorageAccountKey>
+    public partial class StorageAccountKey : IUtf8JsonSerializable, IJsonModel<StorageAccountKey>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StorageAccountKey>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountKey>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<StorageAccountKey>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<StorageAccountKey>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(KeyName))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("keyName"u8);
-                writer.WriteStringValue(KeyName);
+                if (Optional.IsDefined(KeyName))
+                {
+                    writer.WritePropertyName("keyName"u8);
+                    writer.WriteStringValue(KeyName);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Value))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("value"u8);
-                writer.WriteStringValue(Value);
+                if (Optional.IsDefined(Value))
+                {
+                    writer.WritePropertyName("value"u8);
+                    writer.WriteStringValue(Value);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Permissions))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("permissions"u8);
-                writer.WriteStringValue(Permissions.Value.ToSerialString());
+                if (Optional.IsDefined(Permissions))
+                {
+                    writer.WritePropertyName("permissions"u8);
+                    writer.WriteStringValue(Permissions.Value.ToSerialString());
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CreatedOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("creationTime"u8);
-                writer.WriteStringValue(CreatedOn.Value, "O");
+                if (Optional.IsDefined(CreatedOn))
+                {
+                    writer.WritePropertyName("creationTime"u8);
+                    writer.WriteStringValue(CreatedOn.Value, "O");
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,24 +61,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        StorageAccountKey IModelJsonSerializable<StorageAccountKey>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        StorageAccountKey IJsonModel<StorageAccountKey>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeStorageAccountKey(document.RootElement, options);
         }
 
-        internal static StorageAccountKey DeserializeStorageAccountKey(JsonElement element, ModelSerializerOptions options = null)
+        internal static StorageAccountKey DeserializeStorageAccountKey(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -107,7 +127,7 @@ namespace Azure.ResourceManager.Storage.Models
                     creationTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -116,16 +136,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new StorageAccountKey(keyName.Value, value.Value, Optional.ToNullable(permissions), Optional.ToNullable(creationTime), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<StorageAccountKey>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<StorageAccountKey>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        StorageAccountKey IModelSerializable<StorageAccountKey>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        StorageAccountKey IModel<StorageAccountKey>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeStorageAccountKey(document.RootElement, options);

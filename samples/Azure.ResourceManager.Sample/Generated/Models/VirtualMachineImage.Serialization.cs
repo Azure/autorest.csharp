@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -42,47 +41,44 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Plan))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(Plan))
-                {
-                    writer.WritePropertyName("plan"u8);
-                    writer.WriteObjectValue(Plan);
-                }
-                if (Optional.IsDefined(OSDiskImage))
-                {
-                    writer.WritePropertyName("osDiskImage"u8);
-                    writer.WriteObjectValue(OSDiskImage);
-                }
-                if (Optional.IsCollectionDefined(DataDiskImages))
-                {
-                    writer.WritePropertyName("dataDiskImages"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in DataDiskImages)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsDefined(AutomaticOSUpgradeProperties))
-                {
-                    writer.WritePropertyName("automaticOSUpgradeProperties"u8);
-                    writer.WriteObjectValue(AutomaticOSUpgradeProperties);
-                }
-                if (Optional.IsDefined(HyperVGeneration))
-                {
-                    writer.WritePropertyName("hyperVGeneration"u8);
-                    writer.WriteStringValue(HyperVGeneration.Value.ToString());
-                }
-                if (Optional.IsDefined(Disallowed))
-                {
-                    writer.WritePropertyName("disallowed"u8);
-                    writer.WriteObjectValue(Disallowed);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("plan"u8);
+                writer.WriteObjectValue(Plan);
             }
+            if (Optional.IsDefined(OSDiskImage))
+            {
+                writer.WritePropertyName("osDiskImage"u8);
+                writer.WriteObjectValue(OSDiskImage);
+            }
+            if (Optional.IsCollectionDefined(DataDiskImages))
+            {
+                writer.WritePropertyName("dataDiskImages"u8);
+                writer.WriteStartArray();
+                foreach (var item in DataDiskImages)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(AutomaticOSUpgradeProperties))
+            {
+                writer.WritePropertyName("automaticOSUpgradeProperties"u8);
+                writer.WriteObjectValue(AutomaticOSUpgradeProperties);
+            }
+            if (Optional.IsDefined(HyperVGeneration))
+            {
+                writer.WritePropertyName("hyperVGeneration"u8);
+                writer.WriteStringValue(HyperVGeneration.Value.ToString());
+            }
+            if (Optional.IsDefined(Disallowed))
+            {
+                writer.WritePropertyName("disallowed"u8);
+                writer.WriteObjectValue(Disallowed);
+            }
+            writer.WriteEndObject();
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -103,7 +99,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineImage IJsonModel<VirtualMachineImage>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineImage(document.RootElement, options);
@@ -242,14 +242,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineImage>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineImage IModel<VirtualMachineImage>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineImage(document.RootElement, options);

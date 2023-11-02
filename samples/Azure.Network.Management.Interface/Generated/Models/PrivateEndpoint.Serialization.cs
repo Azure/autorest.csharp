@@ -7,38 +7,48 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class PrivateEndpoint : IUtf8JsonSerializable, IModelJsonSerializable<PrivateEndpoint>
+    public partial class PrivateEndpoint : IUtf8JsonSerializable, IJsonModel<PrivateEndpoint>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PrivateEndpoint>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateEndpoint>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<PrivateEndpoint>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<PrivateEndpoint>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
+                if (Optional.IsDefined(Name))
+                {
+                    writer.WritePropertyName("name"u8);
+                    writer.WriteStringValue(Name);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
+                if (Optional.IsDefined(Type))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(Type);
+                }
             }
             if (Optional.IsDefined(Location))
             {
@@ -56,16 +66,16 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Subnet))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(Subnet))
-                {
-                    writer.WritePropertyName("subnet"u8);
-                    writer.WriteObjectValue(Subnet);
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(NetworkInterfaces))
+                writer.WritePropertyName("subnet"u8);
+                writer.WriteObjectValue(Subnet);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(NetworkInterfaces))
                 {
                     writer.WritePropertyName("networkInterfaces"u8);
                     writer.WriteStartArray();
@@ -75,61 +85,69 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
+            }
+            if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
+            {
+                writer.WritePropertyName("privateLinkServiceConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateLinkServiceConnections)
                 {
-                    writer.WritePropertyName("privateLinkServiceConnections"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in PrivateLinkServiceConnections)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsCollectionDefined(ManualPrivateLinkServiceConnections))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ManualPrivateLinkServiceConnections))
+            {
+                writer.WritePropertyName("manualPrivateLinkServiceConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    writer.WritePropertyName("manualPrivateLinkServiceConnections"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ManualPrivateLinkServiceConnections)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
-                writer.WriteEndObject();
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        PrivateEndpoint IModelJsonSerializable<PrivateEndpoint>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PrivateEndpoint IJsonModel<PrivateEndpoint>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializePrivateEndpoint(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PrivateEndpoint>.Serialize(ModelSerializerOptions options)
+        internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PrivateEndpoint IModelSerializable<PrivateEndpoint>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateEndpoint(document.RootElement, options);
-        }
-
-        internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -146,6 +164,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<ProvisioningState> provisioningState = default;
             Optional<IList<PrivateLinkServiceConnection>> privateLinkServiceConnections = default;
             Optional<IList<PrivateLinkServiceConnection>> manualPrivateLinkServiceConnections = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -259,8 +279,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, subnet.Value, Optional.ToList(networkInterfaces), Optional.ToNullable(provisioningState), Optional.ToList(privateLinkServiceConnections), Optional.ToList(manualPrivateLinkServiceConnections));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), serializedAdditionalRawData, etag.Value, subnet.Value, Optional.ToList(networkInterfaces), Optional.ToNullable(provisioningState), Optional.ToList(privateLinkServiceConnections), Optional.ToList(manualPrivateLinkServiceConnections));
+        }
+
+        BinaryData IModel<PrivateEndpoint>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        PrivateEndpoint IModel<PrivateEndpoint>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateEndpoint(document.RootElement, options);
         }
     }
 }

@@ -6,15 +6,18 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    internal partial class StorageError : IUtf8JsonSerializable, IModelJsonSerializable<StorageError>, IXmlSerializable
+    internal partial class StorageError : IUtf8JsonSerializable, IJsonModel<StorageError>, IXmlSerializable, IModel<StorageError>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -28,19 +31,19 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static StorageError DeserializeStorageError(XElement element)
+        internal static StorageError DeserializeStorageError(XElement element, ModelReaderWriterOptions options = null)
         {
             string message = default;
             if (element.Element("Message") is XElement messageElement)
             {
                 message = (string)messageElement;
             }
-            return new StorageError(message);
+            return new StorageError(message, default);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StorageError>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageError>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<StorageError>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<StorageError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Message))
@@ -48,40 +51,47 @@ namespace Azure.Storage.Tables.Models
                 writer.WritePropertyName("Message"u8);
                 writer.WriteStringValue(Message);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        StorageError IModelJsonSerializable<StorageError>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        StorageError IJsonModel<StorageError>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeStorageError(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<StorageError>.Serialize(ModelSerializerOptions options)
+        internal static StorageError DeserializeStorageError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        StorageError IModelSerializable<StorageError>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeStorageError(document.RootElement, options);
-        }
-
-        internal static StorageError DeserializeStorageError(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<string> message = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("Message"u8))
@@ -89,8 +99,61 @@ namespace Azure.Storage.Tables.Models
                     message = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new StorageError(message.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new StorageError(message.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<StorageError>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                return ModelReaderWriter.WriteCore(this, options);
+            }
+            else
+            {
+                using MemoryStream stream = new MemoryStream();
+                using XmlWriter writer = XmlWriter.Create(stream);
+                ((IXmlSerializable)this).Write(writer, null);
+                writer.Flush();
+                if (stream.Position > int.MaxValue)
+                {
+                    return BinaryData.FromStream(stream);
+                }
+                else
+                {
+                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                }
+            }
+        }
+
+        StorageError IModel<StorageError>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            if (data.ToMemory().Span.StartsWith("{"u8))
+            {
+                using JsonDocument document = JsonDocument.Parse(data);
+                return DeserializeStorageError(document.RootElement, options);
+            }
+            else
+            {
+                return DeserializeStorageError(XElement.Load(data.ToStream()), options);
+            }
         }
     }
 }

@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class KeyCreationTime : IUtf8JsonSerializable, IModelJsonSerializable<KeyCreationTime>
+    public partial class KeyCreationTime : IUtf8JsonSerializable, IJsonModel<KeyCreationTime>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<KeyCreationTime>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyCreationTime>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<KeyCreationTime>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<KeyCreationTime>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Key1))
@@ -30,7 +31,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("key2"u8);
                 writer.WriteStringValue(Key2.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -38,24 +39,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        KeyCreationTime IModelJsonSerializable<KeyCreationTime>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        KeyCreationTime IJsonModel<KeyCreationTime>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeKeyCreationTime(document.RootElement, options);
         }
 
-        internal static KeyCreationTime DeserializeKeyCreationTime(JsonElement element, ModelSerializerOptions options = null)
+        internal static KeyCreationTime DeserializeKeyCreationTime(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +93,7 @@ namespace Azure.ResourceManager.Storage.Models
                     key2 = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,16 +102,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new KeyCreationTime(Optional.ToNullable(key1), Optional.ToNullable(key2), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<KeyCreationTime>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<KeyCreationTime>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        KeyCreationTime IModelSerializable<KeyCreationTime>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        KeyCreationTime IModel<KeyCreationTime>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeKeyCreationTime(document.RootElement, options);

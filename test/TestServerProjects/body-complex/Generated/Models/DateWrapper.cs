@@ -6,24 +6,30 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
     /// <summary> The DateWrapper. </summary>
     public partial class DateWrapper
     {
-        /// <summary> Initializes a new instance of DateWrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DateWrapper"/>. </summary>
         public DateWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of DateWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="DateWrapper"/>. </summary>
         /// <param name="field"></param>
         /// <param name="leap"></param>
-        internal DateWrapper(DateTimeOffset? field, DateTimeOffset? leap)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DateWrapper(DateTimeOffset? field, DateTimeOffset? leap, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field = field;
             Leap = leap;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

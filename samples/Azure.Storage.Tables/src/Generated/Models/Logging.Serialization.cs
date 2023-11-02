@@ -5,13 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class Logging : IXmlSerializable
+    public partial class Logging : IXmlSerializable, IModel<Logging>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -32,7 +36,7 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static Logging DeserializeLogging(XElement element)
+        internal static Logging DeserializeLogging(XElement element, ModelReaderWriterOptions options = null)
         {
             string version = default;
             bool delete = default;
@@ -59,7 +63,40 @@ namespace Azure.Storage.Tables.Models
             {
                 retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return new Logging(version, delete, read, write, retentionPolicy);
+            return new Logging(version, delete, read, write, retentionPolicy, default);
+        }
+
+        BinaryData IModel<Logging>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Logging IModel<Logging>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return DeserializeLogging(XElement.Load(data.ToStream()), options);
         }
     }
 }

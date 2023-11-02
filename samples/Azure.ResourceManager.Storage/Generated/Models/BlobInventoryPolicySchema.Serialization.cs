@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class BlobInventoryPolicySchema : IUtf8JsonSerializable, IModelJsonSerializable<BlobInventoryPolicySchema>
+    public partial class BlobInventoryPolicySchema : IUtf8JsonSerializable, IJsonModel<BlobInventoryPolicySchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<BlobInventoryPolicySchema>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobInventoryPolicySchema>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<BlobInventoryPolicySchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<BlobInventoryPolicySchema>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("enabled"u8);
@@ -31,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -39,24 +40,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        BlobInventoryPolicySchema IModelJsonSerializable<BlobInventoryPolicySchema>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        BlobInventoryPolicySchema IJsonModel<BlobInventoryPolicySchema>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeBlobInventoryPolicySchema(document.RootElement, options);
         }
 
-        internal static BlobInventoryPolicySchema DeserializeBlobInventoryPolicySchema(JsonElement element, ModelSerializerOptions options = null)
+        internal static BlobInventoryPolicySchema DeserializeBlobInventoryPolicySchema(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -89,7 +97,7 @@ namespace Azure.ResourceManager.Storage.Models
                     rules = array;
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -98,16 +106,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new BlobInventoryPolicySchema(enabled, type, rules, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<BlobInventoryPolicySchema>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<BlobInventoryPolicySchema>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        BlobInventoryPolicySchema IModelSerializable<BlobInventoryPolicySchema>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        BlobInventoryPolicySchema IModel<BlobInventoryPolicySchema>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeBlobInventoryPolicySchema(document.RootElement, options);

@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,20 +21,29 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<UpgradeOperationHistoricalStatusInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Properties))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                if (Optional.IsDefined(Properties))
+                {
+                    writer.WritePropertyName("properties"u8);
+                    writer.WriteObjectValue(Properties);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(UpgradeOperationHistoricalStatusInfoType);
+                if (Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(UpgradeOperationHistoricalStatusInfoType);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Location))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("location"u8);
-                writer.WriteStringValue(Location.Value);
+                if (Optional.IsDefined(Location))
+                {
+                    writer.WritePropertyName("location"u8);
+                    writer.WriteStringValue(Location.Value);
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -57,7 +65,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         UpgradeOperationHistoricalStatusInfo IJsonModel<UpgradeOperationHistoricalStatusInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeUpgradeOperationHistoricalStatusInfo(document.RootElement, options);
@@ -112,14 +124,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<UpgradeOperationHistoricalStatusInfo>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         UpgradeOperationHistoricalStatusInfo IModel<UpgradeOperationHistoricalStatusInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUpgradeOperationHistoricalStatusInfo(document.RootElement, options);

@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,20 +21,29 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<RollbackStatusInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("successfullyRolledbackInstanceCount"u8);
-                writer.WriteNumberValue(SuccessfullyRolledbackInstanceCount.Value);
+                if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
+                {
+                    writer.WritePropertyName("successfullyRolledbackInstanceCount"u8);
+                    writer.WriteNumberValue(SuccessfullyRolledbackInstanceCount.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(FailedRolledbackInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("failedRolledbackInstanceCount"u8);
-                writer.WriteNumberValue(FailedRolledbackInstanceCount.Value);
+                if (Optional.IsDefined(FailedRolledbackInstanceCount))
+                {
+                    writer.WritePropertyName("failedRolledbackInstanceCount"u8);
+                    writer.WriteNumberValue(FailedRolledbackInstanceCount.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(RollbackError))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("rollbackError"u8);
-                writer.WriteObjectValue(RollbackError);
+                if (Optional.IsDefined(RollbackError))
+                {
+                    writer.WritePropertyName("rollbackError"u8);
+                    writer.WriteObjectValue(RollbackError);
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -57,7 +65,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         RollbackStatusInfo IJsonModel<RollbackStatusInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRollbackStatusInfo(document.RootElement, options);
@@ -116,14 +128,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<RollbackStatusInfo>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         RollbackStatusInfo IModel<RollbackStatusInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRollbackStatusInfo(document.RootElement, options);

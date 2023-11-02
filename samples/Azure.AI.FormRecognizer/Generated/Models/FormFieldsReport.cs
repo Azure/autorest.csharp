@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -13,7 +14,10 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Report for a custom model training field. </summary>
     public partial class FormFieldsReport
     {
-        /// <summary> Initializes a new instance of FormFieldsReport. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/>. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
@@ -23,6 +27,22 @@ namespace Azure.AI.FormRecognizer.Models
 
             FieldName = fieldName;
             Accuracy = accuracy;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/>. </summary>
+        /// <param name="fieldName"> Training field name. </param>
+        /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FormFieldsReport(string fieldName, float accuracy, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            FieldName = fieldName;
+            Accuracy = accuracy;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/> for deserialization. </summary>
+        internal FormFieldsReport()
+        {
         }
 
         /// <summary> Training field name. </summary>

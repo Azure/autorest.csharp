@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -33,66 +32,63 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ForceUpdateTag))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(ForceUpdateTag))
-                {
-                    writer.WritePropertyName("forceUpdateTag"u8);
-                    writer.WriteStringValue(ForceUpdateTag);
-                }
-                if (Optional.IsDefined(Publisher))
-                {
-                    writer.WritePropertyName("publisher"u8);
-                    writer.WriteStringValue(Publisher);
-                }
-                if (Optional.IsDefined(ExtensionType))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(ExtensionType);
-                }
-                if (Optional.IsDefined(TypeHandlerVersion))
-                {
-                    writer.WritePropertyName("typeHandlerVersion"u8);
-                    writer.WriteStringValue(TypeHandlerVersion);
-                }
-                if (Optional.IsDefined(AutoUpgradeMinorVersion))
-                {
-                    writer.WritePropertyName("autoUpgradeMinorVersion"u8);
-                    writer.WriteBooleanValue(AutoUpgradeMinorVersion.Value);
-                }
-                if (Optional.IsDefined(EnableAutomaticUpgrade))
-                {
-                    writer.WritePropertyName("enableAutomaticUpgrade"u8);
-                    writer.WriteBooleanValue(EnableAutomaticUpgrade.Value);
-                }
-                if (Optional.IsDefined(Settings))
-                {
-                    writer.WritePropertyName("settings"u8);
+                writer.WritePropertyName("forceUpdateTag"u8);
+                writer.WriteStringValue(ForceUpdateTag);
+            }
+            if (Optional.IsDefined(Publisher))
+            {
+                writer.WritePropertyName("publisher"u8);
+                writer.WriteStringValue(Publisher);
+            }
+            if (Optional.IsDefined(ExtensionType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ExtensionType);
+            }
+            if (Optional.IsDefined(TypeHandlerVersion))
+            {
+                writer.WritePropertyName("typeHandlerVersion"u8);
+                writer.WriteStringValue(TypeHandlerVersion);
+            }
+            if (Optional.IsDefined(AutoUpgradeMinorVersion))
+            {
+                writer.WritePropertyName("autoUpgradeMinorVersion"u8);
+                writer.WriteBooleanValue(AutoUpgradeMinorVersion.Value);
+            }
+            if (Optional.IsDefined(EnableAutomaticUpgrade))
+            {
+                writer.WritePropertyName("enableAutomaticUpgrade"u8);
+                writer.WriteBooleanValue(EnableAutomaticUpgrade.Value);
+            }
+            if (Optional.IsDefined(Settings))
+            {
+                writer.WritePropertyName("settings"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Settings);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(Settings))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-                if (Optional.IsDefined(ProtectedSettings))
+                using (JsonDocument document = JsonDocument.Parse(Settings))
                 {
-                    writer.WritePropertyName("protectedSettings"u8);
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            if (Optional.IsDefined(ProtectedSettings))
+            {
+                writer.WritePropertyName("protectedSettings"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(ProtectedSettings);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(ProtectedSettings))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(ProtectedSettings))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
-                writer.WriteEndObject();
+#endif
             }
+            writer.WriteEndObject();
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -113,7 +109,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineExtensionUpdate IJsonModel<VirtualMachineExtensionUpdate>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineExtensionUpdate(document.RootElement, options);
@@ -233,14 +233,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineExtensionUpdate>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineExtensionUpdate IModel<VirtualMachineExtensionUpdate>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineExtensionUpdate(document.RootElement, options);

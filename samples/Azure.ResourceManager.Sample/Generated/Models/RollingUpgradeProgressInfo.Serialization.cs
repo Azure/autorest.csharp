@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,25 +21,37 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<RollingUpgradeProgressInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(SuccessfulInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("successfulInstanceCount"u8);
-                writer.WriteNumberValue(SuccessfulInstanceCount.Value);
+                if (Optional.IsDefined(SuccessfulInstanceCount))
+                {
+                    writer.WritePropertyName("successfulInstanceCount"u8);
+                    writer.WriteNumberValue(SuccessfulInstanceCount.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(FailedInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("failedInstanceCount"u8);
-                writer.WriteNumberValue(FailedInstanceCount.Value);
+                if (Optional.IsDefined(FailedInstanceCount))
+                {
+                    writer.WritePropertyName("failedInstanceCount"u8);
+                    writer.WriteNumberValue(FailedInstanceCount.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(InProgressInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("inProgressInstanceCount"u8);
-                writer.WriteNumberValue(InProgressInstanceCount.Value);
+                if (Optional.IsDefined(InProgressInstanceCount))
+                {
+                    writer.WritePropertyName("inProgressInstanceCount"u8);
+                    writer.WriteNumberValue(InProgressInstanceCount.Value);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(PendingInstanceCount))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("pendingInstanceCount"u8);
-                writer.WriteNumberValue(PendingInstanceCount.Value);
+                if (Optional.IsDefined(PendingInstanceCount))
+                {
+                    writer.WritePropertyName("pendingInstanceCount"u8);
+                    writer.WriteNumberValue(PendingInstanceCount.Value);
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -62,7 +73,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         RollingUpgradeProgressInfo IJsonModel<RollingUpgradeProgressInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRollingUpgradeProgressInfo(document.RootElement, options);
@@ -131,14 +146,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<RollingUpgradeProgressInfo>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         RollingUpgradeProgressInfo IModel<RollingUpgradeProgressInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRollingUpgradeProgressInfo(document.RootElement, options);

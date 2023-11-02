@@ -14,7 +14,7 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Model factory for models. </summary>
     public static partial class StorageTablesModelFactory
     {
-        /// <summary> Initializes a new instance of TableQueryResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TableQueryResponse"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
         /// <returns> A new <see cref="Models.TableQueryResponse"/> instance for mocking. </returns>
@@ -22,10 +22,10 @@ namespace Azure.Storage.Tables.Models
         {
             value ??= new List<TableResponseProperties>();
 
-            return new TableQueryResponse(odataMetadata, value?.ToList());
+            return new TableQueryResponse(odataMetadata, value?.ToList(), new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of TableResponseProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TableResponseProperties"/>. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>
@@ -33,22 +33,25 @@ namespace Azure.Storage.Tables.Models
         /// <returns> A new <see cref="Models.TableResponseProperties"/> instance for mocking. </returns>
         public static TableResponseProperties TableResponseProperties(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null)
         {
-            return new TableResponseProperties(tableName, odataType, odataId, odataEditLink);
+            return new TableResponseProperties(tableName, odataType, odataId, odataEditLink, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of TableResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TableResponse"/>. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>
         /// <param name="odataEditLink"> The edit link of the table. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <returns> A new <see cref="Models.TableResponse"/> instance for mocking. </returns>
-        public static TableResponse TableResponse(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null, string odataMetadata = null)
+        public static TableResponse TableResponse(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string odataMetadata = null)
         {
-            return new TableResponse(tableName, odataType, odataId, odataEditLink, odataMetadata);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new TableResponse(tableName, odataType, odataId, odataEditLink, serializedAdditionalRawData, odataMetadata);
         }
 
-        /// <summary> Initializes a new instance of TableEntityQueryResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TableEntityQueryResponse"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of table entities. </param>
         /// <returns> A new <see cref="Models.TableEntityQueryResponse"/> instance for mocking. </returns>
@@ -56,24 +59,24 @@ namespace Azure.Storage.Tables.Models
         {
             value ??= new List<IDictionary<string, object>>();
 
-            return new TableEntityQueryResponse(odataMetadata, value?.ToList());
+            return new TableEntityQueryResponse(odataMetadata, value?.ToList(), new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of StorageServiceStats. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.StorageServiceStats"/>. </summary>
         /// <param name="geoReplication"> Geo-Replication information for the Secondary Storage Service. </param>
         /// <returns> A new <see cref="Models.StorageServiceStats"/> instance for mocking. </returns>
         public static StorageServiceStats StorageServiceStats(GeoReplication geoReplication = null)
         {
-            return new StorageServiceStats(geoReplication);
+            return new StorageServiceStats(geoReplication, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of GeoReplication. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.GeoReplication"/>. </summary>
         /// <param name="status"> The status of the secondary location. </param>
         /// <param name="lastSyncTime"> A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. </param>
         /// <returns> A new <see cref="Models.GeoReplication"/> instance for mocking. </returns>
         public static GeoReplication GeoReplication(GeoReplicationStatusType status = default, DateTimeOffset lastSyncTime = default)
         {
-            return new GeoReplication(status, lastSyncTime);
+            return new GeoReplication(status, lastSyncTime, new Dictionary<string, BinaryData>());
         }
     }
 }

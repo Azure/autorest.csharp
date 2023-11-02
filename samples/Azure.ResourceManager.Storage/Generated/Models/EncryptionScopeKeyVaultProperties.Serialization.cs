@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class EncryptionScopeKeyVaultProperties : IUtf8JsonSerializable, IModelJsonSerializable<EncryptionScopeKeyVaultProperties>
+    public partial class EncryptionScopeKeyVaultProperties : IUtf8JsonSerializable, IJsonModel<EncryptionScopeKeyVaultProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EncryptionScopeKeyVaultProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionScopeKeyVaultProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<EncryptionScopeKeyVaultProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<EncryptionScopeKeyVaultProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(KeyUri))
@@ -25,17 +26,23 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("keyUri"u8);
                 writer.WriteStringValue(KeyUri.AbsoluteUri);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CurrentVersionedKeyIdentifier))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("currentVersionedKeyIdentifier"u8);
-                writer.WriteStringValue(CurrentVersionedKeyIdentifier);
+                if (Optional.IsDefined(CurrentVersionedKeyIdentifier))
+                {
+                    writer.WritePropertyName("currentVersionedKeyIdentifier"u8);
+                    writer.WriteStringValue(CurrentVersionedKeyIdentifier);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(LastKeyRotationTimestamp))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("lastKeyRotationTimestamp"u8);
-                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
+                if (Optional.IsDefined(LastKeyRotationTimestamp))
+                {
+                    writer.WritePropertyName("lastKeyRotationTimestamp"u8);
+                    writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -43,24 +50,31 @@ namespace Azure.ResourceManager.Storage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        EncryptionScopeKeyVaultProperties IModelJsonSerializable<EncryptionScopeKeyVaultProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        EncryptionScopeKeyVaultProperties IJsonModel<EncryptionScopeKeyVaultProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeEncryptionScopeKeyVaultProperties(document.RootElement, options);
         }
 
-        internal static EncryptionScopeKeyVaultProperties DeserializeEncryptionScopeKeyVaultProperties(JsonElement element, ModelSerializerOptions options = null)
+        internal static EncryptionScopeKeyVaultProperties DeserializeEncryptionScopeKeyVaultProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -96,7 +110,7 @@ namespace Azure.ResourceManager.Storage.Models
                     lastKeyRotationTimestamp = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -105,16 +119,24 @@ namespace Azure.ResourceManager.Storage.Models
             return new EncryptionScopeKeyVaultProperties(keyUri.Value, currentVersionedKeyIdentifier.Value, Optional.ToNullable(lastKeyRotationTimestamp), serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<EncryptionScopeKeyVaultProperties>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<EncryptionScopeKeyVaultProperties>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        EncryptionScopeKeyVaultProperties IModelSerializable<EncryptionScopeKeyVaultProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        EncryptionScopeKeyVaultProperties IModel<EncryptionScopeKeyVaultProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeEncryptionScopeKeyVaultProperties(document.RootElement, options);

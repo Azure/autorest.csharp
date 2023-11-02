@@ -6,17 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class ApplicationGatewayBackendAddress : IUtf8JsonSerializable, IModelJsonSerializable<ApplicationGatewayBackendAddress>
+    public partial class ApplicationGatewayBackendAddress : IUtf8JsonSerializable, IJsonModel<ApplicationGatewayBackendAddress>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ApplicationGatewayBackendAddress>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ApplicationGatewayBackendAddress>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ApplicationGatewayBackendAddress>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ApplicationGatewayBackendAddress>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Fqdn))
@@ -29,34 +31,39 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("ipAddress"u8);
                 writer.WriteStringValue(IpAddress);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        ApplicationGatewayBackendAddress IModelJsonSerializable<ApplicationGatewayBackendAddress>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ApplicationGatewayBackendAddress IJsonModel<ApplicationGatewayBackendAddress>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeApplicationGatewayBackendAddress(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ApplicationGatewayBackendAddress>.Serialize(ModelSerializerOptions options)
+        internal static ApplicationGatewayBackendAddress DeserializeApplicationGatewayBackendAddress(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ApplicationGatewayBackendAddress IModelSerializable<ApplicationGatewayBackendAddress>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeApplicationGatewayBackendAddress(document.RootElement, options);
-        }
-
-        internal static ApplicationGatewayBackendAddress DeserializeApplicationGatewayBackendAddress(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -64,6 +71,8 @@ namespace Azure.Network.Management.Interface.Models
             }
             Optional<string> fqdn = default;
             Optional<string> ipAddress = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fqdn"u8))
@@ -76,8 +85,36 @@ namespace Azure.Network.Management.Interface.Models
                     ipAddress = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ApplicationGatewayBackendAddress(fqdn.Value, ipAddress.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ApplicationGatewayBackendAddress(fqdn.Value, ipAddress.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<ApplicationGatewayBackendAddress>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        ApplicationGatewayBackendAddress IModel<ApplicationGatewayBackendAddress>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeApplicationGatewayBackendAddress(document.RootElement, options);
         }
     }
 }

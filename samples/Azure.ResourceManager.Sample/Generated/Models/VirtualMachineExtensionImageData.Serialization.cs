@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace Azure.ResourceManager.Sample
@@ -51,42 +50,42 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(SystemData))
-            {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
-            }
             if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(OperatingSystem))
+                if (Optional.IsDefined(SystemData))
                 {
-                    writer.WritePropertyName("operatingSystem"u8);
-                    writer.WriteStringValue(OperatingSystem);
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
                 }
-                if (Optional.IsDefined(ComputeRole))
-                {
-                    writer.WritePropertyName("computeRole"u8);
-                    writer.WriteStringValue(ComputeRole);
-                }
-                if (Optional.IsDefined(HandlerSchema))
-                {
-                    writer.WritePropertyName("handlerSchema"u8);
-                    writer.WriteStringValue(HandlerSchema);
-                }
-                if (Optional.IsDefined(VmScaleSetEnabled))
-                {
-                    writer.WritePropertyName("vmScaleSetEnabled"u8);
-                    writer.WriteBooleanValue(VmScaleSetEnabled.Value);
-                }
-                if (Optional.IsDefined(SupportsMultipleExtensions))
-                {
-                    writer.WritePropertyName("supportsMultipleExtensions"u8);
-                    writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
-                }
-                writer.WriteEndObject();
             }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(OperatingSystem))
+            {
+                writer.WritePropertyName("operatingSystem"u8);
+                writer.WriteStringValue(OperatingSystem);
+            }
+            if (Optional.IsDefined(ComputeRole))
+            {
+                writer.WritePropertyName("computeRole"u8);
+                writer.WriteStringValue(ComputeRole);
+            }
+            if (Optional.IsDefined(HandlerSchema))
+            {
+                writer.WritePropertyName("handlerSchema"u8);
+                writer.WriteStringValue(HandlerSchema);
+            }
+            if (Optional.IsDefined(VmScaleSetEnabled))
+            {
+                writer.WritePropertyName("vmScaleSetEnabled"u8);
+                writer.WriteBooleanValue(VmScaleSetEnabled.Value);
+            }
+            if (Optional.IsDefined(SupportsMultipleExtensions))
+            {
+                writer.WritePropertyName("supportsMultipleExtensions"u8);
+                writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
+            }
+            writer.WriteEndObject();
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -107,7 +106,11 @@ namespace Azure.ResourceManager.Sample
 
         VirtualMachineExtensionImageData IJsonModel<VirtualMachineExtensionImageData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineExtensionImageData(document.RootElement, options);
@@ -235,14 +238,22 @@ namespace Azure.ResourceManager.Sample
 
         BinaryData IModel<VirtualMachineExtensionImageData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineExtensionImageData IModel<VirtualMachineExtensionImageData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineExtensionImageData(document.RootElement, options);

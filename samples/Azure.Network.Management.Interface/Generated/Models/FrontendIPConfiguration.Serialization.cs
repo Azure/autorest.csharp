@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class FrontendIPConfiguration : IUtf8JsonSerializable, IModelJsonSerializable<FrontendIPConfiguration>
+    public partial class FrontendIPConfiguration : IUtf8JsonSerializable, IJsonModel<FrontendIPConfiguration>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FrontendIPConfiguration>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FrontendIPConfiguration>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<FrontendIPConfiguration>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<FrontendIPConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,15 +26,21 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
+                if (Optional.IsDefined(Type))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(Type);
+                }
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -50,11 +57,11 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(InboundNatRules))
+                if (Optional.IsCollectionDefined(InboundNatRules))
                 {
                     writer.WritePropertyName("inboundNatRules"u8);
                     writer.WriteStartArray();
@@ -64,7 +71,10 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(InboundNatPools))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(InboundNatPools))
                 {
                     writer.WritePropertyName("inboundNatPools"u8);
                     writer.WriteStartArray();
@@ -74,7 +84,10 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(OutboundRules))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(OutboundRules))
                 {
                     writer.WritePropertyName("outboundRules"u8);
                     writer.WriteStartArray();
@@ -84,7 +97,10 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(LoadBalancingRules))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(LoadBalancingRules))
                 {
                     writer.WritePropertyName("loadBalancingRules"u8);
                     writer.WriteStartArray();
@@ -94,71 +110,79 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (Optional.IsDefined(PrivateIPAddress))
-                {
-                    writer.WritePropertyName("privateIPAddress"u8);
-                    writer.WriteStringValue(PrivateIPAddress);
-                }
-                if (Optional.IsDefined(PrivateIPAllocationMethod))
-                {
-                    writer.WritePropertyName("privateIPAllocationMethod"u8);
-                    writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
-                }
-                if (Optional.IsDefined(PrivateIPAddressVersion))
-                {
-                    writer.WritePropertyName("privateIPAddressVersion"u8);
-                    writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
-                }
-                if (Optional.IsDefined(Subnet))
-                {
-                    writer.WritePropertyName("subnet"u8);
-                    writer.WriteObjectValue(Subnet);
-                }
-                if (Optional.IsDefined(PublicIPAddress))
-                {
-                    writer.WritePropertyName("publicIPAddress"u8);
-                    writer.WriteObjectValue(PublicIPAddress);
-                }
-                if (Optional.IsDefined(PublicIPPrefix))
-                {
-                    writer.WritePropertyName("publicIPPrefix"u8);
-                    writer.WriteObjectValue(PublicIPPrefix);
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (Optional.IsDefined(PrivateIPAddress))
+            {
+                writer.WritePropertyName("privateIPAddress"u8);
+                writer.WriteStringValue(PrivateIPAddress);
+            }
+            if (Optional.IsDefined(PrivateIPAllocationMethod))
+            {
+                writer.WritePropertyName("privateIPAllocationMethod"u8);
+                writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
+            }
+            if (Optional.IsDefined(PrivateIPAddressVersion))
+            {
+                writer.WritePropertyName("privateIPAddressVersion"u8);
+                writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
+            }
+            if (Optional.IsDefined(Subnet))
+            {
+                writer.WritePropertyName("subnet"u8);
+                writer.WriteObjectValue(Subnet);
+            }
+            if (Optional.IsDefined(PublicIPAddress))
+            {
+                writer.WritePropertyName("publicIPAddress"u8);
+                writer.WriteObjectValue(PublicIPAddress);
+            }
+            if (Optional.IsDefined(PublicIPPrefix))
+            {
+                writer.WritePropertyName("publicIPPrefix"u8);
+                writer.WriteObjectValue(PublicIPPrefix);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        FrontendIPConfiguration IModelJsonSerializable<FrontendIPConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FrontendIPConfiguration IJsonModel<FrontendIPConfiguration>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeFrontendIPConfiguration(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FrontendIPConfiguration>.Serialize(ModelSerializerOptions options)
+        internal static FrontendIPConfiguration DeserializeFrontendIPConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FrontendIPConfiguration IModelSerializable<FrontendIPConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFrontendIPConfiguration(document.RootElement, options);
-        }
-
-        internal static FrontendIPConfiguration DeserializeFrontendIPConfiguration(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -180,6 +204,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<PublicIPAddress> publicIPAddress = default;
             Optional<SubResource> publicIPPrefix = default;
             Optional<ProvisioningState> provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -343,8 +369,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new FrontendIPConfiguration(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(zones), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), Optional.ToList(loadBalancingRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, publicIPAddress.Value, publicIPPrefix.Value, Optional.ToNullable(provisioningState));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new FrontendIPConfiguration(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, Optional.ToList(zones), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), Optional.ToList(loadBalancingRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, publicIPAddress.Value, publicIPPrefix.Value, Optional.ToNullable(provisioningState));
+        }
+
+        BinaryData IModel<FrontendIPConfiguration>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        FrontendIPConfiguration IModel<FrontendIPConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFrontendIPConfiguration(document.RootElement, options);
         }
     }
 }

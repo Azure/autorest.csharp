@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,60 +21,90 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<VirtualMachineSoftwarePatchProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(PatchId))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("patchId"u8);
-                writer.WriteStringValue(PatchId);
-            }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Version))
-            {
-                writer.WritePropertyName("version"u8);
-                writer.WriteStringValue(Version);
-            }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(Kbid))
-            {
-                writer.WritePropertyName("kbid"u8);
-                writer.WriteStringValue(Kbid);
-            }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(Classifications))
-            {
-                writer.WritePropertyName("classifications"u8);
-                writer.WriteStartArray();
-                foreach (var item in Classifications)
+                if (Optional.IsDefined(PatchId))
                 {
-                    writer.WriteStringValue(item);
+                    writer.WritePropertyName("patchId"u8);
+                    writer.WriteStringValue(PatchId);
                 }
-                writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(RebootBehavior))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("rebootBehavior"u8);
-                writer.WriteStringValue(RebootBehavior.Value.ToString());
+                if (Optional.IsDefined(Name))
+                {
+                    writer.WritePropertyName("name"u8);
+                    writer.WriteStringValue(Name);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ActivityId))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("activityId"u8);
-                writer.WriteStringValue(ActivityId);
+                if (Optional.IsDefined(Version))
+                {
+                    writer.WritePropertyName("version"u8);
+                    writer.WriteStringValue(Version);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(PublishedOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("publishedDate"u8);
-                writer.WriteStringValue(PublishedOn.Value, "O");
+                if (Optional.IsDefined(Kbid))
+                {
+                    writer.WritePropertyName("kbid"u8);
+                    writer.WriteStringValue(Kbid);
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(LastModifiedOn))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("lastModifiedDateTime"u8);
-                writer.WriteStringValue(LastModifiedOn.Value, "O");
+                if (Optional.IsCollectionDefined(Classifications))
+                {
+                    writer.WritePropertyName("classifications"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Classifications)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(AssessmentState))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("assessmentState"u8);
-                writer.WriteStringValue(AssessmentState.Value.ToString());
+                if (Optional.IsDefined(RebootBehavior))
+                {
+                    writer.WritePropertyName("rebootBehavior"u8);
+                    writer.WriteStringValue(RebootBehavior.Value.ToString());
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ActivityId))
+                {
+                    writer.WritePropertyName("activityId"u8);
+                    writer.WriteStringValue(ActivityId);
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(PublishedOn))
+                {
+                    writer.WritePropertyName("publishedDate"u8);
+                    writer.WriteStringValue(PublishedOn.Value, "O");
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(LastModifiedOn))
+                {
+                    writer.WritePropertyName("lastModifiedDateTime"u8);
+                    writer.WriteStringValue(LastModifiedOn.Value, "O");
+                }
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(AssessmentState))
+                {
+                    writer.WritePropertyName("assessmentState"u8);
+                    writer.WriteStringValue(AssessmentState.Value.ToString());
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -97,7 +126,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineSoftwarePatchProperties IJsonModel<VirtualMachineSoftwarePatchProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineSoftwarePatchProperties(document.RootElement, options);
@@ -211,14 +244,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineSoftwarePatchProperties>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineSoftwarePatchProperties IModel<VirtualMachineSoftwarePatchProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineSoftwarePatchProperties(document.RootElement, options);

@@ -246,7 +246,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 methodArguments.Add(expression);
             }
 
-            FormattableString returnDescription = $"A new <see cref=\"{model.Type}\"/> instance for mocking.";
+            FormattableString returnDescription = $"A new <see cref=\"{model.Type.ToStringForDocs(true)}\"/> instance for mocking.";
 
             var signature = new MethodSignature(
                 ctor.Signature.Name,

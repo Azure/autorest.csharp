@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class SecurityRule : IUtf8JsonSerializable, IModelJsonSerializable<SecurityRule>
+    public partial class SecurityRule : IUtf8JsonSerializable, IJsonModel<SecurityRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SecurityRule>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecurityRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<SecurityRule>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<SecurityRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,160 +26,168 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Description))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(Description))
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            if (Optional.IsDefined(Protocol))
+            {
+                writer.WritePropertyName("protocol"u8);
+                writer.WriteStringValue(Protocol.Value.ToString());
+            }
+            if (Optional.IsDefined(SourcePortRange))
+            {
+                writer.WritePropertyName("sourcePortRange"u8);
+                writer.WriteStringValue(SourcePortRange);
+            }
+            if (Optional.IsDefined(DestinationPortRange))
+            {
+                writer.WritePropertyName("destinationPortRange"u8);
+                writer.WriteStringValue(DestinationPortRange);
+            }
+            if (Optional.IsDefined(SourceAddressPrefix))
+            {
+                writer.WritePropertyName("sourceAddressPrefix"u8);
+                writer.WriteStringValue(SourceAddressPrefix);
+            }
+            if (Optional.IsCollectionDefined(SourceAddressPrefixes))
+            {
+                writer.WritePropertyName("sourceAddressPrefixes"u8);
+                writer.WriteStartArray();
+                foreach (var item in SourceAddressPrefixes)
                 {
-                    writer.WritePropertyName("description"u8);
-                    writer.WriteStringValue(Description);
+                    writer.WriteStringValue(item);
                 }
-                if (Optional.IsDefined(Protocol))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(SourceApplicationSecurityGroups))
+            {
+                writer.WritePropertyName("sourceApplicationSecurityGroups"u8);
+                writer.WriteStartArray();
+                foreach (var item in SourceApplicationSecurityGroups)
                 {
-                    writer.WritePropertyName("protocol"u8);
-                    writer.WriteStringValue(Protocol.Value.ToString());
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsDefined(SourcePortRange))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(DestinationAddressPrefix))
+            {
+                writer.WritePropertyName("destinationAddressPrefix"u8);
+                writer.WriteStringValue(DestinationAddressPrefix);
+            }
+            if (Optional.IsCollectionDefined(DestinationAddressPrefixes))
+            {
+                writer.WritePropertyName("destinationAddressPrefixes"u8);
+                writer.WriteStartArray();
+                foreach (var item in DestinationAddressPrefixes)
                 {
-                    writer.WritePropertyName("sourcePortRange"u8);
-                    writer.WriteStringValue(SourcePortRange);
+                    writer.WriteStringValue(item);
                 }
-                if (Optional.IsDefined(DestinationPortRange))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(DestinationApplicationSecurityGroups))
+            {
+                writer.WritePropertyName("destinationApplicationSecurityGroups"u8);
+                writer.WriteStartArray();
+                foreach (var item in DestinationApplicationSecurityGroups)
                 {
-                    writer.WritePropertyName("destinationPortRange"u8);
-                    writer.WriteStringValue(DestinationPortRange);
+                    writer.WriteObjectValue(item);
                 }
-                if (Optional.IsDefined(SourceAddressPrefix))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(SourcePortRanges))
+            {
+                writer.WritePropertyName("sourcePortRanges"u8);
+                writer.WriteStartArray();
+                foreach (var item in SourcePortRanges)
                 {
-                    writer.WritePropertyName("sourceAddressPrefix"u8);
-                    writer.WriteStringValue(SourceAddressPrefix);
+                    writer.WriteStringValue(item);
                 }
-                if (Optional.IsCollectionDefined(SourceAddressPrefixes))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(DestinationPortRanges))
+            {
+                writer.WritePropertyName("destinationPortRanges"u8);
+                writer.WriteStartArray();
+                foreach (var item in DestinationPortRanges)
                 {
-                    writer.WritePropertyName("sourceAddressPrefixes"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in SourceAddressPrefixes)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
-                if (Optional.IsCollectionDefined(SourceApplicationSecurityGroups))
-                {
-                    writer.WritePropertyName("sourceApplicationSecurityGroups"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in SourceApplicationSecurityGroups)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsDefined(DestinationAddressPrefix))
-                {
-                    writer.WritePropertyName("destinationAddressPrefix"u8);
-                    writer.WriteStringValue(DestinationAddressPrefix);
-                }
-                if (Optional.IsCollectionDefined(DestinationAddressPrefixes))
-                {
-                    writer.WritePropertyName("destinationAddressPrefixes"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in DestinationAddressPrefixes)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsCollectionDefined(DestinationApplicationSecurityGroups))
-                {
-                    writer.WritePropertyName("destinationApplicationSecurityGroups"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in DestinationApplicationSecurityGroups)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsCollectionDefined(SourcePortRanges))
-                {
-                    writer.WritePropertyName("sourcePortRanges"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in SourcePortRanges)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsCollectionDefined(DestinationPortRanges))
-                {
-                    writer.WritePropertyName("destinationPortRanges"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in DestinationPortRanges)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsDefined(Access))
-                {
-                    writer.WritePropertyName("access"u8);
-                    writer.WriteStringValue(Access.Value.ToString());
-                }
-                if (Optional.IsDefined(Priority))
-                {
-                    writer.WritePropertyName("priority"u8);
-                    writer.WriteNumberValue(Priority.Value);
-                }
-                if (Optional.IsDefined(Direction))
-                {
-                    writer.WritePropertyName("direction"u8);
-                    writer.WriteStringValue(Direction.Value.ToString());
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Access))
+            {
+                writer.WritePropertyName("access"u8);
+                writer.WriteStringValue(Access.Value.ToString());
+            }
+            if (Optional.IsDefined(Priority))
+            {
+                writer.WritePropertyName("priority"u8);
+                writer.WriteNumberValue(Priority.Value);
+            }
+            if (Optional.IsDefined(Direction))
+            {
+                writer.WritePropertyName("direction"u8);
+                writer.WriteStringValue(Direction.Value.ToString());
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        SecurityRule IModelJsonSerializable<SecurityRule>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SecurityRule IJsonModel<SecurityRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSecurityRule(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SecurityRule>.Serialize(ModelSerializerOptions options)
+        internal static SecurityRule DeserializeSecurityRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SecurityRule IModelSerializable<SecurityRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSecurityRule(document.RootElement, options);
-        }
-
-        internal static SecurityRule DeserializeSecurityRule(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -203,6 +212,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<int> priority = default;
             Optional<SecurityRuleDirection> direction = default;
             Optional<ProvisioningState> provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -386,8 +397,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SecurityRule(id.Value, name.Value, etag.Value, description.Value, Optional.ToNullable(protocol), sourcePortRange.Value, destinationPortRange.Value, sourceAddressPrefix.Value, Optional.ToList(sourceAddressPrefixes), Optional.ToList(sourceApplicationSecurityGroups), destinationAddressPrefix.Value, Optional.ToList(destinationAddressPrefixes), Optional.ToList(destinationApplicationSecurityGroups), Optional.ToList(sourcePortRanges), Optional.ToList(destinationPortRanges), Optional.ToNullable(access), Optional.ToNullable(priority), Optional.ToNullable(direction), Optional.ToNullable(provisioningState));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SecurityRule(id.Value, serializedAdditionalRawData, name.Value, etag.Value, description.Value, Optional.ToNullable(protocol), sourcePortRange.Value, destinationPortRange.Value, sourceAddressPrefix.Value, Optional.ToList(sourceAddressPrefixes), Optional.ToList(sourceApplicationSecurityGroups), destinationAddressPrefix.Value, Optional.ToList(destinationAddressPrefixes), Optional.ToList(destinationApplicationSecurityGroups), Optional.ToList(sourcePortRanges), Optional.ToList(destinationPortRanges), Optional.ToNullable(access), Optional.ToNullable(priority), Optional.ToNullable(direction), Optional.ToNullable(provisioningState));
+        }
+
+        BinaryData IModel<SecurityRule>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        SecurityRule IModel<SecurityRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSecurityRule(document.RootElement, options);
         }
     }
 }

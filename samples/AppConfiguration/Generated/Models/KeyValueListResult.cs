@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace AppConfiguration.Models
     /// <summary> The result of a list request. </summary>
     internal partial class KeyValueListResult
     {
-        /// <summary> Initializes a new instance of KeyValueListResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="KeyValueListResult"/>. </summary>
         internal KeyValueListResult()
         {
             Items = new ChangeTrackingList<KeyValue>();
         }
 
-        /// <summary> Initializes a new instance of KeyValueListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyValueListResult"/>. </summary>
         /// <param name="items"> The collection value. </param>
         /// <param name="nextLink"> The URI that can be used to request the next set of paged results. </param>
-        internal KeyValueListResult(IReadOnlyList<KeyValue> items, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyValueListResult(IReadOnlyList<KeyValue> items, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Items = items;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The collection value. </summary>

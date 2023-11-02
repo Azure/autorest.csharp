@@ -6,17 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class FloatWrapper : IUtf8JsonSerializable, IModelJsonSerializable<FloatWrapper>
+    public partial class FloatWrapper : IUtf8JsonSerializable, IJsonModel<FloatWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FloatWrapper>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatWrapper>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<FloatWrapper>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<FloatWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Field1))
@@ -29,34 +31,39 @@ namespace body_complex.Models
                 writer.WritePropertyName("field2"u8);
                 writer.WriteNumberValue(Field2.Value);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        FloatWrapper IModelJsonSerializable<FloatWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FloatWrapper IJsonModel<FloatWrapper>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeFloatWrapper(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<FloatWrapper>.Serialize(ModelSerializerOptions options)
+        internal static FloatWrapper DeserializeFloatWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        FloatWrapper IModelSerializable<FloatWrapper>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFloatWrapper(document.RootElement, options);
-        }
-
-        internal static FloatWrapper DeserializeFloatWrapper(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -64,6 +71,8 @@ namespace body_complex.Models
             }
             Optional<float> field1 = default;
             Optional<float> field2 = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field1"u8))
@@ -84,8 +93,36 @@ namespace body_complex.Models
                     field2 = property.Value.GetSingle();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new FloatWrapper(Optional.ToNullable(field1), Optional.ToNullable(field2));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new FloatWrapper(Optional.ToNullable(field1), Optional.ToNullable(field2), serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<FloatWrapper>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        FloatWrapper IModel<FloatWrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFloatWrapper(document.RootElement, options);
         }
     }
 }

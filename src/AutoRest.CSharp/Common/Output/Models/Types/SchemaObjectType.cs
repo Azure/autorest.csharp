@@ -8,6 +8,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -157,11 +159,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<Parameter> serializationConstructorParameters = new List<Parameter>();
             List<ObjectPropertyInitializer> serializationInitializers = new List<ObjectPropertyInitializer>();
             ObjectTypeConstructor? baseSerializationCtor = null;
+            List<ValueExpression> baseParameterInitializers = new List<ValueExpression>();
 
             if (Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType })
             {
                 baseSerializationCtor = objectType.SerializationConstructor;
-                serializationConstructorParameters.AddRange(baseSerializationCtor.Signature.Parameters);
+                foreach (var p in baseSerializationCtor.Signature.Parameters)
+                {
+                    if (p.IsRawData && AdditionalPropertiesProperty != null)
+                    {
+                        baseParameterInitializers.Add(Snippets.Null);
+                        // do not add into the list
+                    }
+                    else
+                    {
+                        baseParameterInitializers.Add(p);
+                        serializationConstructorParameters.Add(p);
+                    }
+                }
             }
 
             foreach (var property in Properties)
@@ -198,7 +213,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                     null,
                     ValidationType.None,
                     null
-                );
+                )
+                {
+                    IsRawData = true
+                };
                 serializationConstructorParameters.Add(deserializationParameter);
                 serializationInitializers.Add(new ObjectPropertyInitializer(RawDataField, deserializationParameter, null));
             }
@@ -227,13 +245,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            return new ObjectTypeConstructor(
+            var initializer = new ConstructorInitializer(true, baseParameterInitializers);
+
+            var signature = new ConstructorSignature(
                 Type,
+                $"Initializes a new instance of <see cref=\"{Type.ToStringForDocs(true)}\"/>",
+                null,
                 IsInheritableCommonType ? Protected : Internal,
-                serializationConstructorParameters.ToArray(),
+                serializationConstructorParameters,
+                Initializer: initializer);
+
+            return new ObjectTypeConstructor(
+                signature,
                 serializationInitializers.ToArray(),
-                baseSerializationCtor
-            );
+                baseSerializationCtor);
         }
 
         private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)

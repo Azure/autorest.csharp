@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -42,10 +41,13 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("version"u8);
                 writer.WriteStringValue(Version);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ExactVersion))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("exactVersion"u8);
-                writer.WriteStringValue(ExactVersion);
+                if (Optional.IsDefined(ExactVersion))
+                {
+                    writer.WritePropertyName("exactVersion"u8);
+                    writer.WriteStringValue(ExactVersion);
+                }
             }
             if (Optional.IsDefined(Id))
             {
@@ -72,7 +74,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         ImageReference IJsonModel<ImageReference>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeImageReference(document.RootElement, options);
@@ -137,14 +143,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<ImageReference>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         ImageReference IModel<ImageReference>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeImageReference(document.RootElement, options);

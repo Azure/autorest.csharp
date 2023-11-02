@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class ServiceAssociationLink : IUtf8JsonSerializable, IModelJsonSerializable<ServiceAssociationLink>
+    public partial class ServiceAssociationLink : IUtf8JsonSerializable, IJsonModel<ServiceAssociationLink>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ServiceAssociationLink>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceAssociationLink>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ServiceAssociationLink>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ServiceAssociationLink>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,85 +26,96 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
+                if (Optional.IsDefined(Type))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(Type);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(LinkedResourceType))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(LinkedResourceType))
-                {
-                    writer.WritePropertyName("linkedResourceType"u8);
-                    writer.WriteStringValue(LinkedResourceType);
-                }
-                if (Optional.IsDefined(Link))
-                {
-                    writer.WritePropertyName("link"u8);
-                    writer.WriteStringValue(Link);
-                }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                writer.WritePropertyName("linkedResourceType"u8);
+                writer.WriteStringValue(LinkedResourceType);
+            }
+            if (Optional.IsDefined(Link))
+            {
+                writer.WritePropertyName("link"u8);
+                writer.WriteStringValue(Link);
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                if (Optional.IsDefined(AllowDelete))
+            }
+            if (Optional.IsDefined(AllowDelete))
+            {
+                writer.WritePropertyName("allowDelete"u8);
+                writer.WriteBooleanValue(AllowDelete.Value);
+            }
+            if (Optional.IsCollectionDefined(Locations))
+            {
+                writer.WritePropertyName("locations"u8);
+                writer.WriteStartArray();
+                foreach (var item in Locations)
                 {
-                    writer.WritePropertyName("allowDelete"u8);
-                    writer.WriteBooleanValue(AllowDelete.Value);
+                    writer.WriteStringValue(item);
                 }
-                if (Optional.IsCollectionDefined(Locations))
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    writer.WritePropertyName("locations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Locations)
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
                     {
-                        writer.WriteStringValue(item);
+                        JsonSerializer.Serialize(writer, document.RootElement);
                     }
-                    writer.WriteEndArray();
+#endif
                 }
-                writer.WriteEndObject();
             }
             writer.WriteEndObject();
         }
 
-        ServiceAssociationLink IModelJsonSerializable<ServiceAssociationLink>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ServiceAssociationLink IJsonModel<ServiceAssociationLink>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeServiceAssociationLink(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ServiceAssociationLink>.Serialize(ModelSerializerOptions options)
+        internal static ServiceAssociationLink DeserializeServiceAssociationLink(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ServiceAssociationLink IModelSerializable<ServiceAssociationLink>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeServiceAssociationLink(document.RootElement, options);
-        }
-
-        internal static ServiceAssociationLink DeserializeServiceAssociationLink(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -118,6 +130,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<ProvisioningState> provisioningState = default;
             Optional<bool> allowDelete = default;
             Optional<IList<string>> locations = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -194,8 +208,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ServiceAssociationLink(id.Value, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(allowDelete), Optional.ToList(locations));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ServiceAssociationLink(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(allowDelete), Optional.ToList(locations));
+        }
+
+        BinaryData IModel<ServiceAssociationLink>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        ServiceAssociationLink IModel<ServiceAssociationLink>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeServiceAssociationLink(document.RootElement, options);
         }
     }
 }

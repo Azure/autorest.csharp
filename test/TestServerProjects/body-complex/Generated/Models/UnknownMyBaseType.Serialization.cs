@@ -6,17 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownMyBaseType : IUtf8JsonSerializable, IModelJsonSerializable<UnknownMyBaseType>
+    internal partial class UnknownMyBaseType : IUtf8JsonSerializable, IJsonModel<UnknownMyBaseType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownMyBaseType>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownMyBaseType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<UnknownMyBaseType>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<UnknownMyBaseType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -26,45 +28,47 @@ namespace body_complex.Models
                 writer.WritePropertyName("propB1"u8);
                 writer.WriteStringValue(PropB1);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("helper"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PropBH1))
             {
-                writer.WritePropertyName("helper"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(PropBH1))
+                writer.WritePropertyName("propBH1"u8);
+                writer.WriteStringValue(PropBH1);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    writer.WritePropertyName("propBH1"u8);
-                    writer.WriteStringValue(PropBH1);
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
-                writer.WriteEndObject();
             }
             writer.WriteEndObject();
         }
 
-        UnknownMyBaseType IModelJsonSerializable<UnknownMyBaseType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        UnknownMyBaseType IJsonModel<UnknownMyBaseType>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeUnknownMyBaseType(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<UnknownMyBaseType>.Serialize(ModelSerializerOptions options)
+        internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        UnknownMyBaseType IModelSerializable<UnknownMyBaseType>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUnknownMyBaseType(document.RootElement, options);
-        }
-
-        internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -73,6 +77,8 @@ namespace body_complex.Models
             MyKind kind = "Unknown";
             Optional<string> propB1 = default;
             Optional<string> propBH1 = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -102,8 +108,36 @@ namespace body_complex.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new UnknownMyBaseType(kind, propB1.Value, propBH1.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new UnknownMyBaseType(kind, propB1.Value, propBH1.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<UnknownMyBaseType>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        UnknownMyBaseType IModel<UnknownMyBaseType>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownMyBaseType(document.RootElement, options);
         }
     }
 }

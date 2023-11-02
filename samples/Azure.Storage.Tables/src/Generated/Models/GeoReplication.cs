@@ -6,19 +6,39 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> The GeoReplication. </summary>
     public partial class GeoReplication
     {
-        /// <summary> Initializes a new instance of GeoReplication. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="GeoReplication"/>. </summary>
         /// <param name="status"> The status of the secondary location. </param>
         /// <param name="lastSyncTime"> A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. </param>
         internal GeoReplication(GeoReplicationStatusType status, DateTimeOffset lastSyncTime)
         {
             Status = status;
             LastSyncTime = lastSyncTime;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="GeoReplication"/>. </summary>
+        /// <param name="status"> The status of the secondary location. </param>
+        /// <param name="lastSyncTime"> A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GeoReplication(GeoReplicationStatusType status, DateTimeOffset lastSyncTime, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Status = status;
+            LastSyncTime = lastSyncTime;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="GeoReplication"/> for deserialization. </summary>
+        internal GeoReplication()
+        {
         }
 
         /// <summary> The status of the secondary location. </summary>

@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class PrivateLinkServiceConnection : IUtf8JsonSerializable, IModelJsonSerializable<PrivateLinkServiceConnection>
+    public partial class PrivateLinkServiceConnection : IUtf8JsonSerializable, IJsonModel<PrivateLinkServiceConnection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PrivateLinkServiceConnection>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateLinkServiceConnection>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<PrivateLinkServiceConnection>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<PrivateLinkServiceConnection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -25,85 +26,96 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
+                if (Optional.IsDefined(Type))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(Type);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                if (Optional.IsDefined(PrivateLinkServiceId))
+            }
+            if (Optional.IsDefined(PrivateLinkServiceId))
+            {
+                writer.WritePropertyName("privateLinkServiceId"u8);
+                writer.WriteStringValue(PrivateLinkServiceId);
+            }
+            if (Optional.IsCollectionDefined(GroupIds))
+            {
+                writer.WritePropertyName("groupIds"u8);
+                writer.WriteStartArray();
+                foreach (var item in GroupIds)
                 {
-                    writer.WritePropertyName("privateLinkServiceId"u8);
-                    writer.WriteStringValue(PrivateLinkServiceId);
+                    writer.WriteStringValue(item);
                 }
-                if (Optional.IsCollectionDefined(GroupIds))
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(RequestMessage))
+            {
+                writer.WritePropertyName("requestMessage"u8);
+                writer.WriteStringValue(RequestMessage);
+            }
+            if (Optional.IsDefined(PrivateLinkServiceConnectionState))
+            {
+                writer.WritePropertyName("privateLinkServiceConnectionState"u8);
+                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    writer.WritePropertyName("groupIds"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in GroupIds)
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
                     {
-                        writer.WriteStringValue(item);
+                        JsonSerializer.Serialize(writer, document.RootElement);
                     }
-                    writer.WriteEndArray();
+#endif
                 }
-                if (Optional.IsDefined(RequestMessage))
-                {
-                    writer.WritePropertyName("requestMessage"u8);
-                    writer.WriteStringValue(RequestMessage);
-                }
-                if (Optional.IsDefined(PrivateLinkServiceConnectionState))
-                {
-                    writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                    writer.WriteObjectValue(PrivateLinkServiceConnectionState);
-                }
-                writer.WriteEndObject();
             }
             writer.WriteEndObject();
         }
 
-        PrivateLinkServiceConnection IModelJsonSerializable<PrivateLinkServiceConnection>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PrivateLinkServiceConnection IJsonModel<PrivateLinkServiceConnection>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializePrivateLinkServiceConnection(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<PrivateLinkServiceConnection>.Serialize(ModelSerializerOptions options)
+        internal static PrivateLinkServiceConnection DeserializePrivateLinkServiceConnection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        PrivateLinkServiceConnection IModelSerializable<PrivateLinkServiceConnection>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateLinkServiceConnection(document.RootElement, options);
-        }
-
-        internal static PrivateLinkServiceConnection DeserializePrivateLinkServiceConnection(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -118,6 +130,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<IList<string>> groupIds = default;
             Optional<string> requestMessage = default;
             Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -194,8 +208,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new PrivateLinkServiceConnection(id.Value, serializedAdditionalRawData, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value);
+        }
+
+        BinaryData IModel<PrivateLinkServiceConnection>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        PrivateLinkServiceConnection IModel<PrivateLinkServiceConnection>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializePrivateLinkServiceConnection(document.RootElement, options);
         }
     }
 }

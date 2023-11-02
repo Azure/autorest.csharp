@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -30,47 +29,44 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Primary))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(Primary))
-                {
-                    writer.WritePropertyName("primary"u8);
-                    writer.WriteBooleanValue(Primary.Value);
-                }
-                if (Optional.IsDefined(EnableAcceleratedNetworking))
-                {
-                    writer.WritePropertyName("enableAcceleratedNetworking"u8);
-                    writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
-                }
-                if (Optional.IsDefined(NetworkSecurityGroup))
-                {
-                    writer.WritePropertyName("networkSecurityGroup"u8);
-                    JsonSerializer.Serialize(writer, NetworkSecurityGroup);
-                }
-                if (Optional.IsDefined(DnsSettings))
-                {
-                    writer.WritePropertyName("dnsSettings"u8);
-                    writer.WriteObjectValue(DnsSettings);
-                }
-                if (Optional.IsCollectionDefined(IPConfigurations))
-                {
-                    writer.WritePropertyName("ipConfigurations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in IPConfigurations)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                if (Optional.IsDefined(EnableIPForwarding))
-                {
-                    writer.WritePropertyName("enableIPForwarding"u8);
-                    writer.WriteBooleanValue(EnableIPForwarding.Value);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("primary"u8);
+                writer.WriteBooleanValue(Primary.Value);
             }
+            if (Optional.IsDefined(EnableAcceleratedNetworking))
+            {
+                writer.WritePropertyName("enableAcceleratedNetworking"u8);
+                writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
+            }
+            if (Optional.IsDefined(NetworkSecurityGroup))
+            {
+                writer.WritePropertyName("networkSecurityGroup"u8);
+                JsonSerializer.Serialize(writer, NetworkSecurityGroup);
+            }
+            if (Optional.IsDefined(DnsSettings))
+            {
+                writer.WritePropertyName("dnsSettings"u8);
+                writer.WriteObjectValue(DnsSettings);
+            }
+            if (Optional.IsCollectionDefined(IPConfigurations))
+            {
+                writer.WritePropertyName("ipConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in IPConfigurations)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(EnableIPForwarding))
+            {
+                writer.WritePropertyName("enableIPForwarding"u8);
+                writer.WriteBooleanValue(EnableIPForwarding.Value);
+            }
+            writer.WriteEndObject();
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -91,7 +87,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineScaleSetNetworkConfiguration IJsonModel<VirtualMachineScaleSetNetworkConfiguration>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetNetworkConfiguration(document.RootElement, options);
@@ -209,14 +209,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<VirtualMachineScaleSetNetworkConfiguration>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         VirtualMachineScaleSetNetworkConfiguration IModel<VirtualMachineScaleSetNetworkConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetNetworkConfiguration(document.RootElement, options);

@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,15 +21,21 @@ namespace Azure.ResourceManager.Sample.Models
         void IJsonModel<OrchestrationServiceSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ServiceName))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("serviceName"u8);
-                writer.WriteStringValue(ServiceName.Value.ToString());
+                if (Optional.IsDefined(ServiceName))
+                {
+                    writer.WritePropertyName("serviceName"u8);
+                    writer.WriteStringValue(ServiceName.Value.ToString());
+                }
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ServiceState))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("serviceState"u8);
-                writer.WriteStringValue(ServiceState.Value.ToString());
+                if (Optional.IsDefined(ServiceState))
+                {
+                    writer.WritePropertyName("serviceState"u8);
+                    writer.WriteStringValue(ServiceState.Value.ToString());
+                }
             }
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
@@ -52,7 +57,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         OrchestrationServiceSummary IJsonModel<OrchestrationServiceSummary>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeOrchestrationServiceSummary(document.RootElement, options);
@@ -101,14 +110,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IModel<OrchestrationServiceSummary>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         OrchestrationServiceSummary IModel<OrchestrationServiceSummary>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeOrchestrationServiceSummary(document.RootElement, options);

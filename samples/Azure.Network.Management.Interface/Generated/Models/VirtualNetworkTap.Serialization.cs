@@ -7,38 +7,48 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class VirtualNetworkTap : IUtf8JsonSerializable, IModelJsonSerializable<VirtualNetworkTap>
+    public partial class VirtualNetworkTap : IUtf8JsonSerializable, IJsonModel<VirtualNetworkTap>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualNetworkTap>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualNetworkTap>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualNetworkTap>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<VirtualNetworkTap>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Etag))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                if (Optional.IsDefined(Etag))
+                {
+                    writer.WritePropertyName("etag"u8);
+                    writer.WriteStringValue(Etag);
+                }
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Name))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
+                if (Optional.IsDefined(Name))
+                {
+                    writer.WritePropertyName("name"u8);
+                    writer.WriteStringValue(Name);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Type))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
+                if (Optional.IsDefined(Type))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(Type);
+                }
             }
             if (Optional.IsDefined(Location))
             {
@@ -56,11 +66,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(NetworkInterfaceTapConfigurations))
+                if (Optional.IsCollectionDefined(NetworkInterfaceTapConfigurations))
                 {
                     writer.WritePropertyName("networkInterfaceTapConfigurations"u8);
                     writer.WriteStartArray();
@@ -70,61 +80,72 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     writer.WriteEndArray();
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ResourceGuid))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ResourceGuid))
                 {
                     writer.WritePropertyName("resourceGuid"u8);
                     writer.WriteStringValue(ResourceGuid);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
-                if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
+            }
+            if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
+            {
+                writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
+                writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
+            }
+            if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
+            {
+                writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
+                writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
+            }
+            if (Optional.IsDefined(DestinationPort))
+            {
+                writer.WritePropertyName("destinationPort"u8);
+                writer.WriteNumberValue(DestinationPort.Value);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                    writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
-                if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
-                {
-                    writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                    writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
-                }
-                if (Optional.IsDefined(DestinationPort))
-                {
-                    writer.WritePropertyName("destinationPort"u8);
-                    writer.WriteNumberValue(DestinationPort.Value);
-                }
-                writer.WriteEndObject();
             }
             writer.WriteEndObject();
         }
 
-        VirtualNetworkTap IModelJsonSerializable<VirtualNetworkTap>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualNetworkTap IJsonModel<VirtualNetworkTap>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualNetworkTap(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualNetworkTap>.Serialize(ModelSerializerOptions options)
+        internal static VirtualNetworkTap DeserializeVirtualNetworkTap(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        VirtualNetworkTap IModelSerializable<VirtualNetworkTap>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualNetworkTap(document.RootElement, options);
-        }
-
-        internal static VirtualNetworkTap DeserializeVirtualNetworkTap(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,6 +163,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<NetworkInterfaceIPConfiguration> destinationNetworkInterfaceIPConfiguration = default;
             Optional<FrontendIPConfiguration> destinationLoadBalancerFrontEndIPConfiguration = default;
             Optional<int> destinationPort = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -250,8 +273,36 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new VirtualNetworkTap(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(networkInterfaceTapConfigurations), resourceGuid.Value, Optional.ToNullable(provisioningState), destinationNetworkInterfaceIPConfiguration.Value, destinationLoadBalancerFrontEndIPConfiguration.Value, Optional.ToNullable(destinationPort));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new VirtualNetworkTap(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), serializedAdditionalRawData, etag.Value, Optional.ToList(networkInterfaceTapConfigurations), resourceGuid.Value, Optional.ToNullable(provisioningState), destinationNetworkInterfaceIPConfiguration.Value, destinationLoadBalancerFrontEndIPConfiguration.Value, Optional.ToNullable(destinationPort));
+        }
+
+        BinaryData IModel<VirtualNetworkTap>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        VirtualNetworkTap IModel<VirtualNetworkTap>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeVirtualNetworkTap(document.RootElement, options);
         }
     }
 }

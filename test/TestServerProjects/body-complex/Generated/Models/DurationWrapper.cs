@@ -6,22 +6,28 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
     /// <summary> The DurationWrapper. </summary>
     public partial class DurationWrapper
     {
-        /// <summary> Initializes a new instance of DurationWrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="DurationWrapper"/>. </summary>
         public DurationWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of DurationWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="DurationWrapper"/>. </summary>
         /// <param name="field"></param>
-        internal DurationWrapper(TimeSpan? field)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DurationWrapper(TimeSpan? field, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field = field;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

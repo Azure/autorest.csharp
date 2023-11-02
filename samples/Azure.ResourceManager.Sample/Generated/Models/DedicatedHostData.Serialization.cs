@@ -11,7 +11,6 @@ using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.Sample.Models;
@@ -55,31 +54,37 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
+            }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PlatformFaultDomain))
+            {
+                writer.WritePropertyName("platformFaultDomain"u8);
+                writer.WriteNumberValue(PlatformFaultDomain.Value);
+            }
+            if (Optional.IsDefined(AutoReplaceOnFailure))
+            {
+                writer.WritePropertyName("autoReplaceOnFailure"u8);
+                writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
             if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(PlatformFaultDomain))
-                {
-                    writer.WritePropertyName("platformFaultDomain"u8);
-                    writer.WriteNumberValue(PlatformFaultDomain.Value);
-                }
-                if (Optional.IsDefined(AutoReplaceOnFailure))
-                {
-                    writer.WritePropertyName("autoReplaceOnFailure"u8);
-                    writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
-                }
-                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(HostId))
+                if (Optional.IsDefined(HostId))
                 {
                     writer.WritePropertyName("hostId"u8);
                     writer.WriteStringValue(HostId);
                 }
-                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsCollectionDefined(VirtualMachines))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsCollectionDefined(VirtualMachines))
                 {
                     writer.WritePropertyName("virtualMachines"u8);
                     writer.WriteStartArray();
@@ -89,28 +94,37 @@ namespace Azure.ResourceManager.Sample
                     }
                     writer.WriteEndArray();
                 }
-                if (Optional.IsDefined(LicenseType))
-                {
-                    writer.WritePropertyName("licenseType"u8);
-                    writer.WriteStringValue(LicenseType.Value.ToSerialString());
-                }
-                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ProvisioningOn))
+            }
+            if (Optional.IsDefined(LicenseType))
+            {
+                writer.WritePropertyName("licenseType"u8);
+                writer.WriteStringValue(LicenseType.Value.ToSerialString());
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningOn))
                 {
                     writer.WritePropertyName("provisioningTime"u8);
                     writer.WriteStringValue(ProvisioningOn.Value, "O");
                 }
-                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(ProvisioningState))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
                     writer.WritePropertyName("provisioningState"u8);
                     writer.WriteStringValue(ProvisioningState);
                 }
-                if (options.Format == ModelReaderWriterFormat.Json && Optional.IsDefined(InstanceView))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(InstanceView))
                 {
                     writer.WritePropertyName("instanceView"u8);
                     writer.WriteObjectValue(InstanceView);
                 }
-                writer.WriteEndObject();
             }
+            writer.WriteEndObject();
             if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -131,7 +145,11 @@ namespace Azure.ResourceManager.Sample
 
         DedicatedHostData IJsonModel<DedicatedHostData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeDedicatedHostData(document.RootElement, options);
@@ -304,14 +322,22 @@ namespace Azure.ResourceManager.Sample
 
         BinaryData IModel<DedicatedHostData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             return ModelReaderWriter.WriteCore(this, options);
         }
 
         DedicatedHostData IModel<DedicatedHostData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDedicatedHostData(document.RootElement, options);

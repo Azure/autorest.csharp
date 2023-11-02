@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class EffectiveNetworkSecurityGroup : IUtf8JsonSerializable, IModelJsonSerializable<EffectiveNetworkSecurityGroup>
+    public partial class EffectiveNetworkSecurityGroup : IUtf8JsonSerializable, IJsonModel<EffectiveNetworkSecurityGroup>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EffectiveNetworkSecurityGroup>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EffectiveNetworkSecurityGroup>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<EffectiveNetworkSecurityGroup>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<EffectiveNetworkSecurityGroup>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(NetworkSecurityGroup))
@@ -45,34 +46,39 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("tagMap"u8);
                 writer.WriteStringValue(TagMap);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        EffectiveNetworkSecurityGroup IModelJsonSerializable<EffectiveNetworkSecurityGroup>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        EffectiveNetworkSecurityGroup IJsonModel<EffectiveNetworkSecurityGroup>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeEffectiveNetworkSecurityGroup(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<EffectiveNetworkSecurityGroup>.Serialize(ModelSerializerOptions options)
+        internal static EffectiveNetworkSecurityGroup DeserializeEffectiveNetworkSecurityGroup(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        EffectiveNetworkSecurityGroup IModelSerializable<EffectiveNetworkSecurityGroup>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeEffectiveNetworkSecurityGroup(document.RootElement, options);
-        }
-
-        internal static EffectiveNetworkSecurityGroup DeserializeEffectiveNetworkSecurityGroup(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -82,6 +88,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<EffectiveNetworkSecurityGroupAssociation> association = default;
             Optional<IReadOnlyList<EffectiveNetworkSecurityRule>> effectiveSecurityRules = default;
             Optional<string> tagMap = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("networkSecurityGroup"u8))
@@ -121,8 +129,36 @@ namespace Azure.Network.Management.Interface.Models
                     tagMap = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new EffectiveNetworkSecurityGroup(networkSecurityGroup.Value, association.Value, Optional.ToList(effectiveSecurityRules), tagMap.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup.Value, association.Value, Optional.ToList(effectiveSecurityRules), tagMap.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<EffectiveNetworkSecurityGroup>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        EffectiveNetworkSecurityGroup IModel<EffectiveNetworkSecurityGroup>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeEffectiveNetworkSecurityGroup(document.RootElement, options);
         }
     }
 }
