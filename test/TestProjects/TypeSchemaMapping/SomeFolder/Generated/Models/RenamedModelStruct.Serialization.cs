@@ -6,87 +6,89 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using NamespaceForEnums;
 
 namespace CustomNamespace
 {
-    internal partial struct RenamedModelStruct : IUtf8JsonSerializable, IModelJsonSerializable<RenamedModelStruct>, IModelJsonSerializable<object>
+    internal partial struct RenamedModelStruct : IUtf8JsonSerializable, IJsonModel<RenamedModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RenamedModelStruct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<RenamedModelStruct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<RenamedModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("ModelProperty"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(CustomizedFlattenedStringProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(CustomizedFlattenedStringProperty))
+                writer.WriteStringValue(CustomizedFlattenedStringProperty);
+            }
+            if (Optional.IsDefined(PropertyToField))
+            {
+                writer.WritePropertyName("PropertyToField"u8);
+                writer.WriteStringValue(PropertyToField);
+            }
+            if (Optional.IsDefined(Fruit))
+            {
+                writer.WritePropertyName("Fruit"u8);
+                writer.WriteStringValue(Fruit.Value.ToSerialString());
+            }
+            if (Optional.IsDefined(DaysOfWeek))
+            {
+                writer.WritePropertyName("DaysOfWeek"u8);
+                writer.WriteStringValue(DaysOfWeek.Value.ToString());
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    writer.WritePropertyName("ModelProperty"u8);
-                    writer.WriteStringValue(CustomizedFlattenedStringProperty);
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
-                if (Optional.IsDefined(PropertyToField))
-                {
-                    writer.WritePropertyName("PropertyToField"u8);
-                    writer.WriteStringValue(PropertyToField);
-                }
-                if (Optional.IsDefined(Fruit))
-                {
-                    writer.WritePropertyName("Fruit"u8);
-                    writer.WriteStringValue(Fruit.Value.ToSerialString());
-                }
-                if (Optional.IsDefined(DaysOfWeek))
-                {
-                    writer.WritePropertyName("DaysOfWeek"u8);
-                    writer.WriteStringValue(DaysOfWeek.Value.ToString());
-                }
-                writer.WriteEndObject();
             }
             writer.WriteEndObject();
         }
 
-        RenamedModelStruct IModelJsonSerializable<RenamedModelStruct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RenamedModelStruct IJsonModel<RenamedModelStruct>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeRenamedModelStruct(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<RenamedModelStruct>.Serialize(ModelSerializerOptions options)
+        void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, options);
+
+        object IJsonModel<object>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Read(ref reader, options);
+
+        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        RenamedModelStruct IModelSerializable<RenamedModelStruct>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRenamedModelStruct(document.RootElement, options);
-        }
-
-        void IModelJsonSerializable<object>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options) => ((IModelJsonSerializable<RenamedModelStruct>)this).Serialize(writer, options);
-
-        object IModelJsonSerializable<object>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options) => ((IModelJsonSerializable<RenamedModelStruct>)this).Deserialize(ref reader, options);
-
-        BinaryData IModelSerializable<object>.Serialize(ModelSerializerOptions options) => ((IModelJsonSerializable<RenamedModelStruct>)this).Serialize(options);
-
-        object IModelSerializable<object>.Deserialize(BinaryData data, ModelSerializerOptions options) => ((IModelJsonSerializable<RenamedModelStruct>)this).Deserialize(data, options);
-
-        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             Optional<string> modelProperty = default;
             Optional<string> propertyToField = default;
             Optional<CustomFruitEnum> fruit = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"u8))
@@ -129,8 +131,40 @@ namespace CustomNamespace
                     }
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
         }
+
+        BinaryData IModel<RenamedModelStruct>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
+        }
+
+        RenamedModelStruct IModel<RenamedModelStruct>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRenamedModelStruct(document.RootElement, options);
+        }
+
+        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Write(options);
+
+        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Read(data, options);
     }
 }

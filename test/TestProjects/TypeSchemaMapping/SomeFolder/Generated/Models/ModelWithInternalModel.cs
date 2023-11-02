@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The ModelWithInternalModel. </summary>
     public partial class ModelWithInternalModel
     {
-        /// <summary> Initializes a new instance of ModelWithInternalModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithInternalModel"/>. </summary>
         internal ModelWithInternalModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithInternalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithInternalModel"/>. </summary>
         /// <param name="internalProperty"></param>
-        internal ModelWithInternalModel(InternalModel internalProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithInternalModel(InternalModel internalProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             InternalProperty = internalProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

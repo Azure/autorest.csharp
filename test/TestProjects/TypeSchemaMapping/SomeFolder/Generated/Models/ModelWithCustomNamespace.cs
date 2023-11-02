@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Very.Custom.Namespace.From.Swagger
 {
     /// <summary> The ModelWithCustomNamespace. </summary>
     internal partial class ModelWithCustomNamespace
     {
-        /// <summary> Initializes a new instance of ModelWithCustomNamespace. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomNamespace"/>. </summary>
         internal ModelWithCustomNamespace()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithCustomNamespace. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomNamespace"/>. </summary>
         /// <param name="modelProperty"> . </param>
-        internal ModelWithCustomNamespace(string modelProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithCustomNamespace(string modelProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelProperty = modelProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> . </summary>

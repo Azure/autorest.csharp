@@ -6,15 +6,18 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithCustomUsage>, IXmlSerializable
+    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsage>, IXmlSerializable, IModel<ModelWithCustomUsage>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -28,19 +31,19 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndElement();
         }
 
-        internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(XElement element)
+        internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(XElement element, ModelReaderWriterOptions options = null)
         {
             string modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)
             {
                 modelProperty = (string)modelPropertyElement;
             }
-            return new ModelWithCustomUsage(modelProperty);
+            return new ModelWithCustomUsage(modelProperty, default);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithCustomUsage>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomUsage>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ModelWithCustomUsage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ModelWithCustomUsage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
@@ -48,40 +51,47 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(ModelProperty);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        ModelWithCustomUsage IModelJsonSerializable<ModelWithCustomUsage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelWithCustomUsage IJsonModel<ModelWithCustomUsage>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeModelWithCustomUsage(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ModelWithCustomUsage>.Serialize(ModelSerializerOptions options)
+        internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ModelWithCustomUsage IModelSerializable<ModelWithCustomUsage>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithCustomUsage(document.RootElement, options);
-        }
-
-        internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<string> modelProperty = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"u8))
@@ -89,8 +99,61 @@ namespace TypeSchemaMapping.Models
                     modelProperty = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ModelWithCustomUsage(modelProperty.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ModelWithCustomUsage(modelProperty.Value, serializedAdditionalRawData);
+        }
+
+        BinaryData IModel<ModelWithCustomUsage>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                return ModelReaderWriter.WriteCore(this, options);
+            }
+            else
+            {
+                using MemoryStream stream = new MemoryStream();
+                using XmlWriter writer = XmlWriter.Create(stream);
+                ((IXmlSerializable)this).Write(writer, null);
+                writer.Flush();
+                if (stream.Position > int.MaxValue)
+                {
+                    return BinaryData.FromStream(stream);
+                }
+                else
+                {
+                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                }
+            }
+        }
+
+        ModelWithCustomUsage IModel<ModelWithCustomUsage>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            if (data.ToMemory().Span.StartsWith("{"u8))
+            {
+                using JsonDocument document = JsonDocument.Parse(data);
+                return DeserializeModelWithCustomUsage(document.RootElement, options);
+            }
+            else
+            {
+                return DeserializeModelWithCustomUsage(XElement.Load(data.ToStream()), options);
+            }
         }
     }
 }

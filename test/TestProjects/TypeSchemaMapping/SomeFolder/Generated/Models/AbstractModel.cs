@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace TypeSchemaMapping.Models
 {
     /// <summary>
@@ -14,16 +17,21 @@ namespace TypeSchemaMapping.Models
     /// </summary>
     public abstract partial class AbstractModel
     {
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         protected AbstractModel()
         {
         }
 
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         /// <param name="discriminatorProperty"></param>
-        internal AbstractModel(string discriminatorProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AbstractModel(string discriminatorProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DiscriminatorProperty = discriminatorProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the discriminator property. </summary>

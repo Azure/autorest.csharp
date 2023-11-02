@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithListOfInternalModel. </summary>
     public partial class ModelWithListOfInternalModel
     {
-        /// <summary> Initializes a new instance of ModelWithListOfInternalModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithListOfInternalModel"/>. </summary>
         internal ModelWithListOfInternalModel()
         {
             InternalListProperty = new ChangeTrackingList<InternalModel>();
         }
 
-        /// <summary> Initializes a new instance of ModelWithListOfInternalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithListOfInternalModel"/>. </summary>
         /// <param name="stringProperty"></param>
         /// <param name="internalListProperty"></param>
-        internal ModelWithListOfInternalModel(string stringProperty, IReadOnlyList<InternalModel> internalListProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithListOfInternalModel(string stringProperty, IReadOnlyList<InternalModel> internalListProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StringProperty = stringProperty;
             InternalListProperty = internalListProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the string property. </summary>

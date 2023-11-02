@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using NamespaceForEnums;
 
 namespace CustomNamespace
@@ -12,17 +14,27 @@ namespace CustomNamespace
     /// <summary> The Model. </summary>
     internal partial class CustomizedModel
     {
-        /// <summary> Initializes a new instance of CustomizedModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CustomizedModel"/>. </summary>
         /// <param name="propertyRenamedAndTypeChanged"> . </param>
         /// <param name="field"> . </param>
         /// <param name="customizedFancyField"> Fruit. </param>
         /// <param name="daysOfWeek"> Day of week. </param>
-        internal CustomizedModel(int? propertyRenamedAndTypeChanged, string field, CustomFruitEnum customizedFancyField, CustomDaysOfWeek daysOfWeek)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomizedModel(int? propertyRenamedAndTypeChanged, string field, CustomFruitEnum customizedFancyField, CustomDaysOfWeek daysOfWeek, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PropertyRenamedAndTypeChanged = propertyRenamedAndTypeChanged;
             _field = field;
             CustomizedFancyField = customizedFancyField;
             DaysOfWeek = daysOfWeek;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CustomizedModel"/> for deserialization. </summary>
+        internal CustomizedModel()
+        {
         }
     }
 }

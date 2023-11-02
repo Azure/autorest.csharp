@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace TypeSchemaMapping.Models
@@ -12,18 +14,23 @@ namespace TypeSchemaMapping.Models
     /// <summary> The PublicModelWithInternalProperty. </summary>
     public partial class PublicModelWithInternalProperty
     {
-        /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PublicModelWithInternalProperty"/>. </summary>
         internal PublicModelWithInternalProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicModelWithInternalProperty"/>. </summary>
         /// <param name="stringPropertyJson"></param>
         /// <param name="publicProperty"></param>
-        internal PublicModelWithInternalProperty(JsonElement stringPropertyJson, string publicProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicModelWithInternalProperty(JsonElement stringPropertyJson, string publicProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StringPropertyJson = stringPropertyJson;
             PublicProperty = publicProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
         /// <summary> Gets the public property. </summary>
         public string PublicProperty { get; }

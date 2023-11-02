@@ -6,13 +6,16 @@
 #nullable disable
 
 using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithGuidProperty : IXmlSerializable
+    public partial class ModelWithGuidProperty : IXmlSerializable, IModel<ModelWithGuidProperty>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -26,14 +29,47 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndElement();
         }
 
-        internal static ModelWithGuidProperty DeserializeModelWithGuidProperty(XElement element)
+        internal static ModelWithGuidProperty DeserializeModelWithGuidProperty(XElement element, ModelReaderWriterOptions options = null)
         {
             Guid? modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)
             {
                 modelProperty = new Guid(modelPropertyElement.Value);
             }
-            return new ModelWithGuidProperty(modelProperty);
+            return new ModelWithGuidProperty(modelProperty, default);
+        }
+
+        BinaryData IModel<ModelWithGuidProperty>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        ModelWithGuidProperty IModel<ModelWithGuidProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return DeserializeModelWithGuidProperty(XElement.Load(data.ToStream()), options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using NamespaceForEnums;
@@ -14,21 +15,26 @@ namespace TypeSchemaMapping.Models
     /// <summary> The SecondModel. </summary>
     internal partial class SecondModel
     {
-        /// <summary> Initializes a new instance of SecondModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SecondModel"/>. </summary>
         public SecondModel()
         {
             DictionaryProperty = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of SecondModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="SecondModel"/>. </summary>
         /// <param name="intProperty"> . </param>
         /// <param name="dictionaryProperty"> . </param>
         /// <param name="daysOfWeek"> Day of week. </param>
-        internal SecondModel(int intProperty, IReadOnlyDictionary<string, string> dictionaryProperty, CustomDaysOfWeek? daysOfWeek)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SecondModel(int intProperty, IReadOnlyDictionary<string, string> dictionaryProperty, CustomDaysOfWeek? daysOfWeek, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IntProperty = intProperty;
             DictionaryProperty = dictionaryProperty;
             DaysOfWeek = daysOfWeek;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

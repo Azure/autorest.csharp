@@ -6,22 +6,28 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The ModelWithUriProperty. </summary>
     public partial class ModelWithUriProperty
     {
-        /// <summary> Initializes a new instance of ModelWithUriProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithUriProperty"/>. </summary>
         public ModelWithUriProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithUriProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUriProperty"/>. </summary>
         /// <param name="uri"> . </param>
-        internal ModelWithUriProperty(Uri uri)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithUriProperty(Uri uri, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Uri = uri;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

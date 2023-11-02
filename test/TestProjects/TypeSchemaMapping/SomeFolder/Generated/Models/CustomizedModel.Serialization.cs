@@ -6,18 +6,19 @@
 #nullable disable
 
 using System;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using NamespaceForEnums;
 
 namespace CustomNamespace
 {
-    internal partial class CustomizedModel : IUtf8JsonSerializable, IModelJsonSerializable<CustomizedModel>
+    internal partial class CustomizedModel : IUtf8JsonSerializable, IJsonModel<CustomizedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CustomizedModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomizedModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<CustomizedModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<CustomizedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(PropertyRenamedAndTypeChanged))
@@ -34,71 +35,57 @@ namespace CustomNamespace
             writer.WriteStringValue(CustomizedFancyField.ToSerialString());
             writer.WritePropertyName("DaysOfWeek"u8);
             writer.WriteStringValue(DaysOfWeek.ToString());
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        CustomizedModel IModelJsonSerializable<CustomizedModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        CustomizedModel IJsonModel<CustomizedModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeCustomizedModel(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<CustomizedModel>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<CustomizedModel>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            return ModelReaderWriter.WriteCore(this, options);
         }
 
-        CustomizedModel IModelSerializable<CustomizedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        CustomizedModel IModel<CustomizedModel>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeCustomizedModel(document.RootElement, options);
-        }
-
-        internal static CustomizedModel DeserializeCustomizedModel(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
-
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            Optional<int> modelProperty = default;
-            Optional<string> propertyToField = default;
-            CustomFruitEnum fruit = default;
-            CustomDaysOfWeek daysOfWeek = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("ModelProperty"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    modelProperty = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("PropertyToField"u8))
-                {
-                    propertyToField = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("Fruit"u8))
-                {
-                    fruit = property.Value.GetString().ToCustomFruitEnum();
-                    continue;
-                }
-                if (property.NameEquals("DaysOfWeek"u8))
-                {
-                    daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
-                    continue;
-                }
-            }
-            return new CustomizedModel(Optional.ToNullable(modelProperty), propertyToField.Value, fruit, daysOfWeek);
         }
     }
 }

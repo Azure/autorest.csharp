@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The InternalModel. </summary>
     internal partial class InternalModel
     {
-        /// <summary> Initializes a new instance of InternalModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="InternalModel"/>. </summary>
         internal InternalModel()
         {
         }
 
-        /// <summary> Initializes a new instance of InternalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InternalModel"/>. </summary>
         /// <param name="stringProperty"></param>
-        internal InternalModel(string stringProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InternalModel(string stringProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StringProperty = stringProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the string property. </summary>

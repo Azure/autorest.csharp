@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The ModelWithCustomUsage. </summary>
     public partial class ModelWithCustomUsage
     {
-        /// <summary> Initializes a new instance of ModelWithCustomUsage. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomUsage"/>. </summary>
         public ModelWithCustomUsage()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithCustomUsage. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomUsage"/>. </summary>
         /// <param name="modelProperty"> . </param>
-        internal ModelWithCustomUsage(string modelProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithCustomUsage(string modelProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelProperty = modelProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> . </summary>

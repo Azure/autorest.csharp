@@ -6,22 +6,28 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The ModelWithGuidProperty. </summary>
     public partial class ModelWithGuidProperty
     {
-        /// <summary> Initializes a new instance of ModelWithGuidProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
         public ModelWithGuidProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithGuidProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
-        internal ModelWithGuidProperty(Guid? modelProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithGuidProperty(Guid? modelProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelProperty = modelProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> . </summary>
