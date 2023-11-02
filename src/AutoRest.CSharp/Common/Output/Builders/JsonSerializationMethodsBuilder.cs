@@ -593,7 +593,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return null;
             }
 
-            return new Method(signature, BuildDeserializeBody(elementParameter, optionalOptionsParameter, serialization).ToArray());
+            return new Method(signature, BuildDeserializeBody(elementParameter, optionsParameter, serialization).ToArray());
         }
 
         public static Method BuildFromResponse(SerializableObjectType model, MethodSignatureModifiers modifiers)
@@ -613,7 +613,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(Parameter element, Parameter options, JsonObjectSerialization serialization)
         {
             // fallback to Default options if it is null
-            yield return Assign<ValueExpression>(options, ModelReaderWriterOptionsExpression.DefaultWireOptions, op: " ??= ");
+            yield return AssignIfNull((ValueExpression)options, ModelReaderWriterOptionsExpression.DefaultWireOptions);
 
             yield return EmptyLine;
 
