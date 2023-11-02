@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -45,11 +46,16 @@ internal class PartialResource : Resource
         return null;
     }
 
-    private MethodSignature? _createResourceIdentifierSignature;
-    public override MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierSignature ??= base.CreateResourceIdentifierMethodSignature with
+    protected override Method BuildCreateResourceIdentifierMethod()
     {
-        Modifiers = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static
-    };
+        var original = base.BuildCreateResourceIdentifierMethod();
+
+        return new(
+            original.Signature with
+            {
+                Modifiers = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static
+            }, original.Body!);
+    }
 
     protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
     {

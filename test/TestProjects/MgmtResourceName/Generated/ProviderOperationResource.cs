@@ -26,6 +26,7 @@ namespace MgmtResourceName
     public partial class ProviderOperationResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ProviderOperationResource"/> instance. </summary>
+        /// <param name="resourceProviderNamespace"> The resourceProviderNamespace. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string resourceProviderNamespace)
         {
             var resourceId = $"/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}";

@@ -24,6 +24,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         public ValueExpression NullableStructValue(CSharpType candidateType) => this is not ConstantExpression && candidateType is { IsNullable: true, IsValueType: true } ? new MemberExpression(this, nameof(Nullable<int>.Value)) : this;
         public StringExpression InvokeToString() => new(Invoke(nameof(ToString)));
 
+        public BoolExpression InvokeEquals(ValueExpression other) => new(Invoke(nameof(Equals), other));
+
         public virtual ValueExpression Property(string propertyName)
             => new MemberExpression(this, propertyName);
 
