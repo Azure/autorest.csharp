@@ -628,10 +628,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
         }
 
-        public static IDisposable WriteCommonMethod(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
+        public static IDisposable WriteCommonMethod(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, bool skipValidation = false)
         {
             var scope = WriteCommonMethodWithoutValidation(writer, signature, returnDescription, isAsync, isPublicType);
-            if (isPublicType)
+            if (isPublicType && !skipValidation)
                 writer.WriteParametersValidation(signature.Parameters);
 
             return scope;

@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal sealed class ArmClientExtensionWriter : MgmtExtensionWriter
     {
-        private MgmtExtension This { get; }
+        private ArmClientExtension This { get; }
 
         public ArmClientExtensionWriter(ArmClientExtension extension) : this(new CodeWriter(), extension)
         {
@@ -27,13 +27,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected internal override void WriteImplementations()
         {
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            base.WriteImplementations();
+
+            foreach (var method in This.ArmResourceMethods)
             {
-                _writer.Line($"#region {resource.Type.Name}");
-                WriteGetResourceFromIdMethod(resource);
-                _writer.LineRaw("#endregion");
-                _writer.Line();
+                _writer.WriteMethodDocumentation(method.Signature);
+                _writer.WriteMethod(method);
             }
+        }
+
+        protected override void WriteMethod(MgmtClientOperation clientOperation, bool isAsync)
+        {
+            using (_writer.WriteCommonMethod(clientOperation.MethodSignature, null, isAsync, This.Accessibility == "public", SkipParameterValidation))
+            {
+                WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
+            }
+            _writer.Line();
         }
 
         private void WriteGetResourceFromIdMethod(Resource resource)
@@ -51,15 +60,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
             var modifier = IsArmCore ? "virtual" : "static";
             var instanceParameter = IsArmCore ? string.Empty : $"this {This.ExtensionParameter.Type.Name} {This.ExtensionParameter.Name}, ";
-            using (_writer.Scope($"public {modifier} {resource.Type} Get{resource.Type.Name}({instanceParameter}{typeof(Azure.Core.ResourceIdentifier)} id)"))
+            using (_writer.Scope($"public {modifier} {resource.Type} Get{resource.Type.Name}({instanceParameter}{typeof(ResourceIdentifier)} id)"))
             {
                 if (!IsArmCore)
                 {
-                    using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetResourceClient<{resource.Type}>(() =>"))
-                    {
-                        WriteGetter(resource, $"{ArmClientReference.ToVariableName()}");
-                    }
-                    _writer.Line($");");
+                    _writer.AppendRaw("return ")
+                        .Append($"{This.MockableExtension.FactoryMethodName}({This.ExtensionParameter.Name}).Get{resource.Type.Name}(id);");
                 }
                 else
                 {

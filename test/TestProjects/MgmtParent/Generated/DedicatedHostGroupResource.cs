@@ -96,7 +96,7 @@ namespace MgmtParent
         /// <returns> An object representing collection of DedicatedHostResources and their operations over a DedicatedHostResource. </returns>
         public virtual DedicatedHostCollection GetDedicatedHosts()
         {
-            return GetCachedClient(Client => new DedicatedHostCollection(Client, Id));
+            return GetCachedClient(client => new DedicatedHostCollection(client, Id));
         }
 
         /// <summary>
@@ -115,8 +115,8 @@ namespace MgmtParent
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DedicatedHostResource>> GetDedicatedHostAsync(string hostName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
@@ -139,8 +139,8 @@ namespace MgmtParent
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<DedicatedHostResource> GetDedicatedHost(string hostName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {

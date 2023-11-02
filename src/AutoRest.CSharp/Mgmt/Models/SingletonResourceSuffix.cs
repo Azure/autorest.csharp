@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -30,29 +32,36 @@ namespace AutoRest.CSharp.Mgmt.Models
             _pairs = pairs;
         }
 
-        public FormattableString BuildResourceIdentifier(FormattableString originalId)
+        public ValueExpression BuildResourceIdentifier(ValueExpression originalId)
         {
-            var list = new List<FormattableString>() { originalId };
+            var result = originalId;
             for (int i = 0; i < _pairs.Count; i++)
             {
-                var key = _pairs[i].Key;
-                var value = _pairs[i].Value;
+                var (key, value) = _pairs[i];
                 if (key == Segment.Providers)
                 {
-                    // when we have a providers, we must have a next pair
+                    // when we have a providers segment, we must have a next pair
                     i++;
-                    var nextKey = _pairs[i].Key;
-                    var nextValue = _pairs[i].Value;
-                    list.Add($"{nameof(ResourceIdentifier.AppendProviderResource)}({value:L}, {nextKey:L}, {nextValue:L})");
+                    var (nextKey, nextValue) = _pairs[i];
+                    // build expression: <id> => <id>.AppendProviderResource(value, nextKey, nextValue)
+                    result = new InvokeStaticMethodExpression(
+                        typeof(ResourceIdentifier),
+                        nameof(ResourceIdentifier.AppendProviderResource),
+                        new[] { result, Literal(value), Literal(nextKey), Literal(nextValue) },
+                        CallAsExtension: true);
                 }
                 else
                 {
                     // if not, we just call the method to append this pair
-                    list.Add($"{nameof(ResourceIdentifier.AppendChildResource)}({key:L}, {value:L})");
+                    result = new InvokeStaticMethodExpression(
+                        typeof(ResourceIdentifier),
+                        nameof(ResourceIdentifier.AppendChildResource),
+                        new[] { result, Literal(key), Literal(value) },
+                        CallAsExtension: true);
                 }
             }
 
-            return list.Join(".");
+            return result;
         }
 
         public override string ToString()
