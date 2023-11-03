@@ -114,7 +114,7 @@ if (!($Exclude -contains "TestServer")) {
     }
 }
 
-$llcArgs = "--data-plane=true --security=AzureKey --security-header-name=Fake-Subscription-Key"
+$llcArgs = "--data-plane=true --security=AzureKey --security-header-name=Fake-Subscription-Key --new-project=true"
 
 $testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
 $testNamesLowLevel = $testData.TestServerProjectsLowLevel
