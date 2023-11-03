@@ -14,6 +14,7 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
+    [ModelReaderProxy(typeof(UnknownSingleBase))]
     public partial class SingleBase : IUtf8JsonSerializable, IJsonModel<SingleBase>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SingleBase>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

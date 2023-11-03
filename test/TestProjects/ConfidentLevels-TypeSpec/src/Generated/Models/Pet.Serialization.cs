@@ -14,6 +14,7 @@ using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
+    [ModelReaderProxy(typeof(UnknownPet))]
     public partial class Pet : IUtf8JsonSerializable, IJsonModel<Pet>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Pet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

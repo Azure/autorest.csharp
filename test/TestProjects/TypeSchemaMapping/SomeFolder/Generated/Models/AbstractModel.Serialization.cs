@@ -13,6 +13,7 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
+    [ModelReaderProxy(typeof(UnknownAbstractModel))]
     public partial class AbstractModel : IUtf8JsonSerializable, IJsonModel<AbstractModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AbstractModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

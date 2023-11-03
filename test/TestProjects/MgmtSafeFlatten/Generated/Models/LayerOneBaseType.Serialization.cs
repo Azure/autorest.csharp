@@ -13,6 +13,7 @@ using Azure.Core;
 
 namespace MgmtSafeFlatten.Models
 {
+    [ModelReaderProxy(typeof(UnknownLayerOneBaseType))]
     public partial class LayerOneBaseType : IUtf8JsonSerializable, IJsonModel<LayerOneBaseType>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LayerOneBaseType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

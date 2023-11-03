@@ -14,6 +14,7 @@ using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
+    [ModelReaderProxy(typeof(UnknownPollutedPet))]
     public partial class PollutedPet : IUtf8JsonSerializable, IJsonModel<PollutedPet>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PollutedPet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

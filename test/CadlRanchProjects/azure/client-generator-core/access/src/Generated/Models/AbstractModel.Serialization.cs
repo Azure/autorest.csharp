@@ -14,6 +14,7 @@ using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
+    [ModelReaderProxy(typeof(UnknownAbstractModel))]
     internal partial class AbstractModel : IUtf8JsonSerializable, IJsonModel<AbstractModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AbstractModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

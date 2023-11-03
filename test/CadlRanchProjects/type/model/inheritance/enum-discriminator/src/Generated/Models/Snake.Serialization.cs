@@ -14,6 +14,7 @@ using Azure.Core;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
+    [ModelReaderProxy(typeof(UnknownSnake))]
     public partial class Snake : IUtf8JsonSerializable, IJsonModel<Snake>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Snake>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

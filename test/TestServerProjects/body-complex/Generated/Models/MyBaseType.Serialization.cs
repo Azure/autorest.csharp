@@ -13,6 +13,7 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
+    [ModelReaderProxy(typeof(UnknownMyBaseType))]
     public partial class MyBaseType : IUtf8JsonSerializable, IJsonModel<MyBaseType>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyBaseType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

@@ -13,6 +13,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
+    [ModelReaderProxy(typeof(UnknownDeliveryRuleCondition))]
     public partial class DeliveryRuleCondition : IUtf8JsonSerializable, IJsonModel<DeliveryRuleCondition>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCondition>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

@@ -14,6 +14,7 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
+    [ModelReaderProxy(typeof(UnknownOutputBaseModelWithDiscriminator))]
     public partial class OutputBaseModelWithDiscriminator : IUtf8JsonSerializable, IJsonModel<OutputBaseModelWithDiscriminator>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputBaseModelWithDiscriminator>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

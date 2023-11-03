@@ -13,6 +13,7 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
+    [ModelReaderProxy(typeof(UnknownFish))]
     public partial class Fish : IUtf8JsonSerializable, IJsonModel<Fish>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Fish>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

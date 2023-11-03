@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -46,7 +47,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Append($"[{typeof(JsonConverter)}(typeof({declaration.Name}Converter))]");
                 }
-                // TODO -- write the serialization proxy attribute here
+                // write the serialization proxy attribute if the model is abstract
+                if (declaration.IsAbstract && model.Discriminator is { } discriminator)
+                {
+                    var unknown = discriminator.DefaultObjectType;
+                    writer.Append($"[{typeof(ModelReaderProxyAttribute)}(typeof({unknown.Type}))]");
+                }
 
                 writer.Append($"{declaration.Accessibility} partial {(model.IsStruct ? "struct" : "class")} {declaration.Name} : ");
 

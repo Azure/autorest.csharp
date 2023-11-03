@@ -14,6 +14,7 @@ using Azure.Core;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
+    [ModelReaderProxy(typeof(UnknownDinosaur))]
     public partial class Dinosaur : IUtf8JsonSerializable, IJsonModel<Dinosaur>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Dinosaur>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

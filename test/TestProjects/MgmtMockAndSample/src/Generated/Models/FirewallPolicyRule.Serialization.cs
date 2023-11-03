@@ -13,6 +13,7 @@ using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
+    [ModelReaderProxy(typeof(UnknownFirewallPolicyRule))]
     public partial class FirewallPolicyRule : IUtf8JsonSerializable, IJsonModel<FirewallPolicyRule>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);

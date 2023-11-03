@@ -15,6 +15,7 @@ using Azure.Core;
 namespace Inheritance.Models
 {
     [JsonConverter(typeof(BaseClassWithExtensibleEnumDiscriminatorConverter))]
+    [ModelReaderProxy(typeof(UnknownBaseClassWithExtensibleEnumDiscriminator))]
     public partial class BaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IJsonModel<BaseClassWithExtensibleEnumDiscriminator>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
