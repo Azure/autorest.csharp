@@ -265,13 +265,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var initializer in constructor.Initializers)
                     {
-                        writer.Append($"{initializer.Property.Declaration.Name} = ")
-                            .WriteReferenceOrConstant(initializer.Value)
-                            .WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type);
+                        writer
+                            .Append($"{initializer.Property.Declaration.Name} = ")
+                            .WriteValueExpression(initializer.Value);
 
-                        if (initializer.DefaultValue != null && (!initializer.Value.Type.IsValueType || initializer.Value.Type.IsNullable))
+                        writer.WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type);
+
+                        if (initializer.DefaultValue is {} defaultValue && (!initializer.Value.Type.IsValueType || initializer.Value.Type.IsNullable))
                         {
-                            writer.Append($"?? ").WriteReferenceOrConstant(initializer.DefaultValue.Value);
+                            writer.Append($"?? ");
+                            writer.WriteValueExpression(defaultValue);
                         }
 
                         writer.Line($";");

@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
-            ValueExpression p = parameter;
+            TypedValueExpression p = parameter;
             var propertyStack = property.BuildHierarchyStack();
 
             if (propertyStack.Count == 1)
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             property = propertyStack.Pop();
             // <parameterName> or <parameterName>.Value
             ValueExpression result = isOverriddenValueType
-                ? p.NullableStructValue(parameter.Type) // when it is changed to nullable, we call .Value because its constructor will only take the non-nullable value
+                ? p.NullableStructValue() // when it is changed to nullable, we call .Value because its constructor will only take the non-nullable value
                 : p;
 
             CSharpType from = parameter.Type;

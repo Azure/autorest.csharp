@@ -9,6 +9,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -168,10 +169,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
-                    ReferenceOrConstant? defaultValue = null;
-                    if (TypeFactory.CanBeInitializedInline(discriminatorParameter.Type, Discriminator.Value))
+                    ConstantExpression? defaultValue = null;
+                    if (TypeFactory.CanBeInitializedInline(discriminatorParameter.Type, Discriminator.Value) && Discriminator.Value is {} discriminatorValue)
                     {
-                        defaultValue = Discriminator.Value;
+                        defaultValue = new ConstantExpression(discriminatorValue);
                     }
                     serializationInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, defaultValue));
                 }
@@ -186,12 +187,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
-        private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
+        private ConstantExpression? GetPropertyDefaultValue(ObjectTypeProperty property)
         {
-            if (property == Discriminator?.Property &&
-                Discriminator.Value != null)
+            if (property == Discriminator?.Property && Discriminator.Value != null)
             {
-                return Discriminator.Value;
+                return new ConstantExpression(Discriminator.Value.Value);
             }
 
             return null;
@@ -244,25 +244,24 @@ namespace AutoRest.CSharp.Output.Models.Types
                     continue;
                 }
 
-                ReferenceOrConstant? initializationValue;
-                Constant? defaultInitializationValue = null;
+                TypedValueExpression? initializationValue;
+                TypedValueExpression? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
                 if (property.SchemaProperty?.Schema is ConstantSchema constantSchema && property.IsRequired)
                 {
                     // Turn constants into initializers
                     initializationValue = constantSchema.Value.Value != null ?
-                        BuilderHelpers.ParseConstant(constantSchema.Value.Value, propertyType) :
-                        Constant.NewInstanceOf(propertyType);
+                        new ConstantExpression(BuilderHelpers.ParseConstant(constantSchema.Value.Value, propertyType)) :
+                        new ConstantExpression(Constant.NewInstanceOf(propertyType.FrameworkType));
                 }
                 else if (IsStruct || property.SchemaProperty?.IsRequired == true)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
-                    if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
+                    if (property.SchemaProperty?.ClientDefaultValue is {} defaultValueObject)
                     {
-                        defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
-                        defaultInitializationValue = defaultParameterValue;
+                        defaultInitializationValue = new ConstantExpression(BuilderHelpers.ParseConstant(defaultValueObject, propertyType));
                     }
 
                     var inputType = TypeFactory.GetInputType(propertyType);
@@ -293,30 +292,29 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         if (TypeFactory.IsReadOnlyMemory(propertyType))
                         {
-                            initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
+                            initializationValue = propertyType.IsNullable ? null : new TypedMemberExpression(propertyType, nameof(ReadOnlyMemory<object>.Empty), propertyType);
                         }
                         else
                         {
-                            initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                            initializationValue = new ConstantExpression(Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)));
                         }
                     }
                 }
 
                 if (initializationValue != null)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultInitializationValue));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue, defaultInitializationValue));
                 }
             }
 
             if (Discriminator?.Value != null)
             {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, Discriminator.Value.Value));
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, new ConstantExpression(Discriminator.Value.Value)));
             }
 
-            if (AdditionalPropertiesProperty != null &&
-                !defaultCtorInitializers.Any(i => i.Property == AdditionalPropertiesProperty))
+            if (AdditionalPropertiesProperty != null && defaultCtorInitializers.All(i => i.Property != AdditionalPropertiesProperty))
             {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type))));
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, new ConstantExpression(Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type)))));
             }
 
             return new ObjectTypeConstructor(

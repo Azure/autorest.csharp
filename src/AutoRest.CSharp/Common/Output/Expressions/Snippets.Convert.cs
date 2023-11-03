@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             return expression;
         }
 
-        internal static MethodBodyStatement Increment(VariableReference value) => new UnaryOperatorStatement(new UnaryOperatorExpression("++", value, true));
+        internal static MethodBodyStatement Increment(ValueExpression value) => new UnaryOperatorStatement(new UnaryOperatorExpression("++", value, true));
 
         public static class InvokeConvert
         {

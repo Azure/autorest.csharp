@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -289,7 +290,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (!Configuration.Generation1ConvenienceClient && includeDiscriminator && Discriminator?.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
             {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, new ConstantExpression(discriminatorValue)));
             }
 
             Dictionary<string, Parameter> parameterMap = parameters.ToDictionary(
@@ -298,7 +299,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
-                ReferenceOrConstant? initializationValue = null;
+                TypedValueExpression? initializationValue = null;
 
                 var propertyName = property.Declaration.Name;
                 var propertyType = property.Declaration.Type;
@@ -320,16 +321,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
                 else if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
                 {
-                    initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                    initializationValue = TypeFactory.IsReadOnlyMemory(propertyType)
+                        ? propertyType.IsNullable ? null : new TypedMemberExpression(propertyType, nameof(ReadOnlyMemory<object>.Empty), propertyType)
+                        : new ConstantExpression(Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)));
                 }
                 else if (Configuration.Generation1ConvenienceClient && property.InputModelProperty?.ConstantValue is {} constant && !propertyType.IsNullable)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, BuilderHelpers.ParseConstant(constant.Value, propertyType)));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, new ConstantExpression(BuilderHelpers.ParseConstant(constant.Value, propertyType))));
                 }
 
                 if (initializationValue != null)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue));
                 }
             }
 
@@ -339,11 +342,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (defaultCtorInitializers.All(i => i.Property != discriminator.Property) && parameterMap.TryGetValue(discriminator.Property.Declaration.Name.ToVariableName(), out var discriminatorParameter))
                     {
-                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(discriminator.Property, discriminatorParameter, discriminator.Value));
+                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(discriminator.Property, discriminatorParameter, discriminator.Value is {} value ? new ConstantExpression(value) : null));
                     }
                     else if (!_inputModel.IsUnknownDiscriminatorModel && discriminator.Value is {} value)
                     {
-                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, value));
+                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, new ConstantExpression(value)));
                     }
                 }
             }

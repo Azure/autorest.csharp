@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (TypeFactory.IsCollectionType(type))
+            if (TypeFactory.IsCollectionType(type) && !TypeFactory.IsReadOnlyMemory(type))
             {
                 // nullable collection should be settable
                 // one exception is in the property bag, we never let them to be settable.

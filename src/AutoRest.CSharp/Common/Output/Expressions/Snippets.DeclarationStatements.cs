@@ -3,7 +3,7 @@
 
 using System;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -16,12 +16,6 @@ namespace AutoRest.CSharp.Common.Output.Models
     {
         public static DeclarationStatement UsingDeclare(string name, StreamExpression value, out StreamExpression variable)
             => UsingDeclare(name, value, d => new StreamExpression(d), out variable);
-
-        public static DeclarationStatement UsingDeclare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
-            => UsingDeclare(name, value, d => new HttpMessageExpression(d), out variable);
-
-        public static DeclarationStatement UsingDeclare(string name, RequestContentExpression value, out RequestContentExpression variable)
-            => UsingDeclare(name, value, d => new RequestContentExpression(d), out variable);
 
         public static DeclarationStatement UsingDeclare(VariableReference variable, ValueExpression value)
             => new UsingDeclareVariableStatement(variable.Type, variable.Declaration, value);
@@ -55,6 +49,9 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static DeclarationStatement Declare(string name, DictionaryExpression value, out DictionaryExpression variable)
             => Declare(name, value, d => new DictionaryExpression(value.KeyType, value.ValueType, d), out variable);
+
+        public static DeclarationStatement Declare(string name, EnumerableExpression value, out EnumerableExpression variable)
+            => Declare(name, value, d => new EnumerableExpression(value.ItemType, d), out variable);
 
         public static DeclarationStatement Declare(string name, JsonElementExpression value, out JsonElementExpression variable)
             => Declare(name, value, d => new JsonElementExpression(d), out variable);

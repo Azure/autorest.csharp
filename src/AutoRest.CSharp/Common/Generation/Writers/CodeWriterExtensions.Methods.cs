@@ -519,13 +519,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 case NewArrayExpression(var type, var items, var size):
                     if (size is not null)
                     {
-                        writer.Append($"new {type?.FrameworkType.GetElementType()}");
+                        writer.Append($"new {type?.FrameworkType}");
                         writer.AppendRaw("[");
                         writer.WriteValueExpression(size);
                         writer.AppendRaw("]");
                         break;
                     }
-                    else if (items is { Elements.Count: > 0 })
+
+                    if (items is { Elements.Count: > 0 })
                     {
                         if (type is null)
                         {

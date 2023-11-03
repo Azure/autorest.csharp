@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 
@@ -39,11 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             foreach (var propertyInitializer in Initializers)
             {
-                var value = propertyInitializer.Value;
-                if (value.IsConstant)
-                    continue;
-
-                if (value.Reference.Name == constructorParameter.Name)
+                if (propertyInitializer.Value is ParameterReference pe && pe.Parameter.Name == constructorParameter.Name)
                 {
                     return propertyInitializer.Property;
                 }
@@ -58,13 +55,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (propertyInitializer.Property == property)
                 {
-                    if (propertyInitializer.Value.IsConstant)
+                    if (propertyInitializer.Value is not ParameterReference parameterReference)
                     {
                         continue;
                     }
 
-                    var parameterName = propertyInitializer.Value.Reference.Name;
-                    return Signature.Parameters.Single(p => p.Name == parameterName);
+                    return Signature.Parameters.Single(p => p.Name == parameterReference.Parameter.Name);
                 }
             }
 

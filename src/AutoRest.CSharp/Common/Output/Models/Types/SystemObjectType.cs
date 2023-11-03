@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -116,7 +117,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (parameters.Any(parameter => parameter.Name == autoRestProperty.Declaration.Name.ToVariableName()))
                 {
-                    Reference reference = new Reference(ToCamelCase(autoRestProperty.Declaration.Name), autoRestProperty.ValueType);
+                    var reference = new TypedMemberExpression(null, ToCamelCase(autoRestProperty.Declaration.Name), autoRestProperty.ValueType);
                     initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
                 }
             }

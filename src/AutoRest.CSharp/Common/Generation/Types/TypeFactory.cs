@@ -38,6 +38,8 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputLiteralType literalType       => throw new InvalidOperationException("Literal type shouldn't be used outside of the Input layer"),
             InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable),
+            InputListType { IsEmbeddingsVector: true } listType
+                                               => new CSharpType(typeof(ReadOnlyMemory<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -517,9 +519,6 @@ namespace AutoRest.CSharp.Generation.Types
             return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
         }
 
-        internal static bool IsArray(CSharpType type)
-        {
-            return type.IsFrameworkType && type.FrameworkType.IsArray;
-        }
+        internal static bool IsArray(CSharpType type) => type is { IsFrameworkType: true, FrameworkType.IsArray: true };
     }
 }
