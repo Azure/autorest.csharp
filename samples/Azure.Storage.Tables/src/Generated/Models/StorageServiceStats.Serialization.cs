@@ -69,5 +69,7 @@ namespace Azure.Storage.Tables.Models
 
             return DeserializeStorageServiceStats(XElement.Load(data.ToStream()), options);
         }
+
+        ModelReaderWriterFormat IModel<StorageServiceStats>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

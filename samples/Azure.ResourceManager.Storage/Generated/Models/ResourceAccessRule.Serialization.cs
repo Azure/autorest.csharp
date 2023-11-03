@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Storage.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         ResourceAccessRule IModel<ResourceAccessRule>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -120,5 +120,7 @@ namespace Azure.ResourceManager.Storage.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeResourceAccessRule(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<ResourceAccessRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

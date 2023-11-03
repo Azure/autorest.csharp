@@ -339,7 +339,7 @@ namespace Azure.ResourceManager.Sample
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         DedicatedHostGroupData IModel<DedicatedHostGroupData>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -353,5 +353,7 @@ namespace Azure.ResourceManager.Sample
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDedicatedHostGroupData(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<DedicatedHostGroupData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         SshConfiguration IModel<SshConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -119,5 +119,7 @@ namespace Azure.ResourceManager.Sample.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeSshConfiguration(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<SshConfiguration>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

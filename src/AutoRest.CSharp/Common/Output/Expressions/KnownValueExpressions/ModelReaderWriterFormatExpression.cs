@@ -8,8 +8,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal record ModelReaderWriterFormatExpression(ValueExpression Untyped) : TypedValueExpression<ModelReaderWriterFormat>(Untyped)
     {
-        public static ModelReaderWriterFormatExpression Json => new(new TypeReference(typeof(ModelReaderWriterFormat)).Property(nameof(ModelReaderWriterFormat.Json)));
+        public static ModelReaderWriterFormatExpression Json => new(new MemberExpression(typeof(ModelReaderWriterFormat), nameof(ModelReaderWriterFormat.Json)));
 
-        public static ModelReaderWriterFormatExpression Wire => new(new TypeReference(typeof(ModelReaderWriterFormat)).Property(nameof(ModelReaderWriterFormat.Wire)));
+        public static ModelReaderWriterFormatExpression Xml => new(new MemberExpression(typeof(ModelReaderWriterFormat), nameof(ModelReaderWriterFormat.Xml)));
+
+        public static ModelReaderWriterFormatExpression Wire => new(new MemberExpression(typeof(ModelReaderWriterFormat), nameof(ModelReaderWriterFormat.Wire)));
     }
 }

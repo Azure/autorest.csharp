@@ -125,7 +125,7 @@ namespace Azure.Network.Management.Interface.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         DdosSettings IModel<DdosSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -139,5 +139,7 @@ namespace Azure.Network.Management.Interface.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDdosSettings(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<DdosSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

@@ -143,7 +143,7 @@ namespace additionalProperties.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         PetAPInProperties IModel<PetAPInProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -157,5 +157,7 @@ namespace additionalProperties.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializePetAPInProperties(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<PetAPInProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

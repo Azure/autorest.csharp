@@ -75,7 +75,7 @@ namespace AdditionalPropertiesEx.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         OutputAdditionalPropertiesModelStruct IModel<OutputAdditionalPropertiesModelStruct>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -90,8 +90,12 @@ namespace AdditionalPropertiesEx.Models
             return DeserializeOutputAdditionalPropertiesModelStruct(document.RootElement, options);
         }
 
-        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(options);
+        ModelReaderWriterFormat IModel<OutputAdditionalPropertiesModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
-        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Read(data, options);
+        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IModel<OutputAdditionalPropertiesModelStruct>)this).Write(options);
+
+        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IModel<OutputAdditionalPropertiesModelStruct>)this).Read(data, options);
+
+        ModelReaderWriterFormat IModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IModel<OutputAdditionalPropertiesModelStruct>)this).GetWireFormat(options);
     }
 }

@@ -102,7 +102,7 @@ namespace Azure.ResourceManager.Sample.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         SshPublicKeyInfo IModel<SshPublicKeyInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -116,5 +116,7 @@ namespace Azure.ResourceManager.Sample.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeSshPublicKeyInfo(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<SshPublicKeyInfo>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

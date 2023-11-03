@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         DiffDiskSettings IModel<DiffDiskSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -124,5 +124,7 @@ namespace Azure.ResourceManager.Sample.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDiffDiskSettings(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<DiffDiskSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

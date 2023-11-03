@@ -106,7 +106,7 @@ namespace body_complex.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         Pet IModel<Pet>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -120,5 +120,7 @@ namespace body_complex.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializePet(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Pet>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

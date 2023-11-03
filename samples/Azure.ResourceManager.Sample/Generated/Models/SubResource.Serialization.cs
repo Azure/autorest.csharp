@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         SubResource IModel<SubResource>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -105,5 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeSubResource(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<SubResource>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

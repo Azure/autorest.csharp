@@ -125,7 +125,7 @@ namespace body_complex.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         UnknownMyBaseType IModel<UnknownMyBaseType>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -139,5 +139,7 @@ namespace body_complex.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownMyBaseType(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<UnknownMyBaseType>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

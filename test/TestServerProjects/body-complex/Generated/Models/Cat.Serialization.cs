@@ -142,7 +142,7 @@ namespace body_complex.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         Cat IModel<Cat>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -156,5 +156,7 @@ namespace body_complex.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeCat(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Cat>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

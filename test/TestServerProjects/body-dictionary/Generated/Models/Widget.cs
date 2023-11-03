@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_dictionary.Models
 {
     /// <summary> The Widget. </summary>
     public partial class Widget
     {
-        /// <summary> Initializes a new instance of Widget. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Widget"/>. </summary>
         public Widget()
         {
         }
 
-        /// <summary> Initializes a new instance of Widget. </summary>
+        /// <summary> Initializes a new instance of <see cref="Widget"/>. </summary>
         /// <param name="integer"></param>
         /// <param name="string"></param>
-        internal Widget(int? integer, string @string)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Widget(int? integer, string @string, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Integer = integer;
             String = @string;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the integer. </summary>

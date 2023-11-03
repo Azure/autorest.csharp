@@ -104,7 +104,7 @@ namespace additionalProperties.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         PetAPString IModel<PetAPString>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -118,5 +118,7 @@ namespace additionalProperties.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializePetAPString(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<PetAPString>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

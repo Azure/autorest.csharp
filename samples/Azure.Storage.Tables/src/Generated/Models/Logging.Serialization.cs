@@ -98,5 +98,7 @@ namespace Azure.Storage.Tables.Models
 
             return DeserializeLogging(XElement.Load(data.ToStream()), options);
         }
+
+        ModelReaderWriterFormat IModel<Logging>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

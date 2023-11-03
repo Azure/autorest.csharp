@@ -230,7 +230,7 @@ namespace Azure.ResourceManager.Storage
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         ImmutabilityPolicyData IModel<ImmutabilityPolicyData>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -244,5 +244,7 @@ namespace Azure.ResourceManager.Storage
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeImmutabilityPolicyData(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<ImmutabilityPolicyData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

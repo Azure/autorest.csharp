@@ -100,5 +100,7 @@ namespace Azure.Storage.Tables.Models
 
             return DeserializeCorsRule(XElement.Load(data.ToStream()), options);
         }
+
+        ModelReaderWriterFormat IModel<CorsRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

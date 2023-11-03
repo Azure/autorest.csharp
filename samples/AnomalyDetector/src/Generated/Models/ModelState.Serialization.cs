@@ -181,7 +181,7 @@ namespace AnomalyDetector.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         ModelState IModel<ModelState>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -195,6 +195,8 @@ namespace AnomalyDetector.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeModelState(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<ModelState>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

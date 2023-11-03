@@ -8,16 +8,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
-using Azure.Core.Serialization;
 using MgmtXmlDeserialization;
 
 namespace MgmtXmlDeserialization.Models
 {
-    internal partial class XmlCollection : IUtf8JsonSerializable, IModelJsonSerializable<XmlCollection>, IXmlSerializable, IModelSerializable<XmlCollection>
+    internal partial class XmlCollection : IUtf8JsonSerializable, IJsonModel<XmlCollection>, IXmlSerializable, IModel<XmlCollection>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -44,7 +45,7 @@ namespace MgmtXmlDeserialization.Models
             writer.WriteEndElement();
         }
 
-        internal static XmlCollection DeserializeXmlCollection(XElement element, ModelSerializerOptions options = null)
+        internal static XmlCollection DeserializeXmlCollection(XElement element, ModelReaderWriterOptions options = null)
         {
             long? count = default;
             string nextLink = default;
@@ -66,9 +67,9 @@ namespace MgmtXmlDeserialization.Models
             return new XmlCollection(value, count, nextLink, default);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<XmlCollection>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<XmlCollection>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<XmlCollection>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<XmlCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
@@ -91,7 +92,7 @@ namespace MgmtXmlDeserialization.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -99,24 +100,31 @@ namespace MgmtXmlDeserialization.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        XmlCollection IModelJsonSerializable<XmlCollection>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        XmlCollection IJsonModel<XmlCollection>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeXmlCollection(document.RootElement, options);
         }
 
-        internal static XmlCollection DeserializeXmlCollection(JsonElement element, ModelSerializerOptions options = null)
+        internal static XmlCollection DeserializeXmlCollection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -157,7 +165,7 @@ namespace MgmtXmlDeserialization.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -166,13 +174,17 @@ namespace MgmtXmlDeserialization.Models
             return new XmlCollection(Optional.ToList(value), Optional.ToNullable(count), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<XmlCollection>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<XmlCollection>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            if (options.Format == ModelSerializerFormat.Json)
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
             {
-                return ModelSerializer.SerializeCore(this, options);
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                return ModelReaderWriter.Write(this, options);
             }
             else
             {
@@ -191,9 +203,13 @@ namespace MgmtXmlDeserialization.Models
             }
         }
 
-        XmlCollection IModelSerializable<XmlCollection>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        XmlCollection IModel<XmlCollection>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
 
             if (data.ToMemory().Span.StartsWith("{"u8))
             {
@@ -205,5 +221,7 @@ namespace MgmtXmlDeserialization.Models
                 return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
             }
         }
+
+        ModelReaderWriterFormat IModel<XmlCollection>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

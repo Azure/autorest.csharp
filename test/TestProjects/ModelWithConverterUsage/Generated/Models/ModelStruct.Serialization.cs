@@ -93,7 +93,7 @@ namespace ModelWithConverterUsage.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         ModelStruct IModel<ModelStruct>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -108,9 +108,13 @@ namespace ModelWithConverterUsage.Models
             return DeserializeModelStruct(document.RootElement, options);
         }
 
-        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IJsonModel<ModelStruct>)this).Write(options);
+        ModelReaderWriterFormat IModel<ModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
-        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IJsonModel<ModelStruct>)this).Read(data, options);
+        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IModel<ModelStruct>)this).Write(options);
+
+        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IModel<ModelStruct>)this).Read(data, options);
+
+        ModelReaderWriterFormat IModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IModel<ModelStruct>)this).GetWireFormat(options);
 
         internal partial class ModelStructConverter : JsonConverter<ModelStruct>
         {

@@ -221,7 +221,7 @@ namespace Azure.ResourceManager.Storage
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         DeletedAccountData IModel<DeletedAccountData>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -235,5 +235,7 @@ namespace Azure.ResourceManager.Storage
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDeletedAccountData(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<DeletedAccountData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

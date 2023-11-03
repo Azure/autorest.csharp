@@ -84,5 +84,7 @@ namespace Azure.Storage.Tables.Models
 
             return DeserializeAccessPolicy(XElement.Load(data.ToStream()), options);
         }
+
+        ModelReaderWriterFormat IModel<AccessPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

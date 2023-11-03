@@ -89,7 +89,7 @@ namespace ApiVersionInTsp.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         DetectionResult IModel<DetectionResult>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -103,6 +103,8 @@ namespace ApiVersionInTsp.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDetectionResult(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<DetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

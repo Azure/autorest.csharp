@@ -114,7 +114,7 @@ namespace azure_special_properties.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         Error IModel<Error>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -128,5 +128,7 @@ namespace azure_special_properties.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeError(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Error>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

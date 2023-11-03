@@ -110,7 +110,7 @@ namespace body_complex.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         Datetimerfc1123Wrapper IModel<Datetimerfc1123Wrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -124,5 +124,7 @@ namespace body_complex.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDatetimerfc1123Wrapper(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Datetimerfc1123Wrapper>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

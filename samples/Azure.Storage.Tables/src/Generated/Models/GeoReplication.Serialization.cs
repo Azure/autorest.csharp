@@ -76,5 +76,7 @@ namespace Azure.Storage.Tables.Models
 
             return DeserializeGeoReplication(XElement.Load(data.ToStream()), options);
         }
+
+        ModelReaderWriterFormat IModel<GeoReplication>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

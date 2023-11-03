@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Azure.Core;
 
@@ -14,7 +15,10 @@ namespace body_formdata.Models
     /// <summary> The Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema. </summary>
     internal partial class Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema
     {
-        /// <summary> Initializes a new instance of Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> or <paramref name="fileName"/> is null. </exception>
@@ -25,6 +29,22 @@ namespace body_formdata.Models
 
             FileContent = fileContent;
             FileName = fileName;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/>. </summary>
+        /// <param name="fileContent"> File to upload. </param>
+        /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema(Stream fileContent, string fileName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            FileContent = fileContent;
+            FileName = fileName;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/> for deserialization. </summary>
+        internal Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema()
+        {
         }
 
         /// <summary> File to upload. </summary>

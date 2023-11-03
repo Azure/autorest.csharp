@@ -461,7 +461,7 @@ namespace Azure.ResourceManager.Sample
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         VirtualMachineScaleSetData IModel<VirtualMachineScaleSetData>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -475,5 +475,7 @@ namespace Azure.ResourceManager.Sample
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeVirtualMachineScaleSetData(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<VirtualMachineScaleSetData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

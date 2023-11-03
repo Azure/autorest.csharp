@@ -259,7 +259,7 @@ namespace Azure.ResourceManager.Sample.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         DedicatedHostPatch IModel<DedicatedHostPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -273,5 +273,7 @@ namespace Azure.ResourceManager.Sample.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDedicatedHostPatch(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<DedicatedHostPatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

@@ -152,7 +152,7 @@ namespace Azure.ResourceManager.Sample.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         RollingUpgradeRunningStatus IModel<RollingUpgradeRunningStatus>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -166,5 +166,7 @@ namespace Azure.ResourceManager.Sample.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRollingUpgradeRunningStatus(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<RollingUpgradeRunningStatus>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

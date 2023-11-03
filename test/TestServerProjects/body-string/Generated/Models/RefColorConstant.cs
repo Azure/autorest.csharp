@@ -5,24 +5,32 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_string.Models
 {
     /// <summary> The RefColorConstant. </summary>
     public partial class RefColorConstant
     {
-        /// <summary> Initializes a new instance of RefColorConstant. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RefColorConstant"/>. </summary>
         public RefColorConstant()
         {
             ColorConstant = ColorConstant.GreenColor;
         }
 
-        /// <summary> Initializes a new instance of RefColorConstant. </summary>
+        /// <summary> Initializes a new instance of <see cref="RefColorConstant"/>. </summary>
         /// <param name="colorConstant"> Referenced Color Constant Description. </param>
         /// <param name="field1"> Sample string. </param>
-        internal RefColorConstant(ColorConstant colorConstant, string field1)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RefColorConstant(ColorConstant colorConstant, string field1, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ColorConstant = colorConstant;
             Field1 = field1;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Referenced Color Constant Description. </summary>

@@ -16,7 +16,10 @@ namespace body_formdata.Models
     /// <summary> The Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
     internal partial class Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema
     {
-        /// <summary> Initializes a new instance of Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> Files to upload. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IEnumerable<Stream> fileContent)
@@ -26,11 +29,18 @@ namespace body_formdata.Models
             FileContent = fileContent.ToList();
         }
 
-        /// <summary> Initializes a new instance of Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> Files to upload. </param>
-        internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IReadOnlyList<Stream> fileContent)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IReadOnlyList<Stream> fileContent, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             FileContent = fileContent;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema"/> for deserialization. </summary>
+        internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema()
+        {
         }
 
         /// <summary> Files to upload. </summary>

@@ -135,7 +135,7 @@ namespace Azure.Storage.Tables.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         TableResponse IModel<TableResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -149,5 +149,7 @@ namespace Azure.Storage.Tables.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeTableResponse(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<TableResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

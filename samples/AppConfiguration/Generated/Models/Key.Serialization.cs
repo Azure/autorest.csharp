@@ -94,7 +94,7 @@ namespace AppConfiguration.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         Key IModel<Key>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -108,5 +108,7 @@ namespace AppConfiguration.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeKey(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Key>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

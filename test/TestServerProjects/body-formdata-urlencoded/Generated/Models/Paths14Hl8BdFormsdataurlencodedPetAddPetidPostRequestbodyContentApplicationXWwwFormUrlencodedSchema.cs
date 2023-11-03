@@ -5,12 +5,18 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_formdata_urlencoded.Models
 {
     /// <summary> The Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema. </summary>
     internal partial class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
     {
-        /// <summary> Initializes a new instance of Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"/>. </summary>
         /// <param name="petType"> Can take a value of dog, or cat, or fish. </param>
         /// <param name="petFood"> Can take a value of meat, or fish, or plant. </param>
         /// <param name="petAge"> How many years is it old?. </param>
@@ -21,19 +27,26 @@ namespace body_formdata_urlencoded.Models
             PetAge = petAge;
         }
 
-        /// <summary> Initializes a new instance of Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"/>. </summary>
         /// <param name="petType"> Can take a value of dog, or cat, or fish. </param>
         /// <param name="petFood"> Can take a value of meat, or fish, or plant. </param>
         /// <param name="petAge"> How many years is it old?. </param>
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
-        internal Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(PetType petType, PetFood petFood, int petAge, string name, string status)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(PetType petType, PetFood petFood, int petAge, string name, string status, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PetType = petType;
             PetFood = petFood;
             PetAge = petAge;
             Name = name;
             Status = status;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"/> for deserialization. </summary>
+        internal Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema()
+        {
         }
 
         /// <summary> Can take a value of dog, or cat, or fish. </summary>

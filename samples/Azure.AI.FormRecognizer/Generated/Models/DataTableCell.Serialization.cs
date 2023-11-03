@@ -215,7 +215,7 @@ namespace Azure.AI.FormRecognizer.Models
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         DataTableCell IModel<DataTableCell>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -229,5 +229,7 @@ namespace Azure.AI.FormRecognizer.Models
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeDataTableCell(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<DataTableCell>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

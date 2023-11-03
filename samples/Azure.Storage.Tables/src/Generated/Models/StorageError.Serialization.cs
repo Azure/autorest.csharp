@@ -118,7 +118,7 @@ namespace Azure.Storage.Tables.Models
 
             if (options.Format == ModelReaderWriterFormat.Json)
             {
-                return ModelReaderWriter.WriteCore(this, options);
+                return ModelReaderWriter.Write(this, options);
             }
             else
             {
@@ -155,5 +155,7 @@ namespace Azure.Storage.Tables.Models
                 return DeserializeStorageError(XElement.Load(data.ToStream()), options);
             }
         }
+
+        ModelReaderWriterFormat IModel<StorageError>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

@@ -74,5 +74,7 @@ namespace Azure.Storage.Tables.Models
 
             return DeserializeSignedIdentifier(XElement.Load(data.ToStream()), options);
         }
+
+        ModelReaderWriterFormat IModel<SignedIdentifier>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }
