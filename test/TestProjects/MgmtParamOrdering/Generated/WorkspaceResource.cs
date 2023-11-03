@@ -96,7 +96,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of EnvironmentContainerResources and their operations over a EnvironmentContainerResource. </returns>
         public virtual EnvironmentContainerResourceCollection GetEnvironmentContainerResources()
         {
-            return GetCachedClient(Client => new EnvironmentContainerResourceCollection(Client, Id));
+            return GetCachedClient(client => new EnvironmentContainerResourceCollection(client, Id));
         }
 
         /// <summary>
@@ -114,8 +114,8 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<EnvironmentContainerResource>> GetEnvironmentContainerResourceAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -137,8 +137,8 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<EnvironmentContainerResource> GetEnvironmentContainerResource(string name, CancellationToken cancellationToken = default)
         {

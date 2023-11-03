@@ -59,7 +59,7 @@ namespace MgmtPartialResource
         /// <returns> An object representing collection of ConfigurationProfileAssignmentResources and their operations over a ConfigurationProfileAssignmentResource. </returns>
         public virtual ConfigurationProfileAssignmentCollection GetConfigurationProfileAssignments()
         {
-            return GetCachedClient(Client => new ConfigurationProfileAssignmentCollection(Client, Id));
+            return GetCachedClient(client => new ConfigurationProfileAssignmentCollection(client, Id));
         }
 
         /// <summary>
@@ -77,8 +77,8 @@ namespace MgmtPartialResource
         /// </summary>
         /// <param name="configurationProfileAssignmentName"> The configuration profile assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="configurationProfileAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="configurationProfileAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ConfigurationProfileAssignmentResource>> GetConfigurationProfileAssignmentAsync(string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -100,8 +100,8 @@ namespace MgmtPartialResource
         /// </summary>
         /// <param name="configurationProfileAssignmentName"> The configuration profile assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="configurationProfileAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="configurationProfileAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ConfigurationProfileAssignmentResource> GetConfigurationProfileAssignment(string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
         {
