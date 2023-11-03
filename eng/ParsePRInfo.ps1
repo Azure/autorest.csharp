@@ -1,3 +1,4 @@
-param($SourceBranch)
+param($SourceBranch, $SourceRepositoryURI)
 
 Write-Host $SourceBranch
+Write-Host $SourceRepositoryURI

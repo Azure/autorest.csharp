@@ -42,16 +42,16 @@ jobs:
       - pwsh: ./eng/Generate.ps1 Authoring-TypeSpec
         displayName: "Generate Codes"
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-      - pwsh: ./eng/ParsePRInfo.ps1 -SourceBranch $(System.PullRequest.SourceBranch)
+      - pwsh: ./eng/ParsePRInfo.ps1 -SourceBranch $(System.PullRequest.SourceBranch) -SourceRepositoryURI $(System.PullRequest.SourceRepositoryURI)
         name: PRUrl
         displayName: "Build PR Url"
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-      - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
-        parameters:
-          BaseRepoBranch: $(System.PullRequest.SourceBranch)
-          BaseRepoOwner: azure-sdk
-          CommitMsg: Update SDK codes ${{ parameters.filter }}
-          TargetRepoOwner: Azure
-          TargetRepoName: autorest.csharp
-          WorkingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+      # - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+      #   parameters:
+      #     BaseRepoBranch: $(System.PullRequest.SourceBranch)
+      #     BaseRepoOwner: azure-sdk
+      #     CommitMsg: Update SDK codes ${{ parameters.filter }}
+      #     TargetRepoOwner: Azure
+      #     TargetRepoName: autorest.csharp
+      #     WorkingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+      #     ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
