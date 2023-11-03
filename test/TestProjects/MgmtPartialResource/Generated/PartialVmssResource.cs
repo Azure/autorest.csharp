@@ -8,6 +8,7 @@
 using System;
 using System.Globalization;
 using System.Threading;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -22,6 +23,9 @@ namespace MgmtPartialResource
     public partial class PartialVmssResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="PartialVmssResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="virtualMachineScaleSetName"> The virtualMachineScaleSetName. </param>
         internal static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string virtualMachineScaleSetName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}";
@@ -77,7 +81,7 @@ namespace MgmtPartialResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _publicIPAddressRestClient.CreateListVirtualMachineScaleSetPublicIPAddressesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _publicIPAddressRestClient.CreateListVirtualMachineScaleSetPublicIPAddressesNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), _publicIPAddressClientDiagnostics, Pipeline, "PartialVmssResource.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), _publicIPAddressClientDiagnostics, Pipeline, "PartialVmssResource.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -99,7 +103,7 @@ namespace MgmtPartialResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _publicIPAddressRestClient.CreateListVirtualMachineScaleSetPublicIPAddressesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _publicIPAddressRestClient.CreateListVirtualMachineScaleSetPublicIPAddressesNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), _publicIPAddressClientDiagnostics, Pipeline, "PartialVmssResource.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), _publicIPAddressClientDiagnostics, Pipeline, "PartialVmssResource.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
     }
 }

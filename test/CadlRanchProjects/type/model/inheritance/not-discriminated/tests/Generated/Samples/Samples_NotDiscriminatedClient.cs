@@ -6,68 +6,87 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Model.Inheritance.NotDiscriminated;
 using _Type.Model.Inheritance.NotDiscriminated.Models;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 {
-    public class Samples_NotDiscriminatedClient
+    public partial class Samples_NotDiscriminatedClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostValid()
+        public void Example_PostValid_ShortVersion()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
-            };
+            });
+            Response response = client.PostValid(content);
 
-            Response response = client.PostValid(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostValid_ShortVersion_Async()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                smart = true,
+                age = 1234,
+                name = "<name>",
+            });
+            Response response = await client.PostValidAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PostValid_ShortVersion_Convenience()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Siamese input = new Siamese("<name>", 1234, true);
+            Response response = client.PostValid(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostValid_ShortVersion_Convenience_Async()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Siamese input = new Siamese("<name>", 1234, true);
+            Response response = await client.PostValidAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PostValid_AllParameters()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
-            };
+            });
+            Response response = client.PostValid(content);
 
-            Response response = client.PostValid(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostValid_Async()
-        {
-            var client = new NotDiscriminatedClient();
-
-            var data = new
-            {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
-
-            Response response = await client.PostValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -75,64 +94,92 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PostValid_AllParameters_Async()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
-            };
+            });
+            Response response = await client.PostValidAsync(content);
 
-            Response response = await client.PostValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostValid_Convenience_Async()
+        public void Example_PostValid_AllParameters_Convenience()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var input = new Siamese("<name>", 1234, true);
-            var result = await client.PostValidAsync(input);
+            Siamese input = new Siamese("<name>", 1234, true);
+            Response response = client.PostValid(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid()
+        public async Task Example_PostValid_AllParameters_Convenience_Async()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            Response response = client.GetValid(new RequestContext());
+            Siamese input = new Siamese("<name>", 1234, true);
+            Response response = await client.PostValidAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetValid_ShortVersion()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Response response = client.GetValid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetValid_ShortVersion_Async()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetValid_ShortVersion_Convenience()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Response<Siamese> response = client.GetValid();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetValid_ShortVersion_Convenience_Async()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Response<Siamese> response = await client.GetValidAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            Response response = client.GetValid(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("smart").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
-        {
-            var client = new NotDiscriminatedClient();
-
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = client.GetValid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -144,9 +191,9 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -156,69 +203,95 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Convenience_Async()
+        public void Example_GetValid_AllParameters_Convenience()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var result = await client.GetValidAsync();
+            Response<Siamese> response = client.GetValid();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid()
+        public async Task Example_GetValid_AllParameters_Convenience_Async()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var data = new
+            Response<Siamese> response = await client.GetValidAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutValid_ShortVersion()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
-            };
-
-            Response response = client.PutValid(RequestContent.Create(data));
+            });
+            Response response = client.PutValid(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutValid_ShortVersion_Async()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                smart = true,
+                age = 1234,
+                name = "<name>",
+            });
+            Response response = await client.PutValidAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutValid_ShortVersion_Convenience()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Siamese input = new Siamese("<name>", 1234, true);
+            Response<Siamese> response = client.PutValid(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutValid_ShortVersion_Convenience_Async()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Siamese input = new Siamese("<name>", 1234, true);
+            Response<Siamese> response = await client.PutValidAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_AllParameters()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
-            };
-
-            Response response = client.PutValid(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("smart").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Async()
-        {
-            var client = new NotDiscriminatedClient();
-
-            var data = new
-            {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
-
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            });
+            Response response = client.PutValid(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -230,16 +303,15 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_AllParameters_Async()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
-            };
-
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutValidAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -249,12 +321,22 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Convenience_Async()
+        public void Example_PutValid_AllParameters_Convenience()
         {
-            var client = new NotDiscriminatedClient();
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            var input = new Siamese("<name>", 1234, true);
-            var result = await client.PutValidAsync(input);
+            Siamese input = new Siamese("<name>", 1234, true);
+            Response<Siamese> response = client.PutValid(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutValid_AllParameters_Convenience_Async()
+        {
+            NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+            Siamese input = new Siamese("<name>", 1234, true);
+            Response<Siamese> response = await client.PutValidAsync(input);
         }
     }
 }

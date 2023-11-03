@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -36,19 +37,19 @@ namespace ResourceClients_LowLevel
         /// <summary> Initializes a new instance of ResourceServiceClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ResourceServiceClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new ResourceServiceClientOptions())
+        public ResourceServiceClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new ResourceServiceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ResourceServiceClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public ResourceServiceClient(AzureKeyCredential credential, Uri endpoint, ResourceServiceClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public ResourceServiceClient(Uri endpoint, AzureKeyCredential credential, ResourceServiceClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ResourceServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -135,7 +136,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetGroupsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -156,7 +157,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetGroupsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -177,7 +178,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllItemsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -198,7 +199,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllItemsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
         }
 
         /// <summary> Initializes a new instance of ResourceGroup. </summary>
@@ -209,7 +210,7 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
-            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
+            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, groupId);
         }
 
         internal HttpMessage CreateGetParametersRequest(RequestContext context)

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -22,6 +23,7 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
+    [Parallelizable(ParallelScope.None)]
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;

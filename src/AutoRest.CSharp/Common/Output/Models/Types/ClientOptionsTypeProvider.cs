@@ -15,17 +15,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static TextInfo TextInfo = CultureInfo.InvariantCulture.TextInfo;
 
         public FormattableString Description { get; }
-        public IReadOnlyList<ApiVersion> ApiVersions { get; }
+        public IReadOnlyList<ApiVersion>? ApiVersions { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        public ClientOptionsTypeProvider(IReadOnlyList<string> versions, string name, string ns, FormattableString description, SourceInputModel? sourceInputModel) : base(ns, sourceInputModel)
+        public ClientOptionsTypeProvider(IReadOnlyList<string>? versions, string name, string ns, FormattableString description, SourceInputModel? sourceInputModel) : base(ns, sourceInputModel)
         {
             DefaultName = name;
             DefaultAccessibility = "public";
             Description = description;
 
-            ApiVersions = ConvertApiVersions(versions);
+            if (versions is not null)
+                ApiVersions = ConvertApiVersions(versions);
         }
 
         private static ApiVersion[] ConvertApiVersions(IReadOnlyList<string> versions) =>

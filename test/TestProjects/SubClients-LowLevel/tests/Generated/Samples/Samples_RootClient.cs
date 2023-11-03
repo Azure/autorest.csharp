@@ -6,27 +6,38 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using SubClients_LowLevel;
 
 namespace SubClients_LowLevel.Samples
 {
-    public class Samples_RootClient
+    public partial class Samples_RootClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCachedParameter()
+        public void Example_GetCachedParameter_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new RootClient("<cachedParameter>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RootClient client = new RootClient("<CachedParameter>", credential);
 
-            Response response = client.GetCachedParameter(new RequestContext());
+            Response response = client.GetCachedParameter(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetCachedParameter_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RootClient client = new RootClient("<CachedParameter>", credential);
+
+            Response response = await client.GetCachedParameterAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,23 +47,10 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCachedParameter_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new RootClient("<cachedParameter>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RootClient client = new RootClient("<CachedParameter>", credential);
 
-            Response response = client.GetCachedParameter(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCachedParameter_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new RootClient("<cachedParameter>", credential);
-
-            Response response = await client.GetCachedParameterAsync(new RequestContext());
+            Response response = client.GetCachedParameter(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -62,10 +60,10 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCachedParameter_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new RootClient("<cachedParameter>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RootClient client = new RootClient("<CachedParameter>", credential);
 
-            Response response = await client.GetCachedParameterAsync(new RequestContext());
+            Response response = await client.GetCachedParameterAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

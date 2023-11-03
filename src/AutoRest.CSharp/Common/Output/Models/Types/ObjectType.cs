@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -19,8 +19,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType? _inheritsType;
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
-        private string? _description;
-        private IEnumerable<ModelMethodDefinition>? _methods;
+        private FormattableString? _description;
+        private IEnumerable<Method>? _methods;
         private ObjectTypeDiscriminator? _discriminator;
 
         protected ObjectType(BuildContext context)
@@ -39,23 +39,23 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
-        public IEnumerable<ModelMethodDefinition> Methods => _methods ??= BuildMethods();
+        public IEnumerable<Method> Methods => _methods ??= BuildMethods();
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
 
-        public string? Description => _description ??= CreateDescription() + CreateExtraDescriptionWithDiscriminator();
+        public FormattableString? Description => _description ??= $"{CreateDescription()}{CreateExtraDescriptionWithDiscriminator()}";
         public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
-        protected abstract string CreateDescription();
+        protected abstract FormattableString CreateDescription();
         public abstract bool IncludeConverter { get; }
 
-        protected virtual IEnumerable<ModelMethodDefinition> BuildMethods()
+        protected virtual IEnumerable<Method> BuildMethods()
         {
-            return Array.Empty<ModelMethodDefinition>();
+            return Array.Empty<Method>();
         }
 
         public IEnumerable<ObjectType> EnumerateHierarchy()
@@ -90,19 +90,18 @@ namespace AutoRest.CSharp.Output.Models.Types
             " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
             "The available derived classes include " };
 
-        public virtual string CreateExtraDescriptionWithDiscriminator()
+        public virtual FormattableString CreateExtraDescriptionWithDiscriminator()
         {
             if (Discriminator?.HasDescendants == true)
             {
                 List<FormattableString> childrenList = new List<FormattableString>();
                 foreach (var implementation in Discriminator.Implementations)
                 {
-                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
+                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type}\"/>");
                 }
-                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
-                    $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+                return $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type}\"/>{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}.";
             }
-            return string.Empty;
+            return $"";
         }
     }
 }

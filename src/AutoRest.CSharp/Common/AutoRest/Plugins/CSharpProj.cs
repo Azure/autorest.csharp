@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-{0}{1}
+{0}{1}{2}
 
 </Project>
 ";
@@ -66,6 +66,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <PackageReference Include=""Azure.Core.Experimental"" />
   </ItemGroup>
 ";
+        private string _llcAzureKeyAuth = @"
+  <ItemGroup>
+    <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />
+  </ItemGroup>";
 
         internal static string GetVersion()
         {
@@ -96,31 +100,31 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            Configuration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
-
-            var context = new BuildContext(codeModel, null);
-            Execute(context.DefaultNamespace, async (filename, text) =>
+            var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
+            bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
+            var context = new BuildContext(codeModel, null, config.LibraryName, config.Namespace);
+            Execute(context.DefaultNamespace, needAzureKeyAuth, async (filename, text) =>
             {
-                await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
+                await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");
             },
-                codeModelYaml.Contains("x-ms-format: dfe-"));
+                codeModelYaml.Contains("x-ms-format: dfe-"), config);
             return true;
         }
 
-        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe)
+        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe, bool includeAzureKeyAuth, CSharpProjConfiguration config)
         {
-            Execute(defaultNamespace, async (filename, text) =>
+            Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
             {
                 //TODO adding to workspace makes the formatting messed up since its a raw xml document
                 //somewhere it tries to parse it as a syntax tree and when it converts back to text
                 //its no longer valid xml.  We should consider a "raw files" concept in the work space
                 //so the file writing can still remain in one place
-                await File.WriteAllTextAsync(Path.Combine(Configuration.AbsoluteProjectFolder, filename), text);
+                await File.WriteAllTextAsync(Path.Combine(config.AbsoluteProjectFolder, filename), text);
             },
-                includeDfe);
+                includeDfe, config);
         }
 
-        private void Execute(string defaultNamespace, Action<string, string> writeFile, bool includeDfe)
+        private void Execute(string defaultNamespace, bool includeAzureKeyAuth, Action<string, string> writeFile, bool includeDfe, CSharpProjConfiguration config)
         {
             if (includeDfe)
             {
@@ -129,7 +133,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <PackageReference Include=""Azure.Core.Expressions.DataFactory"" />
   </ItemGroup>";
             }
-            var isTestProject = Configuration.MgmtTestConfiguration is not null;
+
+            var isTestProject = config.IsMgmtTestProject;
             if (isTestProject)
             {
                 _coreCsProjContent += string.Format(@"
@@ -149,25 +154,25 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             string csProjContent;
-            if (Configuration.SkipCSProjPackageReference)
+            if (config.SkipCSProjPackageReference)
             {
                 string additionalContent = string.Empty;
-                if (Configuration.AzureArm)
+                if (config.AzureArm)
                 {
-                  additionalContent += _armCsProjContent;
+                    additionalContent += _armCsProjContent;
                 }
-                else if (!Configuration.Generation1ConvenienceClient)
+                else if (!config.Generation1ConvenienceClient)
                 {
-                  additionalContent += _llcProjectContent;
+                    additionalContent += _llcProjectContent;
                 }
 
-                csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
+                csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent, includeAzureKeyAuth ? _llcAzureKeyAuth : "");
             }
             else
             {
                 var version = GetVersion();
                 var csProjPackageReference = string.Format(_csProjPackageReference, version);
-                csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
+                csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent, includeAzureKeyAuth ? _llcAzureKeyAuth : "");
             }
 
             var projectFile = defaultNamespace;

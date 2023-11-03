@@ -25,11 +25,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override bool IsResourceType => true;
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
-            return BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.") + (string.IsNullOrWhiteSpace(ObjectSchema.Language.Default.Description) ?
-                string.Empty :
-                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(ObjectSchema.Language.Default.Description)}");
+            FormattableString baseDescription = $"{BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.")}";
+            FormattableString extraDescription = string.IsNullOrWhiteSpace(ObjectSchema.Language.Default.Description) ?
+                (FormattableString)$"" :
+                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(ObjectSchema.Language.Default.Description)}";
+            return $"{baseDescription}{extraDescription}";
         }
 
         private string _clientPrefix;

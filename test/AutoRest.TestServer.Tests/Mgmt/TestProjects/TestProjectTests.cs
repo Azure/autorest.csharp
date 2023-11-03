@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -15,7 +14,6 @@ using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
-using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {

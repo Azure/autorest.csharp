@@ -140,8 +140,7 @@ namespace AutoRest.CSharp.Common.Input
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
             VirtualParameter: input is VirtualParameter vp &&
-                (vp is { Schema: not ConstantSchema } or { Required: not true }) ? vp : null, // optional constant parameter can be virtual parameter
-            SerializationFormat: BuilderHelpers.GetSerializationFormat(input.Schema)
+                (vp is { Schema: not ConstantSchema } or { Required: not true }) ? vp : null // optional constant parameter can be virtual parameter
         );
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
@@ -168,7 +167,8 @@ namespace AutoRest.CSharp.Common.Input
 
             return new OperationLongRunning(
                 FinalStateVia: operation.LongRunningFinalStateVia,
-                FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse)
+                FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse),
+                ResultPath: null
             );
         }
 

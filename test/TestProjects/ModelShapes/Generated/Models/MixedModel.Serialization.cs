@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -168,6 +169,48 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
+            writer.WritePropertyName("vector"u8);
+            writer.WriteStartArray();
+            foreach (var item in Vector.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("vectorRequired"u8);
+            writer.WriteStartArray();
+            foreach (var item in VectorRequired.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (VectorNullable != null)
+            {
+                writer.WritePropertyName("vectorNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorNullable");
+            }
+            if (VectorRequiredNullable != null)
+            {
+                writer.WritePropertyName("vectorRequiredNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorRequiredNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorRequiredNullable");
+            }
             writer.WriteEndObject();
         }
 
@@ -195,6 +238,14 @@ namespace ModelShapes.Models
             Optional<IList<int>> nonRequiredNullableIntList = default;
             int requiredReadonlyInt = default;
             Optional<int> nonRequiredReadonlyInt = default;
+            Optional<ReadOnlyMemory<float>> vector = default;
+            Optional<ReadOnlyMemory<float>> vectorReadOnly = default;
+            ReadOnlyMemory<float> vectorReadOnlyRequired = default;
+            ReadOnlyMemory<float> vectorRequired = default;
+            Optional<ReadOnlyMemory<float>?> vectorNullable = default;
+            Optional<ReadOnlyMemory<float>?> vectorReadOnlyNullable = default;
+            ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable = default;
+            ReadOnlyMemory<float>? vectorRequiredNullable = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("RequiredString"u8))
@@ -381,8 +432,136 @@ namespace ModelShapes.Models
                     nonRequiredReadonlyInt = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("vector"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vector = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnly = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnlyRequired"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnlyRequired = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorRequired"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorRequired = new ReadOnlyMemory<float>(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnlyNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnlyNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorReadOnlyRequiredNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorReadOnlyRequiredNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
+                if (property.NameEquals("vectorRequiredNullable"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    int index = 0;
+                    float[] array = new float[property.Value.GetArrayLength()];
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array[index] = item.GetSingle();
+                        index++;
+                    }
+                    vectorRequiredNullable = new ReadOnlyMemory<float>?(array);
+                    continue;
+                }
             }
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt));
+            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, Optional.ToNullable(vectorNullable), Optional.ToNullable(vectorReadOnlyNullable), vectorReadOnlyRequiredNullable, vectorRequiredNullable);
         }
     }
 }

@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.LowLevel.Generation;
+using AutoRest.CSharp.LowLevel.Generation.SampleGeneration;
 using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -35,25 +35,44 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var client in library.RestClients)
             {
-                var codeWriter = new CodeWriter();
-                var xmlDocWriter = new XmlDocWriter();
-                var lowLevelClientWriter = new LowLevelClientWriter(codeWriter, xmlDocWriter, client);
-                lowLevelClientWriter.WriteClient();
-                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
-                project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", xmlDocWriter.ToString());
+                var dpgClientWriter = new DpgClientWriter(library, client);
+                dpgClientWriter.WriteClient();
+                project.AddGeneratedFile($"{client.Type.Name}.cs", dpgClientWriter.ToString());
 
-                var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
-                exampleCompileCheckWriter.Write();
-                project.AddGeneratedFile($"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs", exampleCompileCheckWriter.ToString());
+                var sampleProvider = library.GetSampleForClient(client);
+                if (Configuration.IsBranded)
+                {
+                    // write samples
+                    if (sampleProvider != null)
+                    {
+                        var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                        var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
+                        clientSampleWriter.Write();
+                        project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                        project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
+                    }
+                }
+                else
+                {
+                    if (Configuration.GenerateTestProject && sampleProvider is not null)
+                    {
+                        var smokeTestWriter = new SmokeTestWriter(client, sampleProvider);
+                        smokeTestWriter.Write();
+                        project.AddGeneratedTestFile($"../../tests/Generated/{client.Type.Name}Tests.cs", smokeTestWriter.ToString());
+                    }
+                }
             }
 
             var optionsWriter = new CodeWriter();
             ClientOptionsWriter.WriteClientOptions(optionsWriter, library.ClientOptions);
             project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
 
-            var extensionWriter = new AspDotNetExtensionWriter(library.AspDotNetExtension);
-            extensionWriter.Write();
-            project.AddGeneratedFile($"{library.AspDotNetExtension.Type.Name}.cs", extensionWriter.ToString());
+            if (Configuration.IsBranded)
+            {
+                var extensionWriter = new AspDotNetExtensionWriter(library.AspDotNetExtension);
+                extensionWriter.Write();
+                project.AddGeneratedFile($"{library.AspDotNetExtension.Type.Name}.cs", extensionWriter.ToString());
+            }
 
             var modelFactoryProvider = library.ModelFactory;
             if (modelFactoryProvider != null)
@@ -64,6 +83,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             await project.PostProcessAsync(new PostProcessor(
+                modelsToKeep: library.AccessOverriddenModels.ToImmutableHashSet(),
                 modelFactoryFullName: modelFactoryProvider?.FullName,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
         }

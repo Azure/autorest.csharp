@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class IndirectSelfReferenceModel : IUtf8JsonSerializable
+    public partial class IndirectSelfReferenceModel : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -23,7 +23,14 @@ namespace ConfidentLevelsInTsp.Models
                 writer.WriteObjectValue(Reference);
             }
             writer.WritePropertyName("unionProperty"u8);
-            writer.WriteObjectValue(UnionProperty);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(UnionProperty);
+#else
+            using (JsonDocument document = JsonDocument.Parse(UnionProperty))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             writer.WriteEndObject();
         }
 

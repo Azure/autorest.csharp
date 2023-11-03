@@ -6,26 +6,35 @@
   "1.0.0"
  ],
  "Enums": [],
- "Models": [],
- "Clients": [
+ "Models": [
   {
    "$id": "2",
+   "Name": "RepeatableResponse",
+   "Namespace": "SpecialHeaders.Repeatability",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": []
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "3",
    "Name": "RepeatabilityClient",
    "Description": "Illustrates OASIS repeatability headers",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "immediateSuccess",
      "ResourceName": "Repeatability",
      "Description": "Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "5",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "5",
+        "$id": "6",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -40,9 +49,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "6",
+        "$id": "7",
         "Type": {
-         "$id": "7",
+         "$id": "8",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -51,11 +60,11 @@
        }
       },
       {
-       "$id": "8",
+       "$id": "9",
        "Name": "repeatabilityRequestID",
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
-        "$id": "9",
+        "$id": "10",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -71,11 +80,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "10",
+       "$id": "11",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
-        "$id": "11",
+        "$id": "12",
         "Name": "utcDateTime",
         "Kind": "DateTime",
         "IsNullable": false
@@ -91,11 +100,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "12",
+       "$id": "13",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "13",
+        "$id": "14",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -110,20 +119,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "14",
+        "$id": "15",
         "Type": {
-         "$ref": "13"
+         "$ref": "14"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "15",
+       "$id": "16",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "16",
+        "$id": "17",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -138,9 +147,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "18",
         "Type": {
-         "$id": "18",
+         "$id": "19",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -151,26 +160,26 @@
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "20",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "20",
+         "$id": "21",
          "Name": "Repeatability-Result",
          "NameInResponse": "repeatabilityResult",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
-          "$id": "21",
+          "$id": "22",
           "Name": "Union",
           "UnionItemTypes": [
            {
-            "$id": "22",
+            "$id": "23",
             "Name": "Literal",
             "LiteralValueType": {
-             "$id": "23",
+             "$id": "24",
              "Name": "String",
              "Kind": "String",
              "IsNullable": false
@@ -179,10 +188,10 @@
             "IsNullable": false
            },
            {
-            "$id": "24",
+            "$id": "25",
             "Name": "Literal",
             "LiteralValueType": {
-             "$id": "25",
+             "$id": "26",
              "Name": "String",
              "Kind": "String",
              "IsNullable": false
@@ -208,7 +217,7 @@
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "27"
    },
    "Creatable": true
   }

@@ -9,6 +9,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -216,7 +217,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, _scope, filter);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -239,7 +240,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, _scope, filter);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -294,6 +295,70 @@ namespace MgmtScopeResource
             {
                 var response = _resourceLinkRestClient.Get(_scope, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{linkId}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<NullableResponse<ResourceLinkResource>> GetIfExistsAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _resourceLinkRestClient.GetAsync(_scope, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<ResourceLinkResource>(response.GetRawResponse());
+                return Response.FromValue(new ResourceLinkResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{linkId}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual NullableResponse<ResourceLinkResource> GetIfExists(CancellationToken cancellationToken = default)
+        {
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _resourceLinkRestClient.Get(_scope, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<ResourceLinkResource>(response.GetRawResponse());
+                return Response.FromValue(new ResourceLinkResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

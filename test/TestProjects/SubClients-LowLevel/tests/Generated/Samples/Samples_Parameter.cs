@@ -6,27 +6,38 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using SubClients_LowLevel;
 
 namespace SubClients_LowLevel.Samples
 {
-    internal class Samples_Parameter
+    public partial class Samples_Parameter
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSubParameter()
+        public void Example_GetSubParameter_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Parameter client = new RootClient(null, credential).GetParameterClient();
 
-            Response response = client.GetSubParameter("<subParameter>", new RequestContext());
+            Response response = client.GetSubParameter("<subParameter>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetSubParameter_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Parameter client = new RootClient(null, credential).GetParameterClient();
+
+            Response response = await client.GetSubParameterAsync("<subParameter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,23 +47,10 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetSubParameter_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Parameter client = new RootClient(null, credential).GetParameterClient();
 
-            Response response = client.GetSubParameter("<subParameter>", new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSubParameter_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
-
-            Response response = await client.GetSubParameterAsync("<subParameter>", new RequestContext());
+            Response response = client.GetSubParameter("<subParameter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -62,10 +60,10 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetSubParameter_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Parameter client = new RootClient(null, credential).GetParameterClient();
 
-            Response response = await client.GetSubParameterAsync("<subParameter>", new RequestContext());
+            Response response = await client.GetSubParameterAsync("<subParameter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -27,6 +28,8 @@ namespace MgmtListMethods
     public partial class TenantParentWithNonResChWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TenantParentWithNonResChWithLocResource"/> instance. </summary>
+        /// <param name="tenantTestName"> The tenantTestName. </param>
+        /// <param name="tenantParentWithNonResChWithLocName"> The tenantParentWithNonResChWithLocName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string tenantTestName, string tenantParentWithNonResChWithLocName)
         {
             var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChWithLocs/{tenantParentWithNonResChWithLocName}";
@@ -246,7 +249,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChWithLocRestClient.CreateListNonResourceChildRequest(Id.Parent.Name, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _tenantParentWithNonResChWithLocClientDiagnostics, Pipeline, "TenantParentWithNonResChWithLocResource.GetNonResourceChild", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _tenantParentWithNonResChWithLocClientDiagnostics, Pipeline, "TenantParentWithNonResChWithLocResource.GetNonResourceChild", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -267,7 +270,7 @@ namespace MgmtListMethods
         public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChWithLocRestClient.CreateListNonResourceChildRequest(Id.Parent.Name, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _tenantParentWithNonResChWithLocClientDiagnostics, Pipeline, "TenantParentWithNonResChWithLocResource.GetNonResourceChild", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _tenantParentWithNonResChWithLocClientDiagnostics, Pipeline, "TenantParentWithNonResChWithLocResource.GetNonResourceChild", "value", null, cancellationToken);
         }
 
         /// <summary>

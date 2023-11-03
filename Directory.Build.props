@@ -7,6 +7,15 @@
     <CentralPackagesFile>$(MSBuildThisFileDirectory)Packages.Data.props</CentralPackagesFile>
     <AzureCoreSharedSources>$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/</AzureCoreSharedSources>
     <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
+    <NoWarn Condition="'$(IsTestGenerationTestProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
+    <NoWarn>$(NoWarn);NU5105</NoWarn>
+    <!-- Test client libraries won't be in the approved namespace list -->
+    <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0001</NoWarn>
+    <!-- Test client libraries can have single word class names -->
+    <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0012</NoWarn>
+    <!-- TODO we should figure out how to make our generator create the right thing for these two warnings https://github.com/Azure/autorest.csharp/issues/3706 -->
+    <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0006;AZC0007</NoWarn>
+    <IncludeSharedSourceInLocalBuild Condition="!$(MSBuildProjectName.StartsWith('AutoRest.')) And '$(IsTestGenerationTestProject)' != 'true'">true</IncludeSharedSourceInLocalBuild>
   </PropertyGroup>
 
   <!-- Setup default project properties -->

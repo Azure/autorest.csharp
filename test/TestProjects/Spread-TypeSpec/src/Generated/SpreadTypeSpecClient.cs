@@ -68,7 +68,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadModelAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = thing.ToRequestContent();
+            Response response = await SpreadModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -82,7 +83,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadModel(thing.ToRequestContent(), context);
+            using RequestContent content = thing.ToRequestContent();
+            Response response = SpreadModel(content, context);
             return response;
         }
 
@@ -414,7 +416,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAliasWithModelAsync(id, top, thing.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = thing.ToRequestContent();
+            Response response = await SpreadAliasWithModelAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -432,7 +435,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAliasWithModel(id, top, thing.ToRequestContent(), context);
+            using RequestContent content = thing.ToRequestContent();
+            Response response = SpreadAliasWithModel(id, top, content, context);
             return response;
         }
 

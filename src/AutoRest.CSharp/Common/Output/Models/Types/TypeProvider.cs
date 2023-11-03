@@ -2,14 +2,16 @@
 // Licensed under the MIT License.
 
 using System;
+using AutoRest.CSharp.Common.Input;
+using System.Diagnostics;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
+    [DebuggerDisplay("Name: {Declaration.Name}, Namespace: {Declaration.Namespace}")]
     internal abstract class TypeProvider
     {
         private readonly Lazy<INamedTypeSymbol?> _existingType;

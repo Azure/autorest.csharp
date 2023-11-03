@@ -9,7 +9,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -30,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<Parameter> SerializationParameters { get; }
         public int Count => _fields.Count;
 
-        public ModelTypeProviderFields(InputModelType inputModel, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
+        public ModelTypeProviderFields(InputModelType inputModel, CSharpType modelType, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -42,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
-                var originalFieldName = inputModelProperty.Name.ToCleanName();
+                var originalFieldName = BuilderHelpers.DisambiguateName(modelType, inputModelProperty.Name.ToCleanName(), "Property");
                 var propertyType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 // We represent property being optional by making it nullable (when it is a value type)
@@ -89,7 +88,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     }
                     var isReadOnly = IsReadOnly(serializationMapping.ExistingMember);
-                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath?.Last(), "to be removed by post process", InputPrimitiveType.Object, false, isReadOnly, false);
+                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath?.Last() ?? serializationMapping.ExistingMember.Name, "to be removed by post process", InputPrimitiveType.Object, false, isReadOnly, false);
                     // we put the original type typeof(object) here as fallback. We do not really care about what type we get here, just to ensure there is a type generated
                     // therefore the top type here is reasonable
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
@@ -182,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 declaration,
                 GetPropertyDefaultValue(originalType, inputModelProperty),
                 inputModelProperty.IsRequired,
-                inputModelProperty.SerializationFormat,
+                SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, valueType),
                 OptionalViaNullability: optionalViaNullability,
                 IsField: false,
                 WriteAsProperty: true,
@@ -222,7 +221,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Declaration: declaration,
                 DefaultValue: GetPropertyDefaultValue(originalType, inputModelProperty),
                 IsRequired: inputModelProperty.IsRequired,
-                SerializationFormat: inputModelProperty.SerializationFormat,
+                SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, valueType),
                 IsField: existingMember is IFieldSymbol,
                 WriteAsProperty: writeAsProperty,
                 OptionalViaNullability: optionalViaNullability,

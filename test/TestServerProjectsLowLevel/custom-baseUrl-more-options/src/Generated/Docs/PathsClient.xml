@@ -2,44 +2,46 @@
 <doc>
   <members>
     <member name="GetEmptyAsync(string,string,string,string,RequestContext)">
-<example>
-This sample shows how to call GetEmptyAsync with required parameters.
+      <example>
+This sample shows how to call GetEmptyAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PathsClient("<dnsSuffix>", "<subscriptionId>", credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
 Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PathsClient("<dnsSuffix>", "<subscriptionId>", credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
+
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetEmpty(string,string,string,string,RequestContext)">
-<example>
-This sample shows how to call GetEmpty with required parameters.
+      <example>
+This sample shows how to call GetEmpty.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PathsClient("<dnsSuffix>", "<subscriptionId>", credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
 Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetEmpty with all parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PathsClient("<dnsSuffix>", "<subscriptionId>", credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
+
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

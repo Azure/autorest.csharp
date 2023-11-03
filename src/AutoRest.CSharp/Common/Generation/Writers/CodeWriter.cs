@@ -6,8 +6,8 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class CodeWriter
     {
+        private readonly bool _appendTypeNameOnly;
         private const int DefaultLength = 1024;
         private static readonly string _newLine = "\n";
         private static readonly string _braceNewLine = "{\n";
@@ -28,8 +29,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private char[] _builder;
         private int _length;
 
-        public CodeWriter()
+        public CodeWriter(bool appendTypeNameOnly = false)
         {
+            _appendTypeNameOnly = appendTypeNameOnly;
             _builder = ArrayPool<char>.Shared.Rent(DefaultLength);
 
             _scopes = new Stack<CodeWriterScope>();
@@ -152,7 +154,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         Declaration(declaration);
                         break;
                     case CodeWriterDeclaration declaration:
-                        Identifier(declaration.ActualName);
+                        Append(declaration);
                         break;
                     case var _ when isLiteralFormat:
                         Literal(argument);
@@ -185,10 +187,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void UseNamespace(string @namespace)
         {
-            if (_currentNamespace != @namespace)
+            if (_currentNamespace == @namespace)
             {
-                _usingNamespaces.Add(@namespace);
+                return;
             }
+
+            // [TODO] Uncomment to remove unused namespaces
+            //if (_currentNamespace is not null && _currentNamespace.Length > @namespace.Length && _currentNamespace.StartsWith(@namespace) && _currentNamespace[@namespace.Length] == '.')
+            //{
+            //    return;
+            //}
+
+            _usingNamespaces.Add(@namespace);
         }
 
         public CodeWriter AppendXmlDocumentation(FormattableString startTag, FormattableString endTag, FormattableString content)
@@ -279,7 +289,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return this;
         }
 
-        private string GetTemporaryVariable(string s)
+        protected string GetTemporaryVariable(string s)
         {
             if (IsAvailable(s))
             {
@@ -320,12 +330,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void AppendType(CSharpType type, bool isDeclaration = false)
         {
-            string? mappedName = type.IsFrameworkType
-                ? GetTypeNameMapping(type.FrameworkType)
-                : isDeclaration ? type.Implementation.Declaration.Name : null;
-            if (mappedName != null)
+            if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
-                AppendRaw(mappedName);
+                AppendRaw(keywordName);
+            }
+            else if (isDeclaration && !type.IsFrameworkType)
+            {
+                AppendRaw(type.Implementation.Declaration.Name);
+            }
+            else if (_appendTypeNameOnly)
+            {
+                AppendRaw(type.Name);
             }
             else
             {
@@ -354,28 +369,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 AppendRaw("?");
             }
         }
-
-        internal static string? GetTypeNameMapping(Type? type) => type switch
-        {
-            null => null,
-            var t when t.IsGenericParameter => t.Name,
-            var t when t == typeof(bool) => "bool",
-            var t when t == typeof(byte) => "byte",
-            var t when t == typeof(sbyte) => "sbyte",
-            var t when t == typeof(short) => "short",
-            var t when t == typeof(ushort) => "ushort",
-            var t when t == typeof(int) => "int",
-            var t when t == typeof(uint) => "uint",
-            var t when t == typeof(long) => "long",
-            var t when t == typeof(ulong) => "ulong",
-            var t when t == typeof(char) => "char",
-            var t when t == typeof(double) => "double",
-            var t when t == typeof(float) => "float",
-            var t when t == typeof(object) => "object",
-            var t when t == typeof(decimal) => "decimal",
-            var t when t == typeof(string) => "string",
-            _ => null
-        };
 
         public CodeWriter Literal(object? o)
         {
@@ -520,7 +513,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return AppendRaw(identifier);
         }
 
-        private CodeWriter Declaration(string declaration)
+        protected CodeWriter Declaration(string declaration)
         {
             foreach (var scope in _scopes)
             {
@@ -532,9 +525,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return Identifier(declaration);
         }
 
-        public CodeWriter Declaration(CodeWriterDeclaration declaration)
+        public virtual CodeWriter Declaration(CodeWriterDeclaration declaration)
         {
             declaration.SetActualName(GetTemporaryVariable(declaration.RequestedName));
+            _scopes.Peek().Declarations.Add(declaration);
             return Declaration(declaration.ActualName);
         }
 
@@ -558,9 +552,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     .ToArray();
             if (header)
             {
-                builder.AppendLine("// Copyright (c) Microsoft Corporation. All rights reserved.");
-                builder.AppendLine("// Licensed under the MIT License.");
-                builder.AppendLine();
+                builder.Append(Configuration.ApiTypes.LiscenseString);
                 builder.AppendLine("// <auto-generated/>");
                 builder.AppendLine();
                 builder.AppendLine("#nullable disable");
@@ -590,9 +582,11 @@ namespace AutoRest.CSharp.Generation.Writers
             private readonly string? _end;
             private readonly bool _newLine;
 
-            public HashSet<string> Identifiers { get; } = new HashSet<string>();
+            public HashSet<string> Identifiers { get; } = new();
 
-            public HashSet<string> AllDefinedIdentifiers { get; } = new HashSet<string>();
+            public HashSet<string> AllDefinedIdentifiers { get; } = new();
+
+            public List<CodeWriterDeclaration> Declarations { get; } = new();
 
             public CodeWriterScope(CodeWriter writer, string? end, bool newLine)
             {
@@ -606,6 +600,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (_writer != null)
                 {
                     _writer.PopScope(this);
+                    foreach (var declaration in Declarations)
+                    {
+                        declaration.SetActualName(null);
+                    }
+
+                    Declarations.Clear();
+
                     if (_end != null)
                     {
                         _writer.TrimNewLines();
@@ -676,7 +677,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return codeWriterScope;
         }
 
-        public void Append(CodeWriterDeclaration declaration)
+        public virtual void Append(CodeWriterDeclaration declaration)
         {
             Identifier(declaration.ActualName);
         }

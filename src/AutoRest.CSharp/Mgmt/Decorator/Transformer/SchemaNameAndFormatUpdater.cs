@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Report;
 using static AutoRest.CSharp.Mgmt.Decorator.Transformer.SchemaFormatByNameTransformer;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer;
@@ -48,7 +50,7 @@ internal static class SchemaNameAndFormatUpdater
     {
         foreach ((var key, var value) in Configuration.MgmtConfiguration.RenameMapping)
         {
-            yield return new RenameAndReformatTarget(key, value);
+            yield return new RenameAndReformatTarget(TransformTypeName.RenameMapping, key, value);
         }
     }
 
@@ -57,7 +59,7 @@ internal static class SchemaNameAndFormatUpdater
         var result = new Dictionary<string, RenameAndReformatTarget>();
         foreach ((var key, var value) in rawMapping)
         {
-            result.Add(key, new RenameAndReformatTarget(key, value));
+            result.Add(key, new RenameAndReformatTarget(TransformTypeName.ParameterRenameMapping, key, value));
         }
 
         return result;
@@ -69,24 +71,29 @@ internal static class SchemaNameAndFormatUpdater
         // change the path and query parameters
         foreach (var parameter in operation.Parameters)
         {
-            ApplyRenameTarget(parameter, renameTargets);
+            ApplyRenameTarget(operation, parameter, renameTargets);
         }
 
         // body parameter is not included above
         var bodyParameter = operation.GetBodyParameter();
         if (bodyParameter != null)
         {
-            ApplyRenameTarget(bodyParameter, renameTargets);
+            ApplyRenameTarget(operation, bodyParameter, renameTargets);
         }
     }
 
-    private static void ApplyRenameTarget(RequestParameter parameter, IReadOnlyDictionary<string, RenameAndReformatTarget> renameTargets)
+    private static void ApplyRenameTarget(Operation operation, RequestParameter parameter, IReadOnlyDictionary<string, RenameAndReformatTarget> renameTargets)
     {
         if (renameTargets.TryGetValue(parameter.GetOriginalName(), out var target))
         {
             // apply the rename
+            string oriName = parameter.Language.Default.Name;
             parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
             parameter.Language.Default.Name = target.NewName;
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                new TransformItem(target.Source, target.Key, operation.OperationId!, target.Value),
+                operation.GetFullSerializedName(parameter),
+                "ApplyRenameParameter", oriName, parameter.Language.Default.Name);
         }
     }
 
@@ -157,7 +164,10 @@ internal static class SchemaNameAndFormatUpdater
     {
         if (schema.GetOriginalName() != renameTarget.TypeName)
             return;
-        ApplyNewName(schema.Language, renameTarget.NewName);
+        if (!string.IsNullOrEmpty(renameTarget.NewName))
+        {
+            ApplyNewName(schema.Language, renameTarget, schema.GetFullSerializedName());
+        }
         // we just ignore the format information on this
     }
 
@@ -168,11 +178,11 @@ internal static class SchemaNameAndFormatUpdater
         var choiceValue = choices.FirstOrDefault(choice => choice.Value == renameTarget.PropertyName);
         if (choiceValue == null)
             return;
-        ApplyNewName(choiceValue.Language, renameTarget.NewName);
+        ApplyNewName(choiceValue.Language, renameTarget, schema.GetFullSerializedName(choiceValue));
         // we just ignore the format information on this
     }
 
-    private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameAndReformatTarget renameTarget)
+    private static void ApplyToProperty(ObjectSchema schema, IEnumerable<Property> properties, RenameAndReformatTarget renameTarget)
     {
         Debug.Assert(renameTarget.PropertyName != null);
         if (schema.GetOriginalName() != renameTarget.TypeName)
@@ -189,16 +199,21 @@ internal static class SchemaNameAndFormatUpdater
         var property = filteredProperties.FirstOrDefault(p => p.FlattenedNames.SequenceEqual(flattenedNames));
         if (property == null)
             return;
-        ApplyNewName(property.Language, renameTarget.NewName);
+        ApplyNewName(property.Language, renameTarget, schema.GetFullSerializedName(property));
+
         if (property.Schema is ArraySchema arraySchema)
-            ApplyNewFormat(arraySchema.ElementType, renameTarget.NewFormat);
+        {
+            ApplyNewFormat(arraySchema.ElementType, renameTarget, schema.GetFullSerializedName(property));
+        }
         else
-            ApplyNewFormat(property.Schema, renameTarget.NewFormat);
+        {
+            ApplyNewFormat(property.Schema, renameTarget, schema.GetFullSerializedName(property));
+        }
     }
 
     public static void UpdateAcronyms()
     {
-        if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
+        if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
         // first transform all the name of schemas, properties
         UpdateAcronyms(MgmtContext.CodeModel.AllSchemas);
@@ -206,30 +221,44 @@ internal static class SchemaNameAndFormatUpdater
         UpdateAcronyms(MgmtContext.CodeModel.OperationGroups);
     }
 
-    private static void ApplyNewName(Languages language, string? value)
+    private static void ApplyNewName(Languages language, RenameAndReformatTarget rrt, string targetFullSerializedName)
     {
+        string? value = rrt.NewName;
         if (value == null)
             return;
+        string oriName = language.Default.Name;
         language.Default.SerializedName ??= language.Default.Name;
         language.Default.Name = value;
+        MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
+            "ApplyNewName", oriName, value);
     }
 
-    private static void ApplyNewFormat(Schema schema, FormatPattern? formatPattern)
+    private static void ApplyNewFormat(Schema schema, RenameAndReformatTarget rrt, string targetFullSerializedName)
     {
+        FormatPattern? formatPattern = rrt.NewFormat;
         if (formatPattern == null)
             return;
         if (formatPattern.IsPrimitiveType)
+        {
+            AllSchemaTypes oriType = schema.Type;
             schema.Type = formatPattern.PrimitiveType!.Value;
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
+                "ApplyNewType", oriType.ToString(), schema.Type.ToString());
+        }
         else
         {
             if (schema.Extensions == null)
                 schema.Extensions = new RecordOfStringAndAny();
+            string? oriFormat = schema.Extensions.Format;
             schema.Extensions.Format = formatPattern.ExtensionType!;
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
+                "ApplyNewFormat", oriFormat, schema.Extensions.Format);
         }
     }
 
     private record RenameAndReformatTarget
     {
+        internal string Source { get; }
         internal string Key { get; }
         internal string Value { get; }
 
@@ -239,8 +268,9 @@ internal static class SchemaNameAndFormatUpdater
         internal string? NewName { get; }
         internal FormatPattern? NewFormat { get; }
 
-        internal RenameAndReformatTarget(string renameKey, string value)
+        internal RenameAndReformatTarget(string source, string renameKey, string value)
         {
+            this.Source = source;
             Key = renameKey;
             Value = value;
             // we do not support escape the character dot right now. In case in the future some swagger might have dot inside a property name, we need to support this. Really?
@@ -285,7 +315,7 @@ internal static class SchemaNameAndFormatUpdater
 
     public static void UpdateAcronym(Schema schema)
     {
-        if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
+        if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
         TransformSchema(schema);
     }
@@ -311,11 +341,11 @@ internal static class SchemaNameAndFormatUpdater
 
     private static void TransformOperation(Operation operation)
     {
-        TransformLanguage(operation.Language);
+        TransformLanguage(operation.Language, operation.GetFullSerializedName());
         // this iteration only applies to path and query parameter (maybe headers?) but not to body parameter
         foreach (var parameter in operation.Parameters)
         {
-            TransformLanguage(parameter.Language);
+            TransformLanguage(parameter.Language, operation.GetFullSerializedName(parameter));
         }
 
         // we need to iterate over the parameters in each request (actually only one request) to ensure the name of body parameters are also taken care of
@@ -323,7 +353,7 @@ internal static class SchemaNameAndFormatUpdater
         {
             foreach (var parameter in request.Parameters)
             {
-                TransformLanguage(parameter.Language);
+                TransformLanguage(parameter.Language, operation.GetFullSerializedName(parameter));
             }
         }
     }
@@ -333,10 +363,10 @@ internal static class SchemaNameAndFormatUpdater
         switch (schema)
         {
             case ChoiceSchema choiceSchema:
-                TransformChoiceSchema(choiceSchema.Language, choiceSchema.Choices);
+                TransformChoiceSchema(choiceSchema, choiceSchema.Choices);
                 break;
             case SealedChoiceSchema sealedChoiceSchema:
-                TransformChoiceSchema(sealedChoiceSchema.Language, sealedChoiceSchema.Choices);
+                TransformChoiceSchema(sealedChoiceSchema, sealedChoiceSchema.Choices);
                 break;
             case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
                 TransformObjectSchema(objSchema);
@@ -346,24 +376,30 @@ internal static class SchemaNameAndFormatUpdater
         }
     }
 
-    private static void TransformChoiceSchema(Languages languages, ICollection<ChoiceValue> choiceValues)
+    private static void TransformChoiceSchema(Schema schema, ICollection<ChoiceValue> choiceValues)
     {
-        TransformLanguage(languages);
-        TransformChoices(choiceValues);
+        TransformLanguage(schema.Language, schema.GetFullSerializedName());
+        TransformChoices(schema, choiceValues);
     }
 
-    private static void TransformChoices(ICollection<ChoiceValue> choiceValues)
+    private static void TransformChoices(Schema schema, ICollection<ChoiceValue> choiceValues)
     {
         foreach (var choiceValue in choiceValues)
         {
-            TransformLanguage(choiceValue.Language);
+            TransformLanguage(choiceValue.Language, schema.GetFullSerializedName(choiceValue));
         }
     }
 
-    private static void TransformLanguage(Languages languages)
+    private static void TransformLanguage(Languages languages, string targetFullSerializedName)
     {
         var originalName = languages.Default.Name;
-        var result = NameTransformer.Instance.EnsureNameCase(originalName);
+        var tempName = originalName;
+        var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
+        {
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
+                "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
+            tempName = applyStep.NewName.Name;
+        });
         languages.Default.Name = result.Name;
         languages.Default.SerializedName ??= originalName;
     }
@@ -371,10 +407,10 @@ internal static class SchemaNameAndFormatUpdater
     private static void TransformObjectSchema(ObjectSchema objSchema)
     {
         // transform the name of this schema
-        TransformLanguage(objSchema.Language);
+        TransformLanguage(objSchema.Language, objSchema.GetFullSerializedName());
         foreach (var property in objSchema.Properties)
         {
-            TransformLanguage(property.Language);
+            TransformLanguage(property.Language, objSchema.GetFullSerializedName(property));
         }
     }
 }

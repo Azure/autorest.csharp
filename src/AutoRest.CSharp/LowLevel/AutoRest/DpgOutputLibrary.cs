@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Output.Samples;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -23,10 +23,24 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
-        public IEnumerable<ModelTypeProvider> Models => _models.Values;
+        public IEnumerable<ModelTypeProvider> Models
+        {
+            get
+            {
+                // Skip the replaced model, e.g. the replaced ErrorResponse.
+                foreach (var (key, model) in _models)
+                {
+                    var type = TypeFactory.CreateType(key);
+                    if (type is { IsFrameworkType: false, Implementation: ModelTypeProvider implementation} && model == implementation)
+                    {
+                        yield return model;
+                    }
+                }
+            }
+        }
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
-        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
+        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(Models);
 
         public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
@@ -40,11 +54,33 @@ namespace AutoRest.CSharp.Output.Models.Types
             ClientOptions = clientOptions;
         }
 
+        private IEnumerable<string>? _accessOverriddenModels;
+        public IEnumerable<string> AccessOverriddenModels => _accessOverriddenModels ??= Enums.Where(e => e.IsAccessibilityOverridden).Select(e => e.Declaration.Name)
+            .Concat(Models.Where(m => m.IsAccessibilityOverridden).Select(m => m.Declaration.Name));
+
         private AspDotNetExtensionTypeProvider? _aspDotNetExtension;
         public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, _sourceInputModel);
 
         private ModelFactoryTypeProvider? _modelFactoryProvider;
         public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, _sourceInputModel);
+
+        private Dictionary<LowLevelClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
+        private Dictionary<LowLevelClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
+
+        private Dictionary<LowLevelClient, DpgClientSampleProvider> EnsureDpgSampleProviders()
+        {
+            var result = new Dictionary<LowLevelClient, DpgClientSampleProvider>();
+            foreach (var client in RestClients)
+            {
+                var sampleProvider = new DpgClientSampleProvider(Configuration.Namespace, client, _sourceInputModel);
+                if (!sampleProvider.IsEmpty)
+                    result.Add(client, sampleProvider);
+            }
+
+            return result;
+        }
+
+        public DpgClientSampleProvider? GetSampleForClient(LowLevelClient client) => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {

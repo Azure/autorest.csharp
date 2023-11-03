@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -226,7 +227,7 @@ namespace MgmtOperations
         public virtual AsyncPageable<AvailabilitySetChildResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetChildavailabilitySetChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +248,7 @@ namespace MgmtOperations
         public virtual Pageable<AvailabilitySetChildResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetChildavailabilitySetChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -312,6 +313,80 @@ namespace MgmtOperations
             {
                 var response = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>availabilitySetChild_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        public virtual async Task<NullableResponse<AvailabilitySetChildResource>> GetIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
+
+            using var scope = _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<AvailabilitySetChildResource>(response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChildResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>availabilitySetChild_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        public virtual NullableResponse<AvailabilitySetChildResource> GetIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
+
+            using var scope = _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<AvailabilitySetChildResource>(response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChildResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

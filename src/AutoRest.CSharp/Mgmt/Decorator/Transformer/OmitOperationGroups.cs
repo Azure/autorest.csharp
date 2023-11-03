@@ -3,8 +3,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Report;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
@@ -22,9 +24,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 var omittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
                 var nonOmittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
 
+                omittedOGs.ForEach(og => MgmtReport.Instance.TransformSection.AddTransformLog(
+                    new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
+                    og.GetFullSerializedName(), $"Omit OperationGroup: '{og.GetFullSerializedName()}'"));
+
                 MgmtContext.CodeModel.OperationGroups = nonOmittedOGs;
-                var schemasToOmit = new HashSet<Schema>();
-                var schemasToKeep = new HashSet<Schema>();
+                var schemasToOmit = new Dictionary<Schema, HashSet<OperationGroup>>();
+                var schemasToKeep = new Dictionary<Schema, HashSet<OperationGroup>>();
                 foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
                 {
                     DetectSchemas(operationGroup, schemasToKeep);
@@ -41,27 +47,39 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void RemoveSchemas(HashSet<Schema> schemasToOmit, HashSet<Schema> schemasToKeep)
+        private static void RemoveSchemas(Dictionary<Schema, HashSet<OperationGroup>> schemasToOmit, Dictionary<Schema, HashSet<OperationGroup>> schemasToKeep)
         {
-            foreach (var schema in schemasToOmit)
+            foreach (var schema in schemasToOmit.Keys)
             {
-                if (schema is ObjectSchema objSchema && !schemasToKeep.Contains(objSchema))
+                if (schema is ObjectSchema objSchema && !schemasToKeep.ContainsKey(objSchema))
                 {
                     MgmtContext.CodeModel.Schemas.Objects.Remove(objSchema);
-                    RemoveRelations(objSchema);
+                    foreach (var og in schemasToOmit[schema])
+                        MgmtReport.Instance.TransformSection.AddTransformLog(
+                            new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
+                            schema.GetFullSerializedName(), $"Omit Object '{schema.GetFullSerializedName()}' under OperationGroup '{og.GetFullSerializedName()}'");
+                    RemoveRelations(objSchema, schemasToOmit[objSchema]);
                 }
-                else if (schema is ChoiceSchema choiceSchema && !schemasToKeep.Contains(choiceSchema))
+                else if (schema is ChoiceSchema choiceSchema && !schemasToKeep.ContainsKey(choiceSchema))
                 {
                     MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
+                    foreach (var og in schemasToOmit[schema])
+                        MgmtReport.Instance.TransformSection.AddTransformLog(
+                            new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
+                            schema.GetFullSerializedName(), $"Omit Choice '{schema.GetFullSerializedName()}' under OperationGroup '{og.GetFullSerializedName()}'");
                 }
-                else if (schema is SealedChoiceSchema sealChoiceSchema && !schemasToKeep.Contains(sealChoiceSchema))
+                else if (schema is SealedChoiceSchema sealChoiceSchema && !schemasToKeep.ContainsKey(sealChoiceSchema))
                 {
                     MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
+                    foreach (var og in schemasToOmit[schema])
+                        MgmtReport.Instance.TransformSection.AddTransformLog(
+                            new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
+                            schema.GetFullSerializedName(), $"Omit SealedChoice '{schema.GetFullSerializedName()}' under OperationGroup '{og.GetFullSerializedName()}'");
                 }
             }
         }
 
-        private static void RemoveRelations(ObjectSchema schema)
+        private static void RemoveRelations(ObjectSchema schema, HashSet<OperationGroup> groups)
         {
             if (schema.Parents != null)
             {
@@ -70,14 +88,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     if (parent.Children != null)
                     {
                         parent.Children.Immediate.Remove(schema);
+                        foreach (var og in groups)
+                            MgmtReport.Instance.TransformSection.AddTransformLog(
+                                new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
+                                schema.GetFullSerializedName(), $"Omit related Object '{schema.GetFullSerializedName()}' from related Object '{parent.GetFullSerializedName()}' under OperationGroup '{og.GetFullSerializedName}'");
                     }
                 }
             }
         }
 
-        private static void AddDependantSchemasRecursively(HashSet<Schema> setToProcess)
+        private static void AddDependantSchemasRecursively(Dictionary<Schema, HashSet<OperationGroup>> setToProcess)
         {
-            Queue<Schema> sQueue = new Queue<Schema>(setToProcess);
+            Queue<Schema> sQueue = new Queue<Schema>(setToProcess.Keys);
             HashSet<Schema> handledSchemas = new HashSet<Schema>();
             while (sQueue.Count > 0)
             {
@@ -93,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                             if (!handledSchemas.Contains(propertySchema))
                             {
                                 sQueue.Enqueue(propertySchema);
-                                setToProcess.Add(propertySchema);
+                                setToProcess.AddSchema(propertySchema, setToProcess[cur].ToArray());
                             }
                         }
                         else if (propertySchema is ArraySchema arraySchema && arraySchema.ElementType is ObjectSchema arrayPropertySchema)
@@ -101,7 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                             if (!handledSchemas.Contains(arrayPropertySchema))
                             {
                                 sQueue.Enqueue(arrayPropertySchema);
-                                setToProcess.Add(arrayPropertySchema);
+                                setToProcess.AddSchema(arrayPropertySchema, setToProcess[cur].ToArray());
                             }
                         }
                     }
@@ -114,7 +136,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                                 if (!handledSchemas.Contains(parentSchema))
                                 {
                                     sQueue.Enqueue(parentSchema);
-                                    setToProcess.Add(parentSchema);
+                                    setToProcess.AddSchema(parentSchema, setToProcess[cur].ToArray());
                                 }
                             }
                         }
@@ -123,28 +145,28 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void DetectSchemas(OperationGroup operationGroup, HashSet<Schema> setToProcess)
+        private static void DetectSchemas(OperationGroup operationGroup, Dictionary<Schema, HashSet<OperationGroup>> setToProcess)
         {
             foreach (var operation in operationGroup.Operations)
             {
-                AddResponseSchemas(operation, setToProcess);
-                AddRequestSchemas(operation, setToProcess);
+                AddResponseSchemas(operationGroup, operation, setToProcess);
+                AddRequestSchemas(operationGroup, operation, setToProcess);
             }
         }
 
-        private static void AddResponseSchemas(Operation operation, HashSet<Schema> setToProcess)
+        private static void AddResponseSchemas(OperationGroup group, Operation operation, Dictionary<Schema, HashSet<OperationGroup>> setToProcess)
         {
             foreach (var response in operation.Responses.Concat(operation.Exceptions))
             {
                 var schema = response.ResponseSchema;
                 if (schema != null && schema is ObjectSchema objSchema)
                 {
-                    setToProcess.Add(objSchema);
+                    setToProcess.AddSchema(objSchema, group);
                 }
             }
         }
 
-        private static void AddRequestSchemas(Operation operation, HashSet<Schema> setToProcess)
+        private static void AddRequestSchemas(OperationGroup group, Operation operation, Dictionary<Schema, HashSet<OperationGroup>> setToProcess)
         {
             foreach (var request in operation.Requests)
             {
@@ -154,11 +176,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     {
                         if (param.Schema is ObjectSchema objSchema)
                         {
-                            setToProcess.Add(objSchema);
+                            setToProcess.AddSchema(objSchema, group);
                         }
                     }
                 }
             }
+        }
+
+        private static void AddSchema(this Dictionary<Schema, HashSet<OperationGroup>> dict, Schema schema, params OperationGroup[] groups)
+        {
+            if (!dict.ContainsKey(schema))
+                dict.Add(schema, new HashSet<OperationGroup>());
+            foreach (var group in groups)
+                dict[schema].Add(group);
         }
 
     }

@@ -2,116 +2,200 @@
 <doc>
   <members>
     <member name="GetCollectionsModelAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetCollectionsModelAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-var result = await client.GetCollectionsModelAsync();
+Response<CollectionsModelProperty> response = await client.GetCollectionsModelAsync();
 ]]></code>
-</example>
+This sample shows how to call GetCollectionsModelAsync with all parameters.
+<code><![CDATA[
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+Response<CollectionsModelProperty> response = await client.GetCollectionsModelAsync();
+]]></code></example>
     </member>
     <member name="GetCollectionsModel(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetCollectionsModel.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-var result = client.GetCollectionsModel();
+Response<CollectionsModelProperty> response = client.GetCollectionsModel();
 ]]></code>
-</example>
+This sample shows how to call GetCollectionsModel with all parameters.
+<code><![CDATA[
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+Response<CollectionsModelProperty> response = client.GetCollectionsModel();
+]]></code></example>
     </member>
     <member name="GetCollectionsModelAsync(RequestContext)">
-<example>
-This sample shows how to call GetCollectionsModelAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetCollectionsModelAsync and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-Response response = await client.GetCollectionsModelAsync(new RequestContext());
+Response response = await client.GetCollectionsModelAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetCollectionsModelAsync with all parameters and parse the result.
+<code><![CDATA[
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+Response response = await client.GetCollectionsModelAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+]]></code></example>
     </member>
     <member name="GetCollectionsModel(RequestContext)">
-<example>
-This sample shows how to call GetCollectionsModel with required parameters and parse the result.
+      <example>
+This sample shows how to call GetCollectionsModel and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-Response response = client.GetCollectionsModel(new RequestContext());
+Response response = client.GetCollectionsModel(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetCollectionsModel with all parameters and parse the result.
+<code><![CDATA[
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+Response response = client.GetCollectionsModel(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+]]></code></example>
     </member>
     <member name="PutAsync(CollectionsModelProperty,CancellationToken)">
-<example>
-This sample shows how to call PutAsync with required parameters.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-var body = new CollectionsModelProperty(new InnerModel[] 
+CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
-var result = await client.PutAsync(body);
+Response response = await client.PutAsync(body);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
+{
+    new InnerModel("<property>")
+});
+Response response = await client.PutAsync(body);
+]]></code></example>
     </member>
     <member name="Put(CollectionsModelProperty,CancellationToken)">
-<example>
-This sample shows how to call Put with required parameters.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-var body = new CollectionsModelProperty(new InnerModel[] 
+CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
-var result = client.Put(body);
+Response response = client.Put(body);
 ]]></code>
-</example>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
+{
+    new InnerModel("<property>")
+});
+Response response = client.Put(body);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutAsync with required request content.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-var data = new {
-    property = new[] {
-        new {
+using RequestContent content = RequestContent.Create(new
+{
+    property = new object[]
+    {
+        new
+        {
             property = "<property>",
         }
     },
-};
+});
+Response response = await client.PutAsync(content);
 
-Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    property = new object[]
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Put with required request content.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-var data = new {
-    property = new[] {
-        new {
+using RequestContent content = RequestContent.Create(new
+{
+    property = new object[]
+    {
+        new
+        {
             property = "<property>",
         }
     },
-};
+});
+Response response = client.Put(content);
 
-Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    property = new object[]
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

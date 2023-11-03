@@ -6,27 +6,38 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_HttpFailureClient
+    public partial class Samples_HttpFailureClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmptyError()
+        public void Example_GetEmptyError_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetEmptyError(new RequestContext());
+            Response response = client.GetEmptyError(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetEmptyError_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
+
+            Response response = await client.GetEmptyErrorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,23 +47,10 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetEmptyError_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetEmptyError(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmptyError_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
-
-            Response response = await client.GetEmptyErrorAsync(new RequestContext());
+            Response response = client.GetEmptyError(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -62,10 +60,10 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmptyError_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = await client.GetEmptyErrorAsync(new RequestContext());
+            Response response = await client.GetEmptyErrorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -73,12 +71,25 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNoModelError()
+        public void Example_GetNoModelError_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetNoModelError(new RequestContext());
+            Response response = client.GetNoModelError(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetNoModelError_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
+
+            Response response = await client.GetNoModelErrorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -88,23 +99,10 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNoModelError_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetNoModelError(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNoModelError_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
-
-            Response response = await client.GetNoModelErrorAsync(new RequestContext());
+            Response response = client.GetNoModelError(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -114,10 +112,10 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNoModelError_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = await client.GetNoModelErrorAsync(new RequestContext());
+            Response response = await client.GetNoModelErrorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -125,12 +123,25 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNoModelEmpty()
+        public void Example_GetNoModelEmpty_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetNoModelEmpty(new RequestContext());
+            Response response = client.GetNoModelEmpty(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetNoModelEmpty_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
+
+            Response response = await client.GetNoModelEmptyAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -140,23 +151,10 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNoModelEmpty_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetNoModelEmpty(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNoModelEmpty_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
-
-            Response response = await client.GetNoModelEmptyAsync(new RequestContext());
+            Response response = client.GetNoModelEmpty(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -166,10 +164,10 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNoModelEmpty_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new HttpFailureClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = await client.GetNoModelEmptyAsync(new RequestContext());
+            Response response = await client.GetNoModelEmptyAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

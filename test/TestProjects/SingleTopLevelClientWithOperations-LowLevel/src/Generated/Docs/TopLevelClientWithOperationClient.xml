@@ -2,62 +2,100 @@
 <doc>
   <members>
     <member name="OperationAsync(RequestContext)">
-<example>
-This sample shows how to call OperationAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call OperationAsync and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new TopLevelClientWithOperationClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
-Response response = await client.OperationAsync(new RequestContext());
+Response response = await client.OperationAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-</example>
+This sample shows how to call OperationAsync with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+
+Response response = await client.OperationAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
     </member>
     <member name="Operation(RequestContext)">
-<example>
-This sample shows how to call Operation with required parameters and parse the result.
+      <example>
+This sample shows how to call Operation and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new TopLevelClientWithOperationClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
-Response response = client.Operation(new RequestContext());
+Response response = client.Operation(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-</example>
+This sample shows how to call Operation with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+
+Response response = client.Operation(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
     </member>
     <member name="GetAllAsync(string,RequestContext)">
-<example>
-This sample shows how to call GetAllAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetAllAsync and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new TopLevelClientWithOperationClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
-await foreach (var item in client.GetAllAsync("<filter>", new RequestContext()))
+await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
-</example>
+This sample shows how to call GetAllAsync with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+
+await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code></example>
     </member>
     <member name="GetAll(string,RequestContext)">
-<example>
-This sample shows how to call GetAll with required parameters and parse the result.
+      <example>
+This sample shows how to call GetAll and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new TopLevelClientWithOperationClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
-foreach (var item in client.GetAll("<filter>", new RequestContext()))
+foreach (BinaryData item in client.GetAll("<filter>", null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
-</example>
+This sample shows how to call GetAll with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+
+foreach (BinaryData item in client.GetAll("<filter>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code></example>
     </member>
   </members>
 </doc>

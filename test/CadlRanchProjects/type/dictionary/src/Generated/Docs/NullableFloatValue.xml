@@ -2,108 +2,172 @@
 <doc>
   <members>
     <member name="GetNullableFloatValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetNullableFloatValueAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-var result = await client.GetNullableFloatValueAsync();
+Response<IReadOnlyDictionary<string, float?>> response = await client.GetNullableFloatValueAsync();
 ]]></code>
-</example>
+This sample shows how to call GetNullableFloatValueAsync with all parameters.
+<code><![CDATA[
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, float?>> response = await client.GetNullableFloatValueAsync();
+]]></code></example>
     </member>
     <member name="GetNullableFloatValue(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetNullableFloatValue.
 <code><![CDATA[
-var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-var result = client.GetNullableFloatValue();
+Response<IReadOnlyDictionary<string, float?>> response = client.GetNullableFloatValue();
 ]]></code>
-</example>
+This sample shows how to call GetNullableFloatValue with all parameters.
+<code><![CDATA[
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, float?>> response = client.GetNullableFloatValue();
+]]></code></example>
     </member>
     <member name="GetNullableFloatValueAsync(RequestContext)">
-<example>
-This sample shows how to call GetNullableFloatValueAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetNullableFloatValueAsync and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-Response response = await client.GetNullableFloatValueAsync(new RequestContext());
+Response response = await client.GetNullableFloatValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetNullableFloatValueAsync with all parameters and parse the result.
+<code><![CDATA[
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response response = await client.GetNullableFloatValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
     </member>
     <member name="GetNullableFloatValue(RequestContext)">
-<example>
-This sample shows how to call GetNullableFloatValue with required parameters and parse the result.
+      <example>
+This sample shows how to call GetNullableFloatValue and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-Response response = client.GetNullableFloatValue(new RequestContext());
+Response response = client.GetNullableFloatValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetNullableFloatValue with all parameters and parse the result.
+<code><![CDATA[
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response response = client.GetNullableFloatValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,float?},CancellationToken)">
-<example>
-This sample shows how to call PutAsync with required parameters.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-var body = new Dictionary<string, float?>
+Response response = await client.PutAsync(new Dictionary<string, float?>
 {
-    ["key"] = 3.14f,
-};
-var result = await client.PutAsync(body);
+    ["key"] = 123.45F
+});
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, float?>
+{
+    ["key"] = 123.45F
+});
+]]></code></example>
     </member>
     <member name="Put(IDictionary{string,float?},CancellationToken)">
-<example>
-This sample shows how to call Put with required parameters.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-var body = new Dictionary<string, float?>
+Response response = client.Put(new Dictionary<string, float?>
 {
-    ["key"] = 3.14f,
-};
-var result = client.Put(body);
+    ["key"] = 123.45F
+});
 ]]></code>
-</example>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, float?>
+{
+    ["key"] = 123.45F
+});
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutAsync with required request content.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-var data = new {
-    key = 123.45f,
-};
+using RequestContent content = RequestContent.Create(new
+{
+    key = 123.45F,
+});
+Response response = await client.PutAsync(content);
 
-Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = 123.45F,
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Put with required request content.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-var data = new {
-    key = 123.45f,
-};
+using RequestContent content = RequestContent.Create(new
+{
+    key = 123.45F,
+});
+Response response = client.Put(content);
 
-Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = 123.45F,
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

@@ -18,7 +18,10 @@ import {
     getNamespaceFullName,
     Operation,
     ignoreDiagnostics,
-    NoTarget
+    NoTarget,
+    Namespace,
+    Interface,
+    getLocationContext
 } from "@typespec/compiler";
 import {
     getAuthentication,
@@ -28,7 +31,7 @@ import {
     getHttpOperation
 } from "@typespec/http";
 import { getVersions } from "@typespec/versioning";
-import { NetEmitterOptions } from "../options.js";
+import { NetEmitterOptions, resolveOptions } from "../options.js";
 import { CodeModel } from "../type/codeModel.js";
 import { InputConstant } from "../type/inputConstant.js";
 import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
@@ -48,7 +51,7 @@ import { InputClient } from "../type/inputClient.js";
 import { ClientKind } from "../type/clientKind.js";
 import { InputOperation } from "../type/inputOperation.js";
 import { getOperationLink } from "@azure-tools/typespec-azure-core";
-import { getUsages } from "./model.js";
+import { getUsages, navigateModels } from "./model.js";
 import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";
 import { mockApiVersion } from "../constants.js";
@@ -77,6 +80,7 @@ export function createModelForService(
     context: EmitContext<NetEmitterOptions>,
     service: Service
 ): CodeModel {
+    const emitterOptions = resolveOptions(context);
     const program = context.program;
     const sdkContext = createSdkContext(context);
     const title = service.title;
@@ -173,19 +177,21 @@ export function createModelForService(
 
     lroMonitorOperations = getAllLroMonitorOperations(routes, sdkContext);
     const clients: InputClient[] = [];
-    const dpgClients = listClients(sdkContext);
+    const dpgClients = emitterOptions.branded
+        ? listClients(sdkContext)
+        : listClientsByNamespace(
+              context,
+              context.program.getGlobalNamespaceType()
+          );
     for (const client of dpgClients) {
         clients.push(emitClient(client));
-        const dpgOperationGroups = listOperationGroups(sdkContext, client);
-        for (const dpgGroup of dpgOperationGroups) {
-            clients.push(emitClient(dpgGroup, client));
-        }
+        addChildClients(context, client, clients);
     }
 
     for (const client of clients) {
         for (const op of client.Operations) {
             const apiVersionIndex = op.Parameters.findIndex(
-                (value) => value.IsApiVersion
+                (value: InputParameter) => value.IsApiVersion
             );
             if (apiVersionIndex !== -1) {
                 const apiVersionInOperation = op.Parameters[apiVersionIndex];
@@ -216,6 +222,8 @@ export function createModelForService(
         }
     }
 
+    navigateModels(sdkContext, serviceNamespaceType, modelMap, enumMap);
+
     const usages = getUsages(sdkContext, convenienceOperations, modelMap);
     setUsage(usages, modelMap);
     setUsage(usages, enumMap);
@@ -231,11 +239,59 @@ export function createModelForService(
     } as CodeModel;
     return clientModel;
 
+    function addChildClients(
+        context: EmitContext<NetEmitterOptions>,
+        client: SdkClient | DotnetSdkOperationGroup,
+        clients: InputClient[]
+    ) {
+        if (emitterOptions.branded) {
+            const dpgOperationGroups = listOperationGroups(
+                sdkContext,
+                client as SdkClient
+            );
+            for (const dpgGroup of dpgOperationGroups) {
+                clients.push(
+                    emitClient(
+                        { ...dpgGroup, name: dpgGroup.type.name },
+                        client
+                    )
+                );
+            }
+        } else {
+            const dpgOperationGroups = listOperationGroupsByClient(
+                context,
+                client
+            );
+            for (const dpgGroup of dpgOperationGroups) {
+                clients.push(emitClient(dpgGroup, client));
+                addChildClients(context, dpgGroup, clients);
+            }
+        }
+    }
+
+    function getClientName(
+        client: SdkClient | DotnetSdkOperationGroup
+    ): string {
+        if (emitterOptions.branded) {
+            return client.kind === ClientKind.SdkClient
+                ? client.name
+                : client.type.name;
+        } else {
+            return client.kind === ClientKind.SdkClient
+                ? `${client.name}Client`
+                : client.name === "Models"
+                ? "ModelsOps"
+                : client.name; //quick fix for reserved namespace need something more robust
+        }
+    }
+
     function emitClient(
-        client: SdkClient | SdkOperationGroup,
-        parent?: SdkClient
+        client: SdkClient | DotnetSdkOperationGroup,
+        parent?: SdkClient | DotnetSdkOperationGroup
     ): InputClient {
-        const operations = listOperationsInOperationGroup(sdkContext, client);
+        const operations = emitterOptions.branded
+            ? listOperationsInOperationGroup(sdkContext, client)
+            : listOperations(context, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
@@ -245,15 +301,12 @@ export function createModelForService(
         }
 
         const inputClient = {
-            Name:
-                client.kind === ClientKind.SdkClient
-                    ? client.name
-                    : client.type.name,
+            Name: getClientName(client),
             Description: clientDesc,
             Operations: [],
             Protocol: {},
             Creatable: client.kind === ClientKind.SdkClient,
-            Parent: parent?.name
+            Parent: parent === undefined ? undefined : getClientName(parent)
         } as InputClient;
         for (const op of operations) {
             if (lroMonitorOperations.has(op)) continue;
@@ -302,6 +355,7 @@ function setUsage(
     models: Map<string, InputModelType | InputEnumType>
 ) {
     for (const [name, m] of models) {
+        if (m.Usage !== undefined && m.Usage !== Usage.None) continue;
         if (usages.inputs.includes(name)) {
             m.Usage = Usage.Input;
         } else if (usages.outputs.includes(name)) {
@@ -384,4 +438,124 @@ function createContentTypeOrAcceptParameter(
                   } as InputConstant)
                 : undefined
     } as InputParameter;
+}
+
+function processNamespace(
+    context: EmitContext<NetEmitterOptions>,
+    clients: SdkClient[],
+    root: Namespace,
+    prefix: string,
+    level: number
+) {
+    if (level > 0) {
+        return;
+    }
+
+    const name = level > 1 ? prefix + root.name : root.name;
+
+    const contextType = getLocationContext(context.program, root).type;
+    if (contextType !== "project" && contextType !== "synthetic") {
+        return;
+    }
+
+    if (contextType === "project") {
+        clients.push({
+            kind: "SdkClient",
+            name: name,
+            service: root,
+            type: root,
+            arm: false
+        } as SdkClient);
+    }
+
+    for (const ns of root.namespaces) {
+        processNamespace(context, clients, ns[1], name, level + 1);
+    }
+
+    for (const i of root.interfaces) {
+        processInterface(context, clients, i[1], name, level + 1);
+    }
+}
+
+function processInterface(
+    context: EmitContext<NetEmitterOptions>,
+    clients: SdkClient[],
+    i: Interface,
+    prefix: string,
+    level: number
+) {
+    if (level > 0) {
+        return;
+    }
+
+    const name = level > 1 ? prefix + i.name : i.name;
+    if (i.operations.size > 0) {
+        clients.push({
+            kind: ClientKind.SdkClient,
+            name: name,
+            service: i.namespace,
+            type: i,
+            arm: false
+        } as SdkClient);
+    }
+}
+
+function listClientsByNamespace(
+    context: EmitContext<NetEmitterOptions>,
+    ns: Namespace
+): SdkClient[] {
+    var clients: SdkClient[] = [];
+    //we start with -1 because there is a synthetic namespace created with no name to contain both the project namespaces and the compiler namespaces like TypeSpec
+    processNamespace(context, clients, ns, "", -1);
+    return clients;
+}
+
+function listOperationGroupsByClient(
+    context: EmitContext<NetEmitterOptions>,
+    client: SdkClient | DotnetSdkOperationGroup
+): DotnetSdkOperationGroup[] {
+    var operationGroups: DotnetSdkOperationGroup[] = [];
+    //we start with -1 because there is a synthetic namespace created with no name to contain both the project namespaces and the compiler namespaces like TypeSpec
+    const prefix = client.kind === ClientKind.SdkClient ? "" : client.name;
+    if ("namespaces" in client.type) {
+        for (const ns of client.type.namespaces) {
+            addChild(context, operationGroups, ns[1], prefix);
+        }
+
+        for (const i of client.type.interfaces) {
+            addChild(context, operationGroups, i[1], prefix);
+        }
+    }
+    return operationGroups;
+}
+
+function addChild(
+    context: EmitContext<NetEmitterOptions>,
+    operationGroups: DotnetSdkOperationGroup[],
+    type: Interface | Namespace,
+    prefix: string
+) {
+    const name = `${prefix}${type.name}`;
+    operationGroups.push({
+        kind: ClientKind.SdkOperationGroup,
+        type: type,
+        name: name
+    } as DotnetSdkOperationGroup);
+}
+
+interface DotnetSdkOperationGroup extends SdkOperationGroup {
+    name: string;
+}
+
+function listOperations(
+    context: EmitContext<NetEmitterOptions>,
+    client: SdkClient | DotnetSdkOperationGroup
+): Operation[] {
+    const operations: Operation[] = [];
+
+    for (const operation of client.type.operations) {
+        operations.push(operation[1]);
+    }
+
+    return operations;
 }

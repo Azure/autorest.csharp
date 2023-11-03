@@ -178,8 +178,7 @@ namespace AutoRest.CSharp.Output.Models
                     Explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
                     SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
                     HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
-                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
-                    SerializationFormat: BuilderHelpers.GetSerializationFormat(requestParameter.Schema)
+                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null
                 );
         }
 
@@ -633,7 +632,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var nextPageUrlParameter = new Parameter(
                 "nextLink",
-                "The URL to the next page of results.",
+                $"The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,
                 ValidationType.AssertNotNull,
@@ -696,7 +695,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var credentialParam = new Parameter(
                     "credential",
-                    "A credential used to authenticate to an Azure Service.",
+                    $"A credential used to authenticate to an Azure Service.",
                     credentialType,
                     null,
                     ValidationType.AssertNotNull,

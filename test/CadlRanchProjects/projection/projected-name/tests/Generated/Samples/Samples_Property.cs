@@ -6,62 +6,80 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Projection.ProjectedName;
 using Projection.ProjectedName.Models;
 
 namespace Projection.ProjectedName.Samples
 {
-    internal class Samples_Property
+    public partial class Samples_Property
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Json()
+        public void Example_Json_ShortVersion()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
-            };
+            });
+            Response response = client.Json(content);
 
-            Response response = client.Json(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Json_ShortVersion_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                wireName = true,
+            });
+            Response response = await client.JsonAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Json_ShortVersion_Convenience()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
+            Response response = client.Json(jsonProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Json_ShortVersion_Convenience_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
+            Response response = await client.JsonAsync(jsonProjectedNameModel);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Json_AllParameters()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
-            };
+            });
+            Response response = client.Json(content);
 
-            Response response = client.Json(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Json_Async()
-        {
-            var client = new ProjectedNameClient().GetPropertyClient();
-
-            var data = new
-            {
-                wireName = true,
-            };
-
-            Response response = await client.JsonAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -69,69 +87,99 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Json_AllParameters_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
-            };
+            });
+            Response response = await client.JsonAsync(content);
 
-            Response response = await client.JsonAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Json_Convenience_Async()
+        public void Example_Json_AllParameters_Convenience()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var jsonProjectedNameModel = new JsonProjectedNameModel(true);
-            var result = await client.JsonAsync(jsonProjectedNameModel);
+            JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
+            Response response = client.Json(jsonProjectedNameModel);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Client()
+        public async Task Example_Json_AllParameters_Convenience_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
+            Response response = await client.JsonAsync(jsonProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Client_ShortVersion()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
-            };
+            });
+            Response response = client.Client(content);
 
-            Response response = client.Client(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Client_ShortVersion_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                defaultName = true,
+            });
+            Response response = await client.ClientAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Client_ShortVersion_Convenience()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
+            Response response = client.Client(clientProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Client_ShortVersion_Convenience_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
+            Response response = await client.ClientAsync(clientProjectedNameModel);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Client_AllParameters()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
-            };
+            });
+            Response response = client.Client(content);
 
-            Response response = client.Client(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Client_Async()
-        {
-            var client = new ProjectedNameClient().GetPropertyClient();
-
-            var data = new
-            {
-                defaultName = true,
-            };
-
-            Response response = await client.ClientAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -139,69 +187,99 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Client_AllParameters_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
-            };
+            });
+            Response response = await client.ClientAsync(content);
 
-            Response response = await client.ClientAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Client_Convenience_Async()
+        public void Example_Client_AllParameters_Convenience()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var clientProjectedNameModel = new ClientProjectedNameModel(true);
-            var result = await client.ClientAsync(clientProjectedNameModel);
+            ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
+            Response response = client.Client(clientProjectedNameModel);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Language()
+        public async Task Example_Client_AllParameters_Convenience_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
+            Response response = await client.ClientAsync(clientProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Language_ShortVersion()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
-            };
+            });
+            Response response = client.Language(content);
 
-            Response response = client.Language(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Language_ShortVersion_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                defaultName = true,
+            });
+            Response response = await client.LanguageAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Language_ShortVersion_Convenience()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
+            Response response = client.Language(languageProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Language_ShortVersion_Convenience_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
+            Response response = await client.LanguageAsync(languageProjectedNameModel);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Language_AllParameters()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
-            };
+            });
+            Response response = client.Language(content);
 
-            Response response = client.Language(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Language_Async()
-        {
-            var client = new ProjectedNameClient().GetPropertyClient();
-
-            var data = new
-            {
-                defaultName = true,
-            };
-
-            Response response = await client.LanguageAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -209,69 +287,99 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Language_AllParameters_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
-            };
+            });
+            Response response = await client.LanguageAsync(content);
 
-            Response response = await client.LanguageAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Language_Convenience_Async()
+        public void Example_Language_AllParameters_Convenience()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var languageProjectedNameModel = new LanguageProjectedNameModel(true);
-            var result = await client.LanguageAsync(languageProjectedNameModel);
+            LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
+            Response response = client.Language(languageProjectedNameModel);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_JsonAndClient()
+        public async Task Example_Language_AllParameters_Convenience_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
+            Response response = await client.LanguageAsync(languageProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_JsonAndClient_ShortVersion()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
-            };
+            });
+            Response response = client.JsonAndClient(content);
 
-            Response response = client.JsonAndClient(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_JsonAndClient_ShortVersion_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                wireName = true,
+            });
+            Response response = await client.JsonAndClientAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_JsonAndClient_ShortVersion_Convenience()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
+            Response response = client.JsonAndClient(jsonAndClientProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_JsonAndClient_ShortVersion_Convenience_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
+            Response response = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_JsonAndClient_AllParameters()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
-            };
+            });
+            Response response = client.JsonAndClient(content);
 
-            Response response = client.JsonAndClient(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_JsonAndClient_Async()
-        {
-            var client = new ProjectedNameClient().GetPropertyClient();
-
-            var data = new
-            {
-                wireName = true,
-            };
-
-            Response response = await client.JsonAndClientAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -279,25 +387,35 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_JsonAndClient_AllParameters_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
-            };
+            });
+            Response response = await client.JsonAndClientAsync(content);
 
-            Response response = await client.JsonAndClientAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_JsonAndClient_Convenience_Async()
+        public void Example_JsonAndClient_AllParameters_Convenience()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
-            var jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
-            var result = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
+            JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
+            Response response = client.JsonAndClient(jsonAndClientProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_JsonAndClient_AllParameters_Convenience_Async()
+        {
+            Property client = new ProjectedNameClient().GetPropertyClient();
+
+            JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
+            Response response = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
         }
     }
 }

@@ -6,8 +6,6 @@
     <Version>3.0.0</Version>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     <PackAsTool>true</PackAsTool>
@@ -30,6 +28,7 @@
     <PackageReference Include="nunit" />
     <!-- Any stable version of System.Memory should work here. -->
     <PackageReference Include="System.Memory" />
+    <PackageReference Include="System.Net.ClientModel" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->

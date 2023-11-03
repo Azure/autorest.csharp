@@ -2,480 +2,724 @@
 <doc>
   <members>
     <member name="SpreadModelAsync(Thing,CancellationToken)">
-<example>
-This sample shows how to call SpreadModelAsync with required parameters.
+      <example>
+This sample shows how to call SpreadModelAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var thing = new Thing("<name>", 1234);
-var result = await client.SpreadModelAsync(thing);
+Thing thing = new Thing("<name>", 1234);
+Response response = await client.SpreadModelAsync(thing);
 ]]></code>
-</example>
+This sample shows how to call SpreadModelAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Thing thing = new Thing("<name>", 1234);
+Response response = await client.SpreadModelAsync(thing);
+]]></code></example>
     </member>
     <member name="SpreadModel(Thing,CancellationToken)">
-<example>
-This sample shows how to call SpreadModel with required parameters.
+      <example>
+This sample shows how to call SpreadModel.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var thing = new Thing("<name>", 1234);
-var result = client.SpreadModel(thing);
+Thing thing = new Thing("<name>", 1234);
+Response response = client.SpreadModel(thing);
 ]]></code>
-</example>
+This sample shows how to call SpreadModel with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Thing thing = new Thing("<name>", 1234);
+Response response = client.SpreadModel(thing);
+]]></code></example>
     </member>
     <member name="SpreadModelAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadModelAsync with required request content.
+      <example>
+This sample shows how to call SpreadModelAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = await client.SpreadModelAsync(content);
 
-Response response = await client.SpreadModelAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadModelAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = await client.SpreadModelAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadModel(RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadModel with required request content.
+      <example>
+This sample shows how to call SpreadModel.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = client.SpreadModel(content);
 
-Response response = client.SpreadModel(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadModel with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = client.SpreadModel(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAliasAsync(string,int,CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasAsync with required parameters.
+      <example>
+This sample shows how to call SpreadAliasAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = await client.SpreadAliasAsync("<name>", 1234);
+Response response = await client.SpreadAliasAsync("<name>", 1234);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = await client.SpreadAliasAsync("<name>", 1234);
+]]></code></example>
     </member>
     <member name="SpreadAlias(string,int,CancellationToken)">
-<example>
-This sample shows how to call SpreadAlias with required parameters.
+      <example>
+This sample shows how to call SpreadAlias.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = client.SpreadAlias("<name>", 1234);
+Response response = client.SpreadAlias("<name>", 1234);
 ]]></code>
-</example>
+This sample shows how to call SpreadAlias with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = client.SpreadAlias("<name>", 1234);
+]]></code></example>
     </member>
     <member name="SpreadAliasAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasAsync with required request content.
+      <example>
+This sample shows how to call SpreadAliasAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = await client.SpreadAliasAsync(content);
 
-Response response = await client.SpreadAliasAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = await client.SpreadAliasAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAlias(RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAlias with required request content.
+      <example>
+This sample shows how to call SpreadAlias.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = client.SpreadAlias(content);
 
-Response response = client.SpreadAlias(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAlias with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = client.SpreadAlias(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)">
-<example>
-This sample shows how to call SpreadMultiTargetAliasAsync with required parameters.
+      <example>
+This sample shows how to call SpreadMultiTargetAliasAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
+Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
 ]]></code>
-</example>
+This sample shows how to call SpreadMultiTargetAliasAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
+]]></code></example>
     </member>
     <member name="SpreadMultiTargetAlias(string,int,string,int,CancellationToken)">
-<example>
-This sample shows how to call SpreadMultiTargetAlias with required parameters.
+      <example>
+This sample shows how to call SpreadMultiTargetAlias.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234);
+Response response = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234);
 ]]></code>
-</example>
+This sample shows how to call SpreadMultiTargetAlias with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234);
+]]></code></example>
     </member>
     <member name="SpreadMultiTargetAliasAsync(string,int,RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadMultiTargetAliasAsync with required parameters and request content.
+      <example>
+This sample shows how to call SpreadMultiTargetAliasAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
 
-Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadMultiTargetAliasAsync with all parameters and request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadMultiTargetAlias(string,int,RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadMultiTargetAlias with required parameters and request content.
+      <example>
+This sample shows how to call SpreadMultiTargetAlias.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
 
-Response response = client.SpreadMultiTargetAlias("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadMultiTargetAlias with all parameters and request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasWithModelAsync with required parameters.
+      <example>
+This sample shows how to call SpreadAliasWithModelAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var thing = new Thing("<name>", 1234);
-var result = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
+Thing thing = new Thing("<name>", 1234);
+Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithModelAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Thing thing = new Thing("<name>", 1234);
+Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithModel(string,int,Thing,CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasWithModel with required parameters.
+      <example>
+This sample shows how to call SpreadAliasWithModel.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var thing = new Thing("<name>", 1234);
-var result = client.SpreadAliasWithModel("<id>", 1234, thing);
+Thing thing = new Thing("<name>", 1234);
+Response response = client.SpreadAliasWithModel("<id>", 1234, thing);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithModel with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Thing thing = new Thing("<name>", 1234);
+Response response = client.SpreadAliasWithModel("<id>", 1234, thing);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithModelAsync(string,int,RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasWithModelAsync with required parameters and request content.
+      <example>
+This sample shows how to call SpreadAliasWithModelAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
 
-Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithModelAsync with all parameters and request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithModel(string,int,RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasWithModel with required parameters and request content.
+      <example>
+This sample shows how to call SpreadAliasWithModel.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = client.SpreadAliasWithModel("<id>", 1234, content);
 
-Response response = client.SpreadAliasWithModel("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithModel with all parameters and request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = client.SpreadAliasWithModel("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters.
+      <example>
+This sample shows how to call SpreadAliasWithSpreadAliasAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
+Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithSpreadAliasAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasWithSpreadAlias with required parameters.
+      <example>
+This sample shows how to call SpreadAliasWithSpreadAlias.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234);
+Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithSpreadAlias with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithSpreadAliasAsync(string,int,RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters and request content.
+      <example>
+This sample shows how to call SpreadAliasWithSpreadAliasAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
 
-Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithSpreadAliasAsync with all parameters and request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithSpreadAlias(string,int,RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasWithSpreadAlias with required parameters and request content.
+      <example>
+This sample shows how to call SpreadAliasWithSpreadAlias.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
+});
+Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, content);
 
-Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithSpreadAlias with all parameters and request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters.
+      <example>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"});
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 });
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
+]]></code></example>
     </member>
     <member name="SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasWithOptionalProps with required parameters.
+      <example>
+This sample shows how to call SpreadAliasWithOptionalProps.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"});
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[] { 1234 });
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithOptionalProps with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
+]]></code></example>
     </member>
     <member name="SpreadAliasWithOptionalPropsAsync(string,int,RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters and request content.
+      <example>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    items = new[] {
+    items = new object[]
+    {
         1234
     },
-};
+});
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
 
-Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with all parameters and request content.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     color = "<color>",
     age = 1234,
-    items = new[] {
+    items = new object[]
+    {
         1234
     },
-    elements = new[] {
-        "<String>"
+    elements = new object[]
+    {
+        "<elements>"
     },
-};
+});
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
 
-Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SpreadAliasWithOptionalProps(string,int,RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasWithOptionalProps with required parameters and request content.
+      <example>
+This sample shows how to call SpreadAliasWithOptionalProps.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    items = new[] {
+    items = new object[]
+    {
         1234
     },
-};
+});
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
 
-Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithOptionalProps with all parameters and request content.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     color = "<color>",
     age = 1234,
-    items = new[] {
+    items = new object[]
+    {
         1234
     },
-    elements = new[] {
-        "<String>"
+    elements = new object[]
+    {
+        "<elements>"
     },
-};
+});
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
 
-Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SpreadAliasWithCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasWithCollectionsAsync with required parameters.
+      <example>
+This sample shows how to call SpreadAliasWithCollectionsAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = await client.SpreadAliasWithCollectionsAsync(new String[]{"<requiredStringList>"}, new String[]{"<optionalStringList>"});
+Response response = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" });
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithCollectionsAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
+]]></code></example>
     </member>
     <member name="SpreadAliasWithCollections(IEnumerable{string},IEnumerable{string},CancellationToken)">
-<example>
-This sample shows how to call SpreadAliasWithCollections with required parameters.
+      <example>
+This sample shows how to call SpreadAliasWithCollections.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var result = client.SpreadAliasWithCollections(new String[]{"<requiredStringList>"}, new String[]{"<optionalStringList>"});
+Response response = client.SpreadAliasWithCollections(new string[] { "<requiredStringList>" });
 ]]></code>
-</example>
+This sample shows how to call SpreadAliasWithCollections with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
+
+Response response = client.SpreadAliasWithCollections(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
+]]></code></example>
     </member>
     <member name="SpreadAliasWithCollectionsAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasWithCollectionsAsync with required request content.
+      <example>
+This sample shows how to call SpreadAliasWithCollectionsAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
-    requiredStringList = new[] {
-        "<String>"
+using RequestContent content = RequestContent.Create(new
+{
+    requiredStringList = new object[]
+    {
+        "<requiredStringList>"
     },
-};
+});
+Response response = await client.SpreadAliasWithCollectionsAsync(content);
 
-Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithCollectionsAsync with all request content.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
-    requiredStringList = new[] {
-        "<String>"
+using RequestContent content = RequestContent.Create(new
+{
+    requiredStringList = new object[]
+    {
+        "<requiredStringList>"
     },
-    optionalStringList = new[] {
-        "<String>"
+    optionalStringList = new object[]
+    {
+        "<optionalStringList>"
     },
-};
+});
+Response response = await client.SpreadAliasWithCollectionsAsync(content);
 
-Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SpreadAliasWithCollections(RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAliasWithCollections with required request content.
+      <example>
+This sample shows how to call SpreadAliasWithCollections.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
-    requiredStringList = new[] {
-        "<String>"
+using RequestContent content = RequestContent.Create(new
+{
+    requiredStringList = new object[]
+    {
+        "<requiredStringList>"
     },
-};
+});
+Response response = client.SpreadAliasWithCollections(content);
 
-Response response = client.SpreadAliasWithCollections(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithCollections with all request content.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-var data = new {
-    requiredStringList = new[] {
-        "<String>"
+using RequestContent content = RequestContent.Create(new
+{
+    requiredStringList = new object[]
+    {
+        "<requiredStringList>"
     },
-    optionalStringList = new[] {
-        "<String>"
+    optionalStringList = new object[]
+    {
+        "<optionalStringList>"
     },
-};
+});
+Response response = client.SpreadAliasWithCollections(content);
 
-Response response = client.SpreadAliasWithCollections(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

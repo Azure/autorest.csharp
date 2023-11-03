@@ -7,50 +7,67 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
+using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    internal class Samples_NullableFloatValue
+    public partial class Samples_NullableFloatValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNullableFloatValue()
+        public void Example_GetNullableFloatValue_ShortVersion()
         {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetNullableFloatValue(new RequestContext());
+            Response response = client.GetNullableFloatValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetNullableFloatValue_ShortVersion_Async()
+        {
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.GetNullableFloatValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetNullableFloatValue_ShortVersion_Convenience()
+        {
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyList<float?>> response = client.GetNullableFloatValue();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetNullableFloatValue_ShortVersion_Convenience_Async()
+        {
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyList<float?>> response = await client.GetNullableFloatValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNullableFloatValue_AllParameters()
         {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetNullableFloatValue(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNullableFloatValue_Async()
-        {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
-
-            Response response = await client.GetNullableFloatValueAsync(new RequestContext());
+            Response response = client.GetNullableFloatValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -60,9 +77,9 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNullableFloatValue_AllParameters_Async()
         {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetNullableFloatValueAsync(new RequestContext());
+            Response response = await client.GetNullableFloatValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -70,52 +87,82 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNullableFloatValue_Convenience_Async()
+        public void Example_GetNullableFloatValue_AllParameters_Convenience()
         {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetNullableFloatValueAsync();
+            Response<IReadOnlyList<float?>> response = client.GetNullableFloatValue();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public async Task Example_GetNullableFloatValue_AllParameters_Convenience_Async()
         {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    123.45f
-};
+            Response<IReadOnlyList<float?>> response = await client.GetNullableFloatValueAsync();
+        }
 
-            Response response = client.Put(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_ShortVersion()
+        {
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+            using RequestContent content = RequestContent.Create(new object[]
+            {
+123.45F
+            });
+            Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_ShortVersion_Async()
+        {
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+            using RequestContent content = RequestContent.Create(new object[]
+            {
+123.45F
+            });
+            Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_ShortVersion_Convenience()
+        {
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new float?[] { 123.45F });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_ShortVersion_Convenience_Async()
+        {
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new float?[] { 123.45F });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    123.45f
-};
+            using RequestContent content = RequestContent.Create(new object[]
+            {
+123.45F
+            });
+            Response response = client.Put(content);
 
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
-        {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
-
-            var data = new[] {
-    123.45f
-};
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -123,27 +170,33 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    123.45f
-};
+            using RequestContent content = RequestContent.Create(new object[]
+            {
+123.45F
+            });
+            Response response = await client.PutAsync(content);
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
-            var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            var body = new float?[]
-            {
-    3.14f
-            };
-            var result = await client.PutAsync(body);
+            Response response = client.Put(new float?[] { 123.45F });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new float?[] { 123.45F });
         }
     }
 }

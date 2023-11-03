@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -222,7 +223,7 @@ namespace MgmtSupersetFlattenInheritance
         public virtual AsyncPageable<TrackedResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +243,7 @@ namespace MgmtSupersetFlattenInheritance
         public virtual Pageable<TrackedResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -307,6 +308,80 @@ namespace MgmtSupersetFlattenInheritance
             {
                 var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TrackedResourceModel1s_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="trackedResourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        public virtual async Task<NullableResponse<TrackedResourceModel1Resource>> GetIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
+
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<TrackedResourceModel1Resource>(response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TrackedResourceModel1s_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="trackedResourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        public virtual NullableResponse<TrackedResourceModel1Resource> GetIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
+
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<TrackedResourceModel1Resource>(response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -17,13 +17,13 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="RootClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="cachedParameter"> The String to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<RootClient, RootClientOptions> AddRootClient<TBuilder>(this TBuilder builder, string cachedParameter, AzureKeyCredential credential, Uri endpoint)
+        public static IAzureClientBuilder<RootClient, RootClientOptions> AddRootClient<TBuilder>(this TBuilder builder, Uri endpoint, string cachedParameter, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<RootClient, RootClientOptions>((options) => new RootClient(cachedParameter, credential, endpoint, options));
+            return builder.RegisterClientFactory<RootClient, RootClientOptions>((options) => new RootClient(endpoint, cachedParameter, credential, options));
         }
 
         /// <summary> Registers a <see cref="RootClient"/> instance. </summary>

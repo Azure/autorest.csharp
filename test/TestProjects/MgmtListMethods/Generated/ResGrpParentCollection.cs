@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -227,7 +228,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<ResGrpParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResGrpParentResource(Client, ResGrpParentData.DeserializeResGrpParentData(e)), _resGrpParentClientDiagnostics, Pipeline, "ResGrpParentCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResGrpParentResource(Client, ResGrpParentData.DeserializeResGrpParentData(e)), _resGrpParentClientDiagnostics, Pipeline, "ResGrpParentCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +249,7 @@ namespace MgmtListMethods
         public virtual Pageable<ResGrpParentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ResGrpParentResource(Client, ResGrpParentData.DeserializeResGrpParentData(e)), _resGrpParentClientDiagnostics, Pipeline, "ResGrpParentCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new ResGrpParentResource(Client, ResGrpParentData.DeserializeResGrpParentData(e)), _resGrpParentClientDiagnostics, Pipeline, "ResGrpParentCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -313,6 +314,80 @@ namespace MgmtListMethods
             {
                 var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResGrpParents_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="resGrpParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
+        public virtual async Task<NullableResponse<ResGrpParentResource>> GetIfExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
+
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<ResGrpParentResource>(response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResGrpParents_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="resGrpParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
+        public virtual NullableResponse<ResGrpParentResource> GetIfExists(string resGrpParentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
+
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<ResGrpParentResource>(response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

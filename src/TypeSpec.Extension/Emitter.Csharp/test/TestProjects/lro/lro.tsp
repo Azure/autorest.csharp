@@ -47,5 +47,5 @@ model Pet {
 
 interface Projects {
     @doc("Creates a new pet or updates an existing one.")
-    createOrUpdate is LongRunningResourceCreateOrUpdate<Pet>;
+    createOrUpdate is LongRunningResourceCreateOrReplace<Pet>;
 }

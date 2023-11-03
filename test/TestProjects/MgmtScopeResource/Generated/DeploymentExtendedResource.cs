@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -29,6 +30,8 @@ namespace MgmtScopeResource
     public partial class DeploymentExtendedResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DeploymentExtendedResource"/> instance. </summary>
+        /// <param name="scope"> The scope. </param>
+        /// <param name="deploymentName"> The deploymentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string scope, string deploymentName)
         {
             var resourceId = $"{scope}/providers/Microsoft.Resources/deployments/{deploymentName}";
@@ -774,7 +777,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentOperationsRestClient.CreateListAtScopeRequest(Id.Parent, Id.Name, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentOperationsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id.Parent, Id.Name, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -797,7 +800,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentOperationsRestClient.CreateListAtScopeRequest(Id.Parent, Id.Name, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentOperationsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id.Parent, Id.Name, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

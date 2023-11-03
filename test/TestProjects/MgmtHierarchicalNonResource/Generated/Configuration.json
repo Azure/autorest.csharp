@@ -13,7 +13,7 @@
   "RequestPathToResourceData": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}": "SharedGallery"
   },
-  "RawRenameRules": {
+  "RawAcronymMapping": {
     "VCPU": "VCpu",
     "VCPUs": "VCpus"
   }

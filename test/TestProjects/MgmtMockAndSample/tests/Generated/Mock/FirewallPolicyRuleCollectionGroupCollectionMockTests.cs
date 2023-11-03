@@ -351,5 +351,49 @@ Name = "Example-Filter-Rule-Collection",
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetIfExists_GetFirewallPolicyNatRuleCollectionGroup()
+        {
+            // Example: Get FirewallPolicyNatRuleCollectionGroup
+
+            ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "rg1", "firewallPolicy");
+            FirewallPolicyResource firewallPolicy = GetArmClient().GetFirewallPolicyResource(firewallPolicyResourceId);
+            var collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
+            await collection.GetIfExistsAsync("ruleCollectionGroup1");
+        }
+
+        [RecordedTest]
+        public async Task GetIfExists_GetFirewallPolicyRuleCollectionGroup()
+        {
+            // Example: Get FirewallPolicyRuleCollectionGroup
+
+            ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "rg1", "firewallPolicy");
+            FirewallPolicyResource firewallPolicy = GetArmClient().GetFirewallPolicyResource(firewallPolicyResourceId);
+            var collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
+            await collection.GetIfExistsAsync("ruleCollectionGroup1");
+        }
+
+        [RecordedTest]
+        public async Task GetIfExists_GetFirewallPolicyRuleCollectionGroupWithIpGroups()
+        {
+            // Example: Get FirewallPolicyRuleCollectionGroup With IpGroups
+
+            ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "rg1", "firewallPolicy");
+            FirewallPolicyResource firewallPolicy = GetArmClient().GetFirewallPolicyResource(firewallPolicyResourceId);
+            var collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
+            await collection.GetIfExistsAsync("ruleGroup1");
+        }
+
+        [RecordedTest]
+        public async Task GetIfExists_GetFirewallPolicyRuleCollectionGroupWithWebCategories()
+        {
+            // Example: Get FirewallPolicyRuleCollectionGroup With Web Categories
+
+            ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "rg1", "firewallPolicy");
+            FirewallPolicyResource firewallPolicy = GetArmClient().GetFirewallPolicyResource(firewallPolicyResourceId);
+            var collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
+            await collection.GetIfExistsAsync("ruleCollectionGroup1");
+        }
     }
 }

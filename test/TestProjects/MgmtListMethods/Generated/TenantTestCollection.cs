@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -231,7 +232,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantTestRestClient.CreateListRequest(optionalParam);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantTestRestClient.CreateListNextPageRequest(nextLink, optionalParam);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantTestResource(Client, TenantTestData.DeserializeTenantTestData(e)), _tenantTestClientDiagnostics, Pipeline, "TenantTestCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantTestResource(Client, TenantTestData.DeserializeTenantTestData(e)), _tenantTestClientDiagnostics, Pipeline, "TenantTestCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +255,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantTestRestClient.CreateListRequest(optionalParam);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantTestRestClient.CreateListNextPageRequest(nextLink, optionalParam);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantTestResource(Client, TenantTestData.DeserializeTenantTestData(e)), _tenantTestClientDiagnostics, Pipeline, "TenantTestCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantTestResource(Client, TenantTestData.DeserializeTenantTestData(e)), _tenantTestClientDiagnostics, Pipeline, "TenantTestCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -321,6 +322,82 @@ namespace MgmtListMethods
             {
                 var response = _tenantTestRestClient.Get(tenantTestName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantTests_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public virtual async Task<NullableResponse<TenantTestResource>> GetIfExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _tenantTestRestClient.GetAsync(tenantTestName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<TenantTestResource>(response.GetRawResponse());
+                return Response.FromValue(new TenantTestResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantTests_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public virtual NullableResponse<TenantTestResource> GetIfExists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _tenantTestRestClient.Get(tenantTestName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<TenantTestResource>(response.GetRawResponse());
+                return Response.FromValue(new TenantTestResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

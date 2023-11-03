@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -28,6 +29,9 @@ namespace MgmtExpandResourceTypes
     public partial class ZoneResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ZoneResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="zoneName"> The zoneName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string zoneName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}";
@@ -97,7 +101,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetAResources and their operations over a RecordSetAResource. </returns>
         public virtual RecordSetACollection GetRecordSetAs()
         {
-            return GetCachedClient(Client => new RecordSetACollection(Client, Id));
+            return GetCachedClient(client => new RecordSetACollection(client, Id));
         }
 
         /// <summary>
@@ -148,7 +152,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetAaaaResources and their operations over a RecordSetAaaaResource. </returns>
         public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
-            return GetCachedClient(Client => new RecordSetAaaaCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetAaaaCollection(client, Id));
         }
 
         /// <summary>
@@ -199,7 +203,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetCaaResources and their operations over a RecordSetCaaResource. </returns>
         public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
-            return GetCachedClient(Client => new RecordSetCaaCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetCaaCollection(client, Id));
         }
 
         /// <summary>
@@ -250,7 +254,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetCNameResources and their operations over a RecordSetCNameResource. </returns>
         public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
-            return GetCachedClient(Client => new RecordSetCNameCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetCNameCollection(client, Id));
         }
 
         /// <summary>
@@ -301,7 +305,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetMxResources and their operations over a RecordSetMxResource. </returns>
         public virtual RecordSetMxCollection GetRecordSetMxes()
         {
-            return GetCachedClient(Client => new RecordSetMxCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetMxCollection(client, Id));
         }
 
         /// <summary>
@@ -352,7 +356,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetNsResources and their operations over a RecordSetNsResource. </returns>
         public virtual RecordSetNsCollection GetAllRecordSetNs()
         {
-            return GetCachedClient(Client => new RecordSetNsCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetNsCollection(client, Id));
         }
 
         /// <summary>
@@ -403,7 +407,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetPtrResources and their operations over a RecordSetPtrResource. </returns>
         public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
-            return GetCachedClient(Client => new RecordSetPtrCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetPtrCollection(client, Id));
         }
 
         /// <summary>
@@ -454,7 +458,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetSoaResources and their operations over a RecordSetSoaResource. </returns>
         public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
-            return GetCachedClient(Client => new RecordSetSoaCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetSoaCollection(client, Id));
         }
 
         /// <summary>
@@ -505,7 +509,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetSrvResources and their operations over a RecordSetSrvResource. </returns>
         public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
-            return GetCachedClient(Client => new RecordSetSrvCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetSrvCollection(client, Id));
         }
 
         /// <summary>
@@ -556,7 +560,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetTxtResources and their operations over a RecordSetTxtResource. </returns>
         public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
-            return GetCachedClient(Client => new RecordSetTxtCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetTxtCollection(client, Id));
         }
 
         /// <summary>
@@ -828,7 +832,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -852,7 +856,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -876,7 +880,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListAllByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -900,7 +904,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListAllByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

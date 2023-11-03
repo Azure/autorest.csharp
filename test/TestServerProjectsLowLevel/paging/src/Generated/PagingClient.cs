@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -37,19 +38,19 @@ namespace paging_LowLevel
         /// <summary> Initializes a new instance of PagingClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new PagingClientOptions())
+        public PagingClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new PagingClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PagingClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential, Uri endpoint, PagingClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public PagingClient(Uri endpoint, AzureKeyCredential credential, PagingClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new PagingClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -77,7 +78,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNoItemNamePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetNoItemNamePagesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNoItemNamePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetNoItemNamePagesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -119,7 +120,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetEmptyNextLinkNamePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetEmptyNextLinkNamePagesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetEmptyNextLinkNamePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetEmptyNextLinkNamePagesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNullNextLinkNamePagesRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
         }
 
         /// <summary>
@@ -180,7 +181,7 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNullNextLinkNamePagesRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
         }
 
         /// <summary>
@@ -201,7 +202,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -222,7 +223,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -247,7 +248,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesWithBodyParamsRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, content, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -272,7 +273,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesWithBodyParamsRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, content, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -293,7 +294,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateFirstResponseEmptyRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateFirstResponseEmptyNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -314,7 +315,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateFirstResponseEmptyRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateFirstResponseEmptyNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -337,7 +338,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesNextPageRequest(nextLink, maxresults, timeout, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -360,7 +361,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesNextPageRequest(nextLink, maxresults, timeout, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -382,7 +383,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithQueryParamsRequest(requiredQueryParameter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextOperationWithQueryParamsRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -404,7 +405,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithQueryParamsRequest(requiredQueryParameter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextOperationWithQueryParamsRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -426,7 +427,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateDuplicateParamsRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateDuplicateParamsNextPageRequest(nextLink, filter, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -448,7 +449,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateDuplicateParamsRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateDuplicateParamsNextPageRequest(nextLink, filter, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -470,7 +471,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreatePageWithMaxPageSizeRequest(maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreatePageWithMaxPageSizeNextPageRequest(nextLink, maxpagesize, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -492,7 +493,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreatePageWithMaxPageSizeRequest(maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreatePageWithMaxPageSizeNextPageRequest(nextLink, maxpagesize, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -512,7 +513,7 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextOperationWithQueryParamsRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
         }
 
         /// <summary>
@@ -532,7 +533,7 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextOperationWithQueryParamsRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
         }
 
         /// <summary>
@@ -555,7 +556,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetOdataMultiplePagesNextPageRequest(nextLink, maxresults, timeout, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -578,7 +579,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetOdataMultiplePagesNextPageRequest(nextLink, maxresults, timeout, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -602,7 +603,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, maxresults, timeout, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -626,7 +627,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, maxresults, timeout, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -647,7 +648,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetryFirstRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetryFirst", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetryFirst", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -668,7 +669,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetryFirstRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetryFirst", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetryFirst", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -689,7 +690,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetrySecondRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetrySecond", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetrySecond", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -710,7 +711,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetrySecondRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetrySecond", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetrySecond", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -731,7 +732,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesFailureRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesFailureNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesFailure", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesFailure", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -752,7 +753,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesFailureRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesFailureNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesFailure", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesFailure", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -773,7 +774,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesFailureNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailure", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailure", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -794,7 +795,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesFailureNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailure", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailure", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -815,7 +816,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureUriRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesFailureUriNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -836,7 +837,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureUriRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesFailureUriNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -864,7 +865,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFragmentNextLinkRequest(tenant, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -892,7 +893,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFragmentNextLinkRequest(tenant, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -920,7 +921,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(tenant, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -948,7 +949,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(tenant, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -969,7 +970,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateAppendApiVersionRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateAppendApiVersionNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -990,7 +991,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateAppendApiVersionRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateAppendApiVersionNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -1011,7 +1012,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateReplaceApiVersionRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateReplaceApiVersionNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -1032,7 +1033,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateReplaceApiVersionRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateReplaceApiVersionNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -1062,7 +1063,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -1092,7 +1093,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -1122,7 +1123,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -1152,7 +1153,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", context);
         }
 
         /// <summary>
@@ -1173,7 +1174,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -1194,7 +1195,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -1222,7 +1223,7 @@ namespace paging_LowLevel
             {
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesLRONextPageRequest(nextLink, maxresults, timeout, context);
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(maxresults, timeout, context);
-                return await PageableHelpers.CreateAsyncPageable(waitUntil, message, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", "values", "nextLink", context).ConfigureAwait(false);
+                return await GeneratorPageableHelpers.CreateAsyncPageable(waitUntil, message, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", "values", "nextLink", context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1256,7 +1257,7 @@ namespace paging_LowLevel
             {
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesLRONextPageRequest(nextLink, maxresults, timeout, context);
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(maxresults, timeout, context);
-                return PageableHelpers.CreatePageable(waitUntil, message, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", "values", "nextLink", context);
+                return GeneratorPageableHelpers.CreatePageable(waitUntil, message, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", "values", "nextLink", context);
             }
             catch (Exception e)
             {

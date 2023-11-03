@@ -6,27 +6,39 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using dpg_customization_LowLevel;
 
 namespace dpg_customization_LowLevel.Samples
 {
-    public class Samples_DPGClient
+    public partial class Samples_DPGClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel()
+        public void Example_GetModel_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            Response response = client.GetModel("<mode>", new RequestContext());
+            Response response = client.GetModel("<mode>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("received").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetModel_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
+
+            Response response = await client.GetModelAsync("<mode>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -36,23 +48,10 @@ namespace dpg_customization_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModel_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            Response response = client.GetModel("<mode>", new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("received").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
-
-            Response response = await client.GetModelAsync("<mode>", new RequestContext());
+            Response response = client.GetModel("<mode>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -62,10 +61,10 @@ namespace dpg_customization_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            Response response = await client.GetModelAsync("<mode>", new RequestContext());
+            Response response = await client.GetModelAsync("<mode>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -73,17 +72,33 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostModel()
+        public void Example_PostModel_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 hello = "<hello>",
-            };
+            });
+            Response response = client.PostModel("<mode>", content);
 
-            Response response = client.PostModel("<mode>", RequestContent.Create(data));
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("received").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostModel_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                hello = "<hello>",
+            });
+            Response response = await client.PostModelAsync("<mode>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -93,33 +108,14 @@ namespace dpg_customization_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PostModel_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 hello = "<hello>",
-            };
-
-            Response response = client.PostModel("<mode>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("received").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostModel_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
-
-            var data = new
-            {
-                hello = "<hello>",
-            };
-
-            Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
+            });
+            Response response = client.PostModel("<mode>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -129,15 +125,14 @@ namespace dpg_customization_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PostModel_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 hello = "<hello>",
-            };
-
-            Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
+            });
+            Response response = await client.PostModelAsync("<mode>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -145,12 +140,26 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPages()
+        public void Example_GetPages_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            foreach (var item in client.GetPages("<mode>", new RequestContext()))
+            foreach (BinaryData item in client.GetPages("<mode>", null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("received").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetPages_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
+
+            await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("received").ToString());
@@ -161,24 +170,10 @@ namespace dpg_customization_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPages_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            foreach (var item in client.GetPages("<mode>", new RequestContext()))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("received").ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPages_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
-
-            await foreach (var item in client.GetPagesAsync("<mode>", new RequestContext()))
+            foreach (BinaryData item in client.GetPages("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("received").ToString());
@@ -189,10 +184,10 @@ namespace dpg_customization_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPages_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            await foreach (var item in client.GetPagesAsync("<mode>", new RequestContext()))
+            await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("received").ToString());
@@ -201,14 +196,29 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Lro()
+        public void Example_Lro_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            var operation = client.Lro(WaitUntil.Completed, "<mode>", new RequestContext());
-
+            Operation<BinaryData> operation = client.Lro(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("received").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Lro_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
+
+            Operation<BinaryData> operation = await client.LroAsync(WaitUntil.Completed, "<mode>", null);
+            BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -218,27 +228,12 @@ namespace dpg_customization_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Lro_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            var operation = client.Lro(WaitUntil.Completed, "<mode>", new RequestContext());
-
+            Operation<BinaryData> operation = client.Lro(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("provisioningState").ToString());
-            Console.WriteLine(result.GetProperty("received").ToString());
-        }
 
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Lro_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
-
-            var operation = await client.LroAsync(WaitUntil.Completed, "<mode>", new RequestContext());
-
-            BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -248,12 +243,12 @@ namespace dpg_customization_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Lro_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new DPGClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DPGClient client = new DPGClient(credential);
 
-            var operation = await client.LroAsync(WaitUntil.Completed, "<mode>", new RequestContext());
-
+            Operation<BinaryData> operation = await client.LroAsync(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("received").ToString());

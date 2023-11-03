@@ -26,6 +26,9 @@ namespace MgmtExactMatchInheritance
     public partial class ExactMatchModel1Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ExactMatchModel1Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="exactMatchModel1SName"> The exactMatchModel1SName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string exactMatchModel1SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}";

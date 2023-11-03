@@ -32,11 +32,43 @@ function CopyAll([string[]]$files, [string]$source, [string]$destination)
     }
 }
 
-$files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'ContentTypeUtilities.cs', 'HttpMessageSanitizer.cs',
+$files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'HttpMessageSanitizer.cs',
     'OperationInternalBase.cs', 'OperationInternal.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
     'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
     'OperationPoller.cs', 'FixedDelayWithNoJitterStrategy.cs', 'SequentialDelayStrategy.cs',
-    'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs', 'AzureResourceProviderNamespaceAttribute.cs')
+    'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs', 'AzureResourceProviderNamespaceAttribute.cs',
+    'ChangeTrackingDictionary.cs',
+    'ChangeTrackingList.cs',
+    'FormUrlEncodedContent.cs',
+    'HttpPipelineExtensions.cs',
+    'IOperationSource.cs',
+    'IUtf8JsonSerializable.cs',
+    'IXmlSerializable.cs',
+    'JsonElementExtensions.cs',
+    'NextLinkOperationImplementation.cs',
+    'NoValueResponseOfT.cs',
+    'OperationFinalStateVia.cs',
+    'Optional.cs',
+    'Page.cs',
+    'PageableHelpers.cs',
+    'ProtocolOperation.cs',
+    'ProtocolOperationHelpers.cs',
+    'RawRequestUriBuilder.cs',
+    'RequestContentHelper.cs',
+    'RequestHeaderExtensions.cs',
+    'RequestUriBuilderExtensions.cs',
+    'ResponseHeadersExtensions.cs',
+    'ResponseWithHeaders.cs',
+    'ResponseWithHeadersOfTHeaders.cs',
+    'ResponseWithHeadersOfTOfTHeaders.cs',
+    'StringRequestContent.cs',
+    'TypeFormatters.cs',
+    'Utf8JsonRequestContent.cs',
+    'Utf8JsonWriterExtensions.cs',
+    'XElementExtensions.cs',
+    'XmlWriterContent.cs',
+    'XmlWriterExtensions.cs',
+    'TrimmingAttribute.cs')
 $sourcePath = "$clonedPath/sdk/core/Azure.Core/src/Shared/"
 $destinationPath = "$repoRoot/src/assets/Azure.Core.Shared"
 

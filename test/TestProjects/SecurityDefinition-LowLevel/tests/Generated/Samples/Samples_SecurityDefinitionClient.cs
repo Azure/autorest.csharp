@@ -6,30 +6,42 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using SecurityDefinition_LowLevel;
 
 namespace SecurityDefinition_LowLevel.Samples
 {
-    public class Samples_SecurityDefinitionClient
+    public partial class Samples_SecurityDefinitionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SecurityDefinitionClient(endpoint, credential);
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            var data = new { };
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = client.Operation(content);
 
-            Response response = client.Operation(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Operation_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = await client.OperationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -37,31 +49,17 @@ namespace SecurityDefinition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SecurityDefinitionClient(endpoint, credential);
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 Code = "<Code>",
                 Status = "<Status>",
-            };
+            });
+            Response response = client.Operation(content);
 
-            Response response = client.Operation(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SecurityDefinitionClient(endpoint, credential);
-
-            var data = new { };
-
-            Response response = await client.OperationAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -69,17 +67,17 @@ namespace SecurityDefinition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SecurityDefinitionClient(endpoint, credential);
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 Code = "<Code>",
                 Status = "<Status>",
-            };
+            });
+            Response response = await client.OperationAsync(content);
 
-            Response response = await client.OperationAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

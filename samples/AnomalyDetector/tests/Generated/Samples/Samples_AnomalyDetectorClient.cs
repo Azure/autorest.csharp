@@ -6,10 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AnomalyDetector;
 using AnomalyDetector.Models;
 using Azure;
 using Azure.Core;
@@ -18,26 +17,27 @@ using NUnit.Framework;
 
 namespace AnomalyDetector.Samples
 {
-    public class Samples_AnomalyDetectorClient
+    public partial class Samples_AnomalyDetectorClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateEntireSeries()
+        public void Example_DetectUnivariateEntireSeries_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                series = new[] {
-        new {
-            value = 123.45f,
-        }
-    },
-            };
-
-            Response response = client.DetectUnivariateEntireSeries(RequestContent.Create(data));
+                series = new object[]
+            {
+new
+{
+value = 123.45F,
+}
+            },
+            });
+            Response response = client.DetectUnivariateEntireSeries(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -47,34 +47,95 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
             Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
             Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectUnivariateEntireSeries_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                series = new object[]
+            {
+new
+{
+value = 123.45F,
+}
+            },
+            });
+            Response response = await client.DetectUnivariateEntireSeriesAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("period").ToString());
+            Console.WriteLine(result.GetProperty("expectedValues")[0].ToString());
+            Console.WriteLine(result.GetProperty("upperMargins")[0].ToString());
+            Console.WriteLine(result.GetProperty("lowerMargins")[0].ToString());
+            Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
+            Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
+            Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectUnivariateEntireSeries_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
+new TimeSeriesPoint(123.45F)
+            });
+            Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectUnivariateEntireSeries_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
+new TimeSeriesPoint(123.45F)
+            });
+            Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_DetectUnivariateEntireSeries_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                series = new[] {
-        new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
-        }
-    },
+                series = new object[]
+            {
+new
+{
+timestamp = "2022-05-10T14:57:31.2311892-04:00",
+value = 123.45F,
+}
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
-                maxAnomalyRatio = 123.45f,
+                maxAnomalyRatio = 123.45F,
                 sensitivity = 1234,
                 imputeMode = "auto",
-                imputeFixedValue = 123.45f,
-            };
-
-            Response response = client.DetectUnivariateEntireSeries(RequestContent.Create(data));
+                imputeFixedValue = 123.45F,
+            });
+            Response response = client.DetectUnivariateEntireSeries(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -85,63 +146,35 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
             Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
             Console.WriteLine(result.GetProperty("severity")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateEntireSeries_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            var data = new
-            {
-                series = new[] {
-        new {
-            value = 123.45f,
-        }
-    },
-            };
-
-            Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("period").ToString());
-            Console.WriteLine(result.GetProperty("expectedValues")[0].ToString());
-            Console.WriteLine(result.GetProperty("upperMargins")[0].ToString());
-            Console.WriteLine(result.GetProperty("lowerMargins")[0].ToString());
-            Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
-            Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
-            Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DetectUnivariateEntireSeries_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                series = new[] {
-        new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
-        }
-    },
+                series = new object[]
+            {
+new
+{
+timestamp = "2022-05-10T14:57:31.2311892-04:00",
+value = 123.45F,
+}
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
-                maxAnomalyRatio = 123.45f,
+                maxAnomalyRatio = 123.45F,
                 sensitivity = 1234,
                 imputeMode = "auto",
-                imputeFixedValue = 123.45f,
-            };
-
-            Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data));
+                imputeFixedValue = 123.45F,
+            });
+            Response response = await client.DetectUnivariateEntireSeriesAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -156,49 +189,77 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateEntireSeries_Convenience_Async()
+        public void Example_DetectUnivariateEntireSeries_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
             {
-    new TimeSeriesPoint(3.14f)
+new TimeSeriesPoint(123.45F)
 {
-        Timestamp = DateTimeOffset.UtcNow,
-    }
+Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+}
             })
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
                 Period = 1234,
-                MaxAnomalyRatio = 3.14f,
+                MaxAnomalyRatio = 123.45F,
                 Sensitivity = 1234,
                 ImputeMode = ImputeMode.Auto,
-                ImputeFixedValue = 3.14f,
+                ImputeFixedValue = 123.45F,
             };
-            var result = await client.DetectUnivariateEntireSeriesAsync(options);
+            Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateLastPoint()
+        public async Task Example_DetectUnivariateEntireSeries_AllParameters_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
             {
-                series = new[] {
-        new {
-            value = 123.45f,
-        }
-    },
+new TimeSeriesPoint(123.45F)
+{
+Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+}
+            })
+            {
+                Granularity = TimeGranularity.Yearly,
+                CustomInterval = 1234,
+                Period = 1234,
+                MaxAnomalyRatio = 123.45F,
+                Sensitivity = 1234,
+                ImputeMode = ImputeMode.Auto,
+                ImputeFixedValue = 123.45F,
             };
+            Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
+        }
 
-            Response response = client.DetectUnivariateLastPoint(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectUnivariateLastPoint_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                series = new object[]
+            {
+new
+{
+value = 123.45F,
+}
+            },
+            });
+            Response response = client.DetectUnivariateLastPoint(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -209,34 +270,96 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("isAnomaly").ToString());
             Console.WriteLine(result.GetProperty("isNegativeAnomaly").ToString());
             Console.WriteLine(result.GetProperty("isPositiveAnomaly").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectUnivariateLastPoint_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                series = new object[]
+            {
+new
+{
+value = 123.45F,
+}
+            },
+            });
+            Response response = await client.DetectUnivariateLastPointAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("period").ToString());
+            Console.WriteLine(result.GetProperty("suggestedWindow").ToString());
+            Console.WriteLine(result.GetProperty("expectedValue").ToString());
+            Console.WriteLine(result.GetProperty("upperMargin").ToString());
+            Console.WriteLine(result.GetProperty("lowerMargin").ToString());
+            Console.WriteLine(result.GetProperty("isAnomaly").ToString());
+            Console.WriteLine(result.GetProperty("isNegativeAnomaly").ToString());
+            Console.WriteLine(result.GetProperty("isPositiveAnomaly").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectUnivariateLastPoint_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
+new TimeSeriesPoint(123.45F)
+            });
+            Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectUnivariateLastPoint_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
+new TimeSeriesPoint(123.45F)
+            });
+            Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_DetectUnivariateLastPoint_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                series = new[] {
-        new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
-        }
-    },
+                series = new object[]
+            {
+new
+{
+timestamp = "2022-05-10T14:57:31.2311892-04:00",
+value = 123.45F,
+}
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
-                maxAnomalyRatio = 123.45f,
+                maxAnomalyRatio = 123.45F,
                 sensitivity = 1234,
                 imputeMode = "auto",
-                imputeFixedValue = 123.45f,
-            };
-
-            Response response = client.DetectUnivariateLastPoint(RequestContent.Create(data));
+                imputeFixedValue = 123.45F,
+            });
+            Response response = client.DetectUnivariateLastPoint(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -248,64 +371,35 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("isNegativeAnomaly").ToString());
             Console.WriteLine(result.GetProperty("isPositiveAnomaly").ToString());
             Console.WriteLine(result.GetProperty("severity").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateLastPoint_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            var data = new
-            {
-                series = new[] {
-        new {
-            value = 123.45f,
-        }
-    },
-            };
-
-            Response response = await client.DetectUnivariateLastPointAsync(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("period").ToString());
-            Console.WriteLine(result.GetProperty("suggestedWindow").ToString());
-            Console.WriteLine(result.GetProperty("expectedValue").ToString());
-            Console.WriteLine(result.GetProperty("upperMargin").ToString());
-            Console.WriteLine(result.GetProperty("lowerMargin").ToString());
-            Console.WriteLine(result.GetProperty("isAnomaly").ToString());
-            Console.WriteLine(result.GetProperty("isNegativeAnomaly").ToString());
-            Console.WriteLine(result.GetProperty("isPositiveAnomaly").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DetectUnivariateLastPoint_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                series = new[] {
-        new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
-        }
-    },
+                series = new object[]
+            {
+new
+{
+timestamp = "2022-05-10T14:57:31.2311892-04:00",
+value = 123.45F,
+}
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
-                maxAnomalyRatio = 123.45f,
+                maxAnomalyRatio = 123.45F,
                 sensitivity = 1234,
                 imputeMode = "auto",
-                imputeFixedValue = 123.45f,
-            };
-
-            Response response = await client.DetectUnivariateLastPointAsync(RequestContent.Create(data));
+                imputeFixedValue = 123.45F,
+            });
+            Response response = await client.DetectUnivariateLastPointAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -321,134 +415,195 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateLastPoint_Convenience_Async()
+        public void Example_DetectUnivariateLastPoint_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
             {
-    new TimeSeriesPoint(3.14f)
+new TimeSeriesPoint(123.45F)
 {
-        Timestamp = DateTimeOffset.UtcNow,
-    }
+Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+}
             })
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
                 Period = 1234,
-                MaxAnomalyRatio = 3.14f,
+                MaxAnomalyRatio = 123.45F,
                 Sensitivity = 1234,
                 ImputeMode = ImputeMode.Auto,
-                ImputeFixedValue = 3.14f,
+                ImputeFixedValue = 123.45F,
             };
-            var result = await client.DetectUnivariateLastPointAsync(options);
+            Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateChangePoint()
+        public async Task Example_DetectUnivariateLastPoint_AllParameters_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
             {
-                series = new[] {
-        new {
-            value = 123.45f,
-        }
-    },
-                granularity = "yearly",
+new TimeSeriesPoint(123.45F)
+{
+Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+}
+            })
+            {
+                Granularity = TimeGranularity.Yearly,
+                CustomInterval = 1234,
+                Period = 1234,
+                MaxAnomalyRatio = 123.45F,
+                Sensitivity = 1234,
+                ImputeMode = ImputeMode.Auto,
+                ImputeFixedValue = 123.45F,
             };
+            Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
+        }
 
-            Response response = client.DetectUnivariateChangePoint(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectUnivariateChangePoint_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                series = new object[]
+            {
+new
+{
+value = 123.45F,
+}
+            },
+                granularity = "yearly",
+            });
+            Response response = client.DetectUnivariateChangePoint(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectUnivariateChangePoint_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                series = new object[]
+            {
+new
+{
+value = 123.45F,
+}
+            },
+                granularity = "yearly",
+            });
+            Response response = await client.DetectUnivariateChangePointAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectUnivariateChangePoint_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+            {
+new TimeSeriesPoint(123.45F)
+            }, TimeGranularity.Yearly);
+            Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectUnivariateChangePoint_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+            {
+new TimeSeriesPoint(123.45F)
+            }, TimeGranularity.Yearly);
+            Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_DetectUnivariateChangePoint_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                series = new[] {
-        new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
-        }
-    },
+                series = new object[]
+            {
+new
+{
+timestamp = "2022-05-10T14:57:31.2311892-04:00",
+value = 123.45F,
+}
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
                 stableTrendWindow = 1234,
-                threshold = 123.45f,
-            };
-
-            Response response = client.DetectUnivariateChangePoint(RequestContent.Create(data));
+                threshold = 123.45F,
+            });
+            Response response = client.DetectUnivariateChangePoint(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
             Console.WriteLine(result.GetProperty("isChangePoint")[0].ToString());
             Console.WriteLine(result.GetProperty("confidenceScores")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateChangePoint_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            var data = new
-            {
-                series = new[] {
-        new {
-            value = 123.45f,
-        }
-    },
-                granularity = "yearly",
-            };
-
-            Response response = await client.DetectUnivariateChangePointAsync(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DetectUnivariateChangePoint_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                series = new[] {
-        new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
-        }
-    },
+                series = new object[]
+            {
+new
+{
+timestamp = "2022-05-10T14:57:31.2311892-04:00",
+value = 123.45F,
+}
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
                 stableTrendWindow = 1234,
-                threshold = 123.45f,
-            };
-
-            Response response = await client.DetectUnivariateChangePointAsync(RequestContent.Create(data));
+                threshold = 123.45F,
+            });
+            Response response = await client.DetectUnivariateChangePointAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -458,37 +613,61 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateChangePoint_Convenience_Async()
+        public void Example_DetectUnivariateChangePoint_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
             {
-    new TimeSeriesPoint(3.14f)
+new TimeSeriesPoint(123.45F)
 {
-        Timestamp = DateTimeOffset.UtcNow,
-    }
+Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+}
             }, TimeGranularity.Yearly)
             {
                 CustomInterval = 1234,
                 Period = 1234,
                 StableTrendWindow = 1234,
-                Threshold = 3.14f,
+                Threshold = 123.45F,
             };
-            var result = await client.DetectUnivariateChangePointAsync(options);
+            Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateBatchDetectionResult()
+        public async Task Example_DetectUnivariateChangePoint_AllParameters_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateBatchDetectionResult(Guid.NewGuid(), new RequestContext());
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+            {
+new TimeSeriesPoint(123.45F)
+{
+Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+}
+            }, TimeGranularity.Yearly)
+            {
+                CustomInterval = 1234,
+                Period = 1234,
+                StableTrendWindow = 1234,
+                Threshold = 123.45F,
+            };
+            Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultivariateBatchDetectionResult_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -498,17 +677,59 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("startTime").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMultivariateBatchDetectionResult_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("dataSource").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("topContributorCount").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("startTime").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
+            Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultivariateBatchDetectionResult_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMultivariateBatchDetectionResult_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetMultivariateBatchDetectionResult_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateBatchDetectionResult(Guid.NewGuid(), new RequestContext());
+            Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -533,37 +754,17 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateBatchDetectionResult_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("resultId").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("dataSource").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("topContributorCount").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("startTime").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
-            Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMultivariateBatchDetectionResult_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
+            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -592,47 +793,103 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateBatchDetectionResult_Convenience_Async()
+        public void Example_GetMultivariateBatchDetectionResult_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var result = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid());
+            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TrainMultivariateModel()
+        public async Task Example_GetMultivariateBatchDetectionResult_AllParameters_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TrainMultivariateModel_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "<dataSource>",
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
-            };
-
-            Response response = client.TrainMultivariateModel(RequestContent.Create(data));
+            });
+            Response response = client.TrainMultivariateModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
             Console.WriteLine(result.GetProperty("createdTime").ToString());
             Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TrainMultivariateModel_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                dataSource = "<dataSource>",
+                startTime = "2022-05-10T14:57:31.2311892-04:00",
+                endTime = "2022-05-10T14:57:31.2311892-04:00",
+            });
+            Response response = await client.TrainMultivariateModelAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("modelId").ToString());
+            Console.WriteLine(result.GetProperty("createdTime").ToString());
+            Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TrainMultivariateModel_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TrainMultivariateModel_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_TrainMultivariateModel_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "<dataSource>",
                 dataSchema = "OneTable",
@@ -644,39 +901,44 @@ namespace AnomalyDetector.Samples
                 {
                     alignMode = "Inner",
                     fillNAMethod = "Previous",
-                    paddingValue = 123.45f,
+                    paddingValue = 123.45F,
                 },
                 status = "CREATED",
                 diagnosticsInfo = new
                 {
                     modelState = new
                     {
-                        epochIds = new[] {
-                1234
+                        epochIds = new object[]
+            {
+1234
             },
-                        trainLosses = new[] {
-                123.45f
+                        trainLosses = new object[]
+            {
+123.45F
             },
-                        validationLosses = new[] {
-                123.45f
+                        validationLosses = new object[]
+            {
+123.45F
             },
-                        latenciesInSeconds = new[] {
-                123.45f
+                        latenciesInSeconds = new object[]
+            {
+123.45F
             },
                     },
-                    variableStates = new[] {
-            new {
-                variable = "<variable>",
-                filledNARatio = 123.45f,
-                effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-            }
-        },
+                    variableStates = new object[]
+            {
+new
+{
+variable = "<variable>",
+filledNARatio = 123.45F,
+effectiveCount = 1234,
+firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+}
+            },
                 },
-            };
-
-            Response response = client.TrainMultivariateModel(RequestContent.Create(data));
+            });
+            Response response = client.TrainMultivariateModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -703,40 +965,17 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
             Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
             Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_TrainMultivariateModel_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            var data = new
-            {
-                dataSource = "<dataSource>",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
-            };
-
-            Response response = await client.TrainMultivariateModelAsync(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("modelId").ToString());
-            Console.WriteLine(result.GetProperty("createdTime").ToString());
-            Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TrainMultivariateModel_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "<dataSource>",
                 dataSchema = "OneTable",
@@ -748,39 +987,44 @@ namespace AnomalyDetector.Samples
                 {
                     alignMode = "Inner",
                     fillNAMethod = "Previous",
-                    paddingValue = 123.45f,
+                    paddingValue = 123.45F,
                 },
                 status = "CREATED",
                 diagnosticsInfo = new
                 {
                     modelState = new
                     {
-                        epochIds = new[] {
-                1234
+                        epochIds = new object[]
+            {
+1234
             },
-                        trainLosses = new[] {
-                123.45f
+                        trainLosses = new object[]
+            {
+123.45F
             },
-                        validationLosses = new[] {
-                123.45f
+                        validationLosses = new object[]
+            {
+123.45F
             },
-                        latenciesInSeconds = new[] {
-                123.45f
+                        latenciesInSeconds = new object[]
+            {
+123.45F
             },
                     },
-                    variableStates = new[] {
-            new {
-                variable = "<variable>",
-                filledNARatio = 123.45f,
-                effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-            }
-        },
+                    variableStates = new object[]
+            {
+new
+{
+variable = "<variable>",
+filledNARatio = 123.45F,
+effectiveCount = 1234,
+firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+}
+            },
                 },
-            };
-
-            Response response = await client.TrainMultivariateModelAsync(RequestContent.Create(data));
+            });
+            Response response = await client.TrainMultivariateModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -811,70 +1055,111 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TrainMultivariateModel_Convenience_Async()
+        public void Example_TrainMultivariateModel_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow)
+            ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"))
             {
                 DataSchema = DataSchema.OneTable,
-                DisplayName = "<DisplayName>",
+                DisplayName = "<displayName>",
                 SlidingWindow = 1234,
-                AlignPolicy = new AlignPolicy()
+                AlignPolicy = new AlignPolicy
                 {
                     AlignMode = AlignMode.Inner,
                     FillNAMethod = FillNAMethod.Previous,
-                    PaddingValue = 3.14f,
+                    PaddingValue = 123.45F,
                 },
                 Status = ModelStatus.Created,
-                DiagnosticsInfo = new DiagnosticsInfo()
+                DiagnosticsInfo = new DiagnosticsInfo
                 {
-                    ModelState = new ModelState()
+                    ModelState = new ModelState
                     {
-                        EpochIds =
-{
-                1234
-            },
-                        TrainLosses =
-{
-                3.14f
-            },
-                        ValidationLosses =
-{
-                3.14f
-            },
-                        LatenciesInSeconds =
-{
-                3.14f
-            },
+                        EpochIds = { 1234 },
+                        TrainLosses = { 123.45F },
+                        ValidationLosses = { 123.45F },
+                        LatenciesInSeconds = { 123.45F },
                     },
-                    VariableStates =
+                    VariableStates = {new VariableState
 {
-            new VariableState()
-{
-                Variable = "<Variable>",
-                FilledNARatio = 3.14f,
-                EffectiveCount = 1234,
-                FirstTimestamp = DateTimeOffset.UtcNow,
-                LastTimestamp = DateTimeOffset.UtcNow,
-            }
-        },
+Variable = "<variable>",
+FilledNARatio = 123.45F,
+EffectiveCount = 1234,
+FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+}},
                 },
             };
-            var result = await client.TrainMultivariateModelAsync(modelInfo);
+            Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteMultivariateModel()
+        public async Task Example_TrainMultivariateModel_AllParameters_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"))
+            {
+                DataSchema = DataSchema.OneTable,
+                DisplayName = "<displayName>",
+                SlidingWindow = 1234,
+                AlignPolicy = new AlignPolicy
+                {
+                    AlignMode = AlignMode.Inner,
+                    FillNAMethod = FillNAMethod.Previous,
+                    PaddingValue = 123.45F,
+                },
+                Status = ModelStatus.Created,
+                DiagnosticsInfo = new DiagnosticsInfo
+                {
+                    ModelState = new ModelState
+                    {
+                        EpochIds = { 1234 },
+                        TrainLosses = { 123.45F },
+                        ValidationLosses = { 123.45F },
+                        LatenciesInSeconds = { 123.45F },
+                    },
+                    VariableStates = {new VariableState
+{
+Variable = "<variable>",
+FilledNARatio = 123.45F,
+EffectiveCount = 1234,
+FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+}},
+                },
+            };
+            Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeleteMultivariateModel_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.DeleteMultivariateModel("<modelId>");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DeleteMultivariateModel_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            Response response = await client.DeleteMultivariateModelAsync("<modelId>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -882,23 +1167,12 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteMultivariateModel_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.DeleteMultivariateModel("<modelId>");
-            Console.WriteLine(response.Status);
-        }
 
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteMultivariateModel_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            Response response = await client.DeleteMultivariateModelAsync("<modelId>");
             Console.WriteLine(response.Status);
         }
 
@@ -906,39 +1180,78 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteMultivariateModel_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.DeleteMultivariateModelAsync("<modelId>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModel()
+        public void Example_GetMultivariateModel_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateModel("<modelId>", new RequestContext());
+            Response response = client.GetMultivariateModel("<modelId>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
             Console.WriteLine(result.GetProperty("createdTime").ToString());
             Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMultivariateModel_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            Response response = await client.GetMultivariateModelAsync("<modelId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("modelId").ToString());
+            Console.WriteLine(result.GetProperty("createdTime").ToString());
+            Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultivariateModel_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            Response<AnomalyDetectionModel> response = client.GetMultivariateModel("<modelId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMultivariateModel_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("<modelId>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetMultivariateModel_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateModel("<modelId>", new RequestContext());
+            Response response = client.GetMultivariateModel("<modelId>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -965,33 +1278,17 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
             Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
             Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModel_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            Response response = await client.GetMultivariateModelAsync("<modelId>", new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("modelId").ToString());
-            Console.WriteLine(result.GetProperty("createdTime").ToString());
-            Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMultivariateModel_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateModelAsync("<modelId>", new RequestContext());
+            Response response = await client.GetMultivariateModelAsync("<modelId>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1022,32 +1319,42 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModel_Convenience_Async()
+        public void Example_GetMultivariateModel_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var result = await client.GetMultivariateModelAsync("<modelId>");
+            Response<AnomalyDetectionModel> response = client.GetMultivariateModel("<modelId>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateBatchAnomaly()
+        public async Task Example_GetMultivariateModel_AllParameters_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("<modelId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectMultivariateBatchAnomaly_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
-            };
-
-            Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data));
+            });
+            Response response = client.DetectMultivariateBatchAnomaly("<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1057,25 +1364,75 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("startTime").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectMultivariateBatchAnomaly_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                dataSource = "http://localhost:3000",
+                topContributorCount = 1234,
+                startTime = "2022-05-10T14:57:31.2311892-04:00",
+                endTime = "2022-05-10T14:57:31.2311892-04:00",
+            });
+            Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("dataSource").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("topContributorCount").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("startTime").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
+            Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectMultivariateBatchAnomaly_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("<modelId>", options);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectMultivariateBatchAnomaly_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_DetectMultivariateBatchAnomaly_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
-            };
-
-            Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data));
+            });
+            Response response = client.DetectMultivariateBatchAnomaly("<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1100,53 +1457,24 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateBatchAnomaly_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            var data = new
-            {
-                dataSource = "http://localhost:3000",
-                topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
-            };
-
-            Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("resultId").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("dataSource").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("topContributorCount").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("startTime").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
-            Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DetectMultivariateBatchAnomaly_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
-            };
-
-            Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data));
+            });
+            Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1175,71 +1503,152 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateBatchAnomaly_Convenience_Async()
+        public void Example_DetectMultivariateBatchAnomaly_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
-            var result = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
+            MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("<modelId>", options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateLastAnomaly()
+        public async Task Example_DetectMultivariateBatchAnomaly_AllParameters_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
-            {
-                variables = new[] {
-        new {
-            variable = "<variable>",
-            timestamps = new[] {
-                "<String>"
-            },
-            values = new[] {
-                123.45f
-            },
+            MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
         }
-    },
-                topContributorCount = 1234,
-            };
 
-            Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectMultivariateLastAnomaly_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                variables = new object[]
+            {
+new
+{
+variable = "<variable>",
+timestamps = new object[]
+{
+"<timestamps>"
+},
+values = new object[]
+{
+123.45F
+},
+}
+            },
+                topContributorCount = 1234,
+            });
+            Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectMultivariateLastAnomaly_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                variables = new object[]
+            {
+new
+{
+variable = "<variable>",
+timestamps = new object[]
+{
+"<timestamps>"
+},
+values = new object[]
+{
+123.45F
+},
+}
+            },
+                topContributorCount = 1234,
+            });
+            Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DetectMultivariateLastAnomaly_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+            {
+new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+            }, 1234);
+            Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DetectMultivariateLastAnomaly_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+            {
+new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+            }, 1234);
+            Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_DetectMultivariateLastAnomaly_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                variables = new[] {
-        new {
-            variable = "<variable>",
-            timestamps = new[] {
-                "<String>"
+                variables = new object[]
+            {
+new
+{
+variable = "<variable>",
+timestamps = new object[]
+{
+"<timestamps>"
+},
+values = new object[]
+{
+123.45F
+},
+}
             },
-            values = new[] {
-                123.45f
-            },
-        }
-    },
                 topContributorCount = 1234,
-            };
-
-            Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data));
+            });
+            Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());
@@ -1256,63 +1665,36 @@ namespace AnomalyDetector.Samples
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateLastAnomaly_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            var data = new
-            {
-                variables = new[] {
-        new {
-            variable = "<variable>",
-            timestamps = new[] {
-                "<String>"
-            },
-            values = new[] {
-                123.45f
-            },
-        }
-    },
-                topContributorCount = 1234,
-            };
-
-            Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DetectMultivariateLastAnomaly_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                variables = new[] {
-        new {
-            variable = "<variable>",
-            timestamps = new[] {
-                "<String>"
+                variables = new object[]
+            {
+new
+{
+variable = "<variable>",
+timestamps = new object[]
+{
+"<timestamps>"
+},
+values = new object[]
+{
+123.45F
+},
+}
             },
-            values = new[] {
-                123.45f
-            },
-        }
-    },
                 topContributorCount = 1234,
-            };
-
-            Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", RequestContent.Create(data));
+            });
+            Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());
@@ -1333,39 +1715,91 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateLastAnomaly_Convenience_Async()
+        public void Example_DetectMultivariateLastAnomaly_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            var options = new MultivariateLastDetectionOptions(new VariableValues[]
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
             {
-    new VariableValues("<variable>", new string[]
-{
-        "<null>"
-    }, new float[]
-{
-        3.14f
-    })
+new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
             }, 1234);
-            var result = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
+            Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModels()
+        public async Task Example_DetectMultivariateLastAnomaly_AllParameters_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            foreach (var item in client.GetMultivariateModels(1234, 1234, new RequestContext()))
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+            {
+new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+            }, 1234);
+            Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultivariateModels_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            foreach (BinaryData item in client.GetMultivariateModels(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
                 Console.WriteLine(result.GetProperty("createdTime").ToString());
                 Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMultivariateModels_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetMultivariateModelsAsync(null, null, null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultivariateModels_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            foreach (AnomalyDetectionModel item in client.GetMultivariateModels())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMultivariateModels_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync())
+            {
             }
         }
 
@@ -1373,11 +1807,11 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetMultivariateModels_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            foreach (var item in client.GetMultivariateModels(1234, 1234, new RequestContext()))
+            foreach (BinaryData item in client.GetMultivariateModels(1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1404,23 +1838,6 @@ namespace AnomalyDetector.Samples
                 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
                 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
                 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModels_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
-
-            await foreach (var item in client.GetMultivariateModelsAsync(1234, 1234, new RequestContext()))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("modelId").ToString());
-                Console.WriteLine(result.GetProperty("createdTime").ToString());
-                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
             }
         }
 
@@ -1428,11 +1845,11 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMultivariateModels_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            await foreach (var item in client.GetMultivariateModelsAsync(1234, 1234, new RequestContext()))
+            await foreach (BinaryData item in client.GetMultivariateModelsAsync(1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1464,13 +1881,26 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModels_Convenience_Async()
+        public void Example_GetMultivariateModels_AllParameters_Convenience()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AnomalyDetectorClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            await foreach (var item in client.GetMultivariateModelsAsync(1234, 1234))
+            foreach (AnomalyDetectionModel item in client.GetMultivariateModels(skip: 1234, maxCount: 1234))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMultivariateModels_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
+
+            await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(skip: 1234, maxCount: 1234))
             {
             }
         }

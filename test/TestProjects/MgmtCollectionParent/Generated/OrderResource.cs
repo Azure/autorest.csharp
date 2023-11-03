@@ -26,6 +26,10 @@ namespace MgmtCollectionParent
     public partial class OrderResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="OrderResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="orderName"> The orderName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, AzureLocation location, string orderName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}";

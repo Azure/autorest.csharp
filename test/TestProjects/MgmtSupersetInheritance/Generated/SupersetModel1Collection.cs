@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -222,7 +223,7 @@ namespace MgmtSupersetInheritance
         public virtual AsyncPageable<SupersetModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +243,7 @@ namespace MgmtSupersetInheritance
         public virtual Pageable<SupersetModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -307,6 +308,80 @@ namespace MgmtSupersetInheritance
             {
                 var response = _supersetModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SupersetModel1s_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="supersetModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        public virtual async Task<NullableResponse<SupersetModel1Resource>> GetIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
+
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _supersetModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<SupersetModel1Resource>(response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1Resource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SupersetModel1s_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="supersetModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        public virtual NullableResponse<SupersetModel1Resource> GetIfExists(string supersetModel1SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
+
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _supersetModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<SupersetModel1Resource>(response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

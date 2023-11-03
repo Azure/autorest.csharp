@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -36,19 +37,19 @@ namespace dpg_customization_LowLevel
         /// <summary> Initializes a new instance of DPGClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public DPGClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new DPGClientOptions())
+        public DPGClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new DPGClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of DPGClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public DPGClient(AzureKeyCredential credential, Uri endpoint, DPGClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public DPGClient(Uri endpoint, AzureKeyCredential credential, DPGClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new DPGClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -219,7 +220,7 @@ namespace dpg_customization_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -244,7 +245,7 @@ namespace dpg_customization_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
         }
 
         /// <summary>

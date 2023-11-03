@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 using static AutoRest.CSharp.Input.MgmtConfiguration;
@@ -16,22 +16,25 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class NameTransformer
     {
-        private static NameTransformer? _instance;
-        public static NameTransformer Instance => _instance ??= new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
+        private record AppliedCache(NameInfo NewName, List<ApplyDetailStep> AppliedDetailSteps);
+        public record ApplyDetailStep(string MappingKey, AcronymMappingTarget MappingValue, NameInfo NewName);
 
-        private IReadOnlyDictionary<string, RenameRuleTarget> _renameRules;
+        private static NameTransformer? _instance;
+        public static NameTransformer Instance => _instance ??= new NameTransformer(Configuration.MgmtConfiguration.AcronymMapping);
+
+        private IReadOnlyDictionary<string, AcronymMappingTarget> _acronymMapping;
         private Regex _regex;
-        private ConcurrentDictionary<string, NameInfo> _wordCache;
+        private ConcurrentDictionary<string, AppliedCache> _wordCache;
 
         /// <summary>
         /// Instanciate a NameTransformer which uses the dictionary to transform the abbreviations in this word to correct casing
         /// </summary>
-        /// <param name="renameRules"></param>
-        internal NameTransformer(IReadOnlyDictionary<string, RenameRuleTarget> renameRules)
+        /// <param name="acronymMapping"></param>
+        internal NameTransformer(IReadOnlyDictionary<string, AcronymMappingTarget> acronymMapping)
         {
-            _renameRules = renameRules;
-            _regex = BuildRegex(renameRules.Keys);
-            _wordCache = new ConcurrentDictionary<string, NameInfo>();
+            _acronymMapping = acronymMapping;
+            _regex = BuildRegex(acronymMapping.Keys);
+            _wordCache = new ConcurrentDictionary<string, AppliedCache>();
         }
 
         private static Regex BuildRegex(IEnumerable<string> renameItems)
@@ -53,29 +56,36 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public NameInfo EnsureNameCase(string name)
+        public NameInfo EnsureNameCase(string name, Action<ApplyDetailStep>? onMappingApplied)
         {
             if (_wordCache.TryGetValue(name, out var result))
-                return result;
+            {
+                if (onMappingApplied != null)
+                    result.AppliedDetailSteps.ForEach(record => onMappingApplied(record));
+                return result.NewName;
+            }
 
             // escape the following logic if we do not have any rules
-            if (_renameRules.Count == 0)
+            if (_acronymMapping.Count == 0)
             {
-                result = new NameInfo(name, name);
+                result = new AppliedCache(
+                    new NameInfo(name, name),
+                    new List<ApplyDetailStep>());
                 _wordCache.TryAdd(name, result);
-                return result;
+                return result.NewName;
             }
 
             var propertyNameBuilder = new StringBuilder();
             var parameterNameBuilder = new StringBuilder();
             var strToMatch = name.FirstCharToUpperCase();
             var match = _regex.Match(strToMatch);
+            var detailStep = new List<ApplyDetailStep>();
             bool hasFirstWord = false;
             while (match.Success)
             {
                 // in our regular expression, the content we want to find is in the second group
                 var matchGroup = match.Groups[2];
-                var replaceValue = _renameRules[matchGroup.Value];
+                var replaceValue = _acronymMapping[matchGroup.Value];
                 // append everything between the beginning and the index of this match
                 var everythingBeforeMatch = strToMatch.Substring(0, matchGroup.Index);
                 // append everything before myself
@@ -93,6 +103,14 @@ namespace AutoRest.CSharp.Mgmt.Models
                     parameterNameBuilder.Append(replaceValue.Value);
                 // move to whatever is left unmatched
                 strToMatch = strToMatch.Substring(matchGroup.Index + matchGroup.Length);
+
+                string tempPropertyName = propertyNameBuilder.ToString() + strToMatch;
+                string tempParameterName = parameterNameBuilder.ToString() + strToMatch;
+                NameInfo tempNameInfo = new NameInfo(tempPropertyName, tempParameterName);
+                var step = new ApplyDetailStep(matchGroup.Value, replaceValue, tempNameInfo);
+                if (onMappingApplied != null)
+                    onMappingApplied(step);
+                detailStep.Add(step);
                 match = _regex.Match(strToMatch);
             }
             if (strToMatch.Length > 0)
@@ -101,11 +119,11 @@ namespace AutoRest.CSharp.Mgmt.Models
                 parameterNameBuilder.Append(strToMatch);
             }
 
-            result = new NameInfo(propertyNameBuilder.ToString(), parameterNameBuilder.ToString());
+            result = new AppliedCache(new NameInfo(propertyNameBuilder.ToString(), parameterNameBuilder.ToString()), detailStep);
             _wordCache.TryAdd(name, result);
-            _wordCache.TryAdd(result.Name, result); // in some other scenarios we might need to use the property name as keys
+            _wordCache.TryAdd(result.NewName.Name, result); // in some other scenarios we might need to use the property name as keys
 
-            return result;
+            return result.NewName;
         }
 
         private static bool IsEquivelantEmpty(string s) => string.IsNullOrWhiteSpace(s) || s.All(c => !SyntaxFacts.IsIdentifierStartCharacter(c));
