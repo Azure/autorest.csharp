@@ -28,6 +28,9 @@ namespace MgmtMultipleParentResource
     public partial class AnotherParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AnotherParentResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="anotherName"> The anotherName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string anotherName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}";
@@ -93,7 +96,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of AnotherParentChildResources and their operations over a AnotherParentChildResource. </returns>
         public virtual AnotherParentChildCollection GetAnotherParentChildren()
         {
-            return GetCachedClient(Client => new AnotherParentChildCollection(Client, Id));
+            return GetCachedClient(client => new AnotherParentChildCollection(client, Id));
         }
 
         /// <summary>
@@ -112,8 +115,8 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AnotherParentChildResource>> GetAnotherParentChildAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -136,8 +139,8 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<AnotherParentChildResource> GetAnotherParentChild(string childName, string expand = null, CancellationToken cancellationToken = default)
         {

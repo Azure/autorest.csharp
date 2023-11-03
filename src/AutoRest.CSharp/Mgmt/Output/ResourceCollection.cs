@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override bool CanValidateResourceType => ResourceTypes.SelectMany(p => p.Value).Distinct().Count() == 1;
 
-        public override string BranchIdVariableName => "Id";
+        public override FormattableString BranchIdVariableName => $"Id";
 
         private MgmtClientOperation? _getAllOperation;
         public MgmtClientOperation? GetAllOperation => _getAllOperation ??= EnsureGetAllOperation();
@@ -246,13 +246,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getMgmtRestOperation,
                         "Exists",
                         typeof(bool),
-                        $"Checks to see if the resource exists in azure.")));
+                        $"Checks to see if the resource exists in azure."),
+                    IdVariableName));
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         getMgmtRestOperation,
                         "GetIfExists",
                         getMgmtRestOperation.MgmtReturnType,
-                        $"Tries to get details for this resource from the service.")));
+                        $"Tries to get details for this resource from the service."),
+                    IdVariableName));
             }
 
             return result;
@@ -270,8 +272,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 yield return new FieldDeclaration(FieldModifiers, reference.Type, GetFieldName(reference).ToString());
             }
         }
-
-        public override MethodSignature CreateResourceIdentifierMethodSignature => throw new InvalidOperationException("Resource collections will never have CreateResourceIdentifier method");
 
         private IDictionary<RequestPath, ISet<ResourceTypeSegment>>? _resourceTypes;
         public IDictionary<RequestPath, ISet<ResourceTypeSegment>> ResourceTypes => _resourceTypes ??= EnsureResourceTypes();
