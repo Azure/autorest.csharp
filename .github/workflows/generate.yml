@@ -1,0 +1,39 @@
+name: Regenerate all code
+on: workflow_dispatch
+
+jobs:
+  build:
+    timeout-minutes: 120
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Setup .net core sdk
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: Install packages
+        run: |
+          npm ci
+
+      - name: Generate code
+        shell: pwsh
+        run: |
+          ./eng/Generate.ps1 Authoring-TypeSpec
+
+      - name: Commit generated code
+        run: |
+          git config --global user.name 'actions-user'
+          git config --global user.email 'action@github.com'
+          git add .
+          git commit -m "re-generate test code"
+          git push
