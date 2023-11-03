@@ -56,29 +56,29 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static readonly ValueExpression jsonFormat = new TypeReference(typeof(ModelReaderWriterFormat)).Property(nameof(ModelReaderWriterFormat.Json));
         private static readonly BoolExpression isJsonFormatExpression = Equal(new ModelReaderWriterOptionsExpression(optionsParameter).Format, jsonFormat);
 
-        public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization jsonObjectSerialization)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
         {
-            var jsonModelTInterface = jsonObjectSerialization.IJsonModelInterface;
-            var typeOfT = jsonModelTInterface.Arguments[0];
+            var jsonModelInterface = json.IJsonModelInterface;
+            var typeOfT = jsonModelInterface.Arguments[0];
 
             // void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
             yield return new
             (
                 new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriterParameter }, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
-                This.CastTo(jsonModelTInterface).Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriterParameter, ModelReaderWriterOptionsExpression.DefaultWireOptions)
+                This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriterParameter, ModelReaderWriterOptionsExpression.DefaultWireOptions)
             );
 
             // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
             yield return new
             (
-                new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriterParameter, optionsParameter }, ExplicitInterface: jsonModelTInterface),
-                WriteObject(new Utf8JsonWriterExpression(utf8JsonWriterParameter), jsonObjectSerialization)
+                new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriterParameter, optionsParameter }, ExplicitInterface: jsonModelInterface),
+                WriteObject(new Utf8JsonWriterExpression(utf8JsonWriterParameter), json)
             );
 
             // T IJsonModel<T>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
             yield return new
             (
-                new MethodSignature(nameof(IJsonModel<object>.Read), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { utf8JsonReaderParameter, optionsParameter }, ExplicitInterface: jsonModelTInterface),
+                new MethodSignature(nameof(IJsonModel<object>.Read), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { utf8JsonReaderParameter, optionsParameter }, ExplicitInterface: jsonModelInterface),
                 new MethodBodyStatement[]
                 {
                     BuildModelSerializerHelperValidateFormatStatement(typeOfT, new ModelReaderWriterOptionsExpression(optionsParameter).Format, true),
@@ -91,20 +91,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
 
             // if the model is a struct, it needs to implement IJsonModel<object> as well which leads to another 2 methods
-            if (jsonObjectSerialization.IJsonModelObjectInterface is { } jsonModelObjectInterface)
+            if (json.IJsonModelObjectInterface is { } jsonModelObjectInterface)
             {
                 // void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriterParameter, optionsParameter }, ExplicitInterface: jsonModelObjectInterface),
-                    This.CastTo(jsonModelTInterface).Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriterParameter, optionsParameter)
+                    This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriterParameter, optionsParameter)
                 );
 
                 // object IJsonModel<object>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IJsonModel<object>.Read), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { utf8JsonReaderParameter, optionsParameter }, ExplicitInterface: jsonModelObjectInterface),
-                    This.CastTo(jsonModelTInterface).Invoke(nameof(IJsonModel<object>.Read), utf8JsonReaderParameter, optionsParameter)
+                    This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Read), utf8JsonReaderParameter, optionsParameter)
                 );
             }
         }
