@@ -7,36 +7,43 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using MgmtPagination;
 
 namespace MgmtPagination.Models
 {
-    internal partial class PageSizeNumericModelListResult : IUtf8JsonSerializable, IModelJsonSerializable<PageSizeNumericModelListResult>
+    internal partial class PageSizeNumericModelListResult : IUtf8JsonSerializable, IJsonModel<PageSizeNumericModelListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PageSizeNumericModelListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeNumericModelListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<PageSizeNumericModelListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<PageSizeNumericModelListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Value))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("value"u8);
-                writer.WriteStartArray();
-                foreach (var item in Value)
+                if (Optional.IsCollectionDefined(Value))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("value"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Value)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(NextLink))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("nextLink"u8);
-                writer.WriteStringValue(NextLink);
+                if (Optional.IsDefined(NextLink))
+                {
+                    writer.WritePropertyName("nextLink"u8);
+                    writer.WriteStringValue(NextLink);
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -44,24 +51,31 @@ namespace MgmtPagination.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        PageSizeNumericModelListResult IModelJsonSerializable<PageSizeNumericModelListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PageSizeNumericModelListResult IJsonModel<PageSizeNumericModelListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializePageSizeNumericModelListResult(document.RootElement, options);
         }
 
-        internal static PageSizeNumericModelListResult DeserializePageSizeNumericModelListResult(JsonElement element, ModelSerializerOptions options = null)
+        internal static PageSizeNumericModelListResult DeserializePageSizeNumericModelListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +106,7 @@ namespace MgmtPagination.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,19 +115,29 @@ namespace MgmtPagination.Models
             return new PageSizeNumericModelListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<PageSizeNumericModelListResult>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<PageSizeNumericModelListResult>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        PageSizeNumericModelListResult IModelSerializable<PageSizeNumericModelListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        PageSizeNumericModelListResult IModel<PageSizeNumericModelListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializePageSizeNumericModelListResult(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<PageSizeNumericModelListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

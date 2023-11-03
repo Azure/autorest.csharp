@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace xml_service.Models
@@ -13,7 +14,10 @@ namespace xml_service.Models
     /// <summary> An enumeration of blobs. </summary>
     public partial class ListBlobsResponse
     {
-        /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
         /// <param name="containerName"></param>
         /// <param name="prefix"></param>
         /// <param name="marker"></param>
@@ -40,7 +44,7 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="containerName"></param>
         /// <param name="prefix"></param>
@@ -49,7 +53,8 @@ namespace xml_service.Models
         /// <param name="delimiter"></param>
         /// <param name="blobs"></param>
         /// <param name="nextMarker"></param>
-        internal ListBlobsResponse(string serviceEndpoint, string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListBlobsResponse(string serviceEndpoint, string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ServiceEndpoint = serviceEndpoint;
             ContainerName = containerName;
@@ -59,6 +64,12 @@ namespace xml_service.Models
             Delimiter = delimiter;
             Blobs = blobs;
             NextMarker = nextMarker;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/> for deserialization. </summary>
+        internal ListBlobsResponse()
+        {
         }
 
         /// <summary> Gets the service endpoint. </summary>

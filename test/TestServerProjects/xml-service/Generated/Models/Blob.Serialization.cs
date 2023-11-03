@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Blob : IXmlSerializable
+    public partial class Blob : IXmlSerializable, IModel<Blob>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -39,7 +43,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static Blob DeserializeBlob(XElement element)
+        internal static Blob DeserializeBlob(XElement element, ModelReaderWriterOptions options = null)
         {
             string name = default;
             bool deleted = default;
@@ -71,7 +75,43 @@ namespace xml_service.Models
                 }
                 metadata = dictionary;
             }
-            return new Blob(name, deleted, snapshot, properties, metadata);
+            return new Blob(name, deleted, snapshot, properties, metadata, default);
         }
+
+        BinaryData IModel<Blob>.Write(ModelReaderWriterOptions options)
+        {
+            bool implementsJson = this is IJsonModel<Blob>;
+            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Blob IModel<Blob>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return DeserializeBlob(XElement.Load(data.ToStream()), options);
+        }
+
+        ModelReaderWriterFormat IModel<Blob>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

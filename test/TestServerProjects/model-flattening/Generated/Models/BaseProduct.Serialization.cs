@@ -6,17 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace model_flattening.Models
 {
-    public partial class BaseProduct : IUtf8JsonSerializable, IModelJsonSerializable<BaseProduct>
+    public partial class BaseProduct : IUtf8JsonSerializable, IJsonModel<BaseProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<BaseProduct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseProduct>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<BaseProduct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<BaseProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("base_product_id"u8);
@@ -26,34 +28,39 @@ namespace model_flattening.Models
                 writer.WritePropertyName("base_product_description"u8);
                 writer.WriteStringValue(Description);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        BaseProduct IModelJsonSerializable<BaseProduct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        BaseProduct IJsonModel<BaseProduct>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeBaseProduct(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BaseProduct>.Serialize(ModelSerializerOptions options)
+        internal static BaseProduct DeserializeBaseProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BaseProduct IModelSerializable<BaseProduct>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBaseProduct(document.RootElement, options);
-        }
-
-        internal static BaseProduct DeserializeBaseProduct(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -61,6 +68,8 @@ namespace model_flattening.Models
             }
             string baseProductId = default;
             Optional<string> baseProductDescription = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("base_product_id"u8))
@@ -73,8 +82,38 @@ namespace model_flattening.Models
                     baseProductDescription = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new BaseProduct(baseProductId, baseProductDescription.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new BaseProduct(baseProductId, baseProductDescription.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IModel<BaseProduct>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return ModelReaderWriter.Write(this, options);
+        }
+
+        BaseProduct IModel<BaseProduct>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBaseProduct(document.RootElement, options);
+        }
+
+        ModelReaderWriterFormat IModel<BaseProduct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

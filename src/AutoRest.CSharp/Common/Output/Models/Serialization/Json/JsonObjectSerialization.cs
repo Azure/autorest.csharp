@@ -26,7 +26,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             IJsonModelInterface = new CSharpType(typeof(IJsonModel<>), modelType);
             IModelInterface = new CSharpType(typeof(IModel<>), modelType);
             // we only need this interface when the model is a struct
-            IModelObjectInterface = model.IsStruct ? new CSharpType(typeof(IModel<>), typeof(object)) : null;
+            IJsonModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IJsonModel<object>) : null;
+            IModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IModel<object>) : null;
             IJsonInterface = Configuration.ApiTypes.IUtf8JsonSerializableType;
         }
 
@@ -45,6 +46,10 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         /// The interface IModel{T}
         /// </summary>
         public CSharpType IModelInterface { get; }
+        /// <summary>
+        /// The interface IJsonModel{object}. We only have this interface when this model is a struct
+        /// </summary>
+        public CSharpType? IJsonModelObjectInterface { get; }
         /// <summary>
         /// The interface IModel{object}. We only have this interface when this model is a struct
         /// </summary>

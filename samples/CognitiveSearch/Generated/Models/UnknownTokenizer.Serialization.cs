@@ -14,11 +14,11 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownTokenizer : IUtf8JsonSerializable, IJsonModel<UnknownTokenizer>
+    internal partial class UnknownTokenizer : IUtf8JsonSerializable, IJsonModel<Tokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownTokenizer>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Tokenizer>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownTokenizer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Tokenizer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
@@ -43,12 +43,12 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        UnknownTokenizer IJsonModel<UnknownTokenizer>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Tokenizer IJsonModel<Tokenizer>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -88,27 +88,29 @@ namespace CognitiveSearch.Models
             return new UnknownTokenizer(odataType, name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownTokenizer>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<Tokenizer>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownTokenizer IModel<UnknownTokenizer>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Tokenizer IModel<Tokenizer>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownTokenizer(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Tokenizer>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

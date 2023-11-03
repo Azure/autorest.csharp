@@ -61,11 +61,7 @@ namespace MgmtPartialResource.Mocking
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PublicIPAddressRestClient.CreateListAllRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PublicIPAddressRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId);
-<<<<<<< HEAD:test/TestProjects/MgmtPartialResource/Generated/Extensions/SubscriptionResourceExtensionClient.cs
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
-=======
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "MockableMgmtPartialResourceSubscriptionResource.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
->>>>>>> origin/feature/v3:test/TestProjects/MgmtPartialResource/Generated/Extensions/MockableMgmtPartialResourceSubscriptionResource.cs
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "MockableMgmtPartialResourceSubscriptionResource.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -87,11 +83,7 @@ namespace MgmtPartialResource.Mocking
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PublicIPAddressRestClient.CreateListAllRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PublicIPAddressRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId);
-<<<<<<< HEAD:test/TestProjects/MgmtPartialResource/Generated/Extensions/SubscriptionResourceExtensionClient.cs
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
-=======
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "MockableMgmtPartialResourceSubscriptionResource.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
->>>>>>> origin/feature/v3:test/TestProjects/MgmtPartialResource/Generated/Extensions/MockableMgmtPartialResourceSubscriptionResource.cs
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "MockableMgmtPartialResourceSubscriptionResource.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
     }
 }

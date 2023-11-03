@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtExactMatchFlattenInheritance
 {
-    public partial class CustomModel3Data : IUtf8JsonSerializable, IModelJsonSerializable<CustomModel3Data>
+    public partial class CustomModel3Data : IUtf8JsonSerializable, IJsonModel<CustomModel3Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CustomModel3Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomModel3Data>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<CustomModel3Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<CustomModel3Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -40,7 +41,7 @@ namespace MgmtExactMatchFlattenInheritance
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,24 +49,31 @@ namespace MgmtExactMatchFlattenInheritance
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        CustomModel3Data IModelJsonSerializable<CustomModel3Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        CustomModel3Data IJsonModel<CustomModel3Data>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeCustomModel3Data(document.RootElement, options);
         }
 
-        internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element, ModelSerializerOptions options = null)
+        internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -99,7 +107,7 @@ namespace MgmtExactMatchFlattenInheritance
                     type = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -108,19 +116,29 @@ namespace MgmtExactMatchFlattenInheritance
             return new CustomModel3Data(id.Value, name.Value, type.Value, serializedAdditionalRawData, foo.Value);
         }
 
-        BinaryData IModelSerializable<CustomModel3Data>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<CustomModel3Data>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        CustomModel3Data IModelSerializable<CustomModel3Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        CustomModel3Data IModel<CustomModel3Data>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeCustomModel3Data(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<CustomModel3Data>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

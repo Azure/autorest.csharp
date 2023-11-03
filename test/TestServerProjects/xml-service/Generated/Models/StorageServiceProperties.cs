@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,20 +14,24 @@ namespace xml_service.Models
     /// <summary> Storage Service Properties. </summary>
     public partial class StorageServiceProperties
     {
-        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="StorageServiceProperties"/>. </summary>
         public StorageServiceProperties()
         {
             Cors = new ChangeTrackingList<CorsRule>();
         }
 
-        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceProperties"/>. </summary>
         /// <param name="logging"> Azure Analytics Logging settings. </param>
         /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for blobs. </param>
         /// <param name="minuteMetrics"> a summary of request statistics grouped by API in minute aggregates for blobs. </param>
         /// <param name="cors"> The set of CORS rules. </param>
         /// <param name="defaultServiceVersion"> The default version to use for requests to the Blob service if an incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent versions. </param>
         /// <param name="deleteRetentionPolicy"> The Delete Retention Policy for the service. </param>
-        internal StorageServiceProperties(Logging logging, Metrics hourMetrics, Metrics minuteMetrics, IList<CorsRule> cors, string defaultServiceVersion, RetentionPolicy deleteRetentionPolicy)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageServiceProperties(Logging logging, Metrics hourMetrics, Metrics minuteMetrics, IList<CorsRule> cors, string defaultServiceVersion, RetentionPolicy deleteRetentionPolicy, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Logging = logging;
             HourMetrics = hourMetrics;
@@ -34,6 +39,7 @@ namespace xml_service.Models
             Cors = cors;
             DefaultServiceVersion = defaultServiceVersion;
             DeleteRetentionPolicy = deleteRetentionPolicy;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Azure Analytics Logging settings. </summary>

@@ -6,49 +6,63 @@
 #nullable disable
 
 using System;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(ErrorAdditionalInfoConverter))]
-    public partial class ErrorAdditionalInfo : IUtf8JsonSerializable, IModelJsonSerializable<ErrorAdditionalInfo>
+    public partial class ErrorAdditionalInfo : IUtf8JsonSerializable, IJsonModel<ErrorAdditionalInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ErrorAdditionalInfo>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorAdditionalInfo>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ErrorAdditionalInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ErrorAdditionalInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(ErrorAdditionalInfoType))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ErrorAdditionalInfoType);
+                if (Optional.IsDefined(ErrorAdditionalInfoType))
+                {
+                    writer.WritePropertyName("type"u8);
+                    writer.WriteStringValue(ErrorAdditionalInfoType);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(Info))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("info"u8);
+                if (Optional.IsDefined(Info))
+                {
+                    writer.WritePropertyName("info"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Info);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Info.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(Info))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        ErrorAdditionalInfo IModelJsonSerializable<ErrorAdditionalInfo>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ErrorAdditionalInfo IJsonModel<ErrorAdditionalInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeErrorAdditionalInfo(document.RootElement, options);
         }
 
-        internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element, ModelSerializerOptions options = null)
+        internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -76,20 +90,30 @@ namespace Azure.ResourceManager.Fake.Models
             return new ErrorAdditionalInfo(type.Value, info.Value);
         }
 
-        BinaryData IModelSerializable<ErrorAdditionalInfo>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<ErrorAdditionalInfo>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        ErrorAdditionalInfo IModelSerializable<ErrorAdditionalInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        ErrorAdditionalInfo IModel<ErrorAdditionalInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeErrorAdditionalInfo(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<ErrorAdditionalInfo>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         internal partial class ErrorAdditionalInfoConverter : JsonConverter<ErrorAdditionalInfo>
         {

@@ -6,19 +6,20 @@
 #nullable disable
 
 using System;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(MgmtReferenceTypesPrivateLinkServiceConnectionStateConverter))]
-    public partial class MgmtReferenceTypesPrivateLinkServiceConnectionState : IUtf8JsonSerializable, IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>
+    public partial class MgmtReferenceTypesPrivateLinkServiceConnectionState : IUtf8JsonSerializable, IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Status))
@@ -39,17 +40,21 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        MgmtReferenceTypesPrivateLinkServiceConnectionState IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MgmtReferenceTypesPrivateLinkServiceConnectionState IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(document.RootElement, options);
         }
 
-        internal static MgmtReferenceTypesPrivateLinkServiceConnectionState DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(JsonElement element, ModelSerializerOptions options = null)
+        internal static MgmtReferenceTypesPrivateLinkServiceConnectionState DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,20 +88,30 @@ namespace Azure.ResourceManager.Fake.Models
             return new MgmtReferenceTypesPrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionsRequired.Value);
         }
 
-        BinaryData IModelSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtReferenceTypesPrivateLinkServiceConnectionState IModelSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        MgmtReferenceTypesPrivateLinkServiceConnectionState IModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         internal partial class MgmtReferenceTypesPrivateLinkServiceConnectionStateConverter : JsonConverter<MgmtReferenceTypesPrivateLinkServiceConnectionState>
         {

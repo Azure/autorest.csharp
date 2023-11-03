@@ -7,45 +7,53 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(PrivateLinkResourceListConverter))]
-    public partial class PrivateLinkResourceList : IUtf8JsonSerializable, IModelJsonSerializable<PrivateLinkResourceList>
+    public partial class PrivateLinkResourceList : IUtf8JsonSerializable, IJsonModel<PrivateLinkResourceList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PrivateLinkResourceList>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateLinkResourceList>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<PrivateLinkResourceList>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<PrivateLinkResourceList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Value))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("value"u8);
-                writer.WriteStartArray();
-                foreach (var item in Value)
+                if (Optional.IsCollectionDefined(Value))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("value"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Value)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
 
-        PrivateLinkResourceList IModelJsonSerializable<PrivateLinkResourceList>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PrivateLinkResourceList IJsonModel<PrivateLinkResourceList>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializePrivateLinkResourceList(document.RootElement, options);
         }
 
-        internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element, ModelSerializerOptions options = null)
+        internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -72,20 +80,30 @@ namespace Azure.ResourceManager.Fake.Models
             return new PrivateLinkResourceList(Optional.ToList(value));
         }
 
-        BinaryData IModelSerializable<PrivateLinkResourceList>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<PrivateLinkResourceList>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        PrivateLinkResourceList IModelSerializable<PrivateLinkResourceList>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        PrivateLinkResourceList IModel<PrivateLinkResourceList>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializePrivateLinkResourceList(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<PrivateLinkResourceList>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         internal partial class PrivateLinkResourceListConverter : JsonConverter<PrivateLinkResourceList>
         {

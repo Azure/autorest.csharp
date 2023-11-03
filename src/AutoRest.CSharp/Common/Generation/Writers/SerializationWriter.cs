@@ -53,8 +53,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (jsonSerialization != null)
                 {
                     writer.Append($"{jsonSerialization.IJsonInterface}, {jsonSerialization.IJsonModelInterface}, ");
-                    if (jsonSerialization.IModelObjectInterface is { } iModelInterface)
-                        writer.Append($"{iModelInterface}, ");
+                    if (jsonSerialization.IJsonModelObjectInterface is { } iJsonModelObjectInterface)
+                        writer.Append($"{iJsonModelObjectInterface}, ");
                 }
                 if (xmlSerialization != null)
                 {

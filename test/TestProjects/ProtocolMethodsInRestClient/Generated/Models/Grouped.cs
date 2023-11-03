@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ProtocolMethodsInRestClient.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class Grouped
     {
-        /// <summary> Initializes a new instance of Grouped. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Grouped"/>. </summary>
         /// <param name="second"> Second in group. </param>
         public Grouped(int second)
         {
             Second = second;
         }
 
-        /// <summary> Initializes a new instance of Grouped. </summary>
+        /// <summary> Initializes a new instance of <see cref="Grouped"/>. </summary>
         /// <param name="first"> First in group. </param>
         /// <param name="second"> Second in group. </param>
-        internal Grouped(string first, int second)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Grouped(string first, int second, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             First = first;
             Second = second;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Grouped"/> for deserialization. </summary>
+        internal Grouped()
+        {
         }
 
         /// <summary> First in group. </summary>

@@ -14,11 +14,11 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class UnknownAbstractModel : IUtf8JsonSerializable, IJsonModel<UnknownAbstractModel>
+    internal partial class UnknownAbstractModel : IUtf8JsonSerializable, IJsonModel<AbstractModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownAbstractModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AbstractModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownAbstractModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<AbstractModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
@@ -41,12 +41,12 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        UnknownAbstractModel IJsonModel<UnknownAbstractModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AbstractModel IJsonModel<AbstractModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -80,27 +80,29 @@ namespace TypeSchemaMapping.Models
             return new UnknownAbstractModel(discriminatorProperty, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownAbstractModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<AbstractModel>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownAbstractModel IModel<UnknownAbstractModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AbstractModel IModel<AbstractModel>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownAbstractModel(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<AbstractModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

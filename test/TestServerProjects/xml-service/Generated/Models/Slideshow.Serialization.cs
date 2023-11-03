@@ -5,14 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Slideshow : IXmlSerializable
+    public partial class Slideshow : IXmlSerializable, IModel<Slideshow>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -45,7 +49,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static Slideshow DeserializeSlideshow(XElement element)
+        internal static Slideshow DeserializeSlideshow(XElement element, ModelReaderWriterOptions options = null)
         {
             string title = default;
             string date = default;
@@ -69,7 +73,43 @@ namespace xml_service.Models
                 array.Add(Slide.DeserializeSlide(e));
             }
             slides = array;
-            return new Slideshow(title, date, author, slides);
+            return new Slideshow(title, date, author, slides, default);
         }
+
+        BinaryData IModel<Slideshow>.Write(ModelReaderWriterOptions options)
+        {
+            bool implementsJson = this is IJsonModel<Slideshow>;
+            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Slideshow IModel<Slideshow>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return DeserializeSlideshow(XElement.Load(data.ToStream()), options);
+        }
+
+        ModelReaderWriterFormat IModel<Slideshow>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

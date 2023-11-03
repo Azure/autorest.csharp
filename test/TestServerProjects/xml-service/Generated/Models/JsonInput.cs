@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xml_service.Models
 {
     /// <summary> The JsonInput. </summary>
     public partial class JsonInput
     {
-        /// <summary> Initializes a new instance of JsonInput. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="JsonInput"/>. </summary>
         public JsonInput()
         {
         }
 
-        /// <summary> Initializes a new instance of JsonInput. </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonInput"/>. </summary>
         /// <param name="id"></param>
-        internal JsonInput(int? id)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal JsonInput(int? id, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

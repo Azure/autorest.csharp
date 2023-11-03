@@ -68,7 +68,7 @@ namespace CustomNamespace
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -145,10 +145,10 @@ namespace CustomNamespace
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
         RenamedModelStruct IModel<RenamedModelStruct>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -156,15 +156,19 @@ namespace CustomNamespace
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeRenamedModelStruct(document.RootElement, options);
         }
 
-        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Write(options);
+        ModelReaderWriterFormat IModel<RenamedModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
-        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Read(data, options);
+        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IModel<RenamedModelStruct>)this).Write(options);
+
+        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IModel<RenamedModelStruct>)this).Read(data, options);
+
+        ModelReaderWriterFormat IModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IModel<RenamedModelStruct>)this).GetWireFormat(options);
     }
 }

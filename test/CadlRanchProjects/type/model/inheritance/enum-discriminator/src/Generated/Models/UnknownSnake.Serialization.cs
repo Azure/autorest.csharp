@@ -15,11 +15,11 @@ using Azure.Core;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    internal partial class UnknownSnake : IUtf8JsonSerializable, IJsonModel<UnknownSnake>
+    internal partial class UnknownSnake : IUtf8JsonSerializable, IJsonModel<Snake>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownSnake>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Snake>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownSnake>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Snake>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -44,12 +44,12 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        UnknownSnake IJsonModel<UnknownSnake>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Snake IJsonModel<Snake>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -89,28 +89,30 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return new UnknownSnake(kind, length, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownSnake>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<Snake>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownSnake IModel<UnknownSnake>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Snake IModel<Snake>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownSnake(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Snake>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -123,7 +125,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            throw new Exception();
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

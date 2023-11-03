@@ -41,7 +41,8 @@ namespace TypeSchemaMapping.Models
 
         BinaryData IModel<ModelWithGuidProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool implementsJson = this is IJsonModel<ModelWithGuidProperty>;
+            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
@@ -66,10 +67,12 @@ namespace TypeSchemaMapping.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             return DeserializeModelWithGuidProperty(XElement.Load(data.ToStream()), options);
         }
+
+        ModelReaderWriterFormat IModel<ModelWithGuidProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

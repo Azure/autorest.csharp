@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,21 +14,26 @@ namespace xml_service.Models
     /// <summary> A slide in a slideshow. </summary>
     public partial class Slide
     {
-        /// <summary> Initializes a new instance of Slide. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Slide"/>. </summary>
         public Slide()
         {
             Items = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of Slide. </summary>
+        /// <summary> Initializes a new instance of <see cref="Slide"/>. </summary>
         /// <param name="type"></param>
         /// <param name="title"></param>
         /// <param name="items"></param>
-        internal Slide(string type, string title, IList<string> items)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Slide(string type, string title, IList<string> items, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Type = type;
             Title = title;
             Items = items;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the type. </summary>

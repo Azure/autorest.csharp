@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace model_flattening.Models
@@ -13,7 +14,10 @@ namespace model_flattening.Models
     /// <summary> Parameter group. </summary>
     public partial class FlattenParameterGroup
     {
-        /// <summary> Initializes a new instance of FlattenParameterGroup. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/>. </summary>
         /// <param name="name"> Product name with value 'groupproduct'. </param>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="productId"/> is null. </exception>
@@ -26,7 +30,7 @@ namespace model_flattening.Models
             ProductId = productId;
         }
 
-        /// <summary> Initializes a new instance of FlattenParameterGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/>. </summary>
         /// <param name="name"> Product name with value 'groupproduct'. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
@@ -35,7 +39,8 @@ namespace model_flattening.Models
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        internal FlattenParameterGroup(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FlattenParameterGroup(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             SimpleBodyProduct = simpleBodyProduct;
@@ -45,6 +50,12 @@ namespace model_flattening.Models
             Capacity = capacity;
             GenericValue = genericValue;
             OdataValue = odataValue;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/> for deserialization. </summary>
+        internal FlattenParameterGroup()
+        {
         }
 
         /// <summary> Product name with value 'groupproduct'. </summary>

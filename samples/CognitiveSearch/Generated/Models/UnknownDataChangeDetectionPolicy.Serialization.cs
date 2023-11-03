@@ -14,11 +14,11 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownDataChangeDetectionPolicy : IUtf8JsonSerializable, IJsonModel<UnknownDataChangeDetectionPolicy>
+    internal partial class UnknownDataChangeDetectionPolicy : IUtf8JsonSerializable, IJsonModel<DataChangeDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownDataChangeDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataChangeDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownDataChangeDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<DataChangeDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
@@ -41,12 +41,12 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        UnknownDataChangeDetectionPolicy IJsonModel<UnknownDataChangeDetectionPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DataChangeDetectionPolicy IJsonModel<DataChangeDetectionPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -80,27 +80,29 @@ namespace CognitiveSearch.Models
             return new UnknownDataChangeDetectionPolicy(odataType, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownDataChangeDetectionPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<DataChangeDetectionPolicy>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownDataChangeDetectionPolicy IModel<UnknownDataChangeDetectionPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DataChangeDetectionPolicy IModel<DataChangeDetectionPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownDataChangeDetectionPolicy(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<DataChangeDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

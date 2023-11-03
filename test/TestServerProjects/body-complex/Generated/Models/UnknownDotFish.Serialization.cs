@@ -14,11 +14,11 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownDotFish : IUtf8JsonSerializable, IJsonModel<UnknownDotFish>
+    internal partial class UnknownDotFish : IUtf8JsonSerializable, IJsonModel<DotFish>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownDotFish>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DotFish>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownDotFish>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<DotFish>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type"u8);
@@ -46,12 +46,12 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        UnknownDotFish IJsonModel<UnknownDotFish>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DotFish IJsonModel<DotFish>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -91,29 +91,29 @@ namespace body_complex.Models
             return new UnknownDotFish(fishType, species.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownDotFish>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<DotFish>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownDotFish IModel<UnknownDotFish>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DotFish IModel<DotFish>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownDotFish(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnknownDotFish>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        ModelReaderWriterFormat IModel<DotFish>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

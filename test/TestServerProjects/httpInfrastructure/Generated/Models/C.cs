@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace httpInfrastructure.Models
 {
     /// <summary> The C. </summary>
     public partial class C
     {
-        /// <summary> Initializes a new instance of C. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="C"/>. </summary>
         internal C()
         {
         }
 
-        /// <summary> Initializes a new instance of C. </summary>
+        /// <summary> Initializes a new instance of <see cref="C"/>. </summary>
         /// <param name="httpCode"></param>
-        internal C(string httpCode)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal C(string httpCode, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HttpCode = httpCode;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the http code. </summary>

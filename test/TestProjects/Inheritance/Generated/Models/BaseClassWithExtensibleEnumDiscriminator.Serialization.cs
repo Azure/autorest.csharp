@@ -6,51 +6,57 @@
 #nullable disable
 
 using System;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
     [JsonConverter(typeof(BaseClassWithExtensibleEnumDiscriminatorConverter))]
-    public partial class BaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IModelJsonSerializable<BaseClassWithExtensibleEnumDiscriminator>
+    public partial class BaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IJsonModel<BaseClassWithExtensibleEnumDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<BaseClassWithExtensibleEnumDiscriminator>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<BaseClassWithExtensibleEnumDiscriminator>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<BaseClassWithExtensibleEnumDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty.ToString());
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        BaseClassWithExtensibleEnumDiscriminator IModelJsonSerializable<BaseClassWithExtensibleEnumDiscriminator>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        BaseClassWithExtensibleEnumDiscriminator IJsonModel<BaseClassWithExtensibleEnumDiscriminator>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeBaseClassWithExtensibleEnumDiscriminator(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<BaseClassWithExtensibleEnumDiscriminator>.Serialize(ModelSerializerOptions options)
+        internal static BaseClassWithExtensibleEnumDiscriminator DeserializeBaseClassWithExtensibleEnumDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        BaseClassWithExtensibleEnumDiscriminator IModelSerializable<BaseClassWithExtensibleEnumDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBaseClassWithExtensibleEnumDiscriminator(document.RootElement, options);
-        }
-
-        internal static BaseClassWithExtensibleEnumDiscriminator DeserializeBaseClassWithExtensibleEnumDiscriminator(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -66,6 +72,31 @@ namespace Inheritance.Models
             }
             return UnknownBaseClassWithExtensibleEnumDiscriminator.DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(element);
         }
+
+        BinaryData IModel<BaseClassWithExtensibleEnumDiscriminator>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return ModelReaderWriter.Write(this, options);
+        }
+
+        BaseClassWithExtensibleEnumDiscriminator IModel<BaseClassWithExtensibleEnumDiscriminator>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBaseClassWithExtensibleEnumDiscriminator(document.RootElement, options);
+        }
+
+        ModelReaderWriterFormat IModel<BaseClassWithExtensibleEnumDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         internal partial class BaseClassWithExtensibleEnumDiscriminatorConverter : JsonConverter<BaseClassWithExtensibleEnumDiscriminator>
         {

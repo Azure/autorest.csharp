@@ -14,11 +14,11 @@ using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class UnknownFirewallPolicyRuleCollection : IUtf8JsonSerializable, IJsonModel<UnknownFirewallPolicyRuleCollection>
+    internal partial class UnknownFirewallPolicyRuleCollection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyRuleCollection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownFirewallPolicyRuleCollection>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyRuleCollection>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownFirewallPolicyRuleCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<FirewallPolicyRuleCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("ruleCollectionType"u8);
@@ -51,12 +51,12 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        UnknownFirewallPolicyRuleCollection IJsonModel<UnknownFirewallPolicyRuleCollection>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicyRuleCollection IJsonModel<FirewallPolicyRuleCollection>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -106,27 +106,29 @@ namespace MgmtMockAndSample.Models
             return new UnknownFirewallPolicyRuleCollection(ruleCollectionType, name.Value, Optional.ToNullable(priority), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownFirewallPolicyRuleCollection>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<FirewallPolicyRuleCollection>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownFirewallPolicyRuleCollection IModel<UnknownFirewallPolicyRuleCollection>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicyRuleCollection IModel<FirewallPolicyRuleCollection>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownFirewallPolicyRuleCollection(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<FirewallPolicyRuleCollection>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

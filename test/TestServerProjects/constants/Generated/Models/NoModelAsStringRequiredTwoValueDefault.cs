@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace constants.Models
 {
     /// <summary> The NoModelAsStringRequiredTwoValueDefault. </summary>
     internal partial class NoModelAsStringRequiredTwoValueDefault
     {
-        /// <summary> Initializes a new instance of NoModelAsStringRequiredTwoValueDefault. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringRequiredTwoValueDefault"/>. </summary>
         /// <param name="parameter"></param>
         internal NoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultEnum parameter)
         {
             Parameter = parameter;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringRequiredTwoValueDefault"/>. </summary>
+        /// <param name="parameter"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultEnum parameter, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Parameter = parameter;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringRequiredTwoValueDefault"/> for deserialization. </summary>
+        internal NoModelAsStringRequiredTwoValueDefault()
+        {
         }
 
         /// <summary> Gets the parameter. </summary>

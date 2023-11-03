@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace required_optional.Models
 {
     /// <summary> The IntWrapper. </summary>
     public partial class IntWrapper
     {
-        /// <summary> Initializes a new instance of IntWrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         /// <param name="value"></param>
         public IntWrapper(int value)
         {
             Value = value;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
+        /// <param name="value"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IntWrapper(int value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/> for deserialization. </summary>
+        internal IntWrapper()
+        {
         }
 
         /// <summary> Gets the value. </summary>

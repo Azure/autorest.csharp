@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace NameConflicts.Models
 {
     /// <summary> The Response. </summary>
     public partial class Response
     {
-        /// <summary> Initializes a new instance of Response. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Response"/>. </summary>
         public Response()
         {
         }
 
-        /// <summary> Initializes a new instance of Response. </summary>
+        /// <summary> Initializes a new instance of <see cref="Response"/>. </summary>
         /// <param name="property"></param>
-        internal Response(string property)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Response(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the property. </summary>

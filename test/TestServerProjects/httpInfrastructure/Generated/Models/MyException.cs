@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace httpInfrastructure.Models
 {
     /// <summary> The MyException. </summary>
     public partial class MyException
     {
-        /// <summary> Initializes a new instance of MyException. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="MyException"/>. </summary>
         internal MyException()
         {
         }
 
-        /// <summary> Initializes a new instance of MyException. </summary>
+        /// <summary> Initializes a new instance of <see cref="MyException"/>. </summary>
         /// <param name="statusCode"></param>
-        internal MyException(string statusCode)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MyException(string statusCode, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StatusCode = statusCode;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the status code. </summary>

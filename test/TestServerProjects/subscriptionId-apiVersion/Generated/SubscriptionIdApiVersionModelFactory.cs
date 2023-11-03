@@ -5,18 +5,21 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace subscriptionId_apiVersion.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class SubscriptionIdApiVersionModelFactory
     {
-        /// <summary> Initializes a new instance of SampleResourceGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SampleResourceGroup"/>. </summary>
         /// <param name="name"> resource group name 'testgroup101'. </param>
         /// <param name="location"> resource group location 'West US'. </param>
         /// <returns> A new <see cref="Models.SampleResourceGroup"/> instance for mocking. </returns>
         public static SampleResourceGroup SampleResourceGroup(string name = null, string location = null)
         {
-            return new SampleResourceGroup(name, location);
+            return new SampleResourceGroup(name, location, new Dictionary<string, BinaryData>());
         }
     }
 }

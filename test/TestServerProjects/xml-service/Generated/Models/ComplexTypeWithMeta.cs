@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xml_service.Models
 {
     /// <summary> I am a complex type with XML node. </summary>
     public partial class ComplexTypeWithMeta
     {
-        /// <summary> Initializes a new instance of ComplexTypeWithMeta. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ComplexTypeWithMeta"/>. </summary>
         public ComplexTypeWithMeta()
         {
         }
 
-        /// <summary> Initializes a new instance of ComplexTypeWithMeta. </summary>
+        /// <summary> Initializes a new instance of <see cref="ComplexTypeWithMeta"/>. </summary>
         /// <param name="id"> The id of the res. </param>
-        internal ComplexTypeWithMeta(string id)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ComplexTypeWithMeta(string id, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ID = id;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The id of the res. </summary>

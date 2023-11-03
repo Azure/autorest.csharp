@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,23 +14,28 @@ namespace xml_service.Models
     /// <summary> Data about a slideshow. </summary>
     public partial class Slideshow
     {
-        /// <summary> Initializes a new instance of Slideshow. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Slideshow"/>. </summary>
         public Slideshow()
         {
             Slides = new ChangeTrackingList<Slide>();
         }
 
-        /// <summary> Initializes a new instance of Slideshow. </summary>
+        /// <summary> Initializes a new instance of <see cref="Slideshow"/>. </summary>
         /// <param name="title"></param>
         /// <param name="date"></param>
         /// <param name="author"></param>
         /// <param name="slides"></param>
-        internal Slideshow(string title, string date, string author, IList<Slide> slides)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Slideshow(string title, string date, string author, IList<Slide> slides, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Title = title;
             Date = date;
             Author = author;
             Slides = slides;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the title. </summary>

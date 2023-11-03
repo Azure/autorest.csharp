@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace paging.Models
     /// <summary> The ProductResultValueWithXMSClientName. </summary>
     internal partial class ProductResultValueWithXMSClientName
     {
-        /// <summary> Initializes a new instance of ProductResultValueWithXMSClientName. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ProductResultValueWithXMSClientName"/>. </summary>
         internal ProductResultValueWithXMSClientName()
         {
             Indexes = new ChangeTrackingList<Product>();
         }
 
-        /// <summary> Initializes a new instance of ProductResultValueWithXMSClientName. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductResultValueWithXMSClientName"/>. </summary>
         /// <param name="indexes"></param>
         /// <param name="nextLink"></param>
-        internal ProductResultValueWithXMSClientName(IReadOnlyList<Product> indexes, string nextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductResultValueWithXMSClientName(IReadOnlyList<Product> indexes, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Indexes = indexes;
             NextLink = nextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the indexes. </summary>

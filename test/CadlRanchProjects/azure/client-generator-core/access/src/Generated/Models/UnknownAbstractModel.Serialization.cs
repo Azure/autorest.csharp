@@ -15,11 +15,11 @@ using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    internal partial class UnknownAbstractModel : IUtf8JsonSerializable, IJsonModel<UnknownAbstractModel>
+    internal partial class UnknownAbstractModel : IUtf8JsonSerializable, IJsonModel<AbstractModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownAbstractModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AbstractModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownAbstractModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<AbstractModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -44,12 +44,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             writer.WriteEndObject();
         }
 
-        UnknownAbstractModel IJsonModel<UnknownAbstractModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AbstractModel IJsonModel<AbstractModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -89,28 +89,30 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return new UnknownAbstractModel(kind, name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownAbstractModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<AbstractModel>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownAbstractModel IModel<UnknownAbstractModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AbstractModel IModel<AbstractModel>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownAbstractModel(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<AbstractModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -123,7 +125,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            throw new Exception();
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

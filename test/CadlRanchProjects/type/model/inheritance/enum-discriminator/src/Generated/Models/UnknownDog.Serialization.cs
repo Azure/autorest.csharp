@@ -15,11 +15,11 @@ using Azure.Core;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    internal partial class UnknownDog : IUtf8JsonSerializable, IJsonModel<UnknownDog>
+    internal partial class UnknownDog : IUtf8JsonSerializable, IJsonModel<Dog>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownDog>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Dog>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownDog>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Dog>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -44,12 +44,12 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        UnknownDog IJsonModel<UnknownDog>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Dog IJsonModel<Dog>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -89,28 +89,30 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return new UnknownDog(kind, weight, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownDog>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<Dog>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownDog IModel<UnknownDog>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Dog IModel<Dog>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownDog(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Dog>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -123,7 +125,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            throw new Exception();
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

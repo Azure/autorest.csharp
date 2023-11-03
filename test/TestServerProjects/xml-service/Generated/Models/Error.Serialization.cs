@@ -5,13 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    internal partial class Error : IXmlSerializable
+    internal partial class Error : IXmlSerializable, IModel<Error>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -31,7 +35,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static Error DeserializeError(XElement element)
+        internal static Error DeserializeError(XElement element, ModelReaderWriterOptions options = null)
         {
             int? status = default;
             string message = default;
@@ -43,7 +47,43 @@ namespace xml_service.Models
             {
                 message = (string)messageElement;
             }
-            return new Error(status, message);
+            return new Error(status, message, default);
         }
+
+        BinaryData IModel<Error>.Write(ModelReaderWriterOptions options)
+        {
+            bool implementsJson = this is IJsonModel<Error>;
+            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Error IModel<Error>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return DeserializeError(XElement.Load(data.ToStream()), options);
+        }
+
+        ModelReaderWriterFormat IModel<Error>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

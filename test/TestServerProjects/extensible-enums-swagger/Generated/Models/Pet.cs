@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace extensible_enums_swagger.Models
 {
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="intEnum"></param>
         public Pet(IntEnum intEnum)
         {
             IntEnum = intEnum;
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"> name. </param>
         /// <param name="daysOfWeek"> Type of Pet. </param>
         /// <param name="intEnum"></param>
-        internal Pet(string name, DaysOfWeekExtensibleEnum? daysOfWeek, IntEnum intEnum)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string name, DaysOfWeekExtensibleEnum? daysOfWeek, IntEnum intEnum, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             DaysOfWeek = daysOfWeek;
             IntEnum = intEnum;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>
+        internal Pet()
+        {
         }
 
         /// <summary> name. </summary>

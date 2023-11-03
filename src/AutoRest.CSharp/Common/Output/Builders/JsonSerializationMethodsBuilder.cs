@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
 
             // if the model is a struct, it needs to implement IJsonModel<object> as well which leads to another 2 methods
-            if (jsonObjectSerialization.IModelObjectInterface is { } jsonModelObjectInterface)
+            if (jsonObjectSerialization.IJsonModelObjectInterface is { } jsonModelObjectInterface)
             {
                 // void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
                 yield return new
@@ -237,8 +237,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                  */
                 var jsonPart = new MethodBodyStatement[]
                 {
-                UsingDeclare("document", JsonDocumentExpression.Parse(dataParameter), out var docVariable),
-                Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, optionsParameter))
+                    UsingDeclare("document", JsonDocumentExpression.Parse(dataParameter), out var docVariable),
+                    Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, optionsParameter))
                 };
                 // return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
                 var xmlPart = Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), optionsParameter));

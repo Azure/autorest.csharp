@@ -6,17 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace required_optional.Models
 {
-    public partial class ClassOptionalWrapper : IUtf8JsonSerializable, IModelJsonSerializable<ClassOptionalWrapper>
+    public partial class ClassOptionalWrapper : IUtf8JsonSerializable, IJsonModel<ClassOptionalWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ClassOptionalWrapper>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClassOptionalWrapper>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<ClassOptionalWrapper>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<ClassOptionalWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Value))
@@ -24,40 +26,47 @@ namespace required_optional.Models
                 writer.WritePropertyName("value"u8);
                 writer.WriteObjectValue(Value);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        ClassOptionalWrapper IModelJsonSerializable<ClassOptionalWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ClassOptionalWrapper IJsonModel<ClassOptionalWrapper>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeClassOptionalWrapper(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<ClassOptionalWrapper>.Serialize(ModelSerializerOptions options)
+        internal static ClassOptionalWrapper DeserializeClassOptionalWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        ClassOptionalWrapper IModelSerializable<ClassOptionalWrapper>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeClassOptionalWrapper(document.RootElement, options);
-        }
-
-        internal static ClassOptionalWrapper DeserializeClassOptionalWrapper(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<Product> value = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -69,8 +78,38 @@ namespace required_optional.Models
                     value = Product.DeserializeProduct(property.Value);
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ClassOptionalWrapper(value.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ClassOptionalWrapper(value.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IModel<ClassOptionalWrapper>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return ModelReaderWriter.Write(this, options);
+        }
+
+        ClassOptionalWrapper IModel<ClassOptionalWrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeClassOptionalWrapper(document.RootElement, options);
+        }
+
+        ModelReaderWriterFormat IModel<ClassOptionalWrapper>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

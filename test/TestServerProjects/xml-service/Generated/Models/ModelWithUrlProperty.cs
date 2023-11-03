@@ -6,22 +6,28 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace xml_service.Models
 {
     /// <summary> The ModelWithUrlProperty. </summary>
     public partial class ModelWithUrlProperty
     {
-        /// <summary> Initializes a new instance of ModelWithUrlProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithUrlProperty"/>. </summary>
         public ModelWithUrlProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithUrlProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUrlProperty"/>. </summary>
         /// <param name="url"></param>
-        internal ModelWithUrlProperty(Uri url)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithUrlProperty(Uri url, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Url = url;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the url. </summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Inheritance.Models
 {
     /// <summary>
@@ -14,16 +17,21 @@ namespace Inheritance.Models
     /// </summary>
     internal abstract partial class BaseClassWithEnumDiscriminator
     {
-        /// <summary> Initializes a new instance of BaseClassWithEnumDiscriminator. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithEnumDiscriminator"/>. </summary>
         protected BaseClassWithEnumDiscriminator()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseClassWithEnumDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithEnumDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"></param>
-        internal BaseClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DiscriminatorProperty = discriminatorProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the discriminator property. </summary>

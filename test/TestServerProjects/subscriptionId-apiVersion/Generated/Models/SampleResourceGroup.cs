@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace subscriptionId_apiVersion.Models
 {
     /// <summary> The SampleResourceGroup. </summary>
     public partial class SampleResourceGroup
     {
-        /// <summary> Initializes a new instance of SampleResourceGroup. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
         internal SampleResourceGroup()
         {
         }
 
-        /// <summary> Initializes a new instance of SampleResourceGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
         /// <param name="name"> resource group name 'testgroup101'. </param>
         /// <param name="location"> resource group location 'West US'. </param>
-        internal SampleResourceGroup(string name, string location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SampleResourceGroup(string name, string location, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Location = location;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> resource group name 'testgroup101'. </summary>

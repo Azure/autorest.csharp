@@ -7,45 +7,53 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(PrivateEndpointConnectionListConverter))]
-    public partial class PrivateEndpointConnectionList : IUtf8JsonSerializable, IModelJsonSerializable<PrivateEndpointConnectionList>
+    public partial class PrivateEndpointConnectionList : IUtf8JsonSerializable, IJsonModel<PrivateEndpointConnectionList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PrivateEndpointConnectionList>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateEndpointConnectionList>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<PrivateEndpointConnectionList>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<PrivateEndpointConnectionList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsCollectionDefined(Value))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("value"u8);
-                writer.WriteStartArray();
-                foreach (var item in Value)
+                if (Optional.IsCollectionDefined(Value))
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WritePropertyName("value"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in Value)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
 
-        PrivateEndpointConnectionList IModelJsonSerializable<PrivateEndpointConnectionList>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PrivateEndpointConnectionList IJsonModel<PrivateEndpointConnectionList>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializePrivateEndpointConnectionList(document.RootElement, options);
         }
 
-        internal static PrivateEndpointConnectionList DeserializePrivateEndpointConnectionList(JsonElement element, ModelSerializerOptions options = null)
+        internal static PrivateEndpointConnectionList DeserializePrivateEndpointConnectionList(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -72,20 +80,30 @@ namespace Azure.ResourceManager.Fake.Models
             return new PrivateEndpointConnectionList(Optional.ToList(value));
         }
 
-        BinaryData IModelSerializable<PrivateEndpointConnectionList>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<PrivateEndpointConnectionList>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        PrivateEndpointConnectionList IModelSerializable<PrivateEndpointConnectionList>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        PrivateEndpointConnectionList IModel<PrivateEndpointConnectionList>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializePrivateEndpointConnectionList(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<PrivateEndpointConnectionList>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         internal partial class PrivateEndpointConnectionListConverter : JsonConverter<PrivateEndpointConnectionList>
         {

@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace custom_baseUrl_paging.Models
 {
     /// <summary> The ProductProperties. </summary>
     public partial class ProductProperties
     {
-        /// <summary> Initializes a new instance of ProductProperties. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ProductProperties"/>. </summary>
         internal ProductProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of ProductProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductProperties"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        internal ProductProperties(int? id, string name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductProperties(int? id, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

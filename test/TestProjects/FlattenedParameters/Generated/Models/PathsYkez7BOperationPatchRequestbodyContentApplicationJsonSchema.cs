@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,22 @@ namespace FlattenedParameters.Models
     /// <summary> The PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema
     {
-        /// <summary> Initializes a new instance of PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         public PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema()
         {
             Items = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="items"></param>
-        internal PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(IList<string> items)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(IList<string> items, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Items = items;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the items. </summary>

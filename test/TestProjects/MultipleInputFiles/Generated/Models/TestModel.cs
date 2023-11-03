@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MultipleInputFiles.Models
 {
     /// <summary> . </summary>
     public partial class TestModel
     {
-        /// <summary> Initializes a new instance of TestModel. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="TestModel"/>. </summary>
         public TestModel()
         {
         }
 
-        /// <summary> Initializes a new instance of TestModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="TestModel"/>. </summary>
         /// <param name="code"></param>
         /// <param name="status"></param>
-        internal TestModel(string code, string status)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TestModel(string code, string status, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Status = status;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the code. </summary>

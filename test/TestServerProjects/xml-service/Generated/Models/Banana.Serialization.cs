@@ -6,13 +6,16 @@
 #nullable disable
 
 using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Banana : IXmlSerializable
+    public partial class Banana : IXmlSerializable, IModel<Banana>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -38,7 +41,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static Banana DeserializeBanana(XElement element)
+        internal static Banana DeserializeBanana(XElement element, ModelReaderWriterOptions options = null)
         {
             string name = default;
             string flavor = default;
@@ -55,7 +58,43 @@ namespace xml_service.Models
             {
                 expiration = expirationElement.GetDateTimeOffsetValue("O");
             }
-            return new Banana(name, flavor, expiration);
+            return new Banana(name, flavor, expiration, default);
         }
+
+        BinaryData IModel<Banana>.Write(ModelReaderWriterOptions options)
+        {
+            bool implementsJson = this is IJsonModel<Banana>;
+            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Banana IModel<Banana>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return DeserializeBanana(XElement.Load(data.ToStream()), options);
+        }
+
+        ModelReaderWriterFormat IModel<Banana>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

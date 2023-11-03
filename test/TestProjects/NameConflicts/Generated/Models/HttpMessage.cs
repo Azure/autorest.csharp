@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace NameConflicts.Models
 {
     /// <summary> The HttpMessage. </summary>
     public partial class HttpMessage
     {
-        /// <summary> Initializes a new instance of HttpMessage. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="HttpMessage"/>. </summary>
         public HttpMessage()
         {
         }
 
-        /// <summary> Initializes a new instance of HttpMessage. </summary>
+        /// <summary> Initializes a new instance of <see cref="HttpMessage"/>. </summary>
         /// <param name="property"></param>
-        internal HttpMessage(string property)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal HttpMessage(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the property. </summary>

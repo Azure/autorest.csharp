@@ -7,19 +7,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtOmitOperationGroups.Models;
 
 namespace MgmtOmitOperationGroups
 {
-    public partial class Model2Data : IUtf8JsonSerializable, IModelJsonSerializable<Model2Data>
+    public partial class Model2Data : IUtf8JsonSerializable, IJsonModel<Model2Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Model2Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model2Data>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<Model2Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<Model2Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(B))
@@ -32,37 +33,46 @@ namespace MgmtOmitOperationGroups
                 writer.WritePropertyName("modelx"u8);
                 writer.WriteObjectValue(Modelx);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(F))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("f"u8);
-                writer.WriteStringValue(F);
+                if (Optional.IsDefined(F))
+                {
+                    writer.WritePropertyName("f"u8);
+                    writer.WriteStringValue(F);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(G))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("g"u8);
-                writer.WriteStringValue(G);
+                if (Optional.IsDefined(G))
+                {
+                    writer.WritePropertyName("g"u8);
+                    writer.WriteStringValue(G);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -70,24 +80,31 @@ namespace MgmtOmitOperationGroups
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        Model2Data IModelJsonSerializable<Model2Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Model2Data IJsonModel<Model2Data>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeModel2Data(document.RootElement, options);
         }
 
-        internal static Model2Data DeserializeModel2Data(JsonElement element, ModelSerializerOptions options = null)
+        internal static Model2Data DeserializeModel2Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -153,7 +170,7 @@ namespace MgmtOmitOperationGroups
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -162,19 +179,29 @@ namespace MgmtOmitOperationGroups
             return new Model2Data(id, name, type, systemData.Value, b.Value, modelx.Value, f.Value, g.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<Model2Data>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<Model2Data>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        Model2Data IModelSerializable<Model2Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        Model2Data IModel<Model2Data>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeModel2Data(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Model2Data>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

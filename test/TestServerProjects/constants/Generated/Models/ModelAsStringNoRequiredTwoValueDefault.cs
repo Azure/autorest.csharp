@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace constants.Models
 {
     /// <summary> The ModelAsStringNoRequiredTwoValueDefault. </summary>
     internal partial class ModelAsStringNoRequiredTwoValueDefault
     {
-        /// <summary> Initializes a new instance of ModelAsStringNoRequiredTwoValueDefault. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringNoRequiredTwoValueDefault"/>. </summary>
         internal ModelAsStringNoRequiredTwoValueDefault()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelAsStringNoRequiredTwoValueDefault. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringNoRequiredTwoValueDefault"/>. </summary>
         /// <param name="parameter"></param>
-        internal ModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultEnum? parameter)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultEnum? parameter, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Parameter = parameter;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the parameter. </summary>

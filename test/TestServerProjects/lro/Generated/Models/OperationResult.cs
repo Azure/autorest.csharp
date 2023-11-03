@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace lro.Models
 {
     /// <summary> The OperationResult. </summary>
     internal partial class OperationResult
     {
-        /// <summary> Initializes a new instance of OperationResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         internal OperationResult()
         {
         }
 
-        /// <summary> Initializes a new instance of OperationResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         /// <param name="status"> The status of the request. </param>
         /// <param name="error"></param>
-        internal OperationResult(OperationResultStatus? status, OperationResultError error)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OperationResult(OperationResultStatus? status, OperationResultError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             Error = error;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The status of the request. </summary>

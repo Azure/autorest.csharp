@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace ExtensionClientName.Models
     /// <summary> The RenamedSchema. </summary>
     public partial class RenamedSchema
     {
-        /// <summary> Initializes a new instance of RenamedSchema. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RenamedSchema"/>. </summary>
         public RenamedSchema()
         {
             RenamedProperty = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of RenamedSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedSchema"/>. </summary>
         /// <param name="renamedProperty"> A description about the set of tags. </param>
         /// <param name="renamedPropertyString"> A description about the set of tags. </param>
-        internal RenamedSchema(IDictionary<string, string> renamedProperty, string renamedPropertyString)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedSchema(IDictionary<string, string> renamedProperty, string renamedPropertyString, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RenamedProperty = renamedProperty;
             RenamedPropertyString = renamedPropertyString;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A description about the set of tags. </summary>

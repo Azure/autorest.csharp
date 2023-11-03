@@ -6,26 +6,32 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace xml_service.Models
 {
     /// <summary> A banana. </summary>
     public partial class Banana
     {
-        /// <summary> Initializes a new instance of Banana. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Banana"/>. </summary>
         public Banana()
         {
         }
 
-        /// <summary> Initializes a new instance of Banana. </summary>
+        /// <summary> Initializes a new instance of <see cref="Banana"/>. </summary>
         /// <param name="name"></param>
         /// <param name="flavor"></param>
         /// <param name="expiration"> The time at which you should reconsider eating this banana. </param>
-        internal Banana(string name, string flavor, DateTimeOffset? expiration)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Banana(string name, string flavor, DateTimeOffset? expiration, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Flavor = flavor;
             Expiration = expiration;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

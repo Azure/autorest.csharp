@@ -5,23 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xml_service.Models
 {
     /// <summary> Contans property. </summary>
     public partial class ObjectWithXMsTextProperty
     {
-        /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ObjectWithXMsTextProperty"/>. </summary>
         internal ObjectWithXMsTextProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ObjectWithXMsTextProperty"/>. </summary>
         /// <param name="language"> Returned value should be 'english'. </param>
         /// <param name="content"> Returned value should be 'I am text'. </param>
-        internal ObjectWithXMsTextProperty(string language, string content)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ObjectWithXMsTextProperty(string language, string content, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Language = language;
             Content = content;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Returned value should be 'english'. </summary>

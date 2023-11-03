@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace model_flattening.Models
@@ -13,7 +14,10 @@ namespace model_flattening.Models
     /// <summary> The product documentation. </summary>
     public partial class BaseProduct
     {
-        /// <summary> Initializes a new instance of BaseProduct. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BaseProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
         public BaseProduct(string productId)
@@ -23,13 +27,20 @@ namespace model_flattening.Models
             ProductId = productId;
         }
 
-        /// <summary> Initializes a new instance of BaseProduct. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
-        internal BaseProduct(string productId, string description)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseProduct(string productId, string description, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProductId = productId;
             Description = description;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="BaseProduct"/> for deserialization. </summary>
+        internal BaseProduct()
+        {
         }
 
         /// <summary> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </summary>

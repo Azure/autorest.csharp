@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace paging.Models
@@ -13,7 +14,10 @@ namespace paging.Models
     /// <summary> Parameter group. </summary>
     public partial class CustomParameterGroup
     {
-        /// <summary> Initializes a new instance of CustomParameterGroup. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="CustomParameterGroup"/>. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
@@ -24,6 +28,22 @@ namespace paging.Models
 
             ApiVersion = apiVersion;
             Tenant = tenant;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CustomParameterGroup"/>. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomParameterGroup(string apiVersion, string tenant, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            ApiVersion = apiVersion;
+            Tenant = tenant;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CustomParameterGroup"/> for deserialization. </summary>
+        internal CustomParameterGroup()
+        {
         }
 
         /// <summary> Sets the api version to use. </summary>

@@ -14,7 +14,10 @@ namespace xml_service.Models
     /// <summary> An enumeration of containers. </summary>
     public partial class ListContainersResponse
     {
-        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
         /// <param name="maxResults"></param>
@@ -33,14 +36,15 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
         /// <param name="marker"></param>
         /// <param name="maxResults"></param>
         /// <param name="containers"></param>
         /// <param name="nextMarker"></param>
-        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ServiceEndpoint = serviceEndpoint;
             Prefix = prefix;
@@ -48,6 +52,12 @@ namespace xml_service.Models
             MaxResults = maxResults;
             Containers = containers;
             NextMarker = nextMarker;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/> for deserialization. </summary>
+        internal ListContainersResponse()
+        {
         }
 
         /// <summary> Gets the service endpoint. </summary>

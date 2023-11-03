@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace xml_service.Models
@@ -13,7 +14,10 @@ namespace xml_service.Models
     /// <summary> signed identifier. </summary>
     public partial class SignedIdentifier
     {
-        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         /// <param name="id"> a unique id. </param>
         /// <param name="accessPolicy"> The access policy. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="accessPolicy"/> is null. </exception>
@@ -24,6 +28,22 @@ namespace xml_service.Models
 
             Id = id;
             AccessPolicy = accessPolicy;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
+        /// <param name="id"> a unique id. </param>
+        /// <param name="accessPolicy"> The access policy. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SignedIdentifier(string id, AccessPolicy accessPolicy, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Id = id;
+            AccessPolicy = accessPolicy;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/> for deserialization. </summary>
+        internal SignedIdentifier()
+        {
         }
 
         /// <summary> a unique id. </summary>

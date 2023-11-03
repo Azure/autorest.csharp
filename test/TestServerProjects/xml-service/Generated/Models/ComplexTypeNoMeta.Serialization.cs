@@ -5,13 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ComplexTypeNoMeta : IXmlSerializable
+    public partial class ComplexTypeNoMeta : IXmlSerializable, IModel<ComplexTypeNoMeta>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -25,14 +29,50 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static ComplexTypeNoMeta DeserializeComplexTypeNoMeta(XElement element)
+        internal static ComplexTypeNoMeta DeserializeComplexTypeNoMeta(XElement element, ModelReaderWriterOptions options = null)
         {
             string id = default;
             if (element.Element("ID") is XElement idElement)
             {
                 id = (string)idElement;
             }
-            return new ComplexTypeNoMeta(id);
+            return new ComplexTypeNoMeta(id, default);
         }
+
+        BinaryData IModel<ComplexTypeNoMeta>.Write(ModelReaderWriterOptions options)
+        {
+            bool implementsJson = this is IJsonModel<ComplexTypeNoMeta>;
+            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        ComplexTypeNoMeta IModel<ComplexTypeNoMeta>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return DeserializeComplexTypeNoMeta(XElement.Load(data.ToStream()), options);
+        }
+
+        ModelReaderWriterFormat IModel<ComplexTypeNoMeta>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

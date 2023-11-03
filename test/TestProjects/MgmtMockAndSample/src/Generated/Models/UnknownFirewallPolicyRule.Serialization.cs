@@ -14,11 +14,11 @@ using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class UnknownFirewallPolicyRule : IUtf8JsonSerializable, IJsonModel<UnknownFirewallPolicyRule>
+    internal partial class UnknownFirewallPolicyRule : IUtf8JsonSerializable, IJsonModel<FirewallPolicyRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownFirewallPolicyRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownFirewallPolicyRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<FirewallPolicyRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -51,12 +51,12 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        UnknownFirewallPolicyRule IJsonModel<UnknownFirewallPolicyRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicyRule IJsonModel<FirewallPolicyRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -102,27 +102,29 @@ namespace MgmtMockAndSample.Models
             return new UnknownFirewallPolicyRule(name.Value, description.Value, ruleType, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownFirewallPolicyRule>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<FirewallPolicyRule>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownFirewallPolicyRule IModel<UnknownFirewallPolicyRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicyRule IModel<FirewallPolicyRule>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownFirewallPolicyRule(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<FirewallPolicyRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace paging.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class PagingGetMultiplePagesWithOffsetOptions
     {
-        /// <summary> Initializes a new instance of PagingGetMultiplePagesWithOffsetOptions. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesWithOffsetOptions"/>. </summary>
         /// <param name="offset"> Offset of return value. </param>
         public PagingGetMultiplePagesWithOffsetOptions(int offset)
         {
             Offset = offset;
         }
 
-        /// <summary> Initializes a new instance of PagingGetMultiplePagesWithOffsetOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesWithOffsetOptions"/>. </summary>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        internal PagingGetMultiplePagesWithOffsetOptions(int? maxresults, int offset, int? timeout)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PagingGetMultiplePagesWithOffsetOptions(int? maxresults, int offset, int? timeout, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Maxresults = maxresults;
             Offset = offset;
             Timeout = timeout;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesWithOffsetOptions"/> for deserialization. </summary>
+        internal PagingGetMultiplePagesWithOffsetOptions()
+        {
         }
 
         /// <summary> Sets the maximum number of items to return in the response. </summary>

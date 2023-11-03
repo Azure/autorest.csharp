@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace lro.Models
@@ -12,23 +13,25 @@ namespace lro.Models
     /// <summary> Model factory for models. </summary>
     public static partial class LroModelFactory
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Product"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
-        public static Product Product(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, string provisioningState = null, ProductPropertiesProvisioningStateValues? provisioningStateValues = null)
+        public static Product Product(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string provisioningState = null, ProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
             tags ??= new Dictionary<string, string>();
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new Product(id, type, tags, location, name, provisioningState, provisioningStateValues);
+            return new Product(id, type, tags, location, name, serializedAdditionalRawData, provisioningState, provisioningStateValues);
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -39,25 +42,28 @@ namespace lro.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Resource(id, type, tags, location, name);
+            return new Resource(id, type, tags, location, name, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of SubProduct. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SubProduct"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
         /// <returns> A new <see cref="Models.SubProduct"/> instance for mocking. </returns>
-        public static SubProduct SubProduct(string id = null, string provisioningState = null, SubProductPropertiesProvisioningStateValues? provisioningStateValues = null)
+        public static SubProduct SubProduct(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string provisioningState = null, SubProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
-            return new SubProduct(id, provisioningState, provisioningStateValues);
+            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
+
+            return new SubProduct(id, serializedAdditionalRawData, provisioningState, provisioningStateValues);
         }
 
-        /// <summary> Initializes a new instance of SubResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SubResource"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
         /// <returns> A new <see cref="Models.SubResource"/> instance for mocking. </returns>
         public static SubResource SubResource(string id = null)
         {
-            return new SubResource(id);
+            return new SubResource(id, new Dictionary<string, BinaryData>());
         }
     }
 }

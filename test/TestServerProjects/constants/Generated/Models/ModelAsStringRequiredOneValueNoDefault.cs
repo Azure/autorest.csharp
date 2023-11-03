@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace constants.Models
 {
     /// <summary> The ModelAsStringRequiredOneValueNoDefault. </summary>
     internal partial class ModelAsStringRequiredOneValueNoDefault
     {
-        /// <summary> Initializes a new instance of ModelAsStringRequiredOneValueNoDefault. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredOneValueNoDefault"/>. </summary>
         /// <param name="parameter"></param>
         internal ModelAsStringRequiredOneValueNoDefault(ModelAsStringRequiredOneValueNoDefaultEnum parameter)
         {
             Parameter = parameter;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredOneValueNoDefault"/>. </summary>
+        /// <param name="parameter"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelAsStringRequiredOneValueNoDefault(ModelAsStringRequiredOneValueNoDefaultEnum parameter, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Parameter = parameter;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredOneValueNoDefault"/> for deserialization. </summary>
+        internal ModelAsStringRequiredOneValueNoDefault()
+        {
         }
 
         /// <summary> Gets the parameter. </summary>

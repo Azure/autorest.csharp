@@ -15,7 +15,10 @@ namespace required_optional.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ArrayWrapper(IEnumerable<string> value)
@@ -25,11 +28,18 @@ namespace required_optional.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
         /// <param name="value"></param>
-        internal ArrayWrapper(IList<string> value)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ArrayWrapper(IList<string> value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/> for deserialization. </summary>
+        internal ArrayWrapper()
+        {
         }
 
         /// <summary> Gets the value. </summary>

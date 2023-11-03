@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary> The BaseError. </summary>
     internal partial class BaseError
     {
-        /// <summary> Initializes a new instance of BaseError. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BaseError"/>. </summary>
         internal BaseError()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseError. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseError"/>. </summary>
         /// <param name="someBaseProp"></param>
-        internal BaseError(string someBaseProp)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseError(string someBaseProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SomeBaseProp = someBaseProp;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the some base prop. </summary>

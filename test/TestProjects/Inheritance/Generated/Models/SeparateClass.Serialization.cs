@@ -6,19 +6,21 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
     [JsonConverter(typeof(SeparateClassConverter))]
-    public partial class SeparateClass : IUtf8JsonSerializable, IModelJsonSerializable<SeparateClass>
+    public partial class SeparateClass : IUtf8JsonSerializable, IJsonModel<SeparateClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SeparateClass>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SeparateClass>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<SeparateClass>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<SeparateClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(StringProperty))
@@ -31,34 +33,39 @@ namespace Inheritance.Models
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteObjectValue(ModelProperty);
             }
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        SeparateClass IModelJsonSerializable<SeparateClass>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SeparateClass IJsonModel<SeparateClass>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSeparateClass(document.RootElement, options);
         }
 
-        BinaryData IModelSerializable<SeparateClass>.Serialize(ModelSerializerOptions options)
+        internal static SeparateClass DeserializeSeparateClass(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-            return ModelSerializer.SerializeCore(this, options);
-        }
-
-        SeparateClass IModelSerializable<SeparateClass>.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
-
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSeparateClass(document.RootElement, options);
-        }
-
-        internal static SeparateClass DeserializeSeparateClass(JsonElement element, ModelSerializerOptions options = null)
-        {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -66,6 +73,8 @@ namespace Inheritance.Models
             }
             Optional<string> stringProperty = default;
             Optional<BaseClassWithExtensibleEnumDiscriminator> modelProperty = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"u8))
@@ -82,9 +91,39 @@ namespace Inheritance.Models
                     modelProperty = BaseClassWithExtensibleEnumDiscriminator.DeserializeBaseClassWithExtensibleEnumDiscriminator(property.Value);
                     continue;
                 }
+                if (options.Format == ModelReaderWriterFormat.Json)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SeparateClass(stringProperty.Value, modelProperty.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SeparateClass(stringProperty.Value, modelProperty.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IModel<SeparateClass>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return ModelReaderWriter.Write(this, options);
+        }
+
+        SeparateClass IModel<SeparateClass>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeSeparateClass(document.RootElement, options);
+        }
+
+        ModelReaderWriterFormat IModel<SeparateClass>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>
         {

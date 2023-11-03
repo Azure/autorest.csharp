@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
-    public partial class WritableSubResourceModel2 : IUtf8JsonSerializable, IModelJsonSerializable<WritableSubResourceModel2>
+    public partial class WritableSubResourceModel2 : IUtf8JsonSerializable, IJsonModel<WritableSubResourceModel2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<WritableSubResourceModel2>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WritableSubResourceModel2>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<WritableSubResourceModel2>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<WritableSubResourceModel2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
@@ -25,23 +26,20 @@ namespace MgmtSupersetFlattenInheritance.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(IdPropertiesId))
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (Optional.IsDefined(IdPropertiesId))
-                {
-                    writer.WritePropertyName("id"u8);
-                    writer.WriteStringValue(IdPropertiesId);
-                }
-                if (Optional.IsDefined(Foo))
-                {
-                    writer.WritePropertyName("foo"u8);
-                    writer.WriteStringValue(Foo);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(IdPropertiesId);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (Optional.IsDefined(Foo))
+            {
+                writer.WritePropertyName("foo"u8);
+                writer.WriteStringValue(Foo);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,24 +47,31 @@ namespace MgmtSupersetFlattenInheritance.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        WritableSubResourceModel2 IModelJsonSerializable<WritableSubResourceModel2>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        WritableSubResourceModel2 IJsonModel<WritableSubResourceModel2>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeWritableSubResourceModel2(document.RootElement, options);
         }
 
-        internal static WritableSubResourceModel2 DeserializeWritableSubResourceModel2(JsonElement element, ModelSerializerOptions options = null)
+        internal static WritableSubResourceModel2 DeserializeWritableSubResourceModel2(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -106,7 +111,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -115,19 +120,29 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new WritableSubResourceModel2(id.Value, id0.Value, foo.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<WritableSubResourceModel2>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<WritableSubResourceModel2>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        WritableSubResourceModel2 IModelSerializable<WritableSubResourceModel2>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        WritableSubResourceModel2 IModel<WritableSubResourceModel2>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeWritableSubResourceModel2(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<WritableSubResourceModel2>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

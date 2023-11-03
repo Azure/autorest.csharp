@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace paging.Models
 {
     /// <summary> The BodyParam. </summary>
     public partial class BodyParam
     {
-        /// <summary> Initializes a new instance of BodyParam. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="BodyParam"/>. </summary>
         public BodyParam()
         {
         }
 
-        /// <summary> Initializes a new instance of BodyParam. </summary>
+        /// <summary> Initializes a new instance of <see cref="BodyParam"/>. </summary>
         /// <param name="name"></param>
-        internal BodyParam(string name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BodyParam(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

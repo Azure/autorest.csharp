@@ -14,11 +14,11 @@ using Azure.Core;
 
 namespace MgmtSafeFlatten.Models
 {
-    internal partial class UnknownLayerOneBaseType : IUtf8JsonSerializable, IJsonModel<UnknownLayerOneBaseType>
+    internal partial class UnknownLayerOneBaseType : IUtf8JsonSerializable, IJsonModel<LayerOneBaseType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownLayerOneBaseType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LayerOneBaseType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownLayerOneBaseType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<LayerOneBaseType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -41,12 +41,12 @@ namespace MgmtSafeFlatten.Models
             writer.WriteEndObject();
         }
 
-        UnknownLayerOneBaseType IJsonModel<UnknownLayerOneBaseType>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LayerOneBaseType IJsonModel<LayerOneBaseType>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -80,27 +80,29 @@ namespace MgmtSafeFlatten.Models
             return new UnknownLayerOneBaseType(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownLayerOneBaseType>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<LayerOneBaseType>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownLayerOneBaseType IModel<UnknownLayerOneBaseType>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LayerOneBaseType IModel<LayerOneBaseType>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownLayerOneBaseType(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<LayerOneBaseType>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

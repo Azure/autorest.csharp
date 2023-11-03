@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace media_types.Models
 {
     /// <summary> Uri or local path to source data. </summary>
     public partial class SourcePath
     {
-        /// <summary> Initializes a new instance of SourcePath. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="SourcePath"/>. </summary>
         public SourcePath()
         {
         }
 
-        /// <summary> Initializes a new instance of SourcePath. </summary>
+        /// <summary> Initializes a new instance of <see cref="SourcePath"/>. </summary>
         /// <param name="source"> File source path. </param>
-        internal SourcePath(string source)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SourcePath(string source, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Source = source;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> File source path. </summary>

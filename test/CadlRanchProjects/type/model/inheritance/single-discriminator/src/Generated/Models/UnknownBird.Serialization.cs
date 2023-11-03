@@ -15,11 +15,11 @@ using Azure.Core;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    internal partial class UnknownBird : IUtf8JsonSerializable, IJsonModel<UnknownBird>
+    internal partial class UnknownBird : IUtf8JsonSerializable, IJsonModel<Bird>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownBird>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Bird>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownBird>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Bird>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -44,12 +44,12 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        UnknownBird IJsonModel<UnknownBird>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Bird IJsonModel<Bird>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -89,28 +89,30 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return new UnknownBird(kind, wingspan, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownBird>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<Bird>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownBird IModel<UnknownBird>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Bird IModel<Bird>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownBird(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<Bird>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -123,7 +125,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            throw new Exception();
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

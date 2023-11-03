@@ -14,11 +14,11 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownMyBaseType : IUtf8JsonSerializable, IJsonModel<UnknownMyBaseType>
+    internal partial class UnknownMyBaseType : IUtf8JsonSerializable, IJsonModel<MyBaseType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownMyBaseType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyBaseType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownMyBaseType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<MyBaseType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -54,12 +54,12 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        UnknownMyBaseType IJsonModel<UnknownMyBaseType>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MyBaseType IJsonModel<MyBaseType>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -117,29 +117,29 @@ namespace body_complex.Models
             return new UnknownMyBaseType(kind, propB1.Value, propBH1.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownMyBaseType>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<MyBaseType>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownMyBaseType IModel<UnknownMyBaseType>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MyBaseType IModel<MyBaseType>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownMyBaseType(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnknownMyBaseType>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        ModelReaderWriterFormat IModel<MyBaseType>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

@@ -46,7 +46,8 @@ namespace Azure.Storage.Tables.Models
 
         BinaryData IModel<GeoReplication>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool implementsJson = this is IJsonModel<GeoReplication>;
+            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
                 throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
@@ -71,7 +72,7 @@ namespace Azure.Storage.Tables.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             return DeserializeGeoReplication(XElement.Load(data.ToStream()), options);

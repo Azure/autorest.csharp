@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace model_flattening.Models
 {
     /// <summary> The wrapped produc. </summary>
     public partial class WrappedProduct
     {
-        /// <summary> Initializes a new instance of WrappedProduct. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="WrappedProduct"/>. </summary>
         public WrappedProduct()
         {
         }
 
-        /// <summary> Initializes a new instance of WrappedProduct. </summary>
+        /// <summary> Initializes a new instance of <see cref="WrappedProduct"/>. </summary>
         /// <param name="value"> the product value. </param>
-        internal WrappedProduct(string value)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WrappedProduct(string value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> the product value. </summary>

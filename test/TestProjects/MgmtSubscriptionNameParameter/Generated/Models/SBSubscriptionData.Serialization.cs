@@ -7,133 +7,146 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtSubscriptionNameParameter.Models;
 
 namespace MgmtSubscriptionNameParameter
 {
-    public partial class SBSubscriptionData : IUtf8JsonSerializable, IModelJsonSerializable<SBSubscriptionData>
+    public partial class SBSubscriptionData : IUtf8JsonSerializable, IJsonModel<SBSubscriptionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SBSubscriptionData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SBSubscriptionData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<SBSubscriptionData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<SBSubscriptionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(SystemData))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WritePropertyName("systemData"u8);
+                    JsonSerializer.Serialize(writer, SystemData);
+                }
             }
-            if (options.Format == ModelSerializerFormat.Json)
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteStartObject();
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(MessageCount))
+                if (Optional.IsDefined(MessageCount))
                 {
                     writer.WritePropertyName("messageCount"u8);
                     writer.WriteNumberValue(MessageCount.Value);
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(CreatedOn))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(CreatedOn))
                 {
                     writer.WritePropertyName("createdAt"u8);
                     writer.WriteStringValue(CreatedOn.Value, "O");
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(AccessedOn))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(AccessedOn))
                 {
                     writer.WritePropertyName("accessedAt"u8);
                     writer.WriteStringValue(AccessedOn.Value, "O");
                 }
-                if (options.Format == ModelSerializerFormat.Json && Optional.IsDefined(UpdatedOn))
+            }
+            if (options.Format == ModelReaderWriterFormat.Json)
+            {
+                if (Optional.IsDefined(UpdatedOn))
                 {
                     writer.WritePropertyName("updatedAt"u8);
                     writer.WriteStringValue(UpdatedOn.Value, "O");
                 }
-                if (Optional.IsDefined(LockDuration))
-                {
-                    writer.WritePropertyName("lockDuration"u8);
-                    writer.WriteStringValue(LockDuration.Value, "P");
-                }
-                if (Optional.IsDefined(RequiresSession))
-                {
-                    writer.WritePropertyName("requiresSession"u8);
-                    writer.WriteBooleanValue(RequiresSession.Value);
-                }
-                if (Optional.IsDefined(DefaultMessageTimeToLive))
-                {
-                    writer.WritePropertyName("defaultMessageTimeToLive"u8);
-                    writer.WriteStringValue(DefaultMessageTimeToLive.Value, "P");
-                }
-                if (Optional.IsDefined(DeadLetteringOnFilterEvaluationExceptions))
-                {
-                    writer.WritePropertyName("deadLetteringOnFilterEvaluationExceptions"u8);
-                    writer.WriteBooleanValue(DeadLetteringOnFilterEvaluationExceptions.Value);
-                }
-                if (Optional.IsDefined(DeadLetteringOnMessageExpiration))
-                {
-                    writer.WritePropertyName("deadLetteringOnMessageExpiration"u8);
-                    writer.WriteBooleanValue(DeadLetteringOnMessageExpiration.Value);
-                }
-                if (Optional.IsDefined(DuplicateDetectionHistoryTimeWindow))
-                {
-                    writer.WritePropertyName("duplicateDetectionHistoryTimeWindow"u8);
-                    writer.WriteStringValue(DuplicateDetectionHistoryTimeWindow.Value, "P");
-                }
-                if (Optional.IsDefined(MaxDeliveryCount))
-                {
-                    writer.WritePropertyName("maxDeliveryCount"u8);
-                    writer.WriteNumberValue(MaxDeliveryCount.Value);
-                }
-                if (Optional.IsDefined(EnableBatchedOperations))
-                {
-                    writer.WritePropertyName("enableBatchedOperations"u8);
-                    writer.WriteBooleanValue(EnableBatchedOperations.Value);
-                }
-                if (Optional.IsDefined(AutoDeleteOnIdle))
-                {
-                    writer.WritePropertyName("autoDeleteOnIdle"u8);
-                    writer.WriteStringValue(AutoDeleteOnIdle.Value, "P");
-                }
-                if (Optional.IsDefined(ForwardTo))
-                {
-                    writer.WritePropertyName("forwardTo"u8);
-                    writer.WriteStringValue(ForwardTo);
-                }
-                if (Optional.IsDefined(ForwardDeadLetteredMessagesTo))
-                {
-                    writer.WritePropertyName("forwardDeadLetteredMessagesTo"u8);
-                    writer.WriteStringValue(ForwardDeadLetteredMessagesTo);
-                }
-                if (Optional.IsDefined(IsClientAffine))
-                {
-                    writer.WritePropertyName("isClientAffine"u8);
-                    writer.WriteBooleanValue(IsClientAffine.Value);
-                }
-                if (Optional.IsDefined(ClientAffineProperties))
-                {
-                    writer.WritePropertyName("clientAffineProperties"u8);
-                    writer.WriteObjectValue(ClientAffineProperties);
-                }
-                writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelSerializerFormat.Json)
+            if (Optional.IsDefined(LockDuration))
+            {
+                writer.WritePropertyName("lockDuration"u8);
+                writer.WriteStringValue(LockDuration.Value, "P");
+            }
+            if (Optional.IsDefined(RequiresSession))
+            {
+                writer.WritePropertyName("requiresSession"u8);
+                writer.WriteBooleanValue(RequiresSession.Value);
+            }
+            if (Optional.IsDefined(DefaultMessageTimeToLive))
+            {
+                writer.WritePropertyName("defaultMessageTimeToLive"u8);
+                writer.WriteStringValue(DefaultMessageTimeToLive.Value, "P");
+            }
+            if (Optional.IsDefined(DeadLetteringOnFilterEvaluationExceptions))
+            {
+                writer.WritePropertyName("deadLetteringOnFilterEvaluationExceptions"u8);
+                writer.WriteBooleanValue(DeadLetteringOnFilterEvaluationExceptions.Value);
+            }
+            if (Optional.IsDefined(DeadLetteringOnMessageExpiration))
+            {
+                writer.WritePropertyName("deadLetteringOnMessageExpiration"u8);
+                writer.WriteBooleanValue(DeadLetteringOnMessageExpiration.Value);
+            }
+            if (Optional.IsDefined(DuplicateDetectionHistoryTimeWindow))
+            {
+                writer.WritePropertyName("duplicateDetectionHistoryTimeWindow"u8);
+                writer.WriteStringValue(DuplicateDetectionHistoryTimeWindow.Value, "P");
+            }
+            if (Optional.IsDefined(MaxDeliveryCount))
+            {
+                writer.WritePropertyName("maxDeliveryCount"u8);
+                writer.WriteNumberValue(MaxDeliveryCount.Value);
+            }
+            if (Optional.IsDefined(EnableBatchedOperations))
+            {
+                writer.WritePropertyName("enableBatchedOperations"u8);
+                writer.WriteBooleanValue(EnableBatchedOperations.Value);
+            }
+            if (Optional.IsDefined(AutoDeleteOnIdle))
+            {
+                writer.WritePropertyName("autoDeleteOnIdle"u8);
+                writer.WriteStringValue(AutoDeleteOnIdle.Value, "P");
+            }
+            if (Optional.IsDefined(ForwardTo))
+            {
+                writer.WritePropertyName("forwardTo"u8);
+                writer.WriteStringValue(ForwardTo);
+            }
+            if (Optional.IsDefined(ForwardDeadLetteredMessagesTo))
+            {
+                writer.WritePropertyName("forwardDeadLetteredMessagesTo"u8);
+                writer.WriteStringValue(ForwardDeadLetteredMessagesTo);
+            }
+            if (Optional.IsDefined(IsClientAffine))
+            {
+                writer.WritePropertyName("isClientAffine"u8);
+                writer.WriteBooleanValue(IsClientAffine.Value);
+            }
+            if (Optional.IsDefined(ClientAffineProperties))
+            {
+                writer.WritePropertyName("clientAffineProperties"u8);
+                writer.WriteObjectValue(ClientAffineProperties);
+            }
+            writer.WriteEndObject();
+            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -141,24 +154,31 @@ namespace MgmtSubscriptionNameParameter
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
             writer.WriteEndObject();
         }
 
-        SBSubscriptionData IModelJsonSerializable<SBSubscriptionData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SBSubscriptionData IJsonModel<SBSubscriptionData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeSBSubscriptionData(document.RootElement, options);
         }
 
-        internal static SBSubscriptionData DeserializeSBSubscriptionData(JsonElement element, ModelSerializerOptions options = null)
+        internal static SBSubscriptionData DeserializeSBSubscriptionData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -370,7 +390,7 @@ namespace MgmtSubscriptionNameParameter
                     }
                     continue;
                 }
-                if (options.Format == ModelSerializerFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Json)
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -379,19 +399,29 @@ namespace MgmtSubscriptionNameParameter
             return new SBSubscriptionData(id, name, type, systemData.Value, Optional.ToNullable(messageCount), Optional.ToNullable(createdAt), Optional.ToNullable(accessedAt), Optional.ToNullable(updatedAt), Optional.ToNullable(lockDuration), Optional.ToNullable(requiresSession), Optional.ToNullable(defaultMessageTimeToLive), Optional.ToNullable(deadLetteringOnFilterEvaluationExceptions), Optional.ToNullable(deadLetteringOnMessageExpiration), Optional.ToNullable(duplicateDetectionHistoryTimeWindow), Optional.ToNullable(maxDeliveryCount), Optional.ToNullable(enableBatchedOperations), Optional.ToNullable(autoDeleteOnIdle), forwardTo.Value, forwardDeadLetteredMessagesTo.Value, Optional.ToNullable(isClientAffine), clientAffineProperties.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModelSerializable<SBSubscriptionData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<SBSubscriptionData>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        SBSubscriptionData IModelSerializable<SBSubscriptionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        SBSubscriptionData IModel<SBSubscriptionData>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeSBSubscriptionData(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<SBSubscriptionData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
     }
 }

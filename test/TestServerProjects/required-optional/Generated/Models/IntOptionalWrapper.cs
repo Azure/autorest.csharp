@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace required_optional.Models
 {
     /// <summary> The IntOptionalWrapper. </summary>
     public partial class IntOptionalWrapper
     {
-        /// <summary> Initializes a new instance of IntOptionalWrapper. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="IntOptionalWrapper"/>. </summary>
         public IntOptionalWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of IntOptionalWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntOptionalWrapper"/>. </summary>
         /// <param name="value"></param>
-        internal IntOptionalWrapper(int? value)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IntOptionalWrapper(int? value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the value. </summary>

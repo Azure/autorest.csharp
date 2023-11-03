@@ -14,7 +14,10 @@ namespace validation.Models
     /// <summary> The product documentation. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="child"> The product documentation. </param>
         /// <param name="constChild"> The product documentation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="child"/> or <paramref name="constChild"/> is null. </exception>
@@ -30,7 +33,7 @@ namespace validation.Models
             ConstString = ProductConstString.Constant;
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="displayNames"> Non required array of unique items from 0 to 6 elements. </param>
         /// <param name="capacity"> Non required int betwen 0 and 100 exclusive. </param>
         /// <param name="image"> Image URL representing the product. </param>
@@ -39,7 +42,8 @@ namespace validation.Models
         /// <param name="constInt"> Constant int. </param>
         /// <param name="constString"> Constant string. </param>
         /// <param name="constStringAsEnum"> Constant string as Enum. </param>
-        internal Product(IList<string> displayNames, int? capacity, string image, ChildProduct child, ConstantProduct constChild, ProductConstInt constInt, ProductConstString constString, EnumConst? constStringAsEnum)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Product(IList<string> displayNames, int? capacity, string image, ChildProduct child, ConstantProduct constChild, ProductConstInt constInt, ProductConstString constString, EnumConst? constStringAsEnum, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DisplayNames = displayNames;
             Capacity = capacity;
@@ -49,6 +53,12 @@ namespace validation.Models
             ConstInt = constInt;
             ConstString = constString;
             ConstStringAsEnum = constStringAsEnum;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Product"/> for deserialization. </summary>
+        internal Product()
+        {
         }
 
         /// <summary> Non required array of unique items from 0 to 6 elements. </summary>

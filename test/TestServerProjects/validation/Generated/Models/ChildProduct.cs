@@ -5,24 +5,32 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace validation.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class ChildProduct
     {
-        /// <summary> Initializes a new instance of ChildProduct. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ChildProduct"/>. </summary>
         public ChildProduct()
         {
             ConstProperty = ChildProductConstProperty.Constant;
         }
 
-        /// <summary> Initializes a new instance of ChildProduct. </summary>
+        /// <summary> Initializes a new instance of <see cref="ChildProduct"/>. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="count"> Count. </param>
-        internal ChildProduct(ChildProductConstProperty constProperty, int? count)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ChildProduct(ChildProductConstProperty constProperty, int? count, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConstProperty = constProperty;
             Count = count;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Constant string. </summary>

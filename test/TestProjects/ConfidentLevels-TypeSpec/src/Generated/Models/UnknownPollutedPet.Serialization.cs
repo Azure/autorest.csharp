@@ -15,11 +15,11 @@ using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class UnknownPollutedPet : IUtf8JsonSerializable, IJsonModel<UnknownPollutedPet>
+    internal partial class UnknownPollutedPet : IUtf8JsonSerializable, IJsonModel<PollutedPet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownPollutedPet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PollutedPet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownPollutedPet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<PollutedPet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -44,12 +44,12 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteEndObject();
         }
 
-        UnknownPollutedPet IJsonModel<UnknownPollutedPet>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PollutedPet IJsonModel<PollutedPet>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -89,28 +89,30 @@ namespace ConfidentLevelsInTsp.Models
             return new UnknownPollutedPet(kind, name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownPollutedPet>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<PollutedPet>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownPollutedPet IModel<UnknownPollutedPet>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PollutedPet IModel<PollutedPet>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownPollutedPet(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<PollutedPet>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -123,7 +125,9 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            throw new Exception();
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

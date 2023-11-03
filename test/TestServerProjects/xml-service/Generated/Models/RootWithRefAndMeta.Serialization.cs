@@ -5,13 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.IO;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class RootWithRefAndMeta : IXmlSerializable
+    public partial class RootWithRefAndMeta : IXmlSerializable, IModel<RootWithRefAndMeta>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -29,7 +33,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element)
+        internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element, ModelReaderWriterOptions options = null)
         {
             ComplexTypeWithMeta refToModel = default;
             string something = default;
@@ -41,7 +45,43 @@ namespace xml_service.Models
             {
                 something = (string)somethingElement;
             }
-            return new RootWithRefAndMeta(refToModel, something);
+            return new RootWithRefAndMeta(refToModel, something, default);
         }
+
+        BinaryData IModel<RootWithRefAndMeta>.Write(ModelReaderWriterOptions options)
+        {
+            bool implementsJson = this is IJsonModel<RootWithRefAndMeta>;
+            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+            }
+
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            ((IXmlSerializable)this).Write(writer, null);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        RootWithRefAndMeta IModel<RootWithRefAndMeta>.Read(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
+
+            return DeserializeRootWithRefAndMeta(XElement.Load(data.ToStream()), options);
+        }
+
+        ModelReaderWriterFormat IModel<RootWithRefAndMeta>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
     }
 }

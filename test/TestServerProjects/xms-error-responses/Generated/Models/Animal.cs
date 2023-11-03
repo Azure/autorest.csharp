@@ -5,21 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary> The Animal. </summary>
     public partial class Animal
     {
-        /// <summary> Initializes a new instance of Animal. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         internal Animal()
         {
         }
 
-        /// <summary> Initializes a new instance of Animal. </summary>
+        /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         /// <param name="aniType"></param>
-        internal Animal(string aniType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Animal(string aniType, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AniType = aniType;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the ani type. </summary>

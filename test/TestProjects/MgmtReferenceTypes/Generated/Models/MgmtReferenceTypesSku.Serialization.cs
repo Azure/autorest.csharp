@@ -6,19 +6,20 @@
 #nullable disable
 
 using System;
+using System.Net.ClientModel;
+using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(MgmtReferenceTypesSkuConverter))]
-    public partial class MgmtReferenceTypesSku : IUtf8JsonSerializable, IModelJsonSerializable<MgmtReferenceTypesSku>
+    public partial class MgmtReferenceTypesSku : IUtf8JsonSerializable, IJsonModel<MgmtReferenceTypesSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtReferenceTypesSku>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtReferenceTypesSku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<MgmtReferenceTypesSku>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IJsonModel<MgmtReferenceTypesSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -46,17 +47,21 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        MgmtReferenceTypesSku IModelJsonSerializable<MgmtReferenceTypesSku>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MgmtReferenceTypesSku IJsonModel<MgmtReferenceTypesSku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
             return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
         }
 
-        internal static MgmtReferenceTypesSku DeserializeMgmtReferenceTypesSku(JsonElement element, ModelSerializerOptions options = null)
+        internal static MgmtReferenceTypesSku DeserializeMgmtReferenceTypesSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelSerializerOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.DefaultWireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -106,20 +111,30 @@ namespace Azure.ResourceManager.Fake.Models
             return new MgmtReferenceTypesSku(name, Optional.ToNullable(tier), size.Value, family.Value, Optional.ToNullable(capacity));
         }
 
-        BinaryData IModelSerializable<MgmtReferenceTypesSku>.Serialize(ModelSerializerOptions options)
+        BinaryData IModel<MgmtReferenceTypesSku>.Write(ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
-            return ModelSerializer.SerializeCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtReferenceTypesSku IModelSerializable<MgmtReferenceTypesSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        MgmtReferenceTypesSku IModel<MgmtReferenceTypesSku>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
-            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            if (!isValid)
+            {
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+            }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<MgmtReferenceTypesSku>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         internal partial class MgmtReferenceTypesSkuConverter : JsonConverter<MgmtReferenceTypesSku>
         {

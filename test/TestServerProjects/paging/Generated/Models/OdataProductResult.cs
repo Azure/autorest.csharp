@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,24 @@ namespace paging.Models
     /// <summary> The OdataProductResult. </summary>
     internal partial class OdataProductResult
     {
-        /// <summary> Initializes a new instance of OdataProductResult. </summary>
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="OdataProductResult"/>. </summary>
         internal OdataProductResult()
         {
             Values = new ChangeTrackingList<Product>();
         }
 
-        /// <summary> Initializes a new instance of OdataProductResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OdataProductResult"/>. </summary>
         /// <param name="values"></param>
         /// <param name="odataNextLink"></param>
-        internal OdataProductResult(IReadOnlyList<Product> values, string odataNextLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OdataProductResult(IReadOnlyList<Product> values, string odataNextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Values = values;
             OdataNextLink = odataNextLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the values. </summary>
