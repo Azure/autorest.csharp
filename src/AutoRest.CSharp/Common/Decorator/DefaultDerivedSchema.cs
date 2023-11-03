@@ -96,6 +96,7 @@ namespace AutoRest.CSharp.Common.Decorator
                         },
                         DiscriminatorValue = "Unknown",
                         SerializationFormats = { KnownMediaType.Json },
+                        IsUnknownDiscriminatorModel = true
                     };
 
                     if (actualBaseSchema.Parents is not null)

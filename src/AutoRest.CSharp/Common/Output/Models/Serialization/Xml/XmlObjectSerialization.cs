@@ -2,6 +2,9 @@
 // Licensed under the MIT License.
 
 
+using System.Net.ClientModel.Core;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Xml
@@ -9,18 +12,24 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
     internal class XmlObjectSerialization
     {
         public XmlObjectSerialization(string name,
-            CSharpType type,
+            SerializableObjectType model,
             XmlObjectElementSerialization[] elements,
             XmlObjectAttributeSerialization[] attributes,
             XmlObjectArraySerialization[] embeddedArrays,
             XmlObjectContentSerialization? contentSerialization)
         {
-            Type = type;
+            Type = model.Type;
             Elements = elements;
             Attributes = attributes;
             Name = name;
             EmbeddedArrays = embeddedArrays;
             ContentSerialization = contentSerialization;
+
+            // select interface model type here
+            var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
+            IModelInterface = new CSharpType(typeof(IModel<>), modelType);
+            IXmlInterface = Configuration.ApiTypes.IXmlSerializableType;
+            IModelObjectInterface = model.IsStruct ? new CSharpType(typeof(IModel<>), typeof(object)) : null;
         }
 
         public string Name { get; }
@@ -29,5 +38,18 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
         public XmlObjectArraySerialization[] EmbeddedArrays { get; }
         public XmlObjectContentSerialization? ContentSerialization { get; }
         public CSharpType Type { get; }
+
+        /// <summary>
+        /// The interface IXmlSerializable
+        /// </summary>
+        public CSharpType IXmlInterface { get; }
+        /// <summary>
+        /// The interface IModel{T}
+        /// </summary>
+        public CSharpType IModelInterface { get; }
+        /// <summary>
+        /// The interface IModel{object}
+        /// </summary>
+        public CSharpType? IModelObjectInterface { get; }
     }
 }

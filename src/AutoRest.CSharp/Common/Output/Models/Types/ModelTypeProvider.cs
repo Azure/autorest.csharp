@@ -98,6 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
             IsPropertyBag = inputModel.IsPropertyBag;
+            IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -426,7 +427,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), CreateAdditionalPropertiesSerialization(), Discriminator, false);
+            return new(this, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), CreateAdditionalPropertiesSerialization(), Discriminator, false);
         }
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()

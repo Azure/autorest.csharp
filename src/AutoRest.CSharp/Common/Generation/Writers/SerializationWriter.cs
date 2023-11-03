@@ -3,10 +3,8 @@
 
 using System;
 using System.Linq;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -14,7 +12,6 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
-using Azure.Core.Serialization;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -38,16 +35,8 @@ namespace AutoRest.CSharp.Generation.Writers
             var declaration = model.Declaration;
             var jsonSerialization = model.JsonSerialization;
             var xmlSerialization = model.XmlSerialization;
-            var isStruct = model.IsStruct;
-            var hasJson = jsonSerialization != null;
-            var hasXml = xmlSerialization != null;
 
-            //var typeOfT = model.IsUnknownDerivedType ? model.Inherits!.Implementation!.Type : model.Type;
-            var typeOfT = model.Type;
-            CSharpType iModelSerializableType = new CSharpType(typeof(IModel<>), typeOfT);
-            CSharpType iModelJsonSerializableType = new CSharpType(typeof(IJsonModel<>), typeOfT);
-
-            if (!hasJson && !hasXml)
+            if (jsonSerialization == null && xmlSerialization == null)
             {
                 return;
             }
@@ -59,14 +48,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 // TODO -- write the serialization proxy attribute here
 
-                writer.Append($"{declaration.Accessibility} partial {(isStruct ? "struct" : "class")} {declaration.Name}");
+                writer.Append($"{declaration.Accessibility} partial {(model.IsStruct ? "struct" : "class")} {declaration.Name} : ");
 
-                writer
-                    .AppendIf($": ", hasJson || hasXml)
-                    .AppendIf($"{Configuration.ApiTypes.IUtf8JsonSerializableType}, {iModelJsonSerializableType}, ", hasJson)
-                    .AppendIf($"{typeof(IJsonModel<object>)}, ", hasJson && model.IsStruct)
-                    .AppendIf($"{typeof(IXmlSerializable)}, {iModelSerializableType}, ", hasXml)
-                    .RemoveTrailingComma();
+                if (jsonSerialization != null)
+                {
+                    writer.Append($"{jsonSerialization.IJsonInterface}, {jsonSerialization.IJsonModelInterface}, ");
+                    if (jsonSerialization.IModelObjectInterface is { } iModelInterface)
+                        writer.Append($"{iModelInterface}, ");
+                }
+                if (xmlSerialization != null)
+                {
+                    writer.Append($"{xmlSerialization.IXmlInterface}, {xmlSerialization.IModelInterface}, ");
+                }
+
+                writer.RemoveTrailingComma();
 
                 writer.Line();
                 using (writer.Scope())
@@ -81,7 +76,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteJsonSerialization(writer, model, jsonSerialization);
                     }
 
-                    WriteIModelImplementations(writer, model, hasJson, hasXml);
+                    WriteIModelImplementations(writer, model, jsonSerialization, xmlSerialization);
 
                     foreach (var method in model.Methods)
                     {
@@ -157,11 +152,11 @@ namespace AutoRest.CSharp.Generation.Writers
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="model"></param>
-        /// <param name="hasJson"></param>
-        /// <param name="hasXml"></param>
-        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, bool hasJson, bool hasXml)
+        /// <param name="json"></param>
+        /// <param name="xml"></param>
+        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml)
         {
-            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, hasJson, hasXml))
+            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml))
             {
                 writer.WriteMethod(method);
             }

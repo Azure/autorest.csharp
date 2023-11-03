@@ -15,11 +15,11 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    internal partial class UnknownOutputBaseModelWithDiscriminator : IUtf8JsonSerializable, IJsonModel<UnknownOutputBaseModelWithDiscriminator>
+    internal partial class UnknownOutputBaseModelWithDiscriminator : IUtf8JsonSerializable, IJsonModel<OutputBaseModelWithDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownOutputBaseModelWithDiscriminator>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputBaseModelWithDiscriminator>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
 
-        void IJsonModel<UnknownOutputBaseModelWithDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<OutputBaseModelWithDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -42,12 +42,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        UnknownOutputBaseModelWithDiscriminator IJsonModel<UnknownOutputBaseModelWithDiscriminator>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OutputBaseModelWithDiscriminator IJsonModel<OutputBaseModelWithDiscriminator>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -81,28 +81,30 @@ namespace ModelsTypeSpec.Models
             return new UnknownOutputBaseModelWithDiscriminator(kind, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownOutputBaseModelWithDiscriminator>.Write(ModelReaderWriterOptions options)
+        BinaryData IModel<OutputBaseModelWithDiscriminator>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
-            return ModelReaderWriter.WriteCore(this, options);
+            return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownOutputBaseModelWithDiscriminator IModel<UnknownOutputBaseModelWithDiscriminator>.Read(BinaryData data, ModelReaderWriterOptions options)
+        OutputBaseModelWithDiscriminator IModel<OutputBaseModelWithDiscriminator>.Read(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
             return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement, options);
         }
+
+        ModelReaderWriterFormat IModel<OutputBaseModelWithDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -115,7 +117,9 @@ namespace ModelsTypeSpec.Models
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            throw new Exception();
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

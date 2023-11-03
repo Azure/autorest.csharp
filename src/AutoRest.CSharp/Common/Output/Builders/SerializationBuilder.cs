@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
+        public XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, SerializableObjectType objectType)
         {
             List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
             List<XmlObjectAttributeSerialization> attributes = new List<XmlObjectAttributeSerialization>();
@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.Output.Builders
 
             return new XmlObjectSerialization(
                 objectSchema.Serialization?.Xml?.Name ?? objectSchema.Language.Default.Name,
-                objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
+                objectType, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
                 contentSerialization
                 );
         }
@@ -319,7 +319,7 @@ namespace AutoRest.CSharp.Output.Builders
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectType);
-            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
+            return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
         private class SerializationPropertyBag

@@ -72,6 +72,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
+            IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
         }
 
         internal ObjectSchema ObjectSchema { get; }

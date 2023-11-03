@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
+        public bool IsUnknownDerivedType { get; protected init; }
         public bool IsPropertyBag { get; protected init; }
         public bool IsStruct => ExistingType?.IsValueType ?? false;
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
