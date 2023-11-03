@@ -869,21 +869,16 @@ export function getUsages(
         if (!op.parameters.body?.parameter && op.parameters.body?.type) {
             var effectiveBodyType = undefined;
             const affectTypes: Set<string> = new Set<string>();
-            if (resourceOperation) {
-                effectiveBodyType = resourceOperation.resourceType;
-                affectTypes.add(effectiveBodyType.name);
-            } else {
-                effectiveBodyType = getEffectiveSchemaType(
-                    context,
-                    op.parameters.body.type
-                );
-                if (effectiveBodyType.kind === "Model") {
-                    /* handle spread. */
-                    if (effectiveBodyType.name === "") {
-                        effectiveBodyType.name = `${capitalize(
-                            op.operation.name
-                        )}Request`;
-                    }
+            effectiveBodyType = getEffectiveSchemaType(
+                context,
+                op.parameters.body.type
+            );
+            if (effectiveBodyType.kind === "Model") {
+                /* handle spread. */
+                if (effectiveBodyType.name === "") {
+                    effectiveBodyType.name = `${capitalize(
+                        op.operation.name
+                    )}Request`;
                 }
             }
             if (effectiveBodyType.kind === "Model") {
@@ -905,31 +900,24 @@ export function getUsages(
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
                 let returnType = "";
+                const effectiveReturnType = getEffectiveSchemaType(
+                    context,
+                    resBody.type
+                );
                 if (
-                    resourceOperation &&
-                    resourceOperation.operation !== "list"
+                    effectiveReturnType.kind === "Model" &&
+                    effectiveReturnType.name !== ""
                 ) {
-                    returnType = resourceOperation.resourceType.name;
-                } else {
-                    const effectiveReturnType = getEffectiveSchemaType(
-                        context,
-                        resBody.type
-                    );
-                    if (
-                        effectiveReturnType.kind === "Model" &&
-                        effectiveReturnType.name !== ""
-                    ) {
-                        returnType = getTypeName(context, effectiveReturnType);
-                    }
-                    /*propagate to sub models and composite models*/
-                    if (effectiveReturnType.kind === "Model") {
-                        getAllEffectedModels(
-                            effectiveReturnType,
-                            new Set<string>()
-                        ).forEach((element) => {
-                            affectedReturnTypes.add(element);
-                        });
-                    }
+                    returnType = getTypeName(context, effectiveReturnType);
+                }
+                /*propagate to sub models and composite models*/
+                if (effectiveReturnType.kind === "Model") {
+                    getAllEffectedModels(
+                        effectiveReturnType,
+                        new Set<string>()
+                    ).forEach((element) => {
+                        affectedReturnTypes.add(element);
+                    });
                 }
                 affectedReturnTypes.add(returnType);
                 for (const name of affectedReturnTypes) {

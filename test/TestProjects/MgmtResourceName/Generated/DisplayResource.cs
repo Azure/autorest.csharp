@@ -26,6 +26,9 @@ namespace MgmtResourceName
     public partial class DisplayResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DisplayResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="displayResourceName"> The displayResourceName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string displayResourceName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}";

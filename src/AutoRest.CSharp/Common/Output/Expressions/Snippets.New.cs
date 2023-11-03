@@ -27,6 +27,8 @@ namespace AutoRest.CSharp.Common.Output.Models
                 => Instance(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
             public static ValueExpression NotImplementedException(string name)
                 => Instance(typeof(NotImplementedException), Literal($"Method {name} is implemented in customized code."));
+            public static ValueExpression InvalidOperationException(ValueExpression message)
+                => Instance(typeof(InvalidOperationException), message);
 
             public static EnumerableExpression Array(CSharpType? elementType) => new(elementType ?? typeof(object), new NewArrayExpression(elementType));
             public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));
@@ -52,7 +54,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static ValueExpression RequestFailedException(ResponseExpression response) => Instance(Configuration.ApiTypes.RequestFailedExceptionType, response);
 
-            public static ResourceIdentifierExpression ResourceIdentifier(ValueExpression resourceData) => new(Instance(typeof(ResourceIdentifier), new MemberExpression(resourceData, "Id")));
+            public static ResourceIdentifierExpression ResourceIdentifier(ValueExpression id) => new(Instance(typeof(ResourceIdentifier), id));
 
             public static StreamReaderExpression StreamReader(ValueExpression stream) => new(Instance(typeof(StreamReader), stream));
 

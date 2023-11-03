@@ -26,6 +26,9 @@ namespace MgmtResourceName
     public partial class Memory : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Memory"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="memoryResourceName"> The memoryResourceName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string memoryResourceName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/memoryResources/{memoryResourceName}";

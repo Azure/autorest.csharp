@@ -26,13 +26,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// method using their "value expression"s
         /// </summary>
         /// <param name="requestPath">The contextual path, which is usually the path creating a resource</param>
-        /// <param name="context">The <see cref="BuildContext"/></param>
-        /// <param name="idVariableName">The variable name of the Id variable</param>
+        /// <param name="idVariable">The reference to the Id variable</param>
         /// <returns></returns>
-        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, string idVariableName)
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, ResourceIdentifierExpression idVariable)
         {
             var stack = new Stack<ContextualParameterMapping>();
-            var idVariable = ResourceIdentifierExpression.ReferenceField(idVariableName);
             BuildContextualParameterMappingHierarchy(requestPath, stack, idVariable, idVariable);
             return stack;
         }

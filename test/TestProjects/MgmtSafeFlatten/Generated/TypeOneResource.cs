@@ -27,6 +27,9 @@ namespace MgmtSafeFlatten
     public partial class TypeOneResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TypeOneResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="typeOneName"> The typeOneName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string typeOneName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}";

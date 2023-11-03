@@ -1,12 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
-using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -21,20 +17,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WritePrivateHelpers()
         {
-            foreach (var extensionClient in This.ExtensionClients)
+            foreach (var extension in This.Extensions)
             {
-                if (extensionClient.IsEmpty)
+                if (extension.IsEmpty)
                     continue;
 
-                foreach (var method in extensionClient.FactoryMethods)
-                {
-                    _writer.Line();
+                _writer.Line();
 
-                    using (_writer.WriteMethodDeclaration(method.Signature))
-                    {
-                        method.MethodBodyImplementation(_writer);
-                    }
-                }
+                _writer.WriteMethod(extension.MockingExtensionFactoryMethod);
             }
 
             base.WritePrivateHelpers();

@@ -4,9 +4,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using System.Text;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -29,17 +29,28 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
         private const int PropertyBagThreshold = 5;
-        private const string IdVariableName = "Id";
         private readonly Parameter? _extensionParameter;
-        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
+        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.OperationName).ToArray(), null);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.OperationName).ToArray(), idVariable, extensionParameter, isConvenientOperation);
             }
 
             return null;
         }
+
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, ResourceIdentifierExpression idVariable, Parameter? extensionParameter = null, bool isConvenientOperation = false)
+        {
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, idVariable, extensionParameter, isConvenientOperation);
+        }
+
+        public static MgmtClientOperation FromClientOperation(MgmtClientOperation other, ResourceIdentifierExpression idVariable, Parameter? extensionParameter = null, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
+        {
+            return new MgmtClientOperation(other._operations, idVariable, extensionParameter, isConvenientOperation, parameterOverride);
+        }
+
+        internal ResourceIdentifierExpression IdVariable { get; }
 
         public Func<bool, FormattableString>? ReturnsDescription => _operations.First().ReturnsDescription;
 
@@ -53,18 +64,21 @@ namespace AutoRest.CSharp.Mgmt.Models
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
         public IReadOnlyList<Parameter> PropertyBagUnderlyingParameters => IsPropertyBagOperation ? _passThroughParams : Array.Empty<Parameter>();
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
-        {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
-        }
 
         private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter, bool isConvenientOperation = false)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, Parameter? extensionParameter, bool isConvenientOperation = false)
         {
             _operations = operations;
             _extensionParameter = extensionParameter;
+            IdVariable = idVariable;
             IsConvenientOperation = isConvenientOperation;
+        }
+
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, Parameter? extensionParameter, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
+            : this(operations, idVariable, extensionParameter, isConvenientOperation)
+        {
+            _methodParameters = parameterOverride;
         }
 
         public bool IsConvenientOperation { get; }
@@ -106,10 +120,35 @@ namespace AutoRest.CSharp.Mgmt.Models
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}
 </list>";
+            FormattableString? mockingInformation;
+            if (_extensionParameter == null)
+            {
+                mockingInformation = null;
+            }
+            else
+            {
+                // find the corresponding extension of this method
+                var extendType = _extensionParameter.Type;
+                var mockingExtensionTypeName = MgmtMockableExtension.GetMockableExtensionDefaultName(extendType.Name);
+                // construct the cref name
+                var builder = new StringBuilder(Name);
+                builder.Append("(");
+                var paramList = MethodParameters.Skip(1).Select(p => p.Type.ToStringForDocs());
+                builder.Append(string.Join(",", paramList));
+                builder.Append(")");
+                var methodRef = builder.ToString();
+
+                mockingInformation = $@"<item>
+<term>Mocking</term>
+<description>To mock this method, please mock <see cref=""{mockingExtensionTypeName}.{methodRef}""/> instead.</description>
+</item>";
+            }
+
+            FormattableString extraInformation = mockingInformation != null ? $"{pathInformation}{Environment.NewLine}{mockingInformation}" : pathInformation;
             var descriptionOfOperation = _operations.First().Description;
             if (descriptionOfOperation != null)
-                return $"{descriptionOfOperation}\n{pathInformation}";
-            return pathInformation;
+                return $"{descriptionOfOperation}{Environment.NewLine}{extraInformation}";
+            return extraInformation;
         }
 
         // TODO -- we need a better way to get this
@@ -154,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var contextualPath in OperationMappings.Keys)
             {
                 var adjustedPath = Resource is not null ? contextualPath.ApplyHint(Resource.ResourceType) : contextualPath;
-                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariableName).Concat(contextParams).ToList());
+                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariable).Concat(contextParams).ToList());
             }
 
             var parameterMappings = new Dictionary<RequestPath, IReadOnlyList<ParameterMapping>>();

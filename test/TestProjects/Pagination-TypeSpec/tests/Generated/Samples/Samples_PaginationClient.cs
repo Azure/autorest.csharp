@@ -6,8 +6,10 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
@@ -622,6 +624,122 @@ namespace Pagination.Samples
             PaginationClient client = new PaginationClient(endpoint, credential);
 
             await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPools_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = new PaginationClient(endpoint, credential);
+
+            foreach (BinaryData item in client.GetPools(null, null, null, null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetPools_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = new PaginationClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetPoolsAsync(null, null, null, null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPools_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = new PaginationClient(endpoint, credential);
+
+            foreach (BatchPool item in client.GetPools())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetPools_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = new PaginationClient(endpoint, credential);
+
+            await foreach (BatchPool item in client.GetPoolsAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPools_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = new PaginationClient(endpoint, credential);
+
+            foreach (BinaryData item in client.GetPools("<$filter>", new string[] { "<$select>" }, new string[] { "<$expand>" }, null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("displayName").ToString());
+                Console.WriteLine(result.GetProperty("url").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetPools_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = new PaginationClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetPoolsAsync("<$filter>", new string[] { "<$select>" }, new string[] { "<$expand>" }, null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("displayName").ToString());
+                Console.WriteLine(result.GetProperty("url").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPools_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = new PaginationClient(endpoint, credential);
+
+            foreach (BatchPool item in client.GetPools(filter: "<$filter>", select: new string[] { "<$select>" }, expand: new string[] { "<$expand>" }))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetPools_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = new PaginationClient(endpoint, credential);
+
+            await foreach (BatchPool item in client.GetPoolsAsync(filter: "<$filter>", select: new string[] { "<$select>" }, expand: new string[] { "<$expand>" }))
             {
             }
         }
