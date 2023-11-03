@@ -278,12 +278,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     Declare(isValid, Or(Equal(format, ModelReaderWriterFormatExpression.Json), Equal(format, ModelReaderWriterFormatExpression.Wire))),
                     new IfStatement(Not(new BoolExpression(isValid)))
                     {
-                        Throw(New.Instance(typeof(FormatException), new InvokeStaticMethodExpression(
-                            typeof(string),
-                            nameof(string.Format),
-                            new ValueExpression[]
+                        Throw(New.Instance(
+                            typeof(FormatException),
+                            new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
                             {
-                                Literal("The model {0} does not support '{1}' format."),
                                 new InvokeInstanceMethodExpression(null, nameof(GetType), Array.Empty<ValueExpression>(), null, false).Property(nameof(Type.Name)),
                                 format
                             })))
@@ -320,8 +318,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a Utf8Json{Configuration.ApiTypes.RequestContentType.Name}.", modifiers, Configuration.ApiTypes.RequestContentType, null, Array.Empty<Parameter>()),
                 new[]
                 {
-                    //Return(RequestContentExpression.Create(This, ModelReaderWriterOptionsExpression.DefaultWireOptions)) // We do not have this API yet
-                    Throw(New.Instance(typeof(Exception))) // TODO -- temp
+                    Var("content", New.Utf8JsonRequestContent(), out var requestContent),
+                    requestContent.JsonWriter.WriteObjectValue(This),
+                    Return(requestContent)
                 }
             );
         }
