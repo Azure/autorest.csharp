@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-{0}{1}
+{0}{1}{2}
 
 </Project>
 ";
@@ -67,6 +67,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <PackageReference Include=""Azure.Core.Experimental"" />
   </ItemGroup>
 ";
+        private string _llcAzureKeyAuth = @"
+  <ItemGroup>
+    <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />
+  </ItemGroup>";
 
         internal static string GetVersion()
         {
@@ -98,9 +102,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
             var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
-
+            bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
             var context = new BuildContext(codeModel, null, config.LibraryName, config.Namespace);
-            Execute(context.DefaultNamespace, async (filename, text) =>
+            Execute(context.DefaultNamespace, needAzureKeyAuth, async (filename, text) =>
             {
                 await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");
             },
@@ -108,9 +112,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return true;
         }
 
-        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe, CSharpProjConfiguration config)
+        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe, bool includeAzureKeyAuth, CSharpProjConfiguration config)
         {
-            Execute(defaultNamespace, async (filename, text) =>
+            Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
             {
                 //TODO adding to workspace makes the formatting messed up since its a raw xml document
                 //somewhere it tries to parse it as a syntax tree and when it converts back to text
@@ -121,7 +125,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 includeDfe, config);
         }
 
-        private void Execute(string defaultNamespace, Action<string, string> writeFile, bool includeDfe, CSharpProjConfiguration config)
+        private void Execute(string defaultNamespace, bool includeAzureKeyAuth, Action<string, string> writeFile, bool includeDfe, CSharpProjConfiguration config)
         {
             if (includeDfe)
             {
@@ -163,13 +167,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     additionalContent += _llcProjectContent;
                 }
 
-                csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
+                csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent, includeAzureKeyAuth ? _llcAzureKeyAuth : "");
             }
             else
             {
                 var version = GetVersion();
                 var csProjPackageReference = string.Format(_csProjPackageReference, version);
-                csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
+                csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent, includeAzureKeyAuth ? _llcAzureKeyAuth : "");
             }
 
             var projectFile = defaultNamespace;

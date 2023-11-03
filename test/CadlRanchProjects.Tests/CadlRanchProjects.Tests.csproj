@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs" LinkBase="Shared/Core" />
     <Compile Include="../CadlRanchProjects/**/*.cs" LinkBase="CadlRanchProjects" />
     <Compile Include="../TestProjects/*-TypeSpec/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs" LinkBase="TestProjects" />
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
