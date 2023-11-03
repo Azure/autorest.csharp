@@ -21,8 +21,10 @@ jobs:
       name: azsdk-pool-mms-win-2022-general
       vmImage: windows-2022
     steps:
-      - script: echo $(System.PullRequest.SourceRepositoryUri)
-      - script: echo $(System.PullRequest.TargetRepositoryUri)
+      - script: echo $(Build.Repository.Name)
+      - script: echo $(Build.Repository.Uri)
+      - script: echo $(Build.SourceBranch)
+      - script: echo $(Build.SourceBranchName)
       - checkout: self
         fetchDepth: 1
       - checkout: azure-sdk-tools
