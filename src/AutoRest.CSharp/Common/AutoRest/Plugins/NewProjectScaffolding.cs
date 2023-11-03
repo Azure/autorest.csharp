@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private string _testDirectory;
         private string _serviceDirectory;
         private bool _isAzureSdk;
-        private bool _NeedAzureKeyAuth;
+        private bool _needAzureKeyAuth;
 
         public NewProjectScaffolding(bool needAzureKeyAuth)
         {
@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             _testDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "tests");
             _serviceDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..");
             _isAzureSdk = Configuration.Namespace.StartsWith("Azure.");
-            _NeedAzureKeyAuth = needAzureKeyAuth;
+            _needAzureKeyAuth = needAzureKeyAuth;
         }
 
         public async Task<bool> Execute()
@@ -295,7 +295,7 @@ extends:
 
   <ItemGroup>
     <Compile Include=""$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs"" LinkBase=""Shared/Core"" />";
-            if (_NeedAzureKeyAuth)
+            if (_needAzureKeyAuth)
             {
                 srcBrandedCsprojContent += @"
     <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />";
