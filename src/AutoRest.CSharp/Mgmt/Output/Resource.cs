@@ -532,7 +532,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return Snippets.New.ResourceIdentifier(resourceDataParameter);
+                return Snippets.New.ResourceIdentifier(new MemberExpression(resourceDataParameter, "Id"));
             }
             else
             {

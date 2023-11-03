@@ -115,10 +115,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
             foreach (var autoRestProperty in Properties)
             {
-                if (parameters.Any(parameter => parameter.Name == autoRestProperty.Declaration.Name.ToVariableName()))
+                if (parameters.FirstOrDefault(p => p.Name == autoRestProperty.Declaration.Name.ToVariableName()) is {} parameter)
                 {
-                    var reference = new TypedMemberExpression(null, ToCamelCase(autoRestProperty.Declaration.Name), autoRestProperty.ValueType);
-                    initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
+                    initializers.Add(new ObjectPropertyInitializer(autoRestProperty, parameter));
                 }
             }
 
