@@ -432,12 +432,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
         {
+            bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
             foreach (var obj in EnumerateHierarchy())
             {
                 additionalPropertiesProperty = obj.AdditionalPropertiesProperty ?? (obj as SerializableObjectType)?.RawDataField;
                 if (additionalPropertiesProperty != null)
                 {
+                    // if this is a real "AdditionalProperties", we should NOT exclude it in wire
+                    shouldExcludeInWireSerialization = additionalPropertiesProperty != obj.AdditionalPropertiesProperty;
                     break;
                 }
             }
@@ -454,7 +457,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new JsonAdditionalPropertiesSerialization(
                 additionalPropertiesProperty,
                 valueSerialization,
-                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments));
+                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                shouldExcludeInWireSerialization);
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()

@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Net.ClientModel;
 using System.Reflection;
 using System.Text.Json;
 using System.Xml.Linq;
@@ -199,12 +200,12 @@ namespace AutoRest.TestServer.Tests
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,
                 null,
-                new[] { typeof(JsonElement) },
+                new[] { typeof(JsonElement), typeof(ModelReaderWriterOptions) },
                 null));
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,
                 null,
-                new[] { typeof(XElement) },
+                new[] { typeof(XElement), typeof(ModelReaderWriterOptions) },
                 null));
         }
 

@@ -49,13 +49,10 @@ namespace additionalProperties.Models
                 }
                 writer.WriteEndObject();
             }
-            if (MoreAdditionalProperties != null && options.Format == ModelReaderWriterFormat.Json)
+            foreach (var item in MoreAdditionalProperties)
             {
-                foreach (var item in MoreAdditionalProperties)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
         }
@@ -127,10 +124,7 @@ namespace additionalProperties.Models
                     additionalProperties = dictionary;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
-                {
-                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
-                }
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             moreAdditionalProperties = additionalPropertiesDictionary;
             return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, Optional.ToDictionary(additionalProperties), moreAdditionalProperties);

@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 using System;
-using NUnit.Framework;
-using ModelWithConverterUsage.Models;
 using System.Text.Json;
+using ModelWithConverterUsage.Models;
+using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -92,14 +92,16 @@ namespace AutoRest.TestServer.Tests
         public void DeserializeInputModel()
         {
             string jsonString = @"{""Input_Model_Property"": ""test_str""}";
-            Assert.That(() => JsonSerializer.Deserialize<InputModel>(jsonString), Throws.InstanceOf<NotImplementedException>());
+            var model = JsonSerializer.Deserialize<InputModel>(jsonString);
+            Assert.AreEqual("test_str", model.InputModelProperty);
         }
 
         [Test]
         public void SerializeOutputModel()
         {
             var model = ModelWithConverterUsageModelFactory.OutputModel("test_str");
-            Assert.That(() => JsonSerializer.Serialize(model), Throws.InstanceOf<NotImplementedException>());
+            var json = JsonSerializer.Serialize(model);
+            Assert.AreEqual(@"{""Output_Model_Property"":""test_str""}", json);
         }
 
         [Test]

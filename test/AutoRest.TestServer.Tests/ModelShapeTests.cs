@@ -437,9 +437,9 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ReadOnlyPropertyTypesOfMixedModelIsOutputOnly()
         {
-            Assert.True(typeof(ReadonlyModel).IsPublic);
-            Assert.False(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
-            Assert.NotNull(typeof(ReadonlyModel).GetMethod("DeserializeReadonlyModel", BindingFlags.Static | BindingFlags.NonPublic));
+            Assert.IsTrue(typeof(ReadonlyModel).IsPublic);
+            Assert.IsTrue(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
+            Assert.IsNotNull(typeof(ReadonlyModel).GetMethod("DeserializeReadonlyModel", BindingFlags.Static | BindingFlags.NonPublic));
         }
 
         [Test]
@@ -456,9 +456,9 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelsFlattenedIntoParametersAreInternal()
         {
-            Assert.False(typeof(ParametersModel).IsPublic);
-            Assert.False(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
-            Assert.Null(typeof(ReadonlyModel).GetMethod("DeserializeParametersModel", BindingFlags.Static | BindingFlags.NonPublic));
+            Assert.IsFalse(typeof(ParametersModel).IsPublic);
+            Assert.IsTrue(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
+            Assert.IsNull(typeof(ReadonlyModel).GetMethod("DeserializeParametersModel", BindingFlags.Static | BindingFlags.NonPublic));
         }
 
 
@@ -519,7 +519,12 @@ namespace AutoRest.TestServer.Tests
         {
             TypeAsserts.TypeIsStatic(typeof(ModelShapesModelFactory));
             TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ModelShapesModelFactory),
-                nameof(MixedModel), nameof(MixedModelWithReadonlyProperty), nameof(OutputModel), nameof(ReadonlyModel));
+                nameof(InputModel),
+                nameof(MixedModel),
+                nameof(OutputModel),
+                nameof(MixedModelWithReadonlyProperty),
+                nameof(OutputModel),
+                nameof(ReadonlyModel));
         }
 
         [Test]

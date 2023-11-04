@@ -726,7 +726,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override JsonObjectSerialization EnsureJsonSerialization()
         {
-            return _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this);
+            return _serializationBuilder.BuildJsonObjectSerialization(this);
         }
 
         protected override XmlObjectSerialization EnsureXmlSerialization()
