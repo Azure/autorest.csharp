@@ -561,7 +561,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     : utf8JsonWriter.WriteStringValue(value);
             }
 
-            if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress) || valueType == typeof(RequestMethod))
+            if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress) || valueType == typeof(RequestMethod) || valueType == typeof(ExtendedLocationType))
             {
                 return utf8JsonWriter.WriteStringValue(value.InvokeToString());
             }

@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var model in _rootNamespace.Models)
             {
                 InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
-                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes);
 
                 InputModelType? replacement = null;
                 if (model.IsAnonymousModel)
@@ -360,7 +360,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, IReadOnlyList<InputModelType> derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
@@ -369,10 +369,6 @@ namespace AutoRest.CSharp.Output.Models
             if (isBasePolyType || isChildPolyType)
             {
                 InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
-
-                //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-                if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
-                    return null;
 
                 string defaultDerivedName = $"Unknown{actualBase.Name}";
                 if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out defaultDerivedType))

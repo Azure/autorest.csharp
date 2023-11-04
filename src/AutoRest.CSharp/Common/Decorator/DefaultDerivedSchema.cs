@@ -4,15 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Decorator
 {
     internal static class DefaultDerivedSchema
     {
-        public const string DefaultDerivedExtension = "x-ms-autorest-defaultDerivedSchema";
+        private const string _defaultDerivedExtension = "x-ms-autorest-defaultDerivedSchema";
 
         public static void AddDefaultDerivedSchemas(CodeModel codeModel)
         {
@@ -31,7 +29,7 @@ namespace AutoRest.CSharp.Common.Decorator
         public static ObjectSchema? GetDefaultDerivedSchema(this ObjectSchema schema)
         {
             object? result = null;
-            schema.Extensions?.TryGetValue(DefaultDerivedExtension, out result);
+            schema.Extensions?.TryGetValue(_defaultDerivedExtension, out result);
             return result as ObjectSchema;
         }
 
@@ -50,14 +48,6 @@ namespace AutoRest.CSharp.Common.Decorator
             var actualBaseSchema = isBasePoly ? schema : schema.Parents?.All.FirstOrDefault(parent => parent is ObjectSchema objectParent && objectParent.IsBasePolySchema()) as ObjectSchema;
             if (actualBaseSchema is null)
                 throw new InvalidOperationException($"Found a child poly {schema.Language.Default.Name} that we weren't able to determine its base poly from {string.Join(',', schema.Parents?.Immediate.Select(p => p.Name) ?? Array.Empty<string>())}");
-
-            //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-            var hasXCsharpUsageOutput = !actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase);
-            if (!actualBaseSchema.Usage.Contains(SchemaContext.Output) &&
-                !actualBaseSchema.Usage.Contains(SchemaContext.Exception) &&
-                (!hasXCsharpUsageOutput.HasValue ||
-                hasXCsharpUsageOutput.Value))
-                return;
 
             ObjectSchema? defaultDerivedSchema = null;
 
@@ -135,7 +125,7 @@ namespace AutoRest.CSharp.Common.Decorator
                     {
                         defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', extensionUsages));
                     }
-                    defaultDerivedSchema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
+                    defaultDerivedSchema.Extensions.Add(_defaultDerivedExtension, defaultDerivedSchema);
                     defaultDerivedSchema.Extensions.Add("x-accessibility", "internal");
                     defaultDerivedSchemas.Add(defaultDerivedSchema.Name, defaultDerivedSchema);
                 }
@@ -145,7 +135,7 @@ namespace AutoRest.CSharp.Common.Decorator
             {
                 if (schema.Extensions is null)
                     schema.Extensions = new RecordOfStringAndAny();
-                schema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
+                schema.Extensions.Add(_defaultDerivedExtension, defaultDerivedSchema);
             }
         }
 

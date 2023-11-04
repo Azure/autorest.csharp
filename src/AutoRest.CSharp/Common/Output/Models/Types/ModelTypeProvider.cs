@@ -21,7 +21,6 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using NUnit.Framework.Constraints;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
