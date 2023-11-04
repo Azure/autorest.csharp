@@ -253,8 +253,8 @@ namespace AutoRest.TestServer.Tests
         {
             var root = new AppleBarrel()
             {
-                BadApples = {"Red Delicious"},
-                GoodApples = {"Fuji", "Gala"}
+                BadApples = { "Red Delicious" },
+                GoodApples = { "Fuji", "Gala" }
             };
 
             return await new XmlClient(ClientDiagnostics, pipeline, host).PutWrappedListsAsync(root);
@@ -266,8 +266,8 @@ namespace AutoRest.TestServer.Tests
             var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetWrappedListsAsync();
             var value = result.Value;
 
-            CollectionAssert.AreEqual(new[] {"Red Delicious"}, value.BadApples);
-            CollectionAssert.AreEqual(new[] {"Fuji", "Gala"}, value.GoodApples);
+            CollectionAssert.AreEqual(new[] { "Red Delicious" }, value.BadApples);
+            CollectionAssert.AreEqual(new[] { "Fuji", "Gala" }, value.GoodApples);
         });
 
         [Test]
@@ -505,7 +505,7 @@ namespace AutoRest.TestServer.Tests
         {
             var properties = new StorageServiceProperties()
             {
-                Logging = new Logging("1.0", true, false, true, new RetentionPolicy(true, 7)),
+                Logging = new Logging("1.0", true, false, true, new RetentionPolicy(true) { Days = 7 }),
                 HourMetrics = new Metrics(true)
                 {
                     Version = "1.0",

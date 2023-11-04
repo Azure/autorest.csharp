@@ -16,7 +16,10 @@ namespace AutoRest.TestServer.Tests
             var model = new ModelClass(EnumProperty.A)
             {
                 StringProperty = "test_str",
-                ObjProperty = new Product("str")
+                ObjProperty = new Product()
+                {
+                    ConstProperty = "str"
+                }
             };
 
             var jsonAsString = JsonSerializer.Serialize(model);
@@ -55,7 +58,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void SerializeProductModel()
         {
-            var model = new Product("test_str");
+            var model = new Product()
+            {
+                ConstProperty = "test_str"
+            };
 
             var jsonAsString = JsonSerializer.Serialize(model);
             Assert.AreEqual("{\"ConstProperty\":\"test_str\"}", jsonAsString);
@@ -92,7 +98,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void SerializeOutputModel()
         {
-            var model = new OutputModel("test_str");
+            var model = ModelWithConverterUsageModelFactory.OutputModel("test_str");
             Assert.That(() => JsonSerializer.Serialize(model), Throws.InstanceOf<NotImplementedException>());
         }
 

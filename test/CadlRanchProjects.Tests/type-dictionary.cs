@@ -196,8 +196,14 @@ namespace CadlRanchProjects.Tests
             firstModel.Children.Clear();
             var response = await new DictionaryClient(host, null).GetRecursiveModelValueClient().PutAsync(new Dictionary<string, InnerModel>()
             {
-                {"k1", firstModel },
-                {"k2", new InnerModel("world", new Dictionary<string, InnerModel>() {{"k2.1", new InnerModel("inner world")} }) }
+                ["k1"] = firstModel,
+                ["k2"] = new InnerModel("world")
+                {
+                    Children =
+                    {
+                        ["k2.1"] = new InnerModel("inner world")
+                    }
+                }
             });
             Assert.AreEqual(204, response.Status);
         });

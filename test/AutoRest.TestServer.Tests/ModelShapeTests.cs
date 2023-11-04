@@ -534,7 +534,7 @@ namespace AutoRest.TestServer.Tests
         {
             const string stringValue = "stringValue";
 
-            var expectedModel = new ReadonlyModel(stringValue);
+            var expectedModel = new ReadonlyModel(stringValue, new Dictionary<string, BinaryData>());
             var actualModel = ModelShapesModelFactory.ReadonlyModel(stringValue);
 
             Assert.AreEqual(expectedModel.Name, actualModel.Name);
@@ -544,10 +544,10 @@ namespace AutoRest.TestServer.Tests
         public void ModelFactory_InstantiatesMixedModelWithReadonlyProperty()
         {
             const string stringValue = "stringValue";
-            var readonlyModel = new ReadonlyModel(stringValue);
+            var readonlyModel = new ReadonlyModel(stringValue, new Dictionary<string, BinaryData>());
             var readonlyModelList = new List<ReadonlyModel> { readonlyModel };
 
-            var expectedModel = new MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList.ToList());
+            var expectedModel = new MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList.ToList(), new Dictionary<string, BinaryData>());
             var actualModel = ModelShapesModelFactory.MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList);
 
             Assert.AreEqual(expectedModel.ReadonlyProperty, actualModel.ReadonlyProperty);

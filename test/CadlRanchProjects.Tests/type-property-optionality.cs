@@ -196,8 +196,14 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_CollectionsModel_putAll() => Test(async (host) =>
         {
             CollectionsModelProperty data = new();
-            data.Property.Add(new StringProperty("hello"));
-            data.Property.Add(new StringProperty("world"));
+            data.Property.Add(new StringProperty()
+            {
+                Property = "hello"
+            });
+            data.Property.Add(new StringProperty()
+            {
+                Property = "world"
+            });
 
             Response response = await new OptionalClient(host, null).GetCollectionsModelClient().PutAllAsync(data.ToRequestContent());
             Assert.AreEqual(204, response.Status);
