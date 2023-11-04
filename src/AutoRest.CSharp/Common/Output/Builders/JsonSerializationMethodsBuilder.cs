@@ -35,6 +35,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
@@ -522,7 +523,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return utf8JsonWriter.WriteObjectValue(value);
             }
 
-            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(AzureLocation))
+            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(AzureLocation) || valueType == typeof(ExtendedLocationType))
             {
                 return utf8JsonWriter.WriteStringValue(value);
             }
@@ -593,7 +594,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value);
             }
 
-            throw new NotSupportedException($"Framework type {valueType} serialization not supported");
+            throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
         }
 
         private static MethodBodyStatement CheckCollectionItemForNull(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression value)
@@ -1136,7 +1137,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 frameworkType == typeof(ResourceType) ||
                 frameworkType == typeof(ContentType) ||
                 frameworkType == typeof(RequestMethod) ||
-                frameworkType == typeof(AzureLocation))
+                frameworkType == typeof(AzureLocation) ||
+                frameworkType == typeof(ExtendedLocationType))
             {
                 return New.Instance(frameworkType, element.GetString());
             }
@@ -1210,7 +1212,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return element.GetTimeSpan(format.ToFormatSpecifier());
             }
 
-            throw new NotSupportedException($"Framework type {frameworkType} is not supported");
+            throw new NotSupportedException($"Framework type {frameworkType} is not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
         }
 
         private static MethodBodyStatement InvokeListAdd(ValueExpression list, ValueExpression value)
