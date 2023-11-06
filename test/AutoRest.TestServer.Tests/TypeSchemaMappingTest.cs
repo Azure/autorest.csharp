@@ -116,7 +116,7 @@ namespace AutoRest.TestServer.Tests
                 CustomizedCreatedAtProperty = date
             };
 
-            JsonAsserts.AssertSerialization(
+            JsonAsserts.AssertWireSerialization(
                 @"{""ETag"":""Id"",""CreatedAt"":" + JsonSerializer.Serialize(date) + "}",
                 inputModel);
         }
@@ -135,7 +135,7 @@ namespace AutoRest.TestServer.Tests
         public void ObjectTypePropertiesSerializedAsNull()
         {
             var inputModel = new RenamedThirdModel();
-            JsonAsserts.AssertSerialization(
+            JsonAsserts.AssertWireSerialization(
                 @"{""ETag"":"""",""CreatedAt"":" + JsonSerializer.Serialize(new DateTime()) + "}",
                 inputModel);
         }
@@ -235,7 +235,7 @@ namespace AutoRest.TestServer.Tests
             var inputModel = new ModelWithUriProperty();
             inputModel.Uri = new Uri("http://localhost");
 
-            JsonAsserts.AssertSerialization(
+            JsonAsserts.AssertWireSerialization(
                 @"{""Uri"":""http://localhost/""}",
                 inputModel);
         }

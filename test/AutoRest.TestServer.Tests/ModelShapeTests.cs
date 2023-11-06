@@ -112,7 +112,7 @@ namespace AutoRest.TestServer.Tests
         {
             var inputModel = CreateInputModel();
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.False(element.TryGetProperty("NonRequiredNullableInt", out _));
             Assert.False(element.TryGetProperty("NonRequiredNullableString", out _));
             Assert.False(element.TryGetProperty("NonRequiredNullableIntList", out _));
@@ -126,7 +126,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredNullableIntList = null;
             inputModel.NonRequiredNullableStringList = null;
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("NonRequiredNullableIntList").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("NonRequiredNullableStringList").ValueKind);
         }
@@ -138,7 +138,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredNullableIntList.Clear();
             inputModel.NonRequiredNullableStringList.Clear();
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("NonRequiredNullableIntList").ValueKind);
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("NonRequiredNullableStringList").ValueKind);
         }
@@ -150,7 +150,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredNullableInt = 1;
             inputModel.NonRequiredNullableString = "2";
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(1, element.GetProperty("NonRequiredNullableInt").GetInt32());
             Assert.AreEqual("2", element.GetProperty("NonRequiredNullableString").GetString());
         }
@@ -221,7 +221,7 @@ namespace AutoRest.TestServer.Tests
                 null
             );
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableString").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableInt").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableStringList").ValueKind);
@@ -247,7 +247,7 @@ namespace AutoRest.TestServer.Tests
 
             );
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("RequiredNullableStringList").ValueKind);
             Assert.AreEqual(0, element.GetProperty("RequiredNullableStringList").GetArrayLength());
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("RequiredNullableIntList").ValueKind);
@@ -295,7 +295,7 @@ namespace AutoRest.TestServer.Tests
             _ = inputModel.NonRequiredIntList.Remove(1);
             _ = inputModel.NonRequiredStringList.Remove("s");
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.False(element.TryGetProperty("NonRequiredStringList", out _));
             Assert.False(element.TryGetProperty("NonRequiredIntList", out _));
@@ -309,7 +309,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredIntList.Add(1);
             inputModel.NonRequiredStringList.Add("1");
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.AreEqual("[1]", element.GetProperty("NonRequiredIntList").ToString());
             Assert.AreEqual("[\"1\"]", element.GetProperty("NonRequiredStringList").ToString());
@@ -325,7 +325,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredStringList.Add("1");
             inputModel.NonRequiredStringList.Clear();
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.AreEqual("[]", element.GetProperty("NonRequiredIntList").ToString());
             Assert.AreEqual("[]", element.GetProperty("NonRequiredStringList").ToString());
@@ -341,7 +341,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredStringList.Add("1");
             (inputModel.NonRequiredStringList as ChangeTrackingList<string>).Reset();
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.False(element.TryGetProperty("NonRequiredStringList", out _));
             Assert.False(element.TryGetProperty("NonRequiredIntList", out _));
@@ -358,7 +358,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.RequiredNullableIntList = null;
             inputModel.RequiredNullableStringList = null;
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableIntList").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableStringList").ValueKind);
@@ -499,19 +499,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelWithCustomizedNullableJsonElementPropertySerializesNull()
         {
-            JsonAsserts.AssertSerialization("{\"ModelProperty\":null}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("null").RootElement });
+            JsonAsserts.AssertWireSerialization("{\"ModelProperty\":null}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("null").RootElement });
         }
 
         [Test]
         public void ModelWithCustomizedNullableJsonElementPropertySerializesUndefined()
         {
-            JsonAsserts.AssertSerialization("{}", new ModelWithNullableObjectProperty() { ModelProperty = default });
+            JsonAsserts.AssertWireSerialization("{}", new ModelWithNullableObjectProperty() { ModelProperty = default });
         }
 
         [Test]
         public void ModelWithCustomizedNullableJsonElementPropertySerializesValue()
         {
-            JsonAsserts.AssertSerialization("{\"ModelProperty\":1}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("1").RootElement });
+            JsonAsserts.AssertWireSerialization("{\"ModelProperty\":1}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("1").RootElement });
         }
 
         [Test]
