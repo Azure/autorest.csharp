@@ -169,13 +169,16 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
-            writer.WritePropertyName("vector"u8);
-            writer.WriteStartArray();
-            foreach (var item in Vector.Span)
+            if (Optional.IsDefined(Vector))
             {
-                writer.WriteNumberValue(item);
+                writer.WritePropertyName("vector"u8);
+                writer.WriteStartArray();
+                foreach (var item in Vector.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WritePropertyName("vectorRequired"u8);
             writer.WriteStartArray();
             foreach (var item in VectorRequired.Span)
@@ -183,19 +186,22 @@ namespace ModelShapes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (VectorNullable != null)
+            if (Optional.IsDefined(VectorNullable))
             {
-                writer.WritePropertyName("vectorNullable"u8);
-                writer.WriteStartArray();
-                foreach (var item in VectorNullable.Value.Span)
+                if (VectorNullable != null)
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WritePropertyName("vectorNullable"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorNullable.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            else
-            {
-                writer.WriteNull("vectorNullable");
+                else
+                {
+                    writer.WriteNull("vectorNullable");
+                }
             }
             if (VectorRequiredNullable != null)
             {
@@ -466,10 +472,6 @@ namespace ModelShapes.Models
                 }
                 if (property.NameEquals("vectorReadOnlyRequired"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     int index = 0;
                     float[] array = new float[property.Value.GetArrayLength()];
                     foreach (var item in property.Value.EnumerateArray())
@@ -482,10 +484,6 @@ namespace ModelShapes.Models
                 }
                 if (property.NameEquals("vectorRequired"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     int index = 0;
                     float[] array = new float[property.Value.GetArrayLength()];
                     foreach (var item in property.Value.EnumerateArray())
@@ -509,7 +507,7 @@ namespace ModelShapes.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorNullable = new ReadOnlyMemory<float>?(array);
+                    vectorNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorReadOnlyNullable"u8))
@@ -525,7 +523,7 @@ namespace ModelShapes.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorReadOnlyNullable = new ReadOnlyMemory<float>?(array);
+                    vectorReadOnlyNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorReadOnlyRequiredNullable"u8))
@@ -541,7 +539,7 @@ namespace ModelShapes.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorReadOnlyRequiredNullable = new ReadOnlyMemory<float>?(array);
+                    vectorReadOnlyRequiredNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorRequiredNullable"u8))
@@ -557,7 +555,7 @@ namespace ModelShapes.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorRequiredNullable = new ReadOnlyMemory<float>?(array);
+                    vectorRequiredNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
             }
