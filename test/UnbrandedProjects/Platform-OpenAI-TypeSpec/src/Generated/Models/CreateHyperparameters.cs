@@ -35,13 +35,13 @@ namespace OpenAI.Models
         /// </para>
         /// <para>
         /// <remarks>
-        /// The following types are supported by this property:
+        /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// string literal
+        /// <description>"auto"</description>
         /// </item>
         /// <item>
-        /// long
+        /// <description><see cref="long"/></description>
         /// </item>
         /// </list>
         /// </remarks>

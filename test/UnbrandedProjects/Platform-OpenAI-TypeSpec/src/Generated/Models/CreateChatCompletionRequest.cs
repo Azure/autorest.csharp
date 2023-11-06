@@ -150,13 +150,16 @@ namespace OpenAI.Models
         /// </para>
         /// <para>
         /// <remarks>
-        /// The following types are supported by this property:
+        /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// string literal
+        /// <description>"none"</description>
         /// </item>
         /// <item>
-        /// ChatCompletionFunctionCallOption
+        /// <description>"auto"</description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="ChatCompletionFunctionCallOption"/></description>
         /// </item>
         /// </list>
         /// </remarks>
@@ -221,13 +224,13 @@ namespace OpenAI.Models
         /// </para>
         /// <para>
         /// <remarks>
-        /// The following types are supported by this property:
+        /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// string
+        /// <description><see cref="string"/></description>
         /// </item>
         /// <item>
-        /// IList&lt;string&gt;
+        /// <description><see cref="IList{T}"/> Where <c>T</c> is of type <c>string</c></description>
         /// </item>
         /// </list>
         /// </remarks>

@@ -74,16 +74,16 @@ namespace NoTestTypeSpec.Models
         /// </para>
         /// <para>
         /// <remarks>
-        /// The following types are supported by this property:
+        /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// string
+        /// <description><see cref="string"/></description>
         /// </item>
         /// <item>
-        /// IList&lt;string&gt;
+        /// <description><see cref="IList{T}"/> Where <c>T</c> is of type <c>string</c></description>
         /// </item>
         /// <item>
-        /// int
+        /// <description><see cref="int"/></description>
         /// </item>
         /// </list>
         /// </remarks>

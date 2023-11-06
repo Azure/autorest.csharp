@@ -168,48 +168,36 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         /// <summary>
         /// This method attempts to retrieve the description for each of the union type items
-        /// by attempting to convert each of the union type items to a CSharpType and then getting
-        /// the friendly name of the type. If the friendly name cannot be retrieved, or the union item cannot
-        /// be converted to a CSharpType, then the name of the type is used to construct the description.
+        /// by retrieving the friendly nam of the type. For items that are lists,
+        /// the description will include details about the element type.
+        /// If the friendly name cannot be retrieved, then the name of the type is used to construct the description.
         /// </summary>
         /// <param name="unionItems">the list of union type items.</param>
         /// <returns>A list of strings representing the description of each union item and their corresponding
-        /// CSharp type name.
+        /// CSharp type frinedly name.
         /// </returns>
-        public static IReadOnlyList<string> GetUnionTypesDescriptions(IReadOnlyList<InputType> unionItems)
+        public static IReadOnlyList<string> GetUnionTypesDescriptions(IList<CSharpType> unionItems)
         {
             var values = new List<string>();
 
-            foreach (InputType item in unionItems)
+            foreach (CSharpType item in unionItems)
             {
                 if (item != null)
                 {
-                    var friendlyTypeName = string.Empty;
-                    try
-                    {
-                        CSharpType? csharpType = TypeFactory.CreateSimpleType(item);
-                        if (csharpType != null)
-                        {
-                            friendlyTypeName = csharpType.TryGetCSharpFriendlyName(out var keywordName) ? keywordName : csharpType.Name;
-                        }
-                    }
-                    catch
-                    {
-                        friendlyTypeName = item.Name;
-                    }
+                    var friendlyTypeName = item.TryGetCSharpFriendlyName(out var keywordName) ? keywordName : item.Name;
 
                     if (!friendlyTypeName.IsNullOrEmpty())
                     {
-                        var description = $"{friendlyTypeName}";
+                        var description = $"<description><see cref=\"{friendlyTypeName}\"/></description>";
 
-                        if (item is InputLiteralType)
+                        if (item.IsLiteral && item.LiteralValue != null)
                         {
-                            description = $"{friendlyTypeName} literal";
+                            description = $"<description>\"{item.LiteralValue}\"</description>";
                         }
-                        else if (item is InputListType listItemType)
+                        else if (TypeFactory.IsCollectionType(item) || TypeFactory.IsArray(item))
                         {
-                            var nestedDescription = BuilderHelpers.EscapeXmlDocDescription(ConstructTypeStringForNestedProp(listItemType));
-                            description = $"{nestedDescription}";
+                            // construct the description for the collection type
+                            description = ConstructTypeStringForCollection(item);
                         }
 
                         values.Add(description);
@@ -221,47 +209,64 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         /// <summary>
-        /// Constructs the type string for a property. If the property is a list, then the type string is constructed
-        /// recursively by calling this method again with the list item type.
+        /// Constructs the type string for a collection property. If the property is a list, the description
+        /// will include details about the element type.
         /// </summary>
-        /// <param name="input">The input property.</param>
+        /// <param name="prop">The collection property.</param>
         /// <returns>The constructed type string for the property.</returns>
-        public static string ConstructTypeStringForNestedProp(InputType input)
+        public static string ConstructTypeStringForCollection(CSharpType prop)
         {
-            string itemName = input.Name;
-            // try to get the friendly name of the item
-            try
+            string itemName = prop.TryGetCSharpFriendlyName(out var keywordName) ? keywordName : prop.Name;
+            var collectionTypeDescription = TypeFactory.IsDictionary(prop) ? $"{itemName}{{TKey, TValue}}": $"{itemName}{{T}}";
+
+            string additionalDescriptionForListType = string.Empty;
+            string constructedDescription;
+
+            if (TypeFactory.IsList(prop) || TypeFactory.IsArray(prop))
             {
-                CSharpType? itemCsharpType = TypeFactory.CreateSimpleType(input);
-                if (itemCsharpType != null)
+                // For lists, get the element type and construct the description for it
+                CSharpType elementType = TypeFactory.GetElementType(prop);
+                additionalDescriptionForListType = BuilderHelpers.EscapeXmlDocDescription(ConstructDetailsForListType(elementType));
+            }
+
+            if (!additionalDescriptionForListType.IsNullOrEmpty())
+            {
+                constructedDescription = $"<description><see cref=\"{collectionTypeDescription}\"/> Where <c>T</c> is of type <c>{additionalDescriptionForListType}</c></description>";
+            }
+            else
+            {
+                constructedDescription = $"<description><see cref=\"{collectionTypeDescription}\"/></description>";
+            }
+
+            return constructedDescription;
+        }
+
+        /// <summary>
+        /// This method constructs the description for a list type. If the list type contains an element type,
+        /// then the description will include details about the element type.
+        /// </summary>
+        /// <param name="input">The input list type to construct the description for.</param>
+        /// <returns>A constructed string representing the description of the list type.</returns>
+        public static string ConstructDetailsForListType(CSharpType? input)
+        {
+            string typeDescription = string.Empty;
+
+            if (input != null)
+            {
+                string itemName = input.TryGetCSharpFriendlyName(out var keywordName) ? keywordName : input.Name;
+
+                typeDescription = $"{itemName}";
+                CSharpType? elementType = null;
+
+                if (TypeFactory.IsList(input) || TypeFactory.IsArray(input))
                 {
-                    var itemFriendlyName = itemCsharpType.TryGetCSharpFriendlyName(out var elementKeywordName) ? elementKeywordName : itemCsharpType.Name;
-                    itemName = !string.IsNullOrEmpty(itemFriendlyName) ? itemFriendlyName : itemName;
+                    elementType = TypeFactory.GetElementType(input);
                 }
-            }
-            catch
-            {
-                itemName = input.Name;
-            }
 
-            var typeDescription = $"{itemName}";
-            InputType? elementType = null;
-
-            if (input is InputListType listItemType)
-            {
-                elementType = listItemType.ElementType;
-            }
-
-            // validate if the item contains an element type
-            if (elementType != null)
-            {
-                if (elementType is InputListType elementItemType)
+                // validate if the item contains an element type
+                if (elementType != null)
                 {
-                    typeDescription += $"<{ConstructTypeStringForNestedProp(elementItemType)}>";
-                }
-                else
-                {
-                    typeDescription += $"<{ConstructTypeStringForNestedProp(elementType)}>";
+                    typeDescription += $"{{{ConstructDetailsForListType(elementType)}}}";
                 }
             }
 
@@ -315,7 +320,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 description = $"{parameterDescription}";
             }
 
-            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(InputModelProperty, Declaration.Type, SerializationFormat);
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type, SerializationFormat);
             description = $"{description}{binaryDataExtraDescription}";
 
             return description;
@@ -325,26 +330,23 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// This method will construct an additional description for properties that are binary data. For properties whose values are union types,
         /// the description will include the types of values that are allowed.
         /// </summary>
-        /// <param name="inputModelProp">The InputModelProperty of the property.</param>
         /// <param name="type">The CSharpType of the property.</param>
         /// <param name="serializationFormat">The serialization format of the property.</param>
         /// <returns>The formatted description string for the property.</returns>
-        private FormattableString CreateBinaryDataExtraDescription(InputModelProperty? inputModelProp, CSharpType type, SerializationFormat serializationFormat)
+        private FormattableString CreateBinaryDataExtraDescription(CSharpType type, SerializationFormat serializationFormat)
         {
             if (type.IsFrameworkType)
             {
                 string typeSpecificDesc;
                 IReadOnlyList<string> unionTypeDescriptions = Array.Empty<string>();
-
-                if (inputModelProp != null)
+                if (type.IsUnion || (ValueType != null && ValueType.IsUnion))
                 {
-                    InputType? inputType = inputModelProp.Type;
-                    if (inputType != null && inputType is InputUnionType union)
-                    {
-                        // get the union types, if any
-                        IReadOnlyList<InputType> items = union.UnionItemTypes;
-                        unionTypeDescriptions = GetUnionTypesDescriptions(items);
+                    // get the union types, if any
+                    IList<CSharpType>? items = type.IsUnion ? type.UnionItemTypes : ValueType?.UnionItemTypes;
 
+                    if (items != null && items.Count > 0)
+                    {
+                        unionTypeDescriptions = GetUnionTypesDescriptions(items);
                     }
                 }
 
@@ -377,7 +379,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (unionTypeDescriptions.Count > 0)
             {
-                unionTypesAdditionalDescription = $"\n<remarks>\nThe following types are supported by this property:\n<list type=\"bullet\">\n";
+                unionTypesAdditionalDescription = $"\n<remarks>\nSupported types:\n<list type=\"bullet\">\n";
                 foreach (string unionTypeDescription in unionTypeDescriptions)
                 {
                     unionTypesAdditionalDescription += $"<item>\n{unionTypeDescription}\n</item>\n";

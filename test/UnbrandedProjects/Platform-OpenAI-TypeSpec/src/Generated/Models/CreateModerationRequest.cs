@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -45,13 +46,13 @@ namespace OpenAI.Models
         /// </para>
         /// <para>
         /// <remarks>
-        /// The following types are supported by this property:
+        /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// string
+        /// <description><see cref="string"/></description>
         /// </item>
         /// <item>
-        /// IList&lt;string&gt;
+        /// <description><see cref="IList{T}"/> Where <c>T</c> is of type <c>string</c></description>
         /// </item>
         /// </list>
         /// </remarks>

@@ -59,6 +59,21 @@ namespace AutoRest.CSharp.Generation.Types
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
         }
 
+        /// <summary>
+        /// Constructs a CSharpType that represents a union type.
+        /// </summary>
+        /// <param name="type">The type to convert.</param>
+        /// <param name="unionItemTypes">The list of union item types.</param>
+        /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
+        public CSharpType(Type type, CSharpType[] unionItemTypes, bool isNullable) : this(
+            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
+            isNullable,
+            type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
+        {
+            IsUnion = true;
+            UnionItemTypes = unionItemTypes;
+        }
+
         public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
             : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments)
         {
@@ -83,6 +98,10 @@ namespace AutoRest.CSharp.Generation.Types
         public string Name { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
+        public bool IsLiteral { get; set; }
+        public object? LiteralValue { get; set; }
+        public bool IsUnion { get; }
+        public CSharpType[] UnionItemTypes { get; } = Array.Empty<CSharpType>();
         public bool IsPublic { get; }
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;

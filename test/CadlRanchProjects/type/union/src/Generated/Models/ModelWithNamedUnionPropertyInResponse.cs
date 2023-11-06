@@ -33,13 +33,13 @@ namespace _Type.Union.Models
         /// </para>
         /// <para>
         /// <remarks>
-        /// The following types are supported by this property:
+        /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// Model1
+        /// <description><see cref="Model1"/></description>
         /// </item>
         /// <item>
-        /// Model2
+        /// <description><see cref="Model2"/></description>
         /// </item>
         /// </list>
         /// </remarks>
