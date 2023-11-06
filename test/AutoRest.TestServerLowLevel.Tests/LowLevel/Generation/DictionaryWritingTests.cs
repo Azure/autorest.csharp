@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             new InputModelProperty("requiredModelDictionaryDictionary", "requiredModelDictionaryDictionary", "Required dictionary of dictionary of models, illustrating a dictionary of dictionary types.",
                     new InputDictionaryType("requiredModelDictionaryDictionary", InputPrimitiveType.String, new InputDictionaryType("requiredModelDictionary", InputPrimitiveType.String, ElementModelType, false), false), null, true, false, false),
             new InputModelProperty("requiredModelListDictionary", "requiredModelListDictionary", "Required dictionary of list of models, illustrating a dictionary of list types.",
-                    new InputDictionaryType("requiredModelListDictionary", InputPrimitiveType.String, new InputListType("requiredModelList", ElementModelType, false), false), null, true, false, false)
+                    new InputDictionaryType("requiredModelListDictionary", InputPrimitiveType.String, new InputListType("requiredModelList", ElementModelType, false, false), false), null, true, false, false)
         };
 
         // below are test cases

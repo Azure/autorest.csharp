@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && !TypeFactory.IsReadOnlyMemory(property.SerializedType) && property.IsRequired
+                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.Value.Type) && !TypeFactory.IsReadOnlyMemory(property.Value.Type) && property.IsRequired
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -494,22 +494,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var serializedType = jsonPropertySerialization.SerializedType;
             if (serializedType?.IsNullable == true)
             {
+                var propertyVariable = propertyVariables[jsonPropertySerialization];
+
                 // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
                 // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
                 if (!TypeFactory.IsCollectionType(serializedType) || Configuration.DeserializeNullCollectionAsNullValue)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariables[jsonPropertySerialization], Null),
+                        Assign(propertyVariable, Null),
                         Continue
                     };
                 }
 
-                if (jsonPropertySerialization.IsRequired && !TypeFactory.IsReadOnlyMemory(serializedType))
+                if (jsonPropertySerialization.IsRequired && !propertyVariable.Type.IsValueType)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariables[jsonPropertySerialization], New.Instance(TypeFactory.GetPropertyImplementationType(serializedType))),
+                        Assign(propertyVariable, New.Instance(TypeFactory.GetPropertyImplementationType(propertyVariable.Type))),
                         Continue
                     };
                 }
@@ -520,12 +522,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 };
             }
 
-            if (jsonPropertySerialization.IsRequired && (serializedType == null || !TypeFactory.IsReadOnlyMemory(serializedType)))
+            if (jsonPropertySerialization.IsRequired)
             {
                 return new MethodBodyStatement();
             }
 
             var propertyType = jsonPropertySerialization.ValueSerialization?.Type;
+            // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
+            if (jsonPropertySerialization.IsRequired && (propertyType is null || !TypeFactory.IsReadOnlyMemory(propertyType)))
+            {
+                return new MethodBodyStatement();
+            }
+
             if (propertyType?.Equals(typeof(JsonElement)) == true || // JsonElement handles nulls internally
                 propertyType?.Equals(typeof(string)) == true) //https://github.com/Azure/autorest.csharp/issues/922
             {
