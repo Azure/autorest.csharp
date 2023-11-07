@@ -561,13 +561,6 @@ export function getInputType(
                 Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
             setUsage(context, m, model);
-            models.set(name, model);
-
-            // open generic type model which has un-instanced template parameter will not be generated. e.g.
-            // model GenericModel<T> { value: T }
-            if (m.isFinished) {
-                models.set(name, model);
-            }
 
             // open generic type model which has un-instanced template parameter will not be generated. e.g.
             // model GenericModel<T> { value: T }
