@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private SerializableObjectType? _defaultDerivedType;
         private bool _hasCalculatedDefaultDerivedType;
-        public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerviedType();
+        public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
@@ -734,7 +734,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
         }
 
-        private SerializableObjectType? BuildDefaultDerviedType()
+        private SerializableObjectType? BuildDefaultDerivedType()
         {
             if (_hasCalculatedDefaultDerivedType)
                 return _defaultDerivedType;

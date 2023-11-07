@@ -22,7 +22,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class LowLevelClient : TypeProvider
+    internal class DpgClient : TypeProvider
     {
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
@@ -40,8 +40,8 @@ namespace AutoRest.CSharp.Output.Models
         public string Description { get; }
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
-        public IReadOnlyList<LowLevelClient> SubClients { get; init; }
-        public LowLevelClient? ParentClient;
+        public IReadOnlyList<DpgClient> SubClients { get; init; }
+        public DpgClient? ParentClient;
 
         public ClientOptionsTypeProvider ClientOptions { get; }
 
@@ -50,10 +50,10 @@ namespace AutoRest.CSharp.Output.Models
         private bool? _isResourceClient;
         public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
-        private LowLevelClient? _topLevelClient;
-        public LowLevelClient TopLevelClient => _topLevelClient ??= GetTopLevelClient(this);
+        private DpgClient? _topLevelClient;
+        public DpgClient TopLevelClient => _topLevelClient ??= GetTopLevelClient(this);
 
-        private LowLevelClient GetTopLevelClient(LowLevelClient client)
+        private DpgClient GetTopLevelClient(DpgClient client)
         {
             if (client.ParentClient is null)
                 return client;
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Output.Models
             return GetTopLevelClient(client.ParentClient);
         }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
+        public DpgClient(string name, string ns, string description, string libraryName, DpgClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             _libraryName = libraryName;
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models
             _operations = operations;
             _sourceInputModel = sourceInputModel;
 
-            SubClients = Array.Empty<LowLevelClient>();
+            SubClients = Array.Empty<DpgClient>();
         }
 
         private IReadOnlyList<Parameter>? _parameters;
@@ -112,8 +112,8 @@ namespace AutoRest.CSharp.Output.Models
         private IReadOnlyList<ResponseClassifierType>? _responseClassifierTypes;
         public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes => _responseClassifierTypes ??= RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
 
-        private LowLevelSubClientFactoryMethod? _factoryMethod;
-        public LowLevelSubClientFactoryMethod? FactoryMethod => _factoryMethod ??= ParentClient != null ? BuildFactoryMethod(ParentClient.Fields, _libraryName) : null;
+        private DpgSubClientFactoryMethod? _factoryMethod;
+        public DpgSubClientFactoryMethod? FactoryMethod => _factoryMethod ??= ParentClient != null ? BuildFactoryMethod(ParentClient.Fields, _libraryName) : null;
 
         public IEnumerable<LowLevelClientMethod> CustomMethods()
         {
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(DpgClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
         {
             var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, fields, typeFactory, sourceInputModel, client?._clientParameterExamples));
             foreach (var (_, builder) in builders)
@@ -262,7 +262,7 @@ namespace AutoRest.CSharp.Output.Models
             return new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
         }
 
-        public LowLevelSubClientFactoryMethod BuildFactoryMethod(ClientFields parentFields, string libraryName)
+        public DpgSubClientFactoryMethod BuildFactoryMethod(ClientFields parentFields, string libraryName)
         {
             var constructorCallParameters = GetSubClientFactoryMethodParameters().ToArray();
             var methodParameters = constructorCallParameters.Where(p => parentFields.GetFieldByParameter(p) == null).ToArray();
@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? null
                 : new FieldDeclaration(FieldModifiers.Private, this.Type, $"_cached{Type.Name}");
 
-            return new LowLevelSubClientFactoryMethod(methodSignature, cachingField, constructorCallParameters);
+            return new DpgSubClientFactoryMethod(methodSignature, cachingField, constructorCallParameters);
         }
 
         private IEnumerable<Parameter> GetSubClientFactoryMethodParameters()

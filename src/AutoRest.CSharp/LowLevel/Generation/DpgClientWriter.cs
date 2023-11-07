@@ -35,9 +35,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private readonly DpgOutputLibrary _library;
         private readonly CodeWriter _writer;
         private readonly XmlDocWriter _xmlDocWriter;
-        private readonly LowLevelClient _client;
+        private readonly DpgClient _client;
 
-        public DpgClientWriter(DpgOutputLibrary library, LowLevelClient client)
+        public DpgClientWriter(DpgOutputLibrary library, DpgClient client)
         {
             _writer = new CodeWriter();
             _library = library;

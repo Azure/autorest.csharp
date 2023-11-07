@@ -6,5 +6,5 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelSubClientFactoryMethod(MethodSignature Signature, FieldDeclaration? CachingField, ICollection<Parameter> ConstructorCallParameters);
+    internal record DpgSubClientFactoryMethod(MethodSignature Signature, FieldDeclaration? CachingField, ICollection<Parameter> ConstructorCallParameters);
 }

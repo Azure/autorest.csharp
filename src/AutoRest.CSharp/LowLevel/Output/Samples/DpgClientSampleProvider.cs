@@ -28,9 +28,9 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 {
     internal class DpgClientSampleProvider : TypeProvider
     {
-        public LowLevelClient Client { get; }
+        public DpgClient Client { get; }
 
-        public DpgClientSampleProvider(string defaultNamespace, LowLevelClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public DpgClientSampleProvider(string defaultNamespace, DpgClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Client = client;
             DefaultNamespace = $"{defaultNamespace}.Samples";

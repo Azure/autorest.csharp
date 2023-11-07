@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -123,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
-                    Arguments: new ValueExpression[] { new FormattableStringToExpression($"{ArmClientParameter.Name:I}"), new FormattableStringToExpression(ResourceDataIdExpression($"{ResourceDataParameter.Name:I}")) }));
+                    Arguments: new ValueExpression[] { ArmClientParameter, ResourceDataIdExpression(ResourceDataParameter) }));
         }
 
         public override CSharpType? BaseType => typeof(ArmResource);
@@ -524,17 +525,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new Method(signature, methodBody);
         }
 
-        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
+        public ValueExpression ResourceDataIdExpression(ValueExpression dataExpression)
         {
+            var id = dataExpression.Property("Id");
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
+                return Snippets.New.ResourceIdentifier(id);
             }
             else
             {
                 // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
-                return $"{dataExpression}.Id";
+                return id;
             }
         }
 

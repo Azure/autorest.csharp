@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
                 Parameters: new[] { IsAsyncParameter },
                 Initializer: new ConstructorInitializer(
                     true,
-                    new ValueExpression[] { new FormattableStringToExpression($"{IsAsyncParameter.Name:I}"), new FormattableStringToExpression($"{typeof(RecordedTestMode)}.Record") }));
+                    new ValueExpression[] { IsAsyncParameter, new TypeReference(typeof(RecordedTestMode)).Property(nameof(RecordedTestMode.Record)) }));
         }
     }
 }

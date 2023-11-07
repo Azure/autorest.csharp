@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.IO;
 using System.Net.ClientModel;
 using System.Net.ClientModel.Core;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
@@ -15,7 +14,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
     {
         public override ValueExpression Value => throw new InvalidOperationException("PipelineResponse does not have a Value.");
         public override BinaryDataExpression Content => new(Property(nameof(PipelineResponse.Content)));
-        public override StreamExpression ContentStream => new(Property(nameof(PipelineResponse.Content)).CastTo(typeof(Stream)));
+        public override StreamExpression ContentStream => new(Property(nameof(PipelineResponse.ContentStream)));
 
         public override BaseResponseExpression FromValue(ValueExpression value) => throw new InvalidOperationException("PipelineResponse does not have a FromValue.");
 

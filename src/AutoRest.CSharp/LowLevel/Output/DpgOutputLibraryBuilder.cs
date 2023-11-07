@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
-            var clients = new List<LowLevelClient>();
+            var clients = new List<DpgClient>();
 
             var library = new DpgOutputLibrary(_libraryName, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
 
@@ -622,7 +622,7 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
+        private void CreateClients(List<DpgClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
         {
             var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
 
@@ -634,7 +634,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
+        private IEnumerable<DpgClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, DpgClient? parentClient)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -642,7 +642,7 @@ namespace AutoRest.CSharp.Output.Models
                     ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
                     : BuilderHelpers.EscapeXmlDocDescription(clientInfo.Description);
 
-                var subClients = new List<LowLevelClient>();
+                var subClients = new List<DpgClient>();
 
                 if (!Configuration.IsBranded)
                 {
@@ -652,7 +652,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
                 }
 
-                var client = new LowLevelClient(
+                var client = new DpgClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
                     description,
