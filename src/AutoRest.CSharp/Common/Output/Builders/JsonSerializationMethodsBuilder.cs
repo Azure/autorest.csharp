@@ -273,7 +273,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 bool isValid = (format == ModelReaderWriterFormat.Json && implementsJson) || format == ModelReaderWriterFormat.Wire;
                 if (!isValid)
                 {
-                    throw new FormatException($"The model {model.GetType().Name} does not support '{format}' format.");
+                    throw new FormatException($"The model {nameof(ThisModel)} does not support '{format}' format.");
                 }
              */
             var format = options.Format;
@@ -290,7 +290,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             typeof(FormatException),
                             new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
                             {
-                                new InvokeInstanceMethodExpression(null, nameof(GetType), Array.Empty<ValueExpression>(), null, false).Property(nameof(Type.Name)),
+                                Nameof(type),
                                 format
                             })))
                     }
