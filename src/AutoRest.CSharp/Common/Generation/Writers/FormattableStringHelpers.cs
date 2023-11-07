@@ -73,13 +73,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
             };
 
-        public static FormattableString? GetModelFactoryParameterInitializer(this CSharpType parameterType, Constant? defaultValue)
-            => GetParameterInitializer(parameterType, defaultValue, TypeFactory.GetPropertyImplementationType);
-
         public static FormattableString? GetParameterInitializer(this CSharpType parameterType, Constant? defaultValue)
-            => GetParameterInitializer(parameterType, defaultValue, TypeFactory.GetImplementationType);
-
-        private static FormattableString? GetParameterInitializer(this CSharpType parameterType, Constant? defaultValue, Func<CSharpType, CSharpType> typeConverter)
         {
             if (parameterType.IsValueType)
             {
@@ -88,7 +82,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
             {
-                defaultValue = Constant.NewInstanceOf(typeConverter(parameterType).WithNullable(false));
+                defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
             }
 
             if (defaultValue == null)
