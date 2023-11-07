@@ -26,6 +26,8 @@ namespace MgmtListMethods
     public partial class TenantParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TenantParentResource"/> instance. </summary>
+        /// <param name="tenantTestName"> The tenantTestName. </param>
+        /// <param name="tenantParentName"> The tenantParentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string tenantTestName, string tenantParentName)
         {
             var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}";

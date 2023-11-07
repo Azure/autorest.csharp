@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -262,7 +263,7 @@ namespace _Azure.Lro.Standard
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = await ExportAsync(waitUntil, name, format, context).ConfigureAwait(false);
-            return ProtocolOperationHelpers.Convert(response, ExportedUser.FromResponse, ClientDiagnostics, "StandardClient.Export");
+            return ProtocolOperationHelpers.Convert(response, FetchExportedUserFromResourceOperationStatusUserExportedUserError, ClientDiagnostics, "StandardClient.Export");
         }
 
         /// <summary> Exports a user. </summary>
@@ -281,7 +282,7 @@ namespace _Azure.Lro.Standard
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = Export(waitUntil, name, format, context);
-            return ProtocolOperationHelpers.Convert(response, ExportedUser.FromResponse, ClientDiagnostics, "StandardClient.Export");
+            return ProtocolOperationHelpers.Convert(response, FetchExportedUserFromResourceOperationStatusUserExportedUserError, ClientDiagnostics, "StandardClient.Export");
         }
 
         /// <summary>
@@ -434,5 +435,11 @@ namespace _Azure.Lro.Standard
         private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201 });
         private static ResponseClassifier _responseClassifier202;
         private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new StatusCodeClassifier(stackalloc ushort[] { 202 });
+
+        private ExportedUser FetchExportedUserFromResourceOperationStatusUserExportedUserError(Response response)
+        {
+            var resultJsonElement = JsonDocument.Parse(response.Content).RootElement.GetProperty("result");
+            return ExportedUser.DeserializeExportedUser(resultJsonElement);
+        }
     }
 }

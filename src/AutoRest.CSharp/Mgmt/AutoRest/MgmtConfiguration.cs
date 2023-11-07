@@ -9,6 +9,8 @@ using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Report;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Input
 {
@@ -24,15 +26,27 @@ namespace AutoRest.CSharp.Input
 
             public bool SkipCodeGen { get; }
 
+            public bool GenerateReport { get; }
+
+            public bool ReportOnly { get; }
+
+            public string ReportFormat { get; }
+
             public MgmtDebugConfiguration(
                 JsonElement? suppressListException = default,
                 JsonElement? showSerializedNames = default,
-                JsonElement? skipCodeGen = default
+                JsonElement? skipCodeGen = default,
+                JsonElement? generateReport = default,
+                JsonElement? reportOnly = default,
+                JsonElement? reportFormat = default
             )
             {
                 SuppressListException = Configuration.DeserializeBoolean(suppressListException, false);
                 ShowSerializedNames = Configuration.DeserializeBoolean(showSerializedNames, false);
                 SkipCodeGen = Configuration.DeserializeBoolean(skipCodeGen, false);
+                GenerateReport = Configuration.DeserializeBoolean(generateReport, true);
+                ReportOnly = Configuration.DeserializeBoolean(reportOnly, false);
+                ReportFormat = Configuration.IsValidJsonElement(reportFormat) ? reportFormat?.GetString() ?? "yaml" : "yaml";
             }
 
             internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)
@@ -43,11 +57,17 @@ namespace AutoRest.CSharp.Input
                 root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
                 root.TryGetProperty(nameof(ShowSerializedNames), out var showSerializedNames);
                 root.TryGetProperty(nameof(SkipCodeGen), out var skipCodeGen);
+                root.TryGetProperty(nameof(GenerateReport), out var generateReport);
+                root.TryGetProperty(nameof(ReportOnly), out var reportOnly);
+                root.TryGetProperty(nameof(ReportFormat), out var reportFormat);
 
                 return new MgmtDebugConfiguration(
                     suppressListException: suppressListException,
                     showSerializedNames: showSerializedNames,
-                    skipCodeGen: skipCodeGen
+                    skipCodeGen: skipCodeGen,
+                    generateReport: generateReport,
+                    reportOnly: reportOnly,
+                    reportFormat: reportFormat
                 );
             }
 
@@ -56,7 +76,10 @@ namespace AutoRest.CSharp.Input
                 return new MgmtDebugConfiguration(
                     suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult(),
                     showSerializedNames: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-serialized-names")).GetAwaiter().GetResult(),
-                    skipCodeGen: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "skip-codegen")).GetAwaiter().GetResult()
+                    skipCodeGen: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "skip-codegen")).GetAwaiter().GetResult(),
+                    generateReport: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "generate-report")).GetAwaiter().GetResult(),
+                    reportOnly: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "report-only")).GetAwaiter().GetResult(),
+                    reportFormat: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "report-format")).GetAwaiter().GetResult()
                 );
             }
 
@@ -77,16 +100,16 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public record AcronymMappingTarget(string Value, string? ParameterValue)
+        public record AcronymMappingTarget(string Value, string? ParameterValue, string RawValue)
         {
             internal static AcronymMappingTarget Parse(string rawValue)
             {
                 var spans = rawValue.AsSpan();
                 var index = spans.IndexOf('|');
                 if (index < 0)
-                    return new AcronymMappingTarget(rawValue, null);
+                    return new AcronymMappingTarget(rawValue, null, rawValue);
 
-                return new AcronymMappingTarget(spans.Slice(0, index).ToString(), spans.Slice(index, rawValue.Length - index).ToString());
+                return new AcronymMappingTarget(spans.Slice(0, index).ToString(), spans.Slice(index, rawValue.Length - index).ToString(), rawValue);
             }
         }
 
@@ -133,18 +156,19 @@ namespace AutoRest.CSharp.Input
             JsonElement? partialResources = default,
             JsonElement? operationsToLroApiVersionOverride = default)
         {
+            MgmtReport.Instance.Reset();
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
             RequestPathToResourceData = DeserializeDictionary<string, string>(requestPathToResourceData);
             RequestPathToResourceType = DeserializeDictionary<string, string>(requestPathToResourceType);
             RequestPathToScopeResourceTypes = DeserializeDictionary<string, string[]>(requestPathToScopeResourceTypes);
             RequestPathToSingletonResource = DeserializeDictionary<string, string>(requestPathToSingletonResource);
-            OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName);
-            RawAcronymMapping = DeserializeDictionary<string, string>(acronymMapping);
+            OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName).AddToTransformerStore(TransformTypeName.OverrideOperationName, fromConfig: true);
+            RawAcronymMapping = DeserializeDictionary<string, string>(acronymMapping).AddToTransformerStore(TransformTypeName.AcronymMapping, fromConfig: true);
             RenamePropertyBag = DeserializeDictionary<string, string>(renamePropertyBag);
-            FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules);
-            RenameMapping = DeserializeDictionary<string, string>(renameMapping);
-            ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping);
+            FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules).AddToTransformerStore(TransformTypeName.FormatByNameRules, fromConfig: true);
+            RenameMapping = DeserializeDictionary<string, string>(renameMapping).AddToTransformerStore(TransformTypeName.RenameMapping, fromConfig: true);
+            ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping).AddToTransformerStore(TransformTypeName.ParameterRenameMapping,(arg) => arg.Value.Select(valueKV => new TransformItem(arg.Type, arg.Key, true /*fromConfig*/, valueKV.Key, valueKV.Value)));
             IrregularPluralWords = DeserializeDictionary<string, string>(irregularPluralWords);
             PartialResources = DeserializeDictionary<string, string>(partialResources);
             try
@@ -167,16 +191,16 @@ namespace AutoRest.CSharp.Input
                 var mergeOperationsStrDict = DeserializeDictionary<string, string>(mergeOperations);
                 MergeOperations = mergeOperationsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
-            OperationGroupsToOmit = operationGroupsToOmit;
-            RequestPathIsNonResource = requestPathIsNonResource;
-            NoPropertyTypeReplacement = noPropertyTypeReplacement;
+            OperationGroupsToOmit = operationGroupsToOmit.AddToTransformerStore(Mgmt.Report.TransformTypeName.OperationGroupsToOmit, fromConfig: true);
+            RequestPathIsNonResource = requestPathIsNonResource.AddToTransformerStore(TransformTypeName.RequestPathIsNonResource, fromConfig: true);
+            NoPropertyTypeReplacement = noPropertyTypeReplacement.AddToTransformerStore(TransformTypeName.NoPropertyTypeReplacement, fromConfig: true);
             ListException = listException;
             PromptedEnumValues = promptedEnumValues;
             KeepOrphanedModels = keepOrphanedModels;
-            KeepPluralEnums = keepPluralEnums;
-            KeepPluralResourceData = keepPluralResourceData;
-            NoResourceSuffix = noResourceSuffix;
-            PrependRPPrefix = schemasToPrependRPPrefix;
+            KeepPluralEnums = keepPluralEnums.AddToTransformerStore(TransformTypeName.KeepPluralEnums, fromConfig: true);
+            KeepPluralResourceData = keepPluralResourceData.AddToTransformerStore(TransformTypeName.KeepPluralResourceData, fromConfig: true);
+            NoResourceSuffix = noResourceSuffix.AddToTransformerStore(TransformTypeName.NoResourceSuffix, fromConfig: true);
+            PrependRPPrefix = schemasToPrependRPPrefix.AddToTransformerStore(TransformTypeName.PrependRpPrefix, fromConfig: true);
             GenerateArmResourceExtensions = generateArmResourceExtensions;
             RawParameterizedScopes = parameterizedScopes;
             OperationsToSkipLroApiVersionOverride = operationsToSkipLroApiVersionOverride;
@@ -251,16 +275,16 @@ namespace AutoRest.CSharp.Input
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
         {
             return new MgmtConfiguration(
-                operationGroupsToOmit: autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                requestPathIsNonResource: autoRest.GetValue<string[]?>("request-path-is-non-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                noPropertyTypeReplacement: autoRest.GetValue<string[]?>("no-property-type-replacement").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                operationGroupsToOmit: autoRest.GetValue<string[]?>(TransformTypeName.OperationGroupsToOmit).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                requestPathIsNonResource: autoRest.GetValue<string[]?>(TransformTypeName.RequestPathIsNonResource).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                noPropertyTypeReplacement: autoRest.GetValue<string[]?>(TransformTypeName.NoPropertyTypeReplacement).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 listException: autoRest.GetValue<string[]?>("list-exception").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 promptedEnumValues: autoRest.GetValue<string[]?>("prompted-enum-values").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 keepOrphanedModels: autoRest.GetValue<string[]?>("keep-orphaned-models").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                keepPluralEnums: autoRest.GetValue<string[]?>("keep-plural-enums").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                keepPluralResourceData: autoRest.GetValue<string[]?>("keep-plural-resource-data").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                keepPluralEnums: autoRest.GetValue<string[]?>(TransformTypeName.KeepPluralEnums).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                keepPluralResourceData: autoRest.GetValue<string[]?>(TransformTypeName.KeepPluralResourceData).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                noResourceSuffix: autoRest.GetValue<string[]?>(TransformTypeName.NoResourceSuffix).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                schemasToPrependRPPrefix: autoRest.GetValue<string[]?>(TransformTypeName.PrependRpPrefix).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 parameterizedScopes: autoRest.GetValue<string[]?>("parameterized-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 operationsToSkipLroApiVersionOverride: autoRest.GetValue<string[]?>("operations-to-skip-lro-api-version-override").GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -272,12 +296,12 @@ namespace AutoRest.CSharp.Input
                 requestPathToScopeResourceTypes: autoRest.GetValue<JsonElement?>("request-path-to-scope-resource-types").GetAwaiter().GetResult(),
                 operationPositions: autoRest.GetValue<JsonElement?>("operation-positions").GetAwaiter().GetResult(),
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
-                overrideOperationName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
+                overrideOperationName: autoRest.GetValue<JsonElement?>(TransformTypeName.OverrideOperationName).GetAwaiter().GetResult(),
                 acronymMapping: GetAcronymMappingConfig(autoRest),
                 renamePropertyBag: autoRest.GetValue<JsonElement?>("rename-property-bag").GetAwaiter().GetResult(),
-                formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
-                renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
-                parameterRenameMapping: autoRest.GetValue<JsonElement?>("parameter-rename-mapping").GetAwaiter().GetResult(),
+                formatByNameRules: autoRest.GetValue<JsonElement?>(TransformTypeName.FormatByNameRules).GetAwaiter().GetResult(),
+                renameMapping: autoRest.GetValue<JsonElement?>(TransformTypeName.RenameMapping).GetAwaiter().GetResult(),
+                parameterRenameMapping: autoRest.GetValue<JsonElement?>(TransformTypeName.ParameterRenameMapping).GetAwaiter().GetResult(),
                 irregularPluralWords: autoRest.GetValue<JsonElement?>("irregular-plural-words").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
@@ -293,7 +317,7 @@ namespace AutoRest.CSharp.Input
 
         private static JsonElement? GetAcronymMappingConfig(IPluginCommunication autoRest)
         {
-            var newValue = autoRest.GetValue<JsonElement?>("acronym-mapping").GetAwaiter().GetResult();
+            var newValue = autoRest.GetValue<JsonElement?>(TransformTypeName.AcronymMapping).GetAwaiter().GetResult();
             // acronym-mapping was renamed from rename-rules, so fallback to check rename-rules if acronym-mapping is not available
             if (newValue == null || !newValue.HasValue || newValue.Value.ValueKind == JsonValueKind.Null)
                 return autoRest.GetValue<JsonElement?>("rename-rules").GetAwaiter().GetResult();

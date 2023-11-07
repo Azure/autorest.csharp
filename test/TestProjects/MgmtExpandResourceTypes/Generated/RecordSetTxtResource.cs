@@ -26,6 +26,10 @@ namespace MgmtExpandResourceTypes
     public partial class RecordSetTxtResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="RecordSetTxtResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="zoneName"> The zoneName. </param>
+        /// <param name="relativeRecordSetName"> The relativeRecordSetName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string zoneName, string relativeRecordSetName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}";

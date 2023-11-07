@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static readonly CSharpType RequestContentNullableType = new(Configuration.ApiTypes.RequestContentType, true);
         private static readonly CSharpType RequestContextType = new(Configuration.ApiTypes.RequestContextType);
         private static readonly CSharpType RequestContextNullableType = new(Configuration.ApiTypes.RequestContextType, true);
+        private static readonly CSharpType ResponseType = new(Configuration.ApiTypes.ResponseType);
 
         public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", $"The handler for diagnostic messaging in the client.", new CSharpType(Configuration.ApiTypes.ClientDiagnosticsType), null, ValidationType.AssertNotNull, null);
         public static readonly Parameter Pipeline = new("pipeline", $"The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(Configuration.ApiTypes.HttpPipelineType), null, ValidationType.AssertNotNull, null);
@@ -42,5 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static readonly Parameter CancellationTokenParameter = new("cancellationToken", $"The cancellation token to use", new CSharpType(typeof(CancellationToken)), Constant.NewInstanceOf(typeof(CancellationToken)), ValidationType.None, null);
         public static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", $"Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), ValidationType.None, null) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
+
+        public static readonly Parameter Response = new("response", $"Response returned from backend service", ResponseType, null, ValidationType.None, null);
     }
 }

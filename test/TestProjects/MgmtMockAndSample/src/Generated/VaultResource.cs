@@ -29,6 +29,9 @@ namespace MgmtMockAndSample
     public partial class VaultResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VaultResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="vaultName"> The vaultName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vaultName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}";
@@ -98,7 +101,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of MgmtMockAndSamplePrivateEndpointConnectionResources and their operations over a MgmtMockAndSamplePrivateEndpointConnectionResource. </returns>
         public virtual MgmtMockAndSamplePrivateEndpointConnectionCollection GetMgmtMockAndSamplePrivateEndpointConnections()
         {
-            return GetCachedClient(Client => new MgmtMockAndSamplePrivateEndpointConnectionCollection(Client, Id));
+            return GetCachedClient(client => new MgmtMockAndSamplePrivateEndpointConnectionCollection(client, Id));
         }
 
         /// <summary>
@@ -116,8 +119,8 @@ namespace MgmtMockAndSample
         /// </summary>
         /// <param name="privateEndpointConnectionName"> Name of the private endpoint connection associated with the key vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<MgmtMockAndSamplePrivateEndpointConnectionResource>> GetMgmtMockAndSamplePrivateEndpointConnectionAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
@@ -139,8 +142,8 @@ namespace MgmtMockAndSample
         /// </summary>
         /// <param name="privateEndpointConnectionName"> Name of the private endpoint connection associated with the key vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<MgmtMockAndSamplePrivateEndpointConnectionResource> GetMgmtMockAndSamplePrivateEndpointConnection(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {

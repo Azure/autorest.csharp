@@ -41,17 +41,7 @@ namespace MgmtMockAndSample.Tests.Mock
             {
                 Properties = new ManagedHsmProperties()
                 {
-                    Settings = BinaryData.FromObjectAsJson(new Dictionary<string, object>()
-                    {
-                        ["config1"] = "value1",
-                        ["config2"] = "8427",
-                        ["config3"] = "false",
-                        ["config4"] = new object[] { "1", "2" },
-                        ["config5"] = new Dictionary<string, object>()
-                        {
-                            ["inner"] = "something"
-                        }
-                    }),
+                    Settings = BinaryData.FromString("\"{\"config1\":\"value1\",\"config2\":8427,\"config3\":false,\"config4\":[\"1\",\"2\"],\"config5\":{\"inner\":\"something\"}}\""),
                     ProtectedSettings = BinaryData.FromObjectAsJson(new Dictionary<string, object>()
                     {
                         ["protected1"] = "value2",
