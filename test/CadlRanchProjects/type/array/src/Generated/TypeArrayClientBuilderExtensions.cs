@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using _Type._Array;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ArrayClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<ArrayClient, ArrayClientOptions> AddArrayClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<ArrayClient, ArrayClientOptions> AddArrayClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ArrayClient, ArrayClientOptions>((options) => new ArrayClient(endpoint, options));
+            return builder.RegisterClientFactory<ArrayClient, ArrayClientOptions>((options) => new ArrayClient(options));
         }
 
         /// <summary> Registers a <see cref="ArrayClient"/> instance. </summary>

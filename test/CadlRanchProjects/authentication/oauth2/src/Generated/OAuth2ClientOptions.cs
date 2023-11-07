@@ -33,5 +33,8 @@ namespace Authentication.OAuth2
                 _ => throw new NotSupportedException()
             };
         }
+
+        /// <summary> TestServer endpoint. </summary>
+        public Uri Endpoint { get; set; }
     }
 }

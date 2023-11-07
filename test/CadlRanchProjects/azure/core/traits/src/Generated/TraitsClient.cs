@@ -30,22 +30,19 @@ namespace _Specs_.Azure.Core.Traits
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of TraitsClient. </summary>
-        public TraitsClient() : this(new Uri("http://localhost:3000"), new TraitsClientOptions())
+        public TraitsClient() : this(new TraitsClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of TraitsClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public TraitsClient(Uri endpoint, TraitsClientOptions options)
+        public TraitsClient(TraitsClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new TraitsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

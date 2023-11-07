@@ -40,21 +40,18 @@ namespace url_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="globalStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        public PathItemsClient(string globalStringPath, AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), globalStringPath, credential, null, new AutoRestUrlTestServiceClientOptions())
+        public PathItemsClient(string globalStringPath, AzureKeyCredential credential) : this(globalStringPath, credential, new AutoRestUrlTestServiceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PathItemsClient. </summary>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="globalStringPath"> A string value 'globalItemStringPath' that appears in the path. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="globalStringQuery"> should contain value null. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="globalStringPath"/> or <paramref name="credential"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="globalStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        public PathItemsClient(Uri endpoint, string globalStringPath, AzureKeyCredential credential, string globalStringQuery, AutoRestUrlTestServiceClientOptions options)
+        public PathItemsClient(string globalStringPath, AzureKeyCredential credential, AutoRestUrlTestServiceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNullOrEmpty(globalStringPath, nameof(globalStringPath));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestUrlTestServiceClientOptions();
@@ -63,8 +60,8 @@ namespace url_LowLevel
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _globalStringPath = globalStringPath;
-            _endpoint = endpoint;
-            _globalStringQuery = globalStringQuery;
+            _endpoint = options.Endpoint;
+            _globalStringQuery = options.GlobalStringQuery;
         }
 
         /// <summary>

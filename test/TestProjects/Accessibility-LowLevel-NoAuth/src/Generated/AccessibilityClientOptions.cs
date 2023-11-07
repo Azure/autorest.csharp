@@ -33,5 +33,8 @@ namespace Accessibility_LowLevel_NoAuth
                 _ => throw new NotSupportedException()
             };
         }
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; set; }
     }
 }

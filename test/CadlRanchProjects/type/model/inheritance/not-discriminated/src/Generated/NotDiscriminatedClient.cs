@@ -30,22 +30,19 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of NotDiscriminatedClient. </summary>
-        public NotDiscriminatedClient() : this(new Uri("http://localhost:3000"), new NotDiscriminatedClientOptions())
+        public NotDiscriminatedClient() : this(new NotDiscriminatedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NotDiscriminatedClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public NotDiscriminatedClient(Uri endpoint, NotDiscriminatedClientOptions options)
+        public NotDiscriminatedClient(NotDiscriminatedClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new NotDiscriminatedClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

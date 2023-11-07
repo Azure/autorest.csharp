@@ -36,25 +36,23 @@ namespace ParameterSequence_LowLevel
         /// <summary> Initializes a new instance of ParameterSequenceClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ParameterSequenceClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new ParameterSequenceClientOptions())
+        public ParameterSequenceClient(AzureKeyCredential credential) : this(credential, new ParameterSequenceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ParameterSequenceClient. </summary>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public ParameterSequenceClient(Uri endpoint, AzureKeyCredential credential, ParameterSequenceClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public ParameterSequenceClient(AzureKeyCredential credential, ParameterSequenceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ParameterSequenceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary>

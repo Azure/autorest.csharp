@@ -2,6 +2,7 @@
 
 #nullable disable
 
+using System;
 using System.Net.ClientModel;
 
 namespace OpenAI
@@ -9,5 +10,7 @@ namespace OpenAI
     /// <summary> Client options for OpenAIClient. </summary>
     public partial class OpenAIClientOptions : RequestOptions
     {
+        /// <summary> OpenAI Endpoint. </summary>
+        public Uri Endpoint { get; set; }
     }
 }

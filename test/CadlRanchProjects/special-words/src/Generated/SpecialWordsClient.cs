@@ -25,22 +25,19 @@ namespace SpecialWords
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of SpecialWordsClient. </summary>
-        public SpecialWordsClient() : this(new Uri("http://localhost:3000"), new SpecialWordsClientOptions())
+        public SpecialWordsClient() : this(new SpecialWordsClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SpecialWordsClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public SpecialWordsClient(Uri endpoint, SpecialWordsClientOptions options)
+        public SpecialWordsClient(SpecialWordsClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new SpecialWordsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary> Initializes a new instance of Models. </summary>

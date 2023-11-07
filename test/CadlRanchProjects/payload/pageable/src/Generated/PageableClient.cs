@@ -30,22 +30,19 @@ namespace Payload.Pageable
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of PageableClient. </summary>
-        public PageableClient() : this(new Uri("http://localhost:3000"), new PageableClientOptions())
+        public PageableClient() : this(new PageableClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PageableClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public PageableClient(Uri endpoint, PageableClientOptions options)
+        public PageableClient(PageableClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new PageableClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

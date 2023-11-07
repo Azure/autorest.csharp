@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using _Type.Model.Empty;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="EmptyClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<EmptyClient, EmptyClientOptions> AddEmptyClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<EmptyClient, EmptyClientOptions> AddEmptyClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<EmptyClient, EmptyClientOptions>((options) => new EmptyClient(endpoint, options));
+            return builder.RegisterClientFactory<EmptyClient, EmptyClientOptions>((options) => new EmptyClient(options));
         }
 
         /// <summary> Registers a <see cref="EmptyClient"/> instance. </summary>

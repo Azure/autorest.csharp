@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Authentication.OAuth2;
 using Azure.Core.Extensions;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="OAuth2Client"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<OAuth2Client, OAuth2ClientOptions> AddOAuth2Client<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<OAuth2Client, OAuth2ClientOptions> AddOAuth2Client<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<OAuth2Client, OAuth2ClientOptions>((options, cred) => new OAuth2Client(endpoint, cred, options));
+            return builder.RegisterClientFactory<OAuth2Client, OAuth2ClientOptions>((options, cred) => new OAuth2Client(cred, options));
         }
 
         /// <summary> Registers a <see cref="OAuth2Client"/> instance. </summary>

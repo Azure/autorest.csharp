@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure;
 using Azure.Core.Extensions;
 using body_string_LowLevel;
@@ -17,22 +16,20 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="StringClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<StringClient, AutoRestSwaggerBATServiceClientOptions> AddStringClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<StringClient, AutoRestSwaggerBATServiceClientOptions> AddStringClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<StringClient, AutoRestSwaggerBATServiceClientOptions>((options) => new StringClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<StringClient, AutoRestSwaggerBATServiceClientOptions>((options) => new StringClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="EnumClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<EnumClient, AutoRestSwaggerBATServiceClientOptions> AddEnumClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<EnumClient, AutoRestSwaggerBATServiceClientOptions> AddEnumClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<EnumClient, AutoRestSwaggerBATServiceClientOptions>((options) => new EnumClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<EnumClient, AutoRestSwaggerBATServiceClientOptions>((options) => new EnumClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="StringClient"/> instance. </summary>

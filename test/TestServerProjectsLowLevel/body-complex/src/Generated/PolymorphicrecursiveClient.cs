@@ -36,25 +36,23 @@ namespace body_complex_LowLevel
         /// <summary> Initializes a new instance of PolymorphicrecursiveClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PolymorphicrecursiveClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new AutoRestComplexTestServiceClientOptions())
+        public PolymorphicrecursiveClient(AzureKeyCredential credential) : this(credential, new AutoRestComplexTestServiceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PolymorphicrecursiveClient. </summary>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public PolymorphicrecursiveClient(Uri endpoint, AzureKeyCredential credential, AutoRestComplexTestServiceClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PolymorphicrecursiveClient(AzureKeyCredential credential, AutoRestComplexTestServiceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestComplexTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary>

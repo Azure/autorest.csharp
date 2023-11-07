@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using _Azure.Lro.Standard;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="StandardClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<StandardClient, StandardClientOptions> AddStandardClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<StandardClient, StandardClientOptions> AddStandardClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<StandardClient, StandardClientOptions>((options) => new StandardClient(endpoint, options));
+            return builder.RegisterClientFactory<StandardClient, StandardClientOptions>((options) => new StandardClient(options));
         }
 
         /// <summary> Registers a <see cref="StandardClient"/> instance. </summary>

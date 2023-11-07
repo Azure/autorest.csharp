@@ -30,22 +30,19 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of EnumDiscriminatorClient. </summary>
-        public EnumDiscriminatorClient() : this(new Uri("http://localhost:3000"), new EnumDiscriminatorClientOptions())
+        public EnumDiscriminatorClient() : this(new EnumDiscriminatorClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of EnumDiscriminatorClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public EnumDiscriminatorClient(Uri endpoint, EnumDiscriminatorClientOptions options)
+        public EnumDiscriminatorClient(EnumDiscriminatorClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new EnumDiscriminatorClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

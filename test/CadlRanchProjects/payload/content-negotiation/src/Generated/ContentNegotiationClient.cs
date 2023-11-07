@@ -25,22 +25,19 @@ namespace Payload.ContentNegotiation
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of ContentNegotiationClient. </summary>
-        public ContentNegotiationClient() : this(new Uri("http://localhost:3000"), new ContentNegotiationClientOptions())
+        public ContentNegotiationClient() : this(new ContentNegotiationClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ContentNegotiationClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ContentNegotiationClient(Uri endpoint, ContentNegotiationClientOptions options)
+        public ContentNegotiationClient(ContentNegotiationClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ContentNegotiationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary> Initializes a new instance of SameBody. </summary>

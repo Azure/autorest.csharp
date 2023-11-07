@@ -33,5 +33,8 @@ namespace ParameterSequence_LowLevel
                 _ => throw new NotSupportedException()
             };
         }
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; set; }
     }
 }

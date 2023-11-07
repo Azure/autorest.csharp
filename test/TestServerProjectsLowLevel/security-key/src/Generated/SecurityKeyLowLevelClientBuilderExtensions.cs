@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure;
 using Azure.Core.Extensions;
 using security_key_LowLevel;
@@ -17,12 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="AutorestSecurityKeyClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<AutorestSecurityKeyClient, AutorestSecurityKeyClientOptions> AddAutorestSecurityKeyClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<AutorestSecurityKeyClient, AutorestSecurityKeyClientOptions> AddAutorestSecurityKeyClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<AutorestSecurityKeyClient, AutorestSecurityKeyClientOptions>((options) => new AutorestSecurityKeyClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<AutorestSecurityKeyClient, AutorestSecurityKeyClientOptions>((options) => new AutorestSecurityKeyClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="AutorestSecurityKeyClient"/> instance. </summary>

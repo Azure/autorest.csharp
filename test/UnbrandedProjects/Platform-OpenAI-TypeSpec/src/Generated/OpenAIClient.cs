@@ -35,25 +35,23 @@ namespace OpenAI
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public OpenAIClient(KeyCredential credential) : this(new Uri("https://api.openai.com/v1"), credential, new OpenAIClientOptions())
+        public OpenAIClient(KeyCredential credential) : this(credential, new OpenAIClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
-        /// <param name="endpoint"> OpenAI Endpoint. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public OpenAIClient(Uri endpoint, KeyCredential credential, OpenAIClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public OpenAIClient(KeyCredential credential, OpenAIClientOptions options)
         {
-            ClientUtilities.AssertNotNull(endpoint, nameof(endpoint));
             ClientUtilities.AssertNotNull(credential, nameof(credential));
             options ??= new OpenAIClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);
             _keyCredential = credential;
             _pipeline = MessagePipeline.Create(options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         private Audio _cachedAudio;

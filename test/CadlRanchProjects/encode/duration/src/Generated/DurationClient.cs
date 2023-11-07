@@ -25,22 +25,19 @@ namespace Encode.Duration
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of DurationClient. </summary>
-        public DurationClient() : this(new Uri("http://localhost:3000"), new DurationClientOptions())
+        public DurationClient() : this(new DurationClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of DurationClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public DurationClient(Uri endpoint, DurationClientOptions options)
+        public DurationClient(DurationClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new DurationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary> Initializes a new instance of Query. </summary>

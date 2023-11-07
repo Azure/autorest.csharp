@@ -25,22 +25,19 @@ namespace _Type._Dictionary
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of DictionaryClient. </summary>
-        public DictionaryClient() : this(new Uri("http://localhost:3000"), new DictionaryClientOptions())
+        public DictionaryClient() : this(new DictionaryClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of DictionaryClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public DictionaryClient(Uri endpoint, DictionaryClientOptions options)
+        public DictionaryClient(DictionaryClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new DictionaryClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary> Initializes a new instance of Int32Value. </summary>

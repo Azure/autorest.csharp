@@ -40,20 +40,18 @@ namespace SubClients_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public RootClient(string cachedParameter, AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), cachedParameter, credential, new RootClientOptions())
+        public RootClient(string cachedParameter, AzureKeyCredential credential) : this(cachedParameter, credential, new RootClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RootClient. </summary>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="cachedParameter"> The String to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public RootClient(Uri endpoint, string cachedParameter, AzureKeyCredential credential, RootClientOptions options)
+        public RootClient(string cachedParameter, AzureKeyCredential credential, RootClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNullOrEmpty(cachedParameter, nameof(cachedParameter));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new RootClientOptions();
@@ -62,7 +60,7 @@ namespace SubClients_LowLevel
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _cachedParameter = cachedParameter;
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary>

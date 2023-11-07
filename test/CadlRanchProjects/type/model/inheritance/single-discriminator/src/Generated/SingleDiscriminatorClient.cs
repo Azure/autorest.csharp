@@ -30,22 +30,19 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of SingleDiscriminatorClient. </summary>
-        public SingleDiscriminatorClient() : this(new Uri("http://localhost:3000"), new SingleDiscriminatorClientOptions())
+        public SingleDiscriminatorClient() : this(new SingleDiscriminatorClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SingleDiscriminatorClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public SingleDiscriminatorClient(Uri endpoint, SingleDiscriminatorClientOptions options)
+        public SingleDiscriminatorClient(SingleDiscriminatorClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new SingleDiscriminatorClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

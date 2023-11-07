@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using _Specs_.Azure.ClientGenerator.Core.Access;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="AccessClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<AccessClient, AccessClientOptions> AddAccessClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<AccessClient, AccessClientOptions> AddAccessClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<AccessClient, AccessClientOptions>((options) => new AccessClient(endpoint, options));
+            return builder.RegisterClientFactory<AccessClient, AccessClientOptions>((options) => new AccessClient(options));
         }
 
         /// <summary> Registers a <see cref="AccessClient"/> instance. </summary>

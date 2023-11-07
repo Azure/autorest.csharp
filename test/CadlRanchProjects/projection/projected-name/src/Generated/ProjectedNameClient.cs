@@ -29,22 +29,19 @@ namespace Projection.ProjectedName
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of ProjectedNameClient. </summary>
-        public ProjectedNameClient() : this(new Uri("http://localhost:3000"), new ProjectedNameClientOptions())
+        public ProjectedNameClient() : this(new ProjectedNameClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ProjectedNameClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ProjectedNameClient(Uri endpoint, ProjectedNameClientOptions options)
+        public ProjectedNameClient(ProjectedNameClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ProjectedNameClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

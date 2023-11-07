@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using SpecialWords;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="SpecialWordsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<SpecialWordsClient, SpecialWordsClientOptions> AddSpecialWordsClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<SpecialWordsClient, SpecialWordsClientOptions> AddSpecialWordsClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<SpecialWordsClient, SpecialWordsClientOptions>((options) => new SpecialWordsClient(endpoint, options));
+            return builder.RegisterClientFactory<SpecialWordsClient, SpecialWordsClientOptions>((options) => new SpecialWordsClient(options));
         }
 
         /// <summary> Registers a <see cref="SpecialWordsClient"/> instance. </summary>

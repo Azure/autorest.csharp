@@ -25,22 +25,19 @@ namespace _Type.Property.ValueTypes
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of ValueTypesClient. </summary>
-        public ValueTypesClient() : this(new Uri("http://localhost:3000"), new ValueTypesClientOptions())
+        public ValueTypesClient() : this(new ValueTypesClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ValueTypesClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ValueTypesClient(Uri endpoint, ValueTypesClientOptions options)
+        public ValueTypesClient(ValueTypesClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ValueTypesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary> Initializes a new instance of Boolean. </summary>

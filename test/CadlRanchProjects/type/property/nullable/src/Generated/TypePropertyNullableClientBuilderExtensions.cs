@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using _Type.Property.Nullable;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="NullableClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<NullableClient, NullableClientOptions> AddNullableClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<NullableClient, NullableClientOptions> AddNullableClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<NullableClient, NullableClientOptions>((options) => new NullableClient(endpoint, options));
+            return builder.RegisterClientFactory<NullableClient, NullableClientOptions>((options) => new NullableClient(options));
         }
 
         /// <summary> Registers a <see cref="NullableClient"/> instance. </summary>

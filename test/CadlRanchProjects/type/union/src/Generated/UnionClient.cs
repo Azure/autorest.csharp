@@ -30,22 +30,19 @@ namespace _Type.Union
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
-        public UnionClient() : this(new Uri("http://localhost:3000"), new UnionClientOptions())
+        public UnionClient() : this(new UnionClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public UnionClient(Uri endpoint, UnionClientOptions options)
+        public UnionClient(UnionClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new UnionClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

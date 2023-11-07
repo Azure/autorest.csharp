@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using _Type._Enum.Fixed;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="FixedClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<FixedClient, FixedClientOptions> AddFixedClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<FixedClient, FixedClientOptions> AddFixedClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<FixedClient, FixedClientOptions>((options) => new FixedClient(endpoint, options));
+            return builder.RegisterClientFactory<FixedClient, FixedClientOptions>((options) => new FixedClient(options));
         }
 
         /// <summary> Registers a <see cref="FixedClient"/> instance. </summary>

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using _Type.Property.Optionality;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="OptionalClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<OptionalClient, OptionalClientOptions> AddOptionalClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<OptionalClient, OptionalClientOptions> AddOptionalClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<OptionalClient, OptionalClientOptions>((options) => new OptionalClient(endpoint, options));
+            return builder.RegisterClientFactory<OptionalClient, OptionalClientOptions>((options) => new OptionalClient(options));
         }
 
         /// <summary> Registers a <see cref="OptionalClient"/> instance. </summary>

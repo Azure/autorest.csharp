@@ -37,25 +37,23 @@ namespace Authentication.ApiKey
         /// <summary> Initializes a new instance of ApiKeyClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ApiKeyClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new ApiKeyClientOptions())
+        public ApiKeyClient(AzureKeyCredential credential) : this(credential, new ApiKeyClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ApiKeyClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public ApiKeyClient(Uri endpoint, AzureKeyCredential credential, ApiKeyClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public ApiKeyClient(AzureKeyCredential credential, ApiKeyClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ApiKeyClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

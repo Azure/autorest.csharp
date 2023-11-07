@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
@@ -42,6 +43,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
             public const string UseOverloadsBetweenProtocolAndConvenience = "use-overloads-between-protocol-and-convenience";
             public const string KeepNonOverloadableProtocolSignature = "keep-non-overloadable-protocol-signature";
+            public const string KeepOptionalClientParametersInConstructor = "keep-optional-client-parameters-in-constructor";
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
@@ -86,6 +88,7 @@ namespace AutoRest.CSharp.Common.Input
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             bool useOverloadsBetweenProtocolAndConvenience,
             bool keepNonOverloadableProtocolSignature,
+            bool keepOptionalClientParametersInConstructor,
             string? projectFolder,
             string? existingProjectFolder,
             IReadOnlyList<string> protocolMethodList,
@@ -117,6 +120,7 @@ namespace AutoRest.CSharp.Common.Input
             UnreferencedTypesHandling = unreferencedTypesHandling;
             UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
             KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
+            KeepOptionalClientParametersInConstructor = keepOptionalClientParametersInConstructor;
             ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             projectFolder ??= ProjectFolderDefault;
@@ -264,6 +268,7 @@ namespace AutoRest.CSharp.Common.Input
         public static bool DeserializeNullCollectionAsNullValue { get; private set; }
         public static bool UseOverloadsBetweenProtocolAndConvenience { get; private set; }
         public static bool KeepNonOverloadableProtocolSignature { get; private set; }
+        public static bool KeepOptionalClientParametersInConstructor { get; private set; }
 
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
         /// <summary>
@@ -318,6 +323,7 @@ namespace AutoRest.CSharp.Common.Input
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 useOverloadsBetweenProtocolAndConvenience: GetOptionBoolValue(autoRest, Options.UseOverloadsBetweenProtocolAndConvenience),
                 keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
+                keepOptionalClientParametersInConstructor: GetOptionBoolValue(autoRest, Options.KeepOptionalClientParametersInConstructor),
                 useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
                 projectFolder: GetProjectFolderOption(autoRest),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
@@ -392,6 +398,8 @@ namespace AutoRest.CSharp.Common.Input
                 case Options.UseOverloadsBetweenProtocolAndConvenience:
                     return true;
                 case Options.KeepNonOverloadableProtocolSignature:
+                    return false;
+                case Options.KeepOptionalClientParametersInConstructor:
                     return false;
                 case Options.ShouldTreatBase64AsBinaryData:
                     return true;
@@ -478,6 +486,7 @@ namespace AutoRest.CSharp.Common.Input
                 ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
                 ReadOption(root, Options.UseOverloadsBetweenProtocolAndConvenience),
                 ReadOption(root, Options.KeepNonOverloadableProtocolSignature),
+                ReadOption(root, Options.KeepOptionalClientParametersInConstructor),
                 projectPath ?? ReadStringOption(root, Options.ProjectFolder),
                 existingProjectFolder,
                 protocolMethods,

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Authentication.Union;
 using Azure;
 using Azure.Core.Extensions;
@@ -17,21 +16,19 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="UnionClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options) => new UnionClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options) => new UnionClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="UnionClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options, cred) => new UnionClient(endpoint, cred, options));
+            return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options, cred) => new UnionClient(cred, options));
         }
 
         /// <summary> Registers a <see cref="UnionClient"/> instance. </summary>

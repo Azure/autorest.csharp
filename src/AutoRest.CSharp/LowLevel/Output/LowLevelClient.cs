@@ -155,7 +155,8 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<ConstructorSignature> BuildPrimaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
         {
-            var optionalToRequired = optionalParameters
+            var neededOptionalParameters = Configuration.KeepOptionalClientParametersInConstructor ? optionalParameters : optionalParameters.Where(p => ClientOptions.Type.EqualsIgnoreNullable(p.Type));
+            var optionalToRequired = neededOptionalParameters
                 .Select(parameter => ClientOptions.Type.EqualsIgnoreNullable(parameter.Type)
                 ? parameter with { DefaultValue = null, Validation = ValidationType.None }
                 : parameter with
@@ -191,15 +192,17 @@ namespace AutoRest.CSharp.Output.Models
                 yield return CreateMockingConstructor();
             }
 
+            var neededOptionalParameters = Configuration.KeepOptionalClientParametersInConstructor ? optionalParameters : optionalParameters.Where(p => ClientOptions.Type.EqualsIgnoreNullable(p.Type));
+
             /* Construct the parameter arguments to call primitive constructor.
              * In primitive constructor, the endpoint is the first parameter,
              * so put the endpoint as the first parameter argument if the endpoint is optional paramter.
              * */
-            var optionalParametersArguments = optionalParameters
+            var optionalParametersArguments = neededOptionalParameters
                 .Where(p => !p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase))
                 .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
                 .ToArray();
-            var optionalEndpoint = optionalParameters.Where(p => p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            var optionalEndpoint = neededOptionalParameters.Where(p => p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             var arguments = new List<FormattableString>();
             if (optionalEndpoint != null)
             {

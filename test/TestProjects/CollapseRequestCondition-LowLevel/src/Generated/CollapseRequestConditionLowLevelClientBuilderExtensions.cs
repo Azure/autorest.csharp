@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure;
 using Azure.Core.Extensions;
 using CollapseRequestCondition_LowLevel;
@@ -17,32 +16,29 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="RequestConditionCollapseClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<RequestConditionCollapseClient, CollapseRequestConditionsClientOptions> AddRequestConditionCollapseClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<RequestConditionCollapseClient, CollapseRequestConditionsClientOptions> AddRequestConditionCollapseClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<RequestConditionCollapseClient, CollapseRequestConditionsClientOptions>((options) => new RequestConditionCollapseClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<RequestConditionCollapseClient, CollapseRequestConditionsClientOptions>((options) => new RequestConditionCollapseClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="MatchConditionCollapseClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<MatchConditionCollapseClient, CollapseRequestConditionsClientOptions> AddMatchConditionCollapseClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<MatchConditionCollapseClient, CollapseRequestConditionsClientOptions> AddMatchConditionCollapseClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<MatchConditionCollapseClient, CollapseRequestConditionsClientOptions>((options) => new MatchConditionCollapseClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<MatchConditionCollapseClient, CollapseRequestConditionsClientOptions>((options) => new MatchConditionCollapseClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="NonCollapseClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<NonCollapseClient, CollapseRequestConditionsClientOptions> AddNonCollapseClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<NonCollapseClient, CollapseRequestConditionsClientOptions> AddNonCollapseClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<NonCollapseClient, CollapseRequestConditionsClientOptions>((options) => new NonCollapseClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<NonCollapseClient, CollapseRequestConditionsClientOptions>((options) => new NonCollapseClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="RequestConditionCollapseClient"/> instance. </summary>

@@ -30,22 +30,19 @@ namespace _Type._Enum.Fixed
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of FixedClient. </summary>
-        public FixedClient() : this(new Uri("http://localhost:3000"), new FixedClientOptions())
+        public FixedClient() : this(new FixedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of FixedClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public FixedClient(Uri endpoint, FixedClientOptions options)
+        public FixedClient(FixedClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new FixedClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

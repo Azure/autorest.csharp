@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using _Type.Scalar;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ScalarClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<ScalarClient, ScalarClientOptions> AddScalarClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<ScalarClient, ScalarClientOptions> AddScalarClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ScalarClient, ScalarClientOptions>((options) => new ScalarClient(endpoint, options));
+            return builder.RegisterClientFactory<ScalarClient, ScalarClientOptions>((options) => new ScalarClient(options));
         }
 
         /// <summary> Registers a <see cref="ScalarClient"/> instance. </summary>

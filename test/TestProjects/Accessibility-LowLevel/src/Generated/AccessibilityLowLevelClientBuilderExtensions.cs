@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Accessibility_LowLevel;
 using Azure;
 using Azure.Core.Extensions;
@@ -17,12 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="AccessibilityClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<AccessibilityClient, AccessibilityClientOptions> AddAccessibilityClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<AccessibilityClient, AccessibilityClientOptions> AddAccessibilityClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<AccessibilityClient, AccessibilityClientOptions>((options) => new AccessibilityClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<AccessibilityClient, AccessibilityClientOptions>((options) => new AccessibilityClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="AccessibilityClient"/> instance. </summary>

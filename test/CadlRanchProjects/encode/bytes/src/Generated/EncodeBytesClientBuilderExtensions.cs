@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using Encode.Bytes;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="BytesClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<BytesClient, BytesClientOptions> AddBytesClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<BytesClient, BytesClientOptions> AddBytesClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<BytesClient, BytesClientOptions>((options) => new BytesClient(endpoint, options));
+            return builder.RegisterClientFactory<BytesClient, BytesClientOptions>((options) => new BytesClient(options));
         }
 
         /// <summary> Registers a <see cref="BytesClient"/> instance. </summary>

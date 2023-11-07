@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure;
 using Azure.Core.Extensions;
 using head_LowLevel;
@@ -17,12 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="HttpSuccessClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<HttpSuccessClient, HttpSuccessClientOptions> AddHttpSuccessClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<HttpSuccessClient, HttpSuccessClientOptions> AddHttpSuccessClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<HttpSuccessClient, HttpSuccessClientOptions>((options) => new HttpSuccessClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<HttpSuccessClient, HttpSuccessClientOptions>((options) => new HttpSuccessClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="HttpSuccessClient"/> instance. </summary>

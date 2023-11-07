@@ -82,6 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? GetDefaultValue(InputParameter operationParameter, TypeFactory typeFactory) => operationParameter switch
         {
+            { Name: "$host", DefaultValue.Value: ""} => (Constant?)null, // In M4, when endpoint is not set, its default value is an empty string instead of null
             { NameInRequest: var nameInRequest } when RequestHeader.ClientRequestIdHeaders.Contains(nameInRequest) => Constant.FromExpression($"message.{Configuration.ApiTypes.HttpMessageRequestName}.ClientRequestId", new CSharpType(typeof(string))),
             { NameInRequest: var nameInRequest } when RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(nameInRequest) => new Constant("true", new CSharpType(typeof(string))),
             { DefaultValue: not null } => BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)),

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Authentication.Http.Custom;
 using Azure;
 using Azure.Core.Extensions;
@@ -17,12 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="CustomClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<CustomClient, CustomClientOptions> AddCustomClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<CustomClient, CustomClientOptions> AddCustomClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<CustomClient, CustomClientOptions>((options) => new CustomClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<CustomClient, CustomClientOptions>((options) => new CustomClient(credential, options));
         }
 
         /// <summary> Registers a <see cref="CustomClient"/> instance. </summary>

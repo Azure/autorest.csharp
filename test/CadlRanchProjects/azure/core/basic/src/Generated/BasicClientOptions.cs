@@ -33,5 +33,8 @@ namespace _Specs_.Azure.Core.Basic
                 _ => throw new NotSupportedException()
             };
         }
+
+        /// <summary> TestServer endpoint. </summary>
+        public Uri Endpoint { get; set; }
     }
 }

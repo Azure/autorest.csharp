@@ -33,5 +33,11 @@ namespace url_LowLevel
                 _ => throw new NotSupportedException()
             };
         }
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; set; }
+
+        /// <summary> should contain value null. </summary>
+        public string GlobalStringQuery { get; set; }
     }
 }

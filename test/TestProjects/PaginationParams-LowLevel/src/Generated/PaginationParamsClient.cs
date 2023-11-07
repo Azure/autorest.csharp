@@ -37,25 +37,23 @@ namespace PaginationParams_LowLevel
         /// <summary> Initializes a new instance of PaginationParamsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PaginationParamsClient(TokenCredential credential) : this(new Uri("https://management.azure.com"), credential, new PaginationParamsClientOptions())
+        public PaginationParamsClient(TokenCredential credential) : this(credential, new PaginationParamsClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PaginationParamsClient. </summary>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public PaginationParamsClient(Uri endpoint, TokenCredential credential, PaginationParamsClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PaginationParamsClient(TokenCredential credential, PaginationParamsClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new PaginationParamsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
             _apiVersion = options.Version;
         }
 

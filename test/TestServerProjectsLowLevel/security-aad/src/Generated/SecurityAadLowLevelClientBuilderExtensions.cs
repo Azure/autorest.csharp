@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core.Extensions;
 using security_aad_LowLevel;
 
@@ -16,11 +15,10 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="AutorestSecurityAadClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<AutorestSecurityAadClient, AutorestSecurityAadClientOptions> AddAutorestSecurityAadClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<AutorestSecurityAadClient, AutorestSecurityAadClientOptions> AddAutorestSecurityAadClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<AutorestSecurityAadClient, AutorestSecurityAadClientOptions>((options, cred) => new AutorestSecurityAadClient(endpoint, cred, options));
+            return builder.RegisterClientFactory<AutorestSecurityAadClient, AutorestSecurityAadClientOptions>((options, cred) => new AutorestSecurityAadClient(cred, options));
         }
 
         /// <summary> Registers a <see cref="AutorestSecurityAadClient"/> instance. </summary>

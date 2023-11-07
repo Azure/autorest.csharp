@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -48,6 +49,21 @@ namespace AutoRest.CSharp.Generation.Writers
 
                                 writer.Line($"_ => throw new {typeof(NotSupportedException)}()");
                             }
+                        }
+                    }
+
+                    if (clientOptions.AdditionalProperties != null && !Configuration.KeepOptionalClientParametersInConstructor)
+                    {
+                        if (clientOptions.ApiVersions is not null)
+                        {
+                            writer.Line();
+                        }
+
+                        foreach (var property in clientOptions.AdditionalProperties)
+                        {
+                            writer.WriteXmlDocumentationSummary(property.Description);
+                            writer.Line($"public {property.Type} {property.Name.FirstCharToUpperCase()} {{ get; set; }}");
+                            writer.Line();
                         }
                     }
                 }

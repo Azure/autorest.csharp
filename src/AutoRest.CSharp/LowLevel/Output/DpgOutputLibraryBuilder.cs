@@ -675,6 +675,8 @@ namespace AutoRest.CSharp.Output.Models
 
                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
 
+                clientOptions.AddAdditionalProperty(RestClientBuilder.GetOptionalParameters(client.Parameters));
+
                 yield return client;
             }
         }

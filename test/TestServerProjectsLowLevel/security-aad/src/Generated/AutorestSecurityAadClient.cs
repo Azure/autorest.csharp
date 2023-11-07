@@ -36,25 +36,23 @@ namespace security_aad_LowLevel
         /// <summary> Initializes a new instance of AutorestSecurityAadClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public AutorestSecurityAadClient(TokenCredential credential) : this(new Uri("http://localhost:3000"), credential, new AutorestSecurityAadClientOptions())
+        public AutorestSecurityAadClient(TokenCredential credential) : this(credential, new AutorestSecurityAadClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AutorestSecurityAadClient. </summary>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public AutorestSecurityAadClient(Uri endpoint, TokenCredential credential, AutorestSecurityAadClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public AutorestSecurityAadClient(TokenCredential credential, AutorestSecurityAadClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutorestSecurityAadClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            _endpoint = options.Endpoint;
         }
 
         /// <summary>
