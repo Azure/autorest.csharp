@@ -44,11 +44,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public MethodBodyStatement WriteTo(ValueExpression writer) => new InvokeInstanceMethodStatement(Untyped, nameof(JsonElement.WriteTo), new[] { writer }, false);
 
-        public BoolExpression TryGetProperty(string elementName, string propertyName, out JsonElementExpression discriminator)
+        public BoolExpression TryGetProperty(string propertyName, out JsonElementExpression discriminator)
         {
             var discriminatorDeclaration = new VariableReference(typeof(JsonElement), "discriminator");
             discriminator = new JsonElementExpression(discriminatorDeclaration);
-            return new BoolExpression(new FormattableStringToExpression($"{elementName}.{nameof(JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(JsonElement)} {discriminatorDeclaration.Declaration:D})"));
+            var invocation = new InvokeInstanceMethodExpression(this, nameof(JsonElement.TryGetProperty), new ValueExpression[] { Literal(propertyName), new DeclarationExpression(discriminatorDeclaration, true) }, null, false);
+            return new BoolExpression(invocation);
         }
     }
 }

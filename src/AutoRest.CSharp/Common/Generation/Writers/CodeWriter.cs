@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
@@ -155,6 +156,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         break;
                     case CodeWriterDeclaration declaration:
                         Append(declaration);
+                        break;
+                    case ValueExpression expression:
+                        this.WriteValueExpression(expression);
                         break;
                     case var _ when isLiteralFormat:
                         Literal(argument);

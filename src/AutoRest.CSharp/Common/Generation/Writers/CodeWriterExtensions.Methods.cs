@@ -262,7 +262,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (expression)
             {
                 case CastExpression cast:
-                    // wrap the cast expression with parenthesis, so that it would not cause ambiguity for leading recuisive calls
+                    // wrap the cast expression with parenthesis, so that it would not cause ambiguity for leading recursive calls
                     // if the parenthesis are not needed, the roslyn reducer will remove it.
                     writer.AppendRaw("(");
                     writer.Append($"({cast.Type})");
@@ -636,6 +636,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw("[");
                     writer.WriteValueExpression(index);
                     writer.AppendRaw("]");
+                    break;
+                case DeclarationExpression(var variable, var isOut):
+                    writer.AppendRawIf("out ", isOut);
+                    writer.Append($"{variable.Type} {variable.Declaration:D}");
                     break;
             }
 

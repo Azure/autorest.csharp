@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         /// <summary>
         /// This method writes the implementation of IUtf8JsonSerializable, IJsonModel{T} and the static deserialization method
-        /// If the model is defined as a struct, including the implemenation of IJsonModel{object}
+        /// If the model is defined as a struct, including the implementation of IJsonModel{object}
         /// NOTE: the inherited methods from IModel{T} and IModel{object} is excluded
         /// </summary>
         /// <param name="writer"></param>

@@ -54,8 +54,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static readonly Parameter elementParameter = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);
         private static readonly Parameter dataParameter = new Parameter("data", null, typeof(BinaryData), null, ValidationType.None, null);
         private static readonly Parameter utf8JsonReaderParameter = new Parameter("reader", null, typeof(Utf8JsonReader), null, ValidationType.None, null, IsRef: true);
-        private static readonly ValueExpression jsonFormat = new TypeReference(typeof(ModelReaderWriterFormat)).Property(nameof(ModelReaderWriterFormat.Json));
-        private static readonly BoolExpression isJsonFormatExpression = Equal(new ModelReaderWriterOptionsExpression(optionsParameter).Format, jsonFormat);
+
+        private static BoolExpression BuildIsJsonFormatExpression(ModelReaderWriterOptionsExpression options)
+            => Equal(options.Format, ModelReaderWriterFormatExpression.Json);
 
         public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
         {
@@ -70,10 +71,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
 
             // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+            var options = new ModelReaderWriterOptionsExpression(optionsParameter);
             yield return new
             (
                 new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriterParameter, optionsParameter }, ExplicitInterface: jsonModelInterface),
-                WriteObject(new Utf8JsonWriterExpression(utf8JsonWriterParameter), json)
+                WriteObject(new Utf8JsonWriterExpression(utf8JsonWriterParameter), options, json)
             );
 
             // T IJsonModel<T>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
@@ -82,7 +84,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodSignature(nameof(IJsonModel<object>.Read), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { utf8JsonReaderParameter, optionsParameter }, ExplicitInterface: jsonModelInterface),
                 new MethodBodyStatement[]
                 {
-                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, new ModelReaderWriterOptionsExpression(optionsParameter).Format, true),
+                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, options, true),
                     EmptyLine,
                     // using var document = JsonDocument.ParseValue(ref reader);
                     UsingDeclare("document", JsonDocumentExpression.ParseValue(utf8JsonReaderParameter), out var docVariable),
@@ -120,15 +122,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
             Debug.Assert(iModelTInterface != null);
 
             var typeOfT = iModelTInterface.Arguments[0];
+            var options = new ModelReaderWriterOptionsExpression(optionsParameter);
             // BinaryData IModel<T>.Write(ModelReaderWriterOptions options)
             yield return new
             (
                 new MethodSignature(nameof(IModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { optionsParameter }, ExplicitInterface: iModelTInterface),
                 new MethodBodyStatement[]
                 {
-                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, new ModelReaderWriterOptionsExpression(optionsParameter).Format, json != null),
+                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, options, json != null),
                     EmptyLine,
-                    BuildModelWriteMethod(json != null, xml != null)
+                    BuildModelWriteMethodBody(options, json != null, xml != null)
                 }
             );
 
@@ -138,7 +141,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodSignature(nameof(IModel<object>.Read), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { dataParameter, optionsParameter }, ExplicitInterface: iModelTInterface),
                 new MethodBodyStatement[]
                 {
-                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, new ModelReaderWriterOptionsExpression(optionsParameter).Format, true),
+                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, options, true),
                     EmptyLine,
                     BuildModelReadMethod(model, json != null, xml != null)
                 }
@@ -179,10 +182,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
             }
 
-            static MethodBodyStatement BuildModelWriteMethod(bool hasJson, bool hasXml)
+            static MethodBodyStatement BuildModelWriteMethodBody(ModelReaderWriterOptionsExpression options, bool hasJson, bool hasXml)
             {
                 // return ModelReaderWriter.WriteCore(this, options);
-                var jsonPart = Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, optionsParameter }));
+                var jsonPart = Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options }));
                 /*  using MemoryStream stream = new MemoryStream();
                     using XmlWriter writer = XmlWriter.Create(stream);
                     ((IXmlSerializable)this).Write(writer, null);
@@ -211,14 +214,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                                 typeof(MemoryExtensions),
                                 nameof(MemoryExtensions.AsMemory),
                                 stream.Invoke(nameof(MemoryStream.GetBuffer)),
-                                new[]{Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int))}
+                                new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
                                 ))))
                 };
 
                 if (hasJson && hasXml)
                 {
                     // we have both, we need to wrap things in a if-else statement
-                    return new IfElseStatement(isJsonFormatExpression, jsonPart, xmlPart);
+                    return new IfElseStatement(BuildIsJsonFormatExpression(options), jsonPart, xmlPart);
                 }
 
                 if (hasJson)
@@ -263,7 +266,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement BuildModelSerializerHelperValidateFormatStatement(CSharpType type, ValueExpression format, bool hasJson)
+        private static MethodBodyStatement BuildModelSerializerHelperValidateFormatStatement(CSharpType type, ModelReaderWriterOptionsExpression options, bool hasJson)
         {
             /*
                 bool implementsJson = this is IJsonModel<T>; // we only have this when the model is not implementing this interface, otherwise compiler complains.
@@ -273,6 +276,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     throw new FormatException($"The model {model.GetType().Name} does not support '{format}' format.");
                 }
              */
+            var format = options.Format;
             var iJsonModelType = new CSharpType(typeof(IJsonModel<>), type);
             var isValid = new VariableReference(typeof(bool), "isValid");
             if (hasJson)
@@ -301,12 +305,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     Declare(isValid, Or(And(Equal(format, ModelReaderWriterFormatExpression.Json), new BoolExpression(implementsJson)), Equal(format, ModelReaderWriterFormatExpression.Wire))),
                     new IfStatement(Not(new BoolExpression(isValid)))
                     {
-                        Throw(New.Instance(typeof(FormatException), new InvokeStaticMethodExpression(
-                            typeof(string),
-                            nameof(string.Format),
-                            new ValueExpression[]
+                        Throw(New.Instance(
+                            typeof(FormatException),
+                            new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
                             {
-                                Literal("The model {0} does not support '{1}' format."),
                                 new InvokeInstanceMethodExpression(null, nameof(GetType), Array.Empty<ValueExpression>(), null, false).Property(nameof(Type.Name)),
                                 format
                             })))
@@ -329,12 +331,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
         }
 
-        public static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, JsonObjectSerialization serialization)
+        public static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
             => new[]
             {
                 utf8JsonWriter.WriteStartObject(),
                 WriteProperties(utf8JsonWriter, serialization.Properties).ToArray(),
-                SerializeAdditionalProperties(utf8JsonWriter, serialization.AdditionalProperties),
+                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),
                 utf8JsonWriter.WriteEndObject()
             };
 
@@ -394,7 +396,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, JsonAdditionalPropertiesSerialization? additionalProperties)
+        private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, JsonAdditionalPropertiesSerialization? additionalProperties)
         {
             if (additionalProperties is null)
             {
@@ -410,7 +412,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (additionalProperties.ShouldExcludeInWireSerialization)
             {
-                statement = new IfStatement(And(NotEqual(additionalPropertiesExpression, Null), isJsonFormatExpression))
+                statement = new IfStatement(And(NotEqual(additionalPropertiesExpression, Null), BuildIsJsonFormatExpression(options)))
                 {
                     statement
                 };
@@ -611,7 +613,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return null;
             }
 
-            return new Method(signature, BuildDeserializeBody(elementParameter, optionsParameter, serialization).ToArray());
+            return new Method(signature, BuildDeserializeBody(new JsonElementExpression(elementParameter), new ModelReaderWriterOptionsExpression(optionsParameter), serialization).ToArray());
         }
 
         public static Method BuildFromResponse(SerializableObjectType model, MethodSignatureModifiers modifiers)
@@ -628,14 +630,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
         }
 
-        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(Parameter element, Parameter options, JsonObjectSerialization serialization)
+        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(JsonElementExpression jsonElement, ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
         {
             // fallback to Default options if it is null
             yield return AssignIfNull((ValueExpression)options, ModelReaderWriterOptionsExpression.DefaultWireOptions);
 
             yield return EmptyLine;
 
-            var jsonElement = new JsonElementExpression(element);
             if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
             {
                 yield return new IfStatement(jsonElement.ValueKindEqualsNull())
@@ -647,7 +648,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var discriminator = serialization.Discriminator;
             if (discriminator is not null && discriminator.HasDescendants)
             {
-                yield return new IfStatement(jsonElement.TryGetProperty(element.Name, discriminator.SerializedName, out var discriminatorElement))
+                yield return new IfStatement(jsonElement.TryGetProperty(discriminator.SerializedName, out var discriminatorElement))
                 {
                     new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator).ToArray())
                 };
@@ -659,7 +660,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             else
             {
-                yield return WriteObjectInitialization(jsonElement, serialization).ToArray();
+                yield return WriteObjectInitialization(jsonElement, options, serialization).ToArray();
             }
         }
 
@@ -671,7 +672,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteObjectInitialization(JsonElementExpression element, JsonObjectSerialization serialization)
+        private static IEnumerable<MethodBodyStatement> WriteObjectInitialization(JsonElementExpression element, ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
         {
             // this is the first level of object hierarchy
             // collect all properties and initialize the dictionary
@@ -711,7 +712,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
                 yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
-                    DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties, new JsonPropertyExpression(property), new DictionaryExpression(TypeFactory.GetElementType(objAdditionalProperties.Type), dictionary), propertyVariables, shouldTreatEmptyStringAsNull).ToArray()
+                    DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties, new JsonPropertyExpression(property), new DictionaryExpression(TypeFactory.GetElementType(objAdditionalProperties.Type), dictionary), options, propertyVariables, shouldTreatEmptyStringAsNull).ToArray()
                 };
                 yield return new AssignValueStatement(propertyVariables[objAdditionalProperties], dictionary);
             }
@@ -731,7 +732,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Return(New.Instance(serialization.Type, parameters));
         }
 
-        private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonAdditionalPropertiesSerialization additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
+        private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonAdditionalPropertiesSerialization additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, ModelReaderWriterOptionsExpression options, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
             yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
             // in the case here, this line returns an empty statement, we only want the value here
@@ -740,7 +741,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (additionalPropertiesSerialization.ShouldExcludeInWireSerialization)
             {
-                yield return new IfStatement(isJsonFormatExpression)
+                yield return new IfStatement(BuildIsJsonFormatExpression(options))
                 {
                     additionalPropertiesStatement
                 };
