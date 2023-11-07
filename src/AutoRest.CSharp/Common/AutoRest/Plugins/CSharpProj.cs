@@ -101,13 +101,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
             var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
-            bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
-            var context = new BuildContext(codeModel, null, config.LibraryName, config.Namespace);
+            bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<KeySecurityScheme>().Any();
+            var context = new BuildContext(codeModel, null, config.Namespace);
             Execute(context.DefaultNamespace, needAzureKeyAuth, async (filename, text) =>
             {
                 await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");
-            },
-                codeModelYaml.Contains("x-ms-format: dfe-"), config);
+            }, codeModelYaml.Contains("x-ms-format: dfe-"), config);
             return true;
         }
 
