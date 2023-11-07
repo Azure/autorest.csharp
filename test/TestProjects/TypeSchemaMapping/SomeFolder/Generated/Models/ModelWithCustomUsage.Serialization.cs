@@ -74,7 +74,7 @@ namespace TypeSchemaMapping.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -113,7 +113,7 @@ namespace TypeSchemaMapping.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
             }
 
             if (options.Format == ModelReaderWriterFormat.Json)
@@ -142,7 +142,7 @@ namespace TypeSchemaMapping.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
             }
 
             if (data.ToMemory().Span.StartsWith("{"u8))

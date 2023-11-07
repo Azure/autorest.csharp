@@ -43,7 +43,7 @@ namespace Azure.Storage.Tables.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException(string.Format("The model {0} does not support '{1}' format.", GetType().Name, options.Format));
+                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
             }
 
             using MemoryStream stream = new MemoryStream();
@@ -65,7 +65,7 @@ namespace Azure.Storage.Tables.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(StorageServiceStats)} does not support '{options.Format}' format.");
             }
 
             return DeserializeStorageServiceStats(XElement.Load(data.ToStream()), options);

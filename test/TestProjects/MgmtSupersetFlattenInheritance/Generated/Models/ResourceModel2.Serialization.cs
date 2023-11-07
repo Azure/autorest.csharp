@@ -76,7 +76,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(ResourceModel2)} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -155,7 +155,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(ResourceModel2)} does not support '{options.Format}' format.");
             }
 
             return ModelReaderWriter.Write(this, options);
@@ -166,7 +166,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(ResourceModel2)} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);

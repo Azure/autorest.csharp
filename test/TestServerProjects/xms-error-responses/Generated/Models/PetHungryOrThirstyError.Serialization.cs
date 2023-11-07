@@ -66,7 +66,7 @@ namespace xms_error_responses.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -129,7 +129,7 @@ namespace xms_error_responses.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
             }
 
             return ModelReaderWriter.Write(this, options);
@@ -140,7 +140,7 @@ namespace xms_error_responses.Models
             bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
             if (!isValid)
             {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
