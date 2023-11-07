@@ -35,5 +35,5 @@ jobs:
           git config --global user.name 'actions-user'
           git config --global user.email 'action@github.com'
           git add .
-          git commit -m "re-generate all code (any success run even without change will have a new commit)"
+          git commit -m "Regenerate all code (any successful run even without change will have a new commit)"
           git push
