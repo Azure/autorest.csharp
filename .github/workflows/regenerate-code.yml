@@ -4,7 +4,7 @@ on: workflow_dispatch
 jobs:
   build:
     timeout-minutes: 120
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
@@ -35,5 +35,5 @@ jobs:
           git config --global user.name 'actions-user'
           git config --global user.email 'action@github.com'
           git add .
-          git commit -m "re-generate test code"
+          git commit -m "re-generate all code (any success run even without change will have a new commit)"
           git push
