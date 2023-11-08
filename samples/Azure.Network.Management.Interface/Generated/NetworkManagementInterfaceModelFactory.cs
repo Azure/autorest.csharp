@@ -20,7 +20,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="virtualMachine"> The reference to a virtual machine. </param>
         /// <param name="networkSecurityGroup"> The reference to the NetworkSecurityGroup resource. </param>
@@ -36,15 +35,14 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="resourceGuid"> The resource GUID property of the network interface resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface resource. </param>
         /// <returns> A new <see cref="Models.NetworkInterface"/> instance for mocking. </returns>
-        public static NetworkInterface NetworkInterface(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string etag = null, SubResource virtualMachine = null, NetworkSecurityGroup networkSecurityGroup = null, PrivateEndpoint privateEndpoint = null, IEnumerable<NetworkInterfaceIPConfiguration> ipConfigurations = null, IEnumerable<NetworkInterfaceTapConfiguration> tapConfigurations = null, NetworkInterfaceDnsSettings dnsSettings = null, string macAddress = null, bool? primary = null, bool? enableAcceleratedNetworking = null, bool? enableIPForwarding = null, IEnumerable<string> hostedWorkloads = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
+        public static NetworkInterface NetworkInterface(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, SubResource virtualMachine = null, NetworkSecurityGroup networkSecurityGroup = null, PrivateEndpoint privateEndpoint = null, IEnumerable<NetworkInterfaceIPConfiguration> ipConfigurations = null, IEnumerable<NetworkInterfaceTapConfiguration> tapConfigurations = null, NetworkInterfaceDnsSettings dnsSettings = null, string macAddress = null, bool? primary = null, bool? enableAcceleratedNetworking = null, bool? enableIPForwarding = null, IEnumerable<string> hostedWorkloads = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             ipConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
             tapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
             hostedWorkloads ??= new List<string>();
 
-            return new NetworkInterface(id, name, type, location, tags, serializedAdditionalRawData, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState);
+            return new NetworkInterface(id, name, type, location, tags, new Dictionary<string, BinaryData>(), etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkSecurityGroup"/>. </summary>
@@ -53,7 +51,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="securityRules"> A collection of security rules of the network security group. </param>
         /// <param name="defaultSecurityRules"> The default security rules of network security group. </param>
@@ -62,21 +59,19 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="resourceGuid"> The resource GUID property of the network security group resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network security group resource. </param>
         /// <returns> A new <see cref="Models.NetworkSecurityGroup"/> instance for mocking. </returns>
-        public static NetworkSecurityGroup NetworkSecurityGroup(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string etag = null, IEnumerable<SecurityRule> securityRules = null, IEnumerable<SecurityRule> defaultSecurityRules = null, IEnumerable<NetworkInterface> networkInterfaces = null, IEnumerable<Subnet> subnets = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
+        public static NetworkSecurityGroup NetworkSecurityGroup(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<SecurityRule> securityRules = null, IEnumerable<SecurityRule> defaultSecurityRules = null, IEnumerable<NetworkInterface> networkInterfaces = null, IEnumerable<Subnet> subnets = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             securityRules ??= new List<SecurityRule>();
             defaultSecurityRules ??= new List<SecurityRule>();
             networkInterfaces ??= new List<NetworkInterface>();
             subnets ??= new List<Subnet>();
 
-            return new NetworkSecurityGroup(id, name, type, location, tags, serializedAdditionalRawData, etag, securityRules?.ToList(), defaultSecurityRules?.ToList(), networkInterfaces?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
+            return new NetworkSecurityGroup(id, name, type, location, tags, new Dictionary<string, BinaryData>(), etag, securityRules?.ToList(), defaultSecurityRules?.ToList(), networkInterfaces?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SecurityRule"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="description"> A description for this rule. Restricted to 140 chars. </param>
@@ -96,9 +91,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="direction"> The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. </param>
         /// <param name="provisioningState"> The provisioning state of the security rule resource. </param>
         /// <returns> A new <see cref="Models.SecurityRule"/> instance for mocking. </returns>
-        public static SecurityRule SecurityRule(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string description = null, SecurityRuleProtocol? protocol = null, string sourcePortRange = null, string destinationPortRange = null, string sourceAddressPrefix = null, IEnumerable<string> sourceAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> sourceApplicationSecurityGroups = null, string destinationAddressPrefix = null, IEnumerable<string> destinationAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> destinationApplicationSecurityGroups = null, IEnumerable<string> sourcePortRanges = null, IEnumerable<string> destinationPortRanges = null, SecurityRuleAccess? access = null, int? priority = null, SecurityRuleDirection? direction = null, ProvisioningState? provisioningState = null)
+        public static SecurityRule SecurityRule(string id = null, string name = null, string etag = null, string description = null, SecurityRuleProtocol? protocol = null, string sourcePortRange = null, string destinationPortRange = null, string sourceAddressPrefix = null, IEnumerable<string> sourceAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> sourceApplicationSecurityGroups = null, string destinationAddressPrefix = null, IEnumerable<string> destinationAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> destinationApplicationSecurityGroups = null, IEnumerable<string> sourcePortRanges = null, IEnumerable<string> destinationPortRanges = null, SecurityRuleAccess? access = null, int? priority = null, SecurityRuleDirection? direction = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             sourceAddressPrefixes ??= new List<string>();
             sourceApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
             destinationAddressPrefixes ??= new List<string>();
@@ -106,7 +100,7 @@ namespace Azure.Network.Management.Interface.Models
             sourcePortRanges ??= new List<string>();
             destinationPortRanges ??= new List<string>();
 
-            return new SecurityRule(id, serializedAdditionalRawData, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes?.ToList(), sourceApplicationSecurityGroups?.ToList(), destinationAddressPrefix, destinationAddressPrefixes?.ToList(), destinationApplicationSecurityGroups?.ToList(), sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), access, priority, direction, provisioningState);
+            return new SecurityRule(id, new Dictionary<string, BinaryData>(), name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes?.ToList(), sourceApplicationSecurityGroups?.ToList(), destinationAddressPrefix, destinationAddressPrefixes?.ToList(), destinationApplicationSecurityGroups?.ToList(), sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), access, priority, direction, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApplicationSecurityGroup"/>. </summary>
@@ -115,17 +109,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="resourceGuid"> The resource GUID property of the application security group resource. It uniquely identifies a resource, even if the user changes its name or migrate the resource across subscriptions or resource groups. </param>
         /// <param name="provisioningState"> The provisioning state of the application security group resource. </param>
         /// <returns> A new <see cref="Models.ApplicationSecurityGroup"/> instance for mocking. </returns>
-        public static ApplicationSecurityGroup ApplicationSecurityGroup(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string etag = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
+        public static ApplicationSecurityGroup ApplicationSecurityGroup(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new ApplicationSecurityGroup(id, name, type, location, tags, serializedAdditionalRawData, etag, resourceGuid, provisioningState);
+            return new ApplicationSecurityGroup(id, name, type, location, tags, new Dictionary<string, BinaryData>(), etag, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
@@ -144,7 +136,6 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.Subnet"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="addressPrefix"> The address prefix for the subnet. </param>
@@ -165,9 +156,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="privateEndpointNetworkPolicies"> Enable or Disable apply network policies on private end point in the subnet. </param>
         /// <param name="privateLinkServiceNetworkPolicies"> Enable or Disable apply network policies on private link service in the subnet. </param>
         /// <returns> A new <see cref="Models.Subnet"/> instance for mocking. </returns>
-        public static Subnet Subnet(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string addressPrefix = null, IEnumerable<string> addressPrefixes = null, NetworkSecurityGroup networkSecurityGroup = null, RouteTable routeTable = null, SubResource natGateway = null, IEnumerable<ServiceEndpointPropertiesFormat> serviceEndpoints = null, IEnumerable<ServiceEndpointPolicy> serviceEndpointPolicies = null, IEnumerable<PrivateEndpoint> privateEndpoints = null, IEnumerable<IPConfiguration> ipConfigurations = null, IEnumerable<IPConfigurationProfile> ipConfigurationProfiles = null, IEnumerable<ResourceNavigationLink> resourceNavigationLinks = null, IEnumerable<ServiceAssociationLink> serviceAssociationLinks = null, IEnumerable<Delegation> delegations = null, string purpose = null, ProvisioningState? provisioningState = null, string privateEndpointNetworkPolicies = null, string privateLinkServiceNetworkPolicies = null)
+        public static Subnet Subnet(string id = null, string name = null, string etag = null, string addressPrefix = null, IEnumerable<string> addressPrefixes = null, NetworkSecurityGroup networkSecurityGroup = null, RouteTable routeTable = null, SubResource natGateway = null, IEnumerable<ServiceEndpointPropertiesFormat> serviceEndpoints = null, IEnumerable<ServiceEndpointPolicy> serviceEndpointPolicies = null, IEnumerable<PrivateEndpoint> privateEndpoints = null, IEnumerable<IPConfiguration> ipConfigurations = null, IEnumerable<IPConfigurationProfile> ipConfigurationProfiles = null, IEnumerable<ResourceNavigationLink> resourceNavigationLinks = null, IEnumerable<ServiceAssociationLink> serviceAssociationLinks = null, IEnumerable<Delegation> delegations = null, string purpose = null, ProvisioningState? provisioningState = null, string privateEndpointNetworkPolicies = null, string privateLinkServiceNetworkPolicies = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             addressPrefixes ??= new List<string>();
             serviceEndpoints ??= new List<ServiceEndpointPropertiesFormat>();
             serviceEndpointPolicies ??= new List<ServiceEndpointPolicy>();
@@ -178,7 +168,7 @@ namespace Azure.Network.Management.Interface.Models
             serviceAssociationLinks ??= new List<ServiceAssociationLink>();
             delegations ??= new List<Delegation>();
 
-            return new Subnet(id, serializedAdditionalRawData, name, etag, addressPrefix, addressPrefixes?.ToList(), networkSecurityGroup, routeTable, natGateway, serviceEndpoints?.ToList(), serviceEndpointPolicies?.ToList(), privateEndpoints?.ToList(), ipConfigurations?.ToList(), ipConfigurationProfiles?.ToList(), resourceNavigationLinks?.ToList(), serviceAssociationLinks?.ToList(), delegations?.ToList(), purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
+            return new Subnet(id, new Dictionary<string, BinaryData>(), name, etag, addressPrefix, addressPrefixes?.ToList(), networkSecurityGroup, routeTable, natGateway, serviceEndpoints?.ToList(), serviceEndpointPolicies?.ToList(), privateEndpoints?.ToList(), ipConfigurations?.ToList(), ipConfigurationProfiles?.ToList(), resourceNavigationLinks?.ToList(), serviceAssociationLinks?.ToList(), delegations?.ToList(), purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RouteTable"/>. </summary>
@@ -187,26 +177,23 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="routes"> Collection of routes contained within a route table. </param>
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
         /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
         /// <returns> A new <see cref="Models.RouteTable"/> instance for mocking. </returns>
-        public static RouteTable RouteTable(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string etag = null, IEnumerable<Route> routes = null, IEnumerable<Subnet> subnets = null, bool? disableBgpRoutePropagation = null, ProvisioningState? provisioningState = null)
+        public static RouteTable RouteTable(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<Route> routes = null, IEnumerable<Subnet> subnets = null, bool? disableBgpRoutePropagation = null, ProvisioningState? provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             routes ??= new List<Route>();
             subnets ??= new List<Subnet>();
 
-            return new RouteTable(id, name, type, location, tags, serializedAdditionalRawData, etag, routes?.ToList(), subnets?.ToList(), disableBgpRoutePropagation, provisioningState);
+            return new RouteTable(id, name, type, location, tags, new Dictionary<string, BinaryData>(), etag, routes?.ToList(), subnets?.ToList(), disableBgpRoutePropagation, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Route"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="addressPrefix"> The destination CIDR to which the route applies. </param>
@@ -214,11 +201,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="nextHopIpAddress"> The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance. </param>
         /// <param name="provisioningState"> The provisioning state of the route resource. </param>
         /// <returns> A new <see cref="Models.Route"/> instance for mocking. </returns>
-        public static Route Route(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string addressPrefix = null, RouteNextHopType? nextHopType = null, string nextHopIpAddress = null, ProvisioningState? provisioningState = null)
+        public static Route Route(string id = null, string name = null, string etag = null, string addressPrefix = null, RouteNextHopType? nextHopType = null, string nextHopIpAddress = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Route(id, serializedAdditionalRawData, name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState);
+            return new Route(id, new Dictionary<string, BinaryData>(), name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceEndpointPropertiesFormat"/>. </summary>
@@ -239,26 +224,23 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="serviceEndpointPolicyDefinitions"> A collection of service endpoint policy definitions of the service endpoint policy. </param>
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="resourceGuid"> The resource GUID property of the service endpoint policy resource. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint policy resource. </param>
         /// <returns> A new <see cref="Models.ServiceEndpointPolicy"/> instance for mocking. </returns>
-        public static ServiceEndpointPolicy ServiceEndpointPolicy(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string etag = null, IEnumerable<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = null, IEnumerable<Subnet> subnets = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
+        public static ServiceEndpointPolicy ServiceEndpointPolicy(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = null, IEnumerable<Subnet> subnets = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             serviceEndpointPolicyDefinitions ??= new List<ServiceEndpointPolicyDefinition>();
             subnets ??= new List<Subnet>();
 
-            return new ServiceEndpointPolicy(id, name, type, location, tags, serializedAdditionalRawData, etag, serviceEndpointPolicyDefinitions?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
+            return new ServiceEndpointPolicy(id, name, type, location, tags, new Dictionary<string, BinaryData>(), etag, serviceEndpointPolicyDefinitions?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceEndpointPolicyDefinition"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="description"> A description for this rule. Restricted to 140 chars. </param>
@@ -266,12 +248,11 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="serviceResources"> A list of service resources. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint policy definition resource. </param>
         /// <returns> A new <see cref="Models.ServiceEndpointPolicyDefinition"/> instance for mocking. </returns>
-        public static ServiceEndpointPolicyDefinition ServiceEndpointPolicyDefinition(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string description = null, string service = null, IEnumerable<string> serviceResources = null, ProvisioningState? provisioningState = null)
+        public static ServiceEndpointPolicyDefinition ServiceEndpointPolicyDefinition(string id = null, string name = null, string etag = null, string description = null, string service = null, IEnumerable<string> serviceResources = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             serviceResources ??= new List<string>();
 
-            return new ServiceEndpointPolicyDefinition(id, serializedAdditionalRawData, name, etag, description, service, serviceResources?.ToList(), provisioningState);
+            return new ServiceEndpointPolicyDefinition(id, new Dictionary<string, BinaryData>(), name, etag, description, service, serviceResources?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PrivateEndpoint"/>. </summary>
@@ -280,7 +261,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="subnet"> The ID of the subnet from which the private IP will be allocated. </param>
         /// <param name="networkInterfaces"> An array of references to the network interfaces created for this private endpoint. </param>
@@ -288,20 +268,18 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="privateLinkServiceConnections"> A grouping of information about the connection to the remote resource. </param>
         /// <param name="manualPrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </param>
         /// <returns> A new <see cref="Models.PrivateEndpoint"/> instance for mocking. </returns>
-        public static PrivateEndpoint PrivateEndpoint(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string etag = null, Subnet subnet = null, IEnumerable<NetworkInterface> networkInterfaces = null, ProvisioningState? provisioningState = null, IEnumerable<PrivateLinkServiceConnection> privateLinkServiceConnections = null, IEnumerable<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = null)
+        public static PrivateEndpoint PrivateEndpoint(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, Subnet subnet = null, IEnumerable<NetworkInterface> networkInterfaces = null, ProvisioningState? provisioningState = null, IEnumerable<PrivateLinkServiceConnection> privateLinkServiceConnections = null, IEnumerable<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             networkInterfaces ??= new List<NetworkInterface>();
             privateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
             manualPrivateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
 
-            return new PrivateEndpoint(id, name, type, location, tags, serializedAdditionalRawData, etag, subnet, networkInterfaces?.ToList(), provisioningState, privateLinkServiceConnections?.ToList(), manualPrivateLinkServiceConnections?.ToList());
+            return new PrivateEndpoint(id, name, type, location, tags, new Dictionary<string, BinaryData>(), etag, subnet, networkInterfaces?.ToList(), provisioningState, privateLinkServiceConnections?.ToList(), manualPrivateLinkServiceConnections?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PrivateLinkServiceConnection"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="type"> The resource type. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -311,17 +289,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="requestMessage"> A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of read-only information about the state of the connection to the remote resource. </param>
         /// <returns> A new <see cref="Models.PrivateLinkServiceConnection"/> instance for mocking. </returns>
-        public static PrivateLinkServiceConnection PrivateLinkServiceConnection(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string type = null, string etag = null, ProvisioningState? provisioningState = null, string privateLinkServiceId = null, IEnumerable<string> groupIds = null, string requestMessage = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null)
+        public static PrivateLinkServiceConnection PrivateLinkServiceConnection(string id = null, string name = null, string type = null, string etag = null, ProvisioningState? provisioningState = null, string privateLinkServiceId = null, IEnumerable<string> groupIds = null, string requestMessage = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             groupIds ??= new List<string>();
 
-            return new PrivateLinkServiceConnection(id, serializedAdditionalRawData, name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState);
+            return new PrivateLinkServiceConnection(id, new Dictionary<string, BinaryData>(), name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IPConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="privateIPAddress"> The private IP address of the IP configuration. </param>
@@ -330,11 +306,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="publicIPAddress"> The reference to the public IP resource. </param>
         /// <param name="provisioningState"> The provisioning state of the IP configuration resource. </param>
         /// <returns> A new <see cref="Models.IPConfiguration"/> instance for mocking. </returns>
-        public static IPConfiguration IPConfiguration(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, ProvisioningState? provisioningState = null)
+        public static IPConfiguration IPConfiguration(string id = null, string name = null, string etag = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new IPConfiguration(id, serializedAdditionalRawData, name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState);
+            return new IPConfiguration(id, new Dictionary<string, BinaryData>(), name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PublicIPAddress"/>. </summary>
@@ -343,7 +317,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sku"> The public IP address SKU. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="zones"> A list of availability zones denoting the IP allocated for the resource needs to come from. </param>
@@ -359,35 +332,30 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="resourceGuid"> The resource GUID property of the public IP address resource. </param>
         /// <param name="provisioningState"> The provisioning state of the public IP address resource. </param>
         /// <returns> A new <see cref="Models.PublicIPAddress"/> instance for mocking. </returns>
-        public static PublicIPAddress PublicIPAddress(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, PublicIPAddressSku sku = null, string etag = null, IEnumerable<string> zones = null, IPAllocationMethod? publicIPAllocationMethod = null, IPVersion? publicIPAddressVersion = null, IPConfiguration ipConfiguration = null, PublicIPAddressDnsSettings dnsSettings = null, DdosSettings ddosSettings = null, IEnumerable<IpTag> ipTags = null, string ipAddress = null, SubResource publicIPPrefix = null, int? idleTimeoutInMinutes = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
+        public static PublicIPAddress PublicIPAddress(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, PublicIPAddressSku sku = null, string etag = null, IEnumerable<string> zones = null, IPAllocationMethod? publicIPAllocationMethod = null, IPVersion? publicIPAddressVersion = null, IPConfiguration ipConfiguration = null, PublicIPAddressDnsSettings dnsSettings = null, DdosSettings ddosSettings = null, IEnumerable<IpTag> ipTags = null, string ipAddress = null, SubResource publicIPPrefix = null, int? idleTimeoutInMinutes = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             zones ??= new List<string>();
             ipTags ??= new List<IpTag>();
 
-            return new PublicIPAddress(id, name, type, location, tags, serializedAdditionalRawData, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
+            return new PublicIPAddress(id, name, type, location, tags, new Dictionary<string, BinaryData>(), sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IPConfigurationProfile"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource. This name can be used to access the resource. </param>
         /// <param name="type"> Sub Resource type. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="subnet"> The reference to the subnet resource to create a container network interface ip configuration. </param>
         /// <param name="provisioningState"> The provisioning state of the IP configuration profile resource. </param>
         /// <returns> A new <see cref="Models.IPConfigurationProfile"/> instance for mocking. </returns>
-        public static IPConfigurationProfile IPConfigurationProfile(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string type = null, string etag = null, Subnet subnet = null, ProvisioningState? provisioningState = null)
+        public static IPConfigurationProfile IPConfigurationProfile(string id = null, string name = null, string type = null, string etag = null, Subnet subnet = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new IPConfigurationProfile(id, serializedAdditionalRawData, name, type, etag, subnet, provisioningState);
+            return new IPConfigurationProfile(id, new Dictionary<string, BinaryData>(), name, type, etag, subnet, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceNavigationLink"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Resource type. </param>
@@ -395,16 +363,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="link"> Link to the external resource. </param>
         /// <param name="provisioningState"> The provisioning state of the resource navigation link resource. </param>
         /// <returns> A new <see cref="Models.ResourceNavigationLink"/> instance for mocking. </returns>
-        public static ResourceNavigationLink ResourceNavigationLink(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null)
+        public static ResourceNavigationLink ResourceNavigationLink(string id = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new ResourceNavigationLink(id, serializedAdditionalRawData, name, etag, type, linkedResourceType, link, provisioningState);
+            return new ResourceNavigationLink(id, new Dictionary<string, BinaryData>(), name, etag, type, linkedResourceType, link, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceAssociationLink"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Resource type. </param>
@@ -414,34 +379,30 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="allowDelete"> If true, the resource can be deleted. </param>
         /// <param name="locations"> A list of locations. </param>
         /// <returns> A new <see cref="Models.ServiceAssociationLink"/> instance for mocking. </returns>
-        public static ServiceAssociationLink ServiceAssociationLink(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null, bool? allowDelete = null, IEnumerable<string> locations = null)
+        public static ServiceAssociationLink ServiceAssociationLink(string id = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null, bool? allowDelete = null, IEnumerable<string> locations = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             locations ??= new List<string>();
 
-            return new ServiceAssociationLink(id, serializedAdditionalRawData, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations?.ToList());
+            return new ServiceAssociationLink(id, new Dictionary<string, BinaryData>(), name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Delegation"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a subnet. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="serviceName"> The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers). </param>
         /// <param name="actions"> The actions permitted to the service upon delegation. </param>
         /// <param name="provisioningState"> The provisioning state of the service delegation resource. </param>
         /// <returns> A new <see cref="Models.Delegation"/> instance for mocking. </returns>
-        public static Delegation Delegation(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string serviceName = null, IEnumerable<string> actions = null, ProvisioningState? provisioningState = null)
+        public static Delegation Delegation(string id = null, string name = null, string etag = null, string serviceName = null, IEnumerable<string> actions = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             actions ??= new List<string>();
 
-            return new Delegation(id, serializedAdditionalRawData, name, etag, serviceName, actions?.ToList(), provisioningState);
+            return new Delegation(id, new Dictionary<string, BinaryData>(), name, etag, serviceName, actions?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkInterfaceIPConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="virtualNetworkTaps"> The reference to Virtual Network Taps. </param>
@@ -458,16 +419,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="provisioningState"> The provisioning state of the network interface IP configuration. </param>
         /// <param name="privateLinkConnectionProperties"> PrivateLinkConnection properties for the network interface. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceIPConfiguration"/> instance for mocking. </returns>
-        public static NetworkInterfaceIPConfiguration NetworkInterfaceIPConfiguration(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, IEnumerable<VirtualNetworkTap> virtualNetworkTaps = null, IEnumerable<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = null, IEnumerable<BackendAddressPool> loadBalancerBackendAddressPools = null, IEnumerable<InboundNatRule> loadBalancerInboundNatRules = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, IPVersion? privateIPAddressVersion = null, Subnet subnet = null, bool? primary = null, PublicIPAddress publicIPAddress = null, IEnumerable<ApplicationSecurityGroup> applicationSecurityGroups = null, ProvisioningState? provisioningState = null, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = null)
+        public static NetworkInterfaceIPConfiguration NetworkInterfaceIPConfiguration(string id = null, string name = null, string etag = null, IEnumerable<VirtualNetworkTap> virtualNetworkTaps = null, IEnumerable<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = null, IEnumerable<BackendAddressPool> loadBalancerBackendAddressPools = null, IEnumerable<InboundNatRule> loadBalancerInboundNatRules = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, IPVersion? privateIPAddressVersion = null, Subnet subnet = null, bool? primary = null, PublicIPAddress publicIPAddress = null, IEnumerable<ApplicationSecurityGroup> applicationSecurityGroups = null, ProvisioningState? provisioningState = null, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             virtualNetworkTaps ??= new List<VirtualNetworkTap>();
             applicationGatewayBackendAddressPools ??= new List<ApplicationGatewayBackendAddressPool>();
             loadBalancerBackendAddressPools ??= new List<BackendAddressPool>();
             loadBalancerInboundNatRules ??= new List<InboundNatRule>();
             applicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
 
-            return new NetworkInterfaceIPConfiguration(id, serializedAdditionalRawData, name, etag, virtualNetworkTaps?.ToList(), applicationGatewayBackendAddressPools?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups?.ToList(), provisioningState, privateLinkConnectionProperties);
+            return new NetworkInterfaceIPConfiguration(id, new Dictionary<string, BinaryData>(), name, etag, virtualNetworkTaps?.ToList(), applicationGatewayBackendAddressPools?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups?.ToList(), provisioningState, privateLinkConnectionProperties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualNetworkTap"/>. </summary>
@@ -476,7 +436,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="networkInterfaceTapConfigurations"> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </param>
         /// <param name="resourceGuid"> The resource GUID property of the virtual network tap resource. </param>
@@ -485,34 +444,29 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="destinationLoadBalancerFrontEndIPConfiguration"> The reference to the private IP address on the internal Load Balancer that will receive the tap. </param>
         /// <param name="destinationPort"> The VXLAN destination port that will receive the tapped traffic. </param>
         /// <returns> A new <see cref="Models.VirtualNetworkTap"/> instance for mocking. </returns>
-        public static VirtualNetworkTap VirtualNetworkTap(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string etag = null, IEnumerable<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = null, string resourceGuid = null, ProvisioningState? provisioningState = null, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = null, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = null, int? destinationPort = null)
+        public static VirtualNetworkTap VirtualNetworkTap(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = null, string resourceGuid = null, ProvisioningState? provisioningState = null, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = null, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = null, int? destinationPort = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             networkInterfaceTapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
 
-            return new VirtualNetworkTap(id, name, type, location, tags, serializedAdditionalRawData, etag, networkInterfaceTapConfigurations?.ToList(), resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
+            return new VirtualNetworkTap(id, name, type, location, tags, new Dictionary<string, BinaryData>(), etag, networkInterfaceTapConfigurations?.ToList(), resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkInterfaceTapConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Sub Resource type. </param>
         /// <param name="virtualNetworkTap"> The reference to the Virtual Network Tap resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface tap configuration resource. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceTapConfiguration"/> instance for mocking. </returns>
-        public static NetworkInterfaceTapConfiguration NetworkInterfaceTapConfiguration(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, VirtualNetworkTap virtualNetworkTap = null, ProvisioningState? provisioningState = null)
+        public static NetworkInterfaceTapConfiguration NetworkInterfaceTapConfiguration(string id = null, string name = null, string etag = null, string type = null, VirtualNetworkTap virtualNetworkTap = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new NetworkInterfaceTapConfiguration(id, serializedAdditionalRawData, name, etag, type, virtualNetworkTap, provisioningState);
+            return new NetworkInterfaceTapConfiguration(id, new Dictionary<string, BinaryData>(), name, etag, type, virtualNetworkTap, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FrontendIPConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -529,21 +483,19 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="publicIPPrefix"> The reference to the Public IP Prefix resource. </param>
         /// <param name="provisioningState"> The provisioning state of the frontend IP configuration resource. </param>
         /// <returns> A new <see cref="Models.FrontendIPConfiguration"/> instance for mocking. </returns>
-        public static FrontendIPConfiguration FrontendIPConfiguration(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, IEnumerable<string> zones = null, IEnumerable<SubResource> inboundNatRules = null, IEnumerable<SubResource> inboundNatPools = null, IEnumerable<SubResource> outboundRules = null, IEnumerable<SubResource> loadBalancingRules = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, IPVersion? privateIPAddressVersion = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, SubResource publicIPPrefix = null, ProvisioningState? provisioningState = null)
+        public static FrontendIPConfiguration FrontendIPConfiguration(string id = null, string name = null, string etag = null, string type = null, IEnumerable<string> zones = null, IEnumerable<SubResource> inboundNatRules = null, IEnumerable<SubResource> inboundNatPools = null, IEnumerable<SubResource> outboundRules = null, IEnumerable<SubResource> loadBalancingRules = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, IPVersion? privateIPAddressVersion = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, SubResource publicIPPrefix = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             zones ??= new List<string>();
             inboundNatRules ??= new List<SubResource>();
             inboundNatPools ??= new List<SubResource>();
             outboundRules ??= new List<SubResource>();
             loadBalancingRules ??= new List<SubResource>();
 
-            return new FrontendIPConfiguration(id, serializedAdditionalRawData, name, etag, type, zones?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), loadBalancingRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
+            return new FrontendIPConfiguration(id, new Dictionary<string, BinaryData>(), name, etag, type, zones?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), loadBalancingRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApplicationGatewayBackendAddressPool"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> Name of the backend address pool that is unique within an Application Gateway. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -551,18 +503,16 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="backendAddresses"> Backend addresses. </param>
         /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
         /// <returns> A new <see cref="Models.ApplicationGatewayBackendAddressPool"/> instance for mocking. </returns>
-        public static ApplicationGatewayBackendAddressPool ApplicationGatewayBackendAddressPool(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = null, IEnumerable<ApplicationGatewayBackendAddress> backendAddresses = null, ProvisioningState? provisioningState = null)
+        public static ApplicationGatewayBackendAddressPool ApplicationGatewayBackendAddressPool(string id = null, string name = null, string etag = null, string type = null, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = null, IEnumerable<ApplicationGatewayBackendAddress> backendAddresses = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
             backendAddresses ??= new List<ApplicationGatewayBackendAddress>();
 
-            return new ApplicationGatewayBackendAddressPool(id, serializedAdditionalRawData, name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState);
+            return new ApplicationGatewayBackendAddressPool(id, new Dictionary<string, BinaryData>(), name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BackendAddressPool"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -572,19 +522,17 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="outboundRules"> An array of references to outbound rules that use this backend address pool. </param>
         /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
         /// <returns> A new <see cref="Models.BackendAddressPool"/> instance for mocking. </returns>
-        public static BackendAddressPool BackendAddressPool(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = null, IEnumerable<SubResource> loadBalancingRules = null, SubResource outboundRule = null, IEnumerable<SubResource> outboundRules = null, ProvisioningState? provisioningState = null)
+        public static BackendAddressPool BackendAddressPool(string id = null, string name = null, string etag = null, string type = null, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = null, IEnumerable<SubResource> loadBalancingRules = null, SubResource outboundRule = null, IEnumerable<SubResource> outboundRules = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
             loadBalancingRules ??= new List<SubResource>();
             outboundRules ??= new List<SubResource>();
 
-            return new BackendAddressPool(id, serializedAdditionalRawData, name, etag, type, backendIPConfigurations?.ToList(), loadBalancingRules?.ToList(), outboundRule, outboundRules?.ToList(), provisioningState);
+            return new BackendAddressPool(id, new Dictionary<string, BinaryData>(), name, etag, type, backendIPConfigurations?.ToList(), loadBalancingRules?.ToList(), outboundRule, outboundRules?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InboundNatRule"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -598,11 +546,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="provisioningState"> The provisioning state of the inbound NAT rule resource. </param>
         /// <returns> A new <see cref="Models.InboundNatRule"/> instance for mocking. </returns>
-        public static InboundNatRule InboundNatRule(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, NetworkInterfaceIPConfiguration backendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
+        public static InboundNatRule InboundNatRule(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, NetworkInterfaceIPConfiguration backendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new InboundNatRule(id, serializedAdditionalRawData, name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
+            return new InboundNatRule(id, new Dictionary<string, BinaryData>(), name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/>. </summary>
@@ -728,7 +674,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sku"> The load balancer SKU. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="frontendIPConfigurations"> Object representing the frontend IPs to be used for the load balancer. </param>
@@ -741,10 +686,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="resourceGuid"> The resource GUID property of the load balancer resource. </param>
         /// <param name="provisioningState"> The provisioning state of the load balancer resource. </param>
         /// <returns> A new <see cref="Models.LoadBalancer"/> instance for mocking. </returns>
-        public static LoadBalancer LoadBalancer(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, LoadBalancerSku sku = null, string etag = null, IEnumerable<FrontendIPConfiguration> frontendIPConfigurations = null, IEnumerable<BackendAddressPool> backendAddressPools = null, IEnumerable<LoadBalancingRule> loadBalancingRules = null, IEnumerable<Probe> probes = null, IEnumerable<InboundNatRule> inboundNatRules = null, IEnumerable<InboundNatPool> inboundNatPools = null, IEnumerable<OutboundRule> outboundRules = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
+        public static LoadBalancer LoadBalancer(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, LoadBalancerSku sku = null, string etag = null, IEnumerable<FrontendIPConfiguration> frontendIPConfigurations = null, IEnumerable<BackendAddressPool> backendAddressPools = null, IEnumerable<LoadBalancingRule> loadBalancingRules = null, IEnumerable<Probe> probes = null, IEnumerable<InboundNatRule> inboundNatRules = null, IEnumerable<InboundNatPool> inboundNatPools = null, IEnumerable<OutboundRule> outboundRules = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             frontendIPConfigurations ??= new List<FrontendIPConfiguration>();
             backendAddressPools ??= new List<BackendAddressPool>();
             loadBalancingRules ??= new List<LoadBalancingRule>();
@@ -753,12 +697,11 @@ namespace Azure.Network.Management.Interface.Models
             inboundNatPools ??= new List<InboundNatPool>();
             outboundRules ??= new List<OutboundRule>();
 
-            return new LoadBalancer(id, name, type, location, tags, serializedAdditionalRawData, sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState);
+            return new LoadBalancer(id, name, type, location, tags, new Dictionary<string, BinaryData>(), sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LoadBalancingRule"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -775,16 +718,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="disableOutboundSnat"> Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule. </param>
         /// <param name="provisioningState"> The provisioning state of the load balancing rule resource. </param>
         /// <returns> A new <see cref="Models.LoadBalancingRule"/> instance for mocking. </returns>
-        public static LoadBalancingRule LoadBalancingRule(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, SubResource backendAddressPool = null, SubResource probe = null, TransportProtocol? protocol = null, LoadDistribution? loadDistribution = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, bool? disableOutboundSnat = null, ProvisioningState? provisioningState = null)
+        public static LoadBalancingRule LoadBalancingRule(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, SubResource backendAddressPool = null, SubResource probe = null, TransportProtocol? protocol = null, LoadDistribution? loadDistribution = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, bool? disableOutboundSnat = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new LoadBalancingRule(id, serializedAdditionalRawData, name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState);
+            return new LoadBalancingRule(id, new Dictionary<string, BinaryData>(), name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Probe"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -796,17 +736,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="requestPath"> The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value. </param>
         /// <param name="provisioningState"> The provisioning state of the probe resource. </param>
         /// <returns> A new <see cref="Models.Probe"/> instance for mocking. </returns>
-        public static Probe Probe(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, IEnumerable<SubResource> loadBalancingRules = null, ProbeProtocol? protocol = null, int? port = null, int? intervalInSeconds = null, int? numberOfProbes = null, string requestPath = null, ProvisioningState? provisioningState = null)
+        public static Probe Probe(string id = null, string name = null, string etag = null, string type = null, IEnumerable<SubResource> loadBalancingRules = null, ProbeProtocol? protocol = null, int? port = null, int? intervalInSeconds = null, int? numberOfProbes = null, string requestPath = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             loadBalancingRules ??= new List<SubResource>();
 
-            return new Probe(id, serializedAdditionalRawData, name, etag, type, loadBalancingRules?.ToList(), protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
+            return new Probe(id, new Dictionary<string, BinaryData>(), name, etag, type, loadBalancingRules?.ToList(), protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InboundNatPool"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -820,16 +758,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="provisioningState"> The provisioning state of the inbound NAT pool resource. </param>
         /// <returns> A new <see cref="Models.InboundNatPool"/> instance for mocking. </returns>
-        public static InboundNatPool InboundNatPool(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPortRangeStart = null, int? frontendPortRangeEnd = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
+        public static InboundNatPool InboundNatPool(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPortRangeStart = null, int? frontendPortRangeEnd = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new InboundNatPool(id, serializedAdditionalRawData, name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
+            return new InboundNatPool(id, new Dictionary<string, BinaryData>(), name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OutboundRule"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -841,12 +776,11 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. </param>
         /// <returns> A new <see cref="Models.OutboundRule"/> instance for mocking. </returns>
-        public static OutboundRule OutboundRule(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, string type = null, int? allocatedOutboundPorts = null, IEnumerable<SubResource> frontendIPConfigurations = null, SubResource backendAddressPool = null, ProvisioningState? provisioningState = null, LoadBalancerOutboundRuleProtocol? protocol = null, bool? enableTcpReset = null, int? idleTimeoutInMinutes = null)
+        public static OutboundRule OutboundRule(string id = null, string name = null, string etag = null, string type = null, int? allocatedOutboundPorts = null, IEnumerable<SubResource> frontendIPConfigurations = null, SubResource backendAddressPool = null, ProvisioningState? provisioningState = null, LoadBalancerOutboundRuleProtocol? protocol = null, bool? enableTcpReset = null, int? idleTimeoutInMinutes = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             frontendIPConfigurations ??= new List<SubResource>();
 
-            return new OutboundRule(id, serializedAdditionalRawData, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations?.ToList(), backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
+            return new OutboundRule(id, new Dictionary<string, BinaryData>(), name, etag, type, allocatedOutboundPorts, frontendIPConfigurations?.ToList(), backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
         }
     }
 }

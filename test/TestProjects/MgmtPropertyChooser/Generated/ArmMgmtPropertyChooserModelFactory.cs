@@ -118,7 +118,6 @@ namespace MgmtPropertyChooser.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachinePatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="plan"> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </param>
         /// <param name="identity"> The identity of the virtual machine, if configured. </param>
         /// <param name="zones"> The virtual machine zones. </param>
@@ -127,13 +126,12 @@ namespace MgmtPropertyChooser.Models
         /// <param name="vmId"> Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands. </param>
         /// <param name="extensionsTimeBudget"> Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01. </param>
         /// <returns> A new <see cref="Models.VirtualMachinePatch"/> instance for mocking. </returns>
-        public static VirtualMachinePatch VirtualMachinePatch(IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, ArmPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, string provisioningState = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
+        public static VirtualMachinePatch VirtualMachinePatch(IDictionary<string, string> tags = null, ArmPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, string provisioningState = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             zones ??= new List<string>();
 
-            return new VirtualMachinePatch(tags, serializedAdditionalRawData, plan, identity, zones?.ToList(), provisioningState, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachinePatch(tags, new Dictionary<string, BinaryData>(), plan, identity, zones?.ToList(), provisioningState, licenseType, vmId, extensionsTimeBudget);
         }
     }
 }

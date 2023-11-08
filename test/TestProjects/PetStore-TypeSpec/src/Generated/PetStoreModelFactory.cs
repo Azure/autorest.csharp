@@ -24,26 +24,20 @@ namespace PetStore.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.Shark"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="bite"> The bite of the shark. </param>
         /// <returns> A new <see cref="Models.Shark"/> instance for mocking. </returns>
-        public static Shark Shark(int size = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string bite = null)
+        public static Shark Shark(int size = default, string bite = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Shark("shark", size, serializedAdditionalRawData, bite);
+            return new Shark("shark", size, new Dictionary<string, BinaryData>(), bite);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Tuna"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>
         /// <returns> A new <see cref="Models.Tuna"/> instance for mocking. </returns>
-        public static Tuna Tuna(int size = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null, int fat = default)
+        public static Tuna Tuna(int size = default, int fat = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Tuna("tuna", size, serializedAdditionalRawData, fat);
+            return new Tuna("tuna", size, new Dictionary<string, BinaryData>(), fat);
         }
     }
 }

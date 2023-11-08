@@ -49,14 +49,11 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
-        public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string meow = null)
+        public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string meow = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Cat(PetKind.Cat, name, size, dateOfBirth, serializedAdditionalRawData, meow);
+            return new Cat(PetKind.Cat, name, size, dateOfBirth, new Dictionary<string, BinaryData>(), meow);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
@@ -66,14 +63,11 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string bark = null)
+        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string bark = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Dog(PetKind.Dog, name, size, dateOfBirth, serializedAdditionalRawData, bark);
+            return new Dog(PetKind.Dog, name, size, dateOfBirth, new Dictionary<string, BinaryData>(), bark);
         }
     }
 }

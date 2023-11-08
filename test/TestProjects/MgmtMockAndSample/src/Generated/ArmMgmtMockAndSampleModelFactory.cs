@@ -427,7 +427,6 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="resourceType"> Rule Group type. </param>
@@ -439,12 +438,11 @@ namespace MgmtMockAndSample.Models
         /// </param>
         /// <param name="provisioningState"> The provisioning state of the firewall policy rule collection group resource. </param>
         /// <returns> A new <see cref="MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData"/> instance for mocking. </returns>
-        public static FirewallPolicyRuleCollectionGroupData FirewallPolicyRuleCollectionGroupData(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string etag = null, ResourceType? resourceType = null, int? priority = null, IEnumerable<FirewallPolicyRuleCollection> ruleCollections = null, ProvisioningState? provisioningState = null)
+        public static FirewallPolicyRuleCollectionGroupData FirewallPolicyRuleCollectionGroupData(string id = null, string name = null, string etag = null, ResourceType? resourceType = null, int? priority = null, IEnumerable<FirewallPolicyRuleCollection> ruleCollections = null, ProvisioningState? provisioningState = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             ruleCollections ??= new List<FirewallPolicyRuleCollection>();
 
-            return new FirewallPolicyRuleCollectionGroupData(id, serializedAdditionalRawData, name, etag, resourceType, priority, ruleCollections?.ToList(), provisioningState);
+            return new FirewallPolicyRuleCollectionGroupData(id, new Dictionary<string, BinaryData>(), name, etag, resourceType, priority, ruleCollections?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.RoleAssignmentData"/>. </summary>
@@ -495,14 +493,11 @@ namespace MgmtMockAndSample.Models
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="properties"> Properties of the Guest configuration assignment. </param>
         /// <returns> A new <see cref="MgmtMockAndSample.GuestConfigurationAssignmentData"/> instance for mocking. </returns>
-        public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, AzureLocation? location = null, ResourceType? resourceType = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, GuestConfigurationAssignmentProperties properties = null)
+        public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, AzureLocation? location = null, ResourceType? resourceType = null, GuestConfigurationAssignmentProperties properties = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new GuestConfigurationAssignmentData(id, name, location, resourceType, serializedAdditionalRawData, properties);
+            return new GuestConfigurationAssignmentData(id, name, location, resourceType, new Dictionary<string, BinaryData>(), properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationAssignmentProperties"/>. </summary>

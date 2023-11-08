@@ -24,13 +24,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.TRex"/>. </summary>
         /// <param name="size"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.TRex"/> instance for mocking. </returns>
-        public static TRex TRex(int size = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static TRex TRex(int size = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new TRex("t-rex", size, serializedAdditionalRawData);
+            return new TRex("t-rex", size, new Dictionary<string, BinaryData>());
         }
     }
 }

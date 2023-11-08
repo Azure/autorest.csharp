@@ -131,7 +131,6 @@ namespace MgmtAcronymMapping.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="publisher">
         /// The image publisher.
         /// Serialized Name: ImageReference.publisher
@@ -153,11 +152,9 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: ImageReference.exactVersion
         /// </param>
         /// <returns> A new <see cref="Models.ImageReference"/> instance for mocking. </returns>
-        public static ImageReference ImageReference(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string publisher = null, string offer = null, string sku = null, string version = null, string exactVersion = null)
+        public static ImageReference ImageReference(string id = null, string publisher = null, string offer = null, string sku = null, string version = null, string exactVersion = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new ImageReference(id, serializedAdditionalRawData, publisher, offer, sku, version, exactVersion);
+            return new ImageReference(id, new Dictionary<string, BinaryData>(), publisher, offer, sku, version, exactVersion);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DataDisk"/>. </summary>
@@ -618,7 +615,6 @@ namespace MgmtAcronymMapping.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sourceVirtualMachineId">
         /// The source virtual machine from which Image is created.
         /// Serialized Name: ImageUpdate.properties.sourceVirtualMachine
@@ -636,12 +632,11 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: ImageUpdate.properties.hyperVGeneration
         /// </param>
         /// <returns> A new <see cref="Models.ImagePatch"/> instance for mocking. </returns>
-        public static ImagePatch ImagePatch(IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, ResourceIdentifier sourceVirtualMachineId = null, ImageStorageProfile storageProfile = null, string provisioningState = null, HyperVGenerationType? hyperVGeneration = null)
+        public static ImagePatch ImagePatch(IDictionary<string, string> tags = null, ResourceIdentifier sourceVirtualMachineId = null, ImageStorageProfile storageProfile = null, string provisioningState = null, HyperVGenerationType? hyperVGeneration = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new ImagePatch(tags, serializedAdditionalRawData, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration);
+            return new ImagePatch(tags, new Dictionary<string, BinaryData>(), sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineCaptureResult"/>. </summary>
@@ -649,7 +644,6 @@ namespace MgmtAcronymMapping.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="schema">
         /// the schema of the captured virtual machine
         /// Serialized Name: VirtualMachineCaptureResult.$schema
@@ -667,12 +661,11 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineCaptureResult.resources
         /// </param>
         /// <returns> A new <see cref="Models.VirtualMachineCaptureResult"/> instance for mocking. </returns>
-        public static VirtualMachineCaptureResult VirtualMachineCaptureResult(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string schema = null, string contentVersion = null, BinaryData parameters = null, IEnumerable<BinaryData> resources = null)
+        public static VirtualMachineCaptureResult VirtualMachineCaptureResult(string id = null, string schema = null, string contentVersion = null, BinaryData parameters = null, IEnumerable<BinaryData> resources = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             resources ??= new List<BinaryData>();
 
-            return new VirtualMachineCaptureResult(id, serializedAdditionalRawData, schema, contentVersion, parameters, resources?.ToList());
+            return new VirtualMachineCaptureResult(id, new Dictionary<string, BinaryData>(), schema, contentVersion, parameters, resources?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachinePatch"/>. </summary>
@@ -680,7 +673,6 @@ namespace MgmtAcronymMapping.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="plan">
         /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
         /// Serialized Name: VirtualMachineUpdate.plan
@@ -774,14 +766,13 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineUpdate.properties.extensionsTimeBudget
         /// </param>
         /// <returns> A new <see cref="Models.VirtualMachinePatch"/> instance for mocking. </returns>
-        public static VirtualMachinePatch VirtualMachinePatch(IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, MgmtAcronymMappingPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, bool? encryptionAtHost = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, ResourceIdentifier virtualMachineScaleSetId = null, ResourceIdentifier proximityPlacementGroupId = null, VirtualMachinePriorityType? priority = null, VirtualMachineEvictionPolicyType? evictionPolicy = null, double? billingMaxPrice = null, ResourceIdentifier hostId = null, ResourceIdentifier hostGroupId = null, string provisioningState = null, VirtualMachineInstanceView instanceView = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
+        public static VirtualMachinePatch VirtualMachinePatch(IDictionary<string, string> tags = null, MgmtAcronymMappingPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, bool? encryptionAtHost = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, ResourceIdentifier virtualMachineScaleSetId = null, ResourceIdentifier proximityPlacementGroupId = null, VirtualMachinePriorityType? priority = null, VirtualMachineEvictionPolicyType? evictionPolicy = null, double? billingMaxPrice = null, ResourceIdentifier hostId = null, ResourceIdentifier hostGroupId = null, string provisioningState = null, VirtualMachineInstanceView instanceView = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
 
-            return new VirtualMachinePatch(tags, serializedAdditionalRawData, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachinePatch(tags, new Dictionary<string, BinaryData>(), plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineSize"/>. </summary>
@@ -1026,7 +1017,6 @@ namespace MgmtAcronymMapping.Models
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The name of the extension.
         /// Serialized Name: VirtualMachineScaleSetExtension.name
@@ -1076,12 +1066,11 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.provisionAfterExtensions
         /// </param>
         /// <returns> A new <see cref="MgmtAcronymMapping.VirtualMachineScaleSetExtensionData"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetExtensionData VirtualMachineScaleSetExtensionData(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null, string resourceType = null, string forceUpdateTag = null, string publisher = null, string typePropertiesType = null, string typeHandlerVersion = null, bool? autoUpgradeMinorVersion = null, bool? enableAutomaticUpgrade = null, BinaryData settings = null, BinaryData protectedSettings = null, string provisioningState = null, IEnumerable<string> provisionAfterExtensions = null)
+        public static VirtualMachineScaleSetExtensionData VirtualMachineScaleSetExtensionData(string id = null, string name = null, string resourceType = null, string forceUpdateTag = null, string publisher = null, string typePropertiesType = null, string typeHandlerVersion = null, bool? autoUpgradeMinorVersion = null, bool? enableAutomaticUpgrade = null, BinaryData settings = null, BinaryData protectedSettings = null, string provisioningState = null, IEnumerable<string> provisionAfterExtensions = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             provisionAfterExtensions ??= new List<string>();
 
-            return new VirtualMachineScaleSetExtensionData(id, serializedAdditionalRawData, name, resourceType, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList());
+            return new VirtualMachineScaleSetExtensionData(id, new Dictionary<string, BinaryData>(), name, resourceType, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubResourceReadOnly"/>. </summary>
@@ -1622,17 +1611,14 @@ namespace MgmtAcronymMapping.Models
         /// Group query result by Resource Name.
         /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="intervalLength">
         /// Interval value in minutes used to create LogAnalytics call rate logs.
         /// Serialized Name: RequestRateByIntervalInput.intervalLength
         /// </param>
         /// <returns> A new <see cref="Models.RequestRateByIntervalContent"/> instance for mocking. </returns>
-        public static RequestRateByIntervalContent RequestRateByIntervalContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, IntervalInMin intervalLength = default)
+        public static RequestRateByIntervalContent RequestRateByIntervalContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null, IntervalInMin intervalLength = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, serializedAdditionalRawData, intervalLength);
+            return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, new Dictionary<string, BinaryData>(), intervalLength);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LogAnalyticsInputBase"/>. </summary>
@@ -1718,13 +1704,10 @@ namespace MgmtAcronymMapping.Models
         /// Group query result by Resource Name.
         /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <returns> A new <see cref="Models.ThrottledRequestsContent"/> instance for mocking. </returns>
-        public static ThrottledRequestsContent ThrottledRequestsContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null)
+        public static ThrottledRequestsContent ThrottledRequestsContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, serializedAdditionalRawData);
+            return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, new Dictionary<string, BinaryData>());
         }
     }
 }

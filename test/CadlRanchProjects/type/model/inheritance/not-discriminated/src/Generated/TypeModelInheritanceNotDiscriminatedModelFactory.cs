@@ -23,14 +23,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="age"></param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
-        public static Cat Cat(string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, int age = default)
+        public static Cat Cat(string name = null, int age = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Cat(name, serializedAdditionalRawData, age);
+            return new Cat(name, new Dictionary<string, BinaryData>(), age);
         }
     }
 }

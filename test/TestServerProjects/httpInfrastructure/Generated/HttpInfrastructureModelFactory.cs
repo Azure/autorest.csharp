@@ -23,14 +23,11 @@ namespace httpInfrastructure.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.B"/>. </summary>
         /// <param name="statusCode"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="textStatusCode"></param>
         /// <returns> A new <see cref="Models.B"/> instance for mocking. </returns>
-        public static B B(string statusCode = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string textStatusCode = null)
+        public static B B(string statusCode = null, string textStatusCode = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new B(statusCode, serializedAdditionalRawData, textStatusCode);
+            return new B(statusCode, new Dictionary<string, BinaryData>(), textStatusCode);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.C"/>. </summary>

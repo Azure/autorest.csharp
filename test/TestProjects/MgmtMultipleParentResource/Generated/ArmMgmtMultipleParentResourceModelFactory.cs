@@ -40,7 +40,6 @@ namespace MgmtMultipleParentResource.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.AnotherParentPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
         /// <param name="runAsPassword"> Specifies the user account password on the VM when executing the run command. </param>
@@ -49,12 +48,11 @@ namespace MgmtMultipleParentResource.Models
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <returns> A new <see cref="Models.AnotherParentPatch"/> instance for mocking. </returns>
-        public static AnotherParentPatch AnotherParentPatch(IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, bool? asyncExecution = null, string runAsUser = null, string runAsPassword = null, int? timeoutInSeconds = null, Uri outputBlobUri = null, Uri errorBlobUri = null, string provisioningState = null)
+        public static AnotherParentPatch AnotherParentPatch(IDictionary<string, string> tags = null, bool? asyncExecution = null, string runAsUser = null, string runAsPassword = null, int? timeoutInSeconds = null, Uri outputBlobUri = null, Uri errorBlobUri = null, string provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new AnotherParentPatch(tags, serializedAdditionalRawData, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new AnotherParentPatch(tags, new Dictionary<string, BinaryData>(), asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.ChildBodyData"/>. </summary>
@@ -81,7 +79,6 @@ namespace MgmtMultipleParentResource.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.ChildBodyUpdate"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
         /// <param name="runAsPassword"> Specifies the user account password on the VM when executing the run command. </param>
@@ -90,12 +87,11 @@ namespace MgmtMultipleParentResource.Models
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <returns> A new <see cref="Models.ChildBodyUpdate"/> instance for mocking. </returns>
-        public static ChildBodyUpdate ChildBodyUpdate(IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, bool? asyncExecution = null, string runAsUser = null, string runAsPassword = null, int? timeoutInSeconds = null, Uri outputBlobUri = null, Uri errorBlobUri = null, string provisioningState = null)
+        public static ChildBodyUpdate ChildBodyUpdate(IDictionary<string, string> tags = null, bool? asyncExecution = null, string runAsUser = null, string runAsPassword = null, int? timeoutInSeconds = null, Uri outputBlobUri = null, Uri errorBlobUri = null, string provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new ChildBodyUpdate(tags, serializedAdditionalRawData, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new ChildBodyUpdate(tags, new Dictionary<string, BinaryData>(), asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.TheParentData"/>. </summary>
@@ -122,7 +118,6 @@ namespace MgmtMultipleParentResource.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.TheParentPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
         /// <param name="runAsPassword"> Specifies the user account password on the VM when executing the run command. </param>
@@ -131,12 +126,11 @@ namespace MgmtMultipleParentResource.Models
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <returns> A new <see cref="Models.TheParentPatch"/> instance for mocking. </returns>
-        public static TheParentPatch TheParentPatch(IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, bool? asyncExecution = null, string runAsUser = null, string runAsPassword = null, int? timeoutInSeconds = null, Uri outputBlobUri = null, Uri errorBlobUri = null, string provisioningState = null)
+        public static TheParentPatch TheParentPatch(IDictionary<string, string> tags = null, bool? asyncExecution = null, string runAsUser = null, string runAsPassword = null, int? timeoutInSeconds = null, Uri outputBlobUri = null, Uri errorBlobUri = null, string provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new TheParentPatch(tags, serializedAdditionalRawData, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new TheParentPatch(tags, new Dictionary<string, BinaryData>(), asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.SubParentData"/>. </summary>
@@ -163,7 +157,6 @@ namespace MgmtMultipleParentResource.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.SubParentPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
         /// <param name="runAsPassword"> Specifies the user account password on the VM when executing the run command. </param>
@@ -172,12 +165,11 @@ namespace MgmtMultipleParentResource.Models
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <returns> A new <see cref="Models.SubParentPatch"/> instance for mocking. </returns>
-        public static SubParentPatch SubParentPatch(IDictionary<string, string> tags = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, bool? asyncExecution = null, string runAsUser = null, string runAsPassword = null, int? timeoutInSeconds = null, Uri outputBlobUri = null, Uri errorBlobUri = null, string provisioningState = null)
+        public static SubParentPatch SubParentPatch(IDictionary<string, string> tags = null, bool? asyncExecution = null, string runAsUser = null, string runAsPassword = null, int? timeoutInSeconds = null, Uri outputBlobUri = null, Uri errorBlobUri = null, string provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new SubParentPatch(tags, serializedAdditionalRawData, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new SubParentPatch(tags, new Dictionary<string, BinaryData>(), asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
         }
     }
 }

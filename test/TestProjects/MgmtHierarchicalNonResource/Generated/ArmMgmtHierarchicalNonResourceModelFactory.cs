@@ -18,27 +18,21 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="MgmtHierarchicalNonResource.SharedGalleryData"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <returns> A new <see cref="MgmtHierarchicalNonResource.SharedGalleryData"/> instance for mocking. </returns>
-        public static SharedGalleryData SharedGalleryData(string name = null, string location = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string uniqueId = null)
+        public static SharedGalleryData SharedGalleryData(string name = null, string location = null, string uniqueId = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new SharedGalleryData(name, location, serializedAdditionalRawData, uniqueId);
+            return new SharedGalleryData(name, location, new Dictionary<string, BinaryData>(), uniqueId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PirSharedGalleryResource"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <returns> A new <see cref="Models.PirSharedGalleryResource"/> instance for mocking. </returns>
-        public static PirSharedGalleryResource PirSharedGalleryResource(string name = null, string location = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string uniqueId = null)
+        public static PirSharedGalleryResource PirSharedGalleryResource(string name = null, string location = null, string uniqueId = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new PirSharedGalleryResource(name, location, serializedAdditionalRawData, uniqueId);
+            return new PirSharedGalleryResource(name, location, new Dictionary<string, BinaryData>(), uniqueId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PirResource"/>. </summary>
@@ -53,7 +47,6 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="Models.SharedGalleryImage"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <param name="osType"> This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**. </param>
         /// <param name="osState"> This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'. </param>
@@ -65,13 +58,12 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="features"> A list of gallery image features. </param>
         /// <param name="purchasePlan"> Describes the gallery image definition purchase plan. This is used by marketplace images. </param>
         /// <returns> A new <see cref="Models.SharedGalleryImage"/> instance for mocking. </returns>
-        public static SharedGalleryImage SharedGalleryImage(string name = null, string location = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string uniqueId = null, OperatingSystemType? osType = null, OperatingSystemStateType? osState = null, DateTimeOffset? endOfLifeOn = null, GalleryImageIdentifier identifier = null, RecommendedMachineConfiguration recommended = null, IEnumerable<string> disallowedDiskTypes = null, HyperVGeneration? hyperVGeneration = null, IEnumerable<GalleryImageFeature> features = null, ImagePurchasePlan purchasePlan = null)
+        public static SharedGalleryImage SharedGalleryImage(string name = null, string location = null, string uniqueId = null, OperatingSystemType? osType = null, OperatingSystemStateType? osState = null, DateTimeOffset? endOfLifeOn = null, GalleryImageIdentifier identifier = null, RecommendedMachineConfiguration recommended = null, IEnumerable<string> disallowedDiskTypes = null, HyperVGeneration? hyperVGeneration = null, IEnumerable<GalleryImageFeature> features = null, ImagePurchasePlan purchasePlan = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             disallowedDiskTypes ??= new List<string>();
             features ??= new List<GalleryImageFeature>();
 
-            return new SharedGalleryImage(name, location, serializedAdditionalRawData, uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList(), new Dictionary<string, BinaryData>()) : null, hyperVGeneration, features?.ToList(), purchasePlan);
+            return new SharedGalleryImage(name, location, new Dictionary<string, BinaryData>(), uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList(), new Dictionary<string, BinaryData>()) : null, hyperVGeneration, features?.ToList(), purchasePlan);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GalleryImageIdentifier"/>. </summary>
@@ -124,16 +116,13 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="Models.SharedGalleryImageVersion"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <param name="publishedOn"> The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
         /// <param name="endOfLifeOn"> The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
         /// <returns> A new <see cref="Models.SharedGalleryImageVersion"/> instance for mocking. </returns>
-        public static SharedGalleryImageVersion SharedGalleryImageVersion(string name = null, string location = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string uniqueId = null, DateTimeOffset? publishedOn = null, DateTimeOffset? endOfLifeOn = null)
+        public static SharedGalleryImageVersion SharedGalleryImageVersion(string name = null, string location = null, string uniqueId = null, DateTimeOffset? publishedOn = null, DateTimeOffset? endOfLifeOn = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new SharedGalleryImageVersion(name, location, serializedAdditionalRawData, uniqueId, publishedOn, endOfLifeOn);
+            return new SharedGalleryImageVersion(name, location, new Dictionary<string, BinaryData>(), uniqueId, publishedOn, endOfLifeOn);
         }
     }
 }

@@ -41,14 +41,11 @@ namespace Azure.Storage.Tables.Models
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>
         /// <param name="odataEditLink"> The edit link of the table. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <returns> A new <see cref="Models.TableResponse"/> instance for mocking. </returns>
-        public static TableResponse TableResponse(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string odataMetadata = null)
+        public static TableResponse TableResponse(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null, string odataMetadata = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new TableResponse(tableName, odataType, odataId, odataEditLink, serializedAdditionalRawData, odataMetadata);
+            return new TableResponse(tableName, odataType, odataId, odataEditLink, new Dictionary<string, BinaryData>(), odataMetadata);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TableEntityQueryResponse"/>. </summary>

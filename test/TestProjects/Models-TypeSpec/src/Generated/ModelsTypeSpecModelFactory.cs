@@ -15,25 +15,19 @@ namespace ModelsTypeSpec.Models
     public static partial class ModelsTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="first"></param>
         /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
-        public static FirstDerivedOutputModel FirstDerivedOutputModel(IDictionary<string, BinaryData> serializedAdditionalRawData = null, bool first = default)
+        public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new FirstDerivedOutputModel("first", serializedAdditionalRawData, first);
+            return new FirstDerivedOutputModel("first", new Dictionary<string, BinaryData>(), first);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SecondDerivedOutputModel"/>. </summary>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="second"></param>
         /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
-        public static SecondDerivedOutputModel SecondDerivedOutputModel(IDictionary<string, BinaryData> serializedAdditionalRawData = null, bool second = default)
+        public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new SecondDerivedOutputModel("second", serializedAdditionalRawData, second);
+            return new SecondDerivedOutputModel("second", new Dictionary<string, BinaryData>(), second);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InputModel"/>. </summary>
@@ -83,7 +77,6 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="nonRequiredString"> Optional string. </param>
@@ -115,9 +108,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableIntList"> Optional nullable model list. </param>
         /// <param name="nonRequiredNullableStringList"> Optional nullable string list. </param>
         /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
-        public static RoundTripModel RoundTripModel(IDictionary<string, BinaryData> serializedAdditionalRawData = null, string requiredString = null, int requiredInt = default, string nonRequiredString = null, int? nonRequiredInt = null, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, BaseModelWithDiscriminator requiredModel = null, FixedStringEnum requiredFixedStringEnum = default, FixedIntEnum requiredFixedIntEnum = default, ExtensibleEnum requiredExtensibleEnum = default, IEnumerable<CollectionItem> requiredList = null, IDictionary<string, int> requiredIntRecord = null, IDictionary<string, string> requiredStringRecord = null, IDictionary<string, RecordItem> requiredModelRecord = null, BinaryData requiredBytes = null, BinaryData optionalBytes = null, IEnumerable<int> requiredUint8Array = null, IEnumerable<int> optionalUint8Array = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IEnumerable<int> requiredInt8Array = null, IEnumerable<int> optionalInt8Array = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, IEnumerable<string> nonRequiredNullableStringList = null)
+        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, string nonRequiredString = null, int? nonRequiredInt = null, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, BaseModelWithDiscriminator requiredModel = null, FixedStringEnum requiredFixedStringEnum = default, FixedIntEnum requiredFixedIntEnum = default, ExtensibleEnum requiredExtensibleEnum = default, IEnumerable<CollectionItem> requiredList = null, IDictionary<string, int> requiredIntRecord = null, IDictionary<string, string> requiredStringRecord = null, IDictionary<string, RecordItem> requiredModelRecord = null, BinaryData requiredBytes = null, BinaryData optionalBytes = null, IEnumerable<int> requiredUint8Array = null, IEnumerable<int> optionalUint8Array = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IEnumerable<int> requiredInt8Array = null, IEnumerable<int> optionalInt8Array = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, IEnumerable<string> nonRequiredNullableStringList = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             requiredList ??= new List<CollectionItem>();
             requiredIntRecord ??= new Dictionary<string, int>();
             requiredStringRecord ??= new Dictionary<string, string>();
@@ -131,7 +123,7 @@ namespace ModelsTypeSpec.Models
             nonRequiredNullableIntList ??= new List<int>();
             nonRequiredNullableStringList ??= new List<string>();
 
-            return new RoundTripModel(serializedAdditionalRawData, requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
+            return new RoundTripModel(new Dictionary<string, BinaryData>(), requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithProperties"/>. </summary>
@@ -144,15 +136,13 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithProperties"/>. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredList"> Required collection. </param>
         /// <returns> A new <see cref="Models.DerivedModelWithProperties"/> instance for mocking. </returns>
-        public static DerivedModelWithProperties DerivedModelWithProperties(string optionalPropertyOnBase = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, IEnumerable<CollectionItem> requiredList = null)
+        public static DerivedModelWithProperties DerivedModelWithProperties(string optionalPropertyOnBase = null, IEnumerable<CollectionItem> requiredList = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             requiredList ??= new List<CollectionItem>();
 
-            return new DerivedModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData, requiredList?.ToList());
+            return new DerivedModelWithProperties(optionalPropertyOnBase, new Dictionary<string, BinaryData>(), requiredList?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripReadOnlyModel"/>. </summary>
@@ -269,31 +259,27 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.NumericValuesFacetint32"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>
         /// <returns> A new <see cref="Models.NumericValuesFacetint32"/> instance for mocking. </returns>
-        public static NumericValuesFacetint32 NumericValuesFacetint32(string field = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, IEnumerable<int> values = null, int value = default)
+        public static NumericValuesFacetint32 NumericValuesFacetint32(string field = null, IEnumerable<int> values = null, int value = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             values ??= new List<int>();
 
-            return new NumericValuesFacetint32(field, serializedAdditionalRawData, values?.ToList(), value);
+            return new NumericValuesFacetint32(field, new Dictionary<string, BinaryData>(), values?.ToList(), value);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Int32ValuesFacet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>
         /// <param name="kind"> The facet type. </param>
         /// <returns> A new <see cref="Models.Int32ValuesFacet"/> instance for mocking. </returns>
-        public static Int32ValuesFacet Int32ValuesFacet(string field = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, IEnumerable<int> values = null, int value = default, Int32ValuesFacetKind kind = default)
+        public static Int32ValuesFacet Int32ValuesFacet(string field = null, IEnumerable<int> values = null, int value = default, Int32ValuesFacetKind kind = default)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             values ??= new List<int>();
 
-            return new Int32ValuesFacet(field, serializedAdditionalRawData, values?.ToList(), value, kind);
+            return new Int32ValuesFacet(field, new Dictionary<string, BinaryData>(), values?.ToList(), value, kind);
         }
     }
 }

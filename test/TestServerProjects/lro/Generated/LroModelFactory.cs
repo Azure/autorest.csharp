@@ -19,16 +19,14 @@ namespace lro.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
-        public static Product Product(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string provisioningState = null, ProductPropertiesProvisioningStateValues? provisioningStateValues = null)
+        public static Product Product(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, string provisioningState = null, ProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new Product(id, type, tags, location, name, serializedAdditionalRawData, provisioningState, provisioningStateValues);
+            return new Product(id, type, tags, location, name, new Dictionary<string, BinaryData>(), provisioningState, provisioningStateValues);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
@@ -47,15 +45,12 @@ namespace lro.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.SubProduct"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
         /// <returns> A new <see cref="Models.SubProduct"/> instance for mocking. </returns>
-        public static SubProduct SubProduct(string id = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string provisioningState = null, SubProductPropertiesProvisioningStateValues? provisioningStateValues = null)
+        public static SubProduct SubProduct(string id = null, string provisioningState = null, SubProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new SubProduct(id, serializedAdditionalRawData, provisioningState, provisioningStateValues);
+            return new SubProduct(id, new Dictionary<string, BinaryData>(), provisioningState, provisioningStateValues);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubResource"/>. </summary>

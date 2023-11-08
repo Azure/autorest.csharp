@@ -126,14 +126,11 @@ namespace MgmtScopeResource.Models
         /// <param name="template"> The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both. </param>
         /// <param name="parameters"> Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string. </param>
         /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="whatIfResultFormat"> Optional What-If operation settings. </param>
         /// <returns> A new <see cref="Models.DeploymentWhatIfProperties"/> instance for mocking. </returns>
-        public static DeploymentWhatIfProperties DeploymentWhatIfProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default, IDictionary<string, BinaryData> serializedAdditionalRawData = null, WhatIfResultFormat? whatIfResultFormat = null)
+        public static DeploymentWhatIfProperties DeploymentWhatIfProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default, WhatIfResultFormat? whatIfResultFormat = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new DeploymentWhatIfProperties(template, parameters, mode, serializedAdditionalRawData, whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat, new Dictionary<string, BinaryData>()) : null);
+            return new DeploymentWhatIfProperties(template, parameters, mode, new Dictionary<string, BinaryData>(), whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat, new Dictionary<string, BinaryData>()) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WhatIfOperationResult"/>. </summary>
@@ -267,14 +264,11 @@ namespace MgmtScopeResource.Models
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="properties"> Properties of the Guest configuration assignment. </param>
         /// <returns> A new <see cref="MgmtScopeResource.GuestConfigurationAssignmentData"/> instance for mocking. </returns>
-        public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, string location = null, string resourceType = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, GuestConfigurationAssignmentProperties properties = null)
+        public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, string location = null, string resourceType = null, GuestConfigurationAssignmentProperties properties = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new GuestConfigurationAssignmentData(id, name, location, resourceType, serializedAdditionalRawData, properties);
+            return new GuestConfigurationAssignmentData(id, name, location, resourceType, new Dictionary<string, BinaryData>(), properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationAssignmentProperties"/>. </summary>

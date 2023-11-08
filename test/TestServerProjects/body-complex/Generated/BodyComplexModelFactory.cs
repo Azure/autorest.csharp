@@ -45,15 +45,12 @@ namespace body_complex.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.DotSalmon"/>. </summary>
         /// <param name="species"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="location"></param>
         /// <param name="iswild"></param>
         /// <returns> A new <see cref="Models.DotSalmon"/> instance for mocking. </returns>
-        public static DotSalmon DotSalmon(string species = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string location = null, bool? iswild = null)
+        public static DotSalmon DotSalmon(string species = null, string location = null, bool? iswild = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new DotSalmon("DotSalmon", species, serializedAdditionalRawData, location, iswild);
+            return new DotSalmon("DotSalmon", species, new Dictionary<string, BinaryData>(), location, iswild);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ReadonlyObj"/>. </summary>
@@ -78,14 +75,11 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="Models.MyDerivedType"/>. </summary>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="propD1"></param>
         /// <returns> A new <see cref="Models.MyDerivedType"/> instance for mocking. </returns>
-        public static MyDerivedType MyDerivedType(string propB1 = null, string propBH1 = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string propD1 = null)
+        public static MyDerivedType MyDerivedType(string propB1 = null, string propBH1 = null, string propD1 = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new MyDerivedType(MyKind.Kind1, propB1, propBH1, serializedAdditionalRawData, propD1);
+            return new MyDerivedType(MyKind.Kind1, propB1, propBH1, new Dictionary<string, BinaryData>(), propD1);
         }
     }
 }

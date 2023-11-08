@@ -33,18 +33,16 @@ namespace model_flattening.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="pName"></param>
         /// <param name="typePropertiesType"></param>
         /// <param name="provisioningStateValues"></param>
         /// <param name="provisioningState"></param>
         /// <returns> A new <see cref="Models.FlattenedProduct"/> instance for mocking. </returns>
-        public static FlattenedProduct FlattenedProduct(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string pName = null, string typePropertiesType = null, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = null, string provisioningState = null)
+        public static FlattenedProduct FlattenedProduct(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, string pName = null, string typePropertiesType = null, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = null, string provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
 
-            return new FlattenedProduct(id, type, tags, location, name, serializedAdditionalRawData, pName, typePropertiesType, provisioningStateValues, provisioningState);
+            return new FlattenedProduct(id, type, tags, location, name, new Dictionary<string, BinaryData>(), pName, typePropertiesType, provisioningStateValues, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProductWrapper"/>. </summary>

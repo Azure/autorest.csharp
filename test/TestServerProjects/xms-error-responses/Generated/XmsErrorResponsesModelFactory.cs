@@ -15,14 +15,11 @@ namespace xms_error_responses.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
         /// <param name="aniType"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> Gets the Pet by id. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
-        public static Pet Pet(string aniType = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string name = null)
+        public static Pet Pet(string aniType = null, string name = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new Pet(aniType, serializedAdditionalRawData, name);
+            return new Pet(aniType, new Dictionary<string, BinaryData>(), name);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Animal"/>. </summary>
@@ -43,42 +40,33 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.PetActionError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <returns> A new <see cref="Models.PetActionError"/> instance for mocking. </returns>
-        public static PetActionError PetActionError(string actionResponse = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string errorType = null, string errorMessage = null)
+        public static PetActionError PetActionError(string actionResponse = null, string errorType = null, string errorMessage = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new PetActionError(actionResponse, serializedAdditionalRawData, errorType, errorMessage);
+            return new PetActionError(actionResponse, new Dictionary<string, BinaryData>(), errorType, errorMessage);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetSadError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <returns> A new <see cref="Models.PetSadError"/> instance for mocking. </returns>
-        public static PetSadError PetSadError(string actionResponse = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string errorMessage = null, string reason = null)
+        public static PetSadError PetSadError(string actionResponse = null, string errorMessage = null, string reason = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new PetSadError(actionResponse, serializedAdditionalRawData, "PetSadError", errorMessage, reason);
+            return new PetSadError(actionResponse, new Dictionary<string, BinaryData>(), "PetSadError", errorMessage, reason);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetHungryOrThirstyError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <param name="hungryOrThirsty"> is the pet hungry or thirsty or both. </param>
         /// <returns> A new <see cref="Models.PetHungryOrThirstyError"/> instance for mocking. </returns>
-        public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, string errorMessage = null, string reason = null, string hungryOrThirsty = null)
+        public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = null, string errorMessage = null, string reason = null, string hungryOrThirsty = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new PetHungryOrThirstyError(actionResponse, serializedAdditionalRawData, "PetHungryOrThirstyError", errorMessage, reason, hungryOrThirsty);
+            return new PetHungryOrThirstyError(actionResponse, new Dictionary<string, BinaryData>(), "PetHungryOrThirstyError", errorMessage, reason, hungryOrThirsty);
         }
     }
 }

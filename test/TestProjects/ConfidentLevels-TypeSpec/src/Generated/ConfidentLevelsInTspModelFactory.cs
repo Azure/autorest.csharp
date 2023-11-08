@@ -83,27 +83,21 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="age"> The age. </param>
         /// <returns> A new <see cref="Models.DerivedModel"/> instance for mocking. </returns>
-        public static DerivedModel DerivedModel(string name = null, double? size = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, int? age = null)
+        public static DerivedModel DerivedModel(string name = null, double? size = null, int? age = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new DerivedModel(name, size, serializedAdditionalRawData, age);
+            return new DerivedModel(name, size, new Dictionary<string, BinaryData>(), age);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithUnion"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="unionProperty"> The union property. </param>
         /// <returns> A new <see cref="Models.DerivedModelWithUnion"/> instance for mocking. </returns>
-        public static DerivedModelWithUnion DerivedModelWithUnion(string name = null, double? size = null, IDictionary<string, BinaryData> serializedAdditionalRawData = null, BinaryData unionProperty = null)
+        public static DerivedModelWithUnion DerivedModelWithUnion(string name = null, double? size = null, BinaryData unionProperty = null)
         {
-            serializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
-
-            return new DerivedModelWithUnion(name, size, serializedAdditionalRawData, unionProperty);
+            return new DerivedModelWithUnion(name, size, new Dictionary<string, BinaryData>(), unionProperty);
         }
     }
 }
