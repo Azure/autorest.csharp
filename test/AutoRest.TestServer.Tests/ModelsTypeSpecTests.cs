@@ -658,6 +658,9 @@ namespace AutoRest.TestServer.Tests
                         Assert.Fail($"We should not have other properties here, but got {p.Name}");
                     }
                 }
+
+                // TODO -- remove the comment until the issue is fixed
+                //Assert.Fail($"We should not have other properties here, but got {property.Name}");
             }
         }
     }
