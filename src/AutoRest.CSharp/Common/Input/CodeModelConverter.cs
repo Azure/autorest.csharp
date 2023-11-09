@@ -122,6 +122,7 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(serviceRequest, operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
+                KeepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId),
                 Examples: Array.Empty<InputOperationExample>());
 
             _inputOperationToOperationMap[inputOperation] = operation;
