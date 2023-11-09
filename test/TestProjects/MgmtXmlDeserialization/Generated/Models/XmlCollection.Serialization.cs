@@ -71,6 +71,11 @@ namespace MgmtXmlDeserialization.Models
 
         void IJsonModel<XmlCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<XmlCollection>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<XmlCollection>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
             {
@@ -211,7 +216,7 @@ namespace MgmtXmlDeserialization.Models
                 throw new FormatException($"The model {nameof(XmlCollection)} does not support '{options.Format}' format.");
             }
 
-            if (data.ToMemory().Span.StartsWith("{"u8))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 using JsonDocument document = JsonDocument.Parse(data);
                 return DeserializeXmlCollection(document.RootElement, options);

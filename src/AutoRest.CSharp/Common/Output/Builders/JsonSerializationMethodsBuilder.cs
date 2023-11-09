@@ -236,23 +236,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
             static MethodBodyStatement BuildModelReadMethod(SerializableObjectType model, bool hasJson, bool hasXml)
             {
                 var data = new BinaryDataExpression(dataParameter);
+                var options = new ModelReaderWriterOptionsExpression(optionsParameter);
                 /* using var document = JsonDocument.ParseValue(ref reader);
                  * return DeserializeXXX(doc.RootElement, options);
                  */
                 var jsonPart = new MethodBodyStatement[]
                 {
                     UsingDeclare("document", JsonDocumentExpression.Parse(dataParameter), out var docVariable),
-                    Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, optionsParameter))
+                    Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
                 };
                 // return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
-                var xmlPart = Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), optionsParameter));
+                var xmlPart = Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), options));
 
                 if (hasJson && hasXml)
                 {
                     // we have both, we need to wrap things in a if-else statement
-                    // condition: data.ToMemory().Span.StartsWith("{"u8)
-                    var condition = data.ToMemory().Property(nameof(ReadOnlyMemory<byte>.Span))
-                        .Invoke(nameof(MemoryExtensions.StartsWith), LiteralU8("{"));
+                    // condition: options.Format == ModelReaderWriterFormat.Json
+                    var condition = Equal(options.Format, ModelReaderWriterFormatExpression.Json);
                     return new IfElseStatement(condition, jsonPart, xmlPart);
                 }
 
@@ -334,11 +334,34 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
             => new[]
             {
+                CheckFormat(options, serialization),
+                EmptyLine,
                 utf8JsonWriter.WriteStartObject(),
                 WriteProperties(utf8JsonWriter, serialization.Properties).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),
                 utf8JsonWriter.WriteEndObject()
             };
+
+        private static MethodBodyStatement CheckFormat(ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
+        {
+            /*
+                if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<T>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+                {
+                    throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<XmlModelForCombinedInterface>)} interface");
+                    // use this when it support JSON for wire $"Must use 'J' or 'W' format when calling the {nameof(IJsonModel<XmlModelForCombinedInterface>)} interface"
+                }
+             */
+            // condition: options.Format == ModelReaderWriterFormat.Wire && ((IModel<T>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json
+            var iModelInterface = serialization.IModelInterface;
+            var condition = Equal(options.Format, ModelReaderWriterFormatExpression.Wire)
+                .And(NotEqual(This.CastTo(iModelInterface).Invoke(nameof(IModel<object>.GetWireFormat), options), ModelReaderWriterFormatExpression.Json))
+                .Or(NotEqual(options.Format, ModelReaderWriterFormatExpression.Json));
+            return new IfStatement(condition)
+            {
+                // TODO switch the message to include W when possible
+                Throw(New.Instance(typeof(InvalidOperationException), new FormattableStringExpression("Must use 'J' format when calling the {0} interface", Nameof(serialization.IJsonModelInterface))))
+            };
+        }
 
         public static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties)
         {
