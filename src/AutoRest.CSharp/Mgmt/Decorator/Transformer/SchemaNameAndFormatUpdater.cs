@@ -313,13 +313,6 @@ internal static class SchemaNameAndFormatUpdater
         Type = 0, Property = 1
     }
 
-    public static void UpdateAcronym(Schema schema)
-    {
-        if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
-            return;
-        TransformSchema(schema);
-    }
-
     private static void UpdateAcronyms(IEnumerable<Schema> allSchemas)
     {
         foreach (var schema in allSchemas)
@@ -411,6 +404,67 @@ internal static class SchemaNameAndFormatUpdater
         foreach (var property in objSchema.Properties)
         {
             TransformLanguage(property.Language, objSchema.GetFullSerializedName(property));
+        }
+    }
+
+    public static void UpdateAcronym(InputType inputType, Dictionary<object, string> renamingMap)
+    {
+        if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
+            return;
+        TransformInputType(inputType, renamingMap);
+    }
+
+    private static void TransformInputType(InputType inputType, Dictionary<object, string> renamingMap)
+    {
+        switch (inputType)
+        {
+            case InputEnumType inputEnum:
+                TransformEnumType(inputEnum, inputEnum.AllowedValues, renamingMap);
+                break;
+            case InputModelType inputModel: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
+                TransformInputModelType(inputModel, renamingMap);
+                break;
+            default:
+                throw new InvalidOperationException($"Unknown input type {inputType.GetType()}");
+        }
+    }
+
+    private static void TransformEnumType(InputEnumType inputEnum, IReadOnlyList<InputEnumTypeValue> choiceValues, Dictionary<object, string> renamingMap)
+    {
+        var enumNewName = GetTransformName(inputEnum.Name, inputEnum.GetFullSerializedName());
+        renamingMap.Add(inputEnum, enumNewName);
+        TransformChoices(inputEnum, choiceValues, renamingMap);
+    }
+
+    private static void TransformChoices(InputEnumType inputEnum, IReadOnlyList<InputEnumTypeValue> choiceValues, Dictionary<object, string> renamingMap)
+    {
+        foreach (var choiceValue in choiceValues)
+        {
+            var chiceValueNewName = GetTransformName(choiceValue.Name, inputEnum.GetFullSerializedName(choiceValue));
+            renamingMap.Add(choiceValue, chiceValueNewName);
+        }
+    }
+
+    private static string GetTransformName(string originalName, string targetFullSerializedName)
+    {
+        var tempName = originalName;
+        var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
+        {
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
+                "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
+            tempName = applyStep.NewName.Name;
+        });
+        return result.Name;
+    }
+
+    private static void TransformInputModelType(InputModelType inputModel, Dictionary<object, string> renamingMap)
+    {
+        // transform the name of this schema
+        var inputModelNewName = GetTransformName(inputModel.Name, inputModel.GetFullSerializedName());
+        renamingMap.Add(inputModel, inputModelNewName);
+        foreach (var property in inputModel.Properties)
+        {
+            var propertyNewName = GetTransformName(property.Name, inputModel.GetFullSerializedName(property));
         }
     }
 }

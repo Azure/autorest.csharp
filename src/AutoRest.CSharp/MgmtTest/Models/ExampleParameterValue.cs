@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         public CSharpType Type { get; }
 
-        public ExampleValue? Value { get; }
+        public InputExampleValue? Value { get; }
 
         public FormattableString? Expression { get; }
 
@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             Type = type;
         }
 
-        public ExampleParameterValue(Reference reference, ExampleValue value) : this(reference.Name, reference.Type)
+        public ExampleParameterValue(Reference reference, InputExampleValue value) : this(reference.Name, reference.Type)
         {
             Value = value;
         }
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             Expression = rawValue;
         }
 
-        public ExampleParameterValue(Parameter parameter, ExampleValue value) : this(parameter.Name, parameter.Type)
+        public ExampleParameterValue(Parameter parameter, InputExampleValue value) : this(parameter.Name, parameter.Type)
         {
             Value = value;
         }

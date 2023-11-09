@@ -10,26 +10,24 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class BuildContext
     {
-        private readonly InputNamespace _inputNamespace;
 
         public BuildContext(InputNamespace inputNamespace, CodeModel codeModel, SourceInputModel? sourceInputModel) : this(inputNamespace, codeModel, sourceInputModel, Configuration.Namespace)
         { }
 
         public BuildContext(InputNamespace inputNamespace, CodeModel codeModel, SourceInputModel? sourceInputModel, string defaultNamespace)
         {
-            _inputNamespace = inputNamespace;
             CodeModel = codeModel;
-            SchemaUsageProvider = new SchemaUsageProvider(codeModel);
             SourceInputModel = sourceInputModel;
             DefaultNamespace = defaultNamespace;
+            InputNamespace = inputNamespace;
         }
 
         public OutputLibrary? BaseLibrary { get; protected set; }
 
         public CodeModel CodeModel { get; }
-        public SchemaUsageProvider SchemaUsageProvider { get; }
         public string DefaultNamespace { get; }
         public SourceInputModel? SourceInputModel { get; }
         public virtual TypeFactory TypeFactory { get; } = null!;
+        public InputNamespace InputNamespace { get; }
     }
 }

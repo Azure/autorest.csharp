@@ -18,28 +18,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _ => new ModelWriter()
         };
 
+        // TODO: handle this with custom code
         protected override void AddClassAttributes(CodeWriter writer, ObjectType objectType)
         {
-            if (objectType is not SchemaObjectType schema)
-                return;
-            var extensions = schema.InputModel.Extensions;
-            if (extensions != null)
-            {
-                if (Configuration.IsBranded)
-                    writer.UseNamespace("Azure.Core");
-                if (extensions.MgmtReferenceType)
-                {
-                    writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
-                }
-                else if (extensions.MgmtPropertyReferenceType)
-                {
-                    writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
-                }
-                else if (extensions.MgmtTypeReferenceType)
-                {
-                    writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
-                }
-            }
+            //if (objectType is not SchemaObjectType schema)
+            //    return;
+            //var extensions = schema.InputModel.Extensions;
+            //if (extensions != null)
+            //{
+            //    if (Configuration.IsBranded)
+            //        writer.UseNamespace("Azure.Core");
+            //    if (extensions.MgmtReferenceType)
+            //    {
+            //        writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
+            //    }
+            //    else if (extensions.MgmtPropertyReferenceType)
+            //    {
+            //        writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
+            //    }
+            //    else if (extensions.MgmtTypeReferenceType)
+            //    {
+            //        writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
+            //    }
+            //}
         }
 
         protected override void AddCtorAttribute(CodeWriter writer, ObjectType schema, ObjectTypeConstructor constructor)

@@ -55,12 +55,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool TryGetConfigOperationName(this InputOperation operation, [MaybeNullWhen(false)] out string name)
         {
-            if (Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name))
+            if (Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.Name, out name))
             {
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                    new TransformItem(TransformTypeName.OverrideOperationName, operation.OperationId!, name),
+                    new TransformItem(TransformTypeName.OverrideOperationName, operation.Name, name),
                     operation.GetFullSerializedName(),
-                    "OverrideOperationName", operation.Language.Default.Name, name);
+                    "OverrideOperationName", operation.Name, name);
                 return true;
             }
             return false;
@@ -181,6 +181,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return serviceRequest?.Parameters.FirstOrDefault(parameter => parameter.In == HttpParameterIn.Body);
         }
 
+        public static InputParameter? GetBodyParameter(this InputOperation operation)
+            => operation.Parameters.FirstOrDefault(parameter => parameter.Location == RequestLocation.Body);
+
         public static ServiceRequest? GetServiceRequest(this Operation operation)
         {
             return operation.Requests.FirstOrDefault();
@@ -218,6 +221,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal static string GetFullSerializedName(this Operation operation)
         {
             return operation.OperationId ?? operation.Language.Default.SerializedName ?? operation.Language.Default.Name;
+        }
+
+        internal static string GetFullSerializedName(this InputOperation operation)
+        {
+            return operation.OriginalName ?? operation.Name;
+        }
+
+        internal static string GetFullSerializedName(this InputOperation operation, InputParameter parameter)
+        {
+            return $"{operation.GetFullSerializedName()}.{parameter.NameInRequest}";
         }
 
         internal static string GetFullSerializedName(this Operation operation, RequestParameter parameter)

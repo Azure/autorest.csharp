@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
+using Azure.Core;
 using NUnit.Framework;
 using static AutoRest.CSharp.Mgmt.Models.MgmtRestOperation;
 
@@ -88,176 +88,176 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 generateTestProject: true);
         }
 
-        private void TestPair(ResourceMatchType expected, HttpMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)
+        private void TestPair(ResourceMatchType expected, RequestMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)
         {
             RequestPath resourcePath = RequestPath.FromString(resourcePathStr);
             RequestPath requestPath = RequestPath.FromString(requestPathStr);
             Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod, resourcePath, requestPath, isList));
         }
 
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
             "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/eventSubscriptions")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/providers/Microsoft.EventGrid/eventSubscriptions")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventSubscriptions")]
-        public void ValidateScopeListMatching(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void ValidateScopeListMatching(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.ChildList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ChildList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs")]
-        [TestCase(ResourceMatchType.Context, HttpMethod.Post, false,
+        [TestCase(ResourceMatchType.Context, "POST", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.None, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/scm")]
-        [TestCase(ResourceMatchType.Exact, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.Exact, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/scm",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/scm")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/premieraddons/{premierAddOnName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/premieraddons")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.None, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/premieraddons/{premierAddOnName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.None, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/basicPublishingCredentialsPolicies/ftp",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/basicPublishingCredentialsPolicies/scm")]
-        [TestCase(ResourceMatchType.Exact, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.Exact, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/basicPublishingCredentialsPolicies/scm",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/basicPublishingCredentialsPolicies/scm")]
-        public void ValidateMatchingSegments(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void ValidateMatchingSegments(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs/{continuouswebjobsName}",
            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Post, true,
+        [TestCase(ResourceMatchType.None, "POST", true,
            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs/{continuouswebjobsName}",
            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.None, "GET", false,
             "/providers/Microsoft.Web/publishingUsers/web",
             "/providers/Microsoft.Web/sourcecontrols")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}",
             "/providers/Microsoft.Web/sourcecontrols")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/userProvidedFunctionApps/{functionAppName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/userProvidedFunctionApps")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.None, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/userProvidedFunctionApps/{functionAppName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/userProvidedFunctionApps")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites")]
-        [TestCase(ResourceMatchType.AncestorList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.AncestorList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}",
             "/subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSites")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}",
             "/subscriptions/{subscriptionId}/resourceGroups")]
-        [TestCase(ResourceMatchType.AncestorList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.AncestorList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")]
-        public void ValidateListMatchingSegments(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+        public void ValidateListMatchingSegments(ResourceMatchType expected, RequestMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
             => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.Context, HttpMethod.Post, false,
+        [TestCase(ResourceMatchType.Context, "POST", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors/{detectorName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors/{detectorName}/execute")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Post, false,
+        [TestCase(ResourceMatchType.None, "POST", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors/{detectorName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors/{detectorName}/execute")]
-        public void PostMethodOnMultipleLevels(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void PostMethodOnMultipleLevels(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.None, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/logs",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.None, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/slotConfigNames",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, false,
+        [TestCase(ResourceMatchType.None, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config")]
-        [TestCase(ResourceMatchType.ChildList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ChildList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config")]
-        public void StaticSingletonEnumeration(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void StaticSingletonEnumeration(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.ChildList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ChildList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendationHistory")]
-        public void DifferentReferenceName(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void DifferentReferenceName(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.ChildList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ChildList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates")]
-        public void ParentListAndChildList(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void ParentListAndChildList(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.None, HttpMethod.Post, false,
+        [TestCase(ResourceMatchType.None, "POST", false,
             "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Post, false,
+        [TestCase(ResourceMatchType.None, "POST", false,
             "/providers/Microsoft.Web/publishingUsers/web",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate")]
-        [TestCase(ResourceMatchType.CheckName, HttpMethod.Post, false,
+        [TestCase(ResourceMatchType.CheckName, "POST", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability")]
-        public void ValidateCheckNameAvailability(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void ValidateCheckNameAvailability(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.None, "GET", true,
             "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.None, "GET", true,
             "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Authorization/policyDefinitions")]
-        [TestCase(ResourceMatchType.AncestorList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.AncestorList, "GET", true,
             "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Authorization/policyDefinitions")]
-        public void PolicyDefinitionMultiParent(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void PolicyDefinitionMultiParent(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}",
             "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups")]
-        [TestCase(ResourceMatchType.AncestorList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.AncestorList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}",
             "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.None, "GET", true,
             "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups")]
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups")]
-        public void ChildListDifferentRoot(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void ChildListDifferentRoot(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
 
-        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes")]
-        public void ValidateCommonRestTestProject(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+        public void ValidateCommonRestTestProject(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
     }
 }

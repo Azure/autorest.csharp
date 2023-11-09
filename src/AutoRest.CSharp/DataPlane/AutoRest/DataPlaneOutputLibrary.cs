@@ -103,8 +103,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ? modelTypeProvider.Type.WithNullable(model.IsNullable)
                 : new CSharpType(typeof(object), model.IsNullable);
 
-        public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for HLC!");
-
         public override TypeProvider FindTypeProviderForInputType(InputType inputType) => throw new NotImplementedException($"{nameof(FindTypeProviderForInputType)} shouldn't be called for HLC!");
 
         public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName)?.Select(m => m.Type).FirstOrDefault();

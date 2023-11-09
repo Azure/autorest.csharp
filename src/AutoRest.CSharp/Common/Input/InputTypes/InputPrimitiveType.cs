@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable) : InputType(Kind.ToString(), IsNullable)
+internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable) : InputType(Kind.ToString(), IsNullable, null)
 {
     private InputPrimitiveType(InputTypeKind kind) : this(kind, false) { }
 

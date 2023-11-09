@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -130,6 +131,8 @@ namespace AutoRest.CSharp.Output.Builders
                 escapeLength = slice.Length;
             return isMatch;
         }
+
+        public static string CSharpName(this InputParameter parameter) => parameter.Name.ToVariableName();
 
         public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
 

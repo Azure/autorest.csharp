@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 
@@ -10,11 +11,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        public static void Transform()
+        public static void Transform(CodeModel codeModel)
         {
             // schema usage transformer must run first
-            SchemaUsageTransformer.Transform(MgmtContext.CodeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
+            SchemaUsageTransformer.Transform(codeModel);
+            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             OmitOperationGroups.RemoveOperationGroups();
             PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();

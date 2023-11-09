@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // short version samples
             var shouldGenerateShortVersion = ShouldGenerateShortVersion(protocolMethodSignature, convenienceMethodSignature);
             var samples = new List<DpgOperationSample>();
-            foreach (var (exampleKey, clientParameters) in _clientExamples)
+            foreach (var (exampleKey, clientParameters, _) in _clientExamples)
             {
                 if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
                 {

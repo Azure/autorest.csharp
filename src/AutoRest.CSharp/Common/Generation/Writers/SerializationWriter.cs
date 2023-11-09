@@ -48,11 +48,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Namespace(declaration.Namespace))
             {
-                if (jsonSerialization is { IncludeConverter: true })
-                {
-                    writer.Append($"[{typeof(JsonConverter)}(typeof({declaration.Name}Converter))]");
-                }
-
                 writer.Append($"{declaration.Accessibility} partial {(isStruct ? "struct" : "class")} {declaration.Name}");
 
                 if (includeSerializer)
@@ -72,51 +67,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteMethodDocumentation(method.Signature);
                         writer.WriteMethod(method);
                     }
-
-                    if (jsonSerialization is { IncludeConverter: true })
-                    {
-                        WriteCustomJsonConverter(writer, declaration, jsonSerialization.Type, includeSerializer, includeDeserializer);
-                    }
                 }
             }
-        }
-
-        private static void WriteCustomJsonConverter(CodeWriter writer, TypeDeclarationOptions declaration, CSharpType type, bool includeSerializer, bool includeDeserializer)
-        {
-            writer.Append($"internal partial class {declaration.Name}Converter : {typeof(JsonConverter)}<{type}>");
-            using (writer.Scope())
-            {
-                using (writer.Scope($"public override void  Write({typeof(Utf8JsonWriter)} writer, {type} model, {typeof(JsonSerializerOptions)} options)"))
-                {
-                    if (includeSerializer)
-                    {
-                        writer.Append($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
-                    }
-                    else
-                    {
-                        writer.Append($"throw new {typeof(NotImplementedException)}();");
-                    }
-                }
-
-                using (writer.Scope($"public override {type} Read(ref {typeof(Utf8JsonReader)} reader, {typeof(Type)} typeToConvert, {typeof(JsonSerializerOptions)} options)"))
-                {
-                    if (includeDeserializer)
-                    {
-                        var document = new CodeWriterDeclaration("document");
-                        writer.Line($"using var {document:D} = {typeof(JsonDocument)}.ParseValue(ref reader);");
-                        writer.Line($"return Deserialize{declaration.Name}({document}.RootElement);");
-                    }
-                    else
-                    {
-                        writer.Append($"throw new {typeof(NotImplementedException)}();");
-                    }
-                }
-            }
-        }
-
-        private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization)
-        {
-            writer.WriteMethod(XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(serialization));
         }
 
         public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)

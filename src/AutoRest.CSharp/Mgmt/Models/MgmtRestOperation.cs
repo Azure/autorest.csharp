@@ -43,7 +43,6 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public InputOperation Operation { get; }
 
-        public string OperationId => Operation.OperationId!;
         /// <summary>
         /// The name of this operation
         /// </summary>
@@ -195,18 +194,18 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (!IsLongRunningOperation || IsFakeLongRunningOperation)
                 return null;
 
-            // TODO: how to get extensions from InputOperation?
-            if (Operation.IsInterimLongRunningStateEnabled)
-            {
-                IEnumerable<InputType?> allSchemas = Operation.Responses.Select(r => r.BodyType);
-                ImmutableHashSet<InputType?> schemas = allSchemas.ToImmutableHashSet();
-                if (MgmtReturnType is null || allSchemas.Count() != Operation.Responses.Count() || schemas.Count() != 1)
-                    throw new NotSupportedException($"The interim state feature is only supported when all responses of the long running operation {OperationName} have the same shcema.");
+            // TODO: This is only used for storage RP, we need a better way to handle this.
+            //if (Operation.IsInterimLongRunningStateEnabled)
+            //{
+            //    IEnumerable<InputType?> allSchemas = Operation.Responses.Select(r => r.BodyType);
+            //    ImmutableHashSet<InputType?> schemas = allSchemas.ToImmutableHashSet();
+            //    if (MgmtReturnType is null || allSchemas.Count() != Operation.Responses.Count() || schemas.Count() != 1)
+            //        throw new NotSupportedException($"The interim state feature is only supported when all responses of the long running operation {OperationName} have the same shcema.");
 
-                var interimOperation = new LongRunningInterimOperation(MgmtReturnType, Resource, OperationName);
-                MgmtContext.Library.InterimOperations.Add(interimOperation);
-                return interimOperation;
-            }
+            //    var interimOperation = new LongRunningInterimOperation(MgmtReturnType, Resource, OperationName);
+            //    MgmtContext.Library.InterimOperations.Add(interimOperation);
+            //    return interimOperation;
+            //}
             return null;
         }
 
@@ -472,7 +471,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" : _propertyBagName;
 
             var propertyBagName = $"{clientName}{OperationName}";
-            if (Configuration.MgmtConfiguration.RenamePropertyBag.TryGetValue(OperationId, out string? modelName))
+            if (Configuration.MgmtConfiguration.RenamePropertyBag.TryGetValue(Operation.Name, out string? modelName))
             {
                 if (modelName.EndsWith("Options"))
                 {
@@ -480,7 +479,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
                 else
                 {
-                    throw new InvalidOperationException($"The property bag model name for {OperationId} should end with Options.");
+                    throw new InvalidOperationException($"The property bag model name for {Operation.Name} should end with Options.");
                 }
             }
 
@@ -493,7 +492,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 // we will throw exception in this case to prompt the user to rename the property bag model
                 if (IsDuplicatedPropertyBag(existingModels, (ModelTypeProvider)schemaObject))
                 {
-                    throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {OperationId}.");
+                    throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {Operation.Name}.");
                 }
             }
             MgmtContext.Library.PropertyBagModels.Add(schemaObject);

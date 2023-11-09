@@ -10,5 +10,5 @@ namespace AutoRest.CSharp.Common.Input.Examples
     /// </summary>
     /// <param name="Key">Type of a sample. E.g.: short version sample, all parameters sample, etc.</param>
     /// <param name="ClientParameters">Sample values for client-level parameters</param>
-    internal record InputClientExample(string Key, IReadOnlyList<InputParameterExample> ClientParameters);
+    internal record InputClientExample(string Key, IReadOnlyList<InputParameterExample> ClientParameters, string? OriginalFile = default);
 }

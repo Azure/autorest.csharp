@@ -84,12 +84,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 if (model is MgmtObjectType mot)
                 {
-                    ObjectModelItem mi = new ObjectModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                    ObjectModelItem mi = new ObjectModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.InputModel.Name, MgmtReport.Instance.TransformSection);
                     mi.Properties = mot.Properties.ToDictionary(p => p.Declaration.Name, p =>
                     {
-                        if (p.SchemaProperty != null)
+                        if (p.InputModelProperty != null)
                         {
-                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), mot.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), mot.GetFullSerializedName(p.InputModelProperty), MgmtReport.Instance.TransformSection);
                         }
                         else
                         {
@@ -101,25 +101,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else if (model is EnumType et)
                 {
-                    var schema = MgmtContext.Library.SchemaMap.First(map => map.Value == model).Key;
-                    var choices = schema switch
+                    var inputType = MgmtContext.Library.InputTypeMap.First(map => map.Value == model).Key;
+                    var choices = inputType switch
                     {
-                        ChoiceSchema sc => sc.Choices,
-                        SealedChoiceSchema scs => scs.Choices,
-                        _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + schema.GetType())
+                        InputEnumType sc => sc.AllowedValues,
+                        _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + inputType.GetType())
                     };
 
-                    EnumModelItem mi = new EnumModelItem(et.Declaration.Namespace, et.Declaration.Name, schema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                    EnumModelItem mi = new EnumModelItem(et.Declaration.Namespace, et.Declaration.Name, inputType.Name, MgmtReport.Instance.TransformSection);
                     mi.Values = et.Values.ToDictionary(v => v.Declaration.Name, v =>
                     {
-                        var found = choices.FirstOrDefault(c => c.Value == v.Value.Value?.ToString());
+                        var found = choices.FirstOrDefault(c => c.Value.ToString() == v.Value.Value?.ToString());
                         if (found == null)
                         {
                             var allValues = string.Join(",", choices.Select(c => c.Value ?? "<null>"));
                             AutoRestLogger.Warning($"Can't find matching enumvalue '{v.Value}' in '{allValues}'").Wait();
                             return new EnumValueItem(v.Declaration.Name, "<no matching enum value found>", MgmtReport.Instance.TransformSection);
                         }
-                        return new EnumValueItem(v.Declaration.Name, schema.GetFullSerializedName(found), MgmtReport.Instance.TransformSection);
+                        return new EnumValueItem(v.Declaration.Name, inputType.GetFullSerializedName(found), MgmtReport.Instance.TransformSection);
                     });
                     MgmtReport.Instance.EnumModelSection.Add(mi.FullName, mi);
                 }
@@ -157,12 +156,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 var name = model.Type.Name;
 
-                ObjectModelItem mi = new ObjectModelItem(model.Declaration.Namespace, model.Declaration.Name, model.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                ObjectModelItem mi = new ObjectModelItem(model.Declaration.Namespace, model.Declaration.Name, model.InputModel.Name, MgmtReport.Instance.TransformSection);
                 mi.Properties = model.Properties.ToDictionary(p => p.Declaration.Name, p =>
                 {
-                    if (p.SchemaProperty != null)
+                    if (p.InputModelProperty != null)
                     {
-                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), model.GetFullSerializedName(p.InputModelProperty), MgmtReport.Instance.TransformSection);
                     }
                     else
                     {
@@ -289,12 +288,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 
-            if (model is MgmtReferenceType mgmtReferenceType)
-            {
-                var extensions = mgmtReferenceType.InputModel.Extensions;
-                if (extensions != null && extensions.MgmtReferenceType)
-                    return;
-            }
+            // TODO: Handle this while regen resource manager
+            //if (model is MgmtReferenceType mgmtReferenceType)
+            //{
+            //    var extensions = mgmtReferenceType.InputModel.Extensions;
+            //    if (extensions != null && extensions.MgmtReferenceType)
+            //        return;
+            //}
 
             var serializerCodeWriter = new CodeWriter();
             serializeWriter.WriteSerialization(serializerCodeWriter, model);

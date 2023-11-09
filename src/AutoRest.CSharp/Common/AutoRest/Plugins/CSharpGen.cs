@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (Configuration.AzureArm)
             {
-                CodeModelTransformer.Transform();
+                CodeModelTransformer.Transform(codeModel);
                 var codeModelConverter = new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel));
                 var inputNamespace = codeModelConverter.CreateNamespace();
                 if (Configuration.MgmtConfiguration.MgmtDebug.SkipCodeGen)

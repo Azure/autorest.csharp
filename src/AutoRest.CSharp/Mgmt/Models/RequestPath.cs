@@ -14,6 +14,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
@@ -105,24 +106,16 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
 
     public static RequestPath FromOperation(InputOperation operation, InputClient inpuClient, TypeFactory typeFactory)
     {
-        foreach (var request in operation.Requests)
-        {
-            var httpRequest = request.Protocol.Http as HttpRequest;
-            if (httpRequest is null)
-                continue;
+        var inputParameters = operation.Parameters
+            .Where(p => p.Location is RequestLocation.Path or RequestLocation.Uri)
+            .ToDictionary(GetRequestParameterName);
 
-            var inputParameters = operation.Parameters
-                .Concat(request.Parameters)
-                .Where(rp => rp.In is HttpParameterIn.Path or HttpParameterIn.Uri)
-                .ToDictionary(GetRequestParameterName);
+        var segments = new List<Segment>();
+        var segmentIndex = 0;
+        CreateSegments(operation.Uri, inputParameters, segments, typeFactory, ref segmentIndex);
+        CreateSegments(operation.Path, inputParameters, segments, typeFactory, ref segmentIndex);
 
-            var segments = new List<Segment>();
-            var segmentIndex = 0;
-            CreateSegments(httpRequest.Uri, inputParameters, segments, typeFactory, ref segmentIndex);
-            CreateSegments(httpRequest.Path, inputParameters, segments, typeFactory, ref segmentIndex);
-
-            return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
-        }
+        return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
 
         throw new ErrorHelpers.ErrorException($"We didn't find request path for {inpuClient.Key}.{operation.CleanName}");
     }
@@ -438,7 +431,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
     }
 
-    private static void CreateSegments(string path, IReadOnlyDictionary<string, RequestParameter> requestParameters, ICollection<Segment> segments, TypeFactory typeFactory, ref int segmentIndex)
+    private static void CreateSegments(string path, IReadOnlyDictionary<string, InputParameter> requestParameters, ICollection<Segment> segments, TypeFactory typeFactory, ref int segmentIndex)
     {
         foreach ((ReadOnlySpan<char> span, bool isLiteral) in Utilities.StringExtensions.GetPathParts(path))
         {
@@ -474,22 +467,19 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
                     segmentIndex++;
 
                     // we explicitly skip the `endpoint` variable in the path
-                    if (IsEndpointParameter(inputParameter))
+                    if (inputParameter.IsEndpoint)
                     {
                         continue;
                     }
 
-                    var isNullable = inputParameter.IsNullable || !inputParameter.IsRequired;
-                    var type = typeFactory.CreateType(inputParameter.Schema, inputParameter.Extensions?.Format, isNullable);
-
+                    var type = typeFactory.CreateType(inputParameter.Type);
                     var reference = CreateReference(inputParameter, type, typeFactory);
                     var valueType = reference.Type;
 
                     //for now we only assume expand variables are in the key slot which will be an odd slot
                     CSharpType? expandableType = segmentIndex % 2 == 0 && valueType is { IsFrameworkType: false, Implementation: EnumType } ? valueType : null;
                     // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-                    var skipUriEncoding = inputParameter.Extensions?.SkipEncoding ?? false;
-                    segments.Add(new Segment(reference, !skipUriEncoding, expandableType: expandableType));
+                    segments.Add(new Segment(reference, !inputParameter.SkipUrlEncoding, expandableType: expandableType));
                 }
                 else
                 {
@@ -499,16 +489,16 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         }
     }
 
-    private static ReferenceOrConstant CreateReference(RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory)
+    private static ReferenceOrConstant CreateReference(InputParameter requestParameter, CSharpType type, TypeFactory typeFactory)
     {
-        if (requestParameter.Implementation != ImplementationLocation.Method)
+        if (requestParameter.Kind != InputOperationParameterKind.Method)
         {
             return new Reference(requestParameter.CSharpName(), type);
         }
 
-        if (requestParameter.Schema is ConstantSchema constant)
+        if (requestParameter.Kind == InputOperationParameterKind.Constant)
         {
-            return BuilderHelpers.ParseConstant(constant.Value.Value, typeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
+            return BuilderHelpers.ParseConstant(requestParameter.DefaultValue, typeFactory.CreateType(requestParameter.Type));
         }
 
         var groupedByParameter = requestParameter.GroupedBy;
@@ -517,19 +507,17 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             return new Reference(requestParameter.CSharpName(), type);
         }
 
-        var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
-        var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Language.Default.Name);
+        var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Type).Implementation;
+        // TODO: handle it later
+        //var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Name);
+        var property = groupModel.GetPropertyBySerializedName(requestParameter.NameInRequest ?? requestParameter.Name);
 
         return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
     }
 
-    private static bool IsEndpointParameter(RequestParameter requestParameter)
-        => requestParameter.Origin == "modelerfour:synthesized/host";
-
-    private static string GetRequestParameterName(RequestParameter requestParameter)
+    private static string GetRequestParameterName(InputParameter requestParameter)
     {
-        var language = requestParameter.Language.Default;
-        return language.SerializedName ?? language.Name;
+        return requestParameter.NameInRequest ?? requestParameter.Name;
     }
 
     public int Count => _segments.Count;

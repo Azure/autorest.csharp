@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Xml;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -33,13 +35,13 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         /// <param name="type"></param>
         /// <param name="includeCollectionInitialization"></param>
         /// <returns></returns>
-        public static CodeWriter AppendExampleValue(this CodeWriter writer, ExampleValue exampleValue, CSharpType? type = null, bool includeCollectionInitialization = true)
+        public static CodeWriter AppendExampleValue(this CodeWriter writer, InputExampleValue exampleValue, CSharpType? type = null, bool includeCollectionInitialization = true)
         {
             // get the type of this schema in the type factory if the type is not specified
             // get the type from TypeFactory cannot get the replaced types, therefore we need to put an argument in the signature as a hint in case this might happen in the replaced type case
-            type ??= MgmtContext.Context.Library.TypeFactory.CreateType(exampleValue.Schema, false);
+            type ??= MgmtContext.Context.Library.TypeFactory.CreateType(exampleValue.Type);
 
-            if (exampleValue.Schema != null && ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Schema, out CSharpType? replaceType) && replaceType != null)
+            if (exampleValue.Type != null && ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Type, out CSharpType? replaceType) && replaceType != null)
                 type = replaceType;
 
             return type!.IsFrameworkType ?
@@ -96,13 +98,13 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 return writer.Append(exampleParameterValue.Expression!);
         }
 
-        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeCollectionInitialization = true)
+        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue, bool includeCollectionInitialization = true)
         {
             if (TypeFactory.IsList(type))
-                return writer.AppendListValue(type, exampleValue, includeCollectionInitialization);
+                return writer.AppendListValue(type, exampleValue as InputExampleListValue, includeCollectionInitialization);
 
             if (TypeFactory.IsDictionary(type))
-                return writer.AppendDictionaryValue(type, exampleValue, includeCollectionInitialization);
+                return writer.AppendDictionaryValue(type, exampleValue as InputExampleObjectValue, includeCollectionInitialization);
 
             if (type.FrameworkType == typeof(BinaryData))
                 return writer.AppendBinaryData(exampleValue);
@@ -110,26 +112,27 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (type.FrameworkType == typeof(DataFactoryElement<>))
                 return writer.AppendDataFactoryElementValue(type, exampleValue);
 
-            if (exampleValue.Schema is ObjectSchema objectSchema)
-                return writer.AppendComplexFrameworkTypeValue(objectSchema, type.FrameworkType, exampleValue);
+            if (exampleValue.Type is InputModelType)
+                return writer.AppendComplexFrameworkTypeValue(type.FrameworkType, exampleValue);
 
-            return writer.AppendRawValue(exampleValue.RawValue, type.FrameworkType, exampleValue.Schema.Type);
+            return writer.AppendRawValue((exampleValue as InputExampleRawValue)?.RawValue, type.FrameworkType, exampleValue.Type);
         }
 
-        private static CodeWriter AppendDataFactoryElementValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
+        private static CodeWriter AppendDataFactoryElementValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue)
         {
             if (type.FrameworkType != typeof(DataFactoryElement<>))
                 throw new ArgumentException("DataFactoryElement<> is expected but got: " + type.ToString());
 
             const string DFE_OBJECT_SCHEMA_PREFIX = "DataFactoryElement-";
 
-            if (exampleValue.Schema is ObjectSchema os && os.Name.StartsWith(DFE_OBJECT_SCHEMA_PREFIX))
+            if (exampleValue.Type is InputModelType inputModel && inputModel.Name.StartsWith(DFE_OBJECT_SCHEMA_PREFIX))
             {
                 const string DFE_OBJECT_PROPERTY_TYPE = "type";
                 const string DFE_OBJECT_PROPERTY_VALUE = "value";
 
-                string dfeType = (string)exampleValue.Properties![DFE_OBJECT_PROPERTY_TYPE].RawValue!;
-                ExampleValue dfeValue = exampleValue.Properties![DFE_OBJECT_PROPERTY_VALUE]!;
+                var exampleObjectValue = exampleValue as InputExampleObjectValue;
+                string dfeType = (string)(exampleObjectValue?.Values![DFE_OBJECT_PROPERTY_TYPE] as InputExampleRawValue)?.RawValue!;
+                InputExampleValue dfeValue = exampleObjectValue?.Values![DFE_OBJECT_PROPERTY_VALUE]!;
                 string createMethodName = dfeType switch
                 {
                     "Expression" => nameof(DataFactoryElement<string>.FromExpression),
@@ -150,10 +153,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
+        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, InputExampleListValue? exampleValue, bool includeInitialization = true)
         {
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            var elements = exampleValue.Elements ?? Enumerable.Empty<ExampleValue>();
+            var elements = exampleValue?.Values ?? Enumerable.Empty<InputExampleValue>();
             // since this is a list, we take the first generic argument (and it should always has this first argument)
             var elementType = type.Arguments.First();
             var initialization = includeInitialization ? (FormattableString)$"new {elementType}[]" : (FormattableString)$"";
@@ -174,10 +177,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
+        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, InputExampleObjectValue? exampleValue, bool includeInitialization = true)
         {
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            var keyValues = exampleValue.Properties ?? new Dictionary<string, ExampleValue>();
+            var keyValues = exampleValue?.Values ?? new Dictionary<string, InputExampleValue>();
             // since this is a dictionary, we take the first generic argument as the key type
             // this is important because in our SDK, the key of a dictionary is not always a string. It could be a string-like type, for instance, a ResourceIdentifier
             var keyType = type.Arguments[0];
@@ -192,7 +195,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 {
                     // write key
                     writer.AppendRaw("[");
-                    writer.AppendExampleValue(new ExampleValue() { RawValue = key, Schema = new StringSchema() }, keyType);
+                    writer.AppendExampleValue(new InputExampleRawValue(InputPrimitiveType.String, key), keyType);
                     writer.AppendRaw("] = ");
                     writer.AppendExampleValue(value, valueType);
                     writer.LineRaw(", ");
@@ -201,18 +204,18 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendBinaryData(this CodeWriter writer, ExampleValue exampleValue)
+        private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleValue exampleValue)
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
-            string method = exampleValue.RawValue != null && exampleValue.RawValue is string ? "FromString" : "FromObjectAsJson";
+            string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue?.RawValue != null && exampleRawValue.RawValue is string ? "FromString" : "FromObjectAsJson";
             writer.Append($"{typeof(BinaryData)}.{method}(");
             writer.AppendAnonymousObject(exampleValue);
             return writer.AppendRaw(")");
         }
 
-        private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, ObjectSchema objectSchema, Type type, ExampleValue exampleValue)
+        private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, Type type, InputExampleValue exampleValue)
         {
-            if (exampleValue.Properties == null)
+            if (exampleValue is not InputExampleObjectValue exampleObjectValue)
             {
                 writer.AppendRaw(type.IsValueType ? "default" : "null");
                 return writer;
@@ -225,20 +228,20 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             foreach (var parameter in publicCtor.GetParameters())
             {
                 // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
-                var value = exampleValue.Properties[parameter.Name!];
+                var value = exampleObjectValue.Values[parameter.Name!];
                 writer.AppendExampleValue(value, parameter.ParameterType);
                 writer.AppendRaw(",");
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
             // assign values to the optional parameters
-            var optionalProperties = new Dictionary<string, ExampleValue>();
+            var optionalProperties = new Dictionary<string, InputExampleValue>();
             foreach ((var propertyName, var metadata) in propertyMetadataDict)
             {
                 if (metadata.Required)
                     continue;
                 // find if we have a value for this property
-                if (exampleValue.Properties.TryGetValue(propertyName, out var value))
+                if (exampleObjectValue.Values.TryGetValue(propertyName, out var value))
                 {
                     optionalProperties.Add(propertyName, value);
                 }
@@ -260,33 +263,33 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, ExampleValue exampleValue)
+        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, InputExampleValue exampleValue)
         {
             // check if this is simple type
-            if (exampleValue.RawValue != null)
+            if (exampleValue is InputExampleRawValue exampleRawValue)
             {
-                return writer.AppendRawValue(exampleValue.RawValue, exampleValue.RawValue.GetType());
+                return writer.AppendRawValue(exampleRawValue.RawValue, exampleRawValue.Type.GetType());
             }
             // check if this is an array
-            if (exampleValue.Elements != null && exampleValue.Elements.Any())
+            if (exampleValue is InputExampleListValue exampleListValue)
             {
-                return writer.AppendListValue(typeof(object), exampleValue);
+                return writer.AppendListValue(typeof(object), exampleListValue);
             }
             // fallback to complex object
-            if (exampleValue.Properties == null)
-            {
-                writer.LineRaw("null");
-            }
-            else
+            if (exampleValue is InputExampleObjectValue exampleObjectValue)
             {
                 using (writer.Scope($"new {typeof(Dictionary<string, object>)}()"))
                 {
-                    foreach ((var key, var value) in exampleValue.Properties)
+                    foreach ((var key, var value) in exampleObjectValue.Values)
                     {
                         writer.Append($"[{key:L}] = ");
                         writer.AppendAnonymousObject(value);
                     }
                 }
+            }
+            else
+            {
+                writer.LineRaw("null");
             }
 
             return writer;
@@ -321,21 +324,21 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, AllSchemaTypes? schemaType = null) => rawValue switch
+        private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null) => rawValue switch
         {
             // TODO -- the code model deserializer has an issue that it will deserialize all the primitive types into a string
             // https://github.com/Azure/autorest.csharp/issues/2377
-            string str => writer.AppendStringValue(type, str, schemaType), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
+            string str => writer.AppendStringValue(type, str, inputType), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
             null => writer.AppendRaw("null"),
             List<object?> list => writer.AppendRawList(list),
             Dictionary<object, object?> dict => writer.AppendRawDictionary(dict),
             _ => writer.AppendRaw(rawValue.ToString()!)
         };
 
-        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, AllSchemaTypes? schemaType) => type switch
+        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, InputType? inputType) => type switch
         {
-            _ when schemaType is AllSchemaTypes.Number or AllSchemaTypes.Integer => writer.AppendRaw(value),
-            _ when schemaType is AllSchemaTypes.Duration => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
+            _ when inputType == InputPrimitiveType.Int32 || inputType == InputPrimitiveType.Int64 || inputType == InputPrimitiveType.Float32 || inputType == InputPrimitiveType.Float64 || inputType == InputPrimitiveType.Float128 => writer.AppendRaw(value),
+            _ when inputType == InputPrimitiveType.DurationConstant || inputType == InputPrimitiveType.DurationISO8601 => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
             _ when _primitiveTypes.Contains(type) => writer.AppendRaw(value),
             _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
             _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
@@ -374,19 +377,19 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             typeof(IPAddress)
         };
 
-        private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
+        private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue)
         {
             switch (type.Implementation)
             {
                 case ObjectType objectType:
-                    return writer.AppendObjectTypeValue(objectType, exampleValue.Properties);
+                    return writer.AppendObjectTypeValue(objectType, (exampleValue as InputExampleObjectValue)?.Values);
                 case EnumType enumType:
-                    return writer.AppendEnumTypeValue(enumType, exampleValue.RawValue!);
+                    return writer.AppendEnumTypeValue(enumType, (exampleValue as InputExampleRawValue)?.RawValue!);
             }
             return writer.AppendRaw("default");
         }
 
-        private static ObjectType GetActualImplementation(ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
+        private static ObjectType GetActualImplementation(ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue> valueDict)
         {
             var discriminator = objectType.Discriminator;
             // check if this has a discriminator
@@ -394,12 +397,12 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 return objectType;
             var discriminatorPropertyName = discriminator.SerializedName;
             // get value of this in the valueDict and we should always has a discriminator value in the example
-            if (!valueDict.TryGetValue(discriminatorPropertyName, out var exampleValue) || exampleValue.RawValue == null)
+            if (!valueDict.TryGetValue(discriminatorPropertyName, out var exampleValue) || exampleValue is not InputExampleRawValue exampleRawValue)
             {
                 throw new InvalidOperationException($"Attempting to get the discriminator value for property `{discriminatorPropertyName}` on object type {objectType.Type.Name} but got none or non-primitive type");
             }
             // the discriminator should always be a primitive type
-            var actualDiscriminatorValue = exampleValue.RawValue;
+            var actualDiscriminatorValue = exampleRawValue.RawValue;
             var implementation = discriminator.Implementations.FirstOrDefault(info => info.Key.Equals(actualDiscriminatorValue));
             if (implementation == null)
                 throw new InvalidOperationException($"Cannot find an implementation corresponding to the discriminator value {actualDiscriminatorValue} for object model type {objectType.Type.Name}");
@@ -407,7 +410,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return (ObjectType)implementation.Type.Implementation;
         }
 
-        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue>? valueDict)
+        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue>? valueDict)
         {
             if (valueDict == null)
             {
@@ -428,28 +431,18 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             {
                 // try every property, convert them to variable name and see if there are some of them matching
                 var property = propertyDict[parameter.Name];
-                ExampleValue? exampleValue;
+                InputExampleValue? exampleValue;
                 if (!valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out exampleValue))
                 {
                     // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
                     if (TypeFactory.IsCollectionType(property.Declaration.Type))
                     {
-                        exampleValue = new ExampleValue()
-                        {
-                            Schema = property.SchemaProperty!.Schema,
-                        };
+                        exampleValue = new InputExampleRawValue(property.InputModelProperty!.Type, null);
                     }
                     else if (IsStringLikeType(property.Declaration.Type))
                     {
                         // this is a patch that some parameter is not marked as required, but in our generated code, it inherits from ResourceData, in which location is in the constructor and our code will recognize it as required
-                        exampleValue = new ExampleValue()
-                        {
-                            Schema = new StringSchema()
-                            {
-                                Type = AllSchemaTypes.String
-                            },
-                            RawValue = "placeholder",
-                        };
+                        exampleValue = new InputExampleRawValue(InputPrimitiveType.String, "placeholder");
                     }
                     else
                         throw new InvalidOperationException($"Example value for required property {property.InputModelProperty.SerializedName} in class {objectType.Type.Name} is not found");
@@ -459,7 +452,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
-            var propertiesToWrite = GetPropertiesToWrite(objectType, properties, valueDict);
+            var propertiesToWrite = GetPropertiesToWrite(properties, valueDict);
             if (propertiesToWrite.Count > 0) // only write the property initializers when there are properties to write
             {
                 using (writer.Scope($"", newLine: false))
@@ -476,9 +469,9 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)> GetPropertiesToWrite(ObjectType objectType, IEnumerable<ObjectTypeProperty> properties, Dictionary<string, ExampleValue> valueDict)
+        private static Dictionary<string, (CSharpType PropertyType, InputExampleValue ExampleValue)> GetPropertiesToWrite(IEnumerable<ObjectTypeProperty> properties, IReadOnlyDictionary<string, InputExampleValue> valueDict)
         {
-            var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)>();
+            var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, InputExampleValue ExampleValue)>();
             foreach (var property in properties)
             {
                 var propertyToDeal = property;
@@ -506,7 +499,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return propertiesToWrite;
         }
 
-        private static ExampleValue? UnwrapExampleValueFromSinglePropertySchema(ExampleValue exampleValue, FlattenedObjectTypeProperty flattenedProperty)
+        private static InputExampleValue? UnwrapExampleValueFromSinglePropertySchema(InputExampleValue exampleValue, FlattenedObjectTypeProperty flattenedProperty)
         {
             var hierarchyStack = flattenedProperty.BuildHierarchyStack();
             // reverse the stack because it is a stack, iterating it will start from the innerest property
@@ -514,7 +507,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             foreach (var property in hierarchyStack.Reverse().Skip(1))
             {
                 var inputModelProperty = property.InputModelProperty;
-                if (exampleValue.Properties == null || !exampleValue.Properties.TryGetValue(inputModelProperty!.SerializedName, out var inner))
+                if (exampleValue is not InputExampleObjectValue exampleObjectValue || !exampleObjectValue.Values.TryGetValue(inputModelProperty!.SerializedName, out var inner))
                     return null;
                 // get the value of this layer
                 exampleValue = inner;

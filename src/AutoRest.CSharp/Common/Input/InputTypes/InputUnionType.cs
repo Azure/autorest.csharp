@@ -8,7 +8,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsNullable) : InputType(Name, IsNullable)
+internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsNullable) : InputType(Name, IsNullable, null)
 {
     internal IReadOnlyList<InputEnumTypeValue> GetEnum()
     {

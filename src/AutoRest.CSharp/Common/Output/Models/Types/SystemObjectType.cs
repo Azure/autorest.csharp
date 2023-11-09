@@ -144,19 +144,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
                     new CSharpType(property.PropertyType, isNullable));
-                InputModelProperty prop = new InputModelProperty(property.Name, GetSerializedName(property.Name), $"Gets{GetPropertySummary(setter)} {property.Name}", null, null, IsRequired(property), property.IsReadOnly(), false, null);
 
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
                 //given that the generation will fail with the new types
-                if (TypeFactory.IsDictionary(property.PropertyType))
-                {
-                    prop.Schema = new DictionarySchema()
-                    {
-                        Type = AllSchemaTypes.Dictionary
-                    };
-                }
-
+                InputType inputType = TypeFactory.IsDictionary(property.PropertyType) ? new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean, false, null) : InputPrimitiveType.Boolean;
+                InputModelProperty prop = new InputModelProperty(property.Name, GetSerializedName(property.Name), $"Gets{GetPropertySummary(setter)} {property.Name}", inputType, null, IsRequired(property), property.IsReadOnly(), false, null);
                 yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Description, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
             }
         }

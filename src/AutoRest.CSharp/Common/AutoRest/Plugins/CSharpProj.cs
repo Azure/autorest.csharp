@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-            CodeModelTransformer.Transform();
+            CodeModelTransformer.Transform(codeModel);
             var codeModelConverter = new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel));
             var inputNamespace = codeModelConverter.CreateNamespace();
             var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);

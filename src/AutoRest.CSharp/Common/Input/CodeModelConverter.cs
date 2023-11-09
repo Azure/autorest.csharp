@@ -10,6 +10,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
+using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -24,6 +25,7 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
         private readonly Dictionary<InputOperation, Operation> _inputOperationToOperationMap;
+        private readonly ICollection<ExampleGroup>? _exampleGroups;
 
         public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
@@ -36,6 +38,7 @@ namespace AutoRest.CSharp.Common.Input
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
             _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
+            _exampleGroups = codeModel.TestModel?.MockTest.ExampleGroups;
         }
 
         public InputNamespace CreateNamespace()
@@ -53,9 +56,6 @@ namespace AutoRest.CSharp.Common.Input
                 Auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
 
-        public IReadOnlyDictionary<InputOperation, Operation> GetCurrentInputOperationToOperationMap()
-            => new Dictionary<InputOperation, Operation>(_inputOperationToOperationMap);
-
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
             => operationGroups.Select(CreateClient).ToList();
 
@@ -67,11 +67,29 @@ namespace AutoRest.CSharp.Common.Input
                 Description: operationGroup.Language.Default.Description,
                 Operations: CreateOperations(operationGroup.Operations).Values.ToArray(),
                 Parameters: parameters,
-                Array.Empty<InputClientExample>(),
+                CreateExamples(operationGroup.Language.Default.Name),
                 null)
             {
                 Key = operationGroup.Key,
             };
+        }
+
+        private IReadOnlyList<InputClientExample> CreateExamples(string operationGroupName)
+        {
+            var result = new List<InputClientExample>();
+            var group = _exampleGroups?.FirstOrDefault(g => g.OperationGroup.Language.Default.Name == operationGroupName);
+            if (group is null)
+            {
+                return result;
+            }
+            foreach (var example in group.Examples)
+            {
+                var parameters = example.AllParameters
+                    .Select(p => new InputParameterExample(CreateOperationParameter(p.Parameter), CreateExampleValue(p.ExampleValue)))
+                    .ToList();
+                result.Add(new InputClientExample(example.Name, parameters, example.OriginalFile));
+            }
+            return result;
         }
 
         public IReadOnlyDictionary<ServiceRequest, InputOperation> CreateOperations(IEnumerable<Operation> operations)
@@ -122,7 +140,8 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(serviceRequest, operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
-                Examples: Array.Empty<InputOperationExample>());
+                Examples: Array.Empty<InputOperationExample>(),
+                OriginalName: operation.Language.Default.SerializedName);
 
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;
@@ -138,7 +157,28 @@ namespace AutoRest.CSharp.Common.Input
             return requestParameters.Select(rp => _parametersCache[rp]()).ToList();
         }
 
-        public InputParameter CreateOperationParameter(RequestParameter input) => new(
+        private InputExampleValue CreateExampleValue(ExampleValue exampleValue)
+        {
+            var inputType = GetOrCreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, null, false);
+            if (exampleValue.RawValue != null)
+            {
+                return new InputExampleRawValue(inputType, exampleValue.RawValue);
+            }
+            if (exampleValue.Elements != null && exampleValue.Elements.Any())
+            {
+                return new InputExampleListValue(inputType, exampleValue.Elements.Select(CreateExampleValue).ToList());
+            }
+            if (exampleValue.Properties is null)
+            {
+                return InputExampleValue.Null(inputType);
+            }
+            else
+            {
+                return new InputExampleObjectValue(inputType, exampleValue.Properties.ToDictionary(p => p.Key, p => CreateExampleValue(p.Value)));
+            }
+        }
+
+        private InputParameter CreateOperationParameter(RequestParameter input) => new(
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
             Description: input.Language.Default.Description,
@@ -277,7 +317,9 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
-                IsNullable: false)
+                IsNullable: false,
+                IsEmpty: schema is EmptyObjectSchema,
+                OriginalName: schema.Language.Default.SerializedName)
             {
                 CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>(),
                 Serialization = GetSerialization(schema, usage)
@@ -419,9 +461,9 @@ namespace AutoRest.CSharp.Common.Input
                 XMsFormat.DataFactoryElementOfInt => new InputSystemType(type, InputPrimitiveType.Int32, property.IsNullable),
                 XMsFormat.DataFactoryElementOfDouble => new InputSystemType(type, InputPrimitiveType.Float64, property.IsNullable),
                 XMsFormat.DataFactoryElementOfBool => new InputSystemType(type, InputPrimitiveType.Boolean, property.IsNullable),
-                XMsFormat.DataFactoryElementOfListOfT => new InputSystemType(type, new InputListType(name, GetOrCreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false), false), property.IsNullable),
-                XMsFormat.DataFactoryElementOfListOfString => new InputSystemType(type, new InputListType(name, InputPrimitiveType.String, false), false),
-                XMsFormat.DataFactoryElementOfKeyValuePairs => new InputSystemType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false), property.IsNullable),
+                XMsFormat.DataFactoryElementOfListOfT => new InputSystemType(type, new InputListType(name, GetOrCreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false), false, property.Language.Default.SerializedName), property.IsNullable),
+                XMsFormat.DataFactoryElementOfListOfString => new InputSystemType(type, new InputListType(name, InputPrimitiveType.String, false, property.Language.Default.SerializedName), false),
+                XMsFormat.DataFactoryElementOfKeyValuePairs => new InputSystemType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false, property.Language.Default.SerializedName), property.IsNullable),
                 XMsFormat.DataFactoryElementOfDateTime => new InputSystemType(type, InputPrimitiveType.DateTime, property.IsNullable),
                 XMsFormat.DataFactoryElementOfDuration => new InputSystemType(type, InputPrimitiveType.Time, property.IsNullable),
                 XMsFormat.DataFactoryElementOfUri => new InputSystemType(type, InputPrimitiveType.Uri, property.IsNullable),
@@ -510,8 +552,8 @@ namespace AutoRest.CSharp.Common.Input
             ChoiceSchema choiceSchema => _enumsCache[choiceSchema],
             SealedChoiceSchema choiceSchema => _enumsCache[choiceSchema],
 
-            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), false),
-            DictionarySchema dictionary when !Configuration.AzureArm => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
+            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), false, array.Language.Default.SerializedName),
+            DictionarySchema dictionary when !Configuration.AzureArm => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false, dictionary.Language.Default.SerializedName),
             ObjectSchema objectSchema when !Configuration.AzureArm && modelsCache != null => modelsCache[objectSchema],
 
             AnySchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
@@ -558,7 +600,8 @@ namespace AutoRest.CSharp.Common.Input
                 EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
                 AllowedValues: choices.Select(CreateEnumValue).ToList(),
                 IsExtensible: isExtensible,
-                IsNullable: false
+                IsNullable: false,
+                OriginalName: schema.Language.Default.SerializedName
             )
             {
                 Serialization = GetSerialization(schema, usage)

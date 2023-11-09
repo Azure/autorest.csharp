@@ -120,11 +120,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            if (modelTypeMapping?.Usage is {} usage && usage.Contains(nameof(SchemaTypeUsage.Converter), StringComparer.OrdinalIgnoreCase))
-            {
-                serialization = serialization with {IncludeConverter = true};
-            }
-
             return serialization;
         }
 
@@ -401,7 +396,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
             var properties = SerializationBuilder.GetPropertySerializations(this, _typeFactory);
             var additionalProperties = CreateAdditionalPropertySerialization();
-            return new(Type, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, IncludeConverter);
+            return new(Type, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator);
         }
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertySerialization()

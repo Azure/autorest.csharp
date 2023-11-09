@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable) : InputType(Name, IsNullable) { }
+internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable, string? OriginalName = default) : InputType(Name, IsNullable, OriginalName) { }

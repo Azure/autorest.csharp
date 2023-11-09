@@ -27,19 +27,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-        public EnumType(InputEnumType enumType, TypeFactory typeFactory, BuildContext context)
+        public EnumType(InputEnumType enumType, TypeFactory typeFactory, BuildContext context, string? newName = default)
             : this(enumType, GetDefaultNamespace(enumType.Namespace, context), enumType.Accessibility ?? "public", typeFactory, context.SourceInputModel)
         {
         }
 
-        public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? newName = default)
             : base(Configuration.Generation1ConvenienceClient ? input.Namespace ?? defaultNamespace : defaultNamespace, sourceInputModel)
         {
             _allowedValues = input.AllowedValues;
             _typeFactory = typeFactory;
             _deprecated = input.Deprecated;
 
-            DefaultName = input.Name.ToCleanName();
+            DefaultName = (newName ?? input.Name).ToCleanName();
             DefaultAccessibility = input.Accessibility ?? defaultAccessibility;
 
             var isExtensible = input.IsExtensible;

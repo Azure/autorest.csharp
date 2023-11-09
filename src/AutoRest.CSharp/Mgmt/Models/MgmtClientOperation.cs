@@ -100,8 +100,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 <description>{operation.Operation.GetHttpPath()}</description>
 </item>
 <item>
-<term>Operation Id</term>
-<description>{operation.OperationId}</description>
+<term>Operation Name</term>
+<description>{operation.OperationName}</description>
 </item>").ToArray().Join(Environment.NewLine);
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}

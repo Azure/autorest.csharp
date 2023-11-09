@@ -43,7 +43,8 @@ namespace AutoRest.CSharp.Common.Input
                 InputPrimitiveType.String,
                 union.GetEnum(),
                 true,
-                union.IsNullable
+                union.IsNullable,
+                null
             );
 
             _replacements[union] = enumType;

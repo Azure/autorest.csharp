@@ -6,7 +6,6 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
@@ -26,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         private static InputModelType? FindObjectSchemaWithName(string name)
-            => MgmtContext.CodeModel.AllSchemas.OfType<ObjectSchema>().FirstOrDefault(objectSchema => objectSchema.GetOriginalName() == name);
+            => MgmtContext.InputNamespace.Models.OfType<InputModelType>().FirstOrDefault(inputModel => inputModel.GetOriginalName() == name);
 
         public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)] out InputModelType resourceType)
         {

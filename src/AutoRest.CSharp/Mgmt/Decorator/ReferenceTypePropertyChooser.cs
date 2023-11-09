@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         internal const string OptionalPropertiesName = "OptionalProperties";
 
-        private static ConcurrentDictionary<InputModelType, CSharpType?> _valueCache = new ConcurrentDictionary<InputModelType, CSharpType?>();
+        private static ConcurrentDictionary<InputType, CSharpType?> _valueCache = new ConcurrentDictionary<InputType, CSharpType?>();
 
         private static readonly Type _locationType = typeof(Azure.Core.AzureLocation);
         private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
@@ -32,9 +32,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return FindSimpleReplacements(originalType, frameworkType);
         }
 
-        public static bool TryGetCachedExactMatch(InputModelType inputModel, out CSharpType? result)
+        public static bool TryGetCachedExactMatch(InputType inputType, out CSharpType? result)
         {
-            return _valueCache.TryGetValue(inputModel, out result);
+            return _valueCache.TryGetValue(inputType, out result);
         }
 
         public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace)
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 MgmtReport.Instance.TransformSection.AddTransformLog(new TransformItem(TransformTypeName.NoPropertyTypeReplacement, typeToReplace.Type.Name), typeToReplace.Type.Name, "NoReplaceForType:" + typeToReplace.Type.Name);
             }
-            _valueCache.TryAdd(typeToReplace.ObjectSchema, null);
+            _valueCache.TryAdd(typeToReplace.InputModel, null);
             return null;
         }
 

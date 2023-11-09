@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -14,7 +15,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class MockTestCase : OperationExample
     {
-        public MockTestCase(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, ExampleModel example) : base(operationId, carrier, operation, example)
+        public MockTestCase(string operationName, MgmtTypeProvider carrier, MgmtClientOperation operation, InputClientExample example) : base(operationName, carrier, operation, example)
         {
         }
 
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 // if this parameter is a body parameter, we might have changed it to required, and we cannot tell if we have changed it on the codemodel right now. In this case we just fake an empty body.
                 if (parameter.DefaultValue == null && parameter.RequestLocation == RequestLocation.Body)
                 {
-                    exampleParameter ??= new() { ExampleValue = new() { Properties = new() } };
+                    exampleParameter ??= new(new InputParameter(), new InputExampleRawValue(InputPrimitiveType.Boolean, null));
                 }
                 if (exampleParameter == null)
                 {
@@ -158,16 +158,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         public bool IsPageable => Operation.IsPagingOperation;
 
-        protected override ExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, ExampleValue value)
+        protected override InputExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, InputExampleValue value)
         {
             if (serializedName == "subscriptionId")
             {
-                return new ExampleValue()
-                {
-                    Language = value.Language,
-                    Schema = value.Schema,
-                    RawValue = ReplaceValueForSubscriptionId((string)value.RawValue!)
-                };
+                return new InputExampleRawValue(value.Type, ReplaceValueForSubscriptionId((string)(value as InputExampleRawValue)?.RawValue!));
             }
 
             return value;

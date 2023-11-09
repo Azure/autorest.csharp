@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType(string Name, bool IsNullable)
+internal abstract record InputType(string Name, bool IsNullable, string? OriginalName = default)
 {
     public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
 }

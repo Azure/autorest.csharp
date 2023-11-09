@@ -20,9 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
         }
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.Extensions?.MgmtReferenceType is true;
-
-        public override bool IncludeConverter => (InputModel.Extensions?.MgmtPropertyReferenceType == true || InputModel.Extensions?.MgmtTypeReferenceType == true) && InputModel.Extensions?.MgmtReferenceType != true || base.IncludeConverter;
+        // TODO: handle extension later
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName);// && InputModel.Extensions?.MgmtReferenceType is true;
 
         protected override ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
@@ -45,9 +44,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             return propertyTypeToUse;
         }
 
-        protected override CSharpType? CreateInheritedType()
-        {
-            return InputModel.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
-        }
+        // TODO: handle this later
+        //protected override CSharpType? CreateInheritedType()
+        //{
+        //    return InputModel.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
+        //}
     }
 }

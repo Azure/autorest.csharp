@@ -14,13 +14,12 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Humanizer.Inflections;
-using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -82,6 +81,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private readonly Dictionary<InputClient, IEnumerable<string>> _operationGroupToRequestPaths = new();
 
+        private readonly Dictionary<object, string> _renamingMap = new();
+
         /// <summary>
         /// This is a collection that contains all the models from property bag, we use HashSet here to avoid potential duplicates
         /// </summary>
@@ -89,18 +90,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public TypeFactory TypeFactory { get; }
 
-        public MgmtOutputLibrary(InputNamespace inputNamespace, SchemaUsageProvider schemaUsages)
+        public MgmtOutputLibrary(InputNamespace inputNamespace)
         {
             _input = inputNamespace;
             TypeFactory = new TypeFactory(this);
             ApplyGlobalConfigurations();
 
             // these dictionaries are initialized right now and they would not change later
-            RawRequestPathToOperationSets = CategorizeOperationGroups(inputNamespace);
+            RawRequestPathToOperationSets = CategorizeOperationGroups();
             ResourceDataTypeNameToOperationSets = DecorateOperationSets();
             //_schemaToInputEnumMap = new CodeModelConverter(codeModel, schemaUsages).CreateEnums();
 
-            AllInputTypeMap = InitializeModels(inputNamespace);
+            AllInputTypeMap = InitializeModels();
 
             //var codeModelConverter = new CodeModelConverter(codeModel, schemaUsages);
             //_input = codeModelConverter.CreateNamespace();
@@ -136,27 +137,22 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ICollection<LongRunningInterimOperation> InterimOperations { get; } = new List<LongRunningInterimOperation>();
 
-        private IEnumerable<InputModelType> UpdateBodyParameters(InputNamespace inputNamespace)
+        private void UpdateBodyParameters()
         {
             Dictionary<InputType, int> usageCounts = new Dictionary<InputType, int>();
-            List<InputModelType> updatedModels = new List<InputModelType>();
+
+            // TODO: fill in modelsToUpdate and parametersToUpdate
+            // TODO: update the input types with modelsToUpdate, update the input operations with parametersToUpdate afterwards
+            //Dictionary<object, string> renamingMap = new Dictionary<object, string>();
 
             // run one pass to get the schema usage count
-            foreach (var operationGroup in inputNamespace.Clients)
+            foreach (var operationGroup in _input.Clients)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    foreach (var request in operation.Requests)
+                    foreach (var request in operation.Parameters)
                     {
-                        var httpRequest = request.Protocol.Http as HttpRequest;
-                        if (httpRequest is null)
-                            continue;
-
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body)?.Schema;
-                        if (bodyParam is null)
-                            continue;
-
-                        IncrementCount(usageCounts, bodyParam);
+                        IncrementCount(usageCounts, request.Type);
                     }
                     foreach (var response in operation.Responses)
                     {
@@ -170,88 +166,77 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // run second pass to rename the ones based on the schema usage count
-            foreach (var operationGroup in inputNamespace.Clients)
+            foreach (var operationGroup in _input.Clients)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    foreach (var request in operation.Requests)
+                    if (operation.HttpMethod!= RequestMethod.Patch && operation.HttpMethod != RequestMethod.Put && operation.HttpMethod != RequestMethod.Post)
+                        continue;
+
+                    var bodyParam = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body);
+                    if (bodyParam is null)
+                        continue;
+
+                    if (!usageCounts.TryGetValue(bodyParam.Type, out var count))
+                        continue;
+
+                    // get the request path and operation set
+                    RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup, TypeFactory);
+                    var operationSet = RawRequestPathToOperationSets[requestPath];
+                    if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
                     {
-                        if (request.Protocol.Http is not HttpRequest httpRequest)
-                            continue;
+                        // TODO: change parameter to required, put this logic outside of output library to the code model tranformer or afterwards
+                        // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
+                        BodyParameterNormalizer.MakeRequired(bodyParam, operation.HttpMethod);
+                    }
 
-                        if (httpRequest.Method != HttpMethod.Patch && httpRequest.Method != HttpMethod.Put && httpRequest.Method != HttpMethod.Post)
-                            continue;
-
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
-                        if (bodyParam is null)
-                            continue;
-
-                        if (!usageCounts.TryGetValue(bodyParam.Schema, out var count))
-                            continue;
-
-                        // get the request path and operation set
-                        RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup, TypeFactory);
-                        var operationSet = RawRequestPathToOperationSets[requestPath];
-                        if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
-                        {
-                            // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
-                            BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
-                        }
-
-                        if (count != 1)
-                        {
-                            //even if it has multiple uses for a model type we should normalize the param name just not change the type
-                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets, operation);
-                            continue;
-                        }
-                        if (resourceDataSchema is not null)
-                        {
-                            //TODO handle expandable request paths. We assume that this is fine since if all of the expanded
-                            //types use the same model they should have a common name, but since this case doesn't exist yet
-                            //we don't know for sure
-                            if (requestPath.IsExpandable)
-                                throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CleanName} : {requestPath}");
-                            var name = GetResourceName(resourceDataSchema.Name, operationSet, requestPath);
-                            updatedModels.Add(bodyParam.Schema);
-                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name, operation);
-                        }
-                        else
-                        {
-                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets, operation);
-                        }
+                    if (count != 1)
+                    {
+                        //even if it has multiple uses for a model type we should normalize the param name just not change the type
+                        BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataTypeNameToOperationSets, operation, _renamingMap);
+                        continue;
+                    }
+                    if (resourceDataSchema is not null)
+                    {
+                        //TODO handle expandable request paths. We assume that this is fine since if all of the expanded
+                        //types use the same model they should have a common name, but since this case doesn't exist yet
+                        //we don't know for sure
+                        if (requestPath.IsExpandable)
+                            throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CleanName} : {requestPath}");
+                        var name = GetResourceName(resourceDataSchema.Name, operationSet, requestPath);
+                        BodyParameterNormalizer.Update(operation.HttpMethod, bodyParam, name, operation, _renamingMap);
+                    }
+                    else
+                    {
+                        BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataTypeNameToOperationSets, operation, _renamingMap);
                     }
                 }
             }
 
             // run third pass to rename the corresponding parameters
-            foreach (var operationGroup in inputNamespace.Clients)
+            foreach (var operationGroup in _input.Clients)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    foreach (var request in operation.Requests)
+                    foreach (var param in operation.Parameters)
                     {
-                        foreach (var param in request.SignatureParameters)
-                        {
-                            if (param.In != HttpParameterIn.Body)
-                                continue;
+                        if (param.Location != RequestLocation.Body)
+                            continue;
 
-                            if (param.Schema is not ObjectSchema objectSchema)
-                                continue;
+                        if (param.Type is not InputModelType inputModel)
+                            continue;
 
-                            string oriName = param.Language.Default.Name;
-                            param.Language.Default.Name = NormalizeParamNames.GetNewName(param.Language.Default.Name, objectSchema.Name, ResourceDataSchemaNameToOperationSets);
+                        string oriName = param.Name;
+                        var newParamName = NormalizeParamNames.GetNewName(param.Name, inputModel.Name, ResourceDataTypeNameToOperationSets);
+                        _renamingMap.Add(param, newParamName);
 
-                            string fullSerializedName = operation.GetFullSerializedName(param);
-                            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                                fullSerializedName, "SetBodyParameterNameOnThirdPass", oriName, param.Language.Default.Name);
-
-                        }
+                        string fullSerializedName = operation.GetFullSerializedName(param);
+                        MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                            new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
+                            fullSerializedName, "SetBodyParameterNameOnThirdPass", oriName, newParamName);
                     }
                 }
             }
-
-            return updatedModels;
         }
 
         private static void IncrementCount(Dictionary<InputType, int> usageCounts, InputType inputType)
@@ -267,25 +252,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         // Initialize ResourceData, Models and resource manager common types
-        private Dictionary<InputType, TypeProvider> InitializeModels(InputNamespace inputNamespace)
+        private Dictionary<InputType, TypeProvider> InitializeModels()
         {
+            //this is where we construct renaming map
+            UpdateBodyParameters();
+
             // first, construct resource data models
-            foreach (var inputModel in inputNamespace.Models)
+            foreach (var inputModel in _input.Models)
             {
                 var model = ResourceDataTypeNameToOperationSets.ContainsKey(inputModel.Name) ? BuildResourceData(inputModel) : BuildModel(inputModel);
                 _schemaOrNameToModels.Add(inputModel, model);
             }
 
-            //this is where we update
-            var updatedModels = UpdateBodyParameters(inputNamespace);
-            foreach (var schema in updatedModels)
-            {
-                _schemaOrNameToModels[schema] = BuildModel(schema);
-            }
-
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
             var replacedTypes = new List<MgmtObjectType>();
-            foreach (var inputType in inputNamespace.Models)
+            foreach (var inputType in _input.Models)
             {
                 if (_schemaOrNameToModels.TryGetValue(inputType, out TypeProvider? type))
                 {
@@ -315,11 +296,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // third, update the entries in cache maps with the new model instances
             foreach (var replacedType in replacedTypes)
             {
-                var oriModel = _schemaOrNameToModels[replacedType.ObjectSchema];
-                _schemaOrNameToModels[replacedType.ObjectSchema] = replacedType;
+                var oriModel = _schemaOrNameToModels[replacedType.InputModel];
+                _schemaOrNameToModels[replacedType.InputModel] = replacedType;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                    new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, replacedType.ObjectSchema.GetFullSerializedName()),
-                    replacedType.ObjectSchema.GetFullSerializedName(),
+                    new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, replacedType.InputModel.Name),
+                    replacedType.InputModel.Name,
                     "ReplaceType", oriModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
 
@@ -337,7 +318,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 return legacyMethods;
             }
-            throw new Exception($"The {operation.OperationId} methods do not exist.");
+            throw new Exception($"The {operation.Name} methods do not exist.");
         }
 
         public MethodSignature GetRestClientPublicMethodSignature(InputOperation operation)
@@ -360,7 +341,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var operation = restClientMethods.Operation;
                     if (!operationMethods.TryAdd(operation, restClientMethods))
                     {
-                        throw new Exception($"An rest method '{operation.OperationId}' has already been added");
+                        throw new Exception($"An rest method '{operation.Name}' has already been added");
                     }
                 }
             }
@@ -627,14 +608,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            var resourceName = CalculateResourceName(candidateName, operationSet, requestPath, resourceType);
+            var resourceName = CalculateResourceName(candidateName, requestPath, resourceType);
 
             return isPartial ?
                 $"{resourceName}{MgmtContext.RPName}" :
                 resourceName;
         }
 
-        private string CalculateResourceName(string candidateName, OperationSet operationSet, RequestPath requestPath, ResourceTypeSegment resourceType)
+        private string CalculateResourceName(string candidateName, RequestPath requestPath, ResourceTypeSegment resourceType)
         {
             // find all the expanded request paths of resources that are assiociated with the same resource data model
             var resourcesWithSameResourceData = ResourceDataTypeNameToOperationSets[candidateName]
@@ -785,8 +766,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public override CSharpType ResolveEnum(InputEnumType enumType) => AllEnumMap[enumType].Type;
         public override CSharpType ResolveModel(InputModelType model) => _schemaOrNameToModels[model].Type;
 
-        public override CSharpType FindTypeForSchema(Schema schema) => FindTypeProviderForSchema(schema).Type;
-
         public override TypeProvider FindTypeProviderForInputType(InputType inputType)
         {
             TypeProvider? result;
@@ -827,19 +806,28 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(InputType inputType) => inputType switch
         {
-            InputEnumType enumType => new EnumType(enumType, TypeFactory, MgmtContext.Context),
-            InputModelType inputModel => inputType.Extensions != null && (inputType.Extensions.MgmtReferenceType || inputType.Extensions.MgmtPropertyReferenceType || inputType.Extensions.MgmtTypeReferenceType)
-                ? new MgmtReferenceType(inputModel, TypeFactory)
-                : new MgmtObjectType(inputModel, TypeFactory),
+            InputEnumType enumType => new EnumType(enumType, TypeFactory, MgmtContext.Context, GetNewName(inputType)),
+            // TODO: handle this when regen resource manager
+            // inputType.Extensions != null && (inputType.Extensions.MgmtReferenceType || inputType.Extensions.MgmtPropertyReferenceType || inputType.Extensions.MgmtTypeReferenceType) ? new MgmtReferenceType(inputModel, TypeFactory)
+            InputModelType inputModel => new MgmtObjectType(inputModel, TypeFactory, newName: GetNewName(inputType)),
             _ => throw new NotImplementedException($"Unhandled input type {inputType.GetType()} with name {inputType.Name}")
         };
 
-        private TypeProvider BuildResourceData(InputType inputType) => inputType switch
+        private string? GetNewName(object o) => _renamingMap.TryGetValue(o, out var name) ? name : null;
+
+        private TypeProvider BuildResourceData(InputType inputType)
         {
-            EmptyObjectSchema emptyObjectSchema => new EmptyResourceData(emptyObjectSchema, TypeFactory),
-            InputModelType inputModel => new ResourceData(inputModel, TypeFactory),
-            _ => throw new NotImplementedException()
-        };
+            if (inputType is InputModelType inputModel)
+            {
+                string? newName = GetNewName(inputType);
+                if (inputModel.IsEmpty)
+                {
+                    return new EmptyResourceData(inputModel, TypeFactory, newName);
+                }
+                return new ResourceData(inputModel, TypeFactory, newName);
+            }
+            throw new NotImplementedException();
+        }
 
         private Dictionary<string, HashSet<OperationSet>> DecorateOperationSets()
         {
@@ -853,15 +841,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // skip this step if the configuration is set to keep this plural
                     if (!Configuration.MgmtConfiguration.KeepPluralResourceData.Contains(typeName))
                     {
-                        resourceDataType.SerializedName ??= typeName;
-                        typeName = typeName.LastWordToSingular(false);
-                        resourceDataType.Language.Default.Name = typeName;
+                        _renamingMap.Add(resourceDataType, typeName.LastWordToSingular(false));
                     }
                     else
                     {
                         MgmtReport.Instance.TransformSection.AddTransformLog(
-                            new TransformItem(TransformTypeName.KeepPluralResourceData, schemaName),
-                            resourceDataSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {schemaName}");
+                            new TransformItem(TransformTypeName.KeepPluralResourceData, typeName),
+                            resourceDataType.GetFullSerializedName(), $"Keep ObjectName as Plural: {typeName}");
                     }
                     // if this operation set corresponds to a SDK resource, we add it to the map
                     if (!resourceDataSchemaNameToOperationSets.TryGetValue(typeName, out HashSet<OperationSet>? result))
@@ -876,10 +862,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return resourceDataSchemaNameToOperationSets;
         }
 
-        private Dictionary<string, OperationSet> CategorizeOperationGroups(InputNamespace inputNamespace)
+        private Dictionary<string, OperationSet> CategorizeOperationGroups()
         {
             var rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
-            foreach (var client in inputNamespace.Clients)
+            foreach (var client in _input.Clients)
             {
                 var requestPathList = new HashSet<string>();
                 _operationGroupToRequestPaths.Add(client, requestPathList);

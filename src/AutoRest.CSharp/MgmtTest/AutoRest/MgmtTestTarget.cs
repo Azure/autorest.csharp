@@ -36,12 +36,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var sourceCodeProject = new SourceCodeProject(sourceFolder, Configuration.SharedSourceFolders);
                 sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
                 InitializeMgmtContext(inputNamespace, codeModel, sourceInputModel);
-                library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+                library = new MgmtTestOutputLibrary();
                 project.AddDirectory(sourceFolder);
             }
             else
             {
-                library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+                library = new MgmtTestOutputLibrary();
             }
 
             if (Configuration.MgmtTestConfiguration.Mock)

@@ -744,7 +744,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     var propertyName = groupedByParameterType.Implementation switch
                     {
                         ModelTypeProvider modelType => modelType.Fields.GetFieldByParameterName(outputParameter.Name)?.Name,
-                        SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyForGroupedParameter(inputParameter.Name).Declaration.Name,
+                        // TODO: handle it later
+                        //SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyForGroupedParameter(inputParameter.Name).Declaration.Name,
+                        SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyBySerializedName(inputParameter.NameInRequest ?? inputParameter.Name).Declaration.Name,
                         _ => throw new InvalidOperationException($"Unexpected object type {groupedByParameterType.GetType()} for grouped parameter {outputParameter.Name}")
                     };
 

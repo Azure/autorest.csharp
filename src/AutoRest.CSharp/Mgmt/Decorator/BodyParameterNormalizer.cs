@@ -4,12 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -17,84 +17,83 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static readonly string Content = "Content";
 
-        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, Operation operation)
+        internal static void Update(RequestMethod method, InputParameter bodyParameter, string resourceName, InputOperation operation, Dictionary<object, string> renamingMap)
         {
-            switch (method)
+            if (method == RequestMethod.Put)
             {
-                case HttpMethod.Put:
-                    UpdateRequestParameter(bodyParameter, "content", $"{resourceName}CreateOrUpdateContent", operation);
-                    break;
-                case HttpMethod.Patch:
-                    UpdateRequestParameter(bodyParameter, "patch", $"{resourceName}Patch", operation);
-                    break;
-                default:
-                    throw new InvalidOperationException($"unhandled HttpMethod {method} for resource {resourceName}");
+                UpdateRequestParameter(bodyParameter, "content", $"{resourceName}CreateOrUpdateContent", operation, renamingMap);
+            }
+            else if (method == RequestMethod.Patch)
+            {
+                UpdateRequestParameter(bodyParameter, "patch", $"{resourceName}Patch", operation, renamingMap);
+            }
+            else
+            {
+                throw new InvalidOperationException($"unhandled HttpMethod {method} for resource {resourceName}");
             }
         }
 
-        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, Operation operation)
+        internal static void UpdateUsingReplacement(InputParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation, Dictionary<object, string> renamingMap)
         {
-            var schemaName = bodyParameter.Schema.Language.Default.Name;
-            if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
-                schemaName = schemaName.ReplaceLast("Parameters", Content);
-            if (schemaName.EndsWith("Request", StringComparison.Ordinal))
-                schemaName = schemaName.ReplaceLast("Request", Content);
-            if (schemaName.EndsWith("Options", StringComparison.Ordinal))
-                schemaName = schemaName.ReplaceLast("Options", Content);
-            if (schemaName.EndsWith("Info", StringComparison.Ordinal))
-                schemaName = schemaName.ReplaceLast("Info", Content);
-            if (schemaName.EndsWith("Input", StringComparison.Ordinal))
-                schemaName = schemaName.ReplaceLast("Input", Content);
-            var paramName = NormalizeParamNames.GetNewName(bodyParameter.Language.Default.Name, schemaName, resourceDataDictionary);
+            var typeName = bodyParameter.Type.Name;
+            if (typeName.EndsWith("Parameters", StringComparison.Ordinal))
+                typeName = typeName.ReplaceLast("Parameters", Content);
+            if (typeName.EndsWith("Request", StringComparison.Ordinal))
+                typeName = typeName.ReplaceLast("Request", Content);
+            if (typeName.EndsWith("Options", StringComparison.Ordinal))
+                typeName = typeName.ReplaceLast("Options", Content);
+            if (typeName.EndsWith("Info", StringComparison.Ordinal))
+                typeName = typeName.ReplaceLast("Info", Content);
+            if (typeName.EndsWith("Input", StringComparison.Ordinal))
+                typeName = typeName.ReplaceLast("Input", Content);
+            var paramNewName = NormalizeParamNames.GetNewName(bodyParameter.Name, typeName, resourceDataDictionary);
             // TODO -- we need to add a check here to see if this rename introduces parameter name collisions
-            UpdateRequestParameter(bodyParameter, paramName, schemaName, operation);
+            UpdateRequestParameter(bodyParameter, paramNewName, typeName, operation, renamingMap);
         }
 
-        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, Operation operation)
+        internal static void UpdateParameterNameOnly(InputParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation, Dictionary<object, string> parameterRenaming)
         {
-            string oriName = bodyParam.Language.Default.Name;
-            bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
-            bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
+            string oriName = bodyParam.Name;
+            var newName = NormalizeParamNames.GetNewName(bodyParam.Name, bodyParam.Type.Name, resourceDataDictionary);
+            parameterRenaming.Add(bodyParam, newName);
             string fullSerializedName = operation.GetFullSerializedName(bodyParam);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                fullSerializedName, "UpdateParameterNameOnly", oriName, bodyParam.Language.Default.Name);
+                fullSerializedName, "UpdateParameterNameOnly", oriName, newName);
         }
 
-        private static void UpdateRequestParameter(RequestParameter parameter, string parameterName, string schemaName, Operation operation)
+        private static void UpdateRequestParameter(InputParameter parameter, string parameterNewName, string typeNewName, InputOperation operation, Dictionary<object, string> renamingMap)
         {
-            string oriParameterName = parameter.Language.Default.Name;
-            parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
-            parameter.Language.Default.Name = parameterName;
+            string oriParameterName = parameter.Name;
+            renamingMap.Add(parameter, parameterNewName);
             string fullSerializedName = operation.GetFullSerializedName(parameter);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                fullSerializedName, "UpdateParameterName", oriParameterName, parameter.Language.Default.Name);
+                fullSerializedName, "UpdateParameterName", oriParameterName, parameterNewName);
 
-            string oriSchemaName = parameter.Schema.Language.Default.Name;
-            parameter.Schema.Language.Default.SerializedName ??= parameter.Schema.Language.Default.Name;
-            parameter.Schema.Language.Default.Name = schemaName;
-            fullSerializedName = parameter.Schema.GetFullSerializedName();
+            string oriSchemaName = parameter.Type.Name;
+            renamingMap.Add(parameter.Type, typeNewName);
+            fullSerializedName = parameter.Type.GetFullSerializedName();
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Schema.Language.Default.Name);
+                fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Type.Name);
 
-            if (parameter.Schema is ChoiceSchema ||
-                parameter.Schema is SealedChoiceSchema ||
-                parameter.Schema is ObjectSchema)
-                SchemaNameAndFormatUpdater.UpdateAcronym(parameter.Schema);
+            if (parameter.Type is InputEnumType ||
+                parameter.Type is InputModelType)
+                SchemaNameAndFormatUpdater.UpdateAcronym(parameter.Type, renamingMap);
         }
 
-        internal static void MakeRequired(RequestParameter bodyParameter, HttpMethod method)
+        internal static InputParameter? MakeRequired(InputParameter bodyParameter, RequestMethod method)
         {
             if (ShouldMarkRequired(method))
             {
-                bodyParameter.Required = true;
+                return bodyParameter with { IsRequired = true };
             }
+            return null;
         }
 
-        internal static bool ShouldMarkRequired(HttpMethod method) => MethodsRequiredBodyParameter.Contains(method);
+        private static bool ShouldMarkRequired(RequestMethod method) => MethodsRequiredBodyParameter.Contains(method);
 
-        private static readonly HttpMethod[] MethodsRequiredBodyParameter = new[] { HttpMethod.Put, HttpMethod.Patch };
+        private static readonly RequestMethod[] MethodsRequiredBodyParameter = new[] { RequestMethod.Put, RequestMethod.Patch };
     }
 }

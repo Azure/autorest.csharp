@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             // Write sample source file
             _writer.Line($"// Generated from example definition: {sample.OriginalFilepath}");
             // Write claimers
-            _writer.Line($"// this example is just showing the usage of \"{sample.OperationId}\" operation, for the dependent resources, they will have to be created separately.");
+            _writer.Line($"// this example is just showing the usage of \"{sample.OperationName}\" operation, for the dependent resources, they will have to be created separately.");
             _writer.Line();
 
             // Write the ArmClient and authentication

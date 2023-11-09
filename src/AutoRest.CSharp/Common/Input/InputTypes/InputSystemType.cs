@@ -5,5 +5,5 @@ using System;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputSystemType(Type Type, InputType ElementType, bool IsNullable) : InputType(Type.Name, IsNullable);
+    internal record InputSystemType(Type Type, InputType ElementType, bool IsNullable) : InputType(Type.Name, IsNullable, ElementType.OriginalName);
 }

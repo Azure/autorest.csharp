@@ -108,11 +108,24 @@ internal static class SchemaExtensions
         return objSchema.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String);
     }
 
+    internal static string GetOriginalName(this InputType inputType) => inputType.OriginalName ?? inputType.Name;
+
     internal static string GetOriginalName(this Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
 
     internal static string GetOriginalName(this RequestParameter parameter) => parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name;
 
     internal static string GetFullSerializedName(this Schema schema) => schema.GetOriginalName();
+
+    internal static string GetFullSerializedName(this InputType inputType) => inputType.GetOriginalName();
+
+    internal static string GetFullSerializedName(this InputType inputType, InputEnumTypeValue choice)
+    {
+        return inputType switch
+        {
+            InputEnumType c => c.GetFullSerializedName(choice),
+            _ => throw new InvalidOperationException($"Given input type is not InputEnumType: {inputType.Name}")
+        };
+    }
 
     internal static string GetFullSerializedName(this Schema schema, ChoiceValue choice)
     {
@@ -122,6 +135,13 @@ internal static class SchemaExtensions
             SealedChoiceSchema sc => sc.GetFullSerializedName(choice),
             _ => throw new InvalidOperationException("Given schema is not ChoiceSchema or SealedChoiceSchema: " + schema.Name)
         };
+    }
+
+    internal static string GetFullSerializedName(this InputEnumType inputEnum, InputEnumTypeValue choice)
+    {
+        if (!inputEnum.AllowedValues.Contains(choice))
+            throw new InvalidOperationException($"enum value {choice.Value} doesn't belong to enum {inputEnum.Name}");
+        return $"{inputEnum.Name}.{choice.Value}";
     }
 
     internal static string GetFullSerializedName(this ChoiceSchema schema, ChoiceValue choice)
@@ -148,5 +168,17 @@ internal static class SchemaExtensions
         else
             propertySerializedName = string.Join(".", property.FlattenedNames);
         return $"{schema.GetFullSerializedName()}.{propertySerializedName}";
+    }
+
+    internal static string GetFullSerializedName(this InputModelType inputModel, InputModelProperty property)
+    {
+        if (!inputModel.Properties.Contains(property))
+            throw new InvalidOperationException($"property {property.SerializedName} doesn't belong to object {inputModel.Name}");
+        string propertySerializedName;
+        if (property.FlattenedNames is null)
+            propertySerializedName = $"{property.SerializedName}";
+        else
+            propertySerializedName = string.Join(".", property.FlattenedNames);
+        return $"{inputModel.GetFullSerializedName()}.{propertySerializedName}";
     }
 }

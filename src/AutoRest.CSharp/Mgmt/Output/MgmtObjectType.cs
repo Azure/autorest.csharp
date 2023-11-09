@@ -6,11 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 
@@ -20,8 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private ObjectTypeProperty[]? _myProperties;
 
-        public MgmtObjectType(InputModelType inputModelType, TypeFactory typeFactory, string? name = default, string? nameSpace = default)
-            : base(inputModelType, typeFactory, MgmtContext.Context)
+        public MgmtObjectType(InputModelType inputModelType, TypeFactory typeFactory, string? name = default, string? nameSpace = default, string? newName = default)
+            : base(inputModelType, typeFactory, MgmtContext.Context, newName)
         {
             _typeFactory = typeFactory;
             _defaultName = name;
@@ -132,7 +130,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         if (match != null)
                         {
-                            string fullSerializedName = this.GetFullSerializedName(objectTypeProperty, i);
+                            string fullSerializedName = GetFullSerializedName(objectTypeProperty, i);
                             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                                 new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                                fullSerializedName,
@@ -152,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     if (match != null)
                     {
                         propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
-                        string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
+                        string fullSerializedName = GetFullSerializedName(objectTypeProperty);
                         MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                             new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                            fullSerializedName,
@@ -169,7 +167,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns>true if this type should NOT be replaced when used as property type; false elsewise</returns>
         public bool ShouldNotReplaceForProperty()
         {
-            return Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(this.Type.Name);
+            return Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(Type.Name);
         }
 
         private bool IsDescendantOf(SchemaObjectType schemaObjectType)
@@ -180,8 +178,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
             if (InputModel.DiscriminatorValue == "Unknown" &&
-                InputModel.Parents?.All.Count == 1 &&
-                InputModel.Parents.All.First().Equals(schemaObjectType.InputModel))
+                InputModel.DerivedModels.Count == 1 &&
+                InputModel.DerivedModels.First().Equals(schemaObjectType.InputModel))
             {
                 descendantTypes.Add(Type);
             }
@@ -242,7 +240,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
-                    string fullSerializedName = this.GetFullSerializedName();
+                    string fullSerializedName = GetFullSerializedName();
                     MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                         new TransformItem(TransformTypeName.ReplaceBaseType, fullSerializedName),
                         fullSerializedName,
@@ -255,7 +253,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties);
             if (supersetBaseType != null)
             {
-                string fullSerializedName = this.GetFullSerializedName();
+                string fullSerializedName = GetFullSerializedName();
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                     new TransformItem(TransformTypeName.ReplaceBaseType, fullSerializedName),
                     fullSerializedName,
@@ -271,20 +269,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return base.CreateInheritedType();
         }
 
-        public override ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
-        {
-            if (!TryGetPropertyForSchemaProperty(p => p.InputModelProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
-            {
-                if (Inherits?.Implementation is SystemObjectType)
-                {
-                    return GetPropertyBySerializedName(property.SerializedName, includeParents);
-                }
-                throw new InvalidOperationException($"Unable to find object property for schema property '{property.SerializedName}' in schema {DefaultName}");
-            }
-
-            return objectProperty;
-        }
-
         protected override FormattableString CreateDescription()
         {
             return $"{InputModel.Description}";
@@ -292,15 +276,15 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal string GetFullSerializedName()
         {
-            return this.ObjectSchema.GetFullSerializedName();
+            return InputModel.Name;
         }
 
-        internal string GetFullSerializedName(Property property)
+        internal string GetFullSerializedName(InputModelProperty property)
         {
-            var parentSchema = this.GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(property));
+            var parentSchema = GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(property));
             if (parentSchema == null)
             {
-                throw new InvalidOperationException($"Can't find parent object schema for property schema: '{this.Declaration.Name}.{property.CSharpName()}'");
+                throw new InvalidOperationException($"Can't find parent object schema for property schema: '{Declaration.Name}.{property.Type.Name}'");
             }
             else
             {
@@ -310,10 +294,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal string GetFullSerializedName(ObjectTypeProperty otProperty)
         {
-            if (otProperty.SchemaProperty != null)
-                return this.GetFullSerializedName(otProperty.SchemaProperty);
+            if (otProperty.InputModelProperty != null)
+                return GetFullSerializedName(otProperty.InputModelProperty);
             else
-                return $"{this.GetFullSerializedName()}.{otProperty.Declaration.Name}";
+                return $"{GetFullSerializedName()}.{otProperty.Declaration.Name}";
         }
 
         internal string GetFullSerializedName(ObjectTypeProperty otProperty, int argumentIndex)
@@ -321,7 +305,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (otProperty.ValueType.Arguments == null || otProperty.ValueType.Arguments.Length <= argumentIndex)
                 throw new ArgumentException("argumentIndex out of range");
             var argType = otProperty.ValueType.Arguments[argumentIndex];
-            return $"{this.GetFullSerializedName(otProperty)}.Arguments[{argumentIndex}-{argType.Namespace}.{argType.Name}]";
+            return $"{GetFullSerializedName(otProperty)}.Arguments[{argumentIndex}-{argType.Namespace}.{argType.Name}]";
         }
     }
 }

@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class EmptyResourceData : ResourceData
     {
-        public EmptyResourceData(InputModelType inputModel, TypeFactory typeFactory) : base(inputModel, typeFactory)
+        public EmptyResourceData(InputModelType inputModel, TypeFactory typeFactory, string? newName = null) : base(inputModel, typeFactory, newName)
         { }
 
         // we never need anything in the empty resource data

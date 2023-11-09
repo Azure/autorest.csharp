@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Enum.TryParse(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyName, null, isNullable)
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyName, null, isNullable, false, null)
             {
                 IsAnonymousModel = isAnonymousModel
             };

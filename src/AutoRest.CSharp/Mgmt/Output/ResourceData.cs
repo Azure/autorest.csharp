@@ -12,8 +12,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        public ResourceData(InputModelType inputType, TypeFactory typeFactory, string? name = default, string? nameSpace = default)
-            : base(inputType, typeFactory, name, nameSpace)
+        public ResourceData(InputModelType inputType, TypeFactory typeFactory, string? name = default, string? nameSpace = default, string? newName = default)
+            : base(inputType, typeFactory, name, nameSpace, newName)
         {
             _clientPrefix = inputType.Name;
         }

@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             elementType = elementType ?? throw new JsonException("List must have element type");
-            return new InputListType(name ?? "List", elementType, isNullable);
+            return new InputListType(name ?? "List", elementType, isNullable, null);
         }
     }
 }

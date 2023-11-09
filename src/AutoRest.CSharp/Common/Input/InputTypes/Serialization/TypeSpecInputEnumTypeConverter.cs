@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Common.Input
             }
             valueType = currentType ?? throw new JsonException("Enum value type must be set.");
 
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable, isNullable);
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable, isNullable, null);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);

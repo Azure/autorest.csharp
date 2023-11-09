@@ -542,7 +542,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WritePagingLROMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
+            throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operations: {string.Join(", ", clientOperation.Select(o => o.OperationName))}");
         }
 
         protected IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
@@ -831,12 +831,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMapping.Where(p => p.Parameter != KnownParameters.CancellationTokenParameter));
                 _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
 
-                if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationId))
+                if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationName))
                 {
                     _writer.AppendRaw("skipApiVersionOverride: true,");
                 }
 
-                if (Configuration.MgmtConfiguration.OperationsToLroApiVersionOverride.TryGetValue(operation.OperationId, out var apiVersionOverrideValue))
+                if (Configuration.MgmtConfiguration.OperationsToLroApiVersionOverride.TryGetValue(operation.OperationName, out var apiVersionOverrideValue))
                 {
                     _writer.Append($"apiVersionOverrideValue: {apiVersionOverrideValue:L}");
                 }

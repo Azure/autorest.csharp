@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Common.Input
             keyType = keyType ?? throw new JsonException("Dictionary must have key type");
             valueType = valueType ?? throw new JsonException("Dictionary must have value type");
 
-            return new InputDictionaryType(name ?? "Dictionary", keyType, valueType, isNullable);
+            return new InputDictionaryType(name ?? "Dictionary", keyType, valueType, isNullable, null);
         }
     }
 }

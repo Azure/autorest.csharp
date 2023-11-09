@@ -14,12 +14,12 @@ namespace AutoRest.CSharp.Mgmt.Report
     internal class OperationItem : TransformableItem
     {
         public OperationItem(MgmtRestOperation operation, TransformSection transformSection)
-            : base(operation.OperationId, transformSection)
+            : base(operation.Operation.Name, transformSection)
         {
-            this.OperationId = operation.OperationId;
-            this.IsLongRunningOperation = operation.IsLongRunningOperation;
-            this.IsPageableOperation = operation.IsPagingOperation;
-            this.Resource = operation.Resource?.ResourceName;
+            OperationName = operation.Operation.Name;
+            IsLongRunningOperation = operation.IsLongRunningOperation;
+            IsPageableOperation = operation.IsPagingOperation;
+            Resource = operation.Resource?.ResourceName;
 
             var bodyParam = operation.Parameters.FirstOrDefault(p => p.RequestLocation == Common.Input.RequestLocation.Body);
             if (bodyParam != null)
@@ -29,24 +29,24 @@ namespace AutoRest.CSharp.Mgmt.Report
                 if (bodyRequestParam == null)
                 {
                     paramFullSerializedName = $"{operation.Operation.GetFullSerializedName()}.{bodyParam.Name}";
-                    string warning = $"Can't find corresponding RequestParameter for Parameter {operation.OperationName}.{bodyParam.Name}. OperationId = {operation.OperationId}. Try to use Parameter.Name to parse fullSerializedName as {paramFullSerializedName}";
+                    string warning = $"Can't find corresponding RequestParameter for Parameter {operation.OperationName}.{bodyParam.Name}. OperationName = {operation.Operation.Name}. Try to use Parameter.Name to parse fullSerializedName as {paramFullSerializedName}";
                     AutoRestLogger.Warning(warning).Wait();
                 }
                 else if (bodyRequestParam.CSharpName() != bodyParam.Name)
                 {
                     paramFullSerializedName = operation.Operation.GetFullSerializedName(bodyRequestParam);
-                    string warning = $"Name mismatch between Parameter and RequestParameter. OperationId = {operation.OperationId}. Parameter.Name = {bodyParam.Name}, RequestParameter.CSharpName = {bodyRequestParam.CSharpName()}. Try to use RequestParameter to parse fullSerializedName as {paramFullSerializedName}";
+                    string warning = $"Name mismatch between Parameter and RequestParameter. OperationName = {operation.Operation.Name}. Parameter.Name = {bodyParam.Name}, RequestParameter.CSharpName = {bodyRequestParam.CSharpName()}. Try to use RequestParameter to parse fullSerializedName as {paramFullSerializedName}";
                     AutoRestLogger.Warning(warning).Wait();
                 }
                 else
                 {
                     paramFullSerializedName = operation.Operation.GetFullSerializedName(bodyRequestParam);
                 }
-                this.BodyParameter = new ParameterItem(bodyParam, paramFullSerializedName, transformSection);
+                BodyParameter = new ParameterItem(bodyParam, paramFullSerializedName, transformSection);
             }
         }
 
-        public string OperationId { get; set; }
+        public string OperationName { get; set; }
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitNull)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ParameterItem? BodyParameter { get; set; }
