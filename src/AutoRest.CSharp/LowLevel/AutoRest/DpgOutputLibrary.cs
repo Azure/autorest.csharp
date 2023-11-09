@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
         private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
         private readonly IReadOnlyList<TypeProvider> _privateAllModels;
+        private readonly bool _isTspInput;
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
@@ -46,12 +47,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             allModels.AddRange(_models.Values);
             _privateAllModels = allModels;
 
-            AllModels = isTspInput ? allModels : Array.Empty<TypeProvider>();
+            _isTspInput = isTspInput;
+            AllModels = _isTspInput ? allModels : Array.Empty<TypeProvider>();
             RestClients = CreateClients(topLevelClientInfos, clientOptions, rootNamespace, TypeFactory, libraryName, sourceInputModel);
             ClientOptions = clientOptions;
             ModelFactory = ModelFactoryTypeProvider.TryCreate(AllModels, sourceInputModel);
             AspDotNetExtension = new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, sourceInputModel);
-            AccessOverriddenModels = isTspInput
+            AccessOverriddenModels = _isTspInput
                 ? _enums.Where(e => e.Key.Accessibility is not null).Select(e => e.Value.Declaration.Name)
                     .Concat(_models.Where(m => m.Key.Accessibility is not null).Select(e => e.Value.Declaration.Name))
                     .ToList()
@@ -60,7 +62,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
-            if (enumType.Usage == InputModelTypeUsage.None)
+            // [TODO] In swagger-based DPG, ambiguity between protocol and convenience method signatures check is dependent on `ResolveEnum` returning EnumValueType instead of enum itself
+            if (!_isTspInput || enumType.Usage == InputModelTypeUsage.None)
             {
                 return TypeFactory.CreateType(enumType.EnumValueType);
             }
