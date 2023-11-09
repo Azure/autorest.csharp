@@ -10,6 +10,14 @@ $root = (Resolve-Path "$PSScriptRoot/../../..").Path.Replace('\', '/')
 . "$root/eng/scripts/preview/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
-Invoke-LoggedCommand "git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code -- $Exceptions"
+$diffExcludes = @(
+    'package.json'
+    'package-lock.json'
+    'src/TypeSpec.Extension/Emitter.Csharp/package.json'
+) | ForEach-Object { "`":(exclude)$_`"" } | Join-String -Separator ' '
 
-exit $LastExitCode
+Invoke-LoggedCommand "git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code -- $diffExcludes" -IgnoreExitCode
+
+if($LastExitCode -ne 0) {
+    throw "Changes detected"
+}

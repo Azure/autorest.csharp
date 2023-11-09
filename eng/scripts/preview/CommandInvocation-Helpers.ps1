@@ -23,7 +23,9 @@ function Invoke-LoggedCommand {
         [ValidateScript({ Test-Path $_ -PathType Container })]
         [string] $ExecutePath,
 
-        [switch] $GroupOutput
+        [switch] $GroupOutput,
+
+        [switch] $IgnoreExitCode
     )
 
     $pipelineBuild = !!$env:TF_BUILD
@@ -48,16 +50,19 @@ function Invoke-LoggedCommand {
         Write-Host "##[endgroup]"
       }
 
-      if($LastExitCode -ne 0)
+      if($IgnoreExitCode) {
+        Write-Host "Command completed ($duration)`n"
+      }
+      elseif($LastExitCode -ne 0)
       {
           if($pipelineBuild) {
-              Write-Error "##[error]Command failed to execute ($duration): $Command`n"
+              Write-Error "##[error]Command completed with exit code $LastExitCode ($duration): $Command`n"
           } else {
-              Write-Error "Command failed to execute ($duration): $Command`n"
+              Write-Error "Command completed with exit code $LastExitCode ($duration): $Command`n"
           }
       }
       else {
-          Write-Host "Command succeeded ($duration)`n"
+          Write-Host "Command completed ($duration)`n"
       }
     }
     finally {
