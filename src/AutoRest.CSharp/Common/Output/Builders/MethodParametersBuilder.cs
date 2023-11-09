@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _convenienceParameters = new List<Parameter>();
             _arguments = new Dictionary<Parameter, ValueExpression>();
             _conversions = new Dictionary<Parameter, MethodBodyStatement>();
-            _keepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
+            _keepClientDefaultValue = operation.KeepClientDefaultValue || Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
             _unsortedParameters = operation.Parameters
                 .Where(rp => rp.Location != RequestLocation.Header || !IgnoredRequestHeader.Contains(rp.NameInRequest))
                 .ToArray();
@@ -646,7 +646,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private IEnumerable<InputParameter> GetSortedParameters()
         {
-            var keepCurrentDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(_operation.Name);
             var uriOrPathParameters = new Dictionary<string, InputParameter>();
             var requiredRequestParameters = new List<InputParameter>();
             var optionalRequestParameters = new List<InputParameter>();
@@ -673,7 +672,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     case { IsRequired: true, DefaultValue: null }:
                         requiredRequestParameters.Add(operationParameter);
                         break;
-                    case { IsRequired: true } when !keepCurrentDefaultValue:
+                    case { IsRequired: true } when !_keepClientDefaultValue:
                         requiredRequestParameters.Add(operationParameter);
                         break;
                     default:
