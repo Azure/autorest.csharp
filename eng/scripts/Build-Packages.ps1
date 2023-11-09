@@ -2,42 +2,35 @@
 
 param(
     [string] $BuildNumber,
-    [string] $PublishTarget,
-    [string] $BuildPrereleaseVersion,
-    [string] $Output
+    [string] $Output,
+    [switch] $Prerelease,
+    [switch] $PublishInternal
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
-$root = (Resolve-Path "$PSScriptRoot/../../..").Path.Replace('\', '/')
+$root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
 . "$root/eng/scripts/preview/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
-[bool]$BuildPrereleaseVersion = $BuildPrereleaseVersion -ieq "true"
-
-$artifacts = "$root/artifacts"
-$output = $Output ? $Output : "$artifacts/ci-build"
+$artifactsPath = "$root/artifacts"
+$outputPath = $Output ? $Output : "$artifactsPath/ci-build"
 
 # try to remove the artifacts folder if it exists
-if (Test-Path "$artifacts") {
-    Remove-Item -Recurse -Force "$artifacts"
-}
-
-# try to remove the artifacts folder if it exists
-if (Test-Path "$output") {
-    Remove-Item -Recurse -Force "$output"
+if (Test-Path $artifactsPath) {
+    Remove-Item -Recurse -Force $artifactsPath
 }
 
 # create the output folders
-$artifacts = New-Item -ItemType Directory -Force -Path "$artifacts" | Select-Object -ExpandProperty FullName
-$output = New-Item -ItemType Directory -Force -Path "$output" | Select-Object -ExpandProperty FullName
+$artifactsPath = New-Item -ItemType Directory -Force -Path $artifactsPath | Select-Object -ExpandProperty FullName
+$outputPath = New-Item -ItemType Directory -Force -Path $outputPath | Select-Object -ExpandProperty FullName
 
 $generatorVersion = node -p -e "require('$root/src/AutoRest.CSharp/package.json').version"
 $emitterVersion = node -p -e "require('$root/src/TypeSpec.Extension/Emitter.Csharp/package.json').version"
 
 if ($BuildNumber) {
     # set package versions
-    $versionTag = $BuildPrereleaseVersion ? "-alpha" : "-beta"
+    $versionTag = $Prerelease ? "-alpha" : "-beta"
 
     # TODO: Remove 'x' suffix before merge    
     $generatorVersion = "$generatorVersion$versionTag.$BuildNumber.x"
@@ -57,7 +50,7 @@ Write-Host "Working in $root"
 Push-Location $root
 try
 {
-    Invoke-LoggedCommand "dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj $versionOption -o $output/packages -warnaserror -c Release" -GroupOutput
+    Invoke-LoggedCommand "dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj $versionOption -o $outputPath/packages -warnaserror -c Release" -GroupOutput
 }
 finally
 {
@@ -65,7 +58,7 @@ finally
 }
 
 # pack the c# npm package
-Push-Location "$artifacts/bin/AutoRest.CSharp/Release/net6.0/"
+Push-Location "$artifactsPath/bin/AutoRest.CSharp/Release/net6.0/"
 try {
     Write-Host "Working in $PWD"
     if ($BuildNumber) {
@@ -73,7 +66,7 @@ try {
     }
 
     $file = Invoke-LoggedCommand "npm pack -q"
-    Copy-Item $file -Destination "$output/packages"
+    Copy-Item $file -Destination "$outputPath/packages"
 }
 finally
 {
@@ -99,25 +92,29 @@ try {
 
     #pack the emitter
     $file = Invoke-LoggedCommand "npm pack -q"
-    Copy-Item $file -Destination "$output/packages"
+    Copy-Item $file -Destination "$outputPath/packages"
 }
 finally
 {
     Pop-Location
 }
 
-$feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest@local/npm/registry"
+if ($PublishInternal) {
+    $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry"
 
-$overrides = @{
-    "@autorest/csharp" = "$feedUrl/@autorest/csharp/-/csharp-$generatorVersion.tgz"
-    "@azure-tools/typespec-csharp" = "$feedUrl/@azure-tools/typespec-csharp/-/typespec-csharp-$emitterVersion.tgz"
+    $overrides = @{
+        "@autorest/csharp" = "$feedUrl/@autorest/csharp/-/csharp-$generatorVersion.tgz"
+        "@azure-tools/typespec-csharp" = "$feedUrl/@azure-tools/typespec-csharp/-/typespec-csharp-$emitterVersion.tgz"
+    }
+} else {
+    $overrides = @{}
 }
 
-$overrides | ConvertTo-Json | Set-Content "$output/overrides.json"
+$overrides | ConvertTo-Json | Set-Content "$outputPath/overrides.json"
 
 $packageMatrix = [ordered]@{
     "generator" = $generatorVersion
     "emitter" = $emitterVersion
 }
 
-$packageMatrix | ConvertTo-Json | Set-Content "$output/package-versions.json"
+$packageMatrix | ConvertTo-Json | Set-Content "$outputPath/package-versions.json"
