@@ -21,6 +21,11 @@ namespace MgmtAcronymMapping.Models
 
         void IJsonModel<VirtualMachineScaleSetNetworkProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<VirtualMachineScaleSetNetworkProfile>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetNetworkProfile>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(HealthProbe))
             {

@@ -21,6 +21,11 @@ namespace MgmtScopeResource.Models
 
         void IJsonModel<Marketplace>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<Marketplace>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Marketplace>)} interface");
+            }
+
             writer.WriteStartObject();
             if (options.Format == ModelReaderWriterFormat.Json)
             {

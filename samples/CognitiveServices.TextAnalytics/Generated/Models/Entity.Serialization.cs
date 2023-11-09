@@ -20,6 +20,11 @@ namespace CognitiveServices.TextAnalytics.Models
 
         void IJsonModel<Entity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<Entity>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Entity>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("text"u8);
             writer.WriteStringValue(Text);

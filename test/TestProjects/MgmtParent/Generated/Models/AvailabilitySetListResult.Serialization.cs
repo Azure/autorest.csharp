@@ -21,6 +21,11 @@ namespace MgmtParent.Models
 
         void IJsonModel<AvailabilitySetListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<AvailabilitySetListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AvailabilitySetListResult>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStartArray();

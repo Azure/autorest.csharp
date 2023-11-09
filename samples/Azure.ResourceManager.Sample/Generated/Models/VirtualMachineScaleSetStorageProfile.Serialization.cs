@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<VirtualMachineScaleSetStorageProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<VirtualMachineScaleSetStorageProfile>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetStorageProfile>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ImageReference))
             {

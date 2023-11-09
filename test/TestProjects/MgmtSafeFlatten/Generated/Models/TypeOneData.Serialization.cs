@@ -23,6 +23,11 @@ namespace MgmtSafeFlatten
 
         void IJsonModel<TypeOneData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<TypeOneData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TypeOneData>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(MyType))
             {

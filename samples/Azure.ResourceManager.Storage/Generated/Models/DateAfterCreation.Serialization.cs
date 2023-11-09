@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         void IJsonModel<DateAfterCreation>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DateAfterCreation>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DateAfterCreation>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("daysAfterCreationGreaterThan"u8);
             writer.WriteNumberValue(DaysAfterCreationGreaterThan);

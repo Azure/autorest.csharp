@@ -21,6 +21,11 @@ namespace _Type.Property.Optionality.Models
 
         void IJsonModel<CollectionsByteProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<CollectionsByteProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CollectionsByteProperty>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Property))
             {

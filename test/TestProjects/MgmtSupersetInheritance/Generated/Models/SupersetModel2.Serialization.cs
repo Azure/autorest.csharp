@@ -20,6 +20,11 @@ namespace MgmtSupersetInheritance.Models
 
         void IJsonModel<SupersetModel2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SupersetModel2>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SupersetModel2>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ID))
             {

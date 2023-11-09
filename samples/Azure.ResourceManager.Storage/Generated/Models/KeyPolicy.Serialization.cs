@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         void IJsonModel<KeyPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<KeyPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<KeyPolicy>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("keyExpirationPeriodInDays"u8);
             writer.WriteNumberValue(KeyExpirationPeriodInDays);

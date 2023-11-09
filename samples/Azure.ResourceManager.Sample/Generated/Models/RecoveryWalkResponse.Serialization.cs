@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<RecoveryWalkResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<RecoveryWalkResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RecoveryWalkResponse>)} interface");
+            }
+
             writer.WriteStartObject();
             if (options.Format == ModelReaderWriterFormat.Json)
             {

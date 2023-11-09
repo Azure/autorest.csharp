@@ -20,6 +20,11 @@ namespace httpInfrastructure.Models
 
         void IJsonModel<B>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<B>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<B>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(TextStatusCode))
             {

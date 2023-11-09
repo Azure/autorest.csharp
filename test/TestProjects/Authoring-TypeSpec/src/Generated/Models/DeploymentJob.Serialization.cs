@@ -21,6 +21,11 @@ namespace AuthoringTypeSpec.Models
 
         void IJsonModel<DeploymentJob>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DeploymentJob>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeploymentJob>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("jobId"u8);
             writer.WriteStringValue(JobId);

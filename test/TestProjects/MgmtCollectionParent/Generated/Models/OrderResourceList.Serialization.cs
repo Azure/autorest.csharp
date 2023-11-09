@@ -21,6 +21,11 @@ namespace MgmtCollectionParent.Models
 
         void IJsonModel<OrderResourceList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<OrderResourceList>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OrderResourceList>)} interface");
+            }
+
             writer.WriteStartObject();
             if (options.Format == ModelReaderWriterFormat.Json)
             {

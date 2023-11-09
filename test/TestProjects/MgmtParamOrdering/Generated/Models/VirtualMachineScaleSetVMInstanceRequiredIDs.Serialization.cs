@@ -20,6 +20,11 @@ namespace MgmtParamOrdering.Models
 
         void IJsonModel<VirtualMachineScaleSetVMInstanceRequiredIDs>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<VirtualMachineScaleSetVMInstanceRequiredIDs>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetVMInstanceRequiredIDs>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("instanceIds"u8);
             writer.WriteStartArray();

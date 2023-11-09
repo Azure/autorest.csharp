@@ -21,6 +21,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         void IJsonModel<BlobServiceItems>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<BlobServiceItems>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BlobServiceItems>)} interface");
+            }
+
             writer.WriteStartObject();
             if (options.Format == ModelReaderWriterFormat.Json)
             {

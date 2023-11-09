@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<EdgeNGramTokenFilterV2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<EdgeNGramTokenFilterV2>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EdgeNGramTokenFilterV2>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(MinGram))
             {

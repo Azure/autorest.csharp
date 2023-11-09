@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<SshPublicKeyGenerateKeyPairResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SshPublicKeyGenerateKeyPairResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SshPublicKeyGenerateKeyPairResult>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("privateKey"u8);
             writer.WriteStringValue(PrivateKey);

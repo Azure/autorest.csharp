@@ -45,6 +45,11 @@ namespace TypeSchemaMapping.Models
 
         void IJsonModel<ModelWithCustomUsage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ModelWithCustomUsage>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithCustomUsage>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
             {
@@ -145,7 +150,7 @@ namespace TypeSchemaMapping.Models
                 throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
             }
 
-            if (data.ToMemory().Span.StartsWith("{"u8))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 using JsonDocument document = JsonDocument.Parse(data);
                 return DeserializeModelWithCustomUsage(document.RootElement, options);

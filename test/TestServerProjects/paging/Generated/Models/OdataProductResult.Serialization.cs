@@ -20,6 +20,11 @@ namespace paging.Models
 
         void IJsonModel<OdataProductResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<OdataProductResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OdataProductResult>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Values))
             {

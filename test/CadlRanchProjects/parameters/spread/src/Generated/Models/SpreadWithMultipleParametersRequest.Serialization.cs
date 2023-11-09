@@ -21,6 +21,11 @@ namespace Parameters.Spread.Models
 
         void IJsonModel<SpreadWithMultipleParametersRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SpreadWithMultipleParametersRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SpreadWithMultipleParametersRequest>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("prop1"u8);
             writer.WriteStringValue(Prop1);

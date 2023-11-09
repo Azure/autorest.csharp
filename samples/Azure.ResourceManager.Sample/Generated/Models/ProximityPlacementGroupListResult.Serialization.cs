@@ -21,6 +21,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<ProximityPlacementGroupListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ProximityPlacementGroupListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProximityPlacementGroupListResult>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStartArray();

@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<ServiceStatistics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ServiceStatistics>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ServiceStatistics>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("counters"u8);
             writer.WriteObjectValue(Counters);

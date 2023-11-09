@@ -21,6 +21,11 @@ namespace MgmtPropertyChooser.Models
 
         void IJsonModel<VirtualMachinePatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<VirtualMachinePatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachinePatch>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Plan))
             {

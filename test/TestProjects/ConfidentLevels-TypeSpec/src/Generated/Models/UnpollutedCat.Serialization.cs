@@ -21,6 +21,11 @@ namespace ConfidentLevelsInTsp.Models
 
         void IJsonModel<UnpollutedCat>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<UnpollutedCat>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnpollutedCat>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("meow"u8);
             writer.WriteStringValue(Meow);

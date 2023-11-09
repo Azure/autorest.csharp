@@ -21,6 +21,11 @@ namespace MgmtSingletonResource
 
         void IJsonModel<ParentResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ParentResourceData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ParentResourceData>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
             {

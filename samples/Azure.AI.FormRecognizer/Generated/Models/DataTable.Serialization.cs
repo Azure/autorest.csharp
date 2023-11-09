@@ -20,6 +20,11 @@ namespace Azure.AI.FormRecognizer.Models
 
         void IJsonModel<DataTable>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DataTable>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DataTable>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("rows"u8);
             writer.WriteNumberValue(Rows);

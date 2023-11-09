@@ -20,6 +20,11 @@ namespace Azure.Network.Management.Interface.Models
 
         void IJsonModel<EffectiveRouteListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<EffectiveRouteListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EffectiveRouteListResult>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
             {

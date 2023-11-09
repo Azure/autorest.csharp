@@ -20,6 +20,11 @@ namespace MgmtExactMatchInheritance.Models
 
         void IJsonModel<ExactMatchModel3>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ExactMatchModel3>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ExactMatchModel3>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
             {

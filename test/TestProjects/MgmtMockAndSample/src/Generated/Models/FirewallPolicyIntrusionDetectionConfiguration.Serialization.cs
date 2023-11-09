@@ -20,6 +20,11 @@ namespace MgmtMockAndSample.Models
 
         void IJsonModel<FirewallPolicyIntrusionDetectionConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<FirewallPolicyIntrusionDetectionConfiguration>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyIntrusionDetectionConfiguration>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(SignatureOverrides))
             {

@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<StemmerOverrideTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<StemmerOverrideTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StemmerOverrideTokenFilter>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("rules"u8);
             writer.WriteStartArray();

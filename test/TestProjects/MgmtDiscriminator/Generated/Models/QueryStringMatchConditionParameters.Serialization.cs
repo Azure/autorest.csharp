@@ -20,6 +20,11 @@ namespace MgmtDiscriminator.Models
 
         void IJsonModel<QueryStringMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<QueryStringMatchConditionParameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<QueryStringMatchConditionParameters>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());

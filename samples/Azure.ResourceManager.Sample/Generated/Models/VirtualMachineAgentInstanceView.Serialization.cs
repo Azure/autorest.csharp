@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<VirtualMachineAgentInstanceView>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<VirtualMachineAgentInstanceView>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineAgentInstanceView>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(VmAgentVersion))
             {

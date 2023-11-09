@@ -21,6 +21,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<KeyVaultSecretReference>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<KeyVaultSecretReference>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<KeyVaultSecretReference>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("secretUrl"u8);
             writer.WriteStringValue(SecretUri.AbsoluteUri);

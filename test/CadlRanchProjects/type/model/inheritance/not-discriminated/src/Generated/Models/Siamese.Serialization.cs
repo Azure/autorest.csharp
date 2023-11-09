@@ -21,6 +21,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
 
         void IJsonModel<Siamese>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<Siamese>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Siamese>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("smart"u8);
             writer.WriteBooleanValue(Smart);

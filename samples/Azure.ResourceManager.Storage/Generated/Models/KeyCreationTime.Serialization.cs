@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         void IJsonModel<KeyCreationTime>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<KeyCreationTime>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<KeyCreationTime>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Key1))
             {

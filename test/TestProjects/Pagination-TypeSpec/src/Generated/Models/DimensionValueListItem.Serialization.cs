@@ -21,6 +21,11 @@ namespace Pagination.Models
 
         void IJsonModel<DimensionValueListItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DimensionValueListItem>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DimensionValueListItem>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStartArray();

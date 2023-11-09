@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<HighWaterMarkChangeDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<HighWaterMarkChangeDetectionPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<HighWaterMarkChangeDetectionPolicy>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("highWaterMarkColumnName"u8);
             writer.WriteStringValue(HighWaterMarkColumnName);

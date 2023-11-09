@@ -20,6 +20,11 @@ namespace xms_error_responses.Models
 
         void IJsonModel<NotFoundErrorBase>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<NotFoundErrorBase>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NotFoundErrorBase>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Reason))
             {

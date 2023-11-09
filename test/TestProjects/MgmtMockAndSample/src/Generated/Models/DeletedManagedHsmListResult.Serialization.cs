@@ -21,6 +21,11 @@ namespace MgmtMockAndSample.Models
 
         void IJsonModel<DeletedManagedHsmListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DeletedManagedHsmListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeletedManagedHsmListResult>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
             {

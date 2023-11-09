@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<EntityRecognitionSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<EntityRecognitionSkill>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EntityRecognitionSkill>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Categories))
             {

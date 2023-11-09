@@ -21,6 +21,11 @@ namespace AnomalyDetector.Models
 
         void IJsonModel<UnivariateLastDetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<UnivariateLastDetectionResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnivariateLastDetectionResult>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("period"u8);
             writer.WriteNumberValue(Period);

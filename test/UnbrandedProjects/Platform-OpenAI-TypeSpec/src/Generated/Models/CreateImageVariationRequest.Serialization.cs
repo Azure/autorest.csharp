@@ -17,6 +17,11 @@ namespace OpenAI.Models
 
         void IJsonModel<CreateImageVariationRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<CreateImageVariationRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateImageVariationRequest>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("image"u8);
             writer.WriteBase64StringValue(Image.ToArray(), "D");

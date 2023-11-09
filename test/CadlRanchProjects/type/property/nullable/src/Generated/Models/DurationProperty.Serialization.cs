@@ -21,6 +21,11 @@ namespace _Type.Property.Nullable.Models
 
         void IJsonModel<DurationProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DurationProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DurationProperty>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredProperty"u8);
             writer.WriteStringValue(RequiredProperty);

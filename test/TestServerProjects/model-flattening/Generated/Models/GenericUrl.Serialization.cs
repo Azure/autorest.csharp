@@ -20,6 +20,11 @@ namespace model_flattening.Models
 
         void IJsonModel<GenericUrl>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<GenericUrl>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<GenericUrl>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(GenericValue))
             {

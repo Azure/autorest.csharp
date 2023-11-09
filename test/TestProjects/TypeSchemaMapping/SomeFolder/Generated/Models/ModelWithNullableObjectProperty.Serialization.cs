@@ -20,6 +20,11 @@ namespace TypeSchemaMapping.Models
 
         void IJsonModel<ModelWithNullableObjectProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ModelWithNullableObjectProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithNullableObjectProperty>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
             {

@@ -21,6 +21,11 @@ namespace Inheritance.Models
 
         void IJsonModel<ClassThatInheritsFromBaseClassAndSomeProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ClassThatInheritsFromBaseClassAndSomeProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ClassThatInheritsFromBaseClassAndSomeProperties>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(SomeProperty))
             {

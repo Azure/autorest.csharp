@@ -20,6 +20,11 @@ namespace Azure.AI.FormRecognizer.Models
 
         void IJsonModel<KeysResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<KeysResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<KeysResult>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("clusters"u8);
             writer.WriteStartObject();

@@ -21,6 +21,11 @@ namespace AnomalyDetector.Models
 
         void IJsonModel<ModelInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ModelInfo>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelInfo>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("dataSource"u8);
             writer.WriteStringValue(DataSource);

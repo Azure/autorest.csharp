@@ -17,6 +17,11 @@ namespace OpenAI.Models
 
         void IJsonModel<CompletionUsage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<CompletionUsage>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CompletionUsage>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("prompt_tokens"u8);
             writer.WriteNumberValue(PromptTokens);

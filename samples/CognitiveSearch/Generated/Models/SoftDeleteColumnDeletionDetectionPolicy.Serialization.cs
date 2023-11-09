@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<SoftDeleteColumnDeletionDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SoftDeleteColumnDeletionDetectionPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SoftDeleteColumnDeletionDetectionPolicy>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(SoftDeleteColumnName))
             {

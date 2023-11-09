@@ -21,6 +21,11 @@ namespace AnomalyDetector.Models
 
         void IJsonModel<TimeSeriesPoint>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<TimeSeriesPoint>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TimeSeriesPoint>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Timestamp))
             {

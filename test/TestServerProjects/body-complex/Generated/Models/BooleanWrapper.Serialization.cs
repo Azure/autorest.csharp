@@ -20,6 +20,11 @@ namespace body_complex.Models
 
         void IJsonModel<BooleanWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<BooleanWrapper>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BooleanWrapper>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(FieldTrue))
             {

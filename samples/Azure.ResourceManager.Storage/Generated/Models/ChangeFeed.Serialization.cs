@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         void IJsonModel<ChangeFeed>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ChangeFeed>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ChangeFeed>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Enabled))
             {

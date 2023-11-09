@@ -20,6 +20,11 @@ namespace MgmtMockAndSample.Models
 
         void IJsonModel<FirewallPolicyNatRuleCollectionAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<FirewallPolicyNatRuleCollectionAction>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyNatRuleCollectionAction>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ActionType))
             {

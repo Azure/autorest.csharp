@@ -17,6 +17,11 @@ namespace OpenAI.Models
 
         void IJsonModel<FineTuningJobError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<FineTuningJobError>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FineTuningJobError>)} interface");
+            }
+
             writer.WriteStartObject();
             if (OptionalProperty.IsDefined(Message))
             {

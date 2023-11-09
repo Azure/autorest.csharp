@@ -22,6 +22,11 @@ namespace MgmtOmitOperationGroups
 
         void IJsonModel<Model2Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<Model2Data>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Model2Data>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(B))
             {

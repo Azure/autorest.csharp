@@ -21,6 +21,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<ImageOSDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ImageOSDisk>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImageOSDisk>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("osType"u8);
             writer.WriteStringValue(OSType.ToSerialString());

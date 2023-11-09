@@ -21,6 +21,11 @@ namespace ModelsTypeSpec.Models
 
         void IJsonModel<DerivedModelWithDiscriminatorB>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DerivedModelWithDiscriminatorB>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DerivedModelWithDiscriminatorB>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);

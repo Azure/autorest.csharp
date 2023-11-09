@@ -21,6 +21,11 @@ namespace ConfidentLevelsInTsp.Models
 
         void IJsonModel<PollutedDog>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<PollutedDog>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PollutedDog>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("woof"u8);
             writer.WriteStringValue(Woof);

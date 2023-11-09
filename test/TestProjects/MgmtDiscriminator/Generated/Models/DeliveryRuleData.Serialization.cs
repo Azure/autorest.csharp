@@ -22,6 +22,11 @@ namespace MgmtDiscriminator
 
         void IJsonModel<DeliveryRuleData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DeliveryRuleData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeliveryRuleData>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Properties))
             {

@@ -21,6 +21,11 @@ namespace ConfidentLevelsInTsp.Models
 
         void IJsonModel<ModelWithUnionProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ModelWithUnionProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithUnionProperty>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("unionProperty"u8);
 #if NET6_0_OR_GREATER

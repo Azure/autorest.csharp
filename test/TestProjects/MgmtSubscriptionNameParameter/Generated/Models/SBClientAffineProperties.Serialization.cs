@@ -20,6 +20,11 @@ namespace MgmtSubscriptionNameParameter.Models
 
         void IJsonModel<SBClientAffineProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SBClientAffineProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SBClientAffineProperties>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ClientId))
             {

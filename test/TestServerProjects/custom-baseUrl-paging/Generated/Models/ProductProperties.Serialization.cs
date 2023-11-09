@@ -20,6 +20,11 @@ namespace custom_baseUrl_paging.Models
 
         void IJsonModel<ProductProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ProductProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProductProperties>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
             {

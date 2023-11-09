@@ -23,6 +23,11 @@ namespace MgmtMockAndSample
 
         void IJsonModel<MhsmPrivateEndpointConnectionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<MhsmPrivateEndpointConnectionData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MhsmPrivateEndpointConnectionData>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Etag))
             {

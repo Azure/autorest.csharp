@@ -20,6 +20,11 @@ namespace AppConfiguration.Models
 
         void IJsonModel<LabelListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<LabelListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LabelListResult>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Items))
             {

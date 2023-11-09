@@ -21,6 +21,11 @@ namespace _Type.Property.ValueTypes.Models
 
         void IJsonModel<UnknownIntProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<UnknownIntProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnknownIntProperty>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
 #if NET6_0_OR_GREATER

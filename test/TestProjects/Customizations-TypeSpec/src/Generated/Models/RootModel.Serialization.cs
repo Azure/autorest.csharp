@@ -21,6 +21,11 @@ namespace CustomizationsInTsp.Models
 
         void IJsonModel<RootModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<RootModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RootModel>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(PropertyExtensibleEnum))
             {

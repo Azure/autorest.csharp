@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<SnowballTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SnowballTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SnowballTokenFilter>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("language"u8);
             writer.WriteStringValue(Language.ToSerialString());

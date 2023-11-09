@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<TextWeights>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<TextWeights>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TextWeights>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("weights"u8);
             writer.WriteStartObject();

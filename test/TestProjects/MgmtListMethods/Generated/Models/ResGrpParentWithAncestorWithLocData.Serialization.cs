@@ -21,6 +21,11 @@ namespace MgmtListMethods
 
         void IJsonModel<ResGrpParentWithAncestorWithLocData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ResGrpParentWithAncestorWithLocData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResGrpParentWithAncestorWithLocData>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Bar))
             {

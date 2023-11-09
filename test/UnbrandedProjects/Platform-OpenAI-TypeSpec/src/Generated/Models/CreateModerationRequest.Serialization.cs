@@ -17,6 +17,11 @@ namespace OpenAI.Models
 
         void IJsonModel<CreateModerationRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<CreateModerationRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateModerationRequest>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("input"u8);
 #if NET6_0_OR_GREATER

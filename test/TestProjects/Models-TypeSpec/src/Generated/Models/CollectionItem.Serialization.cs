@@ -21,6 +21,11 @@ namespace ModelsTypeSpec.Models
 
         void IJsonModel<CollectionItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<CollectionItem>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CollectionItem>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredModelRecord"u8);
             writer.WriteStartObject();

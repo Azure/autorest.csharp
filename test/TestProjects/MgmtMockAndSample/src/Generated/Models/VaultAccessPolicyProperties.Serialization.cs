@@ -20,6 +20,11 @@ namespace MgmtMockAndSample.Models
 
         void IJsonModel<VaultAccessPolicyProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<VaultAccessPolicyProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VaultAccessPolicyProperties>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("accessPolicies"u8);
             writer.WriteStartArray();

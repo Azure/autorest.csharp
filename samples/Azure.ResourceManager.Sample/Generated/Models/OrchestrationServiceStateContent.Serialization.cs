@@ -20,6 +20,11 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<OrchestrationServiceStateContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<OrchestrationServiceStateContent>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OrchestrationServiceStateContent>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("serviceName"u8);
             writer.WriteStringValue(ServiceName.ToString());

@@ -21,6 +21,11 @@ namespace TypeSchemaMapping.Models
 
         void IJsonModel<SecondModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SecondModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SecondModel>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(IntProperty))
             {

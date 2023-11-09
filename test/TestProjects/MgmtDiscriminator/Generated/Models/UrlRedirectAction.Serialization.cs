@@ -20,6 +20,11 @@ namespace MgmtDiscriminator.Models
 
         void IJsonModel<UrlRedirectAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<UrlRedirectAction>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UrlRedirectAction>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
             writer.WriteObjectValue(Parameters);

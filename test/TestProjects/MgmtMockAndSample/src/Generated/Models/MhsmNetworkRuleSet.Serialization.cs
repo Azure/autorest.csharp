@@ -21,6 +21,11 @@ namespace MgmtMockAndSample.Models
 
         void IJsonModel<MhsmNetworkRuleSet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<MhsmNetworkRuleSet>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MhsmNetworkRuleSet>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Bypass))
             {

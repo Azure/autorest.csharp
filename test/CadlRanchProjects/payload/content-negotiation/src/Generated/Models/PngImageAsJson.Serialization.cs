@@ -21,6 +21,11 @@ namespace Payload.ContentNegotiation.Models
 
         void IJsonModel<PngImageAsJson>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<PngImageAsJson>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PngImageAsJson>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("content"u8);
             writer.WriteBase64StringValue(Content.ToArray(), "D");

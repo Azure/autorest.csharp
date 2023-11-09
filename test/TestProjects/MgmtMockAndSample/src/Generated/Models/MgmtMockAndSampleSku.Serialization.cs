@@ -20,6 +20,11 @@ namespace MgmtMockAndSample.Models
 
         void IJsonModel<MgmtMockAndSampleSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<MgmtMockAndSampleSku>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtMockAndSampleSku>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("family"u8);
             writer.WriteStringValue(Family.ToString());

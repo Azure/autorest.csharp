@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<FreshnessScoringFunction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<FreshnessScoringFunction>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FreshnessScoringFunction>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("freshness"u8);
             writer.WriteObjectValue(Parameters);

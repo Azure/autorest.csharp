@@ -21,6 +21,11 @@ namespace MgmtResourceName
 
         void IJsonModel<MemoryData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<MemoryData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MemoryData>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
             {

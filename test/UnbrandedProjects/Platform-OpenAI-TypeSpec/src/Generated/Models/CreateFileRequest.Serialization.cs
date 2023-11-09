@@ -17,6 +17,11 @@ namespace OpenAI.Models
 
         void IJsonModel<CreateFileRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<CreateFileRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateFileRequest>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("file"u8);
             writer.WriteBase64StringValue(File.ToArray(), "D");

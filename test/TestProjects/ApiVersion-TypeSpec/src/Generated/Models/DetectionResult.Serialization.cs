@@ -21,6 +21,11 @@ namespace ApiVersionInTsp.Models
 
         void IJsonModel<DetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DetectionResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DetectionResult>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("resultId"u8);
             writer.WriteStringValue(ResultId);

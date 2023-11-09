@@ -17,6 +17,11 @@ namespace OpenAI.Models
 
         void IJsonModel<CreateHyperparameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<CreateHyperparameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateHyperparameters>)} interface");
+            }
+
             writer.WriteStartObject();
             if (OptionalProperty.IsDefined(NEpochs))
             {

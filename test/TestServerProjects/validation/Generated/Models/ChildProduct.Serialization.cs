@@ -20,6 +20,11 @@ namespace validation.Models
 
         void IJsonModel<ChildProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ChildProduct>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ChildProduct>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty"u8);
             writer.WriteStringValue(ConstProperty.ToString());

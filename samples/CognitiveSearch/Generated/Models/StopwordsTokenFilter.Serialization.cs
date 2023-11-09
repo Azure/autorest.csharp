@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<StopwordsTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<StopwordsTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StopwordsTokenFilter>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Stopwords))
             {

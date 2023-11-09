@@ -45,6 +45,11 @@ namespace Azure.Storage.Tables.Models
 
         void IJsonModel<StorageError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<StorageError>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageError>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Message))
             {
@@ -145,7 +150,7 @@ namespace Azure.Storage.Tables.Models
                 throw new FormatException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
             }
 
-            if (data.ToMemory().Span.StartsWith("{"u8))
+            if (options.Format == ModelReaderWriterFormat.Json)
             {
                 using JsonDocument document = JsonDocument.Parse(data);
                 return DeserializeStorageError(document.RootElement, options);

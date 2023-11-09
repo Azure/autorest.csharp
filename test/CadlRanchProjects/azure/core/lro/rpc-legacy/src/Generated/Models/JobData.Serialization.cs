@@ -21,6 +21,11 @@ namespace _Azure.Lro.RpcLegacy.Models
 
         void IJsonModel<JobData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<JobData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<JobData>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("comment"u8);
             writer.WriteStringValue(Comment);

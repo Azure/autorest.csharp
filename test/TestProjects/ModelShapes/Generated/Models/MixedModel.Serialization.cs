@@ -20,6 +20,11 @@ namespace ModelShapes.Models
 
         void IJsonModel<MixedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<MixedModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MixedModel>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("RequiredString"u8);
             writer.WriteStringValue(RequiredString);

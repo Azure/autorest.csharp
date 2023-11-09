@@ -21,6 +21,11 @@ namespace ModelsTypeSpec.Models
 
         void IJsonModel<RoundTripOptionalModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<RoundTripOptionalModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RoundTripOptionalModel>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(OptionalString))
             {

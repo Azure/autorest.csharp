@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<SynonymTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SynonymTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SynonymTokenFilter>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("synonyms"u8);
             writer.WriteStartArray();

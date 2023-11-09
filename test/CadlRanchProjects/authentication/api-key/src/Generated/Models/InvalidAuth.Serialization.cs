@@ -21,6 +21,11 @@ namespace Authentication.ApiKey.Models
 
         void IJsonModel<InvalidAuth>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<InvalidAuth>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InvalidAuth>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("error"u8);
             writer.WriteStringValue(Error);

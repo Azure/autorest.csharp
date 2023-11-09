@@ -21,6 +21,11 @@ namespace MgmtDiscriminator.Models
 
         void IJsonModel<OriginGroupOverrideActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<OriginGroupOverrideActionParameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OriginGroupOverrideActionParameters>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());

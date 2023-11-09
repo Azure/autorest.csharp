@@ -20,6 +20,11 @@ namespace Inheritance.Models
 
         void IJsonModel<BaseClassWithExtensibleEnumDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<BaseClassWithExtensibleEnumDiscriminator>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty.ToString());

@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<TextTranslationSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<TextTranslationSkill>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TextTranslationSkill>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("defaultToLanguageCode"u8);
             writer.WriteStringValue(DefaultToLanguageCode.ToString());

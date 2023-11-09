@@ -21,6 +21,11 @@ namespace MgmtSingletonResource
 
         void IJsonModel<IgnitionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<IgnitionData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IgnitionData>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(PushButton))
             {

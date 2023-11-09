@@ -20,6 +20,11 @@ namespace body_complex.Models
 
         void IJsonModel<DotSalmon>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<DotSalmon>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DotSalmon>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Location))
             {

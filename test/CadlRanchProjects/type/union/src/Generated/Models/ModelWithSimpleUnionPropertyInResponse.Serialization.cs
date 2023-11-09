@@ -21,6 +21,11 @@ namespace _Type.Union.Models
 
         void IJsonModel<ModelWithSimpleUnionPropertyInResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ModelWithSimpleUnionPropertyInResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithSimpleUnionPropertyInResponse>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("simpleUnion"u8);
 #if NET6_0_OR_GREATER

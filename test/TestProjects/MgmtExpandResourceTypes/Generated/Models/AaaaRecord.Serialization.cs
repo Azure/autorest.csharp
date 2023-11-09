@@ -20,6 +20,11 @@ namespace MgmtExpandResourceTypes.Models
 
         void IJsonModel<AaaaRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<AaaaRecord>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AaaaRecord>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Ipv6Address))
             {

@@ -21,6 +21,11 @@ namespace PetStore.Models
 
         void IJsonModel<Tuna>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<Tuna>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Tuna>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("fat"u8);
             writer.WriteNumberValue(Fat);

@@ -21,6 +21,11 @@ namespace Pagination.Models
 
         void IJsonModel<LedgerEntry>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<LedgerEntry>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LedgerEntry>)} interface");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("contents"u8);
             writer.WriteStringValue(Contents);

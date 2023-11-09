@@ -20,6 +20,11 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<BM25Similarity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<BM25Similarity>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BM25Similarity>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(K1))
             {
