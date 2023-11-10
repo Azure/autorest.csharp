@@ -34,6 +34,11 @@ ___
     - [Preserve raw Json value of a property](#preserve-raw-json-value-of-a-property)
     - [Changing member doc comment](#changing-member-doc-comment)
     - [Customize serialization/deserialization methods](#customize-serializationdeserialization-methods)
+      - [Change the serialized name of a property](#change-the-serialized-name-of-a-property)
+      - [Change the hierarchy of a property in the serialized JSON](#change-the-hierarchy-of-a-property-in-the-serialized-json)
+      - [Change the implementation of serialization/deserialization method of one particular property](#change-the-implementation-of-serializationdeserialization-method-of-one-particular-property)
+      - [Add a new property to the model with serialization/deserialization](#add-a-new-property-to-the-model-with-serializationdeserialization)
+      - [Replace the entire serialization/deserialization method](#replace-the-entire-serializationdeserialization-method)
     - [Renaming an enum](#renaming-an-enum)
     - [Renaming an enum member](#renaming-an-enum-member)
     - [Changing an enum to an extensible enum](#changing-an-enum-to-an-extensible-enum)
@@ -51,7 +56,7 @@ ___
 
 ## Prerequisites
 
-- [NodeJS (14.x.x)](https://nodejs.org/en/) 
+- [NodeJS (18.x.x)](https://nodejs.org/en/) 
 - [.NET Core SDK (5.0.100)](https://dotnet.microsoft.com/download/dotnet-core/5.0)
 - [PowerShell Core 7](https://github.com/PowerShell/PowerShell/releases/latest)
 - `npm install` (at root)
