@@ -464,7 +464,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 _protocolParameters.Add(protocolMethodParameter);
 
                 var value = GetValueForProtocolArgument(inputParameter, protocolMethodParameter);
-                _arguments[protocolMethodParameter] = ConvertValue(value, protocolMethodParameter.Type, value.Type.IsNullable);
+                _arguments[protocolMethodParameter] = ConvertValue(value, value.Type.IsNullable);
                 return;
             }
 
@@ -492,7 +492,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
-            if (TryCreateConversionForEnum(convenienceMethodParameter, protocolMethodParameter.Type, convenienceMethodParameter.IsOptionalInSignature, out var convertedValue))
+            if (TryCreateConversionForEnum(convenienceMethodParameter, convenienceMethodParameter.IsOptionalInSignature, out var convertedValue))
             {
                 _arguments[protocolMethodParameter] = convertedValue;
                 return;
@@ -754,9 +754,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private TypedValueExpression ConvertValue(TypedValueExpression value, CSharpType convertedValueType, bool valueCanBeNull)
+        private TypedValueExpression ConvertValue(TypedValueExpression value, bool valueCanBeNull)
         {
-            if (TryCreateConversionForEnum(value, convertedValueType, valueCanBeNull, out var convertedValue))
+            if (TryCreateConversionForEnum(value, valueCanBeNull, out var convertedValue))
             {
                 return convertedValue;
             }
@@ -764,15 +764,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return value;
         }
 
-        private bool TryCreateConversionForEnum(TypedValueExpression value, CSharpType to, bool valueCanBeNull, [MaybeNullWhen(false)] out TypedValueExpression convertedValue)
+        private bool TryCreateConversionForEnum(TypedValueExpression value, bool valueCanBeNull, [MaybeNullWhen(false)] out TypedValueExpression convertedValue)
         {
-            if (to.EqualsIgnoreNullable(typeof(string)) && value.Type is {IsFrameworkType: false, Implementation: EnumType enumType})
+            if (value.Type is {IsFrameworkType: false, Implementation: EnumType enumType})
             {
                 convertedValue = new EnumExpression(enumType, NullConditional(value, valueCanBeNull)).ToSerial();
                 return true;
             }
 
-            if (to.EqualsIgnoreNullable(typeof(IEnumerable<string>)) && TypeFactory.IsList(value.Type, out var elementType) && elementType is {IsFrameworkType: false, Implementation: EnumType elementEnumType})
+            if (TypeFactory.IsList(value.Type, out var elementType) && elementType is {IsFrameworkType: false, Implementation: EnumType elementEnumType})
             {
                 var element = new VariableReference(elementType, "e");
                 var selector = new EnumExpression(elementEnumType, element).ToSerial();

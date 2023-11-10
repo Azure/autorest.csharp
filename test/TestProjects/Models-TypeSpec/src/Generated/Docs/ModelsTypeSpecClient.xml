@@ -2141,6 +2141,174 @@ Console.WriteLine(result.GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
 ]]></code></example>
     </member>
+    <member name="FixedFloatEnumAsync(FixedFloatEnum,CancellationToken)">
+      <example>
+This sample shows how to call FixedFloatEnumAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<OutputModel> response = await client.FixedFloatEnumAsync(FixedFloatEnum.One);
+]]></code>
+This sample shows how to call FixedFloatEnumAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<OutputModel> response = await client.FixedFloatEnumAsync(FixedFloatEnum.One);
+]]></code></example>
+    </member>
+    <member name="FixedFloatEnum(FixedFloatEnum,CancellationToken)">
+      <example>
+This sample shows how to call FixedFloatEnum.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<OutputModel> response = client.FixedFloatEnum(FixedFloatEnum.One);
+]]></code>
+This sample shows how to call FixedFloatEnum with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<OutputModel> response = client.FixedFloatEnum(FixedFloatEnum.One);
+]]></code></example>
+    </member>
+    <member name="FixedFloatEnumAsync(float,RequestContext)">
+      <example>
+This sample shows how to call FixedFloatEnumAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = await client.FixedFloatEnumAsync(1.1F);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call FixedFloatEnumAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = await client.FixedFloatEnumAsync(1.1F);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code></example>
+    </member>
+    <member name="FixedFloatEnum(float,RequestContext)">
+      <example>
+This sample shows how to call FixedFloatEnum and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = client.FixedFloatEnum(1.1F);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call FixedFloatEnum with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = client.FixedFloatEnum(1.1F);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code></example>
+    </member>
+    <member name="ExtenisbleIntEnumAsync(ExtensibleIntEnum,CancellationToken)">
+      <example>
+This sample shows how to call ExtenisbleIntEnumAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<OutputModel> response = await client.ExtenisbleIntEnumAsync(ExtensibleIntEnum.One);
+]]></code>
+This sample shows how to call ExtenisbleIntEnumAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<OutputModel> response = await client.ExtenisbleIntEnumAsync(ExtensibleIntEnum.One);
+]]></code></example>
+    </member>
+    <member name="ExtenisbleIntEnum(ExtensibleIntEnum,CancellationToken)">
+      <example>
+This sample shows how to call ExtenisbleIntEnum.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<OutputModel> response = client.ExtenisbleIntEnum(ExtensibleIntEnum.One);
+]]></code>
+This sample shows how to call ExtenisbleIntEnum with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<OutputModel> response = client.ExtenisbleIntEnum(ExtensibleIntEnum.One);
+]]></code></example>
+    </member>
+    <member name="ExtenisbleIntEnumAsync(int,RequestContext)">
+      <example>
+This sample shows how to call ExtenisbleIntEnumAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = await client.ExtenisbleIntEnumAsync(1);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call ExtenisbleIntEnumAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = await client.ExtenisbleIntEnumAsync(1);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code></example>
+    </member>
+    <member name="ExtenisbleIntEnum(int,RequestContext)">
+      <example>
+This sample shows how to call ExtenisbleIntEnum and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = client.ExtenisbleIntEnum(1);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call ExtenisbleIntEnum with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = client.ExtenisbleIntEnum(1);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code></example>
+    </member>
     <member name="RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse,CancellationToken)">
       <example>
 This sample shows how to call RoundTripToOutputWithNoUseBaseAsync.

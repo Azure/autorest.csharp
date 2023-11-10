@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Common.Output.Builders.Azure
         {
             if (value.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
             {
-                return new EnumExpression(enumType, value.NullableStructValue(value.Type)).ToSerial();
+                return new(new EnumExpression(enumType, value.NullableStructValue(value.Type)).ToSerial());
             }
 
             return value.Type.EqualsIgnoreNullable(typeof(string)) ? new(value) : value.NullableStructValue(value.Type).InvokeToString();

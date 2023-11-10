@@ -990,6 +990,194 @@ namespace ModelsTypeSpec
             }
         }
 
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="input"> The FixedFloatEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='FixedFloatEnumAsync(FixedFloatEnum,CancellationToken)']/*" />
+        public virtual async Task<Response<OutputModel>> FixedFloatEnumAsync(FixedFloatEnum input, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await FixedFloatEnumAsync(input.ToSerialSingle(), context).ConfigureAwait(false);
+            return Response.FromValue(OutputModel.FromResponse(response), response);
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="input"> The FixedFloatEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='FixedFloatEnum(FixedFloatEnum,CancellationToken)']/*" />
+        public virtual Response<OutputModel> FixedFloatEnum(FixedFloatEnum input, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = FixedFloatEnum(input.ToSerialSingle(), context);
+            return Response.FromValue(OutputModel.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Returns model that has property of its own type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FixedFloatEnumAsync(FixedFloatEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="input"> The float to use. Allowed values: "1.1" | "2.1" | "4". </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='FixedFloatEnumAsync(float,RequestContext)']/*" />
+        public virtual async Task<Response> FixedFloatEnumAsync(float input, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.FixedFloatEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFixedFloatEnumRequest(input, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Returns model that has property of its own type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FixedFloatEnum(FixedFloatEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="input"> The float to use. Allowed values: "1.1" | "2.1" | "4". </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='FixedFloatEnum(float,RequestContext)']/*" />
+        public virtual Response FixedFloatEnum(float input, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.FixedFloatEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFixedFloatEnumRequest(input, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="input"> The ExtensibleIntEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='ExtenisbleIntEnumAsync(ExtensibleIntEnum,CancellationToken)']/*" />
+        public virtual async Task<Response<OutputModel>> ExtenisbleIntEnumAsync(ExtensibleIntEnum input, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ExtenisbleIntEnumAsync(input.ToSerialInt32(), context).ConfigureAwait(false);
+            return Response.FromValue(OutputModel.FromResponse(response), response);
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="input"> The ExtensibleIntEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='ExtenisbleIntEnum(ExtensibleIntEnum,CancellationToken)']/*" />
+        public virtual Response<OutputModel> ExtenisbleIntEnum(ExtensibleIntEnum input, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ExtenisbleIntEnum(input.ToSerialInt32(), context);
+            return Response.FromValue(OutputModel.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Returns model that has property of its own type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ExtenisbleIntEnumAsync(ExtensibleIntEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="input"> The int to use. Allowed values: "1" | "2" | "4". </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='ExtenisbleIntEnumAsync(int,RequestContext)']/*" />
+        public virtual async Task<Response> ExtenisbleIntEnumAsync(int input, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.ExtenisbleIntEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateExtenisbleIntEnumRequest(input, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Returns model that has property of its own type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ExtenisbleIntEnum(ExtensibleIntEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="input"> The int to use. Allowed values: "1" | "2" | "4". </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='ExtenisbleIntEnum(int,RequestContext)']/*" />
+        public virtual Response ExtenisbleIntEnum(int input, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.ExtenisbleIntEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateExtenisbleIntEnumRequest(input, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Returns RoundTripOnNoUse. </summary>
         /// <param name="input"> The RoundTripOnNoUse to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1516,6 +1704,36 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/selfReference", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateFixedFloatEnumRequest(float input, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/fixedFloatEnum", false);
+            uri.AppendQuery("input", input, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateExtenisbleIntEnumRequest(int input, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/extenisbleIntEnum", false);
+            uri.AppendQuery("input", input, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
