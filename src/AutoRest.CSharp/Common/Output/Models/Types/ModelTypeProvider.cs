@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     .ToList();
             }
 
-            foreach (var property in compositionModels.SelectMany(m => m.Properties))
+            foreach (var property in compositionModels.SelectMany(m => m.GetSelfAndBaseModels()).SelectMany(m => m.Properties))
             {
                 if (properties.All(p => p.Name != property.Name))
                 {

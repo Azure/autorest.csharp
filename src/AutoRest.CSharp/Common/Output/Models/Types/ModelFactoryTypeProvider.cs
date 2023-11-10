@@ -19,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -37,36 +38,47 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Models = objectTypes;
 
-            DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
+            DefaultName = defaultName;
             DefaultAccessibility = "public";
             ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
             ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
+        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             if (!Configuration.GenerateModelFactory)
                 return null;
 
             var objectTypes = models.OfType<SerializableObjectType>()
                 .Where(RequiresModelFactory)
-                .ToArray();
+                .ToHashSet();
+
+            var defaultNamespace = GetDefaultNamespace();
+            var defaultName = $"{GetRPName(defaultNamespace)}ModelFactory".ToCleanName();
+            defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
+
+            var existingFactoryType = sourceInputModel?.FindForType(defaultNamespace, defaultName);
+            if (existingFactoryType is not null)
+            {
+                foreach (ITypeSymbol existingSymbol in existingFactoryType.GetMembers().OfType<IMethodSymbol>().Select(m => m.ReturnType))
+                {
+                    if (typeFactory.TryCreateType(existingSymbol, out var existingType) && existingType is { IsFrameworkType: false, Implementation: SerializableObjectType existingObjectType })
+                    {
+                        objectTypes.Remove(existingObjectType);
+                    }
+                }
+            }
 
             if (!objectTypes.Any())
             {
                 return null;
             }
 
-            var defaultNamespace = GetDefaultNamespace();
-            var defaultRPName = GetRPName(defaultNamespace);
-
-            defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
-
-            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
+            return new ModelFactoryTypeProvider(objectTypes, defaultName, defaultNamespace, sourceInputModel);
         }
 
         public static string GetRPName(string defaultNamespace)

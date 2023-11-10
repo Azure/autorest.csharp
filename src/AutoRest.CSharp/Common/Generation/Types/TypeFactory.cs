@@ -431,7 +431,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         private static bool NoTypeValidator(System.Type type) => true;
 
-        public bool TryCreateType(ITypeSymbol symbol, [NotNullWhen(true)] out CSharpType? type)
+        public bool TryCreateType(ITypeSymbol symbol, [MaybeNullWhen(false)] out CSharpType type)
             => TryCreateType(symbol, NoTypeValidator, out type);
 
         public CSharpType? GetLibraryTypeByName(string name) => _library.FindTypeByName(name);

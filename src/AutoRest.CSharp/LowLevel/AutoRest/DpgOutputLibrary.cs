@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             AllModels = _isTspInput ? allModels : Array.Empty<TypeProvider>();
             RestClients = CreateClients(topLevelClientInfos, clientOptions, rootNamespace, TypeFactory, libraryName, sourceInputModel);
             ClientOptions = clientOptions;
-            ModelFactory = ModelFactoryTypeProvider.TryCreate(AllModels, sourceInputModel);
+            ModelFactory = ModelFactoryTypeProvider.TryCreate(AllModels, TypeFactory, sourceInputModel);
             AspDotNetExtension = new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, sourceInputModel);
             AccessOverriddenModels = _isTspInput
                 ? _enums.Where(e => e.Key.Accessibility is not null).Select(e => e.Value.Declaration.Name)
