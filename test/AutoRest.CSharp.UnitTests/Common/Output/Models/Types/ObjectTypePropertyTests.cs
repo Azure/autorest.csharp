@@ -3,6 +3,8 @@ using NUnit.Framework;
 using AutoRest.CSharp.Output.Models.Types;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
+using System;
+using System.Globalization;
 
 namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
 {
@@ -20,29 +22,34 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         public void TestConstructDetailsForListType_PrimitiveType()
         {
             bool isNullable = false;
+            bool isBaseElement = true;
             InputPrimitiveType type = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
             CSharpType cSharpType = typeFactory.CreateType(type);
 
-            string result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType);
-            string expectedResult = "bool";
+            FormattableString result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType, isBaseElement);
+            FormattableString expectedResult = $"<see cref=\"bool\"/>";
 
-            Assert.AreEqual(expectedResult, result);
+            bool areStringsEqual = string.Compare(result.ToString(), expectedResult.ToString(), CultureInfo.CurrentCulture,
+                CompareOptions.IgnoreSymbols) == 0;
+
+            Assert.True(areStringsEqual);
         }
 
         // Validates that the type string is constructed correctly for a given list type
         [Test]
-        public void TestConstructDetailsForListTypep_ListType()
+        public void TestConstructDetailsForListType_ListType()
         {
             bool isNullable = false;
+            bool isBaseElement = true;
             InputType elementType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
             InputListType type = new InputListType("InputListType", elementType, isNullable);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
-            string result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType);
-            string expectedResult = "IList{bool}";
+            FormattableString result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType, isBaseElement);
+            FormattableString expectedResult = $"<c>IList{{bool}}</c>";
 
-            Assert.AreEqual(expectedResult, result);
+            Assert.AreEqual(expectedResult.ToString(), result.ToString());
         }
 
         // Validates that the type string is constructed correctly for a given nested list type
@@ -50,16 +57,36 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         public void TestConstructDetailsForListType_NestedListType()
         {
             bool isNullable = false;
+            bool isBaseElement = true;
             InputType elementType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
             InputType listElementType = new InputListType("InputListType1", elementType, isNullable);
             InputListType type = new InputListType("InputListType2", listElementType, isNullable);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
-            string result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType);
-            string expectedResult = "IList{IList{bool}}";
+            FormattableString result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType, isBaseElement);
+            FormattableString expectedResult = $"<c>IList{{IList{{bool}}}}</c>";
 
-            Assert.AreEqual(expectedResult, result);
+            Assert.AreEqual(expectedResult.ToString(), result.ToString());
+        }
+
+        // Validates that the type string is constructed correctly for a list of dictionary type
+        [Test]
+        public void TestConstructDetailsForListType_ListOfDictType()
+        {
+            bool isNullable = false;
+            bool isBaseElement = true;
+            InputType keyType = new InputPrimitiveType(InputTypeKind.String, isNullable);
+            InputType valueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
+            InputDictionaryType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
+            InputType listElementType = new InputListType("InputListType1", dictionaryType, isNullable);
+
+            CSharpType cSharpType = typeFactory.CreateType(listElementType);
+
+            FormattableString result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType, isBaseElement);
+            FormattableString expectedResult = $"<c>IList{{IDictionary{{TKey, TValue}}}}</c>";
+
+            Assert.AreEqual(expectedResult.ToString(), result.ToString());
         }
 
         // Validates that the type description summary string is constructed correctly for a given dictionary type
@@ -73,27 +100,13 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
-            string result = ObjectTypeProperty.ConstructTypeStringForCollection(cSharpType);
-            string expectedResult = $"<description><see cref=\"IDictionary{{TKey, TValue}}\"/></description>";
+            FormattableString result = ObjectTypeProperty.ConstructTypeStringForCollection(cSharpType);
+            FormattableString expectedResult = $"<description><see cref=\"global::System.Collections.Generic.IDictionary<string, int>\"/></description>";
 
-            Assert.AreEqual(expectedResult, result);
-        }
+            bool areStringsEqual = string.Compare(result.ToString(), expectedResult.ToString(), CultureInfo.CurrentCulture,
+                CompareOptions.IgnoreSymbols) == 0;
 
-        // Validates that the type description summary string is constructed correctly for a given list type
-        [Test]
-        public void TestConstructTypeStringForCollection_ListType()
-        {
-            bool isNullable = false;
-            InputType elementType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
-            InputType listElementType = new InputListType("InputListType1", elementType, isNullable);
-            InputListType type = new InputListType("InputListType2", listElementType, isNullable);
-
-            CSharpType cSharpType = typeFactory.CreateType(type);
-
-            string result = ObjectTypeProperty.ConstructTypeStringForCollection(cSharpType);
-            string expectedResult = $"<description><see cref=\"IList{{T}}\"/> Where <c>T</c> is of type <c>IList{{bool}}</c></description>";
-
-            Assert.AreEqual(expectedResult, result);
+            Assert.True(areStringsEqual);
         }
 
         // Validates that the summary description string is constructed correctly for several types
@@ -101,40 +114,70 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         public void TestGetUnionTypesDescriptions()
         {
             bool isNullable = false;
-            InputType elementType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
-            InputListType listType = new InputListType("InputListType", elementType, isNullable);
 
             // dictionary type
             InputType keyType = new InputPrimitiveType(InputTypeKind.String, isNullable);
             InputType valueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
             InputType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
 
-            // literal type
+            // literal types
             InputType literalValueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
             InputLiteralType literalType = new InputLiteralType("InputLiteralType", literalValueType, 21, isNullable);
+
+            InputType stringLiteralValueType = new InputPrimitiveType(InputTypeKind.String, isNullable);
+            InputLiteralType stringLiteralType = new InputLiteralType("InputLiteralType", stringLiteralValueType, "test", isNullable);
+
+            InputType boolLiteralValueType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
+            InputLiteralType boolLiteralType = new InputLiteralType("InputLiteralType", boolLiteralValueType, true, isNullable);
+
+            InputType dateTimeLiteralValueType = new InputPrimitiveType(InputTypeKind.DateTime, isNullable);
+            var dateTime = new DateTimeOffset();
+            InputLiteralType dateTimeLiteralType = new InputLiteralType("InputLiteralType", dateTimeLiteralValueType, dateTime, isNullable);
 
             IList<CSharpType> unionItems = new List<CSharpType>()
             {
                 typeFactory.CreateType(new InputPrimitiveType(InputTypeKind.Boolean, false)),
-                typeFactory.CreateType(listType),
                 typeFactory.CreateType(new InputPrimitiveType(InputTypeKind.Int32, false)),
                 typeFactory.CreateType(dictionaryType),
                 typeFactory.CreateType(literalType),
+                typeFactory.CreateType(stringLiteralType),
+                typeFactory.CreateType(boolLiteralType),
+                typeFactory.CreateType(dateTimeLiteralType),
             };
 
-            IReadOnlyList<string> descriptions = ObjectTypeProperty.GetUnionTypesDescriptions(unionItems);
+            IReadOnlyList<FormattableString> descriptions = ObjectTypeProperty.GetUnionTypesDescriptions(unionItems);
 
-            Assert.AreEqual(5, descriptions.Count);
+            Assert.AreEqual(7, descriptions.Count);
             var expectedDescription = "<description><see cref=\"bool\"/></description>";
-            Assert.AreEqual(expectedDescription, descriptions[0]);
-            var expectedListDescription = $"<description><see cref=\"IList{{T}}\"/> Where <c>T</c> is of type <c>bool</c></description>";
-            Assert.AreEqual(expectedListDescription, descriptions[1]);
+            bool areStringsEqual = string.Compare(descriptions[0].ToString(), expectedDescription.ToString(), CultureInfo.CurrentCulture,
+               CompareOptions.IgnoreSymbols) == 0;
+
+            Assert.True(areStringsEqual);
+
             expectedDescription = "<description><see cref=\"int\"/></description>";
-            Assert.AreEqual(expectedDescription, descriptions[2]);
-            var expectedDictionaryDescription = $"<description><see cref=\"IDictionary{{TKey, TValue}}\"/></description>";
-            Assert.AreEqual(expectedDictionaryDescription, descriptions[3]);
-            var expectedLiteralDescription = $"<description>\"21\"</description>";
-            Assert.AreEqual(expectedLiteralDescription, descriptions[4]);
+            areStringsEqual = string.Compare(descriptions[1].ToString(), expectedDescription.ToString(), CultureInfo.CurrentCulture,
+              CompareOptions.IgnoreSymbols) == 0;
+
+            Assert.True(areStringsEqual);
+
+            var expectedDictionaryDescription = $"<description><see cref=\"global::System.Collections.Generic.IDictionary<string, int>\"/></description>";
+            areStringsEqual = string.Compare(descriptions[2].ToString(), expectedDictionaryDescription.ToString(), CultureInfo.CurrentCulture,
+              CompareOptions.IgnoreSymbols) == 0;
+
+            Assert.True(areStringsEqual);
+
+            var expectedLiteralDescription = $"<description>21</description>";
+            Assert.AreEqual(expectedLiteralDescription, descriptions[3].ToString());
+
+            var expectedStringLiteralDescription = $"<description>test</description>";
+            Assert.AreEqual(expectedStringLiteralDescription, descriptions[4].ToString());
+
+            var expectedBoolLiteralDescription = $"<description>True</description>";
+            Assert.AreEqual(expectedBoolLiteralDescription, descriptions[5].ToString());
+
+            var expectedDateTimeLiteralDescription = $"<description>{dateTime}</description>";
+            Assert.AreEqual(expectedDateTimeLiteralDescription, descriptions[6].ToString());
         }
     }
+
 }

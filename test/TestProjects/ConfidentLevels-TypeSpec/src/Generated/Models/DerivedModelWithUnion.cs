@@ -51,7 +51,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <description><see cref="string"/></description>
         /// </item>
         /// <item>
-        /// <description><see cref="IList{T}"/> Where <c>T</c> is of type <c>int</c></description>
+        /// <description><see cref="IList{T}"/> Where <c>T</c> is of type <see cref="int"/></description>
         /// </item>
         /// </list>
         /// </remarks>

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Types
@@ -30,6 +31,21 @@ namespace AutoRest.CSharp.Generation.Types
             isNullable,
             type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
         {
+        }
+
+        /// <summary>
+        /// Constructs a CSharpType for a literal type.
+        /// </summary>
+        /// <param name="type">The type to convert.</param>
+        /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
+        /// <param name="isLiteral">Flag used to determine if a type is a literal.</param>
+        /// <param name="literalValue">The value of the literal.</param>
+        public CSharpType(Type type, bool isNullable, bool isLiteral, Constant? literalValue) : this(
+            type,
+            isNullable)
+        {
+            IsLiteral = isLiteral;
+            Literal = literalValue;
         }
 
         public CSharpType(Type type, Type? serializeAs) : this(
@@ -98,8 +114,8 @@ namespace AutoRest.CSharp.Generation.Types
         public string Name { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
-        public bool IsLiteral { get; set; }
-        public object? LiteralValue { get; set; }
+        public bool IsLiteral { get; }
+        public Constant? Literal { get; }
         public bool IsUnion { get; }
         public CSharpType[] UnionItemTypes { get; } = Array.Empty<CSharpType>();
         public bool IsPublic { get; }

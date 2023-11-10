@@ -98,53 +98,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("const ", modifiers.HasFlag(FieldModifiers.Const));
         }
 
-        /// <summary>
-        /// This method gathers the namespaces for the union types of a property and adds them to the writer.
-        /// </summary>
-        /// <param name="writer">The code writer.</param>
-        /// <param name="property">The property to gather the namespaces from. Only properties that are union
-        /// type and have union type items will be checked.</param>
-        private static void AddNamespacesForUnionTypeProperty(CodeWriter writer, ObjectTypeProperty property)
-        {
-            if (property != null)
-            {
-                HashSet<string> namespaces = new();
-                CSharpType[]? unionTypes = null;
-
-                if (property.Declaration.Type != null && property.Declaration.Type.IsUnion)
-                {
-                    unionTypes = property.Declaration.Type.UnionItemTypes;
-
-                }
-                else if (property.ValueType != null && property.ValueType.IsUnion)
-                {
-                    unionTypes = property.ValueType.UnionItemTypes;
-                }
-
-                if (unionTypes != null)
-                {
-                    foreach (var u in unionTypes)
-                    {
-                        if (!u.Namespace.IsNullOrEmpty())
-                        {
-                            namespaces.Add(u.Namespace);
-                        }
-                    }
-
-                    if (namespaces.Count > 0)
-                    {
-                        foreach (var n in namespaces)
-                        {
-                            writer.UseNamespace(n);
-                        }
-                    }
-                }
-            }
-        }
-
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
         {
-            AddNamespacesForUnionTypeProperty(writer, property);
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
 
@@ -171,7 +126,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteProperty(CodeWriter writer, FlattenedObjectTypeProperty property)
         {
-            AddNamespacesForUnionTypeProperty(writer, property);
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             using (writer.Scope($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}"))
             {

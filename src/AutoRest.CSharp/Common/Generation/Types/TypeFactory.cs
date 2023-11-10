@@ -89,7 +89,9 @@ namespace AutoRest.CSharp.Generation.Types
         };
 
         /// <summary>
-        /// This function is used to create a CSharpType from an InputType. It will create the type and set the isLiteral and literalValue properties.
+        /// This function is used to create a CSharpType from an InputType.
+        /// If the InputType is a framework type, the CSharpType will be created with the literal value Constant
+        /// object.
         /// </summary>
         /// <param name="inputType">The input type to create a CSharpType from.</param>
         /// <param name="literalValue">The literal value of the InputType, if any.</param>
@@ -98,11 +100,20 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType CreateType(InputType inputType, object literalValue, bool isLiteral)
         {
             CSharpType type = CreateType(inputType);
-            type.IsLiteral = isLiteral;
 
-            if (literalValue != null)
+            if (type.IsFrameworkType)
             {
-                type.LiteralValue = literalValue;
+                Constant? literal;
+                try
+                {
+                    literal = new Constant(literalValue, type);
+                }
+                catch
+                {
+                    literal = null;
+                }
+
+                type = new CSharpType(type.FrameworkType, type.IsNullable, isLiteral, literal);
             }
 
             return type;

@@ -115,6 +115,8 @@ namespace AutoRest.CSharp.Generation.Writers
             const string literalFormatString = ":L";
             const string declarationFormatString = ":D"; // :D :)
             const string identifierFormatString = ":I";
+            const string typeNameFormatString = ":C"; // Format flag to adjust how type names are written
+
             foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(formattableString.Format))
             {
                 if (isLiteral)
@@ -133,6 +135,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var isDeclaration = span.EndsWith(declarationFormatString);
                 var isIdentifier = span.EndsWith(identifierFormatString);
                 var isLiteralFormat = span.EndsWith(literalFormatString);
+                var isGenericTypeName = span.EndsWith(typeNameFormatString);
+
                 switch (argument)
                 {
                     case IEnumerable<FormattableString> fss:
@@ -148,7 +152,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         AppendType(new CSharpType(t));
                         break;
                     case CSharpType t:
-                        AppendType(t, isDeclaration);
+                        AppendType(t, isDeclaration, isGenericTypeName);
                         break;
                     case CodeWriterDeclaration declaration when isDeclaration:
                         Declaration(declaration);
@@ -328,7 +332,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        private void AppendType(CSharpType type, bool isDeclaration = false)
+        private void AppendType(CSharpType type, bool isDeclaration = false, bool isGenericTypeName = false)
         {
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
@@ -352,7 +356,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 AppendRaw(type.Name);
             }
 
-            if (type.Arguments.Any())
+            if (isGenericTypeName)
+            {
+                if (TypeFactory.IsList(type) || TypeFactory.IsArray(type))
+                {
+                    AppendRaw("{T}");
+                }
+                else if (TypeFactory.IsDictionary(type))
+                {
+                    AppendRaw("{TKey, TValue}");
+                }
+            }
+            else if (type.Arguments.Any())
             {
                 AppendRaw("<");
                 foreach (var typeArgument in type.Arguments)
