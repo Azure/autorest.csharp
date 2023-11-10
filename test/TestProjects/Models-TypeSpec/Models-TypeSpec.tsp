@@ -104,12 +104,14 @@ enum FixedIntEnum {
     Four: 4
 }
 
-// @doc("Fixed float enum")
-// enum FixedFloatEnum {
-//     One: 1.1,
-//     Two: 2.1,
-//     Four: 4.0
-// }
+@doc("Fixed float enum")
+@fixed
+@deprecated("should be replaced by cadl-ranch")
+enum FixedFloatEnum {
+    One: 1.1,
+    Two: 2.1,
+    Four: 4.0
+}
 
 @doc("Extensible enum")
 @deprecated("deprecated for test")
@@ -118,6 +120,15 @@ enum ExtensibleEnum {
     Two: "2",
     Four: "4"
 }
+
+@doc("Extensible int enum")
+@deprecated("should be replaced by cadl-ranch")
+enum ExtensibleIntEnum {
+    One: 1,
+    Two: 2,
+    Four: 4
+}
+
 
 @doc("Model used both as input and output")
 model RoundTripModel extends BaseModel {
@@ -596,6 +607,18 @@ op roundTripRecursive(@body input: RoundTripRecursiveModel): RoundTripRecursiveM
 @get
 @convenientAPI(true)
 op selfReference(): ErrorModel;
+
+@route("/fixedFloatEnum")
+@doc("Returns model that has property of its own type")
+@get
+@convenientAPI(true)
+op fixedFloatEnum(@query input: FixedFloatEnum): OutputModel;
+
+@route("/extenisbleIntEnum")
+@doc("Returns model that has property of its own type")
+@get
+@convenientAPI(true)
+op extenisbleIntEnum(@query input: ExtensibleIntEnum): OutputModel;
 
 @doc("Base model")
 model NoUseBase {
