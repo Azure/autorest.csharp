@@ -56,7 +56,7 @@ ___
 
 ## Prerequisites
 
-- [NodeJS (16.x.x)](https://nodejs.org/en/) 
+- [NodeJS (18.x.x)](https://nodejs.org/en/) 
 - [.NET Core SDK (5.0.100)](https://dotnet.microsoft.com/download/dotnet-core/5.0)
 - [PowerShell Core 7](https://github.com/PowerShell/PowerShell/releases/latest)
 - `npm install` (at root)
