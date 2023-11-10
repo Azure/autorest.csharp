@@ -492,12 +492,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
-            if (TryCreateConversionForEnum(convenienceMethodParameter, convenienceMethodParameter.IsOptionalInSignature, out var convertedValue))
-            {
-                _arguments[protocolMethodParameter] = convertedValue;
-                return;
-            }
-
             if (protocolMethodParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
                 CreateConversionToRequestContent(inputParameter, convenienceMethodParameter, new Dictionary<InputParameter, Parameter>(), convenienceMethodParameter.IsOptionalInSignature, out var argument, out var conversions);
@@ -514,6 +508,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     _arguments[protocolMethodParameter] = requestContent;
                 }
 
+                return;
+            }
+
+            if (TryCreateConversionForEnum(convenienceMethodParameter, convenienceMethodParameter.IsOptionalInSignature, out var convertedValue))
+            {
+                _arguments[protocolMethodParameter] = convertedValue;
                 return;
             }
 
