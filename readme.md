@@ -75,6 +75,15 @@ These arguments change the behavior:
 - `-fast` option skips Swagger -> YAML IL step. Much faster when only making codegen changes
 - `-fast SWAGGER_NAME` (where SWAGGER_NAME is replaced with the name of the swagger) to run only one case
 
+You could run this command on local dev machine or ask github workflow run it against your branch. The steps to run workflow is:
+
+1. Go to github actions from your fork repo.
+2. Click workflow "Regenerate all code".
+3. Choose the branch you are working on, and click "Run workflow".
+4. After the workflow success, there will be a new commit to your branch
+
+![Regen workflow example image](./docs/images/regenWorkflow.png)
+
 **`dotnet test` (at root)**
 
 ### Testing Details

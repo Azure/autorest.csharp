@@ -96,7 +96,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocResources and their operations over a FakeParentWithAncestorWithNonResChWithLocResource. </returns>
         public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
-            return GetCachedClient(Client => new FakeParentWithAncestorWithNonResChWithLocCollection(Client, Id));
+            return GetCachedClient(client => new FakeParentWithAncestorWithNonResChWithLocCollection(client, Id));
         }
 
         /// <summary>
@@ -114,8 +114,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeParentWithAncestorWithNonResChWithLocResource>> GetFakeParentWithAncestorWithNonResChWithLocAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -137,8 +137,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResChWithLoc(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -149,7 +149,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChResources and their operations over a FakeParentWithAncestorWithNonResChResource. </returns>
         public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
-            return GetCachedClient(Client => new FakeParentWithAncestorWithNonResChCollection(Client, Id));
+            return GetCachedClient(client => new FakeParentWithAncestorWithNonResChCollection(client, Id));
         }
 
         /// <summary>
@@ -167,8 +167,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeParentWithAncestorWithNonResChResource>> GetFakeParentWithAncestorWithNonResChAsync(string fakeParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -190,8 +190,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResCh(string fakeParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -202,7 +202,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocResources and their operations over a FakeParentWithAncestorWithLocResource. </returns>
         public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
-            return GetCachedClient(Client => new FakeParentWithAncestorWithLocCollection(Client, Id));
+            return GetCachedClient(client => new FakeParentWithAncestorWithLocCollection(client, Id));
         }
 
         /// <summary>
@@ -220,8 +220,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeParentWithAncestorWithLocResource>> GetFakeParentWithAncestorWithLocAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
@@ -243,8 +243,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLoc(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
@@ -255,7 +255,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestorResources and their operations over a FakeParentWithAncestorResource. </returns>
         public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
-            return GetCachedClient(Client => new FakeParentWithAncestorCollection(Client, Id));
+            return GetCachedClient(client => new FakeParentWithAncestorCollection(client, Id));
         }
 
         /// <summary>
@@ -273,8 +273,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeParentWithAncestorResource>> GetFakeParentWithAncestorAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
@@ -296,8 +296,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeParentWithAncestorResource> GetFakeParentWithAncestor(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
@@ -308,7 +308,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithNonResChResources and their operations over a FakeParentWithNonResChResource. </returns>
         public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
-            return GetCachedClient(Client => new FakeParentWithNonResChCollection(Client, Id));
+            return GetCachedClient(client => new FakeParentWithNonResChCollection(client, Id));
         }
 
         /// <summary>
@@ -326,8 +326,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeParentWithNonResChResource>> GetFakeParentWithNonResChAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -349,8 +349,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeParentWithNonResChResource> GetFakeParentWithNonResCh(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -361,7 +361,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentResources and their operations over a FakeParentResource. </returns>
         public virtual FakeParentCollection GetFakeParents()
         {
-            return GetCachedClient(Client => new FakeParentCollection(Client, Id));
+            return GetCachedClient(client => new FakeParentCollection(client, Id));
         }
 
         /// <summary>
@@ -379,8 +379,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeParentResource>> GetFakeParentAsync(string fakeParentName, CancellationToken cancellationToken = default)
         {
@@ -402,8 +402,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeParentResource> GetFakeParent(string fakeParentName, CancellationToken cancellationToken = default)
         {
@@ -414,7 +414,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeConfigurationResources and their operations over a FakeConfigurationResource. </returns>
         public virtual FakeConfigurationCollection GetFakeConfigurations()
         {
-            return GetCachedClient(Client => new FakeConfigurationCollection(Client, Id));
+            return GetCachedClient(client => new FakeConfigurationCollection(client, Id));
         }
 
         /// <summary>
@@ -432,8 +432,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="configurationName"> The name of the configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="configurationName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="configurationName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeConfigurationResource>> GetFakeConfigurationAsync(string configurationName, CancellationToken cancellationToken = default)
         {
@@ -455,8 +455,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="configurationName"> The name of the configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="configurationName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="configurationName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeConfigurationResource> GetFakeConfiguration(string configurationName, CancellationToken cancellationToken = default)
         {

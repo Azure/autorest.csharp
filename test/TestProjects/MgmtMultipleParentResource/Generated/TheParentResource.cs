@@ -96,7 +96,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
         public virtual SubParentCollection GetSubParents()
         {
-            return GetCachedClient(Client => new SubParentCollection(Client, Id));
+            return GetCachedClient(client => new SubParentCollection(client, Id));
         }
 
         /// <summary>
@@ -115,8 +115,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SubParentResource>> GetSubParentAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -139,8 +139,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SubParentResource> GetSubParent(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {

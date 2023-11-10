@@ -95,7 +95,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetGrandChildResources and their operations over a AvailabilitySetGrandChildResource. </returns>
         public virtual AvailabilitySetGrandChildCollection GetAvailabilitySetGrandChildren()
         {
-            return GetCachedClient(Client => new AvailabilitySetGrandChildCollection(Client, Id));
+            return GetCachedClient(client => new AvailabilitySetGrandChildCollection(client, Id));
         }
 
         /// <summary>
@@ -113,8 +113,8 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AvailabilitySetGrandChildResource>> GetAvailabilitySetGrandChildAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
@@ -136,8 +136,8 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<AvailabilitySetGrandChildResource> GetAvailabilitySetGrandChild(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
