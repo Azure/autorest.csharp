@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
                     if (parameter.DefaultValue == null)
                     {
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
+                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
@@ -214,7 +214,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (IsSameParameter(parameter, KnownParameters.RequestConditionsParameter) || IsSameParameter(parameter, KnownParameters.MatchConditionsParameter))
             {
                 // temporarily just return null value
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
                 return true;
             }
 

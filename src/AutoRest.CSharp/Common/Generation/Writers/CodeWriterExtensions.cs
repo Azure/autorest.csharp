@@ -486,83 +486,6 @@ namespace AutoRest.CSharp.Generation.Writers
         public static CodeWriter WriteReferenceOrConstant(this CodeWriter writer, ReferenceOrConstant value)
             => writer.Append(value.GetReferenceOrConstantFormattable());
 
-        public static CodeWriter WriteInitialization(
-            this CodeWriter writer,
-            Action<FormattableString> valueCallback,
-            TypeProvider objectType,
-            ObjectTypeConstructor constructor,
-            IEnumerable<PropertyInitializer> initializers)
-        {
-            var initializersSet = initializers.ToHashSet();
-
-            // Find longest satisfiable ctor
-            List<PropertyInitializer> selectedCtorInitializers = constructor.Signature.Parameters
-                .Select(constructor.FindPropertyInitializedByParameter)
-                .Select(property => initializersSet.SingleOrDefault(i => i.Name == property?.Declaration.Name && Equals(i.Type, property.Declaration.Type)))
-                .ToList();
-
-            // Checks if constructor parameters can be satisfied by the provided initializer list
-            Debug.Assert(!selectedCtorInitializers.Contains(default));
-
-            // Find properties that would have to be initialized using a foreach loop
-            var collectionInitializers = initializersSet
-                .Except(selectedCtorInitializers)
-                .Where(i => i.IsReadOnly && TypeFactory.IsCollectionType(i.Type))
-                .ToArray();
-
-            // Find properties that would have to be initialized via property initializers
-            var restOfInitializers = initializersSet
-                .Except(selectedCtorInitializers)
-                .Except(collectionInitializers)
-                .ToArray();
-
-            var constructorParameters = selectedCtorInitializers
-                .Select<PropertyInitializer, FormattableString>(pi => $"{pi.Value}{GetConversion(writer, pi.ValueType!, pi.Type)}")
-                .ToArray()
-                .Join(", ");
-
-            var propertyInitializers = restOfInitializers
-                .Select<PropertyInitializer, FormattableString>(pi => $"{pi.Name} = {pi.Value}{GetConversion(writer, pi.ValueType!, pi.Type)}")
-                .ToArray()
-                .Join(",\n ");
-
-            var objectInitializerFormattable = restOfInitializers.Any()
-                ? $"new {objectType.Type}({constructorParameters}) {{\n{propertyInitializers}\n}}"
-                : (FormattableString)$"new {objectType.Type}({constructorParameters})";
-
-            if (collectionInitializers.Any())
-            {
-                var modelVariable = new CodeWriterDeclaration(objectType.Declaration.Name.ToVariableName());
-                writer.Line($"{objectType.Type} {modelVariable:D} = {objectInitializerFormattable};");
-
-                // Writes the:
-                // foreach (var value in param)
-                // {
-                //     model.CollectionProperty = value;
-                // }
-                foreach (var propertyInitializer in collectionInitializers)
-                {
-                    var valueVariable = new CodeWriterDeclaration("value");
-                    using (writer.Scope($"if ({propertyInitializer.Value} != null)"))
-                    {
-                        using (writer.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
-                        {
-                            writer.Append($"{modelVariable:I}.{propertyInitializer.Name}.Add({valueVariable});");
-                        }
-                    }
-                }
-
-                valueCallback($"{modelVariable:I}");
-            }
-            else
-            {
-                valueCallback(objectInitializerFormattable);
-            }
-
-
-            return writer;
-        }
-
         public static CodeWriter WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
         {
             if (TypeFactory.RequiresToList(from, to))
@@ -572,17 +495,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return writer;
-        }
-
-        internal static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
-        {
-            if (TypeFactory.RequiresToList(from, to))
-            {
-                writer.UseNamespace(typeof(Enumerable).Namespace!);
-                return from.IsNullable ? "?.ToList()" : ".ToList()";
-            }
-
-            return string.Empty;
         }
 
         public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)

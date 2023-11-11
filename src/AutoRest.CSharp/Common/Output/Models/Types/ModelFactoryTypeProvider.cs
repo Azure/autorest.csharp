@@ -29,8 +29,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= Models.Select(CreateMethod);
+        private IReadOnlyList<Method>? _methods;
+        public IReadOnlyList<Method> Methods => _methods ??= Models.Select(CreateMethod).WhereNotNull().ToList();
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
@@ -38,9 +38,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> models, string defaultName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-            Models = objectTypes;
+            Models = models;
 
             DefaultName = defaultName;
             DefaultAccessibility = "public";
@@ -53,32 +53,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (!Configuration.GenerateModelFactory)
                 return null;
 
-            var objectTypes = models.OfType<SerializableObjectType>()
-                .Where(RequiresModelFactory)
-                .ToHashSet();
-
             var defaultNamespace = GetDefaultNamespace();
             var defaultName = $"{GetRPName(defaultNamespace)}ModelFactory".ToCleanName();
             defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
 
-            var existingFactoryType = sourceInputModel?.FindForType(defaultNamespace, defaultName);
-            if (existingFactoryType is not null)
-            {
-                foreach (ITypeSymbol existingSymbol in existingFactoryType.GetMembers().OfType<IMethodSymbol>().Select(m => m.ReturnType))
-                {
-                    if (typeFactory.TryCreateType(existingSymbol, out var existingType) && existingType is { IsFrameworkType: false, Implementation: SerializableObjectType existingObjectType })
-                    {
-                        objectTypes.Remove(existingObjectType);
-                    }
-                }
-            }
-
-            if (!objectTypes.Any())
-            {
-                return null;
-            }
-
-            return new ModelFactoryTypeProvider(objectTypes, defaultName, defaultNamespace, sourceInputModel);
+            return new ModelFactoryTypeProvider(models.OfType<SerializableObjectType>(), defaultName, defaultNamespace, sourceInputModel);
         }
 
         public static string GetRPName(string defaultNamespace)
@@ -165,8 +144,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        private Method CreateMethod(SerializableObjectType model)
+        private Method? CreateMethod(SerializableObjectType model)
         {
+            if (!RequiresModelFactory(model))
+            {
+                return null;
+            }
+
             var ctor = model.SerializationConstructor;
             var ctorToCall = ctor;
             var discriminator = model.Discriminator;
@@ -250,6 +234,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 model.Type,
                 returnDescription,
                 methodParameters);
+
+            if (SourceInputHelper.TryGetExistingMethod(ExistingType, signature, out _))
+            {
+                return null;
+            }
 
             var methodBody = new MethodBodyStatement[]
             {

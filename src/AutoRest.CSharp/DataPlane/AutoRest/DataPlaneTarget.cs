@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             var modelFactoryType = library.ModelFactory;
-            if (modelFactoryType != default)
+            if (modelFactoryType is not null && modelFactoryType.Methods.Any())
             {
                 var modelFactoryWriter = new ModelFactoryWriter(modelFactoryType);
                 modelFactoryWriter.Write();

@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue != null)
                     return New.Instance(frameworkType, Literal(rawValue.RawValue.ToString()!));
                 else
-                    return frameworkType.IsValueType ? Default : Null;
+                    return frameworkType.IsValueType ? Default.CastTo(frameworkType) : Null.CastTo(frameworkType);
             }
 
             if (frameworkType == typeof(IPAddress))
@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue != null)
                     return new InvokeStaticMethodExpression(typeof(IPAddress), nameof(IPAddress.Parse), new[] { Literal(rawValue.RawValue.ToString()!) });
                 else
-                    return Null;
+                    return Null.CastTo(frameworkType);
             }
 
             if (frameworkType == typeof(BinaryData))
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                     };
                 }
 
-                return Default;
+                return Default.CastTo(frameworkType);
             }
 
             if (frameworkType == typeof(DateTimeOffset))
@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                     }
                 }
 
-                return Default;
+                return Default.CastTo(frameworkType);
             }
 
             if (frameworkType == typeof(Guid))
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                     return GuidExpression.Parse(s);
                 }
 
-                return Default;
+                return Default.CastTo(frameworkType);
             }
 
             if (frameworkType == typeof(char) ||
@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                         return new CastExpression(Literal(rawValue.RawValue), frameworkType);
                 }
 
-                return Default;
+                return Default.CastTo(frameworkType);
             }
 
             if (frameworkType == typeof(string))
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                     return Literal(rawValue.RawValue.ToString());
                 }
 
-                return Null;
+                return Null.CastTo(frameworkType);
             }
 
             if (frameworkType == typeof(bool))
@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is bool b)
                     return Literal(b);
 
-                return Default;
+                return Default.CastTo(frameworkType);
             }
 
             if (frameworkType == typeof(byte[]))
@@ -198,10 +198,10 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
                     return new TypeReference(typeof(Encoding)).Property(nameof(Encoding.UTF8)).Invoke(nameof(Encoding.GetBytes), Literal(rawValue.RawValue.ToString()));
 
-                return Null;
+                return Null.CastTo(frameworkType);
             }
 
-            return frameworkType.IsValueType ? Default : Null;
+            return frameworkType.IsValueType ? Default.CastTo(frameworkType) : Null.CastTo(frameworkType);
         }
 
         private static ValueExpression GetExpressionForRequestContent(InputExampleValue value)
@@ -324,7 +324,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             {
                 ObjectType objectType => GetExpressionForObjectType(objectType, (exampleValue as InputExampleObjectValue)?.Values),
                 EnumType enumType when exampleValue is InputExampleRawValue rawValue => GetExpressionForEnumType(enumType, rawValue.RawValue!),
-                _ => type is { IsValueType: true, IsNullable: false } ? Default : Null,
+                _ => type is { IsValueType: true, IsNullable: false } ? Default.CastTo(type) : Null.CastTo(type),
             };
         }
 

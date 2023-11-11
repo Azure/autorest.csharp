@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             var modelFactoryProvider = MgmtContext.Library.ModelFactory;
-            if (modelFactoryProvider != null)
+            if (modelFactoryProvider is not null && modelFactoryProvider.Methods.Any())
             {
                 var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
                 modelFactoryWriter.Write();
