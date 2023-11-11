@@ -38,11 +38,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
         }
-        public IReadOnlyList<DpgClient> RestClients { get; }
+        public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(Models);
 
-        public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<DpgClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
+        public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
             TypeFactory = new TypeFactory(this);
             _libraryName = libraryName;
@@ -64,12 +64,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ModelFactoryTypeProvider? _modelFactoryProvider;
         public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, _sourceInputModel);
 
-        private Dictionary<DpgClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
-        private Dictionary<DpgClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
+        private Dictionary<LowLevelClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
+        private Dictionary<LowLevelClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
 
-        private Dictionary<DpgClient, DpgClientSampleProvider> EnsureDpgSampleProviders()
+        private Dictionary<LowLevelClient, DpgClientSampleProvider> EnsureDpgSampleProviders()
         {
-            var result = new Dictionary<DpgClient, DpgClientSampleProvider>();
+            var result = new Dictionary<LowLevelClient, DpgClientSampleProvider>();
             foreach (var client in RestClients)
             {
                 var sampleProvider = new DpgClientSampleProvider(Configuration.Namespace, client, _sourceInputModel);
@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        public DpgClientSampleProvider? GetSampleForClient(DpgClient client) => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
+        public DpgClientSampleProvider? GetSampleForClient(LowLevelClient client) => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {

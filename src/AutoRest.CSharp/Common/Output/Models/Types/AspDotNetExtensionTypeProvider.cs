@@ -24,9 +24,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private IReadOnlyList<DpgClient> _clients;
+        private IReadOnlyList<LowLevelClient> _clients;
 
-        public AspDotNetExtensionTypeProvider(IReadOnlyList<DpgClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
+        public AspDotNetExtensionTypeProvider(IReadOnlyList<LowLevelClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
         {
             DefaultName = $"{ClientBuilder.GetRPName(clientNamespace)}ClientBuilderExtensions".ToCleanName();
             //TODO: very bad design that this list is empty when we leave the constructor and is filled in at some point in the future.
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         public FormattableString Description => $"Extension methods to add {GetClientSeeRefs()} to client builder";
 
-        private IEnumerable<DpgClient> _topLevelClients => _clients.Where(client => !client.IsSubClient && client.Declaration.Accessibility == "public");
+        private IEnumerable<LowLevelClient> _topLevelClients => _clients.Where(client => !client.IsSubClient && client.Declaration.Accessibility == "public");
 
         protected override string DefaultName { get; }
 

@@ -71,8 +71,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return true;
         }
 
-        protected readonly string _privateAdditionalPropertiesPropertyDescription = "Keeps track of any properties unknown to the library.";
-        protected readonly string _privateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
-        protected readonly CSharpType _privateAdditionalPropertiesPropertyType = new CSharpType(typeof(IDictionary<,>), typeof(string), typeof(BinaryData));
+        protected const string PrivateAdditionalPropertiesPropertyDescription = "Keeps track of any properties unknown to the library.";
+        protected const string PrivateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
+        protected static readonly CSharpType _privateAdditionalPropertiesPropertyType = typeof(IDictionary<string, BinaryData>);
     }
 }

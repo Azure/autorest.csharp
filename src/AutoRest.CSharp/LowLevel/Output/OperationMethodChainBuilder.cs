@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly string _namespaceName;
         private readonly string _clientName;
-        private readonly DpgClient? _client;
+        private readonly LowLevelClient? _client;
         private readonly ClientFields _fields;
         private readonly IReadOnlyDictionary<string, InputClientExample>? _clientParameterExamples;
         private readonly TypeFactory _typeFactory;
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(DpgClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel, IReadOnlyDictionary<string, InputClientExample>? clientParameterExamples)
+        public OperationMethodChainBuilder(LowLevelClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel, IReadOnlyDictionary<string, InputClientExample>? clientParameterExamples)
         {
             _client = client;
             _namespaceName = namespaceName;

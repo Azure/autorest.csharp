@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Common.Decorator
 {
     internal static class DefaultDerivedSchema
     {
-        private const string _defaultDerivedExtension = "x-ms-autorest-defaultDerivedSchema";
+        private const string DefaultDerivedExtension = "x-ms-autorest-defaultDerivedSchema";
 
         public static void AddDefaultDerivedSchemas(CodeModel codeModel)
         {
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Common.Decorator
         public static ObjectSchema? GetDefaultDerivedSchema(this ObjectSchema schema)
         {
             object? result = null;
-            schema.Extensions?.TryGetValue(_defaultDerivedExtension, out result);
+            schema.Extensions?.TryGetValue(DefaultDerivedExtension, out result);
             return result as ObjectSchema;
         }
 
@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.Common.Decorator
                     {
                         defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', extensionUsages));
                     }
-                    defaultDerivedSchema.Extensions.Add(_defaultDerivedExtension, defaultDerivedSchema);
+                    defaultDerivedSchema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
                     defaultDerivedSchema.Extensions.Add("x-accessibility", "internal");
                     defaultDerivedSchemas.Add(defaultDerivedSchema.Name, defaultDerivedSchema);
                 }
@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Common.Decorator
             {
                 if (schema.Extensions is null)
                     schema.Extensions = new RecordOfStringAndAny();
-                schema.Extensions.Add(_defaultDerivedExtension, defaultDerivedSchema);
+                schema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
             }
         }
 
