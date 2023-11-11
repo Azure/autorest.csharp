@@ -410,20 +410,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                     null);
         }
 
-        protected override bool EnsureHasJsonSerialization()
+        protected override JsonObjectSerialization? BuildJsonSerialization()
         {
             if (IsPropertyBag)
-                return false;
-            return true;
-        }
-
-        protected override bool EnsureHasXmlSerialization()
-        {
-            return false;
-        }
-
-        protected override JsonObjectSerialization EnsureJsonSerialization()
-        {
+                return null;
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
             return new(this, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), CreateAdditionalPropertiesSerialization(), Discriminator, false);
@@ -460,7 +450,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 shouldExcludeInWireSerialization);
         }
 
-        protected override XmlObjectSerialization? EnsureXmlSerialization()
+        protected override XmlObjectSerialization? BuildXmlSerialization()
         {
             return null;
         }

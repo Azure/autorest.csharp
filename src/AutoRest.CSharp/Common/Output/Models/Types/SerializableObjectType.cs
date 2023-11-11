@@ -23,22 +23,36 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
 
+        private bool _jsonSerializationInitialized = false;
         private JsonObjectSerialization? _jsonSerialization;
-        public JsonObjectSerialization? JsonSerialization => HasJsonSerialization ? _jsonSerialization ??= EnsureJsonSerialization() : null;
+        public JsonObjectSerialization? JsonSerialization => EnsureJsonSerialization();
 
+        private bool _xmlSerializationInitialized = false;
         private XmlObjectSerialization? _xmlSerialization;
-        public XmlObjectSerialization? XmlSerialization => HasXmlSerialization ? _xmlSerialization ??= EnsureXmlSerialization() : null;
+        public XmlObjectSerialization? XmlSerialization => EnsureXmlSerialization();
 
-        private bool? _hasJsonSerialization;
-        private bool HasJsonSerialization => _hasJsonSerialization ??= EnsureHasJsonSerialization();
+        private JsonObjectSerialization? EnsureJsonSerialization()
+        {
+            if (_jsonSerializationInitialized)
+                return _jsonSerialization;
 
-        private bool? _hasXmlSerialization;
-        private bool HasXmlSerialization => _hasXmlSerialization ??= EnsureHasXmlSerialization();
+            _jsonSerializationInitialized = true;
+            _jsonSerialization = BuildJsonSerialization();
+            return _jsonSerialization;
+        }
 
-        protected abstract bool EnsureHasJsonSerialization();
-        protected abstract bool EnsureHasXmlSerialization();
-        protected abstract JsonObjectSerialization? EnsureJsonSerialization();
-        protected abstract XmlObjectSerialization? EnsureXmlSerialization();
+        private XmlObjectSerialization? EnsureXmlSerialization()
+        {
+            if (_xmlSerializationInitialized)
+                return _xmlSerialization;
+
+            _xmlSerializationInitialized = true;
+            _xmlSerialization = BuildXmlSerialization();
+            return _xmlSerialization;
+        }
+
+        protected abstract JsonObjectSerialization? BuildJsonSerialization();
+        protected abstract XmlObjectSerialization? BuildXmlSerialization();
 
         // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method
         public virtual ObjectTypeProperty? RawDataField => null;

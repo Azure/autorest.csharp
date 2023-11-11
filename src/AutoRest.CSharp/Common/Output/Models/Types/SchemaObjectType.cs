@@ -714,24 +714,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             return $"{ObjectSchema.CreateDescription()}";
         }
 
-        protected override bool EnsureHasJsonSerialization()
+        protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Json);
+            return _supportedSerializationFormats.Contains(KnownMediaType.Json) ? _serializationBuilder.BuildJsonObjectSerialization(this) : null;
         }
 
-        protected override bool EnsureHasXmlSerialization()
+        protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Xml);
-        }
-
-        protected override JsonObjectSerialization EnsureJsonSerialization()
-        {
-            return _serializationBuilder.BuildJsonObjectSerialization(this);
-        }
-
-        protected override XmlObjectSerialization EnsureXmlSerialization()
-        {
-            return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         }
 
         private SerializableObjectType? BuildDefaultDerivedType()
