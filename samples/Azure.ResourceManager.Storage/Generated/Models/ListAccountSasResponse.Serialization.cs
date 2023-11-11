@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         void IJsonModel<ListAccountSasResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ListAccountSasResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<ListAccountSasResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ListAccountSasResponse>)} interface");
             }

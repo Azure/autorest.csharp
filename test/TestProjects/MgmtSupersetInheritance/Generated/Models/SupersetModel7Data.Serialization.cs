@@ -21,7 +21,7 @@ namespace MgmtSupersetInheritance
 
         void IJsonModel<SupersetModel7Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SupersetModel7Data>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SupersetModel7Data>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SupersetModel7Data>)} interface");
             }

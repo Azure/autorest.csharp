@@ -21,7 +21,7 @@ namespace AnomalyDetector.Models
 
         void IJsonModel<MultivariateLastDetectionOptions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<MultivariateLastDetectionOptions>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<MultivariateLastDetectionOptions>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MultivariateLastDetectionOptions>)} interface");
             }

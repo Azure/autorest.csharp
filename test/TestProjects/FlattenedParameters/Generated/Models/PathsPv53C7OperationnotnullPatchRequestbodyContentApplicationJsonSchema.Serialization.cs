@@ -20,7 +20,7 @@ namespace FlattenedParameters.Models
 
         void IJsonModel<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>)} interface");
             }

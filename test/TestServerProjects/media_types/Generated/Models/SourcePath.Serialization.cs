@@ -20,7 +20,7 @@ namespace media_types.Models
 
         void IJsonModel<SourcePath>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SourcePath>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<SourcePath>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SourcePath>)} interface");
             }
