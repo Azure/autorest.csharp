@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
 {
     internal static class ExampleValueSnippets
     {
-        public static ValueExpression GetExpression(CSharpType type, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        public static ValueExpression GetExpression(CSharpType type, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool castDefaultValueToType, bool includeCollectionInitialization = true)
         {
             // handle ReadOnlyMemory
             if (TypeFactory.IsReadOnlyMemory(type))
@@ -47,14 +47,20 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             if (frameworkType != null)
             {
                 // handle framework type
-                return GetExpressionForFrameworkType(frameworkType, exampleValue, serializationFormat, includeCollectionInitialization);
+                return GetExpressionForFrameworkType(frameworkType, exampleValue, serializationFormat, includeCollectionInitialization) ?? GetDefault(type, castDefaultValueToType);
             }
 
             // handle implementation
-            return GetExpressionForTypeProvider(type, exampleValue);
+            return GetExpressionForTypeProvider(type, exampleValue) ?? GetDefault(type, castDefaultValueToType);
         }
 
-        private static ValueExpression GetExpressionForFrameworkType(Type frameworkType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetDefault(CSharpType type, bool castToType)
+        {
+            var defaultValue = type is { IsValueType: true, IsNullable: false } ? Default : Null;
+            return castToType ? defaultValue.CastTo(type) : defaultValue;
+        }
+
+        private static ValueExpression? GetExpressionForFrameworkType(Type frameworkType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             // handle objects - we usually do not generate object types, but for some rare cases (such as union type) we generate object
             // and we get this case in the free form object initialization as well
@@ -69,6 +75,16 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 return GetExpressionForRequestContent(exampleValue);
             }
 
+            if (frameworkType == typeof(BinaryData))
+            {
+                return GetExpressionForBinaryData(exampleValue);
+            }
+
+            if (exampleValue is not InputExampleRawValue { RawValue: {} rawValue } exampleRawValue)
+            {
+                return null;
+            }
+
             if (frameworkType == typeof(ETag) ||
                 frameworkType == typeof(Uri) ||
                 frameworkType == typeof(ResourceIdentifier) ||
@@ -77,83 +93,53 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 frameworkType == typeof(RequestMethod) ||
                 frameworkType == typeof(AzureLocation))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue != null)
-                    return New.Instance(frameworkType, Literal(rawValue.RawValue.ToString()!));
-                else
-                    return frameworkType.IsValueType ? Default.CastTo(frameworkType) : Null.CastTo(frameworkType);
+                return New.Instance(frameworkType, Literal(rawValue.ToString()!));
             }
 
             if (frameworkType == typeof(IPAddress))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue != null)
-                    return new InvokeStaticMethodExpression(typeof(IPAddress), nameof(IPAddress.Parse), new[] { Literal(rawValue.RawValue.ToString()!) });
-                else
-                    return Null.CastTo(frameworkType);
-            }
-
-            if (frameworkType == typeof(BinaryData))
-            {
-                return GetExpressionForBinaryData(exampleValue);
+                return new InvokeStaticMethodExpression(typeof(IPAddress), nameof(IPAddress.Parse), new[] { Literal(rawValue.ToString()!) });
             }
 
             if (frameworkType == typeof(TimeSpan))
             {
-                if (exampleValue is InputExampleRawValue { RawValue: { } } rawValue)
+                switch (serializationFormat)
                 {
-                    switch (serializationFormat)
-                    {
-                        case SerializationFormat.Duration_Seconds or SerializationFormat.Duration_Seconds_Float:
-                            if (rawValue.RawValue is int or float or double)
-                                return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.FromSeconds), new[] { Literal(rawValue.RawValue) });
-                            break;
-                        case SerializationFormat.Duration_ISO8601:
-                            if (rawValue.RawValue is string duration)
-                                return new InvokeStaticMethodExpression(typeof(XmlConvert), nameof(XmlConvert.ToTimeSpan), new[] { Literal(duration) });
-                            break;
-                        case SerializationFormat.Time_ISO8601:
-                            if (rawValue.RawValue is string time)
-                                return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.Parse), new[] { Literal(time) });
-                            break;
-                    };
-                }
+                    case SerializationFormat.Duration_Seconds or SerializationFormat.Duration_Seconds_Float when rawValue is int or float or double:
+                        return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.FromSeconds), new[] { Literal(rawValue) });
 
-                return Default.CastTo(frameworkType);
+                    case SerializationFormat.Duration_ISO8601 when rawValue is string duration:
+                        return new InvokeStaticMethodExpression(typeof(XmlConvert), nameof(XmlConvert.ToTimeSpan), new[] { Literal(duration) });
+
+                    case SerializationFormat.Time_ISO8601 when rawValue is string time:
+                        return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.Parse), new[] { Literal(time) });
+
+                    default:
+                        return null;
+                }
             }
 
             if (frameworkType == typeof(DateTimeOffset))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
+                switch (serializationFormat)
                 {
-                    switch (serializationFormat)
-                    {
-                        case SerializationFormat.DateTime_Unix:
-                            long? time = rawValue.RawValue switch
-                            {
-                                int i => i,
-                                long l => l,
-                                _ => null
-                            };
-                            if (time != null)
-                                return DateTimeOffsetExpression.FromUnixTimeSeconds(Long(time.Value));
-                            break;
-                        case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601 or SerializationFormat.Date_ISO8601:
-                            if (rawValue.RawValue is string s)
-                                return DateTimeOffsetExpression.Parse(s);
-                            break;
-                    }
-                }
+                    case SerializationFormat.DateTime_Unix when rawValue is int i:
+                        return DateTimeOffsetExpression.FromUnixTimeSeconds(Long(i));
 
-                return Default.CastTo(frameworkType);
+                    case SerializationFormat.DateTime_Unix when rawValue is long l:
+                        return DateTimeOffsetExpression.FromUnixTimeSeconds(Long(l));
+
+                    case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601 or SerializationFormat.Date_ISO8601 when rawValue is string s:
+                        return DateTimeOffsetExpression.Parse(s);
+
+                    default:
+                        return null;
+                }
             }
 
             if (frameworkType == typeof(Guid))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is string s)
-                {
-                    return GuidExpression.Parse(s);
-                }
-
-                return Default.CastTo(frameworkType);
+                return rawValue is string s ? GuidExpression.Parse(s) : null;
             }
 
             if (frameworkType == typeof(char) ||
@@ -164,44 +150,32 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 frameworkType == typeof(double) ||
                 frameworkType == typeof(decimal))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is char or short or int or long or float or double or decimal)
+                if (rawValue is char or short or int or long or float or double or decimal)
                 {
-                    if (frameworkType == rawValue.RawValue.GetType())
-                        return Literal(rawValue.RawValue);
-                    else
-                        return new CastExpression(Literal(rawValue.RawValue), frameworkType);
+                    return frameworkType == rawValue.GetType()
+                        ? Literal(rawValue)
+                        : Literal(rawValue).CastTo(frameworkType);
                 }
 
-                return Default.CastTo(frameworkType);
+                return null;
             }
 
             if (frameworkType == typeof(string))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
-                {
-                    return Literal(rawValue.RawValue.ToString());
-                }
-
-                return Null.CastTo(frameworkType);
+                return Literal(rawValue.ToString());
             }
 
             if (frameworkType == typeof(bool))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is bool b)
-                    return Literal(b);
-
-                return Default.CastTo(frameworkType);
+                return rawValue is bool b ? Literal(b) : null;
             }
 
             if (frameworkType == typeof(byte[]))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
-                    return new TypeReference(typeof(Encoding)).Property(nameof(Encoding.UTF8)).Invoke(nameof(Encoding.GetBytes), Literal(rawValue.RawValue.ToString()));
-
-                return Null.CastTo(frameworkType);
+                return new TypeReference(typeof(Encoding)).Property(nameof(Encoding.UTF8)).Invoke(nameof(Encoding.GetBytes), Literal(rawValue.ToString()));
             }
 
-            return frameworkType.IsValueType ? Default.CastTo(frameworkType) : Null.CastTo(frameworkType);
+            return null;
         }
 
         private static ValueExpression GetExpressionForRequestContent(InputExampleValue value)
@@ -210,11 +184,9 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             {
                 return Null;
             }
-            else
-            {
-                var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
-                return Configuration.ApiTypes.GetCreateFromStreamSampleExpression(freeFormObjectExpression);
-            }
+
+            var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
+            return Configuration.ApiTypes.GetCreateFromStreamSampleExpression(freeFormObjectExpression);
         }
 
         private static ValueExpression GetExpressionForList(CSharpType listType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
@@ -251,8 +223,8 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             foreach (var (key, value) in exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>())
             {
-                var keyExpression = GetExpression(keyType, InputExampleValue.Value(InputPrimitiveType.String, key), SerializationFormat.Default);
-                var valueExpression = GetExpression(valueType, value, serializationFormat, includeCollectionInitialization);
+                var keyExpression = GetExpression(keyType, InputExampleValue.Value(InputPrimitiveType.String, key), SerializationFormat.Default, false);
+                var valueExpression = GetExpression(valueType, value, serializationFormat, false, includeCollectionInitialization);
                 elementExpressions.Add((keyExpression, valueExpression));
             }
 
@@ -269,13 +241,11 @@ namespace AutoRest.CSharp.LowLevel.Extensions
 
         private static ValueExpression GetExpressionForFreeFormObject(InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
         {
-            InputExampleRawValue rawValue => rawValue.RawValue == null ?
-                            Null :
-                            GetExpressionForFrameworkType(rawValue.RawValue.GetType(), exampleValue, SerializationFormat.Default, includeCollectionInitialization),
+            InputExampleRawValue { RawValue: null } => Null,
+            InputExampleRawValue rawValue => GetExpressionForFrameworkType(rawValue.RawValue.GetType(), exampleValue, SerializationFormat.Default, includeCollectionInitialization) ?? Null,
             InputExampleListValue listValue => GetExpressionForList(typeof(IList<object>), listValue, SerializationFormat.Default),
-            InputExampleObjectValue objectValue => CanBeInstantiatedByAnonymousObject(objectValue) ?
-                            GetExpressionForAnonymousObject(objectValue, includeCollectionInitialization) :
-                            GetExpressionForDictionary(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
+            InputExampleObjectValue objectValue when CanBeInstantiatedByAnonymousObject(objectValue) => GetExpressionForAnonymousObject(objectValue, includeCollectionInitialization),
+            InputExampleObjectValue objectValue => GetExpressionForDictionary(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
             InputExampleStreamValue streamValue => InvokeFileOpenRead(streamValue.Filename),
             _ => throw new InvalidOperationException($"unhandled case {exampleValue}")
         };
@@ -318,13 +288,13 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             return true;
         }
 
-        private static ValueExpression GetExpressionForTypeProvider(CSharpType type, InputExampleValue exampleValue)
+        private static ValueExpression? GetExpressionForTypeProvider(CSharpType type, InputExampleValue exampleValue)
         {
             return type.Implementation switch
             {
                 ObjectType objectType => GetExpressionForObjectType(objectType, (exampleValue as InputExampleObjectValue)?.Values),
                 EnumType enumType when exampleValue is InputExampleRawValue rawValue => GetExpressionForEnumType(enumType, rawValue.RawValue!),
-                _ => type is { IsValueType: true, IsNullable: false } ? Default.CastTo(type) : Null.CastTo(type),
+                _ => null,
             };
         }
 
@@ -380,7 +350,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 if (valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out var exampleValue))
                 {
                     properties.Remove(property);
-                    argument = GetExpression(propertyType, exampleValue, SerializationBuilder.GetSerializationFormat(exampleValue.Type), includeCollectionInitialization: true);
+                    argument = GetExpression(propertyType, exampleValue, SerializationBuilder.GetSerializationFormat(exampleValue.Type), false, includeCollectionInitialization: true);
                 }
                 else
                 {
@@ -397,7 +367,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 foreach (var (property, exampleValue) in propertiesToWrite)
                 {
                     // we need to pass in the current type of this property to make sure its initialization is correct
-                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, SerializationBuilder.GetSerializationFormat(exampleValue.Type), includeCollectionInitialization: false);
+                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, SerializationBuilder.GetSerializationFormat(exampleValue.Type), false, includeCollectionInitialization: false);
                     initializerDict.Add(property.Declaration.Name, propertyExpression);
                 }
                 objectPropertyInitializer = new(initializerDict, false);
