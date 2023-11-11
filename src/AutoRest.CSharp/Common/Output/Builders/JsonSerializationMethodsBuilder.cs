@@ -345,17 +345,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static MethodBodyStatement CheckFormat(ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
         {
             /*
-                if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<T>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json)
+                if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<T>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
                 {
                     throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<XmlModelForCombinedInterface>)} interface");
                     // use this when it support JSON for wire $"Must use 'J' or 'W' format when calling the {nameof(IJsonModel<XmlModelForCombinedInterface>)} interface"
                 }
              */
-            // condition: options.Format == ModelReaderWriterFormat.Wire && ((IModel<T>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json || options.Format != ModelReaderWriterFormat.Json
+            // condition: options.Format == ModelReaderWriterFormat.Wire && ((IModel<T>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json
             var iModelInterface = serialization.IModelInterface;
             var condition = Equal(options.Format, ModelReaderWriterFormatExpression.Wire)
                 .And(NotEqual(This.CastTo(iModelInterface).Invoke(nameof(IModel<object>.GetWireFormat), options), ModelReaderWriterFormatExpression.Json))
-                .Or(NotEqual(options.Format, ModelReaderWriterFormatExpression.Json));
+                .And(NotEqual(options.Format, ModelReaderWriterFormatExpression.Json));
             return new IfStatement(condition)
             {
                 // TODO switch the message to include W when possible
