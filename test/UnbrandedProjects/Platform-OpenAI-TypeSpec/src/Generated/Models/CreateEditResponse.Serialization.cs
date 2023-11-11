@@ -17,7 +17,7 @@ namespace OpenAI.Models
 
         void IJsonModel<CreateEditResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<CreateEditResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CreateEditResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateEditResponse>)} interface");
             }

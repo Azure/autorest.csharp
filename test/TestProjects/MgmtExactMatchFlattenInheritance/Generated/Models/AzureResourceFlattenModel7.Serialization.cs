@@ -20,7 +20,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
 
         void IJsonModel<AzureResourceFlattenModel7>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<AzureResourceFlattenModel7>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AzureResourceFlattenModel7>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AzureResourceFlattenModel7>)} interface");
             }

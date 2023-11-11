@@ -21,7 +21,7 @@ namespace MgmtPagination.Models
 
         void IJsonModel<PageSizeInt32ModelListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<PageSizeInt32ModelListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PageSizeInt32ModelListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PageSizeInt32ModelListResult>)} interface");
             }

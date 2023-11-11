@@ -21,7 +21,7 @@ namespace Projection.ProjectedName.Models
 
         void IJsonModel<JsonAndClientProjectedNameModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if (options.Format == ModelReaderWriterFormat.Wire && ((IModel<JsonAndClientProjectedNameModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<JsonAndClientProjectedNameModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<JsonAndClientProjectedNameModel>)} interface");
             }
