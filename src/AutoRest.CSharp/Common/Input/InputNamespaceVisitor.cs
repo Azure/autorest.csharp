@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private void BuildReferencesBetweenModels(IReadOnlyDictionary<InputType, InputType> typesCache, IReadOnlyDictionary<InputModelType, ModelWithReferences> targetWithOldReferencesToReferences)
         {
-            foreach (var (targetModelWithOldReferences, modelWithReferences) in targetWithOldReferencesToReferences) 
+            foreach (var (targetModelWithOldReferences, modelWithReferences) in targetWithOldReferencesToReferences)
             {
                 var properties = targetModelWithOldReferences.Properties.Select(p => VisitModelProperty(targetModelWithOldReferences, p, typesCache)).ToList();
                 modelWithReferences.TargetProperties.AddRange(properties);
