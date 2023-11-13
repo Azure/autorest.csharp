@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using Parameters.Spread;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="SpreadClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<SpreadClient, SpreadClientOptions> AddSpreadClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<SpreadClient, SpreadClientOptions> AddSpreadClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<SpreadClient, SpreadClientOptions>((options) => new SpreadClient(options));
+            return builder.RegisterClientFactory<SpreadClient, SpreadClientOptions>((options) => new SpreadClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="SpreadClient"/> instance. </summary>

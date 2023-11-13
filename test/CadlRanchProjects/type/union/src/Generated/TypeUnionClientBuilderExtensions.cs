@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using _Type.Union;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="UnionClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options) => new UnionClient(options));
+            return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options) => new UnionClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="UnionClient"/> instance. </summary>

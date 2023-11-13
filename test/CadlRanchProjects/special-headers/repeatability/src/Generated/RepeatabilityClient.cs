@@ -28,19 +28,22 @@ namespace SpecialHeaders.Repeatability
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of RepeatabilityClient. </summary>
-        public RepeatabilityClient() : this(new RepeatabilityClientOptions())
+        public RepeatabilityClient() : this(new Uri("http://localhost:3000"), new RepeatabilityClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RepeatabilityClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public RepeatabilityClient(RepeatabilityClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public RepeatabilityClient(Uri endpoint, RepeatabilityClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new RepeatabilityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 

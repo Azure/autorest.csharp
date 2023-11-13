@@ -37,23 +37,25 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> Initializes a new instance of QueriesClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public QueriesClient(AzureKeyCredential credential) : this(credential, new QueriesClientOptions())
+        public QueriesClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new QueriesClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of QueriesClient. </summary>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public QueriesClient(AzureKeyCredential credential, QueriesClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public QueriesClient(Uri endpoint, AzureKeyCredential credential, QueriesClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new QueriesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary>

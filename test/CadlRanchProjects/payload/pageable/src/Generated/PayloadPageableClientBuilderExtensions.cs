@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using Payload.Pageable;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="PageableClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<PageableClient, PageableClientOptions> AddPageableClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<PageableClient, PageableClientOptions> AddPageableClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<PageableClient, PageableClientOptions>((options) => new PageableClient(options));
+            return builder.RegisterClientFactory<PageableClient, PageableClientOptions>((options) => new PageableClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="PageableClient"/> instance. </summary>

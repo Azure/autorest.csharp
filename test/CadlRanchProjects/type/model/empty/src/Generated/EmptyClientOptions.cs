@@ -33,8 +33,5 @@ namespace _Type.Model.Empty
                 _ => throw new NotSupportedException()
             };
         }
-
-        /// <summary> TestServer endpoint. </summary>
-        public Uri Endpoint { get; set; }
     }
 }

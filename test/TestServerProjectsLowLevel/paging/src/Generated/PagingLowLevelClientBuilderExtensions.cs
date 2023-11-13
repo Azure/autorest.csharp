@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure;
 using Azure.Core.Extensions;
 using paging_LowLevel;
@@ -16,11 +17,12 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="PagingClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<PagingClient, PagingClientOptions> AddPagingClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
+        public static IAzureClientBuilder<PagingClient, PagingClientOptions> AddPagingClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<PagingClient, PagingClientOptions>((options) => new PagingClient(credential, options));
+            return builder.RegisterClientFactory<PagingClient, PagingClientOptions>((options) => new PagingClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="PagingClient"/> instance. </summary>

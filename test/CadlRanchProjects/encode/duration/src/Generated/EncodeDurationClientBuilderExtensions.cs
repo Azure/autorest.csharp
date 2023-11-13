@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using Encode.Duration;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="DurationClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<DurationClient, DurationClientOptions> AddDurationClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<DurationClient, DurationClientOptions> AddDurationClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<DurationClient, DurationClientOptions>((options) => new DurationClient(options));
+            return builder.RegisterClientFactory<DurationClient, DurationClientOptions>((options) => new DurationClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="DurationClient"/> instance. </summary>

@@ -33,8 +33,5 @@ namespace _Type.Property.Nullable
                 _ => throw new NotSupportedException()
             };
         }
-
-        /// <summary> TestServer endpoint. </summary>
-        public Uri Endpoint { get; set; }
     }
 }

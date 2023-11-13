@@ -34,9 +34,6 @@ namespace url_LowLevel
             };
         }
 
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; set; }
-
         /// <summary> should contain value null. </summary>
         public string GlobalStringQuery { get; set; }
     }

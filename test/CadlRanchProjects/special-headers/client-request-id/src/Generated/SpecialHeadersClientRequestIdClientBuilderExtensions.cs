@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using SpecialHeaders.ClientRequestId;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ClientRequestIdClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<ClientRequestIdClient, ClientRequestIdClientOptions> AddClientRequestIdClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<ClientRequestIdClient, ClientRequestIdClientOptions> AddClientRequestIdClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ClientRequestIdClient, ClientRequestIdClientOptions>((options) => new ClientRequestIdClient(options));
+            return builder.RegisterClientFactory<ClientRequestIdClient, ClientRequestIdClientOptions>((options) => new ClientRequestIdClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="ClientRequestIdClient"/> instance. </summary>

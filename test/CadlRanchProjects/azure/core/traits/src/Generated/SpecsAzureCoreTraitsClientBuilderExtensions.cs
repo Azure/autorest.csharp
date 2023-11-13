@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using _Specs_.Azure.Core.Traits;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="TraitsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<TraitsClient, TraitsClientOptions> AddTraitsClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<TraitsClient, TraitsClientOptions> AddTraitsClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<TraitsClient, TraitsClientOptions>((options) => new TraitsClient(options));
+            return builder.RegisterClientFactory<TraitsClient, TraitsClientOptions>((options) => new TraitsClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="TraitsClient"/> instance. </summary>

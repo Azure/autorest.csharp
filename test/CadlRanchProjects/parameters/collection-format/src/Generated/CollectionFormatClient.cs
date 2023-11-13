@@ -25,19 +25,22 @@ namespace Parameters.CollectionFormat
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of CollectionFormatClient. </summary>
-        public CollectionFormatClient() : this(new CollectionFormatClientOptions())
+        public CollectionFormatClient() : this(new Uri("http://localhost:3000"), new CollectionFormatClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CollectionFormatClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public CollectionFormatClient(CollectionFormatClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CollectionFormatClient(Uri endpoint, CollectionFormatClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new CollectionFormatClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of Query. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using _Type.Model.Inheritance.EnumDiscriminator;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="EnumDiscriminatorClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<EnumDiscriminatorClient, EnumDiscriminatorClientOptions> AddEnumDiscriminatorClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<EnumDiscriminatorClient, EnumDiscriminatorClientOptions> AddEnumDiscriminatorClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<EnumDiscriminatorClient, EnumDiscriminatorClientOptions>((options) => new EnumDiscriminatorClient(options));
+            return builder.RegisterClientFactory<EnumDiscriminatorClient, EnumDiscriminatorClientOptions>((options) => new EnumDiscriminatorClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="EnumDiscriminatorClient"/> instance. </summary>

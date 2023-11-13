@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using SpecialHeaders.Repeatability;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="RepeatabilityClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<RepeatabilityClient, RepeatabilityClientOptions> AddRepeatabilityClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<RepeatabilityClient, RepeatabilityClientOptions> AddRepeatabilityClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<RepeatabilityClient, RepeatabilityClientOptions>((options) => new RepeatabilityClient(options));
+            return builder.RegisterClientFactory<RepeatabilityClient, RepeatabilityClientOptions>((options) => new RepeatabilityClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="RepeatabilityClient"/> instance. </summary>

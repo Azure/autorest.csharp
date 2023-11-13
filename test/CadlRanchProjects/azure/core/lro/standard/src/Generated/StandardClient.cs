@@ -31,19 +31,22 @@ namespace _Azure.Lro.Standard
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of StandardClient. </summary>
-        public StandardClient() : this(new StandardClientOptions())
+        public StandardClient() : this(new Uri("http://localhost:3000"), new StandardClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of StandardClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public StandardClient(StandardClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public StandardClient(Uri endpoint, StandardClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new StandardClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
