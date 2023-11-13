@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -86,6 +87,80 @@ namespace ProtocolMethodsInRestClient
             try
             {
                 return RestClient.PutStream(body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Upload file. </summary>
+        /// <param name="fileContent"> File to upload. </param>
+        /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> UploadFileAsync(Stream fileContent, string fileName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TestServiceClient.UploadFile");
+            scope.Start();
+            try
+            {
+                return await RestClient.UploadFileAsync(fileContent, fileName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Upload file. </summary>
+        /// <param name="fileContent"> File to upload. </param>
+        /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response UploadFile(Stream fileContent, string fileName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TestServiceClient.UploadFile");
+            scope.Start();
+            try
+            {
+                return RestClient.UploadFile(fileContent, fileName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Upload multiple files. </summary>
+        /// <param name="files"> Files to upload. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> UploadFilesAsync(IEnumerable<Stream> files, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TestServiceClient.UploadFiles");
+            scope.Start();
+            try
+            {
+                return await RestClient.UploadFilesAsync(files, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Upload multiple files. </summary>
+        /// <param name="files"> Files to upload. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response UploadFiles(IEnumerable<Stream> files, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TestServiceClient.UploadFiles");
+            scope.Start();
+            try
+            {
+                return RestClient.UploadFiles(files, cancellationToken);
             }
             catch (Exception e)
             {

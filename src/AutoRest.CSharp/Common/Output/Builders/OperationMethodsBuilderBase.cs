@@ -322,7 +322,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return new[]
                 {
                     AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray(),
-                    UsingVar("message", InvokeCreateRequestMethod(createRequestMessageMethodSignature), out var message),
+                    UsingVar("message", InvokeCreateRequestMethod(createRequestMessageMethodSignature.Name, protocolMethodArguments), out var message),
                     EnableHttpRedirectIfSupported(message),
                     new HttpPipelineExpression(PipelineField).Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
                     statusCodeSwitchBuilder.Build(message, async)
@@ -339,9 +339,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected MethodBodyStatement CreateLegacyConvenienceMethodBody(MethodSignatureBase createRequestMessageMethodSignature, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
+            var createRequestArguments = createRequestMessageMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList();
             return new[]
             {
-                UsingVar("message", InvokeCreateRequestMethod(createRequestMessageMethodSignature), out var message),
+                UsingVar("message", InvokeCreateRequestMethod(createRequestMessageMethodSignature.Name, createRequestArguments), out var message),
                 EnableHttpRedirectIfSupported(message),
                 new HttpPipelineExpression(PipelineField).Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
                 statusCodeSwitchBuilder.Build(message, async)
@@ -371,8 +372,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         protected MethodBodyStatement WrapInDiagnosticScope(string methodName, params MethodBodyStatement[] statements)
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), Fields.ClientDiagnosticsProperty, statements);
 
-        protected static HttpMessageExpression InvokeCreateRequestMethod(MethodSignatureBase signature)
-            => new(new InvokeInstanceMethodExpression(null, signature.Name, signature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
+        protected static HttpMessageExpression InvokeCreateRequestMethod(string name, IReadOnlyList<ValueExpression> parameters)
+            => new(new InvokeInstanceMethodExpression(null, name, parameters, null, false));
 
         protected ResponseExpression InvokeProtocolMethod(ValueExpression? instance, IReadOnlyList<ValueExpression> arguments, bool async)
             => new(new InvokeInstanceMethodExpression(instance, async ? $"{ProtocolMethodName}Async" : ProtocolMethodName, arguments, null, async));

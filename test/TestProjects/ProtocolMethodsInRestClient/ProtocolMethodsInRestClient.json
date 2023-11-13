@@ -41,6 +41,74 @@
         }
       }
     },
+    "/template/stream/uploadfile": {
+      "post": {
+        "operationId": "UploadFile",
+        "consumes": ["multipart/form-data", "application/octet-stream"],
+        "produces": ["application/octet-stream", "application/json"],
+        "description": "Upload file",
+        "tags": ["Formdata"],
+        "parameters": [
+          {
+            "name": "fileContent",
+            "description": "File to upload.",
+            "required": true,
+            "type": "file",
+            "in": "formData"
+          },
+          {
+            "name": "fileName",
+            "description": "File name to upload. Name has to be spelled exactly as written here.",
+            "required": true,
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/formdata/stream/uploadfiles": {
+      "post": {
+        "operationId": "UploadFiles",
+        "consumes": ["multipart/form-data", "application/octet-stream"],
+        "produces": ["application/octet-stream", "application/json"],
+        "description": "Upload multiple files",
+        "tags": ["Formdata"],
+        "parameters": [
+          {
+            "name": "files",
+            "description": "Files to upload.",
+            "required": true,
+            "type": "array",
+            "in": "formData",
+            "items": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/template/resources": {
       "put": {
         "operationId": "Create",
@@ -394,6 +462,18 @@
     }
   },
   "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "Resource": {
       "properties": {
         "name": {

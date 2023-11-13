@@ -14,6 +14,8 @@ protocol-method-list:
   - Create
   - Delete
   - PutStream
+  - UploadFile
+  - UploadFiles
   - firstTemplate_Create
   - firstTemplate_Get
   - secondTemplate_Get

@@ -73,16 +73,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public RestClientMethodParameters BuildParameters(bool buildParametersForProtocolMethods)
         {
+            var sortedForProtocolMethod = GetSortedParameters();
             if (!buildParametersForProtocolMethods)
             {
-                return BuildParametersLegacy(Configuration.AzureArm ? GetSortedParameters() : GetLegacySortedParameters());
+                return BuildParametersLegacy(Configuration.Generation1ConvenienceClient ? GetLegacySortedParameters() : sortedForProtocolMethod);
             }
 
-            var sortedParameters = GetSortedParameters();
-
+            bool bodyIsAdded = false;
             List<(InputParameter, RequestConditionHeaders)>? requestConditionRequestParameters = null;
+
             AddWaitForCompletion();
-            foreach (var inputParameter in sortedParameters)
+            foreach (var inputParameter in sortedForProtocolMethod)
             {
                 switch (inputParameter)
                 {
@@ -95,6 +96,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         requestConditionRequestParameters ??= new List<(InputParameter, RequestConditionHeaders)>();
                         requestConditionRequestParameters.Add((inputParameter, header));
                         break;
+                    case { Location: RequestLocation.Body }:
+                        if (!bodyIsAdded)
+                        {
+                            AddBodyParameter(inputParameter, sortedForProtocolMethod);
+                            bodyIsAdded = true;
+                        }
+                        break;
                     case { Location: RequestLocation.Header, IsContentType: true }:
                         AddContentTypeRequestParameter(inputParameter);
                         break;
@@ -102,7 +110,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         _requestPartsBuilder.AddNonParameterizedHeaderPart(inputParameter);
                         break;
                     case { IsApiVersion: true } when !Configuration.IsBranded:
-                        // [TODO]: Where to get api version if it is passed neither in operation nor in constructor?
+                        // [TODO]: What provides value for api version if it is passed neither in operation nor in constructor?
                         break;
                     default:
                         AddReferenceAndParameter(inputParameter);
@@ -229,6 +237,32 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
+        private void AddETagParameter(InputParameter inputParameter)
+        {
+            var type = new CSharpType(typeof(ETag), inputParameter.Type.IsNullable);
+            var protocolParameter = Parameter.FromInputParameter(inputParameter, type, _keepClientDefaultValue, _typeFactory);
+            var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
+
+            _requestPartsBuilder.AddHeaderPart(inputParameter, protocolParameter, serializationFormat);
+            AddCreateMessageParameter(protocolParameter);
+            _protocolParameters.Add(protocolParameter);
+
+            AddETagConvenienceParameter(inputParameter, protocolParameter);
+        }
+
+        private void AddETagConvenienceParameter(InputParameter inputParameter, Parameter protocolParameter)
+        {
+            if (!Configuration.AzureArm && !Configuration.Generation1ConvenienceClient)
+            {
+                _convenienceParameters.Add(protocolParameter);
+                return;
+            }
+
+            var convenienceParameter = Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory);
+            _arguments[protocolParameter] = New.Instance(typeof(ETag), convenienceParameter);
+            _convenienceParameters.Add(convenienceParameter);
+        }
+
         private void AddMatchConditionsParameter(InputParameter ifMatchInputParameter, InputParameter ifNoneMatchInputParameter, bool reverseOrder)
         {
             var parameter = KnownParameters.MatchConditionsParameter;
@@ -242,52 +276,34 @@ namespace AutoRest.CSharp.Common.Output.Builders
             AddCreateMessageParameter(parameter);
             _protocolParameters.Add(parameter);
 
-            if (Configuration.AzureArm || Configuration.Generation1ConvenienceClient)
-            {
-                var ifMatchConvenienceParameter = Parameter.FromInputParameter(ifMatchInputParameter, _keepClientDefaultValue, _typeFactory);
-                var ifNoneMatchConvenienceParameter = Parameter.FromInputParameter(ifNoneMatchInputParameter, _keepClientDefaultValue, _typeFactory);
-                _arguments[parameter] = New.Instance(typeof(MatchConditions), new Dictionary<string, ValueExpression>
-                {
-                    [nameof(MatchConditions.IfMatch)] = New.Instance(typeof(ETag), ifMatchConvenienceParameter),
-                    [nameof(MatchConditions.IfNoneMatch)] = New.Instance(typeof(ETag), ifNoneMatchConvenienceParameter),
-                });
-
-                if (reverseOrder)
-                {
-                    _convenienceParameters.Add(ifNoneMatchConvenienceParameter);
-                    _convenienceParameters.Add(ifMatchConvenienceParameter);
-                }
-                else
-                {
-                    _convenienceParameters.Add(ifMatchConvenienceParameter);
-                    _convenienceParameters.Add(ifNoneMatchConvenienceParameter);
-                }
-            }
-            else
-            {
-                _convenienceParameters.Add(parameter);
-            }
+            AddMatchConditionsConvenienceParameter(ifMatchInputParameter, ifNoneMatchInputParameter, parameter, reverseOrder);
         }
 
-        private void AddETagParameter(InputParameter inputParameter)
+        private void AddMatchConditionsConvenienceParameter(InputParameter ifMatchInputParameter, InputParameter ifNoneMatchInputParameter, Parameter protocolParameter, bool reverseOrder)
         {
-            var type = new CSharpType(typeof(ETag), inputParameter.Type.IsNullable);
-            var parameter = Parameter.FromInputParameter(inputParameter, type, _keepClientDefaultValue, _typeFactory);
-            var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
-
-            _requestPartsBuilder.AddHeaderPart(inputParameter, parameter, serializationFormat);
-            AddCreateMessageParameter(parameter);
-            _protocolParameters.Add(parameter);
-
-            if (Configuration.AzureArm || Configuration.Generation1ConvenienceClient)
+            if (!Configuration.AzureArm && !Configuration.Generation1ConvenienceClient)
             {
-                var convenienceParameter = Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory);
-                _arguments[parameter] = New.Instance(typeof(ETag), convenienceParameter);
-                _convenienceParameters.Add(convenienceParameter);
+                _convenienceParameters.Add(protocolParameter);
+                return;
+            }
+
+            var ifMatchConvenienceParameter = Parameter.FromInputParameter(ifMatchInputParameter, _keepClientDefaultValue, _typeFactory);
+            var ifNoneMatchConvenienceParameter = Parameter.FromInputParameter(ifNoneMatchInputParameter, _keepClientDefaultValue, _typeFactory);
+            _arguments[protocolParameter] = New.Instance(typeof(MatchConditions), new Dictionary<string, ValueExpression>
+            {
+                [nameof(MatchConditions.IfMatch)] = New.Instance(typeof(ETag), ifMatchConvenienceParameter),
+                [nameof(MatchConditions.IfNoneMatch)] = New.Instance(typeof(ETag), ifNoneMatchConvenienceParameter),
+            });
+
+            if (reverseOrder)
+            {
+                _convenienceParameters.Add(ifNoneMatchConvenienceParameter);
+                _convenienceParameters.Add(ifMatchConvenienceParameter);
             }
             else
             {
-                _convenienceParameters.Add(parameter);
+                _convenienceParameters.Add(ifMatchConvenienceParameter);
+                _convenienceParameters.Add(ifNoneMatchConvenienceParameter);
             }
         }
 
@@ -307,37 +323,41 @@ namespace AutoRest.CSharp.Common.Output.Builders
             AddCreateMessageParameter(parameter);
             _protocolParameters.Add(parameter);
 
-            if (Configuration.AzureArm || Configuration.Generation1ConvenienceClient)
+            AddRequestConditionsConvenienceParameter(requestConditions, parameter);
+        }
+
+        private void AddRequestConditionsConvenienceParameter(IReadOnlyList<(InputParameter Parameter, RequestConditionHeaders RequestCondition)> requestConditions, Parameter protocolParameter)
+        {
+            if (!Configuration.AzureArm && !Configuration.Generation1ConvenienceClient)
             {
-                var properties = new Dictionary<string, ValueExpression>();
-                foreach (var (inputParameter, requestCondition) in requestConditions)
+                _convenienceParameters.Add(protocolParameter);
+                return;
+            }
+
+            var properties = new Dictionary<string, ValueExpression>();
+            foreach (var (inputParameter, requestCondition) in requestConditions)
+            {
+                var convenienceParameter = Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory);
+                var propertyName = requestCondition switch
                 {
-                    var convenienceParameter = Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory);
-                    var propertyName = requestCondition switch
-                    {
-                        RequestConditionHeaders.IfMatch => nameof(RequestConditions.IfMatch),
-                        RequestConditionHeaders.IfNoneMatch => nameof(RequestConditions.IfNoneMatch),
-                        RequestConditionHeaders.IfModifiedSince => nameof(RequestConditions.IfModifiedSince),
-                        RequestConditionHeaders.IfUnmodifiedSince => nameof(RequestConditions.IfUnmodifiedSince),
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
+                    RequestConditionHeaders.IfMatch => nameof(RequestConditions.IfMatch),
+                    RequestConditionHeaders.IfNoneMatch => nameof(RequestConditions.IfNoneMatch),
+                    RequestConditionHeaders.IfModifiedSince => nameof(RequestConditions.IfModifiedSince),
+                    RequestConditionHeaders.IfUnmodifiedSince => nameof(RequestConditions.IfUnmodifiedSince),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
 
-                    properties[propertyName] = requestCondition switch
-                    {
-                        RequestConditionHeaders.IfMatch or RequestConditionHeaders.IfNoneMatch => New.Instance(typeof(ETag), convenienceParameter),
-                        RequestConditionHeaders.IfModifiedSince or RequestConditionHeaders.IfUnmodifiedSince => convenienceParameter,
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
+                properties[propertyName] = requestCondition switch
+                {
+                    RequestConditionHeaders.IfMatch or RequestConditionHeaders.IfNoneMatch => New.Instance(typeof(ETag), convenienceParameter),
+                    RequestConditionHeaders.IfModifiedSince or RequestConditionHeaders.IfUnmodifiedSince => convenienceParameter,
+                    _ => throw new ArgumentOutOfRangeException()
+                };
 
-                    _convenienceParameters.Add(convenienceParameter);
-                }
-
-                _arguments[parameter] = New.Instance(typeof(RequestConditions), properties);
+                _convenienceParameters.Add(convenienceParameter);
             }
-            else
-            {
-                _convenienceParameters.Add(parameter);
-            }
+
+            _arguments[protocolParameter] = New.Instance(typeof(RequestConditions), properties);
         }
 
         private void AddRequestContext()
@@ -414,34 +434,25 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private void AddReferenceAndParameter(InputParameter inputParameter)
         {
-            Parameter protocolMethodParameter;
-            if (inputParameter.Location == RequestLocation.Body)
-            {
-                protocolMethodParameter = inputParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable;
-                _requestPartsBuilder.AddBodyPart(protocolMethodParameter, null, protocolMethodParameter, !Configuration.Generation1ConvenienceClient);
-            }
-            else
-            {
-                var protocolMethodParameterType = ChangeTypeForProtocolMethod(inputParameter.Type);
-                protocolMethodParameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(protocolMethodParameterType), _keepClientDefaultValue, _typeFactory);
+            var protocolMethodParameterType = ChangeTypeForProtocolMethod(inputParameter.Type);
+            var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(protocolMethodParameterType), _keepClientDefaultValue, _typeFactory);
 
-                var value = GetValueForProtocolArgument(inputParameter with {GroupedBy = null}, protocolMethodParameter);
-                switch (inputParameter.Location)
-                {
-                    case RequestLocation.Uri:
-                        _requestPartsBuilder.AddUriPart(inputParameter, value);
-                        break;
-                    case RequestLocation.Path:
-                        _requestPartsBuilder.AddPathPart(inputParameter, value);
-                        break;
-                    case RequestLocation.Query:
-                        var skipNullCheck = protocolMethodParameter is { IsApiVersionParameter: true, IsOptionalInSignature: true, Initializer: not null };
-                        _requestPartsBuilder.AddQueryPart(inputParameter, value, skipNullCheck);
-                        break;
-                    case RequestLocation.Header:
-                        _requestPartsBuilder.AddHeaderPart(inputParameter, value, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
-                        break;
-                }
+            var value = GetValueForProtocolArgument(inputParameter with {GroupedBy = null}, protocolMethodParameter);
+            switch (inputParameter.Location)
+            {
+                case RequestLocation.Uri:
+                    _requestPartsBuilder.AddUriPart(inputParameter, value);
+                    break;
+                case RequestLocation.Path:
+                    _requestPartsBuilder.AddPathPart(inputParameter, value);
+                    break;
+                case RequestLocation.Query:
+                    var skipNullCheck = protocolMethodParameter is { IsApiVersionParameter: true, IsOptionalInSignature: true, Initializer: not null };
+                    _requestPartsBuilder.AddQueryPart(inputParameter, value, skipNullCheck);
+                    break;
+                case RequestLocation.Header:
+                    _requestPartsBuilder.AddHeaderPart(inputParameter, value, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
+                    break;
             }
 
             AddParameter(inputParameter, protocolMethodParameter);
@@ -451,32 +462,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
             {
-                // BUG: For constant bodies and bodies assigned from client, DPG still creates RequestContent parameter. Most likely, this is incorrect.
-                if (inputParameter.Location != RequestLocation.Body || Configuration.Generation1ConvenienceClient || Configuration.AzureArm)
-                {
-                    return;
-                }
+                return;
             }
 
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
-                AddCreateMessageParameter(protocolMethodParameter);
-                _protocolParameters.Add(protocolMethodParameter);
-
-                var value = GetValueForProtocolArgument(inputParameter, protocolMethodParameter);
-                _arguments[protocolMethodParameter] = ConvertValue(value, value.Type.IsNullable);
+                AddGroupedParameter(inputParameter, protocolMethodParameter);
                 return;
             }
 
             if (inputParameter.Location == RequestLocation.None)
             {
                 _convenienceParameters.Add(Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory));
-                return;
-            }
-
-            if (inputParameter.Kind == InputOperationParameterKind.Spread)
-            {
-                CreateSpreadParameters(inputParameter, protocolMethodParameter);
                 return;
             }
 
@@ -492,25 +489,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
-            if (protocolMethodParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
-            {
-                CreateConversionToRequestContent(inputParameter, convenienceMethodParameter, new Dictionary<InputParameter, Parameter>(), convenienceMethodParameter.IsOptionalInSignature, out var argument, out var conversions);
-                if (conversions is not null)
-                {
-                    _arguments[protocolMethodParameter] = argument;
-                    _conversions[protocolMethodParameter] = conversions;
-                }
-                else
-                {
-                    var requestContent = new VariableReference(Configuration.ApiTypes.RequestContentType, "content");
-                    // Don't dispose content for pageables
-                    _conversions[protocolMethodParameter] = _operation.Paging is not null ? Declare(requestContent, argument) : UsingDeclare(requestContent, argument);
-                    _arguments[protocolMethodParameter] = requestContent;
-                }
-
-                return;
-            }
-
             if (TryCreateConversionForEnum(convenienceMethodParameter, convenienceMethodParameter.IsOptionalInSignature, out var convertedValue))
             {
                 _arguments[protocolMethodParameter] = convertedValue;
@@ -520,7 +498,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
             throw new InvalidOperationException($"Unexpected conversion from '{convenienceMethodParameter.Name}' parameter to '{protocolMethodParameter.Name}' parameter in '{_operation.Name}' operation.");
         }
 
-        private void CreateSpreadParameters(InputParameter inputParameter, Parameter protocolMethodParameter)
+        private void AddGroupedParameter(InputParameter inputParameter, Parameter protocolParameter)
+        {
+            AddCreateMessageParameter(protocolParameter);
+            _protocolParameters.Add(protocolParameter);
+
+            var value = GetValueForProtocolArgument(inputParameter, protocolParameter);
+            if (TryCreateConversionForEnum(value, value.Type.IsNullable, out var convertedValue))
+            {
+                _arguments[protocolParameter] = convertedValue;
+            }
+            else
+            {
+                _arguments[protocolParameter] = value;
+            }
+        }
+
+        private void CreateSpreadConvenienceParameters(InputParameter inputParameter, Parameter protocolMethodParameter)
         {
             var model = inputParameter.Type as InputModelType;
             var requiredConvenienceMethodParameters = new List<Parameter>();
@@ -561,8 +555,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             conversion.Add(utf8JsonWriter.WriteEndObject());
             _conversions[protocolMethodParameter] = conversion;
 
-            AddCreateMessageParameter(protocolMethodParameter);
-            _protocolParameters.Add(protocolMethodParameter);
             _convenienceParameters.AddRange(requiredConvenienceMethodParameters.Concat(optionalConvenienceMethodParameters));
             _arguments[protocolMethodParameter] = requestContent;
         }
@@ -576,6 +568,87 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 : Validation.None;
 
             return new Parameter(property.Name, property.Description, parameterType, defaultValue, validation, initializer);
+        }
+
+        private void CreateMultipartConvenienceParameters(IReadOnlyList<InputParameter> sortedInputParameters, Parameter protocolBodyParameter)
+        {
+            var boundary = Guid.NewGuid().ToString();
+            var conversionStatements = new List<MethodBodyStatement>
+            {
+                Var("content", New.MultipartFormDataContent(boundary), out var multipartContent)
+            };
+
+            foreach (var inputParameter in sortedInputParameters.Where(p => p.Location == RequestLocation.Body))
+            {
+                var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory);
+                _convenienceParameters.Add(convenienceMethodParameter);
+
+
+                MethodBodyStatement addPartStatement;
+                if (TypeFactory.IsList(convenienceMethodParameter.Type))
+                {
+                    EnumerableExpression enumerable = new(TypeFactory.GetElementType(convenienceMethodParameter.Type), convenienceMethodParameter);
+                    addPartStatement = new ForeachStatement("value", enumerable, out var item)
+                    {
+                        multipartContent.Add(RequestContentExpression.Create(item), inputParameter.NameInRequest, Null)
+                    };
+                }
+                else
+                {
+                    RequestContentExpression value = new(GetMultipartBodyValue(convenienceMethodParameter));
+                    addPartStatement = multipartContent.Add(value, inputParameter.NameInRequest, Null);
+                }
+
+                conversionStatements.Add(WrapInNullCheckIfRequired(convenienceMethodParameter, addPartStatement));
+            }
+
+            _arguments[protocolBodyParameter] = multipartContent;
+            _conversions[protocolBodyParameter] = conversionStatements;
+
+            _requestPartsBuilder.AddContentTypeHeaderPart(KnownParameters.ContentType);
+            AddCreateMessageParameter(KnownParameters.ContentType);
+            _protocolParameters.Add(KnownParameters.ContentType);
+            _arguments[KnownParameters.ContentType] = Literal($"multipart/form-data; boundary={boundary}");
+        }
+
+        private void CreateFormUrlEncodedConvenienceParameters(IReadOnlyList<InputParameter> sortedInputParameters, Parameter protocolBodyParameter)
+        {
+            var conversionStatements = new List<MethodBodyStatement>
+            {
+                Var("content", New.FormUrlEncodedContent(), out var urlContent),
+            };
+
+            foreach (var inputParameter in sortedInputParameters.Where(p => p.Location == RequestLocation.Body))
+            {
+                var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory);
+                _convenienceParameters.Add(convenienceMethodParameter);
+
+                var addPartStatement = urlContent.Add(inputParameter.NameInRequest, ConvertToString(convenienceMethodParameter));
+                conversionStatements.Add(WrapInNullCheckIfRequired(convenienceMethodParameter, addPartStatement));
+            }
+
+            _arguments[protocolBodyParameter] = urlContent;
+            _conversions[protocolBodyParameter] = conversionStatements;
+
+            static StringExpression ConvertToString(TypedValueExpression value)
+            {
+                if (value.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
+                {
+                    return new(new EnumExpression(enumType, value.NullableStructValue(value.Type)).ToSerial());
+                }
+
+                return value.Type.EqualsIgnoreNullable(typeof(string)) ? new(value) : value.NullableStructValue(value.Type).InvokeToString();
+            }
+        }
+
+        private static MethodBodyStatement WrapInNullCheckIfRequired(Parameter parameter, MethodBodyStatement statement)
+        {
+            if (parameter.Validation.Type is ValidationType.AssertNotNull or ValidationType.AssertNotNullOrEmpty)
+            {
+                return statement;
+            }
+
+            return new IfStatement(NotEqual(parameter, Null)) { statement };
         }
 
         private void AddCreateMessageParameter(Parameter parameter) => _createMessageParameters.Add(parameter with {DefaultValue = null});
@@ -600,31 +673,92 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return writePropertyStatement;
         }
 
+        private void AddBodyParameter(InputParameter firstInputBodyParameter, IReadOnlyList<InputParameter> sortedInputParameters)
+        {
+            var protocolBodyParameter = firstInputBodyParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable;
+            _requestPartsBuilder.AddBodyPart(protocolBodyParameter, null, protocolBodyParameter, !Configuration.Generation1ConvenienceClient);
+
+            if (firstInputBodyParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
+            {
+                // BUG: For constant bodies and bodies assigned from client, DPG still creates RequestContent parameter. Most likely, this is incorrect.
+                if (Configuration.Generation1ConvenienceClient || Configuration.AzureArm)
+                {
+                    return;
+                }
+            }
+
+            AddCreateMessageParameter(protocolBodyParameter);
+            _protocolParameters.Add(protocolBodyParameter);
+
+            if (firstInputBodyParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant or InputOperationParameterKind.Grouped)
+            {
+                _arguments[protocolBodyParameter] = GetValueForProtocolArgument(firstInputBodyParameter, protocolBodyParameter);
+                return;
+            }
+
+            if (firstInputBodyParameter.Kind == InputOperationParameterKind.Spread)
+            {
+                CreateSpreadConvenienceParameters(firstInputBodyParameter, protocolBodyParameter);
+                return;
+            }
+
+            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart)
+            {
+                CreateMultipartConvenienceParameters(sortedInputParameters, protocolBodyParameter);
+                return;
+            }
+
+            if (_operation.RequestBodyMediaType is BodyMediaType.Form)
+            {
+                CreateFormUrlEncodedConvenienceParameters(sortedInputParameters, protocolBodyParameter);
+                return;
+            }
+
+            var convenienceMethodParameter = Parameter.FromInputParameter(firstInputBodyParameter, _keepClientDefaultValue, _typeFactory);
+            _convenienceParameters.Add(convenienceMethodParameter);
+
+            CreateConversionToRequestContent(firstInputBodyParameter, convenienceMethodParameter, null, convenienceMethodParameter.IsOptionalInSignature, out var argument, out var conversions);
+            if (conversions is not null)
+            {
+                _arguments[protocolBodyParameter] = argument;
+                _conversions[protocolBodyParameter] = conversions;
+            }
+            else
+            {
+                var requestContent = new VariableReference(Configuration.ApiTypes.RequestContentType, "content");
+                // Don't dispose content for pageables
+                _conversions[protocolBodyParameter] = _operation.Paging is not null ? Declare(requestContent, argument) : UsingDeclare(requestContent, argument);
+                _arguments[protocolBodyParameter] = requestContent;
+            }
+        }
+
         private void AddContentTypeRequestParameter(InputParameter inputParameter)
         {
-            Parameter outputParameter;
-            SerializationFormat serializationFormat;
+            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart)
+            {
+                // ContentType parameter has been added with body parameter
+                return;
+            }
+
             if (_operation.RequestMediaTypes?.Count > 1)
             {
                 var name = inputParameter.Name.ToVariableName();
                 var description = Parameter.CreateDescription(inputParameter, typeof(ContentType), _operation.RequestMediaTypes);
-                outputParameter = new Parameter(name, description, typeof(ContentType), null, Validation.None, null, RequestLocation: RequestLocation.Header);
-                serializationFormat = SerializationFormat.Default;
+                var outputParameter = new Parameter(name, description, typeof(ContentType), null, Validation.None, null, RequestLocation: RequestLocation.Header);
 
+                _requestPartsBuilder.AddHeaderPart(inputParameter, GetValueForProtocolArgument(inputParameter, outputParameter), SerializationFormat.Default);
                 AddCreateMessageParameter(outputParameter);
                 _protocolParameters.Add(outputParameter);
                 _convenienceParameters.Add(outputParameter);
             }
             else
             {
-                outputParameter = Parameter.FromInputParameter(inputParameter, new CSharpType(typeof(ContentType), inputParameter.Type.IsNullable), _keepClientDefaultValue, _typeFactory);
-                serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
+                var outputParameter = Parameter.FromInputParameter(inputParameter, new CSharpType(typeof(ContentType), inputParameter.Type.IsNullable), _keepClientDefaultValue, _typeFactory);
+                var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
 
+                _requestPartsBuilder.AddHeaderPart(inputParameter, GetValueForProtocolArgument(inputParameter, outputParameter), serializationFormat);
                 AddParameter(inputParameter, outputParameter);
             }
-
-            var value = GetValueForProtocolArgument(inputParameter, outputParameter);
-            _requestPartsBuilder.AddHeaderPart(inputParameter, value, serializationFormat);
         }
 
         private InputType ChangeTypeForProtocolMethod(InputType type) => type switch
@@ -644,13 +778,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 ? _unsortedParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null })
                 : _unsortedParameters.OrderByDescending(p => p is { IsRequired: true });
 
-        private IEnumerable<InputParameter> GetSortedParameters()
+        private IReadOnlyList<InputParameter> GetSortedParameters()
         {
             var uriOrPathParameters = new Dictionary<string, InputParameter>();
             var requiredRequestParameters = new List<InputParameter>();
             var optionalRequestParameters = new List<InputParameter>();
+            var bodyParameters = new List<InputParameter>();
 
-            InputParameter? bodyParameter = null;
             InputParameter? contentTypeRequestParameter = null;
 
             foreach (var operationParameter in _unsortedParameters)
@@ -658,7 +792,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 switch (operationParameter)
                 {
                     case { Location: RequestLocation.Body }:
-                        bodyParameter = operationParameter;
+                        bodyParameters.Add(operationParameter);
                         break;
                     case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
                         contentTypeRequestParameter = operationParameter;
@@ -686,9 +820,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             SortUriOrPathParameters(_operation.Uri, uriOrPathParameters, orderedParameters);
             SortUriOrPathParameters(_operation.Path, uriOrPathParameters, orderedParameters);
             orderedParameters.AddRange(requiredRequestParameters);
-            if (bodyParameter is not null)
+            if (bodyParameters.Any())
             {
-                orderedParameters.Add(bodyParameter);
+                orderedParameters.AddRange(bodyParameters.OrderByDescending(p => p is { IsRequired: true }));
                 if (contentTypeRequestParameter is not null)
                 {
                     orderedParameters.Add(contentTypeRequestParameter);
@@ -754,16 +888,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private TypedValueExpression ConvertValue(TypedValueExpression value, bool valueCanBeNull)
-        {
-            if (TryCreateConversionForEnum(value, valueCanBeNull, out var convertedValue))
-            {
-                return convertedValue;
-            }
-
-            return value;
-        }
-
         private bool TryCreateConversionForEnum(TypedValueExpression value, bool valueCanBeNull, [MaybeNullWhen(false)] out TypedValueExpression convertedValue)
         {
             if (value.Type is {IsFrameworkType: false, Implementation: EnumType enumType})
@@ -784,7 +908,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return false;
         }
 
-        private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, bool valueCanBeNull, out TypedValueExpression content, out MethodBodyStatement? conversions)
+        private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter>? parameters, bool valueCanBeNull, out TypedValueExpression content, out MethodBodyStatement? conversions)
         {
             conversions = null;
             if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestBodyMethod: true }})
@@ -804,7 +928,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     break;
 
                 case var _ when inputParameter.Kind == InputOperationParameterKind.Flattened:
-                    GetConversionsForFlattenedParameter(parameters, out content, out conversions);
+                    GetConversionsForFlattenedParameter(parameters ?? throw new InvalidOperationException("Protocol parameters must be resolved"), out content, out conversions);
                     break;
 
                 // [TODO] This case is added to minimize amount of changes

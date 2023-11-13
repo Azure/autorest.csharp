@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -95,6 +94,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public void AddRequestConditionsHeaderPart(Parameter outputParameter, SerializationFormat serializationFormat)
         {
             _headerParts.Add(new HeaderRequestPart(null, outputParameter, null, serializationFormat, null));
+        }
+
+        public void AddContentTypeHeaderPart(TypedValueExpression value)
+        {
+            _contentHeaderParts.Add(new HeaderRequestPart("Content-Type", value, null, SerializationFormat.Default, null));
         }
 
         public void AddHeaderPart(InputParameter inputParameter, TypedValueExpression value, SerializationFormat serializationFormat)
