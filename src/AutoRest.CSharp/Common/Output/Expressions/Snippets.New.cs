@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static FormUrlEncodedContentExpression FormUrlEncodedContent() => new(Instance(typeof(FormUrlEncodedContent)));
             public static MultipartFormDataContentExpression MultipartFormDataContent() => new(Instance(typeof(MultipartFormDataContent)));
-            public static MultipartFormDataContentExpression MultipartFormDataContent(string boundary) => new(Instance(typeof(MultipartFormDataContent), Literal(boundary)));
+            public static MultipartFormDataContentExpression MultipartFormDataContent(StringExpression boundary) => new(Instance(typeof(MultipartFormDataContent), boundary));
 
             public static RawRequestUriBuilderExpression RawRequestUriBuilder() => new(Instance(typeof(RawRequestUriBuilder)));
 

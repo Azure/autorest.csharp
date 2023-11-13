@@ -572,9 +572,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private void CreateMultipartConvenienceParameters(IReadOnlyList<InputParameter> sortedInputParameters, Parameter protocolBodyParameter)
         {
-            var boundary = Guid.NewGuid().ToString();
             var conversionStatements = new List<MethodBodyStatement>
             {
+                Var("boundary", GuidExpression.NewGuid().InvokeToString(), out var boundary),
                 Var("content", New.MultipartFormDataContent(boundary), out var multipartContent)
             };
 
@@ -608,7 +608,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _requestPartsBuilder.AddContentTypeHeaderPart(KnownParameters.ContentType);
             AddCreateMessageParameter(KnownParameters.ContentType);
             _protocolParameters.Add(KnownParameters.ContentType);
-            _arguments[KnownParameters.ContentType] = Literal($"multipart/form-data; boundary={boundary}");
+            _arguments[KnownParameters.ContentType] = new FormattableStringExpression("multipart/form-data; boundary={0}", new[]{boundary});
         }
 
         private void CreateFormUrlEncodedConvenienceParameters(IReadOnlyList<InputParameter> sortedInputParameters, Parameter protocolBodyParameter)

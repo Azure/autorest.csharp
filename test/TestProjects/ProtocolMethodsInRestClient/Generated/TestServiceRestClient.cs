@@ -190,10 +190,11 @@ namespace ProtocolMethodsInRestClient
             }
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            var content = new MultipartFormDataContent("223d860e-4606-473a-aa35-c99c5f34f292");
+            var boundary = Guid.NewGuid().ToString();
+            var content = new MultipartFormDataContent(boundary);
             content.Add(RequestContent.Create(fileContent), "fileContent", null);
             content.Add(new StringRequestContent(fileName), "fileName", null);
-            Response response = await UploadFileAsync(content, "multipart/form-data; boundary=223d860e-4606-473a-aa35-c99c5f34f292", context).ConfigureAwait(false);
+            Response response = await UploadFileAsync(content, $"multipart/form-data; boundary={boundary}", context).ConfigureAwait(false);
             switch (response.Status)
             {
                 case 200:
@@ -220,10 +221,11 @@ namespace ProtocolMethodsInRestClient
             }
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            var content = new MultipartFormDataContent("223d860e-4606-473a-aa35-c99c5f34f292");
+            var boundary = Guid.NewGuid().ToString();
+            var content = new MultipartFormDataContent(boundary);
             content.Add(RequestContent.Create(fileContent), "fileContent", null);
             content.Add(new StringRequestContent(fileName), "fileName", null);
-            Response response = UploadFile(content, "multipart/form-data; boundary=223d860e-4606-473a-aa35-c99c5f34f292", context);
+            Response response = UploadFile(content, $"multipart/form-data; boundary={boundary}", context);
             switch (response.Status)
             {
                 case 200:
@@ -328,12 +330,13 @@ namespace ProtocolMethodsInRestClient
             }
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            var content = new MultipartFormDataContent("007e8393-7ecf-4fd8-a730-8cfa57392e5a");
+            var boundary = Guid.NewGuid().ToString();
+            var content = new MultipartFormDataContent(boundary);
             foreach (var value in files)
             {
                 content.Add(RequestContent.Create(value), "files", null);
             }
-            Response response = await UploadFilesAsync(content, "multipart/form-data; boundary=007e8393-7ecf-4fd8-a730-8cfa57392e5a", context).ConfigureAwait(false);
+            Response response = await UploadFilesAsync(content, $"multipart/form-data; boundary={boundary}", context).ConfigureAwait(false);
             switch (response.Status)
             {
                 case 200:
@@ -355,12 +358,13 @@ namespace ProtocolMethodsInRestClient
             }
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            var content = new MultipartFormDataContent("007e8393-7ecf-4fd8-a730-8cfa57392e5a");
+            var boundary = Guid.NewGuid().ToString();
+            var content = new MultipartFormDataContent(boundary);
             foreach (var value in files)
             {
                 content.Add(RequestContent.Create(value), "files", null);
             }
-            Response response = UploadFiles(content, "multipart/form-data; boundary=007e8393-7ecf-4fd8-a730-8cfa57392e5a", context);
+            Response response = UploadFiles(content, $"multipart/form-data; boundary={boundary}", context);
             switch (response.Status)
             {
                 case 200:
