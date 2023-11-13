@@ -252,7 +252,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             _writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
                         }
-                        else if (parameter.IsOptionalInSignature && !Configuration.KeepOptionalClientParametersInConstructor)
+                        else if (parameter.IsOptionalInSignature && !parameter.IsEndpoint && !Configuration.KeepOptionalClientParametersInConstructor)
                         {
                             _writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.{parameter.Name.FirstCharToUpperCase()};");
                         }

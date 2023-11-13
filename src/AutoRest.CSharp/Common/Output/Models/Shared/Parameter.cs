@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
+        public bool IsEndpoint => Type.Equals(typeof(Uri)) && Name == KnownParameters.Endpoint.Name;
 
         public Parameter ToRequired()
         {

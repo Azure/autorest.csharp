@@ -96,7 +96,13 @@ namespace Azure.Core
         }
         public static RequestContent FromObject(BinaryData value)
         {
-            return value;
+            var content = new Utf8JsonRequestContent();
+#if NET6_0_OR_GREATER
+            content.JsonWriter.WriteRawValue(value);
+#else
+            JsonSerializer.Serialize(content.JsonWriter, JsonDocument.Parse(value).RootElement);
+#endif
+            return content;
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using _Type._Enum.Extensible;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ExtensibleClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<ExtensibleClient, ExtensibleClientOptions> AddExtensibleClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<ExtensibleClient, ExtensibleClientOptions> AddExtensibleClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ExtensibleClient, ExtensibleClientOptions>((options) => new ExtensibleClient(options));
+            return builder.RegisterClientFactory<ExtensibleClient, ExtensibleClientOptions>((options) => new ExtensibleClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="ExtensibleClient"/> instance. </summary>

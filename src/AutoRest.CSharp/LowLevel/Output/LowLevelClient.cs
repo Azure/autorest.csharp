@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.Output.Models
             if (!IsSubClient)
             {
                 var requiredParameters = RestClientBuilder.GetRequiredParameters(orderedParameters).ToArray();
-                var optionalParameters = RestClientBuilder.GetOptionalParameters(orderedParameters).Append(CreateOptionsParameter()).ToArray();
+                var optionalParameters = GetOptionalParametersInConstructor(RestClientBuilder.GetOptionalParameters(orderedParameters).Append(CreateOptionsParameter())).ToArray();
 
                 return (
                     BuildPrimaryConstructors(requiredParameters, optionalParameters).ToArray(),
@@ -153,10 +153,20 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+        private IEnumerable<Parameter> GetOptionalParametersInConstructor(IEnumerable<Parameter> optionalParameters)
+        {
+            return Configuration.KeepOptionalClientParametersInConstructor? optionalParameters : optionalParameters.Where(
+                p => ClientOptions.Type.EqualsIgnoreNullable(p.Type) || p.IsEndpoint); // Endpoint is an exception, even it is optional, still need to be the parameter of constructor
+        }
+
+        public IEnumerable<Parameter> GetOptionalParametersInOptions()
+        {
+            return RestClientBuilder.GetOptionalParameters(Parameters).Where(p => !p.IsEndpoint);
+        }
+
         private IEnumerable<ConstructorSignature> BuildPrimaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
         {
-            var neededOptionalParameters = Configuration.KeepOptionalClientParametersInConstructor ? optionalParameters : optionalParameters.Where(p => ClientOptions.Type.EqualsIgnoreNullable(p.Type));
-            var optionalToRequired = neededOptionalParameters
+            var optionalToRequired = optionalParameters
                 .Select(parameter => ClientOptions.Type.EqualsIgnoreNullable(parameter.Type)
                 ? parameter with { DefaultValue = null, Validation = ValidationType.None }
                 : parameter with
@@ -192,17 +202,15 @@ namespace AutoRest.CSharp.Output.Models
                 yield return CreateMockingConstructor();
             }
 
-            var neededOptionalParameters = Configuration.KeepOptionalClientParametersInConstructor ? optionalParameters : optionalParameters.Where(p => ClientOptions.Type.EqualsIgnoreNullable(p.Type));
-
             /* Construct the parameter arguments to call primitive constructor.
              * In primitive constructor, the endpoint is the first parameter,
              * so put the endpoint as the first parameter argument if the endpoint is optional paramter.
              * */
-            var optionalParametersArguments = neededOptionalParameters
+            var optionalParametersArguments = optionalParameters
                 .Where(p => !p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase))
                 .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
                 .ToArray();
-            var optionalEndpoint = neededOptionalParameters.Where(p => p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            var optionalEndpoint = optionalParameters.Where(p => p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             var arguments = new List<FormattableString>();
             if (optionalEndpoint != null)
             {
