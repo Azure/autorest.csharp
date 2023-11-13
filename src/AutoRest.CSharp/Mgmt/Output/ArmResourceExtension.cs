@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class ArmResourceExtension : MgmtExtension
     {
         private readonly List<MgmtExtension> _extensions;
-        public ArmResourceExtension(IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, IEnumerable<MgmtExtensionClient> extensionClients) : base(Enumerable.Empty<InputOperation>(), extensionClients, typeof(ArmResource), RequestPath.Any)
+        public ArmResourceExtension(IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, IEnumerable<MgmtMockableExtension> extensionClients) : base(Enumerable.Empty<InputOperation>(), extensionClients, typeof(ArmResource), RequestPath.Any)
         {
             _extensions = new();
             foreach (var (parentRequestPath, operations) in armResourceExtensionOperations)

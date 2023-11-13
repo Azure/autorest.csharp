@@ -62,6 +62,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private CachedDictionary<InputOperation, RestClientOperationMethods> OperationMethods { get; }
 
+        private Dictionary<Schema, TypeProvider> AllSchemaMap { get; }
+
         private Dictionary<InputType, TypeProvider> AllInputTypeMap { get; }
 
         public CachedDictionary<InputType, TypeProvider> ResourceTypeMap { get; }
@@ -103,6 +105,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceDataTypeNameToOperationSets = DecorateOperationSets();
             //_schemaToInputEnumMap = new CodeModelConverter(codeModel, schemaUsages).CreateEnums();
 
+            AllSchemaMap = InitializeModels(codeModel);
             AllInputTypeMap = InitializeModels();
 
             // others are populated later
@@ -757,6 +760,22 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType ResolveEnum(InputEnumType enumType) => AllEnumMap[enumType].Type;
         public override CSharpType ResolveModel(InputModelType model) => _schemaOrNameToModels[model].Type;
+
+        public override CSharpType FindTypeForSchema(Schema schema) => FindTypeProviderForSchema(schema).Type;
+
+        public TypeProvider FindTypeProviderForSchema(Schema schema)
+        {
+            TypeProvider? result;
+            if (AllSchemaMap is null)
+            {
+                result = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
+            }
+            else if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
+            {
+                throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
+            }
+            return result;
+        }
 
         public override TypeProvider FindTypeProviderForInputType(InputType inputType)
         {

@@ -245,7 +245,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (property.InputModelProperty!.ConstantValue is not null && property.IsRequired)
                 {
                     // Turn constants into initializers
-                    initializationValue = BuilderHelpers.ParseConstant(property.InputModelProperty!.ConstantValue, propertyType);
+                    initializationValue = new ConstantExpression(BuilderHelpers.ParseConstant(property.InputModelProperty!.ConstantValue, propertyType));
                 }
                 else if (IsStruct || property.InputModelProperty?.IsRequired == true)
                 {

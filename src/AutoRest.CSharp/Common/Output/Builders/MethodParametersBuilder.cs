@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _convenienceParameters = new List<Parameter>();
             _arguments = new Dictionary<Parameter, ValueExpression>();
             _conversions = new Dictionary<Parameter, MethodBodyStatement>();
-            _keepClientDefaultValue = operation.KeepClientDefaultValue || Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
+            _keepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
             _unsortedParameters = operation.Parameters
                 .Where(rp => rp.Location != RequestLocation.Header || !IgnoredRequestHeader.Contains(rp.NameInRequest))
                 .ToArray();
@@ -874,11 +874,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     var groupedByParameterType = _typeFactory.CreateType(groupedByInputParameter.Type);
                     var (propertyName, propertyType) = groupedByParameterType.Implementation switch
                     {
-                        ModelTypeProvider modelType => modelType.Fields.GetFieldByParameterName(outputParameter.Name)?.Name,
+                        ModelTypeProvider modelType when modelType.Fields.GetFieldByParameterName(outputParameter.Name) is { } field => (field.Name, field.Type),
                         // TODO: handle it later
-                        //SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyForGroupedParameter(inputParameter.Name).Declaration.Name,
-                        SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyBySerializedName(inputParameter.NameInRequest ?? inputParameter.Name).Declaration.Name,
-                        _ => throw new InvalidOperationException($"Unexpected object type {groupedByParameterType.GetType()} for grouped parameter {outputParameter.Name}")
+                        //SchemaObjectType schemaObjectType when schemaObjectType.GetPropertyForGroupedParameter(inputParameter.Name).Declaration is { } declaration => (declaration.Name, declaration.Type),
+                        _ => throw new InvalidOperationException($"Unable to find object property for grouped parameter {outputParameter.Name} in {groupedByParameterType.Name}")
                     };
 
                     var groupedByParameterName = groupedByInputParameter.Name.ToVariableName();

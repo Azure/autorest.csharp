@@ -5,11 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 
@@ -51,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             AllModels = _isTspInput ? allModels : Array.Empty<TypeProvider>();
             RestClients = CreateClients(topLevelClientInfos, clientOptions, rootNamespace, TypeFactory, libraryName, sourceInputModel);
             ClientOptions = clientOptions;
-            ModelFactory = ModelFactoryTypeProvider.TryCreate(AllModels, TypeFactory, sourceInputModel);
+            ModelFactory = ModelFactoryTypeProvider.TryCreate(AllModels, sourceInputModel);
             AspDotNetExtension = new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, sourceInputModel);
             AccessOverriddenModels = _isTspInput
                 ? _enums.Where(e => e.Key.Accessibility is not null).Select(e => e.Value.Declaration.Name)

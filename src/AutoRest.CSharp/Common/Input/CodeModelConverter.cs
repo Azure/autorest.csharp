@@ -141,6 +141,7 @@ namespace AutoRest.CSharp.Common.Input
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
                 Examples: Array.Empty<InputOperationExample>(),
+                KeepClientDefaultValue: false,
                 OriginalName: operation.Language.Default.SerializedName);
 
             _inputOperationToOperationMap[inputOperation] = operation;
@@ -461,8 +462,8 @@ namespace AutoRest.CSharp.Common.Input
                 XMsFormat.DataFactoryElementOfInt => new InputSystemType(type, InputPrimitiveType.Int32, property.IsNullable),
                 XMsFormat.DataFactoryElementOfDouble => new InputSystemType(type, InputPrimitiveType.Float64, property.IsNullable),
                 XMsFormat.DataFactoryElementOfBool => new InputSystemType(type, InputPrimitiveType.Boolean, property.IsNullable),
-                XMsFormat.DataFactoryElementOfListOfT => new InputSystemType(type, new InputListType(name, GetOrCreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false), false, property.Language.Default.SerializedName), property.IsNullable),
-                XMsFormat.DataFactoryElementOfListOfString => new InputSystemType(type, new InputListType(name, InputPrimitiveType.String, false, property.Language.Default.SerializedName), false),
+                XMsFormat.DataFactoryElementOfListOfT => new InputSystemType(type, new InputListType(name, GetOrCreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false), false, false, property.Language.Default.SerializedName), property.IsNullable),
+                XMsFormat.DataFactoryElementOfListOfString => new InputSystemType(type, new InputListType(name, InputPrimitiveType.String, false, false, property.Language.Default.SerializedName), false),
                 XMsFormat.DataFactoryElementOfKeyValuePairs => new InputSystemType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false, property.Language.Default.SerializedName), property.IsNullable),
                 XMsFormat.DataFactoryElementOfDateTime => new InputSystemType(type, InputPrimitiveType.DateTime, property.IsNullable),
                 XMsFormat.DataFactoryElementOfDuration => new InputSystemType(type, InputPrimitiveType.Time, property.IsNullable),

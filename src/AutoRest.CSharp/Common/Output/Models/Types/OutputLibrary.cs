@@ -10,6 +10,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal abstract class OutputLibrary
     {
         public abstract TypeProvider FindTypeProviderForInputType(InputType inputType);
+        public abstract CSharpType FindTypeForSchema(Schema schema);
         public abstract CSharpType? FindTypeByName(string originalName);
 
         /// <summary>
