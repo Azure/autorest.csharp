@@ -131,17 +131,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="operation"></param>
         /// <returns></returns>
-        public static RequestPath ParentRequestPath(this InputOperation operation)
+        public static RequestPath ParentRequestPath(this InputOperation operation, InputNamespace inputNamespace)
         {
             if (_inputOperationToParentRequestPathCache.TryGetValue(operation, out var result))
                 return result;
 
-            result = GetParentRequestPath(operation);
+            result = GetParentRequestPath(operation, inputNamespace);
             _inputOperationToParentRequestPathCache.TryAdd(operation, result);
             return result;
         }
 
-        private static RequestPath GetParentRequestPath(InputOperation operation)
+        private static RequestPath GetParentRequestPath(InputOperation operation, InputNamespace inputNamespace)
         {
             // escape the calculation if this is configured in the configuration
             if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.Uri, out var rawPath))
@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var currentRequestPath = operation.GetRequestPath();
             var currentOperationSet = MgmtContext.Library.GetOperationSet(currentRequestPath);
             // if this operation comes from a resource, return itself
-            if (currentOperationSet.IsResource())
+            if (currentOperationSet.IsResource(inputNamespace))
                 return currentRequestPath;
 
             // if this operation corresponds to a collection operation of a resource, return the path of the resource

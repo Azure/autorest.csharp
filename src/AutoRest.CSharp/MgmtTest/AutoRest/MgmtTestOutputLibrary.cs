@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -20,9 +19,9 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     {
         private readonly IReadOnlyList<InputClient> _mockTestModel;
         private readonly MgmtTestConfiguration _mgmtTestConfiguration;
-        public MgmtTestOutputLibrary()
+        public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
-            _mockTestModel = MgmtContext.InputNamespace.Clients;
+            _mockTestModel = inputNamespace.Clients;
             _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
         }
 

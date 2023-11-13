@@ -54,7 +54,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
             var inputNamespace = new CodeModelConverter(model, new SchemaUsageProvider(model)).CreateNamespace();
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, model, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, sourceInputModel));
         }
 
         [Test]

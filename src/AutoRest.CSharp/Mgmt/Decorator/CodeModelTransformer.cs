@@ -6,16 +6,27 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
+using Humanizer.Inflections;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        public static void Transform(CodeModel codeModel)
+        private static void ApplyGlobalConfigurations()
         {
+            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
+            {
+                Vocabularies.Default.AddIrregular(word, plural);
+            }
+        }
+
+        public static void Transform()
+        {
+            ApplyGlobalConfigurations();
+
             // schema usage transformer must run first
-            SchemaUsageTransformer.Transform(codeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
+            SchemaUsageTransformer.Transform(MgmtContext.CodeModel);
+            DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
             OmitOperationGroups.RemoveOperationGroups();
             PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();

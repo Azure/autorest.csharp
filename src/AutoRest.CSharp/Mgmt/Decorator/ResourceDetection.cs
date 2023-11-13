@@ -19,15 +19,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private const string ProvidersSegment = "/providers/";
         private static ConcurrentDictionary<string, InputModelType?> _resourceDataSchemaCache = new ConcurrentDictionary<string, InputModelType?>();
 
-        public static bool IsResource(this OperationSet set)
+        public static bool IsResource(this OperationSet set, InputNamespace? inputNamespace = null)
         {
-            return set.TryGetResourceDataSchema(out _);
+            return set.TryGetResourceDataSchema(out _, inputNamespace);
         }
 
-        private static InputModelType? FindObjectSchemaWithName(string name)
-            => MgmtContext.InputNamespace.Models.OfType<InputModelType>().FirstOrDefault(inputModel => inputModel.GetOriginalName() == name);
+        private static InputModelType? FindObjectSchemaWithName(string name, InputNamespace? inputNamespace = null)
+            => inputNamespace?.Models.OfType<InputModelType>().FirstOrDefault(inputModel => inputModel.GetOriginalName() == name);
 
-        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)] out InputModelType resourceType)
+        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)] out InputModelType resourceType, InputNamespace? intputNamespace = null)
         {
             resourceType = null;
             // get the result from cache
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (Configuration.MgmtConfiguration.RequestPathToResourceData.TryGetValue(set.RequestPath, out var resourceTypeName))
             {
                 // find a schema with this name
-                resourceType = FindObjectSchemaWithName(resourceTypeName);
+                resourceType = FindObjectSchemaWithName(resourceTypeName, intputNamespace);
                 if (resourceType == null)
                 {
                     throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceTypeName} in the request-path-to-resource-data configuration");
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // try to find it in the partial resource list
             if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceTypeName))
             {
-                resourceType = FindObjectSchemaWithName(resourceTypeName);
+                resourceType = FindObjectSchemaWithName(resourceTypeName, intputNamespace);
                 if (resourceType == null)
                 {
                     throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceTypeName} in the request-path-to-resource-data configuration");

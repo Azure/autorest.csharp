@@ -18,14 +18,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public static MgmtOutputLibrary Library => Context.Library;
 
         public static CodeModel CodeModel => Context.CodeModel;
+        public static SchemaUsageProvider SchemaUsageProvider => Context.SchemaUsageProvider;
 
         public static string DefaultNamespace => Context.DefaultNamespace;
 
         public static string RPName => ClientBuilder.GetRPName(DefaultNamespace);
 
         public static bool IsInitialized => _context is not null;
-
-        public static InputNamespace InputNamespace=> Context.InputNamespace;
 
         public static void Initialize(BuildContext<MgmtOutputLibrary> context)
         {

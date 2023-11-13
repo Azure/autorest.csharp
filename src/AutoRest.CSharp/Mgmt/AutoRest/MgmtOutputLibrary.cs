@@ -90,11 +90,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public TypeFactory TypeFactory { get; }
 
-        public MgmtOutputLibrary(InputNamespace inputNamespace)
+        public MgmtOutputLibrary(CodeModel codeModel, SchemaUsageProvider schemaUsageProvider)
         {
-            _input = inputNamespace;
             TypeFactory = new TypeFactory(this);
-            ApplyGlobalConfigurations();
+            CodeModelTransformer.Transform();
+
+            var codeModelConverter = new CodeModelConverter(codeModel, schemaUsageProvider);
+            _input = codeModelConverter.CreateNamespace();
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
@@ -103,11 +105,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             AllInputTypeMap = InitializeModels();
 
-            //var codeModelConverter = new CodeModelConverter(codeModel, schemaUsages);
-            //_input = codeModelConverter.CreateNamespace();
-
             // others are populated later
-            OperationsToRequestPaths = new CachedDictionary<InputOperation, RequestPath>(() => PopulateOperationsToRequestPaths(inputNamespace));
+            OperationsToRequestPaths = new CachedDictionary<InputOperation, RequestPath>(() => PopulateOperationsToRequestPaths());
             RawRequestPathToRestClient = new CachedDictionary<string, HashSet<MgmtRestClient>>(EnsureRestClients);
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
             RequestPathToResources = new CachedDictionary<RequestPath, ResourceObjectAssociation>(EnsureRequestPathToResourcesMap);
@@ -120,14 +119,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
-        }
 
-        private static void ApplyGlobalConfigurations()
-        {
-            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
-            {
-                Vocabularies.Default.AddIrregular(word, plural);
-            }
+            //this is where we construct renaming map
+            UpdateBodyParameters();
         }
 
         public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
@@ -183,7 +177,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // get the request path and operation set
                     RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup, TypeFactory);
                     var operationSet = RawRequestPathToOperationSets[requestPath];
-                    if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
+                    if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema, _input))
                     {
                         // TODO: change parameter to required, put this logic outside of output library to the code model tranformer or afterwards
                         // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
@@ -254,8 +248,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<InputType, TypeProvider> InitializeModels()
         {
-            //this is where we construct renaming map
-            UpdateBodyParameters();
 
             // first, construct resource data models
             foreach (var inputModel in _input.Models)
@@ -730,7 +722,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     continue;
                 foreach (var operation in operationSet)
                 {
-                    var parentRequestPath = operation.ParentRequestPath();
+                    var parentRequestPath = operation.ParentRequestPath(_input);
                     if (childOperations.TryGetValue(parentRequestPath, out var list))
                         list.Add(operation);
                     else
@@ -834,7 +826,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             Dictionary<string, HashSet<OperationSet>> resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
-                if (operationSet.TryGetResourceDataSchema(out var resourceDataType))
+                if (operationSet.TryGetResourceDataSchema(out var resourceDataType, _input))
                 {
                     // ensure the name of resource data is singular
                     var typeName = resourceDataType.Name;
@@ -892,10 +884,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return rawRequestPathToOperationSets;
         }
 
-        private Dictionary<InputOperation, RequestPath> PopulateOperationsToRequestPaths(InputNamespace inputNamespace)
+        private Dictionary<InputOperation, RequestPath> PopulateOperationsToRequestPaths()
         {
             var operationsToRequestPath = new Dictionary<InputOperation, RequestPath>();
-            foreach (var client in inputNamespace.Clients)
+            foreach (var client in _input.Clients)
             {
                 foreach (var operation in client.Operations)
                 {

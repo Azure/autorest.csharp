@@ -14,7 +14,6 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class BuildContext<T> : BuildContext where T : OutputLibrary
 #pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly InputNamespace _inputNamespace;
         private T? _library;
         public T Library => _library ??= EnsureLibrary();
 
@@ -28,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (Configuration.AzureArm)
             {
-                library = (T)(object)new MgmtOutputLibrary(_inputNamespace);
+                library = (T)(object)new MgmtOutputLibrary(CodeModel, SchemaUsageProvider);
             }
             else
             {
@@ -39,10 +38,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
 
-        public BuildContext(InputNamespace inputNamespace, CodeModel codeModel, SourceInputModel? sourceInputModel)
-            : base(inputNamespace, codeModel, sourceInputModel)
+        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
+            : base(codeModel, sourceInputModel)
         {
-            _inputNamespace = inputNamespace;
         }
     }
 }
