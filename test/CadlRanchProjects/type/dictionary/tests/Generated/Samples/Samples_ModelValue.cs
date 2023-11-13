@@ -7,129 +7,181 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Dictionary;
 using _Type._Dictionary.Models;
 
 namespace _Type._Dictionary.Samples
 {
-    internal class Samples_ModelValue
+    public partial class Samples_ModelValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue()
+        public void Example_GetModelValue_ShortVersion()
         {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetModelValue(new RequestContext());
+            Response response = client.GetModelValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetModelValue_ShortVersion_Async()
+        {
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.GetModelValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetModelValue_ShortVersion_Convenience()
+        {
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, InnerModel>> response = client.GetModelValue();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetModelValue_ShortVersion_Convenience_Async()
+        {
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, InnerModel>> response = await client.GetModelValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModelValue_AllParameters()
         {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetModelValue(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("children").GetProperty("<test>").GetProperty("property").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_Async()
-        {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
-
-            Response response = await client.GetModelValueAsync(new RequestContext());
+            Response response = client.GetModelValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModelValue_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetModelValueAsync(new RequestContext());
+            Response response = await client.GetModelValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("children").GetProperty("<test>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_Convenience_Async()
+        public void Example_GetModelValue_AllParameters_Convenience()
         {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetModelValueAsync();
+            Response<IReadOnlyDictionary<string, InnerModel>> response = client.GetModelValue();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public async Task Example_GetModelValue_AllParameters_Convenience_Async()
         {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            Response<IReadOnlyDictionary<string, InnerModel>> response = await client.GetModelValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_ShortVersion()
+        {
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
                     property = "<property>",
                 },
-            };
+            });
+            Response response = client.Put(content);
 
-            Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_ShortVersion_Async()
+        {
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = new
+                {
+                    property = "<property>",
+                },
+            });
+            Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_ShortVersion_Convenience()
+        {
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new Dictionary<string, InnerModel>
+            {
+                ["key"] = new InnerModel("<property>")
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_ShortVersion_Convenience_Async()
+        {
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new Dictionary<string, InnerModel>
+            {
+                ["key"] = new InnerModel("<property>")
+            });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
                     property = "<property>",
+                    children = new { },
                 },
-            };
+            });
+            Response response = client.Put(content);
 
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
-        {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
-
-            var data = new
-            {
-                key = new
-                {
-                    property = "<property>",
-                },
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -137,34 +189,55 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
                     property = "<property>",
+                    children = new { },
                 },
-            };
+            });
+            Response response = await client.PutAsync(content);
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
-            var client = new DictionaryClient().GetModelValueClient("1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            var body = new Dictionary<string, InnerModel>
+            Response response = client.Put(new Dictionary<string, InnerModel>
             {
                 ["key"] = new InnerModel("<property>")
                 {
-                    Children = { },
-                },
-            };
-            var result = await client.PutAsync(body);
+                    Children =
+{
+["key"] = default
+},
+                }
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new Dictionary<string, InnerModel>
+            {
+                ["key"] = new InnerModel("<property>")
+                {
+                    Children =
+{
+["key"] = default
+},
+                }
+            });
         }
     }
 }

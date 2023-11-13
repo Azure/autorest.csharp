@@ -1,49 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OperationAsync(RequestContext)">
-<example>
-This sample shows how to call OperationAsync.
+    <member name="ClientNameAsync(RequestContext)">
+      <example>
+This sample shows how to call ClientNameAsync.
 <code><![CDATA[
-var client = new ProjectedNameClient();
+ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = await client.OperationAsync();
+Response response = await client.ClientNameAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call ClientNameAsync with all request content.
+<code><![CDATA[
+ProjectedNameClient client = new ProjectedNameClient();
+
+Response response = await client.ClientNameAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
-    <member name="Operation(RequestContext)">
-<example>
-This sample shows how to call Operation.
+    <member name="ClientName(RequestContext)">
+      <example>
+This sample shows how to call ClientName.
 <code><![CDATA[
-var client = new ProjectedNameClient();
+ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = client.Operation();
+Response response = client.ClientName();
+
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call ClientName with all request content.
+<code><![CDATA[
+ProjectedNameClient client = new ProjectedNameClient();
+
+Response response = client.ClientName();
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="ParameterAsync(string,RequestContext)">
-<example>
-This sample shows how to call ParameterAsync with required parameters.
+      <example>
+This sample shows how to call ParameterAsync.
 <code><![CDATA[
-var client = new ProjectedNameClient();
+ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = await client.ParameterAsync("<defaultName>");
+Response response = await client.ParameterAsync("<clientName>");
+
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call ParameterAsync with all parameters.
+<code><![CDATA[
+ProjectedNameClient client = new ProjectedNameClient();
+
+Response response = await client.ParameterAsync("<clientName>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Parameter(string,RequestContext)">
-<example>
-This sample shows how to call Parameter with required parameters.
+      <example>
+This sample shows how to call Parameter.
 <code><![CDATA[
-var client = new ProjectedNameClient();
+ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = client.Parameter("<defaultName>");
+Response response = client.Parameter("<clientName>");
+
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Parameter with all parameters.
+<code><![CDATA[
+ProjectedNameClient client = new ProjectedNameClient();
+
+Response response = client.Parameter("<clientName>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

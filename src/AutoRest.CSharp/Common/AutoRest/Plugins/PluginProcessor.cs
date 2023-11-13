@@ -8,7 +8,8 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -34,6 +35,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     Console.Error.WriteLine("Attempting to attach debugger.");
                     System.Diagnostics.Debugger.Launch();
                 }
+                AutoRestLogger.Initialize(autoRest);
                 return await plugin.Execute(autoRest);
             }
             catch (Exception e)

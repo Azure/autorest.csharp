@@ -6,65 +6,86 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using ConfidentLevelsInTsp;
 using ConfidentLevelsInTsp.Models;
 using NUnit.Framework;
 
 namespace ConfidentLevelsInTsp.Samples
 {
-    public class Samples_ConfidentLevelsInTspClient
+    public partial class Samples_ConfidentLevelsInTspClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInRequestProperty()
+        public void Example_UnionInRequestProperty_ShortVersion()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                unionProperty = new { },
-            };
+                unionProperty = "<unionProperty>",
+            });
+            Response response = client.UnionInRequestProperty(content);
 
-            Response response = client.UnionInRequestProperty(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionInRequestProperty_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                unionProperty = "<unionProperty>",
+            });
+            Response response = await client.UnionInRequestPropertyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnionInRequestProperty_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = client.UnionInRequestProperty(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionInRequestProperty_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UnionInRequestPropertyAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionInRequestProperty_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                unionProperty = new { },
-            };
+                unionProperty = "<unionProperty>",
+            });
+            Response response = client.UnionInRequestProperty(content);
 
-            Response response = client.UnionInRequestProperty(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInRequestProperty_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                unionProperty = new { },
-            };
-
-            Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -72,71 +93,112 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionInRequestProperty_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                unionProperty = new { },
-            };
+                unionProperty = "<unionProperty>",
+            });
+            Response response = await client.UnionInRequestPropertyAsync(content);
 
-            Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInResponseProperty()
+        public void Example_UnionInRequestProperty_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = client.UnionInRequestProperty(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionInRequestProperty_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UnionInRequestPropertyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnionInResponseProperty_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
-            };
-
-            Response response = client.UnionInResponseProperty(RequestContent.Create(data));
+            });
+            Response response = client.UnionInResponseProperty(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("unionProperty").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionInResponseProperty_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                age = 1234,
+            });
+            Response response = await client.UnionInResponsePropertyAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("unionProperty").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnionInResponseProperty_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            UsualModel body = new UsualModel("<name>", 1234);
+            Response<AnotherModelWithUnionProperty> response = client.UnionInResponseProperty(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionInResponseProperty_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            UsualModel body = new UsualModel("<name>", 1234);
+            Response<AnotherModelWithUnionProperty> response = await client.UnionInResponsePropertyAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionInResponseProperty_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
-                size = 123.45d,
-            };
-
-            Response response = client.UnionInResponseProperty(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInResponseProperty_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                name = "<name>",
-                age = 1234,
-            };
-
-            Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data));
+                size = 123.45,
+            });
+            Response response = client.UnionInResponseProperty(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("unionProperty").ToString());
@@ -146,17 +208,16 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionInResponseProperty_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
-                size = 123.45d,
-            };
-
-            Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data));
+                size = 123.45,
+            });
+            Response response = await client.UnionInResponsePropertyAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("unionProperty").ToString());
@@ -164,52 +225,120 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithSelfReference()
+        public void Example_UnionInResponseProperty_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            UsualModel body = new UsualModel("<name>", 1234)
+            {
+                Size = 123.45,
+            };
+            Response<AnotherModelWithUnionProperty> response = client.UnionInResponseProperty(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionInResponseProperty_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            UsualModel body = new UsualModel("<name>", 1234)
+            {
+                Size = 123.45,
+            };
+            Response<AnotherModelWithUnionProperty> response = await client.UnionInResponsePropertyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnionWithSelfReference_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                unionProperty = new { },
-            };
+                selfReference = new object[]
+            {
+null
+            },
+                unionProperty = "<unionProperty>",
+            });
+            Response response = client.UnionWithSelfReference(content);
 
-            Response response = client.UnionWithSelfReference(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionWithSelfReference_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                selfReference = new object[]
+            {
+null
+            },
+                unionProperty = "<unionProperty>",
+            });
+            Response response = await client.UnionWithSelfReferenceAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnionWithSelfReference_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+            {
+default
+            }, BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = client.UnionWithSelfReference(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionWithSelfReference_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+            {
+default
+            }, BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UnionWithSelfReferenceAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionWithSelfReference_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                unionProperty = new { },
-            };
-
-            Response response = client.UnionWithSelfReference(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithSelfReference_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
+                selfReference = new object[]
             {
-                name = "<name>",
-                unionProperty = new { },
-            };
+null
+            },
+                unionProperty = "<unionProperty>",
+            });
+            Response response = client.UnionWithSelfReference(content);
 
-            Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -217,74 +346,135 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionWithSelfReference_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                unionProperty = new { },
-            };
+                selfReference = new object[]
+            {
+null
+            },
+                unionProperty = "<unionProperty>",
+            });
+            Response response = await client.UnionWithSelfReferenceAsync(content);
 
-            Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithInderict()
+        public void Example_UnionWithSelfReference_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+            {
+default
+            }, BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = client.UnionWithSelfReference(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionWithSelfReference_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+            {
+default
+            }, BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UnionWithSelfReferenceAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnionWithInderict_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
+            });
+            Response response = client.UnionWithInderict(content);
 
-            Response response = client.UnionWithInderict(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionWithInderict_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.UnionWithInderictAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnionWithInderict_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>");
+            Response response = client.UnionWithInderict(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionWithInderict_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>");
+            Response response = await client.UnionWithInderictAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionWithInderict_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                reference = new[] {
-        new {
-            something = "<something>",
-            reference = new {
-                name = "<name>",
-                unionProperty = new {},
+                reference = new object[]
+            {
+new
+{
+something = "<something>",
+reference = new
+{
+name = "<name>",
+selfReference = new object[]
+{
+null
+},
+unionProperty = "<unionProperty>",
+},
+unionProperty = "<unionProperty>",
+}
             },
-            unionProperty = new {},
-        }
-    },
-            };
+            });
+            Response response = client.UnionWithInderict(content);
 
-            Response response = client.UnionWithInderict(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithInderict_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                name = "<name>",
-            };
-
-            Response response = await client.UnionWithInderictAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -292,76 +482,145 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionWithInderict_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                reference = new[] {
-        new {
-            something = "<something>",
-            reference = new {
-                name = "<name>",
-                unionProperty = new {},
+                reference = new object[]
+            {
+new
+{
+something = "<something>",
+reference = new
+{
+name = "<name>",
+selfReference = new object[]
+{
+null
+},
+unionProperty = "<unionProperty>",
+},
+unionProperty = "<unionProperty>",
+}
             },
-            unionProperty = new {},
-        }
-    },
-            };
+            });
+            Response response = await client.UnionWithInderictAsync(content);
 
-            Response response = await client.UnionWithInderictAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfInteger()
+        public void Example_UnionWithInderict_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>")
+            {
+                Reference = {new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
+{
+Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+{
+default
+}, BinaryData.FromObjectAsJson("<unionProperty>")),
+}},
+            };
+            Response response = client.UnionWithInderict(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnionWithInderict_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>")
+            {
+                Reference = {new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
+{
+Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+{
+default
+}, BinaryData.FromObjectAsJson("<unionProperty>")),
+}},
+            };
+            Response response = await client.UnionWithInderictAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_LiteralOfInteger_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 1,
-            };
+            });
+            Response response = client.LiteralOfInteger(content);
 
-            Response response = client.LiteralOfInteger(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfInteger_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                id = 1,
+            });
+            Response response = await client.LiteralOfIntegerAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_LiteralOfInteger_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = client.LiteralOfInteger(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfInteger_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfIntegerAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_LiteralOfInteger_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 1,
-            };
+            });
+            Response response = client.LiteralOfInteger(content);
 
-            Response response = client.LiteralOfInteger(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfInteger_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                name = "<name>",
-                id = 1,
-            };
-
-            Response response = await client.LiteralOfIntegerAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -369,67 +628,111 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_LiteralOfInteger_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 1,
-            };
+            });
+            Response response = await client.LiteralOfIntegerAsync(content);
 
-            Response response = await client.LiteralOfIntegerAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfFloat()
+        public void Example_LiteralOfInteger_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = client.LiteralOfInteger(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfInteger_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfIntegerAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_LiteralOfFloat_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 3.141592,
-            };
+            });
+            Response response = client.LiteralOfFloat(content);
 
-            Response response = client.LiteralOfFloat(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfFloat_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                id = 3.141592,
+            });
+            Response response = await client.LiteralOfFloatAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_LiteralOfFloat_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = client.LiteralOfFloat(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfFloat_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfFloatAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_LiteralOfFloat_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 3.141592,
-            };
+            });
+            Response response = client.LiteralOfFloat(content);
 
-            Response response = client.LiteralOfFloat(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfFloat_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                name = "<name>",
-                id = 3.141592,
-            };
-
-            Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -437,76 +740,117 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_LiteralOfFloat_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 3.141592,
-            };
+            });
+            Response response = await client.LiteralOfFloatAsync(content);
 
-            Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConfidentOperationWithDiscriminator()
+        public void Example_LiteralOfFloat_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = client.LiteralOfFloat(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfFloat_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfFloatAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ConfidentOperationWithDiscriminator_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
                 name = "<name>",
-            };
-
-            Response response = client.ConfidentOperationWithDiscriminator(RequestContent.Create(data));
+            });
+            Response response = client.ConfidentOperationWithDiscriminator(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ConfidentOperationWithDiscriminator_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
+            });
+            Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ConfidentOperationWithDiscriminator_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            Pet input = new Cat("<name>", "<meow>");
+            Response<Pet> response = client.ConfidentOperationWithDiscriminator(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ConfidentOperationWithDiscriminator_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            Pet input = new Cat("<name>", "<meow>");
+            Response<Pet> response = await client.ConfidentOperationWithDiscriminatorAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_ConfidentOperationWithDiscriminator_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
                 name = "<name>",
-            };
-
-            Response response = client.ConfidentOperationWithDiscriminator(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConfidentOperationWithDiscriminator_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                meow = "<meow>",
-                kind = "cat",
-                name = "<name>",
-            };
-
-            Response response = await client.ConfidentOperationWithDiscriminatorAsync(RequestContent.Create(data));
+            });
+            Response response = client.ConfidentOperationWithDiscriminator(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -517,17 +861,16 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConfidentOperationWithDiscriminator_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
                 name = "<name>",
-            };
-
-            Response response = await client.ConfidentOperationWithDiscriminatorAsync(RequestContent.Create(data));
+            });
+            Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -536,75 +879,105 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConfidentOperationWithDiscriminator_Convenience_Async()
+        public void Example_ConfidentOperationWithDiscriminator_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var input = new Cat("<name>", "<meow>");
-            var result = await client.ConfidentOperationWithDiscriminatorAsync(input);
+            Pet input = new Cat("<name>", "<meow>");
+            Response<Pet> response = client.ConfidentOperationWithDiscriminator(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedBaseMethod()
+        public async Task Example_ConfidentOperationWithDiscriminator_AllParameters_Convenience_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            Pet input = new Cat("<name>", "<meow>");
+            Response<Pet> response = await client.ConfidentOperationWithDiscriminatorAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PollutedBaseMethod_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
-                color = new { },
+                color = "<color>",
                 kind = "dog",
                 name = "<name>",
-            };
-
-            Response response = client.PollutedBaseMethod(RequestContent.Create(data));
+            });
+            Response response = client.PollutedBaseMethod(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PollutedBaseMethod_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
+            });
+            Response response = await client.PollutedBaseMethodAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PollutedBaseMethod_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedPet> response = client.PollutedBaseMethod(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PollutedBaseMethod_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedPet> response = await client.PollutedBaseMethodAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PollutedBaseMethod_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
-                color = new { },
+                color = "<color>",
                 kind = "dog",
                 name = "<name>",
-            };
-
-            Response response = client.PollutedBaseMethod(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedBaseMethod_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                woof = "<woof>",
-                color = new { },
-                kind = "dog",
-                name = "<name>",
-            };
-
-            Response response = await client.PollutedBaseMethodAsync(RequestContent.Create(data));
+            });
+            Response response = client.PollutedBaseMethod(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -615,18 +988,17 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PollutedBaseMethod_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
-                color = new { },
+                color = "<color>",
                 kind = "dog",
                 name = "<name>",
-            };
-
-            Response response = await client.PollutedBaseMethodAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PollutedBaseMethodAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -635,68 +1007,109 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedDerivedMethod()
+        public void Example_PollutedBaseMethod_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedPet> response = client.PollutedBaseMethod(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PollutedBaseMethod_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedPet> response = await client.PollutedBaseMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PollutedDerivedMethod_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
-                color = new { },
+                color = "<color>",
                 kind = "dog",
                 name = "<name>",
-            };
-
-            Response response = client.PollutedDerivedMethod(RequestContent.Create(data));
+            });
+            Response response = client.PollutedDerivedMethod(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("woof").ToString());
             Console.WriteLine(result.GetProperty("color").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PollutedDerivedMethod_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
+            });
+            Response response = await client.PollutedDerivedMethodAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("woof").ToString());
+            Console.WriteLine(result.GetProperty("color").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PollutedDerivedMethod_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedDog> response = client.PollutedDerivedMethod(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PollutedDerivedMethod_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedDog> response = await client.PollutedDerivedMethodAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PollutedDerivedMethod_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
-                color = new { },
+                color = "<color>",
                 kind = "dog",
                 name = "<name>",
-            };
-
-            Response response = client.PollutedDerivedMethod(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedDerivedMethod_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                woof = "<woof>",
-                color = new { },
-                kind = "dog",
-                name = "<name>",
-            };
-
-            Response response = await client.PollutedDerivedMethodAsync(RequestContent.Create(data));
+            });
+            Response response = client.PollutedDerivedMethod(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("woof").ToString());
@@ -709,18 +1122,17 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PollutedDerivedMethod_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
-                color = new { },
+                color = "<color>",
                 kind = "dog",
                 name = "<name>",
-            };
-
-            Response response = await client.PollutedDerivedMethodAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PollutedDerivedMethodAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("woof").ToString());
@@ -731,63 +1143,104 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnpollutedDerivedMethod()
+        public void Example_PollutedDerivedMethod_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedDog> response = client.PollutedDerivedMethod(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PollutedDerivedMethod_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedDog> response = await client.PollutedDerivedMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnpollutedDerivedMethod_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
                 name = "<name>",
-            };
-
-            Response response = client.UnpollutedDerivedMethod(RequestContent.Create(data));
+            });
+            Response response = client.UnpollutedDerivedMethod(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("meow").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnpollutedDerivedMethod_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
+            });
+            Response response = await client.UnpollutedDerivedMethodAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("meow").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UnpollutedDerivedMethod_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+            Response<UnpollutedCat> response = client.UnpollutedDerivedMethod(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnpollutedDerivedMethod_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+            Response<UnpollutedCat> response = await client.UnpollutedDerivedMethodAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_UnpollutedDerivedMethod_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
                 name = "<name>",
-            };
-
-            Response response = client.UnpollutedDerivedMethod(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnpollutedDerivedMethod_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                meow = "<meow>",
-                kind = "cat",
-                name = "<name>",
-            };
-
-            Response response = await client.UnpollutedDerivedMethodAsync(RequestContent.Create(data));
+            });
+            Response response = client.UnpollutedDerivedMethod(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("meow").ToString());
@@ -799,17 +1252,16 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnpollutedDerivedMethod_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
                 name = "<name>",
-            };
-
-            Response response = await client.UnpollutedDerivedMethodAsync(RequestContent.Create(data));
+            });
+            Response response = await client.UnpollutedDerivedMethodAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("meow").ToString());
@@ -819,51 +1271,95 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModel()
+        public void Example_UnpollutedDerivedMethod_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+            Response<UnpollutedCat> response = client.UnpollutedDerivedMethod(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UnpollutedDerivedMethod_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+            Response<UnpollutedCat> response = await client.UnpollutedDerivedMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModel_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
+            });
+            Response response = client.UseDerivedModel(content);
 
-            Response response = client.UseDerivedModel(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModel_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.UseDerivedModelAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModel_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            DerivedModel input = new DerivedModel("<name>");
+            Response response = client.UseDerivedModel(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModel_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            DerivedModel input = new DerivedModel("<name>");
+            Response response = await client.UseDerivedModelAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_UseDerivedModel_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 age = 1234,
                 name = "<name>",
-                size = 123.45d,
-            };
+                size = 123.45,
+            });
+            Response response = client.UseDerivedModel(content);
 
-            Response response = client.UseDerivedModel(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModel_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                name = "<name>",
-            };
-
-            Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -871,69 +1367,119 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UseDerivedModel_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 age = 1234,
                 name = "<name>",
-                size = 123.45d,
-            };
+                size = 123.45,
+            });
+            Response response = await client.UseDerivedModelAsync(content);
 
-            Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModelWithUnion()
+        public void Example_UseDerivedModel_AllParameters_Convenience()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            DerivedModel input = new DerivedModel("<name>")
             {
-                unionProperty = new { },
-                name = "<name>",
+                Age = 1234,
             };
+            Response response = client.UseDerivedModel(input);
+        }
 
-            Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModel_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            DerivedModel input = new DerivedModel("<name>")
+            {
+                Age = 1234,
+            };
+            Response response = await client.UseDerivedModelAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModelWithUnion_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                unionProperty = "<unionProperty>",
+                name = "<name>",
+            });
+            Response response = client.UseDerivedModelWithUnion(content);
+
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModelWithUnion_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                unionProperty = "<unionProperty>",
+                name = "<name>",
+            });
+            Response response = await client.UseDerivedModelWithUnionAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModelWithUnion_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = client.UseDerivedModelWithUnion(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModelWithUnion_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UseDerivedModelWithUnionAsync(input);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_UseDerivedModelWithUnion_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                unionProperty = new { },
+                unionProperty = "<unionProperty>",
                 name = "<name>",
-                size = 123.45d,
-            };
+                size = 123.45,
+            });
+            Response response = client.UseDerivedModelWithUnion(content);
 
-            Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModelWithUnion_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
-
-            var data = new
-            {
-                unionProperty = new { },
-                name = "<name>",
-            };
-
-            Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -941,18 +1487,40 @@ namespace ConfidentLevelsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UseDerivedModelWithUnion_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ConfidentLevelsInTspClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
-                unionProperty = new { },
+                unionProperty = "<unionProperty>",
                 name = "<name>",
-                size = 123.45d,
-            };
+                size = 123.45,
+            });
+            Response response = await client.UseDerivedModelWithUnionAsync(content);
 
-            Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModelWithUnion_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = client.UseDerivedModelWithUnion(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModelWithUnion_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UseDerivedModelWithUnionAsync(input);
         }
     }
 }

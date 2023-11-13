@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The derived model. </summary>
-    internal partial class DerivedModel : BaseModel
+    public partial class DerivedModel : BaseModel
     {
         /// <summary> Initializes a new instance of DerivedModel. </summary>
         /// <param name="name"> The name. </param>

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -12,17 +13,10 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record MethodSignature(string Name, string? Summary, string? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute>? Attributes = null, IReadOnlyList<CSharpType>? GenericArguments = null, IReadOnlyDictionary<CSharpType, FormattableString>? GenericParameterConstraints = null)
-        : MethodSignatureBase(Name, Summary, Description, Modifiers, Parameters, Attributes ?? Array.Empty<CSharpAttribute>())
+    internal record MethodSignature(string Name, FormattableString? Summary, FormattableString? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute>? Attributes = null, IReadOnlyList<CSharpType>? GenericArguments = null, IReadOnlyDictionary<CSharpType, FormattableString>? GenericParameterConstraints = null, CSharpType? ExplicitInterface = null, string? NonDocumentComment = null)
+        : MethodSignatureBase(Name, Summary, Description, NonDocumentComment, Modifiers, Parameters, Attributes ?? Array.Empty<CSharpAttribute>())
     {
-        public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
-
-        public MethodSignature WithAsync(bool isAsync)
-            => isAsync && !Modifiers.HasFlag(Async)
-                ? MakeAsync()
-                : Modifiers.HasFlag(Async)
-                    ? MakeSync()
-                    : this;
+        public MethodSignature WithAsync(bool isAsync) => isAsync ? MakeAsync() : MakeSync();
 
         private MethodSignature MakeAsync()
         {
@@ -65,7 +59,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private MethodSignature MakeSync()
         {
-            if (!Modifiers.HasFlag(Async) || ReturnType != null && TypeFactory.IsPageable(ReturnType))
+            if (!Modifiers.HasFlag(Async) && (ReturnType == null || !TypeFactory.IsAsyncPageable(ReturnType)))
             {
                 return this;
             }
@@ -100,6 +94,16 @@ namespace AutoRest.CSharp.Output.Models
                         : ReturnType.Arguments[0]
                     : null
             };
+        }
+
+        public string ToStringForDocs()
+        {
+            var builder = new StringBuilder(Name);
+            builder.Append("(");
+            var paramList = Parameters.Select(p => p.Type.ToStringForDocs());
+            builder.Append(string.Join(",", paramList));
+            builder.Append(")");
+            return builder.ToString();
         }
     }
 }

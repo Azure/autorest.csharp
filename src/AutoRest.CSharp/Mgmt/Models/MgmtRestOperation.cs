@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -17,7 +18,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Operation = AutoRest.CSharp.Input.Operation;
@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal record MgmtRestOperation
     {
+        private static readonly string[] NULLABLE_RESPONSE_METHOD_NAMES = { "GetIfExists" };
+
         private bool? _isLongRunning;
 
         /// <summary>
@@ -542,7 +544,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private CSharpType GetWrappedMgmtReturnType(CSharpType? originalType)
         {
             if (originalType is null)
-                return IsLongRunningOperation ? typeof(ArmOperation) : typeof(Response);
+                return IsLongRunningOperation ? typeof(ArmOperation) : Configuration.ApiTypes.ResponseType;
 
             if (IsPagingOperation)
                 return originalType;
@@ -550,8 +552,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (InterimOperation is not null)
                 return InterimOperation.InterimType;
 
-
-            return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(false);
+            return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(isAsync: false, isNullable: NULLABLE_RESPONSE_METHOD_NAMES.Contains(this.Name));
         }
 
         private CSharpType? GetMgmtReturnType(CSharpType? originalType)

@@ -16,8 +16,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ModelWriter
     {
-        internal delegate void MethodBodyImplementation(CodeWriter codeWriter, ObjectType objectType);
-
         public void WriteModel(CodeWriter writer, TypeProvider model)
         {
             switch (model)
@@ -25,10 +23,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType e when e.IsExtensible:
+                case EnumType {IsExtensible: true} e:
                     WriteExtensibleEnum(writer, e);
                     break;
-                case EnumType e when !e.IsExtensible:
+                case EnumType {IsExtensible: false} e:
                     WriteEnum(writer, e);
                     break;
                 default:
@@ -234,7 +232,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
             FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type, property.SerializationFormat);
-            if (!string.IsNullOrWhiteSpace(property.PropertyDescription))
+            if (!string.IsNullOrWhiteSpace(property.PropertyDescription.ToString()))
             {
                 return $"{property.PropertyDescription}{binaryDataExtraDescription}";
             }
@@ -292,7 +290,7 @@ Examples:
 To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
 </para>
 <para>
-To assign an already formated json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
+To assign an already formatted json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
 </para>
 <para>
 Examples:

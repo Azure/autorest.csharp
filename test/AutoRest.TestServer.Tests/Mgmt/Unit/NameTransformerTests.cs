@@ -18,18 +18,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         {
             acronymMapping = new Dictionary<string, AcronymMappingTarget>
             {
-                { "Os", new AcronymMappingTarget("OS", null) },
-                { "Ip", new AcronymMappingTarget("IP", null) },
-                { "Ips", new AcronymMappingTarget("IPs", "ips") },
-                { "ID", new AcronymMappingTarget("Id", null) },
-                { "IDs", new AcronymMappingTarget("Ids", null) },
-                { "VM", new AcronymMappingTarget("Vm", null) },
-                { "VMs", new AcronymMappingTarget("Vms", null) },
-                { "VPN", new AcronymMappingTarget("Vpn", null) },
-                { "WAN", new AcronymMappingTarget("Wan", null) },
-                { "WANs", new AcronymMappingTarget("Wans", null) },
-                { "DNS", new AcronymMappingTarget("Dns", null) },
-                { "P2s", new AcronymMappingTarget("P2S", "p2s") },
+                { "Os", new AcronymMappingTarget("OS", null, "OS") },
+                { "Ip", new AcronymMappingTarget("IP", null, "IP") },
+                { "Ips", new AcronymMappingTarget("IPs", "ips", "IPs") },
+                { "ID", new AcronymMappingTarget("Id", null, "Id") },
+                { "IDs", new AcronymMappingTarget("Ids", null, "Ids") },
+                { "VM", new AcronymMappingTarget("Vm", null, "Vm") },
+                { "VMs", new AcronymMappingTarget("Vms", null, "Vms") },
+                { "VPN", new AcronymMappingTarget("Vpn", null, "Vpn") },
+                { "WAN", new AcronymMappingTarget("Wan", null, "Wan") },
+                { "WANs", new AcronymMappingTarget("Wans", null, "Wans") },
+                { "DNS", new AcronymMappingTarget("Dns", null, "Dns") },
+                { "P2s", new AcronymMappingTarget("P2S", "p2s", "P2S") },
             };
         }
 
@@ -63,7 +63,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         public void EnsureNameCaseTest(string name, string expectedPropertyName, string expectedVariableName)
         {
             var transformer = new NameTransformer(acronymMapping);
-            var result = transformer.EnsureNameCase(name);
+            var result = transformer.EnsureNameCase(name, null);
             Assert.AreEqual(expectedPropertyName, result.Name);
             Assert.AreEqual(expectedVariableName, result.VariableName.ToCleanName(false));
         }

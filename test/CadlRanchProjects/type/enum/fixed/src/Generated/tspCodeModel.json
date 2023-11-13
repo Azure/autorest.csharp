@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "DaysOfWeekEnum",
-   "Namespace": "Type.Enum.Fixed",
-   "Description": "Days of the week",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -55,6 +53,8 @@
      "Description": "Sunday."
     }
    ],
+   "Namespace": "Type.Enum.Fixed",
+   "Description": "Days of the week",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"

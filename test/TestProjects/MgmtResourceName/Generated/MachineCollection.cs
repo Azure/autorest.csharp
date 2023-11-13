@@ -316,6 +316,80 @@ namespace MgmtResourceName
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/machines/{machineName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Machines_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="machineName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
+        public virtual async Task<NullableResponse<MachineResource>> GetIfExistsAsync(string machineName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
+
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _machineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<MachineResource>(response.GetRawResponse());
+                return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/machines/{machineName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Machines_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="machineName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
+        public virtual NullableResponse<MachineResource> GetIfExists(string machineName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
+
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _machineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<MachineResource>(response.GetRawResponse());
+                return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<MachineResource> IEnumerable<MachineResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

@@ -1,14 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getOperationLink } from "@azure-tools/typespec-azure-core";
+import { getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
     createSdkContext,
     isApiVersion,
-    isInternal,
     shouldGenerateConvenient,
     shouldGenerateProtocol,
-    SdkContext
+    SdkContext,
+    getAccess,
+    isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -43,7 +44,7 @@ import {
     isInputLiteralType,
     isInputUnionType
 } from "../type/inputType.js";
-import { OperationFinalStateVia } from "../type/operationFinalStateVia.js";
+import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
 import { OperationLongRunning } from "../type/operationLongRunning.js";
 import { OperationPaging } from "../type/operationPaging.js";
 import { OperationResponse } from "../type/operationResponse.js";
@@ -63,7 +64,7 @@ import {
     getFormattedType,
     getInputType
 } from "./model.js";
-import { capitalize } from "./utils.js";
+import { capitalize, getProjectedNameForCsharp, getTypeName } from "./utils.js";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -98,45 +99,35 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.bodyParameter) {
+    if (typespecParameters.body?.parameter) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.bodyParameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
-    } else if (typespecParameters.bodyType) {
-        if (resourceOperation) {
-            parameters.push(
-                loadBodyParameter(sdkContext, resourceOperation.resourceType)
-            );
-        } else {
-            const effectiveBodyType = getEffectiveSchemaType(
-                sdkContext,
-                typespecParameters.bodyType
-            );
-            if (effectiveBodyType.kind === "Model") {
-                if (effectiveBodyType.name !== "") {
-                    parameters.push(
-                        loadBodyParameter(sdkContext, effectiveBodyType)
-                    );
-                } else {
-                    effectiveBodyType.name = `${capitalize(op.name)}Request`;
-                    let bodyParameter = loadBodyParameter(
-                        sdkContext,
-                        effectiveBodyType
-                    );
-                    bodyParameter.Kind = InputOperationParameterKind.Spread;
-                    parameters.push(bodyParameter);
-                }
+    } else if (typespecParameters.body?.type) {
+        const effectiveBodyType = getEffectiveSchemaType(
+            sdkContext,
+            typespecParameters.body.type
+        );
+        if (effectiveBodyType.kind === "Model") {
+            if (effectiveBodyType.name !== "") {
+                parameters.push(
+                    loadBodyParameter(sdkContext, effectiveBodyType)
+                );
+            } else {
+                effectiveBodyType.name = `${capitalize(op.name)}Request`;
+                let bodyParameter = loadBodyParameter(
+                    sdkContext,
+                    effectiveBodyType
+                );
+                bodyParameter.Kind = InputOperationParameterKind.Spread;
+                parameters.push(bodyParameter);
             }
         }
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(
-            sdkContext,
-            res,
-            resourceOperation
-        );
+        const operationResponse = loadOperationResponse(sdkContext, res);
         if (operationResponse) {
             responses.push(operationResponse);
         }
@@ -172,15 +163,16 @@ export function loadOperation(
     for (const res of operation.responses) {
         const body = res.responses[0]?.body;
         if (body?.type) {
+            const bodyType = getEffectiveSchemaType(sdkContext, body.type);
             if (
-                body.type.kind === "Model" &&
-                hasDecorator(body?.type, "$pagedResult")
+                bodyType.kind === "Model" &&
+                hasDecorator(bodyType, "$pagedResult")
             ) {
                 const itemsProperty = Array.from(
-                    body.type.properties.values()
+                    bodyType.properties.values()
                 ).find((it) => hasDecorator(it, "$items"));
                 const nextLinkProperty = Array.from(
-                    body.type.properties.values()
+                    bodyType.properties.values()
                 ).find((it) => hasDecorator(it, "$nextLink"));
                 paging = {
                     NextLinkName: nextLinkProperty?.name,
@@ -192,14 +184,16 @@ export function loadOperation(
     /* TODO: handle lro */
 
     return {
-        Name: op.name,
+        Name: getTypeName(sdkContext, op),
         ResourceName:
             resourceOperation?.resourceType.name ??
             getOperationGroupName(sdkContext, op, serviceNamespaceType),
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
-        Accessibility: isInternal(sdkContext, op) ? "internal" : undefined,
+        Accessibility: isInternal(sdkContext, op)
+            ? "internal"
+            : getAccess(sdkContext, op),
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,
@@ -211,11 +205,7 @@ export function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
-        LongRunning: loadLongRunningOperation(
-            sdkContext,
-            operation,
-            resourceOperation
-        ),
+        LongRunning: loadLongRunningOperation(sdkContext, operation),
         Paging: paging,
         GenerateProtocolMethod: generateProtocol,
         GenerateConvenienceMethod: generateConvenience
@@ -256,7 +246,7 @@ export function loadOperation(
                     : InputOperationParameterKind.Client
                 : InputOperationParameterKind.Method;
         return {
-            Name: param.name,
+            Name: getTypeName(sdkContext, param),
             NameInRequest: name,
             Description: getDoc(program, param),
             Type: inputType,
@@ -294,7 +284,7 @@ export function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: body.name,
+            Name: getTypeName(sdkContext, body),
             NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,
@@ -312,8 +302,7 @@ export function loadOperation(
 
     function loadOperationResponse(
         context: SdkContext,
-        response: HttpOperationResponse,
-        resourceOperation?: ResourceOperation
+        response: HttpOperationResponse
     ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
             return undefined;
@@ -325,23 +314,14 @@ export function loadOperation(
 
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            if (resourceOperation && resourceOperation.operation !== "list") {
-                type = getInputType(
-                    context,
-                    getFormattedType(program, resourceOperation.resourceType),
-                    models,
-                    enums
-                );
-            } else {
-                const typespecType = getEffectiveSchemaType(context, body.type);
-                const inputType: InputType = getInputType(
-                    context,
-                    getFormattedType(program, typespecType),
-                    models,
-                    enums
-                );
-                type = inputType;
-            }
+            const typespecType = getEffectiveSchemaType(context, body.type);
+            const inputType: InputType = getInputType(
+                context,
+                getFormattedType(program, typespecType),
+                models,
+                enums
+            );
+            type = inputType;
         }
 
         const headers = response.responses[0]?.headers;
@@ -373,57 +353,44 @@ export function loadOperation(
 
     function loadLongRunningOperation(
         context: SdkContext,
-        op: HttpOperation,
-        resourceOperation?: ResourceOperation
+        op: HttpOperation
     ): OperationLongRunning | undefined {
-        if (!isLongRunningOperation(context, op.operation)) return undefined;
+        const metadata = getLroMetadata(program, op.operation);
+        if (metadata === undefined) {
+            return undefined;
+        }
 
-        const finalResponse = loadLongRunningFinalResponse(
-            context,
-            op,
-            resourceOperation
-        );
-        if (finalResponse === undefined) return undefined;
+        var bodyType = undefined;
+        if (op.verb !== "delete") {
+            const formattedType = getFormattedType(
+                program,
+                // TODO: we should check `logicalPath` or other ways to determine body type,
+                // after https://github.com/Azure/typespec-azure/issues/3725 is fixed
+                op.verb === "post"
+                    ? metadata.envelopeResult
+                    : metadata.logicalResult
+            );
+            bodyType = getInputType(context, formattedType, models, enums);
+        }
 
         return {
-            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
-            FinalResponse: finalResponse
+            FinalStateVia: convertLroFinalStateVia(metadata.finalStateVia),
+            FinalResponse: {
+                // in swagger, we allow delete to return some meaningful body content
+                // for now, let assume we don't allow return type
+                StatusCodes: op.verb === "delete" ? [204] : [200],
+                BodyType: bodyType,
+                BodyMediaType: BodyMediaType.Json
+            } as OperationResponse,
+            ResultPath:
+                metadata.logicalPath ??
+                // TODO: roll back changes when `logicalPath` can be definitive
+                // https://github.com/Azure/typespec-azure/issues/3725
+                (metadata.envelopeResult != metadata.logicalResult &&
+                op.verb === "post"
+                    ? "result" // actually `result` is the only allowed path for now
+                    : undefined)
         } as OperationLongRunning;
-    }
-
-    function loadLongRunningFinalResponse(
-        context: SdkContext,
-        op: HttpOperation,
-        resourceOperation?: ResourceOperation
-    ): OperationResponse | undefined {
-        let finalResponse: any | undefined;
-        for (const response of op.responses) {
-            if (response.statusCode === "200") {
-                finalResponse = response;
-                break;
-            }
-            if (response.statusCode === "204") {
-                finalResponse = response;
-            }
-        }
-
-        if (finalResponse !== undefined) {
-            return loadOperationResponse(
-                context,
-                finalResponse,
-                resourceOperation
-            );
-        }
-
-        return loadOperationResponse(
-            context,
-            op.responses[0],
-            resourceOperation
-        );
-    }
-
-    function isLongRunningOperation(context: SdkContext, op: Operation) {
-        return getOperationLink(context.program, op, "polling") !== undefined;
     }
 }
 

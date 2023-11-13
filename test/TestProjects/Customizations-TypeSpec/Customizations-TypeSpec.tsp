@@ -17,6 +17,15 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 
+@doc("Extensible enum to customize operator")
+enum ExtensibleEnumWithOperator {
+  @doc("Monday.")
+  Monday,
+
+  @doc("Tuesday.")
+  Tuesday,
+}
+
 @doc("Model to add additional serializable property")
 model ModelToAddAdditionalSerializableProperty {
     @doc("Required int")
@@ -81,6 +90,34 @@ model ModelWithCustomizedProperties {
 
   @doc("Property renamed that is listofdictionary")
   badListOfDictionaryName: Record<string>[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>")
+  vector: float32[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  vectorOptional?: float32[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  vectorNullable: float32[] | null;
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  vectorOptionalNullable?: float32[] | null;
+
+  @doc("Property type changed to ReadOnlyMemory<float>")
+  @visibility("read")
+  vectorReadOnly: float32[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  @visibility("read")
+  vectorOptionalReadOnly?: float32[];
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  @visibility("read")
+  vectorNullableReadOnly: float32[] | null;
+
+  @doc("Property type changed to ReadOnlyMemory<float>?")
+  @visibility("read")
+  vectorOptionalNullableReadOnly?: float32[] | null;
 }
 
 @doc("Renamed enum (original name: EnumToRename)")
@@ -115,6 +152,9 @@ enum NormalEnum
 
 @doc("Root RoundTrip model to reference all other types to ensure generation")
 model RootModel {  
+  @doc("ExtensibleEnumWithOperator")
+  propertyExtensibleEnum?: ExtensibleEnumWithOperator;
+
   @doc("ModelToMakeInternal")
   propertyModelToMakeInternal?: ModelToMakeInternal; 
   

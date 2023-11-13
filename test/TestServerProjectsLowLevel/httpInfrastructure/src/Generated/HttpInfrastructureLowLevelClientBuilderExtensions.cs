@@ -17,72 +17,72 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="HttpFailureClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<HttpFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpFailureClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<HttpFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpFailureClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<HttpFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpFailureClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<HttpFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpFailureClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="HttpSuccessClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<HttpSuccessClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpSuccessClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<HttpSuccessClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpSuccessClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<HttpSuccessClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpSuccessClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<HttpSuccessClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpSuccessClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="HttpRedirectsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<HttpRedirectsClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpRedirectsClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<HttpRedirectsClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpRedirectsClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<HttpRedirectsClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpRedirectsClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<HttpRedirectsClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpRedirectsClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="HttpClientFailureClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<HttpClientFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpClientFailureClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<HttpClientFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpClientFailureClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<HttpClientFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpClientFailureClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<HttpClientFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpClientFailureClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="HttpServerFailureClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<HttpServerFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpServerFailureClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<HttpServerFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpServerFailureClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<HttpServerFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpServerFailureClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<HttpServerFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpServerFailureClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="HttpRetryClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<HttpRetryClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpRetryClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<HttpRetryClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpRetryClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<HttpRetryClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpRetryClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<HttpRetryClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new HttpRetryClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="MultipleResponsesClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<MultipleResponsesClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddMultipleResponsesClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<MultipleResponsesClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddMultipleResponsesClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<MultipleResponsesClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new MultipleResponsesClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<MultipleResponsesClient, AutoRestHttpInfrastructureTestServiceClientOptions>((options) => new MultipleResponsesClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="HttpFailureClient"/> instance. </summary>

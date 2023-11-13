@@ -26,6 +26,9 @@ namespace MgmtXmlDeserialization
     public partial class XmlInstanceResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="XmlInstanceResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="xmlName"> The xmlName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string xmlName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls/{xmlName}";

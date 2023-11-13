@@ -2,13 +2,24 @@
 <doc>
   <members>
     <member name="GetValidAsync(RequestContext)">
-<example>
-This sample shows how to call GetValidAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PolymorphicrecursiveClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-Response response = await client.GetValidAsync(new RequestContext());
+Response response = await client.GetValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
+]]></code>
+This sample shows how to call GetValidAsync with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
+
+Response response = await client.GetValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -17,17 +28,27 @@ Console.WriteLine(result.GetProperty("length").ToString());
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
-<example>
-This sample shows how to call GetValid with required parameters and parse the result.
+      <example>
+This sample shows how to call GetValid and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PolymorphicrecursiveClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-Response response = client.GetValid(new RequestContext());
+Response response = client.GetValid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
+]]></code>
+This sample shows how to call GetValid with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
+
+Response response = client.GetValid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -36,74 +57,83 @@ Console.WriteLine(result.GetProperty("length").ToString());
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutValidAsync with required request content.
+      <example>
+This sample shows how to call PutValidAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PolymorphicrecursiveClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     fishtype = "salmon",
-    length = 123.45f,
-};
+    length = 123.45F,
+});
+Response response = await client.PutValidAsync(content);
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PolymorphicrecursiveClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     location = "<location>",
     iswild = true,
     fishtype = "salmon",
     species = "<species>",
-    length = 123.45f,
-};
+    length = 123.45F,
+    siblings = new object[]
+    {
+        null
+    },
+});
+Response response = await client.PutValidAsync(content);
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutValid with required request content.
+      <example>
+This sample shows how to call PutValid.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PolymorphicrecursiveClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     fishtype = "salmon",
-    length = 123.45f,
-};
+    length = 123.45F,
+});
+Response response = client.PutValid(content);
 
-Response response = client.PutValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PolymorphicrecursiveClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     location = "<location>",
     iswild = true,
     fishtype = "salmon",
     species = "<species>",
-    length = 123.45f,
-};
+    length = 123.45F,
+    siblings = new object[]
+    {
+        null
+    },
+});
+Response response = client.PutValid(content);
 
-Response response = client.PutValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

@@ -9,8 +9,6 @@
   {
    "$id": "2",
    "Name": "ModelWithIntegerLiteralTypeProperty_id",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "The ModelWithIntegerLiteralTypeProperty_id",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -20,6 +18,8 @@
      "Description": "1"
     }
    ],
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The ModelWithIntegerLiteralTypeProperty_id",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
@@ -27,8 +27,6 @@
   {
    "$id": "4",
    "Name": "ModelWithFloatLiteralTypeProperty_id",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "The ModelWithFloatLiteralTypeProperty_id",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -38,6 +36,8 @@
      "Description": "3.141592"
     }
    ],
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The ModelWithFloatLiteralTypeProperty_id",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"

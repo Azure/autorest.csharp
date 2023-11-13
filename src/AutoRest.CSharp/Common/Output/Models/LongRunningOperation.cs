@@ -30,12 +30,12 @@ namespace AutoRest.CSharp.Output.Models.Requests
             FinalStateVia = operation.LongRunning.FinalStateVia;
 
             var finalResponse = operation.LongRunning.FinalResponse;
-            var finalResponseType = finalResponse.BodyType;
+            var returnType = operation.LongRunning.ReturnType;
 
-            if (finalResponseType != null)
+            if (returnType != null)
             {
-                ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(finalResponseType with {IsNullable = false}));
-                ResultSerialization = SerializationBuilder.Build(finalResponse.BodyMediaType, finalResponseType, ResultType, null);
+                ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(returnType with {IsNullable = false}));
+                ResultSerialization = SerializationBuilder.Build(finalResponse.BodyMediaType, returnType, ResultType, null);
 
                 var paging = operation.Paging;
                 if (paging != null)

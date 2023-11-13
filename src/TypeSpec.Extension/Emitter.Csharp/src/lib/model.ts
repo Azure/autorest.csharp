@@ -6,73 +6,71 @@ import {
     EncodeData,
     Enum,
     EnumMember,
-    getDoc,
-    getDeprecated,
-    getEffectiveModelType,
-    getEncode,
-    getFormat,
-    getKnownValues,
-    getVisibility,
+    IntrinsicType,
     Model,
     ModelProperty,
     Namespace,
     NeverType,
     Operation,
     Program,
-    resolveUsages,
+    Scalar,
     Type,
+    Union,
     UsageFlags,
+    getDeprecated,
     getDiscriminator,
-    IntrinsicType,
-    isVoidType,
+    getDoc,
+    getEffectiveModelType,
+    getEncode,
+    getFormat,
+    getKnownValues,
+    getVisibility,
     isArrayModelType,
     isRecordModelType,
-    Scalar,
-    Union,
-    getProjectedNames
+    isGlobalNamespace,
+    navigateTypesInNamespace,
+    isVoidType,
+    resolveUsages
 } from "@typespec/compiler";
-import { getResourceOperation } from "@typespec/rest";
 import {
+    HttpOperation,
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
-    HttpOperation,
     isStatusCode
 } from "@typespec/http";
-import {
-    projectedNameClientKey,
-    projectedNameCSharpKey,
-    projectedNameJsonKey
-} from "../constants.js";
+import { getResourceOperation } from "@typespec/rest";
+import { FormattedType } from "../type/formattedType.js";
 import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
 import { InputModelProperty } from "../type/inputModelProperty.js";
 import {
     InputDictionaryType,
     InputEnumType,
+    InputIntrinsicType,
     InputListType,
     InputLiteralType,
     InputModelType,
+    InputNullType,
     InputPrimitiveType,
     InputType,
     InputUnionType,
-    InputNullType,
-    InputIntrinsicType,
     InputUnknownType,
     isInputEnumType,
-    isInputLiteralType
+    isInputLiteralType,
+    isInputModelType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
+import { LiteralTypeContext } from "../type/literalTypeContext.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getLibraryName,
-    getSdkSimpleType,
+    getAccess,
+    getClientType,
+    getUsageOverride,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getModelName, getNameForTemplate } from "./utils.js";
-import { FormattedType } from "../type/formattedType.js";
-import { LiteralTypeContext } from "../type/literalTypeContext.js";
+import { capitalize, getSerializeName, getTypeName } from "./utils.js";
 import { InputConstant } from "../type/inputConstant.js";
 /**
  * Map calType to csharp InputTypeKind
@@ -143,6 +141,13 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Float32;
         case "float64":
             return InputTypeKind.Float64;
+        case "uri":
+        case "url":
+            return InputTypeKind.Uri;
+        case "uuid":
+            return InputTypeKind.Guid;
+        case "etag":
+            return InputTypeKind.String;
         case "string":
             switch (format?.toLowerCase()) {
                 case "date":
@@ -308,12 +313,12 @@ export function getInputType(
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
             default:
-                const sdkType = getSdkSimpleType(context, type);
+                const sdkType = getClientType(context, type);
                 return {
-                    Name: type.name,
+                    Name: getTypeName(context, type),
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
-                        sdkType.format ?? formattedType.format,
+                        formattedType.format,
                         formattedType.encode
                     ),
                     IsNullable: false
@@ -321,6 +326,12 @@ export function getInputType(
         }
     } else if (type.kind === "Union") {
         return getInputTypeForUnion(type);
+    } else if (type.kind === "Tuple") {
+        return {
+            Name: "Intrinsic",
+            Kind: "unknown",
+            IsNullable: false
+        } as InputUnknownType;
     } else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
@@ -341,7 +352,8 @@ export function getInputType(
         m: Model | Scalar,
         e: Enum
     ): InputEnumType {
-        let extensibleEnum = enums.get(m.name);
+        const name = getTypeName(context, m);
+        let extensibleEnum = enums.get(name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
             if (!innerEnum) {
@@ -350,17 +362,17 @@ export function getInputType(
                 );
             }
             extensibleEnum = {
-                Name: m.name,
+                Name: name,
+                EnumValueType: innerEnum.EnumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
+                AllowedValues: innerEnum.AllowedValues,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
-                EnumValueType: innerEnum.EnumValueType,
-                AllowedValues: innerEnum.AllowedValues,
                 IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
-            enums.set(m.name, extensibleEnum);
+            enums.set(name, extensibleEnum);
         }
         return extensibleEnum;
     }
@@ -417,12 +429,12 @@ export function getInputType(
             ];
             const enumType = {
                 Name: enumName,
+                EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
+                AllowedValues: allowValues,
                 Namespace: literalContext.Namespace,
                 Accessibility: undefined,
                 Deprecated: undefined,
                 Description: `The ${enumName}`, // TODO -- what should we put here?
-                EnumValueType: enumValueType,
-                AllowedValues: allowValues,
                 IsExtensible: true,
                 IsNullable: false
             } as InputEnumType;
@@ -434,7 +446,8 @@ export function getInputType(
         e: Enum,
         addToCollection: boolean = true
     ): InputEnumType {
-        let enumType = enums.get(e.name);
+        const name = getTypeName(context, e);
+        let enumType = enums.get(name);
         if (!enumType) {
             if (e.members.size === 0) {
                 throw new Error(
@@ -457,7 +470,7 @@ export function getInputType(
                     );
                 }
                 const member = {
-                    Name: key,
+                    Name: getTypeName(context, option),
                     Value: option.value ?? option?.name,
                     Description: getDoc(program, option)
                 } as InputEnumTypeValue;
@@ -465,17 +478,18 @@ export function getInputType(
             }
 
             enumType = {
-                Name: e.name,
+                Name: name,
+                EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
+                AllowedValues: allowValues,
                 Namespace: getFullNamespaceString(e.namespace),
-                Accessibility: undefined, //TODO: need to add accessibility
+                Accessibility: getAccess(context, e),
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
-                EnumValueType: enumValueType,
-                AllowedValues: allowValues,
                 IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
-            if (addToCollection) enums.set(e.name, enumType);
+            setUsage(context, e, enumType);
+            if (addToCollection) enums.set(name, enumType);
         }
         return enumType;
 
@@ -521,7 +535,7 @@ export function getInputType(
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(context, m) as Model;
-        const name = getModelName(context, m);
+        const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -531,7 +545,9 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m) ? "internal" : undefined,
+                Accessibility: isInternal(context, m)
+                    ? "internal"
+                    : getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -541,8 +557,13 @@ export function getInputType(
                 Usage: Usage.None,
                 Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
+            setUsage(context, m, model);
 
-            models.set(name, model);
+            // open generic type model which has un-instanced template parameter will not be generated. e.g.
+            // model GenericModel<T> { value: T }
+            if (m.isFinished) {
+                models.set(name, model);
+            }
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
@@ -551,13 +572,19 @@ export function getInputType(
             if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
                 model.DerivedModels = [];
                 for (const dm of m.derivedModels) {
-                    const derivedModel = getInputType(
-                        context,
-                        getFormattedType(program, dm),
-                        models,
-                        enums
-                    );
-                    model.DerivedModels.push(derivedModel as InputModelType);
+                    // skip open generic type model which has un-instanced template parameter. e.g.
+                    // model GenericModel<T> { value: T }
+                    if (dm.isFinished) {
+                        const derivedModel = getInputType(
+                            context,
+                            getFormattedType(program, dm),
+                            models,
+                            enums
+                        );
+                        model.DerivedModels.push(
+                            derivedModel as InputModelType
+                        );
+                    }
                 }
             }
         }
@@ -609,13 +636,8 @@ export function getInputType(
                     isReadOnly = true;
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
-                const projectedNamesMap = getProjectedNames(program, value);
-                const name =
-                    projectedNamesMap?.get(projectedNameCSharpKey) ??
-                    projectedNamesMap?.get(projectedNameClientKey) ??
-                    value.name;
-                const serializedName =
-                    projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
+                const name = getTypeName(context, value);
+                const serializedName = getSerializeName(context, value);
                 const literalTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
@@ -628,6 +650,13 @@ export function getInputType(
                     enums,
                     literalTypeContext
                 );
+                if (
+                    model.Namespace === "Azure.Core.Foundations" &&
+                    model.Name === "Error" &&
+                    isInputModelType(inputType)
+                ) {
+                    inputType.Accessibility = undefined;
+                }
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
@@ -757,6 +786,21 @@ export function getInputType(
     }
 }
 
+function setUsage(
+    context: SdkContext,
+    source: Model | Enum,
+    target: InputModelType | InputEnumType
+) {
+    const sourceUsage = getUsageOverride(context, source);
+    if (sourceUsage === UsageFlags.Input) {
+        target.Usage = Usage.Input;
+    } else if (sourceUsage === UsageFlags.Output) {
+        target.Usage = Usage.Output;
+    } else if (sourceUsage === (UsageFlags.Input | UsageFlags.Output)) {
+        target.Usage = Usage.RoundTrip;
+    }
+}
+
 export function getUsages(
     context: SdkContext,
     ops?: HttpOperation[],
@@ -781,26 +825,20 @@ export function getUsages(
         let effectiveType = type;
         if (type.kind === "Model") {
             effectiveType = getEffectiveSchemaType(context, type) as Model;
-            typeName = getModelName(context, effectiveType);
+            typeName = getTypeName(context, effectiveType);
         }
-        const affectTypes: string[] = [];
+        const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {
-            affectTypes.push(typeName);
-            if (effectiveType.kind === "Model") {
-                if (effectiveType.templateMapper?.args) {
-                    for (const arg of effectiveType.templateMapper.args) {
-                        if (
-                            arg.kind === "Model" &&
-                            "name" in arg &&
-                            arg.name !== ""
-                        ) {
-                            affectTypes.push(getModelName(context, arg));
-                        }
-                    }
-                }
+            affectTypes.add(typeName);
+            if (
+                effectiveType.kind === "Model" &&
+                (!modelMap || modelMap.has(typeName))
+            ) {
                 /*propagate to sub models and composite models*/
-                affectTypes.push(
-                    ...getAllEffectedModels(effectiveType, new Set<string>())
+                getAllEffectedModels(effectiveType, new Set<string>()).forEach(
+                    (element) => {
+                        affectTypes.add(element);
+                    }
                 );
             }
         }
@@ -820,73 +858,58 @@ export function getUsages(
         const resourceOperation = getResourceOperation(program, op.operation);
         if (!op.parameters.body?.parameter && op.parameters.body?.type) {
             var effectiveBodyType = undefined;
-            var affectedTypes: string[] = [];
-            if (resourceOperation) {
-                effectiveBodyType = resourceOperation.resourceType;
-                affectedTypes.push(effectiveBodyType.name);
-            } else {
-                effectiveBodyType = getEffectiveSchemaType(
-                    context,
-                    op.parameters.body.type
-                );
-                if (effectiveBodyType.kind === "Model") {
-                    /* handle spread. */
-                    if (effectiveBodyType.name === "") {
-                        effectiveBodyType.name = `${capitalize(
-                            op.operation.name
-                        )}Request`;
-                    }
-                    affectedTypes.push(
-                        getModelName(context, effectiveBodyType)
-                    );
+            const affectTypes: Set<string> = new Set<string>();
+            effectiveBodyType = getEffectiveSchemaType(
+                context,
+                op.parameters.body.type
+            );
+            if (effectiveBodyType.kind === "Model") {
+                /* handle spread. */
+                if (effectiveBodyType.name === "") {
+                    effectiveBodyType.name = `${capitalize(
+                        op.operation.name
+                    )}Request`;
                 }
             }
             if (effectiveBodyType.kind === "Model") {
                 /*propagate to sub models and composite models*/
-                affectedTypes.push(
-                    ...getAllEffectedModels(
-                        effectiveBodyType,
-                        new Set<string>()
-                    )
-                );
+                getAllEffectedModels(
+                    effectiveBodyType,
+                    new Set<string>()
+                ).forEach((element) => {
+                    affectTypes.add(element);
+                });
             }
-            for (const name of affectedTypes) {
+            for (const name of affectTypes) {
                 appendUsage(name, UsageFlags.Input);
             }
         }
         /* handle response type usage. */
-        var affectedReturnTypes: string[] = [];
+        const affectedReturnTypes: Set<string> = new Set<string>();
         for (const res of op.responses) {
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
                 let returnType = "";
+                const effectiveReturnType = getEffectiveSchemaType(
+                    context,
+                    resBody.type
+                );
                 if (
-                    resourceOperation &&
-                    resourceOperation.operation !== "list"
+                    effectiveReturnType.kind === "Model" &&
+                    effectiveReturnType.name !== ""
                 ) {
-                    returnType = resourceOperation.resourceType.name;
-                } else {
-                    const effectiveReturnType = getEffectiveSchemaType(
-                        context,
-                        resBody.type
-                    );
-                    if (
-                        effectiveReturnType.kind === "Model" &&
-                        effectiveReturnType.name !== ""
-                    ) {
-                        returnType = getModelName(context, effectiveReturnType);
-                    }
-                    /*propagate to sub models and composite models*/
-                    if (effectiveReturnType.kind === "Model") {
-                        affectedReturnTypes.push(
-                            ...getAllEffectedModels(
-                                effectiveReturnType,
-                                new Set<string>()
-                            )
-                        );
-                    }
+                    returnType = getTypeName(context, effectiveReturnType);
                 }
-                affectedReturnTypes.push(returnType);
+                /*propagate to sub models and composite models*/
+                if (effectiveReturnType.kind === "Model") {
+                    getAllEffectedModels(
+                        effectiveReturnType,
+                        new Set<string>()
+                    ).forEach((element) => {
+                        affectedReturnTypes.add(element);
+                    });
+                }
+                affectedReturnTypes.add(returnType);
                 for (const name of affectedReturnTypes) {
                     appendUsage(name, UsageFlags.Output);
                 }
@@ -944,13 +967,13 @@ export function getUsages(
         ) {
             result.push(...getAllEffectedModels(model.indexer.value, visited));
         } else {
-            const name = getModelName(context, model);
+            const name = getTypeName(context, model);
             if (model.kind !== "Model" || visited.has(name)) return result;
             result.push(name);
             visited.add(name);
             const derivedModels = model.derivedModels;
             for (const derivedModel of derivedModels) {
-                result.push(getModelName(context, derivedModel));
+                result.push(getTypeName(context, derivedModel));
                 result.push(...getAllEffectedModels(derivedModel, visited));
             }
             for (const [_, prop] of model.properties) {
@@ -980,4 +1003,30 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
         format: format,
         encode: encodeData
     } as FormattedType;
+}
+
+// This is a temporary solution. After we uptake getAllModels we should delete this.
+export function navigateModels(
+    context: SdkContext,
+    namespace: Namespace,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
+) {
+    const computeModel = (x: Type) =>
+        getInputType(
+            context,
+            getFormattedType(context.program, x),
+            models,
+            enums
+        ) as any;
+    const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
+    navigateTypesInNamespace(
+        namespace,
+        {
+            model: (x) =>
+                x.name !== "" && x.kind === "Model" && computeModel(x),
+            enum: computeModel
+        },
+        { skipSubNamespaces }
+    );
 }

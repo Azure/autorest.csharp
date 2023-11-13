@@ -108,7 +108,7 @@
    "Operations": [
     {
      "$id": "15",
-     "Name": "operation",
+     "Name": "clientName",
      "ResourceName": "ProjectedName",
      "Parameters": [
       {
@@ -230,7 +230,7 @@
       },
       {
        "$id": "29",
-       "Name": "default-name",
+       "Name": "clientName",
        "NameInRequest": "default-name",
        "Type": {
         "$id": "30",

@@ -57,12 +57,12 @@ export function isInputModelType(type: InputType): type is InputModelType {
 }
 
 export interface InputEnumType extends InputType {
+    EnumValueType: string;
+    AllowedValues: InputEnumTypeValue[];
     Namespace?: string;
     Accessibility?: string;
     Deprecated?: string;
     Description: string;
-    EnumValueType: string;
-    AllowedValues: InputEnumTypeValue[];
     IsExtensible: boolean;
     Usage: string;
 }

@@ -104,12 +104,14 @@ enum FixedIntEnum {
     Four: 4
 }
 
-// @doc("Fixed float enum")
-// enum FixedFloatEnum {
-//     One: 1.1,
-//     Two: 2.1,
-//     Four: 4.0
-// }
+@doc("Fixed float enum")
+@fixed
+@deprecated("should be replaced by cadl-ranch")
+enum FixedFloatEnum {
+    One: 1.1,
+    Two: 2.1,
+    Four: 4.0
+}
 
 @doc("Extensible enum")
 @deprecated("deprecated for test")
@@ -118,6 +120,15 @@ enum ExtensibleEnum {
     Two: "2",
     Four: "4"
 }
+
+@doc("Extensible int enum")
+@deprecated("should be replaced by cadl-ranch")
+enum ExtensibleIntEnum {
+    One: 1,
+    Two: 2,
+    Four: 4
+}
+
 
 @doc("Model used both as input and output")
 model RoundTripModel extends BaseModel {
@@ -597,6 +608,18 @@ op roundTripRecursive(@body input: RoundTripRecursiveModel): RoundTripRecursiveM
 @convenientAPI(true)
 op selfReference(): ErrorModel;
 
+@route("/fixedFloatEnum")
+@doc("Returns model that has property of its own type")
+@get
+@convenientAPI(true)
+op fixedFloatEnum(@query input: FixedFloatEnum): OutputModel;
+
+@route("/extenisbleIntEnum")
+@doc("Returns model that has property of its own type")
+@get
+@convenientAPI(true)
+op extenisbleIntEnum(@query input: ExtensibleIntEnum): OutputModel;
+
 @doc("Base model")
 model NoUseBase {
   @doc("base model property")
@@ -642,3 +665,25 @@ model SingleBase {
 @get
 @convenientAPI(true)
 op getSingleBase(): SingleBase;
+@doc("Facet")
+model Facet {
+   @doc("A field to facet by, where the field is attributed as 'facetable'")
+   field: string;  
+}
+
+model NumericValuesFacet<T extends numeric> extends Facet {
+  @doc("The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.")
+  values: T[];
+  value: T;
+}
+
+@doc("Facets an int32 field by the specified value ranges.")
+model Int32ValuesFacet extends NumericValuesFacet<int32> {
+  @doc("The facet type.")
+  kind: "Int32Values";
+}
+
+@route("/genericType")
+@get
+@convenientAPI(true)
+op genericType(@body input: Int32ValuesFacet): void;

@@ -6,51 +6,69 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_Duration
+    public partial class Samples_Duration
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuration()
+        public void Example_GetDuration_ShortVersion()
         {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            Response response = client.GetDuration(new RequestContext());
+            Response response = client.GetDuration(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDuration_ShortVersion_Async()
+        {
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+            Response response = await client.GetDurationAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDuration_ShortVersion_Convenience()
+        {
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+            Response<DurationProperty> response = client.GetDuration();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDuration_ShortVersion_Convenience_Async()
+        {
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+            Response<DurationProperty> response = await client.GetDurationAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDuration_AllParameters()
         {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            Response response = client.GetDuration(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_Async()
-        {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
-
-            Response response = await client.GetDurationAsync(new RequestContext());
+            Response response = client.GetDuration(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -60,9 +78,9 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDuration_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetDurationAsync(new RequestContext());
+            Response response = await client.GetDurationAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -70,55 +88,84 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_Convenience_Async()
+        public void Example_GetDuration_AllParameters_Convenience()
         {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            var result = await client.GetDurationAsync();
+            Response<DurationProperty> response = client.GetDuration();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public async Task Example_GetDuration_AllParameters_Convenience_Async()
         {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            var data = new
+            Response<DurationProperty> response = await client.GetDurationAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_ShortVersion()
+        {
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "PT1H23M45S",
-            };
+            });
+            Response response = client.Put(content);
 
-            Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_ShortVersion_Async()
+        {
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                property = "PT1H23M45S",
+            });
+            Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_ShortVersion_Convenience()
+        {
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+            DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+            Response response = client.Put(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_ShortVersion_Convenience_Async()
+        {
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+            DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "PT1H23M45S",
-            };
+            });
+            Response response = client.Put(content);
 
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
-        {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
-
-            var data = new
-            {
-                property = "PT1H23M45S",
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -126,25 +173,35 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "PT1H23M45S",
-            };
+            });
+            Response response = await client.PutAsync(content);
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
-            var client = new ValueTypesClient().GetDurationClient("1.0.0");
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            var body = new DurationProperty(new TimeSpan(1, 2, 3));
-            var result = await client.PutAsync(body);
+            DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+            Response response = client.Put(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+            DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+            Response response = await client.PutAsync(body);
         }
     }
 }

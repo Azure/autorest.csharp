@@ -9,8 +9,6 @@
   {
    "$id": "2",
    "Name": "Thing_requiredLiteralString",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "The Thing_requiredLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -20,6 +18,8 @@
      "Description": "accept"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -27,8 +27,6 @@
   {
    "$id": "4",
    "Name": "Thing_requiredLiteralInt",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "The Thing_requiredLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -38,6 +36,8 @@
      "Description": "123"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -45,8 +45,6 @@
   {
    "$id": "6",
    "Name": "Thing_requiredLiteralFloat",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "The Thing_requiredLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -56,6 +54,8 @@
      "Description": "1.23"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -63,8 +63,6 @@
   {
    "$id": "8",
    "Name": "Thing_optionalLiteralString",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "The Thing_optionalLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -74,6 +72,8 @@
      "Description": "reject"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -81,8 +81,6 @@
   {
    "$id": "10",
    "Name": "Thing_optionalLiteralInt",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "The Thing_optionalLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -92,6 +90,8 @@
      "Description": "456"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -99,8 +99,6 @@
   {
    "$id": "12",
    "Name": "Thing_optionalLiteralFloat",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "The Thing_optionalLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -110,6 +108,8 @@
      "Description": "4.56"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -117,8 +117,6 @@
   {
    "$id": "14",
    "Name": "StringFixedEnum",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -137,6 +135,8 @@
      "Value": "4"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "Simple enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -144,8 +144,6 @@
   {
    "$id": "18",
    "Name": "StringExtensibleEnum",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -164,6 +162,8 @@
      "Value": "4"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -171,8 +171,6 @@
   {
    "$id": "22",
    "Name": "IntExtensibleEnum",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "Int based extensible enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -191,6 +189,8 @@
      "Value": 4
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "Int based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -198,8 +198,6 @@
   {
    "$id": "26",
    "Name": "FloatExtensibleEnum",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "Float based extensible enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -218,6 +216,8 @@
      "Value": 4
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "Float based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -225,8 +225,6 @@
   {
    "$id": "30",
    "Name": "FloatFixedEnum",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "float fixed enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -245,6 +243,8 @@
      "Value": 4.4
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "float fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -252,8 +252,6 @@
   {
    "$id": "34",
    "Name": "IntFixedEnum",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "int fixed enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -272,6 +270,8 @@
      "Value": 4
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "int fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -279,8 +279,6 @@
   {
    "$id": "38",
    "Name": "DaysOfWeekExtensibleEnum",
-   "Namespace": "NewProjectTypeSpec",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -319,6 +317,80 @@
      "Value": "Sunday"
     }
    ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  },
+  {
+   "$id": "46",
+   "Name": "OAuth2FlowType",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "47",
+     "Name": "authorizationCode",
+     "Value": "authorizationCode",
+     "Description": "authorization code flow"
+    },
+    {
+     "$id": "48",
+     "Name": "implicit",
+     "Value": "implicit",
+     "Description": "implcit flow"
+    },
+    {
+     "$id": "49",
+     "Name": "password",
+     "Value": "password",
+     "Description": "password flow"
+    },
+    {
+     "$id": "50",
+     "Name": "clientCredentials",
+     "Value": "clientCredentials",
+     "Description": "client credential flow"
+    }
+   ],
+   "Namespace": "TypeSpec.Http",
+   "Description": "Describes the OAuth2 flow type",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  },
+  {
+   "$id": "51",
+   "Name": "AuthFlow_tokenUrl",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "52",
+     "Name": "https://api.example.com/oauth2/token",
+     "Value": "https://api.example.com/oauth2/token",
+     "Description": "https://api.example.com/oauth2/token"
+    }
+   ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The AuthFlow_tokenUrl",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  },
+  {
+   "$id": "53",
+   "Name": "AuthFlow_refreshUrl",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "54",
+     "Name": "https://api.example.com/oauth2/refresh",
+     "Value": "https://api.example.com/oauth2/refresh",
+     "Description": "https://api.example.com/oauth2/refresh"
+    }
+   ],
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The AuthFlow_refreshUrl",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
@@ -326,7 +398,7 @@
  ],
  "Models": [
   {
-   "$id": "46",
+   "$id": "55",
    "Name": "Thing",
    "Namespace": "NewProjectTypeSpec",
    "Description": "A model with a few properties of literal types",
@@ -334,12 +406,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "47",
+     "$id": "56",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
      "Type": {
-      "$id": "48",
+      "$id": "57",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -348,25 +420,25 @@
      "IsReadOnly": false
     },
     {
-     "$id": "49",
+     "$id": "58",
      "Name": "requiredUnion",
      "SerializedName": "requiredUnion",
      "Description": "required Union",
      "Type": {
-      "$id": "50",
+      "$id": "59",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "51",
+        "$id": "60",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        {
-        "$id": "52",
+        "$id": "61",
         "Name": "Array",
         "ElementType": {
-         "$id": "53",
+         "$id": "62",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -374,7 +446,7 @@
         "IsNullable": false
        },
        {
-        "$id": "54",
+        "$id": "63",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -386,15 +458,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "55",
+     "$id": "64",
      "Name": "requiredLiteralString",
      "SerializedName": "requiredLiteralString",
      "Description": "required literal string",
      "Type": {
-      "$id": "56",
+      "$id": "65",
       "Name": "Literal",
       "Value": {
-       "$id": "57",
+       "$id": "66",
        "Type": {
         "$ref": "2"
        },
@@ -406,15 +478,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "58",
+     "$id": "67",
      "Name": "requiredLiteralInt",
      "SerializedName": "requiredLiteralInt",
      "Description": "required literal int",
      "Type": {
-      "$id": "59",
+      "$id": "68",
       "Name": "Literal",
       "Value": {
-       "$id": "60",
+       "$id": "69",
        "Type": {
         "$ref": "4"
        },
@@ -426,15 +498,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "61",
+     "$id": "70",
      "Name": "requiredLiteralFloat",
      "SerializedName": "requiredLiteralFloat",
      "Description": "required literal float",
      "Type": {
-      "$id": "62",
+      "$id": "71",
       "Name": "Literal",
       "Value": {
-       "$id": "63",
+       "$id": "72",
        "Type": {
         "$ref": "6"
        },
@@ -446,17 +518,17 @@
      "IsReadOnly": false
     },
     {
-     "$id": "64",
+     "$id": "73",
      "Name": "requiredLiteralBool",
      "SerializedName": "requiredLiteralBool",
      "Description": "required literal bool",
      "Type": {
-      "$id": "65",
+      "$id": "74",
       "Name": "Literal",
       "Value": {
-       "$id": "66",
+       "$id": "75",
        "Type": {
-        "$id": "67",
+        "$id": "76",
         "Name": "Boolean",
         "Kind": "Boolean",
         "IsNullable": false
@@ -469,15 +541,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "68",
+     "$id": "77",
      "Name": "optionalLiteralString",
      "SerializedName": "optionalLiteralString",
      "Description": "optional literal string",
      "Type": {
-      "$id": "69",
+      "$id": "78",
       "Name": "Literal",
       "Value": {
-       "$id": "70",
+       "$id": "79",
        "Type": {
         "$ref": "8"
        },
@@ -489,15 +561,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "71",
+     "$id": "80",
      "Name": "optionalLiteralInt",
      "SerializedName": "optionalLiteralInt",
      "Description": "optional literal int",
      "Type": {
-      "$id": "72",
+      "$id": "81",
       "Name": "Literal",
       "Value": {
-       "$id": "73",
+       "$id": "82",
        "Type": {
         "$ref": "10"
        },
@@ -509,15 +581,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "74",
+     "$id": "83",
      "Name": "optionalLiteralFloat",
      "SerializedName": "optionalLiteralFloat",
      "Description": "optional literal float",
      "Type": {
-      "$id": "75",
+      "$id": "84",
       "Name": "Literal",
       "Value": {
-       "$id": "76",
+       "$id": "85",
        "Type": {
         "$ref": "12"
        },
@@ -529,17 +601,17 @@
      "IsReadOnly": false
     },
     {
-     "$id": "77",
+     "$id": "86",
      "Name": "optionalLiteralBool",
      "SerializedName": "optionalLiteralBool",
      "Description": "optional literal bool",
      "Type": {
-      "$id": "78",
+      "$id": "87",
       "Name": "Literal",
       "Value": {
-       "$id": "79",
+       "$id": "88",
        "Type": {
-        "$id": "80",
+        "$id": "89",
         "Name": "Boolean",
         "Kind": "Boolean",
         "IsNullable": false
@@ -552,12 +624,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "81",
+     "$id": "90",
      "Name": "requiredBadDescription",
      "SerializedName": "requiredBadDescription",
      "Description": "description with xml <|endoftext|>",
      "Type": {
-      "$id": "82",
+      "$id": "91",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -568,7 +640,7 @@
    ]
   },
   {
-   "$id": "83",
+   "$id": "92",
    "Name": "Friend",
    "Namespace": "NewProjectTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
@@ -576,12 +648,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "84",
+     "$id": "93",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the NotFriend",
      "Type": {
-      "$id": "85",
+      "$id": "94",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -592,19 +664,19 @@
    ]
   },
   {
-   "$id": "86",
+   "$id": "95",
    "Name": "ModelWithFormat",
    "Namespace": "NewProjectTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "87",
+     "$id": "96",
      "Name": "sourceUrl",
      "SerializedName": "sourceUrl",
      "Description": "url format",
      "Type": {
-      "$id": "88",
+      "$id": "97",
       "Name": "string",
       "Kind": "Uri",
       "IsNullable": false
@@ -613,12 +685,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "89",
+     "$id": "98",
      "Name": "guid",
      "SerializedName": "guid",
      "Description": "uuid format",
      "Type": {
-      "$id": "90",
+      "$id": "99",
       "Name": "string",
       "Kind": "Guid",
       "IsNullable": false
@@ -629,7 +701,7 @@
    ]
   },
   {
-   "$id": "91",
+   "$id": "100",
    "Name": "RoundTripModel",
    "Namespace": "NewProjectTypeSpec",
    "Description": "this is a roundtrip model",
@@ -637,12 +709,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "92",
+     "$id": "101",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
-      "$id": "93",
+      "$id": "102",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -651,12 +723,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "94",
+     "$id": "103",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int, illustrating a value type property.",
      "Type": {
-      "$id": "95",
+      "$id": "104",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -665,12 +737,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "96",
+     "$id": "105",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
      "Description": "Required collection of enums",
      "Type": {
-      "$id": "97",
+      "$id": "106",
       "Name": "Array",
       "ElementType": {
        "$ref": "14"
@@ -681,15 +753,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "98",
+     "$id": "107",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
      "Description": "Required dictionary of enums",
      "Type": {
-      "$id": "99",
+      "$id": "108",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "100",
+       "$id": "109",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -703,18 +775,18 @@
      "IsReadOnly": false
     },
     {
-     "$id": "101",
+     "$id": "110",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "Required model",
      "Type": {
-      "$ref": "46"
+      "$ref": "55"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "102",
+     "$id": "111",
      "Name": "intExtensibleEnum",
      "SerializedName": "intExtensibleEnum",
      "Description": "this is an int based extensible enum",
@@ -725,12 +797,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "103",
+     "$id": "112",
      "Name": "intExtensibleEnumCollection",
      "SerializedName": "intExtensibleEnumCollection",
      "Description": "this is a collection of int based extensible enum",
      "Type": {
-      "$id": "104",
+      "$id": "113",
       "Name": "Array",
       "ElementType": {
        "$ref": "22"
@@ -741,7 +813,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "105",
+     "$id": "114",
      "Name": "floatExtensibleEnum",
      "SerializedName": "floatExtensibleEnum",
      "Description": "this is a float based extensible enum",
@@ -752,12 +824,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "106",
+     "$id": "115",
      "Name": "floatExtensibleEnumCollection",
      "SerializedName": "floatExtensibleEnumCollection",
      "Description": "this is a collection of float based extensible enum",
      "Type": {
-      "$id": "107",
+      "$id": "116",
       "Name": "Array",
       "ElementType": {
        "$ref": "26"
@@ -768,7 +840,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "108",
+     "$id": "117",
      "Name": "floatFixedEnum",
      "SerializedName": "floatFixedEnum",
      "Description": "this is a float based fixed enum",
@@ -779,12 +851,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "109",
+     "$id": "118",
      "Name": "floatFixedEnumCollection",
      "SerializedName": "floatFixedEnumCollection",
      "Description": "this is a collection of float based fixed enum",
      "Type": {
-      "$id": "110",
+      "$id": "119",
       "Name": "Array",
       "ElementType": {
        "$ref": "30"
@@ -795,7 +867,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "111",
+     "$id": "120",
      "Name": "intFixedEnum",
      "SerializedName": "intFixedEnum",
      "Description": "this is a int based fixed enum",
@@ -806,12 +878,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "112",
+     "$id": "121",
      "Name": "intFixedEnumCollection",
      "SerializedName": "intFixedEnumCollection",
      "Description": "this is a collection of int based fixed enum",
      "Type": {
-      "$id": "113",
+      "$id": "122",
       "Name": "Array",
       "ElementType": {
        "$ref": "34"
@@ -822,7 +894,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "114",
+     "$id": "123",
      "Name": "stringFixedEnum",
      "SerializedName": "stringFixedEnum",
      "Description": "this is a string based fixed enum",
@@ -833,12 +905,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "115",
+     "$id": "124",
      "Name": "requiredUnknown",
      "SerializedName": "requiredUnknown",
      "Description": "required unknown",
      "Type": {
-      "$id": "116",
+      "$id": "125",
       "Name": "Intrinsic",
       "Kind": "unknown",
       "IsNullable": false
@@ -847,12 +919,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "117",
+     "$id": "126",
      "Name": "optionalUnknown",
      "SerializedName": "optionalUnknown",
      "Description": "optional unknown",
      "Type": {
-      "$id": "118",
+      "$id": "127",
       "Name": "Intrinsic",
       "Kind": "unknown",
       "IsNullable": false
@@ -861,21 +933,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "119",
+     "$id": "128",
      "Name": "requiredRecordUnknown",
      "SerializedName": "requiredRecordUnknown",
      "Description": "required record of unknown",
      "Type": {
-      "$id": "120",
+      "$id": "129",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "121",
+       "$id": "130",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "122",
+       "$id": "131",
        "Name": "Intrinsic",
        "Kind": "unknown",
        "IsNullable": false
@@ -886,21 +958,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "123",
+     "$id": "132",
      "Name": "optionalRecordUnknown",
      "SerializedName": "optionalRecordUnknown",
      "Description": "optional record of unknown",
      "Type": {
-      "$id": "124",
+      "$id": "133",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "125",
+       "$id": "134",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "126",
+       "$id": "135",
        "Name": "Intrinsic",
        "Kind": "unknown",
        "IsNullable": false
@@ -911,21 +983,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "127",
+     "$id": "136",
      "Name": "readOnlyRequiredRecordUnknown",
      "SerializedName": "readOnlyRequiredRecordUnknown",
      "Description": "required readonly record of unknown",
      "Type": {
-      "$id": "128",
+      "$id": "137",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "129",
+       "$id": "138",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "130",
+       "$id": "139",
        "Name": "Intrinsic",
        "Kind": "unknown",
        "IsNullable": false
@@ -936,21 +1008,21 @@
      "IsReadOnly": true
     },
     {
-     "$id": "131",
+     "$id": "140",
      "Name": "readOnlyOptionalRecordUnknown",
      "SerializedName": "readOnlyOptionalRecordUnknown",
      "Description": "optional readonly record of unknown",
      "Type": {
-      "$id": "132",
+      "$id": "141",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "133",
+       "$id": "142",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "134",
+       "$id": "143",
        "Name": "Intrinsic",
        "Kind": "unknown",
        "IsNullable": false
@@ -961,26 +1033,101 @@
      "IsReadOnly": true
     }
    ]
+  },
+  {
+   "$id": "144",
+   "Name": "AuthFlow",
+   "Namespace": "NewProjectTypeSpec",
+   "Description": "The auth flow model",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "145",
+     "Name": "type",
+     "SerializedName": "type",
+     "Description": "",
+     "Type": {
+      "$ref": "46"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "146",
+     "Name": "tokenUrl",
+     "SerializedName": "tokenUrl",
+     "Description": "",
+     "Type": {
+      "$id": "147",
+      "Name": "Literal",
+      "Value": {
+       "$id": "148",
+       "Type": {
+        "$ref": "51"
+       },
+       "Value": "https://api.example.com/oauth2/token"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "149",
+     "Name": "refreshUrl",
+     "SerializedName": "refreshUrl",
+     "Description": "",
+     "Type": {
+      "$id": "150",
+      "Name": "Literal",
+      "Value": {
+       "$id": "151",
+       "Type": {
+        "$ref": "53"
+       },
+       "Value": "https://api.example.com/oauth2/refresh"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "152",
+     "Name": "scopes",
+     "SerializedName": "scopes",
+     "Description": "",
+     "Type": {
+      "$id": "153",
+      "Name": "Intrinsic",
+      "Kind": "unknown",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "135",
+   "$id": "154",
    "Name": "NewProjectTypeSpecClient",
    "Description": "This is a sample typespec project.",
    "Operations": [
     {
-     "$id": "136",
+     "$id": "155",
      "Name": "topAction",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level method",
      "Parameters": [
       {
-       "$id": "137",
+       "$id": "156",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "138",
+        "$id": "157",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -996,11 +1143,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "139",
+       "$id": "158",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "140",
+        "$id": "159",
         "Name": "string",
         "Kind": "DateTime",
         "IsNullable": false
@@ -1016,11 +1163,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "141",
+       "$id": "160",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "142",
+        "$id": "161",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1035,20 +1182,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "143",
+        "$id": "162",
         "Type": {
-         "$ref": "142"
+         "$ref": "161"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "144",
+       "$id": "163",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "145",
+        "$id": "164",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1063,9 +1210,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "146",
+        "$id": "165",
         "Type": {
-         "$id": "147",
+         "$id": "166",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -1076,12 +1223,12 @@
      ],
      "Responses": [
       {
-       "$id": "148",
+       "$id": "167",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1097,20 +1244,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "149",
+     "$id": "168",
      "Name": "topAction2",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level method2",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "150",
+       "$id": "169",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "151",
+        "$id": "170",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1125,25 +1272,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "152",
+        "$id": "171",
         "Type": {
-         "$ref": "151"
+         "$ref": "170"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "153",
+       "$id": "172",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1159,20 +1306,20 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "154",
+     "$id": "173",
      "Name": "patchAction",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level patch",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "155",
+       "$id": "174",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1185,11 +1332,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "156",
+       "$id": "175",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "157",
+        "$id": "176",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1204,19 +1351,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "158",
+        "$id": "177",
         "Type": {
-         "$ref": "157"
+         "$ref": "176"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "159",
+       "$id": "178",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "160",
+        "$id": "179",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1231,25 +1378,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "161",
+        "$id": "180",
         "Type": {
-         "$ref": "160"
+         "$ref": "179"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "162",
+       "$id": "181",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1268,21 +1415,21 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "163",
+     "$id": "182",
      "Name": "anonymousBody",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "164",
+       "$id": "183",
        "Name": "Thing",
        "NameInRequest": "Thing",
        "Description": "A model with a few properties of literal types",
        "Type": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1295,11 +1442,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "165",
+       "$id": "184",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "166",
+        "$id": "185",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1314,19 +1461,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "167",
+        "$id": "186",
         "Type": {
-         "$ref": "166"
+         "$ref": "185"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "168",
+       "$id": "187",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "169",
+        "$id": "188",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1341,25 +1488,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "170",
+        "$id": "189",
         "Type": {
-         "$ref": "169"
+         "$ref": "188"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "171",
+       "$id": "190",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1378,21 +1525,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "172",
+     "$id": "191",
      "Name": "friendlyModel",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "Model can have its friendly name",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "173",
-       "Name": "NotFriend",
+       "$id": "192",
+       "Name": "Friend",
        "NameInRequest": "NotFriend",
        "Description": "this is not a friendly model but with a friendly name",
        "Type": {
-        "$ref": "83"
+        "$ref": "92"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1405,11 +1552,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "174",
+       "$id": "193",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "175",
+        "$id": "194",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1424,19 +1571,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "176",
+        "$id": "195",
         "Type": {
-         "$ref": "175"
+         "$ref": "194"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "177",
+       "$id": "196",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "178",
+        "$id": "197",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1451,25 +1598,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "179",
+        "$id": "198",
         "Type": {
-         "$ref": "178"
+         "$ref": "197"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "180",
+       "$id": "199",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "83"
+        "$ref": "92"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1488,19 +1635,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "181",
+     "$id": "200",
      "Name": "addTimeHeader",
      "ResourceName": "NewProjectTypeSpec",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "182",
+       "$id": "201",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
-        "$id": "183",
+        "$id": "202",
         "Name": "utcDateTime",
         "Kind": "DateTime",
         "IsNullable": false
@@ -1516,11 +1663,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "184",
+       "$id": "203",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "185",
+        "$id": "204",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1535,20 +1682,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "186",
+        "$id": "205",
         "Type": {
-         "$ref": "185"
+         "$ref": "204"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "187",
+       "$id": "206",
        "StatusCodes": [
         204
        ],
@@ -1566,20 +1713,20 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "188",
+     "$id": "207",
      "Name": "stringFormat",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "paramete has string format.",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "189",
+       "$id": "208",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Type": {
-        "$id": "190",
+        "$id": "209",
         "Name": "string",
         "Kind": "Guid",
         "IsNullable": false
@@ -1595,11 +1742,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "191",
+       "$id": "210",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "86"
+        "$ref": "95"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1612,11 +1759,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "192",
+       "$id": "211",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "193",
+        "$id": "212",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1631,19 +1778,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "194",
+        "$id": "213",
         "Type": {
-         "$ref": "193"
+         "$ref": "212"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "195",
+       "$id": "214",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "196",
+        "$id": "215",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1658,20 +1805,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "197",
+        "$id": "216",
         "Type": {
-         "$ref": "196"
+         "$ref": "215"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "198",
+       "$id": "217",
        "StatusCodes": [
         204
        ],
@@ -1692,20 +1839,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "199",
+     "$id": "218",
      "Name": "sayHi",
      "ResourceName": "Demo",
      "Description": "Return hi",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "200",
+       "$id": "219",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "201",
+        "$id": "220",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1721,11 +1868,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "202",
+       "$id": "221",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "203",
+        "$id": "222",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1741,11 +1888,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "204",
+       "$id": "223",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "205",
+        "$id": "224",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1761,11 +1908,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "206",
+       "$id": "225",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "207",
+        "$id": "226",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1780,25 +1927,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "208",
+        "$id": "227",
         "Type": {
-         "$ref": "207"
+         "$ref": "226"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "209",
+       "$id": "228",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1814,20 +1961,20 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "210",
+     "$id": "229",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "211",
+       "$id": "230",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "212",
+        "$id": "231",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1843,16 +1990,16 @@
        "Kind": "Method"
       },
       {
-       "$id": "213",
+       "$id": "232",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "214",
+        "$id": "233",
         "Name": "Literal",
         "Value": {
-         "$id": "215",
+         "$id": "234",
          "Type": {
-          "$id": "216",
+          "$id": "235",
           "Name": "String",
           "Kind": "String",
           "IsNullable": false
@@ -1863,9 +2010,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "217",
+        "$id": "236",
         "Type": {
-         "$ref": "214"
+         "$ref": "233"
         },
         "Value": "text/plain"
        },
@@ -1879,11 +2026,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "218",
+       "$id": "237",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "219",
+        "$id": "238",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1899,11 +2046,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "220",
+       "$id": "239",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "91"
+        "$ref": "100"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1916,11 +2063,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "221",
+       "$id": "240",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "222",
+        "$id": "241",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1935,25 +2082,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "223",
+        "$id": "242",
         "Type": {
-         "$ref": "222"
+         "$ref": "241"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "224",
+       "$id": "243",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "91"
+        "$ref": "100"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1972,20 +2119,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "225",
+     "$id": "244",
      "Name": "noContentType",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "226",
+       "$id": "245",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "227",
+        "$id": "246",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2001,11 +2148,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "228",
+       "$id": "247",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "229",
+        "$id": "248",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2021,11 +2168,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "230",
+       "$id": "249",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "91"
+        "$ref": "100"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2038,11 +2185,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "231",
+       "$id": "250",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "232",
+        "$id": "251",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2057,19 +2204,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "233",
+        "$id": "252",
         "Type": {
-         "$ref": "232"
+         "$ref": "251"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "234",
+       "$id": "253",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "235",
+        "$id": "254",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2084,25 +2231,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "236",
+        "$id": "255",
         "Type": {
-         "$ref": "235"
+         "$ref": "254"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "237",
+       "$id": "256",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "91"
+        "$ref": "100"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2121,20 +2268,20 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "238",
+     "$id": "257",
      "Name": "helloDemo2",
      "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "239",
+       "$id": "258",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "240",
+        "$id": "259",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2149,25 +2296,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "241",
+        "$id": "260",
         "Type": {
-         "$ref": "240"
+         "$ref": "259"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "242",
+       "$id": "261",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2183,20 +2330,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "243",
+     "$id": "262",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
      "Description": "Create with literal value",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "244",
+       "$id": "263",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2209,11 +2356,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "245",
+       "$id": "264",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "246",
+        "$id": "265",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2228,19 +2375,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "247",
+        "$id": "266",
         "Type": {
-         "$ref": "246"
+         "$ref": "265"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "248",
+       "$id": "267",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "249",
+        "$id": "268",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2255,25 +2402,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "250",
+        "$id": "269",
         "Type": {
-         "$ref": "249"
+         "$ref": "268"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
-       "$id": "251",
+       "$id": "270",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "46"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2292,25 +2439,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "252",
+     "$id": "271",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
      "Description": "Send literal parameters",
      "Parameters": [
       {
-       "$ref": "137"
+       "$ref": "156"
       },
       {
-       "$id": "253",
+       "$id": "272",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "254",
+        "$id": "273",
         "Name": "Literal",
         "Value": {
-         "$id": "255",
+         "$id": "274",
          "Type": {
-          "$id": "256",
+          "$id": "275",
           "Name": "String",
           "Kind": "String",
           "IsNullable": false
@@ -2321,9 +2468,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "257",
+        "$id": "276",
         "Type": {
-         "$ref": "254"
+         "$ref": "273"
         },
         "Value": "test"
        },
@@ -2337,16 +2484,16 @@
        "Kind": "Constant"
       },
       {
-       "$id": "258",
+       "$id": "277",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "259",
+        "$id": "278",
         "Name": "Literal",
         "Value": {
-         "$id": "260",
+         "$id": "279",
          "Type": {
-          "$id": "261",
+          "$id": "280",
           "Name": "Number",
           "Kind": "Int32",
           "IsNullable": false
@@ -2357,9 +2504,9 @@
        },
        "Location": "Path",
        "DefaultValue": {
-        "$id": "262",
+        "$id": "281",
         "Type": {
-         "$ref": "259"
+         "$ref": "278"
         },
         "Value": 123
        },
@@ -2373,16 +2520,16 @@
        "Kind": "Constant"
       },
       {
-       "$id": "263",
+       "$id": "282",
        "Name": "p3",
        "NameInRequest": "p3",
        "Type": {
-        "$id": "264",
+        "$id": "283",
         "Name": "Literal",
         "Value": {
-         "$id": "265",
+         "$id": "284",
          "Type": {
-          "$id": "266",
+          "$id": "285",
           "Name": "Boolean",
           "Kind": "Boolean",
           "IsNullable": false
@@ -2393,9 +2540,9 @@
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "267",
+        "$id": "286",
         "Type": {
-         "$ref": "264"
+         "$ref": "283"
         },
         "Value": true
        },
@@ -2407,239 +2554,6 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Constant"
-      },
-      {
-       "$id": "268",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "269",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "270",
-        "Type": {
-         "$ref": "269"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "144"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "271",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "46"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{firstTestTypeSpecUrl}",
-     "Path": "/helloLiteral/{p2}",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "272",
-     "Name": "getUnknownValue",
-     "ResourceName": "EnumTest",
-     "Description": "get extensible enum",
-     "Parameters": [
-      {
-       "$ref": "137"
-      },
-      {
-       "$id": "273",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "274",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "275",
-        "Type": {
-         "$ref": "274"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "144"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "276",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "38"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{firstTestTypeSpecUrl}",
-     "Path": "/unknown-value",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
-    },
-    {
-     "$id": "277",
-     "Name": "internalProtocol",
-     "ResourceName": "ProtocolAndConvenient",
-     "Description": "When set protocol false and convenient true, then the protocol method should be internal",
-     "Parameters": [
-      {
-       "$ref": "137"
-      },
-      {
-       "$id": "278",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "46"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "279",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "280",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "281",
-        "Type": {
-         "$ref": "280"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "282",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "283",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "284",
-        "Type": {
-         "$ref": "283"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "144"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "285",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "46"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{firstTestTypeSpecUrl}",
-     "Path": "/internalProtocol",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "286",
-     "Name": "stillConvenient",
-     "ResourceName": "ProtocolAndConvenient",
-     "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
-     "Parameters": [
-      {
-       "$ref": "137"
       },
       {
        "$id": "287",
@@ -2669,12 +2583,245 @@
        }
       },
       {
-       "$ref": "144"
+       "$ref": "163"
       }
      ],
      "Responses": [
       {
        "$id": "290",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "55"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{firstTestTypeSpecUrl}",
+     "Path": "/helloLiteral/{p2}",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "291",
+     "Name": "getUnknownValue",
+     "ResourceName": "EnumTest",
+     "Description": "get extensible enum",
+     "Parameters": [
+      {
+       "$ref": "156"
+      },
+      {
+       "$id": "292",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "293",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "294",
+        "Type": {
+         "$ref": "293"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "163"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "295",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "38"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{firstTestTypeSpecUrl}",
+     "Path": "/unknown-value",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "296",
+     "Name": "internalProtocol",
+     "ResourceName": "ProtocolAndConvenient",
+     "Description": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Parameters": [
+      {
+       "$ref": "156"
+      },
+      {
+       "$id": "297",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "55"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "298",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "299",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "300",
+        "Type": {
+         "$ref": "299"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "301",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "302",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "303",
+        "Type": {
+         "$ref": "302"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "163"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "304",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "55"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestTypeSpecUrl}",
+     "Path": "/internalProtocol",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": false,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "305",
+     "Name": "stillConvenient",
+     "ResourceName": "ProtocolAndConvenient",
+     "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Parameters": [
+      {
+       "$ref": "156"
+      },
+      {
+       "$id": "306",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "307",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "308",
+        "Type": {
+         "$ref": "307"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "163"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "309",
        "StatusCodes": [
         204
        ],
@@ -2693,19 +2840,19 @@
     }
    ],
    "Protocol": {
-    "$id": "291"
+    "$id": "310"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "292",
+  "$id": "311",
   "ApiKey": {
-   "$id": "293",
+   "$id": "312",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "294",
+   "$id": "313",
    "Scopes": [
     "https://api.example.com/.default"
    ]

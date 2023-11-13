@@ -167,6 +167,48 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
+            writer.WritePropertyName("vector"u8);
+            writer.WriteStartArray();
+            foreach (var item in Vector.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("vectorRequired"u8);
+            writer.WriteStartArray();
+            foreach (var item in VectorRequired.Span)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (VectorNullable != null)
+            {
+                writer.WritePropertyName("vectorNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorNullable");
+            }
+            if (VectorRequiredNullable != null)
+            {
+                writer.WritePropertyName("vectorRequiredNullable"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorRequiredNullable.Value.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("vectorRequiredNullable");
+            }
             writer.WriteEndObject();
         }
     }

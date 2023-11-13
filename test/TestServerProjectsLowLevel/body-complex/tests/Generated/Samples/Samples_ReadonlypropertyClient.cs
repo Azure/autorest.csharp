@@ -6,27 +6,39 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_ReadonlypropertyClient
+    public partial class Samples_ReadonlypropertyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid()
+        public void Example_GetValid_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ReadonlypropertyClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetValid_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
+
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,37 +48,24 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ReadonlypropertyClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ReadonlypropertyClient(credential);
-
-            Response response = await client.GetValidAsync(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ReadonlypropertyClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -75,14 +74,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid()
+        public void Example_PutValid_ShortVersion()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ReadonlypropertyClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            var data = new { };
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = client.PutValid(content);
 
-            Response response = client.PutValid(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutValid_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -90,28 +102,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ReadonlypropertyClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 size = 1234,
-            };
+            });
+            Response response = client.PutValid(content);
 
-            Response response = client.PutValid(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ReadonlypropertyClient(credential);
-
-            var data = new { };
-
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -119,15 +118,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ReadonlypropertyClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 size = 1234,
-            };
+            });
+            Response response = await client.PutValidAsync(content);
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

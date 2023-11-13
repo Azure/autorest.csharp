@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-using AutoRest.CSharp.Mgmt.Decorator;
-using NUnit.Framework;
 using System.Linq;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
+using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt
 {
@@ -63,6 +64,17 @@ namespace AutoRest.TestServer.Tests.Mgmt
             {
                 Assert.AreEqual(expected[i], result[i]);
             }
+        }
+
+        [TestCase("/subs/{subsId}/rgs/{name}/foo/bar/{something}", "/subs/{subsId}/rgs/{name}/foo", true)]
+        [TestCase("/subs/{subsId}/rgs/{name}/foo/bar/{something}", "/subs/{id}/rgs/{n}/foo", true)]
+        [TestCase("/subs/{subsId}/rgs/{name}/foo/bar/{something}", "/subs/{id}/rGs/{n}/foo", false)]
+        [TestCase("/subs/{subsId}/rgs/{name}/foo/bar/{something}", "/subs/{id", false)] // one of the path is incomplete
+        [TestCase("abcde", "ab", true)]
+        [TestCase("/subs/{id}/rGs/{n}/foo", "/subs/{subsId}/rgs/{name}/foo/bar/{something}", false)]
+        public void IsPrefixTest(string candidate, string requestPath, bool expected)
+        {
+            Assert.AreEqual(expected, RequestPath.IsPrefix(requestPath, candidate));
         }
     }
 }

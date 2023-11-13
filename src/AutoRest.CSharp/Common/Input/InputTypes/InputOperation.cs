@@ -4,9 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input;
@@ -54,6 +53,30 @@ internal record InputOperation(
         GenerateConvenienceMethod: false)
     { }
 
+    public static InputOperation RemoveApiVersionParam(InputOperation operation)
+    {
+        return new InputOperation(
+            operation.Name,
+            operation.ResourceName,
+            operation.Summary,
+            operation.Deprecated,
+            operation.Description,
+            operation.Accessibility,
+            operation.Parameters.Where(p => !p.IsApiVersion).ToList(),
+            operation.Responses,
+            operation.HttpMethod,
+            operation.RequestBodyMediaType,
+            operation.Uri,
+            operation.Path,
+            operation.ExternalDocsUrl,
+            operation.RequestMediaTypes,
+            operation.BufferResponse,
+            operation.LongRunning,
+            operation.Paging,
+            operation.GenerateProtocolMethod,
+            operation.GenerateConvenienceMethod);
+    }
+
     private string? _cleanName;
     public string CleanName
     {
@@ -69,4 +92,16 @@ internal record InputOperation(
     }
 
     public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
+
+    private IReadOnlyDictionary<string, InputOperationExample>? _examples;
+    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();
+
+    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples()
+    {
+        return new Dictionary<string, InputOperationExample>()
+        {
+            [ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false),
+            [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true)
+        };
+    }
 }

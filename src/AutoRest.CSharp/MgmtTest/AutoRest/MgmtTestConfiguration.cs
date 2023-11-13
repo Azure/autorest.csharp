@@ -6,29 +6,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Input
 {
     internal class MgmtTestConfiguration
     {
-        internal const string TestGenOptionsRoot = "testgen";
+        internal const string TestGenOptionsRoot = "sample-gen";
         private const string TestGenOptionsFormat = $"{TestGenOptionsRoot}.{{0}}";
 
         public string? SourceCodePath { get; }
+        public string? OutputFolder { get; }
         public bool Mock { get; }
         public bool Sample { get; }
         public IReadOnlyList<string> SkippedOperations { get; }
+        public bool ClearOutputFolder { get; }
 
         public MgmtTestConfiguration(
             IReadOnlyList<string> skippedOperations,
             JsonElement? sourceCodePath = default,
             JsonElement? mock = default,
-            JsonElement? sample = default)
+            JsonElement? sample = default,
+            JsonElement? outputFolder = default,
+            JsonElement? clearOutputFolder = default)
         {
             SkippedOperations = skippedOperations;
             SourceCodePath = !Configuration.IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
             Mock = Configuration.DeserializeBoolean(mock, false);
-            Sample = Configuration.DeserializeBoolean(sample, false);
+            Sample = Configuration.DeserializeBoolean(sample, true);
+            OutputFolder = !Configuration.IsValidJsonElement(outputFolder) ? null : Configuration.TrimFileSuffix(outputFolder.ToString() ?? "");
+            ClearOutputFolder = Configuration.DeserializeBoolean(clearOutputFolder, false);
         }
 
         internal static MgmtTestConfiguration? LoadConfiguration(JsonElement root)
@@ -42,6 +49,8 @@ namespace AutoRest.CSharp.Input
             testGenRoot.TryGetProperty(nameof(SourceCodePath), out var sourceCodePath);
             testGenRoot.TryGetProperty(nameof(Mock), out var mock);
             testGenRoot.TryGetProperty(nameof(Sample), out var sample);
+            testGenRoot.TryGetProperty(nameof(OutputFolder), out var testGenOutputFolder);
+            testGenRoot.TryGetProperty(nameof(ClearOutputFolder), out var testGenClearOutputFolder);
 
             var skippedOperations = Configuration.DeserializeArray(skippedOperationsElement);
 
@@ -49,7 +58,9 @@ namespace AutoRest.CSharp.Input
                 skippedOperations,
                 sourceCodePath: sourceCodePath,
                 mock: mock,
-                sample: sample);
+                sample: sample,
+                outputFolder: testGenOutputFolder,
+                clearOutputFolder: testGenClearOutputFolder);
         }
 
         internal static MgmtTestConfiguration? GetConfiguration(IPluginCommunication autoRest)
@@ -61,7 +72,9 @@ namespace AutoRest.CSharp.Input
                 skippedOperations: autoRest.GetValue<string[]?>(string.Format(TestGenOptionsFormat, "skipped-operations")).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "source-path")).GetAwaiter().GetResult(),
                 mock: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "mock")).GetAwaiter().GetResult(),
-                sample: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "sample")).GetAwaiter().GetResult());
+                sample: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "sample")).GetAwaiter().GetResult(),
+                outputFolder: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "output-folder")).GetAwaiter().GetResult(),
+                clearOutputFolder: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "clear-output-folder")).GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)

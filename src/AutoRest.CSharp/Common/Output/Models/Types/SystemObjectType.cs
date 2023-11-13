@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var modifiers = ctor.IsFamily ? Protected : Public;
 
-            return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), baseConstructor);
+            return new ObjectTypeConstructor(Type, modifiers, parameters, initializers.ToArray(), baseConstructor);
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
@@ -215,7 +215,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel);
         }
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
             throw new NotImplementedException("Currently we don't support getting description in SystemObjectType");
         }

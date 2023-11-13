@@ -6,10 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
+using Accessibility_LowLevel_NoAuth;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -17,17 +15,29 @@ using NUnit.Framework;
 
 namespace Accessibility_LowLevel_NoAuth.Samples
 {
-    public class Samples_AccessibilityClient
+    public partial class Samples_AccessibilityClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
-            var client = new AccessibilityClient();
+            AccessibilityClient client = new AccessibilityClient();
 
-            var data = "<String>";
+            using RequestContent content = null;
+            Response response = client.Operation(content);
 
-            Response response = client.Operation(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Operation_ShortVersion_Async()
+        {
+            AccessibilityClient client = new AccessibilityClient();
+
+            using RequestContent content = null;
+            Response response = await client.OperationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,23 +45,11 @@ namespace Accessibility_LowLevel_NoAuth.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_AllParameters()
         {
-            var client = new AccessibilityClient();
+            AccessibilityClient client = new AccessibilityClient();
 
-            var data = "<String>";
+            using RequestContent content = RequestContent.Create("<body>");
+            Response response = client.Operation(content);
 
-            Response response = client.Operation(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
-        {
-            var client = new AccessibilityClient();
-
-            var data = "<String>";
-
-            Response response = await client.OperationAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -59,11 +57,11 @@ namespace Accessibility_LowLevel_NoAuth.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
-            var client = new AccessibilityClient();
+            AccessibilityClient client = new AccessibilityClient();
 
-            var data = "<String>";
+            using RequestContent content = RequestContent.Create("<body>");
+            Response response = await client.OperationAsync(content);
 
-            Response response = await client.OperationAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

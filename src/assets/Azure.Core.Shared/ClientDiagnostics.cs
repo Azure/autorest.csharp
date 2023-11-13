@@ -49,7 +49,7 @@ namespace Azure.Core.Pipeline
         ///  The default value could change in the future, the flag should be only set to false if suppression for the client
         ///  should never be enabled.</param>
         public ClientDiagnostics(string optionsNamespace, string? providerNamespace, DiagnosticsOptions diagnosticsOptions, bool? suppressNestedClientActivities = null)
-            : base(optionsNamespace, providerNamespace, diagnosticsOptions.IsDistributedTracingEnabled, suppressNestedClientActivities.GetValueOrDefault(false))
+            : base(optionsNamespace, providerNamespace, diagnosticsOptions.IsDistributedTracingEnabled, suppressNestedClientActivities.GetValueOrDefault(true))
         {
         }
 
@@ -62,13 +62,14 @@ namespace Azure.Core.Pipeline
 
         internal static string? GetResourceProviderNamespace(Assembly assembly)
         {
-            foreach (var customAttribute in assembly.GetCustomAttributes(true))
+            foreach (var customAttribute in assembly.GetCustomAttributesData())
             {
                 // Weak bind internal shared type
-                var attributeType = customAttribute.GetType();
-                if (attributeType.Name == "AzureResourceProviderNamespaceAttribute")
+                Type attributeType = customAttribute.AttributeType!;
+                if (attributeType.FullName == ("Azure.Core.AzureResourceProviderNamespaceAttribute"))
                 {
-                    return attributeType.GetProperty("ResourceProviderNamespace")?.GetValue(customAttribute) as string;
+                    IList<CustomAttributeTypedArgument> namedArguments = customAttribute.ConstructorArguments;
+                    return namedArguments.Single().Value as string;
                 }
             }
 

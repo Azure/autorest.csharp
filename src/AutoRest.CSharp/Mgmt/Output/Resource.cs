@@ -4,18 +4,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -32,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static readonly Parameter TagKeyParameter = new Parameter(
             "key",
-            "The key for the tag.",
+            $"The key for the tag.",
             typeof(string),
             null,
             ValidationType.AssertNotNull,
@@ -40,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static readonly Parameter TagValueParameter = new Parameter(
             "value",
-            "The value for the tag.",
+            $"The value for the tag.",
             typeof(string),
             null,
             ValidationType.AssertNotNull,
@@ -48,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static readonly Parameter TagSetParameter = new Parameter(
             "tags",
-            "The set of tags to use as replacement.",
+            $"The set of tags to use as replacement.",
             typeof(IDictionary<string, string>),
             null,
             ValidationType.AssertNotNull,
@@ -95,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override ConstructorSignature? EnsureArmClientCtor()
         {
             return new ConstructorSignature(
-              Name: Type.Name,
+              Type,
               null,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
               Modifiers: Internal,
@@ -108,7 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override ConstructorSignature? EnsureResourceDataCtor()
         {
             return new ConstructorSignature(
-                Name: Type.Name,
+                Type,
                 null,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
                 Modifiers: Internal,
@@ -157,13 +165,30 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(restOperation);
             }
 
-            return MgmtClientOperation.FromOperations(result);
+            return MgmtClientOperation.FromOperations(result, IdVariableName);
         }
 
         public virtual Resource GetResource() => this;
 
+        private bool loggedForDefaultName = false;
         // name after `{ResourceName}Resource`, unless the `ResourceName` already ends with `Resource`
-        protected override string DefaultName => Configuration.MgmtConfiguration.NoResourceSuffix.Contains(ResourceName) ? ResourceName : ResourceName.AddResourceSuffixToResourceName();
+        protected override string DefaultName
+        {
+            get
+            {
+                if (Configuration.MgmtConfiguration.NoResourceSuffix.Contains(ResourceName))
+                {
+                    if (!loggedForDefaultName)
+                    {
+                        MgmtReport.Instance.TransformSection.AddTransformLog(new TransformItem(TransformTypeName.NoResourceSuffix, ResourceName), ResourceName, $"NoResourceSuffix for {ResourceName}");
+                        loggedForDefaultName = true;
+                    }
+                    return ResourceName;
+                }
+                else
+                    return ResourceName.AddResourceSuffixToResourceName();
+            }
+        }
 
         public override FormattableString Description => CreateDescription();
 
@@ -251,7 +276,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Update",
                         createOrUpdateOperation.MgmtReturnType,
                         createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
-                        createOrUpdateOperation.RequestPath));
+                        createOrUpdateOperation.RequestPath),
+                    IdVariableName);
             }
 
             return null;
@@ -292,7 +318,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getOperation.MgmtReturnType,
                         "Add a tag to the current resource.",
                         TagKeyParameter,
-                        TagValueParameter), isConvenientOperation: true));
+                        TagValueParameter),
+                    IdVariableName,
+                    isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -300,7 +328,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "SetTags",
                         getOperation.MgmtReturnType,
                         "Replace the tags on the resource with the given set.",
-                        TagSetParameter), isConvenientOperation: true));
+                        TagSetParameter),
+                    IdVariableName,
+                    isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -308,12 +338,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "RemoveTag",
                         getOperation.MgmtReturnType,
                         "Removes a tag by key from the resource.",
-                        TagKeyParameter), isConvenientOperation: true));
+                        TagKeyParameter),
+                    IdVariableName,
+                    isConvenientOperation: true));
             }
             return result;
         }
 
-        public override string BranchIdVariableName => "Id.Parent";
+        public override FormattableString BranchIdVariableName => $"Id.Parent";
 
         public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
@@ -377,7 +409,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // TODO -- what if the response type is not the same? Also we need to verify they have the same parameters before we could union those together
             _clientOperationMap = result.Where(pair => pair.Value.Count > 0).ToDictionary(
                 pair => pair.Key,
-                pair => MgmtClientOperation.FromOperations(pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
+                pair => MgmtClientOperation.FromOperations(pair.Value, IdVariableName)!); // We first filtered the ones with at least one operation, therefore this will never be null
             return _clientOperationMap;
         }
 
@@ -433,31 +465,64 @@ namespace AutoRest.CSharp.Mgmt.Output
             _ => FormattableStringHelpers.Join(parentTypes.Select(type => (FormattableString)$"<see cref=\"{type}\" />").ToList(), ", ", " or "),
         };
 
-        private static Type? ToFormatTypeByName(string? name) => name switch
-        {
-            "location" => typeof(AzureLocation),
-            _ => null
-        };
+        private static CSharpType GetReferenceType(Reference reference)
+            => reference.Name switch
+            {
+                "location" when reference.Type.EqualsIgnoreNullable(typeof(string)) => typeof(AzureLocation),
+                _ => reference.Type
+            };
 
         private Parameter CreateResourceIdentifierParameter(Segment segment)
-        {
-            CSharpType ctype = ToFormatTypeByName(segment.Reference.Name) is Type type ? new CSharpType(type, false) : segment.Reference.Type;
-            return new Parameter(segment.Reference.Name, null, ctype, null, ValidationType.AssertNotNull, null);
-        }
+            => new Parameter(segment.Reference.Name, $"The {segment.Reference.Name}", GetReferenceType(segment.Reference), null, ValidationType.None, null);
 
-        private MethodSignature? _createResourceIdentifierMethodSignature;
-        /// <summary>
-        /// Returns the different method signature for different base path of this resource
-        /// </summary>
-        /// <returns></returns>
-        public virtual MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierMethodSignature ??= new MethodSignature(
-            Name: "CreateResourceIdentifier",
-            null,
-            Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-            Modifiers: Public | Static,
-            ReturnType: typeof(ResourceIdentifier),
-            ReturnDescription: null,
-            Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
+        public Method? _createResourceIdentifierMethod;
+        public Method CreateResourceIdentifierMethod => _createResourceIdentifierMethod ??= BuildCreateResourceIdentifierMethod();
+
+        protected virtual Method BuildCreateResourceIdentifierMethod()
+        {
+            var signature = new MethodSignature(
+                Name: "CreateResourceIdentifier",
+                null,
+                Description: $"Generate the resource identifier of a <see cref=\"{Type.ToStringForDocs()}\"/> instance.",
+                Modifiers: Public | Static,
+                ReturnType: typeof(ResourceIdentifier),
+                ReturnDescription: null,
+                Parameters: RequestPath.Where(segment => segment.IsReference).Select(CreateResourceIdentifierParameter).ToArray());
+
+            // build the format string of the id
+            var formatBuilder = new StringBuilder();
+            var first = true;
+            var refCount = 0;
+            foreach (var segment in RequestPath)
+            {
+                if (first)
+                {
+                    first = false;
+                    // If first segment is "{var}", then we should not add leading "/". Instead, we should let callers to specify, e.g. "{scope}/providers/Microsoft.Resources/..." v.s. "/subscriptions/{subscriptionId}/..."
+                    if (RequestPath.Count == 0 || RequestPath[0].IsConstant)
+                        formatBuilder.Append('/');
+                }
+                else
+                    formatBuilder.Append('/');
+                if (segment.IsConstant)
+                    formatBuilder.Append(segment.ConstantValue);
+                else
+                {
+                    formatBuilder.Append('{')
+                        .Append(refCount)
+                        .Append('}');
+                    refCount++;
+                }
+            }
+
+            var resourceId = new VariableReference(typeof(ResourceIdentifier), "resourceId");
+            var methodBody = new MethodBodyStatement[]
+            {
+                Var(resourceId, new FormattableStringExpression(formatBuilder.ToString(), signature.Parameters.Select(p => (ValueExpression)p).ToArray())),
+                Return(Snippets.New.ResourceIdentifier(resourceId))
+            };
+            return new Method(signature, methodBody);
+        }
 
         public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
         {

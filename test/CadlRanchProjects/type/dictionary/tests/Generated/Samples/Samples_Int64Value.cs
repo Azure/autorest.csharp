@@ -7,118 +7,168 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary.Models;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    internal class Samples_Int64Value
+    public partial class Samples_Int64Value
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt64Value()
+        public void Example_GetInt64Value_ShortVersion()
         {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetInt64Value(new RequestContext());
+            Response response = client.GetInt64Value(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetInt64Value_ShortVersion_Async()
+        {
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.GetInt64ValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetInt64Value_ShortVersion_Convenience()
+        {
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, long>> response = client.GetInt64Value();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetInt64Value_ShortVersion_Convenience_Async()
+        {
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, long>> response = await client.GetInt64ValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt64Value_AllParameters()
         {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetInt64Value(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt64Value_Async()
-        {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
-
-            Response response = await client.GetInt64ValueAsync(new RequestContext());
+            Response response = client.GetInt64Value(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt64Value_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetInt64ValueAsync(new RequestContext());
+            Response response = await client.GetInt64ValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt64Value_Convenience_Async()
+        public void Example_GetInt64Value_AllParameters_Convenience()
         {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetInt64ValueAsync();
+            Response<IReadOnlyDictionary<string, long>> response = client.GetInt64Value();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public async Task Example_GetInt64Value_AllParameters_Convenience_Async()
         {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            Response<IReadOnlyDictionary<string, long>> response = await client.GetInt64ValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_ShortVersion()
+        {
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234L,
-            };
+            });
+            Response response = client.Put(content);
 
-            Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_ShortVersion_Async()
+        {
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = 1234L,
+            });
+            Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_ShortVersion_Convenience()
+        {
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new Dictionary<string, long>
+            {
+                ["key"] = 1234L
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_ShortVersion_Convenience_Async()
+        {
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new Dictionary<string, long>
+            {
+                ["key"] = 1234L
+            });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234L,
-            };
+            });
+            Response response = client.Put(content);
 
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
-        {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
-
-            var data = new
-            {
-                key = 1234L,
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -126,28 +176,39 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234L,
-            };
+            });
+            Response response = await client.PutAsync(content);
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
-            var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            var body = new Dictionary<string, long>
+            Response response = client.Put(new Dictionary<string, long>
             {
-                ["key"] = 1234,
-            };
-            var result = await client.PutAsync(body);
+                ["key"] = 1234L
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new Dictionary<string, long>
+            {
+                ["key"] = 1234L
+            });
         }
     }
 }

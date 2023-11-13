@@ -120,5 +120,27 @@ namespace MgmtMockAndSample.Tests.Mock
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetIfExists_VirtualMachineExtensionImagesGetMaximumSetGen()
+        {
+            // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetVirtualMachineExtensionImages(new AzureLocation("aaaaaaaaaaaaa"), "aaaaaaaaaaaaaaaaaaaa");
+            await collection.GetIfExistsAsync("aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
+        }
+
+        [RecordedTest]
+        public async Task GetIfExists_VirtualMachineExtensionImagesGetMinimumSetGen()
+        {
+            // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetVirtualMachineExtensionImages(new AzureLocation("aaaaaaaaaaaaaa"), "aaaaaaaaaaaaaaaaaaaaaaaaaa");
+            await collection.GetIfExistsAsync("aa", "aaa");
+        }
     }
 }

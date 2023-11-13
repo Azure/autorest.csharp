@@ -2,204 +2,296 @@
 <doc>
   <members>
     <member name="GetNotExpandableAsync(RequestContext)">
-<example>
-This sample shows how to call GetNotExpandableAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetNotExpandableAsync and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-Response response = await client.GetNotExpandableAsync(new RequestContext());
+Response response = await client.GetNotExpandableAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-</example>
+This sample shows how to call GetNotExpandableAsync with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+Response response = await client.GetNotExpandableAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
     </member>
     <member name="GetNotExpandable(RequestContext)">
-<example>
-This sample shows how to call GetNotExpandable with required parameters and parse the result.
+      <example>
+This sample shows how to call GetNotExpandable and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-Response response = client.GetNotExpandable(new RequestContext());
+Response response = client.GetNotExpandable(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-</example>
+This sample shows how to call GetNotExpandable with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+Response response = client.GetNotExpandable(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
     </member>
     <member name="PutNotExpandableAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutNotExpandableAsync with required request content.
+      <example>
+This sample shows how to call PutNotExpandableAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-var data = "red color";
+using RequestContent content = RequestContent.Create("red color");
+Response response = await client.PutNotExpandableAsync(content);
 
-Response response = await client.PutNotExpandableAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutNotExpandableAsync with all request content.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+using RequestContent content = RequestContent.Create("red color");
+Response response = await client.PutNotExpandableAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutNotExpandable(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutNotExpandable with required request content.
+      <example>
+This sample shows how to call PutNotExpandable.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-var data = "red color";
+using RequestContent content = RequestContent.Create("red color");
+Response response = client.PutNotExpandable(content);
 
-Response response = client.PutNotExpandable(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutNotExpandable with all request content.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+using RequestContent content = RequestContent.Create("red color");
+Response response = client.PutNotExpandable(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="GetReferencedAsync(RequestContext)">
-<example>
-This sample shows how to call GetReferencedAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetReferencedAsync and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-Response response = await client.GetReferencedAsync(new RequestContext());
+Response response = await client.GetReferencedAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-</example>
+This sample shows how to call GetReferencedAsync with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+Response response = await client.GetReferencedAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
     </member>
     <member name="GetReferenced(RequestContext)">
-<example>
-This sample shows how to call GetReferenced with required parameters and parse the result.
+      <example>
+This sample shows how to call GetReferenced and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-Response response = client.GetReferenced(new RequestContext());
+Response response = client.GetReferenced(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-</example>
+This sample shows how to call GetReferenced with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+Response response = client.GetReferenced(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
     </member>
     <member name="PutReferencedAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutReferencedAsync with required request content.
+      <example>
+This sample shows how to call PutReferencedAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-var data = "red color";
+using RequestContent content = RequestContent.Create("red color");
+Response response = await client.PutReferencedAsync(content);
 
-Response response = await client.PutReferencedAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutReferencedAsync with all request content.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+using RequestContent content = RequestContent.Create("red color");
+Response response = await client.PutReferencedAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutReferenced(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutReferenced with required request content.
+      <example>
+This sample shows how to call PutReferenced.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-var data = "red color";
+using RequestContent content = RequestContent.Create("red color");
+Response response = client.PutReferenced(content);
 
-Response response = client.PutReferenced(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutReferenced with all request content.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+using RequestContent content = RequestContent.Create("red color");
+Response response = client.PutReferenced(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="GetReferencedConstantAsync(RequestContext)">
-<example>
-This sample shows how to call GetReferencedConstantAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetReferencedConstantAsync and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-Response response = await client.GetReferencedConstantAsync(new RequestContext());
+Response response = await client.GetReferencedConstantAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("ColorConstant").ToString());
+]]></code>
+This sample shows how to call GetReferencedConstantAsync with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+Response response = await client.GetReferencedConstantAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());
 Console.WriteLine(result.GetProperty("field1").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetReferencedConstant(RequestContext)">
-<example>
-This sample shows how to call GetReferencedConstant with required parameters and parse the result.
+      <example>
+This sample shows how to call GetReferencedConstant and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-Response response = client.GetReferencedConstant(new RequestContext());
+Response response = client.GetReferencedConstant(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("ColorConstant").ToString());
+]]></code>
+This sample shows how to call GetReferencedConstant with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
+
+Response response = client.GetReferencedConstant(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());
 Console.WriteLine(result.GetProperty("field1").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutReferencedConstantAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutReferencedConstantAsync with required request content.
+      <example>
+This sample shows how to call PutReferencedConstantAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     ColorConstant = "green-color",
-};
+});
+Response response = await client.PutReferencedConstantAsync(content);
 
-Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedConstantAsync with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     ColorConstant = "green-color",
     field1 = "<field1>",
-};
+});
+Response response = await client.PutReferencedConstantAsync(content);
 
-Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutReferencedConstant(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutReferencedConstant with required request content.
+      <example>
+This sample shows how to call PutReferencedConstant.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     ColorConstant = "green-color",
-};
+});
+Response response = client.PutReferencedConstant(content);
 
-Response response = client.PutReferencedConstant(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedConstant with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new EnumClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumClient client = new EnumClient(credential);
 
-var data = new {
+using RequestContent content = RequestContent.Create(new
+{
     ColorConstant = "green-color",
     field1 = "<field1>",
-};
+});
+Response response = client.PutReferencedConstant(content);
 
-Response response = client.PutReferencedConstant(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>
