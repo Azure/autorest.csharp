@@ -38,6 +38,8 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputLiteralType literalType       => throw new InvalidOperationException("Literal type shouldn't be used outside of the Input layer"),
             InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable),
+            InputListType { IsEmbeddingsVector: true } listType
+                                               => new CSharpType(typeof(ReadOnlyMemory<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -82,13 +84,44 @@ namespace AutoRest.CSharp.Generation.Types
             },
             InputSystemType systemType => new CSharpType(systemType.Type, CreateType(systemType.ElementType)).WithNullable(inputType.IsNullable),
             InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.Generation1ConvenienceClient ? typeof(object) : typeof(BinaryData),
+            CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };
+
+        public CSharpType CreateType(Schema schema, bool isNullable, string? formatOverride = default, Property? property = default) => CreateType(schema, formatOverride ?? schema.Extensions?.Format, isNullable, property);
+
+        // This function provide the capability to support the extensions is coming from outside, like parameter.
+        public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
+        {
+            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is { } type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
+            ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
+            ArraySchema array => new CSharpType(GetListType(schema), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
+            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
+            CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
+            NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
+            AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
+                typeof(DataFactoryElement<>),
+                isNullable: isNullable,
+                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
+            _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
+            _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
+        };
+
+        private Type GetListType(Schema schema)
+        {
+            return schema.Extensions is not null && schema.Extensions.IsEmbeddingsVector ? typeof(ReadOnlyMemory<>) : typeof(IList<>);
+        }
 
         public static CSharpType GetImplementationType(CSharpType type)
         {
             if (type.IsFrameworkType)
             {
+                if (IsReadOnlyMemory(type))
+                {
+                    return new CSharpType(type.Arguments[0].FrameworkType.MakeArrayType());
+                }
+
                 if (IsList(type))
                 {
                     return new CSharpType(typeof(List<>), type.Arguments);
@@ -107,6 +140,11 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsFrameworkType)
             {
+                if (IsReadOnlyMemory(type))
+                {
+                    return new CSharpType(typeof(ReadOnlyMemory<>), type.Arguments);
+                }
+
                 if (IsList(type))
                 {
                     return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
@@ -154,6 +192,16 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsFrameworkType)
             {
+                if (type.FrameworkType.IsArray)
+                {
+                    return new CSharpType(type.FrameworkType.GetElementType()!);
+                }
+
+                if (IsReadOnlyMemory(type))
+                {
+                    return type.Arguments[0];
+                }
+
                 if (IsList(type))
                 {
                     return type.Arguments[0];
@@ -203,7 +251,10 @@ namespace AutoRest.CSharp.Generation.Types
             => type.IsFrameworkType && (type.FrameworkType == typeof(IDictionary<,>) || type.FrameworkType == typeof(Dictionary<,>));
 
         internal static bool IsList(CSharpType type)
-            => IsReadOnlyList(type) || IsReadWriteList(type);
+            => IsReadOnlyList(type) || IsReadWriteList(type) || IsReadOnlyMemory(type);
+
+        internal static bool IsReadOnlyMemory(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(ReadOnlyMemory<>);
 
         internal static bool IsList(CSharpType type, [MaybeNullWhen(false)] out CSharpType elementType)
         {
@@ -322,6 +373,11 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsFrameworkType)
             {
+                if (IsReadOnlyMemory(type))
+                {
+                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
+                }
+
                 if (IsList(type))
                 {
                     return new CSharpType(
@@ -338,6 +394,11 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsFrameworkType)
             {
+                if (IsReadOnlyMemory(type))
+                {
+                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
+                }
+
                 if (IsList(type))
                 {
                     return new CSharpType(
@@ -370,7 +431,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         private static bool NoTypeValidator(System.Type type) => true;
 
-        public bool TryCreateType(ITypeSymbol symbol, [NotNullWhen(true)] out CSharpType? type)
+        public bool TryCreateType(ITypeSymbol symbol, [MaybeNullWhen(false)] out CSharpType type)
             => TryCreateType(symbol, NoTypeValidator, out type);
 
         public CSharpType? GetLibraryTypeByName(string name) => _library.FindTypeByName(name);
@@ -457,5 +518,7 @@ namespace AutoRest.CSharp.Generation.Types
 
             return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
         }
+
+        internal static bool IsArray(CSharpType type) => type is { IsFrameworkType: true, FrameworkType.IsArray: true };
     }
 }

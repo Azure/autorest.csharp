@@ -39,25 +39,35 @@ namespace AutoRest.CSharp.Common.Input
             return targetEnums;
         }
 
+        // Models have circular dependencies between them via BaseModel, DerivedModels, and CompositionModels properties
+        // Also, some of the InputModelProperty instances may reference InputModelType via Type property
+        // To correctly update all the references between models, this method does the following:
+        //   1. Sort models by their base models, so that models that have no base models are going first
+        //   2. Iterates over models in the said order and calls `VisitModel` for each of them. Resulted models still reference source models at that point, so all references are invalid
+        //   3. From the "intermediate" models collected on the previous step, create target models with correct `BaseModel` values and empty lists for DerivedModels, CompositionModels and Properties.
+        //      Target model is saved into `typesCache` and added to the returned list.
+        //      If `VisitModel` implementation has returned the same intermediate model for more than one source model, target model will be added only once
+        //   4. After all target models are created, lists for DerivedModels and CompositionModels are filled.
+        //      Also, each property is visited in `VisitModelProperty`, and if InputModelProperty.Type is a model, it must updated it to the target model from `typesCache`.
         private IReadOnlyList<InputModelType> VisitModels(Dictionary<InputType, InputType> typesCache, IReadOnlyList<InputModelType> source)
         {
             var sortedModels = OrderByBaseModel(source);
-            var sourceToTargetWithoutReferences = sortedModels.ToDictionary(s => s, s => VisitModel(s).GetNotNullable());
-            var targetModelToReferences = new Dictionary<InputModelType, ModelWithReferences>();
-            var targetModels = new List<InputModelType>();
+            var sourceToTargetWihOldReferences = sortedModels.ToDictionary(s => s, s => VisitModel(s).GetNotNullable());
 
+            var targetWithOldReferencesToReferences = new Dictionary<InputModelType, ModelWithReferences>();
+            var targetModels = new List<InputModelType>();
             foreach (var sourceModel in sortedModels)
             {
-                var targetNoReferences = sourceToTargetWithoutReferences[sourceModel];
-                if (!targetModelToReferences.TryGetValue(targetNoReferences, out var targetWithReferences))
+                var targetModelWithOldReferences = sourceToTargetWihOldReferences[sourceModel];
+                if (!targetWithOldReferencesToReferences.TryGetValue(targetModelWithOldReferences, out var targetWithReferences))
                 {
                     var properties = new List<InputModelProperty>();
                     var derivedModels = new List<InputModelType>();
                     var compositionModels = new List<InputModelType>();
-                    var targetBaseModel = sourceModel.BaseModel is {} sourceModelBase ? targetModelToReferences[sourceToTargetWithoutReferences[sourceModelBase]].Target : null;
+                    var targetBaseModel = sourceModel.BaseModel is {} sourceModelBase ? targetWithOldReferencesToReferences[sourceToTargetWihOldReferences[sourceModelBase]].Target : null;
                     targetWithReferences = new ModelWithReferences
                     (
-                        Target: targetNoReferences with
+                        Target: targetModelWithOldReferences with
                         {
                             BaseModel = targetBaseModel,
                             Properties = properties,
@@ -69,26 +79,31 @@ namespace AutoRest.CSharp.Common.Input
                         TargetComposition: compositionModels
                     );
 
-                    targetModelToReferences[targetNoReferences] = targetWithReferences;
+                    targetWithOldReferencesToReferences[targetModelWithOldReferences] = targetWithReferences;
                     targetModels.Add(targetWithReferences.Target);
                 }
 
                 typesCache.Add(sourceModel.GetNotNullable(), targetWithReferences.Target);
             }
 
-            foreach (var (targetModelWithoutReferences, modelWithReferences) in targetModelToReferences)
-            {
-                var properties = targetModelWithoutReferences.Properties.Select(p => VisitModelProperty(targetModelWithoutReferences, p, typesCache)).ToList();
-                modelWithReferences.TargetProperties.AddRange(properties);
-
-                var derivedModels = targetModelWithoutReferences.DerivedModels.Select(m => (InputModelType)GetTargetType(m, typesCache)).Distinct().ToList();
-                modelWithReferences.TargetDerived.AddRange(derivedModels);
-
-                var compositionModels = targetModelWithoutReferences.CompositionModels.Select(m => (InputModelType)GetTargetType(m, typesCache)).Distinct().ToList();
-                modelWithReferences.TargetComposition.AddRange(compositionModels);
-            }
+            BuildReferencesBetweenModels(typesCache, targetWithOldReferencesToReferences);
 
             return targetModels;
+        }
+
+        private void BuildReferencesBetweenModels(IReadOnlyDictionary<InputType, InputType> typesCache, IReadOnlyDictionary<InputModelType, ModelWithReferences> targetWithOldReferencesToReferences)
+        {
+            foreach (var (targetModelWithOldReferences, modelWithReferences) in targetWithOldReferencesToReferences)
+            {
+                var properties = targetModelWithOldReferences.Properties.Select(p => VisitModelProperty(targetModelWithOldReferences, p, typesCache)).ToList();
+                modelWithReferences.TargetProperties.AddRange(properties);
+
+                var derivedModels = targetModelWithOldReferences.DerivedModels.Select(m => (InputModelType)GetTargetType(m, typesCache)).Distinct().ToList();
+                modelWithReferences.TargetDerived.AddRange(derivedModels);
+
+                var compositionModels = targetModelWithOldReferences.CompositionModels.Select(m => (InputModelType)GetTargetType(m, typesCache)).Distinct().ToList();
+                modelWithReferences.TargetComposition.AddRange(compositionModels);
+            }
         }
 
         private static IReadOnlyList<InputModelType> OrderByBaseModel(IReadOnlyList<InputModelType> source)

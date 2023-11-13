@@ -27,6 +27,9 @@ namespace MgmtSupersetInheritance
     public partial class SupersetModel4Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SupersetModel4Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="supersetModel4SName"> The supersetModel4SName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string supersetModel4SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}";

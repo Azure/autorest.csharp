@@ -115,6 +115,8 @@ namespace AutoRest.CSharp.Input
         public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
         public string? Usage => TryGetValue("x-csharp-usage", out object? value) ? value?.ToString() : null;
 
+        public bool IsEmbeddingsVector => TryGetValue("x-ms-embedding-vector", out var value) && Convert.ToBoolean(value);
+
         public string[] Formats
         {
             get

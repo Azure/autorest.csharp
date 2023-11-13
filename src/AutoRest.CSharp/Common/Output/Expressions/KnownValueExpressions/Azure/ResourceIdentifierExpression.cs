@@ -9,8 +9,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record ResourceIdentifierExpression(ValueExpression Untyped) : TypedValueExpression<ResourceIdentifier>(Untyped)
     {
-        public static ResourceIdentifierExpression ReferenceField(string fieldName) => new(new MemberExpression(null, fieldName));
-
         public StringExpression Name => new(Property(nameof(ResourceIdentifier.Name)));
         public ResourceIdentifierExpression Parent => new(Property(nameof(ResourceIdentifier.Parent)));
         public StringExpression Provider => new(Property(nameof(ResourceIdentifier.Provider)));

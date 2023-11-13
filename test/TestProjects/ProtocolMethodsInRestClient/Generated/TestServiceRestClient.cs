@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -157,7 +158,287 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateCreateRequest(int second, RequestContent content, string first, RequestContext context)
+        internal HttpMessage CreateUploadFileRequest(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/template/stream/uploadfile", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", contentType.ToString());
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Upload file. </summary>
+        /// <param name="fileContent"> File to upload. </param>
+        /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> or <paramref name="fileName"/> is null. </exception>
+        public async Task<Response> UploadFileAsync(Stream fileContent, string fileName, CancellationToken cancellationToken = default)
+        {
+            if (fileContent == null)
+            {
+                throw new ArgumentNullException(nameof(fileContent));
+            }
+            if (fileName == null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            var content = new MultipartFormDataContent("223d860e-4606-473a-aa35-c99c5f34f292");
+            content.Add(RequestContent.Create(fileContent), "fileContent", null);
+            content.Add(new StringRequestContent(fileName), "fileName", null);
+            Response response = await UploadFileAsync(content, "multipart/form-data; boundary=223d860e-4606-473a-aa35-c99c5f34f292", context).ConfigureAwait(false);
+            switch (response.Status)
+            {
+                case 200:
+                    return response;
+                default:
+                    throw new RequestFailedException(response);
+            }
+        }
+
+        /// <summary> Upload file. </summary>
+        /// <param name="fileContent"> File to upload. </param>
+        /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> or <paramref name="fileName"/> is null. </exception>
+        public Response UploadFile(Stream fileContent, string fileName, CancellationToken cancellationToken = default)
+        {
+            if (fileContent == null)
+            {
+                throw new ArgumentNullException(nameof(fileContent));
+            }
+            if (fileName == null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            var content = new MultipartFormDataContent("223d860e-4606-473a-aa35-c99c5f34f292");
+            content.Add(RequestContent.Create(fileContent), "fileContent", null);
+            content.Add(new StringRequestContent(fileName), "fileName", null);
+            Response response = UploadFile(content, "multipart/form-data; boundary=223d860e-4606-473a-aa35-c99c5f34f292", context);
+            switch (response.Status)
+            {
+                case 200:
+                    return response;
+                default:
+                    throw new RequestFailedException(response);
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Upload file
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The value of Content-Type header. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<Response> UploadFileAsync(RequestContent content, ContentType contentType, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("TestServiceClient.UploadFile");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUploadFileRequest(content, contentType, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Upload file
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The value of Content-Type header. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual Response UploadFile(RequestContent content, ContentType contentType, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("TestServiceClient.UploadFile");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUploadFileRequest(content, contentType, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateUploadFilesRequest(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/formdata/stream/uploadfiles", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", contentType.ToString());
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Upload multiple files. </summary>
+        /// <param name="files"> Files to upload. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="files"/> is null. </exception>
+        public async Task<Response> UploadFilesAsync(IEnumerable<Stream> files, CancellationToken cancellationToken = default)
+        {
+            if (files == null)
+            {
+                throw new ArgumentNullException(nameof(files));
+            }
+
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            var content = new MultipartFormDataContent("007e8393-7ecf-4fd8-a730-8cfa57392e5a");
+            foreach (var value in files)
+            {
+                content.Add(RequestContent.Create(value), "files", null);
+            }
+            Response response = await UploadFilesAsync(content, "multipart/form-data; boundary=007e8393-7ecf-4fd8-a730-8cfa57392e5a", context).ConfigureAwait(false);
+            switch (response.Status)
+            {
+                case 200:
+                    return response;
+                default:
+                    throw new RequestFailedException(response);
+            }
+        }
+
+        /// <summary> Upload multiple files. </summary>
+        /// <param name="files"> Files to upload. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="files"/> is null. </exception>
+        public Response UploadFiles(IEnumerable<Stream> files, CancellationToken cancellationToken = default)
+        {
+            if (files == null)
+            {
+                throw new ArgumentNullException(nameof(files));
+            }
+
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            var content = new MultipartFormDataContent("007e8393-7ecf-4fd8-a730-8cfa57392e5a");
+            foreach (var value in files)
+            {
+                content.Add(RequestContent.Create(value), "files", null);
+            }
+            Response response = UploadFiles(content, "multipart/form-data; boundary=007e8393-7ecf-4fd8-a730-8cfa57392e5a", context);
+            switch (response.Status)
+            {
+                case 200:
+                    return response;
+                default:
+                    throw new RequestFailedException(response);
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Upload multiple files
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The value of Content-Type header. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<Response> UploadFilesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("TestServiceClient.UploadFiles");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUploadFilesRequest(content, contentType, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Upload multiple files
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The value of Content-Type header. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual Response UploadFiles(RequestContent content, ContentType contentType, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("TestServiceClient.UploadFiles");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUploadFilesRequest(content, contentType, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateCreateRequest(int second, RequestContent content, string first, string format, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -169,6 +450,10 @@ namespace ProtocolMethodsInRestClient
             if (first != null)
             {
                 uri.AppendQuery("first", first, true);
+            }
+            if (format != null)
+            {
+                uri.AppendQuery("third", format, true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -196,7 +481,7 @@ namespace ProtocolMethodsInRestClient
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             using RequestContent content = resource?.ToRequestContent();
-            Response response = await CreateAsync(grouped.Second, content, grouped.First, context).ConfigureAwait(false);
+            Response response = await CreateAsync(grouped.Second, content, grouped.First, grouped.Format?.ToString(), context).ConfigureAwait(false);
             switch (response.Status)
             {
                 case 200:
@@ -225,7 +510,7 @@ namespace ProtocolMethodsInRestClient
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             using RequestContent content = resource?.ToRequestContent();
-            Response response = Create(grouped.Second, content, grouped.First, context);
+            Response response = Create(grouped.Second, content, grouped.First, grouped.Format?.ToString(), context);
             switch (response.Status)
             {
                 case 200:
@@ -253,16 +538,17 @@ namespace ProtocolMethodsInRestClient
         /// <param name="second"> Second in group. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="first"> First in group. </param>
+        /// <param name="format"> Third in group. Allowed values: "application/json;odata=nometadata" | "application/json;odata=minimalmetadata" | "application/json;odata=fullmetadata". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> CreateAsync(int second, RequestContent content, string first = null, RequestContext context = null)
+        public virtual async Task<Response> CreateAsync(int second, RequestContent content, string first = null, string format = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(second, content, first, context);
+                using HttpMessage message = CreateCreateRequest(second, content, first, format, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -285,16 +571,17 @@ namespace ProtocolMethodsInRestClient
         /// <param name="second"> Second in group. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="first"> First in group. </param>
+        /// <param name="format"> Third in group. Allowed values: "application/json;odata=nometadata" | "application/json;odata=minimalmetadata" | "application/json;odata=fullmetadata". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response Create(int second, RequestContent content, string first = null, RequestContext context = null)
+        public virtual Response Create(int second, RequestContent content, string first = null, string format = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(second, content, first, context);
+                using HttpMessage message = CreateCreateRequest(second, content, first, format, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)

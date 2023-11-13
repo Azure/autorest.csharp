@@ -27,6 +27,9 @@ namespace MgmtOmitOperationGroups
     public partial class Model2Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Model2Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="model2SName"> The model2SName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string model2SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}";

@@ -26,13 +26,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// method using their "value expression"s
         /// </summary>
         /// <param name="requestPath">The contextual path, which is usually the path creating a resource</param>
-        /// <param name="context">The <see cref="BuildContext"/></param>
-        /// <param name="idVariableName">The variable name of the Id variable</param>
+        /// <param name="idVariable">The reference to the Id variable</param>
         /// <returns></returns>
-        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, string idVariableName)
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, ResourceIdentifierExpression idVariable)
         {
             var stack = new Stack<ContextualParameterMapping>();
-            var idVariable = ResourceIdentifierExpression.ReferenceField(idVariableName);
             BuildContextualParameterMappingHierarchy(requestPath, stack, idVariable, idVariable);
             return stack;
         }
@@ -75,6 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // get the segment in pairs
                 var segmentPairs = SplitDiffIntoPairs(diffPath).ToList();
                 var indexOfProvidersPair = segmentPairs.FindIndex(pair => pair[0] == Segment.Providers);
+                var resourceTypeIdVariable = idVariable;
                 // from the tail, check these segments in pairs
                 for (int i = 0; i < segmentPairs.Count; i++)
                 {
@@ -97,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                                 }
                                 else
                                 {
-                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, idVariable.ResourceType.Namespace));
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, resourceTypeIdVariable.ResourceType.Namespace));
                                 }
                                 // do not append a new .Parent to the id
                             }
@@ -118,6 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (keySegment.IsReference)
                         {
                             parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, invocation.ResourceType.GetLastType(), new[] { "System.Linq" }));
+                            resourceTypeIdVariable = invocation;
                             appendParent = true;
                         }
                         else if (keySegment.IsExpandable)

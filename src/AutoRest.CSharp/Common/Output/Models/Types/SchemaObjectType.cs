@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -160,10 +161,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
-                    ReferenceOrConstant? defaultValue = null;
-                    if (TypeFactory.CanBeInitializedInline(discriminatorParameter.Type, Discriminator.Value))
+                    ConstantExpression? defaultValue = null;
+                    if (TypeFactory.CanBeInitializedInline(discriminatorParameter.Type, Discriminator.Value) && Discriminator.Value is {} discriminatorValue)
                     {
-                        defaultValue = Discriminator.Value;
+                        defaultValue = new ConstantExpression(discriminatorValue);
                     }
                     serializationInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, defaultValue));
                 }
@@ -180,12 +181,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
-        private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
+        private ConstantExpression? GetPropertyDefaultValue(ObjectTypeProperty property)
         {
-            if (property == Discriminator?.Property &&
-                Discriminator.Value != null)
+            if (property == Discriminator?.Property && Discriminator.Value != null)
             {
-                return Discriminator.Value;
+                return new ConstantExpression(Discriminator.Value.Value);
             }
 
             return null;
@@ -238,8 +238,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     continue;
                 }
 
-                ReferenceOrConstant? initializationValue;
-                Constant? defaultInitializationValue = null;
+                TypedValueExpression? initializationValue;
+                TypedValueExpression? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
                 if (property.InputModelProperty!.ConstantValue is not null && property.IsRequired)
@@ -255,8 +255,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     Constant? clientDefaultValue = constantValue != null ? BuilderHelpers.ParseConstant(constantValue.Value, _typeFactory.CreateType(constantValue.Type)) : null;
                     if (clientDefaultValue is object defaultValueObject)
                     {
-                        defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
-                        defaultInitializationValue = defaultParameterValue;
+                        defaultInitializationValue = new ConstantExpression(BuilderHelpers.ParseConstant(defaultValueObject, propertyType));
                     }
 
                     var inputType = TypeFactory.GetInputType(propertyType);
@@ -285,25 +284,31 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
                     {
-                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        if (TypeFactory.IsReadOnlyMemory(propertyType))
+                        {
+                            initializationValue = propertyType.IsNullable ? null : new TypedMemberExpression(propertyType, nameof(ReadOnlyMemory<object>.Empty), propertyType);
+                        }
+                        else
+                        {
+                            initializationValue = new ConstantExpression(Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)));
+                        }
                     }
                 }
 
                 if (initializationValue != null)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultInitializationValue));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue, defaultInitializationValue));
                 }
             }
 
             if (Discriminator?.Value != null)
             {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, Discriminator.Value.Value));
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, new ConstantExpression(Discriminator.Value.Value)));
             }
 
-            if (AdditionalPropertiesProperty != null &&
-                !defaultCtorInitializers.Any(i => i.Property == AdditionalPropertiesProperty))
+            if (AdditionalPropertiesProperty != null && defaultCtorInitializers.All(i => i.Property != AdditionalPropertiesProperty))
             {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type))));
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, new ConstantExpression(Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type)))));
             }
 
             return new ObjectTypeConstructor(
@@ -414,7 +419,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     }
 
-
                     yield return CreateProperty(property);
                 }
             }
@@ -462,7 +466,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = valueType.WithNullable(false);
             }
 
-            bool isCollection = TypeFactory.IsCollectionType(type);
+            bool isCollection = TypeFactory.IsCollectionType(type) && !TypeFactory.IsReadOnlyMemory(type);
 
             bool propertyShouldOmitSetter = IsStruct ||
                               !_usage.HasFlag(InputModelTypeUsage.Input) ||

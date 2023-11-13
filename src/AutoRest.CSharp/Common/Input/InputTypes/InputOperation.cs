@@ -30,6 +30,7 @@ internal record InputOperation(
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
     bool GenerateConvenienceMethod,
+    bool KeepClientDefaultValue,
     string? OriginalName)
 {
     public InputOperation() : this(
@@ -53,6 +54,7 @@ internal record InputOperation(
         Paging: null,
         GenerateProtocolMethod: true,
         GenerateConvenienceMethod: false,
+        KeepClientDefaultValue: false,
         OriginalName: null)
     { }
 

@@ -293,46 +293,6 @@
   },
   {
    "$id": "43",
-   "Name": "PagedProject",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of Project items",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "44",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The Project items on this page",
-     "Type": {
-      "$id": "45",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "19"
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "46",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
-     "Type": {
-      "$id": "47",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "48",
    "Name": "OperationStatusneverError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
@@ -340,12 +300,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "49",
+     "$id": "44",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique ID of the operation.",
      "Type": {
-      "$id": "50",
+      "$id": "45",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -354,7 +314,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "51",
+     "$id": "46",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the operation",
@@ -365,12 +325,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "52",
+     "$id": "47",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
-      "$id": "53",
+      "$id": "48",
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
@@ -378,12 +338,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "54",
+        "$id": "49",
         "Name": "code",
         "SerializedName": "code",
         "Description": "One of a server-defined set of error codes.",
         "Type": {
-         "$id": "55",
+         "$id": "50",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -392,12 +352,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "56",
+        "$id": "51",
         "Name": "message",
         "SerializedName": "message",
         "Description": "A human-readable representation of the error.",
         "Type": {
-         "$id": "57",
+         "$id": "52",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -406,12 +366,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "58",
+        "$id": "53",
         "Name": "target",
         "SerializedName": "target",
         "Description": "The target of the error.",
         "Type": {
-         "$id": "59",
+         "$id": "54",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -420,15 +380,15 @@
         "IsReadOnly": false
        },
        {
-        "$id": "60",
+        "$id": "55",
         "Name": "details",
         "SerializedName": "details",
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
-         "$id": "61",
+         "$id": "56",
          "Name": "Array",
          "ElementType": {
-          "$ref": "53"
+          "$ref": "48"
          },
          "IsNullable": false
         },
@@ -436,12 +396,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "62",
+        "$id": "57",
         "Name": "innererror",
         "SerializedName": "innererror",
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
-         "$id": "63",
+         "$id": "58",
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -449,12 +409,12 @@
          "Usage": "Output",
          "Properties": [
           {
-           "$id": "64",
+           "$id": "59",
            "Name": "code",
            "SerializedName": "code",
            "Description": "One of a server-defined set of error codes.",
            "Type": {
-            "$id": "65",
+            "$id": "60",
             "Name": "string",
             "Kind": "String",
             "IsNullable": false
@@ -463,12 +423,12 @@
            "IsReadOnly": false
           },
           {
-           "$id": "66",
+           "$id": "61",
            "Name": "InnerErrorObject",
            "SerializedName": "innererror",
            "Description": "Inner error.",
            "Type": {
-            "$ref": "63"
+            "$ref": "58"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -486,10 +446,50 @@
    ]
   },
   {
-   "$ref": "53"
+   "$ref": "48"
   },
   {
-   "$ref": "63"
+   "$ref": "58"
+  },
+  {
+   "$id": "62",
+   "Name": "PagedProject",
+   "Namespace": "Azure.Core.Foundations",
+   "Description": "Paged collection of Project items",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "63",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The Project items on this page",
+     "Type": {
+      "$id": "64",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "19"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "65",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "66",
+      "Name": "ResourceLocation",
+      "Kind": "Uri",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
   },
   {
    "$id": "67",
@@ -746,7 +746,7 @@
      "SerializedName": "errors",
      "Description": "The errors encountered while executing the job.",
      "Type": {
-      "$ref": "53"
+      "$ref": "48"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -866,7 +866,7 @@
      "SerializedName": "errors",
      "Description": "The errors encountered while executing the job.",
      "Type": {
-      "$ref": "53"
+      "$ref": "48"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1139,7 +1139,7 @@
      "SerializedName": "errors",
      "Description": "The errors encountered while executing the job.",
      "Type": {
-      "$ref": "53"
+      "$ref": "48"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1573,7 +1573,7 @@
         202
        ],
        "BodyType": {
-        "$ref": "19"
+        "$ref": "43"
        },
        "BodyMediaType": "Json",
        "Headers": [
@@ -1659,7 +1659,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "43"
+        "$ref": "62"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1797,7 +1797,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "48"
+        "$ref": "43"
        },
        "BodyMediaType": "Json"
       }
@@ -1903,7 +1903,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "48"
+        "$ref": "43"
        },
        "BodyMediaType": "Json"
       }
@@ -2056,7 +2056,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "48"
+        "$ref": "43"
        },
        "BodyMediaType": "Json"
       }
@@ -2455,7 +2455,7 @@
         202
        ],
        "BodyType": {
-        "$ref": "70"
+        "$ref": "43"
        },
        "BodyMediaType": "Json",
        "Headers": [
@@ -2727,7 +2727,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "48"
+        "$ref": "43"
        },
        "BodyMediaType": "Json"
       }

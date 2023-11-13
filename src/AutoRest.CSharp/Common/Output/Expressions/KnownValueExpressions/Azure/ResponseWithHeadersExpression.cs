@@ -12,8 +12,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
         public static ResponseWithHeadersExpression FromValue(ValueExpression value, ValueExpression headers, ResponseExpression response)
             => new(new InvokeStaticMethodExpression(typeof(ResponseWithHeaders), nameof(ResponseWithHeaders.FromValue), new[] { value, headers, response }));
 
-        public static ResponseWithHeadersExpression FromValue(CSharpType explicitValueType, ValueExpression value, ValueExpression headers, ResponseExpression response)
-            => new(new InvokeStaticMethodExpression(typeof(ResponseWithHeaders), nameof(ResponseWithHeaders.FromValue), new[] { value, headers, response }, new[] { explicitValueType }));
+        public static ResponseWithHeadersExpression FromValue(CSharpType explicitValueType, ValueExpression value, TypedValueExpression headers, ResponseExpression response)
+            => new(new InvokeStaticMethodExpression(typeof(ResponseWithHeaders), nameof(ResponseWithHeaders.FromValue), new[] { value, headers, response }, new[] { explicitValueType, headers.Type }));
 
         public static ResponseWithHeadersExpression FromValue(ValueExpression headers, ResponseExpression response)
             => new(new InvokeStaticMethodExpression(typeof(ResponseWithHeaders), nameof(ResponseWithHeaders.FromValue), new[] { headers, response }));

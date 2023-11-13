@@ -145,10 +145,36 @@ internal class PostProcessor
     {
         var modelFactorySymbol = definitions.ModelFactorySymbol;
         if (modelFactorySymbol == null)
+        {
             return project;
+        }
+
+
+        // find the GENERATED document of model factory (we may have the customized document of this for overloads)
+        if (!definitions.DeclaredNodesCache.TryGetValue(modelFactorySymbol, out var declarationNodes))
+        {
+            return project;
+        }
+
+        Document? modelFactoryGeneratedDocument = null;
+        // the nodes corresponding to the model factory symbol has never been changed therefore the nodes inside the cache are still usable
+        foreach (var declarationNode in declarationNodes)
+        {
+            var document = project.GetDocument(declarationNode.SyntaxTree);
+            if (document != null && GeneratedCodeWorkspace.IsGeneratedDocument(document))
+            {
+                modelFactoryGeneratedDocument = document;
+                break;
+            }
+        }
+
+        // maybe this is possible, for instance, we could be adding the customization all entries previously inside the generated model factory so that the generated model factory is empty and removed.
+        if (modelFactoryGeneratedDocument == null)
+        {
+            return project;
+        }
 
         var nodesToRemove = new List<SyntaxNode>();
-
         foreach (var method in modelFactorySymbol.GetMembers().OfType<IMethodSymbol>())
         {
             if (namesToRemove.Contains(method.Name))
@@ -161,22 +187,10 @@ internal class PostProcessor
             }
         }
 
-        // find the GENERATED document of model factory (we may have the customized document of this for overloads)
-        Document? modelFactoryGeneratedDocument = null;
-        // the nodes corresponding to the model factory symbol has never been changed therefore the nodes inside the cache are still usable
-        foreach (var declarationNode in definitions.DeclaredNodesCache[modelFactorySymbol])
+        if (!nodesToRemove.Any())
         {
-            var document = project.GetDocument(declarationNode.SyntaxTree);
-            if (document != null && GeneratedCodeWorkspace.IsGeneratedDocument(document))
-            {
-                modelFactoryGeneratedDocument = document;
-                break;
-            }
-        }
-
-        // maybe this is possible, for instance, we could be adding the customization all entries previously inside the generated model factory so that the generated model factory is empty and removed.
-        if (modelFactoryGeneratedDocument == null)
             return project;
+        }
 
         var root = await modelFactoryGeneratedDocument.GetSyntaxRootAsync();
         root = root?.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia);

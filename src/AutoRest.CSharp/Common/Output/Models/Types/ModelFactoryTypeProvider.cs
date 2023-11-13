@@ -19,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -28,8 +29,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= Models.Select(CreateMethod);
+        private IReadOnlyList<Method>? _methods;
+        public IReadOnlyList<Method> Methods => _methods ??= Models.Select(CreateMethod).WhereNotNull().ToList();
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
@@ -37,36 +38,26 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> models, string defaultName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-            Models = objectTypes;
+            Models = models;
 
-            DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
+            DefaultName = defaultName;
             DefaultAccessibility = "public";
             ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
             ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
+        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             if (!Configuration.GenerateModelFactory)
                 return null;
 
-            var objectTypes = models.OfType<SerializableObjectType>()
-                .Where(RequiresModelFactory)
-                .ToArray();
-
-            if (!objectTypes.Any())
-            {
-                return null;
-            }
-
             var defaultNamespace = GetDefaultNamespace();
-            var defaultRPName = GetRPName(defaultNamespace);
-
+            var defaultName = $"{GetRPName(defaultNamespace)}ModelFactory".ToCleanName();
             defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
 
-            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
+            return new ModelFactoryTypeProvider(models.OfType<SerializableObjectType>(), defaultName, defaultNamespace, sourceInputModel);
         }
 
         public static string GetRPName(string defaultNamespace)
@@ -89,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
-            ValueExpression p = parameter;
+            TypedValueExpression p = parameter;
             var propertyStack = property.BuildHierarchyStack();
 
             if (propertyStack.Count == 1)
@@ -106,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             property = propertyStack.Pop();
             // <parameterName> or <parameterName>.Value
             ValueExpression result = isOverriddenValueType
-                ? p.NullableStructValue(parameter.Type) // when it is changed to nullable, we call .Value because its constructor will only take the non-nullable value
+                ? p.NullableStructValue() // when it is changed to nullable, we call .Value because its constructor will only take the non-nullable value
                 : p;
 
             CSharpType from = parameter.Type;
@@ -153,8 +144,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        private Method CreateMethod(SerializableObjectType model)
+        private Method? CreateMethod(SerializableObjectType model)
         {
+            if (!RequiresModelFactory(model))
+            {
+                return null;
+            }
+
             var ctor = model.SerializationConstructor;
             var ctorToCall = ctor;
             var discriminator = model.Discriminator;
@@ -238,6 +234,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 model.Type,
                 returnDescription,
                 methodParameters);
+
+            if (SourceInputHelper.TryGetExistingMethod(ExistingType, signature, out _))
+            {
+                return null;
+            }
 
             var methodBody = new MethodBodyStatement[]
             {

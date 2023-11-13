@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     if (parameter.IsOptionalInSignature)
                         continue;
 
-                    parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default : Null;
+                    parameterExpression = parameter.Type is { IsValueType: true, IsNullable: false } ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
                 }
                 if (IsInlineParameter(parameter))
                 {
@@ -102,78 +102,56 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private Dictionary<string, InputExampleParameterValue> EnsureParameterValueMapping()
         {
             var result = new Dictionary<string, InputExampleParameterValue>();
-            var parameters = GetAllParameters();
-            var parameterExamples = GetAllParameterExamples();
 
-            foreach (var parameter in parameters)
+            // here we should gather all the parameters from my client, and my parent client, and the parent client of my parent client, etc
+            var castDefaultValueToType = true;
+            foreach (var method in ClientInvocationChain)
             {
-                if (ProcessKnownParameters(result, parameter))
+                foreach (var parameter in method.Parameters)
                 {
-                    continue;
+                    AddParameterValue(result, parameter, _inputClientParameterExamples.Concat(_inputOperationExample.Parameters), castDefaultValueToType);
                 }
+                castDefaultValueToType = false;
+            }
 
-                // find the corresponding input parameter
-                var exampleValue = FindExampleValueBySerializedName(parameterExamples, parameter.Name);
+            // then we return all the parameters on this operation
+            var methodParameters = IsAllParametersUsed
+                ? OperationMethodSignature.Parameters
+                : OperationMethodSignature.Parameters.Where(p => !p.IsOptionalInSignature);
 
-                if (exampleValue == null)
-                {
-                    // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
-                    if (parameter.DefaultValue == null)
-                    {
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
-                    }
-                    // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
-                }
-                else
-                {
-                    // add it into the mapping
-                    var serializationFormat = SerializationBuilder.GetSerializationFormat(exampleValue.Type);
-                    result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type, exampleValue, serializationFormat)));
-                }
+            foreach (var parameter in methodParameters)
+            {
+                AddParameterValue(result, parameter, _inputOperationExample.Parameters, castDefaultValueToType);
             }
 
             return result;
         }
 
-        /// <summary>
-        /// Returns all the parameters that should be used in this sample
-        /// Only required parameters on this operation will be included if useAllParameters is false
-        /// Includes all parameters if useAllParameters is true
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerable<Parameter> GetAllParameters()
+        private void AddParameterValue(Dictionary<string, InputExampleParameterValue> result, Parameter parameter, IEnumerable<InputParameterExample> parameterExamples, bool castDefaultValueToType)
         {
-            // here we should gather all the parameters from my client, and my parent client, and the parent client of my parent client, etc
-            foreach (var method in ClientInvocationChain)
+            if (ProcessKnownParameters(result, parameter))
             {
-                foreach (var parameter in method.Parameters)
+                return;
+            }
+
+            // find the corresponding input parameter
+            var exampleValue = FindExampleValueBySerializedName(parameterExamples, parameter.Name);
+
+            if (exampleValue == null)
+            {
+                // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
+                if (parameter.DefaultValue == null)
                 {
-                    yield return parameter;
+                    result.Add(parameter.Name, new InputExampleParameterValue(parameter, castDefaultValueToType ? Null.CastTo(parameter.Type) : Null));
                 }
+                // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
             }
-
-            // then we return all the parameters on this operation
-            var parameters = IsAllParametersUsed
-                ? OperationMethodSignature.Parameters
-                : OperationMethodSignature.Parameters.Where(p => !p.IsOptionalInSignature);
-
-            foreach (var parameter in parameters)
+            else
             {
-                yield return parameter;
+                // add it into the mapping
+                var serializationFormat = SerializationBuilder.GetSerializationFormat(exampleValue.Type);
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type, exampleValue, serializationFormat, castDefaultValueToType)));
             }
-        }
-
-        /// <summary>
-        /// This method returns all the related parameter examples on this particular method
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerable<InputParameterExample> GetAllParameterExamples()
-        {
-            // first we return all the client parameters for reference
-            foreach (var parameter in _inputClientParameterExamples)
-                yield return parameter;
-            foreach (var parameter in _inputOperationExample.Parameters)
-                yield return parameter;
         }
 
         private bool ProcessKnownParameters(Dictionary<string, InputExampleParameterValue> result, Parameter parameter)
@@ -192,7 +170,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
             if (IsSameParameter(parameter, KnownParameters.RequestContext) && !parameter.IsOptionalInSignature)
             {
-                // we need the RequestContext to disambiguiate from the convenience method - but passing in a null value is allowed.
+                // we need the RequestContext to disambiguate from the convenience method - but passing in a null value is allowed.
                 result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
                 return true;
             }
@@ -200,14 +178,14 @@ namespace AutoRest.CSharp.Output.Samples.Models
             // endpoint we kind of will change its description therefore here we only find it for name and type
             if (IsSameParameter(parameter, KnownParameters.Endpoint))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type, GetEndpointValue(parameter.Name), SerializationFormat.Default)));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type, GetEndpointValue(parameter.Name), SerializationFormat.Default, true)));
                 return true;
             }
 
             // request content is also special
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type,  GetBodyParameterValue(), SerializationFormat.Default)));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type,  GetBodyParameterValue(), SerializationFormat.Default, true)));
                 return true;
             }
 

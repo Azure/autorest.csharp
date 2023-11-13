@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -32,21 +31,21 @@ namespace AutoRest.CSharp.Common.Output.Builders
             "Last-Modified",
         };
 
-        private readonly List<RequestPart> _uriParts;
-        private readonly List<RequestPart> _pathParts;
-        private readonly List<RequestPart> _queryParts;
-        private readonly List<RequestPart> _headerParts;
-        private readonly List<RequestPart> _contentHeaderParts;
-        private readonly List<RequestPart> _bodyParts;
+        private readonly List<PathRequestPart> _uriParts;
+        private readonly List<PathRequestPart> _pathParts;
+        private readonly List<QueryRequestPart> _queryParts;
+        private readonly List<HeaderRequestPart> _headerParts;
+        private readonly List<HeaderRequestPart> _contentHeaderParts;
+        private readonly List<BodyRequestPart> _bodyParts;
 
         public RequestPartBuilder()
         {
-            _uriParts = new List<RequestPart>();
-            _pathParts = new List<RequestPart>();
-            _queryParts = new List<RequestPart>();
-            _headerParts = new List<RequestPart>();
-            _contentHeaderParts = new List<RequestPart>();
-            _bodyParts = new List<RequestPart>();
+            _uriParts = new List<PathRequestPart>();
+            _pathParts = new List<PathRequestPart>();
+            _queryParts = new List<QueryRequestPart>();
+            _headerParts = new List<HeaderRequestPart>();
+            _contentHeaderParts = new List<HeaderRequestPart>();
+            _bodyParts = new List<BodyRequestPart>();
         }
 
         public RequestParts BuildParts()
@@ -54,19 +53,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public void AddUriPart(InputParameter inputParameter, TypedValueExpression value)
         {
-            _uriParts.Add(new RequestPart(inputParameter.NameInRequest, value, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type), Escape: !inputParameter.SkipUrlEncoding));
+            _uriParts.Add(new PathRequestPart(inputParameter.NameInRequest, value, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type), Escape: !inputParameter.SkipUrlEncoding));
         }
 
         public void AddPathPart(InputParameter inputParameter, TypedValueExpression value)
         {
-            _pathParts.Add(new RequestPart(inputParameter.NameInRequest, value, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type), Escape: !inputParameter.SkipUrlEncoding, IsNextLink: inputParameter.Name == "nextLink"));
+            _pathParts.Add(new PathRequestPart(inputParameter.NameInRequest, value, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type), Escape: !inputParameter.SkipUrlEncoding, IsNextLink: inputParameter.Name == "nextLink"));
         }
 
         public void AddQueryPart(InputParameter inputParameter, TypedValueExpression value, bool skipNullCheck)
         {
             _queryParts.Add
             (
-                new RequestPart
+                new QueryRequestPart
                 (
                     inputParameter.NameInRequest,
                     value,
@@ -84,39 +83,44 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public void AddNonParameterizedHeaderPart(InputParameter inputParameter)
         {
             var value = GetNonParameterizedHeaderValue(inputParameter.NameInRequest);
-            _headerParts.Add(new RequestPart(inputParameter.NameInRequest, value, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type)));
+            _headerParts.Add(new HeaderRequestPart(inputParameter.NameInRequest, value, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type), null));
         }
 
         public void AddMatchConditionsHeaderPart(Parameter outputParameter, SerializationFormat serializationFormat)
         {
-            _headerParts.Add(new RequestPart(null, outputParameter, null, serializationFormat));
+            _headerParts.Add(new HeaderRequestPart(null, outputParameter, null, serializationFormat, null));
         }
 
         public void AddRequestConditionsHeaderPart(Parameter outputParameter, SerializationFormat serializationFormat)
         {
-            _headerParts.Add(new RequestPart(null, outputParameter, null, serializationFormat));
+            _headerParts.Add(new HeaderRequestPart(null, outputParameter, null, serializationFormat, null));
+        }
+
+        public void AddContentTypeHeaderPart(TypedValueExpression value)
+        {
+            _contentHeaderParts.Add(new HeaderRequestPart("Content-Type", value, null, SerializationFormat.Default, null));
         }
 
         public void AddHeaderPart(InputParameter inputParameter, TypedValueExpression value, SerializationFormat serializationFormat)
         {
             if (ContentHeaders.Contains(inputParameter.NameInRequest))
             {
-                _contentHeaderParts.Add(new RequestPart(inputParameter.HeaderCollectionPrefix ?? inputParameter.NameInRequest, value, null, serializationFormat, inputParameter.ArraySerializationDelimiter));
+                _contentHeaderParts.Add(new HeaderRequestPart(inputParameter.HeaderCollectionPrefix ?? inputParameter.NameInRequest, value, null, serializationFormat, inputParameter.ArraySerializationDelimiter));
             }
             else
             {
-                _headerParts.Add(new RequestPart(inputParameter.HeaderCollectionPrefix ?? inputParameter.NameInRequest, value, null, serializationFormat, inputParameter.ArraySerializationDelimiter));
+                _headerParts.Add(new HeaderRequestPart(inputParameter.HeaderCollectionPrefix ?? inputParameter.NameInRequest, value, null, serializationFormat, inputParameter.ArraySerializationDelimiter));
             }
         }
 
         public void AddBodyPart(InputParameter inputParameter, TypedValueExpression value)
         {
-            _bodyParts.Add(new RequestPart(inputParameter.NameInRequest, value, null, SerializationFormat.Default));
+            _bodyParts.Add(new BodyRequestPart(inputParameter.NameInRequest, value, value, null, false));
         }
 
         public void AddBodyPart(TypedValueExpression value, MethodBodyStatement? conversions, TypedValueExpression content, bool skipNullCheck)
         {
-            _bodyParts.Add(new BodyRequestPart(value, content, conversions, SkipNullCheck: skipNullCheck));
+            _bodyParts.Add(new BodyRequestPart(null, value, content, conversions, skipNullCheck));
         }
 
         private static TypedValueExpression GetNonParameterizedHeaderValue(string nameInRequest)

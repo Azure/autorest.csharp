@@ -27,10 +27,13 @@ namespace AutoRest.CSharp.Common.Output.Models
                 => Instance(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
             public static ValueExpression NotImplementedException(string name)
                 => Instance(typeof(NotImplementedException), Literal($"Method {name} is implemented in customized code."));
+            public static ValueExpression InvalidOperationException(ValueExpression message)
+                => Instance(typeof(InvalidOperationException), message);
 
             public static EnumerableExpression Array(CSharpType? elementType) => new(elementType ?? typeof(object), new NewArrayExpression(elementType));
             public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));
             public static EnumerableExpression Array(CSharpType? elementType, bool isInline, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items, isInline)));
+            public static EnumerableExpression Array(CSharpType? elementType, ValueExpression size) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, Size: size));
 
             public static DictionaryExpression Dictionary(CSharpType keyType, CSharpType valueType)
                 => new(keyType, valueType, new NewDictionaryExpression(new CSharpType(typeof(Dictionary<,>), keyType, valueType)));
@@ -43,6 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static FormUrlEncodedContentExpression FormUrlEncodedContent() => new(Instance(typeof(FormUrlEncodedContent)));
             public static MultipartFormDataContentExpression MultipartFormDataContent() => new(Instance(typeof(MultipartFormDataContent)));
+            public static MultipartFormDataContentExpression MultipartFormDataContent(string boundary) => new(Instance(typeof(MultipartFormDataContent), Literal(boundary)));
 
             public static RawRequestUriBuilderExpression RawRequestUriBuilder() => new(Instance(typeof(RawRequestUriBuilder)));
 
@@ -51,7 +55,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static ValueExpression RequestFailedException(ResponseExpression response) => Instance(Configuration.ApiTypes.RequestFailedExceptionType, response);
 
-            public static ResourceIdentifierExpression ResourceIdentifier(ValueExpression resourceData) => new(Instance(typeof(ResourceIdentifier), new MemberExpression(resourceData, "Id")));
+            public static ResourceIdentifierExpression ResourceIdentifier(ValueExpression id) => new(Instance(typeof(ResourceIdentifier), id));
 
             public static StreamReaderExpression StreamReader(ValueExpression stream) => new(Instance(typeof(StreamReader), stream));
 

@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && property.IsRequired
+                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.Value.Type) && !TypeFactory.IsReadOnlyMemory(property.Value.Type) && property.IsRequired
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -120,11 +120,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, TypedValueExpression expression)
             => serialization switch
             {
-                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)),
+                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, GetEnumerableExpression(expression, array)),
                 JsonDictionarySerialization dictionary => SerializeDictionary(utf8JsonWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 JsonValueSerialization value => SerializeValue(utf8JsonWriter, value, expression),
                 _ => throw new NotSupportedException()
             };
+
+        private static EnumerableExpression GetEnumerableExpression(TypedValueExpression expression, JsonArraySerialization array)
+        {
+            if (TypeFactory.IsReadOnlyMemory(expression.Type))
+            {
+                expression = expression
+                    .NullableStructValue()
+                    .Property(nameof(ReadOnlyMemory<byte>.Span), new CSharpType(typeof(ReadOnlySpan<>), expression.Type.Arguments[0]));
+            }
+
+            return new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression);
+        }
 
         private static MethodBodyStatement SerializeArray(Utf8JsonWriterExpression utf8JsonWriter, JsonArraySerialization arraySerialization, EnumerableExpression array)
         {
@@ -482,22 +494,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var serializedType = jsonPropertySerialization.SerializedType;
             if (serializedType?.IsNullable == true)
             {
+                var propertyVariable = propertyVariables[jsonPropertySerialization];
+
                 // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
                 // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
                 if (!TypeFactory.IsCollectionType(serializedType) || Configuration.DeserializeNullCollectionAsNullValue)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariables[jsonPropertySerialization], Null),
+                        Assign(propertyVariable, Null),
                         Continue
                     };
                 }
 
-                if (jsonPropertySerialization.IsRequired)
+                if (jsonPropertySerialization.IsRequired && !propertyVariable.Type.IsValueType)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariables[jsonPropertySerialization], New.Instance(TypeFactory.GetPropertyImplementationType(serializedType))),
+                        Assign(propertyVariable, New.Instance(TypeFactory.GetPropertyImplementationType(propertyVariable.Type))),
                         Continue
                     };
                 }
@@ -514,6 +528,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var propertyType = jsonPropertySerialization.ValueSerialization?.Type;
+            // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
+            if (jsonPropertySerialization.IsRequired && (propertyType is null || !TypeFactory.IsReadOnlyMemory(propertyType)))
+            {
+                return new MethodBodyStatement();
+            }
+
             if (propertyType?.Equals(typeof(JsonElement)) == true || // JsonElement handles nulls internally
                 propertyType?.Equals(typeof(string)) == true) //https://github.com/Azure/autorest.csharp/issues/922
             {
@@ -630,16 +650,32 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             switch (serialization)
             {
+                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsReadOnlyMemory(jsonReadOnlyMemory.Type):
+                    var array = new VariableReference(TypeFactory.GetImplementationType(jsonReadOnlyMemory.Type), "array");
+                    var index = new VariableReference(typeof(int), "index");
+                    var deserializeReadOnlyMemory = new MethodBodyStatement[]
+                    {
+                        Declare(index, Int(0)),
+                        Declare(array, New.Array(jsonReadOnlyMemory.ValueSerialization.Type, element.GetArrayLength())),
+                        new ForeachStatement("item", element.EnumerateArray(), out var item)
+                        {
+                            DeserializeArrayItemIntoArray(jsonReadOnlyMemory.ValueSerialization, new ArrayElementExpression(array, index), new JsonElementExpression(item)),
+                            Increment(index)
+                        }
+                    };
+                    value = New.Instance(jsonReadOnlyMemory.Type.WithNullable(false), array);
+                    return deserializeReadOnlyMemory;
+
                 case JsonArraySerialization arraySerialization:
                     var deserializeArrayStatement = new MethodBodyStatement[]
                     {
-                        Declare("array", New.List(arraySerialization.ValueSerialization.Type), out var array),
-                        new ForeachStatement("item", element.EnumerateArray(), out var item)
+                        Declare("array", New.List(arraySerialization.ValueSerialization.Type), out var list),
+                        new ForeachStatement("item", element.EnumerateArray(), out var arrayItem)
                         {
-                            DeserializeArrayItem(arraySerialization.ValueSerialization, array, new JsonElementExpression(item))
+                            DeserializeArrayItemIntoList(arraySerialization.ValueSerialization, list, new JsonElementExpression(arrayItem))
                         }
                     };
-                    value = array;
+                    value = list;
                     return deserializeArrayStatement;
 
                 case JsonDictionarySerialization dictionarySerialization:
@@ -668,27 +704,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement DeserializeArrayItem(JsonSerialization serialization, ListExpression arrayVariable, JsonElementExpression arrayItemVariable)
-        {
-            var element = arrayItemVariable;
-            var deserializeValueBlock = new[]
+        private static MethodBodyStatement DeserializeArrayItemIntoList(JsonSerialization serialization, ListExpression listVariable, JsonElementExpression arrayItemVariable)
+            => NullCheckCollectionItemIfRequired(serialization, arrayItemVariable, listVariable.Add(Null), new[]
             {
-                DeserializeValue(serialization, element, out var value),
-                arrayVariable.Add(value),
-            };
+                DeserializeValue(serialization, arrayItemVariable, out var value),
+                listVariable.Add(value),
+            });
 
-            if (CollectionItemRequiresNullCheckInSerialization(serialization))
+        private static MethodBodyStatement DeserializeArrayItemIntoArray(JsonSerialization serialization, ArrayElementExpression arrayElement, JsonElementExpression arrayItemVariable)
+            => NullCheckCollectionItemIfRequired(serialization, arrayItemVariable, Assign(arrayElement, Null), new[]
             {
-                return new IfElseStatement
-                (
-                    element.ValueKindEqualsNull(),
-                    arrayVariable.Add(Null),
-                    deserializeValueBlock
-                );
-            }
+                DeserializeValue(serialization, arrayItemVariable, out var value),
+                Assign(arrayElement, value),
+            });
 
-            return deserializeValueBlock;
-        }
+        private static MethodBodyStatement NullCheckCollectionItemIfRequired(JsonSerialization serialization, JsonElementExpression arrayItemVariable, MethodBodyStatement assignNull, MethodBodyStatement deserializeValue)
+            => CollectionItemRequiresNullCheckInSerialization(serialization)
+                ? new IfElseStatement(arrayItemVariable.ValueKindEqualsNull(), assignNull, deserializeValue)
+                : deserializeValue;
 
         private static MethodBodyStatement DeserializeDictionaryValue(JsonSerialization serialization, DictionaryExpression dictionary, JsonPropertyExpression property)
         {
@@ -767,7 +800,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var targetType = jsonPropertySerialization.Value.Type;
-            if (TypeFactory.IsList(targetType))
+            if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType))
             {
                 return InvokeOptional.ToList(variable);
             }
@@ -893,7 +926,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             => type.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
 
         public static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
-            serialization is { IsNullable: true } and JsonValueSerialization { Type: { IsValueType: true } } || // nullable value type, like int?
+            serialization is { IsNullable: true } and JsonValueSerialization { Type.IsValueType: true } || // nullable value type, like int?
             serialization is JsonArraySerialization or JsonDictionarySerialization || // list or dictionary
             serialization is JsonValueSerialization jsonValueSerialization &&
             jsonValueSerialization is { Type: { IsValueType: false, IsFrameworkType: true } } && // framework reference type, e.g. byte[]

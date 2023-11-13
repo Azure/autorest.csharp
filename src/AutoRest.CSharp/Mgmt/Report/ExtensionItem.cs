@@ -25,12 +25,12 @@ namespace AutoRest.CSharp.Mgmt.Report
                     g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection))).Distinct().ToList());
         }
 
-        public ExtensionItem(MgmtExtensionClient extensionClient, TransformSection transformSection)
+        public ExtensionItem(MgmtMockableExtension mockableExtension, TransformSection transformSection)
         {
-            this.Name = extensionClient.ResourceName;
+            this.Name = mockableExtension.ResourceName;
             this.ContextPaths =
-                extensionClient.AllOperations.SelectMany(cop => cop.Select(rop => rop.ContextualPath.ToString())).Distinct().ToList();
-            this.Operations = extensionClient.AllOperations
+                mockableExtension.AllOperations.SelectMany(cop => cop.Select(rop => rop.ContextualPath.ToString())).Distinct().ToList();
+            this.Operations = mockableExtension.AllOperations
                 .GroupBy(op => op.MethodSignature.Name)
                 .ToDictionary(
                     g => g.Key,

@@ -10,14 +10,12 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class RenameInputsVisitor : InputNamespaceVisitor
     {
-        private readonly InputNamespace _rootNamespace;
         private const string TopParameterName = "top";
         private const string MaxCountParameterName = "maxCount";
         private readonly string _defaultName;
 
         private RenameInputsVisitor(InputNamespace rootNamespace)
         {
-            _rootNamespace = rootNamespace;
             _defaultName = rootNamespace.Name.ReplaceLast("Client", "");
         }
 

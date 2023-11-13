@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (TypeFactory.IsCollectionType(type))
+            if (TypeFactory.IsCollectionType(type) && !TypeFactory.IsReadOnlyMemory(type))
             {
                 // nullable collection should be settable
                 // one exception is in the property bag, we never let them to be settable.
@@ -283,7 +283,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 fieldModifiers |= ReadOnly;
             }
-            else if (existingMember is IPropertySymbol { SetMethod: {} setMethod } && GetAccessModifiers(setMethod) != Public)
+            // [TODO] Enabling support of setter modifiers in TSP affects Azure.Communication.JobRouter in azure-sdk-for-net
+            else if ((Configuration.AzureArm || Configuration.Generation1ConvenienceClient) && existingMember is IPropertySymbol { SetMethod: {} setMethod } && GetAccessModifiers(setMethod) != Public)
             {
                 setterModifiers = GetAccessModifiers(setMethod);
             }

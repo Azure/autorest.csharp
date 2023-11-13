@@ -390,7 +390,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new[] { valueStatement, returnStatement };
         }
 
-        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, ResponseExpression response, ValueExpression headers, bool async)
+        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, ResponseExpression response, TypedValueExpression headers, bool async)
         {
             if (type is null)
             {

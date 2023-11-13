@@ -84,6 +84,7 @@ namespace AutoRest.TestServer.Tests
                     new("second", typeof(int)),
                     new("content", typeof(RequestContent)),
                     new("first", typeof(string)),
+                    new("format", typeof(string)),
                     new("context", typeof(RequestContext))
                 });
         }

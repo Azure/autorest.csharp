@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static ValueExpression? GetParameterInitializer(CSharpType parameterType, Constant? defaultValue)
         {
-            if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
+            if (TypeFactory.IsCollectionType(parameterType) && !TypeFactory.IsReadOnlyMemory(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
             {
                 return new ConstantExpression(Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false)));
             }

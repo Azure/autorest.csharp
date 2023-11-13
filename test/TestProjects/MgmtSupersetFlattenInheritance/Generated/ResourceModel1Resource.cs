@@ -26,6 +26,9 @@ namespace MgmtSupersetFlattenInheritance
     public partial class ResourceModel1Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResourceModel1Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="resourceModel1SName"> The resourceModel1SName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resourceModel1SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}";

@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Input
                 SkipCodeGen = Configuration.DeserializeBoolean(skipCodeGen, false);
                 GenerateReport = Configuration.DeserializeBoolean(generateReport, true);
                 ReportOnly = Configuration.DeserializeBoolean(reportOnly, false);
-                ReportFormat = reportFormat?.GetString() ?? "yaml";
+                ReportFormat = Configuration.IsValidJsonElement(reportFormat) ? reportFormat?.GetString() ?? "yaml" : "yaml";
             }
 
             internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)

@@ -54,19 +54,5 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static Constant Default(CSharpType type)
             => type.IsValueType && !type.IsNullable ? new Constant(NewInstanceSentinel, type) : new Constant(null, type);
-
-        /// <summary>
-        /// A <see cref="Constant"/> value type. It represents an expression without any reference (e.g. 'DateTimeOffset.Now')
-        /// which looks like a constant.
-        /// </summary>
-        public class Expression
-        {
-            internal Expression(FormattableString expressionValue)
-            {
-                ExpressionValue = expressionValue;
-            }
-
-            public FormattableString ExpressionValue { get; }
-        }
     }
 }
