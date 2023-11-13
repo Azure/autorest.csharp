@@ -702,13 +702,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
-            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart)
+            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart && Configuration.Generation1ConvenienceClient)
             {
                 CreateMultipartConvenienceParameters(sortedInputParameters, protocolBodyParameter);
                 return;
             }
 
-            if (_operation.RequestBodyMediaType is BodyMediaType.Form)
+            if (_operation.RequestBodyMediaType is BodyMediaType.Form && Configuration.Generation1ConvenienceClient)
             {
                 CreateFormUrlEncodedConvenienceParameters(sortedInputParameters, protocolBodyParameter);
                 return;
